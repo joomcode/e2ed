@@ -1,0 +1,19 @@
+{
+  "name": "e2ed",
+  "version": "0.0.2",
+  "description": "E2E utils",
+  "keywords": [
+    "E2E",
+    "testcafe"
+  ],
+  "author": "uid11",
+  "license": "MIT",
+  "bin": "index.ts",
+  "bugs": "https://github.com/uid11/e2ed/issues",
+  "engines": {
+    "node": ">=14"
+  },
+  "homepage": "https://github.com/uid11/e2ed#readme",
+  "repository": "uid11/e2ed",
+  "type": "module"
+}

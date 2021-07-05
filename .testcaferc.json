@@ -1,0 +1,40 @@
+{
+  "ajaxRequestTimeout": 40000,
+  "assertionTimeout": 10000,
+  "browserInitTimeout": 60000,
+  "browsers": "chrome",
+  "color": true,
+  "compilerOptions": {
+    "typescript": {
+      "configPath": "e2e/tsconfig.json",
+      "options": {"types": []}
+    }
+  },
+  "hostname": "localhost",
+  "src": ["e2e/tests/**/*.spec.ts"],
+  "pageLoadTimeout": 0,
+  "pageRequestTimeout": 30000,
+  "reporter": [
+    {
+      "name": "spec"
+    },
+    {
+      "name": "json",
+      "output": "reports/e2e/report.json"
+    },
+    {
+      "name": "xunit",
+      "output": "reports/e2e/junit-report.xml"
+    }
+  ],
+  "retryTestPages": true,
+  "screenshots": {
+    "path": "reports/e2e/screenshots",
+    "pathPattern": "${DATE}_${TIME}/${BROWSER}_${BROWSER_VERSION}/${FIXTURE}_${TEST}/${FILE_INDEX}.png",
+    "takeOnFails": true
+  },
+  "skipJsErrors": true,
+  "concurrency": 1,
+  "port1": 1337,
+  "port2": 1338
+}
