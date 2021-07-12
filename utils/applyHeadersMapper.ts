@@ -1,4 +1,4 @@
-import type {Headers, MapHeaders, Mutable} from 'e2e/types';
+import type {Headers, MapHeaders, Mutable} from '../types';
 
 const getCopyOfHeaders = (headers: Headers): Headers => {
   const copyOfHeaders = {...headers};

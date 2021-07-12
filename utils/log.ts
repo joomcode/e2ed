@@ -1,6 +1,6 @@
-import {DEFAULT_INSPECT_OPTIONS} from 'e2e/constants';
 import {inspect} from 'util';
 
+import {DEFAULT_INSPECT_OPTIONS} from '../constants';
 import {context} from './context';
 import {getMoscowDateTime} from './getMoscowDateTime';
 import {getRandomId} from './getRandomId';
@@ -21,7 +21,7 @@ const writeLog: Log = (message, payload) => {
   const {runId} = context.getMeta();
   const fullContext = context.getFullContext();
   const contextKeys = Object.keys(fullContext).filter((key) => fullContext[key]);
-  const maybeRunLabel = getLabel(process.env.E2E_RUN_LABEL);
+  const maybeRunLabel = getLabel(process.env.E2ED_RUN_LABEL);
   const printedObject: Record<string, unknown> = {payload, contextKeys};
 
   if (fullContext.user) {
@@ -37,4 +37,4 @@ const writeLog: Log = (message, payload) => {
 /**
  * Log every actions and API requests in E2E tests.
  */
-export const log = process.env.E2E_SHOW_LOGS ? writeLog : noop;
+export const log = process.env.E2ED_SHOW_LOGS ? writeLog : noop;

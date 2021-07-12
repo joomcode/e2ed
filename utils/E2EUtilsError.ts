@@ -1,6 +1,6 @@
-import {DEFAULT_INSPECT_OPTIONS} from 'e2e/constants';
 import {inspect} from 'util';
 
+import {DEFAULT_INSPECT_OPTIONS} from '../constants';
 import {context} from './context';
 
 export class E2EUtilsError extends Error {

@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-import type {Method} from 'e2e/types';
+import type {Method} from '../types';
 
 /**
  * Abstract route with base methods.

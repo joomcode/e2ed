@@ -1,5 +1,6 @@
-import {log} from 'e2e/utils';
 import {ClientFunction} from 'testcafe';
+
+import {log} from '../utils';
 
 type WaitingForInterfaceStabilization = {
   readonly promise: Promise<number>;

@@ -1,4 +1,3 @@
-import type {Headers, Method, Query} from 'e2e/types';
 import {request as httpRequest} from 'http';
 import {request as httpsRequest} from 'https';
 import {stringify} from 'querystring';
@@ -7,6 +6,7 @@ import {URL} from 'url';
 import {E2EUtilsError} from './E2EUtilsError';
 import {getRandomId} from './getRandomId';
 import {log} from './log';
+import type {Headers, Method, Query} from '../types';
 import {wrapInTestRunTracker} from './wrapInTestRunTracker';
 
 type Options<Data> = Readonly<{

@@ -1,4 +1,4 @@
-import type {Route} from 'e2e/routes';
+import type {Route} from '../routes/Route';
 
 /**
  * Abstract Page with base methods.

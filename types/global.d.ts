@@ -1,5 +1,3 @@
-/* eslint-disable import/no-default-export */
-
 interface RequestHook {
   _onConfigureResponse(event: Record<string, unknown>): Promise<void>;
 }

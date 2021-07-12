@@ -1,5 +1,6 @@
-import type {DeviceTokens, FullContext, Order, TestMeta, User} from 'e2e/types';
 import {t} from 'testcafe';
+
+import type {DeviceTokens, FullContext, Order, TestMeta, User} from '../types';
 
 class Context {
   testController: TestController = t;

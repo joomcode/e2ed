@@ -1,1 +1,1 @@
-export * from "../../../../e2ed/routes/pages";
+export * from '../../../../e2ed/routes/pages';

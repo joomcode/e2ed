@@ -1,0 +1,24 @@
+env:
+  es2021: true
+extends:
+  - eslint:recommended
+  - airbnb-base
+  - plugin:import/recommended
+  - plugin:import/typescript
+  - plugin:@typescript-eslint/recommended
+  - plugin:@typescript-eslint/recommended-requiring-type-checking
+  - prettier
+parser: '@typescript-eslint/parser'
+parserOptions:
+  project: ./tsconfig.json
+  sourceType: module
+root: true
+rules:
+  import/extensions: [error, never]
+  no-restricted-syntax: off
+  import/prefer-default-export: off
+settings:
+  import/extensions: [.js, .ts]
+  import/resolver:
+    node:
+      extensions: [.js, .ts]

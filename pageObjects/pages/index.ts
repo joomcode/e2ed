@@ -1,1 +1,1 @@
-export * from "../../../../e2ed/pageObjects/pages";
+export * from '../../../../e2ed/pageObjects/pages';

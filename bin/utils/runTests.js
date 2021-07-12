@@ -4,13 +4,13 @@ const require = createRequire(import.meta.url);
 
 const createTestCafe = require('testcafe');
 
-process.env.E2E_SHOW_LOGS = 'true';
+process.env.E2ED_SHOW_LOGS = 'true';
 
 const browsers = ['chromium:headless --no-sandbox --disable-dev-shm-usage'];
 const concurrency = 5;
 
 export const runTests = async ({isFirstAttempt, runLabel, tests}) => {
-  process.env.E2E_RUN_LABEL = runLabel;
+  process.env.E2ED_RUN_LABEL = runLabel;
 
   const testCafe = await createTestCafe();
 

@@ -1,11 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 
-import type {Headers, MapOptions} from 'e2e/types';
-import {applyHeadersMapper} from 'e2e/utils';
 import {RequestHook} from 'testcafe';
 
+import {applyHeadersMapper} from './applyHeadersMapper';
 import {log} from './log';
 import {wrapInTestRunTracker} from './wrapInTestRunTracker';
+import type {Headers, MapOptions} from '../types';
 
 type RequestEvent = Readonly<{
   requestOptions: {
