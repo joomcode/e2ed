@@ -9,6 +9,12 @@ import {log} from './log';
 import type {Headers, Method, Query} from '../types';
 import {wrapInTestRunTracker} from './wrapInTestRunTracker';
 
+type Response<Data> = Readonly<{
+  statusCode: number;
+  headers: Headers;
+  data: Data;
+}>;
+
 type Options<Data> = Readonly<{
   url: string;
   query?: Query;
@@ -18,12 +24,6 @@ type Options<Data> = Readonly<{
   timeout?: number;
   maxRetriesCount?: number;
   isNeedRetry?: (response: Response<Data>) => boolean;
-}>;
-
-type Response<Data> = Readonly<{
-  statusCode: number;
-  headers: Headers;
-  data: Data;
 }>;
 
 type LogParams = Readonly<{url: string}> & Record<string, unknown>;
@@ -63,6 +63,7 @@ const oneTryOfRequest = <Data>({
     let endTimeout: NodeJS.Timeout;
 
     const req = libRequest(urlObject, fullOptions, (res) => {
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       res.on = wrapInTestRunTracker(res.on);
 
       endTimeout = setTimeout(() => {
@@ -88,7 +89,7 @@ const oneTryOfRequest = <Data>({
         const responseDataAsString = chunks.join('');
 
         try {
-          const responseData: Data = JSON.parse(responseDataAsString);
+          const responseData = JSON.parse(responseDataAsString) as Data;
           const response = {
             statusCode: res.statusCode || 400,
             headers: res.headers,
@@ -97,7 +98,7 @@ const oneTryOfRequest = <Data>({
 
           clearTimeout(endTimeout);
           resolve({fullLogParams, response});
-        } catch (cause) {
+        } catch (cause: unknown) {
           clearTimeout(endTimeout);
           reject(
             new E2EUtilsError(
@@ -109,6 +110,7 @@ const oneTryOfRequest = <Data>({
       });
     });
 
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     req.on = wrapInTestRunTracker(req.on);
 
     req.on('error', (cause) => {
@@ -181,7 +183,7 @@ export const request = async <Data = unknown>({
       if (needRetry === false) {
         return response;
       }
-    } catch (cause) {
+    } catch (cause: unknown) {
       log(`An error was received during the request to ${url}`, {...logParams, retry, cause});
     }
   }

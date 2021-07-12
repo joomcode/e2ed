@@ -2,7 +2,6 @@ import {inspect} from 'util';
 
 import {DEFAULT_INSPECT_OPTIONS} from '../constants';
 import {context} from './context';
-import {getMoscowDateTime} from './getMoscowDateTime';
 import {getRandomId} from './getRandomId';
 
 type Log = (message: string, params?: Record<string, unknown>) => void;
@@ -12,7 +11,7 @@ const getLabel = (label: string | undefined) => (label ? `[${label}]` : '');
 const noop: Log = () => {};
 
 const writeLog: Log = (message, payload) => {
-  const moscowDateTime = getMoscowDateTime();
+  const dateTimeInISO = new Date().toISOString();
 
   if (context.getMeta().runId === undefined) {
     context.setMeta({runId: getRandomId()});
@@ -31,7 +30,7 @@ const writeLog: Log = (message, payload) => {
   const printedString = inspect(printedObject, DEFAULT_INSPECT_OPTIONS);
 
   // eslint-disable-next-line no-console
-  console.log(`[e2e][${moscowDateTime}]${maybeRunLabel}[${runId}] ${message} ${printedString}`);
+  console.log(`[e2e][${dateTimeInISO}]${maybeRunLabel}[${runId}] ${message} ${printedString}`);
 };
 
 /**

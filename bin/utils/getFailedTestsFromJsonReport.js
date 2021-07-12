@@ -2,7 +2,7 @@ import {createRequire} from 'module';
 
 const require = createRequire(import.meta.url);
 
-const {reporter} = require('../../../.testcaferc.json');
+const {reporter} = require('../../.testcaferc.json');
 
 const jsonReportPathFromRoot = reporter.find(({name}) => name === 'json').output;
 const jsonReportPath = `../../../${jsonReportPathFromRoot}`;

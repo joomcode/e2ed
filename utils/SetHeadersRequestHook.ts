@@ -28,6 +28,7 @@ type ResponseEvent = Readonly<{
 export class SetHeadersRequestHook extends RequestHook {
   constructor(public url: string, public options: MapOptions) {
     super([url], {includeHeaders: true});
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     this.resetMethods(this.onRequest, this._onConfigureResponse);
   }
 
@@ -63,5 +64,6 @@ export class SetHeadersRequestHook extends RequestHook {
 }
 
 SetHeadersRequestHook.prototype.resetMethods = wrapInTestRunTracker(
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   SetHeadersRequestHook.prototype.resetMethods,
 );

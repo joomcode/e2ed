@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "importsNotUsedAsValues": "error",
+    "module": "ESNext",
     "moduleResolution": "node",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
@@ -15,5 +16,5 @@
     "target": "ESNext",
     "types": ["node", "testcafe"]
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "**/*.js"]
 }
