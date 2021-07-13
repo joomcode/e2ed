@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "E2E utils",
   "keywords": [
     "E2E",
@@ -9,8 +9,8 @@
   "author": "uid11",
   "license": "MIT",
   "bin": {
-    "e2ed:docker": "./bin/run-tests-local.sh",
-    "e2ed:local": "./bin/run-tests-in-docker.sh"
+    "e2ed-docker": "./bin/run-tests-local.sh",
+    "e2ed-local": "./bin/run-tests-in-docker.sh"
   },
   "bugs": "https://github.com/uid11/e2ed/issues",
   "engines": {
