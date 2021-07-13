@@ -1,8 +1,6 @@
 type Cookie = Readonly<{name: string; value: string}>;
 
 export const replaceCookie = (cookies: string[], cookie: Cookie): string[] => {
-  console.log(7777777, cookie, cookies);
-
   const newCookies = [...cookies];
   const newCookieString = `${cookie.name}=${cookie.value};`;
   const cookieIndex = newCookies.findIndex((cookieString) =>

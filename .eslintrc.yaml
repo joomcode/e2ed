@@ -26,6 +26,8 @@ overrides:
       '@typescript-eslint/restrict-template-expressions': off
 root: true
 rules:
+  class-methods-use-this:
+    [error, {exceptMethods: [getOrigin, getMethod, onResponse, willNavigateTo]}]
   import/extensions: [error, never]
   no-await-in-loop: off
   no-restricted-syntax: off

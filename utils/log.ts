@@ -1,7 +1,7 @@
 import {inspect} from 'util';
 
 import {DEFAULT_INSPECT_OPTIONS} from '../constants';
-import {context} from './context';
+import {getContextLength, getMeta, setMeta} from '../context';
 import {getRandomId} from './getRandomId';
 
 type Log = (message: string, params?: Record<string, unknown>) => void;
@@ -13,24 +13,21 @@ const noop: Log = () => {};
 const writeLog: Log = (message, payload) => {
   const dateTimeInISO = new Date().toISOString();
 
-  if (context.getMeta().runId === undefined) {
-    context.setMeta({runId: getRandomId()});
+  if (getMeta().runId === undefined) {
+    setMeta({runId: getRandomId()});
   }
 
-  const {runId} = context.getMeta();
-  const fullContext = context.getFullContext();
-  const contextKeys = Object.keys(fullContext).filter((key) => fullContext[key]);
+  const {runId} = getMeta();
+  const contextLength = getContextLength();
   const maybeRunLabel = getLabel(process.env.E2ED_RUN_LABEL);
-  const printedObject: Record<string, unknown> = {payload, contextKeys};
-
-  if (fullContext.user) {
-    printedObject.userEmail = fullContext.user.email;
-  }
+  const printedObject: Record<string, unknown> = {payload, contextLength};
 
   const printedString = inspect(printedObject, DEFAULT_INSPECT_OPTIONS);
 
   // eslint-disable-next-line no-console
-  console.log(`[e2e][${dateTimeInISO}]${maybeRunLabel}[${runId}] ${message} ${printedString}`);
+  console.log(
+    `[e2ed][${dateTimeInISO}]${maybeRunLabel}[${runId || ''}] ${message} ${printedString}`,
+  );
 };
 
 /**

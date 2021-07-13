@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/require-await */
+
 import type {Route} from '../routes/Route';
 
 /**

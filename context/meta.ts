@@ -1,0 +1,18 @@
+import type {TestMeta} from '../types';
+import {useContext} from './useContext';
+
+const [getRawMeta, setRawMeta] = useContext<TestMeta>();
+
+/**
+ * Get test metadata.
+ */
+export const getMeta = (): TestMeta => getRawMeta() || {};
+
+/**
+ * Set test metadata.
+ */
+export const setMeta = (partialMeta: Partial<TestMeta>): void => {
+  const meta = getRawMeta();
+
+  setRawMeta({...meta, ...partialMeta});
+};
