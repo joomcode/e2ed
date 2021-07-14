@@ -6,12 +6,11 @@
   "color": true,
   "compilerOptions": {
     "typescript": {
-      "configPath": "e2e/tsconfig.json",
-      "options": {"types": []}
+      "options": {"esModuleInterop": true, "resolveJsonModule": true}
     }
   },
   "hostname": "localhost",
-  "src": ["e2e/tests/**/*.spec.ts"],
+  "src": ["../../e2ed/tests/**/*.spec.ts"],
   "pageLoadTimeout": 0,
   "pageRequestTimeout": 30000,
   "reporter": [

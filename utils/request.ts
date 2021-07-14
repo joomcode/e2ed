@@ -3,7 +3,7 @@ import {request as httpsRequest} from 'https';
 import {stringify} from 'querystring';
 import {URL} from 'url';
 
-import {E2EUtilsError} from './E2EUtilsError';
+import {E2EDError} from './E2EDError';
 import {getRandomId} from './getRandomId';
 import {log} from './log';
 import type {Headers, Method, Query} from '../types';
@@ -70,7 +70,7 @@ const oneTryOfRequest = <Data>({
         req.destroy();
         req.emit(
           'error',
-          new E2EUtilsError(
+          new E2EDError(
             `The request to ${logParams.url} is timed out in ${timeout} ms`,
             fullLogParams,
           ),
@@ -101,7 +101,7 @@ const oneTryOfRequest = <Data>({
         } catch (cause: unknown) {
           clearTimeout(endTimeout);
           reject(
-            new E2EUtilsError(
+            new E2EDError(
               `The response data string to request ${logParams.url} is not valid JSON: ${responseDataAsString}`,
               {...fullLogParams, cause},
             ),
@@ -115,7 +115,7 @@ const oneTryOfRequest = <Data>({
 
     req.on('error', (cause) => {
       clearTimeout(endTimeout);
-      reject(new E2EUtilsError(`Error on request to ${logParams.url}`, {...fullLogParams, cause}));
+      reject(new E2EDError(`Error on request to ${logParams.url}`, {...fullLogParams, cause}));
     });
 
     req.write(dataAsString);
@@ -140,7 +140,7 @@ export const request = async <Data = unknown>({
   const logParams: LogParams = {url, query, method, headers, data, timeout};
 
   if (urlObject.search !== '') {
-    throw new E2EUtilsError(
+    throw new E2EDError(
       `Url for request to ${url} contains search part: ${urlObject.search}`,
       logParams,
     );
@@ -188,7 +188,7 @@ export const request = async <Data = unknown>({
     }
   }
 
-  throw new E2EUtilsError(
+  throw new E2EDError(
     `All ${maxRetriesCount} retries to request to ${url} have been exhausted`,
     logParams,
   );

@@ -1,10 +1,10 @@
-import {E2EUtilsError} from './E2EUtilsError';
+import {E2EDError} from './E2EDError';
 
 /**
  * Asserts that the value is defined (is not undefined).
  */
 export function assertValueIsDefined<T>(value: T): asserts value is Exclude<T, undefined> {
   if (value === undefined) {
-    throw new E2EUtilsError('Asserted value is undefined', {value});
+    throw new E2EDError('Asserted value is undefined', {value});
   }
 }
