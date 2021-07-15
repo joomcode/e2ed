@@ -6,9 +6,14 @@ import {t} from 'testcafe';
 
 import {waitForInterfaceStabilization} from './actions';
 import {pages} from './pageObjects';
-import type {Page} from './pageObjects';
+import type {Page} from './Page';
 import type {NavigateToPage} from './types';
 import {log} from './utils';
+
+export * from './ApiRoute';
+export * from './Page';
+export * from './PageRoute';
+export * from './Route';
 
 type Pages = typeof pages;
 
