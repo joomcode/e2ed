@@ -2,6 +2,7 @@ import {inspect} from 'util';
 
 import {DEFAULT_INSPECT_OPTIONS} from '../constants';
 import {getContextLength, getMeta, setMeta} from '../context';
+
 import {getRandomId} from './getRandomId';
 
 type Log = (message: string, params?: Record<string, unknown>) => void;

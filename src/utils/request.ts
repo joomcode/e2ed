@@ -6,8 +6,9 @@ import {URL} from 'url';
 import {E2EDError} from './E2EDError';
 import {getRandomId} from './getRandomId';
 import {log} from './log';
-import type {Headers, Method, Query} from '../types';
 import {wrapInTestRunTracker} from './wrapInTestRunTracker';
+
+import type {Headers, Method, Query} from '../types';
 
 type Response<Data> = Readonly<{
   statusCode: number;

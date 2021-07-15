@@ -1,5 +1,6 @@
-import type {TestMeta} from '../types';
 import {useContext} from './useContext';
+
+import type {TestMeta} from '../types';
 
 const [getRawMeta, setRawMeta] = useContext<TestMeta>();
 

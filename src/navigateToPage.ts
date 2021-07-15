@@ -1,14 +1,11 @@
-/**
- * @file This file contains the highest-level e2ed API, which depends on all other e2ed-utilities.
- * Do not import functions from here into other e2ed-utilities to avoid circular dependencies.
- */
 import {t} from 'testcafe';
 
 import {waitForInterfaceStabilization} from './actions';
 import {pages} from './pageObjects';
+import {log} from './utils';
+
 import type {Page} from './Page';
 import type {NavigateToPage} from './types';
-import {log} from './utils';
 
 type Pages = typeof pages;
 

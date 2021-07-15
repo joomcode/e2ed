@@ -25,9 +25,25 @@ overrides:
       '@typescript-eslint/no-unsafe-return': off
       '@typescript-eslint/restrict-template-expressions': off
 root: true
+ignorePatterns: [build]
 rules:
   class-methods-use-this:
     [error, {exceptMethods: [getOrigin, getMethod, onResponse, willNavigateTo]}]
+  import/order:
+    - error
+    - alphabetize: {order: asc}
+      groups:
+        - builtin
+        - external
+        - internal
+        - unknown
+        - parent
+        - sibling
+        - index
+        - object
+        - type
+      newlines-between: always
+      warnOnUnassignedImports: true
   import/extensions: [error, never]
   no-await-in-loop: off
   no-restricted-syntax: off

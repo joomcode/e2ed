@@ -1,5 +1,3 @@
-import TESTCAFE_DEFAULT_CONFIG from '../.testcaferc.json';
-
 export * from '../../../e2ed/constants';
 
 export const DEFAULT_INSPECT_OPTIONS = {
@@ -7,5 +5,3 @@ export const DEFAULT_INSPECT_OPTIONS = {
   depth: 16,
   showHidden: true,
 };
-
-export const DEFAULT_PORT = TESTCAFE_DEFAULT_CONFIG;

@@ -5,6 +5,7 @@ import {RequestHook} from 'testcafe';
 import {applyHeadersMapper} from './applyHeadersMapper';
 import {log} from './log';
 import {wrapInTestRunTracker} from './wrapInTestRunTracker';
+
 import type {Headers, MapOptions} from '../types';
 
 type RequestEvent = Readonly<{
