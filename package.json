@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "E2E utils",
   "keywords": [
     "E2E",
@@ -38,6 +38,8 @@
     "lint:es": "eslint --ext=.js,.ts src",
     "lint:prettier": "prettier --check 'src/**/*.{yaml,json,ts,js,md}'",
     "lint:types": "tsc --noEmit",
+    "prebuild": "tsc --declaration --declarationDir declarations --emitDeclarationOnly; echo 'Emit declarations...'",
     "postbuild": "cp -r dist/* ./ && rm -rf dist"
-  }
+  },
+  "types": "declarations/index.d.ts"
 }
