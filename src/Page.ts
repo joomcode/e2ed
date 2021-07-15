@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/require-await */
 
-import type {Route} from '../routes/Route';
+import type {Route} from './Route';
 
 /**
  * Abstract Page with base methods.

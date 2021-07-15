@@ -18,12 +18,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.pageRoutes = exports.apiRoutes = void 0;
 exports.apiRoutes = __importStar(require("./api"));
 exports.pageRoutes = __importStar(require("./pages"));
-__exportStar(require("./ApiRoute"), exports);
-__exportStar(require("./PageRoute"), exports);
