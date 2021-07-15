@@ -3,6 +3,7 @@
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "baseUrl": ".",
+    "declaration": true,
     "esModuleInterop": true,
     "importsNotUsedAsValues": "error",
     "outDir": "dist",
