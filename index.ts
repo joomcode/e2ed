@@ -10,11 +10,6 @@ import type {Page} from './Page';
 import type {NavigateToPage} from './types';
 import {log} from './utils';
 
-export * from './ApiRoute';
-export * from './Page';
-export * from './PageRoute';
-export * from './Route';
-
 type Pages = typeof pages;
 
 /**
@@ -36,7 +31,7 @@ export const navigateToPage: NavigateToPage<Pages> = async (
     willNavigateToExecutedInMs: startNavigateTime - startTime,
   });
   await t.navigateTo(url);
-  await waitForInterfaceStabilization(5000);
+  await waitForInterfaceStabilization(2000);
   log(`Page "${String(pageName)}" loaded in ${Date.now() - startNavigateTime} ms`, {url});
   return page as never;
 };
