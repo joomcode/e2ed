@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "E2E utils",
   "keywords": [
     "E2E",
@@ -39,9 +39,9 @@
     "lint:prettier": "prettier --check --ignore-path=.gitignore '**/*.{yaml,json,ts,js,md}'",
     "lint:types": "tsc --noEmit",
     "prebuild": "rm -rf build",
-    "build": "tsc; echo 'Build done.'",
+    "build": "tsc; echo 'Compilation done.'",
     "postbuild": "npm run copy:meta",
-    "prepublish": "build",
-    "publish": "npm publish build"
+    "prerelease": "npm run build",
+    "release": "npm publish ./build"
   }
 }
