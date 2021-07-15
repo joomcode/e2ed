@@ -1,20 +1,22 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "baseUrl": ".",
     "esModuleInterop": true,
     "importsNotUsedAsValues": "error",
-    "module": "ESNext",
+    "outDir": "dist",
+    "module": "CommonJS",
     "moduleResolution": "node",
-    "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
+    "removeComments": true,
     "resolveJsonModule": true,
     "strict": true,
     "target": "ESNext",
     "types": ["node", "testcafe"]
   },
-  "include": ["**/*.ts", "**/*.js"]
+  "include": ["src/**/*.ts", "src/**/*.js"]
 }
