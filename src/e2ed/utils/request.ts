@@ -10,21 +10,21 @@ import {wrapInTestRunTracker} from './wrapInTestRunTracker';
 
 import type {Headers, Method, Query} from '../types';
 
-type Response<Data> = Readonly<{
+type Response<Output> = Readonly<{
   statusCode: number;
   headers: Headers;
-  data: Data;
+  output: Output;
 }>;
 
-type Options<Data> = Readonly<{
+type Options<Input, Output> = Readonly<{
   url: string;
   query?: Query;
   method?: Method;
   headers?: Headers;
-  data?: string | Record<string, unknown>;
+  input?: string | Input;
   timeout?: number;
   maxRetriesCount?: number;
-  isNeedRetry?: (response: Response<Data>) => boolean;
+  isNeedRetry?: (response: Response<Output>) => boolean;
 }>;
 
 type LogParams = Readonly<{url: string}> & Record<string, unknown>;
@@ -32,22 +32,22 @@ type LogParams = Readonly<{url: string}> & Record<string, unknown>;
 type OneTryOfRequestOptions = Readonly<{
   urlObject: URL;
   options: Readonly<{method: Method; headers: Headers}>;
-  dataAsString: string;
+  inputAsString: string;
   libRequest: typeof httpRequest;
   timeout: number;
   logParams: LogParams;
 }>;
 
-const defaultIsNeedRetry = <Data>({statusCode}: Response<Data>) => statusCode >= 400;
+const defaultIsNeedRetry = <Output>({statusCode}: Response<Output>) => statusCode >= 400;
 
-const oneTryOfRequest = <Data>({
+const oneTryOfRequest = <Output>({
   urlObject,
   options,
-  dataAsString,
+  inputAsString,
   libRequest,
   timeout,
   logParams,
-}: OneTryOfRequestOptions): Promise<{fullLogParams: LogParams; response: Response<Data>}> =>
+}: OneTryOfRequestOptions): Promise<{fullLogParams: LogParams; response: Response<Output>}> =>
   new Promise((resolve, reject) => {
     const fullOptions = {
       ...options,
@@ -87,14 +87,14 @@ const oneTryOfRequest = <Data>({
       });
 
       res.on('end', () => {
-        const responseDataAsString = chunks.join('');
+        const outputAsString = chunks.join('');
 
         try {
-          const responseData = JSON.parse(responseDataAsString) as Data;
+          const output = JSON.parse(outputAsString) as Output;
           const response = {
             statusCode: res.statusCode || 400,
             headers: res.headers,
-            data: responseData,
+            output,
           };
 
           clearTimeout(endTimeout);
@@ -103,7 +103,7 @@ const oneTryOfRequest = <Data>({
           clearTimeout(endTimeout);
           reject(
             new E2EDError(
-              `The response data string to request ${logParams.url} is not valid JSON: ${responseDataAsString}`,
+              `The response data string to request ${logParams.url} is not valid JSON: ${outputAsString}`,
               {...fullLogParams, cause},
             ),
           );
@@ -119,7 +119,7 @@ const oneTryOfRequest = <Data>({
       reject(new E2EDError(`Error on request to ${logParams.url}`, {...fullLogParams, cause}));
     });
 
-    req.write(dataAsString);
+    req.write(inputAsString);
     req.end();
   });
 
@@ -127,18 +127,18 @@ const oneTryOfRequest = <Data>({
  * Send a request to the (JSON) API by url, query params, HTTP-method, headers,
  * post-data, timeout and number of retry attempts.
  */
-export const request = async <Data = unknown>({
+export const request = async <Input = unknown, Output = unknown>({
   url,
   query,
   method = 'GET',
   headers,
-  data = '',
+  input = '',
   timeout = 30_000,
   maxRetriesCount = 5,
   isNeedRetry = defaultIsNeedRetry,
-}: Options<Data>): Promise<Response<Data>> => {
+}: Options<Input, Output>): Promise<Response<Output>> => {
   const urlObject = new URL(url);
-  const logParams: LogParams = {url, query, method, headers, data, timeout};
+  const logParams: LogParams = {url, query, method, headers, input, timeout};
 
   if (urlObject.search !== '') {
     throw new E2EDError(
@@ -149,11 +149,11 @@ export const request = async <Data = unknown>({
 
   urlObject.search = stringify(query);
 
-  const dataAsString = typeof data === 'string' ? data : JSON.stringify(data);
+  const inputAsString = typeof input === 'string' ? input : JSON.stringify(input);
   const options = {
     method,
     headers: {
-      'Content-Length': String(Buffer.byteLength(dataAsString)),
+      'Content-Length': String(Buffer.byteLength(inputAsString)),
       'Content-Type': 'application/json; charset=UTF-8',
       ...headers,
     },
@@ -169,10 +169,10 @@ export const request = async <Data = unknown>({
 
     try {
       // eslint-disable-next-line no-await-in-loop
-      const {fullLogParams, response} = await oneTryOfRequest<Data>({
+      const {fullLogParams, response} = await oneTryOfRequest<Output>({
         urlObject,
         options,
-        dataAsString,
+        inputAsString,
         libRequest,
         timeout,
         logParams: {...logParams, retry},

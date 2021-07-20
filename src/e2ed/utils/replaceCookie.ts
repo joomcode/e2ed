@@ -1,5 +1,9 @@
-type Cookie = Readonly<{name: string; value: string}>;
+import type {Cookie} from '../types';
 
+/**
+ * Replace one cookie in array of cookie (insert if such a cookie was not in the array)
+ * and return new array of cookies.
+ */
 export const replaceCookie = (cookies: string[], cookie: Cookie): string[] => {
   const newCookies = [...cookies];
   const newCookieString = `${cookie.name}=${cookie.value};`;

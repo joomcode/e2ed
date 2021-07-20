@@ -4,6 +4,8 @@ export * from '../../../e2ed/types';
 
 export * from './context';
 
+export type {Brand} from './utils';
+
 export * from './request';
 
 export type Mutable<T> = {

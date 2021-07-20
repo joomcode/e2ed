@@ -1,6 +1,11 @@
 import type {IncomingHttpHeaders} from 'http';
 
 /**
+ * Cookie object.
+ */
+export type Cookie = Readonly<{name: string; value: string}>;
+
+/**
  * HTTP headers.
  */
 export type Headers = Readonly<IncomingHttpHeaders>;
