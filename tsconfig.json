@@ -15,7 +15,7 @@
     "noUnusedLocals": true,
     "resolveJsonModule": true,
     "strict": true,
-    "target": "ESNext",
+    "target": "ES2016",
     "types": ["node", "testcafe"]
   },
   "include": ["src/**/*.ts", "bin/**/*.js"]
