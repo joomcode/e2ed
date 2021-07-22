@@ -7,7 +7,7 @@
     "esModuleInterop": true,
     "importsNotUsedAsValues": "error",
     "outDir": "build",
-    "module": "ESNext",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,

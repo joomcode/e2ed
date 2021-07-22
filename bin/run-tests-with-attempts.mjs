@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import {getFailedTestsFromJsonReport} from './utils/getFailedTestsFromJsonReport.js';
-import {runTests} from './utils/runTests.js';
+import {getFailedTestsFromJsonReport} from './utils/getFailedTestsFromJsonReport.mjs';
+import {runTests} from './utils/runTests.mjs';
 
 const MAX_ATTEMPTS = 5;
 

@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "E2E utils",
   "keywords": [
     "E2E",
@@ -33,7 +33,7 @@
     "typescript": "4.4.0-beta"
   },
   "scripts": {
-    "copy:meta": "cp -r bin LICENSE package.json README.md .testcaferc.json build",
+    "copy:meta": "cp -r bin LICENSE package.json README.md .testcaferc.json build/src/e2ed",
     "lint": "npm run lint:es & npm run lint:prettier & npm run lint:types & wait",
     "lint:es": "eslint --ext=.js,.ts .",
     "lint:prettier": "prettier --check --ignore-path=.gitignore '**/*.{yaml,json,ts,js,md}'",
@@ -42,6 +42,6 @@
     "build": "tsc; echo 'Compilation done.'",
     "postbuild": "npm run copy:meta",
     "prerelease": "npm run build",
-    "release": "npm publish ./build"
+    "release": "npm publish ./build/src/e2ed"
   }
 }
