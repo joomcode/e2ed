@@ -19,16 +19,16 @@
     },
     {
       "name": "json",
-      "output": "reports/e2e/report.json"
+      "output": "../../e2ed/reports/report.json"
     },
     {
       "name": "xunit",
-      "output": "reports/e2e/junit-report.xml"
+      "output": "../../e2ed/reports/junit-report.xml"
     }
   ],
   "retryTestPages": true,
   "screenshots": {
-    "path": "reports/e2e/screenshots",
+    "path": "../e2ed/reports/screenshots",
     "pathPattern": "${DATE}_${TIME}/${BROWSER}_${BROWSER_VERSION}/${FIXTURE}_${TEST}/${FILE_INDEX}.png",
     "takeOnFails": true
   },

@@ -5,7 +5,7 @@ const require = createRequire(import.meta.url);
 const {reporter} = require('../../.testcaferc.json');
 
 const jsonReportPathFromRoot = reporter.find(({name}) => name === 'json').output;
-const jsonReportPath = `../../../${jsonReportPathFromRoot}`;
+const jsonReportPath = `../../${jsonReportPathFromRoot}`;
 
 export const getFailedTestsFromJsonReport = () => {
   const absoluteJsonReportPath = require.resolve(jsonReportPath);
