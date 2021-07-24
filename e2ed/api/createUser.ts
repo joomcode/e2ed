@@ -1,7 +1,8 @@
-import {DEFAULT_PASSWORD} from 'e2e/constants';
-import {apiRoutes} from 'e2e/routes';
-import type {Password, User, UserInfo} from 'e2e/types';
-import {request} from 'e2e/utils';
+import {DEFAULT_PASSWORD} from 'e2ed/constants';
+import {apiRoutes} from 'e2ed/routes';
+import {request} from 'e2ed/utils';
+
+import type {Password, User, UserInfo} from 'e2ed/types';
 
 type Input = Readonly<UserInfo & {password: Password}>;
 
@@ -17,12 +18,12 @@ export const createUser = async (userInfo: UserInfo): Promise<User> => {
   const input = {...userInfo, password: DEFAULT_PASSWORD};
 
   const {
-    output: {payload: User},
+    output: {payload: user},
   } = await request<Input, Output>({
     url,
     method: apiRoutes.userSignUp.getMethod(),
     input,
   });
 
-  return User;
+  return user;
 };
