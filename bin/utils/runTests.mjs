@@ -9,7 +9,7 @@ process.env.E2ED_SHOW_LOGS = 'true';
 const browsers = ['chromium:headless --no-sandbox --disable-dev-shm-usage'];
 const concurrency = 5;
 
-export const runTests = async ({isFirstAttempt, runLabel, tests}) => {
+export const runTests = async ({isFirstRetry, runLabel, tests}) => {
   process.env.E2ED_RUN_LABEL = runLabel;
 
   const testCafe = await createTestCafe();
@@ -21,7 +21,7 @@ export const runTests = async ({isFirstAttempt, runLabel, tests}) => {
       .browsers(browsers)
       .concurrency(concurrency)
       .filter((testName, fixtureName, fixturePath) => {
-        if (isFirstAttempt) {
+        if (isFirstRetry) {
           return true;
         }
 

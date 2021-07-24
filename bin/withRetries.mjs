@@ -3,39 +3,39 @@
 import {getFailedTestsFromJsonReport} from './utils/getFailedTestsFromJsonReport.mjs';
 import {runTests} from './utils/runTests.mjs';
 
-const MAX_ATTEMPTS = 5;
+const MAX_RETRIES = 5;
 
 const startTime = Date.now();
 const log = (message) => console.log(`[${new Date().toISOString()}] ${message}\n`);
 const toString = (tests) => JSON.stringify(tests, null, 2);
 
 let allTestsCount = 0;
-let attemptIndex = 1;
+let retryIndex = 1;
 let tests = [];
 
-for (; attemptIndex <= MAX_ATTEMPTS; attemptIndex += 1) {
-  const isFirstAttempt = attemptIndex === 1;
-  const runLabel = `attempt ${attemptIndex}/${MAX_ATTEMPTS}`;
-  const startAttemptTime = Date.now();
-  const printedTestsString = isFirstAttempt
+for (; retryIndex <= MAX_RETRIES; retryIndex += 1) {
+  const isFirstRetry = retryIndex === 1;
+  const runLabel = `retry ${retryIndex}/${MAX_RETRIES}`;
+  const startRetryTime = Date.now();
+  const printedTestsString = isFirstRetry
     ? ''
     : ` (${tests.length} failed tests out of ${allTestsCount}): ${toString(tests)}`;
 
   log(`Run tests with ${runLabel}${printedTestsString}`);
 
-  await runTests({isFirstAttempt, tests, runLabel});
+  await runTests({isFirstRetry, tests, runLabel});
 
   const failedTests = getFailedTestsFromJsonReport();
 
   tests = failedTests.tests;
 
-  if (isFirstAttempt) {
+  if (isFirstRetry) {
     allTestsCount = failedTests.allTestsCount;
   }
 
-  const testsCount = isFirstAttempt ? allTestsCount : tests.length;
+  const testsCount = isFirstRetry ? allTestsCount : tests.length;
 
-  log(`${testsCount} tests with ${runLabel} ran in ${Date.now() - startAttemptTime} ms`);
+  log(`${testsCount} tests with ${runLabel} ran in ${Date.now() - startRetryTime} ms`);
 
   if (tests.length === 0) {
     log(`[OK] All ${allTestsCount} tests completed successfully with ${runLabel}`);
@@ -44,14 +44,14 @@ for (; attemptIndex <= MAX_ATTEMPTS; attemptIndex += 1) {
   }
 }
 
-if (attemptIndex > MAX_ATTEMPTS) {
+if (retryIndex > MAX_RETRIES) {
   log(
     `[FAIL] There are ${
       tests.length
-    } failed tests (out of ${allTestsCount}) after ${MAX_ATTEMPTS} attempts: ${toString(tests)}`,
+    } failed tests (out of ${allTestsCount}) after ${MAX_RETRIES} retries: ${toString(tests)}`,
   );
 }
 
-log(`${allTestsCount} tests with all ${MAX_ATTEMPTS} attempts lasted ${Date.now() - startTime} ms`);
+log(`${allTestsCount} tests with all ${MAX_RETRIES} retries lasted ${Date.now() - startTime} ms`);
 
 process.exit(0);

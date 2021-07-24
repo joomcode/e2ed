@@ -125,7 +125,7 @@ const oneTryOfRequest = <Output>({
 
 /**
  * Send a request to the (JSON) API by url, query params, HTTP-method, headers,
- * post-data, timeout and number of retry attempts.
+ * post-data, timeout and number of retries.
  */
 export const request = async <Input = unknown, Output = unknown>({
   url,

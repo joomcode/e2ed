@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "description": "E2E utils",
   "keywords": [
     "E2E",
@@ -9,8 +9,8 @@
   "author": "uid11",
   "license": "MIT",
   "bin": {
-    "e2ed-docker": "./bin/run-tests-in-docker.sh",
-    "e2ed-local": "./bin/run-tests-local.sh"
+    "e2ed-docker": "./bin/docker.sh",
+    "e2ed-local": "./bin/local.sh"
   },
   "bugs": "https://github.com/uid11/e2ed/issues",
   "engines": {
@@ -33,13 +33,13 @@
   },
   "scripts": {
     "lint": "npm run lint:es & npm run lint:prettier & npm run lint:types & wait",
-    "lint:es": "eslint --ext=.js,.ts .",
+    "lint:es": "eslint --ext=.mjs,.ts .",
     "lint:prettier": "prettier --check --ignore-path=.gitignore '**/*.{yaml,json,ts,js,md}'",
     "lint:types": "tsc --noEmit",
     "prebuild": "rm -rf build",
     "build": "tsc; echo 'Compilation done.'",
     "postbuild": "npm run build:set-node-modules && npm run build:copy-meta",
-    "build:set-node-modules": "mv build/src build/node_modules",
+    "build:set-node-modules": "mv build/src build/node_modules && mv build/node_modules/package build/node_modules/e2ed",
     "build:copy-meta": "cp -r bin LICENSE package.json README.md .testcaferc.json build/node_modules/e2ed",
     "prerelease": "npm run build",
     "release": "npm publish ./build/node_modules/e2ed"

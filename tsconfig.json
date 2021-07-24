@@ -17,5 +17,5 @@
     "target": "ES2016",
     "types": ["node", "testcafe"]
   },
-  "include": ["e2ed/**/*.ts", "src/**/*.ts", "bin/**/*.js"]
+  "include": ["e2ed/**/*.ts", "src/**/*.ts", "bin/**/*.mjs"]
 }

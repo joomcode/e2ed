@@ -10,10 +10,11 @@ extends:
   - prettier
 parser: '@typescript-eslint/parser'
 parserOptions:
+  extraFileExtensions: ['.mjs']
   project: ./tsconfig.json
   sourceType: module
 overrides:
-  - files: ['*.js']
+  - files: ['*.mjs']
     rules:
       import/extensions: [error, always]
       no-console: off
@@ -49,7 +50,7 @@ rules:
   no-restricted-syntax: off
   import/prefer-default-export: off
 settings:
-  import/extensions: [.js, .ts]
+  import/extensions: [.mjs, .ts]
   import/resolver:
     node:
-      extensions: [.js, .ts]
+      extensions: [.mjs, .ts]
