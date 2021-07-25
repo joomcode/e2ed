@@ -5,7 +5,10 @@ import type {FailTest} from './getFailedTestsFromJsonReport';
 process.env.E2ED_SHOW_LOGS = 'true';
 
 const browsers = ['chromium:headless --no-sandbox --disable-dev-shm-usage'];
-const concurrency = 5;
+const concurrencyFromEnv = Number(process.env.E2ED_CONCURRENCY);
+const isConcurrencyFromEnvValid =
+  Number.isInteger(concurrencyFromEnv) && concurrencyFromEnv > 0 && concurrencyFromEnv < 50;
+const concurrency = isConcurrencyFromEnvValid ? concurrencyFromEnv : 5;
 
 type RunOptions = Readonly<{
   isFirstRetry: boolean;
