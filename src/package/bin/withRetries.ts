@@ -1,17 +1,20 @@
 #!/usr/bin/env node
 
-import {getFailedTestsFromJsonReport} from './utils/getFailedTestsFromJsonReport.mjs';
-import {runTests} from './utils/runTests.mjs';
+import {getFailedTestsFromJsonReport} from './utils/getFailedTestsFromJsonReport';
+import {runTests} from './utils/runTests';
+
+import type {FailTest} from './utils/getFailedTestsFromJsonReport';
 
 const MAX_RETRIES = 5;
 
 const startTime = Date.now();
-const log = (message) => console.log(`[${new Date().toISOString()}] ${message}\n`);
-const toString = (tests) => JSON.stringify(tests, null, 2);
+// eslint-disable-next-line no-console
+const log = (message: string) => console.log(`[${new Date().toISOString()}] ${message}\n`);
+const toString = (tests: FailTest[]) => JSON.stringify(tests, null, 2);
 
 let allTestsCount = 0;
 let retryIndex = 1;
-let tests = [];
+let tests: FailTest[] = [];
 
 for (; retryIndex <= MAX_RETRIES; retryIndex += 1) {
   const isFirstRetry = retryIndex === 1;
@@ -23,6 +26,8 @@ for (; retryIndex <= MAX_RETRIES; retryIndex += 1) {
 
   log(`Run tests with ${runLabel}${printedTestsString}`);
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   await runTests({isFirstRetry, tests, runLabel});
 
   const failedTests = getFailedTestsFromJsonReport();

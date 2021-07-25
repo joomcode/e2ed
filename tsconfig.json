@@ -13,9 +13,11 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "stripInternal": true,
     "strict": true,
     "target": "ES2016",
     "types": ["node", "testcafe"]
   },
-  "include": ["e2ed/**/*.ts", "src/**/*.ts", "bin/**/*.mjs"]
+  "include": ["e2ed/**/*.ts", "src/**/*.ts"]
 }

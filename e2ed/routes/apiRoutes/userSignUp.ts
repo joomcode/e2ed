@@ -8,7 +8,6 @@ class UserSignUp extends ApiRoute {
     return 'POST';
   }
 
-  // eslint-disable-next-line class-methods-use-this
   getPath(): string {
     return '/user/auth/signUp';
   }

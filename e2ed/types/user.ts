@@ -1,6 +1,11 @@
 import type {Brand} from 'e2ed/types';
 
 /**
+ * User email.
+ */
+export type Email = Brand<string, 'Email'>;
+
+/**
  * User password.
  */
 export type Password = Brand<string, 'Password'>;
@@ -15,7 +20,7 @@ export type UserId = Brand<string, 'UserId'>;
  */
 export type UserInfo = Readonly<{
   name: string;
-  email: string;
+  email: Email;
 }>;
 
 export type User = Readonly<UserInfo & {id: UserId}>;

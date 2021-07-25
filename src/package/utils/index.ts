@@ -7,3 +7,4 @@ export * from './replaceCookie';
 export * from './request';
 export * from './SetHeadersRequestHook';
 export * from './wait';
+export * from '../../../e2ed/utils';

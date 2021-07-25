@@ -10,26 +10,13 @@ extends:
   - prettier
 parser: '@typescript-eslint/parser'
 parserOptions:
-  extraFileExtensions: ['.mjs']
   project: ./tsconfig.json
   sourceType: module
-overrides:
-  - files: ['*.mjs']
-    rules:
-      import/extensions: [error, always]
-      no-console: off
-      '@typescript-eslint/explicit-module-boundary-types': off
-      '@typescript-eslint/no-var-requires': off
-      '@typescript-eslint/no-unsafe-assignment': off
-      '@typescript-eslint/no-unsafe-member-access': off
-      '@typescript-eslint/no-unsafe-call': off
-      '@typescript-eslint/no-unsafe-return': off
-      '@typescript-eslint/restrict-template-expressions': off
 root: true
 ignorePatterns: [build]
 rules:
   class-methods-use-this:
-    [error, {exceptMethods: [getOrigin, getMethod, onResponse, willNavigateTo]}]
+    [error, {exceptMethods: [getOrigin, getMethod, getPath, onResponse, willNavigateTo]}]
   import/order:
     - error
     - alphabetize: {order: asc}
@@ -49,8 +36,9 @@ rules:
   no-await-in-loop: off
   no-restricted-syntax: off
   import/prefer-default-export: off
+  '@typescript-eslint/no-namespace': [error, {allowDeclarations: true}]
 settings:
-  import/extensions: [.mjs, .ts]
+  import/extensions: [.ts]
   import/resolver:
     node:
-      extensions: [.mjs, .ts]
+      extensions: [.ts]

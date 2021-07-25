@@ -1,7 +1,5 @@
 import type {OneOrTwoArgs, UnionToIntersection} from './utils';
 
-export * from '../../../e2ed/types';
-
 export * from './context';
 
 export type {Brand} from './utils';
@@ -24,3 +22,5 @@ export type NavigateToPage<
     ) => Promise<Pages[K]>;
   }[keyof Pages]
 >;
+
+export * from '../../../e2ed/types';

@@ -1,15 +1,23 @@
-import {createRequire} from 'module';
+import createTestCafe from 'testcafe';
 
-const require = createRequire(import.meta.url);
-
-const createTestCafe = require('testcafe');
+import type {FailTest} from './getFailedTestsFromJsonReport';
 
 process.env.E2ED_SHOW_LOGS = 'true';
 
 const browsers = ['chromium:headless --no-sandbox --disable-dev-shm-usage'];
 const concurrency = 5;
 
-export const runTests = async ({isFirstRetry, runLabel, tests}) => {
+type RunOptions = Readonly<{
+  isFirstRetry: boolean;
+  runLabel: string;
+  tests: FailTest[];
+}>;
+
+/**
+ * Run one retry of tests.
+ * @internal
+ */
+export const runTests = async ({isFirstRetry, runLabel, tests}: RunOptions): Promise<void> => {
   process.env.E2ED_RUN_LABEL = runLabel;
 
   const testCafe = await createTestCafe();
@@ -33,8 +41,9 @@ export const runTests = async ({isFirstRetry, runLabel, tests}) => {
         );
       })
       .run();
-  } catch (error) {
-    console.log(`Caught an error when running tests with label "${runLabel}": ${error}`);
+  } catch (error: unknown) {
+    // eslint-disable-next-line no-console
+    console.log(`Caught an error when running tests with label "${runLabel}": ${String(error)}`);
   } finally {
     await testCafe.close();
   }

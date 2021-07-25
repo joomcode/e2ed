@@ -1,4 +1,4 @@
-import {useContext} from './useContext';
+import {useContext} from '../useContext';
 
 import type {TestMeta} from '../types';
 
