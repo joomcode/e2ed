@@ -35,7 +35,7 @@
   "scripts": {
     "lint": "npm run lint:es & npm run lint:prettier & npm run lint:types & wait",
     "lint:es": "eslint --max-warnings=0 --ext=.ts .",
-    "lint:prettier": "prettier --check --ignore-path=.gitignore '**/*.{yaml,json,ts,js,md}'",
+    "lint:prettier": "prettier --check --ignore-path=.gitignore '**/*.{yaml,json,ts,md}'",
     "lint:types": "tsc --noEmit",
     "prebuild": "rm -rf build",
     "build": "tsc; echo 'Compilation done.'",

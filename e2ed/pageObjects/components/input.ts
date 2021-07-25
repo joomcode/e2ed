@@ -4,7 +4,7 @@ class Input {
   /**
    *  Input element.
    */
-  readonly input = cssSelector('input[title=Search]');
+  readonly input = cssSelector('input[name=q]');
 
   /**
    * Input value.
