@@ -5,7 +5,7 @@ type Set<T> = (value: T) => void;
 
 let callCount = 0;
 
-export const useContext = <T>(): [get: Get<T>, set: Set<T>] => {
+export const useContext = <T>(): [Get<T>, Set<T>] => {
   callCount += 1;
 
   const contextIndex = callCount;

@@ -9,7 +9,7 @@ class Input {
   /**
    * Input value.
    */
-  get value() {
+  get value(): Promise<string> {
     return this.input.value as Promise<string>;
   }
 }

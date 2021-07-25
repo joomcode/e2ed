@@ -1,4 +1,5 @@
-const isObject = (x: unknown) => x !== null && typeof x === 'object' && Array.isArray(x) === false;
+const isObject = (x: unknown): boolean =>
+  x !== null && typeof x === 'object' && Array.isArray(x) === false;
 
 /**
  * Deep merge two objects (arrays does not merge).

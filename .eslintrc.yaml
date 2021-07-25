@@ -16,7 +16,8 @@ root: true
 ignorePatterns: [build]
 rules:
   class-methods-use-this:
-    [error, {exceptMethods: [getOrigin, getMethod, getPath, onResponse, willNavigateTo]}]
+    - error
+    - {exceptMethods: [getOrigin, getMethod, getPath, onResponse, searchString, willNavigateTo]}
   import/order:
     - error
     - alphabetize: {order: asc}
@@ -36,6 +37,7 @@ rules:
   no-await-in-loop: off
   no-restricted-syntax: off
   import/prefer-default-export: off
+  '@typescript-eslint/explicit-function-return-type': [error, {allowExpressions: true}]
   '@typescript-eslint/no-namespace': [error, {allowDeclarations: true}]
 settings:
   import/extensions: [.ts]

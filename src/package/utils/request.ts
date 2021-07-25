@@ -38,7 +38,7 @@ type OneTryOfRequestOptions = Readonly<{
   logParams: LogParams;
 }>;
 
-const defaultIsNeedRetry = <Output>({statusCode}: Response<Output>) => statusCode >= 400;
+const defaultIsNeedRetry = <Output>({statusCode}: Response<Output>): boolean => statusCode >= 400;
 
 const oneTryOfRequest = <Output>({
   urlObject,

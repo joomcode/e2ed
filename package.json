@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "E2E utils",
   "keywords": [
     "E2E",
@@ -38,12 +38,16 @@
     "lint:types": "tsc --noEmit",
     "prebuild": "rm -rf build",
     "build": "tsc; echo 'Compilation done.'",
-    "postbuild": "npm run build:rename && npm run build:copy",
+    "postbuild": "npm run build:rename && npm run build:copy:meta && npm run build:copy:example",
     "build:rename": "mv build/src build/node_modules && mv build/node_modules/package build/node_modules/e2ed",
-    "build:copy": "cp -r bin LICENSE package.json README.md build/node_modules/e2ed",
-    "postbuild:copy": "chmod +x build/node_modules/e2ed/bin/withRetries.js",
-    "prerelease": "npm run build",
-    "release": "npm publish ./build/node_modules/e2ed"
+    "build:copy:meta": "cp -r bin LICENSE package.json README.md build/node_modules/e2ed",
+    "postbuild:copy:meta": "chmod +x build/node_modules/e2ed/bin/withRetries.js",
+    "prebuild:copy:example": "rm -r build/e2ed",
+    "build:copy:example": "cp -r e2ed build/ && rm -rf build/e2ed/node_modules",
+    "prerelease": "npm run lint && npm run build && npm run test:local",
+    "release": "npm publish ./build/node_modules/e2ed",
+    "test:docker": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/docker.sh)",
+    "test:local": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/local.sh chromium:headless)"
   },
   "types": "index.d.ts"
 }

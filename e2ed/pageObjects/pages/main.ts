@@ -12,12 +12,14 @@ type PageParams = Partial<RouteParams>;
  * Terms Of Service page.
  */
 class Main extends Page<RouteParams> {
-  readonly route = pageRoutes.main;
+  readonly route: typeof pageRoutes.main = pageRoutes.main;
 
-  readonly searchString = components.input.value;
+  get searchString(): Promise<string> {
+    return components.input.value;
+  }
 
   // eslint-disable-next-line @typescript-eslint/require-await
-  async willNavigateTo({language = 'en'}: PageParams = {}): Promise<RouteParams> {
+  async willNavigateTo({language = 'de'}: PageParams): Promise<RouteParams> {
     return {language};
   }
 }

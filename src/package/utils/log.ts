@@ -7,7 +7,7 @@ import {getRandomId} from './getRandomId';
 
 type Log = (message: string, params?: Record<string, unknown>) => void;
 
-const getLabel = (label: string | undefined) => (label ? `[${label}]` : '');
+const getLabel = (label: string | undefined): string => (label ? `[${label}]` : '');
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop: Log = () => {};
 
