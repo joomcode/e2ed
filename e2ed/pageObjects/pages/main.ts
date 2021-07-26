@@ -9,18 +9,32 @@ type RouteParams = Readonly<{language: Language}>;
 type PageParams = Partial<RouteParams>;
 
 /**
- * Terms Of Service page.
+ * Main (index) page.
  */
 class Main extends Page<RouteParams> {
   readonly route: typeof pageRoutes.main = pageRoutes.main;
 
+  /**
+   * Search input.
+   */
+  readonly searchInput = new components.Input('q');
+
+  /**
+   * Current search string.
+   */
   get searchString(): Promise<string> {
-    return components.input.value;
+    return this.searchInput.value;
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await
-  async willNavigateTo({language = 'de'}: PageParams): Promise<RouteParams> {
-    return {language};
+  /**
+   * Type text into a search input.
+   */
+  typeIntoSearchInput(text: string): Promise<void> {
+    return this.searchInput.type(text);
+  }
+
+  willNavigateTo({language = 'de'}: PageParams): Promise<RouteParams> {
+    return Promise.resolve({language});
   }
 }
 

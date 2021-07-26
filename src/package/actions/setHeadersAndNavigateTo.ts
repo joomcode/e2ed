@@ -2,7 +2,7 @@ import {t as testController} from 'testcafe';
 
 import {SetHeadersRequestHook} from '../utils/SetHeadersRequestHook';
 
-import type {MapOptions} from '../types';
+import type {MapOptions} from '../types/internal';
 
 /**
  * Navigate to the page and map custom response and request headers.

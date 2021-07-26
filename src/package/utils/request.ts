@@ -8,7 +8,7 @@ import {getRandomId} from './getRandomId';
 import {log} from './log';
 import {wrapInTestRunTracker} from './wrapInTestRunTracker';
 
-import type {Headers, Method, Query} from '../types';
+import type {Headers, Method, Query} from '../types/internal';
 
 type Response<Output> = Readonly<{
   statusCode: number;

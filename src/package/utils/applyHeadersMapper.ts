@@ -1,4 +1,4 @@
-import type {Headers, MapHeaders, Mutable} from '../types';
+import type {Headers, MapHeaders, Mutable} from '../types/internal';
 
 const getCopyOfHeaders = (headers: Headers): Headers => {
   const copyOfHeaders = {...headers};

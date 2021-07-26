@@ -5,7 +5,7 @@ import type {FailTest} from './getFailedTestsFromJsonReport';
 process.env.E2ED_SHOW_LOGS = 'true';
 
 const browsers = ['chromium:headless --no-sandbox --disable-dev-shm-usage'];
-const concurrencyFromEnv = Number(process.env.E2ED_CONCURRENCY);
+const concurrencyFromEnv = Number(process.env.E2ED_DOCKER_CONCURRENCY);
 const isConcurrencyFromEnvValid =
   Number.isInteger(concurrencyFromEnv) && concurrencyFromEnv > 0 && concurrencyFromEnv < 50;
 const concurrency = isConcurrencyFromEnvValid ? concurrencyFromEnv : 5;

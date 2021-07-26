@@ -5,7 +5,7 @@ import {pages} from './pageObjects';
 import {log} from './utils/log';
 
 import type {Page} from './Page';
-import type {NavigateToPage} from './types';
+import type {NavigateToPage} from './types/internal';
 
 type Pages = typeof pages;
 

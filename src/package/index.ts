@@ -13,7 +13,7 @@ export * from './PageRoute';
 export * from './Route';
 export * from './useContext';
 
-export type {Selector} from './types';
+export type {Selector} from './types/internal';
 
 export * from './expect';
 export * from './it';

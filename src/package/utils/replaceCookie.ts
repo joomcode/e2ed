@@ -1,4 +1,4 @@
-import type {Cookie} from '../types';
+import type {Cookie} from '../types/internal';
 
 /**
  * Replace one cookie in array of cookie (insert if such a cookie was not in the array)
