@@ -1,7 +1,8 @@
 import {inspect} from 'util';
 
 import {DEFAULT_INSPECT_OPTIONS} from '../constants';
-import {getContextLength, getMeta, setMeta} from '../context';
+import {getContextLength} from '../context/getContextLength';
+import {getRunId, setRunId} from '../context/runId';
 
 import {getRandomId} from './getRandomId';
 
@@ -14,11 +15,11 @@ const noop: Log = () => {};
 const writeLog: Log = (message, payload) => {
   const dateTimeInISO = new Date().toISOString();
 
-  if (getMeta().runId === undefined) {
-    setMeta({runId: getRandomId()});
+  if (getRunId() === undefined) {
+    setRunId(getRandomId());
   }
 
-  const {runId} = getMeta();
+  const runId = getRunId();
   const contextLength = getContextLength();
   const maybeRunLabel = getLabel(process.env.E2ED_RUN_LABEL);
   const printedObject: Record<string, unknown> = {payload, contextLength};

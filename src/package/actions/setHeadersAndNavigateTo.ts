@@ -1,6 +1,6 @@
-import {t} from 'testcafe';
+import {t as testController} from 'testcafe';
 
-import {SetHeadersRequestHook} from '../utils';
+import {SetHeadersRequestHook} from '../utils/SetHeadersRequestHook';
 
 import type {MapOptions} from '../types';
 
@@ -10,9 +10,9 @@ import type {MapOptions} from '../types';
 export const setHeadersAndNavigateTo = async (url: string, options: MapOptions): Promise<void> => {
   const setHeadersRequestHook = new SetHeadersRequestHook(url, options);
 
-  await t.addRequestHooks(setHeadersRequestHook);
+  await testController.addRequestHooks(setHeadersRequestHook);
 
-  await t.navigateTo(url);
+  await testController.navigateTo(url);
 
-  await t.removeRequestHooks(setHeadersRequestHook);
+  await testController.removeRequestHooks(setHeadersRequestHook);
 };

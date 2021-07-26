@@ -1,8 +1,8 @@
-import {t} from 'testcafe';
+import {t as testController} from 'testcafe';
 
-import {waitForInterfaceStabilization} from './actions';
+import {waitForInterfaceStabilization} from './actions/waitForInterfaceStabilization';
 import {pages} from './pageObjects';
-import {log} from './utils';
+import {log} from './utils/log';
 
 import type {Page} from './Page';
 import type {NavigateToPage} from './types';
@@ -27,7 +27,7 @@ export const navigateToPage: NavigateToPage<Pages> = async (
     url,
     willNavigateToExecutedInMs: startNavigateTime - startTime,
   });
-  await t.navigateTo(url);
+  await testController.navigateTo(url);
   await waitForInterfaceStabilization(2000);
   log(`Page "${String(pageName)}" loaded in ${Date.now() - startNavigateTime} ms`, {url});
   return page as never;

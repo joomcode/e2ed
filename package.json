@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "E2E utils",
   "keywords": [
     "E2E",
@@ -48,7 +48,7 @@
     "prerelease": "npm run lint && npm run build && npm run test:local",
     "release": "npm publish ./build/node_modules/e2ed",
     "test:docker": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/docker.sh)",
-    "test:local": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/local.sh chromium:headless)"
+    "test:local": "(cd ./build && E2ED_SHOW_LOGS=1 E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/local.sh chromium:headless)"
   },
   "types": "index.d.ts"
 }

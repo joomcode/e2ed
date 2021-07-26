@@ -1,6 +1,6 @@
 import {ClientFunction} from 'testcafe';
 
-import {log} from '../utils';
+import {log} from '../utils/log';
 
 type WaitingForInterfaceStabilization = {
   readonly promise: Promise<number>;

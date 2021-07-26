@@ -1,3 +1,5 @@
-import {Selector} from 'testcafe';
+import {createSelector} from '../createSelector';
 
-export const testIdSelector = (id: string): Selector => Selector(`[data-testid='${id}']`);
+import type {Selector} from '../types';
+
+export const testIdSelector = (id: string): Selector => createSelector(`[data-testid='${id}']`);

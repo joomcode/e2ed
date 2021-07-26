@@ -1,7 +1,7 @@
 import {inspect} from 'util';
 
 import {DEFAULT_INSPECT_OPTIONS} from '../constants';
-import {getContextLength} from '../context';
+import {getContextLength} from '../context/getContextLength';
 
 export class E2EDError extends Error {
   constructor(message: string, params: Record<string, unknown>) {

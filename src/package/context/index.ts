@@ -1,3 +1,3 @@
 export * from './getContextLength';
-export * from './meta';
+export {getMeta, setMeta} from './meta';
 export * from '../../../e2ed/context';

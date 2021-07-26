@@ -24,5 +24,6 @@ declare module 'testcafe/lib/api/test-run-tracker' {
     _createContextSwitchingFunctionHook(ctxSwitchingFn: Fn, patchedArgsCount: number): Fn;
   };
 
+  // eslint-disable-next-line import/no-default-export
   export default testRunTracker;
 }

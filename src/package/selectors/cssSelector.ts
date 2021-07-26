@@ -1,3 +1,5 @@
-import {Selector} from 'testcafe';
+import {createSelector} from '../createSelector';
 
-export const cssSelector = (locator: string): Selector => Selector(locator);
+import type {Selector} from '../types';
+
+export const cssSelector = (locator: string): Selector => createSelector(locator);

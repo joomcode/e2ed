@@ -1,9 +1,7 @@
-import {navigateToPage} from 'e2ed';
+import {expect, it, navigateToPage} from 'e2ed';
 
-fixture('main page exists');
-
-test('search string is empty', async (t) => {
+it('exists', {meta: {testId: '1'}}, async () => {
   const mainPage = await navigateToPage('main', {language: 'en'});
 
-  await t.expect(mainPage.searchString).eql('');
+  await expect(mainPage.searchString, 'search string is empty').eql('');
 });
