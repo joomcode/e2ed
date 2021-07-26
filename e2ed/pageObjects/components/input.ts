@@ -1,10 +1,10 @@
-import {cssSelector} from 'e2ed/selectors';
+import {inputSelector} from 'e2ed/selectors';
 
 class Input {
   /**
    *  Input element.
    */
-  readonly input = cssSelector('input[name=q]');
+  readonly input = inputSelector('q');
 
   /**
    * Input value.

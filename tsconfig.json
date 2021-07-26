@@ -5,6 +5,7 @@
     "declaration": true,
     "esModuleInterop": true,
     "importsNotUsedAsValues": "error",
+    "incremental": true,
     "outDir": "build",
     "module": "CommonJS",
     "moduleResolution": "node",

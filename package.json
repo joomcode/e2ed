@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "description": "E2E utils",
   "keywords": [
     "E2E",
@@ -10,6 +10,7 @@
   "license": "MIT",
   "bin": {
     "e2ed-docker": "./bin/docker.sh",
+    "e2ed-init": "./bin/init.sh",
     "e2ed-local": "./bin/local.sh"
   },
   "bugs": "https://github.com/uid11/e2ed/issues",
@@ -44,10 +45,11 @@
     "build:copy:meta": "cp -r bin LICENSE package.json README.md build/node_modules/e2ed",
     "postbuild:copy:meta": "chmod +x build/node_modules/e2ed/bin/withRetries.js",
     "prebuild:copy:example": "rm -r build/e2ed",
-    "build:copy:example": "cp -r e2ed build/ && rm -rf build/e2ed/node_modules",
+    "build:copy:example": "cp -r e2ed build/node_modules/e2ed/ && rm -r build/node_modules/e2ed/e2ed/node_modules",
     "prerelease": "npm run lint && npm run build && npm run test:local",
     "release": "npm publish ./build/node_modules/e2ed",
     "test:docker": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/docker.sh)",
+    "pretest:local": "(cd ./build && ./node_modules/e2ed/bin/init.sh)",
     "test:local": "(cd ./build && E2ED_SHOW_LOGS=1 E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/local.sh chromium:headless)"
   },
   "types": "index.d.ts"
