@@ -36,6 +36,7 @@ rules:
   import/extensions: [error, never]
   no-await-in-loop: off
   no-restricted-syntax: off
+  no-useless-constructor: off
   import/no-default-export: error
   import/prefer-default-export: off
   '@typescript-eslint/explicit-function-return-type': [error, {allowExpressions: true}]

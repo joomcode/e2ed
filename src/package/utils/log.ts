@@ -1,10 +1,8 @@
-import {inspect} from 'util';
-
-import {DEFAULT_INSPECT_OPTIONS} from '../constants';
 import {getContextLength} from '../context/getContextLength';
 import {getRunId, setRunId} from '../context/runId';
 
 import {getRandomId} from './getRandomId';
+import {print} from './print';
 
 type Log = (message: string, params?: Record<string, unknown>) => void;
 
@@ -24,7 +22,7 @@ const writeLog: Log = (message, payload) => {
   const maybeRunLabel = getLabel(process.env.E2ED_RUN_LABEL);
   const printedObject: Record<string, unknown> = {payload, contextLength};
 
-  const printedString = inspect(printedObject, DEFAULT_INSPECT_OPTIONS);
+  const printedString = print(printedObject);
 
   // eslint-disable-next-line no-console
   console.log(

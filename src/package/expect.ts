@@ -1,9 +1,4 @@
-import {t as testController} from 'testcafe';
+import {Expect} from './utils/Expect';
 
-import {log} from './utils/log';
-
-export const expect = <A>(value: Promise<A>, description: string): Assertion<A> => {
-  log(`Assert expected value`, {description});
-
-  return testController.expect(value);
-};
+export const expect = <V>(value: Promise<V>, description: string): Assertion<V> =>
+  new Expect(value, description) as unknown as Assertion<V>;

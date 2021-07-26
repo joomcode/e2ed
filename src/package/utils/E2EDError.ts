@@ -1,12 +1,11 @@
-import {inspect} from 'util';
-
-import {DEFAULT_INSPECT_OPTIONS} from '../constants';
 import {getContextLength} from '../context/getContextLength';
+
+import {print} from './print';
 
 export class E2EDError extends Error {
   constructor(message: string, params: Record<string, unknown>) {
     const printedObject = {params, contextLength: getContextLength()};
-    const printedString = inspect(printedObject, DEFAULT_INSPECT_OPTIONS);
+    const printedString = print(printedObject);
 
     super(`${message} ${printedString}`);
 
