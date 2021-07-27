@@ -6,6 +6,9 @@ type Options = Readonly<{
   meta: TestMeta;
 }>;
 
+/**
+ * Creates test with name, metatags, params and test function.
+ */
 export const it = (name: string, {meta}: Options, testFn: () => Promise<void>): void => {
   fixture('✔');
 

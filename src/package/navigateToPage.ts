@@ -9,7 +9,7 @@ import type {NavigateToPage} from './types/internal';
 type Pages = typeof pages;
 
 /**
- * Navigate to the page by page name and page params.
+ * Navigates to the page by page name and page params.
  */
 export const navigateToPage: NavigateToPage<Pages> = async (
   pageName: keyof Pages,
