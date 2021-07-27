@@ -10,6 +10,13 @@ const isConcurrencyFromEnvValid =
   Number.isInteger(concurrencyFromEnv) && concurrencyFromEnv > 0 && concurrencyFromEnv < 50;
 const concurrency = isConcurrencyFromEnvValid ? concurrencyFromEnv : 5;
 
+if (process.env.E2ED_DOCKER_CONCURRENCY !== undefined && isConcurrencyFromEnvValid === false) {
+  // eslint-disable-next-line no-console
+  console.log(
+    `Invalid value for environment variable E2ED_DOCKER_CONCURRENCY (it must be less than 50): ${process.env.E2ED_DOCKER_CONCURRENCY}. Instead, use the default value ${concurrency}`,
+  );
+}
+
 type RunOptions = Readonly<{
   isFirstRetry: boolean;
   runLabel: string;

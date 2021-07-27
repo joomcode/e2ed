@@ -50,6 +50,8 @@ E2ED_ORIGIN=https://google.com npx e2ed-docker
 
 `E2ED_DOCKER_CONCURRENCY`: the number of browser windows in which tests with the `e2ed-docker` command will run in parallel (5 by default).
 
+`E2ED_NAVIGATE_STABILIZATION_INTERVAL`: after navigating to the page, `e2ed` will wait until the page is stable for the specified time in milliseconds (2000 by default).
+
 ## License
 
 [MIT][license-url]
