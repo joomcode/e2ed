@@ -1,5 +1,6 @@
 import {t as testController} from 'testcafe';
 
+import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
 import type {Selector} from '../types/internal';
@@ -7,10 +8,12 @@ import type {Selector} from '../types/internal';
 type Options = Parameters<typeof testController.click>[1];
 
 /**
- * Click an element.
+ * Clicks an element.
  */
-export const click = (selector: Selector, options?: Options): TestControllerPromise => {
-  log('Click an element', {options});
+export const click = (selector: Selector, options?: Options): Promise<void> => {
+  const locator = getLocatorFromSelector(selector);
+
+  log('Click an element', {locator, options});
 
   return testController.click(selector as globalThis.Selector, options);
 };
