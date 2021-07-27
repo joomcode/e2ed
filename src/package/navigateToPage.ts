@@ -1,6 +1,5 @@
-import {t as testController} from 'testcafe';
-
 import {waitForInterfaceStabilization} from './actions/waitForInterfaceStabilization';
+import {navigateTo} from './hooks';
 import {pages} from './pageObjects';
 import {log} from './utils/log';
 
@@ -14,22 +13,22 @@ type Pages = typeof pages;
  */
 export const navigateToPage: NavigateToPage<Pages> = async (
   pageName: keyof Pages,
-  params?: unknown,
+  pageParams?: unknown,
 ): Promise<never> => {
   const startTime = Date.now();
   const page: Page = pages[pageName];
-  const fullParams = await page.willNavigateTo(params as never);
-  const url = page.route.getUrl(fullParams as never);
+  const routeParams = await page.willNavigateTo(pageParams as never);
+  const url = page.route.getUrl(routeParams as never);
   const startNavigateTime = Date.now();
 
   log(`Will navigate to the page "${String(pageName)}"`, {
-    originParams: params,
-    fullParams,
+    pageParams,
+    routeParams,
     url,
     willNavigateToExecutedInMs: startNavigateTime - startTime,
   });
 
-  await testController.navigateTo(url);
+  await navigateTo(url);
 
   const stabilizationIntervalFromEnv = Number(process.env.E2ED_NAVIGATE_STABILIZATION_INTERVAL);
   const isStabilizationIntervalFromEnvValid =
