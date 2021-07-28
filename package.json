@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "E2E utils",
   "keywords": [
     "E2E",
@@ -9,9 +9,9 @@
   "author": "uid11",
   "license": "MIT",
   "bin": {
-    "e2ed-docker": "./bin/docker.sh",
+    "e2ed-docker": "./bin/runDocker.sh",
     "e2ed-init": "./bin/init.sh",
-    "e2ed-local": "./bin/local.sh"
+    "e2ed-local": "./bin/runLocal.js"
   },
   "bugs": "https://github.com/uid11/e2ed/issues",
   "engines": {
@@ -20,7 +20,7 @@
   "homepage": "https://github.com/uid11/e2ed#readme",
   "repository": "uid11/e2ed",
   "dependencies": {
-    "testcafe": "1.14.2"
+    "testcafe": "1.15.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "4.28.5",
@@ -42,15 +42,16 @@
     "build": "tsc; echo 'Compilation done.'",
     "postbuild": "npm run build:rename && npm run build:copy:meta && npm run build:copy:example",
     "build:rename": "mv build/src build/node_modules && mv build/node_modules/package build/node_modules/e2ed",
+    "prebuild:copy:meta": "rm -r build/node_modules/e2ed/bin/*.d.ts build/node_modules/e2ed/bin/utils/*.d.ts",
     "build:copy:meta": "cp -r bin LICENSE package.json README.md build/node_modules/e2ed",
-    "postbuild:copy:meta": "chmod +x build/node_modules/e2ed/bin/withRetries.js",
+    "postbuild:copy:meta": "chmod +x build/node_modules/e2ed/bin/run*",
     "prebuild:copy:example": "rm -r build/e2ed",
     "build:copy:example": "cp -r e2ed build/node_modules/e2ed/ && rm -r build/node_modules/e2ed/e2ed/node_modules",
     "prerelease": "npm run lint && npm run build && npm run test:local",
     "release": "npm publish ./build/node_modules/e2ed",
-    "test:docker": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/docker.sh)",
+    "test:docker": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/runDocker.sh)",
     "pretest:local": "(cd ./build && ./node_modules/e2ed/bin/init.sh)",
-    "test:local": "(cd ./build && E2ED_SHOW_LOGS=1 E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/local.sh chromium:headless)"
+    "test:local": "(cd ./build && E2ED_SHOW_LOGS=1 E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/runLocal.js chromium:headless)"
   },
   "types": "index.d.ts"
 }

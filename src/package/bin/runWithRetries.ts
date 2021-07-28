@@ -8,7 +8,6 @@ import type {FailTest} from './utils/getFailedTestsFromJsonReport';
 const MAX_RETRIES = 5;
 
 const startTime = Date.now();
-// eslint-disable-next-line no-console
 const log = (message: string): void => console.log(`[${new Date().toISOString()}] ${message}\n`);
 const toString = (tests: FailTest[]): string => JSON.stringify(tests, null, 2);
 

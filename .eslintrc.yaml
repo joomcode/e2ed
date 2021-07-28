@@ -41,6 +41,10 @@ rules:
   import/prefer-default-export: off
   '@typescript-eslint/explicit-function-return-type': [error, {allowExpressions: true}]
   '@typescript-eslint/no-namespace': [error, {allowDeclarations: true}]
+overrides:
+  - files: ['**/bin/**/*.ts']
+    rules:
+      no-console: off
 settings:
   import/extensions: [.ts]
   import/resolver:
