@@ -3,5 +3,5 @@ import {Expect} from './utils/Expect';
 /**
  * Wraps a promised value to assertion for further checks.
  */
-export const expect = <V>(value: Promise<V>, description: string): Assertion<V> =>
-  new Expect(value, description) as unknown as Assertion<V>;
+export const expect = <A>(actual: Promise<A>, description: string): Assertion<A> =>
+  new Expect(actual, description) as unknown as Assertion<A>;
