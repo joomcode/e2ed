@@ -2,7 +2,7 @@ import type {OneOrTwoArgs, UnionToIntersection} from './utils';
 
 export * from './request';
 
-export * from './utils';
+export type {Brand} from './utils';
 
 export type Mutable<T> = {
   -readonly [K in keyof T]: T[K];

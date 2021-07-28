@@ -14,14 +14,12 @@ type IncludeUndefined<T> = true extends (T extends undefined ? true : never) ? t
 /**
  * OneOrTwoArgs<'foo', string> = ['foo', string].
  * OneOrTwoArgs<'foo', undefined | number> = ['foo'] | ['foo', number].
- * @internal
  */
 export type OneOrTwoArgs<K, A> = IncludeUndefined<A> extends true ? [K, A?] : [K, A];
 
 /**
  * UnionToIntersection<((x: string) => number) | ((x: number) => string)> =
  *  ((x: string) => number) & ((x: number) => string)
- * @internal
  */
 export type UnionToIntersection<U> = (U extends unknown ? (k: U) => void : never) extends (
   k: infer I,
