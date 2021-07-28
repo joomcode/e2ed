@@ -1,4 +1,4 @@
-import {ApiRoute} from 'e2ed';
+import {ApiRoute} from 'e2ed/routes';
 
 /**
  * Client API route for user signUp.
