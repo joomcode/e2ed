@@ -18,6 +18,8 @@ rules:
   class-methods-use-this:
     - error
     - {exceptMethods: [getOrigin, getMethod, getPath, onResponse, searchString, willNavigateTo]}
+  import/extensions: [error, never]
+  import/no-default-export: error
   import/order:
     - error
     - alphabetize: {order: asc}
@@ -33,12 +35,22 @@ rules:
         - type
       newlines-between: always
       warnOnUnassignedImports: true
-  import/extensions: [error, never]
+  import/prefer-default-export: off
   no-await-in-loop: off
   no-restricted-syntax: off
   no-useless-constructor: off
-  import/no-default-export: error
-  import/prefer-default-export: off
+  padding-line-between-statements:
+    - error
+    - {blankLine: always, prev: class, next: '*'}
+    - {blankLine: always, prev: '*', next: class}
+    - {blankLine: always, prev: [const, let], next: '*'}
+    - {blankLine: always, prev: '*', next: [const, let]}
+    - {blankLine: any, prev: [const, let], next: [const, let]}
+    - {blankLine: always, prev: for, next: '*'}
+    - {blankLine: always, prev: '*', next: for}
+    - {blankLine: always, prev: '*', next: return}
+    - {blankLine: always, prev: try, next: '*'}
+    - {blankLine: always, prev: '*', next: try}
   '@typescript-eslint/explicit-function-return-type': [error, {allowExpressions: true}]
   '@typescript-eslint/no-namespace': [error, {allowDeclarations: true}]
 overrides:

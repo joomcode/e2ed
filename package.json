@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "E2E utils",
   "keywords": [
     "E2E",
@@ -9,8 +9,8 @@
   "author": "uid11",
   "license": "MIT",
   "bin": {
-    "e2ed-init": "./bin/init.sh",
-    "e2ed": "./bin/runLocal.js"
+    "e2ed": "./bin/runLocal.js",
+    "e2ed-init": "./bin/init.sh"
   },
   "bugs": "https://github.com/uid11/e2ed/issues",
   "engines": {

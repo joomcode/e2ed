@@ -13,12 +13,14 @@ const toString = (tests: FailTest[]): string => JSON.stringify(tests, null, 2);
 
 let allTestsCount = 0;
 let retryIndex = 1;
+let runLabel = '';
 let tests: FailTest[] = [];
 
 const asyncRunTests = async (): Promise<void> => {
   for (; retryIndex <= MAX_RETRIES; retryIndex += 1) {
+    runLabel = `retry ${retryIndex}/${MAX_RETRIES}`;
+
     const isFirstRetry = retryIndex === 1;
-    const runLabel = `retry ${retryIndex}/${MAX_RETRIES}`;
     const startRetryTime = Date.now();
     const printedTestsString = isFirstRetry
       ? ''
@@ -48,16 +50,22 @@ const asyncRunTests = async (): Promise<void> => {
   }
 };
 
-asyncRunTests().finally(() => {
-  if (retryIndex > MAX_RETRIES) {
-    log(
-      `[FAIL] There are ${
-        tests.length
-      } failed tests (out of ${allTestsCount}) after ${MAX_RETRIES} retries: ${toString(tests)}`,
-    );
-  }
+asyncRunTests()
+  .catch((error: unknown) => {
+    log(`Caught error on ${runLabel}: ${String(error)}`);
+  })
+  .finally(() => {
+    if (retryIndex > MAX_RETRIES) {
+      log(
+        `[FAIL] There are ${
+          tests.length
+        } failed tests (out of ${allTestsCount}) after ${MAX_RETRIES} retries: ${toString(tests)}`,
+      );
+    }
 
-  log(`${allTestsCount} tests with all ${MAX_RETRIES} retries lasted ${Date.now() - startTime} ms`);
+    const testsCountPrefix = allTestsCount > 0 ? `${allTestsCount} tests` : 'Run';
 
-  process.exit(0);
-});
+    log(`${testsCountPrefix} with all ${MAX_RETRIES} retries lasted ${Date.now() - startTime} ms`);
+
+    process.exit(0);
+  });
