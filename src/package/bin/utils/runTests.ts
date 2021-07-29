@@ -10,9 +10,9 @@ const isConcurrencyFromEnvValid =
   Number.isInteger(concurrencyFromEnv) && concurrencyFromEnv > 0 && concurrencyFromEnv < 50;
 const concurrency = isConcurrencyFromEnvValid ? concurrencyFromEnv : 5;
 
-if (process.env.E2ED_DOCKER_CONCURRENCY !== undefined && isConcurrencyFromEnvValid === false) {
+if (process.env.E2ED_DOCKER_CONCURRENCY && isConcurrencyFromEnvValid === false) {
   console.log(
-    `Invalid value for environment variable E2ED_DOCKER_CONCURRENCY (it must be less than 50): ${process.env.E2ED_DOCKER_CONCURRENCY}. Instead, use the default value ${concurrency}`,
+    `Invalid value for environment variable E2ED_DOCKER_CONCURRENCY (it must be less than 50): "${process.env.E2ED_DOCKER_CONCURRENCY}". Instead, uses the default value ${concurrency}`,
   );
 }
 
@@ -23,13 +23,14 @@ type RunOptions = Readonly<{
 }>;
 
 /**
- * Run one retry of tests.
+ * Runs one retry of tests.
  * @internal
  */
 export const runTests = async ({isFirstRetry, runLabel, tests}: RunOptions): Promise<void> => {
   process.env.E2ED_RUN_LABEL = runLabel;
 
-  const testCafe = await createTestCafe();
+  // @ts-expect-error: createTestCafe has wrong argument types
+  const testCafe = await createTestCafe({configFile: './node_modules/e2ed/testcaferc.json'});
 
   try {
     const runner = testCafe.createRunner();

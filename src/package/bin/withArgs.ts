@@ -1,6 +1,6 @@
 /**
- * @file Fix bug with circular require 'convert-source-map'
- * @link https://github.com/babel/babel/issues/11964
+ * @file Fix bug with circular require 'convert-source-map'.
+ * {@link https://github.com/babel/babel/issues/11964}
  */
 
 try {
@@ -14,5 +14,7 @@ try {
 } catch (error) {
   console.log('Error in convert-source-map fix', error);
 }
+
+process.argv.push('--config-file', './node_modules/e2ed/testcaferc.json');
 
 require('testcafe/lib/cli/cli');

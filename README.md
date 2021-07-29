@@ -20,22 +20,24 @@ npm install e2ed --save-dev
 
 ### CLI
 
-Create an initial directory structure for tests in a project:
+First create the necessary initial structure of directories and files in the project,
+with a sample test and pageObject (all the code related to `e2ed`
+will be in the `e2ed` directory in the root of the project):
 
 ```sh
 npx e2ed-init
 ```
 
-Run tests locally for `https://google.com`:
+Then run tests locally for `https://google.com`:
 
 ```sh
-E2ED_ORIGIN=https://google.com npx e2ed-local
+E2ED_ORIGIN=https://google.com npx e2ed
 ```
 
-Run tests for `https://google.com` in docker:
+And run tests for `https://google.com` in docker:
 
 ```sh
-E2ED_ORIGIN=https://google.com npx e2ed-docker
+E2ED_ORIGIN=https://google.com ./bin/runDocker.sh
 ```
 
 ### Environment variables

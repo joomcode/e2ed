@@ -10,7 +10,7 @@
     }
   },
   "hostname": "localhost",
-  "src": ["../../e2ed/tests/**/*.spec.ts"],
+  "src": ["./e2ed/tests/**/*.spec.ts"],
   "pageLoadTimeout": 0,
   "pageRequestTimeout": 30000,
   "reporter": [
@@ -19,16 +19,16 @@
     },
     {
       "name": "json",
-      "output": "../../e2ed/reports/report.json"
+      "output": "./e2ed/reports/report.json"
     },
     {
       "name": "xunit",
-      "output": "../../e2ed/reports/junit-report.xml"
+      "output": "./e2ed/reports/junit-report.xml"
     }
   ],
   "retryTestPages": true,
   "screenshots": {
-    "path": "../../e2ed/reports/screenshots",
+    "path": "./e2ed/reports/screenshots",
     "pathPattern": "${DATE}_${TIME}/${BROWSER}_${BROWSER_VERSION}/${FIXTURE}_${TEST}/${FILE_INDEX}.png",
     "takeOnFails": true
   },

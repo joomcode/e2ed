@@ -38,11 +38,11 @@ export const navigateToPage: NavigateToPage<Pages> = async (
     : 2000;
 
   if (
-    process.env.E2ED_NAVIGATE_STABILIZATION_INTERVAL !== undefined &&
+    process.env.E2ED_NAVIGATE_STABILIZATION_INTERVAL &&
     isStabilizationIntervalFromEnvValid === false
   ) {
     log(
-      `Invalid value for environment variable E2ED_NAVIGATE_STABILIZATION_INTERVAL: ${process.env.E2ED_NAVIGATE_STABILIZATION_INTERVAL}. Instead, use the default value ${stabilizationInterval}`,
+      `Invalid value for environment variable E2ED_NAVIGATE_STABILIZATION_INTERVAL: "${process.env.E2ED_NAVIGATE_STABILIZATION_INTERVAL}". Instead, uses the default value ${stabilizationInterval}`,
       {url},
     );
   }

@@ -1,4 +1,4 @@
-import config from '../../.testcaferc.json';
+import config from '../../testcaferc.json';
 
 const jsonReportPathFromRoot = config.reporter.find(({name}) => name === 'json')?.output || '';
 const jsonReportPath = `../../${jsonReportPathFromRoot}`;

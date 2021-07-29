@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.1.11",
+  "version": "0.2.0",
   "description": "E2E utils",
   "keywords": [
     "E2E",
@@ -9,9 +9,8 @@
   "author": "uid11",
   "license": "MIT",
   "bin": {
-    "e2ed-docker": "./bin/runDocker.sh",
     "e2ed-init": "./bin/init.sh",
-    "e2ed-local": "./bin/runLocal.js"
+    "e2ed": "./bin/runLocal.js"
   },
   "bugs": "https://github.com/uid11/e2ed/issues",
   "engines": {
@@ -38,19 +37,23 @@
     "lint:es": "eslint --max-warnings=0 --ext=.ts .",
     "lint:prettier": "prettier --check --ignore-path=.gitignore '**/*.{json,md,ts,yaml}'",
     "lint:types": "tsc --noEmit",
+    "test": "npm run test:local & npm run test:docker & wait",
     "prebuild": "rm -rf build",
     "build": "tsc; echo 'Compilation done.'",
-    "postbuild": "npm run build:rename && npm run build:copy:meta && npm run build:copy:example",
+    "postbuild": "npm run build:rename && npm run build:copy:meta && npm run build:copy:example && npm run build:init",
     "build:rename": "mv build/src build/node_modules && mv build/node_modules/package build/node_modules/e2ed",
     "prebuild:copy:meta": "rm -r build/node_modules/e2ed/bin/*.d.ts build/node_modules/e2ed/bin/utils/*.d.ts",
     "build:copy:meta": "cp -r bin LICENSE package.json README.md build/node_modules/e2ed",
     "postbuild:copy:meta": "chmod +x build/node_modules/e2ed/bin/run*",
     "prebuild:copy:example": "rm -r build/e2ed",
     "build:copy:example": "cp -r e2ed build/node_modules/e2ed/ && rm -r build/node_modules/e2ed/e2ed/node_modules",
-    "prerelease": "npm run lint && npm run build && npm run test:local",
+    "build:init": "(cd ./build && ./node_modules/e2ed/bin/init.sh)",
+    "prerelease": "npm run lint & npm run build && npm run test",
     "release": "npm publish ./build/node_modules/e2ed",
-    "test:docker": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/runDocker.sh)",
-    "pretest:local": "(cd ./build && ./node_modules/e2ed/bin/init.sh)",
+    "build:docker": "docker build -t e2ed .",
+    "pretest:docker": "npm run build:docker && npm run test:docker:copy",
+    "test:docker:copy": "rm -rf build/docker && mkdir build/docker && cp -r build/e2ed build/docker/e2ed",
+    "test:docker": "(cd ./build/docker && E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh)",
     "test:local": "(cd ./build && E2ED_SHOW_LOGS=1 E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/runLocal.js chromium:headless)"
   },
   "types": "index.d.ts"
