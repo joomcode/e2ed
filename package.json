@@ -42,7 +42,7 @@
     "build": "tsc; echo 'Compilation done.'",
     "postbuild": "npm run build:rename && npm run build:copy:meta && npm run build:copy:example && npm run build:init",
     "build:rename": "mv build/src build/node_modules && mv build/node_modules/package build/node_modules/e2ed",
-    "prebuild:copy:meta": "rm -r build/node_modules/e2ed/bin/*.d.ts build/node_modules/e2ed/bin/utils/*.d.ts",
+    "prebuild:copy:meta": "rm -r build/node_modules/e2ed/bin/*.d.ts",
     "build:copy:meta": "cp -r bin LICENSE package.json README.md build/node_modules/e2ed",
     "postbuild:copy:meta": "chmod +x build/node_modules/e2ed/bin/run*",
     "prebuild:copy:example": "rm -r build/e2ed",
@@ -53,8 +53,8 @@
     "build:docker": "docker build -t e2ed .",
     "pretest:docker": "npm run build:docker && npm run test:docker:copy",
     "test:docker:copy": "rm -rf build/docker && mkdir build/docker && cp -r build/e2ed build/docker/e2ed",
-    "test:docker": "(cd ./build/docker && E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh)",
-    "test:local": "(cd ./build && E2ED_SHOW_LOGS=1 E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/runLocal.js chromium:headless)"
+    "test:docker": "(cd ./build/docker && E2ED_DOCKER_CONCURRENCY=2 E2ED_DOCKER_RETRIES=1 E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh)",
+    "test:local": "(cd ./build && E2ED_SHOW_LOGS=true E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/runLocal.js chromium:headless)"
   },
   "types": "index.d.ts"
 }

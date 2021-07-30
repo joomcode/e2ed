@@ -1,20 +1,18 @@
 import createTestCafe from 'testcafe';
 
+import {getIntegerFromEnvVariable} from './getIntegerFromEnvVariable';
+
 import type {FailTest} from './getFailedTestsFromJsonReport';
 
 process.env.E2ED_SHOW_LOGS = 'true';
 
 const browsers = ['chromium:headless --no-sandbox --disable-dev-shm-usage'];
-const concurrencyFromEnv = Number(process.env.E2ED_DOCKER_CONCURRENCY);
-const isConcurrencyFromEnvValid =
-  Number.isInteger(concurrencyFromEnv) && concurrencyFromEnv > 0 && concurrencyFromEnv < 50;
-const concurrency = isConcurrencyFromEnvValid ? concurrencyFromEnv : 5;
 
-if (process.env.E2ED_DOCKER_CONCURRENCY && isConcurrencyFromEnvValid === false) {
-  console.log(
-    `Invalid value for environment variable E2ED_DOCKER_CONCURRENCY (it must be less than 50): "${process.env.E2ED_DOCKER_CONCURRENCY}". Instead, uses the default value ${concurrency}`,
-  );
-}
+const concurrency = getIntegerFromEnvVariable({
+  defaultValue: 5,
+  maxValue: 50,
+  name: 'E2ED_DOCKER_CONCURRENCY',
+});
 
 type RunOptions = Readonly<{
   isFirstRetry: boolean;
@@ -30,7 +28,10 @@ export const runTests = async ({isFirstRetry, runLabel, tests}: RunOptions): Pro
   process.env.E2ED_RUN_LABEL = runLabel;
 
   // @ts-expect-error: createTestCafe has wrong argument types
-  const testCafe = await createTestCafe({configFile: './node_modules/e2ed/testcaferc.json'});
+  const testCafe = await createTestCafe({
+    browsers,
+    configFile: './node_modules/e2ed/testcaferc.json',
+  });
 
   try {
     const runner = testCafe.createRunner();
@@ -52,6 +53,7 @@ export const runTests = async ({isFirstRetry, runLabel, tests}: RunOptions): Pro
       })
       .run();
   } catch (error: unknown) {
+    // eslint-disable-next-line no-console
     console.log(`Caught an error when running tests with label "${runLabel}": ${String(error)}`);
   } finally {
     await testCafe.close();

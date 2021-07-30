@@ -1,11 +1,16 @@
 #!/usr/bin/env node
 
-import {getFailedTestsFromJsonReport} from './utils/getFailedTestsFromJsonReport';
-import {runTests} from './utils/runTests';
+import {getFailedTestsFromJsonReport} from '../utils/getFailedTestsFromJsonReport';
+import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
+import {runTests} from '../utils/runTests';
 
-import type {FailTest} from './utils/getFailedTestsFromJsonReport';
+import type {FailTest} from '../utils/getFailedTestsFromJsonReport';
 
-const MAX_RETRIES = 5;
+const retries = getIntegerFromEnvVariable({
+  defaultValue: 5,
+  maxValue: 10,
+  name: 'E2ED_DOCKER_RETRIES',
+});
 
 const startTime = Date.now();
 const log = (message: string): void => console.log(`[${new Date().toISOString()}] ${message}\n`);
@@ -17,8 +22,8 @@ let runLabel = '';
 let tests: FailTest[] = [];
 
 const asyncRunTests = async (): Promise<void> => {
-  for (; retryIndex <= MAX_RETRIES; retryIndex += 1) {
-    runLabel = `retry ${retryIndex}/${MAX_RETRIES}`;
+  for (; retryIndex <= retries; retryIndex += 1) {
+    runLabel = `retry ${retryIndex}/${retries}`;
 
     const isFirstRetry = retryIndex === 1;
     const startRetryTime = Date.now();
@@ -55,17 +60,17 @@ asyncRunTests()
     log(`Caught error on ${runLabel}: ${String(error)}`);
   })
   .finally(() => {
-    if (retryIndex > MAX_RETRIES) {
+    if (retryIndex > retries) {
       log(
         `[FAIL] There are ${
           tests.length
-        } failed tests (out of ${allTestsCount}) after ${MAX_RETRIES} retries: ${toString(tests)}`,
+        } failed tests (out of ${allTestsCount}) after ${retries} retries: ${toString(tests)}`,
       );
     }
 
     const testsCountPrefix = allTestsCount > 0 ? `${allTestsCount} tests` : 'Run';
 
-    log(`${testsCountPrefix} with all ${MAX_RETRIES} retries lasted ${Date.now() - startTime} ms`);
+    log(`${testsCountPrefix} with all ${retries} retries lasted ${Date.now() - startTime} ms`);
 
     process.exit(0);
   });
