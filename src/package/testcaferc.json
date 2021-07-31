@@ -1,7 +1,7 @@
 {
   "ajaxRequestTimeout": 40000,
   "assertionTimeout": 10000,
-  "browserInitTimeout": 60000,
+  "browserInitTimeout": 40000,
   "browsers": "chrome",
   "color": true,
   "compilerOptions": {

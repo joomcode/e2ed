@@ -1,6 +1,6 @@
 import {fork} from 'child_process';
 
-import type {RunOptions} from '../bin/runTestCafeSubprocess';
+import type {RunOptions} from './runTestCafe';
 
 /**
  * Runs one retry of tests.

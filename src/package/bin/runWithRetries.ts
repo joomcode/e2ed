@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import {generalLog} from '../utils/generalLog';
+import {getConcurrencyForNextRetry} from '../utils/getConcurrencyForNextRetry';
 import {getFailedTestsFromJsonReport} from '../utils/getFailedTestsFromJsonReport';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {printStartParams} from '../utils/printStartParams';
@@ -12,7 +13,7 @@ process.env.E2ED_IS_DOCKER_RUN = 'true';
 
 printStartParams();
 
-const concurrency = getIntegerFromEnvVariable({
+let concurrency = getIntegerFromEnvVariable({
   defaultValue: 5,
   maxValue: 50,
   name: 'E2ED_CONCURRENCY',
@@ -31,6 +32,7 @@ let allTestsCount = 0;
 let retryIndex = 1;
 let runLabel = '';
 let tests: FailTest[] = [];
+let testsCount = 0;
 
 const asyncRunTests = async (): Promise<void> => {
   for (; retryIndex <= retries; retryIndex += 1) {
@@ -39,15 +41,15 @@ const asyncRunTests = async (): Promise<void> => {
     const startRetryTime = Date.now();
     const printedTestsString =
       tests.length === 0
-        ? ''
-        : ` (${tests.length} failed tests out of ${allTestsCount}): ${testsToString(tests)}`;
+        ? ')'
+        : `, ${tests.length} failed tests out of ${allTestsCount}): ${testsToString(tests)}`;
 
     let failedTests: FailTests | undefined;
 
-    generalLog(`Run tests with ${runLabel}${printedTestsString}`);
+    generalLog(`Run tests (${runLabel}, concurrency ${concurrency}${printedTestsString}`);
 
     try {
-      await runTests({concurrency, tests, runLabel});
+      await runTests({concurrency, runLabel, tests});
 
       failedTests = getFailedTestsFromJsonReport();
     } catch (error: unknown) {
@@ -60,17 +62,30 @@ const asyncRunTests = async (): Promise<void> => {
 
     if (failedTests && allTestsCount === 0) {
       allTestsCount = failedTests.allTestsCount;
+      testsCount = allTestsCount;
     }
 
-    const testsCount = tests.length || allTestsCount;
+    testsCount = failedTests ? failedTests.allTestsCount : testsCount;
 
-    generalLog(`${testsCount} tests with ${runLabel} ran in ${Date.now() - startRetryTime} ms`);
+    const wordTest = testsCount === 1 ? 'test' : 'tests';
+
+    generalLog(
+      `${testsCount} ${wordTest} with ${runLabel} and concurrency ${concurrency} ran in ${
+        Date.now() - startRetryTime
+      } ms`,
+    );
 
     if (failedTests && tests.length === 0) {
       generalLog(`[OK] All ${allTestsCount} tests completed successfully with ${runLabel}`);
 
       break;
     }
+
+    concurrency = getConcurrencyForNextRetry({
+      currentConcurrency: concurrency,
+      lastRetryHasError: !failedTests,
+      testsCount: tests.length,
+    });
   }
 };
 
@@ -87,10 +102,12 @@ asyncRunTests()
       );
     }
 
-    const testsCountPrefix = allTestsCount > 0 ? `${allTestsCount} tests` : 'Run';
+    const wordTest = allTestsCount === 1 ? 'test' : 'tests';
+    const wordRetry = retries === 1 ? 'retry' : 'retries';
+    const testsCountPrefix = allTestsCount > 0 ? `${allTestsCount} ${wordTest}` : 'Run';
 
     generalLog(
-      `${testsCountPrefix} with all ${retries} retries lasted ${Date.now() - startTime} ms`,
+      `${testsCountPrefix} with all ${retries} ${wordRetry} lasted ${Date.now() - startTime} ms`,
     );
 
     process.exit(0);
