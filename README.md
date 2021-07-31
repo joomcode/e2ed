@@ -44,22 +44,22 @@ E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh
 
 `E2ED_ORIGIN`: origin-part of the url (`protocol` + `host`) on which the tests will be run. For example, `https://google.com`.
 
-`E2ED_SHOW_LOGS`: show detailed logs of test runs if this variable is not empty.
-
 `E2ED_API_ORIGIN`: origin-part of the backend API url that can be used by tests to create and delete test entities.
 
-`E2ED_IS_DOCKER_RUN`: when run in docker the `e2ed` sets this variable to `"true"`.
-
-`E2ED_IS_LOCAL_RUN`: when run local the `e2ed` sets this variable to `"true"`.
+`E2ED_CONCURRENCY`: the number of browser windows in which tests will run in parallel
+(maximum value 50, 5 by default for run in docker and 1 by default for local run).
 
 `E2ED_DOCKER_IMAGE`: name of the docker image used to run tests with the `your-project/e2ed/bin/runDocker.sh` command
 (`e2ed` by default).
 
-`E2ED_DOCKER_CONCURRENCY`: the number of browser windows in which tests with the `your-project/e2ed/bin/runDocker.sh`
-command will run in parallel (maximum value 50, 5 by default).
-
 `E2ED_DOCKER_RETRIES`: the maximum number of retries to run a failing test with the `your-project/e2ed/bin/runDocker.sh`
 command (maximum value 10, 5 by default). For example, if it is equal to three, the test will be run no more than three times.
+
+`E2ED_HIDE_LOGS`: hides detailed logs of test runs if this variable is not empty.
+
+`E2ED_IS_DOCKER_RUN`: when run in docker the `e2ed` sets this variable to `"true"`.
+
+`E2ED_IS_LOCAL_RUN`: when run local the `e2ed` sets this variable to `"true"`.
 
 `E2ED_NAVIGATE_STABILIZATION_INTERVAL`: after navigating to the page, `e2ed` will wait until
 the page is stable for the specified time in milliseconds (maximum value 60000, 2000 by default).

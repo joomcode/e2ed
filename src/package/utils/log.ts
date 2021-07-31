@@ -33,4 +33,4 @@ const writeLog: Log = (message, payload) => {
 /**
  * Log every actions and API requests in E2ED tests.
  */
-export const log = process.env.E2ED_SHOW_LOGS ? writeLog : noop;
+export const log = process.env.E2ED_HIDE_LOGS ? noop : writeLog;

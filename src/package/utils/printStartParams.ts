@@ -6,7 +6,7 @@ export const printStartParams = (): void => {
   const isDockerRun = Boolean(process.env.E2ED_IS_DOCKER_RUN);
 
   const lines = [
-    `[${new Date().toISOString()}]: Ran tests ${isDockerRun ? 'in docker' : 'local'} with args:`,
+    `[${new Date().toISOString()}]: Run tests ${isDockerRun ? 'in docker' : 'local'} with args:`,
   ];
 
   lines.push(`"${process.argv.join('", "')}"`);

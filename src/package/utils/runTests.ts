@@ -4,14 +4,12 @@ import {getIntegerFromEnvVariable} from './getIntegerFromEnvVariable';
 
 import type {FailTest} from './getFailedTestsFromJsonReport';
 
-process.env.E2ED_SHOW_LOGS = 'true';
-
 const browsers = ['chromium:headless --no-sandbox --disable-dev-shm-usage'];
 
 const concurrency = getIntegerFromEnvVariable({
   defaultValue: 5,
   maxValue: 50,
-  name: 'E2ED_DOCKER_CONCURRENCY',
+  name: 'E2ED_CONCURRENCY',
 });
 
 type RunOptions = Readonly<{
