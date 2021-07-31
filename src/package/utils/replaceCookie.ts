@@ -1,3 +1,5 @@
+import {trimSemicolonsAtTheEnd} from './trimSemicolonsAtTheEnd';
+
 import type {Cookie} from '../types/internal';
 
 /**
@@ -12,7 +14,7 @@ export const replaceCookie = (cookies: string[], cookie: Cookie): string[] => {
   );
 
   if (cookieIndex === -1) {
-    newCookies.push(newCookieString);
+    newCookies.push(trimSemicolonsAtTheEnd(newCookieString));
   } else {
     const cookieString = newCookies[cookieIndex];
     const semicolonIndex = cookieString.indexOf(';');
@@ -22,6 +24,8 @@ export const replaceCookie = (cookies: string[], cookie: Cookie): string[] => {
     } else {
       newCookies[cookieIndex] = `${newCookieString}${cookieString.slice(semicolonIndex + 1)}`;
     }
+
+    newCookies[cookieIndex] = trimSemicolonsAtTheEnd(newCookies[cookieIndex]);
   }
 
   return newCookies;
