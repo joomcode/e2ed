@@ -1,5 +1,5 @@
-import {getContextLength} from '../context/getContextLength';
 import {getRunId, setRunId} from '../context/runId';
+import {logContext} from '../hooks';
 
 import {getRandomId} from './getRandomId';
 import {valueToString} from './valueToString';
@@ -18,9 +18,9 @@ const writeLog: Log = (message, payload) => {
   }
 
   const runId = getRunId();
-  const contextLength = getContextLength();
   const maybeRunLabel = getLabel(process.env.E2ED_RUN_LABEL);
-  const printedObject: Record<string, unknown> = {payload, contextLength};
+  const context = logContext();
+  const printedObject: Record<string, unknown> = {payload, context};
 
   const printedString = valueToString(printedObject);
 
