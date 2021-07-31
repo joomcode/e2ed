@@ -3,6 +3,7 @@
  * {@link https://github.com/babel/babel/issues/11964}
  */
 
+import {generalLog} from '../utils/generalLog';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {printStartParams} from '../utils/printStartParams';
 
@@ -15,7 +16,7 @@ try {
   });
   delete require.cache[require.resolve('convert-source-map')];
 } catch (error) {
-  console.log('Error in convert-source-map fix', error);
+  generalLog(`Error in convert-source-map fix: ${String(error)}`);
 }
 
 process.env.E2ED_IS_LOCAL_RUN = 'true';

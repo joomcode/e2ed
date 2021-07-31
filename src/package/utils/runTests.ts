@@ -1,18 +1,13 @@
 import createTestCafe from 'testcafe';
 
-import {getIntegerFromEnvVariable} from './getIntegerFromEnvVariable';
+import {generalLog} from './generalLog';
 
 import type {FailTest} from './getFailedTestsFromJsonReport';
 
 const browsers = ['chromium:headless --no-sandbox --disable-dev-shm-usage'];
 
-const concurrency = getIntegerFromEnvVariable({
-  defaultValue: 5,
-  maxValue: 50,
-  name: 'E2ED_CONCURRENCY',
-});
-
 type RunOptions = Readonly<{
+  concurrency: number;
   isFirstRetry: boolean;
   runLabel: string;
   tests: FailTest[];
@@ -22,16 +17,23 @@ type RunOptions = Readonly<{
  * Runs one retry of tests.
  * @internal
  */
-export const runTests = async ({isFirstRetry, runLabel, tests}: RunOptions): Promise<void> => {
+export const runTests = async ({
+  concurrency,
+  isFirstRetry,
+  runLabel,
+  tests,
+}: RunOptions): Promise<void> => {
   process.env.E2ED_RUN_LABEL = runLabel;
 
-  // @ts-expect-error: createTestCafe has wrong argument types
-  const testCafe = await createTestCafe({
-    browsers,
-    configFile: './node_modules/e2ed/testcaferc.json',
-  });
+  let testCafe: globalThis.TestCafe | undefined;
 
   try {
+    // @ts-expect-error: createTestCafe has wrong argument types
+    testCafe = await createTestCafe({
+      browsers,
+      configFile: './node_modules/e2ed/testcaferc.json',
+    });
+
     const runner = testCafe.createRunner();
 
     await runner
@@ -51,9 +53,8 @@ export const runTests = async ({isFirstRetry, runLabel, tests}: RunOptions): Pro
       })
       .run();
   } catch (error: unknown) {
-    // eslint-disable-next-line no-console
-    console.log(`Caught an error when running tests with label "${runLabel}": ${String(error)}`);
+    generalLog(`Caught an error when running tests with label "${runLabel}": ${String(error)}`);
   } finally {
-    await testCafe.close();
+    await testCafe?.close();
   }
 };

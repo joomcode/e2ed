@@ -1,3 +1,5 @@
+import {generalLog} from './generalLog';
+
 type Options = Readonly<{
   name: string;
   maxValue: number;
@@ -15,10 +17,9 @@ export const getIntegerFromEnvVariable = ({defaultValue, maxValue, name}: Option
   const result = isValueValid ? value : defaultValue;
 
   if (rawValue && isValueValid === false) {
-    // eslint-disable-next-line no-console
-    console.log(
+    generalLog(
       `Invalid value for environment variable ${name} (it should be no more than ${maxValue}): "${rawValue}".
-Instead, uses the default value ${result}`,
+Instead, uses the default value "${result}".`,
     );
   }
 

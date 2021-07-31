@@ -1,15 +1,22 @@
 #!/usr/bin/env node
 
+import {generalLog} from '../utils/generalLog';
 import {getFailedTestsFromJsonReport} from '../utils/getFailedTestsFromJsonReport';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {printStartParams} from '../utils/printStartParams';
 import {runTests} from '../utils/runTests';
 
-import type {FailTest} from '../utils/getFailedTestsFromJsonReport';
+import type {FailTest, FailTests} from '../utils/getFailedTestsFromJsonReport';
 
 process.env.E2ED_IS_DOCKER_RUN = 'true';
 
 printStartParams();
+
+const concurrency = getIntegerFromEnvVariable({
+  defaultValue: 5,
+  maxValue: 50,
+  name: 'E2ED_CONCURRENCY',
+});
 
 const retries = getIntegerFromEnvVariable({
   defaultValue: 5,
@@ -18,8 +25,7 @@ const retries = getIntegerFromEnvVariable({
 });
 
 const startTime = Date.now();
-const log = (message: string): void => console.log(`[${new Date().toISOString()}] ${message}\n`);
-const toString = (tests: FailTest[]): string => JSON.stringify(tests, null, 2);
+const testsToString = (tests: FailTest[]): string => JSON.stringify(tests, null, 2);
 
 let allTestsCount = 0;
 let retryIndex = 1;
@@ -34,26 +40,34 @@ const asyncRunTests = async (): Promise<void> => {
     const startRetryTime = Date.now();
     const printedTestsString = isFirstRetry
       ? ''
-      : ` (${tests.length} failed tests out of ${allTestsCount}): ${toString(tests)}`;
+      : ` (${tests.length} failed tests out of ${allTestsCount}): ${testsToString(tests)}`;
 
-    log(`Run tests with ${runLabel}${printedTestsString}`);
+    let failedTests: FailTests | undefined;
 
-    await runTests({isFirstRetry, tests, runLabel});
+    generalLog(`Run tests with ${runLabel}${printedTestsString}`);
 
-    const failedTests = getFailedTestsFromJsonReport();
+    try {
+      await runTests({concurrency, isFirstRetry, tests, runLabel});
 
-    tests = failedTests.tests;
+      failedTests = getFailedTestsFromJsonReport();
+    } catch (error: unknown) {
+      generalLog(`Caught an error on ${runLabel}: ${String(error)}`);
+    }
 
-    if (isFirstRetry) {
+    if (failedTests) {
+      tests = failedTests.tests;
+    }
+
+    if (failedTests && isFirstRetry) {
       allTestsCount = failedTests.allTestsCount;
     }
 
     const testsCount = isFirstRetry ? allTestsCount : tests.length;
 
-    log(`${testsCount} tests with ${runLabel} ran in ${Date.now() - startRetryTime} ms`);
+    generalLog(`${testsCount} tests with ${runLabel} ran in ${Date.now() - startRetryTime} ms`);
 
-    if (tests.length === 0) {
-      log(`[OK] All ${allTestsCount} tests completed successfully with ${runLabel}`);
+    if (failedTests && tests.length === 0) {
+      generalLog(`[OK] All ${allTestsCount} tests completed successfully with ${runLabel}`);
 
       break;
     }
@@ -62,20 +76,22 @@ const asyncRunTests = async (): Promise<void> => {
 
 asyncRunTests()
   .catch((error: unknown) => {
-    log(`Caught error on ${runLabel}: ${String(error)}`);
+    generalLog(`Caught unexpected error on ${runLabel}: ${String(error)}`);
   })
   .finally(() => {
     if (retryIndex > retries) {
-      log(
+      generalLog(
         `[FAIL] There are ${
           tests.length
-        } failed tests (out of ${allTestsCount}) after ${retries} retries: ${toString(tests)}`,
+        } failed tests (out of ${allTestsCount}) after ${retries} retries: ${testsToString(tests)}`,
       );
     }
 
     const testsCountPrefix = allTestsCount > 0 ? `${allTestsCount} tests` : 'Run';
 
-    log(`${testsCountPrefix} with all ${retries} retries lasted ${Date.now() - startTime} ms`);
+    generalLog(
+      `${testsCountPrefix} with all ${retries} retries lasted ${Date.now() - startTime} ms`,
+    );
 
     process.exit(0);
   });
