@@ -36,18 +36,18 @@ const asyncRunTests = async (): Promise<void> => {
   for (; retryIndex <= retries; retryIndex += 1) {
     runLabel = `retry ${retryIndex}/${retries}`;
 
-    const isFirstRetry = retryIndex === 1;
     const startRetryTime = Date.now();
-    const printedTestsString = isFirstRetry
-      ? ''
-      : ` (${tests.length} failed tests out of ${allTestsCount}): ${testsToString(tests)}`;
+    const printedTestsString =
+      tests.length === 0
+        ? ''
+        : ` (${tests.length} failed tests out of ${allTestsCount}): ${testsToString(tests)}`;
 
     let failedTests: FailTests | undefined;
 
     generalLog(`Run tests with ${runLabel}${printedTestsString}`);
 
     try {
-      await runTests({concurrency, isFirstRetry, tests, runLabel});
+      await runTests({concurrency, tests, runLabel});
 
       failedTests = getFailedTestsFromJsonReport();
     } catch (error: unknown) {
@@ -58,11 +58,11 @@ const asyncRunTests = async (): Promise<void> => {
       tests = failedTests.tests;
     }
 
-    if (failedTests && isFirstRetry) {
+    if (failedTests && allTestsCount === 0) {
       allTestsCount = failedTests.allTestsCount;
     }
 
-    const testsCount = isFirstRetry ? allTestsCount : tests.length;
+    const testsCount = tests.length || allTestsCount;
 
     generalLog(`${testsCount} tests with ${runLabel} ran in ${Date.now() - startRetryTime} ms`);
 
