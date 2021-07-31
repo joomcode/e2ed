@@ -2,9 +2,14 @@
 
 import {getFailedTestsFromJsonReport} from '../utils/getFailedTestsFromJsonReport';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
+import {printStartParams} from '../utils/printStartParams';
 import {runTests} from '../utils/runTests';
 
 import type {FailTest} from '../utils/getFailedTestsFromJsonReport';
+
+process.env.E2ED_IS_DOCKER_RUN = 'true';
+
+printStartParams();
 
 const retries = getIntegerFromEnvVariable({
   defaultValue: 5,

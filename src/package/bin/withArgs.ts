@@ -3,6 +3,8 @@
  * {@link https://github.com/babel/babel/issues/11964}
  */
 
+import {printStartParams} from '../utils/printStartParams';
+
 try {
   // eslint-disable-next-line
   require('@babel/core').transformSync('1', {
@@ -14,6 +16,10 @@ try {
 } catch (error) {
   console.log('Error in convert-source-map fix', error);
 }
+
+process.env.E2ED_IS_LOCAL_RUN = 'true';
+
+printStartParams();
 
 process.argv.push('--config-file', './node_modules/e2ed/testcaferc.json');
 

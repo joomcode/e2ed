@@ -48,6 +48,10 @@ E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh
 
 `E2ED_API_ORIGIN`: origin-part of the backend API url that can be used by tests to create and delete test entities.
 
+`E2ED_IS_DOCKER_RUN`: when run in docker the `e2ed` sets this variable to `"true"`.
+
+`E2ED_IS_LOCAL_RUN`: when run local the `e2ed` sets this variable to `"true"`.
+
 `E2ED_DOCKER_IMAGE`: name of the docker image used to run tests with the `your-project/e2ed/bin/runDocker.sh` command
 (`e2ed` by default).
 

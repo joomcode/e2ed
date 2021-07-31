@@ -5,7 +5,7 @@ export * from './E2EDError';
 export * from './getIntegerFromEnvVariable';
 export * from './getRandomId';
 export * from './log';
-export * from './print';
+export * from './valueToString';
 export * from './replaceCookie';
 export * from './request';
 export * from './SetHeadersRequestHook';
