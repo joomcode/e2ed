@@ -3,6 +3,8 @@ import {t as testController} from 'testcafe';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
+import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
+
 import type {Selector} from '../types/internal';
 
 type Options = Parameters<typeof testController.drag>[3];
@@ -20,5 +22,7 @@ export const drag = (
 
   log('Drag an element by an offset', {locator, dragOffsetX, dragOffsetY, options});
 
-  return testController.drag(selector as globalThis.Selector, dragOffsetX, dragOffsetY, options);
+  return testController
+    .drag(selector as globalThis.Selector, dragOffsetX, dragOffsetY, options)
+    .then(() => waitForInterfaceStabilization());
 };

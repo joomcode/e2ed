@@ -3,6 +3,8 @@ import {t as testController} from 'testcafe';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
+import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
+
 import type {Selector} from '../types/internal';
 
 type Options = Parameters<typeof testController.doubleClick>[1];
@@ -15,5 +17,7 @@ export const doubleClick = (selector: Selector, options?: Options): Promise<void
 
   log('Double-click an element', {locator, options});
 
-  return testController.doubleClick(selector as globalThis.Selector, options);
+  return testController
+    .doubleClick(selector as globalThis.Selector, options)
+    .then(() => waitForInterfaceStabilization());
 };
