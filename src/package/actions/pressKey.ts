@@ -9,8 +9,10 @@ type Options = Parameters<typeof testController.pressKey>[1];
 /**
  * Presses the specified keyboard keys.
  */
-export const pressKey = (keys: string, options?: Options): Promise<void> => {
+export const pressKey = async (keys: string, options?: Options): Promise<void> => {
   log(`Press keyboard keys: "${keys}"`, {options});
 
-  return testController.pressKey(keys, options).then(() => waitForInterfaceStabilization());
+  await testController.pressKey(keys, options);
+
+  await waitForInterfaceStabilization();
 };

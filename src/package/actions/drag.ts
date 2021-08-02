@@ -12,7 +12,7 @@ type Options = Parameters<typeof testController.drag>[3];
 /**
  * Drags an element by an offset.
  */
-export const drag = (
+export const drag = async (
   selector: Selector,
   dragOffsetX: number,
   dragOffsetY: number,
@@ -22,7 +22,7 @@ export const drag = (
 
   log('Drag an element by an offset', {locator, dragOffsetX, dragOffsetY, options});
 
-  return testController
-    .drag(selector as globalThis.Selector, dragOffsetX, dragOffsetY, options)
-    .then(() => waitForInterfaceStabilization());
+  await testController.drag(selector as globalThis.Selector, dragOffsetX, dragOffsetY, options);
+
+  await waitForInterfaceStabilization();
 };

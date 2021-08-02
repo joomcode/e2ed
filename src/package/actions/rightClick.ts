@@ -12,12 +12,12 @@ type Options = Parameters<typeof testController.rightClick>[1];
 /**
  * Double-clicks an element.
  */
-export const rightClick = (selector: Selector, options?: Options): Promise<void> => {
+export const rightClick = async (selector: Selector, options?: Options): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
   log('Right-click an element', {locator, options});
 
-  return testController
-    .rightClick(selector as globalThis.Selector, options)
-    .then(() => waitForInterfaceStabilization());
+  await testController.rightClick(selector as globalThis.Selector, options);
+
+  await waitForInterfaceStabilization();
 };

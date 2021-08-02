@@ -12,12 +12,12 @@ type Options = Parameters<typeof testController.doubleClick>[1];
 /**
  * Double-clicks an element.
  */
-export const doubleClick = (selector: Selector, options?: Options): Promise<void> => {
+export const doubleClick = async (selector: Selector, options?: Options): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
   log('Double-click an element', {locator, options});
 
-  return testController
-    .doubleClick(selector as globalThis.Selector, options)
-    .then(() => waitForInterfaceStabilization());
+  await testController.doubleClick(selector as globalThis.Selector, options);
+
+  await waitForInterfaceStabilization();
 };

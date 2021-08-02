@@ -12,12 +12,16 @@ type Options = Parameters<typeof testController.typeText>[2];
 /**
  * Types the specified text into an input element.
  */
-export const typeText = (selector: Selector, text: string, options?: Options): Promise<void> => {
+export const typeText = async (
+  selector: Selector,
+  text: string,
+  options?: Options,
+): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
   log(`Type "${text}" into an input element`, {locator, options});
 
-  return testController
-    .typeText(selector as globalThis.Selector, text, options)
-    .then(() => waitForInterfaceStabilization());
+  await testController.typeText(selector as globalThis.Selector, text, options);
+
+  await waitForInterfaceStabilization();
 };

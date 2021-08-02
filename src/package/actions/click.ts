@@ -12,12 +12,12 @@ type Options = Parameters<typeof testController.click>[1];
 /**
  * Clicks an element.
  */
-export const click = (selector: Selector, options?: Options): Promise<void> => {
+export const click = async (selector: Selector, options?: Options): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
   log('Click an element', {locator, options});
 
-  return testController
-    .click(selector as globalThis.Selector, options)
-    .then(() => waitForInterfaceStabilization());
+  await testController.click(selector as globalThis.Selector, options);
+
+  await waitForInterfaceStabilization();
 };

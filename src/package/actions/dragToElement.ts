@@ -12,7 +12,7 @@ type Options = Parameters<typeof testController.dragToElement>[2];
 /**
  * Drags an element onto another one.
  */
-export const dragToElement = (
+export const dragToElement = async (
   selector: Selector,
   destinationSelector: Selector,
   options?: Options,
@@ -22,11 +22,11 @@ export const dragToElement = (
 
   log('Drag an element onto another one', {locator, destinationLocator, options});
 
-  return testController
-    .dragToElement(
-      selector as globalThis.Selector,
-      destinationSelector as globalThis.Selector,
-      options,
-    )
-    .then(() => waitForInterfaceStabilization());
+  await testController.dragToElement(
+    selector as globalThis.Selector,
+    destinationSelector as globalThis.Selector,
+    options,
+  );
+
+  await waitForInterfaceStabilization();
 };
