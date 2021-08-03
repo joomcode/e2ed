@@ -1,5 +1,8 @@
 import {generalLog} from './generalLog';
 
+// eslint-disable-next-line
+const {version} = require('../package.json') as {version: string};
+
 /**
  * Prints CLI params and environment variables on start of tests run.
  * @internal
@@ -7,7 +10,7 @@ import {generalLog} from './generalLog';
 export const printStartParams = (): void => {
   const isDockerRun = Boolean(process.env.E2ED_IS_DOCKER_RUN);
 
-  const lines = [`Run tests ${isDockerRun ? 'in docker' : 'local'} with args:`];
+  const lines = [`Run tests ${isDockerRun ? 'in docker' : 'local'} with e2ed@${version}`];
 
   lines.push(`"${process.argv.join('", "')}"`);
 
