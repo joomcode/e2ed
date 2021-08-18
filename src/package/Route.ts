@@ -7,10 +7,10 @@ import type {Method} from './types/internal';
  */
 export abstract class Route<Params = unknown> {
   /**
-   *  Return true if url matches the page (with any parameters).
+   *  Return true if url matches the page with given parameters.
    */
-  isMatchUrl(url: string): boolean {
-    return url.includes(this.getPath());
+  isMatchUrl(url: string, params?: Params): boolean {
+    return url.includes(this.getPath(params));
   }
 
   /**

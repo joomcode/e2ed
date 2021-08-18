@@ -11,8 +11,8 @@ type Options = Readonly<{
  */
 export const getConcurrencyForNextRetry = ({
   currentConcurrency,
-  testsCount,
   lastRetryHasError,
+  testsCount,
 }: Options): number => {
   const newBaseConcurrency = lastRetryHasError
     ? Math.ceil(currentConcurrency / 2)

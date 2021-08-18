@@ -12,6 +12,6 @@ export abstract class PageRoute<Params> extends Route<Params> {
       return E2ED_ORIGIN.replace(/\/+$/, '');
     }
 
-    return `http://localhost`;
+    return 'http://localhost';
   }
 }
