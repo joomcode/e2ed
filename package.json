@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "description": "E2E utils",
   "keywords": [
     "E2E",
@@ -19,7 +19,7 @@
   "homepage": "https://github.com/uid11/e2ed#readme",
   "repository": "uid11/e2ed",
   "dependencies": {
-    "testcafe": "1.15.2"
+    "testcafe": "1.15.3"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "4.29.2",
@@ -27,10 +27,10 @@
     "eslint": "7.32.0",
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-import": "2.24.0",
+    "eslint-plugin-import": "2.24.1",
     "husky": "7.0.1",
     "prettier": "2.3.2",
-    "typescript": "4.4.0-beta"
+    "typescript": "4.4.1-rc"
   },
   "scripts": {
     "lint": "npm run lint:es & npm run lint:prettier & npm run lint:types & wait",
@@ -50,6 +50,7 @@
     "build:init": "(cd ./build && ./node_modules/e2ed/bin/init.sh)",
     "prerelease": "npm run lint & npm run build && npm run test",
     "release": "npm publish ./build/node_modules/e2ed",
+    "postrelease": "if [ -f ./local/postrelease.sh ]; then ./local/postrelease.sh; else echo 'No postrelease hook'; fi",
     "build:docker": "docker build -t e2ed .",
     "pretest:docker": "npm run build:docker && npm run test:docker:copy",
     "test:docker:copy": "rm -rf build/docker && mkdir build/docker && cp -r build/e2ed build/docker/e2ed",

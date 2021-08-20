@@ -12,6 +12,13 @@ export type Brand<T, K extends string> = T & {[BRAND]: K};
 type IncludeUndefined<T> = true extends (T extends undefined ? true : never) ? true : false;
 
 /**
+ * Normalizes intersection of types.
+ */
+export type Normalize<T> = {
+  [K in keyof T]: T[K];
+};
+
+/**
  * OneOrTwoArgs<'foo', string> = ['foo', string].
  * OneOrTwoArgs<'foo', undefined | number> = ['foo'] | ['foo', number].
  */

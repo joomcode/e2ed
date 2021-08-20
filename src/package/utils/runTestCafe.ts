@@ -25,7 +25,6 @@ export const runTestCafe = async ({concurrency, runLabel, tests}: RunOptions): P
   let testCafe: globalThis.TestCafe | undefined;
 
   try {
-    // @ts-expect-error: createTestCafe has wrong argument types
     testCafe = await createTestCafe({
       browsers,
       configFile: './node_modules/e2ed/testcaferc.json',

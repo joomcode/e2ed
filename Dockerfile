@@ -1,4 +1,4 @@
-FROM testcafe/testcafe:1.15.2
+FROM testcafe/testcafe:1.15.3
 
 COPY ./build/node_modules/e2ed /opt/e2ed
 
