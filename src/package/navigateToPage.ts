@@ -17,7 +17,7 @@ export const navigateToPage: NavigateToPage<Pages> = async (
   pageParams?: unknown,
 ): Promise<never> => {
   const startTime = Date.now();
-  const page: Page = pages[pageName];
+  const page: Page<unknown, unknown> = pages[pageName];
   const routeParams = await page.willNavigateTo(pageParams as never);
   const url = page.route.getUrl(routeParams as never);
   const startNavigateTime = Date.now();

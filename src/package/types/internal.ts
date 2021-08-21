@@ -2,8 +2,11 @@ import type {OneOrTwoArgs, UnionToIntersection} from './utils';
 
 export * from './request';
 
-export type {Brand} from './utils';
+export type {Brand, GetParamsType, Normalize, PARAMS} from './utils';
 
+/**
+ * Returns a copy of the object type with mutable properties.
+ */
 export type Mutable<T> = {
   -readonly [K in keyof T]: T[K];
 };

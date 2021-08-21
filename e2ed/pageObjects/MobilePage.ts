@@ -3,7 +3,7 @@ import {Page} from 'e2ed';
 /**
  * Abstract mobile Page.
  */
-export abstract class MobilePage<Params = unknown> extends Page<Params> {
+export abstract class MobilePage<PageParams, RouteParams> extends Page<PageParams, RouteParams> {
   /**
    * Type of mobile device.
    */

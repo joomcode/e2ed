@@ -1,8 +1,8 @@
 import {PageRoute} from 'e2ed';
 
-import type {pages} from 'e2ed/pageObjects';
+import type {Language} from 'e2ed/types';
 
-type Params = pages.Main.PathParams;
+type Params = Readonly<{language: Language}>;
 
 /**
  * Route of the Main page.
