@@ -39,6 +39,7 @@ rules:
   no-await-in-loop: off
   no-restricted-syntax: off
   no-useless-constructor: off
+  no-use-before-define: off
   no-void: off
   padding-line-between-statements:
     - error
@@ -54,6 +55,7 @@ rules:
     - {blankLine: always, prev: '*', next: try}
   '@typescript-eslint/explicit-function-return-type': [error, {allowExpressions: true}]
   '@typescript-eslint/no-namespace': [error, {allowDeclarations: true}]
+  '@typescript-eslint/no-use-before-define': [error]
 overrides:
   - files: ['**/bin/**/*.ts']
     rules:

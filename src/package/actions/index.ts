@@ -1,8 +1,11 @@
 export * from './clearUpload';
 export * from './click';
+export * from './debug';
+export * from './dispatchEvent';
 export * from './doubleClick';
 export * from './drag';
 export * from './dragToElement';
+export * from './getBrowserConsoleMessages';
 export * from './hover';
 export * from './pressKey';
 export * from './reloadPage';
@@ -17,4 +20,5 @@ export * from './takeElementScreenshot';
 export * from './takeScreenshot';
 export * from './typeText';
 export * from './waitForInterfaceStabilization';
+
 export * from '../../../e2ed/actions';

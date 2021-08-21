@@ -6,12 +6,14 @@ import type {GetParamsType} from 'e2ed/types';
 
 type RouteParams = GetParamsType<typeof pageRoutes.main>;
 
-type PageParams = Partial<RouteParams>;
+type CustomPageParams = Partial<RouteParams>;
+
+type PageParams = GetParamsType<Main>;
 
 /**
  * Main (index) page.
  */
-class Main extends Page<PageParams, RouteParams> {
+class Main extends Page<CustomPageParams, RouteParams> {
   readonly route: typeof pageRoutes.main = pageRoutes.main;
 
   /**
