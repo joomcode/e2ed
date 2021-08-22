@@ -1,7 +1,6 @@
-import {waitForInterfaceStabilization} from './actions/waitForInterfaceStabilization';
+import {waitForNavigateInterfaceStabilization} from './actions/waitForNavigateInterfaceStabilization';
 import {navigateTo} from './hooks';
 import {pages} from './pageObjects';
-import {getIntegerFromEnvVariable} from './utils/getIntegerFromEnvVariable';
 import {log} from './utils/log';
 
 import type {Page} from './Page';
@@ -31,13 +30,7 @@ export const navigateToPage: NavigateToPage<Pages> = async (
 
   await navigateTo(url);
 
-  const stabilizationInterval = getIntegerFromEnvVariable({
-    defaultValue: 2000,
-    maxValue: 60_000,
-    name: 'E2ED_NAVIGATE_STABILIZATION_INTERVAL',
-  });
-
-  await waitForInterfaceStabilization(stabilizationInterval);
+  await waitForNavigateInterfaceStabilization();
 
   log(`Page "${String(pageName)}" loaded in ${Date.now() - startNavigateTime} ms`, {url});
 

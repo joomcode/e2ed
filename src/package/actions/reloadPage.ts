@@ -1,5 +1,4 @@
-import {ClientFunction} from 'testcafe';
-
+import {ClientFunction} from '../ClientFunction';
 import {log} from '../utils/log';
 
 const clientReloadPage = ClientFunction(() => window.location.reload());

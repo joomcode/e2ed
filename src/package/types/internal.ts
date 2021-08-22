@@ -1,27 +1,22 @@
-import type {OneOrTwoArgs, UnionToIntersection} from './utils';
+import type {UnwrapPromise} from './utils';
 
+export * from './pages';
 export * from './request';
-
-export type {Brand, GetParamsType, Normalize, PARAMS} from './utils';
-
-/**
- * Returns a copy of the object type with mutable properties.
- */
-export type Mutable<T> = {
-  -readonly [K in keyof T]: T[K];
-};
+export * from './utils';
 
 /**
- * Overloaded type for navigateToPage function.
+ * Type for log function.
  */
-export type NavigateToPage<
-  Pages extends Record<string, {willNavigateTo(...args: never[]): unknown}>,
-> = UnionToIntersection<
-  {
-    [K in keyof Pages]: (
-      ...args: OneOrTwoArgs<K, Parameters<Pages[K]['willNavigateTo']>[0]>
-    ) => Promise<Pages[K]>;
-  }[keyof Pages]
->;
+export type Log = (message: string, params?: Record<string, unknown>) => void;
 
+/**
+ * Selector type (which replaces the DOM element wrapper).
+ */
 export type Selector = SelectorAPI;
+
+/**
+ * Type of the wrapped client function.
+ */
+export type WrappedClientFunction<R, A extends unknown[]> = (
+  ...args: A
+) => Promise<UnwrapPromise<R> | undefined>;

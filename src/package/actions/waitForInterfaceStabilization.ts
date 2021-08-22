@@ -1,5 +1,4 @@
-import {ClientFunction} from 'testcafe';
-
+import {ClientFunction} from '../ClientFunction';
 import {log} from '../utils/log';
 
 type WaitingForInterfaceStabilization = {
@@ -110,6 +109,8 @@ export const waitForInterfaceStabilization = async (stabilizationInterval = 500)
   const waitInMs = await clientWaitForInterfaceStabilization(stabilizationInterval);
 
   log(
-    `Waited for interface stabilization for ${waitInMs} ms with stabilization interval ${stabilizationInterval}`,
+    `Waited for interface stabilization for ${String(
+      waitInMs,
+    )} ms with stabilization interval ${stabilizationInterval}`,
   );
 };

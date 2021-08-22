@@ -1,12 +1,12 @@
 import {getRunId, setRunId} from '../context/runId';
 import {logContext} from '../hooks';
 
+import {getLabel} from './getLabel';
 import {getRandomId} from './getRandomId';
 import {valueToString} from './valueToString';
 
-type Log = (message: string, params?: Record<string, unknown>) => void;
+import type {Log} from '../types/internal';
 
-const getLabel = (label: string | undefined): string => (label ? `[${label}]` : '');
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop: Log = () => {};
 
@@ -26,7 +26,7 @@ const writeLog: Log = (message, payload) => {
 
   // eslint-disable-next-line no-console
   console.log(
-    `[e2ed][${dateTimeInISO}]${maybeRunLabel}[${runId || ''}] ${message} ${printedString}`,
+    `[e2ed][${dateTimeInISO}]${maybeRunLabel}[${runId || ''}] ${message} ${printedString}\n`,
   );
 };
 

@@ -3,10 +3,13 @@
  */
 declare const BRAND: unique symbol;
 
+/**
+ * Inner key for params type.
+ */
 declare const PARAMS_KEY: unique symbol;
 
 /**
- * Inner key for params type.
+ * Type of inner key for params type.
  */
 export type PARAMS = typeof PARAMS_KEY;
 
@@ -22,7 +25,16 @@ export type Brand<T, K extends string> = T & {[BRAND]: K};
 type IncludeUndefined<T> = true extends (T extends undefined ? true : never) ? true : false;
 
 /**
+ * Returns a copy of the object type with mutable properties.
+ * Mutable<{readonly foo: string}> = {foo: string}.
+ */
+export type Mutable<T> = {
+  -readonly [K in keyof T]: T[K];
+};
+
+/**
  * Normalizes intersection of types.
+ * Normalize<{foo: string} & {bar: number}> = {foo: string, bar: number}.
  */
 export type Normalize<T> = {
   [K in keyof T]: T[K];
@@ -48,3 +60,10 @@ export type UnionToIntersection<U> = (U extends unknown ? (k: U) => void : never
 ) => void
   ? I
   : never;
+
+/**
+ * UnwrapPromise<number> = number.
+ * UnwrapPromise<Promise<string>> = string.
+ * UnwrapPromise<Promise<Promise<bigint>>> = bigint.
+ */
+export type UnwrapPromise<T> = T extends Promise<infer V> ? UnwrapPromise<V> : T;

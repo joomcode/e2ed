@@ -20,5 +20,6 @@ export * from './takeElementScreenshot';
 export * from './takeScreenshot';
 export * from './typeText';
 export * from './waitForInterfaceStabilization';
+export * from './waitForNavigateInterfaceStabilization';
 
 export * from '../../../e2ed/actions';
