@@ -88,9 +88,16 @@ export const ClientFunction = <R, A extends unknown[]>(
 
   const wrappedClientFunction: WrappedClientFunction<R, A> = async (...args: A) => {
     try {
-      return clientFunction(...args);
+      return clientFunction(...args).catch((error: unknown) => {
+        generalLog(`Client function "${originFn.name || 'anonymous'}" rejected with error`, {
+          error,
+          originFn,
+        });
+
+        return undefined;
+      });
     } catch (error: unknown) {
-      generalLog(`Client function "${originFn.name || 'anonymous'}" throw an error`, {
+      generalLog(`Client function "${originFn.name || 'anonymous'}" thrown an error`, {
         error,
         originFn,
       });
