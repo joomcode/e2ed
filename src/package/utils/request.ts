@@ -52,7 +52,6 @@ const oneTryOfRequest = <Output>({
     const fullOptions = {
       ...options,
       headers: {
-        'X-Api-Token': getRandomId(),
         'X-Request-ID': getRandomId(),
         ...options.headers,
       },
