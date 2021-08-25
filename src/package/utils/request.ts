@@ -8,15 +8,15 @@ import {getRandomId} from './getRandomId';
 import {log} from './log';
 import {wrapInTestRunTracker} from './wrapInTestRunTracker';
 
-import type {Headers, Method, Query} from '../types/internal';
+import type {Headers as AnyHeaders, Method, Query as AnyQuery} from '../types/internal';
 
 type Response<Output> = Readonly<{
   statusCode: number;
-  headers: Headers;
+  headers: AnyHeaders;
   output: Output;
 }>;
 
-type Options<Input, Output> = Readonly<{
+type Options<Input, Output, Query, Headers> = Readonly<{
   url: string;
   query?: Query;
   method?: Method;
@@ -31,7 +31,7 @@ type LogParams = Readonly<{url: string}> & Record<string, unknown>;
 
 type OneTryOfRequestOptions = Readonly<{
   urlObject: URL;
-  options: Readonly<{method: Method; headers: Headers}>;
+  options: Readonly<{method: Method; headers: AnyHeaders}>;
   inputAsString: string;
   libRequest: typeof httpRequest;
   timeout: number;
@@ -126,7 +126,12 @@ const oneTryOfRequest = <Output>({
  * Send a request to the (JSON) API by url, query params, HTTP-method, headers,
  * post-data, timeout and number of retries.
  */
-export const request = async <Input = unknown, Output = unknown>({
+export const request = async <
+  Input = unknown,
+  Output = unknown,
+  Query extends AnyQuery = AnyQuery,
+  Headers extends AnyHeaders = AnyHeaders,
+>({
   url,
   query,
   method = 'GET',
@@ -135,7 +140,7 @@ export const request = async <Input = unknown, Output = unknown>({
   timeout = 30_000,
   maxRetriesCount = 5,
   isNeedRetry = defaultIsNeedRetry,
-}: Options<Input, Output>): Promise<Response<Output>> => {
+}: Options<Input, Output, Query, Headers>): Promise<Response<Output>> => {
   const urlObject = new URL(url);
   const logParams: LogParams = {url, query, method, headers, input, timeout};
 
