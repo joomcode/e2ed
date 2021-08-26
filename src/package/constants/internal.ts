@@ -13,3 +13,5 @@ export const DEFAULT_INSPECT_OPTIONS = {
  * @internal
  */
 export const LOCATOR_KEY = Symbol('Key for string locators in createSelector');
+
+export const MAX_LINES_IN_STRINGIFY_VALUE = 400;
