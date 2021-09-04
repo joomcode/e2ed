@@ -6,6 +6,7 @@
   "color": true,
   "compilerOptions": {
     "typescript": {
+      "customCompilerModulePath": "../typescript",
       "options": {"esModuleInterop": true, "resolveJsonModule": true}
     }
   },

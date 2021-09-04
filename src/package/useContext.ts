@@ -9,7 +9,7 @@ let callCount = 0;
 /**
  * Creates function for get, set and clear some typed value in test context.
  */
-export const useContext = <T>(): [Get<T>, Set<T>, Clear] => {
+export const useContext = <T>(): [get: Get<T>, set: Set<T>, clear: Clear] => {
   callCount += 1;
 
   const contextIndex = callCount;
