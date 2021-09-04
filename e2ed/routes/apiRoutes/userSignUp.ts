@@ -4,7 +4,7 @@ import {ApiRoute} from 'e2ed/routes';
  * Client API route for user signUp.
  */
 class UserSignUp extends ApiRoute {
-  getMethod(): 'POST' {
+  override getMethod(): 'POST' {
     return 'POST';
   }
 
