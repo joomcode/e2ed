@@ -94,7 +94,9 @@ asyncRunTests()
     generalLog(`Caught unexpected error on ${runLabel}: ${String(error)}`);
   })
   .finally(() => {
-    if (retryIndex > retries) {
+    const hasFailedTests = retryIndex > retries;
+
+    if (hasFailedTests) {
       generalLog(
         `[FAIL] There are ${
           tests.length
@@ -110,5 +112,5 @@ asyncRunTests()
       `${testsCountPrefix} with all ${retries} ${wordRetry} lasted ${Date.now() - startTime} ms`,
     );
 
-    process.exit(0);
+    process.exit(hasFailedTests ? 1 : 0);
   });
