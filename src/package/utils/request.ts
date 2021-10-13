@@ -89,7 +89,7 @@ const oneTryOfRequest = <Output>({
         const outputAsString = chunks.join('');
 
         try {
-          const output = JSON.parse(outputAsString) as Output;
+          const output = (outputAsString === '' ? undefined : JSON.parse(outputAsString)) as Output;
           const response = {
             statusCode: res.statusCode || 400,
             headers: res.headers,
