@@ -31,7 +31,8 @@
   "screenshots": {
     "path": "e2ed/reports/screenshots",
     "pathPattern": "${DATE}_${TIME}_${BROWSER}_${BROWSER_VERSION}/${TEST}/${FILE_INDEX}.png",
-    "takeOnFails": true
+    "takeOnFails": true,
+    "thumbnails": false
   },
   "skipJsErrors": true,
   "concurrency": 1,

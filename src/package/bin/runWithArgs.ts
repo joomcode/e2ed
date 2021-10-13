@@ -33,4 +33,6 @@ process.argv.push('--concurrency', String(concurrency));
 
 process.argv.push('--config-file', './node_modules/e2ed/testcaferc.json');
 
+process.argv.push('-r', 'spec,json:e2ed/reports/report.json,xunit:e2ed/reports/junit-report.xml');
+
 require('testcafe/lib/cli/cli');

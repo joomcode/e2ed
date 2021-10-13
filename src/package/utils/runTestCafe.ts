@@ -37,14 +37,16 @@ export const runTestCafe = async ({concurrency, runLabel, tests}: RunOptions): P
       .concurrency(concurrency)
       .filter((testName, fixtureName, fixturePath) => {
         if (tests.length === 0) {
-          return true;
+          return Promise.resolve(true);
         }
 
-        return tests.some(
-          (test) =>
-            test.testName === testName &&
-            test.fixtureName === fixtureName &&
-            test.fixturePath === fixturePath,
+        return Promise.resolve(
+          tests.some(
+            (test) =>
+              test.testName === testName &&
+              test.fixtureName === fixtureName &&
+              test.fixturePath === fixturePath,
+          ),
         );
       })
       .run();
