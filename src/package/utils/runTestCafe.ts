@@ -1,5 +1,7 @@
 import createTestCafe from 'testcafe';
 
+import config from '../testcaferc.json';
+
 import {generalLog} from './generalLog';
 
 import type {FailTest} from './getFailedTestsFromJsonReport';
@@ -49,6 +51,7 @@ export const runTestCafe = async ({concurrency, runLabel, tests}: RunOptions): P
           ),
         );
       })
+      .reporter(config.reporter)
       .run();
   } catch (error: unknown) {
     generalLog(`Caught an error when running tests with label "${runLabel}": ${String(error)}`);

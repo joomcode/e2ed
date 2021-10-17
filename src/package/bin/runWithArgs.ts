@@ -3,9 +3,14 @@
  * {@link https://github.com/babel/babel/issues/11964}
  */
 
+import config from '../testcaferc.json';
 import {generalLog} from '../utils/generalLog';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {printStartParams} from '../utils/printStartParams';
+
+const reporterString = config.reporter
+  .reduce((acc, {name, output}) => `${acc},${name}${output ? `:${output}` : ''}`, '')
+  .slice(1);
 
 try {
   // eslint-disable-next-line
@@ -33,6 +38,6 @@ process.argv.push('--concurrency', String(concurrency));
 
 process.argv.push('--config-file', './node_modules/e2ed/testcaferc.json');
 
-process.argv.push('-r', 'spec,json:e2ed/reports/report.json,xunit:e2ed/reports/junit-report.xml');
+process.argv.push('--reporter', reporterString);
 
 require('testcafe/lib/cli/cli');
