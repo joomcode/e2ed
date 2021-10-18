@@ -35,6 +35,11 @@ export abstract class Route<RouteParams> {
   abstract getPath(params?: RouteParams): string;
 
   /**
+   * Return route params object from the passed url.
+   */
+  getParams?(url: string): RouteParams;
+
+  /**
    * Return the url of the route.
    */
   getUrl(params?: RouteParams): string {
