@@ -4,6 +4,7 @@ export * from './deepMerge';
 export * from './E2EDError';
 export * from './getIntegerFromEnvVariable';
 export * from './generalLog';
+export * from './getCurrentUrl';
 export * from './getRandomId';
 export * from './log';
 export * from './valueToString';
