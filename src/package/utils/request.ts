@@ -146,7 +146,8 @@ export const request = async <
 
   if (urlObject.search !== '') {
     throw new E2EDError(
-      `Url for request to ${url} contains search part: ${urlObject.search}`,
+      `Url for request to ${url} contains search part: ${urlObject.search}.
+Please, move search params to options property "query".`,
       logParams,
     );
   }
