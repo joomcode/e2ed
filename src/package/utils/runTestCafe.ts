@@ -1,10 +1,11 @@
-import createTestCafe from 'testcafe';
+import createTestCafe from 'testcafe-without-typecheck';
 
 import config from '../testcaferc.json';
 
 import {generalLog} from './generalLog';
 
 import type {FailTest} from './getFailedTestsFromJsonReport';
+import type {Inner} from 'testcafe-without-typecheck';
 
 const browsers = ['chromium:headless --no-sandbox --disable-dev-shm-usage'];
 
@@ -24,20 +25,22 @@ export type RunOptions = Readonly<{
 export const runTestCafe = async ({concurrency, runLabel, tests}: RunOptions): Promise<void> => {
   process.env.E2ED_RUN_LABEL = runLabel;
 
-  let testCafe: globalThis.TestCafe | undefined;
+  let maybeTestCafe: Inner.TestCafe | undefined;
 
   try {
-    testCafe = await createTestCafe({
+    const testCafe = await createTestCafe({
       browsers,
       configFile: './node_modules/e2ed/testcaferc.json',
     });
+
+    maybeTestCafe = testCafe;
 
     const runner = testCafe.createRunner();
 
     await runner
       .browsers(browsers)
       .concurrency(concurrency)
-      .filter((testName, fixtureName, fixturePath) => {
+      .filter((testName: string, fixtureName: string, fixturePath: string) => {
         if (tests.length === 0) {
           return Promise.resolve(true);
         }
@@ -56,7 +59,7 @@ export const runTestCafe = async ({concurrency, runLabel, tests}: RunOptions): P
   } catch (error: unknown) {
     generalLog(`Caught an error when running tests with label "${runLabel}": ${String(error)}`);
   } finally {
-    await testCafe?.close();
+    await maybeTestCafe?.close();
     process.exit(0);
   }
 };

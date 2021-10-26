@@ -40,4 +40,4 @@ process.argv.push('--config-file', './node_modules/e2ed/testcaferc.json');
 
 process.argv.push('--reporter', reporterString);
 
-require('testcafe/lib/cli/cli');
+require('testcafe-without-typecheck/lib/cli/cli');

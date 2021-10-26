@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 
-import {RequestHook} from 'testcafe';
+import {RequestHook} from 'testcafe-without-typecheck';
 
 import {applyHeadersMapper} from './applyHeadersMapper';
 import {log} from './log';

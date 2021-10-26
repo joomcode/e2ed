@@ -1,9 +1,11 @@
-import {t as testController} from 'testcafe';
+import {testController} from '../testController';
 
 import {log} from './log';
 import {valueToString} from './valueToString';
 
-type AssertionKeys = keyof Assertion;
+import type {Inner} from 'testcafe-without-typecheck';
+
+type AssertionKeys = keyof Inner.Assertion;
 
 const assertions: Record<AssertionKeys, (...args: unknown[]) => string> = {
   eql: (expected) => `is deeply equal to ${valueToString(expected)}`,

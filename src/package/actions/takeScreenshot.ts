@@ -1,9 +1,10 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {log} from '../utils/log';
 
+import type {Inner} from 'testcafe-without-typecheck';
+
 type TakeScreenshot = ((path?: string) => Promise<void>) &
-  ((options: TakeScreenshotOptions) => Promise<void>);
+  ((options: Inner.TakeScreenshotOptions) => Promise<void>);
 
 /**
  * Takes a screenshot of the tested page.

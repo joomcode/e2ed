@@ -1,5 +1,4 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
@@ -19,5 +18,5 @@ export const setFilesToUpload = (
     locator,
   });
 
-  return testController.setFilesToUpload(selector as globalThis.Selector, filePath);
+  return testController.setFilesToUpload(selector, filePath);
 };

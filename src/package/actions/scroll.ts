@@ -1,19 +1,23 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
 import type {Selector} from '../types/internal';
+import type {Inner} from 'testcafe-without-typecheck';
 
 type Scroll = ((posX: number, posY: number) => Promise<void>) &
-  ((position: ScrollPosition) => Promise<void>) &
+  ((position: Inner.ScrollPosition) => Promise<void>) &
   ((
     selector: Selector,
     scrollLeft: number,
     scrollTop: number,
-    options?: OffsetOptions,
+    options?: Inner.OffsetOptions,
   ) => Promise<void>) &
-  ((selector: Selector, position: ScrollPosition, options?: OffsetOptions) => Promise<void>);
+  ((
+    selector: Selector,
+    position: Inner.ScrollPosition,
+    options?: Inner.OffsetOptions,
+  ) => Promise<void>);
 
 /**
  * Scrolls the document (or element) to the specified absolute position.

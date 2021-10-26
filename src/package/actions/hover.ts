@@ -1,5 +1,4 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
@@ -17,7 +16,7 @@ export const hover = async (selector: Selector, options?: Options): Promise<void
 
   log('Hover the mouse pointer over an element', {locator, options});
 
-  await testController.hover(selector as globalThis.Selector, options);
+  await testController.hover(selector, options);
 
   await waitForInterfaceStabilization();
 };

@@ -1,4 +1,4 @@
-import {t as testController} from 'testcafe';
+import {testController} from './testController';
 
 type Get<T> = () => T | undefined;
 type Set<T> = (value: T) => void;

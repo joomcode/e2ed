@@ -1,5 +1,4 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {log} from '../utils/log';
 
 import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';

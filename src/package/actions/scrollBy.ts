@@ -1,12 +1,12 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
 import type {Selector} from '../types/internal';
+import type {Inner} from 'testcafe-without-typecheck';
 
 type ScrollBy = ((x: number, y: number) => Promise<void>) &
-  ((selector: Selector, x: number, y: number, options?: OffsetOptions) => Promise<void>);
+  ((selector: Selector, x: number, y: number, options?: Inner.OffsetOptions) => Promise<void>);
 
 /**
  * Scrolls the document (or element) by the given offset.

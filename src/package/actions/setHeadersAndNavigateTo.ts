@@ -1,5 +1,4 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {SetHeadersRequestHook} from '../utils/SetHeadersRequestHook';
 
 import type {MapOptions} from '../types/internal';

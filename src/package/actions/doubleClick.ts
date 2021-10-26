@@ -1,5 +1,4 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
@@ -17,7 +16,7 @@ export const doubleClick = async (selector: Selector, options?: Options): Promis
 
   log('Double-click an element', {locator, options});
 
-  await testController.doubleClick(selector as globalThis.Selector, options);
+  await testController.doubleClick(selector, options);
 
   await waitForInterfaceStabilization();
 };

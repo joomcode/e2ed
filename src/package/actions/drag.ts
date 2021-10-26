@@ -1,5 +1,4 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
@@ -22,7 +21,7 @@ export const drag = async (
 
   log('Drag an element by an offset', {locator, dragOffsetX, dragOffsetY, options});
 
-  await testController.drag(selector as globalThis.Selector, dragOffsetX, dragOffsetY, options);
+  await testController.drag(selector, dragOffsetX, dragOffsetY, options);
 
   await waitForInterfaceStabilization();
 };

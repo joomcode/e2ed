@@ -1,5 +1,4 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
@@ -13,5 +12,5 @@ export const clearUpload = (selector: Selector): Promise<void> => {
 
   log('Remove all file paths from file upload input', {locator});
 
-  return testController.clearUpload(selector as globalThis.Selector);
+  return testController.clearUpload(selector);
 };

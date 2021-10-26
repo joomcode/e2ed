@@ -1,5 +1,4 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
@@ -21,7 +20,7 @@ export const dispatchEvent = async (
 
   log('Click an element', {locator, options});
 
-  await testController.dispatchEvent(selector as globalThis.Selector, eventName, options);
+  await testController.dispatchEvent(selector, eventName, options);
 
   await waitForInterfaceStabilization();
 };

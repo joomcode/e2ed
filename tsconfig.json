@@ -20,7 +20,7 @@
     "stripInternal": true,
     "strict": true,
     "target": "ES2016",
-    "types": ["node", "testcafe"]
+    "types": ["node"]
   },
   "include": ["e2ed/**/*.ts", "src/**/*.ts"]
 }

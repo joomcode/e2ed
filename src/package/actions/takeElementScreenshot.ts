@@ -1,5 +1,4 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
@@ -20,5 +19,5 @@ export const takeElementScreenshot = (
 
   log(`Take a screenshot of the element${pathMessage}`, {locator, options});
 
-  return testController.takeElementScreenshot(selector as globalThis.Selector, path, options);
+  return testController.takeElementScreenshot(selector, path, options);
 };

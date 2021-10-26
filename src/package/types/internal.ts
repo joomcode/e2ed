@@ -1,4 +1,5 @@
 import type {UnwrapPromise} from './utils';
+import type {Inner} from 'testcafe-without-typecheck';
 
 export * from './pages';
 export * from './request';
@@ -12,7 +13,7 @@ export type Log = (message: string, params?: Record<string, unknown>) => void;
 /**
  * Selector type (which replaces the DOM element wrapper).
  */
-export type Selector = SelectorAPI;
+export type Selector = Inner.SelectorAPI;
 
 /**
  * Type of the wrapped client function.

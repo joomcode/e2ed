@@ -1,4 +1,4 @@
-export {RequestHook, RequestLogger, RequestMock, t as testController} from 'testcafe';
+export {RequestHook, RequestLogger, RequestMock} from 'testcafe-without-typecheck';
 
 export * from './ApiRoute';
 export * from './createSelector';
@@ -12,5 +12,6 @@ export type {Selector} from './types/internal';
 export * from './expect';
 export * from './it';
 export * from './ClientFunction';
+export * from './testController';
 export * from './assertPage';
 export * from './navigateToPage';

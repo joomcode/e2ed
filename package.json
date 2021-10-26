@@ -19,7 +19,7 @@
   "homepage": "https://github.com/uid11/e2ed#readme",
   "repository": "uid11/e2ed",
   "dependencies": {
-    "testcafe": "1.16.1"
+    "testcafe-without-typecheck": "1.16.1-rc.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "5.2.0",
@@ -30,6 +30,7 @@
     "eslint-plugin-import": "2.25.2",
     "husky": "7.0.4",
     "prettier": "2.4.1",
+    "testcafe": "1.16.1",
     "typescript": "4.5.0-beta"
   },
   "scripts": {
@@ -58,8 +59,9 @@
     "test:docker:copy": "rm -rf build/docker && mkdir build/docker && cp -r build/e2ed build/docker/e2ed",
     "test:docker": "(cd ./build/docker && E2ED_CONCURRENCY=2 E2ED_DOCKER_RETRIES=1 E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh)",
     "test:local": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/runLocal.js chromium:headless)",
+    "testcafefork:publish": "./bin/TestCafeFork/publish.sh",
     "testcafefork:clean": "./bin/TestCafeFork/clean.sh",
-    "testcafefork:publish": "./bin/TestCafeFork/publish.sh"
+    "testcafefork:test:install": "./bin/TestCafeFork/testInstall.sh"
   },
   "types": "index.d.ts"
 }

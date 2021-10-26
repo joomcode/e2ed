@@ -1,5 +1,4 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
@@ -25,5 +24,5 @@ export const selectText = (
     {locator, options},
   );
 
-  return testController.selectText(selector as globalThis.Selector, startPos, endPos, options);
+  return testController.selectText(selector, startPos, endPos, options);
 };

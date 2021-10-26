@@ -1,5 +1,4 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
@@ -22,11 +21,7 @@ export const dragToElement = async (
 
   log('Drag an element onto another one', {locator, destinationLocator, options});
 
-  await testController.dragToElement(
-    selector as globalThis.Selector,
-    destinationSelector as globalThis.Selector,
-    options,
-  );
+  await testController.dragToElement(selector, destinationSelector, options);
 
   await waitForInterfaceStabilization();
 };

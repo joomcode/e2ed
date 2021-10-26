@@ -1,4 +1,4 @@
-import {ClientFunction as BaseClientFunction} from 'testcafe';
+import {ClientFunction as BaseClientFunction} from 'testcafe-without-typecheck';
 
 import {generalLog} from './utils/generalLog';
 

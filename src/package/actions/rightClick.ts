@@ -1,5 +1,4 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
@@ -17,7 +16,7 @@ export const rightClick = async (selector: Selector, options?: Options): Promise
 
   log('Right-click an element', {locator, options});
 
-  await testController.rightClick(selector as globalThis.Selector, options);
+  await testController.rightClick(selector, options);
 
   await waitForInterfaceStabilization();
 };

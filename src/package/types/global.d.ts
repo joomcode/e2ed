@@ -32,7 +32,7 @@ declare module 'bin-v8-flags-filter' {
 /**
  * Internal TestCafe module, which is used to track asynchronous calls in tests.
  */
-declare module 'testcafe/lib/api/test-run-tracker' {
+declare module 'testcafe-without-typecheck/lib/api/test-run-tracker' {
   const testRunTracker: {
     activeTestRuns: {[id: string]: TestRun};
     addTrackingMarkerToFunction(testRunId: string, fn: Fn): Fn;

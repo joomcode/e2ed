@@ -1,4 +1,4 @@
-import testRunTracker from 'testcafe/lib/api/test-run-tracker';
+import testRunTracker from 'testcafe-without-typecheck/lib/api/test-run-tracker';
 
 /**
  * Wrap functions that set callbacks in the test run tracker.

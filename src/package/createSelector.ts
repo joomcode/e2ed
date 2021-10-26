@@ -1,4 +1,4 @@
-import {Selector} from 'testcafe';
+import {Selector} from 'testcafe-without-typecheck';
 
 import {LOCATOR_KEY} from './constants/internal';
 

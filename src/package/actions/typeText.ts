@@ -1,5 +1,4 @@
-import {t as testController} from 'testcafe';
-
+import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
@@ -21,7 +20,7 @@ export const typeText = async (
 
   log(`Type "${text}" into an input element`, {locator, options});
 
-  await testController.typeText(selector as globalThis.Selector, text, options);
+  await testController.typeText(selector, text, options);
 
   await waitForInterfaceStabilization();
 };
