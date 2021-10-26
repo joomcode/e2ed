@@ -13,7 +13,7 @@ parserOptions:
   project: ./tsconfig.json
   sourceType: module
 root: true
-ignorePatterns: [build]
+ignorePatterns: [bin, build]
 rules:
   class-methods-use-this:
     - error

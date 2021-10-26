@@ -6,4 +6,4 @@ cp -r ./node_modules/testcafe ./bin/TestCafeFork/package
 
 ./bin/TestCafeFork/transform.sh $1
 
-#npm publish ./bin/TestCafeFork/package
+npm publish ./bin/TestCafeFork/package
