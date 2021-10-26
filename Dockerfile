@@ -10,4 +10,6 @@ USER root
 
 RUN ln -s /usr/lib/node_modules/testcafe/node_modules /usr/lib/node_modules/testcafe-without-typecheck/node_modules
 
+USER user
+
 ENTRYPOINT ["/opt/e2ed/bin/runInDocker.sh"]
