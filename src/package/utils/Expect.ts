@@ -48,7 +48,6 @@ for (const [key, getAssertionMessage] of Object.entries(assertions)) {
 
     log(`Assert that value ${message}`, {description: this.description});
 
-    // @ts-expect-error: args have different types for different assertions
     return testController.expect(this.value)[key as AssertionKeys](...args) as unknown;
   };
 }

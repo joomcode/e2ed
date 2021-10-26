@@ -34,7 +34,7 @@ export class SetHeadersRequestHook extends RequestHook {
   }
 
   // eslint-disable-next-line @typescript-eslint/require-await
-  override async onRequest(event: RequestEvent): Promise<void> {
+  async onRequest(event: RequestEvent): Promise<void> {
     const {headers} = event.requestOptions;
 
     applyHeadersMapper(headers, this.options.mapRequestHeaders);
@@ -42,11 +42,11 @@ export class SetHeadersRequestHook extends RequestHook {
     log(`Map request headers for ${this.url}`, {headers});
   }
 
-  override async onResponse(): Promise<void> {
+  async onResponse(): Promise<void> {
     // do nothing
   }
 
-  override async _onConfigureResponse(event: ResponseEvent): Promise<void> {
+  async _onConfigureResponse(event: ResponseEvent): Promise<void> {
     await super._onConfigureResponse(event);
 
     const {headers} = event._requestContext.destRes;
