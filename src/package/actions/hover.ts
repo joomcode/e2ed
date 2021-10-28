@@ -5,6 +5,7 @@ import {log} from '../utils/log';
 import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
 
 import type {Selector} from '../types/internal';
+import type {Inner} from 'testcafe-without-typecheck';
 
 type Options = Parameters<typeof testController.hover>[1];
 
@@ -16,7 +17,7 @@ export const hover = async (selector: Selector, options?: Options): Promise<void
 
   log('Hover the mouse pointer over an element', {locator, options});
 
-  await testController.hover(selector, options);
+  await testController.hover(selector as Inner.Selector, options);
 
   await waitForInterfaceStabilization();
 };

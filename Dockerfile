@@ -8,6 +8,8 @@ COPY ./build/node_modules/e2ed /opt/e2ed
 
 USER root
 
+RUN rm -rf /usr/lib/node_modules/testcafe/node_modules/typescript
+
 RUN ln -s /usr/lib/node_modules/testcafe/node_modules /usr/lib/node_modules/testcafe-without-typecheck/node_modules
 
 USER user

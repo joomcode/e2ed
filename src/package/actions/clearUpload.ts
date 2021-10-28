@@ -3,6 +3,7 @@ import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
 import type {Selector} from '../types/internal';
+import type {Inner} from 'testcafe-without-typecheck';
 
 /**
  * Removes all file paths from the specified file upload input.
@@ -12,5 +13,5 @@ export const clearUpload = (selector: Selector): Promise<void> => {
 
   log('Remove all file paths from file upload input', {locator});
 
-  return testController.clearUpload(selector);
+  return testController.clearUpload(selector as Inner.Selector);
 };

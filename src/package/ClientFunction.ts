@@ -86,7 +86,6 @@ export const ClientFunction = <R, A extends unknown[]>(
     originFn: String(originFn).slice(0, 80),
   });
 
-  // eslint-disable-next-line @typescript-eslint/require-await
   const wrappedClientFunction: WrappedClientFunction<R, A> = async (...args: A) => {
     try {
       return clientFunction(...args).catch((error: unknown) => {

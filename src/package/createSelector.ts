@@ -9,7 +9,7 @@ import type {Selector as SelectorType} from './types/internal';
  */
 export const createSelector = (...args: Parameters<typeof Selector>): SelectorType => {
   const locator = args[0];
-  const selector = Selector(...args) as SelectorType;
+  const selector = Selector(...args);
 
   if (typeof locator === 'string') {
     // @ts-expect-error: native Selector type does not have LOCATOR_KEY

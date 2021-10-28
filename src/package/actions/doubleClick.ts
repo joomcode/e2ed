@@ -5,6 +5,7 @@ import {log} from '../utils/log';
 import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
 
 import type {Selector} from '../types/internal';
+import type {Inner} from 'testcafe-without-typecheck';
 
 type Options = Parameters<typeof testController.doubleClick>[1];
 
@@ -16,7 +17,7 @@ export const doubleClick = async (selector: Selector, options?: Options): Promis
 
   log('Double-click an element', {locator, options});
 
-  await testController.doubleClick(selector, options);
+  await testController.doubleClick(selector as Inner.Selector, options);
 
   await waitForInterfaceStabilization();
 };

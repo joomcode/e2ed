@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+./bin/TestCafeFork/removeSourceMap.sh
 ./bin/TestCafeFork/setName.sh
 ./bin/TestCafeFork/setVersion.sh $1
 ./bin/TestCafeFork/setDependencies.sh

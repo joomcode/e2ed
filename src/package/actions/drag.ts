@@ -5,6 +5,7 @@ import {log} from '../utils/log';
 import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
 
 import type {Selector} from '../types/internal';
+import type {Inner} from 'testcafe-without-typecheck';
 
 type Options = Parameters<typeof testController.drag>[3];
 
@@ -21,7 +22,7 @@ export const drag = async (
 
   log('Drag an element by an offset', {locator, dragOffsetX, dragOffsetY, options});
 
-  await testController.drag(selector, dragOffsetX, dragOffsetY, options);
+  await testController.drag(selector as Inner.Selector, dragOffsetX, dragOffsetY, options);
 
   await waitForInterfaceStabilization();
 };

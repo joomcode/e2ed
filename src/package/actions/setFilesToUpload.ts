@@ -3,6 +3,7 @@ import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
 import type {Selector} from '../types/internal';
+import type {Inner} from 'testcafe-without-typecheck';
 
 /**
  * Populates the specified file upload input with file paths.
@@ -18,5 +19,5 @@ export const setFilesToUpload = (
     locator,
   });
 
-  return testController.setFilesToUpload(selector, filePath);
+  return testController.setFilesToUpload(selector as Inner.Selector, filePath);
 };

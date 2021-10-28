@@ -3,6 +3,7 @@ import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
 import type {Selector} from '../types/internal';
+import type {Inner} from 'testcafe-without-typecheck';
 
 type Options = Parameters<typeof testController.takeElementScreenshot>[2];
 
@@ -19,5 +20,5 @@ export const takeElementScreenshot = (
 
   log(`Take a screenshot of the element${pathMessage}`, {locator, options});
 
-  return testController.takeElementScreenshot(selector, path, options);
+  return testController.takeElementScreenshot(selector as Inner.Selector, path, options);
 };

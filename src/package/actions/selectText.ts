@@ -3,6 +3,7 @@ import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
 import type {Selector} from '../types/internal';
+import type {Inner} from 'testcafe-without-typecheck';
 
 type Options = Parameters<typeof testController.selectText>[3];
 
@@ -24,5 +25,5 @@ export const selectText = (
     {locator, options},
   );
 
-  return testController.selectText(selector, startPos, endPos, options);
+  return testController.selectText(selector as Inner.Selector, startPos, endPos, options);
 };

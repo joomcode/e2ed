@@ -1,6 +1,10 @@
 import {setRawMeta} from './context/meta';
 
 import type {TestMeta} from './types';
+import type {Inner} from 'testcafe-without-typecheck';
+
+declare const fixture: Inner.FixtureFn;
+declare const test: Inner.TestFn;
 
 type Options = Readonly<{
   meta: TestMeta;

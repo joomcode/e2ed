@@ -5,6 +5,7 @@ import {log} from '../utils/log';
 import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
 
 import type {Selector} from '../types/internal';
+import type {Inner} from 'testcafe-without-typecheck';
 
 type Options = Parameters<typeof testController.click>[1];
 
@@ -16,7 +17,7 @@ export const click = async (selector: Selector, options?: Options): Promise<void
 
   log('Click an element', {locator, options});
 
-  await testController.click(selector, options);
+  await testController.click(selector as Inner.Selector, options);
 
   await waitForInterfaceStabilization();
 };

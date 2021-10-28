@@ -5,6 +5,7 @@ import {log} from '../utils/log';
 import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
 
 import type {Selector} from '../types/internal';
+import type {Inner} from 'testcafe-without-typecheck';
 
 type Options = Record<string, unknown>;
 
@@ -20,7 +21,7 @@ export const dispatchEvent = async (
 
   log('Click an element', {locator, options});
 
-  await testController.dispatchEvent(selector, eventName, options);
+  await testController.dispatchEvent(selector as Inner.Selector, eventName, options);
 
   await waitForInterfaceStabilization();
 };

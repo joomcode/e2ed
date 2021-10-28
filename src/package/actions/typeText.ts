@@ -5,6 +5,7 @@ import {log} from '../utils/log';
 import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
 
 import type {Selector} from '../types/internal';
+import type {Inner} from 'testcafe-without-typecheck';
 
 type Options = Parameters<typeof testController.typeText>[2];
 
@@ -20,7 +21,7 @@ export const typeText = async (
 
   log(`Type "${text}" into an input element`, {locator, options});
 
-  await testController.typeText(selector, text, options);
+  await testController.typeText(selector as Inner.Selector, text, options);
 
   await waitForInterfaceStabilization();
 };
