@@ -1,4 +1,4 @@
-import config from '../testcaferc.json';
+import {config} from '../testcaferc';
 
 import {generalLog} from './generalLog';
 

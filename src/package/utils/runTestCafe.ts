@@ -1,6 +1,6 @@
 import createTestCafe from 'testcafe-without-typecheck';
 
-import config from '../testcaferc.json';
+import {config} from '../testcaferc';
 
 import {generalLog} from './generalLog';
 
@@ -30,7 +30,7 @@ export const runTestCafe = async ({concurrency, runLabel, tests}: RunOptions): P
   try {
     const testCafe = await createTestCafe({
       browsers,
-      configFile: './node_modules/e2ed/testcaferc.json',
+      configFile: './node_modules/e2ed/testcaferc.js',
     });
 
     maybeTestCafe = testCafe;

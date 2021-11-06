@@ -3,7 +3,7 @@
  * {@link https://github.com/babel/babel/issues/11964}
  */
 
-import config from '../testcaferc.json';
+import {config} from '../testcaferc';
 import {generalLog} from '../utils/generalLog';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {printStartParams} from '../utils/printStartParams';
@@ -36,7 +36,7 @@ const concurrency = getIntegerFromEnvVariable({
 
 process.argv.push('--concurrency', String(concurrency));
 
-process.argv.push('--config-file', './node_modules/e2ed/testcaferc.json');
+process.argv.push('--config-file', './node_modules/e2ed/testcaferc.js');
 
 process.argv.push('--reporter', reporterString);
 

@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "E2E utils",
   "keywords": [
     "E2E",
@@ -19,18 +19,18 @@
   "homepage": "https://github.com/uid11/e2ed#readme",
   "repository": "uid11/e2ed",
   "dependencies": {
-    "testcafe-without-typecheck": "1.16.1-rc.3"
+    "testcafe-without-typecheck": "1.17.0-rc.1"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "5.2.0",
-    "@typescript-eslint/parser": "5.2.0",
-    "eslint": "8.1.0",
+    "@typescript-eslint/eslint-plugin": "5.3.0",
+    "@typescript-eslint/parser": "5.3.0",
+    "eslint": "8.2.0",
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.25.2",
     "husky": "7.0.4",
     "prettier": "2.4.1",
-    "testcafe": "1.16.1",
+    "testcafe": "1.17.0",
     "typescript": "4.5.0-beta"
   },
   "scripts": {
