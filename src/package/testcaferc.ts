@@ -1,8 +1,6 @@
-import type defaultConfig from './typedTestcaferc.json';
+import type {TestCafeConfig} from './types/internal';
 
-type Config = typeof defaultConfig;
-
-export const config: Config = {
+export const config: TestCafeConfig = {
   ajaxRequestTimeout: 40000,
   assertionTimeout: 10000,
   browserInitTimeout: 40000,

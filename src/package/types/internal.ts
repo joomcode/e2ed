@@ -1,6 +1,7 @@
 import type {UnwrapPromise} from './utils';
 import type {Inner} from 'testcafe-without-typecheck';
 
+export * from './config';
 export * from './pages';
 export * from './request';
 export * from './utils';
