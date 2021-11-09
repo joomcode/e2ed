@@ -5,7 +5,7 @@ const isObject = (x: unknown): boolean =>
  * Deep merge two objects (arrays does not merge).
  * y overwrites x; x and y are immutable.
  */
-export const deepMerge = <T>(x: T, y: T): T => {
+export const deepMerge = <T>(x: T, y: Partial<T>): T => {
   const result: T = {...x};
 
   for (const [key, value] of Object.entries(y) as Array<[keyof T, T[keyof T]]>) {
