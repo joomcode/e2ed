@@ -1,10 +1,10 @@
 {
   "name": "e2ed",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "E2E utils",
   "keywords": [
     "E2E",
-    "testcafe"
+    "TestCafe"
   ],
   "author": "uid11",
   "license": "MIT",
@@ -27,7 +27,7 @@
     "eslint": "8.2.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-import": "2.25.2",
+    "eslint-plugin-import": "2.25.3",
     "husky": "7.0.4",
     "prettier": "2.4.1",
     "testcafe": "1.17.0",

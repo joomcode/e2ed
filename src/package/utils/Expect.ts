@@ -7,7 +7,9 @@ import type {Inner} from 'testcafe-without-typecheck';
 
 type AssertionKeys = keyof Inner.Assertion;
 
-const assertions: Record<AssertionKeys, (...args: unknown[]) => string> = {
+type Assert<T> = Record<AssertionKeys, (...args: unknown[]) => T>;
+
+const assertions: Assert<string> = {
   eql: (expected) => `is deeply equal to ${valueToString(expected)}`,
   notEql: (expected) => `is not deeply equal to ${valueToString(expected)}`,
   ok: () => 'is truthy',
@@ -37,7 +39,7 @@ const assertions: Record<AssertionKeys, (...args: unknown[]) => string> = {
  * @internal
  */
 export class Expect {
-  constructor(public value: unknown, public description: string) {}
+  constructor(public actual: unknown, public description: string) {}
 
   [key: string]: unknown;
 }
@@ -46,9 +48,19 @@ for (const [key, getAssertionMessage] of Object.entries(assertions)) {
   Expect.prototype[key] = function method(...args: unknown[]) {
     const message = getAssertionMessage(...args);
 
-    log(`Assert that value ${message}`, {description: this.description});
+    const assertPromise = new Promise((resolve) => {
+      const assert = testController.expect(this.actual) as Assert<Promise<void>>;
 
-    // @ts-expect-error: args have different types for different assertions
-    return testController.expect(this.value)[key as AssertionKeys](...args) as unknown;
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      assert[key as AssertionKeys](...args).then(resolve);
+    });
+
+    return assertPromise
+      .then(() => this.actual)
+      .then((actual) => {
+        log(`Assert that value ${valueToString(actual)} ${message}`, {
+          description: this.description,
+        });
+      });
   };
 }
