@@ -34,6 +34,8 @@
     "typescript": "4.5.1-rc"
   },
   "scripts": {
+    "changelog": "node build/scripts/changelog",
+    "postchangelog": "git add CHANGELOG.md",
     "lint": "npm run lint:es & npm run lint:prettier & npm run lint:types & wait",
     "lint:es": "eslint --cache --cache-location=.eslintcache-global --max-warnings=0 --ext=.ts .",
     "lint:prettier": "prettier --check --ignore-path=.gitignore '**/*.{json,md,ts,yaml}'",
@@ -51,14 +53,16 @@
     "prebuild:copy:example": "rm -r build/e2ed",
     "build:copy:example": "cp -r e2ed build/node_modules/e2ed/ && rm -r build/node_modules/e2ed/e2ed/node_modules",
     "build:init": "(cd ./build && ./node_modules/e2ed/bin/init.sh)",
-    "prerelease": "npm run lint & npm run build && npm run test",
+    "preversion": "npm run lint & npm run build && npm run test",
+    "version": "npm run changelog",
+    "postversion": "git push --follow-tags && npm run release",
     "release": "npm publish ./build/node_modules/e2ed",
     "postrelease": "if [ -f ./local/postrelease.sh ]; then ./local/postrelease.sh; else echo 'No postrelease hook'; fi",
     "build:docker": "docker build -t e2ed .",
     "pretest:docker": "npm run build:docker && npm run test:docker:copy",
     "test:docker:copy": "rm -rf build/docker && mkdir build/docker && cp -r build/e2ed build/docker/e2ed",
     "test:docker": "(cd ./build/docker && E2ED_CONCURRENCY=2 E2ED_DOCKER_RETRIES=1 E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh)",
-    "test:local": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/runLocal.js chromium:headless)",
+    "test:local": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/runLocal.js)",
     "testcafefork:publish": "./bin/TestCafeFork/publish.sh",
     "testcafefork:clean": "./bin/TestCafeFork/clean.sh",
     "testcafefork:test:install": "./bin/TestCafeFork/testInstall.sh"

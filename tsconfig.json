@@ -22,5 +22,5 @@
     "target": "ES2016",
     "types": ["node"]
   },
-  "include": ["e2ed/**/*.ts", "src/**/*.ts"]
+  "include": ["e2ed/**/*.ts", "scripts/**/*.ts", "src/**/*.ts"]
 }

@@ -2,7 +2,7 @@ export type TestCafeConfig = {
   ajaxRequestTimeout: number;
   assertionTimeout: number;
   browserInitTimeout: number;
-  browsers: string;
+  browsers: string | string[];
   color: boolean;
   compilerOptions: {
     typescript?: {
