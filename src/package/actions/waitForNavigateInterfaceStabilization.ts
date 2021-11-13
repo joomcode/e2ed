@@ -13,7 +13,10 @@ export const waitForNavigateInterfaceStabilization = async (): Promise<void> => 
     name: 'E2ED_NAVIGATE_STABILIZATION_INTERVAL',
   });
 
-  log('Wait for the interface stabilization after the intended navigation to another page');
+  await log(
+    'Wait for the interface stabilization after the intended navigation to another page',
+    'internalAction',
+  );
 
   await waitForInterfaceStabilization(stabilizationInterval);
 };

@@ -8,7 +8,7 @@ import {valueToString} from './valueToString';
 import type {Log} from '../types/internal';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-const noop: Log = () => {};
+const noop: Log = () => Promise.resolve();
 
 const writeLog: Log = (message, payload) => {
   const dateTimeInISO = new Date().toISOString();
@@ -28,6 +28,8 @@ const writeLog: Log = (message, payload) => {
   console.log(
     `[e2ed][${dateTimeInISO}]${maybeRunLabel}[${runId || ''}] ${message} ${printedString}\n`,
   );
+
+  return Promise.resolve();
 };
 
 /**

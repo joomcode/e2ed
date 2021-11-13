@@ -108,9 +108,10 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
 export const waitForInterfaceStabilization = async (stabilizationInterval = 500): Promise<void> => {
   const waitInMs = await clientWaitForInterfaceStabilization(stabilizationInterval);
 
-  log(
+  await log(
     `Waited for interface stabilization for ${String(
       waitInMs,
     )} ms with stabilization interval ${stabilizationInterval}`,
+    'internalAction',
   );
 };

@@ -7,7 +7,7 @@ const clientGetCurrentUrl = ClientFunction(() => window.location.href);
 export const getCurrentUrl = async (): Promise<string | undefined> => {
   const url = await clientGetCurrentUrl();
 
-  log(`Get current page url: "${String(url)}"`);
+  await log(`Get current page url: "${String(url)}"`, 'internalUtil');
 
   return url;
 };

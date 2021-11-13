@@ -34,9 +34,8 @@
     "typescript": "4.5.1-rc"
   },
   "scripts": {
-    "changelog": "node build/changelog",
-    "postchangelog": "git add CHANGELOG.md",
     "lint": "npm run lint:es & npm run lint:prettier & npm run lint:types & wait",
+    "lint:clear:cache": "rm .eslintcache-global",
     "lint:es": "eslint --cache --cache-location=.eslintcache-global --max-warnings=0 --ext=.ts .",
     "lint:prettier": "prettier --check --ignore-path=.gitignore '**/*.{json,md,ts,yaml}'",
     "lint:types": "tsc --noEmit",
@@ -54,8 +53,10 @@
     "prebuild:copy:example": "rm -r build/e2ed",
     "build:copy:example": "cp -r e2ed build/node_modules/e2ed/ && rm -r build/node_modules/e2ed/e2ed/node_modules",
     "build:init": "(cd ./build && ./node_modules/e2ed/bin/init.sh)",
-    "preversion": "npm run lint & npm run build && npm run test",
-    "version": "npm run changelog",
+    "preversion": "npm run lint:clear:cache && npm run lint & npm run build && npm run test",
+    "version": "npm run update:changelog",
+    "update:changelog": "node build/updateChangelog",
+    "postupdate:changelog": "git add CHANGELOG.md",
     "postversion": "git push --follow-tags && npm run release",
     "prerelease": "npm run build",
     "release": "npm publish ./build/node_modules/e2ed",

@@ -10,7 +10,7 @@ type Options = Parameters<typeof testController.takeElementScreenshot>[2];
 /**
  * Takes a screenshot of the specified element.
  */
-export const takeElementScreenshot = (
+export const takeElementScreenshot = async (
   selector: Selector,
   path?: string,
   options?: Options,
@@ -18,7 +18,7 @@ export const takeElementScreenshot = (
   const locator = getLocatorFromSelector(selector);
   const pathMessage = path === undefined ? '' : ` to path "${path}"`;
 
-  log(`Take a screenshot of the element${pathMessage}`, {locator, options});
+  await log(`Take a screenshot of the element${pathMessage}`, {locator, options}, 'internalAction');
 
   return testController.takeElementScreenshot(selector as Inner.Selector, path, options);
 };

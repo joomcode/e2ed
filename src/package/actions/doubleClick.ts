@@ -15,7 +15,7 @@ type Options = Parameters<typeof testController.doubleClick>[1];
 export const doubleClick = async (selector: Selector, options?: Options): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
-  log('Double-click an element', {locator, options});
+  await log('Double-click an element', {locator, options}, 'internalAction');
 
   await testController.doubleClick(selector as Inner.Selector, options);
 

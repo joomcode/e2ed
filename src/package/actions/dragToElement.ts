@@ -20,7 +20,11 @@ export const dragToElement = async (
   const locator = getLocatorFromSelector(selector);
   const destinationLocator = getLocatorFromSelector(destinationSelector);
 
-  log('Drag an element onto another one', {locator, destinationLocator, options});
+  await log(
+    'Drag an element onto another one',
+    {locator, destinationLocator, options},
+    'internalAction',
+  );
 
   await testController.dragToElement(
     selector as Inner.Selector,

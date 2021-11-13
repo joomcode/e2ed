@@ -20,7 +20,11 @@ export const drag = async (
 ): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
-  log('Drag an element by an offset', {locator, dragOffsetX, dragOffsetY, options});
+  await log(
+    'Drag an element by an offset',
+    {locator, dragOffsetX, dragOffsetY, options},
+    'internalAction',
+  );
 
   await testController.drag(selector as Inner.Selector, dragOffsetX, dragOffsetY, options);
 

@@ -28,11 +28,15 @@ export const assertPage: AssertPage<Pages> = async (
 
   const message = `Assert that the current url matches the specified page "${String(pageName)}"`;
 
-  log(message, {
-    currentUrl,
-    isMatch,
-    routeParams,
-  });
+  await log(
+    message,
+    {
+      currentUrl,
+      isMatch,
+      routeParams,
+    },
+    'internalCore',
+  );
 
   await expect(isMatch, message).ok();
 

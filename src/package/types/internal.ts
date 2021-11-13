@@ -2,14 +2,10 @@ import type {UnwrapPromise} from './utils';
 import type {Inner} from 'testcafe-without-typecheck';
 
 export * from './config';
+export * from './log';
 export * from './pages';
 export * from './request';
 export * from './utils';
-
-/**
- * Type for log function.
- */
-export type Log = (message: string, params?: Record<string, unknown>) => void;
 
 /**
  * Selector type (which replaces the DOM element wrapper).

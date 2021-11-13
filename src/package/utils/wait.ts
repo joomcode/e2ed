@@ -4,8 +4,8 @@ import {log} from './log';
 /**
  * Wait delayInMs milliseconds.
  */
-export const wait = (delayInMs: number): Promise<void> => {
-  log(`Wait for ${delayInMs} ms`);
+export const wait = async (delayInMs: number): Promise<void> => {
+  await log(`Wait for ${delayInMs} ms`, 'internalUtil');
 
   return getWaitPromise(delayInMs);
 };

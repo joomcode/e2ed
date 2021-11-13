@@ -8,10 +8,10 @@ import type {Inner} from 'testcafe-without-typecheck';
 /**
  * Removes all file paths from the specified file upload input.
  */
-export const clearUpload = (selector: Selector): Promise<void> => {
+export const clearUpload = async (selector: Selector): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
-  log('Remove all file paths from file upload input', {locator});
+  await log('Remove all file paths from file upload input', {locator}, 'internalAction');
 
   return testController.clearUpload(selector as Inner.Selector);
 };

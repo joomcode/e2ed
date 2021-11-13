@@ -15,7 +15,7 @@ type Options = Parameters<typeof testController.rightClick>[1];
 export const rightClick = async (selector: Selector, options?: Options): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
-  log('Right-click an element', {locator, options});
+  await log('Right-click an element', {locator, options}, 'internalAction');
 
   await testController.rightClick(selector as Inner.Selector, options);
 

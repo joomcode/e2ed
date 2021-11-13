@@ -57,10 +57,14 @@ for (const [key, getAssertionMessage] of Object.entries(assertions)) {
 
     return assertPromise
       .then(() => this.actual)
-      .then((actual) => {
-        log(`Assert that value ${valueToString(actual)} ${message}`, {
-          description: this.description,
-        });
-      });
+      .then((actual) =>
+        log(
+          `Assert that value ${valueToString(actual)} ${message}`,
+          {
+            description: this.description,
+          },
+          'internalAssert',
+        ),
+      );
   };
 }

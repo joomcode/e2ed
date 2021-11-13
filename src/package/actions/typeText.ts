@@ -19,7 +19,7 @@ export const typeText = async (
 ): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
-  log(`Type "${text}" into an input element`, {locator, options});
+  await log(`Type "${text}" into an input element`, {locator, options}, 'internalAction');
 
   await testController.typeText(selector as Inner.Selector, text, options);
 

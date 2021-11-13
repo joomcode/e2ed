@@ -21,18 +21,26 @@ export const navigateToPage: NavigateToPage<Pages> = async (
   const url = page.route.getUrl(routeParams as never);
   const startNavigateTime = Date.now();
 
-  log(`Will navigate to the page "${String(pageName)}"`, {
-    pageParams,
-    routeParams,
-    url,
-    willNavigateToExecutedInMs: startNavigateTime - startTime,
-  });
+  await log(
+    `Will navigate to the page "${String(pageName)}"`,
+    {
+      pageParams,
+      routeParams,
+      url,
+      willNavigateToExecutedInMs: startNavigateTime - startTime,
+    },
+    'internalCore',
+  );
 
   await navigateTo(url);
 
   await waitForNavigateInterfaceStabilization();
 
-  log(`Page "${String(pageName)}" loaded in ${Date.now() - startNavigateTime} ms`, {url});
+  await log(
+    `Page "${String(pageName)}" loaded in ${Date.now() - startNavigateTime} ms`,
+    {url},
+    'internalCore',
+  );
 
   return page as never;
 };

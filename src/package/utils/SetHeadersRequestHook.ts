@@ -39,7 +39,7 @@ export class SetHeadersRequestHook extends RequestHook {
 
     applyHeadersMapper(headers, this.options.mapRequestHeaders);
 
-    log(`Map request headers for ${this.url}`, {headers});
+    await log(`Map request headers for ${this.url}`, {headers}, 'internalUtil');
   }
 
   override async onResponse(): Promise<void> {
@@ -53,7 +53,7 @@ export class SetHeadersRequestHook extends RequestHook {
 
     applyHeadersMapper(headers, this.options.mapResponseHeaders);
 
-    log(`Map response headers for ${this.url}`, {headers});
+    await log(`Map response headers for ${this.url}`, {headers}, 'internalUtil');
   }
 
   resetMethods(

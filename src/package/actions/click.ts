@@ -15,7 +15,7 @@ type Options = Parameters<typeof testController.click>[1];
 export const click = async (selector: Selector, options?: Options): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
-  log('Click an element', {locator, options});
+  await log('Click an element', {locator, options}, 'internalAction');
 
   await testController.click(selector as Inner.Selector, options);
 

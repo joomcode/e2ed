@@ -15,7 +15,7 @@ type Options = Parameters<typeof testController.hover>[1];
 export const hover = async (selector: Selector, options?: Options): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
-  log('Hover the mouse pointer over an element', {locator, options});
+  await log('Hover the mouse pointer over an element', {locator, options}, 'internalAction');
 
   await testController.hover(selector as Inner.Selector, options);
 

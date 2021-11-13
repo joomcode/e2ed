@@ -1,3 +1,6 @@
 {
-  "version": "*"
+  "version": "*",
+  "dependencies": {
+    "testcafe-without-typecheck": "*"
+  }
 }

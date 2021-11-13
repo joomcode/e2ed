@@ -14,7 +14,7 @@ export const createDeviceAndUser = async (
     email,
   });
 
-  log('Random user have been created', {user});
+  await log('Random user have been created', {user}, 'action');
 
   return user;
 };
