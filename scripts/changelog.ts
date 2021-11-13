@@ -5,7 +5,7 @@ import {join} from 'path';
 import pkg from '../package.json';
 
 const baseUrl = `https://github.com/${pkg.repository}`;
-const changelogPath = join(__dirname, '..', '..', 'CHANGELOG.md');
+const changelogPath = join(__dirname, '..', 'CHANGELOG.md');
 
 const fullDate = new Date().toISOString().slice(0, 10);
 
@@ -26,8 +26,12 @@ const commitsLinks = commits
 writeFileSync(
   changelogPath,
   `# Changelog
+
 ## [v${pkg.version}](${baseUrl}/tree/v${pkg.version}) (${fullDate})
+
 [Full Changelog](${baseUrl}/compare/v${previousVersion}...v${pkg.version})
+
 ${commitsLinks}
+
 ${changelogText.slice(changelogText.search('##'))}`,
 );
