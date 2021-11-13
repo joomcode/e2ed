@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.4.11](https://github.com/uid11/e2ed/tree/v0.4.11) (2021-11-13)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.4.10...v0.4.11)
+
+- [fix: getVersion script](https://github.com/uid11/e2ed/commit/8d2c00478d670a1effbed1e854ab43967eaafc61)
+
 ## [v0.4.10](https://github.com/uid11/e2ed/tree/v0.4.10) (2021-11-13)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.4.8...v0.4.10)
