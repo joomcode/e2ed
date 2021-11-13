@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.5.0](https://github.com/uid11/e2ed/tree/v0.5.0) (2021-11-13)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.4.11...v0.5.0)
+
+- [feat: use async log function](https://github.com/uid11/e2ed/commit/905348244c7c8ba79852031822371406620b78db)
+- [feat: add .gitignore to e2ed init directory](https://github.com/uid11/e2ed/commit/ebed89cac837fed42d9498e1bf0cac5ac2c3e246)
+
 ## [v0.4.11](https://github.com/uid11/e2ed/tree/v0.4.11) (2021-11-13)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.4.10...v0.4.11)
