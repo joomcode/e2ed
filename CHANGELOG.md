@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.5.1](https://github.com/uid11/e2ed/tree/v0.5.1) (2021-11-19)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.0...v0.5.1)
+
+- [feat: save screenshot on each log call; register test run and log call](https://github.com/uid11/e2ed/commit/ea811b7eb488a4617782d289017d7472529cab14)
+
 ## [v0.5.0](https://github.com/uid11/e2ed/tree/v0.5.0) (2021-11-13)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.4.11...v0.5.0)
