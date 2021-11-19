@@ -1,24 +1,26 @@
 import {setRawMeta} from './context/meta';
+import {setRunId} from './context/runId';
+import {getRandomId} from './utils/getRandomId';
+import {registerRunTestEvent} from './utils/registerRunTestEvent';
 
-import type {TestMeta} from './types';
+import type {RunId, TestOptions} from './types/internal';
 import type {Inner} from 'testcafe-without-typecheck';
 
 declare const fixture: Inner.FixtureFn;
 declare const test: Inner.TestFn;
 
-type Options = Readonly<{
-  meta: TestMeta;
-}>;
-
 /**
- * Creates test with name, metatags, params and test function.
+ * Creates test with name, metatags, options and test function.
  */
-export const it = (name: string, {meta}: Options, testFn: () => Promise<void>): void => {
+export const it = (name: string, options: TestOptions, testFn: () => Promise<void>): void => {
   fixture('✔');
 
-  test.before(() => {
-    setRawMeta(meta);
+  test.before(async () => {
+    const runId = getRandomId().replace(/:/g, '-') as RunId;
 
-    return Promise.resolve();
+    await registerRunTestEvent({name, options, runId});
+
+    setRunId(runId);
+    setRawMeta(options.meta);
   })(name, testFn);
 };

@@ -1,35 +1,54 @@
-import {getRunId, setRunId} from '../context/runId';
+import {getRunId} from '../context/runId';
 import {logContext} from '../hooks';
+import {testController} from '../testController';
 
-import {getLabel} from './getLabel';
-import {getRandomId} from './getRandomId';
+import {getKeysCounter} from './getKeysCounter';
+import {getPrintedLabel} from './getPrintedLabel';
+import {registerLogEvent} from './registerLogEvent';
 import {valueToString} from './valueToString';
 
-import type {Log} from '../types/internal';
+import type {Log, LogEventType, LogPayload} from '../types/internal';
+
+const resolvedPromise = Promise.resolve();
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-const noop: Log = () => Promise.resolve();
+const noop: Log = () => resolvedPromise;
 
-const writeLog: Log = (message, payload) => {
-  const dateTimeInISO = new Date().toISOString();
+const numberInRunCounter = getKeysCounter();
 
-  if (getRunId() === undefined) {
-    setRunId(getRandomId());
-  }
-
+const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unknown) => {
+  const time = new Date().getTime();
+  const dateTimeInISO = new Date(time).toISOString();
   const runId = getRunId();
-  const maybeRunLabel = getLabel(process.env.E2ED_RUN_LABEL);
+  const runLabel = process.env.E2ED_RUN_LABEL;
+  const printedRunLabel = getPrintedLabel(runLabel);
   const context = logContext();
-  const printedObject: Record<string, unknown> = {payload, context};
+  const numberInRun = numberInRunCounter(runId);
+  const payload = typeof maybePayload === 'object' ? (maybePayload as LogPayload) : undefined;
+  const type =
+    typeof maybePayload === 'string'
+      ? (maybePayload as LogEventType)
+      : (maybeLogEventType as LogEventType) || 'unspecified';
 
-  const printedString = valueToString(printedObject);
+  return registerLogEvent({
+    context,
+    message,
+    numberInRun,
+    payload,
+    runId,
+    runLabel,
+    time,
+    type,
+  }).then(() => {
+    const printedString = valueToString({payload, context});
 
-  // eslint-disable-next-line no-console
-  console.log(
-    `[e2ed][${dateTimeInISO}]${maybeRunLabel}[${runId || ''}] ${message} ${printedString}\n`,
-  );
+    // eslint-disable-next-line no-console
+    console.log(
+      `[e2ed][${dateTimeInISO}]${printedRunLabel}[${type}][${runId}] ${message} ${printedString}\n`,
+    );
 
-  return Promise.resolve();
+    return testController.takeScreenshot({path: `${runId}/${numberInRun}`}) as Promise<void>;
+  });
 };
 
 /**

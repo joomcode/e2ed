@@ -1,4 +1,4 @@
-import {getLabel} from './getLabel';
+import {getPrintedLabel} from './getPrintedLabel';
 import {valueToString} from './valueToString';
 
 import type {GeneralLog} from '../types/internal';
@@ -8,10 +8,10 @@ import type {GeneralLog} from '../types/internal';
  */
 export const generalLog: GeneralLog = (message, payload) => {
   const dateTimeInISO = new Date().toISOString();
-  const maybeRunLabel = getLabel(process.env.E2ED_RUN_LABEL);
+  const printedRunLabel = getPrintedLabel(process.env.E2ED_RUN_LABEL);
 
   const printedString = payload === undefined ? '' : valueToString(payload);
 
   // eslint-disable-next-line no-console
-  console.log(`[e2ed][${dateTimeInISO}]${maybeRunLabel} ${message} ${printedString}\n`);
+  console.log(`[e2ed][${dateTimeInISO}]${printedRunLabel} ${message} ${printedString}\n`);
 };

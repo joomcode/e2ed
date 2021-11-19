@@ -1,7 +1,13 @@
 export * from './user';
 
+/**
+ * User language.
+ */
 export type Language = 'de' | 'en';
 
+/**
+ * Mobile device type.
+ */
 export type MobileDevice = 'iphone' | 'samsung';
 
 /**
