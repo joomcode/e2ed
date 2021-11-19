@@ -22,8 +22,8 @@
     "testcafe-without-typecheck": "1.17.1-rc.1"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "5.3.1",
-    "@typescript-eslint/parser": "5.3.1",
+    "@typescript-eslint/eslint-plugin": "5.4.0",
+    "@typescript-eslint/parser": "5.4.0",
     "eslint": "8.2.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.3.0",
@@ -31,7 +31,7 @@
     "husky": "7.0.4",
     "prettier": "2.4.1",
     "testcafe": "1.17.1",
-    "typescript": "4.5.1-rc"
+    "typescript": "4.5.2"
   },
   "scripts": {
     "lint": "npm run lint:es & npm run lint:prettier & npm run lint:types & wait",
