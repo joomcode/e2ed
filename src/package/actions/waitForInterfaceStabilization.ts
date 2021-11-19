@@ -100,7 +100,7 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
   global.waitingForInterfaceStabilization = {promise, stabilizationInterval};
 
   return promise;
-});
+}, 'waitForInterfaceStabilization');
 
 /**
  * Wait until the page interface stabilizes (in particular, the page will stop scrolling).

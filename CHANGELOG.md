@@ -4,7 +4,7 @@
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.1...v0.5.2)
 
-- [feat: update TypeScript and @typescript-eslint/*](https://github.com/uid11/e2ed/commit/ac7e6a3a291f70abd07ae45dbcd576ecf55fa88b)
+- [feat: update TypeScript and @typescript-eslint/\*](https://github.com/uid11/e2ed/commit/ac7e6a3a291f70abd07ae45dbcd576ecf55fa88b)
 
 ## [v0.5.1](https://github.com/uid11/e2ed/tree/v0.5.1) (2021-11-19)
 

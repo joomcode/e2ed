@@ -5,6 +5,7 @@ export * from './E2EDError';
 export * from './getIntegerFromEnvVariable';
 export * from './generalLog';
 export * from './getCurrentUrl';
+export * from './getKeysCounter';
 export * from './getRandomId';
 export * from './log';
 export * from './valueToString';

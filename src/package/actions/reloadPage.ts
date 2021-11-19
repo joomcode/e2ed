@@ -1,7 +1,7 @@
 import {ClientFunction} from '../ClientFunction';
 import {log} from '../utils/log';
 
-const clientReloadPage = ClientFunction(() => window.location.reload());
+const clientReloadPage = ClientFunction(() => window.location.reload(), 'reloadPage');
 
 /**
  * Reload page.

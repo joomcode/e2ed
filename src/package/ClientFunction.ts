@@ -74,6 +74,7 @@ const clientFunctionWrapper = function clientFunctionWrapper(): unknown {
  */
 export const ClientFunction = <R, A extends unknown[]>(
   originFn: (...args: A) => R,
+  description: string,
 ): WrappedClientFunction<R, A> => {
   const clientFunction = BaseClientFunction<UnwrapPromise<R> | undefined, A>(
     clientFunctionWrapper as unknown as (...args: A) => UnwrapPromise<R> | undefined,
@@ -83,6 +84,7 @@ export const ClientFunction = <R, A extends unknown[]>(
   );
 
   generalLog(`Create client function "${originFn.name || 'anonymous'}"`, {
+    description,
     originFn: String(originFn).slice(0, 80),
   });
 
@@ -90,6 +92,8 @@ export const ClientFunction = <R, A extends unknown[]>(
     try {
       return clientFunction(...args).catch((error: unknown) => {
         generalLog(`Client function "${originFn.name || 'anonymous'}" rejected with error`, {
+          args,
+          description,
           error,
           originFn,
         });
@@ -98,6 +102,8 @@ export const ClientFunction = <R, A extends unknown[]>(
       });
     } catch (error: unknown) {
       generalLog(`Client function "${originFn.name || 'anonymous'}" thrown an error`, {
+        args,
+        description,
         error,
         originFn,
       });
