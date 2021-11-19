@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.5.3](https://github.com/uid11/e2ed/tree/v0.5.3) (2021-11-19)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.2...v0.5.3)
+
+- [feat: add description to client functions (for logging)](https://github.com/uid11/e2ed/commit/29fb8e7acc92f6224a93074622a0a0ade44e450b)
+
 ## [v0.5.2](https://github.com/uid11/e2ed/tree/v0.5.2) (2021-11-19)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.1...v0.5.2)
