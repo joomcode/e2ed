@@ -37,13 +37,13 @@ export const navigateToPage: NavigateToPage<Pages> = async (
 
   await waitForNavigateInterfaceStabilization();
 
-  setPageLoaded(true);
-
   await log(
     `Page "${String(pageName)}" loaded in ${Date.now() - startNavigateTime} ms`,
     {url},
     'internalCore',
   );
+
+  setPageLoaded(true);
 
   return page as never;
 };

@@ -1,3 +1,4 @@
+import {getPageLoaded} from '../context/pageLoaded';
 import {getRunId} from '../context/runId';
 import {logContext} from '../hooks';
 import {testController} from '../testController';
@@ -47,7 +48,13 @@ const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unkn
       `[e2ed][${dateTimeInISO}]${printedRunLabel}[${type}][${runId}] ${message} ${printedString}\n`,
     );
 
-    return testController.takeScreenshot({path: `${runId}/${numberInRun}`}) as Promise<void>;
+    const pageLoaded = getPageLoaded();
+
+    if (pageLoaded && (type === 'action' || type === 'internalAssert')) {
+      return testController.takeScreenshot({path: `${runId}/${numberInRun}`}) as Promise<void>;
+    }
+
+    return undefined;
   });
 };
 
