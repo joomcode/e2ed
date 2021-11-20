@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.5.4](https://github.com/uid11/e2ed/tree/v0.5.4) (2021-11-20)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.3...v0.5.4)
+
+- [feat: add internal pageLoaded flag to context; add default value to useContext](https://github.com/uid11/e2ed/commit/8f560a843af79da376e7a1bd1cd8e563dfa3ffdf)
+
 ## [v0.5.3](https://github.com/uid11/e2ed/tree/v0.5.3) (2021-11-19)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.2...v0.5.3)
