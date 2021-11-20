@@ -1,4 +1,5 @@
 import {waitForNavigateInterfaceStabilization} from './actions/waitForNavigateInterfaceStabilization';
+import {setPageLoaded} from './context/pageLoaded';
 import {expect} from './expect';
 import {pages} from './pageObjects';
 import {assertValueIsDefined} from './utils/asserts';
@@ -39,6 +40,8 @@ export const assertPage: AssertPage<Pages> = async (
   );
 
   await expect(isMatch, message).ok();
+
+  setPageLoaded(true);
 
   return page as never;
 };

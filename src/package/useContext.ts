@@ -1,30 +1,64 @@
 import {testController} from './testController';
 
+type Ctx<T> = {contexts: Record<number, T>};
+
 type Get<T> = () => T | undefined;
+type GetWithDefaultValue<T> = () => T;
 type Set<T> = (value: T) => void;
 type Clear = () => void;
+
+type UseContext = (<T>() => [get: Get<T>, set: Set<T>, clear: Clear]) &
+  (<T>(defaultValue: T) => [get: GetWithDefaultValue<T>, set: Set<T>, clear: Clear]);
 
 let callCount = 0;
 
 /**
- * Creates function for get, set and clear some typed value in test context.
+ * Creates functions for get, set and clear some typed value in test context.
  */
-export const useContext = <T>(): [get: Get<T>, set: Set<T>, clear: Clear] => {
+export const useContext = (<T>(defaultValue?: T) => {
   callCount += 1;
 
   const contextIndex = callCount;
 
-  const get: Get<T> = () => (testController.ctx.contexts as Record<number, T>)?.[contextIndex];
-
-  const set: Set<T> = (value) => {
+  /**
+   * Set value to test context.
+   */
+  const set = (value: T): void => {
     if (testController.ctx.contexts === undefined) {
       testController.ctx.contexts = {};
     }
 
-    (testController.ctx.contexts as Record<number, T>)[contextIndex] = value;
+    const {contexts} = testController.ctx as Ctx<T>;
+
+    contexts[contextIndex] = value;
   };
 
-  const clear: Clear = () => set(undefined as unknown as T);
+  /**
+   * Clear value in test context (set value to undefined).
+   */
+  const clear = (): void => set(undefined as unknown as T);
 
-  return [get, set, clear];
-};
+  if (defaultValue === undefined) {
+    /**
+     * Get value from test context.
+     */
+    const get = (): T | undefined => {
+      const {contexts}: Partial<Ctx<T>> = testController.ctx;
+
+      return contexts?.[contextIndex];
+    };
+
+    return [get, set, clear];
+  }
+
+  /**
+   * Get value from test context (or default value, if it is undefined).
+   */
+  const getWithDefaultValue = (): T => {
+    const {contexts}: Partial<Ctx<T>> = testController.ctx;
+
+    return contexts?.[contextIndex] ?? defaultValue;
+  };
+
+  return [getWithDefaultValue, set, clear];
+}) as UseContext;

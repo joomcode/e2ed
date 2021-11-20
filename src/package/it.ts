@@ -15,12 +15,12 @@ declare const test: Inner.TestFn;
 export const it = (name: string, options: TestOptions, testFn: () => Promise<void>): void => {
   fixture('✔');
 
-  test.before(async () => {
+  test.before(() => {
     const runId = getRandomId().replace(/:/g, '-') as RunId;
-
-    await registerRunTestEvent({name, options, runId});
 
     setRunId(runId);
     setRawMeta(options.meta);
+
+    return registerRunTestEvent({name, options, runId});
   })(name, testFn);
 };

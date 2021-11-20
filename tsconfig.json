@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "importsNotUsedAsValues": "error",
     "incremental": true,
-    "outDir": "build",
+    "outDir": "build/out",
     "module": "CommonJS",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
@@ -22,5 +22,5 @@
     "target": "ES2016",
     "types": ["node"]
   },
-  "include": ["e2ed/**/*.ts", "scripts/**/*.ts", "src/**/*.ts"]
+  "include": ["build/e2ed/**/*.ts", "e2ed/**/*.ts", "scripts/**/*.ts", "src/**/*.ts"]
 }

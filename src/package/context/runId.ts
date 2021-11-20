@@ -3,10 +3,14 @@ import {assertValueIsDefined} from '../utils/asserts';
 
 import type {RunId} from '../types/internal';
 
+/**
+ * @internal
+ */
 const [getRawRunId, setRunId] = useContext<RunId>();
 
 /**
  * Get test runId.
+ * @internal
  */
 export const getRunId = (): RunId => {
   const runId = getRawRunId();

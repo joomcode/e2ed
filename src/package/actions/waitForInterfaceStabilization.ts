@@ -2,7 +2,7 @@ import {ClientFunction} from '../ClientFunction';
 import {log} from '../utils/log';
 
 type WaitingForInterfaceStabilization = {
-  readonly promise: Promise<number>;
+  readonly promise: Promise<void>;
   stabilizationInterval: number;
 };
 
@@ -68,7 +68,7 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
   let interfaceState = getInterfaceState();
   let stabilizationIntervalStart = startTime;
 
-  const promise = new Promise<number>((resolve, reject) => {
+  const promise = new Promise<void>((resolve, reject) => {
     const intervalId = setInterval(() => {
       const newInterfaceState = getInterfaceState();
 
@@ -84,7 +84,7 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
       if (Date.now() - stabilizationIntervalStart >= currentStabilizationInterval) {
         global.waitingForInterfaceStabilization = undefined;
         clearInterval(intervalId);
-        resolve(Date.now() - startTime);
+        resolve();
 
         return;
       }
@@ -106,12 +106,14 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
  * Wait until the page interface stabilizes (in particular, the page will stop scrolling).
  */
 export const waitForInterfaceStabilization = async (stabilizationInterval = 500): Promise<void> => {
-  const waitInMs = await clientWaitForInterfaceStabilization(stabilizationInterval);
+  const startTime = Date.now();
+
+  await clientWaitForInterfaceStabilization(stabilizationInterval);
+
+  const waitInMs = Date.now() - startTime;
 
   await log(
-    `Waited for interface stabilization for ${String(
-      waitInMs,
-    )} ms with stabilization interval ${stabilizationInterval}`,
+    `Waited for interface stabilization for ${waitInMs} ms with stabilization interval ${stabilizationInterval}`,
     'internalAction',
   );
 };

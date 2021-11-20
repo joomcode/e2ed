@@ -1,4 +1,5 @@
 import {waitForNavigateInterfaceStabilization} from './actions/waitForNavigateInterfaceStabilization';
+import {setPageLoaded} from './context/pageLoaded';
 import {navigateTo} from './hooks';
 import {pages} from './pageObjects';
 import {log} from './utils/log';
@@ -35,6 +36,8 @@ export const navigateToPage: NavigateToPage<Pages> = async (
   await navigateTo(url);
 
   await waitForNavigateInterfaceStabilization();
+
+  setPageLoaded(true);
 
   await log(
     `Page "${String(pageName)}" loaded in ${Date.now() - startNavigateTime} ms`,
