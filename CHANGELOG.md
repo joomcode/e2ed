@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.5.6](https://github.com/uid11/e2ed/tree/v0.5.6) (2021-11-20)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.5...v0.5.6)
+
+- [fix: remove buggy runExecutionTimeout and testExecutionTimeout properties](https://github.com/uid11/e2ed/commit/42f757c30fc2f8c79b65bc92b2390bcd29268946)
+
 ## [v0.5.5](https://github.com/uid11/e2ed/tree/v0.5.5) (2021-11-20)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.4...v0.5.5)
