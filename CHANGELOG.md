@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.5.5](https://github.com/uid11/e2ed/tree/v0.5.5) (2021-11-20)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.4...v0.5.5)
+
+- [feat: take log screenshot only for loaded pages and important actions](https://github.com/uid11/e2ed/commit/8d0faf27a5812cf25a2e2aa77fff8a36cb8d3f26)
+
 ## [v0.5.4](https://github.com/uid11/e2ed/tree/v0.5.4) (2021-11-20)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.3...v0.5.4)
