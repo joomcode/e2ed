@@ -14,7 +14,6 @@ export type TestCafeConfig = {
   src: string[];
   pageLoadTimeout: number;
   pageRequestTimeout: number;
-  runExecutionTimeout: number;
   reporter: {name: string; output?: string}[];
   retryTestPages: boolean;
   screenshots: {
@@ -24,7 +23,6 @@ export type TestCafeConfig = {
     thumbnails: boolean;
   };
   skipJsErrors: boolean;
-  testExecutionTimeout: number;
   concurrency: number;
   port1: number;
   port2: number;

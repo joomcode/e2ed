@@ -27,7 +27,6 @@ const defaultConfig: TestCafeConfig = {
   src: ['./e2ed/tests/**/*.spec.ts'],
   pageLoadTimeout: 0,
   pageRequestTimeout: 30000,
-  runExecutionTimeout: 180000,
   reporter: [
     {
       name: 'spec',
@@ -50,7 +49,6 @@ const defaultConfig: TestCafeConfig = {
     thumbnails: false,
   },
   skipJsErrors: true,
-  testExecutionTimeout: 120000,
   concurrency: 1,
   port1: 1337,
   port2: 1338,
