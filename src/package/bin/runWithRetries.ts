@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import {failTestsToString} from '../utils/failTestsToString';
 import {generalLog} from '../utils/generalLog';
 import {getConcurrencyForNextRetry} from '../utils/getConcurrencyForNextRetry';
 import {getFailedTestsFromJsonReport} from '../utils/getFailedTestsFromJsonReport';
@@ -7,7 +8,7 @@ import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {printStartParams} from '../utils/printStartParams';
 import {runTests} from '../utils/runTests';
 
-import type {FailTest, FailTests} from '../utils/getFailedTestsFromJsonReport';
+import type {FailTest, FailTests} from '../types/internal';
 
 process.env.E2ED_IS_DOCKER_RUN = 'true';
 
@@ -26,7 +27,6 @@ const retries = getIntegerFromEnvVariable({
 });
 
 const startTime = Date.now();
-const testsToString = (tests: FailTest[]): string => JSON.stringify(tests, null, 2);
 
 let allTestsCount = 0;
 let retryIndex = 1;
@@ -42,7 +42,7 @@ const asyncRunTests = async (): Promise<void> => {
     const printedTestsString =
       tests.length === 0
         ? ')'
-        : `, ${tests.length} failed tests out of ${allTestsCount}): ${testsToString(tests)}`;
+        : `, ${tests.length} failed tests out of ${allTestsCount}): ${failTestsToString(tests)}`;
 
     let failedTests: FailTests | undefined;
 
@@ -100,7 +100,9 @@ asyncRunTests()
       generalLog(
         `[FAIL] There are ${
           tests.length
-        } failed tests (out of ${allTestsCount}) after ${retries} retries: ${testsToString(tests)}`,
+        } failed tests (out of ${allTestsCount}) after ${retries} retries: ${failTestsToString(
+          tests,
+        )}`,
       );
     }
 

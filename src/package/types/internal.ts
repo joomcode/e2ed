@@ -5,6 +5,7 @@ export * from './config';
 export * from './log';
 export * from './pages';
 export * from './request';
+export * from './run';
 export * from './test';
 export * from './utils';
 

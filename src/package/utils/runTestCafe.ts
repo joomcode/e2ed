@@ -2,7 +2,7 @@ import createTestCafe from 'testcafe-without-typecheck';
 
 import {generalLog} from './generalLog';
 
-import type {FailTest} from './getFailedTestsFromJsonReport';
+import type {FailTest} from '../types/internal';
 import type {Inner} from 'testcafe-without-typecheck';
 
 const browsers = ['chromium:headless --no-sandbox --disable-dev-shm-usage'];

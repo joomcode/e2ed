@@ -2,6 +2,8 @@ import {config} from '../testcaferc';
 
 import {generalLog} from './generalLog';
 
+import type {FailTests} from '../types/internal';
+
 const jsonReportPathFromRoot = config.reporter.find(({name}) => name === 'json')?.output || '';
 const jsonReportPath = `../../../${jsonReportPathFromRoot}`;
 
@@ -14,25 +16,6 @@ type Fixture = Readonly<{
   name: string;
   path: string;
   tests: Test[];
-}>;
-
-/**
- * Fail test params.
- * @internal
- */
-export type FailTest = Readonly<{
-  fixtureName: string;
-  fixturePath: string;
-  testName: string;
-}>;
-
-/**
- * Fail tests with all tests count.
- * @internal
- */
-export type FailTests = Readonly<{
-  allTestsCount: number;
-  tests: FailTest[];
 }>;
 
 /**
