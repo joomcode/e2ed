@@ -20,7 +20,7 @@
   "repository": "uid11/e2ed",
   "dependencies": {
     "pngjs": "6.0.0",
-    "testcafe-without-typecheck": "1.17.1-rc.1"
+    "testcafe-without-typecheck": "1.17.1-rc.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "5.4.0",
