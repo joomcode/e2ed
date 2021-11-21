@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.5.8](https://github.com/uid11/e2ed/tree/v0.5.8) (2021-11-21)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.7...v0.5.8)
+
+- [feat: turn on eslint curly rule for all statements](https://github.com/uid11/e2ed/commit/cc7cbf741a36b8cab7c87315ebd2128a9ea58b22)
+- [feat: add pixelmatch util (for comparing snapshots)](https://github.com/uid11/e2ed/commit/55eccb04740f9539d58d1f28d03b9d96dbae23f4)
+
 ## [v0.5.7](https://github.com/uid11/e2ed/tree/v0.5.7) (2021-11-21)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.6...v0.5.7)
