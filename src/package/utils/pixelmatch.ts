@@ -69,7 +69,9 @@ const colorDelta = (img1: Img, img2: Img, k: number, m: number, yOnly: boolean):
   let b2 = img2[m + 2];
   let a2 = img2[m + 3];
 
-  if (a1 === a2 && r1 === r2 && g1 === g2 && b1 === b2) return 0;
+  if (a1 === a2 && r1 === r2 && g1 === g2 && b1 === b2) {
+    return 0;
+  }
 
   if (a1 < 255) {
     a1 /= 255;
@@ -89,7 +91,9 @@ const colorDelta = (img1: Img, img2: Img, k: number, m: number, yOnly: boolean):
   const y2 = rgb2y(r2, g2, b2);
   const y = y1 - y2;
 
-  if (yOnly) return y;
+  if (yOnly) {
+    return y;
+  }
 
   const i = rgb2i(r1, g1, b1) - rgb2i(r2, g2, b2);
   const q = rgb2q(r1, g1, b1) - rgb2q(r2, g2, b2);
@@ -115,8 +119,10 @@ const hasManySiblings = (
 
   for (let x = x0; x <= x2; x += 1) {
     for (let y = y0; y <= y2; y += 1) {
-      // eslint-disable-next-line no-continue
-      if (x === x1 && y === y1) continue;
+      if (x === x1 && y === y1) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
 
       const pos2 = (y * width + x) * 4;
 
@@ -129,7 +135,9 @@ const hasManySiblings = (
         zeroes += 1;
       }
 
-      if (zeroes > 2) return true;
+      if (zeroes > 2) {
+        return true;
+      }
     }
   }
 
@@ -159,14 +167,18 @@ const antialiased = (
 
   for (let x = x0; x <= x2; x += 1) {
     for (let y = y0; y <= y2; y += 1) {
-      // eslint-disable-next-line no-continue
-      if (x === x1 && y === y1) continue;
+      if (x === x1 && y === y1) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
 
       const delta = colorDelta(img, img, pos, (y * width + x) * 4, true);
 
       if (delta === 0) {
         zeroes += 1;
-        if (zeroes > 2) return false;
+        if (zeroes > 2) {
+          return false;
+        }
       } else if (delta < min) {
         min = delta;
         minX = x;
@@ -179,7 +191,9 @@ const antialiased = (
     }
   }
 
-  if (min === 0 || max === 0) return false;
+  if (min === 0 || max === 0) {
+    return false;
+  }
 
   return (
     (hasManySiblings(img, minX, minY, width, height) &&
@@ -228,7 +242,9 @@ export const pixelmatch = (
 
   if (identical) {
     if (output && !options.diffMask) {
-      for (let i = 0; i < len; i += 1) drawGrayPixel(img1, 4 * i, options.alpha, output);
+      for (let i = 0; i < len; i += 1) {
+        drawGrayPixel(img1, 4 * i, options.alpha, output);
+      }
     }
 
     return 0;
@@ -248,7 +264,9 @@ export const pixelmatch = (
           (antialiased(img1, x, y, width, height, img2) ||
             antialiased(img2, x, y, width, height, img1))
         ) {
-          if (output && !options.diffMask) drawPixel(output, pos, ...options.aaColor);
+          if (output && !options.diffMask) {
+            drawPixel(output, pos, ...options.aaColor);
+          }
         } else {
           if (output) {
             drawPixel(output, pos, ...((delta < 0 && options.diffColorAlt) || options.diffColor));
@@ -256,7 +274,9 @@ export const pixelmatch = (
           diff += 1;
         }
       } else if (output) {
-        if (!options.diffMask) drawGrayPixel(img1, pos, options.alpha, output);
+        if (!options.diffMask) {
+          drawGrayPixel(img1, pos, options.alpha, output);
+        }
       }
     }
   }

@@ -18,6 +18,7 @@ rules:
   class-methods-use-this:
     - error
     - {exceptMethods: [getOrigin, getMethod, getPath, onResponse, searchString, willNavigateTo]}
+  curly: [error, all]
   default-param-last: off
   import/extensions: [error, never]
   import/no-default-export: error
