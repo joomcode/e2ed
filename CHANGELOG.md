@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.5.7](https://github.com/uid11/e2ed/tree/v0.5.7) (2021-11-21)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.6...v0.5.7)
+
+- [feat: use testcafe-without-typecheck with up to date pngjs](https://github.com/uid11/e2ed/commit/e41f9c2b6891c0b1ea8f75bd803b02a5f63c001b)
+- [feat: add pngjs to dependencies; fix fail tests representation](https://github.com/uid11/e2ed/commit/3c76281510106e61dbd061291cd0449b96cba8cd)
+
 ## [v0.5.6](https://github.com/uid11/e2ed/tree/v0.5.6) (2021-11-20)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.5...v0.5.6)
