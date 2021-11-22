@@ -1,7 +1,7 @@
-import type {UnwrapPromise} from './utils';
 import type {Inner} from 'testcafe-without-typecheck';
 
 export * from './config';
+export * from './events';
 export * from './log';
 export * from './pages';
 export * from './request';
@@ -19,4 +19,4 @@ export type Selector = Inner.SelectorAPI;
  */
 export type WrappedClientFunction<R, A extends unknown[]> = (
   ...args: A
-) => Promise<UnwrapPromise<R> | undefined>;
+) => Promise<Awaited<R> | undefined>;

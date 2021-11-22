@@ -2,7 +2,7 @@ import {ClientFunction as BaseClientFunction} from 'testcafe-without-typecheck';
 
 import {generalLog} from './utils/generalLog';
 
-import type {UnwrapPromise, WrappedClientFunction} from './types/internal';
+import type {WrappedClientFunction} from './types/internal';
 
 type E2edClientFunctionWrapper = Array<(() => void) | undefined>;
 
@@ -76,8 +76,8 @@ export const ClientFunction = <R, A extends unknown[]>(
   originFn: (...args: A) => R,
   name: string,
 ): WrappedClientFunction<R, A> => {
-  const clientFunction = BaseClientFunction<UnwrapPromise<R> | undefined, A>(
-    clientFunctionWrapper as unknown as (...args: A) => UnwrapPromise<R> | undefined,
+  const clientFunction = BaseClientFunction<Awaited<R> | undefined, A>(
+    clientFunctionWrapper as unknown as (...args: A) => Awaited<R> | undefined,
     {
       dependencies: {originFn},
     },
@@ -87,7 +87,7 @@ export const ClientFunction = <R, A extends unknown[]>(
     originFn: String(originFn).slice(0, 80),
   });
 
-  const wrappedClientFunction: WrappedClientFunction<R, A> = async (...args: A) => {
+  const wrappedClientFunction = (async (...args: A) => {
     try {
       return clientFunction(...args).catch((error: unknown) => {
         generalLog(`Client function "${name}" rejected with error`, {args, error, originFn});
@@ -99,7 +99,7 @@ export const ClientFunction = <R, A extends unknown[]>(
     }
 
     return undefined;
-  };
+  }) as WrappedClientFunction<R, A>;
 
   return wrappedClientFunction;
 };

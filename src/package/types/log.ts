@@ -1,5 +1,3 @@
-import type {Brand} from './utils';
-
 /**
  * Payload of log event.
  */
@@ -26,25 +24,6 @@ export type LogEventType =
   | 'internalCore'
   | 'internalUtil'
   | 'unspecified';
-
-/**
- * Unique id of each test run.
- */
-export type RunId = Brand<string, 'RunId'>;
-
-/**
- * Logging event.
- */
-export type LogEvent = Readonly<{
-  context: LogContext;
-  message: string;
-  numberInRun: number;
-  payload: LogPayload | undefined;
-  runId: RunId;
-  runLabel: string | undefined;
-  time: number;
-  type: LogEventType;
-}>;
 
 /**
  * Type for log function in test context.
