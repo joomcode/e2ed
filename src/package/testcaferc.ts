@@ -19,7 +19,6 @@ const defaultConfig: TestCafeConfig = {
   color: true,
   compilerOptions: {
     typescript: {
-      customCompilerModulePath: '../typescript',
       options: {esModuleInterop: true, resolveJsonModule: true},
     },
   },

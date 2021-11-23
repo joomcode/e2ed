@@ -13,7 +13,7 @@ declare const test: Inner.TestFn;
  * Creates test with name, metatags, options and test function.
  */
 export const it = (name: string, options: TestOptions, testFn: () => Promise<void>): void => {
-  fixture('---------------------');
+  fixture(' - e2ed - ');
 
   test.before(() => {
     const runId = getRandomId().replace(/:/g, '-') as RunId;

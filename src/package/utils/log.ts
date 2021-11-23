@@ -1,6 +1,5 @@
 import {getPageLoaded} from '../context/pageLoaded';
 import {getRunId} from '../context/runId';
-import {logContext} from '../hooks';
 import {testController} from '../testController';
 
 import {getKeysCounter} from './getKeysCounter';
@@ -18,12 +17,15 @@ const noop: Log = () => resolvedPromise;
 const numberInRunCounter = getKeysCounter();
 
 const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unknown) => {
+  // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
+  const hooks: typeof import('../hooks') = require('../hooks');
+
   const time = new Date().getTime();
   const dateTimeInISO = new Date(time).toISOString();
   const runId = getRunId();
   const runLabel = process.env.E2ED_RUN_LABEL;
   const printedRunLabel = getPrintedLabel(runLabel);
-  const context = logContext();
+  const context = hooks.logContext();
   const numberInRun = numberInRunCounter(runId);
   const payload = typeof maybePayload === 'object' ? (maybePayload as LogPayload) : undefined;
   const type =
