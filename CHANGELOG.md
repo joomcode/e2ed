@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.5.9](https://github.com/uid11/e2ed/tree/v0.5.9) (2021-11-23)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.8...v0.5.9)
+
+- [fix: error with resolving TypeScript from TestCafe; remove hooks circle dependencies](https://github.com/uid11/e2ed/commit/7afeec06b8cbe3039c6bb8095a7db4a1b2c9e1c3)
+- [feat: add assert that all tests have unique names](https://github.com/uid11/e2ed/commit/124a0ffab8f6546a0bd62d577ed79133dd12ffc2)
+
 ## [v0.5.8](https://github.com/uid11/e2ed/tree/v0.5.8) (2021-11-21)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.7...v0.5.8)
