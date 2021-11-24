@@ -17,10 +17,11 @@ export const it = (name: string, options: TestOptions, testFn: () => Promise<voi
 
   test.before(() => {
     const runId = getRandomId().replace(/:/g, '-') as RunId;
+    const runLabel = process.env.E2ED_RUN_LABEL;
 
     setRunId(runId);
     setRawMeta(options.meta);
 
-    return registerRunTestEvent({name, options, runId});
+    return registerRunTestEvent({name, options, runId, runLabel});
   })(name, testFn);
 };

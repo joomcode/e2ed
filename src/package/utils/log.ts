@@ -23,8 +23,7 @@ const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unkn
   const time = new Date().getTime();
   const dateTimeInISO = new Date(time).toISOString();
   const runId = getRunId();
-  const runLabel = process.env.E2ED_RUN_LABEL;
-  const printedRunLabel = getPrintedLabel(runLabel);
+  const printedRunLabel = getPrintedLabel(process.env.E2ED_RUN_LABEL);
   const context = hooks.logContext();
   const numberInRun = numberInRunCounter(runId);
   const payload = typeof maybePayload === 'object' ? (maybePayload as LogPayload) : undefined;
@@ -39,7 +38,6 @@ const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unkn
     numberInRun,
     payload,
     runId,
-    runLabel,
     time,
     type,
   }).then(() => {

@@ -48,6 +48,7 @@ const defaultConfig: TestCafeConfig = {
     thumbnails: false,
   },
   skipJsErrors: true,
+  testExecutionTimeout: 60000,
   concurrency: 1,
   port1: 1337,
   port2: 1338,

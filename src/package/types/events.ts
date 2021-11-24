@@ -10,7 +10,6 @@ export type LogEvent = Readonly<{
   numberInRun: number;
   payload: LogPayload | undefined;
   runId: RunId;
-  runLabel: string | undefined;
   time: number;
   type: LogEventType;
 }>;
@@ -22,6 +21,7 @@ export type RunTestEvent = Readonly<{
   name: string;
   options: TestOptions;
   runId: RunId;
+  runLabel: string | undefined;
 }>;
 
 /**

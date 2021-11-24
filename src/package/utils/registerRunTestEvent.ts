@@ -9,9 +9,11 @@ import type {RunTestEvent} from '../types/internal';
 export const registerRunTestEvent = (runTestEvent: RunTestEvent): Promise<void> => {
   const {runTestEvents} = getRunEvents();
 
-  const {name} = runTestEvent;
+  const {name, runLabel} = runTestEvent;
 
-  const duplicateRunTestEvent = runTestEvents.find((event) => event.name === name);
+  const duplicateRunTestEvent = runTestEvents.find(
+    (event) => event.name === name && event.runLabel === runLabel,
+  );
 
   if (duplicateRunTestEvent) {
     throw new E2EDError(`There are duplicate tests with name "${name}":`, {

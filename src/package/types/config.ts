@@ -23,6 +23,7 @@ export type TestCafeConfig = {
     thumbnails: boolean;
   };
   skipJsErrors: boolean;
+  testExecutionTimeout: number;
   concurrency: number;
   port1: number;
   port2: number;

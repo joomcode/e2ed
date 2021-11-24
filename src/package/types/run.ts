@@ -16,3 +16,13 @@ export type FailTests = Readonly<{
   allTestsCount: number;
   tests: FailTest[];
 }>;
+
+/**
+ * Options for running one retry of tests.
+ * @internal
+ */
+export type TestCafeRunOptions = Readonly<{
+  concurrency: number;
+  runLabel: string;
+  tests: FailTest[];
+}>;

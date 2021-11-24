@@ -2,25 +2,19 @@ import createTestCafe from 'testcafe-without-typecheck';
 
 import {generalLog} from './generalLog';
 
-import type {FailTest} from '../types/internal';
+import type {TestCafeRunOptions} from '../types/internal';
 import type {Inner} from 'testcafe-without-typecheck';
 
 const browsers = ['chromium:headless --no-sandbox --disable-dev-shm-usage'];
 
 /**
- * Options for running one retry of tests.
- * @internal
- */
-export type RunOptions = Readonly<{
-  concurrency: number;
-  runLabel: string;
-  tests: FailTest[];
-}>;
-
-/**
  * Runs TestCafe via JavaScript API.
  */
-export const runTestCafe = async ({concurrency, runLabel, tests}: RunOptions): Promise<void> => {
+export const runTestCafe = async ({
+  concurrency,
+  runLabel,
+  tests,
+}: TestCafeRunOptions): Promise<void> => {
   process.env.E2ED_RUN_LABEL = runLabel;
 
   let maybeTestCafe: Inner.TestCafe | undefined;
@@ -57,6 +51,7 @@ export const runTestCafe = async ({concurrency, runLabel, tests}: RunOptions): P
     generalLog(`Caught an error when running tests with label "${runLabel}": ${String(error)}`);
   } finally {
     await maybeTestCafe?.close();
+
     process.exit(0);
   }
 };
