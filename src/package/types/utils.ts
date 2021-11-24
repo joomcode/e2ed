@@ -1,4 +1,12 @@
 /**
+ * Function by argument, return type, and this (context) type.
+ */
+export type Fn<Args extends unknown[] = never[], ReturnType = unknown, This = unknown> = (
+  this: This,
+  ...args: Args
+) => ReturnType;
+
+/**
  * Inner key for brand types.
  */
 declare const BRAND: unique symbol;

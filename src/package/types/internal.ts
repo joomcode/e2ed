@@ -6,6 +6,7 @@ export * from './log';
 export * from './pages';
 export * from './request';
 export * from './run';
+export * from './stackTrack';
 export * from './test';
 export * from './utils';
 

@@ -3,6 +3,7 @@ export * from './asserts';
 export * from './deepMerge';
 export * from './E2EDError';
 export * from './getIntegerFromEnvVariable';
+export * from './getStackTrace';
 export * from './generalLog';
 export * from './getCurrentUrl';
 export * from './getKeysCounter';
