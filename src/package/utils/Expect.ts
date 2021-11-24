@@ -1,6 +1,5 @@
 import {testController} from '../testController';
 
-import {E2EDError} from './E2EDError';
 import {log} from './log';
 import {valueToString} from './valueToString';
 
@@ -47,37 +46,32 @@ export class Expect {
 
 for (const [key, getAssertionMessage] of Object.entries(assertions)) {
   Expect.prototype[key] = function method(...args: unknown[]) {
-    const payload = {description: this.description};
-    const expectedDescription = getAssertionMessage(...args);
+    const message = getAssertionMessage(...args);
 
-    // Wrap the actual value in a promise, then convert it to a string.
-    const actualPromise = Promise.resolve(this.actual).then(valueToString);
-
-    // Wrap the assertion in a promise, then convert the result into a boolean.
     const assertPromise = new Promise((resolve) => {
       const assert = testController.expect(this.actual) as Assert<Promise<void>>;
 
       assert[key as AssertionKeys](...args)
-        .then(() => resolve(true))
-        .catch(() => resolve(false));
+        .then(() => resolve(undefined))
+        .catch((error) => resolve(error));
     });
 
-    return Promise.all([actualPromise, assertPromise])
-      .then(([actual, isExpected]) => {
-        if (isExpected) {
-          return log(
-            `Assert that value ${actual} ${expectedDescription}`,
-            payload,
+    return assertPromise.then((maybeError) =>
+      Promise.resolve(this.actual)
+        .then((actual) =>
+          log(
+            `Assert that value ${valueToString(actual)} ${message}`,
+            {
+              description: this.description,
+            },
             'internalAssert',
-          );
-        }
-
-        throw `Expected that value ${actual} ${expectedDescription}`;
-      })
-      .catch((error) => {
-        const message = error instanceof Error ? error.message : String(error);
-
-        throw new E2EDError(message, payload);
-      });
+          ),
+        )
+        .then(() => {
+          if (maybeError) {
+            throw maybeError;
+          }
+        }),
+    );
   };
 }
