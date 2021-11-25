@@ -51,20 +51,27 @@ for (const [key, getAssertionMessage] of Object.entries(assertions)) {
     const assertPromise = new Promise((resolve) => {
       const assert = testController.expect(this.actual) as Assert<Promise<void>>;
 
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      assert[key as AssertionKeys](...args).then(resolve);
+      assert[key as AssertionKeys](...args)
+        .then(() => resolve(undefined))
+        .catch((error) => resolve(error));
     });
 
-    return assertPromise
-      .then(() => this.actual)
-      .then((actual) =>
-        log(
-          `Assert that value ${valueToString(actual)} ${message}`,
-          {
-            description: this.description,
-          },
-          'internalAssert',
-        ),
-      );
+    return assertPromise.then((maybeError) =>
+      Promise.resolve(this.actual)
+        .then((actual) =>
+          log(
+            `Assert that value ${valueToString(actual)} ${message}`,
+            {
+              description: this.description,
+            },
+            'internalAssert',
+          ),
+        )
+        .then(() => {
+          if (maybeError) {
+            throw maybeError;
+          }
+        }),
+    );
   };
 }
