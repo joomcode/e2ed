@@ -7,6 +7,15 @@ const query = 'foo';
 it('exists', {meta: {testId: '1'}}, async () => {
   await scroll(0, 200);
 
+  await expect(1, 'throw an error when actual value do not fit expected value')
+    .eql(2)
+    .then(
+      () => {
+        throw new Error('the "expect" function did not throw an error');
+      },
+      () => undefined,
+    );
+
   const mainPage = await navigateToPage('main', {language: 'en'});
 
   await expect(mainPage.searchString, 'search string is empty').eql('');
