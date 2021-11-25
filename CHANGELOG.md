@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.6.0](https://github.com/uid11/e2ed/tree/v0.6.0) (2021-11-25)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.9...v0.6.0)
+
+- [feat: add negative test for expect (expect should throw an error)](https://github.com/uid11/e2ed/commit/24cf2d1150e32ab6ac72193047e7760e4ced88ac)
+- [fix: add extends module for internal extending TestCafe types](https://github.com/uid11/e2ed/commit/45c0c6d6f0d2d8da3edf2cae22253986fb828db6)
+- [Merge pull request #1 from nazarov-mi/fix-expect-util](https://github.com/uid11/e2ed/commit/5a3206a32455ae812bdac0c719641e44d7f0d813)
+- [feat: add filePath to RunTestEvent; add TypeScript to peerDependencies](https://github.com/uid11/e2ed/commit/d15bb3c4d3006b56eaf85ba96a7e5b1b5dd35409)
+- [feat: add getStackTrace util (V8 callsite)](https://github.com/uid11/e2ed/commit/b9796936a90d88a3ba7754703147efad72c8341a)
+- [fix: move runLabel from LogEvent to RunTestEvent; restore testExecutionTimeout param](https://github.com/uid11/e2ed/commit/6127bff6122252ca8e2a7f3afa78353d8a22db39)
+- [fix(utils/Expect): fixes after review](https://github.com/uid11/e2ed/commit/daa9acf78f2447af3d8c575b53799ab764c2f39c)
+- [fix(utils/Expect): handle rejection to prevent endless tests](https://github.com/uid11/e2ed/commit/70bad345213d99a203d5231b1ab367e53c954890)
+
 ## [v0.5.9](https://github.com/uid11/e2ed/tree/v0.5.9) (2021-11-23)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.8...v0.5.9)
