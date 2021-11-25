@@ -1,5 +1,9 @@
 /* eslint-disable import/no-default-export */
 
+/**
+ * Package for filtering V8 command line flags when run TestCafe via CLI.
+ * @internal
+ */
 declare module 'bin-v8-flags-filter' {
   type Options = Readonly<{
     ignore?: string[];
@@ -15,22 +19,9 @@ declare module 'bin-v8-flags-filter' {
   export default v8FlagsFilter;
 }
 
-declare module 'testcafe-without-typecheck' {
-  export namespace Inner {
-    interface TestController {
-      testRun: Readonly<{
-        test: Readonly<{
-          testFile: Readonly<{
-            filename: string;
-          }>;
-        }>;
-      }>;
-    }
-  }
-}
-
 /**
  * Internal TestCafe module, which is used to track asynchronous calls in tests.
+ * @internal
  */
 declare module 'testcafe-without-typecheck/lib/api/test-run-tracker' {
   type TestRun = {

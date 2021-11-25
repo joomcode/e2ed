@@ -48,12 +48,12 @@ for (const [key, getAssertionMessage] of Object.entries(assertions)) {
   Expect.prototype[key] = function method(...args: unknown[]) {
     const message = getAssertionMessage(...args);
 
-    const assertPromise = new Promise((resolve) => {
+    const assertPromise = new Promise<Error | undefined>((resolve) => {
       const assert = testController.expect(this.actual) as Assert<Promise<void>>;
 
       assert[key as AssertionKeys](...args)
         .then(() => resolve(undefined))
-        .catch((error) => resolve(error));
+        .catch((error: Error) => resolve(error));
     });
 
     return assertPromise.then((maybeError) =>
