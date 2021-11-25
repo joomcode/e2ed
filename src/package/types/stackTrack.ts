@@ -13,6 +13,7 @@ export type StackFrame<F extends Fn = Fn, This = unknown> = Readonly<{
   getColumnNumber(): number;
   getFunction(): F;
   getEvalOrigin(): string;
+  getScriptNameOrSourceURL(): string;
   isNative(): boolean;
   isToplevel(): boolean;
   isEval(): boolean;

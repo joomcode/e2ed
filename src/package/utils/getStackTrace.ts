@@ -1,10 +1,9 @@
 import type {StackFrame} from '../types/internal';
 
 /**
- * Get V8 inner stack trace.
- * {@link https://www.npmjs.com/package/callsite}
+ * For using arguments.callee we need to eval this function in non-strict mode.
  */
-export const getStackTrace = function getStackTrace(): StackFrame[] {
+const getStackTraceBody = function getStackTrace(): StackFrame[] {
   const savedLimit = Error.stackTraceLimit;
 
   Error.stackTraceLimit = 5000;
@@ -28,3 +27,12 @@ export const getStackTrace = function getStackTrace(): StackFrame[] {
 
   return stack;
 };
+
+// eslint-disable-next-line @typescript-eslint/no-implied-eval, no-new-func
+const getStackTraceGetter = new Function(`return (${getStackTraceBody.toString()})`);
+
+/**
+ * Get V8 inner stack trace.
+ * {@link https://www.npmjs.com/package/callsite}
+ */
+export const getStackTrace = getStackTraceGetter() as typeof getStackTraceBody;

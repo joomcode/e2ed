@@ -18,6 +18,7 @@ export type LogEvent = Readonly<{
  * RunTest event.
  */
 export type RunTestEvent = Readonly<{
+  filePath: string;
   name: string;
   options: TestOptions;
   runId: RunId;

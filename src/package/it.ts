@@ -15,13 +15,14 @@ declare const test: Inner.TestFn;
 export const it = (name: string, options: TestOptions, testFn: () => Promise<void>): void => {
   fixture(' - e2ed - ');
 
-  test.before(() => {
+  test.before((testController: Inner.TestController) => {
+    const {filename: filePath} = testController.testRun.test.testFile;
     const runId = getRandomId().replace(/:/g, '-') as RunId;
     const runLabel = process.env.E2ED_RUN_LABEL;
 
     setRunId(runId);
     setRawMeta(options.meta);
 
-    return registerRunTestEvent({name, options, runId, runLabel});
+    return registerRunTestEvent({filePath, name, options, runId, runLabel});
   })(name, testFn);
 };

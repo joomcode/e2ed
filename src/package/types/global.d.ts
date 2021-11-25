@@ -15,6 +15,20 @@ declare module 'bin-v8-flags-filter' {
   export default v8FlagsFilter;
 }
 
+declare module 'testcafe-without-typecheck' {
+  export namespace Inner {
+    interface TestController {
+      testRun: Readonly<{
+        test: Readonly<{
+          testFile: Readonly<{
+            filename: string;
+          }>;
+        }>;
+      }>;
+    }
+  }
+}
+
 /**
  * Internal TestCafe module, which is used to track asynchronous calls in tests.
  */
