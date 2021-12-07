@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.6.1](https://github.com/uid11/e2ed/tree/v0.6.1) (2021-12-07)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.0...v0.6.1)
+
+- [chore: update devDependencies (@typescript-eslint/*, eslint, prettier)](https://github.com/uid11/e2ed/commit/a7e60f50521b698cf754ce4a89d8f14218a1e12f)
+- [feat: add pageParams and routeParams getters to pages; getParams -> getParamsFromUrl](https://github.com/uid11/e2ed/commit/a679164d15f96f9140dfd94bb3f1d4c114d300a7)
+- [feat: add Url brand type; add recursive DeepReadonly type](https://github.com/uid11/e2ed/commit/a4f2254d4e9fda23ac5a29c545066fad6bad27f1)
+
 ## [v0.6.0](https://github.com/uid11/e2ed/tree/v0.6.0) (2021-11-25)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.5.9...v0.6.0)
