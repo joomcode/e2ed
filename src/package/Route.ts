@@ -37,7 +37,7 @@ export abstract class Route<RouteParams> {
   /**
    * Return route params object from the passed url.
    */
-  getParams?(url: Url): RouteParams;
+  getParamsFromUrl?(url: Url): RouteParams;
 
   /**
    * Return the url of the route.

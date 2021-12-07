@@ -1,3 +1,8 @@
+/* eslint-disable class-methods-use-this */
+
+import {getPageParams} from './context/pageParams';
+import {getRouteParams} from './context/routeParams';
+
 import type {Route} from './Route';
 import type {PARAMS} from './types/internal';
 
@@ -13,6 +18,20 @@ export abstract class Page<PageParams, RouteParams> {
    * Page route.
    */
   abstract readonly route: Route<RouteParams>;
+
+  /**
+   * pageParams, if they setted with navigateToPage.
+   */
+  get pageParams(): PageParams | undefined {
+    return getPageParams() as PageParams | undefined;
+  }
+
+  /**
+   * routeParams, as they setted with navigateToPage or assertPage.
+   */
+  get routeParams(): RouteParams {
+    return getRouteParams() as RouteParams;
+  }
 
   /**
    * This async method is called before navigating to the page.

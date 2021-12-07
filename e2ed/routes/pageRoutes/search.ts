@@ -11,7 +11,7 @@ type Params = Readonly<{query: string}>;
  */
 class Search extends PageRoute<Params> {
   // eslint-disable-next-line class-methods-use-this
-  override getParams(url: Url): Params {
+  override getParamsFromUrl(url: Url): Params {
     const {searchParams} = new URL(url);
     const query = searchParams.get('q') || '';
 

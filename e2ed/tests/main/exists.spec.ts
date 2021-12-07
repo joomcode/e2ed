@@ -2,6 +2,7 @@ import {assertPage, expect, it, navigateToPage} from 'e2ed';
 import {pressKey, scroll} from 'e2ed/actions';
 import {assertValueIsDefined, getCurrentUrl} from 'e2ed/utils';
 
+const language = 'en';
 const query = 'foo';
 
 it('exists', {meta: {testId: '1'}}, async () => {
@@ -16,7 +17,11 @@ it('exists', {meta: {testId: '1'}}, async () => {
       () => undefined,
     );
 
-  const mainPage = await navigateToPage('main', {language: 'en'});
+  const mainPage = await navigateToPage('main', {language});
+
+  await expect(mainPage.pageParams, 'pageParams is correct after navigateToPage').eql({language});
+
+  await expect(mainPage.routeParams, 'routeParams is correct after navigateToPage').eql({language});
 
   await expect(mainPage.searchString, 'search string is empty').eql('');
 
@@ -27,11 +32,16 @@ it('exists', {meta: {testId: '1'}}, async () => {
   await pressKey('enter');
 
   const searchPage = await assertPage('search', {query});
+
+  await expect(searchPage.pageParams, 'pageParams is correct after assertPage').eql(undefined);
+
+  await expect(searchPage.routeParams, 'routeParams is correct after assertPage').eql({query});
+
   const url = await getCurrentUrl();
 
   assertValueIsDefined(url);
 
-  await expect(searchPage.route.getParams(url), 'page url has expected params').eql({
+  await expect(searchPage.route.getParamsFromUrl(url), 'page url has expected params').eql({
     query,
   });
 

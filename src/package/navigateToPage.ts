@@ -1,5 +1,7 @@
 import {waitForNavigateInterfaceStabilization} from './actions/waitForNavigateInterfaceStabilization';
 import {setPageLoaded} from './context/pageLoaded';
+import {setPageParams} from './context/pageParams';
+import {setRouteParams} from './context/routeParams';
 import {navigateTo} from './hooks';
 import {pages} from './pageObjects';
 import {log} from './utils/log';
@@ -19,6 +21,10 @@ export const navigateToPage: NavigateToPage<Pages> = async (
   const startTime = Date.now();
   const page: Page<unknown, unknown> = pages[pageName];
   const routeParams = await page.willNavigateTo(pageParams as never);
+
+  setPageParams(pageParams);
+  setRouteParams(routeParams);
+
   const url = page.route.getUrl(routeParams as never);
   const startNavigateTime = Date.now();
 
