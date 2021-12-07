@@ -2,9 +2,14 @@ import {ClientFunction} from '../ClientFunction';
 
 import {log} from './log';
 
-const clientGetCurrentUrl = ClientFunction(() => window.location.href, 'getCurrentUrl');
+import type {Url} from '../types/internal';
 
-export const getCurrentUrl = async (): Promise<string | undefined> => {
+const clientGetCurrentUrl = ClientFunction<Url, []>(
+  () => window.location.href as Url,
+  'getCurrentUrl',
+);
+
+export const getCurrentUrl = async (): Promise<Url | undefined> => {
   const url = await clientGetCurrentUrl();
 
   await log(`Get current page url: "${String(url)}"`, 'internalUtil');

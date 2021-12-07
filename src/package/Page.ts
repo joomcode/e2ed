@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/require-await */
-
 import type {Route} from './Route';
 import type {PARAMS} from './types/internal';
 

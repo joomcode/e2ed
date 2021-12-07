@@ -1,3 +1,4 @@
+import type {Brand} from './utils';
 import type {IncomingHttpHeaders} from 'http';
 
 /**
@@ -51,3 +52,8 @@ export type Query = Record<
   | null
   | undefined
 >;
+
+/**
+ * Brand type for url string.
+ */
+export type Url = Brand<string, 'Url'>;

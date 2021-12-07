@@ -17,6 +17,10 @@ class Search extends MobilePage<CustomPageParams, RouteParams> {
 
   mobileDevice = 'iphone' as const;
 
+  /**
+   * Convert page parameters to route parameters,
+   * and perform the necessary actions before opening the search page.
+   */
   willNavigateTo({query = 'foo'}: PageParams): Promise<RouteParams> {
     return Promise.resolve({query});
   }

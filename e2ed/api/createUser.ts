@@ -2,11 +2,11 @@ import {DEFAULT_PASSWORD} from 'e2ed/constants';
 import {apiRoutes} from 'e2ed/routes';
 import {request} from 'e2ed/utils';
 
-import type {Password, User, UserInfo} from 'e2ed/types';
+import type {DeepReadonly, Password, User, UserInfo} from 'e2ed/types';
 
-type Input = Readonly<UserInfo & {password: Password}>;
+type Input = DeepReadonly<UserInfo & {password: Password}>;
 
-type Output = Readonly<{
+type Output = DeepReadonly<{
   payload: User;
 }>;
 

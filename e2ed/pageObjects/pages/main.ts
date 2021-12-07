@@ -35,6 +35,10 @@ class Main extends Page<CustomPageParams, RouteParams> {
     return this.searchInput.type(text);
   }
 
+  /**
+   * Convert page parameters to route parameters,
+   * and perform the necessary actions before opening the main page.
+   */
   willNavigateTo({language = 'de'}: PageParams): Promise<RouteParams> {
     return Promise.resolve({language});
   }

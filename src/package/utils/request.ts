@@ -8,16 +8,22 @@ import {getRandomId} from './getRandomId';
 import {log} from './log';
 import {wrapInTestRunTracker} from './wrapInTestRunTracker';
 
-import type {Headers as AnyHeaders, Method, Query as AnyQuery} from '../types/internal';
+import type {
+  DeepReadonly,
+  Headers as AnyHeaders,
+  Method,
+  Query as AnyQuery,
+  Url,
+} from '../types/internal';
 
-type Response<Output> = Readonly<{
+type Response<Output> = DeepReadonly<{
   statusCode: number;
   headers: AnyHeaders;
   output: Output;
 }>;
 
-type Options<Input, Output, Query, Headers> = Readonly<{
-  url: string;
+type Options<Input, Output, Query, Headers> = DeepReadonly<{
+  url: Url;
   query?: Query;
   method?: Method;
   headers?: Headers;
@@ -27,11 +33,11 @@ type Options<Input, Output, Query, Headers> = Readonly<{
   isNeedRetry?: (response: Response<Output>) => boolean;
 }>;
 
-type LogParams = Readonly<{url: string}> & Record<string, unknown>;
+type LogParams = DeepReadonly<{url: Url}> & Record<string, unknown>;
 
-type OneTryOfRequestOptions = Readonly<{
+type OneTryOfRequestOptions = DeepReadonly<{
   urlObject: URL;
-  options: Readonly<{method: Method; headers: AnyHeaders}>;
+  options: {method: Method; headers: AnyHeaders};
   inputAsString: string;
   libRequest: typeof httpRequest;
   timeout: number;
@@ -91,7 +97,7 @@ const oneTryOfRequest = <Output>({
             try {
               const output = (
                 outputAsString === '' ? undefined : JSON.parse(outputAsString)
-              ) as Output;
+              ) as DeepReadonly<Output>;
               const response = {
                 statusCode: res.statusCode || 400,
                 headers: res.headers,

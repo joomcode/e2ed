@@ -1,4 +1,4 @@
-import type {Brand} from 'e2ed/types';
+import type {Brand, DeepReadonly} from 'e2ed/types';
 
 /**
  * User email.
@@ -23,4 +23,4 @@ export type UserInfo = Readonly<{
   email: Email;
 }>;
 
-export type User = Readonly<UserInfo & {id: UserId}>;
+export type User = DeepReadonly<UserInfo & {id: UserId}>;

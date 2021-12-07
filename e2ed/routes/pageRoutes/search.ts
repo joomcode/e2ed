@@ -2,6 +2,8 @@ import {URL} from 'url';
 
 import {PageRoute} from 'e2ed';
 
+import type {Url} from 'e2ed/types';
+
 type Params = Readonly<{query: string}>;
 
 /**
@@ -9,7 +11,7 @@ type Params = Readonly<{query: string}>;
  */
 class Search extends PageRoute<Params> {
   // eslint-disable-next-line class-methods-use-this
-  override getParams(url: string): Params {
+  override getParams(url: Url): Params {
     const {searchParams} = new URL(url);
     const query = searchParams.get('q') || '';
 

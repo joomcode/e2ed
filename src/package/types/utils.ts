@@ -24,7 +24,24 @@ export type PARAMS = typeof PARAMS_KEY;
 /**
  * Brand<string, 'OrderId'> = OrderId (A string that can only be getting from the API).
  */
-export type Brand<T, K extends string> = T & {[BRAND]: K};
+export type Brand<T, K extends string> = T & {readonly [BRAND]: K};
+
+/**
+ * Return true, if T is brand type.
+ * IsBrand<3> = false.
+ * IsBrand<Brand<3, 'foo'> = true.
+ */
+export type IsBrand<T> = [T] extends [{[BRAND]: unknown}] ? true : false;
+
+/**
+ * Readonly type with recursive applying.
+ * DeepReadonly<{foo: {bar: 0}}> = {readonly foo: {readonly bar: 0}}.
+ */
+export type DeepReadonly<T> = keyof T extends never
+  ? T
+  : IsBrand<T> extends true
+  ? T
+  : {readonly [K in keyof T]: DeepReadonly<T[K]>};
 
 /**
  * IncludeUndefined<string> = false.

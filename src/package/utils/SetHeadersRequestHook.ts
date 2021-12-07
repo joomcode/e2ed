@@ -6,15 +6,15 @@ import {applyHeadersMapper} from './applyHeadersMapper';
 import {log} from './log';
 import {wrapInTestRunTracker} from './wrapInTestRunTracker';
 
-import type {Headers, MapOptions} from '../types/internal';
+import type {DeepReadonly, Headers, MapOptions, Url} from '../types/internal';
 
-type RequestEvent = Readonly<{
+type RequestEvent = DeepReadonly<{
   requestOptions: {
     headers: Headers;
   };
 }>;
 
-type ResponseEvent = Readonly<{
+type ResponseEvent = DeepReadonly<{
   setHeader(name: string, value: string): Promise<void>;
   removeHeader(name: string): Promise<void>;
   _requestContext: {
@@ -27,7 +27,7 @@ type ResponseEvent = Readonly<{
  * for concrete url.
  */
 export class SetHeadersRequestHook extends RequestHook {
-  constructor(public url: string, public options: MapOptions) {
+  constructor(public url: Url, public options: MapOptions) {
     super([url], {includeHeaders: true});
     // eslint-disable-next-line @typescript-eslint/unbound-method
     this.resetMethods(this.onRequest, this._onConfigureResponse);

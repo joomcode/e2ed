@@ -1,8 +1,8 @@
 import {Page} from 'e2ed';
 
-import type {MobileDevice} from 'e2ed/types';
+import type {DeepReadonly, MobileDevice} from 'e2ed/types';
 
-type PageParams<CustomPageParams> = CustomPageParams & Readonly<{mobileDevice?: MobileDevice}>;
+type PageParams<CustomPageParams> = CustomPageParams & DeepReadonly<{mobileDevice?: MobileDevice}>;
 
 /**
  * Abstract mobile page.
