@@ -4,6 +4,7 @@
     "allowUnreachableCode": false,
     "declaration": true,
     "esModuleInterop": true,
+    "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",
     "incremental": true,

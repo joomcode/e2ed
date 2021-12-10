@@ -20,7 +20,7 @@ type WaitingForInterfaceStabilization = {
  */
 const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterval: number) => {
   const global: {
-    waitingForInterfaceStabilization?: WaitingForInterfaceStabilization;
+    waitingForInterfaceStabilization?: WaitingForInterfaceStabilization | undefined;
   } & Window = window;
 
   if (global.waitingForInterfaceStabilization) {

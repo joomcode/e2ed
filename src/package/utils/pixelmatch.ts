@@ -1,5 +1,5 @@
 type Img = Buffer | Uint8Array | Uint8ClampedArray;
-type RGBTuple = [number, number, number];
+type RGBTuple = readonly [number, number, number];
 
 type Options = Readonly<{
   threshold: number;
@@ -7,7 +7,7 @@ type Options = Readonly<{
   alpha: number;
   aaColor: RGBTuple;
   diffColor: RGBTuple;
-  diffColorAlt?: RGBTuple;
+  diffColorAlt: RGBTuple | undefined;
   diffMask: boolean;
 }>;
 
@@ -56,7 +56,7 @@ const drawGrayPixel = (img: Img, i: number, alpha: number, output: Img): void =>
 
 const isPixelData = (img: Img): boolean =>
   ArrayBuffer.isView(img) &&
-  (img.constructor as {BYTES_PER_ELEMENT: number}).BYTES_PER_ELEMENT === 1;
+  (img.constructor as {BYTES_PER_ELEMENT?: number}).BYTES_PER_ELEMENT === 1;
 
 const colorDelta = (img1: Img, img2: Img, k: number, m: number, yOnly: boolean): number => {
   let r1 = img1[k + 0];
