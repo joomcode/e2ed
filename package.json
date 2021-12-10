@@ -20,7 +20,7 @@
   "repository": "uid11/e2ed",
   "dependencies": {
     "pngjs": "6.0.0",
-    "testcafe-without-typecheck": "1.17.1-rc.3"
+    "testcafe-without-typecheck": "1.17.1-rc.4"
   },
   "devDependencies": {
     "@types/node": "16.11.12",
@@ -39,12 +39,12 @@
     "typescript": ">=4"
   },
   "scripts": {
-    "lint": "npm run lint:es & npm run lint:prettier & npm run lint:types & wait",
+    "lint": "./bin/runParallel.sh lint:es lint:prettier lint:types",
     "lint:clear:cache": "rm .cache-eslint",
     "lint:es": "eslint --cache --cache-location=.cache-eslint --max-warnings=0 --ext=.ts .",
     "lint:prettier": "prettier --check --ignore-path=.gitignore '**/*.{json,md,ts,yaml}'",
     "lint:types": "tsc --noEmit",
-    "test": "npm run test:local & npm run test:docker & wait",
+    "test": "./bin/runParallel.sh test:local test:docker",
     "build:clear": "rm -rf build",
     "prebuild": "npm run build:clear",
     "build": "tsc; echo 'Compilation done.'",
