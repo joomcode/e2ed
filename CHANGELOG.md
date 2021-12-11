@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.6.4](https://github.com/uid11/e2ed/tree/v0.6.4) (2021-12-11)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.3...v0.6.4)
+
+- [feat: add DeepPartial<T> utility type](https://github.com/uid11/e2ed/commit/e61ba858d4818c17650a748a9a32860f3ffc84db)
+
 ## [v0.6.3](https://github.com/uid11/e2ed/tree/v0.6.3) (2021-12-11)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.2...v0.6.3)
