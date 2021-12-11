@@ -18,6 +18,7 @@ export type LogContext = Record<string, unknown>;
  */
 export type LogEventType =
   | 'action'
+  | 'entities'
   | 'util'
   | 'internalAction'
   | 'internalAssert'

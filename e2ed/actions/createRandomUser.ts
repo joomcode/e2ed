@@ -1,20 +1,16 @@
-import {createUser} from 'e2ed/api';
-import {getUserEmail, log} from 'e2ed/utils';
+import {createUser} from 'e2ed/entities';
+import {getRandomUserName, log} from 'e2ed/utils';
 
-import type {User, UserInfo} from 'e2ed/types';
+import type {User} from 'e2ed/types';
 
 /**
- * Create random user.
+ * Create new user with random name.
  */
-export const createDeviceAndUser = async (
-  {name = 'John Doe', email = getUserEmail()}: UserInfo = {} as UserInfo,
-): Promise<User> => {
-  const user = await createUser({
-    name,
-    email,
-  });
+export const createRandomUser = async (): Promise<User> => {
+  const name = getRandomUserName();
+  const user = await createUser({name});
 
-  await log('Random user have been created', {user}, 'action');
+  await log(`User with random name "${name}" have been created`, {user}, 'action');
 
   return user;
 };

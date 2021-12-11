@@ -1,4 +1,4 @@
-export * from './user';
+export * from './entities';
 
 /**
  * User language.
