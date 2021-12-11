@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.6.2](https://github.com/uid11/e2ed/tree/v0.6.2) (2021-12-11)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.1...v0.6.2)
+
+- [feat: add support for entities (from Domain-driven design)](https://github.com/uid11/e2ed/commit/e3dabb9fb1724a5c34d3e6609f6f2cdd78d548db)
+- [fix: use runParallel.sh for saving jobs exit code](https://github.com/uid11/e2ed/commit/49fd2487017fcd6bab9720e30956b1938f42d2cc)
+- [feat: add exactOptionalPropertyTypes options; update @types/node](https://github.com/uid11/e2ed/commit/a916f67128a2c8fb345f448e58344aadad45675e)
+
 ## [v0.6.1](https://github.com/uid11/e2ed/tree/v0.6.1) (2021-12-07)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.0...v0.6.1)
