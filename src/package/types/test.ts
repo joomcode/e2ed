@@ -1,5 +1,6 @@
+import type {Brand} from './brand';
+import type {DeepReadonly} from './deep';
 import type {TestMeta} from './userland';
-import type {Brand, DeepReadonly} from './utils';
 
 /**
  * Unique id of each test run.

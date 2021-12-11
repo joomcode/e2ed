@@ -1,7 +1,9 @@
 import type {Inner} from 'testcafe-without-typecheck';
 
+export * from './brand';
 export * from './config';
 export * from './date';
+export * from './deep';
 export * from './events';
 export * from './log';
 export * from './pages';

@@ -1,4 +1,4 @@
-import type {Brand} from './utils';
+import type {Brand} from './brand';
 import type {IncomingHttpHeaders} from 'http';
 
 /**
