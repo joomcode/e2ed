@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.6.3](https://github.com/uid11/e2ed/tree/v0.6.3) (2021-12-11)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.2...v0.6.3)
+
+- [feat: add general UtcTimeInMs type](https://github.com/uid11/e2ed/commit/65973e719735fd98bc6c6fdb42347141b3b76c82)
+
 ## [v0.6.2](https://github.com/uid11/e2ed/tree/v0.6.2) (2021-12-11)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.1...v0.6.2)
