@@ -42,6 +42,7 @@ export class SetHeadersRequestHook extends RequestHook {
     await log(`Map request headers for ${this.url}`, {headers}, 'internalUtil');
   }
 
+  // eslint-disable-next-line class-methods-use-this
   override async onResponse(): Promise<void> {
     // do nothing
   }

@@ -10,7 +10,6 @@ type Params = Readonly<{query: string}>;
  * Route of the Search page.
  */
 class Search extends PageRoute<Params> {
-  // eslint-disable-next-line class-methods-use-this
   override getParamsFromUrl(url: Url): Params {
     const {searchParams} = new URL(url);
     const query = searchParams.get('q') || '';

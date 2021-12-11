@@ -1,6 +1,8 @@
 import {ClientFunction} from '../ClientFunction';
 import {log} from '../utils/log';
 
+import type {UtcTimeInMs} from '../types/internal';
+
 type WaitingForInterfaceStabilization = {
   readonly promise: Promise<void>;
   stabilizationInterval: number;
@@ -34,7 +36,7 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
   const CHECK_INTERVAL_IN_MS = 250;
   const TIMEOUT_IN_MS = 40_000;
   const COUNT_OF_NODES = 6;
-  const startTime = Date.now();
+  const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const getInterfaceState = (): string => {
     const {innerWidth, innerHeight} = window;
@@ -66,14 +68,14 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
   };
 
   let interfaceState = getInterfaceState();
-  let stabilizationIntervalStart = startTime;
+  let stabilizationIntervalStart = startTimeInMs;
 
   const promise = new Promise<void>((resolve, reject) => {
     const intervalId = setInterval(() => {
       const newInterfaceState = getInterfaceState();
 
       if (newInterfaceState !== interfaceState) {
-        stabilizationIntervalStart = Date.now();
+        stabilizationIntervalStart = Date.now() as UtcTimeInMs;
       }
 
       interfaceState = newInterfaceState;
@@ -89,7 +91,7 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
         return;
       }
 
-      if (Date.now() - startTime > TIMEOUT_IN_MS) {
+      if (Date.now() - startTimeInMs > TIMEOUT_IN_MS) {
         global.waitingForInterfaceStabilization = undefined;
         clearInterval(intervalId);
         reject(new Error(`Time was out in waitForInterfaceStabilization (${TIMEOUT_IN_MS} ms)`));
@@ -106,11 +108,11 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
  * Wait until the page interface stabilizes (in particular, the page will stop scrolling).
  */
 export const waitForInterfaceStabilization = async (stabilizationInterval = 500): Promise<void> => {
-  const startTime = Date.now();
+  const startTimeInMs = Date.now() as UtcTimeInMs;
 
   await clientWaitForInterfaceStabilization(stabilizationInterval);
 
-  const waitInMs = Date.now() - startTime;
+  const waitInMs = Date.now() - startTimeInMs;
 
   await log(
     `Waited for interface stabilization for ${waitInMs} ms with stabilization interval ${stabilizationInterval}`,

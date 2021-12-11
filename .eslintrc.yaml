@@ -17,7 +17,7 @@ ignorePatterns: [bin, build]
 rules:
   class-methods-use-this:
     - error
-    - {exceptMethods: [getOrigin, getMethod, getPath, onResponse, searchString, willNavigateTo]}
+    - {exceptMethods: [getOrigin, getMethod, getParamsFromUrl, getPath, willNavigateTo]}
   curly: [error, all]
   default-param-last: off
   import/extensions: [error, never]

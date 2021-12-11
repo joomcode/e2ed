@@ -3,7 +3,7 @@ import {setRunId} from './context/runId';
 import {getRandomId} from './utils/getRandomId';
 import {registerRunTestEvent} from './utils/registerRunTestEvent';
 
-import type {RunId, TestOptions} from './types/internal';
+import type {RunId, TestOptions, UtcTimeInMs} from './types/internal';
 import type {Inner} from 'testcafe-without-typecheck';
 
 declare const fixture: Inner.FixtureFn;
@@ -19,10 +19,11 @@ export const it = (name: string, options: TestOptions, testFn: () => Promise<voi
     const {filename: filePath} = testController.testRun.test.testFile;
     const runId = getRandomId().replace(/:/g, '-') as RunId;
     const runLabel = process.env.E2ED_RUN_LABEL;
+    const utcTimeInMs = Date.now() as UtcTimeInMs;
 
     setRunId(runId);
     setRawMeta(options.meta);
 
-    return registerRunTestEvent({filePath, name, options, runId, runLabel});
+    return registerRunTestEvent({filePath, name, options, runId, runLabel, utcTimeInMs});
   })(name, testFn);
 };

@@ -7,7 +7,7 @@ import {getPrintedLabel} from './getPrintedLabel';
 import {registerLogEvent} from './registerLogEvent';
 import {valueToString} from './valueToString';
 
-import type {Log, LogEventType, LogPayload} from '../types/internal';
+import type {Log, LogEventType, LogPayload, UtcTimeInMs} from '../types/internal';
 
 const resolvedPromise = Promise.resolve();
 
@@ -20,8 +20,8 @@ const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unkn
   // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
   const hooks: typeof import('../hooks') = require('../hooks');
 
-  const time = new Date().getTime();
-  const dateTimeInISO = new Date(time).toISOString();
+  const utcTimeInMs = Date.now() as UtcTimeInMs;
+  const dateTimeInISO = new Date(utcTimeInMs).toISOString();
   const runId = getRunId();
   const printedRunLabel = getPrintedLabel(process.env.E2ED_RUN_LABEL);
   const context = hooks.logContext();
@@ -38,8 +38,8 @@ const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unkn
     numberInRun,
     payload,
     runId,
-    time,
     type,
+    utcTimeInMs,
   }).then(() => {
     const printedString = valueToString({payload, context});
 

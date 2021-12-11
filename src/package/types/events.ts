@@ -1,3 +1,4 @@
+import type {UtcTimeInMs} from './date';
 import type {LogContext, LogEventType, LogPayload} from './log';
 import type {RunId, TestOptions} from './test';
 
@@ -10,8 +11,8 @@ export type LogEvent = Readonly<{
   numberInRun: number;
   payload: LogPayload | undefined;
   runId: RunId;
-  time: number;
   type: LogEventType;
+  utcTimeInMs: UtcTimeInMs;
 }>;
 
 /**
@@ -23,6 +24,7 @@ export type RunTestEvent = Readonly<{
   options: TestOptions;
   runId: RunId;
   runLabel: string | undefined;
+  utcTimeInMs: UtcTimeInMs;
 }>;
 
 /**

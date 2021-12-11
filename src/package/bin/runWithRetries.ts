@@ -8,7 +8,7 @@ import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {printStartParams} from '../utils/printStartParams';
 import {runTests} from '../utils/runTests';
 
-import type {FailTest, FailTests} from '../types/internal';
+import type {FailTest, FailTests, UtcTimeInMs} from '../types/internal';
 
 process.env.E2ED_IS_DOCKER_RUN = 'true';
 
@@ -26,7 +26,7 @@ const retries = getIntegerFromEnvVariable({
   name: 'E2ED_DOCKER_RETRIES',
 });
 
-const startTime = Date.now();
+const startTimeInMs = Date.now() as UtcTimeInMs;
 
 let allTestsCount = 0;
 let retryIndex = 1;
@@ -38,7 +38,7 @@ const asyncRunTests = async (): Promise<void> => {
   for (; retryIndex <= retries; retryIndex += 1) {
     runLabel = `retry ${retryIndex}/${retries}`;
 
-    const startRetryTime = Date.now();
+    const startRetryTimeInMs = Date.now() as UtcTimeInMs;
     const printedTestsString =
       tests.length === 0
         ? ')'
@@ -71,7 +71,7 @@ const asyncRunTests = async (): Promise<void> => {
 
     generalLog(
       `${testsCount} ${wordTest} with ${runLabel} and concurrency ${concurrency} ran in ${
-        Date.now() - startRetryTime
+        Date.now() - startRetryTimeInMs
       } ms`,
     );
 
@@ -111,7 +111,9 @@ asyncRunTests()
     const testsCountPrefix = allTestsCount > 0 ? `${allTestsCount} ${wordTest}` : 'Run';
 
     generalLog(
-      `${testsCountPrefix} with all ${retries} ${wordRetry} lasted ${Date.now() - startTime} ms`,
+      `${testsCountPrefix} with all ${retries} ${wordRetry} lasted ${
+        Date.now() - startTimeInMs
+      } ms`,
     );
 
     process.exit(hasFailedTests ? 1 : 0);
