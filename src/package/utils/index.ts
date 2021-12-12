@@ -1,5 +1,6 @@
 export * from './applyHeadersMapper';
 export * from './asserts';
+export * from './cloneWithoutUndefinedProperties';
 export * from './deepMerge';
 export * from './E2EDError';
 export * from './getIntegerFromEnvVariable';
