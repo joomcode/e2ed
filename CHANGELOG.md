@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.6.5](https://github.com/uid11/e2ed/tree/v0.6.5) (2021-12-12)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.4...v0.6.5)
+
+- [feat: add DeepMutable and DeepRequired types; fix log event type typo](https://github.com/uid11/e2ed/commit/21c6342a8b6d3ab3ea993890c88d345ab88126f9)
+
 ## [v0.6.4](https://github.com/uid11/e2ed/tree/v0.6.4) (2021-12-11)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.3...v0.6.4)
