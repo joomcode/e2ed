@@ -18,7 +18,7 @@ export const createUser = async ({
     password,
   });
 
-  await log('New user have been created', {user}, 'entities');
+  await log('New user have been created', {user}, 'entity');
 
   return user;
 };

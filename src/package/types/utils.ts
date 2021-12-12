@@ -1,3 +1,5 @@
+import type {IsBrand} from './brand';
+
 /**
  * Function by argument, return type, and this (context) type.
  */
@@ -34,9 +36,11 @@ export type Mutable<T> = {
  * Normalizes intersection of types.
  * Normalize<{foo: string} & {bar: number}> = {foo: string, bar: number}.
  */
-export type Normalize<T> = {
-  [K in keyof T]: T[K];
-};
+export type Normalize<T> = keyof T extends never
+  ? T
+  : IsBrand<T> extends true
+  ? T
+  : {[K in keyof T]: Normalize<T[K]>};
 
 /**
  * Returns the type of instance params.
