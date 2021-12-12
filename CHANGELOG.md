@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.6.6](https://github.com/uid11/e2ed/tree/v0.6.6) (2021-12-12)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.5...v0.6.6)
+
+- [feat: add cloneWithoutUndefinedProperties utility function](https://github.com/uid11/e2ed/commit/22b3d5166ea7c4f3409aeacceb4573b2cf62488f)
+
 ## [v0.6.5](https://github.com/uid11/e2ed/tree/v0.6.5) (2021-12-12)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.4...v0.6.5)
