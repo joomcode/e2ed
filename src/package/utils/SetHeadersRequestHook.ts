@@ -33,7 +33,6 @@ export class SetHeadersRequestHook extends RequestHook {
     this.resetMethods(this.onRequest, this._onConfigureResponse);
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await
   override async onRequest(event: RequestEvent): Promise<void> {
     const {headers} = event.requestOptions;
 

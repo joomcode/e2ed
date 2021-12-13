@@ -1,3 +1,5 @@
+<img alt="e2ed logo" src="./logo.svg">
+
 # e2ed
 
 [![NPM version][npm-image]][npm-url]
