@@ -1,4 +1,6 @@
-export {};
+import type {DeepReadonly} from './internal';
+
+type Err = {readonly errMsg: string};
 
 /**
  * Internal extend TestController type.
@@ -7,12 +9,13 @@ export {};
 declare module 'testcafe-without-typecheck' {
   namespace Inner {
     interface TestController {
-      testRun: Readonly<{
-        test: Readonly<{
-          testFile: Readonly<{
+      readonly testRun: DeepReadonly<{
+        errs: readonly Err[];
+        test: {
+          testFile: {
             filename: string;
-          }>;
-        }>;
+          };
+        };
       }>;
     }
   }

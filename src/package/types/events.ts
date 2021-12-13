@@ -1,9 +1,11 @@
 import type {UtcTimeInMs} from './date';
 import type {LogContext, LogEventType, LogPayload} from './log';
+import type {TestCafeError} from './run';
 import type {RunId, TestOptions} from './test';
 
 /**
  * Logging event.
+ * @internal
  */
 export type LogEvent = Readonly<{
   context: LogContext;
@@ -16,7 +18,18 @@ export type LogEvent = Readonly<{
 }>;
 
 /**
+ * FinishTest event.
+ * @internal
+ */
+export type FinishTestEvent = Readonly<{
+  errors: TestCafeError[];
+  runId: RunId;
+  utcTimeInMs: UtcTimeInMs;
+}>;
+
+/**
  * RunTest event.
+ * @internal
  */
 export type RunTestEvent = Readonly<{
   filePath: string;
@@ -25,12 +38,4 @@ export type RunTestEvent = Readonly<{
   runId: RunId;
   runLabel: string | undefined;
   utcTimeInMs: UtcTimeInMs;
-}>;
-
-/**
- * Registred RunTestEvents and LogEvents (for current run).
- */
-export type RunEvents = Readonly<{
-  logEvents: LogEvent[];
-  runTestEvents: RunTestEvent[];
 }>;
