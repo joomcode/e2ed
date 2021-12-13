@@ -5,14 +5,14 @@ import {generalLog} from '../utils/generalLog';
 import {getConcurrencyForNextRetry} from '../utils/getConcurrencyForNextRetry';
 import {getFailedTestsFromJsonReport} from '../utils/getFailedTestsFromJsonReport';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
-import {printStartParams} from '../utils/printStartParams';
+import {getStartMessage} from '../utils/getStartMessage';
+import {registerFinishE2edEvent} from '../utils/registerFinishE2edEvent';
+import {registerRunE2edEvent} from '../utils/registerRunE2edEvent';
 import {runTests} from '../utils/runTests';
 
-import type {FailTest, FailTests, UtcTimeInMs} from '../types/internal';
+import type {FailTest, FailTests, RunE2edEvent, UtcTimeInMs} from '../types/internal';
 
 process.env.E2ED_IS_DOCKER_RUN = 'true';
-
-printStartParams();
 
 let concurrency = getIntegerFromEnvVariable({
   defaultValue: 5,
@@ -35,6 +35,18 @@ let tests: FailTest[] = [];
 let testsCount = 0;
 
 const asyncRunTests = async (): Promise<void> => {
+  const startMessage = getStartMessage();
+  const runE2edEvent: RunE2edEvent = {
+    concurrency,
+    runEnvironment: 'docker',
+    startMessage,
+    utcTimeInMs: startTimeInMs,
+  };
+
+  generalLog(`${startMessage}\n`);
+
+  await registerRunE2edEvent(runE2edEvent);
+
   for (; retryIndex <= retries; retryIndex += 1) {
     runLabel = `retry ${retryIndex}/${retries}`;
 
@@ -110,11 +122,17 @@ asyncRunTests()
     const wordRetry = retries === 1 ? 'retry' : 'retries';
     const testsCountPrefix = allTestsCount > 0 ? `${allTestsCount} ${wordTest}` : 'Run';
 
+    const finishTimeInMs = Date.now() as UtcTimeInMs;
+
     generalLog(
       `${testsCountPrefix} with all ${retries} ${wordRetry} lasted ${
-        Date.now() - startTimeInMs
+        finishTimeInMs - startTimeInMs
       } ms`,
     );
 
-    process.exit(hasFailedTests ? 1 : 0);
+    const finishE2edEvent = {utcTimeInMs: finishTimeInMs};
+
+    registerFinishE2edEvent(finishE2edEvent).finally(() => {
+      process.exit(hasFailedTests ? 1 : 0);
+    });
   });

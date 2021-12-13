@@ -4,7 +4,7 @@ import type {TestCafeError} from './run';
 import type {RunId, TestOptions} from './test';
 
 /**
- * Logging event.
+ * Logging event (on log call).
  * @internal
  */
 export type LogEvent = Readonly<{
@@ -18,17 +18,41 @@ export type LogEvent = Readonly<{
 }>;
 
 /**
- * FinishTest event.
+ * FinishE2ed event (once event after all retries of all tests).
+ * @internal
+ */
+export type FinishE2edEvent = Readonly<{
+  utcTimeInMs: UtcTimeInMs;
+}>;
+
+/**
+ * FinishTest event (on closing test).
  * @internal
  */
 export type FinishTestEvent = Readonly<{
-  errors: TestCafeError[];
+  errors: readonly TestCafeError[];
   runId: RunId;
   utcTimeInMs: UtcTimeInMs;
 }>;
 
 /**
- * RunTest event.
+ * Run environment (run in docker or local run).
+ */
+type RunEnvironment = 'docker' | 'local';
+
+/**
+ * RunE2ed event (once event on starting e2ed).
+ * @internal
+ */
+export type RunE2edEvent = Readonly<{
+  concurrency: number;
+  runEnvironment: RunEnvironment;
+  startMessage: string;
+  utcTimeInMs: UtcTimeInMs;
+}>;
+
+/**
+ * RunTest event (on starting one test).
  * @internal
  */
 export type RunTestEvent = Readonly<{

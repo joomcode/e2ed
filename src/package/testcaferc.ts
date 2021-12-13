@@ -1,3 +1,4 @@
+import {JSON_REPORT_PATH} from './constants/internal';
 import {deepMerge} from './utils/deepMerge';
 
 import type {TestCafeConfig} from './types/internal';
@@ -32,11 +33,11 @@ const defaultConfig: TestCafeConfig = {
     },
     {
       name: 'json',
-      output: 'e2ed/reports/report.json',
+      output: JSON_REPORT_PATH,
     },
     {
       name: 'xunit',
-      output: 'e2ed/reports/junit-report.xml',
+      output: './e2ed/reports/junit-report.xml',
     },
   ],
   retryTestPages: true,

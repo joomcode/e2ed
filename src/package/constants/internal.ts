@@ -15,6 +15,12 @@ export const DEFAULT_INSPECT_OPTIONS = {
 } as const;
 
 /**
+ * Path to JSON-report file.
+ * @internal
+ */
+export const JSON_REPORT_PATH = './e2ed/reports/report.json';
+
+/**
  * Key for string locators in createSelector.
  * @internal
  */

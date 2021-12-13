@@ -1,12 +1,11 @@
 import pkg from '../package.json';
 
-import {generalLog} from './generalLog';
-
 /**
- * Prints CLI params and environment variables on start of tests run.
+ * Get CLI params and environment variables on start of tests run
+ * in form of printable message.
  * @internal
  */
-export const printStartParams = (): void => {
+export const getStartMessage = (): string => {
   const isDockerRun = Boolean(process.env.E2ED_IS_DOCKER_RUN);
 
   const lines = [`Run tests ${isDockerRun ? 'in docker' : 'local'} with e2ed@${pkg.version}`];
@@ -22,7 +21,7 @@ export const printStartParams = (): void => {
   }
 
   lines.push(`PWD: "${String(process.env.PWD)}"`);
-  lines.push(`cwd(): "${process.cwd()}"\n`);
+  lines.push(`cwd(): "${process.cwd()}"`);
 
-  generalLog(lines.join('\n'));
+  return lines.join('\n');
 };
