@@ -27,7 +27,15 @@ export const it = (name: string, options: TestOptions, testFn: () => Promise<voi
       setRunId(runId);
       setRawMeta(options.meta);
 
-      return registerRunTestEvent({filePath, name, options, runId, runLabel, utcTimeInMs});
+      return registerRunTestEvent({
+        filePath,
+        logEvents: [],
+        name,
+        options,
+        runId,
+        runLabel,
+        utcTimeInMs,
+      });
     })(name, testFn)
     .after((testController: Inner.TestController) => {
       const utcTimeInMs = Date.now() as UtcTimeInMs;

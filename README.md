@@ -1,4 +1,4 @@
-<img alt="e2ed logo" src="./logo.svg">
+<img alt="e2ed logo" src="https://raw.github.com/uid11/e2ed/main/logo.svg?sanitize=true">
 
 # e2ed
 

@@ -4,6 +4,17 @@ import type {TestCafeError} from './run';
 import type {RunId, TestOptions} from './test';
 
 /**
+ * Completed test run object.
+ * @internal
+ */
+export type CompletedTest = Readonly<{
+  errors: readonly TestCafeError[];
+  startTimeInMs: UtcTimeInMs;
+  finishTimeInMs: UtcTimeInMs;
+}> &
+  Omit<RunTestEvent, 'utcTimeInMs'>;
+
+/**
  * Logging event (on log call).
  * @internal
  */
@@ -12,7 +23,6 @@ export type LogEvent = Readonly<{
   message: string;
   numberInRun: number;
   payload: LogPayload | undefined;
-  runId: RunId;
   type: LogEventType;
   utcTimeInMs: UtcTimeInMs;
 }>;
@@ -57,6 +67,7 @@ export type RunE2edEvent = Readonly<{
  */
 export type RunTestEvent = Readonly<{
   filePath: string;
+  logEvents: readonly LogEvent[];
   name: string;
   options: TestOptions;
   runId: RunId;

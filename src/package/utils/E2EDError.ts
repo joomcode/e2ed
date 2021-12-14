@@ -1,5 +1,8 @@
 import {valueToString} from './valueToString';
 
+/**
+ * e2ed's own Error class.
+ */
 export class E2EDError extends Error {
   constructor(message: string, params: Record<string, unknown>) {
     // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
