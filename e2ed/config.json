@@ -1,4 +1,4 @@
 {
   "browsers": "chromium:headless",
-  "browserInitTimeout": 45000
+  "browserInitTimeout": 50000
 }

@@ -63,7 +63,7 @@
     "preversion": "npm run lint:clear:cache && npm run build && npm run lint && npm run test",
     "version": "npm run update:changelog",
     "update:changelog": "node build/updateChangelog",
-    "postupdate:changelog": "git add CHANGELOG.md",
+    "postupdate:changelog": "prettier --write CHANGELOG.md && git add CHANGELOG.md",
     "postversion": "git push --follow-tags && npm run release",
     "prerelease": "npm run build",
     "release": "npm publish ./build/node_modules/e2ed",
