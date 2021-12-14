@@ -13,6 +13,7 @@ export * from './resizeWindow';
 export * from './rightClick';
 export * from './scroll';
 export * from './scrollBy';
+export * from './scrollIntoView';
 export * from './selectText';
 export * from './setFilesToUpload';
 export * from './setHeadersAndNavigateTo';
