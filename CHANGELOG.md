@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.6.8](https://github.com/uid11/e2ed/tree/v0.6.8) (2021-12-14)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.7...v0.6.8)
+
+- [feat: add scrollIntoView action](https://github.com/uid11/e2ed/commit/6908112ac18e65d2988c91b0d368e4a59529663b)
+- [feat: collect data from event files for report](https://github.com/uid11/e2ed/commit/bbbb212034f9515297c31c25beeb270a7d81e932)
+
 ## [v0.6.7](https://github.com/uid11/e2ed/tree/v0.6.7) (2021-12-14)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.6...v0.6.7)
