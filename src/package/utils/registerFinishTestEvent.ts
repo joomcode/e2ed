@@ -1,9 +1,9 @@
 import {RUNS_HASH} from '../constants/internal';
 
 import {assertValueIsDefined, assertValueIsTrue} from './asserts';
-import {writeCompletedTestToJsonFile} from './writeCompletedTestToJsonFile';
+import {writeTestRunToJsonFile} from './writeTestRunToJsonFile';
 
-import type {CompletedTest, FinishTestEvent} from '../types/internal';
+import type {FinishTestEvent, TestRun} from '../types/internal';
 
 /**
  * Register finish test event (for report) after test closing.
@@ -20,7 +20,7 @@ export const registerFinishTestEvent = (finishTestEvent: FinishTestEvent): Promi
   const {utcTimeInMs: startTimeInMs, ...restRunTestEvent} = runTestEvent;
   const {errors, utcTimeInMs: finishTimeInMs} = finishTestEvent;
 
-  const completedTest: CompletedTest = {errors, startTimeInMs, finishTimeInMs, ...restRunTestEvent};
+  const testRun: TestRun = {errors, startTimeInMs, finishTimeInMs, ...restRunTestEvent};
 
-  return writeCompletedTestToJsonFile(completedTest);
+  return writeTestRunToJsonFile(testRun);
 };

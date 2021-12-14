@@ -8,7 +8,7 @@ import type {RunId, TestOptions} from './test';
  * Completed test run object.
  * @internal
  */
-export type CompletedTest = Readonly<{
+export type TestRun = Readonly<{
   errors: readonly TestCafeError[];
   startTimeInMs: UtcTimeInMs;
   finishTimeInMs: UtcTimeInMs;

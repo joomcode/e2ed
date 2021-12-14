@@ -7,6 +7,7 @@ export * from './deep';
 export * from './events';
 export * from './log';
 export * from './pages';
+export * from './report';
 export * from './request';
 export * from './run';
 export * from './stackTrack';

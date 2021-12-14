@@ -3,16 +3,17 @@ import {join} from 'path';
 
 import {EVENTS_DIRECTORY_PATH} from '../constants/internal';
 
-import type {CompletedTest} from '../types/internal';
+import type {TestRun} from '../types/internal';
 
 /**
  * Write completed test run object to temporary JSON file.
+ * @internal
  */
-export const writeCompletedTestToJsonFile = (completedTest: CompletedTest): Promise<void> => {
-  const {runId} = completedTest;
+export const writeTestRunToJsonFile = (testRun: TestRun): Promise<void> => {
+  const {runId} = testRun;
 
   const filePath = join(EVENTS_DIRECTORY_PATH, `${runId}.json`);
-  const data = JSON.stringify(completedTest);
+  const data = JSON.stringify(testRun);
 
   return writeFile(filePath, data);
 };
