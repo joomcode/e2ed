@@ -1,4 +1,5 @@
 import {waitForNavigateInterfaceStabilization} from './actions/waitForNavigateInterfaceStabilization';
+import {LogEventType} from './constants/internal';
 import {setPageLoaded} from './context/pageLoaded';
 import {setPageParams} from './context/pageParams';
 import {setRouteParams} from './context/routeParams';
@@ -36,7 +37,7 @@ export const navigateToPage: NavigateToPage<Pages> = async (
       url,
       willNavigateToExecutedInMs: startNavigateTimeInMs - startTimeInMs,
     },
-    'internalCore',
+    LogEventType.InternalCore,
   );
 
   await navigateTo(url);
@@ -46,7 +47,7 @@ export const navigateToPage: NavigateToPage<Pages> = async (
   await log(
     `Page "${String(pageName)}" loaded in ${Date.now() - startNavigateTimeInMs} ms`,
     {url},
-    'internalCore',
+    LogEventType.InternalCore,
   );
 
   setPageLoaded(true);

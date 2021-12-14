@@ -1,5 +1,6 @@
+import type {LogEventType} from '../constants/internal';
 import type {UtcTimeInMs} from './date';
-import type {LogContext, LogEventType, LogPayload} from './log';
+import type {LogPayload} from './log';
 import type {TestCafeError} from './run';
 import type {RunId, TestOptions} from './test';
 
@@ -19,12 +20,10 @@ export type CompletedTest = Readonly<{
  * @internal
  */
 export type LogEvent = Readonly<{
-  context: LogContext;
   message: string;
-  numberInRun: number;
   payload: LogPayload | undefined;
   type: LogEventType;
-  utcTimeInMs: UtcTimeInMs;
+  time: UtcTimeInMs;
 }>;
 
 /**

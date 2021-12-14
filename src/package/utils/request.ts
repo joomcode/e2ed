@@ -3,6 +3,8 @@ import {request as httpsRequest} from 'https';
 import {stringify} from 'querystring';
 import {URL} from 'url';
 
+import {LogEventType} from '../constants/internal';
+
 import {E2EDError} from './E2EDError';
 import {getRandomId} from './getRandomId';
 import {log} from './log';
@@ -64,72 +66,74 @@ const oneTryOfRequest = <Output>({
     };
     const fullLogParams: LogParams = {...logParams, ...fullOptions};
 
-    void log(`Will be send a request to ${logParams.url}`, fullLogParams, 'internalUtil').then(
-      () => {
-        let endTimeout: NodeJS.Timeout;
+    void log(
+      `Will be send a request to ${logParams.url}`,
+      fullLogParams,
+      LogEventType.InternalUtil,
+    ).then(() => {
+      let endTimeout: NodeJS.Timeout;
 
-        const req = libRequest(urlObject, fullOptions, (res) => {
-          // eslint-disable-next-line @typescript-eslint/unbound-method
-          res.on = wrapInTestRunTracker(res.on);
+      const req = libRequest(urlObject, fullOptions, (res) => {
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        res.on = wrapInTestRunTracker(res.on);
 
-          endTimeout = setTimeout(() => {
-            req.destroy();
-            req.emit(
-              'error',
+        endTimeout = setTimeout(() => {
+          req.destroy();
+          req.emit(
+            'error',
+            new E2EDError(
+              `The request to ${logParams.url} is timed out in ${timeout} ms`,
+              fullLogParams,
+            ),
+          );
+        }, timeout);
+
+        res.setEncoding('utf8');
+
+        const chunks: string[] = [];
+
+        res.on('data', (chunk: string) => {
+          chunks.push(chunk);
+        });
+
+        res.on('end', () => {
+          const outputAsString = chunks.join('');
+
+          try {
+            const output = (
+              outputAsString === '' ? undefined : JSON.parse(outputAsString)
+            ) as DeepReadonly<Output>;
+            const response = {
+              statusCode: res.statusCode || 400,
+              headers: res.headers,
+              output,
+            };
+
+            clearTimeout(endTimeout);
+            resolve({fullLogParams, response});
+          } catch (cause: unknown) {
+            clearTimeout(endTimeout);
+            reject(
               new E2EDError(
-                `The request to ${logParams.url} is timed out in ${timeout} ms`,
-                fullLogParams,
+                `The response data string to request ${logParams.url} is not valid JSON: ${outputAsString}`,
+                {...fullLogParams, cause},
               ),
             );
-          }, timeout);
-
-          res.setEncoding('utf8');
-
-          const chunks: string[] = [];
-
-          res.on('data', (chunk: string) => {
-            chunks.push(chunk);
-          });
-
-          res.on('end', () => {
-            const outputAsString = chunks.join('');
-
-            try {
-              const output = (
-                outputAsString === '' ? undefined : JSON.parse(outputAsString)
-              ) as DeepReadonly<Output>;
-              const response = {
-                statusCode: res.statusCode || 400,
-                headers: res.headers,
-                output,
-              };
-
-              clearTimeout(endTimeout);
-              resolve({fullLogParams, response});
-            } catch (cause: unknown) {
-              clearTimeout(endTimeout);
-              reject(
-                new E2EDError(
-                  `The response data string to request ${logParams.url} is not valid JSON: ${outputAsString}`,
-                  {...fullLogParams, cause},
-                ),
-              );
-            }
-          });
+          }
         });
+      });
 
-        // eslint-disable-next-line @typescript-eslint/unbound-method
-        req.on = wrapInTestRunTracker(req.on);
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      req.on = wrapInTestRunTracker(req.on);
 
-        req.on('error', (cause) => {
-          clearTimeout(endTimeout);
-          reject(new E2EDError(`Error on request to ${logParams.url}`, {...fullLogParams, cause}));
-        });
+      req.on('error', (cause) => {
+        clearTimeout(endTimeout);
+        reject(new E2EDError(`Error on request to ${logParams.url}`, {...fullLogParams, cause}));
+      });
 
-        req.write(inputAsString);
-        req.end();
-      },
-    );
+      req.write(inputAsString);
+      req.end();
+    });
   });
 
 /**
@@ -197,7 +201,7 @@ Please, move search params to options property "query".`,
       await log(
         `Got a response to the request to ${url}`,
         {...fullLogParams, needRetry, response},
-        'internalUtil',
+        LogEventType.InternalUtil,
       );
 
       if (needRetry === false) {
@@ -207,7 +211,7 @@ Please, move search params to options property "query".`,
       await log(
         `An error was received during the request to ${url}`,
         {...logParams, retry, cause},
-        'internalUtil',
+        LogEventType.InternalUtil,
       );
     }
   }

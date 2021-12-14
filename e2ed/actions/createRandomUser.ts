@@ -1,3 +1,4 @@
+import {LogEventType} from 'e2ed/constants';
 import {createUser} from 'e2ed/entities';
 import {getRandomUserName, log} from 'e2ed/utils';
 
@@ -10,7 +11,7 @@ export const createRandomUser = async (): Promise<User> => {
   const name = getRandomUserName();
   const user = await createUser({name});
 
-  await log(`User with random name "${name}" have been created`, {user}, 'action');
+  await log(`User with random name "${name}" have been created`, {user}, LogEventType.Action);
 
   return user;
 };

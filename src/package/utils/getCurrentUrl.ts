@@ -1,4 +1,5 @@
 import {ClientFunction} from '../ClientFunction';
+import {LogEventType} from '../constants/internal';
 
 import {log} from './log';
 
@@ -12,7 +13,7 @@ const clientGetCurrentUrl = ClientFunction<Url, []>(
 export const getCurrentUrl = async (): Promise<Url | undefined> => {
   const url = await clientGetCurrentUrl();
 
-  await log(`Get current page url: "${String(url)}"`, 'internalUtil');
+  await log(`Get current page url: "${String(url)}"`, LogEventType.InternalUtil);
 
   return url;
 };

@@ -1,3 +1,4 @@
+import {LogEventType} from '../constants/internal';
 import {getPageLoaded} from '../context/pageLoaded';
 import {getRunId} from '../context/runId';
 import {testController} from '../testController';
@@ -6,7 +7,7 @@ import {getPrintedLabel} from './getPrintedLabel';
 import {registerLogEvent} from './registerLogEvent';
 import {valueToString} from './valueToString';
 
-import type {Log, LogEventType, LogPayload, UtcTimeInMs} from '../types/internal';
+import type {Log, LogPayload, UtcTimeInMs} from '../types/internal';
 
 const resolvedPromise = Promise.resolve();
 
@@ -17,24 +18,18 @@ const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unkn
   // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
   const hooks: typeof import('../hooks') = require('../hooks');
 
-  const utcTimeInMs = Date.now() as UtcTimeInMs;
-  const dateTimeInISO = new Date(utcTimeInMs).toISOString();
+  const time = Date.now() as UtcTimeInMs;
+  const dateTimeInISO = new Date(time).toISOString();
   const runId = getRunId();
   const printedRunLabel = getPrintedLabel(process.env.E2ED_RUN_LABEL);
   const context = hooks.logContext();
   const payload = typeof maybePayload === 'object' ? (maybePayload as LogPayload) : undefined;
   const type =
-    typeof maybePayload === 'string'
+    typeof maybePayload === 'number'
       ? (maybePayload as LogEventType)
-      : (maybeLogEventType as LogEventType) || 'unspecified';
+      : (maybeLogEventType as LogEventType) || LogEventType.Unspecified;
 
-  return registerLogEvent(runId, {
-    context,
-    message,
-    payload,
-    type,
-    utcTimeInMs,
-  }).then((numberInRun) => {
+  return registerLogEvent(runId, {message, payload, type, time}).then((numberInRun) => {
     const printedString = valueToString({payload, context});
 
     // eslint-disable-next-line no-console
@@ -44,7 +39,7 @@ const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unkn
 
     const pageLoaded = getPageLoaded();
 
-    if (pageLoaded && (type === 'action' || type === 'internalAssert')) {
+    if (pageLoaded && (type === LogEventType.Action || type === LogEventType.InternalAssert)) {
       return testController.takeScreenshot({path: `${runId}/${numberInRun}`}) as Promise<void>;
     }
 

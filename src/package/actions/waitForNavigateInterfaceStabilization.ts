@@ -1,3 +1,4 @@
+import {LogEventType} from '../constants/internal';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {log} from '../utils/log';
 
@@ -15,7 +16,7 @@ export const waitForNavigateInterfaceStabilization = async (): Promise<void> => 
 
   await log(
     'Wait for the interface stabilization after the intended navigation to another page',
-    'internalAction',
+    LogEventType.InternalAction,
   );
 
   await waitForInterfaceStabilization(stabilizationInterval);

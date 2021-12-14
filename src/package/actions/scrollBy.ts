@@ -1,3 +1,4 @@
+import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
@@ -23,7 +24,7 @@ export const scrollBy: ScrollBy = async (...args) => {
   await log(
     'Scroll the document (or element) by the given offset',
     {locator, args: printedArgs},
-    'internalAction',
+    LogEventType.InternalAction,
   );
 
   return testController.scrollBy(...(args as unknown as [number, number]));

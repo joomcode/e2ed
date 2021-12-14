@@ -1,3 +1,4 @@
+import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
@@ -20,7 +21,7 @@ export const setFilesToUpload = async (
     {
       locator,
     },
-    'internalAction',
+    LogEventType.InternalAction,
   );
 
   return testController.setFilesToUpload(selector as Inner.Selector, filePath);

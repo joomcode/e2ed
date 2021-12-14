@@ -1,3 +1,4 @@
+import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
@@ -19,7 +20,7 @@ export const dispatchEvent = async (
 ): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
-  await log('Click an element', {locator, options}, 'internalAction');
+  await log('Click an element', {locator, options}, LogEventType.InternalAction);
 
   await testController.dispatchEvent(selector as Inner.Selector, eventName, options);
 

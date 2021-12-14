@@ -1,3 +1,5 @@
+import type {LogEventType} from '../constants/internal';
+
 /**
  * Payload of log event.
  */
@@ -12,19 +14,6 @@ export type GeneralLog = (message: string, payload?: LogPayload) => void;
  * Context of log event.
  */
 export type LogContext = Record<string, unknown>;
-
-/**
- * Type of LogEvent.
- */
-export type LogEventType =
-  | 'action'
-  | 'entity'
-  | 'util'
-  | 'internalAction'
-  | 'internalAssert'
-  | 'internalCore'
-  | 'internalUtil'
-  | 'unspecified';
 
 /**
  * Type for log function in test context.

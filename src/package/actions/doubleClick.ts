@@ -1,3 +1,4 @@
+import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
@@ -15,7 +16,7 @@ type Options = Parameters<typeof testController.doubleClick>[1];
 export const doubleClick = async (selector: Selector, options?: Options): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
-  await log('Double-click an element', {locator, options}, 'internalAction');
+  await log('Double-click an element', {locator, options}, LogEventType.InternalAction);
 
   await testController.doubleClick(selector as Inner.Selector, options);
 

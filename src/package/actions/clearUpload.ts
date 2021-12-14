@@ -1,3 +1,4 @@
+import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
@@ -11,7 +12,7 @@ import type {Inner} from 'testcafe-without-typecheck';
 export const clearUpload = async (selector: Selector): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
-  await log('Remove all file paths from file upload input', {locator}, 'internalAction');
+  await log('Remove all file paths from file upload input', {locator}, LogEventType.InternalAction);
 
   return testController.clearUpload(selector as Inner.Selector);
 };

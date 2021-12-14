@@ -1,3 +1,4 @@
+import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
@@ -34,7 +35,7 @@ export const scroll: Scroll = async (...args) => {
   await log(
     'Scroll the document (or element) to the specified position',
     {locator, args: printedArgs},
-    'internalAction',
+    LogEventType.InternalAction,
   );
 
   return testController.scroll(...(args as unknown as [number, number]));

@@ -1,5 +1,5 @@
 import {createUser as apiCreateUser} from 'e2ed/api';
-import {DEFAULT_PASSWORD} from 'e2ed/constants';
+import {DEFAULT_PASSWORD, LogEventType} from 'e2ed/constants';
 import {getUserEmail, log} from 'e2ed/utils';
 
 import type {User, UserParams} from 'e2ed/types';
@@ -18,7 +18,7 @@ export const createUser = async ({
     password,
   });
 
-  await log('New user have been created', {user}, 'entity');
+  await log('New user have been created', {user}, LogEventType.Entity);
 
   return user;
 };

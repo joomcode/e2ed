@@ -2,6 +2,8 @@
 
 import {RequestHook} from 'testcafe-without-typecheck';
 
+import {LogEventType} from '../constants/internal';
+
 import {applyHeadersMapper} from './applyHeadersMapper';
 import {log} from './log';
 import {wrapInTestRunTracker} from './wrapInTestRunTracker';
@@ -38,7 +40,7 @@ export class SetHeadersRequestHook extends RequestHook {
 
     applyHeadersMapper(headers, this.options.mapRequestHeaders);
 
-    await log(`Map request headers for ${this.url}`, {headers}, 'internalUtil');
+    await log(`Map request headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -53,7 +55,7 @@ export class SetHeadersRequestHook extends RequestHook {
 
     applyHeadersMapper(headers, this.options.mapResponseHeaders);
 
-    await log(`Map response headers for ${this.url}`, {headers}, 'internalUtil');
+    await log(`Map response headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
   }
 
   resetMethods(

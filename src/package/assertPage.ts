@@ -1,4 +1,5 @@
 import {waitForNavigateInterfaceStabilization} from './actions/waitForNavigateInterfaceStabilization';
+import {LogEventType} from './constants/internal';
 import {setPageLoaded} from './context/pageLoaded';
 import {setPageParams} from './context/pageParams';
 import {setRouteParams} from './context/routeParams';
@@ -38,7 +39,7 @@ export const assertPage: AssertPage<Pages> = async (
       isMatch,
       routeParams,
     },
-    'internalCore',
+    LogEventType.InternalCore,
   );
 
   await expect(isMatch, message).ok();

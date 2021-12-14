@@ -1,3 +1,4 @@
+import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
@@ -23,7 +24,7 @@ export const drag = async (
   await log(
     'Drag an element by an offset',
     {locator, dragOffsetX, dragOffsetY, options},
-    'internalAction',
+    LogEventType.InternalAction,
   );
 
   await testController.drag(selector as Inner.Selector, dragOffsetX, dragOffsetY, options);

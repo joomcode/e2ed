@@ -1,3 +1,4 @@
+import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 
 import {log} from './log';
@@ -64,7 +65,7 @@ for (const [key, getAssertionMessage] of Object.entries(assertions)) {
             {
               description: this.description,
             },
-            'internalAssert',
+            LogEventType.InternalAssert,
           ),
         )
         .then(() => {

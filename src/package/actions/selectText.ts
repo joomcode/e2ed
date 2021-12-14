@@ -1,3 +1,4 @@
+import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
@@ -23,7 +24,7 @@ export const selectText = async (
       endPos === undefined ? 'the end' : endPos
     }`,
     {locator, options},
-    'internalAction',
+    LogEventType.InternalAction,
   );
 
   return testController.selectText(selector as Inner.Selector, startPos, endPos, options);

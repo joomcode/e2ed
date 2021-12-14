@@ -1,4 +1,5 @@
 import {ClientFunction} from '../ClientFunction';
+import {LogEventType} from '../constants/internal';
 import {log} from '../utils/log';
 
 import type {UtcTimeInMs} from '../types/internal';
@@ -116,6 +117,6 @@ export const waitForInterfaceStabilization = async (stabilizationInterval = 500)
 
   await log(
     `Waited for interface stabilization for ${waitInMs} ms with stabilization interval ${stabilizationInterval}`,
-    'internalAction',
+    LogEventType.InternalAction,
   );
 };

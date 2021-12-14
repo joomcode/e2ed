@@ -1,3 +1,4 @@
+import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
@@ -23,7 +24,7 @@ export const dragToElement = async (
   await log(
     'Drag an element onto another one',
     {locator, destinationLocator, options},
-    'internalAction',
+    LogEventType.InternalAction,
   );
 
   await testController.dragToElement(

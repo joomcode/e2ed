@@ -1,3 +1,4 @@
+import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {log} from '../utils/log';
 
@@ -10,7 +11,7 @@ type TakeScreenshot = ((path?: string) => Promise<void>) &
  * Takes a screenshot of the tested page.
  */
 export const takeScreenshot: TakeScreenshot = async (pathOrOptions) => {
-  await log('Take a screenshot of the tested page', 'internalAction');
+  await log('Take a screenshot of the tested page', LogEventType.InternalAction);
 
   return testController.takeScreenshot(pathOrOptions as never);
 };

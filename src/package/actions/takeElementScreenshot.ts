@@ -1,3 +1,4 @@
+import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
@@ -18,7 +19,11 @@ export const takeElementScreenshot = async (
   const locator = getLocatorFromSelector(selector);
   const pathMessage = path === undefined ? '' : ` to path "${path}"`;
 
-  await log(`Take a screenshot of the element${pathMessage}`, {locator, options}, 'internalAction');
+  await log(
+    `Take a screenshot of the element${pathMessage}`,
+    {locator, options},
+    LogEventType.InternalAction,
+  );
 
   return testController.takeElementScreenshot(selector as Inner.Selector, path, options);
 };
