@@ -26,10 +26,14 @@ export const getTestRunsLists = ({testRuns}: ReportData): TestRunsListProps[] =>
 
     const retry = parseInt((runLabel || 'retry 1').slice(6), 10);
 
-    const maybeDuplicatedRunHash = hooks.testRunHash(testRun);
-    const runHash = runHashUnificator(maybeDuplicatedRunHash);
+    const maybeDuplicateRunHash = hooks.testRunHash(testRun);
+    const {duplicate, runHash} = runHashUnificator(maybeDuplicateRunHash);
 
-    const status = errors.length === 0 ? TestRunStatus.Passed : TestRunStatus.Failed;
+    let status = errors.length === 0 ? TestRunStatus.Passed : TestRunStatus.Failed;
+
+    if (duplicate) {
+      status = TestRunStatus.Unknown;
+    }
 
     const testRunButtonProps = {durationInMs, filePath, mainParams, name, runHash, runId, status};
 
