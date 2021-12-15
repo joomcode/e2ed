@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.1](https://github.com/uid11/e2ed/tree/v0.7.1) (2021-12-15)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.0...v0.7.1)
+
+- [feat: add mainParams hook for printing main test params in tests list](https://github.com/uid11/e2ed/commit/c2680c27197544db08afa9dfa388c07800db5adb)
+
 ## [v0.7.0](https://github.com/uid11/e2ed/tree/v0.7.0) (2021-12-15)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.8...v0.7.0)
