@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.7.0](https://github.com/uid11/e2ed/tree/v0.7.0) (2021-12-15)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.8...v0.7.0)
+
+- [feat: add generation and saving HTML report](https://github.com/uid11/e2ed/commit/e803cc498bb1f9456d53416925459d228e258112)
+- [feat: convert report data to test runs lists (by retries)](https://github.com/uid11/e2ed/commit/096d50d4fee5e49090fe6dfc950d80889fc54b68)
+- [chore: update development dependencies (typescript, @types/node...)](https://github.com/uid11/e2ed/commit/17bf1601ffa4d7b75ac6c09bc9b99de8f5fcfb44)
+- [feat: add runId hooks for getting unique test run id](https://github.com/uid11/e2ed/commit/bc3e9afea2f4b4c22a97364dfc9ec3fad6f70991)
+
 ## [v0.6.8](https://github.com/uid11/e2ed/tree/v0.6.8) (2021-12-14)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.6.7...v0.6.8)
