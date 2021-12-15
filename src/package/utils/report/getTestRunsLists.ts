@@ -1,16 +1,18 @@
 import {TestRunStatus} from '../../constants/internal';
 
+import {getRunHashUnificator} from './getRunHashUnificator';
+
 import type {ReportData, TestRunButtonProps, TestRunsListProps} from '../../types/internal';
 
 /**
  * Get array of TestRunsListProps (by retries) from report data.
  * @internal
  */
-export const getTestRunsLists = (reportData: ReportData): TestRunsListProps[] => {
+export const getTestRunsLists = ({testRuns}: ReportData): TestRunsListProps[] => {
   // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
   const hooks: typeof import('../../hooks') = require('../../hooks');
 
-  const {testRuns} = reportData;
+  const runHashUnificator = getRunHashUnificator();
 
   const testRunsLists: TestRunsListProps[] = [];
   const testRunButtonsHash: Record<number, TestRunButtonProps[]> = {};
@@ -18,15 +20,18 @@ export const getTestRunsLists = (reportData: ReportData): TestRunsListProps[] =>
   for (const testRun of testRuns) {
     const {filePath, errors, name, runId, runLabel, startTimeInMs, finishTimeInMs} = testRun;
 
-    const mainParams = hooks.mainParams(testRun);
+    const mainParams = hooks.mainTestRunParams(testRun);
 
     const durationInMs = finishTimeInMs - startTimeInMs;
 
     const retry = parseInt((runLabel || 'retry 1').slice(6), 10);
 
+    const maybeDuplicatedRunHash = hooks.testRunHash(testRun);
+    const runHash = runHashUnificator(maybeDuplicatedRunHash);
+
     const status = errors.length === 0 ? TestRunStatus.Passed : TestRunStatus.Failed;
 
-    const testRunButtonProps = {durationInMs, filePath, mainParams, name, runId, status};
+    const testRunButtonProps = {durationInMs, filePath, mainParams, name, runHash, runId, status};
 
     if (testRunButtonsHash[retry] === undefined) {
       testRunButtonsHash[retry] = [];

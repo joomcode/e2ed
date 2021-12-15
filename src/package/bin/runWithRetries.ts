@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 
+import {registerFinishE2edEvent, registerRunE2edEvent} from '../utils/events';
 import {failTestsToString} from '../utils/failTestsToString';
 import {generalLog} from '../utils/generalLog';
 import {getConcurrencyForNextRetry} from '../utils/getConcurrencyForNextRetry';
 import {getFailedTestsFromJsonReport} from '../utils/getFailedTestsFromJsonReport';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {getStartMessage} from '../utils/getStartMessage';
-import {registerFinishE2edEvent} from '../utils/registerFinishE2edEvent';
-import {registerRunE2edEvent} from '../utils/registerRunE2edEvent';
 import {runTests} from '../utils/runTests';
 
 import type {FailTest, FailTests, RunE2edEvent, UtcTimeInMs} from '../types/internal';

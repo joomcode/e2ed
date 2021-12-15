@@ -1,9 +1,8 @@
-import {RUNS_HASH} from '../constants/internal';
+import {RUN_IDS_HASH} from '../../constants/internal';
+import {assertValueIsDefined, assertValueIsTrue} from '../asserts';
+import {writeTestRunToJsonFile} from '../writeTestRunToJsonFile';
 
-import {assertValueIsDefined, assertValueIsTrue} from './asserts';
-import {writeTestRunToJsonFile} from './writeTestRunToJsonFile';
-
-import type {FinishTestEvent, TestRun} from '../types/internal';
+import type {FinishTestEvent, TestRun} from '../../types/internal';
 
 /**
  * Register finish test event (for report) after test closing.
@@ -12,7 +11,7 @@ import type {FinishTestEvent, TestRun} from '../types/internal';
 export const registerFinishTestEvent = (finishTestEvent: FinishTestEvent): Promise<void> => {
   const {runId} = finishTestEvent;
 
-  const runTestEvent = RUNS_HASH[runId];
+  const runTestEvent = RUN_IDS_HASH[runId];
 
   assertValueIsDefined(runTestEvent);
   assertValueIsTrue(runTestEvent.runId === runId);

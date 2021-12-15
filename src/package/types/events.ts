@@ -1,18 +1,7 @@
 import type {LogEventType} from '../constants/internal';
 import type {UtcTimeInMs} from './date';
 import type {LogPayload} from './log';
-import type {TestCafeError} from './run';
-import type {RunId, TestOptions} from './test';
-
-/**
- * Completed test run object.
- */
-export type TestRun = Readonly<{
-  errors: readonly TestCafeError[];
-  startTimeInMs: UtcTimeInMs;
-  finishTimeInMs: UtcTimeInMs;
-}> &
-  Omit<RunTestEvent, 'utcTimeInMs'>;
+import type {RunId, TestOptions} from './testRun';
 
 /**
  * Logging event (on log call).
@@ -44,6 +33,7 @@ export type FinishTestEvent = Readonly<{
 
 /**
  * Run environment (run in docker or local run).
+ * @internal
  */
 type RunEnvironment = 'docker' | 'local';
 
@@ -59,21 +49,21 @@ export type RunE2edEvent = Readonly<{
 }>;
 
 /**
- * RunTest own initial parameters.
+ * RunTest event (on starting one test).
  */
-export type RunTestOwnParams = Readonly<{
+export type RunTestEvent = Readonly<{
   filePath: string;
+  logEvents: readonly LogEvent[];
   name: string;
   options: TestOptions;
+  runId: RunId;
   runLabel: string | undefined;
   utcTimeInMs: UtcTimeInMs;
 }>;
 
 /**
- * RunTest event (on starting one test).
+ * Internal TestCafe error object (only some fields).
  */
-export type RunTestEvent = Readonly<{
-  logEvents: readonly LogEvent[];
-  runId: RunId;
-}> &
-  RunTestOwnParams;
+export type TestCafeError = Readonly<{
+  message: string;
+}>;

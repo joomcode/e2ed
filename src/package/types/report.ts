@@ -1,7 +1,7 @@
 import type {TestRunStatus} from '../constants/internal';
 import type {UtcTimeInMs} from './date';
-import type {RunE2edEvent, TestRun} from './events';
-import type {RunId} from './test';
+import type {RunE2edEvent} from './events';
+import type {RunHash, RunId, TestRun} from './testRun';
 
 /**
  * The complete report data (for printing report).
@@ -32,6 +32,7 @@ export type TestRunButtonProps = Readonly<{
   filePath: string;
   mainParams: string;
   name: string;
+  runHash: RunHash;
   runId: RunId;
   status: TestRunStatus;
 }>;

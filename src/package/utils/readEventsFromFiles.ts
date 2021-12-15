@@ -17,8 +17,8 @@ export const readEventsFromFiles = async (): Promise<TestRun[]> => {
 
   for (
     let fileIndex = 0;
-    fileIndex * AMOUNT_OF_PARALLEL_OPEN_FILES < eventFiles.length;
-    fileIndex += 1
+    fileIndex < eventFiles.length;
+    fileIndex += AMOUNT_OF_PARALLEL_OPEN_FILES
   ) {
     const readPromises = [];
 
@@ -27,7 +27,7 @@ export const readEventsFromFiles = async (): Promise<TestRun[]> => {
       index < eventFiles.length && index < fileIndex + AMOUNT_OF_PARALLEL_OPEN_FILES;
       index += 1
     ) {
-      const fileName = eventFiles[fileIndex];
+      const fileName = eventFiles[index];
       const filePath = join(EVENTS_DIRECTORY_PATH, fileName);
       const promise = readFile(filePath, READ_FILE_OPTIONS);
 

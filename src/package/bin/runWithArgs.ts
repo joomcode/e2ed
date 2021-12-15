@@ -9,8 +9,7 @@ import {JSON_REPORT_PATH} from '../constants/internal';
 import {generalLog} from '../utils/generalLog';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {getStartMessage} from '../utils/getStartMessage';
-import {registerFinishE2edEvent} from '../utils/registerFinishE2edEvent';
-import {registerRunE2edEvent} from '../utils/registerRunE2edEvent';
+import {registerFinishE2edEvent, registerRunE2edEvent} from '../utils/events';
 
 import type {RunE2edEvent, UtcTimeInMs} from '../types/internal';
 

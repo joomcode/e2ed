@@ -1,9 +1,8 @@
 import {setRawMeta} from './context/meta';
 import {setRunId} from './context/runId';
-import {assertValueIsDefined} from './utils/asserts';
+import {registerFinishTestEvent, registerRunTestEvent} from './utils/events';
+import {getRandomId} from './utils/getRandomId';
 import {getRelativeTestFilePath} from './utils/getRelativeTestFilePath';
-import {registerFinishTestEvent} from './utils/registerFinishTestEvent';
-import {registerRunTestEvent} from './utils/registerRunTestEvent';
 
 import type {RunId, TestOptions, UtcTimeInMs} from './types/internal';
 import type {Inner} from 'testcafe-without-typecheck';
@@ -17,13 +16,10 @@ declare const test: Inner.TestFn;
 export const it = (name: string, options: TestOptions, testFn: () => Promise<void>): void => {
   fixture(' - e2ed - ');
 
-  let runId: RunId;
+  const runId = getRandomId().replace(/:/g, '-') as RunId;
 
   test
     .before((testController: Inner.TestController) => {
-      // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
-      const hooks: typeof import('./hooks') = require('./hooks');
-
       const {filename: absoluteFilePath} = testController.testRun.test.testFile;
       const filePath = getRelativeTestFilePath(absoluteFilePath);
       const runLabel = process.env.E2ED_RUN_LABEL;
@@ -31,16 +27,12 @@ export const it = (name: string, options: TestOptions, testFn: () => Promise<voi
 
       const runTestOwnParams = {filePath, name, options, runLabel, utcTimeInMs};
 
-      runId = hooks.runId(runTestOwnParams).replace(/[ :/]+/g, '-') as RunId;
-
       setRunId(runId);
       setRawMeta(options.meta);
 
       return registerRunTestEvent({...runTestOwnParams, logEvents: [], runId});
     })(name, testFn)
     .after((testController: Inner.TestController) => {
-      assertValueIsDefined(runId);
-
       const utcTimeInMs = Date.now() as UtcTimeInMs;
 
       const {errs} = testController.testRun;

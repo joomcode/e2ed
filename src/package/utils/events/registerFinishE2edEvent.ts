@@ -1,11 +1,10 @@
-import {TMP_DIRECTORY_PATH} from '../constants/internal';
+import {TMP_DIRECTORY_PATH} from '../../constants/internal';
+import {getRunE2edEvent} from '../getAndSetRunE2edEvent';
+import {readEventsFromFiles} from '../readEventsFromFiles';
+import {removeDirectory} from '../removeDirectory';
+import {saveHtmlReport} from '../report';
 
-import {getRunE2edEvent} from './getAndSetRunE2edEvent';
-import {readEventsFromFiles} from './readEventsFromFiles';
-import {removeDirectory} from './removeDirectory';
-import {saveHtmlReport} from './report';
-
-import type {FinishE2edEvent} from '../types/internal';
+import type {FinishE2edEvent} from '../../types/internal';
 
 /**
  * Register finishing e2ed event (for report) after closing of all tests.

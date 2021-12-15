@@ -9,9 +9,9 @@ export * from './log';
 export * from './pages';
 export * from './report';
 export * from './request';
-export * from './run';
 export * from './stackTrack';
-export * from './test';
+export * from './subprocess';
+export * from './testRun';
 export * from './utils';
 
 /**

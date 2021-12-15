@@ -1,10 +1,9 @@
-import {TMP_DIRECTORY_PATH, EVENTS_DIRECTORY_PATH} from '../constants/internal';
+import {TMP_DIRECTORY_PATH, EVENTS_DIRECTORY_PATH} from '../../constants/internal';
+import {createDirectory} from '../createDirectory';
+import {setRunE2edEvent} from '../getAndSetRunE2edEvent';
+import {removeDirectory} from '../removeDirectory';
 
-import {createDirectory} from './createDirectory';
-import {setRunE2edEvent} from './getAndSetRunE2edEvent';
-import {removeDirectory} from './removeDirectory';
-
-import type {RunE2edEvent} from '../types/internal';
+import type {RunE2edEvent} from '../../types/internal';
 
 /**
  * Register run e2ed event (for report) before running any test.

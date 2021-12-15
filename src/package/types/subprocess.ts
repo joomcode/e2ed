@@ -26,10 +26,3 @@ export type TestCafeRunOptions = Readonly<{
   runLabel: string;
   tests: readonly FailTest[];
 }>;
-
-/**
- * Internal TestCafe error object (only some fields).
- */
-export type TestCafeError = Readonly<{
-  message: string;
-}>;

@@ -3,8 +3,8 @@ import {getPageLoaded} from '../context/pageLoaded';
 import {getRunId} from '../context/runId';
 import {testController} from '../testController';
 
+import {registerLogEvent} from './events';
 import {getPrintedLabel} from './getPrintedLabel';
-import {registerLogEvent} from './registerLogEvent';
 import {valueToString} from './valueToString';
 
 import type {Log, LogPayload, UtcTimeInMs} from '../types/internal';
