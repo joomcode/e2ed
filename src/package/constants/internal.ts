@@ -27,6 +27,11 @@ export const LOCATOR_KEY = Symbol('Key for string locators in createSelector');
 export const MAX_LINES_IN_STRINGIFY_VALUE = 400;
 
 /**
+ * Default options for readFile/readFileSync function from fs.
+ */
+export const READ_FILE_OPTIONS = {encoding: 'utf8'} as const;
+
+/**
  * Hash object with runId as keys and runTestEvent
  * @internal
  */

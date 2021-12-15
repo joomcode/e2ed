@@ -19,6 +19,7 @@ export type ReportData = Readonly<{
  * @internal
  */
 export type TestRunButtonProps = Readonly<{
+  durationInMs: number;
   filePath: string;
   name: string;
   runId: RunId;

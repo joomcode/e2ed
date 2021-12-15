@@ -1,12 +1,11 @@
 import {readdir, readFile} from 'fs/promises';
 import {join} from 'path';
 
-import {EVENTS_DIRECTORY_PATH} from '../constants/internal';
+import {EVENTS_DIRECTORY_PATH, READ_FILE_OPTIONS} from '../constants/internal';
 
 import type {TestRun} from '../types/internal';
 
 const AMOUNT_OF_PARALLEL_OPEN_FILES = 40;
-const readFileOptions = {encoding: 'utf8'} as const;
 
 /**
  * Read events objects from temporary directory.
@@ -30,7 +29,7 @@ export const readEventsFromFiles = async (): Promise<TestRun[]> => {
     ) {
       const fileName = eventFiles[fileIndex];
       const filePath = join(EVENTS_DIRECTORY_PATH, fileName);
-      const promise = readFile(filePath, readFileOptions);
+      const promise = readFile(filePath, READ_FILE_OPTIONS);
 
       readPromises.push(promise);
     }

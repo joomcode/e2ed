@@ -1,12 +1,31 @@
 import {getTestRunsLists} from './getTestRunsLists';
+import {renderHead} from './renderHead';
+import {renderJsonData} from './renderJsonData';
+import {renderNavigation} from './renderNavigation';
+import {renderTestRunsLists} from './renderTestRunsLists';
 
 import type {ReportData} from '../../types/internal';
 
 /**
  * Render report data to HTML report page.
+ * @internal
  */
 export const renderHtmlReportToString = (reportData: ReportData): string => {
   const testRunsLists = getTestRunsLists(reportData);
 
-  return String(testRunsLists.length);
+  return `<!DOCTYPE html><html lang="en">${renderHead()}
+<body>${renderNavigation(testRunsLists)}
+  <div class="main" role="tabpanel">
+    <section class="main__section main__section_position_left" aria-label="Retry 1">
+      <h4 class="main__section-title">Retry 1</h4>
+      <div class="toolbar" role="toolbar" aria-label="Tests filter"></div>
+      ${renderTestRunsLists(testRunsLists)}
+    </section>
+    <div class="drag-container"></div>
+    <section id="e2edTestRunDetails" class="main__section main__section_position_right" aria-label="Tests results">
+      <div class="test-detail-empty"><p>No test selected</p></div>
+    </section>
+  </div>
+  ${renderJsonData(reportData)}
+</body></html>`;
 };

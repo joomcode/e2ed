@@ -4,6 +4,7 @@ import type {ReportData, TestRunButtonProps, TestRunsListProps} from '../../type
 
 /**
  * Get array of TestRunsListProps (by retries) from report data.
+ * @internal
  */
 export const getTestRunsLists = (reportData: ReportData): TestRunsListProps[] => {
   const {testRuns} = reportData;
@@ -12,13 +13,15 @@ export const getTestRunsLists = (reportData: ReportData): TestRunsListProps[] =>
   const testRunButtonsHash: Record<number, TestRunButtonProps[]> = {};
 
   for (const testRun of testRuns) {
-    const {filePath, errors, name, runId, runLabel} = testRun;
+    const {filePath, errors, name, runId, runLabel, startTimeInMs, finishTimeInMs} = testRun;
+
+    const durationInMs = finishTimeInMs - startTimeInMs;
 
     const retry = parseInt((runLabel || 'retry 1').slice(6), 10);
 
     const status = errors.length === 0 ? TestRunStatus.Passed : TestRunStatus.Failed;
 
-    const testRunButtonProps = {filePath, name, runId, status};
+    const testRunButtonProps = {durationInMs, filePath, name, runId, status};
 
     if (testRunButtonsHash[retry] === undefined) {
       testRunButtonsHash[retry] = [];
