@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.2](https://github.com/uid11/e2ed/tree/v0.7.2) (2021-12-15)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.1...v0.7.2)
+
+- [fix: error with reading tests result from filesystem; use separate runId and runHash](https://github.com/uid11/e2ed/commit/1e7284680a0cdb15d9c0fc13d87bfbee1baa152c)
+
 ## [v0.7.1](https://github.com/uid11/e2ed/tree/v0.7.1) (2021-12-15)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.0...v0.7.1)
