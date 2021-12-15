@@ -31,7 +31,7 @@ const startTimeInMs = Date.now() as UtcTimeInMs;
 let allTestsCount = 0;
 let retryIndex = 1;
 let runLabel = '';
-let tests: FailTest[] = [];
+let tests: readonly FailTest[] = [];
 let testsCount = 0;
 
 const asyncRunTests = async (): Promise<void> => {

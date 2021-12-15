@@ -3,7 +3,7 @@ import {TMP_DIRECTORY_PATH} from '../constants/internal';
 import {getRunE2edEvent} from './getAndSetRunE2edEvent';
 import {readEventsFromFiles} from './readEventsFromFiles';
 import {removeDirectory} from './removeDirectory';
-import {saveHTMLReport} from './report';
+import {saveHtmlReport} from './report';
 
 import type {FinishE2edEvent} from '../types/internal';
 
@@ -20,7 +20,7 @@ export const registerFinishE2edEvent = async ({
 
   const reportData = {startTimeInMs, finishTimeInMs, testRuns, ...restRunE2edEvent};
 
-  await saveHTMLReport(reportData);
+  await saveHtmlReport(reportData);
 
   await removeDirectory(TMP_DIRECTORY_PATH);
 };

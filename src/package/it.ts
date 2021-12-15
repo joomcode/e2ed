@@ -31,7 +31,7 @@ export const it = (name: string, options: TestOptions, testFn: () => Promise<voi
 
       const runTestOwnParams = {filePath, name, options, runLabel, utcTimeInMs};
 
-      runId = hooks.runId(runTestOwnParams);
+      runId = hooks.runId(runTestOwnParams).replace(/[:/]/g, '-') as RunId;
 
       setRunId(runId);
       setRawMeta(options.meta);

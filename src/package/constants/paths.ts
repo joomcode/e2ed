@@ -4,7 +4,7 @@ import {join} from 'path';
  * Relative (from root) path to reports directory.
  * @internal
  */
-const REPORTS_DIRECTORY_PATH = join('e2ed', 'reports');
+export const REPORTS_DIRECTORY_PATH = join('e2ed', 'reports');
 
 /**
  * Relative (from root) path to tmp directory.

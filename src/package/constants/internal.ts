@@ -2,6 +2,7 @@ import type {RunId, RunTestEvent} from '../types/internal';
 
 export * from './log';
 export * from './paths';
+export * from './report';
 
 /**
  * Default options for node util.inspect.

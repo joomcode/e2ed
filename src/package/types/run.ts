@@ -14,7 +14,7 @@ export type FailTest = Readonly<{
  */
 export type FailTests = Readonly<{
   allTestsCount: number;
-  tests: FailTest[];
+  tests: readonly FailTest[];
 }>;
 
 /**
@@ -24,7 +24,7 @@ export type FailTests = Readonly<{
 export type TestCafeRunOptions = Readonly<{
   concurrency: number;
   runLabel: string;
-  tests: FailTest[];
+  tests: readonly FailTest[];
 }>;
 
 /**
