@@ -15,12 +15,22 @@ export type ReportData = Readonly<{
   Omit<RunE2edEvent, 'utcTimeInMs'>;
 
 /**
+ * RetryButton component props.
+ * @internal
+ */
+export type RetryButtonProps = Readonly<{
+  retry: number;
+  selected: boolean;
+}>;
+
+/**
  * TestRunButton component props.
  * @internal
  */
 export type TestRunButtonProps = Readonly<{
   durationInMs: number;
   filePath: string;
+  mainParams: string;
   name: string;
   runId: RunId;
   status: TestRunStatus;

@@ -6,7 +6,6 @@ import type {RunId, TestOptions} from './test';
 
 /**
  * Completed test run object.
- * @internal
  */
 export type TestRun = Readonly<{
   errors: readonly TestCafeError[];
@@ -17,7 +16,6 @@ export type TestRun = Readonly<{
 
 /**
  * Logging event (on log call).
- * @internal
  */
 export type LogEvent = Readonly<{
   message: string;
@@ -73,7 +71,6 @@ export type RunTestOwnParams = Readonly<{
 
 /**
  * RunTest event (on starting one test).
- * @internal
  */
 export type RunTestEvent = Readonly<{
   logEvents: readonly LogEvent[];

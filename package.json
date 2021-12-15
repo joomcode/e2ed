@@ -42,7 +42,7 @@
     "lint": "./bin/runParallel.sh lint:es lint:prettier lint:types",
     "lint:clear:cache": "rm .cache-eslint",
     "lint:es": "eslint --cache --cache-location=.cache-eslint --max-warnings=0 --ext=.ts .",
-    "lint:prettier": "prettier --check --ignore-path=.gitignore '**/*.{json,md,ts,yaml}'",
+    "lint:prettier": "prettier --check --ignore-path=.gitignore '**/*.{css,json,md,ts,yaml}'",
     "lint:types": "tsc --noEmit",
     "test": "./bin/runParallel.sh test:local test:docker",
     "build:clear": "rm -rf build",

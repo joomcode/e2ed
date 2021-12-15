@@ -7,6 +7,9 @@ import type {ReportData, TestRunButtonProps, TestRunsListProps} from '../../type
  * @internal
  */
 export const getTestRunsLists = (reportData: ReportData): TestRunsListProps[] => {
+  // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
+  const hooks: typeof import('../../hooks') = require('../../hooks');
+
   const {testRuns} = reportData;
 
   const testRunsLists: TestRunsListProps[] = [];
@@ -15,13 +18,15 @@ export const getTestRunsLists = (reportData: ReportData): TestRunsListProps[] =>
   for (const testRun of testRuns) {
     const {filePath, errors, name, runId, runLabel, startTimeInMs, finishTimeInMs} = testRun;
 
+    const mainParams = hooks.mainParams(testRun);
+
     const durationInMs = finishTimeInMs - startTimeInMs;
 
     const retry = parseInt((runLabel || 'retry 1').slice(6), 10);
 
     const status = errors.length === 0 ? TestRunStatus.Passed : TestRunStatus.Failed;
 
-    const testRunButtonProps = {durationInMs, filePath, name, runId, status};
+    const testRunButtonProps = {durationInMs, filePath, mainParams, name, runId, status};
 
     if (testRunButtonsHash[retry] === undefined) {
       testRunButtonsHash[retry] = [];

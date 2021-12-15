@@ -1,30 +1,20 @@
-import {TestRunStatus} from '../../constants/internal';
+import {TEST_RUN_STATUS_TO_MODIFIER_HASH} from '../../constants/internal';
 
 import type {TestRunButtonProps, TestRunsListProps} from '../../types/internal';
-
-/**
- * Map test run status to element status modifier.
- */
-const statusToModifierHash = {
-  [TestRunStatus.Passed]: 'passed',
-  [TestRunStatus.Failed]: 'failed',
-  [TestRunStatus.Broken]: 'broken',
-  [TestRunStatus.Skipped]: 'skipped',
-  [TestRunStatus.Unknown]: 'unknown',
-};
 
 /**
  * Render single test run button (in test runs list).
  */
 const renderTestRunButton = (
-  {durationInMs, status, name}: TestRunButtonProps,
+  {durationInMs, status, mainParams, name}: TestRunButtonProps,
   index: number,
 ): string => {
-  const statusModifier = statusToModifierHash[status];
+  const statusModifier = TEST_RUN_STATUS_TO_MODIFIER_HASH[status];
 
   return `<button role="tab" aria-selected="false" class="test-button test-button_status_${statusModifier}">
   <span class="test-button__order">#${index + 1}</span>
   <span class="test-button__name">${name}</span>
+  <span class="test-button__parameters">${mainParams}</span>
   <span class="test-button__time">${durationInMs}ms</span>
 </button>`;
 };
