@@ -30,11 +30,11 @@ const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unkn
       : (maybeLogEventType as LogEventType) || LogEventType.Unspecified;
 
   return registerLogEvent(runId, {message, payload, type, time}).then((numberInRun) => {
-    const printedString = valueToString({payload, context});
+    const printedString = valueToString(context ? {payload, context} : {payload});
 
     // eslint-disable-next-line no-console
     console.log(
-      `[e2ed][${dateTimeInISO}]${printedRunLabel}[${type}][${runId}] ${message} ${printedString}\n`,
+      `[e2ed][${dateTimeInISO}]${printedRunLabel}[${runId}] ${message} ${printedString}\n`,
     );
 
     const pageLoaded = getPageLoaded();

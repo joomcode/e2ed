@@ -61,15 +61,22 @@ export type RunE2edEvent = Readonly<{
 }>;
 
 /**
+ * RunTest own initial parameters.
+ */
+export type RunTestOwnParams = Readonly<{
+  filePath: string;
+  name: string;
+  options: TestOptions;
+  runLabel: string | undefined;
+  utcTimeInMs: UtcTimeInMs;
+}>;
+
+/**
  * RunTest event (on starting one test).
  * @internal
  */
 export type RunTestEvent = Readonly<{
-  filePath: string;
   logEvents: readonly LogEvent[];
-  name: string;
-  options: TestOptions;
   runId: RunId;
-  runLabel: string | undefined;
-  utcTimeInMs: UtcTimeInMs;
-}>;
+}> &
+  RunTestOwnParams;

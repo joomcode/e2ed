@@ -1,6 +1,7 @@
 import {setRawMeta} from './context/meta';
 import {setRunId} from './context/runId';
-import {getRandomId} from './utils/getRandomId';
+import {assertValueIsDefined} from './utils/asserts';
+import {getRelativeTestFilePath} from './utils/getRelativeTestFilePath';
 import {registerFinishTestEvent} from './utils/registerFinishTestEvent';
 import {registerRunTestEvent} from './utils/registerRunTestEvent';
 
@@ -16,28 +17,30 @@ declare const test: Inner.TestFn;
 export const it = (name: string, options: TestOptions, testFn: () => Promise<void>): void => {
   fixture(' - e2ed - ');
 
-  const runId = getRandomId().replace(/:/g, '-') as RunId;
+  let runId: RunId;
 
   test
     .before((testController: Inner.TestController) => {
-      const {filename: filePath} = testController.testRun.test.testFile;
+      // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
+      const hooks: typeof import('./hooks') = require('./hooks');
+
+      const {filename: absoluteFilePath} = testController.testRun.test.testFile;
+      const filePath = getRelativeTestFilePath(absoluteFilePath);
       const runLabel = process.env.E2ED_RUN_LABEL;
       const utcTimeInMs = Date.now() as UtcTimeInMs;
+
+      const runTestOwnParams = {filePath, name, options, runLabel, utcTimeInMs};
+
+      runId = hooks.runId(runTestOwnParams);
 
       setRunId(runId);
       setRawMeta(options.meta);
 
-      return registerRunTestEvent({
-        filePath,
-        logEvents: [],
-        name,
-        options,
-        runId,
-        runLabel,
-        utcTimeInMs,
-      });
+      return registerRunTestEvent({...runTestOwnParams, logEvents: [], runId});
     })(name, testFn)
     .after((testController: Inner.TestController) => {
+      assertValueIsDefined(runId);
+
       const utcTimeInMs = Date.now() as UtcTimeInMs;
 
       const {errs} = testController.testRun;
