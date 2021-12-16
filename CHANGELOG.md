@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.4](https://github.com/uid11/e2ed/tree/v0.7.4) (2021-12-16)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.3...v0.7.4)
+
+- [fix: npm bin script error (bin should be path to executed scripts)](https://github.com/uid11/e2ed/commit/5b78b3c7f685423f0b9bf6a82f905bbb233c1b1e)
+
 ## [v0.7.3](https://github.com/uid11/e2ed/tree/v0.7.3) (2021-12-16)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.2...v0.7.3)
