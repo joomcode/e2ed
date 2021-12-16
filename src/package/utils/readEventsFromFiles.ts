@@ -3,7 +3,9 @@ import {join} from 'path';
 
 import {EVENTS_DIRECTORY_PATH, READ_FILE_OPTIONS} from '../constants/internal';
 
-import type {TestRun} from '../types/internal';
+import {generalLog} from './generalLog';
+
+import type {TestRunWithHooks} from '../types/internal';
 
 const AMOUNT_OF_PARALLEL_OPEN_FILES = 40;
 
@@ -11,9 +13,9 @@ const AMOUNT_OF_PARALLEL_OPEN_FILES = 40;
  * Read events objects from temporary directory.
  * @internal
  */
-export const readEventsFromFiles = async (): Promise<TestRun[]> => {
+export const readEventsFromFiles = async (): Promise<TestRunWithHooks[]> => {
   const eventFiles = await readdir(EVENTS_DIRECTORY_PATH);
-  const testRuns: TestRun[] = [];
+  const testRuns: TestRunWithHooks[] = [];
 
   for (
     let fileIndex = 0;
@@ -37,11 +39,13 @@ export const readEventsFromFiles = async (): Promise<TestRun[]> => {
     const files = await Promise.all(readPromises);
 
     for (const file of files) {
-      const testRun = JSON.parse(file) as TestRun;
+      const testRunWithHooks = JSON.parse(file) as TestRunWithHooks;
 
-      testRuns.push(testRun);
+      testRuns.push(testRunWithHooks);
     }
   }
+
+  generalLog(`Read ${testRuns.length} test runs from ${EVENTS_DIRECTORY_PATH}`);
 
   return testRuns;
 };

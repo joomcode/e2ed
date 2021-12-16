@@ -1,3 +1,5 @@
+import {generalLog} from '../generalLog';
+
 import {getTestRunsLists} from './getTestRunsLists';
 import {renderHead} from './renderHead';
 import {renderJsonData} from './renderJsonData';
@@ -11,6 +13,10 @@ import type {ReportData} from '../../types/internal';
  * @internal
  */
 export const renderHtmlReportToString = (reportData: ReportData): string => {
+  const {length} = reportData.testRunsWithHooks;
+
+  generalLog(`Will render HTML report for ${length} test run${length > 1 ? 's' : ''}`);
+
   const testRunsLists = getTestRunsLists(reportData);
 
   return `<!DOCTYPE html><html lang="en">${renderHead()}

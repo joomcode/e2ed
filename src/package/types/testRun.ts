@@ -32,3 +32,10 @@ export type TestRun = Readonly<{
   finishTimeInMs: UtcTimeInMs;
 }> &
   Omit<RunTestEvent, 'utcTimeInMs'>;
+
+/**
+ * TestRun object with result of userland hooks (like mainParams and runHash).
+ * Used in HTML report.
+ * @internal
+ */
+export type TestRunWithHooks = Readonly<{mainParams: string; runHash: RunHash}> & TestRun;

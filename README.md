@@ -51,6 +51,8 @@ E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh
 `E2ED_CONCURRENCY`: the number of browser windows in which tests will run in parallel
 (maximum value 50, 5 by default for run in docker and 1 by default for local run).
 
+`E2ED_DEBUG`: run e2ed in nodejs-debug mode (`--inspect-brk=0.0.0.0`, port 9229 in docker) if this variable is not empty.
+
 `E2ED_DOCKER_IMAGE`: name of the docker image used to run tests with the `your-project/e2ed/bin/runDocker.sh` command
 (`e2ed` by default).
 

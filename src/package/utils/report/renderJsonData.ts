@@ -5,9 +5,9 @@ import type {ReportData} from '../../types/internal';
  * @internal
  */
 export const renderJsonData = (reportData: ReportData): string => {
-  const {testRuns} = reportData;
+  const {testRunsWithHooks} = reportData;
 
-  const jsonString = JSON.stringify(testRuns);
+  const jsonString = JSON.stringify(testRunsWithHooks);
 
   return `<script id="e2edJsonReportData" type="application/json">${jsonString}</script>`;
 };

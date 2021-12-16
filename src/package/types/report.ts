@@ -1,7 +1,7 @@
 import type {TestRunStatus} from '../constants/internal';
 import type {UtcTimeInMs} from './date';
 import type {RunE2edEvent} from './events';
-import type {RunHash, RunId, TestRun} from './testRun';
+import type {RunHash, RunId, TestRunWithHooks} from './testRun';
 
 /**
  * The complete report data (for printing report).
@@ -10,7 +10,7 @@ import type {RunHash, RunId, TestRun} from './testRun';
 export type ReportData = Readonly<{
   startTimeInMs: UtcTimeInMs;
   finishTimeInMs: UtcTimeInMs;
-  testRuns: readonly TestRun[];
+  testRunsWithHooks: readonly TestRunWithHooks[];
 }> &
   Omit<RunE2edEvent, 'utcTimeInMs'>;
 

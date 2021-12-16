@@ -3,10 +3,10 @@ import {getKeysCounter} from '../getKeysCounter';
 
 import type {RunHash} from '../../types/internal';
 
-type RunHashUnificator = (maybeDuplicatedRunHash: RunHash) => {
-  runHash: RunHash;
+type RunHashUnificator = (maybeDuplicatedRunHash: RunHash) => Readonly<{
   duplicate: boolean;
-};
+  runHash: RunHash;
+}>;
 
 /**
  * Get function that convert all test runs hashes to unique hashes.

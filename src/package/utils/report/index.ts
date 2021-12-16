@@ -2,6 +2,7 @@ import {writeFile} from 'fs/promises';
 import {join} from 'path';
 
 import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
+import {generalLog} from '../generalLog';
 
 import {renderHtmlReportToString} from './renderHtmlReportToString';
 
@@ -15,6 +16,8 @@ export const saveHtmlReport = (reportData: ReportData): Promise<void> => {
   const htmlReportString = renderHtmlReportToString(reportData);
 
   const reportFilePath = join(REPORTS_DIRECTORY_PATH, 'e2ed-report.html');
+
+  generalLog(`Write HTML report (${htmlReportString.length} symbols) to "${reportFilePath}"`);
 
   return writeFile(reportFilePath, htmlReportString);
 };
