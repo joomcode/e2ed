@@ -1,4 +1,4 @@
-import type {TestRun} from '../../types/internal';
+import type {TestRun} from '../../../types/internal';
 
 /**
  * Render tag <article class="test-detail"> with test run details.

@@ -1,4 +1,4 @@
-import type {TestRun} from '../../types/internal';
+import type {TestRun} from '../../../types/internal';
 
 declare const e2edJsonReportData: HTMLScriptElement;
 

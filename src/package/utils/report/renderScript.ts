@@ -1,5 +1,5 @@
+import {domContentLoadedCallback} from './client/domContentLoadedCallback';
 import {initialScript} from './client/initialScript';
-import {domContentLoadedCallback} from './domContentLoadedCallback';
 import {renderScriptGlobalFunctions} from './renderScriptGlobalFunctions';
 
 /**
