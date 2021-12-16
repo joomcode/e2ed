@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.5](https://github.com/uid11/e2ed/tree/v0.7.5) (2021-12-16)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.4...v0.7.5)
+
+- [fix: add missing bin script to package](https://github.com/uid11/e2ed/commit/fcf99451c78530b8008cd09a6026b140e323be09)
+
 ## [v0.7.4](https://github.com/uid11/e2ed/tree/v0.7.4) (2021-12-16)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.3...v0.7.4)
