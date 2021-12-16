@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.7.3](https://github.com/uid11/e2ed/tree/v0.7.3) (2021-12-16)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.2...v0.7.3)
+
+- [fix: log reports errors; fix require hooks bug; add E2ED_DEBUG](https://github.com/uid11/e2ed/commit/7423bf88511e025f7778d520ba57b93ee7573798)
+- [chore: update @types/node; log about duplicate test run hashes](https://github.com/uid11/e2ed/commit/93c26a373fee43bcf94786a99de9662e32ce6b83)
+
 ## [v0.7.2](https://github.com/uid11/e2ed/tree/v0.7.2) (2021-12-15)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.1...v0.7.2)
