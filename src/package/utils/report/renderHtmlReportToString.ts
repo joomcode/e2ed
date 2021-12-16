@@ -4,6 +4,7 @@ import {getTestRunsLists} from './getTestRunsLists';
 import {renderHead} from './renderHead';
 import {renderJsonData} from './renderJsonData';
 import {renderNavigation} from './renderNavigation';
+import {renderScript} from './renderScript';
 import {renderTestRunsLists} from './renderTestRunsLists';
 
 import type {ReportData} from '../../types/internal';
@@ -32,6 +33,7 @@ export const renderHtmlReportToString = (reportData: ReportData): string => {
       <div class="test-detail-empty"><p>No test selected</p></div>
     </section>
   </div>
+  ${renderScript()}
   ${renderJsonData(reportData)}
 </body></html>`;
 };

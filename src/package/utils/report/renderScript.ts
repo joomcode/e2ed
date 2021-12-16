@@ -1,3 +1,4 @@
+import {initialScript} from './client/initialScript';
 import {domContentLoadedCallback} from './domContentLoadedCallback';
 import {renderScriptGlobalFunctions} from './renderScriptGlobalFunctions';
 
@@ -6,6 +7,7 @@ import {renderScriptGlobalFunctions} from './renderScriptGlobalFunctions';
  * @internal
  */
 export const renderScript = (): string => `<script>
-${renderScriptGlobalFunctions()}
-document.addEventListener("DOMContentLoaded", ${domContentLoadedCallback.toString()})
+${renderScriptGlobalFunctions()};
+document.addEventListener("DOMContentLoaded", ${domContentLoadedCallback.toString()});
+(${initialScript.toString()})();
 </script>`;

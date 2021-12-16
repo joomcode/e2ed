@@ -1,6 +1,5 @@
 import {renderCssStyles} from './renderCssStyles';
 import {renderFavicon} from './renderFavicon';
-import {renderScript} from './renderScript';
 
 /**
  * Render tag <head>.
@@ -13,5 +12,4 @@ export const renderHead = (): string => `<head>
 <meta name="description" content="e2ed-report" />
 ${renderFavicon()}
 ${renderCssStyles()}
-${renderScript()}
 </head>`;
