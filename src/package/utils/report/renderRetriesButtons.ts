@@ -5,10 +5,11 @@ import type {RetryButtonProps, TestRunsListProps} from '../../types/internal';
  * @internal
  */
 const renderRetryButton = ({
+  disabled,
   retry,
   selected,
 }: RetryButtonProps): string => `<button role="tab" aria-selected="${String(selected)}"
-aria-controls="retry${retry}-nav-tab"
+aria-controls="retry${retry}-nav-tab ${disabled ? 'disabled' : ''}"
 id="retry${retry}-nav" class="nav-tabs__button">Retry ${retry}</button>`;
 
 /**
@@ -16,7 +17,15 @@ id="retry${retry}-nav" class="nav-tabs__button">Retry ${retry}</button>`;
  * @internal
  */
 export const renderRetriesButtons = (testRunsLists: TestRunsListProps[]): string => {
-  const buttons = testRunsLists.map(({retry}) => renderRetryButton({retry, selected: retry === 1}));
+  const retries = testRunsLists.map(({retry}) => retry);
+  const maxRetry = Math.max(...retries);
+  const buttons: string[] = [];
+
+  for (let index = 1; index <= maxRetry; index += 1) {
+    const isRetry = retries.includes(index);
+
+    buttons[index] = renderRetryButton({disabled: !isRetry, retry: index, selected: index === 1});
+  }
 
   return `<div role="tablist" aria-label="Retries" class="nav-tabs">${buttons.join('')}</div>`;
 };

@@ -2,7 +2,7 @@
 
 if [ -z $E2ED_DEBUG ]
 then
-  ./bin/runLocal.js "$@"
+  ./node_modules/e2ed/bin/runLocal.js "$@"
 else
-  node --inspect-brk=0.0.0.0 ./bin/runLocal.js "$@"
+  node --inspect-brk=0.0.0.0 ./node_modules/e2ed/bin/runLocal.js "$@"
 fi

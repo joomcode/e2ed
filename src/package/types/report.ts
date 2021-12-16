@@ -19,6 +19,7 @@ export type ReportData = Readonly<{
  * @internal
  */
 export type RetryButtonProps = Readonly<{
+  disabled: boolean;
   retry: number;
   selected: boolean;
 }>;
