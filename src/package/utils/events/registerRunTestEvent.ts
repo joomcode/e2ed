@@ -1,5 +1,6 @@
 import {RUN_IDS_HASH} from '../../constants/internal';
-import {E2EDError} from '../E2EDError';
+import {cloneWithoutUndefinedProperties} from '../cloneWithoutUndefinedProperties';
+import {generalLog} from '../generalLog';
 
 import type {RunTestEvent} from '../../types/internal';
 
@@ -11,7 +12,16 @@ export const registerRunTestEvent = (runTestEvent: RunTestEvent): Promise<void> 
   const {runId} = runTestEvent;
 
   if (runId in RUN_IDS_HASH) {
-    throw new E2EDError('Duplicate runId in run ids hash', {runId});
+    const oldTestRun = cloneWithoutUndefinedProperties({
+      ...RUN_IDS_HASH[runId],
+      logEvents: undefined,
+    });
+    const newTestRun = cloneWithoutUndefinedProperties({
+      ...runTestEvent,
+      logEvents: undefined,
+    });
+
+    generalLog('Duplicate runId in run ids hash', {oldTestRun, newTestRun});
   }
 
   RUN_IDS_HASH[runId] = runTestEvent;
