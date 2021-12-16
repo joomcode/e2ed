@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.7.8](https://github.com/uid11/e2ed/tree/v0.7.8) (2021-12-16)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.7...v0.7.8)
+
+- [feat: add e2edAddOnClickOnClass client utility function](https://github.com/uid11/e2ed/commit/de355a1eafd58fedcb71a99e8fa669230201ff11)
+- [feat: move client page scripts to separate directory](https://github.com/uid11/e2ed/commit/c95411dc09561dcad4be4173d92c34cc580014e1)
+- [feat: get initial page script that runs before DOMContentLoaded](https://github.com/uid11/e2ed/commit/05141b64268356dcc4bd26bd6cdfe82836fad26c)
+- [feat: show disabled retries buttons: fix e2ed local run script](https://github.com/uid11/e2ed/commit/c9022c9f8fc98132ecd57f1546de9b3d5c4c9fb5)
+
 ## [v0.7.7](https://github.com/uid11/e2ed/tree/v0.7.7) (2021-12-16)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.6...v0.7.7)
