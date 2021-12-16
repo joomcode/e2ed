@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.7](https://github.com/uid11/e2ed/tree/v0.7.7) (2021-12-16)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.6...v0.7.7)
+
+- [fix: TestCafe can retry failed tests in some cases](https://github.com/uid11/e2ed/commit/6aed9485c967cdb666b186a976cd45a7880390cc)
+
 ## [v0.7.6](https://github.com/uid11/e2ed/tree/v0.7.6) (2021-12-16)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.5...v0.7.6)
