@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.6](https://github.com/uid11/e2ed/tree/v0.7.6) (2021-12-16)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.5...v0.7.6)
+
+- [fix: debug scripts (error with supporting E2ED_DEBUG)](https://github.com/uid11/e2ed/commit/072dbcb0b4572a6acaf35aaa4b675f070f3df276)
+
 ## [v0.7.5](https://github.com/uid11/e2ed/tree/v0.7.5) (2021-12-16)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.4...v0.7.5)
