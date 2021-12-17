@@ -10,6 +10,7 @@ import type {RunHash, RunId, TestRunWithHooks} from './testRun';
 export type ReportData = Readonly<{
   startTimeInMs: UtcTimeInMs;
   finishTimeInMs: UtcTimeInMs;
+  name: string;
   testRunsWithHooks: readonly TestRunWithHooks[];
 }> &
   Omit<RunE2edEvent, 'utcTimeInMs'>;
@@ -35,6 +36,7 @@ export type TestRunButtonProps = Readonly<{
   name: string;
   runHash: RunHash;
   runId: RunId;
+  startTimeInMs: UtcTimeInMs;
   status: TestRunStatus;
 }>;
 

@@ -5,11 +5,11 @@ import {renderFavicon} from './renderFavicon';
  * Render tag <head>.
  * @internal
  */
-export const renderHead = (): string => `<head>
+export const renderHead = (name: string): string => `<head>
 <meta charset="utf-8" />
-<title>e2ed-report</title>
+<title>${name}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="e2ed-report" />
+<meta name="description" content="${name}" />
 ${renderFavicon()}
 ${renderCssStyles()}
 </head>`;

@@ -2,7 +2,7 @@ import {TestRunStatus} from '../../constants/internal';
 
 import {getRunHashUnificator} from './getRunHashUnificator';
 
-import type {ReportData, TestRunButtonProps, TestRunsListProps} from '../../types/internal';
+import type {ReportData, RunId, TestRunButtonProps, TestRunsListProps} from '../../types/internal';
 
 /**
  * Get array of TestRunsListProps (by retries) from report data.
@@ -11,13 +11,15 @@ import type {ReportData, TestRunButtonProps, TestRunsListProps} from '../../type
 export const getTestRunsLists = ({testRunsWithHooks}: ReportData): TestRunsListProps[] => {
   const runHashUnificator = getRunHashUnificator();
 
+  const internallyRetriedRunIds: RunId[] = [];
   const testRunsLists: TestRunsListProps[] = [];
   const testRunButtonsHash: Record<number, TestRunButtonProps[]> = {};
 
   for (const testRunWithHooks of testRunsWithHooks) {
     const {
-      filePath,
       errors,
+      filePath,
+      isInternalRetryOf,
       mainParams,
       name,
       runHash: maybeDuplicateRunHash,
@@ -29,6 +31,10 @@ export const getTestRunsLists = ({testRunsWithHooks}: ReportData): TestRunsListP
 
     const durationInMs = finishTimeInMs - startTimeInMs;
 
+    if (isInternalRetryOf) {
+      internallyRetriedRunIds.push(isInternalRetryOf);
+    }
+
     const retry = parseInt((runLabel || 'retry 1').slice(6), 10);
 
     const {duplicate, runHash} = runHashUnificator(maybeDuplicateRunHash);
@@ -39,7 +45,16 @@ export const getTestRunsLists = ({testRunsWithHooks}: ReportData): TestRunsListP
       status = TestRunStatus.Unknown;
     }
 
-    const testRunButtonProps = {durationInMs, filePath, mainParams, name, runHash, runId, status};
+    const testRunButtonProps = {
+      durationInMs,
+      filePath,
+      mainParams,
+      name,
+      runHash,
+      runId,
+      startTimeInMs,
+      status,
+    };
 
     if (testRunButtonsHash[retry] === undefined) {
       testRunButtonsHash[retry] = [];
@@ -49,7 +64,23 @@ export const getTestRunsLists = ({testRunsWithHooks}: ReportData): TestRunsListP
   }
 
   for (const [retryString, testRunButtons] of Object.entries(testRunButtonsHash)) {
-    testRunButtons.sort((a, b) => (a.filePath > b.filePath ? 1 : -1));
+    for (const testRunButton of testRunButtons) {
+      if (internallyRetriedRunIds.includes(testRunButton.runId)) {
+        (testRunButton as {status: TestRunStatus}).status = TestRunStatus.Broken;
+      }
+    }
+
+    testRunButtons.sort((a, b) => {
+      if (a.filePath > b.filePath) {
+        return 1;
+      }
+
+      if (a.filePath < b.filePath) {
+        return -1;
+      }
+
+      return a.startTimeInMs - b.startTimeInMs;
+    });
 
     const retry = Number(retryString);
 

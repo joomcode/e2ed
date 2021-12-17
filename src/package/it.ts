@@ -1,5 +1,5 @@
 import {setRawMeta} from './context/meta';
-import {setRunId} from './context/runId';
+import {getRunId, setRunId} from './context/runId';
 import {registerFinishTestEvent, registerRunTestEvent} from './utils/events';
 import {getRandomId} from './utils/getRandomId';
 import {getRelativeTestFilePath} from './utils/getRelativeTestFilePath';
@@ -16,16 +16,21 @@ declare const test: Inner.TestFn;
 export const it = (name: string, options: TestOptions, testFn: () => Promise<void>): void => {
   fixture(' - e2ed - ');
 
-  const runId = getRandomId().replace(/:/g, '-') as RunId;
+  let lastRunId: RunId | undefined;
 
   test
     .before((testController: Inner.TestController) => {
+      const runId = getRandomId().replace(/:/g, '-') as RunId;
+
+      const isInternalRetryOf = lastRunId;
       const {filename: absoluteFilePath} = testController.testRun.test.testFile;
       const filePath = getRelativeTestFilePath(absoluteFilePath);
       const runLabel = process.env.E2ED_RUN_LABEL;
       const utcTimeInMs = Date.now() as UtcTimeInMs;
 
-      const runTestOwnParams = {filePath, name, options, runLabel, utcTimeInMs};
+      const runTestOwnParams = {filePath, isInternalRetryOf, name, options, runLabel, utcTimeInMs};
+
+      lastRunId = runId;
 
       setRunId(runId);
       setRawMeta(options.meta);
@@ -36,8 +41,9 @@ export const it = (name: string, options: TestOptions, testFn: () => Promise<voi
       const utcTimeInMs = Date.now() as UtcTimeInMs;
 
       const {errs} = testController.testRun;
-
       const errors = errs.map(({errMsg}) => ({message: errMsg}));
+
+      const runId = getRunId();
 
       return registerFinishTestEvent({errors, runId, utcTimeInMs});
     });

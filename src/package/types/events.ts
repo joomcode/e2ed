@@ -53,6 +53,7 @@ export type RunE2edEvent = Readonly<{
  */
 export type RunTestEvent = Readonly<{
   filePath: string;
+  isInternalRetryOf: RunId | undefined;
   logEvents: readonly LogEvent[];
   name: string;
   options: TestOptions;

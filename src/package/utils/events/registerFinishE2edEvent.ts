@@ -4,6 +4,7 @@ import {getRunE2edEvent} from '../getAndSetRunE2edEvent';
 import {readEventsFromFiles} from '../readEventsFromFiles';
 import {removeDirectory} from '../removeDirectory';
 import {saveHtmlReport} from '../report';
+import {getReportName} from '../report/getReportName';
 
 import type {FinishE2edEvent} from '../../types/internal';
 
@@ -19,8 +20,9 @@ export const registerFinishE2edEvent = async ({
   const testRunsWithHooks = await readEventsFromFiles();
   const runE2edEvent = getRunE2edEvent();
   const {utcTimeInMs: startTimeInMs, ...restRunE2edEvent} = runE2edEvent;
+  const name = getReportName(startTimeInMs);
 
-  const reportData = {startTimeInMs, finishTimeInMs, testRunsWithHooks, ...restRunE2edEvent};
+  const reportData = {startTimeInMs, finishTimeInMs, name, testRunsWithHooks, ...restRunE2edEvent};
 
   await saveHtmlReport(reportData);
 

@@ -14,8 +14,8 @@ import type {ReportData} from '../../types/internal';
  */
 export const saveHtmlReport = (reportData: ReportData): Promise<void> => {
   const htmlReportString = renderHtmlReportToString(reportData);
-
-  const reportFilePath = join(REPORTS_DIRECTORY_PATH, 'e2ed-report.html');
+  const reportFileName = `${reportData.name}.html`;
+  const reportFilePath = join(REPORTS_DIRECTORY_PATH, reportFileName);
 
   generalLog(`Write HTML report (${htmlReportString.length} symbols) to "${reportFilePath}"`);
 

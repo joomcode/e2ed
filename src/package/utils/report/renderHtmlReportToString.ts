@@ -20,7 +20,7 @@ export const renderHtmlReportToString = (reportData: ReportData): string => {
 
   const testRunsLists = getTestRunsLists(reportData);
 
-  return `<!DOCTYPE html><html lang="en">${renderHead()}
+  return `<!DOCTYPE html><html lang="en">${renderHead(reportData.name)}
 <body>${renderNavigation(testRunsLists)}
   <div class="main" role="tabpanel">
     <section class="main__section main__section_position_left" aria-label="Retry 1">
