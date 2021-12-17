@@ -53,12 +53,16 @@ export const getTestRunsLists = ({testRunsWithHooks}: ReportData): TestRunsListP
 
     const retry = Number(retryString);
 
-    const testRunsList = {hidden: retry !== 1, retry, testRunButtons};
+    const testRunsList = {hidden: true, retry, testRunButtons};
 
     testRunsLists.push(testRunsList);
   }
 
   testRunsLists.sort((a, b) => a.retry - b.retry);
+
+  if (testRunsLists[0]) {
+    (testRunsLists[0] as {hidden: boolean}).hidden = false;
+  }
 
   return testRunsLists;
 };

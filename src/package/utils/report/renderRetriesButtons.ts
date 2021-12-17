@@ -19,12 +19,17 @@ id="retry${retry}-nav" class="nav-tabs__button">Retry ${retry}</button>`;
 export const renderRetriesButtons = (testRunsLists: TestRunsListProps[]): string => {
   const retries = testRunsLists.map(({retry}) => retry);
   const maxRetry = Math.max(...retries);
+  const minRetry = Math.min(...retries);
   const buttons: string[] = [];
 
   for (let index = 1; index <= maxRetry; index += 1) {
     const isRetry = retries.includes(index);
 
-    buttons[index] = renderRetryButton({disabled: !isRetry, retry: index, selected: index === 1});
+    buttons[index] = renderRetryButton({
+      disabled: !isRetry,
+      retry: index,
+      selected: index === minRetry,
+    });
   }
 
   return `<div role="tablist" aria-label="Retries" class="nav-tabs">${buttons.join('')}</div>`;
