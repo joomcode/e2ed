@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.7.10](https://github.com/uid11/e2ed/tree/v0.7.10) (2021-12-17)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.9...v0.7.10)
+
+- [fix: select first non-empty retry](https://github.com/uid11/e2ed/commit/e08097f44139e925918b42c9cd073e784b319dd5)
+- [fix: remove empty unnecessary hidden test runs lists](https://github.com/uid11/e2ed/commit/9883a3dc9ba0f04aeae313c49490a9086e1bc2d4)
+
 ## [v0.7.9](https://github.com/uid11/e2ed/tree/v0.7.9) (2021-12-17)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.8...v0.7.9)
