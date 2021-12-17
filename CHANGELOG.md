@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.9](https://github.com/uid11/e2ed/tree/v0.7.9) (2021-12-17)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.8...v0.7.9)
+
+- [feat: render empty test runs lists for empty retries](https://github.com/uid11/e2ed/commit/8e4f2573d8c83b0ba53ecdee225b5982a5b460d1)
+
 ## [v0.7.8](https://github.com/uid11/e2ed/tree/v0.7.8) (2021-12-16)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.7...v0.7.8)
