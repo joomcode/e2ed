@@ -9,7 +9,7 @@ const renderRetryButton = ({
   retry,
   selected,
 }: RetryButtonProps): string => `<button role="tab" aria-selected="${String(selected)}"
-aria-controls="retry${retry}-nav-tab ${disabled ? 'disabled' : ''}"
+aria-controls="retry${retry}-nav-tab" ${disabled ? 'disabled' : ''}
 id="retry${retry}-nav" class="nav-tabs__button">Retry ${retry}</button>`;
 
 /**

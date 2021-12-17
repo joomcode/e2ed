@@ -1,5 +1,4 @@
 import {TEST_RUN_STATUS_TO_MODIFIER_HASH} from '../../constants/internal';
-import {assertValueIsDefined} from '../asserts';
 
 import type {TestRunButtonProps, TestRunsListProps} from '../../types/internal';
 
@@ -36,27 +35,7 @@ const renderTestRunsSingleList = ({hidden, retry, testRunButtons}: TestRunsListP
  * @internal
  */
 export const renderTestRunsLists = (testRunsLists: TestRunsListProps[]): string => {
-  const retries = testRunsLists.map(({retry}) => retry);
-  const maxRetry = Math.max(...retries);
-  const lists: string[] = [];
-
-  for (let index = 1; index <= maxRetry; index += 1) {
-    const isRetry = retries.includes(index);
-
-    if (isRetry) {
-      const testRunsList = testRunsLists.find(({retry}) => retry === index);
-
-      assertValueIsDefined(testRunsList);
-
-      lists[index] = renderTestRunsSingleList(testRunsList);
-    } else {
-      lists[index] = renderTestRunsSingleList({
-        hidden: index !== 1,
-        retry: index,
-        testRunButtons: [],
-      });
-    }
-  }
+  const lists = testRunsLists.map(renderTestRunsSingleList);
 
   return lists.join('');
 };
