@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.11](https://github.com/uid11/e2ed/tree/v0.7.11) (2021-12-17)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.10...v0.7.11)
+
+- [feat: use own runId for internally retried test runs; mark such retries as broken](https://github.com/uid11/e2ed/commit/cdc653f0861cee43f7911115edb55f734e6e5ad8)
+
 ## [v0.7.10](https://github.com/uid11/e2ed/tree/v0.7.10) (2021-12-17)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.9...v0.7.10)
