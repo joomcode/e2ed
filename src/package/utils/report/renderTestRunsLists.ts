@@ -1,4 +1,5 @@
 import {TEST_RUN_STATUS_TO_MODIFIER_HASH} from '../../constants/internal';
+import {assertValueIsDefined} from '../asserts';
 
 import type {TestRunButtonProps, TestRunsListProps} from '../../types/internal';
 
@@ -22,10 +23,12 @@ const renderTestRunButton = (
 /**
  * Render test runs list for one retry.
  */
-const renderTestRunsList = ({hidden, testRunButtons}: TestRunsListProps): string => {
+const renderTestRunsSingleList = ({hidden, retry, testRunButtons}: TestRunsListProps): string => {
   const buttons = testRunButtons.map(renderTestRunButton);
 
-  return `<div role="tablist" ${hidden ? 'hidden' : ''}>${buttons.join('')}</div>`;
+  return `<div role="tablist" id="retry${retry}-nav-tablist" ${
+    hidden ? 'hidden' : ''
+  }>${buttons.join('')}</div>`;
 };
 
 /**
@@ -33,7 +36,27 @@ const renderTestRunsList = ({hidden, testRunButtons}: TestRunsListProps): string
  * @internal
  */
 export const renderTestRunsLists = (testRunsLists: TestRunsListProps[]): string => {
-  const lists = testRunsLists.map(renderTestRunsList);
+  const retries = testRunsLists.map(({retry}) => retry);
+  const maxRetry = Math.max(...retries);
+  const lists: string[] = [];
+
+  for (let index = 1; index <= maxRetry; index += 1) {
+    const isRetry = retries.includes(index);
+
+    if (isRetry) {
+      const testRunsList = testRunsLists.find(({retry}) => retry === index);
+
+      assertValueIsDefined(testRunsList);
+
+      lists[index] = renderTestRunsSingleList(testRunsList);
+    } else {
+      lists[index] = renderTestRunsSingleList({
+        hidden: index !== 1,
+        retry: index,
+        testRunButtons: [],
+      });
+    }
+  }
 
   return lists.join('');
 };
