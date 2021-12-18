@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.14](https://github.com/uid11/e2ed/tree/v0.7.14) (2021-12-18)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.13...v0.7.14)
+
+- [feat: refactoring event names (finish -> end, etc.)](https://github.com/uid11/e2ed/commit/48ceeca4b47efec031881ae9c044c59940617b29)
+
 ## [v0.7.13](https://github.com/uid11/e2ed/tree/v0.7.13) (2021-12-18)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.12...v0.7.13)
