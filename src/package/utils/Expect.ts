@@ -23,13 +23,13 @@ const assertions: Assert<string> = {
   gte: (expected) => `is greater than or equal to ${valueToString(expected)}`,
   lt: (expected) => `is less than ${valueToString(expected)}`,
   lte: (expected) => `is less than or equal to ${valueToString(expected)}`,
-  within: (start, finish) =>
+  within: (start, end) =>
     `is within a range from ${valueToString(start)} to ${valueToString(
-      finish,
+      end,
     )} (bounds are inclusive)`,
-  notWithin: (start, finish) =>
+  notWithin: (start, end) =>
     `is not within a range from ${valueToString(start)} to ${valueToString(
-      finish,
+      end,
     )} (bounds are inclusive)`,
   match: (re) => `matches the regular expression ${valueToString(re)}`,
   notMatch: (re) => `does not match the regular expression ${valueToString(re)}`,

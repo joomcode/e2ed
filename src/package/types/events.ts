@@ -4,7 +4,7 @@ import type {LogPayload} from './log';
 import type {RunId, TestOptions} from './testRun';
 
 /**
- * Logging event (on log call).
+ * Log event (on log call).
  */
 export type LogEvent = Readonly<{
   message: string;
@@ -14,18 +14,18 @@ export type LogEvent = Readonly<{
 }>;
 
 /**
- * FinishE2ed event (once event after all retries of all tests).
+ * EndE2edRun event (once event after all retries of all tests).
  * @internal
  */
-export type FinishE2edEvent = Readonly<{
+export type EndE2edRunEvent = Readonly<{
   utcTimeInMs: UtcTimeInMs;
 }>;
 
 /**
- * FinishTest event (on closing test).
+ * EndTestRun event (on closing test).
  * @internal
  */
-export type FinishTestEvent = Readonly<{
+export type EndTestRunEvent = Readonly<{
   errors: readonly TestCafeError[];
   runId: RunId;
   utcTimeInMs: UtcTimeInMs;
@@ -38,10 +38,10 @@ export type FinishTestEvent = Readonly<{
 type RunEnvironment = 'docker' | 'local';
 
 /**
- * RunE2ed event (once event on starting e2ed).
+ * E2edRun event (once event on starting e2ed).
  * @internal
  */
-export type RunE2edEvent = Readonly<{
+export type E2edRunEvent = Readonly<{
   concurrency: number;
   runEnvironment: RunEnvironment;
   startMessage: string;
@@ -51,12 +51,12 @@ export type RunE2edEvent = Readonly<{
 /**
  * RunTest event (on starting one test).
  */
-export type RunTestEvent = Readonly<{
+export type TestRunEvent = Readonly<{
   filePath: string;
-  isInternalRetryOf: RunId | undefined;
   logEvents: readonly LogEvent[];
   name: string;
   options: TestOptions;
+  previousRunId: RunId | undefined;
   runId: RunId;
   runLabel: string | undefined;
   utcTimeInMs: UtcTimeInMs;

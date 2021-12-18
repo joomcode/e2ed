@@ -1,6 +1,6 @@
 import type {TestRunStatus} from '../constants/internal';
 import type {UtcTimeInMs} from './date';
-import type {RunE2edEvent} from './events';
+import type {E2edRunEvent} from './events';
 import type {RunHash, RunId, TestRunWithHooks} from './testRun';
 
 /**
@@ -9,11 +9,11 @@ import type {RunHash, RunId, TestRunWithHooks} from './testRun';
  */
 export type ReportData = Readonly<{
   startTimeInMs: UtcTimeInMs;
-  finishTimeInMs: UtcTimeInMs;
+  endTimeInMs: UtcTimeInMs;
   name: string;
   testRunsWithHooks: readonly TestRunWithHooks[];
 }> &
-  Omit<RunE2edEvent, 'utcTimeInMs'>;
+  Omit<E2edRunEvent, 'utcTimeInMs'>;
 
 /**
  * RetryButton component props.

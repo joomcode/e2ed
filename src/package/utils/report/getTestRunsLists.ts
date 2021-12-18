@@ -19,20 +19,20 @@ export const getTestRunsLists = ({testRunsWithHooks}: ReportData): TestRunsListP
     const {
       errors,
       filePath,
-      isInternalRetryOf,
       mainParams,
       name,
+      previousRunId,
       runHash: maybeDuplicateRunHash,
       runId,
       runLabel,
       startTimeInMs,
-      finishTimeInMs,
+      endTimeInMs,
     } = testRunWithHooks;
 
-    const durationInMs = finishTimeInMs - startTimeInMs;
+    const durationInMs = endTimeInMs - startTimeInMs;
 
-    if (isInternalRetryOf) {
-      internallyRetriedRunIds.push(isInternalRetryOf);
+    if (previousRunId) {
+      internallyRetriedRunIds.push(previousRunId);
     }
 
     const retry = parseInt((runLabel || 'retry 1').slice(6), 10);

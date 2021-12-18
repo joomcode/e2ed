@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import {registerFinishE2edEvent, registerRunE2edEvent} from '../utils/events';
+import {registerEndE2edRunEvent, registerStartE2edRunEvent} from '../utils/events';
 import {failTestsToString} from '../utils/failTestsToString';
 import {generalLog} from '../utils/generalLog';
 import {getConcurrencyForNextRetry} from '../utils/getConcurrencyForNextRetry';
@@ -9,7 +9,7 @@ import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {getStartMessage} from '../utils/getStartMessage';
 import {runTests} from '../utils/runTests';
 
-import type {FailTest, FailTests, RunE2edEvent, UtcTimeInMs} from '../types/internal';
+import type {E2edRunEvent, FailTest, FailTests, UtcTimeInMs} from '../types/internal';
 
 process.env.E2ED_IS_DOCKER_RUN = 'true';
 
@@ -35,7 +35,7 @@ let testsCount = 0;
 
 const asyncRunTests = async (): Promise<void> => {
   const startMessage = getStartMessage();
-  const runE2edEvent: RunE2edEvent = {
+  const e2edRunEvent: E2edRunEvent = {
     concurrency,
     runEnvironment: 'docker',
     startMessage,
@@ -44,7 +44,7 @@ const asyncRunTests = async (): Promise<void> => {
 
   generalLog(`${startMessage}\n`);
 
-  await registerRunE2edEvent(runE2edEvent);
+  await registerStartE2edRunEvent(e2edRunEvent);
 
   for (; retryIndex <= retries; retryIndex += 1) {
     runLabel = `retry ${retryIndex}/${retries}`;
@@ -121,17 +121,17 @@ asyncRunTests()
     const wordRetry = retries === 1 ? 'retry' : 'retries';
     const testsCountPrefix = allTestsCount > 0 ? `${allTestsCount} ${wordTest}` : 'Run';
 
-    const finishTimeInMs = Date.now() as UtcTimeInMs;
+    const endTimeInMs = Date.now() as UtcTimeInMs;
 
     generalLog(
       `${testsCountPrefix} with all ${retries} ${wordRetry} lasted ${
-        finishTimeInMs - startTimeInMs
+        endTimeInMs - startTimeInMs
       } ms`,
     );
 
-    const finishE2edEvent = {utcTimeInMs: finishTimeInMs};
+    const endE2edRunEvent = {utcTimeInMs: endTimeInMs};
 
-    registerFinishE2edEvent(finishE2edEvent)
+    registerEndE2edRunEvent(endE2edRunEvent)
       .catch((error: unknown) => {
         generalLog('Caught error on saving HTML report', {error});
       })

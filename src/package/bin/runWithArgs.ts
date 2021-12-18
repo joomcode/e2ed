@@ -9,9 +9,9 @@ import {JSON_REPORT_PATH} from '../constants/internal';
 import {generalLog} from '../utils/generalLog';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {getStartMessage} from '../utils/getStartMessage';
-import {registerFinishE2edEvent, registerRunE2edEvent} from '../utils/events';
+import {registerEndE2edRunEvent, registerStartE2edRunEvent} from '../utils/events';
 
-import type {RunE2edEvent, UtcTimeInMs} from '../types/internal';
+import type {E2edRunEvent, UtcTimeInMs} from '../types/internal';
 
 try {
   // eslint-disable-next-line
@@ -35,7 +35,7 @@ const concurrency = getIntegerFromEnvVariable({
 
 const startMessage = getStartMessage();
 
-const runE2edEvent: RunE2edEvent = {
+const e2edRunEvent: E2edRunEvent = {
   concurrency,
   runEnvironment: 'local',
   startMessage,
@@ -44,7 +44,7 @@ const runE2edEvent: RunE2edEvent = {
 
 generalLog(`${startMessage}\n`);
 
-void registerRunE2edEvent(runE2edEvent);
+void registerStartE2edRunEvent(e2edRunEvent);
 
 process.argv.push('--concurrency', String(concurrency));
 
@@ -84,7 +84,7 @@ const timer: NodeJS.Timer = setInterval(() => {
       if (previousStatData !== undefined) {
         const utcTimeInMs = Date.now() as UtcTimeInMs;
 
-        registerFinishE2edEvent({utcTimeInMs});
+        registerEndE2edRunEvent({utcTimeInMs});
 
         clear(timer);
       }
