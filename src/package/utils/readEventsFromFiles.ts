@@ -45,7 +45,7 @@ export const readEventsFromFiles = async (): Promise<TestRunWithHooks[]> => {
     }
   }
 
-  generalLog(`Read ${testRuns.length} test runs from ${EVENTS_DIRECTORY_PATH}`);
+  generalLog(`Read ${testRuns.length} test runs from "${EVENTS_DIRECTORY_PATH}"`);
 
   return testRuns;
 };
