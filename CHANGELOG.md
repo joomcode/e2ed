@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.13](https://github.com/uid11/e2ed/tree/v0.7.13) (2021-12-18)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.12...v0.7.13)
+
+- [fix: local run with E2ED_DEBUG; remove unnecessary script bin/e2ed.sh](https://github.com/uid11/e2ed/commit/af08d24afc62c7672f0c6e7128a7352cc7499b0a)
+
 ## [v0.7.12](https://github.com/uid11/e2ed/tree/v0.7.12) (2021-12-18)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.11...v0.7.12)
