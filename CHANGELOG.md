@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.7.12](https://github.com/uid11/e2ed/tree/v0.7.12) (2021-12-18)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.11...v0.7.12)
+
+- [chore: update eslint to latest version](https://github.com/uid11/e2ed/commit/9ff0e7257d06eb02df2a7276dca44fbbf04fef46)
+- [feat: support environment variable E2ED_REPORT_NAME (for HTML report)](https://github.com/uid11/e2ed/commit/c42730836892cd37fce9c33ed64432f2907143b9)
+
 ## [v0.7.11](https://github.com/uid11/e2ed/tree/v0.7.11) (2021-12-17)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.10...v0.7.11)
