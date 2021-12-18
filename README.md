@@ -59,6 +59,9 @@ E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh
 `E2ED_DOCKER_RETRIES`: the maximum number of retries to run a failing test with the `your-project/e2ed/bin/runDocker.sh`
 command (maximum value 10, 5 by default). For example, if it is equal to three, the test will be run no more than three times.
 
+`E2ED_REPORT_NAME`: the name of HTML report (without extension `.html`). This name is used as the title
+of the report page, and as the name of the file to save the report.
+
 `E2ED_HIDE_LOGS`: hides detailed logs of test runs if this variable is not empty.
 
 `E2ED_IS_DOCKER_RUN`: when run in docker the `e2ed` sets this variable to `"true"`.

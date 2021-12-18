@@ -6,6 +6,12 @@ import type {UtcTimeInMs} from '../../types/internal';
  * @internal
  */
 export const getReportName = (startTimeInMs: UtcTimeInMs): string => {
+  const reportNameFromEnvironment = process.env.E2ED_REPORT_NAME;
+
+  if (reportNameFromEnvironment) {
+    return reportNameFromEnvironment;
+  }
+
   const date = new Date(startTimeInMs);
   const dateTimeString = date.toISOString().slice(0, 19);
 
