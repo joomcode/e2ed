@@ -1,11 +1,10 @@
 import {readdir, readFile} from 'fs/promises';
 import {join} from 'path';
 
-import {EVENTS_DIRECTORY_PATH, READ_FILE_OPTIONS} from '../constants/internal';
+import {EVENTS_DIRECTORY_PATH, READ_FILE_OPTIONS} from '../../constants/internal';
+import {generalLog} from '../generalLog';
 
-import {generalLog} from './generalLog';
-
-import type {TestRunWithHooks} from '../types/internal';
+import type {TestRunWithHooks} from '../../types/internal';
 
 const AMOUNT_OF_PARALLEL_OPEN_FILES = 40;
 

@@ -16,6 +16,11 @@ export type RunHash = Brand<string, 'RunHash'>;
 export type RunId = Brand<string, 'RunId'>;
 
 /**
+ * Relative file path for files with tests.
+ */
+export type TestFilePath = Brand<string, 'TestFilePath'>;
+
+/**
  * Test options.
  */
 export type TestOptions = DeepReadonly<{

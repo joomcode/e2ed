@@ -3,7 +3,7 @@ import {getPageLoaded} from '../context/pageLoaded';
 import {getRunId} from '../context/runId';
 import {testController} from '../testController';
 
-import {registerLogEvent} from './events';
+import {registerLogEvent} from './events/registerLogEvent';
 import {getPrintedLabel} from './getPrintedLabel';
 import {valueToString} from './valueToString';
 

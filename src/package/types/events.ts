@@ -1,7 +1,7 @@
 import type {LogEventType} from '../constants/internal';
 import type {UtcTimeInMs} from './date';
 import type {LogPayload} from './log';
-import type {RunId, TestOptions} from './testRun';
+import type {RunId, TestFilePath, TestOptions, TestRunWithHooks} from './testRun';
 
 /**
  * Log event (on log call).
@@ -32,6 +32,16 @@ export type EndTestRunEvent = Readonly<{
 }>;
 
 /**
+ * Object with full events data (for report).
+ * @internal
+ */
+export type FullEventsData = Readonly<{
+  e2edRunEvent: E2edRunEvent;
+  endE2edRunEvent: EndE2edRunEvent;
+  testRunsWithHooks: readonly TestRunWithHooks[];
+}>;
+
+/**
  * Run environment (run in docker or local run).
  * @internal
  */
@@ -49,10 +59,10 @@ export type E2edRunEvent = Readonly<{
 }>;
 
 /**
- * RunTest event (on starting one test).
+ * TestRun event (on starting one test).
  */
 export type TestRunEvent = Readonly<{
-  filePath: string;
+  filePath: TestFilePath;
   logEvents: readonly LogEvent[];
   name: string;
   options: TestOptions;

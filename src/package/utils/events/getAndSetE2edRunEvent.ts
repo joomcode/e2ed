@@ -1,6 +1,6 @@
-import {assertValueIsDefined, assertValueIsTrue} from './asserts';
+import {assertValueIsDefined, assertValueIsTrue} from '../asserts';
 
-import type {E2edRunEvent} from '../types/internal';
+import type {E2edRunEvent} from '../../types/internal';
 
 let e2edRunEvent: E2edRunEvent | undefined;
 

@@ -1,7 +1,8 @@
 import {TMP_DIRECTORY_PATH, EVENTS_DIRECTORY_PATH} from '../../constants/internal';
 import {createDirectory} from '../createDirectory';
-import {setE2edRunEvent} from '../getAndSetE2edRunEvent';
 import {removeDirectory} from '../removeDirectory';
+
+import {setE2edRunEvent} from './getAndSetE2edRunEvent';
 
 import type {E2edRunEvent} from '../../types/internal';
 
