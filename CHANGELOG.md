@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.7.19](https://github.com/uid11/e2ed/tree/v0.7.19) (2021-12-20)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.18...v0.7.19)
+
+- [feat: add original errors object to TestRunEvent](https://github.com/uid11/e2ed/commit/5891429bf55a59feafa0e138bd2aa595d386f080)
+- [feat: add ended flag to TestRunEvent; add bin-v8-flags-filter to peer dependencies](https://github.com/uid11/e2ed/commit/b92462b3ccbb902b0ce3bae3edc1478a3585aa96)
+
 ## [v0.7.18](https://github.com/uid11/e2ed/tree/v0.7.18) (2021-12-20)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.17...v0.7.18)
