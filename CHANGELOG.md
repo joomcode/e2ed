@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.21](https://github.com/uid11/e2ed/tree/v0.7.21) (2021-12-20)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.20...v0.7.21)
+
+- [fix: remove dependency on hooks from E2EDError constructor](https://github.com/uid11/e2ed/commit/86e810df79dee3b57426238e29f677dc265fc7e2)
+
 ## [v0.7.20](https://github.com/uid11/e2ed/tree/v0.7.20) (2021-12-20)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.19...v0.7.20)
