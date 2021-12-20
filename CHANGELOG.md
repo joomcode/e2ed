@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.7.15](https://github.com/uid11/e2ed/tree/v0.7.15) (2021-12-20)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.14...v0.7.15)
+
+- [feat: check that all tests files was visited during tests run](https://github.com/uid11/e2ed/commit/a982b50bf9f73f61bae5db7b053c5dd546b15b89)
+- [refactor: directories utils/events and utils/report](https://github.com/uid11/e2ed/commit/9ec9852c3b999a7f32d734cc47188a0e2c20557f)
+
 ## [v0.7.14](https://github.com/uid11/e2ed/tree/v0.7.14) (2021-12-18)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.13...v0.7.14)
