@@ -1,12 +1,26 @@
 import type {IsBrand} from './brand';
 
 /**
+ * This type checks that the type true is passed to it.
+ */
+export type Expect<T extends true> = T;
+
+/**
  * Function by argument, return type, and this (context) type.
  */
 export type Fn<Args extends unknown[] = never[], ReturnType = unknown, This = unknown> = (
   this: This,
   ...args: Args
 ) => ReturnType;
+
+/**
+ * Return true if types are exactly equal and false otherwise.
+ * IsEqual<{foo: string}, {foo: string}> = true.
+ * IsEqual<{readonly foo: string}, {foo: string}> = false.
+ */
+export type IsEqual<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2
+  ? true
+  : false;
 
 /**
  * Inner key for params type.
