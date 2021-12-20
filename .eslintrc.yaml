@@ -13,7 +13,7 @@ parserOptions:
   project: ./tsconfig.json
   sourceType: module
 root: true
-ignorePatterns: [bin, build]
+ignorePatterns: [bin/TestCafeFork/package, build]
 rules:
   class-methods-use-this:
     - error
@@ -62,10 +62,6 @@ rules:
   '@typescript-eslint/no-namespace': [error, {allowDeclarations: true}]
   '@typescript-eslint/no-shadow': [error]
   '@typescript-eslint/no-use-before-define': [error]
-overrides:
-  - files: ['**/bin/**/*.ts']
-    rules:
-      no-console: off
 settings:
   import/extensions: [.ts]
   import/resolver:

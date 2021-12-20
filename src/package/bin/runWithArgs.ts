@@ -6,10 +6,10 @@
 import {stat} from 'fs/promises';
 
 import {JSON_REPORT_PATH} from '../constants/internal';
+import {registerEndE2edRunEvent, registerStartE2edRunEvent} from '../utils/events';
 import {generalLog} from '../utils/generalLog';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {getStartMessage} from '../utils/getStartMessage';
-import {registerEndE2edRunEvent, registerStartE2edRunEvent} from '../utils/events';
 
 import type {E2edRunEvent, UtcTimeInMs} from '../types/internal';
 
@@ -59,7 +59,7 @@ const startTimeInMs = Date.now() as UtcTimeInMs;
 let previousStatData: string | undefined;
 let cleared = false;
 
-const clear = (id: NodeJS.Timer) => {
+const clear = (id: NodeJS.Timer): void => {
   clearInterval(id);
   cleared = true;
 };
@@ -70,21 +70,23 @@ const timer: NodeJS.Timer = setInterval(() => {
   }
 
   if (Date.now() - startTimeInMs > 10 * 60_000) {
-    return clear(timer);
+    clear(timer);
+
+    return;
   }
 
-  stat(JSON_REPORT_PATH).then((stats) => {
+  void stat(JSON_REPORT_PATH).then(({ctime, mtime}) => {
     if (cleared) {
       return;
     }
 
-    const statData = JSON.stringify(stats);
+    const statData = JSON.stringify({ctime, mtime});
 
     if (statData !== previousStatData) {
       if (previousStatData !== undefined) {
         const utcTimeInMs = Date.now() as UtcTimeInMs;
 
-        registerEndE2edRunEvent({utcTimeInMs});
+        void registerEndE2edRunEvent({utcTimeInMs});
 
         clear(timer);
       }

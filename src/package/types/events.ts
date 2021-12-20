@@ -46,7 +46,7 @@ export type FullEventsData = Readonly<{
  * Run environment (run in docker or local run).
  * @internal
  */
-type RunEnvironment = 'docker' | 'local';
+export type RunEnvironment = 'docker' | 'local';
 
 /**
  * E2edRun event (once event on starting e2ed).

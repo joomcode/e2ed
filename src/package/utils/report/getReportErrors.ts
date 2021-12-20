@@ -1,24 +1,27 @@
 import {getUnvisitedTestFilePaths} from '../getUnvisitedTestFilePaths';
 
-import type {TestRunWithHooks} from '../../types/internal';
+import type {RunEnvironment, TestRunWithHooks} from '../../types/internal';
 
 /**
  * Get all report errors. General report status is failed if there is any error.
  * @internal
  */
 export const getReportErrors = async (
+  runEnvironment: RunEnvironment,
   testRunsWithHooks: readonly TestRunWithHooks[],
 ): Promise<readonly string[]> => {
   const errors: string[] = [];
 
-  const unvisitedTestFilePaths = await getUnvisitedTestFilePaths(testRunsWithHooks);
+  if (runEnvironment === 'docker') {
+    const unvisitedTestFilePaths = await getUnvisitedTestFilePaths(testRunsWithHooks);
 
-  if (unvisitedTestFilePaths.length !== 0) {
-    errors.push(
-      `Error: There are e2ed/tests/**/*.spec.ts-files not visited when running tests: ${unvisitedTestFilePaths.join(
-        ', ',
-      )}`,
-    );
+    if (unvisitedTestFilePaths.length !== 0) {
+      errors.push(
+        `Error: There are e2ed/tests/**/*.spec.ts-files not visited when running tests: ${unvisitedTestFilePaths.join(
+          ', ',
+        )}`,
+      );
+    }
   }
 
   return errors;

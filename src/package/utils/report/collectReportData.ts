@@ -12,18 +12,19 @@ export const collectReportData = async ({
   endE2edRunEvent,
   testRunsWithHooks,
 }: FullEventsData): Promise<ReportData> => {
-  const {utcTimeInMs: startTimeInMs, ...restE2edRunEvent} = e2edRunEvent;
+  const {utcTimeInMs: startTimeInMs, runEnvironment, ...restE2edRunEvent} = e2edRunEvent;
   const {utcTimeInMs: endTimeInMs} = endE2edRunEvent;
 
   const name = getReportName(startTimeInMs);
 
-  const errors = await getReportErrors(testRunsWithHooks);
+  const errors = await getReportErrors(runEnvironment, testRunsWithHooks);
 
   const reportData = {
     startTimeInMs,
     errors,
     endTimeInMs,
     name,
+    runEnvironment,
     testRunsWithHooks,
     ...restE2edRunEvent,
   };
