@@ -5,7 +5,7 @@ import type {TestRun} from 'e2ed/types';
  * The resulting value is used in test runs list in HTML report.
  * As with all hooks, you can replace it with your own implementation.
  */
-export const mainTestRunParams = (testRun: TestRun): string => {
+export const getMainTestRunParams = (testRun: TestRun): string => {
   const {options} = testRun;
 
   return options.meta.testId;

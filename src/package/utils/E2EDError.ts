@@ -16,7 +16,7 @@ export class E2EDError extends Error {
       // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
       const hooks: typeof import('../hooks') = require('../hooks');
 
-      printedObject.context = hooks.logContext();
+      printedObject.context = hooks.getLogContext();
     } catch (error) {
       generalLog('Cannot get log context from hooks for E2EDError', {message, error, params});
     }

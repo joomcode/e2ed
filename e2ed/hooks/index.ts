@@ -1,4 +1,4 @@
-export * from './logContext';
-export * from './mainTestRunParams';
+export * from './getLogContext';
+export * from './getMainTestRunParams';
+export * from './getTestRunHash';
 export * from './navigateTo';
-export * from './testRunHash';

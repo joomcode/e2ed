@@ -24,8 +24,8 @@ export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promi
 
   const testRun: TestRun = {errors, startTimeInMs, endTimeInMs, ...restTestRunEvent};
 
-  const mainParams = hooks.mainTestRunParams(testRun);
-  const runHash = hooks.testRunHash(testRun);
+  const mainParams = hooks.getMainTestRunParams(testRun);
+  const runHash = hooks.getTestRunHash(testRun);
 
   const testRunWithHooks: TestRunWithHooks = {mainParams, runHash, ...testRun};
 

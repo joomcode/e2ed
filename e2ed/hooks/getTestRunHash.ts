@@ -7,7 +7,7 @@ import type {RunHash, TestRun} from 'e2ed/types';
  * special characters like hyphens, colons, and so on.
  * As with all hooks, you can replace it with your own implementation.
  */
-export const testRunHash = (testRun: TestRun): RunHash => {
+export const getTestRunHash = (testRun: TestRun): RunHash => {
   const {options, runLabel} = testRun;
 
   const label = runLabel ? `-${runLabel}` : '';

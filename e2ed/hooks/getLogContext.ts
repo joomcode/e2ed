@@ -10,7 +10,7 @@ import type {LogContext} from 'e2ed/types';
  * As with all hooks, you can replace it with your own implementation.
  * Use context (e2ed/context) to get parameters inside a hook.
  */
-export const logContext = (): LogContext | undefined => {
+export const getLogContext = (): LogContext | undefined => {
   const {testId} = getMeta();
 
   return {testId};
