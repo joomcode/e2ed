@@ -3,13 +3,21 @@ import {assertValueIsDefined, assertValueIsTrue} from '../asserts';
 import {generalLog} from '../generalLog';
 import {writeTestRunToJsonFile} from '../writeTestRunToJsonFile';
 
-import type {EndTestRunEvent, TestRun, TestRunWithHooks} from '../../types/internal';
+import type {
+  EndTestRunEvent,
+  OriginalTestRunError,
+  TestRun,
+  TestRunWithHooks,
+} from '../../types/internal';
 
 /**
  * Register end test run event (for report) after test closing.
  * @internal
  */
-export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promise<void> => {
+export const registerEndTestRunEvent = (
+  endTestRunEvent: EndTestRunEvent,
+  originalErrors: readonly OriginalTestRunError[],
+): Promise<void> => {
   const {runId} = endTestRunEvent;
 
   const testRunEvent = RUN_IDS_HASH[runId];
@@ -17,7 +25,14 @@ export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promi
   assertValueIsDefined(testRunEvent);
   assertValueIsTrue(testRunEvent.runId === runId);
 
-  const {utcTimeInMs: startTimeInMs, ended, ...restTestRunEvent} = testRunEvent;
+  const {
+    utcTimeInMs: startTimeInMs,
+    ended,
+    originalErrors: originalTestRunErrors,
+    ...restTestRunEvent
+  } = testRunEvent;
+
+  assertValueIsTrue(originalTestRunErrors === originalErrors);
 
   if (ended) {
     generalLog('Try to end TestRunEvent event, but it is already ended', {

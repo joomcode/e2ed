@@ -1,5 +1,6 @@
 import type {LogEventType} from '../constants/internal';
 import type {UtcTimeInMs} from './date';
+import type {OriginalTestRunError, TestRunError} from './errors';
 import type {TestFilePath} from './fs';
 import type {LogPayload} from './log';
 import type {RunId, TestOptions, TestRunWithHooks} from './testRun';
@@ -27,7 +28,7 @@ export type EndE2edRunEvent = Readonly<{
  * @internal
  */
 export type EndTestRunEvent = Readonly<{
-  errors: readonly TestCafeError[];
+  errors: readonly TestRunError[];
   runId: RunId;
   utcTimeInMs: UtcTimeInMs;
 }>;
@@ -68,15 +69,9 @@ export type TestRunEvent = Readonly<{
   logEvents: readonly LogEvent[];
   name: string;
   options: TestOptions;
+  originalErrors: readonly OriginalTestRunError[];
   previousRunId: RunId | undefined;
   runId: RunId;
   runLabel: string | undefined;
   utcTimeInMs: UtcTimeInMs;
-}>;
-
-/**
- * Internal TestCafe error object (only some fields).
- */
-export type TestCafeError = Readonly<{
-  message: string;
 }>;

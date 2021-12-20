@@ -22,6 +22,7 @@ export const it = (name: string, options: TestOptions, testFn: () => Promise<voi
     .before((testController: Inner.TestController) => {
       const runId = getRandomId().replace(/:/g, '-') as RunId;
 
+      const {errs: originalErrors} = testController.testRun;
       const {filename: absoluteFilePath} = testController.testRun.test.testFile;
       const filePath = getRelativeTestFilePath(absoluteFilePath);
       const runLabel = process.env.E2ED_RUN_LABEL;
@@ -34,16 +35,22 @@ export const it = (name: string, options: TestOptions, testFn: () => Promise<voi
       setRunId(runId);
       setRawMeta(options.meta);
 
-      return registerStartTestRunEvent({...runTestOwnParams, ended: false, logEvents: [], runId});
+      return registerStartTestRunEvent({
+        ...runTestOwnParams,
+        ended: false,
+        logEvents: [],
+        originalErrors,
+        runId,
+      });
     })(name, testFn)
     .after((testController: Inner.TestController) => {
       const utcTimeInMs = Date.now() as UtcTimeInMs;
 
-      const {errs} = testController.testRun;
-      const errors = errs.map(({errMsg}) => ({message: errMsg}));
+      const {errs: originalErrors} = testController.testRun;
+      const errors = originalErrors.map(({errMsg}) => ({message: errMsg}));
 
       const runId = getRunId();
 
-      return registerEndTestRunEvent({errors, runId, utcTimeInMs});
+      return registerEndTestRunEvent({errors, runId, utcTimeInMs}, originalErrors);
     });
 };

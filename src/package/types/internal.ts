@@ -4,6 +4,7 @@ export * from './brand';
 export * from './config';
 export * from './date';
 export * from './deep';
+export * from './errors';
 export * from './events';
 export * from './fs';
 export * from './log';

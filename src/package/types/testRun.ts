@@ -1,7 +1,8 @@
 import type {Brand} from './brand';
 import type {UtcTimeInMs} from './date';
 import type {DeepReadonly} from './deep';
-import type {TestCafeError, TestRunEvent} from './events';
+import type {TestRunError} from './errors';
+import type {TestRunEvent} from './events';
 import type {TestMeta} from './userland';
 
 /**
@@ -27,11 +28,11 @@ export type TestOptions = DeepReadonly<{
  * Not internal because it used in user hooks.
  */
 export type TestRun = Readonly<{
-  errors: readonly TestCafeError[];
+  errors: readonly TestRunError[];
   startTimeInMs: UtcTimeInMs;
   endTimeInMs: UtcTimeInMs;
 }> &
-  Omit<TestRunEvent, 'ended' | 'utcTimeInMs'>;
+  Omit<TestRunEvent, 'ended' | 'originalErrors' | 'utcTimeInMs'>;
 
 /**
  * TestRun object with result of userland hooks (like mainParams and runHash).
