@@ -20,7 +20,7 @@
   "repository": "uid11/e2ed",
   "dependencies": {
     "pngjs": "6.0.0",
-    "testcafe-without-typecheck": "1.17.1-rc.4"
+    "testcafe-without-typecheck": "1.17.1-rc.5"
   },
   "devDependencies": {
     "@types/node": "17.0.1",
