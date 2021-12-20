@@ -1,12 +1,14 @@
 import {readdir, readFile} from 'fs/promises';
 import {join} from 'path';
 
-import {EVENTS_DIRECTORY_PATH, READ_FILE_OPTIONS} from '../../constants/internal';
+import {
+  AMOUNT_OF_PARALLEL_OPEN_FILES,
+  EVENTS_DIRECTORY_PATH,
+  READ_FILE_OPTIONS,
+} from '../../constants/internal';
 import {generalLog} from '../generalLog';
 
 import type {TestRunWithHooks} from '../../types/internal';
-
-const AMOUNT_OF_PARALLEL_OPEN_FILES = 40;
 
 /**
  * Read events objects from temporary directory.
@@ -21,7 +23,7 @@ export const readEventsFromFiles = async (): Promise<TestRunWithHooks[]> => {
     fileIndex < eventFiles.length;
     fileIndex += AMOUNT_OF_PARALLEL_OPEN_FILES
   ) {
-    const readPromises = [];
+    const readPromises: Promise<string>[] = [];
 
     for (
       let index = fileIndex;

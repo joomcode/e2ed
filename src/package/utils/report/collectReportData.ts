@@ -1,3 +1,4 @@
+import {getReportErrors} from './getReportErrors';
 import {getReportName} from './getReportName';
 
 import type {FullEventsData, ReportData} from '../../types/internal';
@@ -13,11 +14,19 @@ export const collectReportData = async ({
 }: FullEventsData): Promise<ReportData> => {
   const {utcTimeInMs: startTimeInMs, ...restE2edRunEvent} = e2edRunEvent;
   const {utcTimeInMs: endTimeInMs} = endE2edRunEvent;
+
   const name = getReportName(startTimeInMs);
 
-  const reportData = {startTimeInMs, endTimeInMs, name, testRunsWithHooks, ...restE2edRunEvent};
+  const errors = await getReportErrors(testRunsWithHooks);
 
-  void (await Promise.resolve());
+  const reportData = {
+    startTimeInMs,
+    errors,
+    endTimeInMs,
+    name,
+    testRunsWithHooks,
+    ...restE2edRunEvent,
+  };
 
   return reportData;
 };

@@ -1,6 +1,7 @@
 import {generalLog} from '../generalLog';
 
 import {getTestRunsLists} from './getTestRunsLists';
+import {renderErrors} from './renderErrors';
 import {renderHead} from './renderHead';
 import {renderJsonData} from './renderJsonData';
 import {renderNavigation} from './renderNavigation';
@@ -27,6 +28,7 @@ export const renderHtmlReportToString = (reportData: ReportData): string => {
       <h4 class="main__section-title">Retry 1</h4>
       <div class="toolbar" role="toolbar" aria-label="Tests filter"></div>
       ${renderTestRunsLists(testRunsLists)}
+      ${renderErrors(reportData.errors)}
     </section>
     <div class="drag-container"></div>
     <section id="e2edTestRunDetails" class="main__section main__section_position_right" aria-label="Tests results">

@@ -12,7 +12,7 @@ import type {ReportData} from '../../types/internal';
  * Save HTML report (report.html file) with test runs results.
  * @internal
  */
-export const saveHtmlReport = (reportData: ReportData): Promise<void> => {
+export const writeHtmlReport = (reportData: ReportData): Promise<void> => {
   const htmlReportString = renderHtmlReportToString(reportData);
   const reportFileName = `${reportData.name}.html`;
   const reportFilePath = join(REPORTS_DIRECTORY_PATH, reportFileName);

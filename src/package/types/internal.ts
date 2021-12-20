@@ -5,6 +5,7 @@ export * from './config';
 export * from './date';
 export * from './deep';
 export * from './events';
+export * from './fs';
 export * from './log';
 export * from './pages';
 export * from './report';

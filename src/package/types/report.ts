@@ -9,6 +9,7 @@ import type {RunHash, RunId, TestRunWithHooks} from './testRun';
  */
 export type ReportData = Readonly<{
   startTimeInMs: UtcTimeInMs;
+  errors: readonly string[];
   endTimeInMs: UtcTimeInMs;
   name: string;
   testRunsWithHooks: readonly TestRunWithHooks[];

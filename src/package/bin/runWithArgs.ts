@@ -73,12 +73,12 @@ const timer: NodeJS.Timer = setInterval(() => {
     return clear(timer);
   }
 
-  stat(JSON_REPORT_PATH).then((statObject) => {
+  stat(JSON_REPORT_PATH).then((stats) => {
     if (cleared) {
       return;
     }
 
-    const statData = JSON.stringify(statObject);
+    const statData = JSON.stringify(stats);
 
     if (statData !== previousStatData) {
       if (previousStatData !== undefined) {

@@ -74,6 +74,17 @@ button:hover {
   border-bottom: 1px solid #b5b5b5;
 }
 
+/* errors */
+.errors {
+  padding: 2px 6px;
+}
+
+.errors .__error {
+  color: var(--failed-color);
+
+  margin: 4px 0;
+}
+
 /* nav */
 .nav {
   width: 100px;

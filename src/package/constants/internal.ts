@@ -5,6 +5,12 @@ export * from './paths';
 export * from './report';
 
 /**
+ * Amount of parallel open files.
+ * @internal
+ */
+export const AMOUNT_OF_PARALLEL_OPEN_FILES = 40;
+
+/**
  * Default options for node util.inspect.
  * @internal
  */

@@ -1,7 +1,8 @@
 import type {LogEventType} from '../constants/internal';
 import type {UtcTimeInMs} from './date';
+import type {TestFilePath} from './fs';
 import type {LogPayload} from './log';
-import type {RunId, TestFilePath, TestOptions, TestRunWithHooks} from './testRun';
+import type {RunId, TestOptions, TestRunWithHooks} from './testRun';
 
 /**
  * Log event (on log call).
