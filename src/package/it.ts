@@ -34,7 +34,7 @@ export const it = (name: string, options: TestOptions, testFn: () => Promise<voi
       setRunId(runId);
       setRawMeta(options.meta);
 
-      return registerStartTestRunEvent({...runTestOwnParams, logEvents: [], runId});
+      return registerStartTestRunEvent({...runTestOwnParams, ended: false, logEvents: [], runId});
     })(name, testFn)
     .after((testController: Inner.TestController) => {
       const utcTimeInMs = Date.now() as UtcTimeInMs;

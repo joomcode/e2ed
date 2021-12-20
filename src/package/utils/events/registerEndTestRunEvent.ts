@@ -1,5 +1,6 @@
 import {RUN_IDS_HASH} from '../../constants/internal';
 import {assertValueIsDefined, assertValueIsTrue} from '../asserts';
+import {generalLog} from '../generalLog';
 import {writeTestRunToJsonFile} from '../writeTestRunToJsonFile';
 
 import type {EndTestRunEvent, TestRun, TestRunWithHooks} from '../../types/internal';
@@ -9,9 +10,6 @@ import type {EndTestRunEvent, TestRun, TestRunWithHooks} from '../../types/inter
  * @internal
  */
 export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promise<void> => {
-  // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
-  const hooks: typeof import('../../hooks') = require('../../hooks');
-
   const {runId} = endTestRunEvent;
 
   const testRunEvent = RUN_IDS_HASH[runId];
@@ -19,10 +17,25 @@ export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promi
   assertValueIsDefined(testRunEvent);
   assertValueIsTrue(testRunEvent.runId === runId);
 
-  const {utcTimeInMs: startTimeInMs, ...restTestRunEvent} = testRunEvent;
+  const {utcTimeInMs: startTimeInMs, ended, ...restTestRunEvent} = testRunEvent;
+
+  if (ended) {
+    generalLog('Try to end TestRunEvent event, but it is already ended', {
+      testRunEvent,
+      endTestRunEvent,
+    });
+
+    return Promise.resolve();
+  }
+
+  (testRunEvent as {ended: boolean}).ended = true;
+
   const {errors, utcTimeInMs: endTimeInMs} = endTestRunEvent;
 
   const testRun: TestRun = {errors, startTimeInMs, endTimeInMs, ...restTestRunEvent};
+
+  // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
+  const hooks: typeof import('../../hooks') = require('../../hooks');
 
   const mainParams = hooks.getMainTestRunParams(testRun);
   const runHash = hooks.getTestRunHash(testRun);

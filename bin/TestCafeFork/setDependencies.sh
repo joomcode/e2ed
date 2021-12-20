@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+sed -i "s/\x22bin-v8-flags-filter\x22: \x22[^\x22]*\x22,/\x22bin-v8-flags-filter\x22: \x22>=1.2.0\x22,/" ./bin/TestCafeFork/package/package.json
 sed -i "s/\x22pngjs\x22: \x22[^\x22]*\x22,//" ./bin/TestCafeFork/package/package.json
 sed -i "s/\x22typescript\x22: \x22[^\x22]*\x22,//" ./bin/TestCafeFork/package/package.json
 

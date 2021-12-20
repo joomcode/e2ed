@@ -36,6 +36,7 @@
     "typescript": "4.5.4"
   },
   "peerDependencies": {
+    "bin-v8-flags-filter": ">=1.2.0",
     "typescript": ">=4"
   },
   "scripts": {

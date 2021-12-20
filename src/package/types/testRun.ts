@@ -31,7 +31,7 @@ export type TestRun = Readonly<{
   startTimeInMs: UtcTimeInMs;
   endTimeInMs: UtcTimeInMs;
 }> &
-  Omit<TestRunEvent, 'utcTimeInMs'>;
+  Omit<TestRunEvent, 'ended' | 'utcTimeInMs'>;
 
 /**
  * TestRun object with result of userland hooks (like mainParams and runHash).

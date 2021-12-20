@@ -63,6 +63,7 @@ export type E2edRunEvent = Readonly<{
  * TestRun event (on starting one test).
  */
 export type TestRunEvent = Readonly<{
+  ended: boolean;
   filePath: TestFilePath;
   logEvents: readonly LogEvent[];
   name: string;
