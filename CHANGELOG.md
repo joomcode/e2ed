@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.16](https://github.com/uid11/e2ed/tree/v0.7.16) (2021-12-20)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.15...v0.7.16)
+
+- [fix: check unvisited test files only in docker; fix local register EndE2edRunEvent](https://github.com/uid11/e2ed/commit/8d65c24a4a1fb8769bd7d23027278b76f258b341)
+
 ## [v0.7.15](https://github.com/uid11/e2ed/tree/v0.7.15) (2021-12-20)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.14...v0.7.15)
