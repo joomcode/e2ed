@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.17](https://github.com/uid11/e2ed/tree/v0.7.17) (2021-12-20)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.16...v0.7.17)
+
+- [fix: rename hooks as normal get-functions](https://github.com/uid11/e2ed/commit/9fafdfa54134ca557471a9fd9b7efc4946c18c92)
+
 ## [v0.7.16](https://github.com/uid11/e2ed/tree/v0.7.16) (2021-12-20)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.15...v0.7.16)
