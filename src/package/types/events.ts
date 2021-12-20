@@ -29,6 +29,7 @@ export type EndE2edRunEvent = Readonly<{
  */
 export type EndTestRunEvent = Readonly<{
   errors: readonly TestRunError[];
+  originalErrors: readonly OriginalTestRunError[];
   runId: RunId;
   utcTimeInMs: UtcTimeInMs;
 }>;

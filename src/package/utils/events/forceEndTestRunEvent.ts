@@ -21,5 +21,5 @@ export const forceEndTestRunEvent = async (runId: RunId): Promise<void> => {
   const {originalErrors} = testRunEvent;
   const errors = getTestRunErrors(originalErrors);
 
-  await registerEndTestRunEvent({errors, runId, utcTimeInMs}, originalErrors);
+  await registerEndTestRunEvent({errors, originalErrors, runId, utcTimeInMs});
 };

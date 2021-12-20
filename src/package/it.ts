@@ -60,6 +60,6 @@ export const it = (name: string, options: TestOptions, testFn: () => Promise<voi
 
       const runId = getRunId();
 
-      await registerEndTestRunEvent({errors, runId, utcTimeInMs}, originalErrors);
+      await registerEndTestRunEvent({errors, originalErrors, runId, utcTimeInMs});
     });
 };
