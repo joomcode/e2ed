@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.20](https://github.com/uid11/e2ed/tree/v0.7.20) (2021-12-20)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.19...v0.7.20)
+
+- [feat: force end TestRuns which are internally retrying by TestCafe](https://github.com/uid11/e2ed/commit/ae5a9d26b000f8bd8290e781a0ee5d8e660c10a9)
+
 ## [v0.7.19](https://github.com/uid11/e2ed/tree/v0.7.19) (2021-12-20)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.18...v0.7.19)
