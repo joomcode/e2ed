@@ -1,8 +1,13 @@
 import {setRawMeta} from './context/meta';
 import {getRunId, setRunId} from './context/runId';
-import {registerEndTestRunEvent, registerStartTestRunEvent} from './utils/events';
+import {
+  forceEndTestRunEvent,
+  registerEndTestRunEvent,
+  registerStartTestRunEvent,
+} from './utils/events';
 import {getRandomId} from './utils/getRandomId';
 import {getRelativeTestFilePath} from './utils/getRelativeTestFilePath';
+import {getTestRunErrors} from './utils/getTestRunErrors';
 
 import type {RunId, TestOptions, UtcTimeInMs} from './types/internal';
 import type {Inner} from 'testcafe-without-typecheck';
@@ -19,7 +24,7 @@ export const it = (name: string, options: TestOptions, testFn: () => Promise<voi
   let previousRunId: RunId | undefined;
 
   test
-    .before((testController: Inner.TestController) => {
+    .before(async (testController: Inner.TestController) => {
       const runId = getRandomId().replace(/:/g, '-') as RunId;
 
       const {errs: originalErrors} = testController.testRun;
@@ -30,12 +35,16 @@ export const it = (name: string, options: TestOptions, testFn: () => Promise<voi
 
       const runTestOwnParams = {filePath, name, options, previousRunId, runLabel, utcTimeInMs};
 
+      if (previousRunId !== undefined) {
+        await forceEndTestRunEvent(runId);
+      }
+
       previousRunId = runId;
 
       setRunId(runId);
       setRawMeta(options.meta);
 
-      return registerStartTestRunEvent({
+      await registerStartTestRunEvent({
         ...runTestOwnParams,
         ended: false,
         logEvents: [],
@@ -43,14 +52,14 @@ export const it = (name: string, options: TestOptions, testFn: () => Promise<voi
         runId,
       });
     })(name, testFn)
-    .after((testController: Inner.TestController) => {
+    .after(async (testController: Inner.TestController) => {
       const utcTimeInMs = Date.now() as UtcTimeInMs;
 
       const {errs: originalErrors} = testController.testRun;
-      const errors = originalErrors.map(({errMsg}) => ({message: errMsg}));
+      const errors = getTestRunErrors(originalErrors);
 
       const runId = getRunId();
 
-      return registerEndTestRunEvent({errors, runId, utcTimeInMs}, originalErrors);
+      await registerEndTestRunEvent({errors, runId, utcTimeInMs}, originalErrors);
     });
 };
