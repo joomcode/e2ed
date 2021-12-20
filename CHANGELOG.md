@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.7.18](https://github.com/uid11/e2ed/tree/v0.7.18) (2021-12-20)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.17...v0.7.18)
+
+- [feat: add checks that e2ed/hooks has specified module interface](https://github.com/uid11/e2ed/commit/9f6eeb24896047f9a185bda5a5d5f55d1eb1d6c6)
+- [fix: remove unnecessary empty test file from builded package](https://github.com/uid11/e2ed/commit/04e63b00f55be643d2e1efbe0f6a84ccd703d48f)
+
 ## [v0.7.17](https://github.com/uid11/e2ed/tree/v0.7.17) (2021-12-20)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.16...v0.7.17)
