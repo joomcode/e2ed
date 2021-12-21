@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.22](https://github.com/uid11/e2ed/tree/v0.7.22) (2021-12-21)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.21...v0.7.22)
+
+- [fix: add general logs for forcing end of TestRun event](https://github.com/uid11/e2ed/commit/299359645c357cb5bf8ee01e4b03a3fbba74b258)
+
 ## [v0.7.21](https://github.com/uid11/e2ed/tree/v0.7.21) (2021-12-20)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.20...v0.7.21)
