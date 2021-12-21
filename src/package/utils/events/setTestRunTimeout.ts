@@ -1,4 +1,5 @@
 import {config} from '../../testcaferc';
+import {generalLog} from '../generalLog';
 
 import {forceEndTestRunEvent} from './forceEndTestRunEvent';
 
@@ -28,6 +29,8 @@ export const setTestRunTimeout = (runId: RunId, testFn: TestFn): ClearAndTestFn 
   }, testRunExecutionTimeout);
 
   const clear = (): void => {
+    generalLog('Clear TestRun event', {resolve, runId});
+
     clearTimeout(id);
     resolve?.();
   };

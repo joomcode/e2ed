@@ -20,7 +20,7 @@ export const forceEndTestRunEvent = async (runId: RunId): Promise<void> => {
     return;
   }
 
-  generalLog('Force end TestRun event', {testRunEvent});
+  generalLog('Force end TestRun event', {testRunEvent: {...testRunEvent, logEvents: undefined}});
 
   assertValueIsTrue(testRunEvent.runId === runId);
 

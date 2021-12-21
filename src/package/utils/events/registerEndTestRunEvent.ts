@@ -29,8 +29,8 @@ export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promi
 
   if (ended) {
     generalLog('Try to end TestRunEvent event, but it is already ended', {
-      testRunEvent: {...testRunEvent, logEvents: []},
-      endTestRunEvent: {...endTestRunEvent, logEvents: []},
+      testRunEvent: {...testRunEvent, logEvents: undefined},
+      endTestRunEvent: {...endTestRunEvent, logEvents: undefined},
     });
 
     return Promise.resolve();
