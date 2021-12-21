@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.26](https://github.com/uid11/e2ed/tree/v0.7.26) (2021-12-21)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.25...v0.7.26)
+
+- [feat: add log in clear TestRun event](https://github.com/uid11/e2ed/commit/c7f95ba0292e79794a967c82654c56df94e07b85)
+
 ## [v0.7.25](https://github.com/uid11/e2ed/tree/v0.7.25) (2021-12-21)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.24...v0.7.25)
