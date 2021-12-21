@@ -1,5 +1,6 @@
 import {RUN_IDS_HASH} from '../../constants/internal';
 import {assertValueIsDefined, assertValueIsTrue} from '../asserts';
+import {generalLog} from '../generalLog';
 import {getTestRunErrors} from '../getTestRunErrors';
 
 import {registerEndTestRunEvent} from './registerEndTestRunEvent';
@@ -12,6 +13,8 @@ import type {RunId, UtcTimeInMs} from '../../types/internal';
  */
 export const forceEndTestRunEvent = async (runId: RunId): Promise<void> => {
   const testRunEvent = RUN_IDS_HASH[runId];
+
+  generalLog('Force end TestRun event', {testRunEvent});
 
   assertValueIsDefined(testRunEvent);
   assertValueIsTrue(testRunEvent.runId === runId);
