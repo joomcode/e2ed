@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.23](https://github.com/uid11/e2ed/tree/v0.7.23) (2021-12-21)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.22...v0.7.23)
+
+- [fix: force end for previous test run (instead of wrong ending of current run)](https://github.com/uid11/e2ed/commit/4a55eba9222dbe6cd37803dd1c603d7ae51a66b6)
+
 ## [v0.7.22](https://github.com/uid11/e2ed/tree/v0.7.22) (2021-12-21)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.21...v0.7.22)
