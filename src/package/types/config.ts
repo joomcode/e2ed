@@ -1,4 +1,9 @@
-export type TestCafeConfig = {
+import type {DeepReadonly} from './deep';
+
+/**
+ * Native TestCafe config.
+ */
+export type TestCafeConfig = DeepReadonly<{
   ajaxRequestTimeout: number;
   assertionTimeout: number;
   browserInitTimeout: number;
@@ -27,4 +32,16 @@ export type TestCafeConfig = {
   concurrency: number;
   port1: number;
   port2: number;
-};
+}>;
+
+/**
+ * Own e2ed config properties.
+ */
+type OwnE2edConfig = Readonly<{
+  testRunExecutionTimeout: number;
+}>;
+
+/**
+ * The complete e2ed config object.
+ */
+export type Config = TestCafeConfig & OwnE2edConfig;

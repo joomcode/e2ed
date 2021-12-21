@@ -1,7 +1,9 @@
 import {useContext} from '../useContext';
 import {assertValueIsDefined} from '../utils/asserts';
+import {deepMerge} from '../utils/deepMerge';
 
 import type {TestMeta} from '../types';
+import type {DeepPartial} from '../types/internal';
 
 export const [getRawMeta, setRawMeta] = useContext<TestMeta>();
 
@@ -19,8 +21,9 @@ export const getMeta = (): TestMeta => {
 /**
  * Set test metadata.
  */
-export const setMeta = (partialMeta: Partial<TestMeta>): void => {
+export const setMeta = (partialMeta: DeepPartial<TestMeta>): void => {
   const meta = getMeta();
+  const mergedMeta = deepMerge<TestMeta>(meta, partialMeta);
 
-  setRawMeta({...meta, ...partialMeta});
+  setRawMeta(mergedMeta);
 };

@@ -59,12 +59,12 @@ const startTimeInMs = Date.now() as UtcTimeInMs;
 let previousStatData: string | undefined;
 let cleared = false;
 
-const clear = (id: NodeJS.Timer): void => {
+const clear = (id: NodeJS.Timeout): void => {
   clearInterval(id);
   cleared = true;
 };
 
-const timer: NodeJS.Timer = setInterval(() => {
+const timer: NodeJS.Timeout = setInterval(() => {
   if (cleared) {
     return;
   }

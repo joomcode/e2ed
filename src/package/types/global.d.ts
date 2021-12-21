@@ -24,7 +24,7 @@ declare module 'bin-v8-flags-filter' {
  * @internal
  */
 declare module 'testcafe-without-typecheck/lib/api/test-run-tracker' {
-  type TestRun = {
+  type InternalTestRun = {
     id: string;
     controller: Record<string, unknown>;
 
@@ -35,10 +35,10 @@ declare module 'testcafe-without-typecheck/lib/api/test-run-tracker' {
   type Fn = (...args: never[]) => unknown;
 
   const testRunTracker: {
-    activeTestRuns: {[id: string]: TestRun};
+    activeTestRuns: {[id: string]: InternalTestRun};
     addTrackingMarkerToFunction(testRunId: string, fn: Fn): Fn;
     ensureEnabled(): void;
-    resolveContextTestRun(): TestRun;
+    resolveContextTestRun(): InternalTestRun;
     /**
      * Wraps function in context tracker for asynchronous calls.
      */

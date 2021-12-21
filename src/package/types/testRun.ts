@@ -17,6 +17,11 @@ export type RunHash = Brand<string, 'RunHash'>;
 export type RunId = Brand<string, 'RunId'>;
 
 /**
+ * Test function itself.
+ */
+export type TestFn = () => Promise<void>;
+
+/**
  * Test options.
  */
 export type TestOptions = DeepReadonly<{
@@ -32,7 +37,7 @@ export type TestRun = Readonly<{
   startTimeInMs: UtcTimeInMs;
   endTimeInMs: UtcTimeInMs;
 }> &
-  Omit<TestRunEvent, 'ended' | 'originalErrors' | 'utcTimeInMs'>;
+  Omit<TestRunEvent, 'clear' | 'ended' | 'originalErrors' | 'utcTimeInMs'>;
 
 /**
  * TestRun object with result of userland hooks (like mainParams and runHash).

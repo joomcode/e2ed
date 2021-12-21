@@ -65,6 +65,7 @@ export type E2edRunEvent = Readonly<{
  * TestRun event (on starting one test).
  */
 export type TestRunEvent = Readonly<{
+  clear(): void;
   ended: boolean;
   filePath: TestFilePath;
   logEvents: readonly LogEvent[];

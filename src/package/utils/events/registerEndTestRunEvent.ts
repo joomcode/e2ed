@@ -18,9 +18,10 @@ export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promi
   assertValueIsTrue(testRunEvent.runId === runId);
 
   const {
-    utcTimeInMs: startTimeInMs,
+    clear,
     ended,
     originalErrors: originalTestRunErrors,
+    utcTimeInMs: startTimeInMs,
     ...restTestRunEvent
   } = testRunEvent;
 
@@ -36,6 +37,7 @@ export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promi
   }
 
   (testRunEvent as {ended: boolean}).ended = true;
+  clear();
 
   const {errors, utcTimeInMs: endTimeInMs} = endTestRunEvent;
 

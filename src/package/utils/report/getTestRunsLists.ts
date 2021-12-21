@@ -1,6 +1,6 @@
 import {TestRunStatus} from '../../constants/internal';
 
-import {sanitizeRunHash} from './sanitizeRunHash';
+import {getRunHashUnificator} from './getRunHashUnificator';
 
 import type {ReportData, RunId, TestRunButtonProps, TestRunsListProps} from '../../types/internal';
 
@@ -9,6 +9,8 @@ import type {ReportData, RunId, TestRunButtonProps, TestRunsListProps} from '../
  * @internal
  */
 export const getTestRunsLists = ({testRunsWithHooks}: ReportData): TestRunsListProps[] => {
+  const runHashUnificator = getRunHashUnificator();
+
   const internallyRetriedRunIds: RunId[] = [];
   const testRunsLists: TestRunsListProps[] = [];
   const testRunButtonsHash: Record<number, TestRunButtonProps[]> = {};
@@ -35,9 +37,13 @@ export const getTestRunsLists = ({testRunsWithHooks}: ReportData): TestRunsListP
 
     const retry = parseInt((runLabel || 'retry 1').slice(6), 10);
 
-    const runHash = sanitizeRunHash(maybeDuplicateRunHash);
+    const {duplicate, runHash} = runHashUnificator(maybeDuplicateRunHash);
 
-    const status = errors.length === 0 ? TestRunStatus.Passed : TestRunStatus.Failed;
+    let status = errors.length === 0 ? TestRunStatus.Passed : TestRunStatus.Failed;
+
+    if (duplicate) {
+      status = TestRunStatus.Unknown;
+    }
 
     const testRunButtonProps = {
       durationInMs,

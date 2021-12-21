@@ -1,18 +1,18 @@
 import {JSON_REPORT_PATH} from './constants/internal';
 import {deepMerge} from './utils/deepMerge';
 
-import type {TestCafeConfig} from './types/internal';
+import type {Config, DeepPartial} from './types/internal';
 
-let userConfig: Partial<TestCafeConfig>;
+let userConfig: DeepPartial<Config>;
 
 try {
   // eslint-disable-next-line global-require, import/extensions, @typescript-eslint/no-var-requires
-  userConfig = require('../../e2ed/config.json') as Partial<TestCafeConfig>;
+  userConfig = require('../../e2ed/config.json') as Partial<Config>;
 } catch (errors: unknown) {
   userConfig = {};
 }
 
-const defaultConfig: TestCafeConfig = {
+const defaultConfig: Config = {
   ajaxRequestTimeout: 40000,
   assertionTimeout: 10000,
   browserInitTimeout: 40000,
@@ -50,11 +50,12 @@ const defaultConfig: TestCafeConfig = {
   },
   skipJsErrors: true,
   testExecutionTimeout: 180000,
+  testRunExecutionTimeout: 120000,
   concurrency: 1,
   port1: 1337,
   port2: 1338,
 };
 
-export const config = deepMerge<TestCafeConfig>(defaultConfig, userConfig);
+export const config = deepMerge<Config>(defaultConfig, userConfig);
 
 Object.assign(exports, config);
