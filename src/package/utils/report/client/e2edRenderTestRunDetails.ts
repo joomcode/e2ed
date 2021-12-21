@@ -8,5 +8,5 @@ import type {TestRun} from '../../../types/internal';
 export function e2edRenderTestRunDetails(testRun: TestRun): string {
   void testRun;
 
-  return `<article class="test-detail"></article>`;
+  return '<article class="test-detail"></article>';
 }

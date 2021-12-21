@@ -1,7 +1,8 @@
-import {RUN_IDS_HASH} from '../../constants/internal';
-import {assertValueIsDefined, assertValueIsTrue} from '../asserts';
+import {assertValueIsTrue} from '../asserts';
 import {generalLog} from '../generalLog';
 import {writeTestRunToJsonFile} from '../writeTestRunToJsonFile';
+
+import {getTestRunEvent} from './getTestRunEvent';
 
 import type {EndTestRunEvent, TestRun, TestRunWithHooks} from '../../types/internal';
 
@@ -12,15 +13,16 @@ import type {EndTestRunEvent, TestRun, TestRunWithHooks} from '../../types/inter
 export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promise<void> => {
   const {runId} = endTestRunEvent;
 
-  const testRunEvent = RUN_IDS_HASH[runId];
+  const testRunEvent = getTestRunEvent(runId);
 
-  assertValueIsDefined(testRunEvent);
   assertValueIsTrue(testRunEvent.runId === runId);
 
   const {
-    clear,
+    clearTimeout,
     ended,
     originalErrors: originalTestRunErrors,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    reject,
     utcTimeInMs: startTimeInMs,
     ...restTestRunEvent
   } = testRunEvent;
@@ -37,7 +39,7 @@ export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promi
   }
 
   (testRunEvent as {ended: boolean}).ended = true;
-  clear();
+  clearTimeout();
 
   const {errors, utcTimeInMs: endTimeInMs} = endTestRunEvent;
 

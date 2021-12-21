@@ -3,7 +3,7 @@ import type {UtcTimeInMs} from './date';
 import type {OriginalTestRunError, TestRunError} from './errors';
 import type {TestFilePath} from './fs';
 import type {LogPayload} from './log';
-import type {RunId, TestOptions, TestRunWithHooks} from './testRun';
+import type {RejectTestRun, RunId, TestOptions, TestRunWithHooks} from './testRun';
 
 /**
  * Log event (on log call).
@@ -65,7 +65,7 @@ export type E2edRunEvent = Readonly<{
  * TestRun event (on starting one test).
  */
 export type TestRunEvent = Readonly<{
-  clear(): void;
+  clearTimeout(): void;
   ended: boolean;
   filePath: TestFilePath;
   logEvents: readonly LogEvent[];
@@ -73,6 +73,7 @@ export type TestRunEvent = Readonly<{
   options: TestOptions;
   originalErrors: readonly OriginalTestRunError[];
   previousRunId: RunId | undefined;
+  reject: RejectTestRun;
   runId: RunId;
   runLabel: string | undefined;
   utcTimeInMs: UtcTimeInMs;

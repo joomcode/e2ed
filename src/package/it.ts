@@ -2,7 +2,7 @@ import {setRawMeta} from './context/meta';
 import {getRunId, setRunId} from './context/runId';
 import {assertValueIsDefined} from './utils/asserts';
 import {
-  forceEndTestRunEvent,
+  getTestRunEvent,
   registerEndTestRunEvent,
   registerStartTestRunEvent,
   setTestRunTimeout,
@@ -39,7 +39,9 @@ export const it = (name: string, options: TestOptions, testFn: TestFn): void => 
       const runTestOwnParams = {filePath, name, options, previousRunId, runLabel, utcTimeInMs};
 
       if (previousRunId !== undefined) {
-        await forceEndTestRunEvent(previousRunId);
+        const previousTestRun = getTestRunEvent(previousRunId);
+
+        previousTestRun.reject('TestRun was internally retried');
       }
 
       previousRunId = runId;
@@ -47,16 +49,17 @@ export const it = (name: string, options: TestOptions, testFn: TestFn): void => 
       setRunId(runId);
       setRawMeta(options.meta);
 
-      const {clear, testFnWithTimeout} = setTestRunTimeout(runId, testFn);
+      const {clearTimeout, reject, testFnWithReject} = setTestRunTimeout(runId, testFn);
 
-      testFnClosure = testFnWithTimeout;
+      testFnClosure = testFnWithReject;
 
       await registerStartTestRunEvent({
         ...runTestOwnParams,
-        clear,
+        clearTimeout,
         ended: false,
         logEvents: [],
         originalErrors,
+        reject,
         runId,
       });
     })(name, () => {

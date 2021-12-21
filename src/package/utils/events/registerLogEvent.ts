@@ -1,5 +1,4 @@
-import {RUN_IDS_HASH} from '../../constants/internal';
-import {assertValueIsDefined} from '../asserts';
+import {getTestRunEvent} from './getTestRunEvent';
 
 import type {LogEvent, RunId} from '../../types/internal';
 
@@ -8,9 +7,7 @@ import type {LogEvent, RunId} from '../../types/internal';
  * @internal
  */
 export const registerLogEvent = async (runId: RunId, logEvent: LogEvent): Promise<number> => {
-  const runTestEvent = RUN_IDS_HASH[runId];
-
-  assertValueIsDefined(runTestEvent);
+  const runTestEvent = getTestRunEvent(runId);
 
   const numberInRun = runTestEvent.logEvents.length;
 

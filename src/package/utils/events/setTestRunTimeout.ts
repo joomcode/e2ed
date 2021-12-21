@@ -1,13 +1,14 @@
 import {config} from '../../testcaferc';
 import {generalLog} from '../generalLog';
 
-import {forceEndTestRunEvent} from './forceEndTestRunEvent';
+import {getTestRunEvent} from './getTestRunEvent';
 
-import type {RunId, TestFn} from '../../types/internal';
+import type {RejectTestRun, RunId, TestFn} from '../../types/internal';
 
 type ClearAndTestFn = Readonly<{
-  clear(): void;
-  testFnWithTimeout: TestFn;
+  clearTimeout(): void;
+  reject: RejectTestRun;
+  testFnWithReject: TestFn;
 }>;
 
 /**
@@ -16,24 +17,41 @@ type ClearAndTestFn = Readonly<{
 export const setTestRunTimeout = (runId: RunId, testFn: TestFn): ClearAndTestFn => {
   const {testRunExecutionTimeout} = config;
 
-  let resolve: (() => void) | undefined;
+  let rejectPromise: RejectTestRun | undefined;
 
-  const promise = new Promise<void>((res) => {
-    resolve = res;
+  const promise = new Promise<void>((res, rej) => {
+    rejectPromise = rej;
   });
 
-  const testFnWithTimeout: TestFn = () => Promise.race([testFn(), promise]);
+  const testFnWithReject: TestFn = () => Promise.race([testFn(), promise]);
 
   const id = setTimeout(() => {
-    void forceEndTestRunEvent(runId).then(resolve);
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    reject(`TestRun out of time (${testRunExecutionTimeout} ms)`);
   }, testRunExecutionTimeout);
 
-  const clear = (): void => {
-    generalLog('Clear TestRun event', {resolve, runId});
-
-    clearTimeout(id);
-    resolve?.();
+  /**
+   * Clear TestRun execution timeout.
+   */
+  const clearTimeout = (): void => {
+    globalThis.clearTimeout(id);
   };
 
-  return {clear, testFnWithTimeout};
+  /**
+   * Reject TestRun with some reason.
+   */
+  function reject(reason: string): void {
+    const {ended} = getTestRunEvent(runId);
+
+    if (ended) {
+      return;
+    }
+
+    generalLog('Reject TestRun', {reason, runId});
+
+    clearTimeout();
+    rejectPromise?.(reason);
+  }
+
+  return {clearTimeout, reject, testFnWithReject};
 };
