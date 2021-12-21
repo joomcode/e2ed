@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.25](https://github.com/uid11/e2ed/tree/v0.7.25) (2021-12-21)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.24...v0.7.25)
+
+- [fix: remove long logEvents arrays from logs](https://github.com/uid11/e2ed/commit/0dc5054092aa8a3daac49f3b84832fa2ea9ee5ab)
+
 ## [v0.7.24](https://github.com/uid11/e2ed/tree/v0.7.24) (2021-12-21)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.23...v0.7.24)
