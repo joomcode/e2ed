@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.24](https://github.com/uid11/e2ed/tree/v0.7.24) (2021-12-21)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.23...v0.7.24)
+
+- [feat: add property testRunExecutionTimeout to config; fix internally retried runs](https://github.com/uid11/e2ed/commit/9553b6ebeae4047adfc2c8dc8a99fe641c4fe7f0)
+
 ## [v0.7.23](https://github.com/uid11/e2ed/tree/v0.7.23) (2021-12-21)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.22...v0.7.23)
