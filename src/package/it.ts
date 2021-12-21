@@ -36,7 +36,7 @@ export const it = (name: string, options: TestOptions, testFn: () => Promise<voi
       const runTestOwnParams = {filePath, name, options, previousRunId, runLabel, utcTimeInMs};
 
       if (previousRunId !== undefined) {
-        await forceEndTestRunEvent(runId);
+        await forceEndTestRunEvent(previousRunId);
       }
 
       previousRunId = runId;
