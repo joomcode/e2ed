@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.27](https://github.com/uid11/e2ed/tree/v0.7.27) (2021-12-21)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.26...v0.7.27)
+
+- [fix: reject test promise when test is out of time instead of force end TestRunEvent](https://github.com/uid11/e2ed/commit/7f386ebe5dd2be100bfc0b52880de12a6b4cec61)
+
 ## [v0.7.26](https://github.com/uid11/e2ed/tree/v0.7.26) (2021-12-21)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.25...v0.7.26)
