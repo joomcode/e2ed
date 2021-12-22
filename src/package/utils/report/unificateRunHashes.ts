@@ -1,5 +1,9 @@
 import type {RunHash, TestRunWithHooks} from '../../types/internal';
 
+/**
+ * Unificate all TestRun hashes at once.
+ * @internal
+ */
 export const unificateRunHashes = (testRunsWithHooks: readonly TestRunWithHooks[]): void => {
   const {length} = String(testRunsWithHooks.length - 1);
 

@@ -1,6 +1,7 @@
 import {config} from '../../testcaferc';
-import {generalLog} from '../generalLog';
+import {E2EDError} from '../E2EDError';
 
+import {forceEndTestRunEvent} from './forceEndTestRunEvent';
 import {getTestRunEvent} from './getTestRunEvent';
 
 import type {RejectTestRun, RunId, TestFn} from '../../types/internal';
@@ -17,7 +18,7 @@ type ClearAndTestFn = Readonly<{
 export const setTestRunTimeout = (runId: RunId, testFn: TestFn): ClearAndTestFn => {
   const {testRunExecutionTimeout} = config;
 
-  let rejectPromise: RejectTestRun | undefined;
+  let rejectPromise: ((error: E2EDError) => void) | undefined;
 
   const promise = new Promise<void>((res, rej) => {
     rejectPromise = rej;
@@ -41,16 +42,22 @@ export const setTestRunTimeout = (runId: RunId, testFn: TestFn): ClearAndTestFn 
    * Reject TestRun with some reason.
    */
   function reject(reason: string): void {
-    const {ended} = getTestRunEvent(runId);
+    const testRunEvent = getTestRunEvent(runId);
 
-    if (ended) {
+    if (testRunEvent.ended) {
       return;
     }
 
-    generalLog('Reject TestRun', {reason, runId});
+    const error = new E2EDError('Reject TestRun', {reason, runId});
 
     clearTimeout();
-    rejectPromise?.(reason);
+    rejectPromise?.(error);
+
+    if (!testRunEvent.ended) {
+      setTimeout(() => {
+        void forceEndTestRunEvent(runId);
+      }, 500);
+    }
   }
 
   return {clearTimeout, reject, testFnWithReject};
