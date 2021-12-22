@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.7.28](https://github.com/uid11/e2ed/tree/v0.7.28) (2021-12-22)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.27...v0.7.28)
+
+- [feat: force end TestRunEvent (again!) if TestCafe do not call "after" hook](https://github.com/uid11/e2ed/commit/a9fec76dc6522345cdc5cfa40001ec6fb3f67bb2)
+- [feat: add unificateRunHashes function for getting unique run hashes](https://github.com/uid11/e2ed/commit/50997378d1a97fc9473c97def4ee07ee6e1b836d)
+
 ## [v0.7.27](https://github.com/uid11/e2ed/tree/v0.7.27) (2021-12-21)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.26...v0.7.27)
