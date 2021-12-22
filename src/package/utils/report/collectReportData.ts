@@ -1,5 +1,6 @@
 import {getReportErrors} from './getReportErrors';
 import {getReportName} from './getReportName';
+import {unificateRunHashes} from './unificateRunHashes';
 
 import type {FullEventsData, ReportData} from '../../types/internal';
 
@@ -18,6 +19,8 @@ export const collectReportData = async ({
   const name = getReportName(startTimeInMs);
 
   const errors = await getReportErrors(runEnvironment, testRunsWithHooks);
+
+  unificateRunHashes(testRunsWithHooks);
 
   const reportData = {
     startTimeInMs,
