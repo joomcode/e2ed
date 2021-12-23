@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.7.31](https://github.com/uid11/e2ed/tree/v0.7.31) (2021-12-23)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.30...v0.7.31)
+
+- [chore: update devDependencies (@types/node to 17.0.4)](https://github.com/uid11/e2ed/commit/477cc4dc6556dc04db4308a590d42178580581b3)
+- [feat: add listener for click on choose retry button](https://github.com/uid11/e2ed/commit/d1edc5cc798e6028b6c2d186a5791cc8cf237441)
+
 ## [v0.7.30](https://github.com/uid11/e2ed/tree/v0.7.30) (2021-12-23)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.29...v0.7.30)
