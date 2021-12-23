@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.7.29](https://github.com/uid11/e2ed/tree/v0.7.29) (2021-12-23)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.28...v0.7.29)
+
+- [chore: update devDependencies (@types/node, @typescript-eslint/\*)](https://github.com/uid11/e2ed/commit/2cdfd8602f0aa66f96734cd714c441e6ef32bc51)
+- [feat: add assertion that tests names are unique in one retry](https://github.com/uid11/e2ed/commit/124d613e79c46cc858fd7e989e40bf6a71912d6a)
+
 ## [v0.7.28](https://github.com/uid11/e2ed/tree/v0.7.28) (2021-12-22)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.27...v0.7.28)
