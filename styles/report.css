@@ -50,7 +50,7 @@ body {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: 1fr;
-  font-family: system-ui, sans-serif;
+  font-family: system-ui;
   font-size: 14px;
   color: var(--font-color);
 }
@@ -60,12 +60,15 @@ button:focus,
 button:active,
 button:hover {
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif,
-    Apple Color Emoji, Segoe UI Emoji;
   cursor: pointer;
   background-color: transparent;
   background: none;
 }
+
+button:disabled {
+  cursor: not-allowed;
+}
+
 .header {
   margin: 0 0 20px 0;
   height: 40px;
@@ -114,7 +117,7 @@ button:hover {
   color: #fff;
   cursor: default;
 }
-.nav-tabs__button:hover {
+.nav-tabs__button:not(:disabled):hover {
   color: #fff;
 }
 

@@ -120,7 +120,6 @@ const hasManySiblings = (
   for (let x = x0; x <= x2; x += 1) {
     for (let y = y0; y <= y2; y += 1) {
       if (x === x1 && y === y1) {
-        // eslint-disable-next-line no-continue
         continue;
       }
 
@@ -168,7 +167,6 @@ const antialiased = (
   for (let x = x0; x <= x2; x += 1) {
     for (let y = y0; y <= y2; y += 1) {
       if (x === x1 && y === y1) {
-        // eslint-disable-next-line no-continue
         continue;
       }
 

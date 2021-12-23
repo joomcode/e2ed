@@ -10,6 +10,15 @@ export function assertValueIsDefined<T>(value: T): asserts value is Exclude<T, u
 }
 
 /**
+ * Asserts that the value is false (strictly equal to false).
+ */
+export function assertValueIsFalse<T>(value: T | false): asserts value is false {
+  if (value !== false) {
+    throw new E2EDError('Asserted value is not false', {value});
+  }
+}
+
+/**
  * Asserts that the value is true (strictly equal to true).
  */
 export function assertValueIsTrue<T>(value: T | true): asserts value is true {

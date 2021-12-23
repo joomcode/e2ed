@@ -39,6 +39,7 @@ rules:
       warnOnUnassignedImports: true
   import/prefer-default-export: off
   no-await-in-loop: off
+  no-continue: off
   no-restricted-syntax: off
   no-shadow: off
   no-useless-constructor: off

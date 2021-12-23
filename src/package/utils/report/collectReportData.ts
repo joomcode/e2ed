@@ -1,3 +1,4 @@
+import {assertThatTestNamesAreUnique} from './assertThatTestNamesAreUnique';
 import {getReportErrors} from './getReportErrors';
 import {getReportName} from './getReportName';
 import {unificateRunHashes} from './unificateRunHashes';
@@ -19,6 +20,8 @@ export const collectReportData = async ({
   const name = getReportName(startTimeInMs);
 
   const errors = await getReportErrors(runEnvironment, testRunsWithHooks);
+
+  assertThatTestNamesAreUnique(testRunsWithHooks);
 
   unificateRunHashes(testRunsWithHooks);
 
