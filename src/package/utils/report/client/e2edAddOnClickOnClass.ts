@@ -2,9 +2,12 @@
  * Add onclick event listener on all elements with some class.
  * @internal
  */
-export function e2edAddOnClickOnClass(className: string, onclick: (event: Element) => void): void {
+export function e2edAddOnClickOnClass(
+  className: string,
+  onclick: (event: HTMLElement) => void,
+): void {
   const global = window as Window & {
-    e2edClickListeners?: Record<string, (event: Element) => void>;
+    e2edClickListeners?: Record<string, (event: HTMLElement) => void>;
   };
 
   let {e2edClickListeners} = global;
@@ -14,11 +17,11 @@ export function e2edAddOnClickOnClass(className: string, onclick: (event: Elemen
     global.e2edClickListeners = e2edClickListeners;
 
     document.addEventListener('click', (event) => {
-      let currentElement: Element = event.target as Element;
+      let currentElement = event.target as HTMLElement | null;
 
       while (currentElement) {
         for (const currentClass of Object.keys(e2edClickListeners as object)) {
-          if (currentElement?.classList?.contains(currentClass)) {
+          if (currentElement.classList?.contains(currentClass)) {
             const listener = e2edClickListeners?.[currentClass];
 
             listener?.(currentElement);
@@ -26,7 +29,7 @@ export function e2edAddOnClickOnClass(className: string, onclick: (event: Elemen
             return;
           }
 
-          currentElement = currentElement?.parentNode as Element;
+          currentElement = currentElement.parentNode as HTMLElement;
         }
       }
     });

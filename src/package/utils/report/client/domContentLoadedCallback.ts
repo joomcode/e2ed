@@ -1,4 +1,4 @@
-import type {TestRun} from '../../../types/internal';
+import type {TestRunWithHooks} from '../../../types/internal';
 
 declare const e2edJsonReportData: HTMLScriptElement;
 
@@ -10,7 +10,7 @@ declare const e2edJsonReportData: HTMLScriptElement;
 export const domContentLoadedCallback = (): void => {
   const testRuns = JSON.parse(
     e2edJsonReportData.textContent || 'Cannot parse JSON report data',
-  ) as TestRun[];
+  ) as TestRunWithHooks[];
 
   // eslint-disable-next-line no-console
   console.log(testRuns);
