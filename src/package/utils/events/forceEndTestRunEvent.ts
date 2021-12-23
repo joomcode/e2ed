@@ -8,7 +8,7 @@ import {registerEndTestRunEvent} from './registerEndTestRunEvent';
 import type {RunId, TestRunError, UtcTimeInMs} from '../../types/internal';
 
 /**
- * End TestRunEvent by its RunId.
+ * Force end TestRunEvent by its RunId.
  * @internal
  */
 export const forceEndTestRunEvent = async (runId: RunId): Promise<void> => {

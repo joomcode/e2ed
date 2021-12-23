@@ -39,7 +39,7 @@ export const MAX_LINES_IN_STRINGIFY_VALUE = 400;
 export const READ_FILE_OPTIONS = {encoding: 'utf8'} as const;
 
 /**
- * Hash object with runId as keys and TestRunEvent.
+ * Hash object with runId as keys and TestRunEvent as values.
  * @internal
  */
 export const RUN_IDS_HASH: Record<RunId, TestRunEvent> = {};
