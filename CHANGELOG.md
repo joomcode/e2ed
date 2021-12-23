@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.30](https://github.com/uid11/e2ed/tree/v0.7.30) (2021-12-23)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.29...v0.7.30)
+
+- [fix: do not skip commits with version numbers in CHANGELOG.md](https://github.com/uid11/e2ed/commit/b109af2c55933160a9961e94a4bc8cb89b8453a4)
+
 ## [v0.7.29](https://github.com/uid11/e2ed/tree/v0.7.29) (2021-12-23)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.28...v0.7.29)
