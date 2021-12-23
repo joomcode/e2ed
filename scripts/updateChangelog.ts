@@ -17,7 +17,7 @@ const gitOptions = ['log', `HEAD...v${previousVersion}`, '--pretty=tformat:%H %s
 const commits = execFileSync('git', gitOptions, {encoding: 'utf8'})
   .split('\n')
   .map((text) => ({hash: text.slice(0, 40), message: text.slice(41)}))
-  .filter(({hash, message}) => hash && message && !/\d+\.\d+\.\d+/.test(message));
+  .filter(({hash, message}) => hash && message && !/^\d+\.\d+\.\d+$/.test(message));
 
 const commitsLinks = commits
   .map(({hash, message}) => `- [${message}](${baseUrl}/commit/${hash})`)
