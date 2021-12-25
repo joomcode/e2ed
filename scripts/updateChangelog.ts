@@ -1,3 +1,7 @@
+/**
+ * @file Generate CHANGELOG.md with changes relative to the previous version.
+ */
+
 import {execFileSync} from 'child_process';
 import {readFileSync, writeFileSync} from 'fs';
 import {join} from 'path';
