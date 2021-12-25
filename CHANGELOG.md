@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.7.33](https://github.com/uid11/e2ed/tree/v0.7.33) (2021-12-25)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.32...v0.7.33)
+
+- [fix: check:all command runs linting and tests sequentially](https://github.com/uid11/e2ed/commit/b71badce20d7c13c4cff014eceb618cfe27a4993)
+- [fix: typo in checkTestCafeVersion script](https://github.com/uid11/e2ed/commit/df30d2f8001b2c97dfdce3eb78c2933768c78a4f)
+- [fix: update TestCafe in docker to 1.18.1; add checkTestCafeVersion script](https://github.com/uid11/e2ed/commit/7792b47d91eac7d01d7f6d26cd1c9d3eef4e2cdb)
+
 ## [v0.7.32](https://github.com/uid11/e2ed/tree/v0.7.32) (2021-12-25)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.31...v0.7.32)
