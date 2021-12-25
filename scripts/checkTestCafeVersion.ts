@@ -21,3 +21,8 @@ const dockerfileText = readFileSync('Dockerfile', 'utf8');
 if (!dockerfileText.includes(`testcafe:${testCafeVersion}`)) {
   throw new Error(`Dockerfile in not based on version of TestCafe (${testCafeVersion})`);
 }
+
+// eslint-disable-next-line no-console
+console.log(
+  `[OK] testcafe-without-testcafe and Dockerfile are based on the installed version of TestCafe (${testCafeVersion})`,
+);
