@@ -4,7 +4,7 @@ import {join} from 'path';
 import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
 import {generalLog} from '../generalLog';
 
-import {renderHtmlReportToString} from './renderHtmlReportToString';
+import {renderReportToHtml} from './render';
 
 import type {ReportData} from '../../types/internal';
 
@@ -13,11 +13,11 @@ import type {ReportData} from '../../types/internal';
  * @internal
  */
 export const writeHtmlReport = (reportData: ReportData): Promise<void> => {
-  const htmlReportString = renderHtmlReportToString(reportData);
+  const reportHtml = renderReportToHtml(reportData);
   const reportFileName = `${reportData.name}.html`;
   const reportFilePath = join(REPORTS_DIRECTORY_PATH, reportFileName);
 
-  generalLog(`Write HTML report (${htmlReportString.length} symbols) to "${reportFilePath}"`);
+  generalLog(`Write HTML report (${reportHtml.length} symbols) to "${reportFilePath}"`);
 
-  return writeFile(reportFilePath, htmlReportString);
+  return writeFile(reportFilePath, reportHtml);
 };
