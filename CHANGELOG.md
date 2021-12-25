@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.34](https://github.com/uid11/e2ed/tree/v0.7.34) (2021-12-25)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.33...v0.7.34)
+
+- [refactor: split pixelmatch.ts into different files; add sort-keys eslint rule](https://github.com/uid11/e2ed/commit/784b671883140c30d5cc89476d9aa215a0284678)
+
 ## [v0.7.33](https://github.com/uid11/e2ed/tree/v0.7.33) (2021-12-25)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.32...v0.7.33)
