@@ -22,8 +22,8 @@ export const registerStartTestRunEvent = (testRunEvent: TestRunEvent): Promise<v
     });
 
     throw new E2EDError('Duplicate runId in run ids hash', {
-      oldTestRun: {...oldTestRun, logEvents: undefined},
       newTestRun: {...newTestRun, logEvents: undefined},
+      oldTestRun: {...oldTestRun, logEvents: undefined},
     });
   }
 

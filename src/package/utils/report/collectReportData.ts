@@ -26,11 +26,11 @@ export const collectReportData = async ({
   unificateRunHashes(testRunsWithHooks);
 
   const reportData = {
-    startTimeInMs,
-    errors,
     endTimeInMs,
+    errors,
     name,
     runEnvironment,
+    startTimeInMs,
     testRunsWithHooks,
     ...restE2edRunEvent,
   };

@@ -23,7 +23,7 @@ export const scrollBy: ScrollBy = async (...args) => {
 
   await log(
     'Scroll the document (or element) by the given offset',
-    {locator, args: printedArgs},
+    {args: printedArgs, locator},
     LogEventType.InternalAction,
   );
 

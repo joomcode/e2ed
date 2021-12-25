@@ -2,7 +2,7 @@ import {rm} from 'fs/promises';
 
 import type {DirectoryPathFromRoot} from '../types/internal';
 
-const options = {recursive: true, force: true};
+const options = {force: true, recursive: true};
 
 /**
  * Remove directory by path (recursive and with force).

@@ -8,13 +8,13 @@ import type {User, UserParams} from 'e2ed/types';
  * Create new user.
  */
 export const createUser = async ({
-  name = 'John Doe',
   email = getUserEmail(),
+  name = 'John Doe',
   password = DEFAULT_PASSWORD,
 }: UserParams = {}): Promise<User> => {
   const user = await apiCreateUser({
-    name,
     email,
+    name,
     password,
   });
 

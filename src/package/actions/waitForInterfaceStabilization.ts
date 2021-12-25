@@ -65,7 +65,7 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
       rectangle: element.getBoundingClientRect(),
     }));
 
-    return JSON.stringify({innerWidth, innerHeight, attributes});
+    return JSON.stringify({attributes, innerHeight, innerWidth});
   };
 
   let interfaceState = getInterfaceState();

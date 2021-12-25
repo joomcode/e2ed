@@ -24,5 +24,5 @@ if (!dockerfileText.includes(`testcafe:${testCafeVersion}`)) {
 
 // eslint-disable-next-line no-console
 console.log(
-  `[OK] testcafe-without-testcafe and Dockerfile are based on the installed version of TestCafe (${testCafeVersion})`,
+  `[OK] testcafe-without-typecheck and Dockerfile are based on the installed version of TestCafe (${testCafeVersion})`,
 );

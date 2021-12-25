@@ -18,9 +18,9 @@ export const createUser = async (params: ApiUserParams): Promise<User> => {
   const {
     output: {payload: apiUser},
   } = await request<Input, Output>({
-    url,
-    method: apiRoutes.userSignUp.getMethod(),
     input: params,
+    method: apiRoutes.userSignUp.getMethod(),
+    url,
   });
 
   return {...apiUser, password: params.password};

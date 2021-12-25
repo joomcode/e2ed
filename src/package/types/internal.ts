@@ -10,6 +10,7 @@ export * from './fs';
 export * from './html';
 export * from './log';
 export * from './pages';
+export * from './pixelmatch';
 export * from './report';
 export * from './request';
 export * from './stackTrack';

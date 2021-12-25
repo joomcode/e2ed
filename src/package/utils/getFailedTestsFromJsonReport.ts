@@ -49,10 +49,10 @@ export const getFailedTestsFromJsonReport = (): FailTests | undefined => {
   for (const {name: fixtureName, path: fixturePath, tests} of fixtures) {
     for (const {name: testName, errs: errors} of tests) {
       if (errors.length !== 0) {
-        failedTests.push({testName, fixtureName, fixturePath});
+        failedTests.push({fixtureName, fixturePath, testName});
       }
     }
   }
 
-  return {tests: failedTests, allTestsCount: total};
+  return {allTestsCount: total, tests: failedTests};
 };

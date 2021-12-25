@@ -104,9 +104,9 @@ const oneTryOfRequest = <Output>({
               outputAsString === '' ? undefined : JSON.parse(outputAsString)
             ) as DeepReadonly<Output>;
             const response = {
-              statusCode: res.statusCode || 400,
               headers: res.headers,
               output,
+              statusCode: res.statusCode || 400,
             };
 
             clearTimeout(endTimeout);
@@ -156,7 +156,7 @@ export const request = async <
   isNeedRetry = defaultIsNeedRetry,
 }: Options<Input, Output, Query, Headers>): Promise<Response<Output>> => {
   const urlObject = new URL(url);
-  const logParams: LogParams = {url, query, method, headers, input, timeout};
+  const logParams: LogParams = {headers, input, method, query, timeout, url};
 
   if (urlObject.search !== '') {
     throw new E2EDError(
@@ -170,12 +170,12 @@ Please, move search params to options property "query".`,
 
   const inputAsString = typeof input === 'string' ? input : JSON.stringify(input);
   const options = {
-    method,
     headers: {
       'Content-Length': String(Buffer.byteLength(inputAsString)),
       'Content-Type': 'application/json; charset=UTF-8',
       ...headers,
     },
+    method,
   };
   const libRequest = wrapInTestRunTracker(
     urlObject.protocol === 'http:' ? httpRequest : httpsRequest,
@@ -189,12 +189,12 @@ Please, move search params to options property "query".`,
     try {
       // eslint-disable-next-line no-await-in-loop
       const {fullLogParams, response} = await oneTryOfRequest<Output>({
-        urlObject,
-        options,
         inputAsString,
         libRequest,
-        timeout,
         logParams: {...logParams, retry},
+        options,
+        timeout,
+        urlObject,
       });
       const needRetry = isNeedRetry(response);
 
@@ -210,7 +210,7 @@ Please, move search params to options property "query".`,
     } catch (cause: unknown) {
       await log(
         `An error was received during the request to ${url}`,
-        {...logParams, retry, cause},
+        {...logParams, cause, retry},
         LogEventType.InternalUtil,
       );
     }

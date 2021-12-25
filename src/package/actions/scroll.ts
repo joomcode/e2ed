@@ -34,7 +34,7 @@ export const scroll: Scroll = async (...args) => {
 
   await log(
     'Scroll the document (or element) to the specified position',
-    {locator, args: printedArgs},
+    {args: printedArgs, locator},
     LogEventType.InternalAction,
   );
 

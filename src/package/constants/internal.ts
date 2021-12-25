@@ -2,6 +2,7 @@ import type {RunId, TestRunEvent} from '../types/internal';
 
 export * from './log';
 export * from './paths';
+export * from './pixelmatch';
 export * from './report';
 
 /**

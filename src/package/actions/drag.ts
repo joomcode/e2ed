@@ -23,7 +23,7 @@ export const drag = async (
 
   await log(
     'Drag an element by an offset',
-    {locator, dragOffsetX, dragOffsetY, options},
+    {dragOffsetX, dragOffsetY, locator, options},
     LogEventType.InternalAction,
   );
 

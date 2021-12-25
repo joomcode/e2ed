@@ -23,7 +23,7 @@ export const dragToElement = async (
 
   await log(
     'Drag an element onto another one',
-    {locator, destinationLocator, options},
+    {destinationLocator, locator, options},
     LogEventType.InternalAction,
   );
 

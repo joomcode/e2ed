@@ -29,7 +29,8 @@ const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unkn
       ? (maybePayload as LogEventType)
       : (maybeLogEventType as LogEventType) || LogEventType.Unspecified;
 
-  return registerLogEvent(runId, {message, payload, type, time}).then((numberInRun) => {
+  return registerLogEvent(runId, {message, payload, time, type}).then((numberInRun) => {
+    // eslint-disable-next-line sort-keys
     const printedString = valueToString(context ? {payload, context} : {payload});
 
     // eslint-disable-next-line no-console

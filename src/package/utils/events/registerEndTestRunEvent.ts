@@ -31,8 +31,8 @@ export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promi
 
   if (ended) {
     generalLog('Try to end TestRunEvent event, but it is already ended', {
-      testRunEvent: {...testRunEvent, logEvents: undefined},
       endTestRunEvent: {...endTestRunEvent, logEvents: undefined},
+      testRunEvent: {...testRunEvent, logEvents: undefined},
     });
 
     return Promise.resolve();
@@ -43,7 +43,7 @@ export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promi
 
   const {errors, utcTimeInMs: endTimeInMs} = endTestRunEvent;
 
-  const testRun: TestRun = {errors, startTimeInMs, endTimeInMs, ...restTestRunEvent};
+  const testRun: TestRun = {endTimeInMs, errors, startTimeInMs, ...restTestRunEvent};
 
   // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
   const hooks: typeof import('../../hooks') = require('../../hooks');

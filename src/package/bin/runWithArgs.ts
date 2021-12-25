@@ -16,9 +16,9 @@ import type {E2edRunEvent, UtcTimeInMs} from '../types/internal';
 try {
   // eslint-disable-next-line
   require('@babel/core').transformSync('1', {
-    sourceMaps: 'inline',
-    configFile: false,
     babelrc: false,
+    configFile: false,
+    sourceMaps: 'inline',
   });
   delete require.cache[require.resolve('convert-source-map')];
 } catch (error) {

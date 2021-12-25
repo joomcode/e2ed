@@ -23,10 +23,12 @@ const defaultConfig: Config = {
       options: {esModuleInterop: true, resolveJsonModule: true},
     },
   },
+  concurrency: 1,
   hostname: 'localhost',
-  src: ['./e2ed/tests/**/*.spec.ts'],
   pageLoadTimeout: 0,
   pageRequestTimeout: 30000,
+  port1: 1337,
+  port2: 1338,
   reporter: [
     {
       name: 'spec',
@@ -49,11 +51,9 @@ const defaultConfig: Config = {
     thumbnails: false,
   },
   skipJsErrors: true,
+  src: ['./e2ed/tests/**/*.spec.ts'],
   testExecutionTimeout: 180000,
   testRunExecutionTimeout: 120000,
-  concurrency: 1,
-  port1: 1337,
-  port2: 1338,
 };
 
 export const config = deepMerge<Config>(defaultConfig, userConfig);

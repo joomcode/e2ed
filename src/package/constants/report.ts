@@ -13,6 +13,7 @@ export const enum TestRunStatus {
 
 /**
  * Map test run status to element status modifier.
+ * @internal
  */
 export const TEST_RUN_STATUS_TO_MODIFIER_HASH = {
   [TestRunStatus.Passed]: 'passed',

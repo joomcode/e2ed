@@ -11,28 +11,28 @@ type AssertionKeys = keyof Inner.Assertion;
 type Assert<T> = Record<AssertionKeys, (...args: unknown[]) => T>;
 
 const assertions: Assert<string> = {
-  eql: (expected) => `is deeply equal to ${valueToString(expected)}`,
-  notEql: (expected) => `is not deeply equal to ${valueToString(expected)}`,
-  ok: () => 'is truthy',
-  notOk: () => 'is falsy',
   contains: (expected) => `contains ${valueToString(expected)}`,
-  notContains: (unexpected) => `not contains ${valueToString(unexpected)}`,
-  typeOf: (typeName) => `has type ${valueToString(typeName)}`,
-  notTypeOf: (typeName) => `has not type ${valueToString(typeName)}`,
+  eql: (expected) => `is deeply equal to ${valueToString(expected)}`,
   gt: (expected) => `is strictly greater than ${valueToString(expected)}`,
   gte: (expected) => `is greater than or equal to ${valueToString(expected)}`,
   lt: (expected) => `is less than ${valueToString(expected)}`,
   lte: (expected) => `is less than or equal to ${valueToString(expected)}`,
-  within: (start, end) =>
-    `is within a range from ${valueToString(start)} to ${valueToString(
-      end,
-    )} (bounds are inclusive)`,
+  match: (re) => `matches the regular expression ${valueToString(re)}`,
+  notContains: (unexpected) => `not contains ${valueToString(unexpected)}`,
+  notEql: (expected) => `is not deeply equal to ${valueToString(expected)}`,
+  notMatch: (re) => `does not match the regular expression ${valueToString(re)}`,
+  notOk: () => 'is falsy',
+  notTypeOf: (typeName) => `has not type ${valueToString(typeName)}`,
   notWithin: (start, end) =>
     `is not within a range from ${valueToString(start)} to ${valueToString(
       end,
     )} (bounds are inclusive)`,
-  match: (re) => `matches the regular expression ${valueToString(re)}`,
-  notMatch: (re) => `does not match the regular expression ${valueToString(re)}`,
+  ok: () => 'is truthy',
+  typeOf: (typeName) => `has type ${valueToString(typeName)}`,
+  within: (start, end) =>
+    `is within a range from ${valueToString(start)} to ${valueToString(
+      end,
+    )} (bounds are inclusive)`,
 };
 
 /**

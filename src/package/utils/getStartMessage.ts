@@ -11,6 +11,7 @@ export const getStartMessage = (): string => {
   const lines = [`Run tests ${isDockerRun ? 'in docker' : 'local'} with e2ed@${pkg.version}`];
 
   lines.push(`"${process.argv.join('", "')}"`);
+  lines.push(`cwd(): "${process.cwd()}"`);
 
   for (const name of Object.keys(process.env).sort()) {
     const value = process.env[name];
@@ -20,8 +21,8 @@ export const getStartMessage = (): string => {
     }
   }
 
+  lines.push(`node: "${process.version}"`);
   lines.push(`PWD: "${String(process.env.PWD)}"`);
-  lines.push(`cwd(): "${process.cwd()}"`);
 
   return lines.join('\n');
 };
