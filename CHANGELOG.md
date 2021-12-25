@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.7.32](https://github.com/uid11/e2ed/tree/v0.7.32) (2021-12-25)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.31...v0.7.32)
+
+- [chore: update testcafe-without-typecheck to 1.18.1-rc.1](https://github.com/uid11/e2ed/commit/35cf198f47c048bab88daeb659e5e49074254216)
+- [feat: sanitize all rendering strings (simple XSS protection)](https://github.com/uid11/e2ed/commit/69d1b56872cab8cffae20abc60ea517180fadbc8)
+
 ## [v0.7.31](https://github.com/uid11/e2ed/tree/v0.7.31) (2021-12-23)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.30...v0.7.31)
