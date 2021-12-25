@@ -18,6 +18,6 @@ if (!testCafeWithoutTypecheckVersion.startsWith(testCafeVersion)) {
 
 const dockerfileText = readFileSync('Dockerfile', 'utf8');
 
-if (!dockerfileText.includes(`testcafe${testCafeVersion}`)) {
+if (!dockerfileText.includes(`testcafe:${testCafeVersion}`)) {
   throw new Error(`Dockerfile in not based on version of TestCafe (${testCafeVersion})`);
 }
