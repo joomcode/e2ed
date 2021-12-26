@@ -1,4 +1,5 @@
-import {TMP_DIRECTORY_PATH, EVENTS_DIRECTORY_PATH} from '../../constants/internal';
+import {EVENTS_DIRECTORY_PATH, TMP_DIRECTORY_PATH} from '../../constants/internal';
+
 import {createDirectory} from '../createDirectory';
 import {removeDirectory} from '../removeDirectory';
 

@@ -2,6 +2,7 @@ import {writeFile} from 'fs/promises';
 import {join} from 'path';
 
 import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
+
 import {generalLog} from '../generalLog';
 
 import {renderReportToHtml} from './render';

@@ -1,10 +1,12 @@
 import {LogEventType} from '../../constants/internal';
+
 import {E2EDError} from '../E2EDError';
 import {getRandomId} from '../getRandomId';
 import {log} from '../log';
 import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
 import type {DeepReadonly} from '../../types/internal';
+
 import type {LogParams, OneTryOfRequestOptions, Response} from './types';
 
 /**

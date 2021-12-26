@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-internal-modules
 import testRunTracker from 'testcafe-without-typecheck/lib/api/test-run-tracker';
 
 /**

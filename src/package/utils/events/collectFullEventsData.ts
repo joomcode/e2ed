@@ -1,4 +1,5 @@
 import {TMP_DIRECTORY_PATH} from '../../constants/internal';
+
 import {removeDirectory} from '../removeDirectory';
 
 import {getE2edRunEvent} from './getAndSetE2edRunEvent';

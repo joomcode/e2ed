@@ -3,6 +3,7 @@ import {getPageLoaded} from '../context/pageLoaded';
 import {getRunId} from '../context/runId';
 import {testController} from '../testController';
 
+// eslint-disable-next-line import/no-internal-modules
 import {registerLogEvent} from './events/registerLogEvent';
 import {getPrintedLabel} from './getPrintedLabel';
 import {valueToString} from './valueToString';

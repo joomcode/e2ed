@@ -1,5 +1,6 @@
-import type {Brand} from './brand';
 import type {IncomingHttpHeaders} from 'http';
+
+import type {Brand} from './brand';
 
 /**
  * Cookie object.

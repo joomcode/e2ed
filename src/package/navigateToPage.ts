@@ -3,9 +3,9 @@ import {LogEventType} from './constants/internal';
 import {setPageLoaded} from './context/pageLoaded';
 import {setPageParams} from './context/pageParams';
 import {setRouteParams} from './context/routeParams';
+import {log} from './utils/log';
 import {navigateTo} from './hooks';
 import {pages} from './pageObjects';
-import {log} from './utils/log';
 
 import type {Page} from './Page';
 import type {NavigateToPage, UtcTimeInMs} from './types/internal';

@@ -56,6 +56,8 @@ const defaultConfig: Config = {
   testRunExecutionTimeout: 120000,
 };
 
-export const config = deepMerge<Config>(defaultConfig, userConfig);
+const config = deepMerge<Config>(defaultConfig, userConfig);
 
 Object.assign(exports, config);
+
+export {config};

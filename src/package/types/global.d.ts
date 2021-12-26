@@ -1,4 +1,4 @@
-/* eslint-disable import/no-default-export */
+/* eslint-disable import/no-default-export, import/no-unused-modules, import/unambiguous */
 
 /**
  * Package for filtering V8 command line flags when run TestCafe via CLI.

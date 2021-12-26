@@ -21,24 +21,31 @@ rules:
     - {exceptMethods: [getOrigin, getMethod, getParamsFromUrl, getPath, willNavigateTo]}
   curly: [error, all]
   default-param-last: off
+  import/exports-last: error
   import/extensions: [error, never]
+  import/named: error
+  import/no-commonjs: error
   import/no-default-export: error
-  import/order:
+  import/no-deprecated: error
+  import/no-duplicates: error
+  import/no-internal-modules:
     - error
-    - alphabetize: {order: asc}
-      groups:
-        - builtin
-        - external
-        - internal
-        - unknown
-        - parent
-        - sibling
-        - index
-        - object
-        - type
-      newlines-between: always
-      warnOnUnassignedImports: true
+    - allow:
+        - '**/actions/*'
+        - '**/constants/internal'
+        - '**/context/*'
+        - '**/e2ed/*/*'
+        - '**/types/internal'
+        - '**/utils/*'
+  import/no-unassigned-import: error
+  import/no-unused-modules:
+    - error
+    - ignoreExports: [src/package/context, src/package/index.ts]
+      missingExports: false
+      unusedExports: true
+  import/order: off
   import/prefer-default-export: off
+  import/unambiguous: error
   no-await-in-loop: off
   no-continue: off
   no-restricted-syntax: off
@@ -59,6 +66,24 @@ rules:
     - {blankLine: always, prev: try, next: '*'}
     - {blankLine: always, prev: '*', next: try}
   simple-import-sort/exports: error
+  simple-import-sort/imports:
+    - error
+    - groups:
+        - ['^(child_process|fs|http|https|path|querystring|url|util)(/.*|$)']
+        - ['^\w']
+        - ['^\u0000']
+        - ['^\.\./\.\./\.\./\.\.(?!/?$)', '^\.\./\.\./\.\./\.\./?$']
+        - ['^\.\./\.\./\.\.(?!/?$)', '^\.\./\.\./\.\./?$']
+        - ['^\.\./\.\.(?!/?$)', '^\.\./\.\./?$']
+        - ['^\.\.(?!/?$)', '^\.\./?$']
+        - ['^\./(?=.*/)(?!/?$)', '^\.(?!/?$)', '^\./?$']
+        - ['^\w.*\u0000$']
+        - ['^[^.].*\u0000$']
+        - ['^\.\./\.\./\.\./\.\./.*\u0000$']
+        - ['^\.\./\.\./\.\./.*\u0000$']
+        - ['^\.\./\.\./.*\u0000$']
+        - ['^\.\./.*\u0000$']
+        - ['^\..*\u0000$']
   sort-keys: [error, asc, {caseSensitive: true, natural: false}]
   '@typescript-eslint/default-param-last': [error]
   '@typescript-eslint/explicit-function-return-type': [error, {allowExpressions: true}]

@@ -1,4 +1,5 @@
 import type {LogEventType} from '../constants/internal';
+
 import type {UtcTimeInMs} from './date';
 import type {OriginalTestRunError, TestRunError} from './errors';
 import type {TestFilePath} from './fs';

@@ -1,5 +1,6 @@
-import type {DeepReadonly, Headers as AnyHeaders, Method, Url} from '../../types/internal';
 import type {request as httpRequest} from 'http';
+
+import type {DeepReadonly, Headers as AnyHeaders, Method, Url} from '../../types/internal';
 
 /**
  * Request log parameters.

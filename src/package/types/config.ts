@@ -1,6 +1,13 @@
 import type {DeepReadonly} from './deep';
 
 /**
+ * Own e2ed config properties.
+ */
+type OwnE2edConfig = Readonly<{
+  testRunExecutionTimeout: number;
+}>;
+
+/**
  * Native TestCafe config.
  */
 export type TestCafeConfig = DeepReadonly<{
@@ -32,13 +39,6 @@ export type TestCafeConfig = DeepReadonly<{
   concurrency: number;
   port1: number;
   port2: number;
-}>;
-
-/**
- * Own e2ed config properties.
- */
-type OwnE2edConfig = Readonly<{
-  testRunExecutionTimeout: number;
 }>;
 
 /**

@@ -28,7 +28,7 @@ type ResponseEvent = DeepReadonly<{
  * RequestHook that set mapped headers for request and response
  * for concrete url.
  */
-export class SetHeadersRequestHook extends RequestHook {
+class SetHeadersRequestHook extends RequestHook {
   constructor(public url: Url, public options: MapOptions) {
     super([url], {includeHeaders: true});
     // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -71,3 +71,5 @@ SetHeadersRequestHook.prototype.resetMethods = wrapInTestRunTracker(
   // eslint-disable-next-line @typescript-eslint/unbound-method
   SetHeadersRequestHook.prototype.resetMethods,
 );
+
+export {SetHeadersRequestHook};

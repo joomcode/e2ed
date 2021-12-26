@@ -50,6 +50,7 @@ process.argv.push('--concurrency', String(concurrency));
 
 process.argv.push('--config-file', './node_modules/e2ed/testcaferc.js');
 
+// eslint-disable-next-line import/no-commonjs, import/no-internal-modules, import/no-unassigned-import
 require('testcafe-without-typecheck/lib/cli/cli');
 
 /**

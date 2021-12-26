@@ -3,8 +3,9 @@ import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
-import type {Selector} from '../types/internal';
 import type {Inner} from 'testcafe-without-typecheck';
+
+import type {Selector} from '../types/internal';
 
 type Options = Parameters<typeof testController.takeElementScreenshot>[2];
 

@@ -1,6 +1,7 @@
 import {RUN_IDS_HASH} from '../../constants/internal';
-import {E2EDError} from '../E2EDError';
+
 import {cloneWithoutUndefinedProperties} from '../cloneWithoutUndefinedProperties';
+import {E2EDError} from '../E2EDError';
 
 import type {TestRunEvent} from '../../types/internal';
 

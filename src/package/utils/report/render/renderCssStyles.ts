@@ -2,6 +2,7 @@ import {readFileSync} from 'fs';
 import {join} from 'path';
 
 import {E2ED_PACKAGE_DIRECTORY_PATH, READ_FILE_OPTIONS} from '../../../constants/internal';
+
 import {e2edCreateSafeHtmlWithoutSanitize} from '../client';
 
 import type {SafeHtml} from '../../../types/internal';

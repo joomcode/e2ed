@@ -1,4 +1,5 @@
 import {config} from '../../testcaferc';
+
 import {E2EDError} from '../E2EDError';
 
 import {forceEndTestRunEvent} from './forceEndTestRunEvent';

@@ -2,8 +2,9 @@ import createTestCafe from 'testcafe-without-typecheck';
 
 import {generalLog} from './generalLog';
 
-import type {TestCafeRunOptions} from '../types/internal';
 import type {Inner} from 'testcafe-without-typecheck';
+
+import type {TestCafeRunOptions} from '../types/internal';
 
 const browsers = ['chromium:headless --no-sandbox --disable-dev-shm-usage'];
 

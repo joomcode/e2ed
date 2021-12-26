@@ -3,8 +3,9 @@
  * Do not remove this module.
  */
 
-import type * as Hooks from '../hooks';
 import type {Expect, ExternalHooks, IsEqual} from 'e2ed/types';
+
+import type * as Hooks from '../hooks';
 
 declare const checks: [Expect<IsEqual<ExternalHooks, typeof Hooks>>];
 

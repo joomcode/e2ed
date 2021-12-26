@@ -4,6 +4,7 @@ import {stringify} from 'querystring';
 import {URL} from 'url';
 
 import {LogEventType} from '../../constants/internal';
+
 import {E2EDError} from '../E2EDError';
 import {log} from '../log';
 import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
@@ -11,6 +12,7 @@ import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 import {oneTryOfRequest} from './oneTryOfRequest';
 
 import type {Headers as AnyHeaders, Query as AnyQuery} from '../../types/internal';
+
 import type {LogParams, Options, Response} from './types';
 
 const defaultIsNeedRetry = <Output>({statusCode}: Response<Output>): boolean => statusCode >= 400;

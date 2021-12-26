@@ -3,11 +3,11 @@ import {LogEventType} from './constants/internal';
 import {setPageLoaded} from './context/pageLoaded';
 import {setPageParams} from './context/pageParams';
 import {setRouteParams} from './context/routeParams';
-import {expect} from './expect';
-import {pages} from './pageObjects';
 import {assertValueIsDefined} from './utils/asserts';
 import {getCurrentUrl} from './utils/getCurrentUrl';
 import {log} from './utils/log';
+import {expect} from './expect';
+import {pages} from './pageObjects';
 
 import type {Page} from './Page';
 import type {AssertPage} from './types/internal';

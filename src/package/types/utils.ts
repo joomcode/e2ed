@@ -1,6 +1,17 @@
 import type {IsBrand} from './brand';
 
 /**
+ * Inner key for params type.
+ */
+declare const PARAMS_KEY: unique symbol;
+
+/**
+ * IncludeUndefined<string> = false.
+ * IncludeUndefined<string | undefined> = true.
+ */
+type IncludeUndefined<T> = true extends (T extends undefined ? true : never) ? true : false;
+
+/**
  * This type checks that the type true is passed to it.
  */
 export type Expect<T extends true> = T;
@@ -23,20 +34,9 @@ export type IsEqual<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T ex
   : false;
 
 /**
- * Inner key for params type.
- */
-declare const PARAMS_KEY: unique symbol;
-
-/**
  * Type of inner key for params type.
  */
 export type PARAMS = typeof PARAMS_KEY;
-
-/**
- * IncludeUndefined<string> = false.
- * IncludeUndefined<string | undefined> = true.
- */
-type IncludeUndefined<T> = true extends (T extends undefined ? true : never) ? true : false;
 
 /**
  * Returns a copy of the object type with mutable properties.

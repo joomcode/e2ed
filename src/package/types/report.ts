@@ -1,4 +1,5 @@
 import type {TestRunStatus} from '../constants/internal';
+
 import type {UtcTimeInMs} from './date';
 import type {E2edRunEvent} from './events';
 import type {RunHash, RunId, TestRunWithHooks} from './testRun';

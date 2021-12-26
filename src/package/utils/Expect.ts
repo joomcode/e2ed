@@ -39,7 +39,7 @@ const assertions: Assert<string> = {
  * testController.expect wrapper with logs.
  * @internal
  */
-export class Expect {
+class Expect {
   constructor(public actual: unknown, public description: string) {}
 
   [key: string]: unknown;
@@ -76,3 +76,5 @@ for (const [key, getAssertionMessage] of Object.entries(assertions)) {
     );
   };
 }
+
+export {Expect};

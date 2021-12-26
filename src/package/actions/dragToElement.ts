@@ -5,8 +5,9 @@ import {log} from '../utils/log';
 
 import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
 
-import type {Selector} from '../types/internal';
 import type {Inner} from 'testcafe-without-typecheck';
+
+import type {Selector} from '../types/internal';
 
 type Options = Parameters<typeof testController.dragToElement>[2];
 

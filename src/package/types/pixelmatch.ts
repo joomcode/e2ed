@@ -1,14 +1,14 @@
 /**
- * Image data as buffer or typed array.
- * @internal
- */
-export type ImgData = Buffer | Uint8Array | Uint8ClampedArray;
-
-/**
  * RGB color representation (as three numbers).
  * @internal
  */
 type RGBTuple = readonly [number, number, number];
+
+/**
+ * Image data as buffer or typed array.
+ * @internal
+ */
+export type ImgData = Buffer | Uint8Array | Uint8ClampedArray;
 
 /**
  * Pixelmatch options.
