@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.7.36](https://github.com/uid11/e2ed/tree/v0.7.36) (2021-12-26)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.35...v0.7.36)
+
+- [chore: update @types/node to 17.0.5](https://github.com/uid11/e2ed/commit/2df1cb5759ecfddc7ac89e8e8d749ffc8fc73b01)
+- [feat: add simple-import-sort/imports ESLint rule and some import/\* rules](https://github.com/uid11/e2ed/commit/fd81e0850106c934147f86df6d2fc5eb43fab5fc)
+
 ## [v0.7.35](https://github.com/uid11/e2ed/tree/v0.7.35) (2021-12-26)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.34...v0.7.35)
