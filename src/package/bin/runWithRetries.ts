@@ -63,7 +63,7 @@ const asyncRunTests = async (): Promise<void> => {
       await runTests({concurrency, runLabel, tests});
 
       failedTests = getFailedTestsFromJsonReport();
-    } catch (error: unknown) {
+    } catch (error) {
       generalLog(`Caught an error on ${runLabel}: ${String(error)}`);
     }
 

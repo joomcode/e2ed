@@ -37,7 +37,7 @@ export const getFailedTestsFromJsonReport = (): FailTests | undefined => {
   try {
     // eslint-disable-next-line import/no-dynamic-require, global-require, @typescript-eslint/no-var-requires
     report = require(jsonReportPath) as Report;
-  } catch (error: unknown) {
+  } catch (error) {
     generalLog(`Caught an error while reading the JSON report: ${String(error)} `);
 
     return undefined;

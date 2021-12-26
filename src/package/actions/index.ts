@@ -23,4 +23,7 @@ export * from './typeText';
 export * from './waitForInterfaceStabilization';
 export * from './waitForNavigateInterfaceStabilization';
 
+/**
+ * Userland actions. This exports must be the last.
+ */
 export * from '../../../e2ed/actions';

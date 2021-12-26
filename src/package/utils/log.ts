@@ -11,7 +11,6 @@ import type {Log, LogPayload, UtcTimeInMs} from '../types/internal';
 
 const resolvedPromise = Promise.resolve();
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop: Log = () => resolvedPromise;
 
 const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unknown) => {

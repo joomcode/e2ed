@@ -43,7 +43,7 @@ const clientFunctionWrapper = function clientFunctionWrapper(): unknown {
   try {
     // @ts-expect-error: originFn is out of scope
     result = originFn.apply(undefined, args); // eslint-disable-line
-  } catch (error: unknown) {
+  } catch (error) {
     // do nothing
   }
 
@@ -94,7 +94,7 @@ export const ClientFunction = <R, A extends unknown[]>(
 
         return undefined;
       });
-    } catch (error: unknown) {
+    } catch (error) {
       generalLog(`Client function "${name}" thrown an error`, {args, error, originFn});
     }
 

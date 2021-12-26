@@ -3,19 +3,22 @@ export * from './asserts';
 export * from './cloneWithoutUndefinedProperties';
 export * from './deepMerge';
 export * from './E2EDError';
-export * from './getIntegerFromEnvVariable';
-export * from './getStackTrace';
 export * from './generalLog';
 export * from './getCurrentUrl';
+export * from './getIntegerFromEnvVariable';
 export * from './getKeysCounter';
 export * from './getRandomId';
+export * from './getStackTrace';
 export * from './log';
-export * from './valueToString';
 export * from './replaceCookie';
 export * from './request';
 export * from './SetHeadersRequestHook';
 export * from './trimSemicolonsAtTheEnd';
+export * from './valueToString';
 export * from './wait';
 export * from './wrapInTestRunTracker';
 
+/**
+ * Userland utils. This export must be the last.
+ */
 export * from '../../../e2ed/utils';

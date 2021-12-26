@@ -6,9 +6,9 @@ import type {Config, DeepPartial} from './types/internal';
 let userConfig: DeepPartial<Config>;
 
 try {
-  // eslint-disable-next-line global-require, import/extensions, @typescript-eslint/no-var-requires
+  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
   userConfig = require('../../e2ed/config.json') as Partial<Config>;
-} catch (errors: unknown) {
+} catch (errors) {
   userConfig = {};
 }
 
