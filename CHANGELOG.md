@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.35](https://github.com/uid11/e2ed/tree/v0.7.35) (2021-12-26)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.34...v0.7.35)
+
+- [refactor: divide request.ts into several parts; turn on simple-import-sort/exports rule](https://github.com/uid11/e2ed/commit/78bc26b5f2911127d18c55114af1c3b832c90ea0)
+
 ## [v0.7.34](https://github.com/uid11/e2ed/tree/v0.7.34) (2021-12-25)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.33...v0.7.34)
