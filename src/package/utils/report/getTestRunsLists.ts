@@ -2,17 +2,23 @@ import {TestRunStatus} from '../../constants/internal';
 
 import {getRunHashUnificator} from './getRunHashUnificator';
 
-import type {ReportData, RunId, TestRunButtonProps, TestRunsListProps} from '../../types/internal';
+import type {
+  ReportData,
+  RetryProps,
+  RunId,
+  TestRunButtonProps,
+  UtcTimeInMs,
+} from '../../types/internal';
 
 /**
- * Get array of TestRunsListProps (by retries) from report data.
+ * Get array of RetryProps from report data.
  * @internal
  */
-export const getTestRunsLists = ({testRunsWithHooks}: ReportData): TestRunsListProps[] => {
+export const getTestRunsLists = ({testRunsWithHooks}: ReportData): RetryProps[] => {
   const runHashUnificator = getRunHashUnificator();
 
   const internallyRetriedRunIds: RunId[] = [];
-  const testRunsLists: TestRunsListProps[] = [];
+  const retries: RetryProps[] = [];
   const testRunButtonsHash: Record<number, TestRunButtonProps[]> = {};
 
   for (const testRunWithHooks of testRunsWithHooks) {
@@ -29,13 +35,11 @@ export const getTestRunsLists = ({testRunsWithHooks}: ReportData): TestRunsListP
       endTimeInMs,
     } = testRunWithHooks;
 
-    const durationInMs = endTimeInMs - startTimeInMs;
-
     if (previousRunId) {
       internallyRetriedRunIds.push(previousRunId);
     }
 
-    const retry = parseInt((runLabel || 'retry 1').slice(6), 10);
+    const retry = parseInt((runLabel || 'r:1').slice(2), 10);
 
     const {duplicate, runHash} = runHashUnificator(maybeDuplicateRunHash);
 
@@ -46,7 +50,7 @@ export const getTestRunsLists = ({testRunsWithHooks}: ReportData): TestRunsListP
     }
 
     const testRunButtonProps = {
-      durationInMs,
+      endTimeInMs,
       filePath,
       mainParams,
       name,
@@ -82,18 +86,24 @@ export const getTestRunsLists = ({testRunsWithHooks}: ReportData): TestRunsListP
       return a.startTimeInMs - b.startTimeInMs;
     });
 
+    const startTimes = testRunButtons.map((testRun) => testRun.startTimeInMs);
+    const startTimeInMs = Math.min(...startTimes) as UtcTimeInMs;
+
+    const endTimes = testRunButtons.map((testRun) => testRun.endTimeInMs);
+    const endTimeInMs = Math.max(...endTimes) as UtcTimeInMs;
+
     const retry = Number(retryString);
 
-    const testRunsList = {hidden: true, retry, testRunButtons};
+    const testRunsList = {endTimeInMs, hidden: true, retry, startTimeInMs, testRunButtons};
 
-    testRunsLists.push(testRunsList);
+    retries.push(testRunsList);
   }
 
-  testRunsLists.sort((a, b) => a.retry - b.retry);
+  retries.sort((a, b) => a.retry - b.retry);
 
-  if (testRunsLists[0]) {
-    (testRunsLists[0] as {hidden: boolean}).hidden = false;
+  if (retries[0]) {
+    (retries[0] as {hidden: boolean}).hidden = false;
   }
 
-  return testRunsLists;
+  return retries;
 };

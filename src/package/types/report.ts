@@ -32,7 +32,7 @@ export type RetryButtonProps = Readonly<{
  * @internal
  */
 export type TestRunButtonProps = Readonly<{
-  durationInMs: number;
+  endTimeInMs: UtcTimeInMs;
   filePath: string;
   mainParams: string;
   name: string;
@@ -43,11 +43,13 @@ export type TestRunButtonProps = Readonly<{
 }>;
 
 /**
- * TestRunsList component props.
+ * Retry component props.
  * @internal
  */
-export type TestRunsListProps = Readonly<{
+export type RetryProps = Readonly<{
+  endTimeInMs: UtcTimeInMs;
   hidden: boolean;
   retry: number;
+  startTimeInMs: UtcTimeInMs;
   testRunButtons: readonly TestRunButtonProps[];
 }>;

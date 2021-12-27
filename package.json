@@ -63,7 +63,7 @@
     "build:copy:bin": "cp bin/init.sh bin/runInDocker.sh build/node_modules/e2ed/bin",
     "postbuild:copy:bin": "(cd build/node_modules/e2ed/bin && chmod +x runLocal.js && chmod +x runWithRetries.js)",
     "build:copy:scripts": "cp build/scripts/*.js build",
-    "build:copy:meta": "cp -r LICENSE package.json README.md styles build/node_modules/e2ed",
+    "build:copy:meta": "cp -r LICENSE logo.svg package.json README.md styles build/node_modules/e2ed",
     "prebuild:copy:example": "rm -r ./build/e2ed",
     "build:copy:example": "cp -r e2ed build/node_modules/e2ed/",
     "postbuild:copy:example": "rm -r ./build/node_modules/e2ed/e2ed/node_modules",

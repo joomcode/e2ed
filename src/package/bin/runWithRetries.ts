@@ -47,7 +47,7 @@ const asyncRunTests = async (): Promise<void> => {
   await registerStartE2edRunEvent(e2edRunEvent);
 
   for (; retryIndex <= retries; retryIndex += 1) {
-    runLabel = `retry ${retryIndex}/${retries}`;
+    runLabel = `r:${retryIndex}/${retries};c:${concurrency}`;
 
     const startRetryTimeInMs = Date.now() as UtcTimeInMs;
     const printedTestsString =

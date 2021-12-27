@@ -11,7 +11,7 @@ export const renderRetryButton = ({
   retry,
   selected,
 }: RetryButtonProps): SafeHtml => e2edSanitizeHtml`<button
-aria-controls="retry${retry}-nav-tablist"
+aria-controls="retry${retry}"
 aria-selected="${String(selected)}"
 class="nav-tabs__button"
 id="retry${retry}-nav"

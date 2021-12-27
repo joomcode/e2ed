@@ -2,20 +2,20 @@ import {e2edCreateSafeHtmlWithoutSanitize} from '../client';
 
 import {renderRetryButton} from './renderRetryButton';
 
-import type {SafeHtml, TestRunsListProps} from '../../../types/internal';
+import type {RetryProps, SafeHtml} from '../../../types/internal';
 
 /**
  * Render retries navigation buttons.
  * @internal
  */
-export const renderRetriesButtons = (testRunsLists: TestRunsListProps[]): SafeHtml => {
-  const retries = testRunsLists.map(({retry}) => retry);
-  const maxRetry = Math.max(...retries);
-  const minRetry = Math.min(...retries);
+export const renderRetriesButtons = (retries: RetryProps[]): SafeHtml => {
+  const retryNumbers = retries.map(({retry}) => retry);
+  const maxRetry = Math.max(...retryNumbers);
+  const minRetry = Math.min(...retryNumbers);
   const buttons: SafeHtml[] = [];
 
   for (let index = 1; index <= maxRetry; index += 1) {
-    const isRetry = retries.includes(index);
+    const isRetry = retryNumbers.includes(index);
 
     buttons[index] = renderRetryButton({
       disabled: !isRetry,

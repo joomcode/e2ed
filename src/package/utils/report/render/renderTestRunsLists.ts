@@ -1,15 +1,15 @@
 import {e2edCreateSafeHtmlWithoutSanitize} from '../client';
 
-import {renderListOfTestRuns} from './renderListOfTestRuns';
+import {renderRetry} from './renderRetry';
 
-import type {SafeHtml, TestRunsListProps} from '../../../types/internal';
+import type {RetryProps, SafeHtml} from '../../../types/internal';
 
 /**
  * Render test runs lists.
  * @internal
  */
-export const renderTestRunsLists = (testRunsLists: TestRunsListProps[]): SafeHtml => {
-  const lists = testRunsLists.map(renderListOfTestRuns);
+export const renderTestRunsLists = (retries: RetryProps[]): SafeHtml => {
+  const retriesHtml = retries.map(renderRetry);
 
-  return e2edCreateSafeHtmlWithoutSanitize`${lists.join('')}`;
+  return e2edCreateSafeHtmlWithoutSanitize`${retriesHtml.join('')}`;
 };
