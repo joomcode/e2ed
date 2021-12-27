@@ -5,10 +5,10 @@ import {renderRetry} from './renderRetry';
 import type {RetryProps, SafeHtml} from '../../../types/internal';
 
 /**
- * Render test runs lists.
+ * Render list of retries (with test runs).
  * @internal
  */
-export const renderTestRunsLists = (retries: RetryProps[]): SafeHtml => {
+export const renderRetries = (retries: RetryProps[]): SafeHtml => {
   const retriesHtml = retries.map(renderRetry);
 
   return e2edCreateSafeHtmlWithoutSanitize`${retriesHtml.join('')}`;

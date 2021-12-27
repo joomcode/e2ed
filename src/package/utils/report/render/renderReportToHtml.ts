@@ -1,14 +1,14 @@
 import {generalLog} from '../../generalLog';
 
 import {e2edSanitizeHtml} from '../client';
-import {getTestRunsLists} from '../getTestRunsLists';
+import {getRetriesProps} from '../getRetriesProps';
 
 import {renderErrors} from './renderErrors';
 import {renderHead} from './renderHead';
 import {renderJsonData} from './renderJsonData';
 import {renderNavigation} from './renderNavigation';
+import {renderRetries} from './renderRetries';
 import {renderScript} from './renderScript';
-import {renderTestRunsLists} from './renderTestRunsLists';
 
 import type {ReportData, SafeHtml} from '../../../types/internal';
 
@@ -21,16 +21,16 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
 
   generalLog(`Will render HTML report for ${length} test run${length > 1 ? 's' : ''}`);
 
-  const testRunsLists = getTestRunsLists(reportData);
+  const retries = getRetriesProps(reportData);
 
   return e2edSanitizeHtml`<!DOCTYPE html>
 <html lang="en">
   ${renderHead(reportData.name)}
   <body>
-    ${renderNavigation(testRunsLists)}
+    ${renderNavigation(retries)}
     <div class="main" role="tabpanel">
       <section class="main__section _position_left" aria-label="Retry 1">
-        ${renderTestRunsLists(testRunsLists)}
+        ${renderRetries(retries)}
         ${renderErrors(reportData.errors)}
       </section>
       <div class="drag-container"></div>

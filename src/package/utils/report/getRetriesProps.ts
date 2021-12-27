@@ -14,7 +14,7 @@ import type {
  * Get array of RetryProps from report data.
  * @internal
  */
-export const getTestRunsLists = ({testRunsWithHooks}: ReportData): RetryProps[] => {
+export const getRetriesProps = ({testRunsWithHooks}: ReportData): RetryProps[] => {
   const runHashUnificator = getRunHashUnificator();
 
   const internallyRetriedRunIds: RunId[] = [];
@@ -23,6 +23,7 @@ export const getTestRunsLists = ({testRunsWithHooks}: ReportData): RetryProps[] 
 
   for (const testRunWithHooks of testRunsWithHooks) {
     const {
+      endTimeInMs,
       errors,
       filePath,
       mainParams,
@@ -32,7 +33,6 @@ export const getTestRunsLists = ({testRunsWithHooks}: ReportData): RetryProps[] 
       runId,
       runLabel,
       startTimeInMs,
-      endTimeInMs,
     } = testRunWithHooks;
 
     if (previousRunId) {
