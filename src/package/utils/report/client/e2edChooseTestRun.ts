@@ -1,8 +1,8 @@
+import {e2edRenderTestRunDetails as clientE2edRenderTestRunDetails} from './e2edRenderTestRunDetails';
+
 import type {ReportClientGlobal, RunHash} from '../../../types/internal';
 
-import type {e2edRenderTestRunDetails as E2edRenderTestRunDetails} from './e2edRenderTestRunDetails';
-
-declare const e2edRenderTestRunDetails: typeof E2edRenderTestRunDetails;
+const e2edRenderTestRunDetails = clientE2edRenderTestRunDetails;
 
 declare const e2edTestRunDetailsContainer: HTMLElement;
 

@@ -1,13 +1,16 @@
-import {TestRunStatus} from '../../../constants/internal';
+import {
+  E2ED_TEST_STATUS_TO_STATUS_STRING as CLIENT_E2ED_TEST_STATUS_TO_STATUS_STRING,
+  TestRunStatus,
+} from '../../../constants/internal';
 
-import type {E2ED_TEST_STATUS_TO_STATUS_STRING as E2ED_TEST_STATUS_TO_STATUS_STRING_TYPE} from '../../../constants/internal';
+import {e2edRenderTestRunDescription as clientE2edRenderTestRunDescription} from './e2edRenderTestRunDescription';
+import {e2edSanitizeHtml as clientE2edSanitizeHtml} from './sanitizeHtml';
+
 import type {SafeHtml, TestRunWithHooks} from '../../../types/internal';
 
-import type {e2edSanitizeHtml as E2edSanitizeHtml} from './sanitizeHtml';
-
-declare const e2edSanitizeHtml: typeof E2edSanitizeHtml;
-
-declare const E2ED_TEST_STATUS_TO_STATUS_STRING: typeof E2ED_TEST_STATUS_TO_STATUS_STRING_TYPE;
+const e2edRenderTestRunDescription = clientE2edRenderTestRunDescription;
+const E2ED_TEST_STATUS_TO_STATUS_STRING = CLIENT_E2ED_TEST_STATUS_TO_STATUS_STRING;
+const e2edSanitizeHtml = clientE2edSanitizeHtml;
 
 /**
  * Render tag <article class="test-details"> with test run details.
@@ -26,5 +29,8 @@ export function e2edRenderTestRunDetails(testRunWithHooks: TestRunWithHooks): Sa
     <span class="color-cell color-cell_status_${statusString} test-details__status">${capitalizedStatus}</span>
     ${name}
   </h2>
+  <div role="tabpanel">
+    ${e2edRenderTestRunDescription(testRunWithHooks)}
+  </div>
 </article>`;
 }

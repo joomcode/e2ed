@@ -1,10 +1,10 @@
-import type {e2edAddOnClickOnClass as E2edAddOnClickOnClass} from './e2edAddOnClickOnClass';
-import type {e2edClickOnRetry as E2edClickOnRetry} from './e2edClickOnRetry';
-import type {e2edClickOnTestRun as E2edClickOnTestRun} from './e2edClickOnTestRun';
+import {e2edAddOnClickOnClass as clientE2edAddOnClickOnClass} from './e2edAddOnClickOnClass';
+import {e2edClickOnRetry as clientE2edClickOnRetry} from './e2edClickOnRetry';
+import {e2edClickOnTestRun as clientE2edClickOnTestRun} from './e2edClickOnTestRun';
 
-declare const e2edAddOnClickOnClass: typeof E2edAddOnClickOnClass;
-declare const e2edClickOnRetry: typeof E2edClickOnRetry;
-declare const e2edClickOnTestRun: typeof E2edClickOnTestRun;
+const e2edAddOnClickOnClass = clientE2edAddOnClickOnClass;
+const e2edClickOnRetry = clientE2edClickOnRetry;
+const e2edClickOnTestRun = clientE2edClickOnTestRun;
 
 /**
  * Initial report page script.

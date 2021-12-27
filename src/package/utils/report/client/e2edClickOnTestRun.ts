@@ -1,8 +1,8 @@
+import {e2edChooseTestRun as clientE2edChooseTestRun} from './e2edChooseTestRun';
+
 import type {RunHash} from '../../../types/internal';
 
-import type {e2edChooseTestRun as E2edChooseTestRun} from './e2edChooseTestRun';
-
-declare const e2edChooseTestRun: typeof E2edChooseTestRun;
+const e2edChooseTestRun = clientE2edChooseTestRun;
 
 /**
  * Handler for click on choose TestRun button.
