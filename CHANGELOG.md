@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.39](https://github.com/uid11/e2ed/tree/v0.7.39) (2021-12-27)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.38...v0.7.39)
+
+- [feat: render header of test run details](https://github.com/uid11/e2ed/commit/31bfcbf97db5dddac77759e24eaf6a8168cb8ecf)
+
 ## [v0.7.38](https://github.com/uid11/e2ed/tree/v0.7.38) (2021-12-27)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.37...v0.7.38)
