@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.40](https://github.com/uid11/e2ed/tree/v0.7.40) (2021-12-27)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.39...v0.7.40)
+
+- [feat: render TestRun description (meta, date and duration)](https://github.com/uid11/e2ed/commit/ac0a3f915eb2d44b6181fa604de1323e88ce4b28)
+
 ## [v0.7.39](https://github.com/uid11/e2ed/tree/v0.7.39) (2021-12-27)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.38...v0.7.39)
