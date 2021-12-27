@@ -43,6 +43,15 @@ export type TestRunButtonProps = Readonly<{
 }>;
 
 /**
+ * Global object on report html page.
+ * @internal
+ */
+export type ReportClientGlobal = {
+  e2edTestRunDetailsElementsByHash?: Record<RunHash, HTMLElement>;
+  e2edTestRunsWithHooks?: TestRunWithHooks[];
+} & Window;
+
+/**
  * Retry component props.
  * @internal
  */

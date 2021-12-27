@@ -1,5 +1,6 @@
 /**
  * Add onclick event listener on all elements with some class.
+ * This global client function should not use scope variables (except other global functions).
  * @internal
  */
 export function e2edAddOnClickOnClass(
@@ -28,9 +29,9 @@ export function e2edAddOnClickOnClass(
 
             return;
           }
-
-          currentElement = currentElement.parentNode as HTMLElement;
         }
+
+        currentElement = currentElement.parentNode as HTMLElement;
       }
     });
   }

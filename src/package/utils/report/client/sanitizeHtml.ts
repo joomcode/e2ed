@@ -2,6 +2,7 @@ import type {SafeHtml} from '../../../types/internal';
 
 /**
  * Create SafeHtml from string without sanitize.
+ * This global client function should not use scope variables (except other global functions).
  * @internal
  */
 export function e2edCreateSafeHtmlWithoutSanitize(
@@ -31,6 +32,7 @@ export function e2edCreateSafeHtmlWithoutSanitize(
 
 /**
  * Sanitize HTML code (simple protection against XSS attacks).
+ * This global client function should not use scope variables (except other global functions).
  * @internal
  */
 export function e2edSanitizeHtml(

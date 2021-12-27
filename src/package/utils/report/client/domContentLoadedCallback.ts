@@ -1,4 +1,4 @@
-import type {TestRunWithHooks} from '../../../types/internal';
+import type {ReportClientGlobal, TestRunWithHooks} from '../../../types/internal';
 
 declare const e2edJsonReportData: HTMLScriptElement;
 
@@ -8,10 +8,11 @@ declare const e2edJsonReportData: HTMLScriptElement;
  * @internal
  */
 export const domContentLoadedCallback = (): void => {
-  const testRuns = JSON.parse(
+  const e2edTestRunsWithHooks = JSON.parse(
     e2edJsonReportData.textContent || 'Cannot parse JSON report data',
   ) as TestRunWithHooks[];
 
-  // eslint-disable-next-line no-console
-  console.log(testRuns);
+  const global: ReportClientGlobal = window;
+
+  global.e2edTestRunsWithHooks = e2edTestRunsWithHooks;
 };

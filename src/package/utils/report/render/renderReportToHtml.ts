@@ -34,9 +34,11 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
         ${renderErrors(reportData.errors)}
       </section>
       <div class="drag-container"></div>
-      <section id="e2edTestRunDetails" class="main__section _position_right" aria-label="Tests results">
-        <div class="test-details-empty"><p>No test selected</p></div>
-      </section>
+      <section
+        aria-label="Tests results"
+        class="main__section _position_right"
+        id="e2edTestRunDetailsContainer"
+      ><div class="test-details-empty"><p>No test selected</p></div></section>
     </div>
     ${renderScript()}
     ${renderJsonData(reportData)}

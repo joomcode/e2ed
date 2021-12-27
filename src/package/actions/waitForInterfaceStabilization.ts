@@ -23,15 +23,15 @@ type WaitingForInterfaceStabilization = {
  */
 const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterval: number) => {
   const global: {
-    waitingForInterfaceStabilization?: WaitingForInterfaceStabilization | undefined;
+    e2edWaitingForInterfaceStabilization?: WaitingForInterfaceStabilization | undefined;
   } & Window = window;
 
-  if (global.waitingForInterfaceStabilization) {
-    if (stabilizationInterval > global.waitingForInterfaceStabilization.stabilizationInterval) {
-      global.waitingForInterfaceStabilization.stabilizationInterval = stabilizationInterval;
+  if (global.e2edWaitingForInterfaceStabilization) {
+    if (stabilizationInterval > global.e2edWaitingForInterfaceStabilization.stabilizationInterval) {
+      global.e2edWaitingForInterfaceStabilization.stabilizationInterval = stabilizationInterval;
     }
 
-    return global.waitingForInterfaceStabilization.promise;
+    return global.e2edWaitingForInterfaceStabilization.promise;
   }
 
   const CHECK_INTERVAL_IN_MS = 250;
@@ -82,10 +82,10 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
       interfaceState = newInterfaceState;
 
       const currentStabilizationInterval =
-        global?.waitingForInterfaceStabilization?.stabilizationInterval ?? Infinity;
+        global?.e2edWaitingForInterfaceStabilization?.stabilizationInterval ?? Infinity;
 
       if (Date.now() - stabilizationIntervalStart >= currentStabilizationInterval) {
-        global.waitingForInterfaceStabilization = undefined;
+        global.e2edWaitingForInterfaceStabilization = undefined;
         clearInterval(intervalId);
         resolve();
 
@@ -93,14 +93,14 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
       }
 
       if (Date.now() - startTimeInMs > TIMEOUT_IN_MS) {
-        global.waitingForInterfaceStabilization = undefined;
+        global.e2edWaitingForInterfaceStabilization = undefined;
         clearInterval(intervalId);
         reject(new Error(`Time was out in waitForInterfaceStabilization (${TIMEOUT_IN_MS} ms)`));
       }
     }, CHECK_INTERVAL_IN_MS);
   });
 
-  global.waitingForInterfaceStabilization = {promise, stabilizationInterval};
+  global.e2edWaitingForInterfaceStabilization = {promise, stabilizationInterval};
 
   return promise;
 }, 'waitForInterfaceStabilization');
