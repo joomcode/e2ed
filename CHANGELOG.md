@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.38](https://github.com/uid11/e2ed/tree/v0.7.38) (2021-12-27)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.37...v0.7.38)
+
+- [refactor: rename the list of test runs in retries](https://github.com/uid11/e2ed/commit/4073dfaabc2fbf9eb51bd657bbddbc82e9dbbe6b)
+
 ## [v0.7.37](https://github.com/uid11/e2ed/tree/v0.7.37) (2021-12-27)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.36...v0.7.37)
