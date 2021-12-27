@@ -9,5 +9,6 @@ export * from './e2edRenderDuration';
 export * from './e2edRenderSteps';
 export * from './e2edRenderTestRunDescription';
 export * from './e2edRenderTestRunDetails';
+export * from './e2edRenderTestRunErrors';
 export * from './initialScript';
 export * from './sanitizeHtml';

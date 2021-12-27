@@ -5,12 +5,14 @@ import {
 
 import {e2edRenderSteps as clientE2edRenderSteps} from './e2edRenderSteps';
 import {e2edRenderTestRunDescription as clientE2edRenderTestRunDescription} from './e2edRenderTestRunDescription';
+import {e2edRenderTestRunErrors as clientE2edRenderTestRunErrors} from './e2edRenderTestRunErrors';
 import {e2edSanitizeHtml as clientE2edSanitizeHtml} from './sanitizeHtml';
 
 import type {SafeHtml, TestRunWithHooks} from '../../../types/internal';
 
 const e2edRenderSteps = clientE2edRenderSteps;
 const e2edRenderTestRunDescription = clientE2edRenderTestRunDescription;
+const e2edRenderTestRunErrors = clientE2edRenderTestRunErrors;
 const E2ED_TEST_STATUS_TO_STATUS_STRING = CLIENT_E2ED_TEST_STATUS_TO_STATUS_STRING;
 const e2edSanitizeHtml = clientE2edSanitizeHtml;
 
@@ -20,7 +22,7 @@ const e2edSanitizeHtml = clientE2edSanitizeHtml;
  * @internal
  */
 export function e2edRenderTestRunDetails(testRunWithHooks: TestRunWithHooks): SafeHtml {
-  const {errors, filePath, name} = testRunWithHooks;
+  const {endTimeInMs, errors, filePath, logEvents, name} = testRunWithHooks;
   const status = errors.length > 0 ? TestRunStatus.Failed : TestRunStatus.Passed;
   const statusString = E2ED_TEST_STATUS_TO_STATUS_STRING[status];
   const capitalizedStatus = `${statusString[0].toUpperCase()}${statusString.slice(1)}`;
@@ -35,7 +37,8 @@ export function e2edRenderTestRunDetails(testRunWithHooks: TestRunWithHooks): Sa
     ${e2edRenderTestRunDescription(testRunWithHooks)}
     <article class="overview">
       <h3 class="overview__title">Execution</h3>
-      ${e2edRenderSteps(testRunWithHooks.logEvents)}
+      ${e2edRenderSteps({endTimeInMs, logEvents})}
+      ${e2edRenderTestRunErrors(errors)}
     </article>
   </div>
 </article>`;

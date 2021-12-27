@@ -10,6 +10,7 @@ import {
   e2edRenderSteps,
   e2edRenderTestRunDescription,
   e2edRenderTestRunDetails,
+  e2edRenderTestRunErrors,
   e2edSanitizeHtml,
 } from '../client';
 
@@ -31,5 +32,6 @@ ${e2edRenderDuration.toString()}
 ${e2edRenderSteps.toString()}
 ${e2edRenderTestRunDescription.toString()}
 ${e2edRenderTestRunDetails.toString()}
+${e2edRenderTestRunErrors.toString()}
 ${e2edSanitizeHtml.toString()}
 `;
