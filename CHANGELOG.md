@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.8.0](https://github.com/uid11/e2ed/tree/v0.8.0) (2021-12-27)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.41...v0.8.0)
+
+- [feat: render TestRun errors, as simple messages](https://github.com/uid11/e2ed/commit/4b229e2d9207e481dd078bc40712299f8c16e0a0)
+
 ## [v0.7.41](https://github.com/uid11/e2ed/tree/v0.7.41) (2021-12-27)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.40...v0.7.41)
