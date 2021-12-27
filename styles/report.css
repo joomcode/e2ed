@@ -597,7 +597,7 @@ button:disabled {
   display: none;
 }
 .step-expanded-panel {
-  margin: 0 0 10px 0;
+  margin: 0;
   display: none;
   box-sizing: border-box;
 }

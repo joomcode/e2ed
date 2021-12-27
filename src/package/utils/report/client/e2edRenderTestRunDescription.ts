@@ -23,7 +23,6 @@ export function e2edRenderTestRunDescription(testRunWithHooks: TestRunWithHooks)
   const {meta} = testRunWithHooks.options;
   const metaHtmls: SafeHtml[] = [];
 
-  //  for (const [key, value] of Object.entries(y) as Array<[keyof T, T[keyof T]]>) {
   for (const [key, value] of Object.entries(meta)) {
     const metaHtml = e2edSanitizeHtml`
 <dt class="test-description__term">${key}</dt>
@@ -32,9 +31,11 @@ export function e2edRenderTestRunDescription(testRunWithHooks: TestRunWithHooks)
     metaHtmls.push(metaHtml);
   }
 
-  return e2edCreateSafeHtmlWithoutSanitize`
+  const metaProperties = e2edCreateSafeHtmlWithoutSanitize`${metaHtmls.join()}`;
+
+  return e2edSanitizeHtml`
 <dl class="test-description test-description_type_meta">
-  ${metaHtmls.join('')}
+  ${metaProperties}
   <dt class="test-description__term">Date</dt>
   <dd class="test-description__definition">
     ${e2edRenderDatesInterval({endTimeInMs, startTimeInMs})}

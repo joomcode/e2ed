@@ -3,11 +3,13 @@ import {
   TestRunStatus,
 } from '../../../constants/internal';
 
+import {e2edRenderSteps as clientE2edRenderSteps} from './e2edRenderSteps';
 import {e2edRenderTestRunDescription as clientE2edRenderTestRunDescription} from './e2edRenderTestRunDescription';
 import {e2edSanitizeHtml as clientE2edSanitizeHtml} from './sanitizeHtml';
 
 import type {SafeHtml, TestRunWithHooks} from '../../../types/internal';
 
+const e2edRenderSteps = clientE2edRenderSteps;
 const e2edRenderTestRunDescription = clientE2edRenderTestRunDescription;
 const E2ED_TEST_STATUS_TO_STATUS_STRING = CLIENT_E2ED_TEST_STATUS_TO_STATUS_STRING;
 const e2edSanitizeHtml = clientE2edSanitizeHtml;
@@ -31,6 +33,10 @@ export function e2edRenderTestRunDetails(testRunWithHooks: TestRunWithHooks): Sa
   </h2>
   <div role="tabpanel">
     ${e2edRenderTestRunDescription(testRunWithHooks)}
+    <article class="overview">
+      <h3 class="overview__title">Execution</h3>
+      ${e2edRenderSteps(testRunWithHooks.logEvents)}
+    </article>
   </div>
 </article>`;
 }
