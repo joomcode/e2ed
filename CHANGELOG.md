@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.41](https://github.com/uid11/e2ed/tree/v0.7.41) (2021-12-27)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.40...v0.7.41)
+
+- [feat: render TestRun steps](https://github.com/uid11/e2ed/commit/e62043b0a02e35a9ff1382392c3c75ab0d45dca0)
+
 ## [v0.7.40](https://github.com/uid11/e2ed/tree/v0.7.40) (2021-12-27)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.39...v0.7.40)
