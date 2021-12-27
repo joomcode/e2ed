@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.37](https://github.com/uid11/e2ed/tree/v0.7.37) (2021-12-27)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.36...v0.7.37)
+
+- [feat: render timings of retry; render logo from file; refactor some styles](https://github.com/uid11/e2ed/commit/ebded95cbe89d7f4e09a2d9dc3064d228bfe17b0)
+
 ## [v0.7.36](https://github.com/uid11/e2ed/tree/v0.7.36) (2021-12-26)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.35...v0.7.36)
