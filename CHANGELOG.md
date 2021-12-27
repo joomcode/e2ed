@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.8.1](https://github.com/uid11/e2ed/tree/v0.8.1) (2021-12-27)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.0...v0.8.1)
+
+- [fix: typo in html template](https://github.com/uid11/e2ed/commit/5f47150edb1fbf9b01e2b3d78e40e27a4b757667)
+
 ## [v0.8.0](https://github.com/uid11/e2ed/tree/v0.8.0) (2021-12-27)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.7.41...v0.8.0)
