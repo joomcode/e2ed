@@ -31,7 +31,7 @@ export function e2edRenderTestRunDescription(testRunWithHooks: TestRunWithHooks)
     metaHtmls.push(metaHtml);
   }
 
-  const metaProperties = e2edCreateSafeHtmlWithoutSanitize`${metaHtmls.join()}`;
+  const metaProperties = e2edCreateSafeHtmlWithoutSanitize`${metaHtmls.join('')}`;
 
   return e2edSanitizeHtml`
 <dl class="test-description test-description_type_meta">
