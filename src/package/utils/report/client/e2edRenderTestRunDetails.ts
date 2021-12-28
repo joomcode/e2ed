@@ -30,8 +30,7 @@ export function e2edRenderTestRunDetails(testRunWithHooks: TestRunWithHooks): Sa
   return e2edSanitizeHtml`<article class="test-details">
   <p class="test-details__path">${filePath}</p>
   <h2 class="test-details__title">
-    <span class="color-cell color-cell_status_${statusString} test-details__status">${capitalizedStatus}</span>
-    ${name}
+    <span class="color-cell color-cell_status_${statusString} test-details__status">${capitalizedStatus}</span>${name}
   </h2>
   <div role="tabpanel">
     ${e2edRenderTestRunDescription(testRunWithHooks)}
