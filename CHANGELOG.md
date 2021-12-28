@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.8.3](https://github.com/uid11/e2ed/tree/v0.8.3) (2021-12-28)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.2...v0.8.3)
+
+- [fix: remove extra space between DOM text nodes (in report)](https://github.com/uid11/e2ed/commit/dabff90dde1bf984e5b27cfec42c337162927533)
+
 ## [v0.8.2](https://github.com/uid11/e2ed/tree/v0.8.2) (2021-12-28)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.1...v0.8.2)
