@@ -1,3 +1,5 @@
+import type {RunLabel} from './runLabel';
+
 /**
  * Fail test params.
  * @internal
@@ -23,6 +25,6 @@ export type FailTests = Readonly<{
  */
 export type TestCafeRunOptions = Readonly<{
   concurrency: number;
-  runLabel: string;
+  runLabel: RunLabel;
   tests: readonly FailTest[];
 }>;

@@ -13,7 +13,7 @@ import {getTestRunErrors} from './utils/getTestRunErrors';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
-import type {RunId, TestFn, TestOptions, UtcTimeInMs} from './types/internal';
+import type {RunId, RunLabel, TestFn, TestOptions, UtcTimeInMs} from './types/internal';
 
 declare const fixture: Inner.FixtureFn;
 declare const test: Inner.TestFn;
@@ -34,7 +34,7 @@ export const it = (name: string, options: TestOptions, testFn: TestFn): void => 
       const {errs: originalErrors} = testController.testRun;
       const {filename: absoluteFilePath} = testController.testRun.test.testFile;
       const filePath = getRelativeTestFilePath(absoluteFilePath);
-      const runLabel = process.env.E2ED_RUN_LABEL;
+      const runLabel = process.env.E2ED_RUN_LABEL as RunLabel;
       const utcTimeInMs = Date.now() as UtcTimeInMs;
 
       const runTestOwnParams = {filePath, name, options, previousRunId, runLabel, utcTimeInMs};

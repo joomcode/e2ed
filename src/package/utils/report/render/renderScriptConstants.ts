@@ -1,4 +1,4 @@
-import {E2ED_TEST_STATUS_TO_STATUS_STRING} from '../../../constants/internal';
+import {TEST_STATUS_TO_STATUS_STRING} from '../../../constants/internal';
 
 import {e2edCreateSafeHtmlWithoutSanitize} from '../client';
 
@@ -9,9 +9,9 @@ import type {SafeHtml} from '../../../types/internal';
  * @internal
  */
 export const renderScriptConstants = (): SafeHtml => {
-  const E2ED_TEST_STATUS_TO_STATUS_STRING_JSON = JSON.stringify(E2ED_TEST_STATUS_TO_STATUS_STRING);
+  const TEST_STATUS_TO_STATUS_STRING_JSON = JSON.stringify(TEST_STATUS_TO_STATUS_STRING);
 
   return e2edCreateSafeHtmlWithoutSanitize`
-window.E2ED_TEST_STATUS_TO_STATUS_STRING = ${E2ED_TEST_STATUS_TO_STATUS_STRING_JSON};
+const TEST_STATUS_TO_STATUS_STRING = ${TEST_STATUS_TO_STATUS_STRING_JSON};
 `;
 };

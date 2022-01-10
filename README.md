@@ -83,5 +83,5 @@ the page is stable for the specified time in milliseconds (maximum value 60000, 
 [npm-url]: https://www.npmjs.com/package/e2ed
 [prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg 'Prettier code style'
 [prettier-url]: https://github.com/prettier/prettier
-[typescript-image]: https://img.shields.io/badge/TypeScript-full-brightgreen 'Full TypeScript support'
+[typescript-image]: https://img.shields.io/badge/types-TypeScript-blue.svg 'Full TypeScript support'
 [typescript-url]: https://www.typescriptlang.org/

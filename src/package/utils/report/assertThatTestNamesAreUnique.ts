@@ -1,3 +1,5 @@
+import {getRunLabelObject} from '../runLabel';
+
 import {assertThatTestNamesAreUniqueInOneRetry} from './assertThatTestNamesAreUniqueInOneRetry';
 
 import type {TestRunWithHooks} from '../../types/internal';
@@ -12,13 +14,13 @@ export const assertThatTestNamesAreUnique = (
   const testRunsByRunLabel: Record<string, TestRunWithHooks[]> = {};
 
   for (const testRunWithHooks of testRunsWithHooks) {
-    const runLabelString = String(testRunWithHooks.runLabel);
+    const {retry} = getRunLabelObject(testRunWithHooks.runLabel);
 
-    if (!(runLabelString in testRunsByRunLabel)) {
-      testRunsByRunLabel[runLabelString] = [];
+    if (!(retry in testRunsByRunLabel)) {
+      testRunsByRunLabel[retry] = [];
     }
 
-    testRunsByRunLabel[runLabelString].push(testRunWithHooks);
+    testRunsByRunLabel[retry].push(testRunWithHooks);
   }
 
   for (const testRunsInOneRetry of Object.values(testRunsByRunLabel)) {

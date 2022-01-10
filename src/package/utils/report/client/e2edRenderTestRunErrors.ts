@@ -21,9 +21,7 @@ export function e2edRenderTestRunErrors(errors: readonly TestRunError[]): SafeHt
     const errorHtml = e2edSanitizeHtml`
 <div class="status-detail status-detail_status_failed">
   <div class="status-detail__content">
-    <code class="status-detail__button-text">
-      ${message}
-    </code>
+    <code class="status-detail__button-text">${message}</code>
   </div>
 </div>
 `;

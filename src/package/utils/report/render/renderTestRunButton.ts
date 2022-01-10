@@ -1,4 +1,4 @@
-import {E2ED_TEST_STATUS_TO_STATUS_STRING} from '../../../constants/internal';
+import {TEST_STATUS_TO_STATUS_STRING} from '../../../constants/internal';
 
 import {e2edSanitizeHtml} from '../client';
 
@@ -13,7 +13,7 @@ export const renderTestRunButton = (
   index: number,
 ): SafeHtml => {
   const durationInMs = endTimeInMs - startTimeInMs;
-  const statusModifier = E2ED_TEST_STATUS_TO_STATUS_STRING[status];
+  const statusModifier = TEST_STATUS_TO_STATUS_STRING[status];
 
   return e2edSanitizeHtml`<button
   aria-selected="false"

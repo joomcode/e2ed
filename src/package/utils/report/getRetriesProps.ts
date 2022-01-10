@@ -1,5 +1,7 @@
 import {TestRunStatus} from '../../constants/internal';
 
+import {getRunLabelObject} from '../runLabel';
+
 import {getRunHashUnificator} from './getRunHashUnificator';
 
 import type {
@@ -39,7 +41,7 @@ export const getRetriesProps = ({testRunsWithHooks}: ReportData): RetryProps[] =
       internallyRetriedRunIds.push(previousRunId);
     }
 
-    const retry = parseInt((runLabel || 'r:1').slice(2), 10);
+    const {retry} = getRunLabelObject(runLabel);
 
     const {duplicate, runHash} = runHashUnificator(maybeDuplicateRunHash);
 

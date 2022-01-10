@@ -10,7 +10,5 @@ import type {RunHash, TestRun} from 'e2ed/types';
 export const getTestRunHash = (testRun: TestRun): RunHash => {
   const {options, runLabel} = testRun;
 
-  const label = runLabel ? `-${runLabel}` : '';
-
-  return `${options.meta.testId}${label}` as RunHash;
+  return `${options.meta.testId}-${runLabel}` as RunHash;
 };

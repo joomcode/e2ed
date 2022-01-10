@@ -1,5 +1,5 @@
 import {
-  E2ED_TEST_STATUS_TO_STATUS_STRING as CLIENT_E2ED_TEST_STATUS_TO_STATUS_STRING,
+  TEST_STATUS_TO_STATUS_STRING as CLIENT_TEST_STATUS_TO_STATUS_STRING,
   TestRunStatus,
 } from '../../../constants/internal';
 
@@ -13,7 +13,7 @@ import type {SafeHtml, TestRunWithHooks} from '../../../types/internal';
 const e2edRenderSteps = clientE2edRenderSteps;
 const e2edRenderTestRunDescription = clientE2edRenderTestRunDescription;
 const e2edRenderTestRunErrors = clientE2edRenderTestRunErrors;
-const E2ED_TEST_STATUS_TO_STATUS_STRING = CLIENT_E2ED_TEST_STATUS_TO_STATUS_STRING;
+const TEST_STATUS_TO_STATUS_STRING = CLIENT_TEST_STATUS_TO_STATUS_STRING;
 const e2edSanitizeHtml = clientE2edSanitizeHtml;
 
 /**
@@ -24,7 +24,7 @@ const e2edSanitizeHtml = clientE2edSanitizeHtml;
 export function e2edRenderTestRunDetails(testRunWithHooks: TestRunWithHooks): SafeHtml {
   const {endTimeInMs, errors, filePath, logEvents, name} = testRunWithHooks;
   const status = errors.length > 0 ? TestRunStatus.Failed : TestRunStatus.Passed;
-  const statusString = E2ED_TEST_STATUS_TO_STATUS_STRING[status];
+  const statusString = TEST_STATUS_TO_STATUS_STRING[status];
   const capitalizedStatus = `${statusString[0].toUpperCase()}${statusString.slice(1)}`;
 
   return e2edSanitizeHtml`<article class="test-details">

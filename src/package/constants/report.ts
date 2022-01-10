@@ -15,7 +15,7 @@ export const enum TestRunStatus {
  * Map test run status to element status modifier.
  * @internal
  */
-export const E2ED_TEST_STATUS_TO_STATUS_STRING = {
+export const TEST_STATUS_TO_STATUS_STRING = {
   [TestRunStatus.Passed]: 'passed',
   [TestRunStatus.Failed]: 'failed',
   [TestRunStatus.Broken]: 'broken',

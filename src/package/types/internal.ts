@@ -13,6 +13,7 @@ export * from './pages';
 export * from './pixelmatch';
 export * from './report';
 export * from './request';
+export * from './runLabel';
 export * from './stackTrack';
 export * from './subprocess';
 export * from './testRun';

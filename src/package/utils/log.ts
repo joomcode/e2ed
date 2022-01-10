@@ -5,10 +5,9 @@ import {testController} from '../testController';
 
 // eslint-disable-next-line import/no-internal-modules
 import {registerLogEvent} from './events/registerLogEvent';
-import {getPrintedLabel} from './getPrintedLabel';
 import {valueToString} from './valueToString';
 
-import type {Log, LogPayload, UtcTimeInMs} from '../types/internal';
+import type {Log, LogPayload, RunLabel, UtcTimeInMs} from '../types/internal';
 
 const resolvedPromise = Promise.resolve();
 
@@ -21,7 +20,7 @@ const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unkn
   const time = Date.now() as UtcTimeInMs;
   const dateTimeInISO = new Date(time).toISOString();
   const runId = getRunId();
-  const printedRunLabel = getPrintedLabel(process.env.E2ED_RUN_LABEL);
+  const runLabel = process.env.E2ED_RUN_LABEL as RunLabel;
   const context = hooks.getLogContext();
   const payload = typeof maybePayload === 'object' ? (maybePayload as LogPayload) : undefined;
   const type =
@@ -34,9 +33,7 @@ const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unkn
     const printedString = valueToString(context ? {payload, context} : {payload});
 
     // eslint-disable-next-line no-console
-    console.log(
-      `[e2ed][${dateTimeInISO}]${printedRunLabel}[${runId}] ${message} ${printedString}\n`,
-    );
+    console.log(`[e2ed][${dateTimeInISO}][${runLabel}][${runId}] ${message} ${printedString}\n`);
 
     const pageLoaded = getPageLoaded();
 

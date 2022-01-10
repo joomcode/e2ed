@@ -7,9 +7,10 @@ import {getConcurrencyForNextRetry} from '../utils/getConcurrencyForNextRetry';
 import {getFailedTestsFromJsonReport} from '../utils/getFailedTestsFromJsonReport';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {getStartMessage} from '../utils/getStartMessage';
+import {getRunLabel} from '../utils/runLabel';
 import {runTests} from '../utils/runTests';
 
-import type {E2edRunEvent, FailTest, FailTests, UtcTimeInMs} from '../types/internal';
+import type {E2edRunEvent, FailTest, FailTests, RunLabel, UtcTimeInMs} from '../types/internal';
 
 process.env.E2ED_IS_DOCKER_RUN = 'true';
 
@@ -29,9 +30,11 @@ const startTimeInMs = Date.now() as UtcTimeInMs;
 
 let allTestsCount = 0;
 let retryIndex = 1;
-let runLabel = '';
+let runLabel: RunLabel;
 let tests: readonly FailTest[] = [];
 let testsCount = 0;
+
+const getPrintedRetry = (): string => `retry ${retryIndex}/${retries}`;
 
 const asyncRunTests = async (): Promise<void> => {
   const startMessage = getStartMessage();
@@ -47,9 +50,10 @@ const asyncRunTests = async (): Promise<void> => {
   await registerStartE2edRunEvent(e2edRunEvent);
 
   for (; retryIndex <= retries; retryIndex += 1) {
-    runLabel = `r:${retryIndex}/${retries};c:${concurrency}`;
+    runLabel = getRunLabel({concurrency, maxRetry: retries, retry: retryIndex});
 
     const startRetryTimeInMs = Date.now() as UtcTimeInMs;
+    const printedRetry = getPrintedRetry();
     const printedTestsString =
       tests.length === 0
         ? ')'
@@ -57,14 +61,14 @@ const asyncRunTests = async (): Promise<void> => {
 
     let failedTests: FailTests | undefined;
 
-    generalLog(`Run tests (${runLabel}, concurrency ${concurrency}${printedTestsString}`);
+    generalLog(`Run tests (${printedRetry}, concurrency ${concurrency}${printedTestsString}`);
 
     try {
       await runTests({concurrency, runLabel, tests});
 
       failedTests = getFailedTestsFromJsonReport();
     } catch (error) {
-      generalLog(`Caught an error on ${runLabel}: ${String(error)}`);
+      generalLog(`Caught an error on ${printedRetry}: ${String(error)}`);
     }
 
     if (failedTests) {
@@ -81,13 +85,13 @@ const asyncRunTests = async (): Promise<void> => {
     const wordTest = testsCount === 1 ? 'test' : 'tests';
 
     generalLog(
-      `${testsCount} ${wordTest} with ${runLabel} and concurrency ${concurrency} ran in ${
+      `${testsCount} ${wordTest} with ${printedRetry} and concurrency ${concurrency} ran in ${
         Date.now() - startRetryTimeInMs
       } ms`,
     );
 
     if (failedTests && tests.length === 0) {
-      generalLog(`[OK] All ${allTestsCount} tests completed successfully with ${runLabel}`);
+      generalLog(`[OK] All ${allTestsCount} tests completed successfully with ${printedRetry}`);
 
       break;
     }
@@ -102,7 +106,7 @@ const asyncRunTests = async (): Promise<void> => {
 
 asyncRunTests()
   .catch((error: unknown) => {
-    generalLog(`Caught unexpected error on ${runLabel}: ${String(error)}`);
+    generalLog(`Caught unexpected error on ${getPrintedRetry()}: ${String(error)}`);
   })
   .finally(() => {
     const hasFailedTests = retryIndex > retries;

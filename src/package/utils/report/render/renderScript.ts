@@ -15,9 +15,9 @@ import type {SafeHtml} from '../../../types/internal';
  */
 export const renderScript = (): SafeHtml => e2edCreateSafeHtmlWithoutSanitize`
 <script>
-'use strict';
+'use strict'; {
 ${renderScriptConstants()}
 ${renderScriptGlobalFunctions()};
 document.addEventListener("DOMContentLoaded", ${domContentLoadedCallback.toString()});
 (${initialScript.toString()})();
-</script>`;
+}</script>`;

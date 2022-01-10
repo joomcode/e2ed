@@ -10,6 +10,7 @@ import {registerEndE2edRunEvent, registerStartE2edRunEvent} from '../utils/event
 import {generalLog} from '../utils/generalLog';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {getStartMessage} from '../utils/getStartMessage';
+import {getRunLabel} from '../utils/runLabel';
 
 import type {E2edRunEvent, UtcTimeInMs} from '../types/internal';
 
@@ -45,6 +46,10 @@ const e2edRunEvent: E2edRunEvent = {
 generalLog(`${startMessage}\n`);
 
 void registerStartE2edRunEvent(e2edRunEvent);
+
+const runLabel = getRunLabel({concurrency, maxRetry: 1, retry: 1});
+
+process.env.E2ED_RUN_LABEL = runLabel;
 
 process.argv.push('--concurrency', String(concurrency));
 
