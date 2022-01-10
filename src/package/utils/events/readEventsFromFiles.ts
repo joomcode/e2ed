@@ -9,13 +9,15 @@ import {
 
 import {generalLog} from '../generalLog';
 
-import type {TestRunWithHooks} from '../../types/internal';
+import type {TestRunWithHooks, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Read events objects from temporary directory.
  * @internal
  */
 export const readEventsFromFiles = async (): Promise<TestRunWithHooks[]> => {
+  const startTimeInMs = Date.now() as UtcTimeInMs;
+
   const eventFiles = await readdir(EVENTS_DIRECTORY_PATH);
   const testRuns: TestRunWithHooks[] = [];
 
@@ -47,7 +49,9 @@ export const readEventsFromFiles = async (): Promise<TestRunWithHooks[]> => {
     }
   }
 
-  generalLog(`Read ${testRuns.length} test runs from "${EVENTS_DIRECTORY_PATH}"`);
+  const duration = Date.now() - startTimeInMs;
+
+  generalLog(`Read ${testRuns.length} test runs from "${EVENTS_DIRECTORY_PATH}" in ${duration} ms`);
 
   return testRuns;
 };

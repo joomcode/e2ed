@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import {registerEndE2edRunEvent, registerStartE2edRunEvent} from '../utils/events';
 import {failTestsToString} from '../utils/failTestsToString';
 import {generalLog} from '../utils/generalLog';

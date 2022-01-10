@@ -10,20 +10,20 @@ import {renderNavigation} from './renderNavigation';
 import {renderRetries} from './renderRetries';
 import {renderScript} from './renderScript';
 
-import type {ReportData, SafeHtml} from '../../../types/internal';
+import type {ReportData, SafeHtml, UtcTimeInMs} from '../../../types/internal';
 
 /**
  * Render report data to HTML report page.
  * @internal
  */
 export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
-  const {length} = reportData.testRunsWithHooks;
+  const startTimeInMs = Date.now() as UtcTimeInMs;
 
-  generalLog(`Will render HTML report for ${length} test run${length > 1 ? 's' : ''}`);
+  const {length} = reportData.testRunsWithHooks;
 
   const retries = getRetriesProps(reportData);
 
-  return sanitizeHtml`<!DOCTYPE html>
+  const safeHtml = sanitizeHtml`<!DOCTYPE html>
 <html lang="en">
   ${renderHead(reportData.name)}
   <body>
@@ -44,4 +44,12 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
     ${renderJsonData(reportData)}
   </body>
 </html>`;
+
+  const duration = Date.now() - startTimeInMs;
+
+  generalLog(
+    `HTML report was rendered for ${length} test run${length > 1 ? 's' : ''} in ${duration} ms`,
+  );
+
+  return safeHtml;
 };
