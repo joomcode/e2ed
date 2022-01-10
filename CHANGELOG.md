@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.8.4](https://github.com/uid11/e2ed/tree/v0.8.4) (2022-01-10)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.3...v0.8.4)
+
+- [refactor: move base client functions from global to script context](https://github.com/uid11/e2ed/commit/3256039412d4c53edcab61097e4b7f22ccf6868e)
+- [chore: update devDependencies (eslint, etc)](https://github.com/uid11/e2ed/commit/bab2459c7ce8d85d88029e4f4802a684b7eefb1f)
+- [feat: use RunLabel as mandatory field in TestRun](https://github.com/uid11/e2ed/commit/4524d1732519b7c2a3baaa186deb1d5038ce24f8)
+
 ## [v0.8.3](https://github.com/uid11/e2ed/tree/v0.8.3) (2021-12-28)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.2...v0.8.3)
