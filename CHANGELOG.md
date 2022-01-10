@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.8.5](https://github.com/uid11/e2ed/tree/v0.8.5) (2022-01-10)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.4...v0.8.5)
+
+- [chore: update @typescript-eslint/\*](https://github.com/uid11/e2ed/commit/aed239d6242215ddb5771e8cdb293d6eb3da1ac5)
+- [feat: remove shebang from TS bin files; print duration of report saving](https://github.com/uid11/e2ed/commit/0ff011f06513219951c32fa2ef859190e1f47466)
+
 ## [v0.8.4](https://github.com/uid11/e2ed/tree/v0.8.4) (2022-01-10)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.3...v0.8.4)
