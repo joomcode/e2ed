@@ -1,17 +1,17 @@
-import {e2edRenderTestRunDetails as clientE2edRenderTestRunDetails} from './e2edRenderTestRunDetails';
+import {renderTestRunDetails as clientRenderTestRunDetails} from './renderTestRunDetails';
 
 import type {ReportClientGlobal, RunHash} from '../../../types/internal';
 
-const e2edRenderTestRunDetails = clientE2edRenderTestRunDetails;
+const renderTestRunDetails = clientRenderTestRunDetails;
 
 declare const e2edTestRunDetailsContainer: HTMLElement;
 
 /**
  * Choose TestRun (render chosen TestRun in right panel).
- * This global client function should not use scope variables (except other global functions).
+ * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function e2edChooseTestRun(runHash: RunHash): void {
+export function chooseTestRun(runHash: RunHash): void {
   const previousHash = window.location.hash as RunHash;
 
   window.location.hash = runHash;
@@ -59,7 +59,7 @@ export function e2edChooseTestRun(runHash: RunHash): void {
     return;
   }
 
-  const testRunDetailsHtml = e2edRenderTestRunDetails(testRunWithHooks);
+  const testRunDetailsHtml = renderTestRunDetails(testRunWithHooks);
 
   e2edTestRunDetailsContainer.innerHTML = String(testRunDetailsHtml);
 

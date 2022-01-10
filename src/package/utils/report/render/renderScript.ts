@@ -1,11 +1,7 @@
-import {
-  domContentLoadedCallback,
-  e2edCreateSafeHtmlWithoutSanitize,
-  initialScript,
-} from '../client';
+import {createSafeHtmlWithoutSanitize, domContentLoadedCallback, initialScript} from '../client';
 
 import {renderScriptConstants} from './renderScriptConstants';
-import {renderScriptGlobalFunctions} from './renderScriptGlobalFunctions';
+import {renderScriptFunctions} from './renderScriptFunctions';
 
 import type {SafeHtml} from '../../../types/internal';
 
@@ -13,11 +9,11 @@ import type {SafeHtml} from '../../../types/internal';
  * Render tag <script> with all report JavaScript code.
  * @internal
  */
-export const renderScript = (): SafeHtml => e2edCreateSafeHtmlWithoutSanitize`
+export const renderScript = (): SafeHtml => createSafeHtmlWithoutSanitize`
 <script>
 'use strict'; {
 ${renderScriptConstants()}
-${renderScriptGlobalFunctions()};
+${renderScriptFunctions()};
 document.addEventListener("DOMContentLoaded", ${domContentLoadedCallback.toString()});
 (${initialScript.toString()})();
 }</script>`;

@@ -1,6 +1,6 @@
 import {generalLog} from '../../generalLog';
 
-import {e2edSanitizeHtml} from '../client';
+import {sanitizeHtml} from '../client';
 import {getRetriesProps} from '../getRetriesProps';
 
 import {renderErrors} from './renderErrors';
@@ -23,7 +23,7 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
 
   const retries = getRetriesProps(reportData);
 
-  return e2edSanitizeHtml`<!DOCTYPE html>
+  return sanitizeHtml`<!DOCTYPE html>
 <html lang="en">
   ${renderHead(reportData.name)}
   <body>

@@ -1,4 +1,4 @@
-import {e2edSanitizeHtml} from '../client';
+import {sanitizeHtml} from '../client';
 
 import type {RetryButtonProps, SafeHtml} from '../../../types/internal';
 
@@ -10,7 +10,7 @@ export const renderRetryButton = ({
   disabled,
   retry,
   selected,
-}: RetryButtonProps): SafeHtml => e2edSanitizeHtml`<button
+}: RetryButtonProps): SafeHtml => sanitizeHtml`<button
 aria-controls="retry${retry}"
 aria-selected="${String(selected)}"
 class="nav-tabs__button"

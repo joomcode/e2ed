@@ -1,15 +1,15 @@
-import {e2edChooseTestRun as clientE2edChooseTestRun} from './e2edChooseTestRun';
+import {chooseTestRun as clientChooseTestRun} from './chooseTestRun';
 
 import type {RunHash} from '../../../types/internal';
 
-const e2edChooseTestRun = clientE2edChooseTestRun;
+const chooseTestRun = clientChooseTestRun;
 
 /**
  * Handler for click on choose TestRun button.
- * This global client function should not use scope variables (except other global functions).
+ * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function e2edClickOnTestRun(element: HTMLElement): void {
+export function clickOnTestRun(element: HTMLElement): void {
   const runHash = element.dataset.runhash as RunHash;
 
   const previousChosenTestRunButton = document.querySelector('.test-button[aria-selected="true"]');
@@ -20,5 +20,5 @@ export function e2edClickOnTestRun(element: HTMLElement): void {
 
   element.setAttribute('aria-selected', 'true');
 
-  e2edChooseTestRun(runHash);
+  chooseTestRun(runHash);
 }

@@ -1,4 +1,4 @@
-import {e2edCreateSafeHtmlWithoutSanitize} from '../client';
+import {createSafeHtmlWithoutSanitize} from '../client';
 
 import type {ReportData, SafeHtml} from '../../../types/internal';
 
@@ -11,6 +11,6 @@ export const renderJsonData = (reportData: ReportData): SafeHtml => {
 
   const jsonString = JSON.stringify(testRunsWithHooks);
 
-  return e2edCreateSafeHtmlWithoutSanitize`
+  return createSafeHtmlWithoutSanitize`
 <script id="e2edJsonReportData" type="application/json">${jsonString}</script>`;
 };

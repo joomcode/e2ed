@@ -1,4 +1,4 @@
-import {e2edSanitizeHtml} from '../client';
+import {sanitizeHtml} from '../client';
 
 import {renderCssStyles} from './renderCssStyles';
 import {renderFavicon} from './renderFavicon';
@@ -9,7 +9,7 @@ import type {SafeHtml} from '../../../types/internal';
  * Render tag <head>.
  * @internal
  */
-export const renderHead = (name: string): SafeHtml => e2edSanitizeHtml`
+export const renderHead = (name: string): SafeHtml => sanitizeHtml`
 <head>
   <meta charset="utf-8" />
   <title>${name}</title>

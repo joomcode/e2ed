@@ -1,4 +1,4 @@
-import {e2edSanitizeHtml as clientE2edSanitizeHtml} from './sanitizeHtml';
+import {sanitizeHtml as clientSanitizeHtml} from './sanitizeHtml';
 
 import type {SafeHtml, UtcTimeInMs} from '../../../types/internal';
 
@@ -7,14 +7,14 @@ type Options = Readonly<{
   startTimeInMs: UtcTimeInMs;
 }>;
 
-const e2edSanitizeHtml = clientE2edSanitizeHtml;
+const sanitizeHtml = clientSanitizeHtml;
 
 /**
  * Render the interval between two dates.
- * This global client function should not use scope variables (except other global functions).
+ * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function e2edRenderDatesInterval({endTimeInMs, startTimeInMs}: Options): SafeHtml {
+export function renderDatesInterval({endTimeInMs, startTimeInMs}: Options): SafeHtml {
   const startDate = new Date(startTimeInMs);
   const endDate = new Date(endTimeInMs);
 
@@ -26,6 +26,6 @@ export function e2edRenderDatesInterval({endTimeInMs, startTimeInMs}: Options): 
   const startTime = startDatetime.slice(11, 19);
   const endTime = endDatetime.slice(11, 19);
 
-  return e2edSanitizeHtml`<time datetime="${startDatetime}">${date} ${startTime}</time> –
+  return sanitizeHtml`<time datetime="${startDatetime}">${date} ${startTime}</time> –
 <time datetime="${endDatetime}">${endTime}</time>`;
 }

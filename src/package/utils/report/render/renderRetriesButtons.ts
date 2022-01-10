@@ -1,4 +1,4 @@
-import {e2edCreateSafeHtmlWithoutSanitize} from '../client';
+import {createSafeHtmlWithoutSanitize} from '../client';
 
 import {renderRetryButton} from './renderRetryButton';
 
@@ -24,6 +24,6 @@ export const renderRetriesButtons = (retries: RetryProps[]): SafeHtml => {
     });
   }
 
-  return e2edCreateSafeHtmlWithoutSanitize`
+  return createSafeHtmlWithoutSanitize`
 <div role="tablist" aria-label="Retries" class="nav-tabs">${buttons.join('')}</div>`;
 };

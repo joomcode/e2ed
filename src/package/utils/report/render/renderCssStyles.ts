@@ -3,7 +3,7 @@ import {join} from 'path';
 
 import {E2ED_PACKAGE_DIRECTORY_PATH, READ_FILE_OPTIONS} from '../../../constants/internal';
 
-import {e2edCreateSafeHtmlWithoutSanitize} from '../client';
+import {createSafeHtmlWithoutSanitize} from '../client';
 
 import type {SafeHtml} from '../../../types/internal';
 
@@ -16,5 +16,5 @@ export const renderCssStyles = (): SafeHtml => {
 
   const cssString = readFileSync(pathToCss, READ_FILE_OPTIONS);
 
-  return e2edCreateSafeHtmlWithoutSanitize`<style>${cssString}</style>`;
+  return createSafeHtmlWithoutSanitize`<style>${cssString}</style>`;
 };

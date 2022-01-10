@@ -1,4 +1,4 @@
-import {e2edRenderDatesInterval, e2edRenderDuration, e2edSanitizeHtml} from '../client';
+import {renderDatesInterval, renderDuration, sanitizeHtml} from '../client';
 
 import type {RetryProps, SafeHtml} from '../../../types/internal';
 
@@ -9,10 +9,10 @@ import type {RetryProps, SafeHtml} from '../../../types/internal';
 export const renderRetryHeader = ({endTimeInMs, retry, startTimeInMs}: RetryProps): SafeHtml => {
   const durationMs = endTimeInMs - startTimeInMs;
 
-  return e2edSanitizeHtml`
+  return sanitizeHtml`
 <h3 class="__title">Retry ${retry}</h3>
 <p class="__date">
-  ${e2edRenderDatesInterval({endTimeInMs, startTimeInMs})}
-  (${e2edRenderDuration(durationMs)})
+  ${renderDatesInterval({endTimeInMs, startTimeInMs})}
+  (${renderDuration(durationMs)})
 </p>`;
 };

@@ -2,10 +2,10 @@ import type {SafeHtml} from '../../../types/internal';
 
 /**
  * Create SafeHtml from string without sanitize.
- * This global client function should not use scope variables (except other global functions).
+ * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function e2edCreateSafeHtmlWithoutSanitize(
+export function createSafeHtmlWithoutSanitize(
   strings: readonly string[],
   ...values: readonly unknown[]
 ): SafeHtml {
@@ -32,13 +32,10 @@ export function e2edCreateSafeHtmlWithoutSanitize(
 
 /**
  * Sanitize HTML code (simple protection against XSS attacks).
- * This global client function should not use scope variables (except other global functions).
+ * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function e2edSanitizeHtml(
-  strings: readonly string[],
-  ...values: readonly unknown[]
-): SafeHtml {
+export function sanitizeHtml(strings: readonly string[], ...values: readonly unknown[]): SafeHtml {
   const key = Symbol.for('e2ed SafeHtml key');
 
   const sanitizeValue = (value: unknown): string =>
@@ -66,5 +63,5 @@ export function e2edSanitizeHtml(
 
   const html = parts.join('');
 
-  return e2edCreateSafeHtmlWithoutSanitize`${html}`;
+  return createSafeHtmlWithoutSanitize`${html}`;
 }

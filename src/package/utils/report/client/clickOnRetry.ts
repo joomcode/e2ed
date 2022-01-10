@@ -1,9 +1,9 @@
 /**
  * Handler for click on choose Retry button.
- * This global client function should not use scope variables (except other global functions).
+ * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function e2edClickOnRetry(element: HTMLElement): void {
+export function clickOnRetry(element: HTMLElement): void {
   const chosenRetryId = element.getAttribute('aria-controls');
   const retry = Number(chosenRetryId?.match(/\d+/)?.[0]);
   const allRetryElements: NodeListOf<HTMLElement> = document.querySelectorAll('.retry');

@@ -1,12 +1,9 @@
 /**
  * Add onclick event listener on all elements with some class.
- * This global client function should not use scope variables (except other global functions).
+ * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function e2edAddOnClickOnClass(
-  className: string,
-  onclick: (event: HTMLElement) => void,
-): void {
+export function addOnClickOnClass(className: string, onclick: (event: HTMLElement) => void): void {
   const global = window as Window & {
     e2edClickListeners?: Record<string, (event: HTMLElement) => void>;
   };
