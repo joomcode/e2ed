@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.8.6](https://github.com/uid11/e2ed/tree/v0.8.6) (2022-01-11)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.5...v0.8.6)
+
+- [feat: use streams for writing files (HTML report and others)](https://github.com/uid11/e2ed/commit/f3ef395c75a87116b75cbc17dd277990dd51f9ba)
+- [feat: remove field "scripts" from published package.json](https://github.com/uid11/e2ed/commit/03725b2d6682ce56f569c69515feb84dbed499f4)
+
 ## [v0.8.5](https://github.com/uid11/e2ed/tree/v0.8.5) (2022-01-10)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.4...v0.8.5)
