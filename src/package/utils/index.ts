@@ -17,6 +17,7 @@ export * from './trimSemicolonsAtTheEnd';
 export * from './valueToString';
 export * from './wait';
 export * from './wrapInTestRunTracker';
+export * from './writeFile';
 
 /**
  * Userland utils. This export must be the last.

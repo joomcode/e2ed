@@ -69,7 +69,7 @@ rules:
   simple-import-sort/imports:
     - error
     - groups:
-        - ['^(child_process|fs|http|https|path|querystring|url|util)(/.*|$)']
+        - ['^(child_process|fs|http|https|path|querystring|stream|url|util)(/.*|$)']
         - ['^\w']
         - ['^\u0000']
         - ['^\.\./\.\./\.\./\.\.(?!/?$)', '^\.\./\.\./\.\./\.\./?$']

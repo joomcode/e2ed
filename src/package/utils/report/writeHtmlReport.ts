@@ -1,9 +1,9 @@
-import {writeFile} from 'fs/promises';
 import {join} from 'path';
 
 import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
 
 import {generalLog} from '../generalLog';
+import {writeFile} from '../writeFile';
 
 import {renderReportToHtml} from './render';
 
@@ -20,7 +20,7 @@ export const writeHtmlReport = async (reportData: ReportData): Promise<void> => 
   const reportFileName = `${reportData.name}.html`;
   const reportFilePath = join(REPORTS_DIRECTORY_PATH, reportFileName);
 
-  await writeFile(reportFilePath, reportHtml);
+  await writeFile(reportFilePath, String(reportHtml));
 
   const duration = Date.now() - startTimeInMs;
 

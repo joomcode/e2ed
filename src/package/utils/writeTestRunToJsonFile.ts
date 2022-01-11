@@ -1,9 +1,10 @@
-import {stat, writeFile} from 'fs/promises';
+import {stat} from 'fs/promises';
 import {join} from 'path';
 
 import {EVENTS_DIRECTORY_PATH} from '../constants/internal';
 
 import {E2EDError} from './E2EDError';
+import {writeFile} from './writeFile';
 
 import type {TestRunWithHooks} from '../types/internal';
 
