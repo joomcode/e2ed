@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.8.7](https://github.com/uid11/e2ed/tree/v0.8.7) (2022-01-24)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.6...v0.8.7)
+
+- [chore: update devDependencies and temporary remove npm audit](https://github.com/uid11/e2ed/commit/cce33992fc5e74acd58c10574e12a6881c2772a2)
+- [fix: tests should start without reports/report.json files](https://github.com/uid11/e2ed/commit/321540df279f4c9fab331b753743172b988c4f6a)
+- [chore: update devDependencies](https://github.com/uid11/e2ed/commit/cea9e21ffb034960c57de01acffdb8ff1c051eb4)
+- [feat: add package "exports" field; add argument to getLogContext](https://github.com/uid11/e2ed/commit/0b69be966bae1f10f11169aeb17b2c1ebd66d821)
+
 ## [v0.8.6](https://github.com/uid11/e2ed/tree/v0.8.6) (2022-01-11)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.5...v0.8.6)
