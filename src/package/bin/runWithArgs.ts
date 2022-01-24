@@ -59,7 +59,7 @@ process.argv.push('--config-file', './node_modules/e2ed/testcaferc.js');
 require('testcafe-without-typecheck/lib/cli/cli');
 
 /**
- * TODO: Next code need refactor.
+ * @todo Next code need refactor.
  */
 
 const startTimeInMs = Date.now() as UtcTimeInMs;

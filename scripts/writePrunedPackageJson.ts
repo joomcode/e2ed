@@ -1,5 +1,5 @@
 /**
- * @file Generate pruned package.json for npm package.
+ * @file Generate and write pruned package.json for npm package.
  */
 
 import {writeFileSync} from 'fs';
@@ -11,6 +11,7 @@ const prunedPackageJsonPath = join(__dirname, 'node_modules', 'e2ed', 'package.j
 
 const prunedPackageJson: Partial<typeof pkg> = {...pkg};
 
+delete prunedPackageJson.devDependencies;
 delete prunedPackageJson.scripts;
 
 const prunedPackageJsonText = JSON.stringify(prunedPackageJson, null, 2);

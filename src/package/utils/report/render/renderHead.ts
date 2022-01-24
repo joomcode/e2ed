@@ -1,4 +1,5 @@
-import {sanitizeHtml} from '../client';
+import {createSafeHtmlWithoutSanitize, sanitizeHtml} from '../client';
+import {getCspHash} from '../getCspHash';
 
 import {renderCssStyles} from './renderCssStyles';
 import {renderFavicon} from './renderFavicon';
@@ -9,12 +10,21 @@ import type {SafeHtml} from '../../../types/internal';
  * Render tag <head>.
  * @internal
  */
-export const renderHead = (name: string): SafeHtml => sanitizeHtml`
+export const renderHead = (name: string): SafeHtml => {
+  const cspHash = getCspHash('');
+  const safeCspHash = createSafeHtmlWithoutSanitize`${cspHash}`;
+
+  return sanitizeHtml`
 <head>
   <meta charset="utf-8" />
-  <title>${name}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="${name}" />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; img-src 'self' data:; script-src '${safeCspHash}';"
+  />
+  <title>${name}</title>
   ${renderFavicon()}
   ${renderCssStyles()}
 </head>`;
+};

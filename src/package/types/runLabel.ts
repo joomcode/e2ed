@@ -6,7 +6,7 @@ import type {Brand} from './brand';
 export type RunLabel = Brand<string, 'RunLabel'>;
 
 /**
- * Unique id of each test run.
+ * Additional data parsed from RunLabel string.
  */
 export type RunLabelObject = Readonly<{
   concurrency: number;

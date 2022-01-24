@@ -4,6 +4,7 @@ import type {DeepReadonly, Headers as AnyHeaders, Method, Url} from '../../types
 
 /**
  * Request log parameters.
+ * @todo Replace Record<...> with exact fields.
  * @internal
  */
 export type LogParams = Readonly<{url: Url}> & Record<string, unknown>;

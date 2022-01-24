@@ -69,7 +69,7 @@ rules:
   simple-import-sort/imports:
     - error
     - groups:
-        - ['^(child_process|fs|http|https|path|querystring|stream|url|util)(/.*|$)']
+        - ['^(child_process|crypto|fs|http|https|path|querystring|stream|url|util)(/.*|$)']
         - ['^\w']
         - ['^\u0000']
         - ['^\.\./\.\./\.\./\.\.(?!/?$)', '^\.\./\.\./\.\./\.\./?$']
@@ -91,7 +91,7 @@ rules:
   '@typescript-eslint/no-namespace': [error, {allowDeclarations: true}]
   '@typescript-eslint/no-shadow': [error]
   '@typescript-eslint/no-use-before-define': [error]
-  '@typescript-eslint/quotes': [error, single]
+  '@typescript-eslint/quotes': [error, single, {avoidEscape: true}]
 settings:
   import/extensions: [.ts]
   import/resolver: {node: {extensions: [.ts]}}

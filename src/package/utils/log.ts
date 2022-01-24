@@ -21,12 +21,12 @@ const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unkn
   const dateTimeInISO = new Date(time).toISOString();
   const runId = getRunId();
   const runLabel = process.env.E2ED_RUN_LABEL as RunLabel;
-  const context = hooks.getLogContext();
   const payload = typeof maybePayload === 'object' ? (maybePayload as LogPayload) : undefined;
   const type =
     typeof maybePayload === 'number'
       ? (maybePayload as LogEventType)
       : (maybeLogEventType as LogEventType) || LogEventType.Unspecified;
+  const context = hooks.getLogContext(message, payload, type);
 
   return registerLogEvent(runId, {message, payload, time, type}).then((numberInRun) => {
     // eslint-disable-next-line sort-keys
