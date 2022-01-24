@@ -20,7 +20,7 @@ export const renderHead = (name: string): SafeHtml => {
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="${name}" />
   <meta
-    http-equiv="Content-Security-Policy"
+    http-equiv="_Content-Security-Policy"
     content="default-src 'self'; img-src 'self' data:; script-src '${safeCspHash}';"
   />
   <title>${name}</title>

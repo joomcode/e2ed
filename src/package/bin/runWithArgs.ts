@@ -83,23 +83,26 @@ const timer: NodeJS.Timeout = setInterval(() => {
     return;
   }
 
-  void stat(JSON_REPORT_PATH).then(({ctime, mtime}) => {
-    if (cleared) {
-      return;
-    }
-
-    const statData = JSON.stringify({ctime, mtime});
-
-    if (statData !== previousStatData) {
-      if (previousStatData !== undefined) {
-        const utcTimeInMs = Date.now() as UtcTimeInMs;
-
-        void registerEndE2edRunEvent({utcTimeInMs});
-
-        clear(timer);
+  void stat(JSON_REPORT_PATH).then(
+    ({ctime, mtime}) => {
+      if (cleared) {
+        return;
       }
 
-      previousStatData = statData;
-    }
-  });
+      const statData = JSON.stringify({ctime, mtime});
+
+      if (statData !== previousStatData) {
+        if (previousStatData !== undefined) {
+          const utcTimeInMs = Date.now() as UtcTimeInMs;
+
+          void registerEndE2edRunEvent({utcTimeInMs});
+
+          clear(timer);
+        }
+
+        previousStatData = statData;
+      }
+    },
+    () => undefined,
+  );
 }, 1_000);
