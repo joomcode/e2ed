@@ -24,8 +24,8 @@
   },
   "devDependencies": {
     "@types/node": "17.0.10",
-    "@typescript-eslint/eslint-plugin": "5.10.0",
-    "@typescript-eslint/parser": "5.10.0",
+    "@typescript-eslint/eslint-plugin": "5.10.1",
+    "@typescript-eslint/parser": "5.10.1",
     "eslint": "8.7.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.3.0",
@@ -57,7 +57,7 @@
   },
   "scripts": {
     "precheck:all": "npm run lint:clear:cache && npm run build",
-    "check:all": "npm audit && npm run check:testcafe:version && npm run lint && npm test",
+    "check:all": "npm run check:testcafe:version && npm run lint && npm test",
     "check:testcafe:version": "node build/checkTestCafeVersion.js",
     "lint": "npm run parallel lint:es lint:prettier lint:types",
     "lint:clear:cache": "rm -f .cache-eslint",
