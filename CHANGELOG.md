@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.8.8](https://github.com/uid11/e2ed/tree/v0.8.8) (2022-01-25)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.7...v0.8.8)
+
+- [fix: fake use of getCspHash](https://github.com/uid11/e2ed/commit/4c5b7f7fe53c47ec5284a01bb1f78d89b87c6c08)
+- [chore: update TestCafe to 1.18.2](https://github.com/uid11/e2ed/commit/05d44ffa81390ad33bb5177ebb255bf36c75e0df)
+- [chore: update @types/node to 17.0.12](https://github.com/uid11/e2ed/commit/6c0cb79cec56d4aaab038d92c5d9c39c540f9a39)
+- [feat: supports direct imports from components, apiRoutes and pageRoutes](https://github.com/uid11/e2ed/commit/327ad80318b4c975c1a7fd8fee6540bc01a38eba)
+
 ## [v0.8.7](https://github.com/uid11/e2ed/tree/v0.8.7) (2022-01-24)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.6...v0.8.7)
