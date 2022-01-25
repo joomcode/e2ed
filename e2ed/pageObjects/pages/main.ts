@@ -1,10 +1,10 @@
 import {Page} from 'e2ed';
-import {components} from 'e2ed/pageObjects';
-import {pageRoutes} from 'e2ed/routes';
+import {Input} from 'e2ed/pageObjects/components';
+import {main as mainRoute} from 'e2ed/routes/pageRoutes';
 
 import type {GetParamsType} from 'e2ed/types';
 
-type RouteParams = GetParamsType<typeof pageRoutes.main>;
+type RouteParams = GetParamsType<typeof mainRoute>;
 
 type CustomPageParams = Partial<RouteParams>;
 
@@ -14,12 +14,12 @@ type PageParams = GetParamsType<Main>;
  * Main (index) page.
  */
 class Main extends Page<CustomPageParams, RouteParams> {
-  readonly route: typeof pageRoutes.main = pageRoutes.main;
+  readonly route: typeof mainRoute = mainRoute;
 
   /**
    * Search input.
    */
-  readonly searchInput = new components.Input('q');
+  readonly searchInput = new Input('q');
 
   /**
    * Current search string.
