@@ -14,7 +14,7 @@
   },
   "bugs": "https://github.com/uid11/e2ed/issues",
   "engines": {
-    "node": ">=15"
+    "node": ">=14.16.1"
   },
   "homepage": "https://github.com/uid11/e2ed#readme",
   "repository": "uid11/e2ed",

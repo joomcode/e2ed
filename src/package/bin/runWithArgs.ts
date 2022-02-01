@@ -3,11 +3,10 @@
  * {@link https://github.com/babel/babel/issues/11964}
  */
 
-import {stat} from 'fs/promises';
-
 import {JSON_REPORT_PATH} from '../constants/internal';
 import {registerEndE2edRunEvent, registerStartE2edRunEvent} from '../utils/events';
 import {generalLog} from '../utils/generalLog';
+import {getFileSize} from '../utils/getFileSize';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {getStartMessage} from '../utils/getStartMessage';
 import {getRunLabel} from '../utils/runLabel';
@@ -64,7 +63,7 @@ require('testcafe-without-typecheck/lib/cli/cli');
 
 const startTimeInMs = Date.now() as UtcTimeInMs;
 
-let previousStatData: string | undefined;
+let previousSize: number | undefined;
 let cleared = false;
 
 const clear = (id: NodeJS.Timeout): void => {
@@ -83,26 +82,23 @@ const timer: NodeJS.Timeout = setInterval(() => {
     return;
   }
 
-  void stat(JSON_REPORT_PATH).then(
-    ({ctime, mtime}) => {
-      if (cleared) {
-        return;
-      }
+  void getFileSize(JSON_REPORT_PATH).then((size) => {
+    if (cleared) {
+      return;
+    }
 
-      const statData = JSON.stringify({ctime, mtime});
+    if (size === previousSize) {
+      return;
+    }
 
-      if (statData !== previousStatData) {
-        if (previousStatData !== undefined) {
-          const utcTimeInMs = Date.now() as UtcTimeInMs;
+    if (previousSize !== undefined && size > previousSize) {
+      const utcTimeInMs = Date.now() as UtcTimeInMs;
 
-          void registerEndE2edRunEvent({utcTimeInMs});
+      void registerEndE2edRunEvent({utcTimeInMs});
 
-          clear(timer);
-        }
+      clear(timer);
+    }
 
-        previousStatData = statData;
-      }
-    },
-    () => undefined,
-  );
+    previousSize = size;
+  });
 }, 1_000);
