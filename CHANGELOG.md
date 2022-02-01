@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.8.9](https://github.com/uid11/e2ed/tree/v0.8.9) (2022-02-01)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.8...v0.8.9)
+
+- [chore: update testcafe-without-typecheck to 1.18.3-rc.1](https://github.com/uid11/e2ed/commit/47ffdc832a7c76fac0d3d3cd11d855680742f812)
+- [chore: update devDependencies (eslint, etc)](https://github.com/uid11/e2ed/commit/eb98b5a5fed273b935dbce2787cf5b2dced15a5e)
+- [fix: use file size instead of ctime for report.json](https://github.com/uid11/e2ed/commit/6ac31ed175bcf000c447cfc9c5134604bbc7b153)
+
 ## [v0.8.8](https://github.com/uid11/e2ed/tree/v0.8.8) (2022-01-25)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.7...v0.8.8)
