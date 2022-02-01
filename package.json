@@ -20,7 +20,7 @@
   "repository": "uid11/e2ed",
   "dependencies": {
     "pngjs": "6.0.0",
-    "testcafe-without-typecheck": "1.18.2-rc.1"
+    "testcafe-without-typecheck": "1.18.3-rc.1"
   },
   "devDependencies": {
     "@types/node": "17.0.14",
@@ -60,7 +60,7 @@
   },
   "scripts": {
     "precheck:all": "npm run lint:clear:cache && npm run build",
-    "check:all": "npm run check:testcafe:version && npm run lint && npm test",
+    "check:all": "npm audit && npm run check:testcafe:version && npm run lint && npm test",
     "check:testcafe:version": "node build/checkTestCafeVersion.js",
     "lint": "npm run parallel lint:es lint:prettier lint:types",
     "lint:clear:cache": "rm -f .cache-eslint",
