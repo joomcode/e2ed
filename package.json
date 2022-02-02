@@ -99,7 +99,7 @@
     "build:docker": "docker build -t e2ed .",
     "pretest:docker": "npm run build:docker && npm run test:docker:copy",
     "test:docker:copy": "rm -rf ./build/docker && mkdir build/docker && cp -r build/e2ed build/docker/e2ed",
-    "test:docker": "(cd ./build/docker && E2ED_CONCURRENCY=2 E2ED_DOCKER_RETRIES=3 E2ED_REPORT_NAME=report E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh)",
+    "test:docker": "(cd ./build/docker && E2ED_DOCKER_DO_AFTER_TESTS=doAfterTests.sh E2ED_DOCKER_DO_BEFORE_TESTS=doBeforeTests.sh E2ED_CONCURRENCY=2 E2ED_DOCKER_RETRIES=3 E2ED_REPORT_NAME=report E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh)",
     "test:local": "(cd ./build && E2ED_REPORT_NAME=report E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/runLocal.js)",
     "testcafefork:publish": "./bin/TestCafeFork/publish.sh",
     "testcafefork:clean": "./bin/TestCafeFork/clean.sh",

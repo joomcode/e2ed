@@ -3,6 +3,12 @@ import {getMeta} from 'e2ed/context';
 import type {LogEventType} from 'e2ed/constants';
 import type {LogContext, LogPayload} from 'e2ed/types';
 
+type GetLogContext = (
+  message: string,
+  payload: LogPayload | undefined,
+  type: LogEventType,
+) => LogContext | undefined;
+
 /**
  * This hook is used inside the log function to get a snapshot
  * of the context at the time the log or the constructor was invoked.
@@ -11,13 +17,7 @@ import type {LogContext, LogPayload} from 'e2ed/types';
  * As with all hooks, you can replace it with your own implementation.
  * Use context (e2ed/context) to get parameters inside a hook.
  */
-export const getLogContext = (
-  message: string,
-  payload: LogPayload | undefined,
-  type: LogEventType,
-): LogContext | undefined => {
-  void type;
-
+export const getLogContext: GetLogContext = () => {
   const {testId} = getMeta();
 
   return {testId};
