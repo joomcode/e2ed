@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.8.10](https://github.com/uid11/e2ed/tree/v0.8.10) (2022-02-02)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.9...v0.8.10)
+
+- [feat: support 'before tests' and 'after tests' scripts](https://github.com/uid11/e2ed/commit/efdaaf91b4807cb14840e8117bed3800bce3eea6)
+
 ## [v0.8.9](https://github.com/uid11/e2ed/tree/v0.8.9) (2022-02-01)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.8...v0.8.9)
