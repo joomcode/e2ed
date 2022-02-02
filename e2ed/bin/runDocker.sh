@@ -2,8 +2,16 @@
 
 DIR="${WORKDIR:-$PWD}"
 DOCKER_IMAGE="${E2ED_DOCKER_IMAGE:-e2ed}"
+DEBUG_PORT="${E2ED_DOCKER_DEBUG_PORT:-9229}"
 
-docker run --rm -p 9229:9229 \
+if [ -z $E2ED_DEBUG ]
+then
+    PORT=""
+else
+    PORT="-p $DEBUG_PORT:$DEBUG_PORT"
+fi
+
+docker run --rm $PORT \
        -v $DIR:$DIR -w $DIR \
        -e NODE_PATH=/usr/lib/node_modules \
        -e E2ED_ORIGIN=$E2ED_ORIGIN \
