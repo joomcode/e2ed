@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.8.11](https://github.com/uid11/e2ed/tree/v0.8.11) (2022-02-02)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.10...v0.8.11)
+
+- [fix: use debug port in docker only when E2ED_DEBUG is set](https://github.com/uid11/e2ed/commit/5060b5db94a3f3aba37ffc395b0c0734d2780974)
+
 ## [v0.8.10](https://github.com/uid11/e2ed/tree/v0.8.10) (2022-02-02)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.9...v0.8.10)
