@@ -7,10 +7,10 @@ type Params = Readonly<{language: Language}>;
 /**
  * Route of the Main page.
  */
-class Main extends PageRoute<Params> {
+class MainRoute extends PageRoute<Params> {
   getPath(): string {
     return '/';
   }
 }
 
-export const main = new Main();
+export const mainRoute = new MainRoute();

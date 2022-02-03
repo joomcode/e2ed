@@ -1,5 +1,5 @@
 import {MobilePage} from 'e2ed/pageObjects';
-import {search as searchRoute} from 'e2ed/routes/pageRoutes';
+import {searchRoute} from 'e2ed/routes/pageRoutes';
 
 import type {GetParamsType} from 'e2ed/types';
 

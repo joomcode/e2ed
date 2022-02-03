@@ -14,7 +14,7 @@
   },
   "bugs": "https://github.com/uid11/e2ed/issues",
   "engines": {
-    "node": ">=14.16.1"
+    "node": ">=16"
   },
   "homepage": "https://github.com/uid11/e2ed#readme",
   "repository": "uid11/e2ed",
@@ -37,9 +37,9 @@
     "typescript": "4.5.5"
   },
   "peerDependencies": {
-    "@types/node": ">=16",
+    "@types/node": ">=16.11.1",
     "bin-v8-flags-filter": ">=1.2.0",
-    "typescript": ">=4"
+    "typescript": ">=4.4"
   },
   "exports": {
     ".": "./index.js",

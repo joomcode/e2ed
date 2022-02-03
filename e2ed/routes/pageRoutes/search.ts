@@ -9,7 +9,7 @@ type Params = Readonly<{query: string}>;
 /**
  * Route of the Search page.
  */
-class Search extends PageRoute<Params> {
+class SearchRoute extends PageRoute<Params> {
   override getParamsFromUrl(url: Url): Params {
     const {searchParams} = new URL(url);
     const query = searchParams.get('q') || '';
@@ -22,4 +22,4 @@ class Search extends PageRoute<Params> {
   }
 }
 
-export const search = new Search();
+export const searchRoute = new SearchRoute();

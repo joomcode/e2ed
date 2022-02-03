@@ -1,4 +1,4 @@
-import {apiRoutes} from 'e2ed/routes';
+import {userSignUpRoute} from 'e2ed/routes/apiRoutes';
 import {request} from 'e2ed/utils';
 
 import type {ApiUser, ApiUserParams, User} from 'e2ed/types';
@@ -13,13 +13,13 @@ type Output = Readonly<{
  * Create new user by API request.
  */
 export const createUser = async (params: ApiUserParams): Promise<User> => {
-  const url = apiRoutes.userSignUp.getUrl();
+  const url = userSignUpRoute.getUrl();
 
   const {
     output: {payload: apiUser},
   } = await request<Input, Output>({
     input: params,
-    method: apiRoutes.userSignUp.getMethod(),
+    method: userSignUpRoute.getMethod(),
     url,
   });
 

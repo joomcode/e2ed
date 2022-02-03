@@ -1,6 +1,6 @@
 import {Page} from 'e2ed';
 import {Input} from 'e2ed/pageObjects/components';
-import {main as mainRoute} from 'e2ed/routes/pageRoutes';
+import {mainRoute} from 'e2ed/routes/pageRoutes';
 
 import type {GetParamsType} from 'e2ed/types';
 

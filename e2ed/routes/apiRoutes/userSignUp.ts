@@ -3,7 +3,7 @@ import {ApiRoute} from 'e2ed/routes';
 /**
  * Client API route for user signUp.
  */
-class UserSignUp extends ApiRoute {
+class UserSignUpRoute extends ApiRoute {
   override getMethod(): 'POST' {
     return 'POST';
   }
@@ -13,4 +13,4 @@ class UserSignUp extends ApiRoute {
   }
 }
 
-export const userSignUp = new UserSignUp();
+export const userSignUpRoute = new UserSignUpRoute();
