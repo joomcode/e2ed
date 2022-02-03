@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.8.12](https://github.com/uid11/e2ed/tree/v0.8.12) (2022-02-03)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.11...v0.8.12)
+
+- [feat: rename routes (add Route to the end of route names)](https://github.com/uid11/e2ed/commit/ecea29d74f488d96468bc9ee86c1948b225f2325)
+
 ## [v0.8.11](https://github.com/uid11/e2ed/tree/v0.8.11) (2022-02-02)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.10...v0.8.11)
