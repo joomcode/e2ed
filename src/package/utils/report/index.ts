@@ -1,2 +1,2 @@
-export {collectReportData} from './collectReportData';
-export {writeHtmlReport} from './writeHtmlReport';
+export * from './collectReportData';
+export * from './writeHtmlReport';

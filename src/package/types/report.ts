@@ -2,6 +2,7 @@ import type {TestRunStatus} from '../constants/internal';
 
 import type {UtcTimeInMs} from './date';
 import type {E2edRunEvent} from './events';
+import type {TestFilePath} from './fs';
 import type {RunHash, RunId, TestRunWithHooks} from './testRun';
 
 /**
@@ -33,7 +34,7 @@ export type RetryButtonProps = Readonly<{
  */
 export type TestRunButtonProps = Readonly<{
   endTimeInMs: UtcTimeInMs;
-  filePath: string;
+  filePath: TestFilePath;
   mainParams: string;
   name: string;
   runHash: RunHash;

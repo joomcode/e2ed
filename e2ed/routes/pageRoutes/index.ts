@@ -1,2 +1,2 @@
-export * from './main';
-export * from './search';
+export * from './mainRoute';
+export * from './searchRoute';

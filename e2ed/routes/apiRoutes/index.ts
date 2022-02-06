@@ -1,1 +1,1 @@
-export * from './userSignUp';
+export * from './userSignUpRoute';
