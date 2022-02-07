@@ -40,19 +40,21 @@ export type Method =
   | 'PATCH';
 
 /**
- * Object with query (search) part of the url.
+ * Object with query (search) part of the url, or query string itself.
  */
-export type Query = Record<
-  string,
-  | string
-  | number
-  | boolean
-  | readonly string[]
-  | readonly number[]
-  | readonly boolean[]
-  | null
-  | undefined
->;
+export type Query =
+  | Record<
+      string,
+      | string
+      | number
+      | boolean
+      | readonly string[]
+      | readonly number[]
+      | readonly boolean[]
+      | null
+      | undefined
+    >
+  | string;
 
 /**
  * Brand type for url string.

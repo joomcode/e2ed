@@ -47,7 +47,7 @@ Please, move search params to options property "query".`,
     );
   }
 
-  urlObject.search = stringify(query);
+  urlObject.search = typeof query === 'string' ? query : stringify(query);
 
   const inputAsString = typeof input === 'string' ? input : JSON.stringify(input);
   const options = {
