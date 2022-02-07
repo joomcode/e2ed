@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.8.13](https://github.com/uid11/e2ed/tree/v0.8.13) (2022-02-07)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.12...v0.8.13)
+
+- [feat: write lite JSON report after running all retries](https://github.com/uid11/e2ed/commit/7ae71192266eba82749546a30c3f5eb41ad3e084)
+- [feat: add retries list to report data (for lite report)](https://github.com/uid11/e2ed/commit/b87276be9b29bf724381f9cb62bbc8eb045746c2)
+- [chore: update @types/nodes](https://github.com/uid11/e2ed/commit/0aa1f196a158397a0885c56831a16daa5cfc4bf5)
+- [feat: add word Route to route files; remove unused getRunHashUnificator](https://github.com/uid11/e2ed/commit/8b368edc375edf8174f207809fc58a4087135e12)
+
 ## [v0.8.12](https://github.com/uid11/e2ed/tree/v0.8.12) (2022-02-03)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.11...v0.8.12)
