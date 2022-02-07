@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.8.14](https://github.com/uid11/e2ed/tree/v0.8.14) (2022-02-07)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.13...v0.8.14)
+
+- [feat: support query as string in request function](https://github.com/uid11/e2ed/commit/5f48dbea81ee909720df13e5667e5a74d49ea80c)
+
 ## [v0.8.13](https://github.com/uid11/e2ed/tree/v0.8.13) (2022-02-07)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.12...v0.8.13)
