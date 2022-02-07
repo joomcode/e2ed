@@ -19,7 +19,7 @@ import type {ReportData, SafeHtml, UtcTimeInMs} from '../../../types/internal';
 export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
-  const {length} = reportData.testRunsWithHooks;
+  const {length} = reportData.fullTestRuns;
 
   const retries = getRetriesProps(reportData);
 

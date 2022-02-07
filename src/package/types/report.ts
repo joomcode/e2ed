@@ -3,18 +3,19 @@ import type {TestRunStatus} from '../constants/internal';
 import type {UtcTimeInMs} from './date';
 import type {E2edRunEvent} from './events';
 import type {TestFilePath} from './fs';
-import type {RunHash, RunId, TestRunWithHooks} from './testRun';
+import type {FullTestRun, RunHash, RunId, TestRunWithHooks} from './testRun';
 
 /**
  * The complete report data (for printing report).
  * @internal
  */
 export type ReportData = Readonly<{
-  startTimeInMs: UtcTimeInMs;
   errors: readonly string[];
   endTimeInMs: UtcTimeInMs;
+  fullTestRuns: readonly FullTestRun[];
   name: string;
-  testRunsWithHooks: readonly TestRunWithHooks[];
+  retries: readonly Retry[];
+  startTimeInMs: UtcTimeInMs;
 }> &
   Omit<E2edRunEvent, 'utcTimeInMs'>;
 
@@ -51,6 +52,17 @@ export type ReportClientGlobal = {
   e2edTestRunDetailsElementsByHash?: Record<RunHash, HTMLElement>;
   e2edTestRunsWithHooks?: TestRunWithHooks[];
 } & Window;
+
+/**
+ * Retry object with all hit full test runs.
+ * @internal
+ */
+export type Retry = Readonly<{
+  endTimeInMs: UtcTimeInMs;
+  fullTestRuns: readonly FullTestRun[];
+  retry: number;
+  startTimeInMs: UtcTimeInMs;
+}>;
 
 /**
  * Retry component props.

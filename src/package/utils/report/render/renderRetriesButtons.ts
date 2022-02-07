@@ -8,7 +8,7 @@ import type {RetryProps, SafeHtml} from '../../../types/internal';
  * Render retries navigation buttons.
  * @internal
  */
-export const renderRetriesButtons = (retries: RetryProps[]): SafeHtml => {
+export const renderRetriesButtons = (retries: readonly RetryProps[]): SafeHtml => {
   const retryNumbers = retries.map(({retry}) => retry);
   const maxRetry = Math.max(...retryNumbers);
   const minRetry = Math.min(...retryNumbers);

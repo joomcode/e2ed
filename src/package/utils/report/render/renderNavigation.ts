@@ -9,7 +9,7 @@ import type {RetryProps, SafeHtml} from '../../../types/internal';
  * Render tag <nav>.
  * @internal
  */
-export const renderNavigation = (retries: RetryProps[]): SafeHtml => sanitizeHtml`
+export const renderNavigation = (retries: readonly RetryProps[]): SafeHtml => sanitizeHtml`
 <nav class="nav">
   <header class="header">
     ${renderLogo()}

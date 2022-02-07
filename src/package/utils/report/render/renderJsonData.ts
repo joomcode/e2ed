@@ -7,9 +7,9 @@ import type {ReportData, SafeHtml} from '../../../types/internal';
  * @internal
  */
 export const renderJsonData = (reportData: ReportData): SafeHtml => {
-  const {testRunsWithHooks} = reportData;
+  const {fullTestRuns} = reportData;
 
-  const jsonString = JSON.stringify(testRunsWithHooks);
+  const jsonString = JSON.stringify(fullTestRuns);
 
   return createSafeHtmlWithoutSanitize`
 <script id="e2edJsonReportData" type="application/json">${jsonString}</script>`;

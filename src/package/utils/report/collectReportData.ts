@@ -1,6 +1,9 @@
+import {TestRunStatus} from '../../constants/internal';
+
 import {assertThatTestNamesAreUnique} from './assertThatTestNamesAreUnique';
 import {getReportErrors} from './getReportErrors';
 import {getReportName} from './getReportName';
+import {getRetriesAndSetStatuses} from './getRetriesAndSetStatuses';
 import {unificateRunHashes} from './unificateRunHashes';
 
 import type {FullEventsData, ReportData} from '../../types/internal';
@@ -25,13 +28,21 @@ export const collectReportData = async ({
 
   unificateRunHashes(testRunsWithHooks);
 
+  const fullTestRuns = testRunsWithHooks.map((testRun) => ({
+    ...testRun,
+    status: TestRunStatus.Unknown,
+  }));
+
+  const retries = getRetriesAndSetStatuses(fullTestRuns);
+
   const reportData = {
     endTimeInMs,
     errors,
+    fullTestRuns,
     name,
+    retries,
     runEnvironment,
     startTimeInMs,
-    testRunsWithHooks,
     ...restE2edRunEvent,
   };
 

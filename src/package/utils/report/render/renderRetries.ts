@@ -8,7 +8,7 @@ import type {RetryProps, SafeHtml} from '../../../types/internal';
  * Render list of retries (with test runs).
  * @internal
  */
-export const renderRetries = (retries: RetryProps[]): SafeHtml => {
+export const renderRetries = (retries: readonly RetryProps[]): SafeHtml => {
   const retriesHtml = retries.map(renderRetry);
 
   return createSafeHtmlWithoutSanitize`${retriesHtml.join('')}`;

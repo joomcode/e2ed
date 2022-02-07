@@ -1,3 +1,5 @@
+import type {TestRunStatus} from '../constants/internal';
+
 import type {Brand} from './brand';
 import type {UtcTimeInMs} from './date';
 import type {DeepReadonly} from './deep';
@@ -50,3 +52,9 @@ export type TestRun = Readonly<{
  * @internal
  */
 export type TestRunWithHooks = Readonly<{mainParams: string; runHash: RunHash}> & TestRun;
+
+/**
+ * Full test run object with hooks and status.
+ * @internal
+ */
+export type FullTestRun = Readonly<{status: TestRunStatus}> & TestRunWithHooks;
