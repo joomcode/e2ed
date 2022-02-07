@@ -48,7 +48,6 @@ export type FullEventsData = Readonly<{
 
 /**
  * Run environment (run in docker or local run).
- * @internal
  */
 export type RunEnvironment = 'docker' | 'local';
 

@@ -1,9 +1,9 @@
 import type {TestRunStatus} from '../constants/internal';
 
 import type {UtcTimeInMs} from './date';
-import type {E2edRunEvent} from './events';
+import type {E2edRunEvent, RunEnvironment} from './events';
 import type {TestFilePath} from './fs';
-import type {FullTestRun, RunHash, RunId, TestRunWithHooks} from './testRun';
+import type {FullTestRun, LiteTestRun, RunHash, RunId, TestRunWithHooks} from './testRun';
 
 /**
  * The complete report data (for printing report).
@@ -18,6 +18,20 @@ export type ReportData = Readonly<{
   startTimeInMs: UtcTimeInMs;
 }> &
   Omit<E2edRunEvent, 'utcTimeInMs'>;
+
+/**
+ * The lite report data (for printing lite JSON report).
+ */
+export type LiteReport = Readonly<{
+  concurrency: number;
+  endTimeInMs: UtcTimeInMs;
+  errors: readonly string[];
+  name: string;
+  retries: readonly LiteRetry[];
+  runEnvironment: RunEnvironment;
+  startMessage: string;
+  startTimeInMs: UtcTimeInMs;
+}>;
 
 /**
  * RetryButton component props.
@@ -54,12 +68,22 @@ export type ReportClientGlobal = {
 } & Window;
 
 /**
- * Retry object with all hit full test runs.
+ * Retry object with all his full test runs.
  * @internal
  */
 export type Retry = Readonly<{
   endTimeInMs: UtcTimeInMs;
   fullTestRuns: readonly FullTestRun[];
+  retry: number;
+  startTimeInMs: UtcTimeInMs;
+}>;
+
+/**
+ * Lite retry object with all his lite test runs.
+ */
+export type LiteRetry = Readonly<{
+  endTimeInMs: UtcTimeInMs;
+  liteTestRuns: readonly LiteTestRun[];
   retry: number;
   startTimeInMs: UtcTimeInMs;
 }>;

@@ -5,6 +5,8 @@ import type {UtcTimeInMs} from './date';
 import type {DeepReadonly} from './deep';
 import type {TestRunError} from './errors';
 import type {TestRunEvent} from './events';
+import type {TestFilePath} from './fs';
+import type {RunLabel} from './runLabel';
 import type {TestMeta} from './userland';
 
 /**
@@ -45,6 +47,22 @@ export type TestRun = Readonly<{
   endTimeInMs: UtcTimeInMs;
 }> &
   Omit<TestRunEvent, 'clearTimeout' | 'ended' | 'originalErrors' | 'reject' | 'utcTimeInMs'>;
+
+/**
+ * Lite test run object.
+ */
+export type LiteTestRun = Readonly<{
+  endTimeInMs: UtcTimeInMs;
+  errors: readonly TestRunError[];
+  filePath: TestFilePath;
+  mainParams: string;
+  name: string;
+  options: TestOptions;
+  runHash: RunHash;
+  runLabel: RunLabel;
+  startTimeInMs: UtcTimeInMs;
+  status: TestRunStatus;
+}>;
 
 /**
  * TestRun object with result of userland hooks (like mainParams and runHash).

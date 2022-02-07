@@ -1,5 +1,5 @@
 import {generalLog} from '../generalLog';
-import {collectReportData, writeHtmlReport} from '../report';
+import {collectReportData, writeHtmlReport, writeLiteJsonReport} from '../report';
 
 import {collectFullEventsData} from './collectFullEventsData';
 
@@ -15,5 +15,6 @@ export const registerEndE2edRunEvent = async (endE2edRunEvent: EndE2edRunEvent):
   const fullEventsData = await collectFullEventsData(endE2edRunEvent);
   const reportData = await collectReportData(fullEventsData);
 
+  await writeLiteJsonReport(reportData);
   await writeHtmlReport(reportData);
 };
