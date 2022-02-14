@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.8.15](https://github.com/uid11/e2ed/tree/v0.8.15) (2022-02-14)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.14...v0.8.15)
+
+- [chore: update development dependencies (eslint, etc)](https://github.com/uid11/e2ed/commit/5db0ee18229d2ce10d1d17eea01142c33febf334)
+
 ## [v0.8.14](https://github.com/uid11/e2ed/tree/v0.8.14) (2022-02-07)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.13...v0.8.14)
