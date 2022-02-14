@@ -12,11 +12,6 @@ export * from './testController';
 export * from './useContext';
 
 /**
- * Exported types.
- */
-export type {LiteReport, Selector} from './types/internal';
-
-/**
  * Dependent on internal utils.
  */
 export * from './ClientFunction';
