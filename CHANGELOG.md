@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.8.16](https://github.com/uid11/e2ed/tree/v0.8.16) (2022-02-16)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.15...v0.8.16)
+
+- [fix: use correct test run status for TestRunDetails; add interval arg to reloadPage action](https://github.com/uid11/e2ed/commit/656aad836f955a30353f4e343feceb794d960617)
+
 ## [v0.8.15](https://github.com/uid11/e2ed/tree/v0.8.15) (2022-02-14)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.14...v0.8.15)
