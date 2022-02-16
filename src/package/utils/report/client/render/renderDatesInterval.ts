@@ -1,6 +1,6 @@
-import {sanitizeHtml as clientSanitizeHtml} from './sanitizeHtml';
+import {sanitizeHtml as clientSanitizeHtml} from '../sanitizeHtml';
 
-import type {SafeHtml, UtcTimeInMs} from '../../../types/internal';
+import type {SafeHtml, UtcTimeInMs} from '../../../../types/internal';
 
 type Options = Readonly<{
   endTimeInMs: UtcTimeInMs;

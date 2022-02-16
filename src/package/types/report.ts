@@ -3,7 +3,7 @@ import type {TestRunStatus} from '../constants/internal';
 import type {UtcTimeInMs} from './date';
 import type {E2edRunEvent, RunEnvironment} from './events';
 import type {TestFilePath} from './fs';
-import type {FullTestRun, LiteTestRun, RunHash, RunId, TestRunWithHooks} from './testRun';
+import type {FullTestRun, LiteTestRun, RunHash, RunId} from './testRun';
 
 /**
  * The complete report data (for printing report).
@@ -64,7 +64,7 @@ export type TestRunButtonProps = Readonly<{
  */
 export type ReportClientGlobal = {
   e2edTestRunDetailsElementsByHash?: Record<RunHash, HTMLElement>;
-  e2edTestRunsWithHooks?: TestRunWithHooks[];
+  e2edFullTestRuns?: readonly FullTestRun[];
 } & Window;
 
 /**

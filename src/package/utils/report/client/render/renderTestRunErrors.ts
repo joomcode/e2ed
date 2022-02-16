@@ -1,9 +1,9 @@
 import {
   createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize,
   sanitizeHtml as clientSanitizeHtml,
-} from './sanitizeHtml';
+} from '../sanitizeHtml';
 
-import type {SafeHtml, TestRunError} from '../../../types/internal';
+import type {SafeHtml, TestRunError} from '../../../../types/internal';
 
 const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
 const sanitizeHtml = clientSanitizeHtml;

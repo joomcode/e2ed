@@ -23,7 +23,7 @@ export const renderHead = (name: string): SafeHtml => {
   <meta name="description" content="${name}" />
   <meta
     http-equiv="Content-Security-Policy"
-content="default-src 'self'; img-src 'self' data:; script-src 'sha256-thIX47WEDVDJxxP4E79NCaP6xBxd+AC060mJ6fNq9rg='; style-src 'sha256-Hgt5+lP9F1EnAc34JcU9giyeXmWgs8AkHn+BwHVxA7Q=';"
+content="default-src 'self'; img-src 'self' data:; script-src 'sha256-fNJc8IUdfFUj1s7oP85/ywKDOga4Xr8O8R5pqicGTk4='; style-src 'sha256-Hgt5+lP9F1EnAc34JcU9giyeXmWgs8AkHn+BwHVxA7Q=';"
   />
   <title>${name}</title>
   ${renderFavicon()}

@@ -1,11 +1,12 @@
-import {renderDatesInterval as clientRenderDatesInterval} from './renderDatesInterval';
-import {renderDuration as clientRenderDuration} from './renderDuration';
 import {
   createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize,
   sanitizeHtml as clientSanitizeHtml,
-} from './sanitizeHtml';
+} from '../sanitizeHtml';
 
-import type {SafeHtml, TestRunWithHooks} from '../../../types/internal';
+import {renderDatesInterval as clientRenderDatesInterval} from './renderDatesInterval';
+import {renderDuration as clientRenderDuration} from './renderDuration';
+
+import type {FullTestRun, SafeHtml} from '../../../../types/internal';
 
 const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
 const renderDatesInterval = clientRenderDatesInterval;
@@ -17,10 +18,10 @@ const sanitizeHtml = clientSanitizeHtml;
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function renderTestRunDescription(testRunWithHooks: TestRunWithHooks): SafeHtml {
-  const {endTimeInMs, startTimeInMs} = testRunWithHooks;
+export function renderTestRunDescription(fullTestRun: FullTestRun): SafeHtml {
+  const {endTimeInMs, startTimeInMs} = fullTestRun;
   const durationMs = endTimeInMs - startTimeInMs;
-  const {meta} = testRunWithHooks.options;
+  const {meta} = fullTestRun.options;
   const metaHtmls: SafeHtml[] = [];
 
   for (const [key, value] of Object.entries(meta)) {

@@ -1,4 +1,4 @@
-import {renderTestRunDetails as clientRenderTestRunDetails} from './renderTestRunDetails';
+import {renderTestRunDetails as clientRenderTestRunDetails} from './render';
 
 import type {ReportClientGlobal, RunHash} from '../../../types/internal';
 
@@ -41,25 +41,25 @@ export function chooseTestRun(runHash: RunHash): void {
     return;
   }
 
-  const {e2edTestRunsWithHooks} = global;
+  const {e2edFullTestRuns} = global;
 
-  if (e2edTestRunsWithHooks === undefined) {
+  if (e2edFullTestRuns === undefined) {
     // eslint-disable-next-line no-console
     console.log('JSON report data not yet loaded');
 
     return;
   }
 
-  const testRunWithHooks = e2edTestRunsWithHooks.find((testRun) => testRun.runHash === runHash);
+  const fullTestRun = e2edFullTestRuns.find((testRun) => testRun.runHash === runHash);
 
-  if (testRunWithHooks === undefined) {
+  if (fullTestRun === undefined) {
     // eslint-disable-next-line no-console
     console.error(`Cannot find test run with hash ${runHash} in JSON report data`);
 
     return;
   }
 
-  const testRunDetailsHtml = renderTestRunDetails(testRunWithHooks);
+  const testRunDetailsHtml = renderTestRunDetails(fullTestRun);
 
   e2edTestRunDetailsContainer.innerHTML = String(testRunDetailsHtml);
 

@@ -1,6 +1,6 @@
-import {sanitizeHtml as clientSanitizeHtml} from './sanitizeHtml';
+import {sanitizeHtml as clientSanitizeHtml} from '../sanitizeHtml';
 
-import type {SafeHtml} from '../../../types/internal';
+import type {SafeHtml} from '../../../../types/internal';
 
 const sanitizeHtml = clientSanitizeHtml;
 
