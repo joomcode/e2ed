@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.8.17](https://github.com/uid11/e2ed/tree/v0.8.17) (2022-02-17)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.16...v0.8.17)
+
+- [feat: add setNativeDialogHandler action; add internal TestClientGlobal type](https://github.com/uid11/e2ed/commit/dfb4ef2bf1ac0dc1a08dbc849e465d8df08a66ca)
+
 ## [v0.8.16](https://github.com/uid11/e2ed/tree/v0.8.16) (2022-02-16)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.15...v0.8.16)
