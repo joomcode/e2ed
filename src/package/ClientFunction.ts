@@ -2,9 +2,7 @@ import {ClientFunction as BaseClientFunction} from 'testcafe-without-typecheck';
 
 import {generalLog} from './utils/generalLog';
 
-import type {WrappedClientFunction} from './types/internal';
-
-type E2edClientFunctionWrapper = Array<(() => void) | undefined>;
+import type {TestClientGlobal, WrappedClientFunction} from './types/internal';
 
 /**
  * This client function wraps all ClientFunction bodies and terminates them on page unload.
@@ -13,22 +11,20 @@ const clientFunctionWrapper = function clientFunctionWrapper(): unknown {
   // eslint-disable-next-line
   const args: unknown[] = Array.prototype.slice.call(arguments);
 
-  const global: {
-    e2edClientFunctionWrapper?: E2edClientFunctionWrapper;
-  } & Window = window;
+  const global: TestClientGlobal = window;
 
-  if (!global.e2edClientFunctionWrapper) {
-    global.e2edClientFunctionWrapper = [];
+  if (!global.e2edClientFunctionResolves) {
+    global.e2edClientFunctionResolves = [];
 
     global.addEventListener('beforeunload', () => {
-      const {e2edClientFunctionWrapper} = global;
+      const {e2edClientFunctionResolves} = global;
 
-      if (!e2edClientFunctionWrapper) {
+      if (!e2edClientFunctionResolves) {
         return;
       }
 
-      e2edClientFunctionWrapper.forEach((resolve, index) => {
-        e2edClientFunctionWrapper[index] = undefined;
+      e2edClientFunctionResolves.forEach((resolve, index) => {
+        e2edClientFunctionResolves[index] = undefined;
 
         if (resolve) {
           resolve();
@@ -37,7 +33,7 @@ const clientFunctionWrapper = function clientFunctionWrapper(): unknown {
     });
   }
 
-  const {e2edClientFunctionWrapper} = global;
+  const {e2edClientFunctionResolves} = global;
   let result: Promise<void> | undefined;
 
   try {
@@ -52,16 +48,16 @@ const clientFunctionWrapper = function clientFunctionWrapper(): unknown {
   }
 
   return new Promise<void>((resolve, reject) => {
-    const index = e2edClientFunctionWrapper.push(resolve) - 1;
+    const index = e2edClientFunctionResolves.push(resolve) - 1;
 
     (result as Promise<void>).then(
       (value) => {
-        e2edClientFunctionWrapper[index] = undefined;
+        e2edClientFunctionResolves[index] = undefined;
 
         resolve(value);
       },
       (error) => {
-        e2edClientFunctionWrapper[index] = undefined;
+        e2edClientFunctionResolves[index] = undefined;
 
         reject(error);
       },

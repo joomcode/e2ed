@@ -2,12 +2,7 @@ import {ClientFunction} from '../ClientFunction';
 import {LogEventType} from '../constants/internal';
 import {log} from '../utils/log';
 
-import type {UtcTimeInMs} from '../types/internal';
-
-type WaitingForInterfaceStabilization = {
-  readonly promise: Promise<void>;
-  stabilizationInterval: number;
-};
+import type {TestClientGlobal, UtcTimeInMs} from '../types/internal';
 
 /**
  * This function in a universal way waits for the end of the movements and redrawing
@@ -22,9 +17,7 @@ type WaitingForInterfaceStabilization = {
  * as well as a number of elements with the data-testid attribute used in tests.
  */
 const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterval: number) => {
-  const global: {
-    e2edWaitingForInterfaceStabilization?: WaitingForInterfaceStabilization | undefined;
-  } & Window = window;
+  const global: TestClientGlobal = window;
 
   if (global.e2edWaitingForInterfaceStabilization) {
     if (stabilizationInterval > global.e2edWaitingForInterfaceStabilization.stabilizationInterval) {

@@ -12,7 +12,7 @@ E2E utils for [TestCafe](https://testcafe.io/).
 
 ## Install
 
-Requires `node@14` or higher:
+Requires `node@16` or higher:
 
 ```sh
 npm install e2ed --save-dev

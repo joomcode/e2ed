@@ -17,6 +17,7 @@ export * from './scrollIntoView';
 export * from './selectText';
 export * from './setFilesToUpload';
 export * from './setHeadersAndNavigateTo';
+export * from './setNativeDialogHandler';
 export * from './takeElementScreenshot';
 export * from './takeScreenshot';
 export * from './typeText';
