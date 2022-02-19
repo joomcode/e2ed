@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.8.18](https://github.com/uid11/e2ed/tree/v0.8.18) (2022-02-19)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.17...v0.8.18)
+
+- [chore: update devDependencies (eslint-config-prettier)](https://github.com/uid11/e2ed/commit/e906aa7ad9b355503ad0009ca6057c3b81379f0a)
+- [fix: exit with correct status when run in docker](https://github.com/uid11/e2ed/commit/b6a2a9e9fb81f6fa32510ceb5ba6f3f49cba8550)
+
 ## [v0.8.17](https://github.com/uid11/e2ed/tree/v0.8.17) (2022-02-17)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.16...v0.8.17)
