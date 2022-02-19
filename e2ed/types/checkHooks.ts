@@ -1,5 +1,5 @@
 /**
- * @file A module for checking the compliance of external modules with specified type contracts.
+ * @file A module for checking the compliance of project hooks with specified type contracts.
  * Do not remove this module.
  */
 
