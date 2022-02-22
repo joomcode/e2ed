@@ -1,4 +1,4 @@
-FROM testcafe/testcafe:1.18.3
+FROM testcafe/testcafe:1.18.4
 
 COPY ./node_modules/testcafe-without-typecheck /usr/lib/node_modules/testcafe-without-typecheck
 

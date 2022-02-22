@@ -14,9 +14,7 @@ export const getLiteRetry = (fullRetry: Retry): LiteRetry => {
   const allLiteTestRuns = fullTestRuns.map(getLiteTestRun);
 
   const brokenLiteTestRuns = allLiteTestRuns.filter(({status}) => status === TestRunStatus.Broken);
-  const liteTestRuns = allLiteTestRuns.filter(
-    ({status}) => status === TestRunStatus.Failed || status === TestRunStatus.Passed,
-  );
+  const liteTestRuns = allLiteTestRuns.filter(({status}) => status !== TestRunStatus.Broken);
 
   return {brokenLiteTestRuns, endTimeInMs, liteTestRuns, retry, startTimeInMs};
 };
