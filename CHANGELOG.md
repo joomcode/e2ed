@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.8.19](https://github.com/uid11/e2ed/tree/v0.8.19) (2022-02-22)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.18...v0.8.19)
+
+- [chore: update devDependencies (@types/node, etc)](https://github.com/uid11/e2ed/commit/d24b597863b3f9f1fb2599e0db0efc90fb1dc964)
+- [feat: extract broken test runs in lite report to separate field](https://github.com/uid11/e2ed/commit/49789762137e4f66eac0ac79347a45e7cf2aca80)
+
 ## [v0.8.18](https://github.com/uid11/e2ed/tree/v0.8.18) (2022-02-19)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.17...v0.8.18)
