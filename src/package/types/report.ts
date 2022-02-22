@@ -82,6 +82,7 @@ export type Retry = Readonly<{
  * Lite retry object with all his lite test runs.
  */
 export type LiteRetry = Readonly<{
+  brokenLiteTestRuns: readonly LiteTestRun[];
   endTimeInMs: UtcTimeInMs;
   liteTestRuns: readonly LiteTestRun[];
   retry: number;

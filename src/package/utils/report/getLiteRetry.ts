@@ -1,3 +1,5 @@
+import {TestRunStatus} from '../../constants/internal';
+
 import {getLiteTestRun} from './getLiteTestRun';
 
 import type {LiteRetry, Retry} from '../../types/internal';
@@ -9,7 +11,12 @@ import type {LiteRetry, Retry} from '../../types/internal';
 export const getLiteRetry = (fullRetry: Retry): LiteRetry => {
   const {endTimeInMs, fullTestRuns, retry, startTimeInMs} = fullRetry;
 
-  const liteTestRuns = fullTestRuns.map(getLiteTestRun);
+  const allLiteTestRuns = fullTestRuns.map(getLiteTestRun);
 
-  return {endTimeInMs, liteTestRuns, retry, startTimeInMs};
+  const brokenLiteTestRuns = allLiteTestRuns.filter(({status}) => status === TestRunStatus.Broken);
+  const liteTestRuns = allLiteTestRuns.filter(
+    ({status}) => status === TestRunStatus.Failed || status === TestRunStatus.Passed,
+  );
+
+  return {brokenLiteTestRuns, endTimeInMs, liteTestRuns, retry, startTimeInMs};
 };
