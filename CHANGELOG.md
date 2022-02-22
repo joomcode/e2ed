@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.8.20](https://github.com/uid11/e2ed/tree/v0.8.20) (2022-02-22)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.19...v0.8.20)
+
+- [chore: update testcafe-without-typecheck to 1.18.4-rc.1](https://github.com/uid11/e2ed/commit/a7a295ad94d37bce7915cfa7e17b99e00d8932c9)
+
 ## [v0.8.19](https://github.com/uid11/e2ed/tree/v0.8.19) (2022-02-22)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.18...v0.8.19)
