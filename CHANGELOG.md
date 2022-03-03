@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.8.21](https://github.com/uid11/e2ed/tree/v0.8.21) (2022-03-03)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.20...v0.8.21)
+
+- [chore: update devDependencies (typescript, eslint, etc)](https://github.com/uid11/e2ed/commit/a450ffc95b9ccc31386fefd0d5c61773fd38556f)
+
 ## [v0.8.20](https://github.com/uid11/e2ed/tree/v0.8.20) (2022-02-22)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.19...v0.8.20)
