@@ -53,12 +53,14 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
       }
     }
 
-    const attributes = elements.map((element) => ({
-      className: element.className,
-      rectangle: element.getBoundingClientRect(),
-    }));
+    const attributes = elements.map((element) => [
+      element.className,
+      element.getBoundingClientRect(),
+      element.scrollLeft,
+      element.scrollTop,
+    ]);
 
-    return JSON.stringify({attributes, innerHeight, innerWidth});
+    return JSON.stringify([attributes, innerHeight, innerWidth]);
   };
 
   let interfaceState = getInterfaceState();

@@ -34,6 +34,7 @@ export type TestCafeConfig = DeepReadonly<{
     takeOnFails: boolean;
     thumbnails: boolean;
   };
+  selectorTimeout: number;
   skipJsErrors: boolean;
   testExecutionTimeout: number;
   concurrency: number;

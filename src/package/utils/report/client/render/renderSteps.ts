@@ -1,3 +1,5 @@
+import {TEST_STATUS_TO_STATUS_STRING as CLIENT_TEST_STATUS_TO_STATUS_STRING} from '../../../../constants/internal';
+
 import {
   createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize,
   sanitizeHtml as clientSanitizeHtml,
@@ -7,6 +9,7 @@ import type {LogEvent, SafeHtml, UtcTimeInMs} from '../../../../types/internal';
 
 const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
 const sanitizeHtml = clientSanitizeHtml;
+const TEST_STATUS_TO_STATUS_STRING = CLIENT_TEST_STATUS_TO_STATUS_STRING;
 
 type Options = Readonly<{
   endTimeInMs: UtcTimeInMs;
@@ -28,9 +31,11 @@ export function renderSteps({endTimeInMs, logEvents}: Options): SafeHtml {
     const nextLogEvent = logEvents[index + 1];
     const nextTime = nextLogEvent?.time ?? endTimeInMs;
     const durationMs = nextTime - time;
+    const status = payload?.logEventStatus ?? 0;
+    const statusString = TEST_STATUS_TO_STATUS_STRING[status];
 
     const stepHtml = sanitizeHtml`
-<button aria-expanded="false" class="step-expanded step-expanded_status_passed">
+<button aria-expanded="false" class="step-expanded step-expanded_status_${statusString}">
   <span class="step-expanded__name">${message}</span>
   <span class="step-expanded__time">${durationMs}ms</span>
 </button>

@@ -1,9 +1,12 @@
-import type {LogEventType} from '../constants/internal';
+import type {LogEventStatus, LogEventType} from '../constants/internal';
 
 /**
  * Payload of log event.
  */
-export type LogPayload = Record<string, unknown>;
+export type LogPayload = {
+  [x: string]: unknown;
+  logEventStatus?: LogEventStatus;
+};
 
 /**
  * Type for generallog log.

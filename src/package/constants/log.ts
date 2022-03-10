@@ -11,3 +11,11 @@ export const enum LogEventType {
   InternalUtil,
   Unspecified,
 }
+
+/**
+ * Status of LogEvent.
+ */
+export const enum LogEventStatus {
+  Passed,
+  Failed,
+}

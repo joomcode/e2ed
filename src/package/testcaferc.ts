@@ -50,6 +50,7 @@ const defaultConfig: Config = {
     takeOnFails: true,
     thumbnails: false,
   },
+  selectorTimeout: 10000,
   skipJsErrors: true,
   src: ['./e2ed/tests/**/*.spec.ts'],
   testExecutionTimeout: 180000,

@@ -12,5 +12,11 @@ export class E2EDError extends Error {
     super(`${message} ${printedString}`);
 
     Object.assign(this, params);
+    Object.defineProperty(this, 'message', {
+      configurable: true,
+      enumerable: true,
+      value: message,
+      writable: true,
+    });
   }
 }

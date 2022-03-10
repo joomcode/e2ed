@@ -63,6 +63,7 @@ export const oneTryOfRequest = <Output>({
 
         res.on('end', () => {
           const outputAsString = chunks.join('');
+          const statusCode = res.statusCode || 400;
 
           try {
             const output = (
@@ -71,7 +72,7 @@ export const oneTryOfRequest = <Output>({
             const response = {
               headers: res.headers,
               output,
-              statusCode: res.statusCode || 400,
+              statusCode,
             };
 
             clearTimeout(endTimeout);
@@ -81,7 +82,7 @@ export const oneTryOfRequest = <Output>({
             reject(
               new E2EDError(
                 `The response data string to request ${logParams.url} is not valid JSON: ${outputAsString}`,
-                {...fullLogParams, cause},
+                {...fullLogParams, cause, statusCode},
               ),
             );
           }
