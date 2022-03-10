@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.8.22](https://github.com/uid11/e2ed/tree/v0.8.22) (2022-03-10)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.21...v0.8.22)
+
+- [chore: update devDependencies (@typescript-eslint/...)](https://github.com/uid11/e2ed/commit/5a5c0a50950293160488280d728ea8b71cc80f05)
+- [feat: add LogEventStatus; watch scroll in waitForInterfaceStabilization](https://github.com/uid11/e2ed/commit/3be0f1740e1bc7956e23dcec2ebde96c92410e5e)
+
 ## [v0.8.21](https://github.com/uid11/e2ed/tree/v0.8.21) (2022-03-03)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.20...v0.8.21)
