@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.8.23](https://github.com/uid11/e2ed/tree/v0.8.23) (2022-03-11)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.22...v0.8.23)
+
+- [fix: use CLI parameter "browsers" from config for local run](https://github.com/uid11/e2ed/commit/63489381a3084d1ee913a165b1d07aa90548370c)
+
 ## [v0.8.22](https://github.com/uid11/e2ed/tree/v0.8.22) (2022-03-10)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.21...v0.8.22)
