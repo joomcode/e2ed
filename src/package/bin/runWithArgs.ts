@@ -4,6 +4,7 @@
  */
 
 import {JSON_REPORT_PATH} from '../constants/internal';
+import {config} from '../testcaferc';
 import {registerEndE2edRunEvent, registerStartE2edRunEvent} from '../utils/events';
 import {generalLog} from '../utils/generalLog';
 import {getFileSize} from '../utils/getFileSize';
@@ -27,6 +28,8 @@ try {
 
 process.env.E2ED_IS_LOCAL_RUN = 'true';
 
+const {browsers} = config;
+
 const concurrency = getIntegerFromEnvVariable({
   defaultValue: 1,
   maxValue: 50,
@@ -49,6 +52,17 @@ void registerStartE2edRunEvent(e2edRunEvent);
 const runLabel = getRunLabel({concurrency, maxRetry: 1, retry: 1});
 
 process.env.E2ED_RUN_LABEL = runLabel;
+
+const maybeBrowsersArg = process.argv[2];
+
+const hasBrowsersArg =
+  maybeBrowsersArg !== undefined &&
+  !maybeBrowsersArg.startsWith('-') &&
+  !maybeBrowsersArg.startsWith('e2ed');
+
+if (browsers.length > 0 && hasBrowsersArg === false) {
+  process.argv.splice(2, 0, String(browsers));
+}
 
 process.argv.push('--concurrency', String(concurrency));
 
