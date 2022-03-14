@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.8.25](https://github.com/uid11/e2ed/tree/v0.8.25) (2022-03-14)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.24...v0.8.25)
+
+- [feat: increase the maximum values of environment variables](https://github.com/uid11/e2ed/commit/024c84a2f42af4949b5d8ee670967a65fc6f0688)
+
 ## [v0.8.24](https://github.com/uid11/e2ed/tree/v0.8.24) (2022-03-14)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.23...v0.8.24)
