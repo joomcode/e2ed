@@ -31,6 +31,7 @@ let retryIndex = 1;
 let runLabel: RunLabel;
 let tests: readonly FailTest[] = [];
 let testsCount = 0;
+let previousTestsString = '';
 
 const getPrintedRetry = (): string => `retry ${retryIndex}/${retries}`;
 
@@ -94,11 +95,17 @@ const asyncRunTests = async (): Promise<void> => {
       break;
     }
 
+    const currentTestsString = JSON.stringify(tests);
+
     concurrency = getConcurrencyForNextRetry({
       currentConcurrency: concurrency,
+
       lastRetryHasError: !failedTests,
       testsCount: tests.length,
+      testsHaveNotChangedSinceLastTime: previousTestsString === currentTestsString,
     });
+
+    previousTestsString = currentTestsString;
   }
 };
 
