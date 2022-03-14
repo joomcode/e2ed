@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.8.24](https://github.com/uid11/e2ed/tree/v0.8.24) (2022-03-14)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.23...v0.8.24)
+
+- [chore: update eslint to 8.11.0](https://github.com/uid11/e2ed/commit/b47a446bbe268abfe77cf422bdf840139169d9b2)
+- [feat: if all tests fail, reduce concurrency by half](https://github.com/uid11/e2ed/commit/2f544dee762314bce27079b33a1e9139bbfb9ef5)
+
 ## [v0.8.23](https://github.com/uid11/e2ed/tree/v0.8.23) (2022-03-11)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.22...v0.8.23)
