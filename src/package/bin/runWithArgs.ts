@@ -32,7 +32,7 @@ const {browsers} = config;
 
 const concurrency = getIntegerFromEnvVariable({
   defaultValue: 1,
-  maxValue: 50,
+  maxValue: 10000,
   name: 'E2ED_CONCURRENCY',
 });
 

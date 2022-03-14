@@ -10,7 +10,7 @@ import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
 export const waitForNavigateInterfaceStabilization = async (): Promise<void> => {
   const stabilizationInterval = getIntegerFromEnvVariable({
     defaultValue: 2000,
-    maxValue: 60_000,
+    maxValue: 120_000,
     name: 'E2ED_NAVIGATE_STABILIZATION_INTERVAL',
   });
 

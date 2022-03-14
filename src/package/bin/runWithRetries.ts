@@ -14,13 +14,13 @@ process.env.E2ED_IS_DOCKER_RUN = 'true';
 
 let concurrency = getIntegerFromEnvVariable({
   defaultValue: 5,
-  maxValue: 50,
+  maxValue: 10_000,
   name: 'E2ED_CONCURRENCY',
 });
 
 const retries = getIntegerFromEnvVariable({
   defaultValue: 5,
-  maxValue: 10,
+  maxValue: 50,
   name: 'E2ED_DOCKER_RETRIES',
 });
 
@@ -99,7 +99,6 @@ const asyncRunTests = async (): Promise<void> => {
 
     concurrency = getConcurrencyForNextRetry({
       currentConcurrency: concurrency,
-
       lastRetryHasError: !failedTests,
       testsCount: tests.length,
       testsHaveNotChangedSinceLastTime: previousTestsString === currentTestsString,
