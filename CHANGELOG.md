@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.8.26](https://github.com/uid11/e2ed/tree/v0.8.26) (2022-03-15)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.25...v0.8.26)
+
+- [chore: update devDependencies (@typescript-eslint/...)](https://github.com/uid11/e2ed/commit/7c3173fa66169e804b15231be731d935e97ecfad)
+- [feat: add LogEventType.Assert for user assertions](https://github.com/uid11/e2ed/commit/4054b6821a30d15ed5ee9936f9e5856441c12014)
+
 ## [v0.8.25](https://github.com/uid11/e2ed/tree/v0.8.25) (2022-03-14)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.24...v0.8.25)
