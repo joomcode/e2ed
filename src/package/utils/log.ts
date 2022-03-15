@@ -1,4 +1,4 @@
-import {LogEventType} from '../constants/internal';
+import {LogEventType, SCREENSHOT_EVENT_TYPES} from '../constants/internal';
 import {getPageLoaded} from '../context/pageLoaded';
 import {getRunId} from '../context/runId';
 import {testController} from '../testController';
@@ -37,7 +37,7 @@ const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unkn
 
     const pageLoaded = getPageLoaded();
 
-    if (pageLoaded && (type === LogEventType.Action || type === LogEventType.InternalAssert)) {
+    if (pageLoaded && SCREENSHOT_EVENT_TYPES.includes(type)) {
       return testController.takeScreenshot({path: `${runId}/${numberInRun}`}) as Promise<void>;
     }
 
