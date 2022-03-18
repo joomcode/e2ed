@@ -40,3 +40,9 @@ export const JSON_REPORT_PATH = join(
   REPORTS_DIRECTORY_PATH,
   'report.json',
 ) as DirectoryPathFromRoot;
+
+/**
+ * Relative (from root) path to userland config file.
+ * @internal
+ */
+export const USERLAND_CONFIG_PATH = join('e2ed', 'config.ts');

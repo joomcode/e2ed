@@ -1,6 +1,7 @@
 {
   "version": "*",
   "dependencies": {
-    "testcafe-without-typecheck": "*"
+    "testcafe-without-typecheck": "*",
+    "typescript": "*"
   }
 }

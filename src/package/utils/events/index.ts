@@ -4,3 +4,4 @@ export * from './registerEndTestRunEvent';
 export * from './registerStartE2edRunEvent';
 export * from './registerStartTestRunEvent';
 export * from './setTestRunTimeout';
+export * from './waitForEndE2edRunEvent';

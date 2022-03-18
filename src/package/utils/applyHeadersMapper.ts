@@ -14,6 +14,7 @@ const getCopyOfHeaders = (headers: Headers): Headers => {
 
 /**
  * Map exists headers to new headers and merge this new headers to exists headers.
+ * @internal
  */
 export const applyHeadersMapper = (headers: Headers, mapper?: MapHeaders): void => {
   if (mapper === undefined) {
