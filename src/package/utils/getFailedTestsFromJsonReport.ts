@@ -1,11 +1,7 @@
-import {config} from '../testcaferc';
-
 import {generalLog} from './generalLog';
+import {getFullConfig} from './getFullConfig';
 
 import type {FailTests} from '../types/internal';
-
-const jsonReportPathFromRoot = config.reporter.find(({name}) => name === 'json')?.output || '';
-const jsonReportPath = `../../../${jsonReportPathFromRoot}`;
 
 type Test = Readonly<{
   name: string;
@@ -28,6 +24,10 @@ type Report = Readonly<{fixtures: Fixture[]; total: number}>;
  * @internal
  */
 export const getFailedTestsFromJsonReport = (): FailTests | undefined => {
+  const {reporter} = getFullConfig();
+  const jsonReportPathFromRoot = reporter.find(({name}) => name === 'json')?.output || '';
+  const jsonReportPath = `../../../${jsonReportPathFromRoot}`;
+
   const absoluteJsonReportPath = require.resolve(jsonReportPath);
 
   delete require.cache[absoluteJsonReportPath];

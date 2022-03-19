@@ -1,6 +1,6 @@
 import {EVENTS_DIRECTORY_PATH, TMP_DIRECTORY_PATH} from '../../constants/internal';
 
-import {compileConfig} from '../compileConfig';
+import {compileUserlandConfig} from '../compileUserlandConfig';
 import {createDirectory} from '../createDirectory';
 import {removeDirectory} from '../removeDirectory';
 
@@ -19,5 +19,5 @@ export const registerStartE2edRunEvent = async (e2edRunEvent: E2edRunEvent): Pro
 
   await createDirectory(EVENTS_DIRECTORY_PATH);
 
-  compileConfig();
+  compileUserlandConfig();
 };

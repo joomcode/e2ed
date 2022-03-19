@@ -1,6 +1,5 @@
-import {config} from '../../testcaferc';
-
 import {E2EDError} from '../E2EDError';
+import {getFullConfig} from '../getFullConfig';
 
 import {forceEndTestRunEvent} from './forceEndTestRunEvent';
 import {getTestRunEvent} from './getTestRunEvent';
@@ -17,7 +16,7 @@ type ClearAndTestFn = Readonly<{
  * Set TestRun execution timeout (for every TestRun).
  */
 export const setTestRunTimeout = (runId: RunId, testFn: TestFn): ClearAndTestFn => {
-  const {testRunExecutionTimeout} = config;
+  const {testRunExecutionTimeout} = getFullConfig();
 
   let rejectPromise: ((error: E2EDError) => void) | undefined;
 

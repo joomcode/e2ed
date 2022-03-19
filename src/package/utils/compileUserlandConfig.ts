@@ -19,10 +19,10 @@ const compilerOptions = {
 };
 
 /**
- * Compile user's config.ts file before running tests.
+ * Compile userland config.ts file before running tests.
  * @internal
  */
-export const compileConfig = (): void => {
+export const compileUserlandConfig = (): void => {
   const program = createProgram([USERLAND_CONFIG_PATH], compilerOptions);
   const {diagnostics} = program.emit();
 

@@ -1,18 +1,23 @@
+/**
+ * @file Full e2ed configuration (Extended TestCafe config) for running tests.
+ * Don't import this module. Instead, use utils/getFullConfig.ts.
+ */
+
 import {JSON_REPORT_PATH} from './constants/internal';
 import {deepMerge} from './utils/deepMerge';
 
-import type {Config, DeepPartial} from './types/internal';
+import type {DeepPartial, FullConfig} from './types/internal';
 
-let userConfig: DeepPartial<Config>;
+let userlandConfig: DeepPartial<FullConfig>;
 
 try {
   // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-  userConfig = require('../../e2ed/config.json') as Partial<Config>;
-} catch (errors) {
-  userConfig = {};
+  userlandConfig = require('../../e2ed/config.json') as Partial<FullConfig>;
+} catch (error) {
+  userlandConfig = {};
 }
 
-const defaultConfig: Config = {
+const defaultConfig: FullConfig = {
   ajaxRequestTimeout: 40000,
   assertionTimeout: 10000,
   browserInitTimeout: 40000,
@@ -57,8 +62,9 @@ const defaultConfig: Config = {
   testRunExecutionTimeout: 120000,
 };
 
-const config = deepMerge<Config>(defaultConfig, userConfig);
+const fullConfig = deepMerge<FullConfig>(defaultConfig, userlandConfig);
 
-Object.assign(exports, config);
+Object.assign(exports, fullConfig);
 
-export {config};
+// eslint-disable-next-line import/no-unused-modules
+export {fullConfig};

@@ -3,9 +3,9 @@
  * {@link https://github.com/babel/babel/issues/11964}
  */
 
-import {config} from '../testcaferc';
 import {registerStartE2edRunEvent, waitForEndE2edRunEvent} from '../utils/events';
 import {generalLog} from '../utils/generalLog';
+import {getFullConfig} from '../utils/getFullConfig';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {getStartMessage} from '../utils/getStartMessage';
 import {hasBrowsersArg} from '../utils/hasBrowsersArg';
@@ -49,7 +49,7 @@ const runLabel = getRunLabel({concurrency, maxRetry: 1, retry: 1});
 process.env.E2ED_RUN_LABEL = runLabel;
 
 void registerStartE2edRunEvent(e2edRunEvent).then(() => {
-  const {browsers} = config;
+  const {browsers} = getFullConfig();
 
   if (browsers.length > 0 && hasBrowsersArg() === false) {
     process.argv.splice(2, 0, String(browsers));

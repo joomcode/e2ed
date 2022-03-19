@@ -8,13 +8,27 @@ type OwnE2edConfig = Readonly<{
 }>;
 
 /**
- * Native TestCafe config.
+ * Userlanf part of TestCafe config.
  */
-export type TestCafeConfig = DeepReadonly<{
+type UserlangTestCafeConfig = Readonly<{
   ajaxRequestTimeout: number;
   assertionTimeout: number;
   browserInitTimeout: number;
-  browsers: string | string[];
+  browsers: string | readonly string[];
+  src: readonly string[];
+  pageLoadTimeout: number;
+  pageRequestTimeout: number;
+  selectorTimeout: number;
+  testExecutionTimeout: number;
+  concurrency: number;
+  port1: number;
+  port2: number;
+}>;
+
+/**
+ * Own part of TestCafe config.
+ */
+type OwnTestCafeConfig = DeepReadonly<{
   color: boolean;
   compilerOptions: {
     typescript?: {
@@ -23,10 +37,7 @@ export type TestCafeConfig = DeepReadonly<{
     };
   };
   hostname: string;
-  src: string[];
-  pageLoadTimeout: number;
-  pageRequestTimeout: number;
-  reporter: {name: string; output?: string}[];
+  reporter: readonly {name: string; output?: string}[];
   retryTestPages: boolean;
   screenshots: {
     path: string;
@@ -34,15 +45,20 @@ export type TestCafeConfig = DeepReadonly<{
     takeOnFails: boolean;
     thumbnails: boolean;
   };
-  selectorTimeout: number;
   skipJsErrors: boolean;
-  testExecutionTimeout: number;
-  concurrency: number;
-  port1: number;
-  port2: number;
 }>;
+
+/**
+ * Native TestCafe config.
+ */
+type TestCafeConfig = UserlangTestCafeConfig & OwnTestCafeConfig;
 
 /**
  * The complete e2ed config object.
  */
-export type Config = TestCafeConfig & OwnE2edConfig;
+export type FullConfig = TestCafeConfig & OwnE2edConfig;
+
+/**
+ * Userland e2ed config.
+ */
+export type UserlandConfig = UserlangTestCafeConfig & OwnE2edConfig;
