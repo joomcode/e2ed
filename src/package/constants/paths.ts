@@ -27,6 +27,12 @@ export const TESTS_DIRECTORY_PATH = join('e2ed', 'tests') as DirectoryPathFromRo
 export const TMP_DIRECTORY_PATH = join(REPORTS_DIRECTORY_PATH, 'tmp') as DirectoryPathFromRoot;
 
 /**
+ * Relative (from root) path to compiled userland config file.
+ * @internal
+ */
+export const COMPILED_USERLAND_CONFIG_PATH = join(TMP_DIRECTORY_PATH, 'config.js');
+
+/**
  * Relative (from root) path to events directory.
  * @internal
  */

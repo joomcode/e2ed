@@ -3,17 +3,25 @@
  * Don't import this module. Instead, use utils/getFullConfig.ts.
  */
 
-import {JSON_REPORT_PATH} from './constants/internal';
+import {join} from 'path';
+
+import {COMPILED_USERLAND_CONFIG_PATH, JSON_REPORT_PATH} from './constants/internal';
 import {deepMerge} from './utils/deepMerge';
+import {generalLog} from './utils/generalLog';
 
-import type {DeepPartial, FullConfig} from './types/internal';
+import type {FullConfig, UserlandConfig} from './types/internal';
 
-let userlandConfig: DeepPartial<FullConfig>;
+const relativeUserlandConfigPath = join('..', '..', COMPILED_USERLAND_CONFIG_PATH);
+
+let userlandConfig: UserlandConfig;
 
 try {
-  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-  userlandConfig = require('../../e2ed/config.json') as Partial<FullConfig>;
+  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires, import/no-dynamic-require
+  userlandConfig = (require(relativeUserlandConfigPath) as typeof import('../../e2ed/config'))
+    .config;
 } catch (error) {
+  generalLog('Cannot load e2ed/config.ts', {error});
+
   userlandConfig = {};
 }
 

@@ -1,4 +1,4 @@
-import type {DeepReadonly} from './deep';
+import type {DeepPartial, DeepReadonly} from './deep';
 
 /**
  * Own e2ed config properties.
@@ -61,4 +61,4 @@ export type FullConfig = TestCafeConfig & OwnE2edConfig;
 /**
  * Userland e2ed config.
  */
-export type UserlandConfig = UserlangTestCafeConfig & OwnE2edConfig;
+export type UserlandConfig = DeepPartial<UserlangTestCafeConfig & OwnE2edConfig>;

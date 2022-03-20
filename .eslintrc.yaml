@@ -40,7 +40,8 @@ rules:
   import/no-unassigned-import: error
   import/no-unused-modules:
     - error
-    - ignoreExports: [src/package/context, src/package/index.ts]
+    - ignoreExports:
+        [e2ed/config.ts, src/package/context, src/package/types/index.ts, src/package/index.ts]
       missingExports: false
       unusedExports: true
   import/order: off
