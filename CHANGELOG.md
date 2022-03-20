@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.9.0](https://github.com/uid11/e2ed/tree/v0.9.0) (2022-03-20)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.26...v0.9.0)
+
+- [feat: use userland e2ed/config.ts instead of e2ed/config.json](https://github.com/uid11/e2ed/commit/e642776bb7b0eb3e5b2429c18014590587dd9a6d)
+- [feat: separate userlandConfig; use getFullConfig instead of direct import](https://github.com/uid11/e2ed/commit/a897e2dae56bb431b0459d9d22aba06a88a441b3)
+- [feat: add compiling of userland config.ts](https://github.com/uid11/e2ed/commit/010d86300d58866338f2d445e9b0556278361569)
+- [chore: update prettier to 2.6.0](https://github.com/uid11/e2ed/commit/2ba157cd90bef4ed0ce3f0c534690b3d3d2199f6)
+
 ## [v0.8.26](https://github.com/uid11/e2ed/tree/v0.8.26) (2022-03-15)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.25...v0.8.26)
