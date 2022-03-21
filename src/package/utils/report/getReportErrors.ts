@@ -1,6 +1,7 @@
 import {getUnvisitedTestFilePaths} from '../getUnvisitedTestFilePaths';
 
-import type {RunEnvironment, TestRunWithHooks} from '../../types/internal';
+import type {RunEnvironment} from '../../constants/internal';
+import type {TestRunWithHooks} from '../../types/internal';
 
 /**
  * Get all report errors. General report status is failed if there is any error.

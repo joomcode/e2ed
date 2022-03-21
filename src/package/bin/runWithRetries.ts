@@ -3,20 +3,14 @@ import {failTestsToString} from '../utils/failTestsToString';
 import {generalLog} from '../utils/generalLog';
 import {getConcurrencyForNextRetry} from '../utils/getConcurrencyForNextRetry';
 import {getFailedTestsFromJsonReport} from '../utils/getFailedTestsFromJsonReport';
+import {getFullConfig} from '../utils/getFullConfig';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
-import {getStartMessage} from '../utils/getStartMessage';
 import {getRunLabel} from '../utils/runLabel';
 import {runTests} from '../utils/runTests';
 
 import type {E2edRunEvent, FailTest, FailTests, RunLabel, UtcTimeInMs} from '../types/internal';
 
 process.env.E2ED_IS_DOCKER_RUN = 'true';
-
-let concurrency = getIntegerFromEnvVariable({
-  defaultValue: 5,
-  maxValue: 10_000,
-  name: 'E2ED_CONCURRENCY',
-});
 
 const retries = getIntegerFromEnvVariable({
   defaultValue: 5,
@@ -36,17 +30,13 @@ let previousTestsString = '';
 const getPrintedRetry = (): string => `retry ${retryIndex}/${retries}`;
 
 const asyncRunTests = async (): Promise<void> => {
-  const startMessage = getStartMessage();
   const e2edRunEvent: E2edRunEvent = {
-    concurrency,
-    runEnvironment: 'docker',
-    startMessage,
     utcTimeInMs: startTimeInMs,
   };
 
-  generalLog(`${startMessage}\n`);
-
   await registerStartE2edRunEvent(e2edRunEvent);
+
+  let {concurrency} = getFullConfig();
 
   for (; retryIndex <= retries; retryIndex += 1) {
     runLabel = getRunLabel({concurrency, maxRetry: retries, retry: retryIndex});

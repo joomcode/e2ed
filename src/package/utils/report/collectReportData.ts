@@ -13,16 +13,16 @@ import type {FullEventsData, ReportData} from '../../types/internal';
  * @internal
  */
 export const collectReportData = async ({
-  e2edRunEvent,
   endE2edRunEvent,
+  fullStartInfo,
   testRunsWithHooks,
 }: FullEventsData): Promise<ReportData> => {
-  const {utcTimeInMs: startTimeInMs, runEnvironment, ...restE2edRunEvent} = e2edRunEvent;
+  const {utcTimeInMs: startTimeInMs, ...startInfo} = fullStartInfo;
   const {utcTimeInMs: endTimeInMs} = endE2edRunEvent;
 
   const name = getReportName(startTimeInMs);
 
-  const errors = await getReportErrors(runEnvironment, testRunsWithHooks);
+  const errors = await getReportErrors(startInfo.runEnvironment, testRunsWithHooks);
 
   assertThatTestNamesAreUnique(testRunsWithHooks);
 
@@ -41,9 +41,8 @@ export const collectReportData = async ({
     fullTestRuns,
     name,
     retries,
-    runEnvironment,
+    startInfo,
     startTimeInMs,
-    ...restE2edRunEvent,
   };
 
   return reportData;

@@ -1,8 +1,8 @@
 import type {TestRunStatus} from '../constants/internal';
 
 import type {UtcTimeInMs} from './date';
-import type {E2edRunEvent, RunEnvironment} from './events';
 import type {TestFilePath} from './fs';
+import type {StartInfo} from './startInfo';
 import type {FullTestRun, LiteTestRun, RunHash, RunId} from './testRun';
 
 /**
@@ -15,21 +15,19 @@ export type ReportData = Readonly<{
   fullTestRuns: readonly FullTestRun[];
   name: string;
   retries: readonly Retry[];
+  startInfo: StartInfo;
   startTimeInMs: UtcTimeInMs;
-}> &
-  Omit<E2edRunEvent, 'utcTimeInMs'>;
+}>;
 
 /**
  * The lite report data (for printing lite JSON report).
  */
 export type LiteReport = Readonly<{
-  concurrency: number;
   endTimeInMs: UtcTimeInMs;
   errors: readonly string[];
   name: string;
   retries: readonly LiteRetry[];
-  runEnvironment: RunEnvironment;
-  startMessage: string;
+  startInfo: StartInfo;
   startTimeInMs: UtcTimeInMs;
 }>;
 

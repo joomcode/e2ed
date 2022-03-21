@@ -1,8 +1,8 @@
 import {TMP_DIRECTORY_PATH} from '../../constants/internal';
 
+import {getFullStartInfo} from '../getAndSetFullStartInfo';
 import {removeDirectory} from '../removeDirectory';
 
-import {getE2edRunEvent} from './getAndSetE2edRunEvent';
 import {readEventsFromFiles} from './readEventsFromFiles';
 
 import type {EndE2edRunEvent, FullEventsData} from '../../types/internal';
@@ -14,10 +14,10 @@ import type {EndE2edRunEvent, FullEventsData} from '../../types/internal';
 export const collectFullEventsData = async (
   endE2edRunEvent: EndE2edRunEvent,
 ): Promise<FullEventsData> => {
-  const e2edRunEvent = getE2edRunEvent();
+  const fullStartInfo = getFullStartInfo();
   const testRunsWithHooks = await readEventsFromFiles();
 
   await removeDirectory(TMP_DIRECTORY_PATH);
 
-  return {e2edRunEvent, endE2edRunEvent, testRunsWithHooks};
+  return {endE2edRunEvent, fullStartInfo, testRunsWithHooks};
 };

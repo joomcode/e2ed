@@ -6,8 +6,6 @@
 import {registerStartE2edRunEvent, waitForEndE2edRunEvent} from '../utils/events';
 import {generalLog} from '../utils/generalLog';
 import {getFullConfig} from '../utils/getFullConfig';
-import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
-import {getStartMessage} from '../utils/getStartMessage';
 import {hasBrowsersArg} from '../utils/hasBrowsersArg';
 import {getRunLabel} from '../utils/runLabel';
 
@@ -27,29 +25,15 @@ try {
 
 process.env.E2ED_IS_LOCAL_RUN = 'true';
 
-const concurrency = getIntegerFromEnvVariable({
-  defaultValue: 1,
-  maxValue: 10000,
-  name: 'E2ED_CONCURRENCY',
-});
-
-const startMessage = getStartMessage();
-
 const e2edRunEvent: E2edRunEvent = {
-  concurrency,
-  runEnvironment: 'local',
-  startMessage,
   utcTimeInMs: Date.now() as UtcTimeInMs,
 };
 
-generalLog(`${startMessage}\n`);
-
-const runLabel = getRunLabel({concurrency, maxRetry: 1, retry: 1});
-
-process.env.E2ED_RUN_LABEL = runLabel;
-
 void registerStartE2edRunEvent(e2edRunEvent).then(() => {
-  const {browsers} = getFullConfig();
+  const {concurrency, browsers} = getFullConfig();
+  const runLabel = getRunLabel({concurrency, maxRetry: 1, retry: 1});
+
+  process.env.E2ED_RUN_LABEL = runLabel;
 
   if (browsers.length > 0 && hasBrowsersArg() === false) {
     process.argv.splice(2, 0, String(browsers));

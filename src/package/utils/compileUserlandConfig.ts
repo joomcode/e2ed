@@ -12,8 +12,12 @@ import {TMP_DIRECTORY_PATH, USERLAND_CONFIG_PATH} from '../constants/internal';
 import {generalLog} from './generalLog';
 
 const compilerOptions = {
+  allowSyntheticDefaultImports: true,
+  esModuleInterop: true,
   module: ModuleKind.CommonJS,
   outDir: TMP_DIRECTORY_PATH,
+  resolveJsonModule: true,
+  skipLibCheck: true,
   target: ScriptTarget.ESNext,
   types: ['node'],
 };

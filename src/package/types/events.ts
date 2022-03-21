@@ -5,6 +5,7 @@ import type {OriginalTestRunError, TestRunError} from './errors';
 import type {TestFilePath} from './fs';
 import type {LogPayload} from './log';
 import type {RunLabel} from './runLabel';
+import type {FullStartInfo} from './startInfo';
 import type {RejectTestRun, RunId, TestOptions, TestRunWithHooks} from './testRun';
 
 /**
@@ -41,24 +42,16 @@ export type EndTestRunEvent = Readonly<{
  * @internal
  */
 export type FullEventsData = Readonly<{
-  e2edRunEvent: E2edRunEvent;
   endE2edRunEvent: EndE2edRunEvent;
+  fullStartInfo: FullStartInfo;
   testRunsWithHooks: readonly TestRunWithHooks[];
 }>;
-
-/**
- * Run environment (run in docker or local run).
- */
-export type RunEnvironment = 'docker' | 'local';
 
 /**
  * E2edRun event (once event on starting e2ed).
  * @internal
  */
 export type E2edRunEvent = Readonly<{
-  concurrency: number;
-  runEnvironment: RunEnvironment;
-  startMessage: string;
   utcTimeInMs: UtcTimeInMs;
 }>;
 

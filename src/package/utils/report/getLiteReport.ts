@@ -7,27 +7,16 @@ import type {LiteReport, ReportData} from '../../types/internal';
  * @internal
  */
 export const getLiteReport = (reportData: ReportData): LiteReport => {
-  const {
-    concurrency,
-    endTimeInMs,
-    errors,
-    name,
-    retries,
-    runEnvironment,
-    startMessage,
-    startTimeInMs,
-  } = reportData;
+  const {endTimeInMs, errors, name, retries, startInfo, startTimeInMs} = reportData;
 
   const liteRetries = retries.map(getLiteRetry);
 
   return {
-    concurrency,
     endTimeInMs,
     errors,
     name,
     retries: liteRetries,
-    runEnvironment,
-    startMessage,
+    startInfo,
     startTimeInMs,
   };
 };

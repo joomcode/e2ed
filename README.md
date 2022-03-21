@@ -48,8 +48,7 @@ E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh
 
 `E2ED_API_ORIGIN`: origin-part of the backend API url that can be used by tests to create and delete test entities.
 
-`E2ED_CONCURRENCY`: the number of browser windows in which tests will run in parallel
-(maximum value 10000, 5 by default for run in docker and 1 by default for local run).
+`E2ED_CONCURRENCY`: the number of browser windows in which tests will run in parallel (1 by default).
 
 `E2ED_DEBUG`: run e2ed in nodejs-debug mode (`--inspect-brk=0.0.0.0`) if this variable is not empty.
 
