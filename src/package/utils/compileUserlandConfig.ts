@@ -1,3 +1,5 @@
+import {existsSync} from 'fs';
+
 import {
   createProgram,
   flattenDiagnosticMessageText,
@@ -7,7 +9,11 @@ import {
   ScriptTarget,
 } from 'typescript';
 
-import {TMP_DIRECTORY_PATH, USERLAND_CONFIG_PATH} from '../constants/internal';
+import {
+  TMP_DIRECTORY_PATH,
+  USERLAND_CONFIG_PATH,
+  USERLAND_OVERRIDE_CONFIG_PATH,
+} from '../constants/internal';
 
 import {generalLog} from './generalLog';
 
@@ -27,7 +33,13 @@ const compilerOptions = {
  * @internal
  */
 export const compileUserlandConfig = (): void => {
-  const program = createProgram([USERLAND_CONFIG_PATH], compilerOptions);
+  const rootNames = [USERLAND_CONFIG_PATH];
+
+  if (existsSync(USERLAND_OVERRIDE_CONFIG_PATH)) {
+    rootNames.push(USERLAND_OVERRIDE_CONFIG_PATH);
+  }
+
+  const program = createProgram(rootNames, compilerOptions);
   const {diagnostics} = program.emit();
 
   const allDiagnostics = getPreEmitDiagnostics(program).concat(diagnostics);

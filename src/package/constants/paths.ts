@@ -52,3 +52,9 @@ export const JSON_REPORT_PATH = join(
  * @internal
  */
 export const USERLAND_CONFIG_PATH = join('e2ed', 'config.ts');
+
+/**
+ * Relative (from root) path to userland override config file.
+ * @internal
+ */
+export const USERLAND_OVERRIDE_CONFIG_PATH = join('e2ed', 'overrideConfig.ts');
