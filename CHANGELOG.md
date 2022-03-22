@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.9.1](https://github.com/uid11/e2ed/tree/v0.9.1) (2022-03-22)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.0...v0.9.1)
+
+- [feat: support skipped tests](https://github.com/uid11/e2ed/commit/f565c8f7e5406da1222cc419d1ab0c7bfa2049ba)
+- [feat: add local e2ed/overrideConfig.ts for overriding userland config](https://github.com/uid11/e2ed/commit/e49e6b997ffecab28d598c5187dd5055dc5aeb05)
+- [chore: update devDependencies (@typescript-eslint/...); temporary remove npm audit](https://github.com/uid11/e2ed/commit/7efdf2be6bea55d2b514da3c691caa3d55d364c5)
+- [feat: save startInfo in report as object; read concurrency from config](https://github.com/uid11/e2ed/commit/b5a8cd5fbbef061101c1375472eb32ab4989b066)
+
 ## [v0.9.0](https://github.com/uid11/e2ed/tree/v0.9.0) (2022-03-20)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.26...v0.9.0)
