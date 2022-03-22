@@ -30,7 +30,7 @@ export const collectReportData = async ({
 
   const fullTestRuns = testRunsWithHooks.map((testRun) => ({
     ...testRun,
-    status: TestRunStatus.Unknown,
+    status: testRun.isSkipped ? TestRunStatus.Skipped : TestRunStatus.Unknown,
   }));
 
   const retries = getRetriesAndSetStatuses(fullTestRuns);

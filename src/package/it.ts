@@ -13,10 +13,21 @@ import {getTestRunErrors} from './utils/getTestRunErrors';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
-import type {RunId, RunLabel, TestFn, TestOptions, UtcTimeInMs} from './types/internal';
+import type {
+  RunId,
+  RunLabel,
+  TestFn,
+  TestOptions,
+  TestStaticOptions,
+  UtcTimeInMs,
+} from './types/internal';
 
 declare const fixture: Inner.FixtureFn;
 declare const test: Inner.TestFn;
+
+const resolvedPromise = Promise.resolve();
+
+const skippedTestFn: TestFn = () => resolvedPromise;
 
 /**
  * Creates test with name, metatags, options and test function.
@@ -37,7 +48,12 @@ export const it = (name: string, options: TestOptions, testFn: TestFn): void => 
       const runLabel = process.env.E2ED_RUN_LABEL as RunLabel;
       const utcTimeInMs = Date.now() as UtcTimeInMs;
 
-      const runTestOwnParams = {filePath, name, options, previousRunId, runLabel, utcTimeInMs};
+      const testStaticOptions: TestStaticOptions = {filePath, name, options};
+      const runTestOwnParams = {...testStaticOptions, previousRunId, runLabel, utcTimeInMs};
+
+      // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
+      const hooks: typeof import('./hooks') = require('./hooks');
+      const isSkipped = hooks.isTestSkipped(testStaticOptions);
 
       if (previousRunId !== undefined) {
         const previousTestRun = getTestRunEvent(previousRunId);
@@ -52,12 +68,13 @@ export const it = (name: string, options: TestOptions, testFn: TestFn): void => 
 
       const {clearTimeout, reject, testFnWithReject} = setTestRunTimeout(runId, testFn);
 
-      testFnClosure = testFnWithReject;
+      testFnClosure = isSkipped ? skippedTestFn : testFnWithReject;
 
       await registerStartTestRunEvent({
         ...runTestOwnParams,
         clearTimeout,
         ended: false,
+        isSkipped,
         logEvents: [],
         originalErrors,
         reject,

@@ -2,11 +2,10 @@ import type {LogEventType} from '../constants/internal';
 
 import type {UtcTimeInMs} from './date';
 import type {OriginalTestRunError, TestRunError} from './errors';
-import type {TestFilePath} from './fs';
 import type {LogPayload} from './log';
 import type {RunLabel} from './runLabel';
 import type {FullStartInfo} from './startInfo';
-import type {RejectTestRun, RunId, TestOptions, TestRunWithHooks} from './testRun';
+import type {RejectTestRun, RunId, TestRunWithHooks, TestStaticOptions} from './testRun';
 
 /**
  * Log event (on log call).
@@ -61,14 +60,13 @@ export type E2edRunEvent = Readonly<{
 export type TestRunEvent = Readonly<{
   clearTimeout(): void;
   ended: boolean;
-  filePath: TestFilePath;
+  isSkipped: boolean;
   logEvents: readonly LogEvent[];
-  name: string;
-  options: TestOptions;
   originalErrors: readonly OriginalTestRunError[];
   previousRunId: RunId | undefined;
   reject: RejectTestRun;
   runId: RunId;
   runLabel: RunLabel;
   utcTimeInMs: UtcTimeInMs;
-}>;
+}> &
+  TestStaticOptions;

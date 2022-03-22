@@ -38,6 +38,16 @@ export type TestOptions = DeepReadonly<{
 }>;
 
 /**
+ * The complete static test options, that is, the options
+ * available from the code before the tests are run.
+ */
+export type TestStaticOptions = Readonly<{
+  filePath: TestFilePath;
+  name: string;
+  options: TestOptions;
+}>;
+
+/**
  * Completed test run object.
  * Not internal because it used in user hooks.
  */
@@ -54,15 +64,13 @@ export type TestRun = Readonly<{
 export type LiteTestRun = Readonly<{
   endTimeInMs: UtcTimeInMs;
   errors: readonly TestRunError[];
-  filePath: TestFilePath;
   mainParams: string;
-  name: string;
-  options: TestOptions;
   runHash: RunHash;
   runLabel: RunLabel;
   startTimeInMs: UtcTimeInMs;
   status: TestRunStatus;
-}>;
+}> &
+  TestStaticOptions;
 
 /**
  * TestRun object with result of userland hooks (like mainParams and runHash).

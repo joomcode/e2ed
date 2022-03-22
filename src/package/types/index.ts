@@ -5,9 +5,9 @@ export type {UserlandConfig as Config} from './internal';
 export * from './internal';
 
 /**
- * External types (for using in userland).
+ * External hooks types (for using in userland).
  */
-export * from './external';
+export * from './externalHooks';
 
 /**
  * Userland types. This export must be the last.

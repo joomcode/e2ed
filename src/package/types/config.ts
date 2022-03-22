@@ -1,9 +1,12 @@
+import type {SkipTests} from '../hooks';
+
 import type {DeepPartial, DeepReadonly} from './deep';
 
 /**
  * Own e2ed config properties.
  */
 type OwnE2edConfig = Readonly<{
+  skipTests?: SkipTests;
   testRunExecutionTimeout: number;
 }>;
 

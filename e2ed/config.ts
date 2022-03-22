@@ -11,6 +11,7 @@ const config: Config = {
   browserInitTimeout: 30000,
   browsers: 'chromium:headless',
   concurrency: Number(process.env.E2ED_CONCURRENCY) || 5,
+  skipTests: ['3'],
 };
 
 try {
