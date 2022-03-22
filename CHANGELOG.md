@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.9.2](https://github.com/uid11/e2ed/tree/v0.9.2) (2022-03-22)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.1...v0.9.2)
+
+- [feat: support skipping of all tests](https://github.com/uid11/e2ed/commit/2db1ec06c54f5b0f448724b83ca91de5c4d8a99b)
+
 ## [v0.9.1](https://github.com/uid11/e2ed/tree/v0.9.1) (2022-03-22)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.0...v0.9.1)
