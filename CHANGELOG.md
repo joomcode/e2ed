@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.9.4](https://github.com/uid11/e2ed/tree/v0.9.4) (2022-03-23)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.3...v0.9.4)
+
+- [fix: explicitly export failed test run statuses](https://github.com/uid11/e2ed/commit/e4ef1c51ea04aa98ac5942692058d7f58c6288c0)
+
 ## [v0.9.3](https://github.com/uid11/e2ed/tree/v0.9.3) (2022-03-23)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.2...v0.9.3)
