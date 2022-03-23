@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.9.3](https://github.com/uid11/e2ed/tree/v0.9.3) (2022-03-23)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.2...v0.9.3)
+
+- [feat: add explicit exit status for local run and run in docker](https://github.com/uid11/e2ed/commit/9fc013569a36638c915076372ffd11d410671744)
+
 ## [v0.9.2](https://github.com/uid11/e2ed/tree/v0.9.2) (2022-03-22)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.1...v0.9.2)
