@@ -7,13 +7,14 @@ import type {LiteReport, ReportData} from '../../types/internal';
  * @internal
  */
 export const getLiteReport = (reportData: ReportData): LiteReport => {
-  const {endTimeInMs, errors, name, retries, startInfo, startTimeInMs} = reportData;
+  const {endTimeInMs, errors, exitStatus, name, retries, startInfo, startTimeInMs} = reportData;
 
   const liteRetries = retries.map(getLiteRetry);
 
   return {
     endTimeInMs,
     errors,
+    exitStatus,
     name,
     retries: liteRetries,
     startInfo,

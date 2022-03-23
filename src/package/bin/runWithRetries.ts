@@ -129,11 +129,5 @@ asyncRunTests()
 
     const endE2edRunEvent = {utcTimeInMs: endTimeInMs};
 
-    registerEndE2edRunEvent(endE2edRunEvent)
-      .catch((error: unknown) => {
-        generalLog('Caught error on saving HTML report', {error});
-      })
-      .finally(() => {
-        process.exit(hasFailedTests ? 1 : 0);
-      });
+    void registerEndE2edRunEvent(endE2edRunEvent);
   });

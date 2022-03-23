@@ -1,5 +1,7 @@
 import {TestRunStatus} from '../../constants/internal';
 
+import {getExitStatus} from '../exit';
+
 import {assertThatTestNamesAreUnique} from './assertThatTestNamesAreUnique';
 import {getReportErrors} from './getReportErrors';
 import {getReportName} from './getReportName';
@@ -34,16 +36,16 @@ export const collectReportData = async ({
   }));
 
   const retries = getRetriesAndSetStatuses(fullTestRuns);
+  const exitStatus = getExitStatus(retries);
 
-  const reportData = {
+  return {
     endTimeInMs,
     errors,
+    exitStatus,
     fullTestRuns,
     name,
     retries,
     startInfo,
     startTimeInMs,
   };
-
-  return reportData;
 };

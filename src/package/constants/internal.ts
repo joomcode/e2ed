@@ -1,10 +1,10 @@
 import type {RunId, TestRunEvent} from '../types/internal';
 
-export * from './events';
 export * from './fs';
 export * from './log';
 export * from './paths';
 export * from './pixelmatch';
+export * from './process';
 export * from './report';
 
 /**

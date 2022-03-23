@@ -1,4 +1,4 @@
-import type {TestRunStatus} from '../constants/internal';
+import type {ExitStatus, TestRunStatus} from '../constants/internal';
 
 import type {UtcTimeInMs} from './date';
 import type {TestFilePath} from './fs';
@@ -12,6 +12,7 @@ import type {FullTestRun, LiteTestRun, RunHash, RunId} from './testRun';
 export type ReportData = Readonly<{
   errors: readonly string[];
   endTimeInMs: UtcTimeInMs;
+  exitStatus: ExitStatus;
   fullTestRuns: readonly FullTestRun[];
   name: string;
   retries: readonly Retry[];
@@ -25,6 +26,7 @@ export type ReportData = Readonly<{
 export type LiteReport = Readonly<{
   endTimeInMs: UtcTimeInMs;
   errors: readonly string[];
+  exitStatus: ExitStatus;
   name: string;
   retries: readonly LiteRetry[];
   startInfo: StartInfo;

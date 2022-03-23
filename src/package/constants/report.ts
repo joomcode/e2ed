@@ -1,6 +1,7 @@
 /**
  * Main status of test run.
  * Failed if it have errors and passed if not.
+ * Broken if the test failed and TestCafe restarted it themself.
  */
 export const enum TestRunStatus {
   Passed,
@@ -9,6 +10,13 @@ export const enum TestRunStatus {
   Broken,
   Unknown,
 }
+
+/**
+ * Statuses, the presence of which in the retray indicates
+ * that there are failed tests in the retray.
+ * @internal
+ */
+export const FAILED_TEST_RUN_STATUSES = [TestRunStatus.Failed, TestRunStatus.Unknown];
 
 /**
  * Map test run status to element status modifier.
