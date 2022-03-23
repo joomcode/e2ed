@@ -14,7 +14,6 @@ export const enum TestRunStatus {
 /**
  * Statuses, the presence of which in the retray indicates
  * that there are failed tests in the retray.
- * @internal
  */
 export const FAILED_TEST_RUN_STATUSES = [TestRunStatus.Failed, TestRunStatus.Unknown];
 
