@@ -7,10 +7,12 @@
 
 import type {Config} from 'e2ed/types';
 
+const defaultConcurrency = process.env.E2ED_IS_LOCAL_RUN ? 1 : 5;
+
 const config: Config = {
   browserInitTimeout: 30000,
   browsers: 'chromium:headless',
-  concurrency: Number(process.env.E2ED_CONCURRENCY) || 5,
+  concurrency: Number(process.env.E2ED_CONCURRENCY) || defaultConcurrency,
   skipTests: ['3'],
 };
 
