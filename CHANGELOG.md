@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.9.5](https://github.com/uid11/e2ed/tree/v0.9.5) (2022-03-24)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.4...v0.9.5)
+
+- [fix: typo in check-all command (npm audio instead of npm audit)](https://github.com/uid11/e2ed/commit/355ad2f5a47303ae84b46dc698605827621d881c)
+- [chore: update devDependencies; fix audit issues (by npm audit)](https://github.com/uid11/e2ed/commit/4b969d8980c01d29ff3c50b00e6d48b45de58c08)
+
 ## [v0.9.4](https://github.com/uid11/e2ed/tree/v0.9.4) (2022-03-23)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.3...v0.9.4)
