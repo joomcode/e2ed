@@ -21,7 +21,7 @@
   "repository": "uid11/e2ed",
   "dependencies": {
     "pngjs": "6.0.0",
-    "testcafe-without-typecheck": "1.18.4-rc.1"
+    "testcafe-without-typecheck": "1.18.5-rc.1"
   },
   "devDependencies": {
     "@types/node": "17.0.23",
@@ -34,7 +34,7 @@
     "eslint-plugin-simple-import-sort": "7.0.0",
     "husky": "7.0.4",
     "prettier": "2.6.2",
-    "testcafe": "1.18.4",
+    "testcafe": "1.18.5",
     "typescript": "4.6.3"
   },
   "peerDependencies": {
