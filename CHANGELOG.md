@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.9.6](https://github.com/uid11/e2ed/tree/v0.9.6) (2022-04-03)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.5...v0.9.6)
+
+- [chore: update TestCafe to 1.18.5](https://github.com/uid11/e2ed/commit/4735e1b096086d72baf84d3f9a9a2fcf028bedbb)
+- [chore: update devDependencies (eslint, prettier, typescript...)](https://github.com/uid11/e2ed/commit/3e7c635b623ab4ac1d4693af9b31d8566dff8a38)
+
 ## [v0.9.5](https://github.com/uid11/e2ed/tree/v0.9.5) (2022-03-24)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.4...v0.9.5)
