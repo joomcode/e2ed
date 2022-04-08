@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+set -eu
 
 ./bin/TestCafeFork/create.sh $1
 

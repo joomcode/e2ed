@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+set -eu
 
 ./bin/TestCafeFork/clean.sh
 

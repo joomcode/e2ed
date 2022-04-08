@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+set -eu
 
 rm ./bin/TestCafeFork/package/ts-defs/*s.d.ts
 

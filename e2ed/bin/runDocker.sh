@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+set -e
 
 DIR="${WORKDIR:-$PWD}"
 DOCKER_IMAGE="${E2ED_DOCKER_IMAGE:-e2ed}"

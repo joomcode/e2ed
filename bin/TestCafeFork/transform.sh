@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+set -eu
 
 ./bin/TestCafeFork/removeSourceMap.sh
 ./bin/TestCafeFork/setName.sh
