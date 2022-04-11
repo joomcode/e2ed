@@ -3,7 +3,7 @@
  * in the Dockerfile match the version of installed testcafe.
  */
 
-import {readFileSync} from 'fs';
+import {readFileSync} from 'node:fs';
 
 import pkg from '../package.json';
 

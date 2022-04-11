@@ -1,7 +1,7 @@
-import {request as httpRequest} from 'http';
-import {request as httpsRequest} from 'https';
-import {stringify} from 'querystring';
-import {URL} from 'url';
+import {request as httpRequest} from 'node:http';
+import {request as httpsRequest} from 'node:https';
+import {stringify} from 'node:querystring';
+import {URL} from 'node:url';
 
 import {LogEventType} from '../../constants/internal';
 

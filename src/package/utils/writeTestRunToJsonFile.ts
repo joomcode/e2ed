@@ -1,5 +1,5 @@
-import {stat} from 'fs/promises';
-import {join} from 'path';
+import {stat} from 'node:fs/promises';
+import {join} from 'node:path';
 
 import {EVENTS_DIRECTORY_PATH} from '../constants/internal';
 

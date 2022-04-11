@@ -1,4 +1,4 @@
-import {inspect} from 'util';
+import {inspect} from 'node:util';
 
 import {DEFAULT_INSPECT_OPTIONS, MAX_LINES_IN_STRINGIFY_VALUE} from '../constants/internal';
 

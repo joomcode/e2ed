@@ -1,4 +1,4 @@
-import {join} from 'path';
+import {join} from 'node:path';
 
 import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
 

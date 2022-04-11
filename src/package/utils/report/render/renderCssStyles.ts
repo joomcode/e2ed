@@ -1,5 +1,5 @@
-import {readFileSync} from 'fs';
-import {join} from 'path';
+import {readFileSync} from 'node:fs';
+import {join} from 'node:path';
 
 import {E2ED_PACKAGE_DIRECTORY_PATH, READ_FILE_OPTIONS} from '../../../constants/internal';
 

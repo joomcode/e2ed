@@ -3,7 +3,7 @@
  * Don't import this module. Instead, use utils/getFullConfig.ts.
  */
 
-import {join} from 'path';
+import {join} from 'node:path';
 
 import {COMPILED_USERLAND_CONFIG_PATH, JSON_REPORT_PATH} from './constants/internal';
 import {deepMerge} from './utils/deepMerge';

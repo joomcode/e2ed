@@ -2,8 +2,8 @@
  * @file Generate and write pruned package.json for npm package.
  */
 
-import {writeFileSync} from 'fs';
-import {join} from 'path';
+import {writeFileSync} from 'node:fs';
+import {join} from 'node:path';
 
 import pkg from '../package.json';
 

@@ -2,9 +2,9 @@
  * @file Generate CHANGELOG.md with changes relative to the previous version.
  */
 
-import {execFileSync} from 'child_process';
-import {readFileSync, writeFileSync} from 'fs';
-import {join} from 'path';
+import {execFileSync} from 'node:child_process';
+import {readFileSync, writeFileSync} from 'node:fs';
+import {join} from 'node:path';
 
 import pkg from '../package.json';
 

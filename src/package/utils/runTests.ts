@@ -1,4 +1,4 @@
-import {fork} from 'child_process';
+import {fork} from 'node:child_process';
 
 import type {TestCafeRunOptions} from '../types/internal';
 

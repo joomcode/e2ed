@@ -1,4 +1,4 @@
-import type {request as httpRequest} from 'http';
+import type {request as httpRequest} from 'node:http';
 
 import type {DeepReadonly, Headers as AnyHeaders, Method, Url} from '../../types/internal';
 

@@ -37,6 +37,20 @@ rules:
         - '**/e2ed/*/*'
         - '**/types/internal'
         - '**/utils/*'
+  import/no-nodejs-modules:
+    - error
+    - allow:
+        - node:child_process
+        - node:crypto
+        - node:fs
+        - node:fs/promises
+        - node:http
+        - node:https
+        - node:path
+        - node:querystring
+        - node:stream
+        - node:url
+        - node:util
   import/no-unassigned-import: error
   import/no-unused-modules:
     - error
@@ -70,7 +84,9 @@ rules:
   simple-import-sort/imports:
     - error
     - groups:
-        - ['^(child_process|crypto|fs|http|https|path|querystring|stream|url|util)(/.*|$)']
+        - [
+            '^(node:child_process|node:crypto|node:fs|node:http|node:https|node:path|node:querystring|node:stream|node:url|node:util)(/.*|$)',
+          ]
         - ['^\w']
         - ['^\u0000']
         - ['^\.\./\.\./\.\./\.\./\.\./\.\.(?!/?$)', '^\.\./\.\./\.\./\.\./?$']

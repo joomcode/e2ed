@@ -1,5 +1,5 @@
-import {createWriteStream} from 'fs';
-import {Readable} from 'stream';
+import {createWriteStream} from 'node:fs';
+import {Readable} from 'node:stream';
 
 import {DEFAULT_FILE_CHUNK_LENGTH} from '../constants/internal';
 

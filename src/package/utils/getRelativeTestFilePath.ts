@@ -1,4 +1,4 @@
-import {join, sep} from 'path';
+import {join, sep} from 'node:path';
 
 import {TESTS_DIRECTORY_PATH} from '../constants/internal';
 
