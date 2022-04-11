@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.9.7](https://github.com/uid11/e2ed/tree/v0.9.7) (2022-04-11)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.6...v0.9.7)
+
+- [fix: reexport createTestCafe from testcafe-without-typecheck](https://github.com/uid11/e2ed/commit/4397a4c010d98fb86ddcc2d60bae34a1f3f66972)
+- [chore: update eslint to 8.13.0](https://github.com/uid11/e2ed/commit/f593f6bb9bafef36cf1b3b4c7a9c95b8ef78ecf3)
+- [chore: use node: imports instead of bare node imports](https://github.com/uid11/e2ed/commit/92b949a33aacd9d649b2a322fe1bfa3a90702f3f)
+- [chore: update devDependencies (@typescript-eslint/\*, ...)](https://github.com/uid11/e2ed/commit/a859e2a44872ab12bce05a6d968de3e2c0e18f3d)
+- [fix: turn on unofficial strict mode in shell scripts](https://github.com/uid11/e2ed/commit/0e9cf810e2e2756698e192a9e1825de7b9f4eb22)
+
 ## [v0.9.6](https://github.com/uid11/e2ed/tree/v0.9.6) (2022-04-03)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.5...v0.9.6)
