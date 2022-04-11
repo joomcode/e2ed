@@ -1,4 +1,9 @@
-export {RequestHook, RequestLogger, RequestMock} from 'testcafe-without-typecheck';
+export {
+  default as createTestCafe,
+  RequestHook,
+  RequestLogger,
+  RequestMock,
+} from 'testcafe-without-typecheck';
 
 /**
  * Base modules.
