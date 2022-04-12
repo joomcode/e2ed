@@ -6,11 +6,15 @@ import type {RetryProps, SafeHtml} from '../../../types/internal';
  * Render retry header.
  * @internal
  */
-export const renderRetryHeader = ({endTimeInMs, retry, startTimeInMs}: RetryProps): SafeHtml => {
+export const renderRetryHeader = ({
+  endTimeInMs,
+  retryIndex,
+  startTimeInMs,
+}: RetryProps): SafeHtml => {
   const durationMs = endTimeInMs - startTimeInMs;
 
   return sanitizeHtml`
-<h3 class="__title">Retry ${retry}</h3>
+<h3 class="__title">Retry ${retryIndex}</h3>
 <p class="__date">
   ${renderDatesInterval({endTimeInMs, startTimeInMs})}
   (${renderDuration(durationMs)})

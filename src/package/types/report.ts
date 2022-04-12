@@ -74,7 +74,7 @@ export type ReportClientGlobal = {
 export type Retry = Readonly<{
   endTimeInMs: UtcTimeInMs;
   fullTestRuns: readonly FullTestRun[];
-  retry: number;
+  retryIndex: number;
   startTimeInMs: UtcTimeInMs;
 }>;
 
@@ -85,7 +85,7 @@ export type LiteRetry = Readonly<{
   brokenLiteTestRuns: readonly LiteTestRun[];
   endTimeInMs: UtcTimeInMs;
   liteTestRuns: readonly LiteTestRun[];
-  retry: number;
+  retryIndex: number;
   startTimeInMs: UtcTimeInMs;
 }>;
 
@@ -96,7 +96,7 @@ export type LiteRetry = Readonly<{
 export type RetryProps = Readonly<{
   endTimeInMs: UtcTimeInMs;
   hidden: boolean;
-  retry: number;
+  retryIndex: number;
   startTimeInMs: UtcTimeInMs;
   testRunButtons: readonly TestRunButtonProps[];
 }>;

@@ -1,7 +1,7 @@
-import {generalLog} from './generalLog';
-import {getFullConfig} from './getFullConfig';
+import {generalLog} from '../generalLog';
+import {getFullConfig} from '../getFullConfig';
 
-import type {FailTests} from '../types/internal';
+import type {FailTests} from './types';
 
 type Test = Readonly<{
   name: string;

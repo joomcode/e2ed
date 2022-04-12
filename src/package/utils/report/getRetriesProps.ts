@@ -8,10 +8,10 @@ import type {ReportData, RetryProps} from '../../types/internal';
  */
 export const getRetriesProps = ({retries}: ReportData): readonly RetryProps[] => {
   const retryProps: RetryProps[] = retries.map(
-    ({endTimeInMs, fullTestRuns, retry, startTimeInMs}) => {
+    ({endTimeInMs, fullTestRuns, retryIndex, startTimeInMs}) => {
       const testRunButtons = fullTestRuns.map(getTestRunButtonProps);
 
-      return {endTimeInMs, hidden: true, retry, startTimeInMs, testRunButtons};
+      return {endTimeInMs, hidden: true, retryIndex, startTimeInMs, testRunButtons};
     },
   );
 

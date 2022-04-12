@@ -11,15 +11,6 @@ export type FailTest = Readonly<{
 }>;
 
 /**
- * Fail tests with all tests count.
- * @internal
- */
-export type FailTests = Readonly<{
-  allTestsCount: number;
-  tests: readonly FailTest[];
-}>;
-
-/**
  * Options for running one retry of tests.
  * @internal
  */

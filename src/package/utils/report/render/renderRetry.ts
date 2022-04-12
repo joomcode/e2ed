@@ -13,7 +13,7 @@ export const renderRetry = (retryProps: RetryProps): SafeHtml => {
   const buttons = retryProps.testRunButtons.map(renderTestRunButton);
 
   return createSafeHtmlWithoutSanitize`
-<article class="retry" id="retry${retryProps.retry}" ${retryProps.hidden ? 'hidden' : ''}>
+<article class="retry" id="retry${retryProps.retryIndex}" ${retryProps.hidden ? 'hidden' : ''}>
   ${renderRetryHeader(retryProps)}
   ${buttons.join('')}
 </article>`;

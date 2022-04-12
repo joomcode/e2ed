@@ -14,13 +14,13 @@ export const assertThatTestNamesAreUnique = (
   const testRunsByRunLabel: Record<string, TestRunWithHooks[]> = {};
 
   for (const testRunWithHooks of testRunsWithHooks) {
-    const {retry} = getRunLabelObject(testRunWithHooks.runLabel);
+    const {retryIndex} = getRunLabelObject(testRunWithHooks.runLabel);
 
-    if (!(retry in testRunsByRunLabel)) {
-      testRunsByRunLabel[retry] = [];
+    if (!(retryIndex in testRunsByRunLabel)) {
+      testRunsByRunLabel[retryIndex] = [];
     }
 
-    testRunsByRunLabel[retry].push(testRunWithHooks);
+    testRunsByRunLabel[retryIndex].push(testRunWithHooks);
   }
 
   for (const testRunsInOneRetry of Object.values(testRunsByRunLabel)) {

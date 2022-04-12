@@ -31,7 +31,7 @@ const e2edRunEvent: E2edRunEvent = {
 
 void registerStartE2edRunEvent(e2edRunEvent).then(() => {
   const {browsers, concurrency} = getFullConfig();
-  const runLabel = getRunLabel({concurrency, maxRetry: 1, retry: 1});
+  const runLabel = getRunLabel({concurrency, maxRetriesCount: 1, retryIndex: 1});
 
   process.env.E2ED_RUN_LABEL = runLabel;
 

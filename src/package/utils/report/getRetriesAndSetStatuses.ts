@@ -23,17 +23,17 @@ export const getRetriesAndSetStatuses = (
       internallyRetriedRunIds.push(previousRunId);
     }
 
-    const {retry} = getRunLabelObject(runLabel);
+    const {retryIndex} = getRunLabelObject(runLabel);
     const passedOrFailedStatus = errors.length === 0 ? TestRunStatus.Passed : TestRunStatus.Failed;
     const status = isSkipped ? TestRunStatus.Skipped : passedOrFailedStatus;
 
     (fullTestRun as {status: TestRunStatus}).status = status;
 
-    if (fullTestRunsHash[retry] === undefined) {
-      fullTestRunsHash[retry] = [];
+    if (fullTestRunsHash[retryIndex] === undefined) {
+      fullTestRunsHash[retryIndex] = [];
     }
 
-    fullTestRunsHash[retry].push(fullTestRun);
+    fullTestRunsHash[retryIndex].push(fullTestRun);
   }
 
   for (const [retryString, retryFullTestRuns] of Object.entries(fullTestRunsHash)) {
@@ -61,14 +61,14 @@ export const getRetriesAndSetStatuses = (
     const endTimes = retryFullTestRuns.map((testRun) => testRun.endTimeInMs);
     const endTimeInMs = Math.max(...endTimes) as UtcTimeInMs;
 
-    const retry = Number(retryString);
+    const retryIndex = Number(retryString);
 
-    const fullRetry = {endTimeInMs, fullTestRuns: retryFullTestRuns, retry, startTimeInMs};
+    const fullRetry = {endTimeInMs, fullTestRuns: retryFullTestRuns, retryIndex, startTimeInMs};
 
     retries.push(fullRetry);
   }
 
-  retries.sort((a, b) => a.retry - b.retry);
+  retries.sort((a, b) => a.retryIndex - b.retryIndex);
 
   return retries;
 };
