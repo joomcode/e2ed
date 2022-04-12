@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.9.8](https://github.com/uid11/e2ed/tree/v0.9.8) (2022-04-12)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.7...v0.9.8)
+
+- [chore: update devDependencies (@typescript-eslint/...)](https://github.com/uid11/e2ed/commit/91bd275365407f42ffff1b31c521ef36ba3569f2)
+- [refactor: cut runWithRetries into several functions](https://github.com/uid11/e2ed/commit/1f65fc1e97d006c8fd6ae6cd6a7b5d2328882ba5)
+
 ## [v0.9.7](https://github.com/uid11/e2ed/tree/v0.9.7) (2022-04-11)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.6...v0.9.7)
