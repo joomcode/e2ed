@@ -1,3 +1,5 @@
+import {join} from 'node:path';
+
 import {generalLog} from '../generalLog';
 import {getFullConfig} from '../getFullConfig';
 
@@ -26,7 +28,7 @@ type Report = Readonly<{fixtures: Fixture[]; total: number}>;
 export const getFailedTestsFromJsonReport = (): FailTests | undefined => {
   const {reporter} = getFullConfig();
   const jsonReportPathFromRoot = reporter.find(({name}) => name === 'json')?.output || '';
-  const jsonReportPath = `../../../${jsonReportPathFromRoot}`;
+  const jsonReportPath = join('..', '..', '..', '..', jsonReportPathFromRoot);
 
   const absoluteJsonReportPath = require.resolve(jsonReportPath);
 
