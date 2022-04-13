@@ -1,5 +1,6 @@
-import {LogEventType} from '../../constants/internal';
+import {BAD_REQUEST_STATUS_CODE, LogEventType} from '../../constants/internal';
 
+import {cloneWithoutUndefinedProperties} from '../cloneWithoutUndefinedProperties';
 import {E2EDError} from '../E2EDError';
 import {getRandomId} from '../getRandomId';
 import {log} from '../log';
@@ -24,10 +25,10 @@ export const oneTryOfRequest = <Output>({
   new Promise((resolve, reject) => {
     const fullOptions = {
       ...options,
-      headers: {
+      headers: cloneWithoutUndefinedProperties({
         'X-Request-ID': getRandomId(),
         ...options.headers,
-      },
+      }),
     };
     const fullLogParams: LogParams = {...logParams, ...fullOptions};
 
@@ -63,7 +64,7 @@ export const oneTryOfRequest = <Output>({
 
         res.on('end', () => {
           const outputAsString = chunks.join('');
-          const statusCode = res.statusCode || 400;
+          const statusCode = res.statusCode || BAD_REQUEST_STATUS_CODE;
 
           try {
             const output = (
