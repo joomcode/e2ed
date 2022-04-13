@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.9.9](https://github.com/uid11/e2ed/tree/v0.9.9) (2022-04-13)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.8...v0.9.9)
+
+- [chore: temporary remove npm audit check (because of package "async")](https://github.com/uid11/e2ed/commit/a9cefba645f117b1fca196b2026b034673f42e8e)
+- [fix: path to report.json for run with retries](https://github.com/uid11/e2ed/commit/21fe0d3abb428c506135f92c0f0e8b5191db6e4d)
+
 ## [v0.9.8](https://github.com/uid11/e2ed/tree/v0.9.8) (2022-04-12)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.7...v0.9.8)
