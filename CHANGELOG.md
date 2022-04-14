@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.9.10](https://github.com/uid11/e2ed/tree/v0.9.10) (2022-04-14)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.9...v0.9.10)
+
+- [chore: update @types/node to 17.0.24](https://github.com/uid11/e2ed/commit/bf3d9e635257dfa53f1bfe4859eeef0d74e2c58f)
+- [fix: TypeScript error on compiling e2ed/config.ts (add @types/node)](https://github.com/uid11/e2ed/commit/df9e8aa4e587c01ec72c5d52981439b36da7be66)
+- [fix: skip headers with undefined value in request function](https://github.com/uid11/e2ed/commit/08874f808dc8c79850e8536fa11b2d15f26dadbf)
+
 ## [v0.9.9](https://github.com/uid11/e2ed/tree/v0.9.9) (2022-04-13)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.8...v0.9.9)
