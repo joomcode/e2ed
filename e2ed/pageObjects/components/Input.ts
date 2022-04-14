@@ -1,13 +1,17 @@
 import {typeText} from 'e2ed/actions';
 import {inputSelector} from 'e2ed/selectors';
 
-export class Input {
-  constructor(private readonly name: string) {}
+import type {Selector} from 'e2ed/types';
 
+export class Input {
   /**
    *  Input element.
    */
-  readonly input = inputSelector(this.name);
+  readonly input: Selector;
+
+  constructor(private readonly name: string) {
+    this.input = inputSelector(this.name);
+  }
 
   /**
    * Input value.
