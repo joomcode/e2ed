@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.9.11](https://github.com/uid11/e2ed/tree/v0.9.11) (2022-04-18)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.10...v0.9.11)
+
+- [chore: update testcafe-without-typecheck to 1.18.6-rc.1](https://github.com/uid11/e2ed/commit/a8523ef58d28d181e86259936d0d0555cb8b2aac)
+- [feat: add reportFileName/liteReportFileName config fields insted of E2ED_REPORT_NAME](https://github.com/uid11/e2ed/commit/0a2b33c45dfead776d50c6dd7e7051960515397f)
+- [feat: remove E2ED_HIDE_LOGS environment variable](https://github.com/uid11/e2ed/commit/1772c575c7d4a7cf20bb913b14d7ec9cffcc5528)
+
 ## [v0.9.10](https://github.com/uid11/e2ed/tree/v0.9.10) (2022-04-14)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.9...v0.9.10)
