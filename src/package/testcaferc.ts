@@ -6,47 +6,24 @@
 import {join} from 'node:path';
 
 import {COMPILED_USERLAND_CONFIG_PATH, JSON_REPORT_PATH} from './constants/internal';
-import {deepMerge} from './utils/deepMerge';
-import {generalLog} from './utils/generalLog';
 
-import type {FullConfig, UserlandConfig} from './types/internal';
+import type {FrozenPartOfTestCafeConfig, FullConfig} from './types/internal';
 
 const relativeUserlandConfigPath = join('..', '..', COMPILED_USERLAND_CONFIG_PATH);
 
-let userlandConfig: UserlandConfig;
+// eslint-disable-next-line global-require, @typescript-eslint/no-var-requires, import/no-dynamic-require
+const userlandConfig = (require(relativeUserlandConfigPath) as typeof import('../../e2ed/config'))
+  .config;
 
-try {
-  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires, import/no-dynamic-require
-  userlandConfig = (require(relativeUserlandConfigPath) as typeof import('../../e2ed/config'))
-    .config;
-} catch (error) {
-  generalLog('Cannot load e2ed/config.ts', {error});
-
-  userlandConfig = {
-    liteReportFileName: null,
-    reportFileName: null,
-  };
-}
-
-const defaultConfig: FullConfig = {
-  ajaxRequestTimeout: 40000,
-  assertionTimeout: 10000,
-  browserInitTimeout: 40000,
-  browsers: 'chrome',
+const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
   color: true,
   compilerOptions: {
     typescript: {
       options: {esModuleInterop: true, resolveJsonModule: true},
     },
   },
-  concurrency: 1,
   hostname: 'localhost',
-  liteReportFileName: null,
   pageLoadTimeout: 0,
-  pageRequestTimeout: 30000,
-  port1: 1337,
-  port2: 1338,
-  reportFileName: null,
   reporter: [
     {
       name: 'spec',
@@ -64,14 +41,10 @@ const defaultConfig: FullConfig = {
     takeOnFails: true,
     thumbnails: false,
   },
-  selectorTimeout: 10000,
   skipJsErrors: true,
-  src: ['./e2ed/tests/**/*.spec.ts'],
-  testExecutionTimeout: 180000,
-  testRunExecutionTimeout: 120000,
 };
 
-const fullConfig = deepMerge<FullConfig>(defaultConfig, userlandConfig);
+const fullConfig: FullConfig = {...userlandConfig, ...frozenPartOfTestCafeConfig};
 
 Object.assign(exports, fullConfig);
 

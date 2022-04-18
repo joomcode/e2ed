@@ -1,45 +1,38 @@
 import type {SkipTests} from '../hooks';
 
-import type {DeepPartial, DeepReadonly} from './deep';
+import type {DeepReadonly} from './deep';
 
 /**
  * Own e2ed config properties.
  */
 type OwnE2edConfig = Readonly<{
-  skipTests?: SkipTests;
+  liteReportFileName: string | null;
+  printTestLogsInConsole: boolean;
+  reportFileName: string | null;
+  skipTests: SkipTests;
   testRunExecutionTimeout: number;
 }>;
 
 /**
- * Own e2ed required config properties.
- */
-type OwnE2edRequiredConfig = Readonly<{
-  liteReportFileName: string | null;
-  reportFileName: string | null;
-}>;
-
-/**
- * Userlanf part of TestCafe config.
+ * Userland part of TestCafe config.
  */
 type UserlangTestCafeConfig = Readonly<{
   ajaxRequestTimeout: number;
   assertionTimeout: number;
   browserInitTimeout: number;
   browsers: string | readonly string[];
-  src: readonly string[];
-  pageLoadTimeout: number;
-  pageRequestTimeout: number;
-  selectorTimeout: number;
-  testExecutionTimeout: number;
   concurrency: number;
+  pageRequestTimeout: number;
   port1: number;
   port2: number;
+  selectorTimeout: number;
+  src: readonly string[];
 }>;
 
 /**
- * Own part of TestCafe config.
+ * Frozen (readonly) part of TestCafe config.
  */
-type OwnTestCafeConfig = DeepReadonly<{
+export type FrozenPartOfTestCafeConfig = DeepReadonly<{
   color: boolean;
   compilerOptions: {
     typescript?: {
@@ -48,6 +41,7 @@ type OwnTestCafeConfig = DeepReadonly<{
     };
   };
   hostname: string;
+  pageLoadTimeout: number;
   reporter: readonly {name: string; output?: string}[];
   retryTestPages: boolean;
   screenshots: {
@@ -60,17 +54,11 @@ type OwnTestCafeConfig = DeepReadonly<{
 }>;
 
 /**
- * Native TestCafe config.
+ * The complete userland e2ed config.
  */
-type TestCafeConfig = UserlangTestCafeConfig & OwnTestCafeConfig & OwnE2edRequiredConfig;
+export type UserlandConfig = UserlangTestCafeConfig & OwnE2edConfig;
 
 /**
  * The complete e2ed config object.
  */
-export type FullConfig = TestCafeConfig & OwnE2edConfig;
-
-/**
- * Userland e2ed config.
- */
-export type UserlandConfig = DeepPartial<UserlangTestCafeConfig & OwnE2edConfig> &
-  OwnE2edRequiredConfig;
+export type FullConfig = UserlandConfig & FrozenPartOfTestCafeConfig;

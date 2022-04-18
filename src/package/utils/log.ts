@@ -5,6 +5,7 @@ import {testController} from '../testController';
 
 // eslint-disable-next-line import/no-internal-modules
 import {registerLogEvent} from './events/registerLogEvent';
+import {getFullConfig} from './getFullConfig';
 import {valueToString} from './valueToString';
 
 import type {Log, LogPayload, RunLabel, UtcTimeInMs} from '../types/internal';
@@ -15,6 +16,8 @@ import type {Log, LogPayload, RunLabel, UtcTimeInMs} from '../types/internal';
 export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: unknown) => {
   // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
   const hooks: typeof import('../hooks') = require('../hooks');
+
+  const {printTestLogsInConsole} = getFullConfig();
 
   const time = Date.now() as UtcTimeInMs;
   const dateTimeInISO = new Date(time).toISOString();
@@ -31,8 +34,10 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
     // eslint-disable-next-line sort-keys
     const printedString = valueToString(context ? {payload, context} : {payload});
 
-    // eslint-disable-next-line no-console
-    console.log(`[e2ed][${dateTimeInISO}][${runLabel}][${runId}] ${message} ${printedString}\n`);
+    if (printTestLogsInConsole) {
+      // eslint-disable-next-line no-console
+      console.log(`[e2ed][${dateTimeInISO}][${runLabel}][${runId}] ${message} ${printedString}\n`);
+    }
 
     const pageLoaded = getPageLoaded();
 

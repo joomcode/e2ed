@@ -54,10 +54,18 @@ the lite JSON report will be saved in the `e2ed/reports` directory, for example,
 Also this name is used as the title of the report page.
 If `null`, the lite report will not be saved.
 
+`printTestLogsInConsole: boolean`: if true, print test logs to the console (literally in console.log).
+
 `reportFileName: string | null`: the name of the file under which, after running the tests,
 the HTML report will be saved in the `e2ed/reports` directory, for example, `report.html`.
 Also this name is used as the title of the report page.
 If `null`, the report will not be saved.
+
+`skipTests: SkipTests`: this setting allows you to describe a set of skipped tests in a custom form.
+You can define the `SkipTests` type and `skipTests` processing rules in the hook `e2ed/hooks/isTestSkipped.ts`.
+
+`testRunExecutionTimeout: number`: timeout (in milliseconds) for each individual test run.
+If the test run takes longer than this timeout, the test fails and rerun on the next retry.
 
 ### Environment variables
 
