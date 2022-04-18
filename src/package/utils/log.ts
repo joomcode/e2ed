@@ -9,11 +9,10 @@ import {valueToString} from './valueToString';
 
 import type {Log, LogPayload, RunLabel, UtcTimeInMs} from '../types/internal';
 
-const resolvedPromise = Promise.resolve();
-
-const noop: Log = () => resolvedPromise;
-
-const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unknown) => {
+/**
+ * Log every actions and API requests in E2ED tests.
+ */
+export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: unknown) => {
   // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
   const hooks: typeof import('../hooks') = require('../hooks');
 
@@ -44,8 +43,3 @@ const writeLog: Log = (message, maybePayload?: unknown, maybeLogEventType?: unkn
     return undefined;
   });
 };
-
-/**
- * Log every actions and API requests in E2ED tests.
- */
-export const log = process.env.E2ED_HIDE_LOGS ? noop : writeLog;
