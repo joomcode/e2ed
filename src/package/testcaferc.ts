@@ -22,7 +22,10 @@ try {
 } catch (error) {
   generalLog('Cannot load e2ed/config.ts', {error});
 
-  userlandConfig = {};
+  userlandConfig = {
+    liteReportFileName: null,
+    reportFileName: null,
+  };
 }
 
 const defaultConfig: FullConfig = {
@@ -38,10 +41,12 @@ const defaultConfig: FullConfig = {
   },
   concurrency: 1,
   hostname: 'localhost',
+  liteReportFileName: null,
   pageLoadTimeout: 0,
   pageRequestTimeout: 30000,
   port1: 1337,
   port2: 1338,
+  reportFileName: null,
   reporter: [
     {
       name: 'spec',
@@ -49,10 +54,6 @@ const defaultConfig: FullConfig = {
     {
       name: 'json',
       output: JSON_REPORT_PATH,
-    },
-    {
-      name: 'xunit',
-      output: './e2ed/reports/junit-report.xml',
     },
   ],
   retryTestPages: true,

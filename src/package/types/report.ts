@@ -14,7 +14,8 @@ export type ReportData = Readonly<{
   endTimeInMs: UtcTimeInMs;
   exitStatus: ExitStatus;
   fullTestRuns: readonly FullTestRun[];
-  name: string;
+  liteReportFileName: string | null;
+  reportFileName: string | null;
   retries: readonly Retry[];
   startInfo: StartInfo;
   startTimeInMs: UtcTimeInMs;
@@ -27,7 +28,7 @@ export type LiteReport = Readonly<{
   endTimeInMs: UtcTimeInMs;
   errors: readonly string[];
   exitStatus: ExitStatus;
-  name: string;
+  liteReportFileName: string;
   retries: readonly LiteRetry[];
   startInfo: StartInfo;
   startTimeInMs: UtcTimeInMs;

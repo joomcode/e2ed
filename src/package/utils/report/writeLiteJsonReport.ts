@@ -18,9 +18,10 @@ export const writeLiteJsonReport = async (reportData: ReportData): Promise<void>
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const liteReport = getLiteReport(reportData);
+  const {liteReportFileName} = liteReport;
   const reportJson = JSON.stringify(liteReport);
-  const reportFileName = `lite-${reportData.name}.json`;
-  const reportFilePath = join(REPORTS_DIRECTORY_PATH, reportFileName);
+
+  const reportFilePath = join(REPORTS_DIRECTORY_PATH, liteReportFileName);
 
   await writeFile(reportFilePath, reportJson);
 

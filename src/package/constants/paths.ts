@@ -44,7 +44,7 @@ export const EVENTS_DIRECTORY_PATH = join(TMP_DIRECTORY_PATH, 'events') as Direc
  */
 export const JSON_REPORT_PATH = join(
   REPORTS_DIRECTORY_PATH,
-  'report.json',
+  'deprecated-report.json',
 ) as DirectoryPathFromRoot;
 
 /**

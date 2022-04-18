@@ -14,4 +14,4 @@ export const READ_FILE_OPTIONS = {encoding: 'utf8'} as const;
  * Default file chunk length (for writeFile).
  * @internal
  */
-export const DEFAULT_FILE_CHUNK_LENGTH = 16 * 1024;
+export const DEFAULT_FILE_CHUNK_LENGTH = 16_384;

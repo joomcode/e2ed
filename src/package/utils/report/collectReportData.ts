@@ -1,10 +1,10 @@
 import {TestRunStatus} from '../../constants/internal';
 
 import {getExitStatus} from '../exit';
+import {getFullConfig} from '../getFullConfig';
 
 import {assertThatTestNamesAreUnique} from './assertThatTestNamesAreUnique';
 import {getReportErrors} from './getReportErrors';
-import {getReportName} from './getReportName';
 import {getRetriesAndSetStatuses} from './getRetriesAndSetStatuses';
 import {unificateRunHashes} from './unificateRunHashes';
 
@@ -22,7 +22,7 @@ export const collectReportData = async ({
   const {utcTimeInMs: startTimeInMs, ...startInfo} = fullStartInfo;
   const {utcTimeInMs: endTimeInMs} = endE2edRunEvent;
 
-  const name = getReportName(startTimeInMs);
+  const {liteReportFileName, reportFileName} = getFullConfig();
 
   const errors = await getReportErrors(startInfo.runEnvironment, testRunsWithHooks);
 
@@ -43,7 +43,8 @@ export const collectReportData = async ({
     errors,
     exitStatus,
     fullTestRuns,
-    name,
+    liteReportFileName,
+    reportFileName,
     retries,
     startInfo,
     startTimeInMs,

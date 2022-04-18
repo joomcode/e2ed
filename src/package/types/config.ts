@@ -11,6 +11,14 @@ type OwnE2edConfig = Readonly<{
 }>;
 
 /**
+ * Own e2ed required config properties.
+ */
+type OwnE2edRequiredConfig = Readonly<{
+  liteReportFileName: string | null;
+  reportFileName: string | null;
+}>;
+
+/**
  * Userlanf part of TestCafe config.
  */
 type UserlangTestCafeConfig = Readonly<{
@@ -54,7 +62,7 @@ type OwnTestCafeConfig = DeepReadonly<{
 /**
  * Native TestCafe config.
  */
-type TestCafeConfig = UserlangTestCafeConfig & OwnTestCafeConfig;
+type TestCafeConfig = UserlangTestCafeConfig & OwnTestCafeConfig & OwnE2edRequiredConfig;
 
 /**
  * The complete e2ed config object.
@@ -64,4 +72,5 @@ export type FullConfig = TestCafeConfig & OwnE2edConfig;
 /**
  * Userland e2ed config.
  */
-export type UserlandConfig = DeepPartial<UserlangTestCafeConfig & OwnE2edConfig>;
+export type UserlandConfig = DeepPartial<UserlangTestCafeConfig & OwnE2edConfig> &
+  OwnE2edRequiredConfig;

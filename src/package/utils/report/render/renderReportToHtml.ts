@@ -1,3 +1,4 @@
+import {assertValueIsNotNull} from '../../asserts';
 import {generalLog} from '../../generalLog';
 
 import {sanitizeHtml} from '../client';
@@ -20,12 +21,15 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const {length} = reportData.fullTestRuns;
+  const {reportFileName} = reportData;
+
+  assertValueIsNotNull(reportFileName);
 
   const retries = getRetriesProps(reportData);
 
   const safeHtml = sanitizeHtml`<!DOCTYPE html>
 <html lang="en">
-  ${renderHead(reportData.name)}
+  ${renderHead(reportFileName)}
   <body>
     ${renderNavigation(retries)}
     <div class="main" role="tabpanel">

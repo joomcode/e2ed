@@ -42,6 +42,23 @@ And run tests for `https://google.com` in docker:
 E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh
 ```
 
+### Config
+
+The config is defined in the file `e2ed/config.ts`.
+You can locally override some config fields in an `e2ed/overrideConfig.ts` file that is not included in the repository.
+
+#### Required config fields
+
+`liteReportFileName: string | null`: the name of the file under which, after running the tests,
+the lite JSON report will be saved in the `e2ed/reports` directory, for example, `lite-report.json`.
+Also this name is used as the title of the report page.
+If `null`, the lite report will not be saved.
+
+`reportFileName: string | null`: the name of the file under which, after running the tests,
+the HTML report will be saved in the `e2ed/reports` directory, for example, `report.html`.
+Also this name is used as the title of the report page.
+If `null`, the report will not be saved.
+
 ### Environment variables
 
 `E2ED_ORIGIN`: origin-part of the url (`protocol` + `host`) on which the tests will be run. For example, `https://google.com`.
@@ -63,9 +80,6 @@ E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh
 
 `E2ED_DOCKER_RETRIES`: the maximum number of retries to run a failing test with the `your-project/e2ed/bin/runDocker.sh`
 command (maximum value 50, 5 by default). For example, if it is equal to three, the test will be run no more than three times.
-
-`E2ED_REPORT_NAME`: the name of HTML report (without extension `.html`). This name is used as the title
-of the report page, and as the name of the file to save the report.
 
 `E2ED_IS_DOCKER_RUN`: when run in docker the `e2ed` sets this variable to `"true"`.
 

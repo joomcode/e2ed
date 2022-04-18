@@ -2,6 +2,7 @@ import {join} from 'node:path';
 
 import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
 
+import {assertValueIsNotNull} from '../asserts';
 import {generalLog} from '../generalLog';
 import {writeFile} from '../writeFile';
 
@@ -17,7 +18,10 @@ export const writeHtmlReport = async (reportData: ReportData): Promise<void> => 
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const reportHtml = renderReportToHtml(reportData);
-  const reportFileName = `${reportData.name}.html`;
+  const {reportFileName} = reportData;
+
+  assertValueIsNotNull(reportFileName);
+
   const reportFilePath = join(REPORTS_DIRECTORY_PATH, reportFileName);
 
   await writeFile(reportFilePath, String(reportHtml));

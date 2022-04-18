@@ -20,8 +20,14 @@ export const registerEndE2edRunEvent = async (endE2edRunEvent: EndE2edRunEvent):
 
     reportData = await collectReportData(fullEventsData);
 
-    await writeLiteJsonReport(reportData);
-    await writeHtmlReport(reportData);
+    const {liteReportFileName, reportFileName} = reportData;
+
+    if (liteReportFileName !== null) {
+      await writeLiteJsonReport(reportData);
+    }
+    if (reportFileName !== null) {
+      await writeHtmlReport(reportData);
+    }
   } catch (error) {
     generalLog(
       'Got an error while collecting the report data or writing the html report and lite report',

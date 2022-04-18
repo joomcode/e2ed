@@ -13,6 +13,8 @@ const config: Config = {
   browserInitTimeout: 30000,
   browsers: 'chromium:headless',
   concurrency: Number(process.env.E2ED_CONCURRENCY) || defaultConcurrency,
+  liteReportFileName: 'lite-report.json',
+  reportFileName: 'report.html',
   skipTests: ['3'],
 };
 
