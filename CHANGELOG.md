@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.9.12](https://github.com/uid11/e2ed/tree/v0.9.12) (2022-04-18)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.11...v0.9.12)
+
+- [chore: update devDependencies (@typescript-eslint/..., @types/node)](https://github.com/uid11/e2ed/commit/1f73bf5e57560e8c8f4344b4c78bc5d9f4846fae)
+- [feat: move default config fields directly to e2ed/config.ts](https://github.com/uid11/e2ed/commit/b04afd026c3fa1d76a596d2576f0bbe57a717790)
+
 ## [v0.9.11](https://github.com/uid11/e2ed/tree/v0.9.11) (2022-04-18)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.10...v0.9.11)
