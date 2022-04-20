@@ -1,4 +1,4 @@
-import {LogEventType, SCREENSHOT_EVENT_TYPES} from '../constants/internal';
+import {CONSOLE_INSPECT_OPTIONS, LogEventType, SCREENSHOT_EVENT_TYPES} from '../constants/internal';
 import {getPageLoaded} from '../context/pageLoaded';
 import {getRunId} from '../context/runId';
 import {testController} from '../testController';
@@ -33,17 +33,21 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
     const {printTestLogsInConsole, testLogsFileName} = getFullConfig();
 
     if (printTestLogsInConsole || testLogsFileName) {
+      const logMessageHead = `[e2ed][${dateTimeInISO}][${runLabel}][${runId}] ${message}`;
       // eslint-disable-next-line sort-keys
-      const printedString = valueToString(context ? {payload, context} : {payload});
-      const logMessage = `[e2ed][${dateTimeInISO}][${runLabel}][${runId}] ${message} ${printedString}\n`;
+      const printedValue = context ? {payload, context} : {payload};
 
       if (printTestLogsInConsole) {
+        const printedString = valueToString(printedValue, CONSOLE_INSPECT_OPTIONS);
+
         // eslint-disable-next-line no-console
-        console.log(logMessage);
+        console.log(`${logMessageHead} ${printedString}\n`);
       }
 
       if (testLogsFileName) {
-        addTestLog(logMessage);
+        const printedString = valueToString(printedValue);
+
+        addTestLog(`${logMessageHead} ${printedString}\n`);
       }
     }
 

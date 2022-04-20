@@ -1,12 +1,15 @@
-import {inspect} from 'node:util';
+import {inspect, InspectOptions} from 'node:util';
 
 import {DEFAULT_INSPECT_OPTIONS, MAX_LINES_IN_STRINGIFY_VALUE} from '../constants/internal';
 
 /**
  * Return string representation of arbitrary value.
  */
-export const valueToString = (value: unknown): string => {
-  const valueAsString = inspect(value, DEFAULT_INSPECT_OPTIONS);
+export const valueToString = (
+  value: unknown,
+  options: InspectOptions = DEFAULT_INSPECT_OPTIONS,
+): string => {
+  const valueAsString = inspect(value, options);
   const lines = valueAsString.split('\n');
 
   if (lines.length <= MAX_LINES_IN_STRINGIFY_VALUE) {

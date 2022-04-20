@@ -19,6 +19,15 @@ export const DEFAULT_INSPECT_OPTIONS = {
 } as const;
 
 /**
+ * Inspect options for output to console.
+ * @internal
+ */
+export const CONSOLE_INSPECT_OPTIONS = {
+  ...DEFAULT_INSPECT_OPTIONS,
+  colors: true,
+} as const;
+
+/**
  * Key for string locators in createSelector.
  * @internal
  */
