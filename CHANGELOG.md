@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.9.14](https://github.com/uid11/e2ed/tree/v0.9.14) (2022-04-20)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.13...v0.9.14)
+
+- [docs: add description for testLogsFileName config field in README.md](https://github.com/uid11/e2ed/commit/6a489abb49a6e5bcee897ad5c97e82963433bc1b)
+
 ## [v0.9.13](https://github.com/uid11/e2ed/tree/v0.9.13) (2022-04-20)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.12...v0.9.13)
