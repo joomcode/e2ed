@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.9.13](https://github.com/uid11/e2ed/tree/v0.9.13) (2022-04-20)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.12...v0.9.13)
+
+- [fix: turn off colors inspect option for log messages](https://github.com/uid11/e2ed/commit/485d010550104227a91a0a6b8aa56aac5c0045fa)
+- [fix: use separate tmp directory for compiling e2ed/config.ts](https://github.com/uid11/e2ed/commit/2572b6fe587810038de39ccf8fb31e8c6d7f6ed0)
+- [feat: add field testLogsFileName to e2ed config](https://github.com/uid11/e2ed/commit/14c2ac79add2cd0a6e2da56fc3ec30ad7ac6aa2c)
+
 ## [v0.9.12](https://github.com/uid11/e2ed/tree/v0.9.12) (2022-04-18)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.11...v0.9.12)
