@@ -51,7 +51,6 @@ You can locally override some config fields in an `e2ed/overrideConfig.ts` file 
 
 `liteReportFileName: string | null`: the name of the file under which, after running the tests,
 the lite JSON report will be saved in the `e2ed/reports` directory, for example, `lite-report.json`.
-Also this name is used as the title of the report page.
 If `null`, the lite report will not be saved.
 
 `printTestLogsInConsole: boolean`: if true, print test logs to the console (literally in console.log).
@@ -63,6 +62,10 @@ If `null`, the report will not be saved.
 
 `skipTests: SkipTests`: this setting allows you to describe a set of skipped tests in a custom form.
 You can define the `SkipTests` type and `skipTests` processing rules in the hook `e2ed/hooks/isTestSkipped.ts`.
+
+`testLogsFileName: string | null`: the name of the file under which, after running the tests,
+the test logs will be saved in the `e2ed/reports` directory, for example, `test-logs.log`.
+If `null`, the report will not be saved.
 
 `testRunExecutionTimeout: number`: timeout (in milliseconds) for each individual test run.
 If the test run takes longer than this timeout, the test fails and rerun on the next retry.
