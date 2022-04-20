@@ -10,7 +10,7 @@ import {
 } from 'typescript';
 
 import {
-  TMP_DIRECTORY_PATH,
+  COMPILED_USERLAND_CONFIG_DIRECTORY,
   USERLAND_CONFIG_PATH,
   USERLAND_OVERRIDE_CONFIG_PATH,
 } from '../constants/internal';
@@ -21,7 +21,7 @@ const compilerOptions = {
   allowSyntheticDefaultImports: true,
   esModuleInterop: true,
   module: ModuleKind.CommonJS,
-  outDir: TMP_DIRECTORY_PATH,
+  outDir: COMPILED_USERLAND_CONFIG_DIRECTORY,
   resolveJsonModule: true,
   skipLibCheck: true,
   target: ScriptTarget.ESNext,
