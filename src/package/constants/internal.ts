@@ -13,7 +13,7 @@ export * from './report';
  * @internal
  */
 export const DEFAULT_INSPECT_OPTIONS = {
-  colors: true,
+  colors: false,
   depth: 16,
   showHidden: true,
 } as const;

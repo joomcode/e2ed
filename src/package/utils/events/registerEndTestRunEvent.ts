@@ -1,5 +1,6 @@
 import {assertValueIsTrue} from '../asserts';
 import {generalLog} from '../generalLog';
+import {writeTestLogsToFile} from '../testLogs';
 import {writeTestRunToJsonFile} from '../writeTestRunToJsonFile';
 
 import {getTestRunEvent} from './getTestRunEvent';
@@ -10,7 +11,9 @@ import type {EndTestRunEvent, TestRun, TestRunWithHooks} from '../../types/inter
  * Register end test run event (for report) after test closing.
  * @internal
  */
-export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promise<void> => {
+export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent): Promise<void> => {
+  await writeTestLogsToFile();
+
   const {runId} = endTestRunEvent;
 
   const testRunEvent = getTestRunEvent(runId);
@@ -35,7 +38,7 @@ export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promi
       testRunEvent: {...testRunEvent, logEvents: undefined},
     });
 
-    return Promise.resolve();
+    return;
   }
 
   (testRunEvent as {ended: boolean}).ended = true;
@@ -53,5 +56,5 @@ export const registerEndTestRunEvent = (endTestRunEvent: EndTestRunEvent): Promi
 
   const testRunWithHooks: TestRunWithHooks = {mainParams, runHash, ...testRun};
 
-  return writeTestRunToJsonFile(testRunWithHooks);
+  await writeTestRunToJsonFile(testRunWithHooks);
 };

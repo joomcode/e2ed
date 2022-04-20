@@ -10,7 +10,7 @@ import {getLiteReport} from './getLiteReport';
 import type {ReportData, UtcTimeInMs} from '../../types/internal';
 
 /**
- * Save lite JSON report (lite-report.json file) with test runs results
+ * Write lite JSON report (lite-report.json file) with test runs results
  * (and without test run logs).
  * @internal
  */

@@ -11,7 +11,7 @@ import {renderReportToHtml} from './render';
 import type {ReportData, UtcTimeInMs} from '../../types/internal';
 
 /**
- * Save HTML report (report.html file) with test runs results.
+ * Write HTML report (report.html file) with test runs results.
  * @internal
  */
 export const writeHtmlReport = async (reportData: ReportData): Promise<void> => {
