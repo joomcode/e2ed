@@ -22,4 +22,4 @@ RUN ln -s /usr/lib/node_modules/testcafe/node_modules /usr/lib/node_modules/test
 
 USER user
 
-ENTRYPOINT ["/opt/e2ed/bin/runInDocker.sh"]
+ENTRYPOINT ["/opt/e2ed/bin/dockerEntrypoint.sh"]

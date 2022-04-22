@@ -9,7 +9,7 @@
   "author": "uid11",
   "license": "MIT",
   "bin": {
-    "e2ed": "./bin/runLocal.js",
+    "e2ed": "./bin/localEntrypoint.js",
     "e2ed-init": "./bin/init.sh"
   },
   "bugs": "https://github.com/uid11/e2ed/issues",
@@ -79,8 +79,8 @@
     "build:rename": "mv build/src build/node_modules && mv build/node_modules/package build/node_modules/e2ed",
     "build:copy": "npm run build:copy:bin && npm run build:copy:scripts && npm run build:copy:meta && npm run build:copy:example",
     "prebuild:copy:bin": "rm -r ./build/node_modules/e2ed/bin/*.d.ts",
-    "build:copy:bin": "cp bin/init.sh bin/runInDocker.sh build/node_modules/e2ed/bin",
-    "postbuild:copy:bin": "npm run make:executable build/node_modules/e2ed/bin/runLocal.js build/node_modules/e2ed/bin/runWithRetries.js",
+    "build:copy:bin": "cp bin/init.sh bin/dockerEntrypoint.sh build/node_modules/e2ed/bin",
+    "postbuild:copy:bin": "npm run make:executable build/node_modules/e2ed/bin/localEntrypoint.js build/node_modules/e2ed/bin/runE2edInDockerEnvironment.js",
     "build:copy:scripts": "cp build/scripts/*.js build",
     "build:copy:meta": "cp -r LICENSE logo.svg README.md styles build/node_modules/e2ed",
     "postbuild:copy:meta": "node build/writePrunedPackageJson.js",
@@ -101,7 +101,7 @@
     "pretest:docker": "npm run build:docker && npm run test:docker:copy",
     "test:docker:copy": "rm -rf ./build/docker && mkdir build/docker && cp -r build/e2ed build/docker/e2ed",
     "test:docker": "(cd ./build/docker && E2ED_DOCKER_DO_AFTER_TESTS=doAfterTests.sh E2ED_DOCKER_DO_BEFORE_TESTS=doBeforeTests.sh E2ED_CONCURRENCY=2 E2ED_DOCKER_RETRIES=3 E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh)",
-    "test:local": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/runLocal.js)",
+    "test:local": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/localEntrypoint.js)",
     "testcafefork:publish": "./bin/TestCafeFork/publish.sh",
     "testcafefork:clean": "./bin/TestCafeFork/clean.sh",
     "testcafefork:test:install": "./bin/TestCafeFork/testInstall.sh"

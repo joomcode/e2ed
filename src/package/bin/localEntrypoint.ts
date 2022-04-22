@@ -5,4 +5,4 @@ if (process.env.E2ED_DEBUG) {
   process.argv.push('--inspect-brk');
 }
 
-v8FlagsFilter('./node_modules/e2ed/bin/runWithArgs.js', {useShutdownMessage: true});
+v8FlagsFilter('./node_modules/e2ed/bin/runE2edInLocalEnvironment.js', {useShutdownMessage: true});
