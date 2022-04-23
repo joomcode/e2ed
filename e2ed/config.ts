@@ -1,7 +1,7 @@
 /**
  * @file Userland configuration for e2ed.
  * Do not import anything into this file other than
- * the following types, environment or optional local overrideConfig,
+ * the following types, environment or optional local overrideConfig
  * (because the config is compiled separately from the tests themselves).
  */
 
@@ -9,7 +9,9 @@ import {RunEnvironment, runEnvironment} from 'e2ed/environment';
 
 import type {Config} from 'e2ed/types';
 
-const defaultConcurrency = runEnvironment === RunEnvironment.Local ? 1 : 5;
+const isLocalRun = runEnvironment === RunEnvironment.Local;
+
+const defaultConcurrency = isLocalRun ? 1 : 5;
 
 const config: Config = {
   ajaxRequestTimeout: 40000,
