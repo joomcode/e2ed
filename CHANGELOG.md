@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.9.15](https://github.com/uid11/e2ed/tree/v0.9.15) (2022-04-23)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.14...v0.9.15)
+
+- [feat: use runEnvironment constant instead of environment variable (in config)](https://github.com/uid11/e2ed/commit/082e935f54fe3fe1848c0c1d9832884c039ccffd)
+- [chore: update eslint to 8.14.0](https://github.com/uid11/e2ed/commit/2059dadbbd323aeae60de7580d6be674bc654bb4)
+- [refactor: rename main bin files to uniform names](https://github.com/uid11/e2ed/commit/153b53a44afadad5bbd56f72ec9a4eb4734b10c3)
+
 ## [v0.9.14](https://github.com/uid11/e2ed/tree/v0.9.14) (2022-04-20)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.13...v0.9.14)
