@@ -92,10 +92,6 @@ If the test run takes longer than this timeout, the test fails and rerun on the 
 `E2ED_DOCKER_RETRIES`: the maximum number of retries to run a failing test with the `your-project/e2ed/bin/runDocker.sh`
 command (maximum value 50, 5 by default). For example, if it is equal to three, the test will be run no more than three times.
 
-`E2ED_IS_DOCKER_RUN`: when run in docker the `e2ed` sets this variable to `"true"`.
-
-`E2ED_IS_LOCAL_RUN`: when run local the `e2ed` sets this variable to `"true"`.
-
 `E2ED_NAVIGATE_STABILIZATION_INTERVAL`: after navigating to the page, `e2ed` will wait until
 the page is stable for the specified time in milliseconds (maximum value 120 000, 2 000 by default).
 

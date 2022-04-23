@@ -3,6 +3,7 @@
  * {@link https://github.com/babel/babel/issues/11964}
  */
 
+import {RunEnvironment, setRunEnvironment} from '../environment';
 import {registerStartE2edRunEvent, waitForEndE2edRunEvent} from '../utils/events';
 import {generalLog} from '../utils/generalLog';
 import {getFullConfig} from '../utils/getFullConfig';
@@ -23,7 +24,7 @@ try {
   generalLog(`Error in convert-source-map fix: ${String(error)}`);
 }
 
-process.env.E2ED_IS_LOCAL_RUN = 'true';
+setRunEnvironment(RunEnvironment.Local);
 
 const e2edRunEvent: E2edRunEvent = {
   utcTimeInMs: Date.now() as UtcTimeInMs,

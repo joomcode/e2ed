@@ -1,4 +1,4 @@
-import {RunEnvironment} from '../constants/internal';
+import {runEnvironment} from '../environment';
 import pkg from '../package.json';
 
 import {getFullConfig} from './getFullConfig';
@@ -11,10 +11,7 @@ import type {StartInfo} from '../types/internal';
  * @internal
  */
 export const getStartInfo = (): StartInfo => {
-  const isDockerRun = Boolean(process.env.E2ED_IS_DOCKER_RUN);
-
   const e2edEnvironmentVariables: Record<string, string | undefined> = {};
-  const runEnvironment = isDockerRun ? RunEnvironment.Docker : RunEnvironment.Local;
 
   for (const name of Object.keys(process.env).sort()) {
     const value = process.env[name];

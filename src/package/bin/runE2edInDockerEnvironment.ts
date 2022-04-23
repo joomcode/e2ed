@@ -1,10 +1,11 @@
+import {RunEnvironment, setRunEnvironment} from '../environment';
 import {generalLog} from '../utils/generalLog';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {getAfterRetries, getPrintedRetry, runRetries} from '../utils/retry';
 
 import type {UtcTimeInMs} from '../types/internal';
 
-process.env.E2ED_IS_DOCKER_RUN = 'true';
+setRunEnvironment(RunEnvironment.Docker);
 
 const maxRetriesCount = getIntegerFromEnvVariable({
   defaultValue: 5,

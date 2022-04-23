@@ -35,6 +35,7 @@ rules:
         - '**/constants/internal'
         - '**/context/*'
         - '**/e2ed/*/*'
+        - '**/environment'
         - '**/types/internal'
         - '**/utils/*'
   import/no-nodejs-modules:

@@ -49,6 +49,7 @@
     "./constants": "./constants/index.js",
     "./context": "./context/index.js",
     "./entities": "./entities/index.js",
+    "./environment": "./environment.js",
     "./hooks": "./hooks/index.js",
     "./pageObjects": "./pageObjects/index.js",
     "./pageObjects/components": "./pageObjects/components/index.js",
