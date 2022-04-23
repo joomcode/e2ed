@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.9.16](https://github.com/uid11/e2ed/tree/v0.9.16) (2022-04-23)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.15...v0.9.16)
+
+- [fix: runEnvironment for TestCafe subprocesses (read from environment variable)](https://github.com/uid11/e2ed/commit/a85421992fd0909c5d3d3cdec1f67c2dba7f9ac8)
+
 ## [v0.9.15](https://github.com/uid11/e2ed/tree/v0.9.15) (2022-04-23)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.14...v0.9.15)
