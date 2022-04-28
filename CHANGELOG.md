@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.9.17](https://github.com/uid11/e2ed/tree/v0.9.17) (2022-04-28)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.16...v0.9.17)
+
+- [chore: update devDependencies (typescript and @types/node)](https://github.com/uid11/e2ed/commit/bc205f854e01ebb7efacde50eaa0ba9c8eb88ae4)
+- [fix: run AFTER_TESTS script even when tests fails](https://github.com/uid11/e2ed/commit/c5d7473afe3f889358e46d90f23f503eb55405fb)
+- [chore: update devDependencies (@typescript-eslint/..., etc)](https://github.com/uid11/e2ed/commit/1aa15b02fd0b7dde4bceff5f72df5a7ce238f416)
+- [feat: more detailed options for launching an e2ed container](https://github.com/uid11/e2ed/commit/af28c2a4e8b4850f20af3f9cba0e31c7b8938c62)
+
 ## [v0.9.16](https://github.com/uid11/e2ed/tree/v0.9.16) (2022-04-23)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.15...v0.9.16)
