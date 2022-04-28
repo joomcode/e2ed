@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-set -eu
+set -u
 
 mkdir -p ./node_modules/@types
 
