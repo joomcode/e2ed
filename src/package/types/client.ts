@@ -1,3 +1,5 @@
+import type {UnwrapPromise} from './utils';
+
 /**
  * Client properties for waiting for interface stabilization.
  */
@@ -25,4 +27,4 @@ export type TestClientGlobal = {
  */
 export type WrappedClientFunction<R, A extends unknown[]> = (
   ...args: A
-) => Promise<Awaited<R> | undefined>;
+) => Promise<UnwrapPromise<R> | undefined>;

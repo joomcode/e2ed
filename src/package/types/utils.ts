@@ -76,3 +76,10 @@ export type UnionToIntersection<U> = (U extends unknown ? (k: U) => void : never
 ) => void
   ? I
   : never;
+
+/**
+ * UnwrapPromise<number> = number.
+ * UnwrapPromise<Promise<string>> = string.
+ * UnwrapPromise<Promise<Promise<bigint>>> = bigint.
+ */
+export type UnwrapPromise<T> = T extends Promise<infer V> ? UnwrapPromise<V> : T;
