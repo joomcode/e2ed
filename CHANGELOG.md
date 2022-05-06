@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.10.1](https://github.com/uid11/e2ed/tree/v0.10.1) (2022-05-06)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.10.0...v0.10.1)
+
+- [fix: remove Awaited utility type for supporting TypeScript 4.4](https://github.com/uid11/e2ed/commit/bc6666bb64787e770f7e06e5ed0b1b1b0c749938)
+
 ## [v0.10.0](https://github.com/uid11/e2ed/tree/v0.10.0) (2022-05-06)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.17...v0.10.0)
