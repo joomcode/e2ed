@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.10.0](https://github.com/uid11/e2ed/tree/v0.10.0) (2022-05-06)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.17...v0.10.0)
+
+- [feat: global refactoring of pageObjects, routes and actions](https://github.com/uid11/e2ed/commit/de01d0520478ecef0d721f2921d0318c838d40bf)
+- [chore: update devDependencies (@types/node, etc)](https://github.com/uid11/e2ed/commit/0194e90c55a8fd1bf2c011d49ff1d159dc6ac9d0)
+
 ## [v0.9.17](https://github.com/uid11/e2ed/tree/v0.9.17) (2022-04-28)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.9.16...v0.9.17)
