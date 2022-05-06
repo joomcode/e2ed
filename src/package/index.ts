@@ -22,9 +22,3 @@ export * from './useContext';
 export * from './ClientFunction';
 export * from './expect';
 export * from './it';
-
-/**
- * Dependent on userland pageObjects. These exports should be the last one.
- */
-export * from './assertPage';
-export * from './navigateToPage';

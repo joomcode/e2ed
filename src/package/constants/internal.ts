@@ -3,6 +3,7 @@ import type {RunId, TestRunEvent} from '../types/internal';
 export * from './fs';
 export * from './http';
 export * from './log';
+export * from './pages';
 export * from './paths';
 export * from './pixelmatch';
 export * from './process';

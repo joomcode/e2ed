@@ -53,6 +53,7 @@
     "./hooks": "./hooks/index.js",
     "./pageObjects": "./pageObjects/index.js",
     "./pageObjects/components": "./pageObjects/components/index.js",
+    "./pageObjects/pages": "./pageObjects/pages/index.js",
     "./routes": "./routes/index.js",
     "./routes/apiRoutes": "./routes/apiRoutes/index.js",
     "./routes/pageRoutes": "./routes/pageRoutes/index.js",

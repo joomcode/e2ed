@@ -1,7 +1,5 @@
-/* eslint-disable class-methods-use-this */
-
-import {getPageParams} from './context/pageParams';
-import {getRouteParams} from './context/routeParams';
+import {CREATE_PAGE_TOKEN} from './constants/internal';
+import {assertValueIsTrue} from './utils/asserts';
 
 import type {Route} from './Route';
 import type {PARAMS} from './types/internal';
@@ -11,31 +9,48 @@ declare const PARAMS_KEY: PARAMS;
 /**
  * Abstract page with base methods.
  */
-export abstract class Page<PageParams, RouteParams> {
-  [PARAMS_KEY]: PageParams;
+export abstract class Page<PageParams> {
+  constructor(createPageToken: typeof CREATE_PAGE_TOKEN, pageParams: PageParams) {
+    assertValueIsTrue(createPageToken === CREATE_PAGE_TOKEN);
 
-  /**
-   * Page route.
-   */
-  abstract readonly route: Route<RouteParams>;
-
-  /**
-   * pageParams, if they setted with navigateToPage.
-   */
-  get pageParams(): PageParams | undefined {
-    return getPageParams() as PageParams | undefined;
+    this.pageParams = pageParams;
   }
 
   /**
-   * routeParams, as they setted with navigateToPage or assertPage.
+   * Immutable page parameters.
    */
-  get routeParams(): RouteParams {
-    return getRouteParams() as RouteParams;
-  }
+  readonly pageParams: PageParams;
+
+  readonly [PARAMS_KEY]: PageParams;
 
   /**
-   * This async method is called before navigating to the page.
-   * It accepts some route parameters, and should return the required route parameters.
+   * Optional initialization (asynchronous or synchronous) of the page after
+   * the synchronous constructor has run.
    */
-  abstract willNavigateTo(params: PageParams): Promise<RouteParams>;
+  init?(): void | Promise<void>;
+
+  /**
+   * Optional hook that runs after asserts the page.
+   */
+  afterAssertPage?(): void | Promise<void>;
+
+  /**
+   * Optional hook that runs after navigation to the page.
+   */
+  afterNavigateToPage?(): void | Promise<void>;
+
+  /**
+   * Optional hook that runs before asserts the page.
+   */
+  beforeAssertPage?(): void | Promise<void>;
+
+  /**
+   * Optional hook that runs before navigation to the page (but after page initialization).
+   */
+  beforeNavigateToPage?(): void | Promise<void>;
+
+  /**
+   * Get page route (for navigation to the page).
+   */
+  abstract getRoute(): Route<unknown>;
 }

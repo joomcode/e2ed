@@ -1,39 +1,20 @@
-import type {OneOrTwoArgs, UnionToIntersection} from './utils';
+import type {CREATE_PAGE_TOKEN} from '../constants/internal';
+import type {Page} from '../Page';
 
-type WithWillNavigateTo = {willNavigateTo(...args: never[]): unknown};
-
-type GetPageParams<Page extends WithWillNavigateTo> = Parameters<Page['willNavigateTo']>[0];
-
-type GetRouteParams<Page extends WithWillNavigateTo> = ReturnType<
-  Page['willNavigateTo']
-> extends Promise<infer RouteParams>
-  ? RouteParams
-  : never;
-
-type AssertPageOverload<PageName, Page extends WithWillNavigateTo> = (
-  ...args: OneOrTwoArgs<PageName, GetRouteParams<Page>>
-) => Promise<Page>;
-
-type PagesWithWillNavigateTo = Record<string, WithWillNavigateTo>;
-
-type NavigateToPageOverload<PageName, Page extends WithWillNavigateTo> = (
-  ...args: OneOrTwoArgs<PageName, GetPageParams<Page>>
-) => Promise<Page>;
+import type {GetParamsType} from './utils';
 
 /**
- * Overloaded type for assertPage function.
+ * Type of navigateToPage and assertPage functions.
  */
-export type AssertPage<Pages extends PagesWithWillNavigateTo> = UnionToIntersection<
-  {
-    [PageName in keyof Pages]: AssertPageOverload<PageName, Pages[PageName]>;
-  }[keyof Pages]
->;
+export type NavigateToOrAssertPage = <SomePageClass extends PageClass<object>>(
+  PageClass: SomePageClass,
+  pageParams: GetParamsType<InstanceType<SomePageClass>>,
+) => Promise<InstanceType<SomePageClass>>;
 
 /**
- * Overloaded type for navigateToPage function.
+ * Page class type by page parameters type.
  */
-export type NavigateToPage<Pages extends PagesWithWillNavigateTo> = UnionToIntersection<
-  {
-    [PageName in keyof Pages]: NavigateToPageOverload<PageName, Pages[PageName]>;
-  }[keyof Pages]
->;
+export type PageClass<PageParams> = {
+  new (createPageToken: typeof CREATE_PAGE_TOKEN, pageParams: PageParams): Page<PageParams>;
+  prototype: Page<PageParams>;
+};

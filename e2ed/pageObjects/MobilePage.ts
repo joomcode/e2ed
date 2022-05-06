@@ -7,10 +7,7 @@ type PageParams<CustomPageParams> = CustomPageParams & DeepReadonly<{mobileDevic
 /**
  * Abstract mobile page.
  */
-export abstract class MobilePage<CustomPageParams, RouteParams> extends Page<
-  PageParams<CustomPageParams>,
-  RouteParams
-> {
+export abstract class MobilePage<CustomPageParams> extends Page<PageParams<CustomPageParams>> {
   /**
    * Type of mobile device.
    */

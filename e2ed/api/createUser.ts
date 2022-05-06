@@ -1,4 +1,4 @@
-import {userSignUpRoute} from 'e2ed/routes/apiRoutes';
+import {UserSignUp} from 'e2ed/routes/apiRoutes';
 import {request} from 'e2ed/utils';
 
 import type {ApiUser, ApiUserParams, User} from 'e2ed/types';
@@ -8,6 +8,8 @@ type Input = ApiUserParams;
 type Output = Readonly<{
   payload: ApiUser;
 }>;
+
+const userSignUpRoute = new UserSignUp(undefined);
 
 /**
  * Create new user by API request.

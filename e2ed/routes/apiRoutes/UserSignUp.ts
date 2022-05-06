@@ -3,8 +3,9 @@ import {ApiRoute} from 'e2ed/routes';
 /**
  * Client API route for user signUp.
  */
-class UserSignUpRoute extends ApiRoute {
-  override getMethod(): 'POST' {
+export class UserSignUp extends ApiRoute {
+  // eslint-disable-next-line class-methods-use-this
+  getMethod(): 'POST' {
     return 'POST';
   }
 
@@ -12,5 +13,3 @@ class UserSignUpRoute extends ApiRoute {
     return '/user/auth/signUp';
   }
 }
-
-export const userSignUpRoute = new UserSignUpRoute();

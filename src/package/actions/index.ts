@@ -7,6 +7,7 @@ export * from './drag';
 export * from './dragToElement';
 export * from './getBrowserConsoleMessages';
 export * from './hover';
+export * from './pages';
 export * from './pressKey';
 export * from './reloadPage';
 export * from './resizeWindow';
