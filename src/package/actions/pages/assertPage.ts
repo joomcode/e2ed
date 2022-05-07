@@ -9,13 +9,13 @@ import {waitForNavigateInterfaceStabilization} from '../waitForNavigateInterface
 
 import {createPageInstance} from './createPageInstance';
 
-import type {NavigateToOrAssertPage, PageClass} from '../../types/internal';
+import type {NavigateToOrAssertPage, PageClassType} from '../../types/internal';
 
 /**
  * Asserts that we are on the expected page by page parameters.
  */
 export const assertPage: NavigateToOrAssertPage = async <PageParams>(
-  PageClass: PageClass<PageParams>,
+  PageClass: PageClassType<PageParams>,
   pageParams: PageParams,
 ): Promise<never> => {
   await waitForNavigateInterfaceStabilization();
