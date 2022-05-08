@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.10.2](https://github.com/uid11/e2ed/tree/v0.10.2) (2022-05-08)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.10.1...v0.10.2)
+
+- [feat: add e2ed/testcafe export with supporting both commonjs and esm](https://github.com/uid11/e2ed/commit/2bc670136f4781ba4992fc72675ad2221003fc37)
+- [chore: update eslint to 8.15.0](https://github.com/uid11/e2ed/commit/dce832da2ca449094262bee469852f55f4109b2c)
+- [fix: rename utility type PageClass to PageClassType](https://github.com/uid11/e2ed/commit/6e106afe8dfba0b8af3072d028250d3471338129)
+
 ## [v0.10.1](https://github.com/uid11/e2ed/tree/v0.10.1) (2022-05-06)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.10.0...v0.10.1)
