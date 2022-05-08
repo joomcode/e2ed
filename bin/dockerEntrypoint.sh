@@ -5,12 +5,12 @@ mkdir -p ./node_modules/@types
 
 if [ ! -d "./node_modules/e2ed" ]
 then
-    cp -r /opt/e2ed ./node_modules
+    cp -r /node_modules/e2ed ./node_modules
 fi
 
 if [ ! -d "./node_modules/@types/node" ]
 then
-    cp -r /usr/lib/node_modules/@types/node ./node_modules/@types/node
+    cp -r /node_modules/@types/node ./node_modules/@types/node
 fi
 
 if [ -z $E2ED_DOCKER_DO_BEFORE_TESTS ]

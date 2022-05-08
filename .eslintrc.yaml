@@ -47,6 +47,7 @@ rules:
         - node:fs/promises
         - node:http
         - node:https
+        - node:module
         - node:path
         - node:querystring
         - node:stream
@@ -56,7 +57,7 @@ rules:
   import/no-unused-modules:
     - error
     - ignoreExports:
-        [e2ed/config.ts, src/package/context, src/package/types/index.ts, src/package/index.ts]
+        [src/package/context, src/package/esm, src/package/testcafe.ts, src/package/types/index.ts]
       missingExports: false
       unusedExports: true
   import/order: off

@@ -10,6 +10,7 @@ import {
 import {getRandomId} from './utils/getRandomId';
 import {getRelativeTestFilePath} from './utils/getRelativeTestFilePath';
 import {getTestRunErrors} from './utils/getTestRunErrors';
+import {fixture, test} from './testcafe';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
@@ -21,9 +22,6 @@ import type {
   TestStaticOptions,
   UtcTimeInMs,
 } from './types/internal';
-
-declare const fixture: Inner.FixtureFn;
-declare const test: Inner.TestFn;
 
 const resolvedPromise = Promise.resolve();
 

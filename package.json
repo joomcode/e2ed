@@ -58,6 +58,10 @@
     "./routes/apiRoutes": "./routes/apiRoutes/index.js",
     "./routes/pageRoutes": "./routes/pageRoutes/index.js",
     "./selectors": "./selectors/index.js",
+    "./testcafe": {
+      "import": "./esm/testcafe.mjs",
+      "require": "./testcafe.js"
+    },
     "./types": "./types/index.js",
     "./utils": "./utils/index.js"
   },
@@ -76,7 +80,7 @@
     "build:clear": "rm -rf ./build",
     "prebuild": "npm run build:clear",
     "build": "tsc; echo 'Compilation done.'",
-    "postbuild": "npm run build:rename && npm run build:copy && npm run build:init",
+    "postbuild": "npm run build:rename && npm run build:copy && npm run build:esm && npm run build:init",
     "prebuild:rename": "cp -r build/out/* build",
     "build:rename": "mv build/src build/node_modules && mv build/node_modules/package build/node_modules/e2ed",
     "build:copy": "npm run build:copy:bin && npm run build:copy:scripts && npm run build:copy:meta && npm run build:copy:example",
@@ -89,6 +93,8 @@
     "prebuild:copy:example": "rm -r ./build/e2ed",
     "build:copy:example": "cp -r e2ed build/node_modules/e2ed/",
     "postbuild:copy:example": "rm -r ./build/node_modules/e2ed/e2ed/node_modules",
+    "prebuild:esm": "rm -r build/node_modules/e2ed/esm/*",
+    "build:esm": "cp src/package/esm/testcafe.ts build/node_modules/e2ed/esm/testcafe.mjs",
     "build:init": "(cd ./build && ./node_modules/e2ed/bin/init.sh)",
     "postbuild:init": "rm ./build/node_modules/e2ed/e2ed/tests/removeMe.spec.ts && cp ./src/package/package.json ./build",
     "preversion": "npm run check:all",

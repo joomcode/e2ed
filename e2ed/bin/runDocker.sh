@@ -15,7 +15,6 @@ fi
 docker run --rm $PORT \
        --workdir $DIR \
        --volume $DIR:$DIR \
-       --env NODE_PATH=/usr/lib/node_modules \
        --env E2ED_ORIGIN=$E2ED_ORIGIN \
        --env E2ED_API_ORIGIN=$E2ED_API_ORIGIN \
        --env E2ED_CONCURRENCY=$E2ED_CONCURRENCY \

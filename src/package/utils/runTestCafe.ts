@@ -1,4 +1,4 @@
-import createTestCafe from 'testcafe-without-typecheck';
+import {createTestCafe} from '../testcafe';
 
 import {generalLog} from './generalLog';
 
