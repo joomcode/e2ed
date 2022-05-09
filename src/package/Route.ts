@@ -6,8 +6,8 @@ declare const PARAMS_KEY: PARAMS;
  * Abstract route with base methods.
  */
 export abstract class Route<RouteParams> {
-  constructor(params: RouteParams) {
-    this.params = params;
+  constructor(...args: RouteParams extends undefined ? [] : [params: RouteParams]) {
+    [this.params] = args as [params: RouteParams];
   }
 
   /**

@@ -9,7 +9,7 @@ type Output = Readonly<{
   payload: ApiUser;
 }>;
 
-const userSignUpRoute = new UserSignUp(undefined);
+const userSignUpRoute = new UserSignUp();
 
 /**
  * Create new user by API request.

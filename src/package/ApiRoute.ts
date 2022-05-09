@@ -5,7 +5,7 @@ import type {Method, Url} from './types/internal';
 /**
  * Abstract route for API requests.
  */
-export abstract class ApiRoute<Params> extends Route<Params> {
+export abstract class ApiRoute<Params = undefined> extends Route<Params> {
   /**
    * Return the http-method of the route (for API requests).
    */

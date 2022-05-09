@@ -4,13 +4,12 @@ import {PageRoute} from 'e2ed';
 
 import type {Url} from 'e2ed/types';
 
-type Params = Readonly<{query: string}>;
+type Params = undefined | Readonly<{query: string}>;
 
 /**
  * Route of the Search page.
  */
 export class Search extends PageRoute<Params> {
-  // eslint-disable-next-line class-methods-use-this
   override getParamsFromUrl(url: Url): Params {
     const {searchParams} = new URL(url);
     const query = searchParams.get('q') || '';
@@ -19,7 +18,7 @@ export class Search extends PageRoute<Params> {
   }
 
   getPath(): string {
-    const {query} = this.params;
+    const {query = 'bar'} = this.params ?? {};
 
     return `/search?q=${query}`;
   }

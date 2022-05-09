@@ -57,6 +57,6 @@ export type Query =
   | string;
 
 /**
- * Brand type for url string.
+ * Brand type for the full url string.
  */
 export type Url = Brand<string, 'Url'>;

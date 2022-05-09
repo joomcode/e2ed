@@ -18,7 +18,7 @@ ignorePatterns: [bin/TestCafeFork/package, build]
 rules:
   class-methods-use-this:
     - error
-    - {exceptMethods: [getOrigin, getPath]}
+    - {exceptMethods: [getMethod, getOrigin, getParamsFromUrl, getPath]}
   curly: [error, all]
   default-param-last: off
   import/exports-last: error
@@ -88,7 +88,7 @@ rules:
     - error
     - groups:
         - [
-            '^(node:child_process|node:crypto|node:fs|node:http|node:https|node:path|node:querystring|node:stream|node:url|node:util)(/.*|$)',
+            '^(node:child_process|node:crypto|node:fs|node:http|node:https|node:module|node:path|node:querystring|node:stream|node:url|node:util)(/.*|$)',
           ]
         - ['^\w']
         - ['^\u0000']

@@ -1,4 +1,4 @@
-import type {Brand} from 'e2ed/types';
+import type {Brand, Device} from 'e2ed/types';
 
 /**
  * User email.
@@ -19,6 +19,7 @@ export type UserId = Brand<string, 'UserId'>;
  * API params for user creation.
  */
 export type ApiUserParams = Readonly<{
+  device: Device;
   name: string;
   email: Email;
   password: Password;
