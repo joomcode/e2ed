@@ -1,4 +1,4 @@
-import type {PARAMS, Url} from './types/internal';
+import type {PARAMS, Url, ZeroOrOneArg} from './types/internal';
 
 declare const PARAMS_KEY: PARAMS;
 
@@ -6,7 +6,7 @@ declare const PARAMS_KEY: PARAMS;
  * Abstract route with base methods.
  */
 export abstract class Route<RouteParams> {
-  constructor(...args: RouteParams extends undefined ? [] : [params: RouteParams]) {
+  constructor(...args: ZeroOrOneArg<RouteParams>) {
     [this.params] = args as [params: RouteParams];
   }
 

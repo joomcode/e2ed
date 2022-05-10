@@ -1,6 +1,8 @@
 import {ApiRoute} from 'e2ed/routes';
 
-type Params = Readonly<{model: string}>;
+import type {MobileDevice} from 'e2ed/types';
+
+type Params = Readonly<{model: MobileDevice}>;
 
 /**
  * Test API route for creating a device.

@@ -62,6 +62,12 @@ export type Normalize<T> = keyof T extends never
 export type GetParamsType<C> = C extends {[PARAMS_KEY]: unknown} ? Normalize<C[PARAMS]> : never;
 
 /**
+ * ZeroOrOneArg<string> = [arg: string].
+ * ZeroOrOneArg<undefined | number> = [arg?: number].
+ */
+export type ZeroOrOneArg<Arg> = IncludeUndefined<Arg> extends true ? [arg?: Arg] : [arg: Arg];
+
+/**
  * OneOrTwoArgs<'foo', string> = ['foo', string].
  * OneOrTwoArgs<'foo', undefined | number> = ['foo'] | ['foo', number].
  */
