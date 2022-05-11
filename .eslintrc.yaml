@@ -18,7 +18,7 @@ ignorePatterns: [bin/TestCafeFork/package, build]
 rules:
   class-methods-use-this:
     - error
-    - {exceptMethods: [getMethod, getOrigin, getParamsFromUrl, getPath]}
+    - {exceptMethods: [getMethod, getOrigin, getParamsFromUrl, getPath, getRoute]}
   curly: [error, all]
   default-param-last: off
   import/exports-last: error

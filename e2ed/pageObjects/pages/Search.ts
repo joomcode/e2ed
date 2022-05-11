@@ -7,10 +7,10 @@ type RouteParams = GetParamsType<SearchRoute>;
 type CustomPageParams = Partial<RouteParams>;
 
 /**
- * Search mobile page.
+ * The search mobile page.
  */
 export class Search extends MobilePage<CustomPageParams> {
-  mobileDevice = 'iphone' as const;
+  readonly mobileDevice = 'iphone' as const;
 
   readonly query!: string;
 

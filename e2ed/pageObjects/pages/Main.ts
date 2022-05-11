@@ -5,16 +5,18 @@ import {Main as MainRoute} from 'e2ed/routes/pageRoutes';
 import type {GetParamsType, Language, Mutable} from 'e2ed/types';
 
 type RouteParams = GetParamsType<MainRoute>;
-type CustomPageParams = Partial<RouteParams>;
+type CustomPageParams = undefined | Partial<RouteParams>;
 
 /**
- * Main (index) page.
+ * The main (index) page.
  */
 export class Main extends Page<CustomPageParams> {
   readonly language!: Language;
 
   override init(): void {
-    (this as Mutable<this>).language = this.pageParams.language ?? 'de';
+    const {language = 'de'} = this.pageParams ?? {};
+
+    (this as Mutable<this>).language = language;
   }
 
   getRoute(): MainRoute {

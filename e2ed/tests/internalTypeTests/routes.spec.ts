@@ -17,6 +17,9 @@ new CreateDevice({model: 'samsung'});
 // @ts-expect-error: wrong RouteParams type
 new CreateDevice({model: 'foo'});
 
+// @ts-expect-error: wrong RouteParams type
+new CreateDevice(undefined);
+
 // @ts-expect-error: wrong number of constructor arguments
 new CreateDevice();
 
@@ -26,6 +29,9 @@ new CreateDevice();
 
 // ok
 new UserSignUp();
+
+// ok
+new UserSignUp(undefined);
 
 // @ts-expect-error: wrong number of constructor arguments
 new UserSignUp('foo');

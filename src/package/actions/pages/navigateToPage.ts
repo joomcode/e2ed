@@ -7,15 +7,16 @@ import {waitForNavigateInterfaceStabilization} from '../waitForNavigateInterface
 
 import {createPageInstance} from './createPageInstance';
 
-import type {NavigateToOrAssertPage, PageClassType, UtcTimeInMs} from '../../types/internal';
+import type {AnyPageClassType, NavigateToOrAssertPageArgs, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Navigates to the page by page class and page params.
  */
-export const navigateToPage: NavigateToOrAssertPage = async <PageParams>(
-  PageClass: PageClassType<PageParams>,
-  pageParams: PageParams,
-): Promise<never> => {
+export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
+  ...args: NavigateToOrAssertPageArgs<SomePageClass>
+): Promise<InstanceType<SomePageClass>> => {
+  const [PageClass, pageParams] = args;
+
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const page = await createPageInstance(PageClass, pageParams);
@@ -55,5 +56,5 @@ export const navigateToPage: NavigateToOrAssertPage = async <PageParams>(
 
   setPageLoaded(true);
 
-  return page as never;
+  return page;
 };

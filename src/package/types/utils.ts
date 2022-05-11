@@ -68,10 +68,12 @@ export type GetParamsType<C> = C extends {[PARAMS_KEY]: unknown} ? Normalize<C[P
 export type ZeroOrOneArg<Arg> = IncludeUndefined<Arg> extends true ? [arg?: Arg] : [arg: Arg];
 
 /**
- * OneOrTwoArgs<'foo', string> = ['foo', string].
- * OneOrTwoArgs<'foo', undefined | number> = ['foo'] | ['foo', number].
+ * OneOrTwoArgs<'foo', string> = [arg1: 'foo', arg2: string].
+ * OneOrTwoArgs<'foo', undefined | number> = [arg1: 'foo', arg2?: number].
  */
-export type OneOrTwoArgs<K, A> = IncludeUndefined<A> extends true ? [K, A?] : [K, A];
+export type OneOrTwoArgs<Arg1, Arg2> = IncludeUndefined<Arg2> extends true
+  ? [arg1: Arg1, arg2?: Arg2]
+  : [arg1: Arg1, arg2: Arg2];
 
 /**
  * UnionToIntersection<((x: string) => number) | ((x: number) => string)> =

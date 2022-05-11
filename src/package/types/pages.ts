@@ -1,20 +1,31 @@
 import type {CREATE_PAGE_TOKEN} from '../constants/internal';
 import type {Page} from '../Page';
 
-import type {GetParamsType} from './utils';
+import type {GetParamsType, OneOrTwoArgs} from './utils';
 
 /**
- * Type of navigateToPage and assertPage functions.
+ * Arguments of page class constructor by page parameters type.
  */
-export type NavigateToOrAssertPage = <SomePageClass extends PageClassType<object>>(
-  PageClass: SomePageClass,
-  pageParams: GetParamsType<InstanceType<SomePageClass>>,
-) => Promise<InstanceType<SomePageClass>>;
+export type PageClassTypeArgs<PageParams> = OneOrTwoArgs<typeof CREATE_PAGE_TOKEN, PageParams>;
 
 /**
  * Page class type by page parameters type.
  */
 export type PageClassType<PageParams> = {
-  new (createPageToken: typeof CREATE_PAGE_TOKEN, pageParams: PageParams): Page<PageParams>;
+  new (...args: PageClassTypeArgs<PageParams>): Page<PageParams>;
   prototype: Page<PageParams>;
 };
+
+/**
+ * Base page class type for any page.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AnyPageClassType = PageClassType<any>;
+
+/**
+ * Arguments of navigateToPage and assertPage functions.
+ */
+export type NavigateToOrAssertPageArgs<SomePageClass extends AnyPageClassType> = OneOrTwoArgs<
+  SomePageClass,
+  GetParamsType<InstanceType<SomePageClass>>
+>;

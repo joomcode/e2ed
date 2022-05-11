@@ -2,18 +2,20 @@ import {CREATE_PAGE_TOKEN} from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
 
 import type {Route} from './Route';
-import type {PARAMS} from './types/internal';
+import type {PageClassTypeArgs, PARAMS} from './types/internal';
 
 declare const PARAMS_KEY: PARAMS;
 
 /**
  * Abstract page with base methods.
  */
-export abstract class Page<PageParams> {
-  constructor(createPageToken: typeof CREATE_PAGE_TOKEN, pageParams: PageParams) {
+export abstract class Page<PageParams = undefined> {
+  constructor(...args: PageClassTypeArgs<PageParams>) {
+    const [createPageToken, pageParams] = args;
+
     assertValueIsTrue(createPageToken === CREATE_PAGE_TOKEN);
 
-    this.pageParams = pageParams;
+    this.pageParams = pageParams as PageParams;
   }
 
   /**
