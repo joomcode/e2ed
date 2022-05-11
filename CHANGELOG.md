@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.10.3](https://github.com/uid11/e2ed/tree/v0.10.3) (2022-05-11)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.10.2...v0.10.3)
+
+- [fix: internal type tests should not run in runtime](https://github.com/uid11/e2ed/commit/6398032682a6783daaf593c253199fd8d521dd09)
+- [chore: update @types/node to 17.0.32](https://github.com/uid11/e2ed/commit/1ee3cba41489f8f92db40b428345c064bd4b683f)
+- [fix: navigateToPage/assertPage arguments types for pageParams=undefined](https://github.com/uid11/e2ed/commit/9c81454ee745b8f568aeaa8d761c2d6de5856c7e)
+- [chore: update devDependencies (@typescript-eslint/\*)](https://github.com/uid11/e2ed/commit/8762a09c861cfb83fcf738f640bc6543fff4fcf6)
+- [feat: clarify route types and add full tests for it](https://github.com/uid11/e2ed/commit/7f90fb5fc395338f1277acf96f7ccabafc19b0dc)
+- [chore: update husky to 8.0.1](https://github.com/uid11/e2ed/commit/a65f67c5324535a08acc12e2e12adc844540821b)
+- [feat: add one more example of entity and route](https://github.com/uid11/e2ed/commit/374650d87facbf3db7c69e86481e59291687d6f3)
+- [feat: add test of ESM exports (function createTestCafe from e2ed/testcafe)](https://github.com/uid11/e2ed/commit/50ec9192d4f95581038478787c5e9f8fef8b025b)
+
 ## [v0.10.2](https://github.com/uid11/e2ed/tree/v0.10.2) (2022-05-08)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.10.1...v0.10.2)
