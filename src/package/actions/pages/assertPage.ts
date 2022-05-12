@@ -35,13 +35,14 @@ export const assertPage = async <SomePageClass extends AnyPageClassType>(
 
   const isMatch = route.isMatchUrl(currentUrl);
 
-  const message = `Assert that the current url matches the specified page "${PageClass.name}"`;
+  const message = `the current url matches the specified page "${PageClass.name}"`;
 
   await log(
-    message,
+    `Assert that ${message}`,
     {
       currentUrl,
       isMatch,
+      pageParams,
       routeParams: route.params,
     },
     LogEventType.InternalCore,

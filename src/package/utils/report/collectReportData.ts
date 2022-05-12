@@ -3,7 +3,7 @@ import {TestRunStatus} from '../../constants/internal';
 import {getExitStatus} from '../exit';
 import {getFullConfig} from '../getFullConfig';
 
-import {assertThatTestNamesAreUnique} from './assertThatTestNamesAreUnique';
+import {assertThatTestNamesAndFilePathsAreUnique} from './assertThatTestNamesAndFilePathsAreUnique';
 import {getReportErrors} from './getReportErrors';
 import {getRetriesAndSetStatuses} from './getRetriesAndSetStatuses';
 import {unificateRunHashes} from './unificateRunHashes';
@@ -26,7 +26,7 @@ export const collectReportData = async ({
 
   const errors = await getReportErrors(startInfo.runEnvironment, testRunsWithHooks);
 
-  assertThatTestNamesAreUnique(testRunsWithHooks);
+  assertThatTestNamesAndFilePathsAreUnique(testRunsWithHooks);
 
   unificateRunHashes(testRunsWithHooks);
 

@@ -1,6 +1,7 @@
+import {RunEnvironment} from '../../constants/internal';
+
 import {getUnvisitedTestFilePaths} from '../getUnvisitedTestFilePaths';
 
-import type {RunEnvironment} from '../../constants/internal';
 import type {TestRunWithHooks} from '../../types/internal';
 
 /**
@@ -13,7 +14,7 @@ export const getReportErrors = async (
 ): Promise<readonly string[]> => {
   const errors: string[] = [];
 
-  if (runEnvironment === 'docker') {
+  if (runEnvironment === RunEnvironment.Docker) {
     const unvisitedTestFilePaths = await getUnvisitedTestFilePaths(testRunsWithHooks);
 
     if (unvisitedTestFilePaths.length !== 0) {

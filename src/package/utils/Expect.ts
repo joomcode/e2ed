@@ -61,9 +61,10 @@ for (const [key, getAssertionMessage] of Object.entries(assertions)) {
       Promise.resolve(this.actual)
         .then((actual) =>
           log(
-            `Assert that value ${valueToString(actual)} ${message}`,
+            `Assert: ${this.description}`,
             {
-              description: this.description,
+              assertion: `value ${valueToString(actual)} ${message}`,
+              error: maybeError,
             },
             LogEventType.InternalAssert,
           ),
