@@ -1,7 +1,7 @@
 import {MobilePage} from 'e2ed/pageObjects';
 import {Search as SearchRoute} from 'e2ed/routes/pageRoutes';
 
-import type {GetParamsType, Mutable} from 'e2ed/types';
+import type {GetParamsType} from 'e2ed/types';
 
 type RouteParams = GetParamsType<SearchRoute>;
 type CustomPageParams = Partial<RouteParams>;
@@ -15,7 +15,9 @@ export class Search extends MobilePage<CustomPageParams> {
   readonly query!: string;
 
   override init(): void {
-    (this as Mutable<this>).query = this.pageParams.query ?? 'foo';
+    const query = this.pageParams.query ?? 'foo';
+
+    Object.assign<Search, Partial<Search>>(this, {query});
   }
 
   getRoute(): SearchRoute {

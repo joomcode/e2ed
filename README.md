@@ -8,7 +8,7 @@
 [![Conventional Commits][conventional-commits-image]][conventional-commits-url]
 [![License MIT][license-image]][license-url]
 
-E2E utils for [TestCafe](https://testcafe.io/).
+E2E testing framework over [TestCafe](https://testcafe.io/).
 
 ## Install
 
