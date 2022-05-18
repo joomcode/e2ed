@@ -13,7 +13,7 @@ E2E testing framework over [TestCafe](https://testcafe.io/).
 
 ## Install
 
-Requires `node@16` or higher:
+Requires [node](https://nodejs.org/en/) version 16 or higher:
 
 ```sh
 npm install e2ed --save-dev
