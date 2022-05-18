@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.10.4](https://github.com/uid11/e2ed/tree/v0.10.4) (2022-05-18)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.10.3...v0.10.4)
+
+- [chore: update devDependencies (@typescript-eslint/\*, etc)](https://github.com/uid11/e2ed/commit/d59decc4fe8363e5a29dc332bfe2336a64c6c3ce)
+- [docs: add CONTRIBUTING.md to the project](https://github.com/uid11/e2ed/commit/78d284e02506976587806e389d15dc37d218689f)
+- [chore: add Contributor Covenant badge to README.md](https://github.com/uid11/e2ed/commit/e350b77c8c0554e88ca3d66a020c633c8759367d)
+- [chore: add Contributor Covenant CODE_OF_CONDUCT.md](https://github.com/uid11/e2ed/commit/68430a8d570a66c3f9705e01ef1a12a0a89463aa)
+- [chore: update @types/node to 17.0.33](https://github.com/uid11/e2ed/commit/44f488a63fb07cbb57c8a356a38f16da1d8b7f14)
+- [docs: clarify the package description (that the package is a testing framework)](https://github.com/uid11/e2ed/commit/ef04893bc2728def2f0d77eda8fa504963e84e1d)
+- [feat: add check that there is exactly one test in each test file](https://github.com/uid11/e2ed/commit/8430ad18b18b7837e55b608dd2a7cc2296876de4)
+
 ## [v0.10.3](https://github.com/uid11/e2ed/tree/v0.10.3) (2022-05-11)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.10.2...v0.10.3)
