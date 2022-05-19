@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.10.5](https://github.com/joomcode/e2ed/tree/v0.10.5) (2022-05-19)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.4...v0.10.5)
+
+- [feat: add commits author name to CHANGELOG.md](https://github.com/joomcode/e2ed/commit/1a1ddeb6b0be414c270fc0acd5ecd3b11c564381) ([uid11](https://github.com/uid11))
+- [chore: replace repository to joomcode](https://github.com/joomcode/e2ed/commit/6d1ef97293f6c8b5a45bb262b0c181b8b6a51f77) ([uid11](https://github.com/uid11))
+- [docs: add pull request template](https://github.com/joomcode/e2ed/commit/dba38b05517ddd977dd179c4c80a1d53f9c1c906) ([uid11](https://github.com/uid11))
+- [docs: add issue templates](https://github.com/joomcode/e2ed/commit/d151fa37fee418772f402f358cb35e23cf2131c9) ([uid11](https://github.com/uid11))
+
 ## [v0.10.4](https://github.com/uid11/e2ed/tree/v0.10.4) (2022-05-18)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.10.3...v0.10.4)
