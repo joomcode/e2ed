@@ -101,11 +101,11 @@ the page is stable for the specified time in milliseconds (maximum value 120 000
 [MIT][license-url]
 
 [code-of-conduct-image]: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg 'Contributor Covenant'
-[code-of-conduct-url]: https://github.com/uid11/e2ed/blob/main/CODE_OF_CONDUCT.md
+[code-of-conduct-url]: CODE_OF_CONDUCT.md
 [conventional-commits-image]: https://img.shields.io/badge/Conventional_Commits-1.0.0-yellow.svg 'Conventional Commits'
 [conventional-commits-url]: https://conventionalcommits.org
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg 'The MIT License'
-[license-url]: https://github.com/uid11/e2ed/blob/main/LICENSE
+[license-url]: LICENSE
 [npm-image]: https://img.shields.io/npm/v/e2ed.svg 'e2ed'
 [npm-url]: https://www.npmjs.com/package/e2ed
 [prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg 'Prettier code style'

@@ -4,7 +4,7 @@
 
 To work with the repository, you must have [node](https://nodejs.org/en/) version 16 or higher.
 
-Next, you must clone the repository (`git clone https://github.com/uid11/e2ed.git`)
+Next, you must clone the repository (`git clone https://github.com/joomcode/e2ed.git`)
 and install the npm dependencies in it (`npm install`).
 
 ## Development
