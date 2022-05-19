@@ -1,4 +1,4 @@
-<img alt="e2ed logo" src="https://raw.github.com/uid11/e2ed/main/logo.svg?sanitize=true">
+<img alt="e2ed logo" src="https://raw.github.com/joomcode/e2ed/main/logo.svg?sanitize=true">
 
 # e2ed
 
@@ -109,6 +109,6 @@ the page is stable for the specified time in milliseconds (maximum value 120 000
 [npm-image]: https://img.shields.io/npm/v/e2ed.svg 'e2ed'
 [npm-url]: https://www.npmjs.com/package/e2ed
 [prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg 'Prettier code style'
-[prettier-url]: https://github.com/prettier/prettier
+[prettier-url]: https://prettier.io/
 [typescript-image]: https://img.shields.io/badge/types-TypeScript-blue.svg 'Full TypeScript support'
 [typescript-url]: https://www.typescriptlang.org/
