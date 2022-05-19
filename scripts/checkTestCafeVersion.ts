@@ -5,10 +5,10 @@
 
 import {readFileSync} from 'node:fs';
 
-import pkg from '../package.json';
+import {dependencies, devDependencies} from '../package.json';
 
-const testCafeVersion = pkg.devDependencies.testcafe;
-const testCafeWithoutTypecheckVersion = pkg.dependencies['testcafe-without-typecheck'];
+const testCafeVersion = devDependencies.testcafe;
+const testCafeWithoutTypecheckVersion = dependencies['testcafe-without-typecheck'];
 
 if (!testCafeWithoutTypecheckVersion.startsWith(testCafeVersion)) {
   throw new Error(

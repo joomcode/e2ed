@@ -5,11 +5,11 @@
 import {execFileSync} from 'node:child_process';
 import {readFileSync, writeFileSync} from 'node:fs';
 import {join} from 'node:path';
+import {URL} from 'node:url';
 
-import pkg from '../package.json';
+import {repository, version} from '../package.json';
 
-const gitHosterOrigin = 'https://github.com';
-const baseUrl = `${gitHosterOrigin}/${pkg.repository}`;
+const {href: repoUrl, origin: repoOrigin} = new URL(repository.url);
 const changelogPath = join(__dirname, '..', 'CHANGELOG.md');
 
 const fullDate = new Date().toISOString().slice(0, 10);
@@ -37,15 +37,15 @@ const commitsWithoutVersionUpdates = commits.filter(
 const commitsLinksText = commitsWithoutVersionUpdates
   .map(
     ({authorName, hash, subject}) =>
-      `- [${subject}](${baseUrl}/commit/${hash}) ([${authorName}](${gitHosterOrigin}/${authorName}))`,
+      `- [${subject}](${repoUrl}/commit/${hash}) ([${authorName}](${repoOrigin}/${authorName}))`,
   )
   .join('\n');
 
 const newChangelogText = `# Changelog
 
-## [v${pkg.version}](${baseUrl}/tree/v${pkg.version}) (${fullDate})
+## [v${version}](${repoUrl}/tree/v${version}) (${fullDate})
 
-[Full Changelog](${baseUrl}/compare/v${previousVersion}...v${pkg.version})
+[Full Changelog](${repoUrl}/compare/v${previousVersion}...v${version})
 
 ${commitsLinksText}
 

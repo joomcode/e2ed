@@ -1,5 +1,5 @@
 import {runEnvironment} from '../environment';
-import pkg from '../package.json';
+import {version as e2edVersion} from '../package.json';
 
 import {getFullConfig} from './getFullConfig';
 
@@ -25,7 +25,7 @@ export const getStartInfo = (): StartInfo => {
     PWD: process.env.PWD,
     'cwd()': process.cwd(),
     e2edEnvironmentVariables,
-    e2edVersion: pkg.version,
+    e2edVersion,
     fullConfig: getFullConfig(),
     nodeVersion: process.version,
     'process.argv': [...process.argv],
