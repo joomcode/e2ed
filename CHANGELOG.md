@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.10.6](https://github.com/joomcode/e2ed/tree/v0.10.6) (2022-05-19)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.5...v0.10.6)
+
+- [docs: fix repository links in CHANGELOG.md (joomcode instead of uid11)](https://github.com/joomcode/e2ed/commit/2a9a8bccd894797503a8768b3ca06f93cc40f935) ([uid11](https://github.com/uid11))
+
 ## [v0.10.5](https://github.com/joomcode/e2ed/tree/v0.10.5) (2022-05-19)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.4...v0.10.5)
