@@ -26,6 +26,9 @@ If you have [Docker](https://www.docker.com/) installed, you can also run tests 
 
 ## Submitting changes
 
+Use the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) format for commit messages,
+for example `fix: bug in reloadPage() action` or `feat: add execution timeout for each test`.
+
 Submit a pull request with your changes to the `main` branch.
 In the pull request, describe what your changes do, or leave a link to the issue.
 

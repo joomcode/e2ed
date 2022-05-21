@@ -100,10 +100,10 @@ the page is stable for the specified time in milliseconds (maximum value 120 000
 
 [MIT][license-url]
 
-[code-of-conduct-image]: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg 'Contributor Covenant'
+[code-of-conduct-image]: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg 'Contributor Covenant Code of Conduct'
 [code-of-conduct-url]: CODE_OF_CONDUCT.md
-[conventional-commits-image]: https://img.shields.io/badge/Conventional_Commits-1.0.0-yellow.svg 'Conventional Commits'
-[conventional-commits-url]: https://conventionalcommits.org
+[conventional-commits-image]: https://img.shields.io/badge/Conventional_Commits-1.0.0-yellow.svg 'The Conventional Commits specification'
+[conventional-commits-url]: https://www.conventionalcommits.org/en/v1.0.0/
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg 'The MIT License'
 [license-url]: LICENSE
 [npm-image]: https://img.shields.io/npm/v/e2ed.svg 'e2ed'
