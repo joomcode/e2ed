@@ -35,11 +35,16 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
   const getInterfaceState = (): string => {
     const {innerWidth, innerHeight} = window;
     const elements: Element[] = [document.documentElement];
-    const elementsWithDataTestId = document.querySelectorAll('[data-testid]');
+    const elementsWithDataTestId = document.querySelectorAll('[data-test-id]');
+    const elementsWithDataTestid = document.querySelectorAll('[data-testid]');
     const deltaX = innerWidth / (COUNT_OF_NODES + 1);
     const deltaY = innerHeight / (COUNT_OF_NODES + 1);
 
     for (let i = 0; i < elementsWithDataTestId.length && i < 35; i += 1) {
+      elements.push(elementsWithDataTestId[i]);
+    }
+
+    for (let i = 0; i < elementsWithDataTestid.length && i < 35; i += 1) {
       elements.push(elementsWithDataTestId[i]);
     }
 

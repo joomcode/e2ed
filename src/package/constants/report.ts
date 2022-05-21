@@ -3,7 +3,7 @@
  * Failed if it have errors and passed if not.
  * Broken if the test failed and TestCafe restarted it themself.
  */
-export const enum TestRunStatus {
+export enum TestRunStatus {
   Passed,
   Failed,
   Skipped,

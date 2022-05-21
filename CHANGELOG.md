@@ -660,7 +660,7 @@
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.6.6...v0.6.7)
 
 - [fix: prettify CHANGELOG.md in release process](https://github.com/joomcode/e2ed/commit/1f66fd76d7b6ff5e7c6650346f9f7ded794a9cad)
-- [feat: convert LogEventType from uniton to const enum](https://github.com/joomcode/e2ed/commit/b37496efc17eb6e12776b70f5c5866b5dfa8bfe1)
+- [feat: convert LogEventType from union to const enum](https://github.com/joomcode/e2ed/commit/b37496efc17eb6e12776b70f5c5866b5dfa8bfe1)
 - [feat: add collecting and saving completed test run objects](https://github.com/joomcode/e2ed/commit/566cdb0d5262f1b7b5457404c1eb11d190796bee)
 - [feat: add RunE2edEvent and FinishE2edEvent (for report)](https://github.com/joomcode/e2ed/commit/29a1eec72d29bd6c379fde107cdb4708b6a5602c)
 - [feat: add FinishTest event](https://github.com/joomcode/e2ed/commit/d929da53319dec29a686fa31ea6581d2cb819df7)
