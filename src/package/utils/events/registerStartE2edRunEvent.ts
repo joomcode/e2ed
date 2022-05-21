@@ -1,4 +1,5 @@
-import {EVENTS_DIRECTORY_PATH, RunEnvironment, TMP_DIRECTORY_PATH} from '../../constants/internal';
+import {RunEnvironment} from '../../configurator';
+import {EVENTS_DIRECTORY_PATH, TMP_DIRECTORY_PATH} from '../../constants/internal';
 
 import {compileUserlandConfig} from '../compileUserlandConfig';
 import {createDirectory} from '../createDirectory';

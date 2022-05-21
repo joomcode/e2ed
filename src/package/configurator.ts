@@ -1,5 +1,8 @@
 const RUN_ENVIRONMENT_VARIABLE_NAME = '__INTERNAL_E2ED_RUN_ENVIRONMENT';
 
+// eslint-disable-next-line import/no-internal-modules, import/no-unused-modules
+export type {UserlandConfig as Config} from './types/config';
+
 /**
  * Run environment enum (run in docker or local run).
  */

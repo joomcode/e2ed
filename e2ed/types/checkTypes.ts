@@ -4,7 +4,8 @@
  * Do not remove this module.
  */
 
-import type {Config, Expect, ExternalHooks, IsEqual} from 'e2ed/types';
+import type {Config} from 'e2ed/configurator';
+import type {Expect, ExternalHooks, IsEqual} from 'e2ed/types';
 
 import type {config} from '../config';
 import type * as hooks from '../hooks';

@@ -1,7 +1,6 @@
 /**
  * Internal types (for using in the e2ed package and in userland).
  */
-export type {UserlandConfig as Config} from './internal';
 export * from './internal';
 
 /**

@@ -1,4 +1,4 @@
-import {RunEnvironment} from '../../constants/internal';
+import {RunEnvironment} from '../../configurator';
 
 import {getUnvisitedTestFilePaths} from '../getUnvisitedTestFilePaths';
 

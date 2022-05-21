@@ -45,5 +45,3 @@ export const MAX_LINES_IN_STRINGIFY_VALUE = 400;
  * @internal
  */
 export const RUN_IDS_HASH: Record<RunId, TestRunEvent> = {};
-
-export {RunEnvironment} from '../environment';

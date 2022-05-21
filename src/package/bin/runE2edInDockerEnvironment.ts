@@ -1,4 +1,4 @@
-import {RunEnvironment, setRunEnvironment} from '../environment';
+import {RunEnvironment, setRunEnvironment} from '../configurator';
 import {generalLog} from '../utils/generalLog';
 import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {getAfterRetries, getPrintedRetry, runRetries} from '../utils/retry';

@@ -1,4 +1,4 @@
-import {runEnvironment} from '../environment';
+import {runEnvironment} from '../configurator';
 import {version as e2edVersion} from '../package.json';
 
 import {getFullConfig} from './getFullConfig';

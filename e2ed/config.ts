@@ -1,13 +1,11 @@
 /**
  * @file Userland configuration for e2ed.
  * Do not import anything into this file other than
- * the following types, environment or optional local overrideConfig
+ * the types and values from configurator, or optional local overrideConfig
  * (because the config is compiled separately from the tests themselves).
  */
 
-import {RunEnvironment, runEnvironment} from 'e2ed/environment';
-
-import type {Config} from 'e2ed/types';
+import {type Config, RunEnvironment, runEnvironment} from 'e2ed/configurator';
 
 const isLocalRun = runEnvironment === RunEnvironment.Local;
 
@@ -34,7 +32,7 @@ const config: Config = {
 
 try {
   // eslint-disable-next-line
-  const {overrideConfig} = require('./overrideConfig');
+  const {overrideConfig}: typeof import('./overrideConfig') = require('./overrideConfig');
 
   Object.assign(config, overrideConfig);
 } catch (error) {

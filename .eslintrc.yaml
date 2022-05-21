@@ -32,11 +32,11 @@ rules:
     - error
     - allow:
         - '**/actions/*'
+        - '**/configurator'
         - '**/constants/internal'
         - '**/context/*'
         - '**/e2ed/*'
         - '**/e2ed/*/*'
-        - '**/environment'
         - '**/types/internal'
         - '**/utils/*'
   import/no-nodejs-modules:

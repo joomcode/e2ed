@@ -1,4 +1,4 @@
-import type {RunEnvironment} from '../constants/internal';
+import type {RunEnvironment} from '../configurator';
 
 import type {FullConfig} from './config';
 import type {E2edRunEvent} from './events';

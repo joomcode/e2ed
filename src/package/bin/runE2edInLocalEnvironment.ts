@@ -3,7 +3,7 @@
  * {@link https://github.com/babel/babel/issues/11964}
  */
 
-import {RunEnvironment, setRunEnvironment} from '../environment';
+import {RunEnvironment, setRunEnvironment} from '../configurator';
 import {registerStartE2edRunEvent, waitForEndE2edRunEvent} from '../utils/events';
 import {generalLog} from '../utils/generalLog';
 import {getFullConfig} from '../utils/getFullConfig';
