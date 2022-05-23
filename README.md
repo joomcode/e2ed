@@ -48,11 +48,17 @@ E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh
 The config is defined in the file `e2ed/config.ts`.
 You can locally override some config fields in an `e2ed/overrideConfig.ts` file that is not included in the repository.
 
-#### Required config fields
+#### Base config fields
+
+`concurrency: number`: the number of browser windows in which tests will run in parallel.
 
 `liteReportFileName: string | null`: the name of the file under which, after running the tests,
 the lite JSON report will be saved in the `e2ed/reports` directory, for example, `lite-report.json`.
 If `null`, the lite report will not be saved.
+
+`maxRetriesCountInDocker: number`: the maximum number of retries to run a test with the command
+`your-project/e2ed/bin/runDocker.sh` (until the test passes).
+For example, if it is equal to three, the test will be run no more than three times.
 
 `printTestLogsInConsole: boolean`: if true, print test logs to the console (literally in console.log).
 
@@ -78,8 +84,6 @@ This parameter can be overridden in the test-specific options.
 
 `E2ED_API_ORIGIN`: origin-part of the backend API url that can be used by tests to create and delete test entities.
 
-`E2ED_CONCURRENCY`: the number of browser windows in which tests will run in parallel (1 by default).
-
 `E2ED_DEBUG`: run e2ed in nodejs-debug mode (`--inspect-brk=0.0.0.0`) if this variable is not empty.
 
 `E2ED_DOCKER_DEBUG_PORT`: debug port when run in docker (9229 by default).
@@ -90,9 +94,6 @@ This parameter can be overridden in the test-specific options.
 
 `E2ED_DOCKER_IMAGE`: the name of the docker image used to run tests with the `your-project/e2ed/bin/runDocker.sh` command
 (`e2ed` by default).
-
-`E2ED_DOCKER_RETRIES`: the maximum number of retries to run a failing test with the `your-project/e2ed/bin/runDocker.sh`
-command (maximum value 50, 5 by default). For example, if it is equal to three, the test will be run no more than three times.
 
 `E2ED_NAVIGATE_STABILIZATION_INTERVAL`: after navigating to the page, `e2ed` will wait until
 the page is stable for the specified time in milliseconds (maximum value 120 000, 2 000 by default).

@@ -6,6 +6,7 @@ import type {DeepReadonly} from './deep';
  * Own e2ed config properties.
  */
 type OwnE2edConfig = Readonly<{
+  maxRetriesCountInDocker: number;
   liteReportFileName: string | null;
   printTestLogsInConsole: boolean;
   reportFileName: string | null;

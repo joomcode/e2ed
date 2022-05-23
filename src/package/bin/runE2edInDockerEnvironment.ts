@@ -1,23 +1,16 @@
 import {RunEnvironment, setRunEnvironment} from '../configurator';
 import {generalLog} from '../utils/generalLog';
-import {getIntegerFromEnvVariable} from '../utils/getIntegerFromEnvVariable';
 import {getAfterRetries, getPrintedRetry, runRetries} from '../utils/retry';
 
 import type {UtcTimeInMs} from '../types/internal';
 
 setRunEnvironment(RunEnvironment.Docker);
 
-const maxRetriesCount = getIntegerFromEnvVariable({
-  defaultValue: 5,
-  maxValue: 50,
-  name: 'E2ED_DOCKER_RETRIES',
-});
-
 const startTimeInMs = Date.now() as UtcTimeInMs;
 
 const retriesState = {
   allTestsCount: 0,
-  maxRetriesCount,
+  maxRetriesCount: 1,
   remainingTests: [],
   retryIndex: 1,
   startTimeInMs,
