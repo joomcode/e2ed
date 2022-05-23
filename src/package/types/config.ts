@@ -11,7 +11,7 @@ type OwnE2edConfig = Readonly<{
   reportFileName: string | null;
   skipTests: SkipTests;
   testLogsFileName: string | null;
-  testRunExecutionTimeout: number;
+  testTimeout: number;
 }>;
 
 /**

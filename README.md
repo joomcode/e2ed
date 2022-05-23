@@ -68,8 +68,9 @@ You can define the `SkipTests` type and `skipTests` processing rules in the hook
 the test logs will be saved in the `e2ed/reports` directory, for example, `test-logs.log`.
 If `null`, the report will not be saved.
 
-`testRunExecutionTimeout: number`: timeout (in milliseconds) for each individual test run.
+`testTimeout: number`: timeout (in milliseconds) for each individual test run.
 If the test run takes longer than this timeout, the test fails and rerun on the next retry.
+This parameter can be overridden in the test-specific options.
 
 ### Environment variables
 
@@ -108,7 +109,7 @@ the page is stable for the specified time in milliseconds (maximum value 120 000
 [license-url]: LICENSE
 [npm-image]: https://img.shields.io/npm/v/e2ed.svg 'e2ed'
 [npm-url]: https://www.npmjs.com/package/e2ed
-[prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg 'Prettier code style'
+[prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg 'Prettier code formatter'
 [prettier-url]: https://prettier.io/
 [typescript-image]: https://img.shields.io/badge/types-TypeScript-blue.svg 'Full TypeScript support'
 [typescript-url]: https://www.typescriptlang.org/

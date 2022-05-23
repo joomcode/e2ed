@@ -64,7 +64,11 @@ export const it = (name: string, options: TestOptions, testFn: TestFn): void => 
       setRunId(runId);
       setRawMeta(options.meta);
 
-      const {clearTimeout, reject, testFnWithReject} = setTestRunTimeout(runId, testFn);
+      const {clearTimeout, reject, testFnWithReject} = setTestRunTimeout({
+        runId,
+        testFn,
+        testTimeout: options.testTimeout,
+      });
 
       testFnClosure = isSkipped ? skippedTestFn : testFnWithReject;
 

@@ -35,6 +35,7 @@ export type TestFn = () => Promise<void>;
  */
 export type TestOptions = DeepReadonly<{
   meta: TestMeta;
+  testTimeout?: number;
 }>;
 
 /**

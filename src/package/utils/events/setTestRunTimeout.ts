@@ -12,11 +12,23 @@ type ClearAndTestFn = Readonly<{
   testFnWithReject: TestFn;
 }>;
 
+type TimeoutAndTestFn = Readonly<{
+  runId: RunId;
+  testFn: TestFn;
+  testTimeout: number | undefined;
+}>;
+
 /**
  * Set TestRun execution timeout (for every TestRun).
  */
-export const setTestRunTimeout = (runId: RunId, testFn: TestFn): ClearAndTestFn => {
-  const {testRunExecutionTimeout} = getFullConfig();
+export const setTestRunTimeout = ({
+  runId,
+  testFn,
+  testTimeout: testTimeoutFromTestOptions,
+}: TimeoutAndTestFn): ClearAndTestFn => {
+  const {testTimeout: testTimeoutFromConfig} = getFullConfig();
+
+  const testTimeout = testTimeoutFromTestOptions ?? testTimeoutFromConfig;
 
   let rejectPromise: ((error: E2EDError) => void) | undefined;
 
@@ -26,16 +38,16 @@ export const setTestRunTimeout = (runId: RunId, testFn: TestFn): ClearAndTestFn 
 
   const testFnWithReject: TestFn = () => Promise.race([testFn(), promise]);
 
-  const id = setTimeout(() => {
+  const timeoutId = setTimeout(() => {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    reject(`TestRun out of time (${testRunExecutionTimeout} ms)`);
-  }, testRunExecutionTimeout);
+    reject(`TestRun out of time (${testTimeout} ms)`);
+  }, testTimeout);
 
   /**
    * Clear TestRun execution timeout.
    */
   const clearTimeout = (): void => {
-    globalThis.clearTimeout(id);
+    globalThis.clearTimeout(timeoutId);
   };
 
   /**

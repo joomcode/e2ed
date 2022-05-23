@@ -12,22 +12,22 @@ const isLocalRun = runEnvironment === RunEnvironment.Local;
 const defaultConcurrency = isLocalRun ? 1 : 5;
 
 const config: Config = {
-  ajaxRequestTimeout: 40000,
-  assertionTimeout: 10000,
-  browserInitTimeout: 30000,
+  ajaxRequestTimeout: 40_000,
+  assertionTimeout: 10_000,
+  browserInitTimeout: 30_000,
   browsers: 'chromium:headless',
   concurrency: Number(process.env.E2ED_CONCURRENCY) || defaultConcurrency,
   liteReportFileName: 'lite-report.json',
-  pageRequestTimeout: 30000,
+  pageRequestTimeout: 30_000,
   port1: 1337,
   port2: 1338,
   printTestLogsInConsole: true,
   reportFileName: 'report.html',
-  selectorTimeout: 10000,
+  selectorTimeout: 10_000,
   skipTests: ['3'],
   src: ['./e2ed/tests/**/*.spec.ts'],
   testLogsFileName: 'test-logs.log',
-  testRunExecutionTimeout: 120000,
+  testTimeout: 90_000,
 };
 
 try {
