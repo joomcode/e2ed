@@ -65,3 +65,12 @@ export function sanitizeHtml(strings: readonly string[], ...values: readonly unk
 
   return createSafeHtmlWithoutSanitize`${html}`;
 }
+
+/**
+ * Sanitize JSON string (simple protection against XSS attacks).
+ * This base client function should not use scope variables (except other base functions).
+ * @internal
+ */
+export function sanitizeJson(json: string): string {
+  return json.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
