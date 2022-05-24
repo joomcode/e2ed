@@ -17,29 +17,35 @@ const fullDate = new Date().toISOString().slice(0, 10);
 const changelogText = readFileSync(changelogPath, 'utf8');
 
 const previousVersion = changelogText.match(/\[v(\d+\.\d+\.\d+)\]/)?.[1] || '';
-const gitOptions = ['log', `HEAD...v${previousVersion}`, '--pretty=tformat:%H%aN %s'];
+const SEPARATOR = '\n'.repeat(64);
+const gitOptions = [
+  'log',
+  `HEAD...v${previousVersion}`,
+  `--pretty=tformat:%H%aN %s%n%b${'%n'.repeat(SEPARATOR.length)}`,
+];
 
-const commitsLines = execFileSync('git', gitOptions, {encoding: 'utf8'}).split('\n');
+const commits = execFileSync('git', gitOptions, {encoding: 'utf8'})
+  .split(SEPARATOR)
+  .map((part) => part.trim())
+  .filter(Boolean);
 
-const commits = commitsLines.map((commit) => {
-  const firstSpaceIndes = commit.indexOf(' ');
-  const hash = commit.slice(0, 40);
-  const authorName = commit.slice(40, firstSpaceIndes);
-  const subject = commit.slice(firstSpaceIndes + 1);
+const markdownCommits = commits.map((commit) => {
+  const [firstLine, ...bodyLines] = commit.split('\n');
 
-  return {authorName, hash, subject};
+  const firstSpaceIndex = firstLine.indexOf(' ');
+  const subject = firstLine.slice(firstSpaceIndex + 1);
+
+  if (/^\d+\.\d+\.\d+$/.test(subject)) {
+    return '';
+  }
+
+  const hash = firstLine.slice(0, 40);
+  const authorName = firstLine.slice(40, firstSpaceIndex);
+
+  const body = bodyLines.length === 0 ? '' : `\n\n  ${bodyLines.join('\n  ')}\n`;
+
+  return `- [${subject}](${repoUrl}/commit/${hash}) ([${authorName}](${repoOrigin}/${authorName}))${body}`;
 });
-
-const commitsWithoutVersionUpdates = commits.filter(
-  ({hash, subject}) => hash && subject && !/^\d+\.\d+\.\d+$/.test(subject),
-);
-
-const commitsLinksText = commitsWithoutVersionUpdates
-  .map(
-    ({authorName, hash, subject}) =>
-      `- [${subject}](${repoUrl}/commit/${hash}) ([${authorName}](${repoOrigin}/${authorName}))`,
-  )
-  .join('\n');
 
 const newChangelogText = `# Changelog
 
@@ -47,7 +53,7 @@ const newChangelogText = `# Changelog
 
 [Full Changelog](${repoUrl}/compare/v${previousVersion}...v${version})
 
-${commitsLinksText}
+${markdownCommits.join('\n')}
 
 ${changelogText.slice(changelogText.search('##'))}`;
 
