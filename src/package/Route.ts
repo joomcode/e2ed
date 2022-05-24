@@ -15,7 +15,7 @@ export abstract class Route<RouteParams> {
    */
   readonly params: RouteParams;
 
-  readonly [PARAMS_KEY]: RouteParams;
+  declare readonly [PARAMS_KEY]: RouteParams;
 
   /**
    *  Return true if url matches the page with given parameters.

@@ -23,7 +23,7 @@ export abstract class Page<PageParams = undefined> {
    */
   readonly pageParams: PageParams;
 
-  readonly [PARAMS_KEY]: PageParams;
+  declare readonly [PARAMS_KEY]: PageParams;
 
   /**
    * Optional initialization (asynchronous or synchronous) of the page after
