@@ -1,5 +1,25 @@
 # Changelog
 
+## [v0.10.7](https://github.com/joomcode/e2ed/tree/v0.10.7) (2022-05-24)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.6...v0.10.7)
+
+- [chore: update TypeScript to 4.7.2](https://github.com/joomcode/e2ed/commit/d26960f23948d37b1a7ebd9e4622c12652597249) ([uid11](https://github.com/uid11))
+
+  Fixed two bugs that occurred with computed class properties not initialized in the constructor.
+
+- [feat: write commit body to CHANGELOG.md](https://github.com/joomcode/e2ed/commit/493fafad74165856447726c09379a6f51891d380) ([uid11](https://github.com/uid11))
+
+  The commit body (if any) is displayed in the CHANGELOG.md under the link to commit.
+
+- [feat: add field maxRetriesCountInDocker to userland config](https://github.com/joomcode/e2ed/commit/a1493a4195f6dff771aeeffd84925482314aa48f) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (@typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/d31dad9a1d1e19e2a89c1e4c5b8b11203397a974) ([uid11](https://github.com/uid11))
+- [feat: add testTimeot parameter to test options](https://github.com/joomcode/e2ed/commit/d570653117ef5cd687616ef67c4cb2783bfc8ed6) ([uid11](https://github.com/uid11))
+- [fix: sanitize JSON string for report (use character entity reference instead of < and >)](https://github.com/joomcode/e2ed/commit/8865f065d98c98e07e04d509250c6722db356246) ([uid11](https://github.com/uid11))
+- [feat: export all stuff for config from separate module](https://github.com/joomcode/e2ed/commit/3222f43059885c582ad2bc2a4380e8d967e2fbd9) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (eslint, @types/node)](https://github.com/joomcode/e2ed/commit/e927b00bb014a8a1d399756b8e66c998d13bd64a) ([uid11](https://github.com/uid11))
+- [fix: export enum instead of const enum (for projects with isolatedModules)](https://github.com/joomcode/e2ed/commit/cd1a56e9ac49fa6cbc73696a7a57414e4a6a156e) ([uid11](https://github.com/uid11))
+
 ## [v0.10.6](https://github.com/joomcode/e2ed/tree/v0.10.6) (2022-05-19)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.5...v0.10.6)
