@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.10.8](https://github.com/joomcode/e2ed/tree/v0.10.8) (2022-05-25)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.7...v0.10.8)
+
+- [feat: add parameters pageStabilizationInterval to config and pages](https://github.com/joomcode/e2ed/commit/831453808644a2b8b3289ef4a6c141b31b33a548) ([uid11](https://github.com/uid11))
+
+  This setting overrides the E2ED_NAVIGATE_STABILIZATION_INTERVAL environment variable.
+  In addition, this setting can be overridden on a specific page.
+
 ## [v0.10.7](https://github.com/joomcode/e2ed/tree/v0.10.7) (2022-05-24)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.6...v0.10.7)
