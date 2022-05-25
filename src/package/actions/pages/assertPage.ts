@@ -5,7 +5,7 @@ import {assertValueIsDefined} from '../../utils/asserts';
 import {getCurrentUrl} from '../../utils/getCurrentUrl';
 import {log} from '../../utils/log';
 
-import {waitForNavigateInterfaceStabilization} from '../waitForNavigateInterfaceStabilization';
+import {waitForInterfaceStabilization} from '../waitForInterfaceStabilization';
 
 import {createPageInstance} from './createPageInstance';
 
@@ -19,9 +19,9 @@ export const assertPage = async <SomePageClass extends AnyPageClassType>(
 ): Promise<InstanceType<SomePageClass>> => {
   const [PageClass, pageParams] = args;
 
-  await waitForNavigateInterfaceStabilization();
-
   const page = await createPageInstance(PageClass, pageParams);
+
+  await waitForInterfaceStabilization(page.pageStabilizationInterval);
 
   const route = page.getRoute();
 

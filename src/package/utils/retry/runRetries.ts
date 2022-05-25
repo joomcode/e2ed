@@ -11,7 +11,7 @@ import {getFailedTestsFromJsonReport} from './getFailedTestsFromJsonReport';
 import {getPrintedRetry} from './getPrintedRetry';
 import {runRetry} from './runRetry';
 
-import type {E2edRunEvent, Mutable, UtcTimeInMs} from '../../types/internal';
+import type {E2edRunEvent, UtcTimeInMs} from '../../types/internal';
 
 import type {FailTests, RetriesState} from './types';
 
@@ -31,7 +31,7 @@ export const runRetries = async (retriesState: RetriesState): Promise<void> => {
   const fullConfig = getFullConfig();
   const {maxRetriesCountInDocker: maxRetriesCount} = fullConfig;
 
-  (retriesState as Mutable<RetriesState>).maxRetriesCount = maxRetriesCount;
+  Object.assign<RetriesState, Partial<RetriesState>>(retriesState, {maxRetriesCount});
 
   let {concurrency} = fullConfig;
   let previousTestsString = '';

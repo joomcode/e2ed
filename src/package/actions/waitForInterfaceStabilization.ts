@@ -29,7 +29,8 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
 
   const CHECK_INTERVAL_IN_MS = 250;
   const TIMEOUT_IN_MS = 40_000;
-  const COUNT_OF_NODES = 6;
+  const COUNT_OF_POINTED_NODES = 8;
+  const COUNT_OF_TEST_ID_NODES = 50;
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const getInterfaceState = (): string => {
@@ -37,19 +38,19 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
     const elements: Element[] = [document.documentElement];
     const elementsWithDataTestId = document.querySelectorAll('[data-test-id]');
     const elementsWithDataTestid = document.querySelectorAll('[data-testid]');
-    const deltaX = innerWidth / (COUNT_OF_NODES + 1);
-    const deltaY = innerHeight / (COUNT_OF_NODES + 1);
+    const deltaX = innerWidth / (COUNT_OF_POINTED_NODES + 1);
+    const deltaY = innerHeight / (COUNT_OF_POINTED_NODES + 1);
 
-    for (let i = 0; i < elementsWithDataTestId.length && i < 35; i += 1) {
+    for (let i = 0; i < elementsWithDataTestId.length && i < COUNT_OF_TEST_ID_NODES; i += 1) {
       elements.push(elementsWithDataTestId[i]);
     }
 
-    for (let i = 0; i < elementsWithDataTestid.length && i < 35; i += 1) {
-      elements.push(elementsWithDataTestId[i]);
+    for (let i = 0; i < elementsWithDataTestid.length && i < COUNT_OF_TEST_ID_NODES; i += 1) {
+      elements.push(elementsWithDataTestid[i]);
     }
 
-    for (let xIndex = 1; xIndex <= COUNT_OF_NODES; xIndex += 1) {
-      for (let yIndex = 1; yIndex <= COUNT_OF_NODES; yIndex += 1) {
+    for (let xIndex = 1; xIndex <= COUNT_OF_POINTED_NODES; xIndex += 1) {
+      for (let yIndex = 1; yIndex <= COUNT_OF_POINTED_NODES; yIndex += 1) {
         const element = document.elementFromPoint(deltaX * xIndex, deltaY * yIndex);
 
         if (element) {

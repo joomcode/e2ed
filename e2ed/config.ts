@@ -20,6 +20,7 @@ const config: Config = {
   liteReportFileName: 'lite-report.json',
   maxRetriesCountInDocker: Number(process.env.E2ED_DOCKER_RETRIES) || 1,
   pageRequestTimeout: 30_000,
+  pageStabilizationInterval: Number(process.env.E2ED_NAVIGATE_STABILIZATION_INTERVAL) || 2_000,
   port1: 1337,
   port2: 1338,
   printTestLogsInConsole: true,

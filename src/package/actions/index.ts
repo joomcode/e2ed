@@ -9,7 +9,6 @@ export * from './getBrowserConsoleMessages';
 export * from './hover';
 export * from './pages';
 export * from './pressKey';
-export * from './reloadPage';
 export * from './resizeWindow';
 export * from './rightClick';
 export * from './scroll';
@@ -23,7 +22,6 @@ export * from './takeElementScreenshot';
 export * from './takeScreenshot';
 export * from './typeText';
 export * from './waitForInterfaceStabilization';
-export * from './waitForNavigateInterfaceStabilization';
 
 /**
  * Userland actions. This exports must be the last.

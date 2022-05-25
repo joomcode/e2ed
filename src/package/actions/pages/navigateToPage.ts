@@ -3,7 +3,7 @@ import {setPageLoaded} from '../../context/pageLoaded';
 import {navigateTo} from '../../hooks';
 import {log} from '../../utils/log';
 
-import {waitForNavigateInterfaceStabilization} from '../waitForNavigateInterfaceStabilization';
+import {waitForInterfaceStabilization} from '../waitForInterfaceStabilization';
 
 import {createPageInstance} from './createPageInstance';
 
@@ -42,7 +42,7 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
 
   await navigateTo(url);
 
-  await waitForNavigateInterfaceStabilization();
+  await waitForInterfaceStabilization(page.pageStabilizationInterval);
 
   if (page.afterNavigateToPage) {
     await page.afterNavigateToPage();

@@ -1,5 +1,6 @@
 import {CREATE_PAGE_TOKEN} from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
+import {getFullConfig} from './utils/getFullConfig';
 
 import type {Route} from './Route';
 import type {PageClassTypeArgs, PARAMS} from './types/internal';
@@ -16,12 +17,23 @@ export abstract class Page<PageParams = undefined> {
     assertValueIsTrue(createPageToken === CREATE_PAGE_TOKEN);
 
     this.pageParams = pageParams as PageParams;
+
+    const {pageStabilizationInterval} = getFullConfig();
+
+    this.pageStabilizationInterval = pageStabilizationInterval;
   }
 
   /**
    * Immutable page parameters.
    */
   readonly pageParams: PageParams;
+
+  /**
+   * After navigating to the page, `e2ed` will wait until
+   * the page is stable for the specified time in millisecond,
+   * and only after that it will consider the page loaded.
+   */
+  readonly pageStabilizationInterval: number;
 
   declare readonly [PARAMS_KEY]: PageParams;
 

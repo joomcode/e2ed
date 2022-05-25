@@ -25,6 +25,8 @@ export class Main extends Page<CustomPageParams> {
     return new MainRoute({language});
   }
 
+  override pageStabilizationInterval = 2_500;
+
   /**
    * Search input.
    */

@@ -60,6 +60,10 @@ If `null`, the lite report will not be saved.
 `your-project/e2ed/bin/runDocker.sh` (until the test passes).
 For example, if it is equal to three, the test will be run no more than three times.
 
+`pageStabilizationInterval: number`: after navigating to the page, `e2ed` will wait until
+the page is stable for the specified time in millisecond, and only after that it will consider the page loaded.
+This parameter can be overridden on a specific page instance.
+
 `printTestLogsInConsole: boolean`: if true, print test logs to the console (literally in console.log).
 
 `reportFileName: string | null`: the name of the file under which, after running the tests,
@@ -94,9 +98,6 @@ This parameter can be overridden in the test-specific options.
 
 `E2ED_DOCKER_IMAGE`: the name of the docker image used to run tests with the `your-project/e2ed/bin/runDocker.sh` command
 (`e2ed` by default).
-
-`E2ED_NAVIGATE_STABILIZATION_INTERVAL`: after navigating to the page, `e2ed` will wait until
-the page is stable for the specified time in milliseconds (maximum value 120 000, 2 000 by default).
 
 ## License
 
