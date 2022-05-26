@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.10.9](https://github.com/joomcode/e2ed/tree/v0.10.9) (2022-05-26)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.8...v0.10.9)
+
+- [feat: add createTestId utility for creating locators](https://github.com/joomcode/e2ed/commit/70ab9b95ca7567f85e82222a47eb6915a6a2721c) ([uid11](https://github.com/uid11))
+
 ## [v0.10.8](https://github.com/joomcode/e2ed/tree/v0.10.8) (2022-05-25)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.7...v0.10.8)
