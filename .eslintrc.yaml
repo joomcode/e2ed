@@ -58,7 +58,13 @@ rules:
   import/no-unused-modules:
     - error
     - ignoreExports:
-        [src/package/context, src/package/esm, src/package/testcafe.ts, src/package/types/index.ts]
+        [
+          src/package/context,
+          src/package/createTestId.ts,
+          src/package/esm,
+          src/package/testcafe.ts,
+          src/package/types/index.ts,
+        ]
       missingExports: false
       unusedExports: true
   import/order: off

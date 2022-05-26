@@ -10,6 +10,7 @@ import {
 import {getRandomId} from './utils/getRandomId';
 import {getRelativeTestFilePath} from './utils/getRelativeTestFilePath';
 import {getTestRunErrors} from './utils/getTestRunErrors';
+import {isTestSkipped} from './hooks';
 import {fixture, test} from './testcafe';
 
 import type {Inner} from 'testcafe-without-typecheck';
@@ -49,9 +50,7 @@ export const it = (name: string, options: TestOptions, testFn: TestFn): void => 
       const testStaticOptions: TestStaticOptions = {filePath, name, options};
       const runTestOwnParams = {...testStaticOptions, previousRunId, runLabel, utcTimeInMs};
 
-      // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
-      const hooks: typeof import('./hooks') = require('./hooks');
-      const isSkipped = hooks.isTestSkipped(testStaticOptions);
+      const isSkipped = isTestSkipped(testStaticOptions);
 
       if (previousRunId !== undefined) {
         const previousTestRun = getTestRunEvent(previousRunId);

@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
     "declaration": true,
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
@@ -18,8 +19,8 @@
     "resolveJsonModule": true,
     "rootDir": ".",
     "skipLibCheck": false,
-    "stripInternal": true,
     "strict": true,
+    "stripInternal": true,
     "target": "ES2016",
     "types": ["node"]
   },

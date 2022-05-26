@@ -9,7 +9,7 @@ import type {AnyPageClassType} from '../../types/internal';
 const clientReloadPage = ClientFunction(() => window.location.reload(), 'reloadPage');
 
 /**
- * Reload page.
+ * Reloads the page, taking into account its stabilization interval.
  */
 export const reloadPage = async (page: InstanceType<AnyPageClassType>): Promise<void> => {
   await log('Reload page "page.constructor.name"', LogEventType.InternalAction);

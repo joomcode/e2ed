@@ -1,6 +1,5 @@
 import {LogEventType} from '../../constants/internal';
 import {setPageLoaded} from '../../context/pageLoaded';
-import {navigateTo} from '../../hooks';
 import {log} from '../../utils/log';
 
 import {waitForInterfaceStabilization} from '../waitForInterfaceStabilization';
@@ -40,7 +39,10 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
     await page.beforeNavigateToPage();
   }
 
-  await navigateTo(url);
+  // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
+  const hooks: typeof import('../../hooks') = require('../../hooks');
+
+  await hooks.navigateTo(url);
 
   await waitForInterfaceStabilization(page.pageStabilizationInterval);
 

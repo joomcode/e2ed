@@ -7,6 +7,7 @@ RUN mkdir -p /node_modules/@types
 COPY ./node_modules/testcafe-without-typecheck /node_modules/testcafe-without-typecheck
 
 COPY ./node_modules/@types/node /node_modules/@types/node
+COPY ./node_modules/create-test-id /node_modules/create-test-id
 COPY ./node_modules/pngjs /node_modules/pngjs
 COPY ./node_modules/typescript /node_modules/typescript
 
