@@ -9,7 +9,16 @@ export class E2EDError extends Error {
   constructor(message: string, params?: Params) {
     const printedString = valueToString(params);
 
-    super(`${message} ${printedString}`);
+    const constructorArgs: [message: string, options?: {cause: unknown}] = [
+      `${message} ${printedString}`,
+    ];
+
+    if (params?.cause) {
+      constructorArgs.push({cause: params?.cause});
+    }
+
+    // @ts-expect-error: constructor Error still doesn't support second argument
+    super(...constructorArgs);
 
     Object.assign(this, params);
     Object.defineProperty(this, 'message', {
