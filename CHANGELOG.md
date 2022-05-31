@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.10.10](https://github.com/joomcode/e2ed/tree/v0.10.10) (2022-05-31)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.9...v0.10.10)
+
+- [chore: update TestCafe to 1.19.0 (i.e. testcafe-without-typecheck)](https://github.com/joomcode/e2ed/commit/78e42b65b07aae9d8f236c3f0b999e60edd4f270) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (@typescript-eslint/\*, etc)](https://github.com/joomcode/e2ed/commit/80e40977cac93b9e6db23d16a0c89f1ba4e8fba0) ([uid11](https://github.com/uid11))
+- [feat: read e2ed startTime from e2ed/configurator](https://github.com/joomcode/e2ed/commit/988efa8b1fc8c56aefa9c06391fe418df1ce2500) ([uid11](https://github.com/uid11))
+- [feat: support second argument in Error constructor (cause field)](https://github.com/joomcode/e2ed/commit/28865efc2734dd58c5b325d7ee2123b15bb8ba21) ([uid11](https://github.com/uid11))
+
 ## [v0.10.9](https://github.com/joomcode/e2ed/tree/v0.10.9) (2022-05-26)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.8...v0.10.9)
