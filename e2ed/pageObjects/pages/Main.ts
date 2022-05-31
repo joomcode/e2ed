@@ -9,7 +9,7 @@ import type {GetParamsType, Language} from 'e2ed/types';
 type RouteParams = GetParamsType<MainRoute>;
 type CustomPageParams = undefined | Partial<RouteParams>;
 
-const mainPageTestId = createTestId<{header: unknown}>({prefix: 'google'});
+const mainPageTestId = createTestId<{header: unknown}>('google');
 
 /**
  * The main (index) page.

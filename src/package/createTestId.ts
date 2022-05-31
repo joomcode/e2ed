@@ -1,1 +1,1 @@
-export {createTestId} from 'create-test-id';
+export {type TestId, createTestId, createTestIdForProduction} from 'create-test-id';
