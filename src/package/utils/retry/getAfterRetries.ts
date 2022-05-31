@@ -1,3 +1,5 @@
+import {startTimeInMs} from '../../configurator';
+
 import {registerEndE2edRunEvent} from '../events';
 import {generalLog} from '../generalLog';
 
@@ -12,13 +14,7 @@ import type {RetriesState} from './types';
  * @internal
  */
 export const getAfterRetries =
-  ({
-    allTestsCount,
-    maxRetriesCount,
-    remainingTests,
-    retryIndex,
-    startTimeInMs,
-  }: RetriesState): (() => void) =>
+  ({allTestsCount, maxRetriesCount, remainingTests, retryIndex}: RetriesState): (() => void) =>
   () => {
     const hasFailedTests = retryIndex > maxRetriesCount;
 

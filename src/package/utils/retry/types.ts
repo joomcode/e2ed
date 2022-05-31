@@ -1,4 +1,4 @@
-import type {FailTest, UtcTimeInMs} from '../../types/internal';
+import type {FailTest} from '../../types/internal';
 
 /**
  * Fail tests with all tests count.
@@ -18,5 +18,4 @@ export type RetriesState = {
   readonly maxRetriesCount: number;
   remainingTests: readonly FailTest[];
   retryIndex: number;
-  readonly startTimeInMs: UtcTimeInMs;
 };

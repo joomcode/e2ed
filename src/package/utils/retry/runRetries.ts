@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
 
+import {startTimeInMs} from '../../configurator';
+
 import {registerStartE2edRunEvent} from '../events';
 import {generalLog} from '../generalLog';
 import {getFullConfig} from '../getFullConfig';
@@ -20,8 +22,6 @@ import type {FailTests, RetriesState} from './types';
  * @internal
  */
 export const runRetries = async (retriesState: RetriesState): Promise<void> => {
-  const {startTimeInMs} = retriesState;
-
   const e2edRunEvent: E2edRunEvent = {
     utcTimeInMs: startTimeInMs,
   };

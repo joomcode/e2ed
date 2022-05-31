@@ -3,14 +3,14 @@
  * {@link https://github.com/babel/babel/issues/11964}
  */
 
-import {RunEnvironment, setRunEnvironment} from '../configurator';
+import {RunEnvironment, setRunEnvironment, startTimeInMs} from '../configurator';
 import {registerStartE2edRunEvent, waitForEndE2edRunEvent} from '../utils/events';
 import {generalLog} from '../utils/generalLog';
 import {getFullConfig} from '../utils/getFullConfig';
 import {hasBrowsersArg} from '../utils/hasBrowsersArg';
 import {getRunLabel} from '../utils/runLabel';
 
-import type {E2edRunEvent, UtcTimeInMs} from '../types/internal';
+import type {E2edRunEvent} from '../types/internal';
 
 try {
   // eslint-disable-next-line
@@ -27,7 +27,7 @@ try {
 setRunEnvironment(RunEnvironment.Local);
 
 const e2edRunEvent: E2edRunEvent = {
-  utcTimeInMs: Date.now() as UtcTimeInMs,
+  utcTimeInMs: startTimeInMs,
 };
 
 void registerStartE2edRunEvent(e2edRunEvent).then(() => {

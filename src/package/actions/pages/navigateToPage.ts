@@ -27,10 +27,10 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
   await log(
     `Will navigate to the page "${PageClass.name}"`,
     {
+      pageInstanceCreatedInMs: startNavigateTimeInMs - startTimeInMs,
       pageParams,
       routeParams: route.params,
       url,
-      willNavigateToExecutedInMs: startNavigateTimeInMs - startTimeInMs,
     },
     LogEventType.InternalCore,
   );
