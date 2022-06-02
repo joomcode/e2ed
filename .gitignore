@@ -1,4 +1,4 @@
-.cache-eslint
+.lint-cache
 bin/TestCafeFork/package
 build
 e2ed/reports/

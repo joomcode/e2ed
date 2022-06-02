@@ -7,7 +7,7 @@ import {assertValueIsDefined, getCurrentUrl} from 'e2ed/utils';
 const language = 'en';
 const query = 'foo';
 
-it('exists', {meta: {testId: '1'}, testTimeout: 50000}, async () => {
+it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
   await scroll(0, 200);
 
   await expect(1, 'throw an error when actual value do not fit expected value')

@@ -5,7 +5,9 @@
  * (because the config is compiled separately from the tests themselves).
  */
 
-import {type Config, RunEnvironment, runEnvironment} from 'e2ed/configurator';
+import {RunEnvironment, runEnvironment} from 'e2ed/configurator';
+
+import type {Config} from 'e2ed/configurator';
 
 const isLocalRun = runEnvironment === RunEnvironment.Local;
 
@@ -34,7 +36,7 @@ const config: Config = {
 
 try {
   // eslint-disable-next-line
-  const {overrideConfig}: typeof import('./overrideConfig') = require('./overrideConfig');
+  const {overrideConfig} = require('./overrideConfig');
 
   Object.assign(config, overrideConfig);
 } catch (error) {
