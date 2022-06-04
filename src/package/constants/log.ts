@@ -24,8 +24,4 @@ export enum LogEventStatus {
 /**
  * LogEvent types for which a screenshot is taken.
  */
-export const SCREENSHOT_EVENT_TYPES = [
-  LogEventType.Action,
-  LogEventType.Assert,
-  LogEventType.InternalAction,
-];
+export const SCREENSHOT_EVENT_TYPES: readonly LogEventType[] = [];
