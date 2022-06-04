@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.8.6-testcafe.1.19.0](https://github.com/uid11/e2ed/tree/v0.8.6-testcafe.1.19.0) (2022-06-04)
+
+[Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.6...v0.8.6-testcafe.1.19.0)
+
+- [chore: temporary remove npm audit check](https://github.com/uid11/e2ed/commit/fa82d9b17fffd60c42e1f45e0a18d0708b410af6)
+- [chore: install TestCafe@1.19.0](https://github.com/uid11/e2ed/commit/4c28d83d69097b51588bc743080f15df641f1b69)
+
 ## [v0.8.6](https://github.com/uid11/e2ed/tree/v0.8.6) (2022-01-11)
 
 [Full Changelog](https://github.com/uid11/e2ed/compare/v0.8.5...v0.8.6)

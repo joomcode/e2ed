@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.8.6",
+  "version": "0.8.6-testcafe.1.19.0",
   "description": "E2E utils",
   "keywords": [
     "E2E",
