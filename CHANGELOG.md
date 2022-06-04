@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.10.11](https://github.com/joomcode/e2ed/tree/v0.10.11) (2022-06-04)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.10...v0.10.11)
+
+- [chore: restore TestCafe@1.18.6](https://github.com/joomcode/e2ed/commit/7ebaae60e95d2ae1ffdcd51551a97881ead821fa) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (eslint, typescript, @types/node)](https://github.com/joomcode/e2ed/commit/4fd9ac377654536cbe39e527bd5dcc9f5cec2ac4) ([uid11](https://github.com/uid11))
+- [fix: remove environment variable E2ED_NAVIGATE_STABILIZATION_INTERVAL](https://github.com/joomcode/e2ed/commit/5742571cdb9f1d8279ab9ceaaa8ebdb016b252c2) ([uid11](https://github.com/uid11))
+- [fix: support TS 4.4](https://github.com/joomcode/e2ed/commit/8bcc87af740ea03659c7420d0e1358e75ee27a70) ([uid11](https://github.com/uid11))
+
 ## [v0.10.10](https://github.com/joomcode/e2ed/tree/v0.10.10) (2022-05-31)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.9...v0.10.10)
