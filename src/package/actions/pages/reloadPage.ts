@@ -12,7 +12,7 @@ const clientReloadPage = ClientFunction(() => window.location.reload(), 'reloadP
  * Reloads the page, taking into account its stabilization interval.
  */
 export const reloadPage = async (page: InstanceType<AnyPageClassType>): Promise<void> => {
-  await log('Reload page "page.constructor.name"', LogEventType.InternalAction);
+  await log(`Reload page "${page.constructor.name}"`, LogEventType.InternalAction);
 
   await clientReloadPage();
 
