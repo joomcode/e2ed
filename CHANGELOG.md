@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.10.12](https://github.com/joomcode/e2ed/tree/v0.10.12) (2022-06-04)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.11...v0.10.12)
+
+- [chore: update TestCafe to 1.19.0](https://github.com/joomcode/e2ed/commit/dbb7445205f9c352870238a74a4c993800020db9) ([uid11](https://github.com/uid11))
+
 ## [v0.10.11](https://github.com/joomcode/e2ed/tree/v0.10.11) (2022-06-04)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.10...v0.10.11)
