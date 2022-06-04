@@ -43,7 +43,7 @@
   },
   "scripts": {
     "precheck:all": "npm run lint:clear:cache && npm run build",
-    "check:all": "npm audit && npm run check:testcafe:version && npm run lint && npm test",
+    "check:all": "npm run check:testcafe:version && npm run lint && npm test",
     "check:testcafe:version": "node build/checkTestCafeVersion.js",
     "lint": "npm run parallel lint:es lint:prettier lint:types",
     "lint:clear:cache": "rm -f .cache-eslint",
