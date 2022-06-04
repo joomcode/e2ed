@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.10.13](https://github.com/joomcode/e2ed/tree/v0.10.13) (2022-06-04)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.12...v0.10.13)
+
+- [fix: do not take screenshots during log event](https://github.com/joomcode/e2ed/commit/b908b4ef2eb9c92ffd89c2621661dddd79c02aab) ([uid11](https://github.com/uid11))
+
 ## [v0.10.12](https://github.com/joomcode/e2ed/tree/v0.10.12) (2022-06-04)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.11...v0.10.12)
