@@ -1,10 +1,12 @@
-FROM testcafe/testcafe:1.18.1
+FROM testcafe/testcafe:1.19.0
 
 COPY ./node_modules/testcafe-without-typecheck /usr/lib/node_modules/testcafe-without-typecheck
 
 COPY ./node_modules/pngjs /usr/lib/node_modules/pngjs
 
 COPY ./node_modules/typescript /usr/lib/node_modules/typescript
+
+COPY ./node_modules /node_modules
 
 COPY ./build/node_modules/e2ed /opt/e2ed
 
