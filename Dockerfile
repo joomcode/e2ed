@@ -1,4 +1,4 @@
-FROM testcafe/testcafe:1.19.0
+FROM testcafe/testcafe:1.18.6
 
 USER root
 
@@ -17,7 +17,7 @@ RUN rm -rf /usr/lib/node_modules/testcafe/node_modules/@types/node
 RUN rm -rf /usr/lib/node_modules/testcafe/node_modules/pngjs
 RUN rm -rf /usr/lib/node_modules/testcafe/node_modules/typescript
 
-RUN ln -s /usr/lib/node_modules/testcafe/node_modules /node_modules/testcafe-without-typecheck/node_modules
+RUN cp -r /usr/lib/node_modules/testcafe/node_modules/* /node_modules
 
 USER user
 
