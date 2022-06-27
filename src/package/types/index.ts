@@ -1,12 +1,12 @@
 /**
+ * External types checks in the e2ed directory of the project.
+ */
+export * from './externalTypesChecks';
+
+/**
  * Internal types (for using in the e2ed package and in userland).
  */
 export * from './internal';
-
-/**
- * External hooks types (for using in userland).
- */
-export * from './externalHooks';
 
 /**
  * Userland types. This export must be the last.
