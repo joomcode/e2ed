@@ -20,7 +20,7 @@ export const writeHtmlReport = async (reportData: ReportData): Promise<void> => 
   const reportHtml = renderReportToHtml(reportData);
   const {reportFileName} = reportData;
 
-  assertValueIsNotNull(reportFileName, 'reportFileName is null');
+  assertValueIsNotNull(reportFileName, 'reportFileName is not null');
 
   const reportFilePath = join(REPORTS_DIRECTORY_PATH, reportFileName);
 

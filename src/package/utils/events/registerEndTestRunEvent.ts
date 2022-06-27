@@ -18,7 +18,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
 
   const testRunEvent = getTestRunEvent(runId);
 
-  assertValueIsTrue(testRunEvent.runId === runId, 'runIds are not equal', {
+  assertValueIsTrue(testRunEvent.runId === runId, 'runIds are equal', {
     endTestRunEvent,
     testRunEvent,
   });

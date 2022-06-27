@@ -12,7 +12,7 @@ export const getLiteReport = (reportData: ReportData): LiteReport => {
   const {endTimeInMs, errors, exitStatus, liteReportFileName, retries, startInfo, startTimeInMs} =
     reportData;
 
-  assertValueIsNotNull(liteReportFileName, 'liteReportFileName is null');
+  assertValueIsNotNull(liteReportFileName, 'liteReportFileName is not null');
 
   const liteRetries = retries.map(getLiteRetry);
 

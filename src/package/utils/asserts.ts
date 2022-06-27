@@ -7,11 +7,24 @@ import type {LogParams} from '../types/internal';
  */
 export function assertValueIsDefined<T>(
   value: T,
-  message: string,
+  check: string,
   payload?: LogParams,
 ): asserts value is Exclude<T, undefined> {
   if (value === undefined) {
-    throw new E2EDError('Asserted value is undefined', {message, payload});
+    throw new E2EDError('Asserted value is undefined', {check, payload});
+  }
+}
+
+/**
+ * Asserts that the value is undefined (is not defined).
+ */
+export function assertValueIsUndefined<T>(
+  value: T,
+  check: string,
+  payload?: LogParams,
+): asserts value is T & undefined {
+  if (value !== undefined) {
+    throw new E2EDError('Asserted value is defined', {check, payload});
   }
 }
 
@@ -20,11 +33,24 @@ export function assertValueIsDefined<T>(
  */
 export function assertValueIsNotNull<T>(
   value: T,
-  message: string,
+  check: string,
   payload?: LogParams,
 ): asserts value is Exclude<T, null> {
   if (value === null) {
-    throw new E2EDError('Asserted value is null', {message, payload});
+    throw new E2EDError('Asserted value is null', {check, payload});
+  }
+}
+
+/**
+ * Asserts that the value is null.
+ */
+export function assertValueIsNull<T>(
+  value: T,
+  check: string,
+  payload?: LogParams,
+): asserts value is null & T {
+  if (value !== null) {
+    throw new E2EDError('Asserted value is not null', {check, payload});
   }
 }
 
@@ -33,11 +59,11 @@ export function assertValueIsNotNull<T>(
  */
 export function assertValueIsFalse<T>(
   value: T | false,
-  message: string,
+  check: string,
   payload?: LogParams,
 ): asserts value is false {
   if (value !== false) {
-    throw new E2EDError('Asserted value is not false', {message, payload, value});
+    throw new E2EDError('Asserted value is not false', {check, payload, value});
   }
 }
 
@@ -46,10 +72,10 @@ export function assertValueIsFalse<T>(
  */
 export function assertValueIsTrue<T>(
   value: T | true,
-  message: string,
+  check: string,
   payload?: LogParams,
 ): asserts value is true {
   if (value !== true) {
-    throw new E2EDError('Asserted value is not true', {message, payload, value});
+    throw new E2EDError('Asserted value is not true', {check, payload, value});
   }
 }

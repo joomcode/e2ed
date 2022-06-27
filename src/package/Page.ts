@@ -14,7 +14,7 @@ export abstract class Page<PageParams = undefined> {
   constructor(...args: PageClassTypeArgs<PageParams>) {
     const [createPageToken, pageParams] = args;
 
-    assertValueIsTrue(createPageToken === CREATE_PAGE_TOKEN, 'createPageToken is incorrect', {
+    assertValueIsTrue(createPageToken === CREATE_PAGE_TOKEN, 'createPageToken is correct', {
       createPageToken,
       pageParams,
     });

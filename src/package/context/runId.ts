@@ -15,7 +15,7 @@ const [getRawRunId, setRunId] = useContext<RunId>();
 export const getRunId = (): RunId => {
   const runId = getRawRunId();
 
-  assertValueIsDefined(runId, 'runId is undefined');
+  assertValueIsDefined(runId, 'runId is defined');
 
   return runId;
 };

@@ -23,7 +23,7 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
   const {length} = reportData.fullTestRuns;
   const {reportFileName} = reportData;
 
-  assertValueIsNotNull(reportFileName, 'reportFileName is null');
+  assertValueIsNotNull(reportFileName, 'reportFileName is not null');
 
   const retries = getRetriesProps(reportData);
 

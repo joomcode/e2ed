@@ -20,7 +20,7 @@ export const forceEndTestRunEvent = async (runId: RunId): Promise<void> => {
 
   generalLog('Force end TestRun event', {testRunEvent: {...testRunEvent, logEvents: undefined}});
 
-  assertValueIsTrue(testRunEvent.runId === runId, 'runIds are not equal', {runId, testRunEvent});
+  assertValueIsTrue(testRunEvent.runId === runId, 'runIds are equal', {runId, testRunEvent});
 
   const utcTimeInMs = Date.now() as UtcTimeInMs;
 

@@ -13,7 +13,7 @@ export const deepMerge = <T>(x: T, y: DeepPartial<T>): T => {
   for (const key of Object.keys(x)) {
     const descriptor = Object.getOwnPropertyDescriptor(x, key);
 
-    assertValueIsDefined(descriptor, 'descriptor is undefined', {key, x});
+    assertValueIsDefined(descriptor, 'descriptor is defined', {key, x});
 
     Object.defineProperty(result, key, descriptor);
   }
@@ -24,7 +24,7 @@ export const deepMerge = <T>(x: T, y: DeepPartial<T>): T => {
     } else {
       const descriptor = Object.getOwnPropertyDescriptor(y, key);
 
-      assertValueIsDefined(descriptor, 'descriptor is undefined', {key, y});
+      assertValueIsDefined(descriptor, 'descriptor is defined', {key, y});
 
       Object.defineProperty(result, key, descriptor);
     }

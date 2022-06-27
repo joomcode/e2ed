@@ -36,11 +36,11 @@ export const assertThatTestNamesAndFilePathsAreUniqueInOneRetry = (
     let currentTestRun: TestRunWithHooks | undefined = testRunWithHooks;
 
     while (currentTestRun && !(currentTestRun.runId in visited)) {
-      assertValueIsTrue(currentTestRun.filePath === filePath, 'filePaths are not equal', {
+      assertValueIsTrue(currentTestRun.filePath === filePath, 'filePaths are equal', {
         currentTestRun,
         filePath,
       });
-      assertValueIsTrue(currentTestRun.name === name, 'names are not equal', {
+      assertValueIsTrue(currentTestRun.name === name, 'names are equal', {
         currentTestRun,
         name,
       });
@@ -54,23 +54,23 @@ export const assertThatTestNamesAndFilePathsAreUniqueInOneRetry = (
 
       assertValueIsTrue(
         currentTestRun !== testRunWithHooks,
-        'currentTestRun equals initial testRunWithHooks',
+        'currentTestRun is not equal to initial testRunWithHooks',
         {currentTestRun},
       );
     }
 
     if (currentTestRun !== undefined) {
-      assertValueIsTrue(currentTestRun.filePath === filePath, 'filePaths are not equals', {
+      assertValueIsTrue(currentTestRun.filePath === filePath, 'filePaths are equals', {
         currentTestRun,
         filePath,
       });
-      assertValueIsTrue(currentTestRun.name === name, 'names are not equals', {
+      assertValueIsTrue(currentTestRun.name === name, 'names are equals', {
         currentTestRun,
         name,
       });
       assertValueIsTrue(
         chainByName[name][0] === currentTestRun,
-        'the chain does not start with currentTestRun',
+        'the chain starts with currentTestRun',
         {chain: chainByName[name], currentTestRun, name},
       );
     }
@@ -93,8 +93,10 @@ export const assertThatTestNamesAndFilePathsAreUniqueInOneRetry = (
       continue;
     }
 
-    assertValueIsFalse(filePath in filePathsHash, 'filePath already visited', {testRunWithHooks});
-    assertValueIsFalse(name in chainByName, 'name already visited', {
+    assertValueIsFalse(filePath in filePathsHash, 'filePath is not visited yet', {
+      testRunWithHooks,
+    });
+    assertValueIsFalse(name in chainByName, 'name is not visited yet', {
       chain: chainByName[name],
       testRunWithHooks,
     });

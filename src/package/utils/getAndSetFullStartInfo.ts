@@ -1,4 +1,4 @@
-import {assertValueIsDefined, assertValueIsTrue} from './asserts';
+import {assertValueIsDefined, assertValueIsUndefined} from './asserts';
 
 import type {FullStartInfo} from '../types/internal';
 
@@ -9,7 +9,7 @@ let fullStartInfo: FullStartInfo | undefined;
  * @internal
  */
 export const getFullStartInfo = (): FullStartInfo => {
-  assertValueIsDefined(fullStartInfo, 'fullStartInfo is undefined');
+  assertValueIsDefined(fullStartInfo, 'fullStartInfo is defined');
 
   return fullStartInfo;
 };
@@ -19,7 +19,7 @@ export const getFullStartInfo = (): FullStartInfo => {
  * @internal
  */
 export const setFullStartInfo = (info: FullStartInfo): void => {
-  assertValueIsTrue(fullStartInfo === undefined, 'fullStartInfo is defined', {fullStartInfo});
+  assertValueIsUndefined(fullStartInfo, 'fullStartInfo is undefined', {fullStartInfo});
 
   fullStartInfo = info;
 };
