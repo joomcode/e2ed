@@ -2,6 +2,7 @@
 set -e
 
 DIR="${WORKDIR:-$PWD}"
+MOUNTDIR="${MOUNTDIR:-$DIR}"
 DOCKER_IMAGE="${E2ED_DOCKER_IMAGE:-e2ed}"
 DEBUG_PORT="${E2ED_DOCKER_DEBUG_PORT:-9229}"
 
@@ -14,7 +15,7 @@ fi
 
 docker run --rm $PORT \
        --workdir $DIR \
-       --volume $DIR:$DIR \
+       --volume $MOUNTDIR:$MOUNTDIR \
        --env E2ED_ORIGIN=$E2ED_ORIGIN \
        --env E2ED_API_ORIGIN=$E2ED_API_ORIGIN \
        --env E2ED_CONCURRENCY=$E2ED_CONCURRENCY \

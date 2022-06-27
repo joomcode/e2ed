@@ -9,7 +9,12 @@ export type LogPayload = {
 };
 
 /**
- * Type for generallog log.
+ * Log parameters for E2Ederror and assert functions.
+ */
+export type LogParams = Record<string, unknown>;
+
+/**
+ * Type for generalLog log.
  */
 export type GeneralLog = (message: string, payload?: LogPayload) => void;
 

@@ -13,7 +13,7 @@ export const [getRawMeta, setRawMeta] = useContext<TestMeta>();
 export const getMeta = (): TestMeta => {
   const meta = getRawMeta();
 
-  assertValueIsDefined(meta);
+  assertValueIsDefined(meta, 'meta is undefined');
 
   return meta;
 };

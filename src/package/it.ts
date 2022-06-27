@@ -82,7 +82,7 @@ export const it = (name: string, options: TestOptions, testFn: TestFn): void => 
         runId,
       });
     })(name, () => {
-      assertValueIsDefined(testFnClosure);
+      assertValueIsDefined(testFnClosure, 'testFnClosure is undefined', {previousRunId});
 
       return testFnClosure();
     })

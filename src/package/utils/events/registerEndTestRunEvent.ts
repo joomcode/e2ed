@@ -18,7 +18,10 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
 
   const testRunEvent = getTestRunEvent(runId);
 
-  assertValueIsTrue(testRunEvent.runId === runId);
+  assertValueIsTrue(testRunEvent.runId === runId, 'runIds are not equal', {
+    endTestRunEvent,
+    testRunEvent,
+  });
 
   const {
     clearTimeout,
@@ -30,7 +33,11 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
     ...restTestRunEvent
   } = testRunEvent;
 
-  assertValueIsTrue(originalTestRunErrors === endTestRunEvent.originalErrors);
+  assertValueIsTrue(
+    originalTestRunErrors === endTestRunEvent.originalErrors,
+    'originalErrors are not equal',
+    {endTestRunEvent, originalTestRunErrors},
+  );
 
   if (ended) {
     generalLog('Try to end TestRunEvent event, but it is already ended', {

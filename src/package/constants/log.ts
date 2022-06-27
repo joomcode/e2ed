@@ -1,7 +1,7 @@
 /**
  * Type of LogEvent.
  */
-export enum LogEventType {
+export const enum LogEventType {
   Action,
   Assert,
   Entity,
@@ -16,7 +16,7 @@ export enum LogEventType {
 /**
  * Status of LogEvent.
  */
-export enum LogEventStatus {
+export const enum LogEventStatus {
   Passed,
   Failed,
 }

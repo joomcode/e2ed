@@ -11,7 +11,7 @@ import type {RunId, TestRunEvent} from '../../types/internal';
 export const getTestRunEvent = (runId: RunId): TestRunEvent => {
   const testRunEvent = RUN_IDS_HASH[runId];
 
-  assertValueIsDefined(testRunEvent);
+  assertValueIsDefined(testRunEvent, 'testRunEvent is undefined', {runId});
 
   return testRunEvent;
 };

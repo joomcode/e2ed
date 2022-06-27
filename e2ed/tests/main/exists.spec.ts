@@ -37,7 +37,7 @@ it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
 
   const url = await getCurrentUrl();
 
-  assertValueIsDefined(url);
+  assertValueIsDefined(url, 'url is undefined', {pageParams: searchPage.pageParams});
 
   const searchRoute = new SearchRoute({query});
 

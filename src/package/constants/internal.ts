@@ -38,7 +38,7 @@ export const LOCATOR_KEY = Symbol('Key for string locators in createSelector');
  * Max number of lines in printed stringify values (in logs).
  * @internal
  */
-export const MAX_LINES_IN_STRINGIFY_VALUE = 400;
+export const MAX_LINES_IN_STRINGIFY_VALUE = 300;
 
 /**
  * Hash object with runId as keys and TestRunEvent as values.

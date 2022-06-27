@@ -31,7 +31,11 @@ export const assertPage = async <SomePageClass extends AnyPageClassType>(
 
   const currentUrl = await getCurrentUrl();
 
-  assertValueIsDefined(currentUrl);
+  assertValueIsDefined(currentUrl, 'currentUrl is undefined', {
+    pageName: PageClass.name,
+    pageParams,
+    route,
+  });
 
   const isMatch = route.isMatchUrl(currentUrl);
 

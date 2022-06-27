@@ -10,7 +10,7 @@ export const getRunLabelObject = (runLabel: RunLabel): RunLabelObject => {
     /r:(?<retryIndex>\d+)\/(?<maxRetriesCount>\d+),c:(?<concurrency>\d+)/,
   )?.groups;
 
-  assertValueIsDefined(object);
+  assertValueIsDefined(object, 'runLabel is not match template', {runLabel});
 
   return {
     concurrency: Number(object.concurrency),

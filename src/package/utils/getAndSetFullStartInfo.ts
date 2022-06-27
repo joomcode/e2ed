@@ -9,7 +9,7 @@ let fullStartInfo: FullStartInfo | undefined;
  * @internal
  */
 export const getFullStartInfo = (): FullStartInfo => {
-  assertValueIsDefined(fullStartInfo);
+  assertValueIsDefined(fullStartInfo, 'fullStartInfo is undefined');
 
   return fullStartInfo;
 };
@@ -19,7 +19,7 @@ export const getFullStartInfo = (): FullStartInfo => {
  * @internal
  */
 export const setFullStartInfo = (info: FullStartInfo): void => {
-  assertValueIsTrue(fullStartInfo === undefined);
+  assertValueIsTrue(fullStartInfo === undefined, 'fullStartInfo is defined', {fullStartInfo});
 
   fullStartInfo = info;
 };

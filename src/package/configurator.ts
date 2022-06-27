@@ -17,7 +17,7 @@ export type {UserlandConfig as Config} from './types/config';
 /**
  * Run environment enum (run in docker or local run).
  */
-export enum RunEnvironment {
+export const enum RunEnvironment {
   Docker = 'docker',
   Local = 'local',
 }

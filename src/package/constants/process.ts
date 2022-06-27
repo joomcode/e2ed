@@ -1,7 +1,7 @@
 /**
  * Exit status of e2ed process.
  */
-export enum ExitStatus {
+export const enum ExitStatus {
   Passed,
   Failed,
   NoRetries,

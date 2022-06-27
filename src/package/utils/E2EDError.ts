@@ -1,12 +1,12 @@
 import {valueToString} from './valueToString';
 
-type Params = Record<string, unknown>;
+import type {LogParams} from '../types/internal';
 
 /**
  * e2ed's own Error class.
  */
 export class E2EDError extends Error {
-  constructor(message: string, params?: Params) {
+  constructor(message: string, params?: LogParams) {
     const printedString = valueToString(params);
 
     const constructorArgs: [message: string, options?: {cause: unknown}] = [
@@ -21,6 +21,7 @@ export class E2EDError extends Error {
     super(...constructorArgs);
 
     Object.assign(this, params);
+
     Object.defineProperty(this, 'message', {
       configurable: true,
       enumerable: true,
