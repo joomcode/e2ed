@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.10.14",
+  "version": "0.10.15",
   "description": "E2E testing framework over TestCafe",
   "keywords": [
     "E2E",

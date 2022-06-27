@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.10.15](https://github.com/joomcode/e2ed/tree/v0.10.15) (2022-06-27)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.14...v0.10.15)
+
+- [fix: userland types checks for project with option skipLibCheck = true](https://github.com/joomcode/e2ed/commit/f03eef3bc4cc19fe22bcd3a37b3082f071ad40ee) ([uid11](https://github.com/uid11))
+
 ## [v0.10.14](https://github.com/joomcode/e2ed/tree/v0.10.14) (2022-06-27)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.13...v0.10.14)
