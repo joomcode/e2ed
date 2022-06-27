@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.10.16](https://github.com/joomcode/e2ed/tree/v0.10.16) (2022-06-27)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.15...v0.10.16)
+
+- [fix: invert check messages in assert functions](https://github.com/joomcode/e2ed/commit/56d3e995343aceea508c8966fe0106cc0f646e12) ([uid11](https://github.com/uid11))
+
 ## [v0.10.15](https://github.com/joomcode/e2ed/tree/v0.10.15) (2022-06-27)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.14...v0.10.15)
