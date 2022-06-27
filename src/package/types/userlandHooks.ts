@@ -5,9 +5,9 @@ import type {Url} from './request';
 import type {RunHash, TestRun, TestStaticOptions} from './testRun';
 
 /**
- * External type that the e2ed/hooks user module must correspond to.
+ * Hooks type that the e2ed/hooks userland module must correspond to.
  */
-export type ExternalHooks = Readonly<{
+export type UserlandHooks = Readonly<{
   getLogContext(
     message: string,
     payload: LogPayload | undefined,
