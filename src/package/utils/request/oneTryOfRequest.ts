@@ -6,22 +6,25 @@ import {getRandomId} from '../getRandomId';
 import {log} from '../log';
 import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
-import type {DeepReadonly} from '../../types/internal';
+import type {Response, StatusCode} from '../../types/internal';
 
-import type {LogParams, OneTryOfRequestOptions, Response} from './types';
+import type {LogParams, OneTryOfRequestOptions} from './types';
 
 /**
  * One try of request.
  * @internal
  */
-export const oneTryOfRequest = <Output>({
+export const oneTryOfRequest = <RequestBody, ResponseBody, RequestQuery>({
   urlObject,
   options,
-  inputAsString,
+  requestBodyAsString,
   libRequest,
   timeout,
   logParams,
-}: OneTryOfRequestOptions): Promise<{fullLogParams: LogParams; response: Response<Output>}> =>
+}: OneTryOfRequestOptions<RequestBody, RequestQuery>): Promise<{
+  fullLogParams: LogParams<RequestBody, RequestQuery>;
+  response: Response<ResponseBody>;
+}> =>
   new Promise((resolve, reject) => {
     const fullOptions = {
       ...options,
@@ -30,7 +33,7 @@ export const oneTryOfRequest = <Output>({
         ...options.headers,
       }),
     };
-    const fullLogParams: LogParams = {...logParams, ...fullOptions};
+    const fullLogParams: LogParams<RequestBody, RequestQuery> = {...logParams, ...fullOptions};
 
     void log(
       `Will be send a request to ${logParams.url}`,
@@ -63,16 +66,16 @@ export const oneTryOfRequest = <Output>({
         });
 
         res.on('end', () => {
-          const outputAsString = chunks.join('');
-          const statusCode = res.statusCode || BAD_REQUEST_STATUS_CODE;
+          const responseBodyAsString = chunks.join('');
+          const statusCode = (res.statusCode as StatusCode) || BAD_REQUEST_STATUS_CODE;
 
           try {
-            const output = (
-              outputAsString === '' ? undefined : JSON.parse(outputAsString)
-            ) as DeepReadonly<Output>;
+            const responseBody = (
+              responseBodyAsString === '' ? undefined : JSON.parse(responseBodyAsString)
+            ) as ResponseBody;
             const response = {
-              headers: res.headers,
-              output,
+              responseBody,
+              responseHeaders: res.headers,
               statusCode,
             };
 
@@ -82,7 +85,7 @@ export const oneTryOfRequest = <Output>({
             clearTimeout(endTimeout);
             reject(
               new E2EDError(
-                `The response data string to request ${logParams.url} is not valid JSON: ${outputAsString}`,
+                `The response data string to request ${logParams.url} is not valid JSON: ${responseBodyAsString}`,
                 {...fullLogParams, cause, statusCode},
               ),
             );
@@ -98,7 +101,7 @@ export const oneTryOfRequest = <Output>({
         reject(new E2EDError(`Error on request to ${logParams.url}`, {...fullLogParams, cause}));
       });
 
-      req.write(inputAsString);
+      req.write(requestBodyAsString);
       req.end();
     });
   });

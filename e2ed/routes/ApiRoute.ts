@@ -7,6 +7,6 @@ import type {Url} from 'e2ed/types';
  */
 export abstract class ApiRoute<Params = undefined> extends BaseApiRoute<Params> {
   override getOrigin(): Url {
-    return (process.env.E2ED_API_ORIGIN || 'http://localhost:3000') as Url;
+    return 'http://localhost:3000' as Url;
   }
 }

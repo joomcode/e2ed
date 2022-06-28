@@ -17,7 +17,6 @@ docker run --rm $PORT \
        --workdir $DIR \
        --volume $MOUNTDIR:$MOUNTDIR \
        --env E2ED_ORIGIN=$E2ED_ORIGIN \
-       --env E2ED_API_ORIGIN=$E2ED_API_ORIGIN \
        --env E2ED_CONCURRENCY=$E2ED_CONCURRENCY \
        --env E2ED_DEBUG=$E2ED_DEBUG \
        --env E2ED_DOCKER_DO_AFTER_TESTS=$E2ED_DOCKER_DO_AFTER_TESTS \

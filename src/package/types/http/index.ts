@@ -1,6 +1,8 @@
 import type {IncomingHttpHeaders} from 'node:http';
 
-import type {Brand} from './brand';
+import type {Brand} from '../brand';
+
+import type {StatusCode} from './statusCode';
 
 /**
  * Cookie object.
@@ -26,7 +28,7 @@ export type MapOptions = Readonly<{
 }>;
 
 /**
- * HTTP Method.
+ * HTTP method.
  */
 export type Method =
   | 'HEAD'
@@ -55,6 +57,17 @@ export type Query =
       | undefined
     >
   | string;
+
+export type {StatusCode};
+
+/**
+ * HTTP response object.
+ */
+export type Response<ResponseBody> = Readonly<{
+  responseBody: ResponseBody;
+  responseHeaders: Headers;
+  statusCode: StatusCode;
+}>;
 
 /**
  * Brand type for the full url string.

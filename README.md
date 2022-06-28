@@ -86,8 +86,6 @@ This parameter can be overridden in the test-specific options.
 
 `E2ED_ORIGIN`: origin-part of the url (`protocol` + `host`) on which the tests will be run. For example, `https://google.com`.
 
-`E2ED_API_ORIGIN`: origin-part of the backend API url that can be used by tests to create and delete test entities.
-
 `E2ED_DEBUG`: run e2ed in nodejs-debug mode (`--inspect-brk=0.0.0.0`) if this variable is not empty.
 
 `E2ED_DOCKER_DEBUG_PORT`: debug port when run in docker (9229 by default).

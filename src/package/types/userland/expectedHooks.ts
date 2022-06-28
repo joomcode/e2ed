@@ -1,13 +1,13 @@
-import type {LogEventType} from '../constants/internal';
+import type {LogEventType} from '../../constants/internal';
 
-import type {LogContext, LogPayload} from './log';
-import type {Url} from './request';
-import type {RunHash, TestRun, TestStaticOptions} from './testRun';
+import type {Url} from '../http';
+import type {LogContext, LogPayload} from '../log';
+import type {RunHash, TestRun, TestStaticOptions} from '../testRun';
 
 /**
  * Hooks type that the e2ed/hooks userland module must correspond to.
  */
-export type UserlandHooks = Readonly<{
+export type ExpectedHooks = Readonly<{
   getLogContext(
     message: string,
     payload: LogPayload | undefined,

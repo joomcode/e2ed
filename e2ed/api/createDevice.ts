@@ -3,9 +3,9 @@ import {request} from 'e2ed/utils';
 
 import type {ApiDevice, ApiDeviceParams, Device} from 'e2ed/types';
 
-type Input = ApiDeviceParams;
+type RequestBody = ApiDeviceParams;
 
-type Output = Readonly<{
+type ResponseBody = Readonly<{
   payload: ApiDevice;
 }>;
 
@@ -19,10 +19,10 @@ export const createDevice = async (params: ApiDeviceParams): Promise<Device> => 
   const url = createDeviceRoute.getUrl();
 
   const {
-    output: {payload: apiDevice},
-  } = await request<Input, Output>({
-    input: params,
+    responseBody: {payload: apiDevice},
+  } = await request<RequestBody, ResponseBody>({
     method: createDeviceRoute.getMethod(),
+    requestBody: params,
     url,
   });
 

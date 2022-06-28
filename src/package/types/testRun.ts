@@ -7,7 +7,7 @@ import type {TestRunError} from './errors';
 import type {TestRunEvent} from './events';
 import type {TestFilePath} from './fs';
 import type {RunLabel} from './runLabel';
-import type {TestMeta} from './userland';
+import type {TestMeta} from './userland/types';
 
 /**
  * Method for rejecting (force ending) TestRun.

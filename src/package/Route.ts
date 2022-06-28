@@ -6,6 +6,12 @@ declare const PARAMS_KEY: PARAMS;
  * Abstract route with base methods.
  */
 export abstract class Route<RouteParams> {
+  /**
+   * Return route params from the passed url.
+   * @throws {Error} If the route does not match on the url.
+   */
+  static getParamsFromUrl?(url: Url): unknown;
+
   constructor(...args: ZeroOrOneArg<RouteParams>) {
     [this.params] = args as [params: RouteParams];
   }
@@ -33,11 +39,6 @@ export abstract class Route<RouteParams> {
    * Return the path-part of the route.
    */
   abstract getPath(): string;
-
-  /**
-   * Return route params object from the passed url.
-   */
-  getParamsFromUrl?(url: Url): RouteParams;
 
   /**
    * Return the url of the route.

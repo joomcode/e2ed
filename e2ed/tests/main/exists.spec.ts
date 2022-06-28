@@ -39,9 +39,7 @@ it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
 
   assertValueIsDefined(url, 'url is defined', {pageParams: searchPage.pageParams});
 
-  const searchRoute = new SearchRoute({query});
-
-  await expect(searchRoute.getParamsFromUrl(url), 'page url has expected params').eql({
+  await expect(SearchRoute.getParamsFromUrl(url), 'page url has expected params').eql({
     query,
   });
 

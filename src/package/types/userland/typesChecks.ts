@@ -3,19 +3,20 @@
  * config and other parts with specified type contracts.
  */
 
-import type {config} from '../../../e2ed/config';
-import type * as hooks from '../../../e2ed/hooks';
+import type {config} from '../../../../e2ed/config';
+import type * as hooks from '../../../../e2ed/hooks';
 
-import type {UserlandConfig} from './config';
-import type {UserlandHooks} from './userlandHooks';
-import type {Expect, IsEqual} from './utils';
+import type {UserlandConfig} from '../config';
+import type {Expect, IsEqual} from '../utils';
+
+import type {ExpectedHooks} from './expectedHooks';
 
 /**
  * Userland types checks in the e2ed directory of the project.
  */
 declare type UserlandTypesChecks = [
   Expect<IsEqual<UserlandConfig, typeof config>>,
-  Expect<IsEqual<UserlandHooks, typeof hooks>>,
+  Expect<IsEqual<ExpectedHooks, typeof hooks>>,
 ];
 
 /**

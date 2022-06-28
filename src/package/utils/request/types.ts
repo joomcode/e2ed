@@ -1,46 +1,44 @@
 import type {request as httpRequest} from 'node:http';
 
-import type {DeepReadonly, Headers as AnyHeaders, Method, Url} from '../../types/internal';
+import type {Headers, Method, Response, Url} from '../../types/internal';
 
 /**
  * Request log parameters.
- * @todo Replace Record<...> with exact fields.
  * @internal
  */
-export type LogParams = Readonly<{url: Url}> & Record<string, unknown>;
+export type LogParams<RequestBody, RequestQuery> = Readonly<{
+  headers: Headers | undefined;
+  method: Method;
+  query: RequestQuery | undefined;
+  requestBody: string | RequestBody;
+  retry: string | undefined;
+  timeout: number;
+  url: Url;
+}>;
 
 /**
  * Options of oneTryOfRequest function.
  * @internal
  */
-export type OneTryOfRequestOptions = DeepReadonly<{
-  urlObject: URL;
-  options: {method: Method; headers: AnyHeaders};
-  inputAsString: string;
+export type OneTryOfRequestOptions<RequestBody, RequestQuery> = Readonly<{
   libRequest: typeof httpRequest;
+  logParams: LogParams<RequestBody, RequestQuery>;
+  options: Readonly<{method: Method; headers: Headers}>;
+  requestBodyAsString: string;
   timeout: number;
-  logParams: LogParams;
+  urlObject: URL;
 }>;
 
 /**
  * Options of request function.
  */
-export type Options<Input, Output, Query, Headers> = DeepReadonly<{
-  url: Url;
-  query?: Query;
-  method?: Method;
-  headers?: Headers;
-  input?: string | Input;
-  timeout?: number;
+export type Options<RequestBody, ResponseBody, RequestQuery, RequestHeaders> = Readonly<{
+  headers?: RequestHeaders;
+  isNeedRetry?: (response: Response<ResponseBody>) => boolean;
   maxRetriesCount?: number;
-  isNeedRetry?: (response: Response<Output>) => boolean;
-}>;
-
-/**
- * Response object of request function.
- */
-export type Response<Output> = DeepReadonly<{
-  statusCode: number;
-  headers: AnyHeaders;
-  output: Output;
+  method?: Method;
+  query?: RequestQuery;
+  requestBody?: string | RequestBody;
+  timeout?: number;
+  url: Url;
 }>;

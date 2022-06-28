@@ -38,6 +38,7 @@ rules:
         - '**/e2ed/*'
         - '**/e2ed/*/*'
         - '**/types/internal'
+        - '**/types/userland/*'
         - '**/utils/*'
   import/no-nodejs-modules:
     - error

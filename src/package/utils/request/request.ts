@@ -11,33 +11,44 @@ import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
 import {oneTryOfRequest} from './oneTryOfRequest';
 
-import type {Headers as AnyHeaders, Query as AnyQuery} from '../../types/internal';
+import type {Headers, Mutable, Query, Response} from '../../types/internal';
 
-import type {LogParams, Options, Response} from './types';
+import type {LogParams, Options} from './types';
 
-const defaultIsNeedRetry = <Output>({statusCode}: Response<Output>): boolean => statusCode >= 400;
+const defaultIsNeedRetry = <ResponseBody>({statusCode}: Response<ResponseBody>): boolean =>
+  statusCode >= 400;
 
 /**
- * Send a request to the (JSON) API by url, query params, HTTP-method, headers,
+ * Send a request to the (JSON) API by url, query params, HTTP method, headers,
  * post-data, timeout and number of retries.
  */
 export const request = async <
-  Input = unknown,
-  Output = unknown,
-  Query extends AnyQuery = AnyQuery,
-  Headers extends AnyHeaders = AnyHeaders,
+  RequestBody = unknown,
+  ResponseBody = unknown,
+  RequestQuery extends Query = Query,
+  RequestHeaders extends Headers = Headers,
 >({
-  url,
-  query,
-  method = 'GET',
-  headers,
-  input = '',
-  timeout = 30_000,
-  maxRetriesCount = 5,
   isNeedRetry = defaultIsNeedRetry,
-}: Options<Input, Output, Query, Headers>): Promise<Response<Output>> => {
+  headers,
+  maxRetriesCount = 5,
+  method = 'GET',
+  query,
+  requestBody = '',
+  timeout = 30_000,
+  url,
+}: Options<RequestBody, ResponseBody, RequestQuery, RequestHeaders>): Promise<
+  Response<ResponseBody>
+> => {
   const urlObject = new URL(url);
-  const logParams: LogParams = {headers, input, method, query, timeout, url};
+  const logParams: LogParams<RequestBody, RequestQuery> = {
+    headers,
+    method,
+    query,
+    requestBody,
+    retry: undefined,
+    timeout,
+    url,
+  };
 
   if (urlObject.search !== '') {
     throw new E2EDError(
@@ -49,10 +60,11 @@ Please, move search params to options property "query".`,
 
   urlObject.search = typeof query === 'string' ? query : stringify(query);
 
-  const inputAsString = typeof input === 'string' ? input : JSON.stringify(input);
+  const requestBodyAsString =
+    typeof requestBody === 'string' ? requestBody : JSON.stringify(requestBody);
   const options = {
     headers: {
-      'Content-Length': String(Buffer.byteLength(inputAsString)),
+      'Content-Length': String(Buffer.byteLength(requestBodyAsString)),
       'Content-Type': 'application/json; charset=UTF-8',
       ...headers,
     },
@@ -62,17 +74,21 @@ Please, move search params to options property "query".`,
     urlObject.protocol === 'http:' ? httpRequest : httpsRequest,
   );
 
-  logParams.headers = options.headers;
+  (logParams as Mutable<typeof logParams>).headers = options.headers;
 
   for (let retryIndex = 1; retryIndex <= maxRetriesCount; retryIndex += 1) {
     const retry = `${retryIndex}/${maxRetriesCount}`;
 
     try {
-      const {fullLogParams, response} = await oneTryOfRequest<Output>({
-        inputAsString,
+      const {fullLogParams, response} = await oneTryOfRequest<
+        RequestBody,
+        ResponseBody,
+        RequestQuery
+      >({
         libRequest,
         logParams: {...logParams, retry},
         options,
+        requestBodyAsString,
         timeout,
         urlObject,
       });
