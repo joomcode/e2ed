@@ -61,6 +61,14 @@ export type Query =
 export type {StatusCode};
 
 /**
+ * HTTP request object.
+ */
+export type Request<RequestBody> = Readonly<{
+  requestBody: RequestBody;
+  requestHeaders: Headers;
+}>;
+
+/**
  * HTTP response object.
  */
 export type Response<ResponseBody> = Readonly<{

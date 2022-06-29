@@ -15,6 +15,7 @@ export * from './log';
 export * from './pages';
 export * from './pixelmatch';
 export * from './report';
+export * from './routes';
 export * from './runLabel';
 export * from './stackTrack';
 export * from './startInfo';

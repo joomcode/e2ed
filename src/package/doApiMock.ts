@@ -1,27 +1,22 @@
 import {RequestMock} from 'testcafe-without-typecheck';
 
 import {assertValueIsDefined, assertValueIsTrue} from './utils/asserts';
+import {cloneWithoutUndefinedProperties} from './utils/cloneWithoutUndefinedProperties';
+import {getContentJsonHeaders} from './utils/request';
 import {testController} from './testController';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
 import type {ApiRoute} from './ApiRoute';
-import type {AnyApiMockFunction, ApiMockFunction, GetParamsType, Url} from './types/internal';
-
-/**
- * Route class with static method getParamsFromUrl.
- */
-type RouteWithGetParamsFromUrl = typeof ApiRoute &
-  Readonly<{
-    getParamsFromUrl: Exclude<typeof ApiRoute['getParamsFromUrl'], undefined>;
-  }>;
+import type {ApiMockFunction, ApiRouteWithGetParamsFromUrl, Url} from './types/internal';
 
 type RouteParamsAndApiMockFunction = Readonly<{
-  apiMockFunction: AnyApiMockFunction;
+  apiMockFunction: ApiMockFunction<unknown>;
   routeParams: unknown;
 }>;
 
-let apiMockFunctionByRoute: Map<RouteWithGetParamsFromUrl, AnyApiMockFunction> | undefined;
+let apiMockFunctionByRoute: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+Map<ApiRouteWithGetParamsFromUrl<any>, ApiMockFunction<unknown>> | undefined;
 const apiMockFunctionAndRouteParamsByUrl: Record<Url, RouteParamsAndApiMockFunction | undefined> =
   {};
 
@@ -41,11 +36,15 @@ const requestsFilter = (request: Inner.RequestOptions): boolean => {
       if (route.getMethod) {
         const routeMethod = route.getMethod();
 
-        assertValueIsTrue(routeMethod === request.method, 'route method equals to request method', {
-          request,
-          route,
-          routeMethod,
-        });
+        assertValueIsTrue(
+          routeMethod.toLowerCase() === request.method.toLocaleLowerCase(),
+          'route method equals to request method',
+          {
+            request,
+            route,
+            routeMethod,
+          },
+        );
       }
 
       apiMockFunctionAndRouteParamsByUrl[url] = {apiMockFunction, routeParams};
@@ -72,36 +71,36 @@ const setResponse = async (
 
   const {apiMockFunction, routeParams} = apiMockFunctionAndRouteParams;
 
-  const requestBody = JSON.stringify(request.body);
+  const requestBody: unknown = JSON.parse(String(request.body));
   const requestHeaders = request.headers;
 
   const {
     responseBody,
     responseHeaders,
     statusCode = 200,
-  } = await apiMockFunction({
-    requestBody,
-    requestHeaders,
-    routeParams,
-  });
+  } = await apiMockFunction(routeParams, {requestBody, requestHeaders});
+
+  const responseBodyAsString =
+    responseBody === undefined ? undefined : JSON.stringify(responseBody);
 
   response.statusCode = statusCode;
 
-  if (responseHeaders) {
-    response.headers = responseHeaders as Record<string, string>;
-  }
+  response.headers = cloneWithoutUndefinedProperties({
+    ...getContentJsonHeaders(responseBodyAsString),
+    ...responseHeaders,
+  }) as unknown as Record<string, string>;
 
-  if (responseBody) {
-    response.setBody(JSON.stringify(responseBody));
+  if (responseBodyAsString !== undefined) {
+    response.setBody(responseBodyAsString);
   }
 };
 
 /**
  * Add mock for some API route.
  */
-export const doApiMock = async <RequestBody, ResponseBody>(
-  Route: RouteWithGetParamsFromUrl,
-  apiMockFunction: ApiMockFunction<RequestBody, ResponseBody, GetParamsType<typeof Route>>,
+export const doApiMock = async <RouteParams>(
+  Route: ApiRouteWithGetParamsFromUrl<RouteParams>,
+  apiMockFunction: ApiMockFunction<RouteParams>,
 ): Promise<void> => {
   if (apiMockFunctionByRoute === undefined) {
     apiMockFunctionByRoute = new Map();
@@ -111,5 +110,5 @@ export const doApiMock = async <RequestBody, ResponseBody>(
     await testController.addRequestHooks(apiMock);
   }
 
-  apiMockFunctionByRoute.set(Route, apiMockFunction as AnyApiMockFunction);
+  apiMockFunctionByRoute.set(Route, apiMockFunction as ApiMockFunction<unknown>);
 };

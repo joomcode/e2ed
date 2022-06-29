@@ -9,6 +9,7 @@ import {E2EDError} from '../E2EDError';
 import {log} from '../log';
 import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
+import {getContentJsonHeaders} from './getContentJsonHeaders';
 import {oneTryOfRequest} from './oneTryOfRequest';
 
 import type {Headers, Mutable, Query, Response} from '../../types/internal';
@@ -64,8 +65,7 @@ Please, move search params to options property "query".`,
     typeof requestBody === 'string' ? requestBody : JSON.stringify(requestBody);
   const options = {
     headers: {
-      'Content-Length': String(Buffer.byteLength(requestBodyAsString)),
-      'Content-Type': 'application/json; charset=UTF-8',
+      ...getContentJsonHeaders(requestBodyAsString),
       ...headers,
     },
     method,

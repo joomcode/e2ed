@@ -1,17 +1,10 @@
-import type {Headers, Response} from './http';
-
-/**
- * Any API mock function.
- */
-export type AnyApiMockFunction = ApiMockFunction<unknown, unknown, unknown>;
+import type {Request, Response} from './http';
 
 /**
  * API mock function, that map request to mocked response.
  */
-export type ApiMockFunction<RequestBody, ResponseBody, RouteParams> = (
-  request: Readonly<{
-    requestBody: RequestBody;
-    requestHeaders: Headers;
-    routeParams: RouteParams;
-  }>,
-) => Promise<Partial<Response<ResponseBody>>>;
+export type ApiMockFunction<RouteParams> = (
+  routeParams: RouteParams,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  request: Request<any>,
+) => Promise<Partial<Response<unknown>>> | Partial<Response<unknown>>;

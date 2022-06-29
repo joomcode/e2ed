@@ -1,13 +1,27 @@
-import {expect, it} from 'e2ed';
+import {ClientFunction, doApiMock, expect, it} from 'e2ed';
 import {assertPage, navigateToPage, pressKey, scroll} from 'e2ed/actions';
 import {Main, Search} from 'e2ed/pageObjects/pages';
+import {CreateProduct as CreateProductRoute} from 'e2ed/routes/apiRoutes';
 import {Search as SearchRoute} from 'e2ed/routes/pageRoutes';
 import {assertValueIsDefined, getCurrentUrl} from 'e2ed/utils';
+
+import type {Request, Response} from 'e2ed/types';
 
 const language = 'en';
 const query = 'foo';
 
+type ResponseBody = Readonly<{id: number; output: string}>;
+
 it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
+  await doApiMock(
+    CreateProductRoute,
+    (routeParams, {requestBody}: Request<{input: number}>): Partial<Response<ResponseBody>> => {
+      const responseBody = {id: routeParams.id, output: String(requestBody.input)};
+
+      return {responseBody};
+    },
+  );
+
   await scroll(0, 200);
 
   await expect(1, 'throw an error when actual value do not fit expected value')
@@ -44,4 +58,21 @@ it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
   });
 
   await expect(searchPage.mobileDevice, 'search page has right device').eql('iphone');
+
+  const getMockedProduct = ClientFunction(
+    () =>
+      fetch('/product/135865', {
+        body: JSON.stringify({input: 17}),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        method: 'POST',
+      }).then((res) => res.json() as Promise<ResponseBody>),
+    'getMockedProduct',
+  );
+
+  await expect(await getMockedProduct(), 'mocked API returns correct result').eql({
+    id: 135865,
+    output: '17',
+  });
 });
