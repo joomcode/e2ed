@@ -1,5 +1,22 @@
 # Changelog
 
+## [v0.10.17](https://github.com/joomcode/e2ed/tree/v0.10.17) (2022-06-29)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.16...v0.10.17)
+
+- [chore: update devDependencies (@typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/06a74ee4a372258d63dd2a0f102fb6487bc5ce8b) ([uid11](https://github.com/uid11))
+- [feat: add runtime tests for doApiMock function](https://github.com/joomcode/e2ed/commit/843f4fabfaa1dc0c3bf0c83b44c4f28e9affd64c) ([uid11](https://github.com/uid11))
+
+  Fix comparing of request's method
+  Fix doApiMock types
+  Refactor Request and Response types
+
+- [feat: add base version of doApiMock](https://github.com/joomcode/e2ed/commit/06213d6955b4d8911a08d4f9b30c21d0311711ec) ([uid11](https://github.com/uid11))
+
+  refactor: use request and response instead of input and output
+  refactor: move userland types checks inside of e2ed
+  fix: remove E2ED_API_ORIGIN environment variable
+
 ## [v0.10.16](https://github.com/joomcode/e2ed/tree/v0.10.16) (2022-06-27)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.15...v0.10.16)
