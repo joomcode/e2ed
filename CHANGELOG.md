@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.10.18](https://github.com/joomcode/e2ed/tree/v0.10.18) (2022-07-06)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.17...v0.10.18)
+
+- [fix: add the ability to put additional dependencies in the image through npm i](https://github.com/joomcode/e2ed/commit/55b1d9ac358240bd3596e83d65ca96a3325431ea) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (eslint, @types/node, @typescript-eslint/\*, etc)](https://github.com/joomcode/e2ed/commit/6b3b11f3c74229e005796a56518afac22595cef7) ([uid11](https://github.com/uid11))
+
 ## [v0.10.17](https://github.com/joomcode/e2ed/tree/v0.10.17) (2022-06-29)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.16...v0.10.17)
