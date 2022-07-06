@@ -19,6 +19,8 @@ RUN rm -rf /usr/lib/node_modules/testcafe/node_modules/typescript
 
 RUN cp -r /usr/lib/node_modules/testcafe/node_modules/* /node_modules
 
+RUN echo '{"dependencies":{"e2ed":"*","typescript":"*"}}' > /package.json
+
 USER user
 
 ENTRYPOINT ["/node_modules/e2ed/bin/dockerEntrypoint.sh"]
