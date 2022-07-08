@@ -26,26 +26,26 @@ const defaultIsNeedRetry = <ResponseBody>({statusCode}: Response<ResponseBody>):
 export const request = async <
   RequestBody = unknown,
   ResponseBody = unknown,
-  RequestQuery extends Query = Query,
+  SomeQuery extends Query = Query,
   RequestHeaders extends Headers = Headers,
 >({
   isNeedRetry = defaultIsNeedRetry,
-  headers,
+  requestHeaders,
   maxRetriesCount = 5,
   method = 'GET',
   query,
   requestBody = '',
   timeout = 30_000,
   url,
-}: Options<RequestBody, ResponseBody, RequestQuery, RequestHeaders>): Promise<
+}: Options<RequestBody, ResponseBody, SomeQuery, RequestHeaders>): Promise<
   Response<ResponseBody>
 > => {
   const urlObject = new URL(url);
-  const logParams: LogParams<RequestBody, RequestQuery> = {
-    headers,
+  const logParams: LogParams<RequestBody, SomeQuery> = {
     method,
     query,
     requestBody,
+    requestHeaders,
     retry: undefined,
     timeout,
     url,
@@ -64,34 +64,32 @@ Please, move search params to options property "query".`,
   const requestBodyAsString =
     typeof requestBody === 'string' ? requestBody : JSON.stringify(requestBody);
   const options = {
-    headers: {
-      ...getContentJsonHeaders(requestBodyAsString),
-      ...headers,
-    },
     method,
+    requestHeaders: {
+      ...getContentJsonHeaders(requestBodyAsString),
+      ...requestHeaders,
+    },
   };
   const libRequest = wrapInTestRunTracker(
     urlObject.protocol === 'http:' ? httpRequest : httpsRequest,
   );
 
-  (logParams as Mutable<typeof logParams>).headers = options.headers;
+  (logParams as Mutable<typeof logParams>).requestHeaders = options.requestHeaders;
 
   for (let retryIndex = 1; retryIndex <= maxRetriesCount; retryIndex += 1) {
     const retry = `${retryIndex}/${maxRetriesCount}`;
 
     try {
-      const {fullLogParams, response} = await oneTryOfRequest<
-        RequestBody,
-        ResponseBody,
-        RequestQuery
-      >({
-        libRequest,
-        logParams: {...logParams, retry},
-        options,
-        requestBodyAsString,
-        timeout,
-        urlObject,
-      });
+      const {fullLogParams, response} = await oneTryOfRequest<RequestBody, ResponseBody, SomeQuery>(
+        {
+          libRequest,
+          logParams: {...logParams, retry},
+          options,
+          requestBodyAsString,
+          timeout,
+          urlObject,
+        },
+      );
       const needRetry = isNeedRetry(response);
 
       await log(

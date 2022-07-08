@@ -63,18 +63,30 @@ export type {StatusCode};
 /**
  * HTTP request object.
  */
-export type Request<RequestBody> = Readonly<{
+export type Request<
+  RequestBody,
+  SomeQuery extends Query = Query,
+  RequestHeaders extends Headers = Headers,
+  SomeMethod extends Method = Method,
+> = Readonly<{
+  method: SomeMethod;
+  query: SomeQuery;
   requestBody: RequestBody;
-  requestHeaders: Headers;
+  requestHeaders: RequestHeaders;
+  url: Url;
 }>;
 
 /**
  * HTTP response object.
  */
-export type Response<ResponseBody> = Readonly<{
+export type Response<
+  ResponseBody = unknown,
+  ResponseHeaders extends Headers = Headers,
+  SomeStatusCode extends StatusCode = StatusCode,
+> = Readonly<{
   responseBody: ResponseBody;
-  responseHeaders: Headers;
-  statusCode: StatusCode;
+  responseHeaders: ResponseHeaders;
+  statusCode: SomeStatusCode;
 }>;
 
 /**

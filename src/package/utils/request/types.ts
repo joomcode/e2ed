@@ -6,10 +6,10 @@ import type {Headers, Method, Response, Url} from '../../types/internal';
  * Request log parameters.
  * @internal
  */
-export type LogParams<RequestBody, RequestQuery> = Readonly<{
-  headers: Headers | undefined;
+export type LogParams<RequestBody, SomeQuery> = Readonly<{
+  requestHeaders: Headers | undefined;
   method: Method;
-  query: RequestQuery | undefined;
+  query: SomeQuery | undefined;
   requestBody: string | RequestBody;
   retry: string | undefined;
   timeout: number;
@@ -20,10 +20,10 @@ export type LogParams<RequestBody, RequestQuery> = Readonly<{
  * Options of oneTryOfRequest function.
  * @internal
  */
-export type OneTryOfRequestOptions<RequestBody, RequestQuery> = Readonly<{
+export type OneTryOfRequestOptions<RequestBody, SomeQuery> = Readonly<{
   libRequest: typeof httpRequest;
-  logParams: LogParams<RequestBody, RequestQuery>;
-  options: Readonly<{method: Method; headers: Headers}>;
+  logParams: LogParams<RequestBody, SomeQuery>;
+  options: Readonly<{method: Method; requestHeaders: Headers}>;
   requestBodyAsString: string;
   timeout: number;
   urlObject: URL;
@@ -32,12 +32,12 @@ export type OneTryOfRequestOptions<RequestBody, RequestQuery> = Readonly<{
 /**
  * Options of request function.
  */
-export type Options<RequestBody, ResponseBody, RequestQuery, RequestHeaders> = Readonly<{
-  headers?: RequestHeaders;
+export type Options<RequestBody, ResponseBody, SomeQuery, RequestHeaders> = Readonly<{
+  requestHeaders?: RequestHeaders;
   isNeedRetry?: (response: Response<ResponseBody>) => boolean;
   maxRetriesCount?: number;
   method?: Method;
-  query?: RequestQuery;
+  query?: SomeQuery;
   requestBody?: string | RequestBody;
   timeout?: number;
   url: Url;

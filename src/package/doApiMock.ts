@@ -1,3 +1,6 @@
+import {parse} from 'node:querystring';
+import {URL} from 'node:url';
+
 import {RequestMock} from 'testcafe-without-typecheck';
 
 import {assertValueIsDefined, assertValueIsTrue} from './utils/asserts';
@@ -8,7 +11,7 @@ import {testController} from './testController';
 import type {Inner} from 'testcafe-without-typecheck';
 
 import type {ApiRoute} from './ApiRoute';
-import type {ApiMockFunction, ApiRouteWithGetParamsFromUrl, Url} from './types/internal';
+import type {ApiMockFunction, ApiRouteWithGetParamsFromUrl, Method, Url} from './types/internal';
 
 type RouteParamsAndApiMockFunction = Readonly<{
   apiMockFunction: ApiMockFunction<unknown>;
@@ -71,6 +74,10 @@ const setResponse = async (
 
   const {apiMockFunction, routeParams} = apiMockFunctionAndRouteParams;
 
+  const {search} = new URL(url);
+
+  const method = request.method.toUpperCase() as Method;
+  const query = parse(search ? search.slice(1) : '');
   const requestBody: unknown = JSON.parse(String(request.body));
   const requestHeaders = request.headers;
 
@@ -78,7 +85,7 @@ const setResponse = async (
     responseBody,
     responseHeaders,
     statusCode = 200,
-  } = await apiMockFunction(routeParams, {requestBody, requestHeaders});
+  } = await apiMockFunction(routeParams, {method, query, requestBody, requestHeaders, url});
 
   const responseBodyAsString =
     responseBody === undefined ? undefined : JSON.stringify(responseBody);

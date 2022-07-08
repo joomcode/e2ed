@@ -14,26 +14,26 @@ import type {LogParams, OneTryOfRequestOptions} from './types';
  * One try of request.
  * @internal
  */
-export const oneTryOfRequest = <RequestBody, ResponseBody, RequestQuery>({
+export const oneTryOfRequest = <RequestBody, ResponseBody, Query>({
   urlObject,
   options,
   requestBodyAsString,
   libRequest,
   timeout,
   logParams,
-}: OneTryOfRequestOptions<RequestBody, RequestQuery>): Promise<{
-  fullLogParams: LogParams<RequestBody, RequestQuery>;
+}: OneTryOfRequestOptions<RequestBody, Query>): Promise<{
+  fullLogParams: LogParams<RequestBody, Query>;
   response: Response<ResponseBody>;
 }> =>
   new Promise((resolve, reject) => {
     const fullOptions = {
       ...options,
-      headers: cloneWithoutUndefinedProperties({
+      requestHeaders: cloneWithoutUndefinedProperties({
         'X-Request-ID': getRandomId(),
-        ...options.headers,
+        ...options.requestHeaders,
       }),
     };
-    const fullLogParams: LogParams<RequestBody, RequestQuery> = {...logParams, ...fullOptions};
+    const fullLogParams: LogParams<RequestBody, Query> = {...logParams, ...fullOptions};
 
     void log(
       `Will be send a request to ${logParams.url}`,
