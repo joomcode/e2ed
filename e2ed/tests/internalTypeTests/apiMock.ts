@@ -2,7 +2,7 @@ import {doApiMock} from 'e2ed';
 import {CreateDevice, CreateProduct} from 'e2ed/routes/apiRoutes';
 import {Main} from 'e2ed/routes/pageRoutes';
 
-import type {Request, Response} from 'e2ed/types';
+import type {Request, Response, Url} from 'e2ed/types';
 
 type RequestBody = Readonly<{
   foo: number;
@@ -10,15 +10,16 @@ type RequestBody = Readonly<{
 
 type ResponseBody = Readonly<{
   bar: string;
+  url: Url;
 }>;
 
 const apiMockFunction = (
   routeParams: object,
-  {requestBody}: Request<RequestBody>,
+  {requestBody, url}: Request<RequestBody>,
 ): Partial<Response<ResponseBody>> => {
   const {foo} = requestBody;
 
-  const responseBody = {bar: String(foo)};
+  const responseBody = {bar: String(foo), url};
 
   return {responseBody};
 };
@@ -37,15 +38,16 @@ void doApiMock(
   CreateProduct,
   async (
     routeParams,
-    {requestBody}: Request<RequestBody>, // eslint-disable-next-line @typescript-eslint/require-await
+    {method, requestBody, query, url}: Request<RequestBody>, // eslint-disable-next-line @typescript-eslint/require-await
   ): Promise<Response<ResponseBody>> => {
     const {foo} = requestBody;
 
-    const responseBody = {bar: `${foo}${routeParams.id}`};
+    const responseBody = {bar: `${foo}${routeParams.id}`, url};
     const responseHeaders = {
       'X-Request-Id': 'Gd8obEgq81x',
+      referer: String(query),
     };
-    const statusCode = 201;
+    const statusCode = method === 'GET' ? 201 : 200;
 
     return {responseBody, responseHeaders, statusCode};
   },

@@ -12,17 +12,17 @@ type CustomPageParams = Partial<RouteParams>;
 export class Search extends MobilePage<CustomPageParams> {
   readonly mobileDevice = 'iphone' as const;
 
-  readonly query!: string;
+  readonly searchQuery!: string;
 
   override init(): void {
-    const query = this.pageParams.query ?? 'foo';
+    const searchQuery = this.pageParams.searchQuery ?? 'foo';
 
-    Object.assign<Search, Partial<Search>>(this, {query});
+    Object.assign<Search, Partial<Search>>(this, {searchQuery});
   }
 
   getRoute(): SearchRoute {
-    const {query} = this;
+    const {searchQuery} = this;
 
-    return new SearchRoute({query});
+    return new SearchRoute({searchQuery});
   }
 }

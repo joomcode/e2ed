@@ -41,7 +41,7 @@ new UserSignUp('foo');
  */
 
 // ok
-new Search({query: 'foo'});
+new Search({searchQuery: 'foo'});
 
 // ok
 new Search();

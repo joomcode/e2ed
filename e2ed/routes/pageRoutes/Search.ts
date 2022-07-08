@@ -5,7 +5,7 @@ import {assertValueIsTrue} from 'e2ed/utils';
 
 import type {Url} from 'e2ed/types';
 
-type Params = undefined | Readonly<{query: string}>;
+type Params = undefined | Readonly<{searchQuery: string}>;
 
 /**
  * Route of the Search page.
@@ -16,14 +16,14 @@ export class Search extends PageRoute<Params> {
 
     assertValueIsTrue(pathname === '/search', 'search route matches on url', {url});
 
-    const query = searchParams.get('q') || '';
+    const searchQuery = searchParams.get('q') || '';
 
-    return {query};
+    return {searchQuery};
   }
 
   getPath(): string {
-    const {query = 'bar'} = this.params ?? {};
+    const {searchQuery = 'bar'} = this.params ?? {};
 
-    return `/search?q=${query}`;
+    return `/search?q=${searchQuery}`;
   }
 }

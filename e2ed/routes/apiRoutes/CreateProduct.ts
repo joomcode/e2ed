@@ -3,7 +3,7 @@ import {assertValueIsTrue} from 'e2ed/utils';
 
 import type {Url} from 'e2ed/types';
 
-type Params = Readonly<{id: number}>;
+type Params = Readonly<{id: number; size: number}>;
 
 const pathStart = '/product/';
 
@@ -21,10 +21,12 @@ export class CreateProduct extends ApiRoute<Params> {
     );
 
     const id = Number(urlObject.pathname.slice(pathStart.length));
+    const size = Number(urlObject.searchParams.get('size'));
 
-    assertValueIsTrue(Number.isInteger(id), 'url has correct id', {id, urlObject});
+    assertValueIsTrue(Number.isInteger(id), 'url has correct id', {id, size, urlObject});
+    assertValueIsTrue(Number.isInteger(size), 'url has correct size', {id, size, urlObject});
 
-    return {id};
+    return {id, size};
   }
 
   getMethod(): 'POST' {
@@ -32,8 +34,8 @@ export class CreateProduct extends ApiRoute<Params> {
   }
 
   getPath(): string {
-    const {id} = this.params;
+    const {id, size} = this.params;
 
-    return `${pathStart}${id}`;
+    return `${pathStart}${id}?size=${size}`;
   }
 }

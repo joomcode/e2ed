@@ -3,15 +3,13 @@ import {valueToString} from './valueToString';
 import type {LogParams} from '../types/internal';
 
 /**
- * e2ed's own Error class.
+ * Extended Error class for e2ed.
  */
 export class E2EDError extends Error {
   constructor(message: string, params?: LogParams) {
-    const printedString = valueToString(params);
+    const fullMessage = `${message} ${valueToString(params)}`;
 
-    const constructorArgs: [message: string, options?: {cause: unknown}] = [
-      `${message} ${printedString}`,
-    ];
+    const constructorArgs: [message: string, options?: {cause: unknown}] = [fullMessage];
 
     if (params?.cause) {
       constructorArgs.push({cause: params?.cause});
@@ -25,7 +23,7 @@ export class E2EDError extends Error {
     Object.defineProperty(this, 'message', {
       configurable: true,
       enumerable: true,
-      value: message,
+      value: fullMessage,
       writable: true,
     });
   }

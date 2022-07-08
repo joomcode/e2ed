@@ -10,7 +10,7 @@ import {Main, Search, Services} from 'e2ed/pageObjects/pages';
  */
 
 // ok
-void navigateToPage(Search, {query: 'foo'});
+void navigateToPage(Search, {searchQuery: 'foo'});
 
 // @ts-expect-error: wrong PageParams type
 void navigateToPage(Search, {query: 0});

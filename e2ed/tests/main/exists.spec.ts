@@ -5,18 +5,27 @@ import {CreateProduct as CreateProductRoute} from 'e2ed/routes/apiRoutes';
 import {Search as SearchRoute} from 'e2ed/routes/pageRoutes';
 import {assertValueIsDefined, getCurrentUrl} from 'e2ed/utils';
 
-import type {Request, Response} from 'e2ed/types';
+import type {Method, Query, Request, Response, Url} from 'e2ed/types';
 
 const language = 'en';
-const query = 'foo';
+const searchQuery = 'foo';
 
-type ResponseBody = Readonly<{id: number; output: string}>;
+type ResponseBody = Readonly<{id: number; method: Method; output: string; query: Query; url: Url}>;
 
 it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
   await doApiMock(
     CreateProductRoute,
-    (routeParams, {requestBody}: Request<{input: number}>): Partial<Response<ResponseBody>> => {
-      const responseBody = {id: routeParams.id, output: String(requestBody.input)};
+    (
+      routeParams,
+      {method, query, requestBody, url}: Request<{input: number}>,
+    ): Partial<Response<ResponseBody>> => {
+      const responseBody = {
+        id: routeParams.id,
+        method,
+        output: String(requestBody.input),
+        query,
+        url,
+      };
 
       return {responseBody};
     },
@@ -39,29 +48,29 @@ it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
 
   await expect(mainPage.searchString, 'search string is empty').eql('');
 
-  await mainPage.typeIntoSearchInput(query);
+  await mainPage.typeIntoSearchInput(searchQuery);
 
-  await expect(mainPage.searchString, 'search string has setted value').eql(query);
+  await expect(mainPage.searchString, 'search string has setted value').eql(searchQuery);
 
   await pressKey('enter');
 
-  const searchPage = await assertPage(Search, {query});
+  const searchPage = await assertPage(Search, {searchQuery});
 
-  await expect(searchPage.pageParams, 'pageParams is correct after assertPage').eql({query});
+  await expect(searchPage.pageParams, 'pageParams is correct after assertPage').eql({searchQuery});
 
   const url = await getCurrentUrl();
 
   assertValueIsDefined(url, 'url is defined', {pageParams: searchPage.pageParams});
 
   await expect(SearchRoute.getParamsFromUrl(url), 'page url has expected params').eql({
-    query,
+    searchQuery,
   });
 
   await expect(searchPage.mobileDevice, 'search page has right device').eql('iphone');
 
   const getMockedProduct = ClientFunction(
     () =>
-      fetch('/product/135865', {
+      fetch('/product/135865?size=13', {
         body: JSON.stringify({input: 17}),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -71,8 +80,20 @@ it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
     'getMockedProduct',
   );
 
-  await expect(await getMockedProduct(), 'mocked API returns correct result').eql({
-    id: 135865,
+  const mockedProduct = await getMockedProduct();
+
+  const {origin} = new URL(url);
+  const fetchUrl = `${origin}/product/135865?size=13` as Url;
+
+  const productRouteParams = CreateProductRoute.getParamsFromUrl(fetchUrl);
+
+  const productRouteFromUrl = new CreateProductRoute(productRouteParams);
+
+  await expect(mockedProduct, 'mocked API returns correct result').eql({
+    id: productRouteFromUrl.params.id,
+    method: productRouteFromUrl.getMethod(),
     output: '17',
+    query: {size: '13'},
+    url: fetchUrl,
   });
 });
