@@ -6,6 +6,11 @@ import type {Brand, Device} from 'e2ed/types';
 export type Email = Brand<string, 'Email'>;
 
 /**
+ * User language.
+ */
+export type Language = 'de' | 'en';
+
+/**
  * User password.
  */
 export type Password = Brand<string, 'Password'>;

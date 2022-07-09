@@ -1,4 +1,4 @@
-import type {Brand, MobileDevice} from 'e2ed/types';
+import type {Brand} from 'e2ed/types';
 
 /**
  * Device id.
@@ -28,3 +28,8 @@ export type Device = Readonly<ApiDeviceParams & {id: DeviceId}>;
  * Device object returned by API.
  */
 export type ApiDevice = Device;
+
+/**
+ * Mobile device type.
+ */
+export type MobileDevice = 'iphone' | 'samsung';
