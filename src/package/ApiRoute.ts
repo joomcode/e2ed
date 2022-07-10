@@ -1,9 +1,16 @@
 import {Route} from './Route';
 
-import type {Method, REQUEST, Request, RESPONSE, Response, Url} from './types/internal';
+import type {
+  Method,
+  Request,
+  REQUEST_KEY_TYPE,
+  Response,
+  RESPONSE_KEY_TYPE,
+  Url,
+} from './types/internal';
 
-declare const REQUEST_KEY: REQUEST;
-declare const RESPONSE_KEY: RESPONSE;
+declare const REQUEST_KEY: REQUEST_KEY_TYPE;
+declare const RESPONSE_KEY: RESPONSE_KEY_TYPE;
 
 /**
  * Abstract route for API requests.

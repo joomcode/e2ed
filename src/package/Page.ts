@@ -3,9 +3,9 @@ import {assertValueIsTrue} from './utils/asserts';
 import {getFullConfig} from './utils/getFullConfig';
 
 import type {Route} from './Route';
-import type {PageClassTypeArgs, PARAMS} from './types/internal';
+import type {PageClassTypeArgs, PARAMS_KEY_TYPE} from './types/internal';
 
-declare const PARAMS_KEY: PARAMS;
+declare const PARAMS_KEY: PARAMS_KEY_TYPE;
 
 /**
  * Abstract page with base methods.

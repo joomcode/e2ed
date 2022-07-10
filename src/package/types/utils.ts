@@ -36,7 +36,7 @@ export type IsEqual<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T ex
 /**
  * Type of inner key for params type.
  */
-export type PARAMS = typeof PARAMS_KEY;
+export type PARAMS_KEY_TYPE = typeof PARAMS_KEY;
 
 /**
  * Returns a copy of the object type with mutable properties.
@@ -59,7 +59,9 @@ export type Normalize<T> = keyof T extends never
 /**
  * Returns the type of instance params.
  */
-export type GetParamsType<C> = C extends {[PARAMS_KEY]: unknown} ? Normalize<C[PARAMS]> : never;
+export type GetParamsType<C> = C extends {[PARAMS_KEY]: unknown}
+  ? Normalize<C[PARAMS_KEY_TYPE]>
+  : never;
 
 /**
  * ZeroOrOneArg<string> = [arg: string].

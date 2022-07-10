@@ -87,7 +87,7 @@ export type Request<
 /**
  * Type of inner key for request type.
  */
-export type REQUEST = typeof REQUEST_KEY;
+export type REQUEST_KEY_TYPE = typeof REQUEST_KEY;
 
 /**
  * HTTP response object.
@@ -105,7 +105,7 @@ export type Response<
 /**
  * Type of inner key for response type.
  */
-export type RESPONSE = typeof RESPONSE_KEY;
+export type RESPONSE_KEY_TYPE = typeof RESPONSE_KEY;
 
 /**
  * Brand type for the full url string.

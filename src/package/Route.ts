@@ -1,6 +1,6 @@
-import type {PARAMS, Url, ZeroOrOneArg} from './types/internal';
+import type {PARAMS_KEY_TYPE, Url, ZeroOrOneArg} from './types/internal';
 
-declare const PARAMS_KEY: PARAMS;
+declare const PARAMS_KEY: PARAMS_KEY_TYPE;
 
 /**
  * Abstract route with base methods.
