@@ -7,6 +7,7 @@ export type RunLabel = Brand<string, 'RunLabel'>;
 
 /**
  * Additional data parsed from RunLabel string.
+ * @internal
  */
 export type RunLabelObject = Readonly<{
   concurrency: number;
