@@ -1,5 +1,23 @@
 # Changelog
 
+## [v0.11.0](https://github.com/joomcode/e2ed/tree/v0.11.0) (2022-07-13)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.18...v0.11.0)
+
+- [feat: add action switchToIframe (native TestCafe action)](https://github.com/joomcode/e2ed/commit/3fbdfe6a6a403f9407efd8c0545e73213e0a13e2) ([uid11](https://github.com/uid11))
+- [refactor: use Request/Response types from API routes in util/request](https://github.com/joomcode/e2ed/commit/1714f883f9e207a76cc625ef4fadd7607b04fa73) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (@typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/cea7345831768abe08748023d43819f6aa831138) ([uid11](https://github.com/uid11))
+- [refactor: use Request and Response types from ApiRoute for doApiMock](https://github.com/joomcode/e2ed/commit/47222b02c133b9753e05b1ca104615d108f4f63a) ([uid11](https://github.com/uid11))
+- [fix: rename PARAMS, REQUEST and RESPONSE key types](https://github.com/joomcode/e2ed/commit/64d01e991c15c246b2c762a86eae8552321dba91) ([uid11](https://github.com/uid11))
+- [feat: add Request and Response types to API routes](https://github.com/joomcode/e2ed/commit/993f1506f3c803986298c630dcf0dab7adc1db5e) ([uid11](https://github.com/uid11))
+- [fix: remove code from index files (except exports)](https://github.com/joomcode/e2ed/commit/756ff78688ddfc8ef506e3b6ba02426a343d217c) ([uid11](https://github.com/uid11))
+- [feat: add checks for method, query and url for doApiMock](https://github.com/joomcode/e2ed/commit/a5636948b1e2bbcf5beae7e0ce1f8784a6aff33c) ([uid11](https://github.com/uid11))
+- [feat: extends Request and Response types](https://github.com/joomcode/e2ed/commit/fee521c464676f5bdfc5fc4126f696d189bb668c) ([uid11](https://github.com/uid11))
+
+  Also add method, query and url to doApiMock request
+
+- [chore: update @types/node](https://github.com/joomcode/e2ed/commit/85a4b83f5bf38554bfd63b0993c79aa4131a9f6d) ([uid11](https://github.com/uid11))
+
 ## [v0.10.18](https://github.com/joomcode/e2ed/tree/v0.10.18) (2022-07-06)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.17...v0.10.18)
