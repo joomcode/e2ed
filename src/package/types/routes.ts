@@ -6,7 +6,11 @@ import type {ZeroOrOneArg} from './utils';
 /**
  * API Route class type by route parameters type.
  */
-type ApiRouteClassType<RouteParams, SomeRequest extends Request, SomeResponse extends Response> = {
+export type ApiRouteClassType<
+  RouteParams,
+  SomeRequest extends Request,
+  SomeResponse extends Response,
+> = {
   new (...args: ZeroOrOneArg<RouteParams>): ApiRoute<RouteParams, SomeRequest, SomeResponse>;
   prototype: ApiRoute<RouteParams, SomeRequest, SomeResponse>;
 };

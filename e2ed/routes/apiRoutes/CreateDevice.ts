@@ -1,6 +1,10 @@
 import {ApiRoute} from 'e2ed/routes';
 
-import type {DeviceAndProductRequest, DeviceAndProductResponse, MobileDevice} from 'e2ed/types';
+import type {
+  ApiDeviceAndProductRequest,
+  ApiDeviceAndProductResponse,
+  MobileDevice,
+} from 'e2ed/types';
 
 type Params = Readonly<{model: MobileDevice}>;
 
@@ -9,8 +13,8 @@ type Params = Readonly<{model: MobileDevice}>;
  */
 export class CreateDevice extends ApiRoute<
   Params,
-  DeviceAndProductRequest,
-  DeviceAndProductResponse
+  ApiDeviceAndProductRequest,
+  ApiDeviceAndProductResponse
 > {
   getMethod(): 'POST' {
     return 'POST';

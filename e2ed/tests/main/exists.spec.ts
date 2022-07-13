@@ -5,7 +5,7 @@ import {CreateProduct as CreateProductRoute} from 'e2ed/routes/apiRoutes';
 import {Search as SearchRoute} from 'e2ed/routes/pageRoutes';
 import {assertValueIsDefined, getCurrentUrl} from 'e2ed/utils';
 
-import type {DeviceAndProductResponse, Url} from 'e2ed/types';
+import type {ApiDeviceAndProductResponse, DeviceId, Url} from 'e2ed/types';
 
 const language = 'en';
 const searchQuery = 'foo';
@@ -16,6 +16,7 @@ it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
       id: routeParams.id,
       method,
       output: String(requestBody.input),
+      payload: {id: String(routeParams.id) as DeviceId, ...requestBody},
       query,
       url,
     };
@@ -63,12 +64,12 @@ it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
   const getMockedProduct = ClientFunction(
     () =>
       fetch('/product/135865?size=13', {
-        body: JSON.stringify({input: 17}),
+        body: JSON.stringify({cookies: [], input: 17, model: 'samsung', version: '12'}),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         method: 'POST',
-      }).then((res) => res.json() as Promise<DeviceAndProductResponse['responseBody']>),
+      }).then((res) => res.json() as Promise<ApiDeviceAndProductResponse['responseBody']>),
     'getMockedProduct',
   );
 
@@ -85,6 +86,13 @@ it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
     id: productRouteFromUrl.params.id,
     method: productRouteFromUrl.getMethod(),
     output: '17',
+    payload: {
+      cookies: [],
+      id: String(productRouteFromUrl.params.id) as DeviceId,
+      input: 17,
+      model: 'samsung',
+      version: '12',
+    },
     query: {size: '13'},
     url: fetchUrl,
   });

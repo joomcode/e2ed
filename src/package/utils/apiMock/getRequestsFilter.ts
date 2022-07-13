@@ -2,7 +2,6 @@ import {assertValueIsDefined, assertValueIsTrue} from '../asserts';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
-import type {ApiRoute} from '../../ApiRoute';
 import type {ApiMockState, Url} from '../../types/internal';
 
 /**
@@ -23,7 +22,7 @@ export const getRequestsFilter =
       try {
         const routeParams = Route.getParamsFromUrl(url);
 
-        const route = new (Route as unknown as new (params: unknown) => ApiRoute)(routeParams);
+        const route = new Route(routeParams);
 
         assertValueIsTrue(route.isMatchUrl(url), 'route matches on url', {request, route});
 

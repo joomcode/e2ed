@@ -1,17 +1,27 @@
-import type {Method, Query, Request, Response, Url} from 'e2ed/types';
+import type {ApiDevice, Method, MobileDevice, Query, Request, Response, Url} from 'e2ed/types';
 
 type RequestBody = Readonly<{
+  cookies: readonly string[];
   input: number;
+  model: MobileDevice;
+  version: string;
 }>;
 
-type ResponseBody = Readonly<{id: number; method: Method; output: string; query: Query; url: Url}>;
+type ResponseBody = Readonly<{
+  id: number;
+  method: Method;
+  output: string;
+  payload: ApiDevice;
+  query: Query;
+  url: Url;
+}>;
 
 /**
- * Request for common device and product endpoint.
+ * API request for common device and product endpoint.
  */
-export type DeviceAndProductRequest = Request<RequestBody>;
+export type ApiDeviceAndProductRequest = Request<RequestBody>;
 
 /**
- * Response for common device and product endpoint.
+ * API response for common device and product endpoint.
  */
-export type DeviceAndProductResponse = Response<ResponseBody>;
+export type ApiDeviceAndProductResponse = Response<ResponseBody>;

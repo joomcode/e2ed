@@ -2,15 +2,22 @@ import {doApiMock} from 'e2ed';
 import {CreateDevice, CreateProduct} from 'e2ed/routes/apiRoutes';
 import {Main} from 'e2ed/routes/pageRoutes';
 
-import type {DeviceAndProductRequest, DeviceAndProductResponse} from 'e2ed/types';
+import type {ApiDeviceAndProductRequest, ApiDeviceAndProductResponse, DeviceId} from 'e2ed/types';
 
 const apiMockFunction = (
   routeParams: object,
-  {method, query, requestBody, url}: DeviceAndProductRequest,
-): Partial<DeviceAndProductResponse> => {
+  {method, query, requestBody, url}: ApiDeviceAndProductRequest,
+): Partial<ApiDeviceAndProductResponse> => {
   const {input} = requestBody;
 
-  const responseBody = {id: 13, method, output: String(input), query, url};
+  const responseBody = {
+    id: 12,
+    method,
+    output: String(input),
+    payload: {id: '12' as DeviceId, ...requestBody},
+    query,
+    url,
+  };
 
   return {responseBody};
 };
@@ -33,7 +40,14 @@ void doApiMock(
   ) => {
     const {input} = requestBody;
 
-    const responseBody = {id: 7, method, output: `${input}${routeParams.id}`, query, url};
+    const responseBody = {
+      id: 7,
+      method,
+      output: `${input}${routeParams.id}`,
+      payload: {id: '7' as DeviceId, ...requestBody},
+      query,
+      url,
+    };
     const responseHeaders = {
       'X-Request-Id': 'Gd8obEgq81x',
       referer: String(query),

@@ -14,16 +14,16 @@ import type {LogParams, OneTryOfRequestOptions} from './types';
  * One try of request.
  * @internal
  */
-export const oneTryOfRequest = <RequestBody, ResponseBody, Query>({
+export const oneTryOfRequest = <SomeResponse extends Response>({
   urlObject,
   options,
   requestBodyAsString,
   libRequest,
   timeout,
   logParams,
-}: OneTryOfRequestOptions<RequestBody, Query>): Promise<{
-  fullLogParams: LogParams<RequestBody, Query>;
-  response: Response<ResponseBody>;
+}: OneTryOfRequestOptions): Promise<{
+  fullLogParams: LogParams;
+  response: SomeResponse;
 }> =>
   new Promise((resolve, reject) => {
     const fullOptions = {
@@ -33,7 +33,7 @@ export const oneTryOfRequest = <RequestBody, ResponseBody, Query>({
         ...options.requestHeaders,
       }),
     };
-    const fullLogParams: LogParams<RequestBody, Query> = {...logParams, ...fullOptions};
+    const fullLogParams: LogParams = {...logParams, ...fullOptions};
 
     void log(
       `Will be send a request to ${logParams.url}`,
@@ -72,12 +72,12 @@ export const oneTryOfRequest = <RequestBody, ResponseBody, Query>({
           try {
             const responseBody = (
               responseBodyAsString === '' ? undefined : JSON.parse(responseBodyAsString)
-            ) as ResponseBody;
+            ) as SomeResponse['responseBody'];
             const response = {
               responseBody,
               responseHeaders: res.headers,
               statusCode,
-            };
+            } as SomeResponse;
 
             clearTimeout(endTimeout);
             resolve({fullLogParams, response});

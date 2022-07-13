@@ -14,6 +14,7 @@ export const createDevice = async ({
 }: DeviceParams = {}): Promise<Device> => {
   const device = await apiCreateDevice({
     cookies,
+    input: 7,
     model,
     version,
   });
