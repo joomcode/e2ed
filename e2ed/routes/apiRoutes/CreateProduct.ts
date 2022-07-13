@@ -1,7 +1,7 @@
 import {ApiRoute} from 'e2ed/routes';
 import {assertValueIsTrue} from 'e2ed/utils';
 
-import type {Url} from 'e2ed/types';
+import type {DeviceAndProductRequest, DeviceAndProductResponse, Url} from 'e2ed/types';
 
 type Params = Readonly<{id: number; size: number}>;
 
@@ -10,7 +10,11 @@ const pathStart = '/product/';
 /**
  * Test API route for creating a product.
  */
-export class CreateProduct extends ApiRoute<Params> {
+export class CreateProduct extends ApiRoute<
+  Params,
+  DeviceAndProductRequest,
+  DeviceAndProductResponse
+> {
   static override getParamsFromUrl(url: Url): Params {
     const urlObject = new URL(url);
 

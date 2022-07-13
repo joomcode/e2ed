@@ -1,19 +1,25 @@
 import type {ApiRoute} from '../ApiRoute';
 
+import type {Request, Response} from './http';
 import type {ZeroOrOneArg} from './utils';
 
 /**
  * API Route class type by route parameters type.
  */
-type ApiRouteClassType<RouteParams> = {
-  new (...args: ZeroOrOneArg<RouteParams>): ApiRoute<RouteParams>;
-  prototype: ApiRoute<RouteParams>;
+type ApiRouteClassType<RouteParams, SomeRequest extends Request, SomeResponse extends Response> = {
+  new (...args: ZeroOrOneArg<RouteParams>): ApiRoute<RouteParams, SomeRequest, SomeResponse>;
+  prototype: ApiRoute<RouteParams, SomeRequest, SomeResponse>;
 };
 
 /**
  * API Route class with static method getParamsFromUrl.
  */
-export type ApiRouteWithGetParamsFromUrl<RouteParams> = ApiRouteClassType<RouteParams> &
+export type ApiRouteWithGetParamsFromUrl<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  RouteParams = any,
+  SomeRequest extends Request = Request,
+  SomeResponse extends Response = Response,
+> = ApiRouteClassType<RouteParams, SomeRequest, SomeResponse> &
   Readonly<{
     getParamsFromUrl: Exclude<typeof ApiRoute['getParamsFromUrl'], undefined>;
   }>;

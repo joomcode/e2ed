@@ -5,31 +5,23 @@ import {CreateProduct as CreateProductRoute} from 'e2ed/routes/apiRoutes';
 import {Search as SearchRoute} from 'e2ed/routes/pageRoutes';
 import {assertValueIsDefined, getCurrentUrl} from 'e2ed/utils';
 
-import type {Method, Query, Request, Response, Url} from 'e2ed/types';
+import type {DeviceAndProductResponse, Url} from 'e2ed/types';
 
 const language = 'en';
 const searchQuery = 'foo';
 
-type ResponseBody = Readonly<{id: number; method: Method; output: string; query: Query; url: Url}>;
-
 it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
-  await doApiMock(
-    CreateProductRoute,
-    (
-      routeParams,
-      {method, query, requestBody, url}: Request<{input: number}>,
-    ): Partial<Response<ResponseBody>> => {
-      const responseBody = {
-        id: routeParams.id,
-        method,
-        output: String(requestBody.input),
-        query,
-        url,
-      };
+  await doApiMock(CreateProductRoute, (routeParams, {method, query, requestBody, url}) => {
+    const responseBody = {
+      id: routeParams.id,
+      method,
+      output: String(requestBody.input),
+      query,
+      url,
+    };
 
-      return {responseBody};
-    },
-  );
+    return {responseBody};
+  });
 
   await scroll(0, 200);
 
@@ -76,7 +68,7 @@ it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         method: 'POST',
-      }).then((res) => res.json() as Promise<ResponseBody>),
+      }).then((res) => res.json() as Promise<DeviceAndProductResponse['responseBody']>),
     'getMockedProduct',
   );
 

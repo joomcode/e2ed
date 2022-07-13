@@ -17,8 +17,8 @@ declare const RESPONSE_KEY: RESPONSE_KEY_TYPE;
  */
 export abstract class ApiRoute<
   Params = undefined,
-  SomeRequest = Request,
-  SomeResponse = Response,
+  SomeRequest extends Request = Request,
+  SomeResponse extends Response = Response,
 > extends Route<Params> {
   abstract getMethod(): Method;
 
