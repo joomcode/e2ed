@@ -18,6 +18,7 @@ export * from './selectText';
 export * from './setFilesToUpload';
 export * from './setHeadersAndNavigateTo';
 export * from './setNativeDialogHandler';
+export * from './switchToIframe';
 export * from './takeElementScreenshot';
 export * from './takeScreenshot';
 export * from './typeText';
