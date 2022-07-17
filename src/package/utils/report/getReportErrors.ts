@@ -16,12 +16,14 @@ export const getReportErrors = async (
 
   if (runEnvironment === RunEnvironment.Docker) {
     const unvisitedTestFilePaths = await getUnvisitedTestFilePaths(testRunsWithHooks);
+    const numberOfUnvisited = unvisitedTestFilePaths.length;
+    const onlyOne = numberOfUnvisited === 1;
 
-    if (unvisitedTestFilePaths.length !== 0) {
+    if (numberOfUnvisited !== 0) {
       errors.push(
-        `Error: There are e2ed/tests/**/*.spec.ts-files not visited when running tests: ${unvisitedTestFilePaths.join(
-          ', ',
-        )}`,
+        `Error: There ${onlyOne ? 'is' : 'are'} ${numberOfUnvisited} e2ed/tests/**/*.spec.ts-file${
+          onlyOne ? '' : 's'
+        } not visited when running tests: ${unvisitedTestFilePaths.join(', ')}`,
       );
     }
   }

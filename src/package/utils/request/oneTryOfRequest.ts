@@ -34,6 +34,8 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
       }),
     };
     const fullLogParams: LogParams = {...logParams, ...fullOptions};
+    const {requestHeaders, ...fullOptionsWithoutHeaders} = fullOptions;
+    const fullOptionsWithHeaders = {...fullOptionsWithoutHeaders, headers: requestHeaders};
 
     void log(
       `Will be send a request to ${logParams.url}`,
@@ -42,7 +44,7 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
     ).then(() => {
       let endTimeout: NodeJS.Timeout;
 
-      const req = libRequest(urlObject, fullOptions, (res) => {
+      const req = libRequest(urlObject, fullOptionsWithHeaders, (res) => {
         // eslint-disable-next-line @typescript-eslint/unbound-method
         res.on = wrapInTestRunTracker(res.on);
 

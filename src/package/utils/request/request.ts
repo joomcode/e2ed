@@ -25,7 +25,7 @@ const defaultIsNeedRetry = <SomeResponse extends Response>({statusCode}: SomeRes
   statusCode >= 400;
 
 /**
- * Send a request to the (JSON) API by url, query params, HTTP method, headers,
+ * Send a request to the (JSON) API by Route, route parameters, headers,
  * post-data, timeout and number of retries.
  */
 export const request = async <

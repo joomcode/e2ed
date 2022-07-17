@@ -40,6 +40,6 @@ export type Options<
   routeParams?: RouteParams;
   isNeedRetry?: (response: SomeResponse) => Promise<boolean> | boolean;
   maxRetriesCount?: number;
-  requestBody?: string | SomeRequest['requestBody'];
+  requestBody?: SomeRequest['requestBody'];
   timeout?: number;
 }>;
