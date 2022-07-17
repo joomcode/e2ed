@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.11.1](https://github.com/joomcode/e2ed/tree/v0.11.1) (2022-07-17)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.0...v0.11.1)
+
+- [chore: update devDependencies (eslint, @types/node)](https://github.com/joomcode/e2ed/commit/bb213f30afa4fd6e5d41043e2f841730acf21244) ([uid11](https://github.com/uid11))
+- [fix: use headers field instead of requestHeaders for http.request](https://github.com/joomcode/e2ed/commit/9e6b6455ce12e8fd8d6fee0aea87f3592bc0a766) ([uid11](https://github.com/uid11))
+
 ## [v0.11.0](https://github.com/joomcode/e2ed/tree/v0.11.0) (2022-07-13)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.10.18...v0.11.0)
