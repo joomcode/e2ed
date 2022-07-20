@@ -10,7 +10,7 @@ import type {ApiMockState, Url} from '../../types/internal';
  */
 export const getRequestsFilter =
   ({
-    functionAndRouteParamsByUrl,
+    functionAndRouteByUrl,
     functionByRoute,
   }: ApiMockState): ((request: Inner.RequestOptions) => boolean) =>
   (request) => {
@@ -41,12 +41,12 @@ export const getRequestsFilter =
         }
 
         // eslint-disable-next-line no-param-reassign
-        functionAndRouteParamsByUrl[url] = {apiMockFunction, routeParams};
+        functionAndRouteByUrl[url] = {apiMockFunction, route};
 
         return true;
       } catch (error) {
         // eslint-disable-next-line no-param-reassign
-        functionAndRouteParamsByUrl[url] = undefined;
+        functionAndRouteByUrl[url] = undefined;
       }
     }
 

@@ -49,7 +49,7 @@ export const assertPage = async <SomePageClass extends AnyPageClassType>(
       pageParams,
       routeParams: route.params,
     },
-    LogEventType.InternalCore,
+    LogEventType.InternalAction,
   );
 
   await expect(isMatch, message).ok();

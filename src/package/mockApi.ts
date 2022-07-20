@@ -1,30 +1,32 @@
 import {RequestMock} from 'testcafe-without-typecheck';
 
-import {getRequestsFilter, getSetResponse} from './utils/apiMock';
+import {LogEventType} from './constants/internal';
+import {log} from './utils/log';
+import {getRequestsFilter, getSetResponse} from './utils/mockApi';
 import {testController} from './testController';
 
 import type {
   ApiMockFunction,
   ApiMockState,
-  ApiRouteWithGetParamsFromUrl,
+  ApiRouteClassTypeWithGetParamsFromUrl,
   Request,
   Response,
 } from './types/internal';
 
 const apiMockState: ApiMockState = {
-  functionAndRouteParamsByUrl: {},
+  functionAndRouteByUrl: {},
   functionByRoute: undefined,
 };
 
 /**
- * Add mock for some API route.
+ * Mock API for some API route.
  */
-export const doApiMock = async <
+export const mockApi = async <
   RouteParams,
   SomeRequest extends Request,
   SomeResponse extends Response,
 >(
-  Route: ApiRouteWithGetParamsFromUrl<RouteParams, SomeRequest, SomeResponse>,
+  Route: ApiRouteClassTypeWithGetParamsFromUrl<RouteParams, SomeRequest, SomeResponse>,
   apiMockFunction: ApiMockFunction<RouteParams, SomeRequest, SomeResponse>,
 ): Promise<void> => {
   let {functionByRoute} = apiMockState;
@@ -42,4 +44,6 @@ export const doApiMock = async <
   }
 
   functionByRoute.set(Route, apiMockFunction as unknown as ApiMockFunction);
+
+  await log(`Mock API for route "${Route.name}"`, {apiMockFunction}, LogEventType.InternalCore);
 };

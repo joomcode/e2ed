@@ -45,7 +45,7 @@ export function chooseTestRun(runHash: RunHash): void {
 
   if (e2edFullTestRuns === undefined) {
     // eslint-disable-next-line no-console
-    console.log('JSON report data not yet loaded');
+    console.log('JSON report data not yet loaded. Please try click again later');
 
     return;
   }

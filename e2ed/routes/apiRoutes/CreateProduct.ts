@@ -1,3 +1,5 @@
+import {URL} from 'node:url';
+
 import {ApiRoute} from 'e2ed/routes';
 import {assertValueIsTrue} from 'e2ed/utils';
 

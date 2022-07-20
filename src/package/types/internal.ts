@@ -1,6 +1,5 @@
 import type {Inner} from 'testcafe-without-typecheck';
 
-export * from './apiMock';
 export * from './brand';
 export * from './client';
 export * from './config';
@@ -12,6 +11,7 @@ export * from './fs';
 export * from './html';
 export * from './http';
 export * from './log';
+export * from './mockApi';
 export * from './pages';
 export * from './pixelmatch';
 export * from './report';

@@ -18,7 +18,7 @@ export type ApiRouteClassType<
 /**
  * API Route class with static method getParamsFromUrl.
  */
-export type ApiRouteWithGetParamsFromUrl<
+export type ApiRouteClassTypeWithGetParamsFromUrl<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   RouteParams = any,
   SomeRequest extends Request = Request,

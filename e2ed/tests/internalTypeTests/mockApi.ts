@@ -1,4 +1,4 @@
-import {doApiMock} from 'e2ed';
+import {mockApi} from 'e2ed';
 import {CreateDevice, CreateProduct} from 'e2ed/routes/apiRoutes';
 import {Main} from 'e2ed/routes/pageRoutes';
 
@@ -23,16 +23,16 @@ const apiMockFunction = (
 };
 
 // @ts-expect-error: doApiMock require API route as first argument
-void doApiMock(Main, apiMockFunction);
+void mockApi(Main, apiMockFunction);
 
 // @ts-expect-error: doApiMock require API route with static method getParamsFromUrl
-void doApiMock(CreateDevice, apiMockFunction);
+void mockApi(CreateDevice, apiMockFunction);
 
 // ok
-void doApiMock(CreateProduct, apiMockFunction);
+void mockApi(CreateProduct, apiMockFunction);
 
 // ok
-void doApiMock(
+void mockApi(
   CreateProduct,
   async (
     routeParams,

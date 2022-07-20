@@ -1,13 +1,15 @@
+import type {ApiRoute} from '../ApiRoute';
+
 import type {Request, Response, Url} from './http';
-import type {ApiRouteWithGetParamsFromUrl} from './routes';
+import type {ApiRouteClassTypeWithGetParamsFromUrl} from './routes';
 
 /**
  * Object with routeParams and apiMockFunction.
  * @internal
  */
-type RouteParamsAndApiMockFunction = Readonly<{
+type MockFunctionAndRoute = Readonly<{
   apiMockFunction: ApiMockFunction;
-  routeParams: unknown;
+  route: ApiRoute<unknown>;
 }>;
 
 /**
@@ -27,6 +29,6 @@ export type ApiMockFunction<
  * @internal
  */
 export type ApiMockState = Readonly<{
-  functionAndRouteParamsByUrl: Record<Url, RouteParamsAndApiMockFunction | undefined>;
-  functionByRoute: Map<ApiRouteWithGetParamsFromUrl, ApiMockFunction> | undefined;
+  functionAndRouteByUrl: Record<Url, MockFunctionAndRoute | undefined>;
+  functionByRoute: Map<ApiRouteClassTypeWithGetParamsFromUrl, ApiMockFunction> | undefined;
 }>;

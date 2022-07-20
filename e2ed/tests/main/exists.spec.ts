@@ -1,4 +1,4 @@
-import {ClientFunction, doApiMock, expect, it} from 'e2ed';
+import {ClientFunction, expect, it, mockApi} from 'e2ed';
 import {assertPage, navigateToPage, pressKey, scroll} from 'e2ed/actions';
 import {Main, Search} from 'e2ed/pageObjects/pages';
 import {CreateProduct as CreateProductRoute} from 'e2ed/routes/apiRoutes';
@@ -11,7 +11,7 @@ const language = 'en';
 const searchQuery = 'foo';
 
 it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
-  await doApiMock(CreateProductRoute, (routeParams, {method, query, requestBody, url}) => {
+  await mockApi(CreateProductRoute, (routeParams, {method, query, requestBody, url}) => {
     const responseBody = {
       id: routeParams.id,
       method,

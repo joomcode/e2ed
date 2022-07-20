@@ -13,6 +13,6 @@ export * from './useContext';
  * Dependent on internal utils.
  */
 export * from './ClientFunction';
-export * from './doApiMock';
 export * from './expect';
 export * from './it';
+export * from './mockApi';

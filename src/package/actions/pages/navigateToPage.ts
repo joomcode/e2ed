@@ -32,7 +32,7 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
       routeParams: route.params,
       url,
     },
-    LogEventType.InternalCore,
+    LogEventType.InternalAction,
   );
 
   if (page.beforeNavigateToPage) {
@@ -53,7 +53,7 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
   await log(
     `Page "${PageClass.name}" loaded in ${Date.now() - startNavigateTimeInMs} ms`,
     {url},
-    LogEventType.InternalCore,
+    LogEventType.InternalAction,
   );
 
   setPageLoaded(true);
