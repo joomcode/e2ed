@@ -1,4 +1,6 @@
-import {ClientFunction, expect, it, mockApi} from 'e2ed';
+import {URL} from 'node:url';
+
+import {ClientFunction, expect, it, mockApiRoute, unmockApiRoute} from 'e2ed';
 import {assertPage, navigateToPage, pressKey, scroll} from 'e2ed/actions';
 import {Main, Search} from 'e2ed/pageObjects/pages';
 import {CreateProduct as CreateProductRoute} from 'e2ed/routes/apiRoutes';
@@ -11,7 +13,7 @@ const language = 'en';
 const searchQuery = 'foo';
 
 it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
-  await mockApi(CreateProductRoute, (routeParams, {method, query, requestBody, url}) => {
+  await mockApiRoute(CreateProductRoute, (routeParams, {method, query, requestBody, url}) => {
     const responseBody = {
       id: routeParams.id,
       method,
@@ -96,4 +98,13 @@ it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
     query: {size: '13'},
     url: fetchUrl,
   });
+
+  await unmockApiRoute(CreateProductRoute);
+
+  await getMockedProduct().then(
+    () => {
+      throw new Error('API mock on CreateProductRoute was not umocked');
+    },
+    () => undefined,
+  );
 });

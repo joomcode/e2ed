@@ -11,7 +11,7 @@ export * from './fs';
 export * from './html';
 export * from './http';
 export * from './log';
-export * from './mockApi';
+export * from './mockApiRoute';
 export * from './pages';
 export * from './pixelmatch';
 export * from './report';

@@ -15,4 +15,4 @@ export * from './useContext';
 export * from './ClientFunction';
 export * from './expect';
 export * from './it';
-export * from './mockApi';
+export * from './mockApiRoute';

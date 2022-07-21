@@ -25,7 +25,7 @@ export type ApiMockFunction<
 ) => Promise<Partial<SomeResponse>> | Partial<SomeResponse>;
 
 /**
- * Internal state of doApiMock.
+ * Internal state of mockApiRoute/unmockApiRoute.
  * @internal
  */
 export type ApiMockState = Readonly<{
