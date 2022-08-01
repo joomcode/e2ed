@@ -3,6 +3,7 @@ import {RequestMock} from 'testcafe-without-typecheck';
 import {LogEventType} from './constants/internal';
 import {log} from './utils/log';
 import {getRequestsFilter, getSetResponse} from './utils/mockApiRoute';
+import {wrapInTestRunTracker} from './utils/wrapInTestRunTracker';
 import {testController} from './testController';
 
 import type {
@@ -36,9 +37,17 @@ export const mockApiRoute = async <
     functionByRoute = new Map();
     (apiMockState as Mutable<ApiMockState>).functionByRoute = functionByRoute;
 
-    const apiMock = RequestMock()
-      .onRequestTo(getRequestsFilter(apiMockState))
-      .respond(getSetResponse(apiMockState));
+    let requestMock = RequestMock();
+
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    requestMock.onRequestTo = wrapInTestRunTracker(requestMock.onRequestTo);
+
+    requestMock = requestMock.onRequestTo(getRequestsFilter(apiMockState));
+
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    requestMock.respond = wrapInTestRunTracker(requestMock.respond);
+
+    const apiMock = requestMock.respond(getSetResponse(apiMockState));
 
     await testController.addRequestHooks(apiMock);
   }

@@ -20,6 +20,14 @@ declare module 'bin-v8-flags-filter' {
 }
 
 /**
+ * Internal ESM module, which is used to directly access to TestCafe exports.
+ * @internal
+ */
+declare module 'e2ed/testcafe' {
+  export const createTestCafe: typeof import('../testcafe').createTestCafe;
+}
+
+/**
  * Internal TestCafe module, which is used to track asynchronous calls in tests.
  * @internal
  */
