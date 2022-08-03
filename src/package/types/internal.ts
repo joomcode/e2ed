@@ -5,6 +5,7 @@ export * from './client';
 export * from './config';
 export * from './date';
 export * from './deep';
+export * from './environment';
 export * from './errors';
 export * from './events';
 export * from './fs';

@@ -25,7 +25,7 @@ export function renderSteps({endTimeInMs, logEvents}: Options): SafeHtml {
   const stepHtmls: SafeHtml[] = [];
 
   for (let index = 0; index < logEvents.length; index += 1) {
-    const logEvent = logEvents[index];
+    const logEvent = logEvents[index]!;
     const {message, payload, time} = logEvent;
     const payloadString = JSON.stringify(payload, null, 2);
     const nextLogEvent = logEvents[index + 1];

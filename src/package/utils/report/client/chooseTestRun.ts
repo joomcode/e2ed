@@ -24,10 +24,6 @@ export function chooseTestRun(runHash: RunHash): void {
 
   const {e2edTestRunDetailsElementsByHash} = global;
 
-  if (e2edTestRunDetailsElementsByHash === undefined) {
-    return;
-  }
-
   const previousTestRunDetailsElement =
     e2edTestRunDetailsContainer.firstElementChild as HTMLElement;
 
@@ -36,7 +32,7 @@ export function chooseTestRun(runHash: RunHash): void {
   }
 
   if (runHash in e2edTestRunDetailsElementsByHash) {
-    previousTestRunDetailsElement.replaceWith(e2edTestRunDetailsElementsByHash[runHash]);
+    previousTestRunDetailsElement.replaceWith(e2edTestRunDetailsElementsByHash[runHash]!);
 
     return;
   }

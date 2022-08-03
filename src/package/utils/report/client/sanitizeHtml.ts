@@ -13,13 +13,13 @@ export function createSafeHtmlWithoutSanitize(
   const parts: string[] = [];
 
   for (let index = 0; index < values.length; index += 1) {
-    const string = strings[index];
+    const string = strings[index]!;
     const value = String(values[index]);
 
     parts.push(string, value);
   }
 
-  parts.push(strings[strings.length - 1]);
+  parts.push(strings[strings.length - 1]!);
 
   const html = parts.join('');
   // eslint-disable-next-line no-new-wrappers
@@ -49,7 +49,7 @@ export function sanitizeHtml(strings: readonly string[], ...values: readonly unk
   const parts: string[] = [];
 
   for (let index = 0; index < values.length; index += 1) {
-    const string = strings[index];
+    const string = strings[index]!;
     const value = values[index];
 
     const valueIsSafeHtml = typeof value === 'object' && value !== null && key in value;
@@ -59,7 +59,7 @@ export function sanitizeHtml(strings: readonly string[], ...values: readonly unk
     parts.push(string, safeValue);
   }
 
-  parts.push(strings[strings.length - 1]);
+  parts.push(strings[strings.length - 1]!);
 
   const html = parts.join('');
 

@@ -19,6 +19,15 @@ import type {TestClientGlobal, UtcTimeInMs} from '../types/internal';
 const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterval: number) => {
   const global: TestClientGlobal = window;
 
+  /**
+   * Asserts that the value is defined (is not undefined).
+   */
+  function assertValueIsDefined<T>(value: T): asserts value is Exclude<T, undefined> {
+    if (value === undefined) {
+      throw new TypeError('Asserted value is undefined');
+    }
+  }
+
   if (global.e2edWaitingForInterfaceStabilization) {
     if (stabilizationInterval > global.e2edWaitingForInterfaceStabilization.stabilizationInterval) {
       global.e2edWaitingForInterfaceStabilization.stabilizationInterval = stabilizationInterval;
@@ -42,11 +51,19 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
     const deltaY = innerHeight / (COUNT_OF_POINTED_NODES + 1);
 
     for (let i = 0; i < elementsWithDataTestId.length && i < COUNT_OF_TEST_ID_NODES; i += 1) {
-      elements.push(elementsWithDataTestId[i]);
+      const elementWithDataTestId = elementsWithDataTestId[i];
+
+      assertValueIsDefined(elementWithDataTestId);
+
+      elements.push(elementWithDataTestId);
     }
 
     for (let i = 0; i < elementsWithDataTestid.length && i < COUNT_OF_TEST_ID_NODES; i += 1) {
-      elements.push(elementsWithDataTestid[i]);
+      const elementWithDataTestid = elementsWithDataTestid[i];
+
+      assertValueIsDefined(elementWithDataTestid);
+
+      elements.push(elementWithDataTestid);
     }
 
     for (let xIndex = 1; xIndex <= COUNT_OF_POINTED_NODES; xIndex += 1) {

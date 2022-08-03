@@ -35,7 +35,7 @@ declare module 'testcafe-without-typecheck/lib/api/test-run-tracker' {
   type Fn = (...args: never[]) => unknown;
 
   const testRunTracker: {
-    activeTestRuns: {[id: string]: InternalTestRun};
+    activeTestRuns: Record<string, InternalTestRun>;
     addTrackingMarkerToFunction(testRunId: string, fn: Fn): Fn;
     ensureEnabled(): void;
     resolveContextTestRun(): InternalTestRun;

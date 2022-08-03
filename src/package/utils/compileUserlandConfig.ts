@@ -51,7 +51,7 @@ export const compileUserlandConfig = (): void => {
     if (diagnostic.file) {
       const {line, character} = getLineAndCharacterOfPosition(
         diagnostic.file,
-        diagnostic.start || 0,
+        diagnostic.start ?? 0,
       );
 
       logData.file = `${diagnostic.file.fileName} (${line + 1},${character + 1})`;

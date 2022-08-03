@@ -20,7 +20,7 @@ export const assertThatTestNamesAndFilePathsAreUnique = (
       testRunsByRunLabel[retryIndex] = [];
     }
 
-    testRunsByRunLabel[retryIndex].push(testRunWithHooks);
+    testRunsByRunLabel[retryIndex]?.push(testRunWithHooks);
   }
 
   for (const testRunsInOneRetry of Object.values(testRunsByRunLabel)) {

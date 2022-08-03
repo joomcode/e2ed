@@ -3,7 +3,7 @@ import {version as e2edVersion} from '../package.json';
 
 import {getFullConfig} from './getFullConfig';
 
-import type {StartInfo} from '../types/internal';
+import type {E2edEnvironment, StartInfo} from '../types/internal';
 
 /**
  * Get complete start info (CLI params, e2ed environment variables
@@ -22,7 +22,7 @@ export const getStartInfo = (): StartInfo => {
   }
 
   return {
-    PWD: process.env.PWD,
+    PWD: (process.env as E2edEnvironment).PWD,
     'cwd()': process.cwd(),
     e2edEnvironmentVariables,
     e2edVersion,

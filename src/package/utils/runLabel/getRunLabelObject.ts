@@ -1,6 +1,6 @@
 import {assertValueIsDefined} from '../asserts';
 
-import type {RunLabel, RunLabelObject} from '../../types/internal';
+import type {RawRunLabelObject, RunLabel, RunLabelObject} from '../../types/internal';
 
 /**
  * Get RunLabelObject from RunLabel.
@@ -8,7 +8,7 @@ import type {RunLabel, RunLabelObject} from '../../types/internal';
 export const getRunLabelObject = (runLabel: RunLabel): RunLabelObject => {
   const object = runLabel.match(
     /r:(?<retryIndex>\d+)\/(?<maxRetriesCount>\d+),c:(?<concurrency>\d+)/,
-  )?.groups;
+  )?.groups as RawRunLabelObject | undefined;
 
   assertValueIsDefined(object, 'runLabel is not match template', {runLabel});
 

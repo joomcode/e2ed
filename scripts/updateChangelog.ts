@@ -7,6 +7,8 @@ import {readFileSync, writeFileSync} from 'node:fs';
 import {join} from 'node:path';
 import {URL} from 'node:url';
 
+import {assertValueIsDefined} from 'e2ed/utils/asserts';
+
 import {repository, version} from '../package.json';
 
 const {href: repoUrl, origin: repoOrigin} = new URL(repository.url);
@@ -16,7 +18,7 @@ const fullDate = new Date().toISOString().slice(0, 10);
 
 const changelogText = readFileSync(changelogPath, 'utf8');
 
-const previousVersion = changelogText.match(/\[v(\d+\.\d+\.\d+)\]/)?.[1] || '';
+const previousVersion = changelogText.match(/\[v(\d+\.\d+\.\d+)\]/)?.[1] ?? '';
 const SEPARATOR = '\n'.repeat(64);
 const gitOptions = [
   'log',
@@ -31,6 +33,8 @@ const commits = execFileSync('git', gitOptions, {encoding: 'utf8'})
 
 const markdownCommits = commits.map((commit) => {
   const [firstLine, ...bodyLines] = commit.split('\n');
+
+  assertValueIsDefined(firstLine, 'firstLine is defined', {bodyLines, commit});
 
   const firstSpaceIndex = firstLine.indexOf(' ');
   const subject = firstLine.slice(firstSpaceIndex + 1);

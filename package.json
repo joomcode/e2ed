@@ -69,7 +69,9 @@
       "require": "./testcafe.js"
     },
     "./types": "./types/index.js",
-    "./utils": "./utils/index.js"
+    "./utils": "./utils/index.js",
+    "./utils/asserts": "./utils/asserts.js",
+    "./utils/E2EDError": "./utils/E2EDError.js"
   },
   "scripts": {
     "precheck:all": "npm run lint:clear:cache && npm run build",

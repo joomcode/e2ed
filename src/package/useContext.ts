@@ -24,8 +24,8 @@ export const useContext = (<T>(defaultValue?: T) => {
    * Set value to test context.
    */
   const set = (value: T): void => {
-    if (testController.ctx.contexts === undefined) {
-      testController.ctx.contexts = {};
+    if ((testController.ctx as Partial<Ctx<T>>).contexts === undefined) {
+      (testController.ctx as Partial<Ctx<T>>).contexts = {};
     }
 
     const {contexts} = testController.ctx as Ctx<T>;

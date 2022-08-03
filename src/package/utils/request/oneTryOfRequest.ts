@@ -6,7 +6,7 @@ import {getRandomId} from '../getRandomId';
 import {log} from '../log';
 import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
-import type {Response, StatusCode} from '../../types/internal';
+import type {Response} from '../../types/internal';
 
 import type {LogParams, OneTryOfRequestOptions} from './types';
 
@@ -69,7 +69,7 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
 
         res.on('end', () => {
           const responseBodyAsString = chunks.join('');
-          const statusCode = (res.statusCode as StatusCode) || BAD_REQUEST_STATUS_CODE;
+          const statusCode = res.statusCode ?? BAD_REQUEST_STATUS_CODE;
 
           try {
             const responseBody = (

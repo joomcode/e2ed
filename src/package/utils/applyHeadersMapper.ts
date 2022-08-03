@@ -27,6 +27,7 @@ export const applyHeadersMapper = (headers: Headers, mapper?: MapHeaders): void 
 
   for (const [key, value] of Object.entries(newHeaders)) {
     if (value === undefined) {
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete mutableHeaders[key];
     } else {
       mutableHeaders[key] = value;

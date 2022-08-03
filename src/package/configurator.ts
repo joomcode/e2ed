@@ -26,8 +26,8 @@ export const enum RunEnvironment {
  * Run environment for current e2ed run.
  */
 // eslint-disable-next-line import/no-mutable-exports
-export let runEnvironment: RunEnvironment =
-  (process.env[RUN_ENVIRONMENT_VARIABLE_NAME] as RunEnvironment) || RunEnvironment.Local;
+export let runEnvironment = (process.env[RUN_ENVIRONMENT_VARIABLE_NAME] ??
+  RunEnvironment.Local) as RunEnvironment;
 
 /**
  * Sets current run environment before e2ed start.

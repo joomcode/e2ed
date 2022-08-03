@@ -1,3 +1,5 @@
+import {assertValueIsDefined} from '../asserts';
+
 import type {RunHash, TestRunWithHooks} from '../../types/internal';
 
 /**
@@ -9,6 +11,9 @@ export const unificateRunHashes = (testRunsWithHooks: readonly TestRunWithHooks[
 
   for (let index = 0; index < testRunsWithHooks.length; index += 1) {
     const testRunWithHooks = testRunsWithHooks[index];
+
+    assertValueIsDefined(testRunWithHooks, 'testRunsWithHooks is defined', {index, length});
+
     const {runHash} = testRunWithHooks;
 
     const clearRunHash = runHash.replace(/[# ?:/]+/g, '-') as RunHash;

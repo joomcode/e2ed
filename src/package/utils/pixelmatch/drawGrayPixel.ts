@@ -8,10 +8,10 @@ import type {ImgData} from '../../types/internal';
  * @internal
  */
 export const drawGrayPixel = (img: ImgData, i: number, alpha: number, output: ImgData): void => {
-  const r = img[i + 0];
-  const g = img[i + 1];
-  const b = img[i + 2];
-  const val = blend(rgb2y(r, g, b), (alpha * img[i + 3]) / 255);
+  const r = img[i + 0]!;
+  const g = img[i + 1]!;
+  const b = img[i + 2]!;
+  const val = blend(rgb2y(r, g, b), (alpha * img[i + 3]!) / 255);
 
   drawPixel(output, i, val, val, val);
 };

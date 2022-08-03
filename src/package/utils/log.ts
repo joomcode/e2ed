@@ -9,7 +9,7 @@ import {getFullConfig} from './getFullConfig';
 import {addTestLog} from './testLogs';
 import {valueToString} from './valueToString';
 
-import type {Log, LogPayload, RunLabel, UtcTimeInMs} from '../types/internal';
+import type {E2edEnvironment, Log, LogPayload, UtcTimeInMs} from '../types/internal';
 
 /**
  * Log every actions and API requests in E2ED tests.
@@ -21,7 +21,7 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
   const time = Date.now() as UtcTimeInMs;
   const dateTimeInISO = new Date(time).toISOString();
   const runId = getRunId();
-  const runLabel = process.env.E2ED_RUN_LABEL as RunLabel;
+  const runLabel = (process.env as E2edEnvironment).E2ED_RUN_LABEL;
   const payload = typeof maybePayload === 'object' ? (maybePayload as LogPayload) : undefined;
   const type =
     typeof maybePayload === 'number'
@@ -33,7 +33,7 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
     const {printTestLogsInConsole, testLogsFileName} = getFullConfig();
 
     if (printTestLogsInConsole || testLogsFileName) {
-      const logMessageHead = `[e2ed][${dateTimeInISO}][${runLabel}][${runId}] ${message}`;
+      const logMessageHead = `[e2ed][${dateTimeInISO}][${runLabel!}][${runId}] ${message}`;
       // eslint-disable-next-line sort-keys
       const printedValue = context ? {payload, context} : {payload};
 

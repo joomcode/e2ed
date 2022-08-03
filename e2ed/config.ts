@@ -11,16 +11,14 @@ import type {Config} from 'e2ed/configurator';
 
 const isLocalRun = runEnvironment === RunEnvironment.Local;
 
-const defaultConcurrency = isLocalRun ? 1 : 5;
-
 const config: Config = {
   ajaxRequestTimeout: 40_000,
   assertionTimeout: 10_000,
   browserInitTimeout: 30_000,
   browsers: 'chromium:headless',
-  concurrency: Number(process.env.E2ED_CONCURRENCY) || defaultConcurrency,
+  concurrency: isLocalRun ? 1 : 2,
   liteReportFileName: 'lite-report.json',
-  maxRetriesCountInDocker: Number(process.env.E2ED_DOCKER_RETRIES) || 1,
+  maxRetriesCountInDocker: 3,
   pageRequestTimeout: 30_000,
   pageStabilizationInterval: 2_000,
   port1: 1337,

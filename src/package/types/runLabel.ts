@@ -14,3 +14,11 @@ export type RunLabelObject = Readonly<{
   maxRetriesCount: number;
   retryIndex: number;
 }>;
+
+/**
+ * Raw additional data parsed from RunLabel string (from match).
+ * @internal
+ */
+export type RawRunLabelObject = {
+  [K in keyof RunLabelObject]: string;
+};

@@ -22,7 +22,7 @@ const TEST_STATUS_TO_STATUS_STRING = CLIENT_TEST_STATUS_TO_STATUS_STRING;
 export function renderTestRunDetails(fullTestRun: FullTestRun): SafeHtml {
   const {endTimeInMs, errors, filePath, logEvents, name, status} = fullTestRun;
   const statusString = TEST_STATUS_TO_STATUS_STRING[status];
-  const capitalizedStatus = `${statusString[0].toUpperCase()}${statusString.slice(1)}`;
+  const capitalizedStatus = `${statusString[0]!.toUpperCase()}${statusString.slice(1)}`;
 
   return sanitizeHtml`<article class="test-details">
   <p class="test-details__path">${filePath}</p>

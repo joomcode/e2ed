@@ -9,7 +9,7 @@ declare const e2edJsonReportData: HTMLScriptElement;
  */
 export const domContentLoadedCallback = (): void => {
   const e2edFullTestRuns = JSON.parse(
-    e2edJsonReportData.textContent || 'Cannot parse JSON report data',
+    e2edJsonReportData.textContent ?? 'Cannot parse JSON report data',
   ) as readonly FullTestRun[];
 
   const global: ReportClientGlobal = window;

@@ -12,6 +12,6 @@ export const getKeysCounter = (): ((key: string) => number) => {
 
     cache[key] += 1;
 
-    return cache[key];
+    return cache[key] as number;
   };
 };

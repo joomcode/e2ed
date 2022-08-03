@@ -10,7 +10,7 @@ const chooseTestRun = clientChooseTestRun;
  * @internal
  */
 export function clickOnTestRun(element: HTMLElement): void {
-  const runHash = element.dataset.runhash as RunHash;
+  const runHash = (element.dataset as {runhash: RunHash}).runhash;
 
   const previousChosenTestRunButton = document.querySelector('.test-button[aria-selected="true"]');
 

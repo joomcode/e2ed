@@ -1,5 +1,7 @@
 import {assertValueIsDefined} from './asserts';
 
+import type {ObjectEntries} from '../types/internal';
+
 type CloneWithoutUndefinedProperties<T extends object> = {
   [Key in keyof T]: Exclude<T[Key], undefined>;
 };
@@ -12,7 +14,7 @@ export const cloneWithoutUndefinedProperties = <T extends object>(
 ): CloneWithoutUndefinedProperties<T> => {
   const result = {} as CloneWithoutUndefinedProperties<T>;
 
-  for (const [key, value] of Object.entries(x) as Array<[keyof T, T[keyof T]]>) {
+  for (const [key, value] of Object.entries(x) as ObjectEntries<T>) {
     const descriptor = Object.getOwnPropertyDescriptor(x, key);
 
     assertValueIsDefined(descriptor, 'descriptor is undefined', {key, x});

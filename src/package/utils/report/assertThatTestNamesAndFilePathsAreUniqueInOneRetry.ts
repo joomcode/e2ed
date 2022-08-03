@@ -69,7 +69,7 @@ export const assertThatTestNamesAndFilePathsAreUniqueInOneRetry = (
         name,
       });
       assertValueIsTrue(
-        chainByName[name][0] === currentTestRun,
+        chainByName[name]?.[0] === currentTestRun,
         'the chain starts with currentTestRun',
         {chain: chainByName[name], currentTestRun, name},
       );

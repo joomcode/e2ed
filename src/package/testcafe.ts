@@ -1,6 +1,6 @@
 import type {fixture as testcafeFixture, test as testcafeTest} from 'testcafe-without-typecheck';
 
-declare const global: Record<string, unknown>;
+declare const global: Readonly<{fixture?: unknown; test?: unknown}>;
 
 Object.defineProperty(exports, 'fixture', {
   get() {

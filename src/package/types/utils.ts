@@ -12,6 +12,16 @@ declare const PARAMS_KEY: unique symbol;
 type IncludeUndefined<T> = true extends (T extends undefined ? true : never) ? true : false;
 
 /**
+ * Entry pair that Object.entries(T) returns.
+ */
+type EntryPair<T> = [keyof T, T[keyof T] | undefined];
+
+/**
+ * List of pairs that Object.entries(T) returns.
+ */
+export type ObjectEntries<T> = EntryPair<T>[];
+
+/**
  * This type checks that the type true is passed to it.
  */
 export type Expect<T extends true> = T;

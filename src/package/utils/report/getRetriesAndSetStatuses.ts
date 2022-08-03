@@ -2,7 +2,7 @@ import {TestRunStatus} from '../../constants/internal';
 
 import {getRunLabelObject} from '../runLabel';
 
-import type {FullTestRun, Retry, RunId, UtcTimeInMs} from '../../types/internal';
+import type {FullTestRun, Mutable, Retry, RunId, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Get array of retries from array of full test runs and
@@ -27,13 +27,13 @@ export const getRetriesAndSetStatuses = (
     const passedOrFailedStatus = errors.length === 0 ? TestRunStatus.Passed : TestRunStatus.Failed;
     const status = isSkipped ? TestRunStatus.Skipped : passedOrFailedStatus;
 
-    (fullTestRun as {status: TestRunStatus}).status = status;
+    (fullTestRun as Mutable<FullTestRun>).status = status;
 
     if (fullTestRunsHash[retryIndex] === undefined) {
       fullTestRunsHash[retryIndex] = [];
     }
 
-    fullTestRunsHash[retryIndex].push(fullTestRun);
+    fullTestRunsHash[retryIndex]?.push(fullTestRun);
   }
 
   for (const [retryString, retryFullTestRuns] of Object.entries(fullTestRunsHash)) {

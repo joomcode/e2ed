@@ -11,7 +11,7 @@ export type LogPayload = {
 /**
  * Log parameters for E2Ederror and assert functions.
  */
-export type LogParams = Record<string, unknown>;
+export type LogParams = Record<string, unknown> & Readonly<{cause?: unknown}>;
 
 /**
  * Type for generalLog log.

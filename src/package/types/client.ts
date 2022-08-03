@@ -9,9 +9,14 @@ type WaitingForInterfaceStabilization = {
 };
 
 /**
+ * Resolve of one async client function.
+ */
+type E2edClientFunctionResolve = (() => void) | undefined;
+
+/**
  * List of resolves for async client functions.
  */
-export type E2edClientFunctionResolves = Array<(() => void) | undefined>;
+export type E2edClientFunctionResolves = E2edClientFunctionResolve[];
 
 /**
  * Global object on test page.

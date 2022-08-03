@@ -16,7 +16,7 @@ export class Search extends PageRoute<Params> {
 
     assertValueIsTrue(pathname === '/search', 'search route matches on url', {url});
 
-    const searchQuery = searchParams.get('q') || '';
+    const searchQuery = searchParams.get('q') ?? '';
 
     return {searchQuery};
   }

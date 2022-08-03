@@ -4,7 +4,7 @@ import {generalLog} from './generalLog';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
-import type {TestCafeRunOptions} from '../types/internal';
+import type {E2edEnvironment, TestCafeRunOptions} from '../types/internal';
 
 const browsers = ['chromium:headless --no-sandbox --disable-dev-shm-usage'];
 
@@ -16,7 +16,7 @@ export const runTestCafe = async ({
   runLabel,
   tests,
 }: TestCafeRunOptions): Promise<void> => {
-  process.env.E2ED_RUN_LABEL = runLabel;
+  (process.env as E2edEnvironment).E2ED_RUN_LABEL = runLabel;
 
   let maybeTestCafe: Inner.TestCafe | undefined;
 

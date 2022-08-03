@@ -7,6 +7,7 @@ import {
   READ_FILE_OPTIONS,
 } from '../../constants/internal';
 
+import {assertValueIsDefined} from '../asserts';
 import {generalLog} from '../generalLog';
 
 import type {TestRunWithHooks, UtcTimeInMs} from '../../types/internal';
@@ -34,6 +35,13 @@ export const readEventsFromFiles = async (): Promise<TestRunWithHooks[]> => {
       index += 1
     ) {
       const fileName = eventFiles[index];
+
+      assertValueIsDefined(fileName, 'fileName is defined', {
+        eventFilesLength: eventFiles.length,
+        fileIndex,
+        index,
+      });
+
       const filePath = join(EVENTS_DIRECTORY_PATH, fileName);
       const promise = readFile(filePath, READ_FILE_OPTIONS);
 

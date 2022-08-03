@@ -27,11 +27,12 @@ type Report = Readonly<{fixtures: Fixture[]; total: number}>;
  */
 export const getFailedTestsFromJsonReport = (): FailTests | undefined => {
   const {reporter} = getFullConfig();
-  const jsonReportPathFromRoot = reporter.find(({name}) => name === 'json')?.output || '';
+  const jsonReportPathFromRoot = reporter.find(({name}) => name === 'json')?.output ?? '';
   const jsonReportPath = join('..', '..', '..', '..', jsonReportPathFromRoot);
 
   const absoluteJsonReportPath = require.resolve(jsonReportPath);
 
+  // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
   delete require.cache[absoluteJsonReportPath];
 
   let report: Report | undefined;

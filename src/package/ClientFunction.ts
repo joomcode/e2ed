@@ -26,9 +26,7 @@ const clientFunctionWrapper = function clientFunctionWrapper(): unknown {
       e2edClientFunctionResolves.forEach((resolve, index) => {
         e2edClientFunctionResolves[index] = undefined;
 
-        if (resolve) {
-          resolve();
-        }
+        resolve?.();
       });
     });
   }
@@ -50,7 +48,7 @@ const clientFunctionWrapper = function clientFunctionWrapper(): unknown {
   return new Promise<void>((resolve, reject) => {
     const index = e2edClientFunctionResolves.push(resolve) - 1;
 
-    (result as Promise<void>).then(
+    result?.then(
       (value) => {
         e2edClientFunctionResolves[index] = undefined;
 

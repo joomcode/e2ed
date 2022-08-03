@@ -16,6 +16,7 @@ import {fixture, test} from './testcafe';
 import type {Inner} from 'testcafe-without-typecheck';
 
 import type {
+  E2edEnvironment,
   RunId,
   RunLabel,
   TestFn,
@@ -44,7 +45,7 @@ export const it = (name: string, options: TestOptions, testFn: TestFn): void => 
       const {errs: originalErrors} = testController.testRun;
       const {filename: absoluteFilePath} = testController.testRun.test.testFile;
       const filePath = getRelativeTestFilePath(absoluteFilePath);
-      const runLabel = process.env.E2ED_RUN_LABEL as RunLabel;
+      const runLabel = (process.env as E2edEnvironment).E2ED_RUN_LABEL as RunLabel;
       const utcTimeInMs = Date.now() as UtcTimeInMs;
 
       const testStaticOptions: TestStaticOptions = {filePath, name, options};

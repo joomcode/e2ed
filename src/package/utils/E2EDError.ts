@@ -12,7 +12,7 @@ export class E2EDError extends Error {
     const constructorArgs: [message: string, options?: {cause: unknown}] = [fullMessage];
 
     if (params?.cause) {
-      constructorArgs.push({cause: params?.cause});
+      constructorArgs.push({cause: params.cause});
     }
 
     // @ts-expect-error: constructor Error still doesn't support second argument
