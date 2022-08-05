@@ -1,4 +1,5 @@
 export * from './addOnClickOnClass';
+export * from './assertValueIsDefined';
 export * from './chooseTestRun';
 export * from './clickOnRetry';
 export * from './clickOnStep';

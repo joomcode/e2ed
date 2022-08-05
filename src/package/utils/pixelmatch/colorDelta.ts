@@ -1,3 +1,5 @@
+import {assertValueIsDefined} from '../asserts';
+
 import {blend, rgb2i, rgb2q, rgb2y} from './colors';
 
 import type {ImgData} from '../../types/internal';
@@ -13,15 +15,25 @@ export const colorDelta = (
   m: number,
   yOnly: boolean,
 ): number => {
-  let r1 = img1[k + 0]!;
-  let g1 = img1[k + 1]!;
-  let b1 = img1[k + 2]!;
-  let a1 = img1[k + 3]!;
+  let r1 = img1[k + 0];
+  let g1 = img1[k + 1];
+  let b1 = img1[k + 2];
+  let a1 = img1[k + 3];
 
-  let r2 = img2[m + 0]!;
-  let g2 = img2[m + 1]!;
-  let b2 = img2[m + 2]!;
-  let a2 = img2[m + 3]!;
+  let r2 = img2[m + 0];
+  let g2 = img2[m + 1];
+  let b2 = img2[m + 2];
+  let a2 = img2[m + 3];
+
+  assertValueIsDefined(r1, 'r1 is defined', {img1, img2, k, m, yOnly});
+  assertValueIsDefined(g1, 'g1 is defined', {img1, img2, k, m, yOnly});
+  assertValueIsDefined(b1, 'b1 is defined', {img1, img2, k, m, yOnly});
+  assertValueIsDefined(a1, 'a1 is defined', {img1, img2, k, m, yOnly});
+
+  assertValueIsDefined(r2, 'r2 is defined', {img1, img2, k, m, yOnly});
+  assertValueIsDefined(g2, 'g2 is defined', {img1, img2, k, m, yOnly});
+  assertValueIsDefined(b2, 'b2 is defined', {img1, img2, k, m, yOnly});
+  assertValueIsDefined(a2, 'a2 is defined', {img1, img2, k, m, yOnly});
 
   if (a1 === a2 && r1 === r2 && g1 === g2 && b1 === b2) {
     return 0;

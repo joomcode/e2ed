@@ -16,7 +16,7 @@ import type {ImgData, PixelmatchOptions} from '../../types/internal';
 export const pixelmatch = (
   img1: ImgData,
   img2: ImgData,
-  output: ImgData,
+  output: ImgData | undefined,
   width: number,
   height: number,
   originOptions: Partial<PixelmatchOptions>,

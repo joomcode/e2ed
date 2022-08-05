@@ -1,7 +1,9 @@
+import {assertValueIsDefined as clientAssertValueIsDefined} from './assertValueIsDefined';
 import {renderTestRunDetails as clientRenderTestRunDetails} from './render';
 
 import type {ReportClientGlobal, RunHash} from '../../../types/internal';
 
+const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
 const renderTestRunDetails = clientRenderTestRunDetails;
 
 declare const e2edTestRunDetailsContainer: HTMLElement;
@@ -32,7 +34,11 @@ export function chooseTestRun(runHash: RunHash): void {
   }
 
   if (runHash in e2edTestRunDetailsElementsByHash) {
-    previousTestRunDetailsElement.replaceWith(e2edTestRunDetailsElementsByHash[runHash]!);
+    const e2edTestRunDetailsElement = e2edTestRunDetailsElementsByHash[runHash];
+
+    assertValueIsDefined(e2edTestRunDetailsElement);
+
+    previousTestRunDetailsElement.replaceWith(e2edTestRunDetailsElement);
 
     return;
   }

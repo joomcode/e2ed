@@ -1,5 +1,6 @@
 import {
   addOnClickOnClass,
+  assertValueIsDefined,
   chooseTestRun,
   clickOnRetry,
   clickOnStep,
@@ -22,6 +23,7 @@ import type {SafeHtml} from '../../../types/internal';
  */
 export const renderScriptFunctions = (): SafeHtml => createSafeHtmlWithoutSanitize`
 ${addOnClickOnClass.toString()}
+${assertValueIsDefined.toString()}
 ${chooseTestRun.toString()}
 ${createSafeHtmlWithoutSanitize.toString()}
 ${clickOnRetry.toString()}

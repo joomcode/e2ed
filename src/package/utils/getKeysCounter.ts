@@ -1,3 +1,5 @@
+import {assertValueIsDefined} from './asserts';
+
 /**
  * Returns a function that takes a key and returns
  * the number of function calls with that key.
@@ -12,6 +14,10 @@ export const getKeysCounter = (): ((key: string) => number) => {
 
     cache[key] += 1;
 
-    return cache[key] as number;
+    const count = cache[key];
+
+    assertValueIsDefined(count, 'count is defined', {cache, key});
+
+    return count;
   };
 };

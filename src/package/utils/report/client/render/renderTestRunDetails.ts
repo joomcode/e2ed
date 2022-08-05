@@ -1,5 +1,6 @@
 import {TEST_STATUS_TO_STATUS_STRING as CLIENT_TEST_STATUS_TO_STATUS_STRING} from '../../../../constants/internal';
 
+import {assertValueIsDefined as clientAssertValueIsDefined} from '../assertValueIsDefined';
 import {sanitizeHtml as clientSanitizeHtml} from '../sanitizeHtml';
 
 import {renderSteps as clientRenderSteps} from './renderSteps';
@@ -8,6 +9,7 @@ import {renderTestRunErrors as clientRenderTestRunErrors} from './renderTestRunE
 
 import type {FullTestRun, SafeHtml} from '../../../../types/internal';
 
+const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
 const renderSteps = clientRenderSteps;
 const renderTestRunDescription = clientRenderTestRunDescription;
 const renderTestRunErrors = clientRenderTestRunErrors;
@@ -22,7 +24,12 @@ const TEST_STATUS_TO_STATUS_STRING = CLIENT_TEST_STATUS_TO_STATUS_STRING;
 export function renderTestRunDetails(fullTestRun: FullTestRun): SafeHtml {
   const {endTimeInMs, errors, filePath, logEvents, name, status} = fullTestRun;
   const statusString = TEST_STATUS_TO_STATUS_STRING[status];
-  const capitalizedStatus = `${statusString[0]!.toUpperCase()}${statusString.slice(1)}`;
+
+  const firstStatusString = statusString[0];
+
+  assertValueIsDefined(firstStatusString);
+
+  const capitalizedStatus = `${firstStatusString.toUpperCase()}${statusString.slice(1)}`;
 
   return sanitizeHtml`<article class="test-details">
   <p class="test-details__path">${filePath}</p>

@@ -5,6 +5,7 @@ import {testController} from '../testController';
 
 // eslint-disable-next-line import/no-internal-modules
 import {registerLogEvent} from './events/registerLogEvent';
+import {assertValueIsDefined} from './asserts';
 import {getFullConfig} from './getFullConfig';
 import {addTestLog} from './testLogs';
 import {valueToString} from './valueToString';
@@ -33,7 +34,16 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
     const {printTestLogsInConsole, testLogsFileName} = getFullConfig();
 
     if (printTestLogsInConsole || testLogsFileName) {
-      const logMessageHead = `[e2ed][${dateTimeInISO}][${runLabel!}][${runId}] ${message}`;
+      assertValueIsDefined(runLabel, 'runLabel is defined', {
+        message,
+        numberInRun,
+        payload,
+        runId,
+        time,
+        type,
+      });
+
+      const logMessageHead = `[e2ed][${dateTimeInISO}][${runLabel}][${runId}] ${message}`;
       // eslint-disable-next-line sort-keys
       const printedValue = context ? {payload, context} : {payload};
 

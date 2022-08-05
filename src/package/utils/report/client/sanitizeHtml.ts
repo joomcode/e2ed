@@ -1,4 +1,8 @@
+import {assertValueIsDefined as clientAssertValueIsDefined} from './assertValueIsDefined';
+
 import type {SafeHtml} from '../../../types/internal';
+
+const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
 
 /**
  * Create SafeHtml from string without sanitize.
@@ -6,20 +10,27 @@ import type {SafeHtml} from '../../../types/internal';
  * @internal
  */
 export function createSafeHtmlWithoutSanitize(
-  strings: readonly string[],
+  stringParts: readonly string[],
   ...values: readonly unknown[]
 ): SafeHtml {
   const key = Symbol.for('e2ed SafeHtml key');
   const parts: string[] = [];
 
   for (let index = 0; index < values.length; index += 1) {
-    const string = strings[index]!;
+    const stringPart = stringParts[index];
+
+    assertValueIsDefined(stringPart);
+
     const value = String(values[index]);
 
-    parts.push(string, value);
+    parts.push(stringPart, value);
   }
 
-  parts.push(strings[strings.length - 1]!);
+  const lastStringPart = stringParts[stringParts.length - 1];
+
+  assertValueIsDefined(lastStringPart);
+
+  parts.push(lastStringPart);
 
   const html = parts.join('');
   // eslint-disable-next-line no-new-wrappers
@@ -35,7 +46,10 @@ export function createSafeHtmlWithoutSanitize(
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function sanitizeHtml(strings: readonly string[], ...values: readonly unknown[]): SafeHtml {
+export function sanitizeHtml(
+  stringParts: readonly string[],
+  ...values: readonly unknown[]
+): SafeHtml {
   const key = Symbol.for('e2ed SafeHtml key');
 
   const sanitizeValue = (value: unknown): string =>
@@ -49,17 +63,24 @@ export function sanitizeHtml(strings: readonly string[], ...values: readonly unk
   const parts: string[] = [];
 
   for (let index = 0; index < values.length; index += 1) {
-    const string = strings[index]!;
+    const stringPart = stringParts[index];
+
+    assertValueIsDefined(stringPart);
+
     const value = values[index];
 
     const valueIsSafeHtml = typeof value === 'object' && value !== null && key in value;
 
     const safeValue = valueIsSafeHtml ? String(value) : sanitizeValue(value);
 
-    parts.push(string, safeValue);
+    parts.push(stringPart, safeValue);
   }
 
-  parts.push(strings[strings.length - 1]!);
+  const lastStringPart = stringParts[stringParts.length - 1];
+
+  assertValueIsDefined(lastStringPart);
+
+  parts.push(lastStringPart);
 
   const html = parts.join('');
 

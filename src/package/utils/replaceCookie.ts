@@ -1,3 +1,4 @@
+import {assertValueIsDefined} from './asserts';
 import {trimSemicolonsAtTheEnd} from './trimSemicolonsAtTheEnd';
 
 import type {Cookie} from '../types/internal';
@@ -16,7 +17,14 @@ export const replaceCookie = (cookies: string[], cookie: Cookie): string[] => {
   if (cookieIndex === -1) {
     newCookies.push(trimSemicolonsAtTheEnd(newCookieString));
   } else {
-    const cookieString = newCookies[cookieIndex]!;
+    const cookieString = newCookies[cookieIndex];
+
+    assertValueIsDefined(cookieString, 'cookieString is defined', {
+      cookies,
+      newCookieString,
+      newCookies,
+    });
+
     const semicolonIndex = cookieString.indexOf(';');
 
     if (semicolonIndex === -1) {
@@ -25,7 +33,15 @@ export const replaceCookie = (cookies: string[], cookie: Cookie): string[] => {
       newCookies[cookieIndex] = `${newCookieString}${cookieString.slice(semicolonIndex + 1)}`;
     }
 
-    newCookies[cookieIndex] = trimSemicolonsAtTheEnd(newCookies[cookieIndex]!);
+    const updatedCookie = newCookies[cookieIndex];
+
+    assertValueIsDefined(updatedCookie, 'updatedCookie is defined', {
+      cookies,
+      newCookieString,
+      newCookies,
+    });
+
+    newCookies[cookieIndex] = trimSemicolonsAtTheEnd(updatedCookie);
   }
 
   return newCookies;

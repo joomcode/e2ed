@@ -19,7 +19,7 @@ export function addOnClickOnClass(className: string, onclick: (event: HTMLElemen
 
       while (currentElement) {
         for (const currentClass of Object.keys(e2edClickListeners as object)) {
-          if (currentElement.classList?.contains(currentClass)) {
+          if (currentElement.classList.contains(currentClass)) {
             const listener = e2edClickListeners?.[currentClass];
 
             listener?.(currentElement);

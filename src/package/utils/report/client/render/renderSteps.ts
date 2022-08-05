@@ -1,5 +1,6 @@
 import {TEST_STATUS_TO_STATUS_STRING as CLIENT_TEST_STATUS_TO_STATUS_STRING} from '../../../../constants/internal';
 
+import {assertValueIsDefined as clientAssertValueIsDefined} from '../assertValueIsDefined';
 import {
   createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize,
   sanitizeHtml as clientSanitizeHtml,
@@ -7,6 +8,7 @@ import {
 
 import type {LogEvent, SafeHtml, UtcTimeInMs} from '../../../../types/internal';
 
+const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
 const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
 const sanitizeHtml = clientSanitizeHtml;
 const TEST_STATUS_TO_STATUS_STRING = CLIENT_TEST_STATUS_TO_STATUS_STRING;
@@ -25,7 +27,10 @@ export function renderSteps({endTimeInMs, logEvents}: Options): SafeHtml {
   const stepHtmls: SafeHtml[] = [];
 
   for (let index = 0; index < logEvents.length; index += 1) {
-    const logEvent = logEvents[index]!;
+    const logEvent = logEvents[index];
+
+    assertValueIsDefined(logEvent);
+
     const {message, payload, time} = logEvent;
     const payloadString = JSON.stringify(payload, null, 2);
     const nextLogEvent = logEvents[index + 1];

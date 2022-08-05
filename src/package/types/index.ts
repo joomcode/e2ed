@@ -1,7 +1,7 @@
 /**
  * Userland types checks in the e2ed directory of the project.
  */
-export {UserlandTypesAreCorrect} from './userland/typesChecks';
+export type {UserlandTypesAreCorrect} from './userland/typesChecks';
 
 /**
  * Internal types (for using in the e2ed package and in userland).

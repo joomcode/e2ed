@@ -65,6 +65,7 @@ export const setTestRunTimeout = ({
     clearTimeout();
     rejectPromise?.(error);
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!testRunEvent.ended) {
       setTimeout(() => {
         void forceEndTestRunEvent(runId);

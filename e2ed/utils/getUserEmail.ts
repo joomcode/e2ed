@@ -8,7 +8,7 @@ const createdEmailsCounts: Record<string, number> = {};
 export const getUserEmail = (): Email => {
   const timeHash = new Date().toISOString().replace(/:/g, '-');
 
-  const currentCount = createdEmailsCounts[timeHash] || 0;
+  const currentCount = createdEmailsCounts[timeHash] ?? 0;
   const newCount = currentCount + 1;
 
   createdEmailsCounts[timeHash] = newCount;

@@ -26,19 +26,17 @@ export const getRequestsFilter =
 
         assertValueIsTrue(route.isMatchUrl(url), 'route matches on url', {request, route});
 
-        if (route.getMethod) {
-          const routeMethod = route.getMethod();
+        const routeMethod = route.getMethod();
 
-          assertValueIsTrue(
-            routeMethod.toLowerCase() === request.method.toLocaleLowerCase(),
-            'route method equals to request method',
-            {
-              request,
-              route,
-              routeMethod,
-            },
-          );
-        }
+        assertValueIsTrue(
+          routeMethod.toLowerCase() === request.method.toLocaleLowerCase(),
+          'route method equals to request method',
+          {
+            request,
+            route,
+            routeMethod,
+          },
+        );
 
         // eslint-disable-next-line no-param-reassign
         functionAndRouteByUrl[url] = {apiMockFunction, route};

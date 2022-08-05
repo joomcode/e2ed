@@ -100,7 +100,7 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
       interfaceState = newInterfaceState;
 
       const currentStabilizationInterval =
-        global?.e2edWaitingForInterfaceStabilization?.stabilizationInterval ?? Infinity;
+        global.e2edWaitingForInterfaceStabilization?.stabilizationInterval ?? Infinity;
 
       if (Date.now() - stabilizationIntervalStart >= currentStabilizationInterval) {
         global.e2edWaitingForInterfaceStabilization = undefined;
