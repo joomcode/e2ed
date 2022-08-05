@@ -1,5 +1,28 @@
 # Changelog
 
+## [v0.11.2](https://github.com/joomcode/e2ed/tree/v0.11.2) (2022-08-05)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.1...v0.11.2)
+
+- [chore: update TestCafe to 1.20.0](https://github.com/joomcode/e2ed/commit/768f3b5c1c08b6d6deb0de7dfb000e42aa2c5030) ([uid11](https://github.com/uid11))
+
+  fix: TypeScript errors in new version
+
+- [fix: error with test of unmockApiRoute function](https://github.com/joomcode/e2ed/commit/cec20065f71bb5d55c59502e087b1f5c18fed783) ([uid11](https://github.com/uid11))
+- [Merge pull request #1 from joomcode/WEB-5540](https://github.com/joomcode/e2ed/commit/d05ba82c2ce80c71a78ebea20c981489d21b9ca0) ([uid11](https://github.com/uid11))
+
+  fix: error with TestCafe context in mockApiRoute function
+
+- [fix: error with TestCafe context in mockApiRoute function](https://github.com/joomcode/e2ed/commit/0a13def3380cc88168b771a36e23405689f3a0e5) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (eslint, etc)](https://github.com/joomcode/e2ed/commit/4055388812dbe1d457d7e7ceefcfc9ac8d963fd9) ([uid11](https://github.com/uid11))
+- [feat: turn on strict rules from @typescript-eslint](https://github.com/joomcode/e2ed/commit/0b79797e7c627042adc851145846021b7396c9f8) ([uid11](https://github.com/uid11))
+- [feat: turn on additional tsconfig strict rules](https://github.com/joomcode/e2ed/commit/ed53bc96151921a9a4612b058f60b4260a5aaa83) ([uid11](https://github.com/uid11))
+
+  fix: TS errors
+
+- [feat: rename doApiMock to mockApiRoute; add unmockApiRoute function](https://github.com/joomcode/e2ed/commit/f629161ccb080f89ba335fb71ff5d500d7d626bd) ([uid11](https://github.com/uid11))
+- [fix: rename doApiMock to mockApi; add logs to mockApi function](https://github.com/joomcode/e2ed/commit/eb7770403bbe30825bf3ba152c3bcd732167c7a4) ([uid11](https://github.com/uid11))
+
 ## [v0.11.1](https://github.com/joomcode/e2ed/tree/v0.11.1) (2022-07-17)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.0...v0.11.1)
