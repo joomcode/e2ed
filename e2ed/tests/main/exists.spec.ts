@@ -101,10 +101,7 @@ it('exists', {meta: {testId: '1'}, testTimeout: 50_000}, async () => {
 
   await unmockApiRoute(CreateProductRoute);
 
-  await getMockedProduct().then(
-    () => {
-      throw new Error('API mock on CreateProductRoute was not umocked');
-    },
-    () => undefined,
+  await expect(await getMockedProduct(), 'API mock on CreateProductRoute was umocked').eql(
+    undefined,
   );
 });
