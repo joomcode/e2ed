@@ -33,10 +33,10 @@ export const getSetResponse =
 
     const {search} = new URL(url);
 
-    const method = originRequest.method.toUpperCase() as Method;
+    const method = (originRequest.method ?? 'GET').toUpperCase() as Method;
     const query = parse(search ? search.slice(1) : '');
     const requestBody: unknown = JSON.parse(String(originRequest.body));
-    const requestHeaders = originRequest.headers;
+    const requestHeaders = originRequest.headers ?? {};
 
     const request = {method, query, requestBody, requestHeaders, url};
 
@@ -61,7 +61,7 @@ export const getSetResponse =
     }
 
     await log(
-      `A mock was applied to the route "${route.constructor.name}"`,
+      `A mock was applied to the API route "${route.constructor.name}"`,
       {apiMockFunction, originRequest, originResponse, request, response, route},
       LogEventType.InternalCore,
     );

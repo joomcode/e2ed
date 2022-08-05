@@ -29,7 +29,7 @@ export const getRequestsFilter =
         const routeMethod = route.getMethod();
 
         assertValueIsTrue(
-          routeMethod.toLowerCase() === request.method.toLocaleLowerCase(),
+          routeMethod.toLowerCase() === request.method?.toLocaleLowerCase(),
           'route method equals to request method',
           {
             request,
