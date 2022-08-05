@@ -12,6 +12,9 @@ const checkCreateTestCafe = async () => {
   runner.concurrency(1);
 
   await testCafe.close();
+
+  // eslint-disable-next-line no-console
+  console.log('[OK] ESM exports are correct');
 };
 
 // @ts-expect-error: top-level await is not allowed with "module": "CommonJS"
