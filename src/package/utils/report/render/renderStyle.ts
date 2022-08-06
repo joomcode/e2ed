@@ -11,7 +11,7 @@ import type {SafeHtml} from '../../../types/internal';
  * Render tag <style> with all CSS styles.
  * @internal
  */
-export const renderCssStyles = (): SafeHtml => {
+export const renderStyle = (): SafeHtml => {
   const pathToCss = join(E2ED_PACKAGE_DIRECTORY_PATH, 'styles', 'report.css');
 
   const cssString = readFileSync(pathToCss, READ_FILE_OPTIONS);

@@ -2,6 +2,7 @@ import {assertValueIsNotNull} from '../../asserts';
 import {generalLog} from '../../generalLog';
 
 import {sanitizeHtml} from '../client';
+import {getContentFromRenderedElement} from '../getContentFromRenderedElement';
 import {getRetriesProps} from '../getRetriesProps';
 
 import {renderErrors} from './renderErrors';
@@ -25,11 +26,14 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
 
   assertValueIsNotNull(reportFileName, 'reportFileName is not null');
 
+  const renderedScript = renderScript();
+  const scriptContent = getContentFromRenderedElement(renderedScript);
+
   const retries = getRetriesProps(reportData);
 
   const safeHtml = sanitizeHtml`<!DOCTYPE html>
 <html lang="en">
-  ${renderHead(reportFileName)}
+  ${renderHead(reportFileName, scriptContent)}
   <body>
     ${renderNavigation(retries)}
     <div class="main" role="tabpanel">
@@ -44,7 +48,7 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
         id="e2edTestRunDetailsContainer"
       ><div class="test-details-empty"><p>No test selected</p></div></section>
     </div>
-    ${renderScript()}
+    ${renderedScript}
     ${renderJsonData(reportData)}
   </body>
 </html>`;

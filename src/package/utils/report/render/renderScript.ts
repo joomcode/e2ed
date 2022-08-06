@@ -12,7 +12,7 @@ import type {SafeHtml} from '../../../types/internal';
 export const renderScript = (): SafeHtml => createSafeHtmlWithoutSanitize`
 <script>
 'use strict'; {
-${renderScriptConstants()}
+${renderScriptConstants()};
 ${renderScriptFunctions()};
 document.addEventListener("DOMContentLoaded", ${domContentLoadedCallback.toString()});
 (${initialScript.toString()})();

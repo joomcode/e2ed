@@ -1,8 +1,9 @@
 import {createSafeHtmlWithoutSanitize, sanitizeHtml} from '../client';
+import {getContentFromRenderedElement} from '../getContentFromRenderedElement';
 import {getCspHash} from '../getCspHash';
 
-import {renderCssStyles} from './renderCssStyles';
 import {renderFavicon} from './renderFavicon';
+import {renderStyle} from './renderStyle';
 
 import type {SafeHtml} from '../../../types/internal';
 
@@ -10,11 +11,15 @@ import type {SafeHtml} from '../../../types/internal';
  * Render tag <head>.
  * @internal
  */
-export const renderHead = (reportFileName: string): SafeHtml => {
-  const cspHash = getCspHash('');
-  const safeCspHash = createSafeHtmlWithoutSanitize`${cspHash}`;
+export const renderHead = (reportFileName: string, scriptContent: string): SafeHtml => {
+  const renderedStyle = renderStyle();
+  const styleContent = getContentFromRenderedElement(renderedStyle);
 
-  void safeCspHash;
+  const cspStyleHash = getCspHash(styleContent);
+  const cspScriptHash = getCspHash(scriptContent);
+
+  const safeCspStyleHash = createSafeHtmlWithoutSanitize`${cspStyleHash}`;
+  const safeCspScriptHash = createSafeHtmlWithoutSanitize`${cspScriptHash}`;
 
   return sanitizeHtml`
 <head>
@@ -23,10 +28,10 @@ export const renderHead = (reportFileName: string): SafeHtml => {
   <meta name="description" content="${reportFileName}" />
   <meta
     http-equiv="Content-Security-Policy"
-content="default-src 'self'; img-src 'self' data:; script-src 'sha256-U02nyXZJXrpW4gny6Mm42N5ErIbC13GcY8K3PBCc9F4='; style-src 'sha256-Hgt5+lP9F1EnAc34JcU9giyeXmWgs8AkHn+BwHVxA7Q=';"
+    content="default-src 'self'; img-src 'self' data:; script-src '${safeCspScriptHash}'; style-src '${safeCspStyleHash}';"
   />
   <title>${reportFileName}</title>
   ${renderFavicon()}
-  ${renderCssStyles()}
+  ${renderedStyle}
 </head>`;
 };
