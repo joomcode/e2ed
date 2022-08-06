@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.11.3](https://github.com/joomcode/e2ed/tree/v0.11.3) (2022-08-06)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.2...v0.11.3)
+
+- [fix: calculate CSP hash for <script> and <style> from content](https://github.com/joomcode/e2ed/commit/0a128f47838fce9233cd54338a6aeb1fb14c0bde) ([uid11](https://github.com/uid11))
+
 ## [v0.11.2](https://github.com/joomcode/e2ed/tree/v0.11.2) (2022-08-05)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.1...v0.11.2)
