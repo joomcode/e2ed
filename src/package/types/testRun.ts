@@ -60,6 +60,16 @@ export type TestRun = Readonly<{
   Omit<TestRunEvent, 'clearTimeout' | 'ended' | 'originalErrors' | 'reject' | 'utcTimeInMs'>;
 
 /**
+ * Internal state of one test (task).
+ * @internal
+ */
+export type TestRunState = Omit<TestStaticOptions, 'filePath'> & {
+  previousRunId: RunId | undefined;
+  readonly testFn: TestFn;
+  testFnClosure: TestFn | undefined;
+};
+
+/**
  * Lite test run object.
  */
 export type LiteTestRun = Readonly<{

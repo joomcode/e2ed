@@ -2,6 +2,8 @@ import {type InspectOptions, inspect} from 'node:util';
 
 import {DEFAULT_INSPECT_OPTIONS, MAX_LINES_IN_STRINGIFY_VALUE} from '../constants/internal';
 
+const STACK_FRAMES = 'stackFrames: [';
+
 /**
  * Return string representation of arbitrary value.
  */
@@ -14,6 +16,26 @@ export const valueToString = (
 
   if (lines.length <= MAX_LINES_IN_STRINGIFY_VALUE) {
     return valueAsString;
+  }
+
+  const stackFramesLineIndex = lines.findIndex((line) => line.includes(STACK_FRAMES));
+  const stackFramesLine = lines[stackFramesLineIndex];
+  const isV8FramesLineIndex = lines.findIndex(
+    (line) => line.includes('isV8Frames: ') && line.includes('true'),
+  );
+
+  if (stackFramesLineIndex > 0 && isV8FramesLineIndex > stackFramesLineIndex && stackFramesLine) {
+    const stackFramesIndent = stackFramesLine.slice(0, stackFramesLine.indexOf(STACK_FRAMES));
+
+    lines.splice(
+      stackFramesLineIndex,
+      isV8FramesLineIndex - stackFramesLineIndex + 1,
+      `${stackFramesIndent}${STACK_FRAMES}...]`,
+    );
+  }
+
+  if (lines.length <= MAX_LINES_IN_STRINGIFY_VALUE) {
+    return lines.join('\n');
   }
 
   const halfOfLines = Math.floor(MAX_LINES_IN_STRINGIFY_VALUE / 2);
