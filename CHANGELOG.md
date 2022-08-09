@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.11.5](https://github.com/joomcode/e2ed/tree/v0.11.5) (2022-08-09)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.4...v0.11.5)
+
+- [fix: add empty e2ed/types/index.js file for eslint resolving](https://github.com/joomcode/e2ed/commit/070e45adf52954f45468887e0d0c6558f8880571) ([uid11](https://github.com/uid11))
+
 ## [v0.11.4](https://github.com/joomcode/e2ed/tree/v0.11.4) (2022-08-09)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.3...v0.11.4)
