@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.11.4](https://github.com/joomcode/e2ed/tree/v0.11.4) (2022-08-09)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.3...v0.11.4)
+
+- [fix: test error property should be undefined, if there is no errors in test](https://github.com/joomcode/e2ed/commit/7e5700c2b02105325898c51e55601c92d6174c65) ([uid11](https://github.com/uid11))
+- [fix: remove useless \*.js files from e2ed/types directory](https://github.com/joomcode/e2ed/commit/cc692e8d85ae95640749b84bb78e6c0724e465b1) ([uid11](https://github.com/uid11))
+- [feat: directly read test error from test function call](https://github.com/joomcode/e2ed/commit/bf28ba80183ab55bd3a93e6e5a6547671db0faf0) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (@types/node, @typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/f020bec4f475bac5a3ef947ad8c42b99230c75c1) ([uid11](https://github.com/uid11))
+- [refactor: split it.ts into several files](https://github.com/joomcode/e2ed/commit/cf9083ba7c7b2cf46443697b5494cb0c3d3dfd4a) ([uid11](https://github.com/uid11))
+
+  refactor: rename it to test; add aliases for it (task, test)
+  fix: cut long stackFrames messages from logs (in valueToString)
+
 ## [v0.11.3](https://github.com/joomcode/e2ed/tree/v0.11.3) (2022-08-06)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.2...v0.11.3)
