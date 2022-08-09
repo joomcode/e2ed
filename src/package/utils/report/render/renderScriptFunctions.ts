@@ -11,7 +11,7 @@ import {
   renderSteps,
   renderTestRunDescription,
   renderTestRunDetails,
-  renderTestRunErrors,
+  renderTestRunError,
   sanitizeHtml,
 } from '../client';
 
@@ -34,6 +34,6 @@ ${renderDuration.toString()}
 ${renderSteps.toString()}
 ${renderTestRunDescription.toString()}
 ${renderTestRunDetails.toString()}
-${renderTestRunErrors.toString()}
+${renderTestRunError.toString()}
 ${sanitizeHtml.toString()}
 `;

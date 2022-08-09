@@ -5,14 +5,14 @@ import {sanitizeHtml as clientSanitizeHtml} from '../sanitizeHtml';
 
 import {renderSteps as clientRenderSteps} from './renderSteps';
 import {renderTestRunDescription as clientRenderTestRunDescription} from './renderTestRunDescription';
-import {renderTestRunErrors as clientRenderTestRunErrors} from './renderTestRunErrors';
+import {renderTestRunError as clientRenderTestRunError} from './renderTestRunError';
 
 import type {FullTestRun, SafeHtml} from '../../../../types/internal';
 
 const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
 const renderSteps = clientRenderSteps;
 const renderTestRunDescription = clientRenderTestRunDescription;
-const renderTestRunErrors = clientRenderTestRunErrors;
+const renderTestRunError = clientRenderTestRunError;
 const sanitizeHtml = clientSanitizeHtml;
 const TEST_STATUS_TO_STATUS_STRING = CLIENT_TEST_STATUS_TO_STATUS_STRING;
 
@@ -22,7 +22,7 @@ const TEST_STATUS_TO_STATUS_STRING = CLIENT_TEST_STATUS_TO_STATUS_STRING;
  * @internal
  */
 export function renderTestRunDetails(fullTestRun: FullTestRun): SafeHtml {
-  const {endTimeInMs, errors, filePath, logEvents, name, status} = fullTestRun;
+  const {endTimeInMs, error, filePath, logEvents, name, status} = fullTestRun;
   const statusString = TEST_STATUS_TO_STATUS_STRING[status];
 
   const firstStatusString = statusString[0];
@@ -41,7 +41,7 @@ export function renderTestRunDetails(fullTestRun: FullTestRun): SafeHtml {
     <article class="overview">
       <h3 class="overview__title">Execution</h3>
       ${renderSteps({endTimeInMs, logEvents})}
-      ${renderTestRunErrors(errors)}
+      ${renderTestRunError(error)}
     </article>
   </div>
 </article>`;

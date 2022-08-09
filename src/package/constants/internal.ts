@@ -7,6 +7,7 @@ export * from './pages';
 export * from './paths';
 export * from './pixelmatch';
 export * from './process';
+export * from './promise';
 export * from './report';
 
 /**

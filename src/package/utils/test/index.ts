@@ -1,3 +1,3 @@
 export * from './afterTest';
-export * from './getBeforeTest';
-export * from './getWrappedTest';
+export * from './beforeTest';
+export * from './runTest';

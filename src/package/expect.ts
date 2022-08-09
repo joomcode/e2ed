@@ -1,4 +1,4 @@
-import {Expect} from './utils/Expect';
+import {Expect} from './utils/expect';
 
 import type {Inner} from 'testcafe-without-typecheck';
 

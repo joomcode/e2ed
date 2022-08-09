@@ -23,21 +23,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
     testRunEvent,
   });
 
-  const {
-    clearTimeout,
-    ended,
-    originalErrors: originalTestRunErrors,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    reject,
-    utcTimeInMs: startTimeInMs,
-    ...restTestRunEvent
-  } = testRunEvent;
-
-  assertValueIsTrue(
-    originalTestRunErrors === endTestRunEvent.originalErrors,
-    'originalErrors are not equal',
-    {endTestRunEvent, originalTestRunErrors},
-  );
+  const {ended, utcTimeInMs: startTimeInMs, ...restTestRunEvent} = testRunEvent;
 
   if (ended) {
     generalLog('Try to end TestRunEvent event, but it is already ended', {
@@ -49,11 +35,10 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
   }
 
   (testRunEvent as {ended: boolean}).ended = true;
-  clearTimeout();
 
-  const {errors, utcTimeInMs: endTimeInMs} = endTestRunEvent;
+  const {error, utcTimeInMs: endTimeInMs} = endTestRunEvent;
 
-  const testRun: TestRun = {endTimeInMs, errors, startTimeInMs, ...restTestRunEvent};
+  const testRun: TestRun = {endTimeInMs, error, startTimeInMs, ...restTestRunEvent};
 
   // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
   const hooks: typeof import('../../hooks') = require('../../hooks');

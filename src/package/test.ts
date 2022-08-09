@@ -1,5 +1,7 @@
-import {afterTest, getBeforeTest, getWrappedTest} from './utils/test';
+import {afterTest, beforeTest, runTest} from './utils/test';
 import {fixture, test as testcafeTest} from './testcafe';
+
+import type {Inner} from 'testcafe-without-typecheck';
 
 import type {TestFn, TestOptions, TestRunState} from './types/internal';
 
@@ -10,17 +12,27 @@ export const test = (name: string, options: TestOptions, testFn: TestFn): void =
   fixture(' - e2ed - ');
 
   const testRunState: TestRunState = {
+    error: undefined,
     name,
     options,
-    previousRunId: undefined,
+    runId: undefined,
     testFn,
     testFnClosure: undefined,
   };
 
-  const beforeTest = getBeforeTest(testRunState);
-  const wrappedTest = getWrappedTest(testRunState);
+  testcafeTest(name, async (testController: Inner.TestController) => {
+    try {
+      beforeTest(testRunState, testController);
 
-  testcafeTest.before(beforeTest)(name, wrappedTest).after(afterTest);
+      await runTest(testRunState);
+    } catch (error) {
+      testRunState.error = error;
+
+      throw error;
+    } finally {
+      await afterTest(testRunState);
+    }
+  });
 };
 
 /**

@@ -9,7 +9,7 @@ import type {TestRunEvent} from '../../types/internal';
  * Register start test run event (for report) before running test.
  * @internal
  */
-export const registerStartTestRunEvent = (testRunEvent: TestRunEvent): Promise<void> => {
+export const registerStartTestRunEvent = (testRunEvent: TestRunEvent): void => {
   const {runId} = testRunEvent;
 
   if (runId in RUN_IDS_HASH) {
@@ -29,6 +29,4 @@ export const registerStartTestRunEvent = (testRunEvent: TestRunEvent): Promise<v
   }
 
   RUN_IDS_HASH[runId] = testRunEvent;
-
-  return Promise.resolve();
 };
