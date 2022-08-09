@@ -15,5 +15,9 @@ export const afterTest = async (testRunState: TestRunState): Promise<void> => {
 
   const runId = getRunId();
 
-  await registerEndTestRunEvent({error: valueToString(error), runId, utcTimeInMs});
+  await registerEndTestRunEvent({
+    error: error ? valueToString(error) : undefined,
+    runId,
+    utcTimeInMs,
+  });
 };
