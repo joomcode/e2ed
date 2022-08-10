@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.11.8](https://github.com/joomcode/e2ed/tree/v0.11.8) (2022-08-10)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.7...v0.11.8)
+
+- [fix: register start of test run before checking previous test run](https://github.com/joomcode/e2ed/commit/7a1ef5f36f7f85a9cc205eff78c8d304ff54875a) ([uid11](https://github.com/uid11))
+
 ## [v0.11.7](https://github.com/joomcode/e2ed/tree/v0.11.7) (2022-08-10)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.6...v0.11.7)
