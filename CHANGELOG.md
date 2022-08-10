@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.11.9](https://github.com/joomcode/e2ed/tree/v0.11.9) (2022-08-10)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.8...v0.11.9)
+
+- [fix: do not log step with error to test report](https://github.com/joomcode/e2ed/commit/a6ea096a2ab91992fd1692f791024d68828c4612) ([uid11](https://github.com/uid11))
+
+  fix: read test error from context (actual for broken tests)
+
 ## [v0.11.8](https://github.com/joomcode/e2ed/tree/v0.11.8) (2022-08-10)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.7...v0.11.8)
