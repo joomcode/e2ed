@@ -1,4 +1,3 @@
-export * from './getTestFnWithTimeout';
 export * from './getTestRunEvent';
 export * from './registerEndE2edRunEvent';
 export * from './registerEndTestRunEvent';

@@ -1,12 +1,7 @@
-import {setError} from './context/error';
-import {generalLog} from './utils/generalLog';
-import {afterTest, beforeTest} from './utils/test';
-import {valueToString} from './utils/valueToString';
+import {getRunTest} from './utils/test';
 import {fixture, test as testcafeTest} from './testcafe';
 
-import type {Inner} from 'testcafe-without-typecheck';
-
-import type {TestFn, TestOptions, TestRunState} from './types/internal';
+import type {TestFn, TestOptions, TestRunStateWithoutReject} from './types/internal';
 
 /**
  * Creates test with name, metatags, options and test function.
@@ -14,33 +9,16 @@ import type {TestFn, TestOptions, TestRunState} from './types/internal';
 export const test = (name: string, options: TestOptions, testFn: TestFn): void => {
   fixture(' - e2ed - ');
 
-  const testRunState: TestRunState = {
+  const testRunStateWithoutReject: TestRunStateWithoutReject = {
     name,
     options,
-    runId: undefined,
+    previousRunId: undefined,
     testFn,
-    testFnClosure: undefined,
   };
 
-  testcafeTest(name, async (testController: Inner.TestController) => {
-    try {
-      beforeTest(testRunState, testController);
+  const runTest = getRunTest(testRunStateWithoutReject);
 
-      await testRunState.testFnClosure();
-    } catch (error) {
-      generalLog(`Test run ${String(testRunState.runId)} failed`, {
-        error,
-        testName: name,
-        testOptions: options,
-      });
-
-      setError(valueToString(error));
-
-      throw error;
-    } finally {
-      await afterTest();
-    }
-  });
+  testcafeTest(name, runTest);
 };
 
 /**

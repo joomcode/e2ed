@@ -1,4 +1,3 @@
-import {assertValueIsTrue} from '../asserts';
 import {generalLog} from '../generalLog';
 import {writeTestLogsToFile} from '../testLogs';
 import {writeTestRunToJsonFile} from '../writeTestRunToJsonFile';
@@ -17,11 +16,6 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
   const {runId} = endTestRunEvent;
 
   const testRunEvent = getTestRunEvent(runId);
-
-  assertValueIsTrue(testRunEvent.runId === runId, 'runIds are equal', {
-    endTestRunEvent,
-    testRunEvent,
-  });
 
   const {ended, utcTimeInMs: startTimeInMs, ...restTestRunEvent} = testRunEvent;
 

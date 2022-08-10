@@ -19,10 +19,10 @@ export type ObjectEntries<T> = EntryPair<T>[];
 /**
  * Function by argument, return type, and this (context) type.
  */
-export type Fn<Args extends unknown[] = never[], ReturnType = unknown, This = unknown> = (
+export type Fn<Args extends unknown[] = never[], Return = unknown, This = unknown> = (
   this: This,
   ...args: Args
-) => ReturnType;
+) => Return;
 
 /**
  * Type of inner key for params type.

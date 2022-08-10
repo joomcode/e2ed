@@ -1,4 +1,5 @@
 import type {TestRunStatus} from '../constants/internal';
+import type {E2EDError} from '../utils/E2EDError';
 
 import type {Brand} from './brand';
 import type {UtcTimeInMs} from './date';
@@ -18,6 +19,11 @@ export type RunHash = Brand<string, 'RunHash'>;
  * Unique id of each test run.
  */
 export type RunId = Brand<string, 'RunId'>;
+
+/**
+ * Reject test run.
+ */
+export type RejectTestRun = (error: E2EDError) => void;
 
 /**
  * Test function itself.
@@ -51,18 +57,24 @@ export type TestRun = Readonly<{
   startTimeInMs: UtcTimeInMs;
   endTimeInMs: UtcTimeInMs;
 }> &
-  Omit<TestRunEvent, 'clearTimeout' | 'ended' | 'originalErrors' | 'reject' | 'utcTimeInMs'>;
+  Omit<TestRunEvent, 'ended' | 'reject' | 'utcTimeInMs'>;
 
 /**
  * Internal state of one test (task).
  * @internal
  */
 export type TestRunState = Readonly<{
-  runId: RunId | undefined;
+  previousRunId: RunId | undefined;
   testFn: TestFn;
-  testFnClosure: TestFn | undefined;
+  testFnWithReject: TestFn;
 }> &
   Omit<TestStaticOptions, 'filePath'>;
+
+/**
+ * Preliminary internal state of one test, without wrappedTestFn.
+ * @internal
+ */
+export type TestRunStateWithoutReject = Omit<TestRunState, 'testFnWithReject'>;
 
 /**
  * Lite test run object.
