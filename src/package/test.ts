@@ -1,6 +1,7 @@
-import {LogEventType} from './constants/internal';
-import {log} from './utils/log';
-import {afterTest, beforeTest, runTest} from './utils/test';
+import {setError} from './context/error';
+import {generalLog} from './utils/generalLog';
+import {afterTest, beforeTest} from './utils/test';
+import {valueToString} from './utils/valueToString';
 import {fixture, test as testcafeTest} from './testcafe';
 
 import type {Inner} from 'testcafe-without-typecheck';
@@ -14,7 +15,6 @@ export const test = (name: string, options: TestOptions, testFn: TestFn): void =
   fixture(' - e2ed - ');
 
   const testRunState: TestRunState = {
-    error: undefined,
     name,
     options,
     runId: undefined,
@@ -26,19 +26,19 @@ export const test = (name: string, options: TestOptions, testFn: TestFn): void =
     try {
       beforeTest(testRunState, testController);
 
-      await runTest(testRunState);
+      await testRunState.testFnClosure();
     } catch (error) {
-      (testRunState as {error: typeof error}).error = error;
+      generalLog(`Test run ${String(testRunState.runId)} failed`, {
+        error,
+        testName: name,
+        testOptions: options,
+      });
 
-      await log(
-        `Test run ${String(testRunState.runId)} failed`,
-        {error, name, options},
-        LogEventType.Test,
-      );
+      setError(valueToString(error));
 
       throw error;
     } finally {
-      await afterTest(testRunState);
+      await afterTest();
     }
   });
 };

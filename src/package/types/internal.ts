@@ -1,6 +1,7 @@
 import type {Inner} from 'testcafe-without-typecheck';
 
 export * from './brand';
+export * from './checks';
 export * from './client';
 export * from './config';
 export * from './date';
@@ -22,6 +23,7 @@ export * from './runLabel';
 export * from './stackTrack';
 export * from './startInfo';
 export * from './testRun';
+export * from './undefined';
 export * from './utils';
 
 /**

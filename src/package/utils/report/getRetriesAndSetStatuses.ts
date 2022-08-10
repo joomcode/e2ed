@@ -24,7 +24,7 @@ export const getRetriesAndSetStatuses = (
     }
 
     const {retryIndex} = getRunLabelObject(runLabel);
-    const passedOrFailedStatus = error ? TestRunStatus.Failed : TestRunStatus.Passed;
+    const passedOrFailedStatus = error === undefined ? TestRunStatus.Passed : TestRunStatus.Failed;
     const status = isSkipped ? TestRunStatus.Skipped : passedOrFailedStatus;
 
     (fullTestRun as Mutable<FullTestRun>).status = status;

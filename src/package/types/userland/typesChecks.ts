@@ -6,8 +6,8 @@
 import type {config} from '../../../../e2ed/config';
 import type * as hooks from '../../../../e2ed/hooks';
 
+import type {Expect, IsEqual} from '../checks';
 import type {UserlandConfig} from '../config';
-import type {Expect, IsEqual} from '../utils';
 
 import type {ExpectedHooks} from './expectedHooks';
 

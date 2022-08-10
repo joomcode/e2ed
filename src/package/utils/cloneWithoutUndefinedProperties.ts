@@ -1,10 +1,6 @@
 import {assertValueIsDefined} from './asserts';
 
-import type {ObjectEntries} from '../types/internal';
-
-type CloneWithoutUndefinedProperties<T extends object> = {
-  [Key in keyof T]: Exclude<T[Key], undefined>;
-};
+import type {CloneWithoutUndefinedProperties, ObjectEntries} from '../types/internal';
 
 /**
  * Clone object without properties that values is undefined.

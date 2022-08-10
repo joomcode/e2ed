@@ -1,23 +1,17 @@
+import {getError} from '../../context/error';
 import {getRunId} from '../../context/runId';
 
 import {registerEndTestRunEvent} from '../events';
-import {valueToString} from '../valueToString';
 
-import type {TestRunState, UtcTimeInMs} from '../../types/internal';
+import type {UtcTimeInMs} from '../../types/internal';
 
 /**
  * Internal after test hook with TestRun state.
  * @internal
  */
-export const afterTest = async (testRunState: TestRunState): Promise<void> => {
-  const {error} = testRunState;
+export const afterTest = async (): Promise<void> => {
   const utcTimeInMs = Date.now() as UtcTimeInMs;
-
   const runId = getRunId();
 
-  await registerEndTestRunEvent({
-    error: error ? valueToString(error) : undefined,
-    runId,
-    utcTimeInMs,
-  });
+  await registerEndTestRunEvent({error: getError(), runId, utcTimeInMs});
 };

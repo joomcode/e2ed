@@ -58,7 +58,6 @@ export type TestRun = Readonly<{
  * @internal
  */
 export type TestRunState = Readonly<{
-  error: unknown;
   runId: RunId | undefined;
   testFn: TestFn;
   testFnClosure: TestFn | undefined;

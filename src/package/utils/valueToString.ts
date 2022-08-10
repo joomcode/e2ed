@@ -29,8 +29,8 @@ export const valueToString = (
 
     lines.splice(
       stackFramesLineIndex,
-      isV8FramesLineIndex - stackFramesLineIndex + 1,
-      `${stackFramesIndent}${STACK_FRAMES}...]`,
+      isV8FramesLineIndex - stackFramesLineIndex,
+      `${stackFramesIndent}${STACK_FRAMES}...],`,
     );
   }
 

@@ -10,7 +10,7 @@ const sanitizeHtml = clientSanitizeHtml;
  * @internal
  */
 export function renderTestRunError(error: string | undefined): SafeHtml {
-  if (!error) {
+  if (error === undefined) {
     return sanitizeHtml``;
   }
 

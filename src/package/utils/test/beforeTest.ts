@@ -12,6 +12,7 @@ import type {Inner} from 'testcafe-without-typecheck';
 
 import type {
   E2edEnvironment,
+  ExcludeUndefinedFromProperties,
   RunId,
   RunLabel,
   TestFn,
@@ -26,10 +27,10 @@ const skippedTestFn: TestFn = () => RESOLVED_PROMISE;
  * Internal before test hook with TestRun state.
  * @internal
  */
-export const beforeTest = (
+export function beforeTest(
   testRunState: TestRunState,
   testController: Inner.TestController,
-): void => {
+): asserts testRunState is ExcludeUndefinedFromProperties<TestRunState> {
   const runId = getRandomId().replace(/:/g, '-') as RunId;
 
   setRunId(runId);
@@ -67,7 +68,6 @@ export const beforeTest = (
   const testFnClosure = isSkipped ? skippedTestFn : testFnWithTimeout;
 
   Object.assign<TestRunState, Partial<TestRunState>>(testRunState, {
-    error: undefined,
     runId,
     testFnClosure,
   });
@@ -80,4 +80,4 @@ export const beforeTest = (
       testRunState,
     });
   }
-};
+}
