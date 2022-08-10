@@ -35,43 +35,18 @@ export const beforeTest = (
   setRunId(runId);
   setRawMeta(testRunState.options.meta);
 
-  const previousRunId = testRunState.runId;
-
-  if (previousRunId !== undefined) {
-    const previousTestRun = getTestRunEvent(previousRunId);
-
-    assertValueIsTrue(previousTestRun.ended, 'previousTestRun is ended', {
-      previousTestRun,
-      testRunState,
-    });
-  }
-
   const {filename: absoluteFilePath} = testController.testRun.test.testFile;
   const filePath = getRelativeTestFilePath(absoluteFilePath);
+  const previousRunId = testRunState.runId;
   const testStaticOptions: TestStaticOptions = {
     filePath,
     name: testRunState.name,
     options: testRunState.options,
   };
-
-  const isSkipped = isTestSkipped(testStaticOptions);
-
-  const testFnWithTimeout = getTestFnWithTimeout({
-    runId,
-    testFn: testRunState.testFn,
-    testTimeout: testRunState.options.testTimeout,
-  });
-
-  const testFnClosure = isSkipped ? skippedTestFn : testFnWithTimeout;
-
-  Object.assign<TestRunState, Partial<TestRunState>>(testRunState, {
-    error: undefined,
-    runId,
-    testFnClosure,
-  });
-
   const runLabel = (process.env as E2edEnvironment).E2ED_RUN_LABEL as RunLabel;
   const utcTimeInMs = Date.now() as UtcTimeInMs;
+
+  const isSkipped = isTestSkipped(testStaticOptions);
 
   registerStartTestRunEvent({
     ...testStaticOptions,
@@ -83,4 +58,26 @@ export const beforeTest = (
     runLabel,
     utcTimeInMs,
   });
+
+  const testFnWithTimeout = getTestFnWithTimeout({
+    runId,
+    testFn: testRunState.testFn,
+    testTimeout: testRunState.options.testTimeout,
+  });
+  const testFnClosure = isSkipped ? skippedTestFn : testFnWithTimeout;
+
+  Object.assign<TestRunState, Partial<TestRunState>>(testRunState, {
+    error: undefined,
+    runId,
+    testFnClosure,
+  });
+
+  if (previousRunId !== undefined) {
+    const previousTestRun = getTestRunEvent(previousRunId);
+
+    assertValueIsTrue(previousTestRun.ended, 'previousTestRun is ended', {
+      previousTestRun,
+      testRunState,
+    });
+  }
 };
