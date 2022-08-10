@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.11.6](https://github.com/joomcode/e2ed/tree/v0.11.6) (2022-08-10)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.5...v0.11.6)
+
+- [fix: error with unseted runId in afterTest hook](https://github.com/joomcode/e2ed/commit/11f1f06a20797f4cb173e18fa4bea161ab6b85f0) ([uid11](https://github.com/uid11))
+
 ## [v0.11.5](https://github.com/joomcode/e2ed/tree/v0.11.5) (2022-08-09)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.4...v0.11.5)
