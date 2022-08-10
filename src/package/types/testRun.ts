@@ -57,12 +57,13 @@ export type TestRun = Readonly<{
  * Internal state of one test (task).
  * @internal
  */
-export type TestRunState = Omit<TestStaticOptions, 'filePath'> & {
+export type TestRunState = Readonly<{
   error: unknown;
   runId: RunId | undefined;
-  readonly testFn: TestFn;
+  testFn: TestFn;
   testFnClosure: TestFn | undefined;
-};
+}> &
+  Omit<TestStaticOptions, 'filePath'>;
 
 /**
  * Lite test run object.

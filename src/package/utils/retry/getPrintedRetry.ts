@@ -1,4 +1,4 @@
-import type {RetriesState} from './types';
+import type {RetriesState} from '../../types/internal';
 
 /**
  * Get printed message about one retry.

@@ -26,7 +26,7 @@ export const test = (name: string, options: TestOptions, testFn: TestFn): void =
 
       await runTest(testRunState);
     } catch (error) {
-      testRunState.error = error;
+      (testRunState as {error: typeof error}).error = error;
 
       throw error;
     } finally {

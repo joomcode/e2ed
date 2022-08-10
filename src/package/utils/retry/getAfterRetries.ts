@@ -5,9 +5,7 @@ import {generalLog} from '../generalLog';
 
 import {failTestsToString} from './failTestsToString';
 
-import type {UtcTimeInMs} from '../../types/internal';
-
-import type {RetriesState} from './types';
+import type {RetriesState, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Get after retries handler.

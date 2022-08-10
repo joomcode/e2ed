@@ -1,4 +1,14 @@
-import type {FailTest} from '../../types/internal';
+import type {RunLabel} from './runLabel';
+
+/**
+ * Fail test params.
+ * @internal
+ */
+export type FailTest = Readonly<{
+  fixtureName: string;
+  fixturePath: string;
+  testName: string;
+}>;
 
 /**
  * Fail tests with all tests count.
@@ -19,3 +29,13 @@ export type RetriesState = {
   remainingTests: readonly FailTest[];
   retryIndex: number;
 };
+
+/**
+ * Options for running one retry of tests.
+ * @internal
+ */
+export type TestCafeRunOptions = Readonly<{
+  concurrency: number;
+  runLabel: RunLabel;
+  tests: readonly FailTest[];
+}>;

@@ -3,17 +3,17 @@ import {join} from 'node:path';
 import {generalLog} from '../generalLog';
 import {getFullConfig} from '../getFullConfig';
 
-import type {FailTests} from './types';
+import type {FailTests} from '../../types/internal';
 
 type Test = Readonly<{
   name: string;
-  errs: unknown[];
+  errs: readonly unknown[];
 }>;
 
 type Fixture = Readonly<{
   name: string;
   path: string;
-  tests: Test[];
+  tests: readonly Test[];
 }>;
 
 /**

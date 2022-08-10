@@ -16,11 +16,11 @@ export * from './mockApiRoute';
 export * from './pages';
 export * from './pixelmatch';
 export * from './report';
+export * from './retries';
 export * from './routes';
 export * from './runLabel';
 export * from './stackTrack';
 export * from './startInfo';
-export * from './subprocess';
 export * from './testRun';
 export * from './utils';
 

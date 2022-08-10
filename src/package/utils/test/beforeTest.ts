@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-
 import {RESOLVED_PROMISE} from '../../constants/internal';
 import {setRawMeta} from '../../context/meta';
 import {setRunId} from '../../context/runId';
@@ -34,27 +32,13 @@ export const beforeTest = (
 ): void => {
   const runId = getRandomId().replace(/:/g, '-') as RunId;
 
-  const {filename: absoluteFilePath} = testController.testRun.test.testFile;
-  const filePath = getRelativeTestFilePath(absoluteFilePath);
-  const runLabel = (process.env as E2edEnvironment).E2ED_RUN_LABEL as RunLabel;
-  const utcTimeInMs = Date.now() as UtcTimeInMs;
+  setRunId(runId);
+  setRawMeta(testRunState.options.meta);
 
-  const testStaticOptions: TestStaticOptions = {
-    filePath,
-    name: testRunState.name,
-    options: testRunState.options,
-  };
-  const runTestOwnParams = {
-    ...testStaticOptions,
-    previousRunId: testRunState.runId,
-    runLabel,
-    utcTimeInMs,
-  };
+  const previousRunId = testRunState.runId;
 
-  const isSkipped = isTestSkipped(testStaticOptions);
-
-  if (testRunState.runId !== undefined) {
-    const previousTestRun = getTestRunEvent(testRunState.runId);
+  if (previousRunId !== undefined) {
+    const previousTestRun = getTestRunEvent(previousRunId);
 
     assertValueIsTrue(previousTestRun.ended, 'previousTestRun is ended', {
       previousTestRun,
@@ -62,11 +46,15 @@ export const beforeTest = (
     });
   }
 
-  testRunState.error = undefined;
-  testRunState.runId = runId;
+  const {filename: absoluteFilePath} = testController.testRun.test.testFile;
+  const filePath = getRelativeTestFilePath(absoluteFilePath);
+  const testStaticOptions: TestStaticOptions = {
+    filePath,
+    name: testRunState.name,
+    options: testRunState.options,
+  };
 
-  setRunId(runId);
-  setRawMeta(testRunState.options.meta);
+  const isSkipped = isTestSkipped(testStaticOptions);
 
   const testFnWithTimeout = getTestFnWithTimeout({
     runId,
@@ -74,13 +62,25 @@ export const beforeTest = (
     testTimeout: testRunState.options.testTimeout,
   });
 
-  testRunState.testFnClosure = isSkipped ? skippedTestFn : testFnWithTimeout;
+  const testFnClosure = isSkipped ? skippedTestFn : testFnWithTimeout;
+
+  Object.assign<TestRunState, Partial<TestRunState>>(testRunState, {
+    error: undefined,
+    runId,
+    testFnClosure,
+  });
+
+  const runLabel = (process.env as E2edEnvironment).E2ED_RUN_LABEL as RunLabel;
+  const utcTimeInMs = Date.now() as UtcTimeInMs;
 
   registerStartTestRunEvent({
-    ...runTestOwnParams,
+    ...testStaticOptions,
     ended: false,
     isSkipped,
     logEvents: [],
+    previousRunId,
     runId,
+    runLabel,
+    utcTimeInMs,
   });
 };

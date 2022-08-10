@@ -13,9 +13,7 @@ import {getFailedTestsFromJsonReport} from './getFailedTestsFromJsonReport';
 import {getPrintedRetry} from './getPrintedRetry';
 import {runRetry} from './runRetry';
 
-import type {E2edRunEvent, UtcTimeInMs} from '../../types/internal';
-
-import type {FailTests, RetriesState} from './types';
+import type {E2edRunEvent, FailTests, RetriesState, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Run retries of remaining tests in a loop.
