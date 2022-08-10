@@ -1,3 +1,5 @@
+import {LogEventType} from './constants/internal';
+import {log} from './utils/log';
 import {afterTest, beforeTest, runTest} from './utils/test';
 import {fixture, test as testcafeTest} from './testcafe';
 
@@ -27,6 +29,12 @@ export const test = (name: string, options: TestOptions, testFn: TestFn): void =
       await runTest(testRunState);
     } catch (error) {
       (testRunState as {error: typeof error}).error = error;
+
+      await log(
+        `Test run ${String(testRunState.runId)} failed`,
+        {error, name, options},
+        LogEventType.Test,
+      );
 
       throw error;
     } finally {

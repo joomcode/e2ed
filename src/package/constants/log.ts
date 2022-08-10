@@ -5,6 +5,7 @@ export const enum LogEventType {
   Action,
   Assert,
   Entity,
+  Test,
   Util,
   InternalAction,
   InternalAssert,
