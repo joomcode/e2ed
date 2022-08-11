@@ -13,9 +13,20 @@ type Options = Readonly<{error: unknown; testName: string; testOptions: TestOpti
  * @internal
  */
 export const setErrorToContext = ({error, testName, testOptions}: Options): void => {
-  const runId = getRunId();
+  try {
+    const runId = getRunId();
 
-  generalLog(`Test run ${runId} failed with error`, {error, testName, testOptions});
+    generalLog(`Test run ${runId} failed with error`, {error, testName, testOptions});
 
-  setError(valueToString(error));
+    setError(valueToString(error));
+  } catch (contextError) {
+    generalLog('Caught context error when setting error to test run', {
+      contextError,
+      error,
+      testName,
+      testOptions,
+    });
+
+    throw contextError;
+  }
 };
