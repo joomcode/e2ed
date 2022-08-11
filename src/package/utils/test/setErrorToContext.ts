@@ -15,7 +15,7 @@ type Options = Readonly<{error: unknown; testName: string; testOptions: TestOpti
 export const setErrorToContext = ({error, testName, testOptions}: Options): void => {
   const runId = getRunId();
 
-  generalLog(`TestRun ${runId} failed with error`, {error, testName, testOptions});
+  generalLog(`Test run ${runId} failed with error`, {error, testName, testOptions});
 
   setError(valueToString(error));
 };

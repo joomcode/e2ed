@@ -1,6 +1,7 @@
 import {RESOLVED_PROMISE} from '../../constants/internal';
 
 import {E2EDError} from '../E2EDError';
+import {generalLog} from '../generalLog';
 import {getFullConfig} from '../getFullConfig';
 
 import type {RejectTestRun, RunId, TestFn} from '../../types/internal';
@@ -44,15 +45,7 @@ export const getTestFnAndReject = ({
   });
   const testFnWithReject: TestFn = () => Promise.race([testFn(), promiseWithReject]);
 
-  /**
-   * Reject test run by timeout error.
-   */
-  const rejectByTimeoutError = (): void => {
-    const error = new E2EDError(`Test run was rejected after ${testTimeout}ms timeout`, {runId});
-
-    rejectPromise?.(error);
-  };
-
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const timeoutId = setTimeout(rejectByTimeoutError, testTimeout);
 
   /**
@@ -61,8 +54,19 @@ export const getTestFnAndReject = ({
   const reject: RejectTestRun = (error) => {
     clearTimeout(timeoutId);
 
+    generalLog(`Reject test run ${runId} with error`, {error});
+
     rejectPromise?.(error);
   };
+
+  /**
+   * Reject test run by timeout error.
+   */
+  function rejectByTimeoutError(): void {
+    const error = new E2EDError(`Test run ${runId} was rejected after ${testTimeout}ms timeout`);
+
+    reject(error);
+  }
 
   return {reject, testFnWithReject};
 };
