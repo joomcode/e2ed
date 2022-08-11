@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.11.11](https://github.com/joomcode/e2ed/tree/v0.11.11) (2022-08-11)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.10...v0.11.11)
+
+- [fix: add more general logs about rejecting previous test runs](https://github.com/joomcode/e2ed/commit/9fba1d3ad5b377dbacec69aa4f4e27bd7bf932f0) ([uid11](https://github.com/uid11))
+
 ## [v0.11.10](https://github.com/joomcode/e2ed/tree/v0.11.10) (2022-08-11)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.9...v0.11.10)
