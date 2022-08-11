@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.11.10](https://github.com/joomcode/e2ed/tree/v0.11.10) (2022-08-11)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.9...v0.11.10)
+
+- [chore: update @types/node to 18.7.1](https://github.com/joomcode/e2ed/commit/fe4c8bd1c6bb3b6749a03ee47f64c08ed662010b) ([uid11](https://github.com/uid11))
+- [fix: force reject previous test run on starting new run of this test](https://github.com/joomcode/e2ed/commit/63aeb816b012e7d4a272a900c79d1a3d9975b802) ([uid11](https://github.com/uid11))
+
 ## [v0.11.9](https://github.com/joomcode/e2ed/tree/v0.11.9) (2022-08-10)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.8...v0.11.9)
