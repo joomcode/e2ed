@@ -1,4 +1,4 @@
-import {getError} from '../../context/error';
+import {getRunError} from '../../context/runError';
 import {getRunId} from '../../context/runId';
 
 import {registerEndTestRunEvent} from '../events';
@@ -15,7 +15,7 @@ export const afterTest = async (): Promise<void> => {
     const utcTimeInMs = Date.now() as UtcTimeInMs;
     const runId = getRunId();
 
-    await registerEndTestRunEvent({error: getError(), runId, utcTimeInMs});
+    await registerEndTestRunEvent({runError: getRunError(), runId, utcTimeInMs});
   } catch (error) {
     generalLog('Caught error when run after test hook', {error});
   }

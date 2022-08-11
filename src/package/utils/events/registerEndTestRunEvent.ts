@@ -30,9 +30,9 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
 
   (testRunEvent as {ended: boolean}).ended = true;
 
-  const {error, utcTimeInMs: endTimeInMs} = endTestRunEvent;
+  const {runError, utcTimeInMs: endTimeInMs} = endTestRunEvent;
 
-  const testRun: TestRun = {endTimeInMs, error, startTimeInMs, ...restTestRunEvent};
+  const testRun: TestRun = {endTimeInMs, runError, startTimeInMs, ...restTestRunEvent};
 
   // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
   const hooks: typeof import('../../hooks') = require('../../hooks');

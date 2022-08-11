@@ -1,12 +1,13 @@
 import {useContext} from '../useContext';
-import {assertValueIsDefined} from '../utils/asserts';
+import {assertValueIsDefined, assertValueIsUndefined} from '../utils/asserts';
 
 import type {RunId} from '../types/internal';
 
 /**
+ * Raw versions of getRunId and setRunId.
  * @internal
  */
-const [getRawRunId, setRunId] = useContext<RunId>();
+const [getRawRunId, setRawRunId] = useContext<RunId>();
 
 /**
  * Get test runId.
@@ -20,4 +21,14 @@ export const getRunId = (): RunId => {
   return runId;
 };
 
-export {setRunId};
+/**
+ * Set test runId (can only be called once).
+ * @internal
+ */
+export const setRunId: typeof setRawRunId = (runId) => {
+  const currentRunId = getRawRunId();
+
+  assertValueIsUndefined(currentRunId, 'currentRunId is not defined', {currentRunId, runId});
+
+  return setRawRunId(runId);
+};

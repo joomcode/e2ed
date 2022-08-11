@@ -22,7 +22,7 @@ const TEST_STATUS_TO_STATUS_STRING = CLIENT_TEST_STATUS_TO_STATUS_STRING;
  * @internal
  */
 export function renderTestRunDetails(fullTestRun: FullTestRun): SafeHtml {
-  const {endTimeInMs, error, filePath, logEvents, name, status} = fullTestRun;
+  const {endTimeInMs, filePath, logEvents, name, runError, status} = fullTestRun;
   const statusString = TEST_STATUS_TO_STATUS_STRING[status];
 
   const firstStatusString = statusString[0];
@@ -41,7 +41,7 @@ export function renderTestRunDetails(fullTestRun: FullTestRun): SafeHtml {
     <article class="overview">
       <h3 class="overview__title">Execution</h3>
       ${renderSteps({endTimeInMs, logEvents})}
-      ${renderTestRunError(error)}
+      ${renderTestRunError(runError)}
     </article>
   </div>
 </article>`;

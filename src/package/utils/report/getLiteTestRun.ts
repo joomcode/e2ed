@@ -7,11 +7,11 @@ import type {FullTestRun, LiteTestRun} from '../../types/internal';
 export const getLiteTestRun = (fullTestRun: FullTestRun): LiteTestRun => {
   const {
     endTimeInMs,
-    error,
     filePath,
     mainParams,
     name,
     options,
+    runError,
     runHash,
     runLabel,
     startTimeInMs,
@@ -20,11 +20,11 @@ export const getLiteTestRun = (fullTestRun: FullTestRun): LiteTestRun => {
 
   return {
     endTimeInMs,
-    error,
     filePath,
     mainParams,
     name,
     options,
+    runError,
     runHash,
     runLabel,
     startTimeInMs,

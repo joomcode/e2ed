@@ -1,6 +1,6 @@
 import {afterTest} from './afterTest';
 import {beforeTest} from './beforeTest';
-import {setErrorToContext} from './setErrorToContext';
+import {setRunErrorToContext} from './setRunErrorToContext';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
@@ -20,10 +20,10 @@ export const getRunTest = (testRunState: TestRunStateWithoutReject): RunTest => 
       beforeTest(testRunState, testController);
 
       await testRunState.testFnWithReject();
-    } catch (error) {
-      setErrorToContext({error, testName, testOptions});
+    } catch (runError) {
+      setRunErrorToContext({runError, testName, testOptions});
 
-      throw error;
+      throw runError;
     } finally {
       await afterTest();
     }

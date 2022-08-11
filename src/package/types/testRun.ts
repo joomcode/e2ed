@@ -53,9 +53,9 @@ export type TestStaticOptions = Readonly<{
  * Not internal because it used in user hooks.
  */
 export type TestRun = Readonly<{
-  error: string | undefined;
-  startTimeInMs: UtcTimeInMs;
   endTimeInMs: UtcTimeInMs;
+  runError: string | undefined;
+  startTimeInMs: UtcTimeInMs;
 }> &
   Omit<TestRunEvent, 'ended' | 'reject' | 'utcTimeInMs'>;
 
@@ -81,8 +81,8 @@ export type TestRunStateWithoutReject = Omit<TestRunState, 'testFnWithReject'>;
  */
 export type LiteTestRun = Readonly<{
   endTimeInMs: UtcTimeInMs;
-  error: string | undefined;
   mainParams: string;
+  runError: string | undefined;
   runHash: RunHash;
   runLabel: RunLabel;
   startTimeInMs: UtcTimeInMs;

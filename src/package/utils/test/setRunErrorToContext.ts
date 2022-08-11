@@ -1,4 +1,4 @@
-import {setError} from '../../context/error';
+import {setRunError} from '../../context/runError';
 import {getRunId} from '../../context/runId';
 
 import {generalLog} from '../generalLog';
@@ -6,23 +6,23 @@ import {valueToString} from '../valueToString';
 
 import type {TestOptions} from '../../types/internal';
 
-type Options = Readonly<{error: unknown; testName: string; testOptions: TestOptions}>;
+type Options = Readonly<{runError: unknown; testName: string; testOptions: TestOptions}>;
 
 /**
- * Set test error to test context as a string.
+ * Set test run error to test context as a string.
  * @internal
  */
-export const setErrorToContext = ({error, testName, testOptions}: Options): void => {
+export const setRunErrorToContext = ({runError, testName, testOptions}: Options): void => {
   try {
     const runId = getRunId();
 
-    generalLog(`Test run ${runId} failed with error`, {error, testName, testOptions});
+    generalLog(`Test run ${runId} failed with error`, {runError, testName, testOptions});
 
-    setError(valueToString(error));
+    setRunError(valueToString(runError));
   } catch (contextError) {
     generalLog('Caught context error when setting error to test run', {
       contextError,
-      error,
+      runError,
       testName,
       testOptions,
     });

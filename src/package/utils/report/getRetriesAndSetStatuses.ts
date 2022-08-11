@@ -17,14 +17,15 @@ export const getRetriesAndSetStatuses = (
   const fullTestRunsHash: Record<number, FullTestRun[]> = {};
 
   for (const fullTestRun of fullTestRuns) {
-    const {error, isSkipped, previousRunId, runLabel} = fullTestRun;
+    const {runError, isSkipped, previousRunId, runLabel} = fullTestRun;
 
     if (previousRunId) {
       internallyRetriedRunIds.push(previousRunId);
     }
 
     const {retryIndex} = getRunLabelObject(runLabel);
-    const passedOrFailedStatus = error === undefined ? TestRunStatus.Passed : TestRunStatus.Failed;
+    const passedOrFailedStatus =
+      runError === undefined ? TestRunStatus.Passed : TestRunStatus.Failed;
     const status = isSkipped ? TestRunStatus.Skipped : passedOrFailedStatus;
 
     (fullTestRun as Mutable<FullTestRun>).status = status;
