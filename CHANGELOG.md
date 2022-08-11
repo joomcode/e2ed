@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.11.12](https://github.com/joomcode/e2ed/tree/v0.11.12) (2022-08-11)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.11...v0.11.12)
+
+- [fix: add more logs on after test hooks](https://github.com/joomcode/e2ed/commit/e2a11058d330389beb57ef1e4859808daf3618c0) ([uid11](https://github.com/uid11))
+
 ## [v0.11.11](https://github.com/joomcode/e2ed/tree/v0.11.11) (2022-08-11)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.10...v0.11.11)
