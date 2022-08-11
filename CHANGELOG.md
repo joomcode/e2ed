@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.11.13](https://github.com/joomcode/e2ed/tree/v0.11.13) (2022-08-11)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.12...v0.11.13)
+
+- [refactor: rename test run error variable to runError](https://github.com/joomcode/e2ed/commit/f6a3fb13e08e6fd5b737f2fd3359ce3c3bda25b0) ([uid11](https://github.com/uid11))
+
+  fix: add checks that test context is unique for each test run
+
 ## [v0.11.12](https://github.com/joomcode/e2ed/tree/v0.11.12) (2022-08-11)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.11...v0.11.12)
