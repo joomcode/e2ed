@@ -22,7 +22,7 @@ const skippedTestFnAndReject: Return = {
 
 /**
  * Get test function with execution timeout and reject function,
- * by test function, runId and timeout.
+ * by isSkipped flag, test function, runId and timeout.
  * @internal
  */
 export const getTestFnAndReject = ({
@@ -38,21 +38,28 @@ export const getTestFnAndReject = ({
   const {testTimeout: testTimeoutFromConfig} = getFullConfig();
   const testTimeout = testTimeoutFromTestOptions ?? testTimeoutFromConfig;
 
+  let isTestRunCompleted = false;
   let rejectPromise: RejectTestRun | undefined;
 
   const promiseWithReject = new Promise<void>((res, rej) => {
     rejectPromise = rej;
   });
-  const testFnWithReject: TestFn = () => Promise.race([testFn(), promiseWithReject]);
-
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const timeoutId = setTimeout(rejectByTimeoutError, testTimeout);
+
+  const testFnWithReject: TestFn = () =>
+    Promise.race([testFn(), promiseWithReject]).finally(() => {
+      isTestRunCompleted = true;
+      clearTimeout(timeoutId);
+    });
 
   /**
    * Reject test run by some run error.
    */
   const reject: RejectTestRun = (error) => {
-    clearTimeout(timeoutId);
+    if (isTestRunCompleted) {
+      return;
+    }
 
     generalLog(`Reject test run ${runId} with run error`, {error});
 

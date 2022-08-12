@@ -1,4 +1,5 @@
 import {createRunId} from '../createRunId';
+import {generalLog} from '../generalLog';
 
 import {afterTest} from './afterTest';
 import {beforeTest} from './beforeTest';
@@ -30,6 +31,8 @@ export const getRunTest = (test: Test): RunTest => {
     } catch (error) {
       hasRunError = true;
       unknownRunError = error;
+
+      generalLog(`Test run ${runId} failed with error`, {error});
 
       throw error;
     } finally {

@@ -2,7 +2,7 @@ import {request as httpRequest} from 'node:http';
 import {request as httpsRequest} from 'node:https';
 import {URL} from 'node:url';
 
-import {LogEventType} from '../../constants/internal';
+import {LogEventStatus, LogEventType} from '../../constants/internal';
 
 import {E2EDError} from '../E2EDError';
 import {log} from '../log';
@@ -89,7 +89,12 @@ export const request = async <
 
       await log(
         `Got a response to the request to ${url}`,
-        {...fullLogParams, needRetry, response},
+        {
+          ...fullLogParams,
+          logEventStatus: needRetry ? LogEventStatus.Failed : LogEventStatus.Passed,
+          needRetry,
+          response,
+        },
         LogEventType.InternalUtil,
       );
 
@@ -99,7 +104,7 @@ export const request = async <
     } catch (cause) {
       await log(
         `An error was received during the request to ${url}`,
-        {...logParams, cause, retry},
+        {...logParams, cause, logEventStatus: LogEventStatus.Failed, retry},
         LogEventType.InternalUtil,
       );
     }

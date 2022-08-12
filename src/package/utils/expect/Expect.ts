@@ -1,4 +1,4 @@
-import {LogEventType} from '../../constants/internal';
+import {LogEventStatus, LogEventType} from '../../constants/internal';
 import {testController} from '../../testController';
 
 import {log} from '../log';
@@ -40,6 +40,7 @@ for (const [key, getAssertionMessage] of Object.entries(assertionMessageGetters)
               assertion: `value ${valueToString(actualValue)} ${message}`,
               assertionArguments: args,
               error: maybeError,
+              logEventStatus: maybeError ? LogEventStatus.Failed : LogEventStatus.Passed,
             },
             LogEventType.InternalAssert,
           ),

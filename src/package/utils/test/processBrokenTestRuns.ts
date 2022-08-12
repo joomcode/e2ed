@@ -24,14 +24,11 @@ export const processBrokenTestRuns = (testRunEvent: TestRunEvent): void => {
     return;
   }
 
-  const error = new E2EDError(
-    'Previous (broken) test run was not ended before new run of this test',
-    {
-      isTestRunBroken: true,
-      previousTestRunEvent: {...previousTestRunEvent, logEvents: undefined},
-      testRunEvent: {...testRunEvent, logEvents: undefined},
-    } as MaybeWithIsTestRunBroken,
-  );
+  const error = new E2EDError('The test was rerun, so previous test run should be rejected', {
+    isTestRunBroken: true,
+    previousTestRunEvent: {...previousTestRunEvent, logEvents: undefined},
+    testRunEvent: {...testRunEvent, logEvents: undefined},
+  } as MaybeWithIsTestRunBroken);
 
   previousTestRunEvent.reject(error);
 };
