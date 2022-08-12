@@ -5,9 +5,7 @@ import {log} from '../utils/log';
 
 import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
 
-import type {Inner} from 'testcafe-without-typecheck';
-
-import type {Selector} from '../types/internal';
+import type {Selector, TestCafeSelector} from '../types/internal';
 
 type Options = Parameters<typeof testController.drag>[3];
 
@@ -28,7 +26,7 @@ export const drag = async (
     LogEventType.InternalAction,
   );
 
-  await testController.drag(selector as Inner.Selector, dragOffsetX, dragOffsetY, options);
+  await testController.drag(selector as TestCafeSelector, dragOffsetX, dragOffsetY, options);
 
   await waitForInterfaceStabilization();
 };

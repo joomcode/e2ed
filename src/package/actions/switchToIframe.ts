@@ -5,9 +5,7 @@ import {log} from '../utils/log';
 
 import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
 
-import type {Inner} from 'testcafe-without-typecheck';
-
-import type {Selector} from '../types/internal';
+import type {Selector, TestCafeSelector} from '../types/internal';
 
 /**
  * Switches browsing context to the specified iframe (by iframe selector).
@@ -21,7 +19,7 @@ export const switchToIframe = async (iframeSelector: Selector): Promise<void> =>
     LogEventType.InternalAction,
   );
 
-  await testController.switchToIframe(iframeSelector as Inner.Selector);
+  await testController.switchToIframe(iframeSelector as TestCafeSelector);
 
   await waitForInterfaceStabilization();
 };

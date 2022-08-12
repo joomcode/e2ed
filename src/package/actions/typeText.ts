@@ -5,9 +5,7 @@ import {log} from '../utils/log';
 
 import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
 
-import type {Inner} from 'testcafe-without-typecheck';
-
-import type {Selector} from '../types/internal';
+import type {Selector, TestCafeSelector} from '../types/internal';
 
 type Options = Parameters<typeof testController.typeText>[2];
 
@@ -27,7 +25,7 @@ export const typeText = async (
     LogEventType.InternalAction,
   );
 
-  await testController.typeText(selector as Inner.Selector, text, options);
+  await testController.typeText(selector as TestCafeSelector, text, options);
 
   await waitForInterfaceStabilization();
 };

@@ -3,9 +3,7 @@ import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
-import type {Inner} from 'testcafe-without-typecheck';
-
-import type {Selector} from '../types/internal';
+import type {Selector, TestCafeSelector} from '../types/internal';
 
 type Options = Parameters<typeof testController.selectText>[3];
 
@@ -28,5 +26,5 @@ export const selectText = async (
     LogEventType.InternalAction,
   );
 
-  return testController.selectText(selector as Inner.Selector, startPos, endPos, options);
+  return testController.selectText(selector as TestCafeSelector, startPos, endPos, options);
 };

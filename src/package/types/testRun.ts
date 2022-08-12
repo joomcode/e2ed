@@ -57,24 +57,14 @@ export type TestRun = Readonly<{
   runError: string | undefined;
   startTimeInMs: UtcTimeInMs;
 }> &
-  Omit<TestRunEvent, 'ended' | 'reject' | 'utcTimeInMs'>;
+  Omit<TestRunEvent, 'ended' | 'reject' | 'testFnWithReject' | 'utcTimeInMs'>;
 
 /**
- * Internal state of one test (task).
+ * The complete test options, that is, all information about the test
+ * that is input to the test function.
  * @internal
  */
-export type TestRunState = Readonly<{
-  previousRunId: RunId | undefined;
-  testFn: TestFn;
-  testFnWithReject: TestFn;
-}> &
-  Omit<TestStaticOptions, 'filePath'>;
-
-/**
- * Preliminary internal state of one test, without wrappedTestFn.
- * @internal
- */
-export type TestRunStateWithoutReject = Omit<TestRunState, 'testFnWithReject'>;
+export type Test = Readonly<{testFn: TestFn}> & Omit<TestStaticOptions, 'filePath'>;
 
 /**
  * Lite test run object.

@@ -3,9 +3,7 @@ import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
-import type {Inner} from 'testcafe-without-typecheck';
-
-import type {Selector} from '../types/internal';
+import type {Selector, TestCafeSelector} from '../types/internal';
 
 type Options = Parameters<typeof testController.takeElementScreenshot>[2];
 
@@ -26,5 +24,5 @@ export const takeElementScreenshot = async (
     LogEventType.InternalAction,
   );
 
-  return testController.takeElementScreenshot(selector as Inner.Selector, path, options);
+  return testController.takeElementScreenshot(selector as TestCafeSelector, path, options);
 };

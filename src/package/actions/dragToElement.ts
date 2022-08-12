@@ -5,9 +5,7 @@ import {log} from '../utils/log';
 
 import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
 
-import type {Inner} from 'testcafe-without-typecheck';
-
-import type {Selector} from '../types/internal';
+import type {Selector, TestCafeSelector} from '../types/internal';
 
 type Options = Parameters<typeof testController.dragToElement>[2];
 
@@ -29,8 +27,8 @@ export const dragToElement = async (
   );
 
   await testController.dragToElement(
-    selector as Inner.Selector,
-    destinationSelector as Inner.Selector,
+    selector as TestCafeSelector,
+    destinationSelector as TestCafeSelector,
     options,
   );
 

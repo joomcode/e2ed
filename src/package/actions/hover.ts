@@ -5,9 +5,7 @@ import {log} from '../utils/log';
 
 import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
 
-import type {Inner} from 'testcafe-without-typecheck';
-
-import type {Selector} from '../types/internal';
+import type {Selector, TestCafeSelector} from '../types/internal';
 
 type Options = Parameters<typeof testController.hover>[1];
 
@@ -23,7 +21,7 @@ export const hover = async (selector: Selector, options?: Options): Promise<void
     LogEventType.InternalAction,
   );
 
-  await testController.hover(selector as Inner.Selector, options);
+  await testController.hover(selector as TestCafeSelector, options);
 
   await waitForInterfaceStabilization();
 };

@@ -3,9 +3,7 @@ import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
-import type {Inner} from 'testcafe-without-typecheck';
-
-import type {Selector} from '../types/internal';
+import type {Selector, TestCafeSelector} from '../types/internal';
 
 type Options = Parameters<typeof testController.scrollIntoView>[1];
 
@@ -21,5 +19,5 @@ export const scrollIntoView = async (selector: Selector, options?: Options): Pro
     LogEventType.InternalAction,
   );
 
-  return testController.scrollIntoView(selector as Inner.Selector, options);
+  return testController.scrollIntoView(selector as TestCafeSelector, options);
 };

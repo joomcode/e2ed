@@ -4,7 +4,7 @@ import type {UtcTimeInMs} from './date';
 import type {LogPayload} from './log';
 import type {RunLabel} from './runLabel';
 import type {FullStartInfo} from './startInfo';
-import type {RejectTestRun, RunId, TestRunWithHooks, TestStaticOptions} from './testRun';
+import type {RejectTestRun, RunId, TestFn, TestRunWithHooks, TestStaticOptions} from './testRun';
 
 /**
  * Log event (on log call).
@@ -63,6 +63,7 @@ export type TestRunEvent = Readonly<{
   reject: RejectTestRun;
   runId: RunId;
   runLabel: RunLabel;
+  testFnWithReject: TestFn;
   utcTimeInMs: UtcTimeInMs;
 }> &
   TestStaticOptions;

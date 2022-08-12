@@ -22,6 +22,7 @@ export * from './routes';
 export * from './runLabel';
 export * from './stackTrack';
 export * from './startInfo';
+export * from './testCafe';
 export * from './testRun';
 export * from './undefined';
 export * from './utils';

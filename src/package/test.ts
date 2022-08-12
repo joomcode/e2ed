@@ -1,7 +1,7 @@
 import {getRunTest} from './utils/test';
 import {fixture, test as testcafeTest} from './testcafe';
 
-import type {TestFn, TestOptions, TestRunStateWithoutReject} from './types/internal';
+import type {TestFn, TestOptions} from './types/internal';
 
 /**
  * Creates test with name, metatags, options and test function.
@@ -9,14 +9,7 @@ import type {TestFn, TestOptions, TestRunStateWithoutReject} from './types/inter
 export const test = (name: string, options: TestOptions, testFn: TestFn): void => {
   fixture(' - e2ed - ');
 
-  const testRunStateWithoutReject: TestRunStateWithoutReject = {
-    name,
-    options,
-    previousRunId: undefined,
-    testFn,
-  };
-
-  const runTest = getRunTest(testRunStateWithoutReject);
+  const runTest = getRunTest({name, options, testFn});
 
   testcafeTest(name, runTest);
 };

@@ -5,9 +5,7 @@ import {log} from '../utils/log';
 
 import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
 
-import type {Inner} from 'testcafe-without-typecheck';
-
-import type {Selector} from '../types/internal';
+import type {Selector, TestCafeSelector} from '../types/internal';
 
 type Options = Parameters<typeof testController.rightClick>[1];
 
@@ -19,7 +17,7 @@ export const rightClick = async (selector: Selector, options?: Options): Promise
 
   await log('Right-click an element', {locator, options}, LogEventType.InternalAction);
 
-  await testController.rightClick(selector as Inner.Selector, options);
+  await testController.rightClick(selector as TestCafeSelector, options);
 
   await waitForInterfaceStabilization();
 };

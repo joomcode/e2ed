@@ -1,31 +1,37 @@
+import {createRunId} from '../createRunId';
+import {valueToString} from '../valueToString';
+
 import {afterTest} from './afterTest';
 import {beforeTest} from './beforeTest';
-import {setRunErrorToContext} from './setRunErrorToContext';
+import {runTestFn} from './runTestFn';
 
-import type {Inner} from 'testcafe-without-typecheck';
+import type {RunId, Test, TestController} from '../../types/internal';
 
-import type {TestRunStateWithoutReject} from '../../types/internal';
-
-type RunTest = (testController: Inner.TestController) => Promise<void>;
+type RunTest = (testController: TestController) => Promise<void>;
 
 /**
  * Get complete run test function by TestRun state.
  * @internal
  */
-export const getRunTest = (testRunState: TestRunStateWithoutReject): RunTest => {
-  const {name: testName, options: testOptions} = testRunState;
+export const getRunTest = (test: Test): RunTest => {
+  let previousRunId: RunId | undefined;
 
-  return async (testController: Inner.TestController) => {
+  return async (testController: TestController) => {
+    const runId = createRunId();
+    let runError: string | undefined;
+
     try {
-      beforeTest(testRunState, testController);
+      beforeTest({previousRunId, runId, test, testController});
 
-      await testRunState.testFnWithReject();
-    } catch (runError) {
-      setRunErrorToContext({runError, testName, testOptions});
+      await runTestFn(runId);
+    } catch (unknownRunError) {
+      runError = valueToString(unknownRunError);
 
-      throw runError;
+      throw unknownRunError;
     } finally {
-      await afterTest();
+      previousRunId = runId;
+
+      await afterTest({runError, runId});
     }
   };
 };

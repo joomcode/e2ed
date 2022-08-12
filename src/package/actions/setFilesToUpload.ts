@@ -3,9 +3,7 @@ import {testController} from '../testController';
 import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
 import {log} from '../utils/log';
 
-import type {Inner} from 'testcafe-without-typecheck';
-
-import type {Selector} from '../types/internal';
+import type {Selector, TestCafeSelector} from '../types/internal';
 
 /**
  * Populates the specified file upload input with file paths.
@@ -25,5 +23,5 @@ export const setFilesToUpload = async (
     LogEventType.InternalAction,
   );
 
-  return testController.setFilesToUpload(selector as Inner.Selector, filePath);
+  return testController.setFilesToUpload(selector as TestCafeSelector, filePath);
 };
