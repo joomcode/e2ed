@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.11.14](https://github.com/joomcode/e2ed/tree/v0.11.14) (2022-08-12)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.13...v0.11.14)
+
+- [chore: update @types/node to 18.7.2](https://github.com/joomcode/e2ed/commit/254f1a99efa8f7662cbf5573a0d5a7c1d621140e) ([uid11](https://github.com/uid11))
+- [fix: read test run id and test run error from closures variables](https://github.com/joomcode/e2ed/commit/da99bb7d840f589a7d89572931162a9c68c55d40) ([uid11](https://github.com/uid11))
+
+  refactor: add separate type for TestCafe selector
+
+- [fix: use explicit readable values for enums (TestRunStatus, etc)](https://github.com/joomcode/e2ed/commit/447039f47b4e5002a701f3d749a01183b0abb01f) ([uid11](https://github.com/uid11))
+
 ## [v0.11.13](https://github.com/joomcode/e2ed/tree/v0.11.13) (2022-08-11)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.12...v0.11.13)
