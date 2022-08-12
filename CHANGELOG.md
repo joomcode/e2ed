@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.11.16](https://github.com/joomcode/e2ed/tree/v0.11.16) (2022-08-12)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.15...v0.11.16)
+
+- [fix: add main log message about test run error](https://github.com/joomcode/e2ed/commit/90dd9327a423a79aad2cceb2ee833cafd3e39da5) ([uid11](https://github.com/uid11))
+
+  fix: clear test timeout when test promise completed
+  fix: do not log about reject, if test run already completed
+
+- [fix: add type MaybeWithIsTestRunBroken for reject error params](https://github.com/joomcode/e2ed/commit/d92d73c6ff76a1c6920ca6c9656c1ff351f6684e) ([uid11](https://github.com/uid11))
+
 ## [v0.11.15](https://github.com/joomcode/e2ed/tree/v0.11.15) (2022-08-12)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.14...v0.11.15)
