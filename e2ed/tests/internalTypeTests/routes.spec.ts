@@ -37,7 +37,7 @@ new UserSignUp(undefined);
 new UserSignUp('foo');
 
 /**
- * RouteParams = undefined | Readonly<{query: string}>
+ * RouteParams = Readonly<{query: string}> | undefined
  */
 
 // ok

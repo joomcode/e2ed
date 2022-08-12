@@ -10,17 +10,17 @@ import {
 import {assertValueIsDefined} from '../asserts';
 import {generalLog} from '../generalLog';
 
-import type {TestRunWithHooks, UtcTimeInMs} from '../../types/internal';
+import type {FullTestRun, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Read events objects from temporary directory.
  * @internal
  */
-export const readEventsFromFiles = async (): Promise<TestRunWithHooks[]> => {
+export const readEventsFromFiles = async (): Promise<readonly FullTestRun[]> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const eventFiles = await readdir(EVENTS_DIRECTORY_PATH);
-  const testRuns: TestRunWithHooks[] = [];
+  const testRuns: FullTestRun[] = [];
 
   for (
     let fileIndex = 0;
@@ -51,9 +51,9 @@ export const readEventsFromFiles = async (): Promise<TestRunWithHooks[]> => {
     const files = await Promise.all(readPromises);
 
     for (const file of files) {
-      const testRunWithHooks = JSON.parse(file) as TestRunWithHooks;
+      const fullTestRun = JSON.parse(file) as FullTestRun;
 
-      testRuns.push(testRunWithHooks);
+      testRuns.push(fullTestRun);
     }
   }
 

@@ -7,7 +7,7 @@ import {testIdSelector} from 'e2ed/selectors';
 import type {GetParamsType, Language} from 'e2ed/types';
 
 type RouteParams = GetParamsType<MainRoute>;
-type CustomPageParams = undefined | Partial<RouteParams>;
+type CustomPageParams = Partial<RouteParams> | undefined;
 
 const mainPageTestId = createTestId<{header: unknown}>('google');
 

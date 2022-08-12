@@ -49,12 +49,12 @@ export const getTestFnAndReject = ({
   const timeoutId = setTimeout(rejectByTimeoutError, testTimeout);
 
   /**
-   * Reject test run by some error.
+   * Reject test run by some run error.
    */
   const reject: RejectTestRun = (error) => {
     clearTimeout(timeoutId);
 
-    generalLog(`Reject test run ${runId} with error`, {error});
+    generalLog(`Reject test run ${runId} with run error`, {error});
 
     rejectPromise?.(error);
   };

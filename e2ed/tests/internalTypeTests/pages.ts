@@ -35,7 +35,7 @@ void navigateToPage(Services, undefined);
 void navigateToPage(Services, {});
 
 /**
- * PageParams = undefined | Readonly<{language?: Language}>
+ * PageParams = Readonly<{language?: Language}> | undefined
  */
 
 // ok

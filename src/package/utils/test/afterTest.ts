@@ -1,24 +1,22 @@
 import {registerEndTestRunEvent} from '../events';
 import {generalLog} from '../generalLog';
 
-import type {RunId, UtcTimeInMs} from '../../types/internal';
+import type {EndTestRunEvent, UtcTimeInMs} from '../../types/internal';
 
-type Options = Readonly<{
-  runError: string | undefined;
-  runId: RunId;
-}>;
+type Options = Omit<EndTestRunEvent, 'utcTimeInMs'>;
 
 /**
  * Internal after test hook.
  * @internal
  */
-export const afterTest = async ({runError, runId}: Options): Promise<void> => {
-  try {
-    const utcTimeInMs = Date.now() as UtcTimeInMs;
+export const afterTest = async (options: Options): Promise<void> => {
+  const utcTimeInMs = Date.now() as UtcTimeInMs;
+  const endTestRunEvent: EndTestRunEvent = {...options, utcTimeInMs};
 
-    await registerEndTestRunEvent({runError, runId, utcTimeInMs});
+  try {
+    await registerEndTestRunEvent(endTestRunEvent);
   } catch (error) {
-    generalLog('Caught error when run after test hook', {error});
+    generalLog('Caught error when register end test run event', {endTestRunEvent, error});
 
     throw error;
   }

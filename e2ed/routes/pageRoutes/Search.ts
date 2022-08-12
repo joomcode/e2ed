@@ -5,7 +5,7 @@ import {assertValueIsTrue} from 'e2ed/utils';
 
 import type {Url} from 'e2ed/types';
 
-type Params = undefined | Readonly<{searchQuery: string}>;
+type Params = Readonly<{searchQuery: string}> | undefined;
 
 /**
  * Route of the Search page.

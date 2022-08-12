@@ -2,7 +2,7 @@ import {RunEnvironment} from '../../configurator';
 
 import {getUnvisitedTestFilePaths} from '../getUnvisitedTestFilePaths';
 
-import type {TestRunWithHooks} from '../../types/internal';
+import type {FullTestRun} from '../../types/internal';
 
 /**
  * Get all report errors. General report status is failed if there is any error.
@@ -10,12 +10,12 @@ import type {TestRunWithHooks} from '../../types/internal';
  */
 export const getReportErrors = async (
   runEnvironment: RunEnvironment,
-  testRunsWithHooks: readonly TestRunWithHooks[],
+  fullTestRuns: readonly FullTestRun[],
 ): Promise<readonly string[]> => {
   const errors: string[] = [];
 
   if (runEnvironment === RunEnvironment.Docker) {
-    const unvisitedTestFilePaths = await getUnvisitedTestFilePaths(testRunsWithHooks);
+    const unvisitedTestFilePaths = await getUnvisitedTestFilePaths(fullTestRuns);
     const numberOfUnvisited = unvisitedTestFilePaths.length;
     const onlyOne = numberOfUnvisited === 1;
 

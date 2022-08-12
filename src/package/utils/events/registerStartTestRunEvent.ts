@@ -2,8 +2,6 @@ import {RUN_IDS_HASH} from '../../constants/internal';
 
 import {assertValueIsFalse} from '../asserts';
 
-import {rejectPreviousTestRun} from './rejectPreviousTestRun';
-
 import type {TestRunEvent} from '../../types/internal';
 
 /**
@@ -19,6 +17,4 @@ export const registerStartTestRunEvent = (testRunEvent: TestRunEvent): void => {
   });
 
   RUN_IDS_HASH[runId] = testRunEvent;
-
-  rejectPreviousTestRun(testRunEvent);
 };

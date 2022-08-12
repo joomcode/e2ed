@@ -1,25 +1,25 @@
 import {assertValueIsDefined} from '../asserts';
 
-import type {RunHash, TestRunWithHooks} from '../../types/internal';
+import type {FullTestRun, RunHash} from '../../types/internal';
 
 /**
  * Unificate all TestRun hashes at once.
  * @internal
  */
-export const unificateRunHashes = (testRunsWithHooks: readonly TestRunWithHooks[]): void => {
-  const {length} = String(testRunsWithHooks.length - 1);
+export const unificateRunHashes = (fullTestRuns: readonly FullTestRun[]): void => {
+  const {length} = String(fullTestRuns.length - 1);
 
-  for (let index = 0; index < testRunsWithHooks.length; index += 1) {
-    const testRunWithHooks = testRunsWithHooks[index];
+  for (let index = 0; index < fullTestRuns.length; index += 1) {
+    const fullTestRun = fullTestRuns[index];
 
-    assertValueIsDefined(testRunWithHooks, 'testRunsWithHooks is defined', {index, length});
+    assertValueIsDefined(fullTestRun, 'fullTestRun is defined', {index, length});
 
-    const {runHash} = testRunWithHooks;
+    const {runHash} = fullTestRun;
 
     const clearRunHash = runHash.replace(/[# ?:/]+/g, '-') as RunHash;
 
     const uniqueRunHash = `${clearRunHash}-${String(index).padStart(length, '0')}` as RunHash;
 
-    (testRunWithHooks as {runHash: RunHash}).runHash = uniqueRunHash;
+    (fullTestRun as {runHash: RunHash}).runHash = uniqueRunHash;
   }
 };

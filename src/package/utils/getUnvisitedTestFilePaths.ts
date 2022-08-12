@@ -2,20 +2,20 @@ import {TESTS_DIRECTORY_PATH} from '../constants/internal';
 
 import {collectTestFilePathsFromDir} from './collectTestFilePathsFromDir';
 
-import type {TestFilePath, TestRunWithHooks} from '../types/internal';
+import type {FullTestRun, TestFilePath} from '../types/internal';
 
 /**
  * Get unvisited test file paths, that is, file paths to tests for which there was no test runs.
  * @internal
  */
 export const getUnvisitedTestFilePaths = async (
-  testRunsWithHooks: readonly TestRunWithHooks[],
+  fullTestRuns: readonly FullTestRun[],
 ): Promise<readonly TestFilePath[]> => {
   const allTestFilePaths = await collectTestFilePathsFromDir(TESTS_DIRECTORY_PATH);
 
   const visitedTestFilePathsHash: Record<TestFilePath, true> = {};
 
-  for (const {filePath} of testRunsWithHooks) {
+  for (const {filePath} of fullTestRuns) {
     visitedTestFilePathsHash[filePath] = true;
   }
 

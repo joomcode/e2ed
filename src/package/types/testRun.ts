@@ -57,7 +57,7 @@ export type TestRun = Readonly<{
   runError: string | undefined;
   startTimeInMs: UtcTimeInMs;
 }> &
-  Omit<TestRunEvent, 'ended' | 'reject' | 'testFnWithReject' | 'utcTimeInMs'>;
+  Omit<TestRunEvent, 'isSkipped' | 'previousRunId' | 'reject' | 'testFnWithReject' | 'utcTimeInMs'>;
 
 /**
  * The complete test options, that is, all information about the test
@@ -81,14 +81,7 @@ export type LiteTestRun = Readonly<{
   TestStaticOptions;
 
 /**
- * TestRun object with result of userland hooks (like mainParams and runHash).
- * Used in HTML report.
+ * Full test run object result of userland hooks (like mainParams and runHash).
  * @internal
  */
-export type TestRunWithHooks = Readonly<{mainParams: string; runHash: RunHash}> & TestRun;
-
-/**
- * Full test run object with hooks and status.
- * @internal
- */
-export type FullTestRun = Readonly<{status: TestRunStatus}> & TestRunWithHooks;
+export type FullTestRun = Readonly<{mainParams: string; runHash: RunHash}> & TestRun;

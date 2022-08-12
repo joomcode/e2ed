@@ -6,14 +6,14 @@ import {EVENTS_DIRECTORY_PATH} from '../constants/internal';
 import {E2EDError} from './E2EDError';
 import {writeFile} from './writeFile';
 
-import type {TestRunWithHooks} from '../types/internal';
+import type {FullTestRun} from '../types/internal';
 
 /**
- * Write completed test run object to temporary JSON file.
+ * Write completed (full) test run object to temporary JSON file.
  * @internal
  */
-export const writeTestRunToJsonFile = async (testRunWithHooks: TestRunWithHooks): Promise<void> => {
-  const {runId} = testRunWithHooks;
+export const writeTestRunToJsonFile = async (fullTestRun: FullTestRun): Promise<void> => {
+  const {runId} = fullTestRun;
 
   const filePath = join(EVENTS_DIRECTORY_PATH, `${runId}.json`);
 
@@ -24,7 +24,7 @@ export const writeTestRunToJsonFile = async (testRunWithHooks: TestRunWithHooks)
     () => undefined,
   );
 
-  const data = JSON.stringify(testRunWithHooks);
+  const data = JSON.stringify(fullTestRun);
 
   await writeFile(filePath, data);
 };

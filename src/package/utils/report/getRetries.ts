@@ -1,34 +1,18 @@
-import {TestRunStatus} from '../../constants/internal';
-
 import {getRunLabelObject} from '../runLabel';
 
-import type {FullTestRun, Mutable, Retry, RunId, UtcTimeInMs} from '../../types/internal';
+import type {FullTestRun, Retry, UtcTimeInMs} from '../../types/internal';
 
 /**
- * Get array of retries from array of full test runs and
- * set statuses for this test runs.
+ * Get array of retries from array of full test runs.
  * @internal
  */
-export const getRetriesAndSetStatuses = (
-  fullTestRuns: readonly FullTestRun[],
-): readonly Retry[] => {
-  const internallyRetriedRunIds: RunId[] = [];
+export const getRetries = (fullTestRuns: readonly FullTestRun[]): readonly Retry[] => {
   const retries: Retry[] = [];
   const fullTestRunsHash: Record<number, FullTestRun[]> = {};
 
   for (const fullTestRun of fullTestRuns) {
-    const {runError, isSkipped, previousRunId, runLabel} = fullTestRun;
-
-    if (previousRunId) {
-      internallyRetriedRunIds.push(previousRunId);
-    }
-
+    const {runLabel} = fullTestRun;
     const {retryIndex} = getRunLabelObject(runLabel);
-    const passedOrFailedStatus =
-      runError === undefined ? TestRunStatus.Passed : TestRunStatus.Failed;
-    const status = isSkipped ? TestRunStatus.Skipped : passedOrFailedStatus;
-
-    (fullTestRun as Mutable<FullTestRun>).status = status;
 
     if (fullTestRunsHash[retryIndex] === undefined) {
       fullTestRunsHash[retryIndex] = [];
@@ -38,12 +22,6 @@ export const getRetriesAndSetStatuses = (
   }
 
   for (const [retryString, retryFullTestRuns] of Object.entries(fullTestRunsHash)) {
-    for (const fullTestRun of retryFullTestRuns) {
-      if (internallyRetriedRunIds.includes(fullTestRun.runId)) {
-        (fullTestRun as {status: TestRunStatus}).status = TestRunStatus.Broken;
-      }
-    }
-
     retryFullTestRuns.sort((a, b) => {
       if (a.filePath > b.filePath) {
         return 1;

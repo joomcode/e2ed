@@ -1,5 +1,4 @@
 import {createRunId} from '../createRunId';
-import {valueToString} from '../valueToString';
 
 import {afterTest} from './afterTest';
 import {beforeTest} from './beforeTest';
@@ -18,20 +17,23 @@ export const getRunTest = (test: Test): RunTest => {
 
   return async (testController: TestController) => {
     const runId = createRunId();
-    let runError: string | undefined;
+
+    let hasRunError = false;
+    let unknownRunError: unknown;
 
     try {
       beforeTest({previousRunId, runId, test, testController});
 
-      await runTestFn(runId);
-    } catch (unknownRunError) {
-      runError = valueToString(unknownRunError);
-
-      throw unknownRunError;
-    } finally {
       previousRunId = runId;
 
-      await afterTest({runError, runId});
+      await runTestFn(runId);
+    } catch (error) {
+      hasRunError = true;
+      unknownRunError = error;
+
+      throw error;
+    } finally {
+      await afterTest({hasRunError, runId, unknownRunError});
     }
   };
 };

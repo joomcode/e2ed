@@ -1,10 +1,10 @@
-import type {LogEventType} from '../constants/internal';
+import type {LogEventType, TestRunStatus} from '../constants/internal';
 
 import type {UtcTimeInMs} from './date';
 import type {LogPayload} from './log';
 import type {RunLabel} from './runLabel';
 import type {FullStartInfo} from './startInfo';
-import type {RejectTestRun, RunId, TestFn, TestRunWithHooks, TestStaticOptions} from './testRun';
+import type {FullTestRun, RejectTestRun, RunId, TestFn, TestStaticOptions} from './testRun';
 
 /**
  * Log event (on log call).
@@ -29,8 +29,9 @@ export type EndE2edRunEvent = Readonly<{
  * @internal
  */
 export type EndTestRunEvent = Readonly<{
-  runError: string | undefined;
+  hasRunError: boolean;
   runId: RunId;
+  unknownRunError: unknown;
   utcTimeInMs: UtcTimeInMs;
 }>;
 
@@ -41,7 +42,7 @@ export type EndTestRunEvent = Readonly<{
 export type FullEventsData = Readonly<{
   endE2edRunEvent: EndE2edRunEvent;
   fullStartInfo: FullStartInfo;
-  testRunsWithHooks: readonly TestRunWithHooks[];
+  fullTestRuns: readonly FullTestRun[];
 }>;
 
 /**
@@ -56,13 +57,13 @@ export type E2edRunEvent = Readonly<{
  * TestRun event (on starting one test).
  */
 export type TestRunEvent = Readonly<{
-  ended: boolean;
   isSkipped: boolean;
   logEvents: readonly LogEvent[];
   previousRunId: RunId | undefined;
   reject: RejectTestRun;
   runId: RunId;
   runLabel: RunLabel;
+  status: TestRunStatus;
   testFnWithReject: TestFn;
   utcTimeInMs: UtcTimeInMs;
 }> &

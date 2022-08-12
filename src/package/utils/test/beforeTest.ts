@@ -1,3 +1,4 @@
+import {TestRunStatus} from '../../constants/internal';
 import {setRawMeta} from '../../context/meta';
 import {setRunId} from '../../context/runId';
 import {isTestSkipped} from '../../hooks';
@@ -6,6 +7,7 @@ import {registerStartTestRunEvent} from '../events';
 import {getRelativeTestFilePath} from '../getRelativeTestFilePath';
 
 import {getTestFnAndReject} from './getTestFnAndReject';
+import {processBrokenTestRuns} from './processBrokenTestRuns';
 
 import type {
   E2edEnvironment,
@@ -13,6 +15,7 @@ import type {
   RunLabel,
   Test,
   TestController,
+  TestRunEvent,
   TestStaticOptions,
   UtcTimeInMs,
 } from '../../types/internal';
@@ -51,16 +54,20 @@ export const beforeTest = ({previousRunId, runId, test, testController}: Options
   const runLabel = (process.env as E2edEnvironment).E2ED_RUN_LABEL as RunLabel;
   const utcTimeInMs = Date.now() as UtcTimeInMs;
 
-  registerStartTestRunEvent({
+  const testRunEvent: TestRunEvent = {
     ...testStaticOptions,
-    ended: false,
     isSkipped,
     logEvents: [],
     previousRunId,
     reject,
     runId,
     runLabel,
+    status: TestRunStatus.Unknown,
     testFnWithReject,
     utcTimeInMs,
-  });
+  };
+
+  registerStartTestRunEvent(testRunEvent);
+
+  processBrokenTestRuns(testRunEvent);
 };

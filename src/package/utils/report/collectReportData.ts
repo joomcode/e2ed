@@ -1,11 +1,9 @@
-import {TestRunStatus} from '../../constants/internal';
-
 import {getExitStatus} from '../exit';
 import {getFullConfig} from '../getFullConfig';
 
 import {assertThatTestNamesAndFilePathsAreUnique} from './assertThatTestNamesAndFilePathsAreUnique';
 import {getReportErrors} from './getReportErrors';
-import {getRetriesAndSetStatuses} from './getRetriesAndSetStatuses';
+import {getRetries} from './getRetries';
 import {unificateRunHashes} from './unificateRunHashes';
 
 import type {FullEventsData, ReportData} from '../../types/internal';
@@ -17,25 +15,20 @@ import type {FullEventsData, ReportData} from '../../types/internal';
 export const collectReportData = async ({
   endE2edRunEvent,
   fullStartInfo,
-  testRunsWithHooks,
+  fullTestRuns,
 }: FullEventsData): Promise<ReportData> => {
   const {utcTimeInMs: startTimeInMs, ...startInfo} = fullStartInfo;
   const {utcTimeInMs: endTimeInMs} = endE2edRunEvent;
 
   const {liteReportFileName, reportFileName} = getFullConfig();
 
-  const errors = await getReportErrors(startInfo.runEnvironment, testRunsWithHooks);
+  const errors = await getReportErrors(startInfo.runEnvironment, fullTestRuns);
 
-  assertThatTestNamesAndFilePathsAreUnique(testRunsWithHooks);
+  assertThatTestNamesAndFilePathsAreUnique(fullTestRuns);
 
-  unificateRunHashes(testRunsWithHooks);
+  unificateRunHashes(fullTestRuns);
 
-  const fullTestRuns = testRunsWithHooks.map((testRun) => ({
-    ...testRun,
-    status: testRun.isSkipped ? TestRunStatus.Skipped : TestRunStatus.Unknown,
-  }));
-
-  const retries = getRetriesAndSetStatuses(fullTestRuns);
+  const retries = getRetries(fullTestRuns);
   const exitStatus = getExitStatus(retries);
 
   return {
