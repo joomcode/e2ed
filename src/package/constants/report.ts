@@ -1,14 +1,14 @@
 /**
  * Main status of test run.
- * Failed if it have errors and passed if not.
+ * Failed if it have run error and passed if not.
  * Broken if the test failed and TestCafe restarted it themself.
  */
 export const enum TestRunStatus {
-  Passed,
-  Failed,
-  Skipped,
-  Broken,
-  Unknown,
+  Passed = 'passed',
+  Failed = 'failed',
+  Skipped = 'skipped',
+  Broken = 'broken',
+  Unknown = 'unknown',
 }
 
 /**
@@ -16,15 +16,3 @@ export const enum TestRunStatus {
  * that there are failed tests in the retray.
  */
 export const FAILED_TEST_RUN_STATUSES = [TestRunStatus.Failed, TestRunStatus.Unknown];
-
-/**
- * Map test run status to element status modifier.
- * @internal
- */
-export const TEST_STATUS_TO_STATUS_STRING = {
-  [TestRunStatus.Passed]: 'passed',
-  [TestRunStatus.Failed]: 'failed',
-  [TestRunStatus.Broken]: 'broken',
-  [TestRunStatus.Skipped]: 'skipped',
-  [TestRunStatus.Unknown]: 'unknown',
-} as const;

@@ -1,4 +1,4 @@
-import {TEST_STATUS_TO_STATUS_STRING as CLIENT_TEST_STATUS_TO_STATUS_STRING} from '../../../../constants/internal';
+import {LogEventStatus} from '../../../../constants/internal';
 
 import {assertValueIsDefined as clientAssertValueIsDefined} from '../assertValueIsDefined';
 import {
@@ -11,7 +11,6 @@ import type {LogEvent, SafeHtml, UtcTimeInMs} from '../../../../types/internal';
 const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
 const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
 const sanitizeHtml = clientSanitizeHtml;
-const TEST_STATUS_TO_STATUS_STRING = CLIENT_TEST_STATUS_TO_STATUS_STRING;
 
 type Options = Readonly<{
   endTimeInMs: UtcTimeInMs;
@@ -36,11 +35,10 @@ export function renderSteps({endTimeInMs, logEvents}: Options): SafeHtml {
     const nextLogEvent = logEvents[index + 1];
     const nextTime = nextLogEvent?.time ?? endTimeInMs;
     const durationMs = nextTime - time;
-    const status = payload?.logEventStatus ?? 0;
-    const statusString = TEST_STATUS_TO_STATUS_STRING[status];
+    const status = payload?.logEventStatus ?? LogEventStatus.Passed;
 
     const stepHtml = sanitizeHtml`
-<button aria-expanded="false" class="step-expanded step-expanded_status_${statusString}">
+<button aria-expanded="false" class="step-expanded step-expanded_status_${status}">
   <span class="step-expanded__name">${message}</span>
   <span class="step-expanded__time">${durationMs}ms</span>
 </button>

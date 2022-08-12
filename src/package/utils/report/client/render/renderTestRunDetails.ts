@@ -1,5 +1,3 @@
-import {TEST_STATUS_TO_STATUS_STRING as CLIENT_TEST_STATUS_TO_STATUS_STRING} from '../../../../constants/internal';
-
 import {assertValueIsDefined as clientAssertValueIsDefined} from '../assertValueIsDefined';
 import {sanitizeHtml as clientSanitizeHtml} from '../sanitizeHtml';
 
@@ -14,7 +12,6 @@ const renderSteps = clientRenderSteps;
 const renderTestRunDescription = clientRenderTestRunDescription;
 const renderTestRunError = clientRenderTestRunError;
 const sanitizeHtml = clientSanitizeHtml;
-const TEST_STATUS_TO_STATUS_STRING = CLIENT_TEST_STATUS_TO_STATUS_STRING;
 
 /**
  * Render tag <article class="test-details"> with test run details.
@@ -23,18 +20,17 @@ const TEST_STATUS_TO_STATUS_STRING = CLIENT_TEST_STATUS_TO_STATUS_STRING;
  */
 export function renderTestRunDetails(fullTestRun: FullTestRun): SafeHtml {
   const {endTimeInMs, filePath, logEvents, name, runError, status} = fullTestRun;
-  const statusString = TEST_STATUS_TO_STATUS_STRING[status];
 
-  const firstStatusString = statusString[0];
+  const firstStatusString = status[0];
 
   assertValueIsDefined(firstStatusString);
 
-  const capitalizedStatus = `${firstStatusString.toUpperCase()}${statusString.slice(1)}`;
+  const capitalizedStatus = `${firstStatusString.toUpperCase()}${status.slice(1)}`;
 
   return sanitizeHtml`<article class="test-details">
   <p class="test-details__path">${filePath}</p>
   <h2 class="test-details__title">
-    <span class="color-cell color-cell_status_${statusString} test-details__status">${capitalizedStatus}</span>${name}
+    <span class="color-cell color-cell_status_${status} test-details__status">${capitalizedStatus}</span>${name}
   </h2>
   <div role="tabpanel">
     ${renderTestRunDescription(fullTestRun)}

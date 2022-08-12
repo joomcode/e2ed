@@ -64,6 +64,7 @@ export type TestRunButtonProps = Readonly<{
  * @internal
  */
 export type ReportClientGlobal = {
+  e2edClickListeners?: Record<string, (event: HTMLElement) => void>;
   e2edTestRunDetailsElementsByHash?: Record<RunHash, HTMLElement>;
   e2edFullTestRuns?: readonly FullTestRun[];
 } & Window;

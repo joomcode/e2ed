@@ -18,5 +18,7 @@ export const afterTest = async (): Promise<void> => {
     await registerEndTestRunEvent({runError: getRunError(), runId, utcTimeInMs});
   } catch (error) {
     generalLog('Caught error when run after test hook', {error});
+
+    throw error;
   }
 };

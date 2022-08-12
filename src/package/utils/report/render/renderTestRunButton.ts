@@ -1,5 +1,3 @@
-import {TEST_STATUS_TO_STATUS_STRING} from '../../../constants/internal';
-
 import {sanitizeHtml} from '../client';
 
 import type {SafeHtml, TestRunButtonProps} from '../../../types/internal';
@@ -13,11 +11,10 @@ export const renderTestRunButton = (
   index: number,
 ): SafeHtml => {
   const durationInMs = endTimeInMs - startTimeInMs;
-  const statusModifier = TEST_STATUS_TO_STATUS_STRING[status];
 
   return sanitizeHtml`<button
   aria-selected="false"
-  class="test-button test-button_status_${statusModifier}"
+  class="test-button test-button_status_${status}"
   data-runhash="${runHash}"
   role="tab"
 >

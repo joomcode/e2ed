@@ -17,8 +17,8 @@ export const enum LogEventType {
  * Status of LogEvent.
  */
 export const enum LogEventStatus {
-  Passed,
-  Failed,
+  Passed = 'passed',
+  Failed = 'failed',
 }
 
 /**

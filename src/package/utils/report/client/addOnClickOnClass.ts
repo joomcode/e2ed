@@ -1,12 +1,12 @@
+import type {ReportClientGlobal} from '../../../types/internal';
+
 /**
  * Add onclick event listener on all elements with some class.
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
 export function addOnClickOnClass(className: string, onclick: (event: HTMLElement) => void): void {
-  const global = window as Window & {
-    e2edClickListeners?: Record<string, (event: HTMLElement) => void>;
-  };
+  const global: ReportClientGlobal = window;
 
   let {e2edClickListeners} = global;
 
@@ -19,7 +19,8 @@ export function addOnClickOnClass(className: string, onclick: (event: HTMLElemen
 
       while (currentElement) {
         for (const currentClass of Object.keys(e2edClickListeners as object)) {
-          if (currentElement.classList.contains(currentClass)) {
+          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+          if (currentElement.classList?.contains(currentClass)) {
             const listener = e2edClickListeners?.[currentClass];
 
             listener?.(currentElement);
