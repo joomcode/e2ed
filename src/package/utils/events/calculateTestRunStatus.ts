@@ -2,9 +2,7 @@ import {TestRunStatus} from '../../constants/internal';
 
 import {assertValueIsFalse} from '../asserts';
 
-import type {EndTestRunEvent, TestRunEvent} from '../../types/internal';
-
-type MaybeWithIsTestRunBroken = {isTestRunBroken?: unknown} | undefined;
+import type {EndTestRunEvent, MaybeWithIsTestRunBroken, TestRunEvent} from '../../types/internal';
 
 type Options = Readonly<{
   endTestRunEvent: EndTestRunEvent;

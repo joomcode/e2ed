@@ -5,7 +5,7 @@ import {getTestRunEvent} from '../events';
 
 import {assertTestRunEventIsPreviousOfTestRunEvent} from './assertTestRunEventIsPreviousOfTestRunEvent';
 
-import type {TestRunEvent} from '../../types/internal';
+import type {MaybeWithIsTestRunBroken, TestRunEvent} from '../../types/internal';
 
 /**
  * Reject broken test runs if needed (current test run or previous test run of the same test).
@@ -30,7 +30,7 @@ export const processBrokenTestRuns = (testRunEvent: TestRunEvent): void => {
       isTestRunBroken: true,
       previousTestRunEvent: {...previousTestRunEvent, logEvents: undefined},
       testRunEvent: {...testRunEvent, logEvents: undefined},
-    },
+    } as MaybeWithIsTestRunBroken,
   );
 
   previousTestRunEvent.reject(error);
