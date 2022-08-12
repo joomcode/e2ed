@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.11.15](https://github.com/joomcode/e2ed/tree/v0.11.15) (2022-08-12)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.14...v0.11.15)
+
+- [feat: add calculated status to test run event](https://github.com/joomcode/e2ed/commit/be3ae2b6177d05a3a33c42c37721d99515825d16) ([uid11](https://github.com/uid11))
+
 ## [v0.11.14](https://github.com/joomcode/e2ed/tree/v0.11.14) (2022-08-12)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.13...v0.11.14)
