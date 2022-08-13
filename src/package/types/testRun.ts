@@ -58,10 +58,7 @@ export type TestRun = Readonly<{
   runError: string | undefined;
   startTimeInMs: UtcTimeInMs;
 }> &
-  Omit<
-    TestRunEvent,
-    'isSkipped' | 'onlog' | 'previousRunId' | 'reject' | 'testFnWithReject' | 'utcTimeInMs'
-  >;
+  Omit<TestRunEvent, 'onlog' | 'previousRunId' | 'reject' | 'testFnWithReject' | 'utcTimeInMs'>;
 
 /**
  * The complete test options, that is, all information about the test

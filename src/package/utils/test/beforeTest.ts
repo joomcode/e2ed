@@ -57,14 +57,13 @@ export const beforeTest = ({previousRunId, runId, test, testController}: Options
 
   const testRunEvent: TestRunEvent = {
     ...testStaticOptions,
-    isSkipped,
     logEvents: [],
     onlog,
     previousRunId,
     reject,
     runId,
     runLabel,
-    status: TestRunStatus.Unknown,
+    status: isSkipped ? TestRunStatus.Skipped : TestRunStatus.Unknown,
     testFnWithReject,
     utcTimeInMs,
   };

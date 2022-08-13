@@ -32,14 +32,11 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
     options,
   } = testRunEvent;
 
-  if (originStatus !== TestRunStatus.Unknown) {
-    generalLog(
-      `Try to end test run event, but it is already has no status ${TestRunStatus.Unknown}`,
-      {
-        endTestRunEvent,
-        testRunEvent: cloneWithoutLogEvents(testRunEvent),
-      },
-    );
+  if (originStatus !== TestRunStatus.Unknown && originStatus !== TestRunStatus.Skipped) {
+    generalLog(`Try to end test run event, but it is already ended with status ${originStatus}`, {
+      endTestRunEvent,
+      testRunEvent: cloneWithoutLogEvents(testRunEvent),
+    });
 
     return;
   }

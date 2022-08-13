@@ -62,7 +62,6 @@ export type Onlog = () => void;
  * TestRun event (on starting one test).
  */
 export type TestRunEvent = Readonly<{
-  isSkipped: boolean;
   logEvents: readonly LogEvent[];
   onlog: Onlog;
   previousRunId: RunId | undefined;
