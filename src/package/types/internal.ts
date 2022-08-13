@@ -20,6 +20,7 @@ export * from './report';
 export * from './retries';
 export * from './routes';
 export * from './runLabel';
+export * from './skipTest';
 export * from './stackTrack';
 export * from './startInfo';
 export * from './testCafe';

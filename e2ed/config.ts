@@ -7,6 +7,8 @@
 
 import {RunEnvironment, runEnvironment} from 'e2ed/configurator';
 
+import {skipTests} from './skipTests';
+
 import type {Config} from 'e2ed/configurator';
 
 const isLocalRun = runEnvironment === RunEnvironment.Local;
@@ -26,7 +28,7 @@ const config: Config = {
   printTestLogsInConsole: true,
   reportFileName: 'report.html',
   selectorTimeout: 10_000,
-  skipTests: ['3'],
+  skipTests,
   src: ['./e2ed/tests/**/*.spec.ts'],
   testIdleTimeout: 20_000,
   testLogsFileName: 'test-logs.log',

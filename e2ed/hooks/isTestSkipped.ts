@@ -1,25 +1,41 @@
 import {getFullConfig} from 'e2ed/utils';
 
-import type {TestStaticOptions} from 'e2ed/types';
+import type {IsTestSkipped, TestStaticOptions} from 'e2ed/types';
+
+/**
+ * Group of skipped tests, grouped by skip reason.
+ */
+type GroupOfSkippedTests = Readonly<{
+  reason: string;
+  testIds: readonly string[];
+  unskipTaskUrl: string;
+}>;
 
 /**
  * This is the type of the "skipTests" field in the e2ed config,
  * which describes the set of tests that need to be skipped.
  */
-export type SkipTests = 'all' | readonly string[];
+export type SkipTests = {reason: string; skipAll: true} | readonly GroupOfSkippedTests[];
 
 /**
  * This hook is used to determine if a given test should be skipped.
- * Skipped tests are displayed in the html report with the corresponding "skipped" status.
+ * Skipped tests are displayed in the html report with the corresponding "skipped" status,
+ * and with skip reason.
  */
-export const isTestSkipped = (testStaticOptions: TestStaticOptions): boolean => {
+export const isTestSkipped = (testStaticOptions: TestStaticOptions): IsTestSkipped => {
   // As with all hooks, you can replace it with your own implementation.
   const {options} = testStaticOptions;
   const {skipTests = []} = getFullConfig();
 
-  if (skipTests === 'all') {
-    return true;
+  if ('skipAll' in skipTests) {
+    return {isSkipped: true, reason: skipTests.reason};
   }
 
-  return skipTests.includes(options.meta.testId);
+  const group = skipTests.find(({testIds}) => testIds.includes(options.meta.testId));
+
+  if (group) {
+    return {isSkipped: true, reason: group.reason};
+  }
+
+  return {isSkipped: false};
 };

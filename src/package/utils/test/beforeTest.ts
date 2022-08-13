@@ -42,7 +42,11 @@ export const beforeTest = ({previousRunId, runId, test, testController}: Options
     name: test.name,
     options: test.options,
   };
-  const isSkipped = isTestSkipped(testStaticOptions);
+  const {isSkipped, reason: skipReason} = isTestSkipped(testStaticOptions);
+
+  if (isSkipped && !('skipReason' in test.options.meta)) {
+    Object.assign(test.options.meta, {skipReason});
+  }
 
   const {onlog, reject, testFnWithReject} = getTestFnAndReject({
     isSkipped,

@@ -2,6 +2,7 @@ import type {LogEventType} from '../../constants/internal';
 
 import type {Url} from '../http';
 import type {LogContext, LogPayload} from '../log';
+import type {IsTestSkipped} from '../skipTest';
 import type {RunHash, TestRun, TestStaticOptions} from '../testRun';
 
 /**
@@ -15,6 +16,6 @@ export type ExpectedHooks = Readonly<{
   ): LogContext | undefined;
   getMainTestRunParams(testRun: TestRun): string;
   getTestRunHash(testRun: TestRun): RunHash;
-  isTestSkipped(testStaticOptions: TestStaticOptions): boolean;
+  isTestSkipped(testStaticOptions: TestStaticOptions): IsTestSkipped;
   navigateTo(url: Url): Promise<void>;
 }>;
