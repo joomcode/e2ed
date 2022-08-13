@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.11.20](https://github.com/joomcode/e2ed/tree/v0.11.20) (2022-08-13)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.19...v0.11.20)
+
+- [chore: update @types/node to 18.7.3](https://github.com/joomcode/e2ed/commit/d9c563bb8d4145b468e9cfde495238304631b90b) ([uid11](https://github.com/uid11))
+- [fix: reject TestCafe subprocess if some tests failed](https://github.com/joomcode/e2ed/commit/ec0850686ff62d9d9602b03519109bcfb2551c56) ([uid11](https://github.com/uid11))
+
 ## [v0.11.19](https://github.com/joomcode/e2ed/tree/v0.11.19) (2022-08-13)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.18...v0.11.19)
