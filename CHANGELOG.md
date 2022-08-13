@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.11.17](https://github.com/joomcode/e2ed/tree/v0.11.17) (2022-08-13)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.16...v0.11.17)
+
+- [fix: reject current test run if previous run of this test already passed](https://github.com/joomcode/e2ed/commit/ef587c65f98f4ff4a9358c31d902203815e229a4) ([uid11](https://github.com/uid11))
+
+  fix: change previous test run status to broken, if it was failed
+  refactor: move all utils for working with filesystem to utils/fs directory
+
 ## [v0.11.16](https://github.com/joomcode/e2ed/tree/v0.11.16) (2022-08-12)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.15...v0.11.16)
