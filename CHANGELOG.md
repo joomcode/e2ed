@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.11.18](https://github.com/joomcode/e2ed/tree/v0.11.18) (2022-08-13)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.17...v0.11.18)
+
+- [feat: add parameter testIdleTimeout to config and test options](https://github.com/joomcode/e2ed/commit/455f111f0c389063a5fb8cafcb074ce74e552dcf) ([uid11](https://github.com/uid11))
+
 ## [v0.11.17](https://github.com/joomcode/e2ed/tree/v0.11.17) (2022-08-13)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.16...v0.11.17)
