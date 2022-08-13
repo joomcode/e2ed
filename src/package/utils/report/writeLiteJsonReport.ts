@@ -2,8 +2,8 @@ import {join} from 'node:path';
 
 import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
 
+import {writeFile} from '../fs';
 import {generalLog} from '../generalLog';
-import {writeFile} from '../writeFile';
 
 import {getLiteReport} from './getLiteReport';
 

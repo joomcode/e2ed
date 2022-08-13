@@ -1,6 +1,6 @@
 import {BAD_REQUEST_STATUS_CODE, LogEventType} from '../../constants/internal';
 
-import {cloneWithoutUndefinedProperties} from '../cloneWithoutUndefinedProperties';
+import {cloneWithoutUndefinedProperties} from '../clone';
 import {E2EDError} from '../E2EDError';
 import {getRandomId} from '../getRandomId';
 import {log} from '../log';

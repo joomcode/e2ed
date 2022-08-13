@@ -1,6 +1,6 @@
-import {assertValueIsDefined} from './asserts';
+import {assertValueIsDefined} from '../asserts';
 
-import type {CloneWithoutUndefinedProperties, ObjectEntries} from '../types/internal';
+import type {CloneWithoutUndefinedProperties, ObjectEntries} from '../../types/internal';
 
 /**
  * Clone object without properties that values is undefined.

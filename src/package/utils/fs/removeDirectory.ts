@@ -1,6 +1,6 @@
 import {rm} from 'node:fs/promises';
 
-import type {DirectoryPathFromRoot} from '../types/internal';
+import type {DirectoryPathFromRoot} from '../../types/internal';
 
 const options = {force: true, recursive: true};
 

@@ -1,6 +1,7 @@
 import {TestRunStatus} from '../../constants/internal';
 
 import {assertValueIsFalse} from '../asserts';
+import {cloneWithoutLogEvents} from '../clone';
 
 import type {EndTestRunEvent, MaybeWithIsTestRunBroken, TestRunEvent} from '../../types/internal';
 
@@ -22,7 +23,7 @@ export const calculateTestRunStatus = ({endTestRunEvent, testRunEvent}: Options)
   if (hasRunError) {
     assertValueIsFalse(status === TestRunStatus.Skipped, `status is not ${TestRunStatus.Skipped}`, {
       endTestRunEvent,
-      testRunEvent: {...testRunEvent, logEvents: undefined},
+      testRunEvent: cloneWithoutLogEvents(testRunEvent),
     });
 
     const isTestRunBroken = Boolean((unknownRunError as MaybeWithIsTestRunBroken)?.isTestRunBroken);

@@ -3,8 +3,8 @@ import {join} from 'node:path';
 import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
 
 import {assertValueIsNotNull} from '../asserts';
+import {writeFile} from '../fs';
 import {generalLog} from '../generalLog';
-import {writeFile} from '../writeFile';
 
 import {renderReportToHtml} from './render';
 

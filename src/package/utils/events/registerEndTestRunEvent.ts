@@ -1,9 +1,10 @@
 import {TestRunStatus} from '../../constants/internal';
 
+import {cloneWithoutLogEvents} from '../clone';
+import {writeTestRunToJsonFile} from '../fs';
 import {generalLog} from '../generalLog';
 import {writeTestLogsToFile} from '../testLogs';
 import {valueToString} from '../valueToString';
-import {writeTestRunToJsonFile} from '../writeTestRunToJsonFile';
 
 import {calculateTestRunStatus} from './calculateTestRunStatus';
 import {getTestRunEvent} from './getTestRunEvent';
@@ -36,7 +37,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
       `Try to end test run event, but it is already has no status ${TestRunStatus.Unknown}`,
       {
         endTestRunEvent,
-        testRunEvent: {...testRunEvent, logEvents: undefined},
+        testRunEvent: cloneWithoutLogEvents(testRunEvent),
       },
     );
 

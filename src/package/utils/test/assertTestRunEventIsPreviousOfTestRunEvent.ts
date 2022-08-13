@@ -1,4 +1,5 @@
 import {assertValueIsTrue} from '../asserts';
+import {cloneWithoutLogEvents} from '../clone';
 
 import type {TestRunEvent} from '../../types/internal';
 
@@ -11,8 +12,8 @@ export const assertTestRunEventIsPreviousOfTestRunEvent = (
   testRunEvent: TestRunEvent,
 ): void => {
   const logInfo = {
-    previousTestRunEvent: {...previousTestRunEvent, logEvents: undefined},
-    testRunEvent: {...testRunEvent, logEvents: undefined},
+    previousTestRunEvent: cloneWithoutLogEvents(previousTestRunEvent),
+    testRunEvent: cloneWithoutLogEvents(testRunEvent),
   };
 
   assertValueIsTrue(

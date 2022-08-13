@@ -1,6 +1,7 @@
 import {TestRunStatus} from '../../constants/internal';
 
 import {assertValueIsFalse} from '../asserts';
+import {cloneWithoutLogEvents} from '../clone';
 
 import type {FullTestRun, TestFilePath} from '../../types/internal';
 
@@ -19,8 +20,12 @@ export const assertThatTestNamesAndFilePathsAreUniqueInOneRetry = (
   for (const fullTestRun of unbrokenTestRuns) {
     const {filePath, name} = fullTestRun;
 
-    assertValueIsFalse(filePath in filePathsHash, 'filePath is unique', {fullTestRun});
-    assertValueIsFalse(name in namesHash, 'name is unique', {fullTestRun});
+    assertValueIsFalse(filePath in filePathsHash, 'filePath is unique', {
+      fullTestRun: cloneWithoutLogEvents(fullTestRun),
+    });
+    assertValueIsFalse(name in namesHash, 'name is unique', {
+      fullTestRun: cloneWithoutLogEvents(fullTestRun),
+    });
 
     filePathsHash[filePath] = fullTestRun;
     namesHash[name] = fullTestRun;

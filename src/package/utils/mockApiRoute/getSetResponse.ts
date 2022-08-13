@@ -4,7 +4,7 @@ import {URL} from 'node:url';
 import {LogEventType} from '../../constants/internal';
 
 import {assertValueIsDefined} from '../asserts';
-import {cloneWithoutUndefinedProperties} from '../cloneWithoutUndefinedProperties';
+import {cloneWithoutUndefinedProperties} from '../clone';
 import {log} from '../log';
 import {getContentJsonHeaders} from '../request';
 

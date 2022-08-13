@@ -1,8 +1,9 @@
 export * from './applyHeadersMapper';
 export * from './asserts';
-export * from './cloneWithoutUndefinedProperties';
+export * from './clone';
 export * from './deepMerge';
 export * from './E2EDError';
+export * from './fs';
 export * from './generalLog';
 export * from './getCurrentUrl';
 export * from './getFullConfig';
@@ -17,7 +18,6 @@ export * from './trimSemicolonsAtTheEnd';
 export * from './valueToString';
 export * from './wait';
 export * from './wrapInTestRunTracker';
-export * from './writeFile';
 
 /**
  * Userland utils. This export must be the last.

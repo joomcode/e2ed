@@ -1,9 +1,7 @@
 import {TMP_DIRECTORY_PATH} from '../../constants/internal';
 
+import {readEventsFromFiles, removeDirectory} from '../fs';
 import {getFullStartInfo} from '../getAndSetFullStartInfo';
-import {removeDirectory} from '../removeDirectory';
-
-import {readEventsFromFiles} from './readEventsFromFiles';
 
 import type {EndE2edRunEvent, FullEventsData} from '../../types/internal';
 

@@ -2,11 +2,10 @@ import {RunEnvironment} from '../../configurator';
 import {EVENTS_DIRECTORY_PATH, TMP_DIRECTORY_PATH} from '../../constants/internal';
 
 import {compileUserlandConfig} from '../compileUserlandConfig';
-import {createDirectory} from '../createDirectory';
+import {createDirectory, removeDirectory} from '../fs';
 import {generalLog} from '../generalLog';
 import {setFullStartInfo} from '../getAndSetFullStartInfo';
 import {getStartInfo} from '../getStartInfo';
-import {removeDirectory} from '../removeDirectory';
 
 import type {E2edRunEvent} from '../../types/internal';
 
