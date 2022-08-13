@@ -13,5 +13,7 @@ export const registerLogEvent = (runId: RunId, logEvent: LogEvent): Promise<numb
 
   (runTestEvent.logEvents as LogEvent[])[numberInRun] = logEvent;
 
+  runTestEvent.onlog();
+
   return Promise.resolve(numberInRun);
 };

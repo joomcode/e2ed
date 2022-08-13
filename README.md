@@ -74,6 +74,11 @@ If `null`, the report will not be saved.
 `skipTests: SkipTests`: this setting allows you to describe a set of skipped tests in a custom form.
 You can define the `SkipTests` type and `skipTests` processing rules in the hook `e2ed/hooks/isTestSkipped.ts`.
 
+`testIdleTimeout: number`: timeout (in milliseconds) for each individual test step.
+If the test step (interval between two `log` function calls) takes longer than this timeout,
+the test fails and rerun on the next retry.
+This parameter can be overridden in the test-specific options.
+
 `testLogsFileName: string | null`: the name of the file under which, after running the tests,
 the test logs will be saved in the `e2ed/reports` directory, for example, `test-logs.log`.
 If `null`, the report will not be saved.

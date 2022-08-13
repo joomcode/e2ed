@@ -3,7 +3,9 @@ import {join} from 'node:path';
 
 import {EVENTS_DIRECTORY_PATH, READ_FILE_OPTIONS, TestRunStatus} from '../../constants/internal';
 
+import {assertValueIsTrue} from '../asserts';
 import {E2EDError} from '../E2EDError';
+import {generalLog} from '../generalLog';
 
 import {writeFile} from './writeFile';
 
@@ -24,6 +26,33 @@ export const writeBrokenStatusToTestRunJsonFile = async (runId: RunId): Promise<
 
   const fullTestRunJson = await readFile(filePath, READ_FILE_OPTIONS);
   const fullTestRun = JSON.parse(fullTestRunJson) as FullTestRun;
+
+  const {
+    filePath: testFilePath,
+    mainParams,
+    name,
+    options,
+    runLabel,
+    status: previousStatus,
+  } = fullTestRun;
+
+  const logInfo = {
+    filePath,
+    mainParams,
+    name,
+    options,
+    previousStatus,
+    runLabel,
+    testFilePath,
+  };
+
+  assertValueIsTrue(
+    previousStatus === TestRunStatus.Failed,
+    `previousStatus is ${TestRunStatus.Failed}`,
+    logInfo,
+  );
+
+  generalLog(`Write broken status to test run ${runId} JSON file`, logInfo);
 
   const fullTestRunWithBrokenStatus: FullTestRun = {...fullTestRun, status: TestRunStatus.Broken};
   const fullTestRunWithBrokenStatusJson = JSON.stringify(fullTestRunWithBrokenStatus);

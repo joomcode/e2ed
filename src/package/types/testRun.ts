@@ -35,6 +35,7 @@ export type TestFn = () => Promise<void>;
  */
 export type TestOptions = DeepReadonly<{
   meta: TestMeta;
+  testIdleTimeout?: number;
   testTimeout?: number;
 }>;
 
@@ -57,7 +58,10 @@ export type TestRun = Readonly<{
   runError: string | undefined;
   startTimeInMs: UtcTimeInMs;
 }> &
-  Omit<TestRunEvent, 'isSkipped' | 'previousRunId' | 'reject' | 'testFnWithReject' | 'utcTimeInMs'>;
+  Omit<
+    TestRunEvent,
+    'isSkipped' | 'onlog' | 'previousRunId' | 'reject' | 'testFnWithReject' | 'utcTimeInMs'
+  >;
 
 /**
  * The complete test options, that is, all information about the test

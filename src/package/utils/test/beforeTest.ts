@@ -44,10 +44,11 @@ export const beforeTest = ({previousRunId, runId, test, testController}: Options
   };
   const isSkipped = isTestSkipped(testStaticOptions);
 
-  const {reject, testFnWithReject} = getTestFnAndReject({
+  const {onlog, reject, testFnWithReject} = getTestFnAndReject({
     isSkipped,
     runId,
     testFn: test.testFn,
+    testIdleTimeout: test.options.testIdleTimeout,
     testTimeout: test.options.testTimeout,
   });
 
@@ -58,6 +59,7 @@ export const beforeTest = ({previousRunId, runId, test, testController}: Options
     ...testStaticOptions,
     isSkipped,
     logEvents: [],
+    onlog,
     previousRunId,
     reject,
     runId,

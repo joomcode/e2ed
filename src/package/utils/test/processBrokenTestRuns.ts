@@ -30,6 +30,8 @@ export const processBrokenTestRuns = (testRunEvent: TestRunEvent): void => {
 
   if (previousTestRunEvent.status !== TestRunStatus.Unknown) {
     if (previousTestRunEvent.status === TestRunStatus.Failed) {
+      (previousTestRunEvent as {status: TestRunStatus}).status = TestRunStatus.Broken;
+
       void writeBrokenStatusToTestRunJsonFile(previousTestRunEvent.runId);
     } else {
       const error = new E2EDError(

@@ -28,6 +28,7 @@ const config: Config = {
   selectorTimeout: 10_000,
   skipTests: ['3'],
   src: ['./e2ed/tests/**/*.spec.ts'],
+  testIdleTimeout: 20_000,
   testLogsFileName: 'test-logs.log',
   testTimeout: 90_000,
 };
