@@ -13,7 +13,7 @@ export const collectFullEventsData = async (
   endE2edRunEvent: EndE2edRunEvent,
 ): Promise<FullEventsData> => {
   const fullStartInfo = getFullStartInfo();
-  const fullTestRuns = await readEventsFromFiles();
+  const fullTestRuns = await readEventsFromFiles([]);
 
   await removeDirectory(TMP_DIRECTORY_PATH);
 

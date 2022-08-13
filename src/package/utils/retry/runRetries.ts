@@ -57,10 +57,16 @@ export const runRetries = async (retriesState: RetriesState): Promise<void> => {
 
     try {
       await runRetry({concurrency, runLabel, tests: retriesState.remainingTests});
+    } catch (error) {
+      generalLog(`Caught an error on ${printedRetry}`, {error});
+    }
 
+    try {
       failedTests = getFailedTestsFromJsonReport();
     } catch (error) {
-      generalLog(`Caught an error on ${printedRetry}: ${String(error)}`);
+      generalLog(`Caught an error on reading failed tests from JSON report on ${printedRetry}`, {
+        error,
+      });
     }
 
     if (failedTests) {

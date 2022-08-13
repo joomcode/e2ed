@@ -47,7 +47,7 @@ export const runTestCafe = async ({
       })
       .run();
   } catch (error) {
-    generalLog(`Caught an error when running tests with label "${runLabel}": ${String(error)}`);
+    generalLog(`Caught an error when running tests with label "${runLabel}"`, {error});
   } finally {
     await maybeTestCafe?.close();
   }

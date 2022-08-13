@@ -15,7 +15,7 @@ type GroupOfSkippedTests = Readonly<{
  * This is the type of the "skipTests" field in the e2ed config,
  * which describes the set of tests that need to be skipped.
  */
-export type SkipTests = {reason: string; skipAll: true} | readonly GroupOfSkippedTests[];
+export type SkipTests = Readonly<{reason: string; skipAll: true}> | readonly GroupOfSkippedTests[];
 
 /**
  * This hook is used to determine if a given test should be skipped.

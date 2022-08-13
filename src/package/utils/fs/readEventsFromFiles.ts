@@ -10,16 +10,22 @@ import {
 import {assertValueIsDefined} from '../asserts';
 import {generalLog} from '../generalLog';
 
-import type {FullTestRun, UtcTimeInMs} from '../../types/internal';
+import type {FullTestRun, RunId, UtcTimeInMs} from '../../types/internal';
 
 /**
- * Read events objects from temporary directory.
+ * Read events objects from temporary directory, with skipping specified events.
  * @internal
  */
-export const readEventsFromFiles = async (): Promise<readonly FullTestRun[]> => {
+export const readEventsFromFiles = async (
+  skippedRunIds: readonly RunId[],
+): Promise<readonly FullTestRun[]> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
-  const eventFiles = await readdir(EVENTS_DIRECTORY_PATH);
+  const allEventFiles = await readdir(EVENTS_DIRECTORY_PATH);
+  const eventFiles = allEventFiles.filter((fileName) =>
+    skippedRunIds.every((runId) => !fileName.includes(runId)),
+  );
+
   const testRuns: FullTestRun[] = [];
 
   for (
