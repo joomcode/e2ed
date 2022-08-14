@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.11.21](https://github.com/joomcode/e2ed/tree/v0.11.21) (2022-08-14)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.20...v0.11.21)
+
+- [fix: exit code from TestCafe subprocess (running one retry)](https://github.com/joomcode/e2ed/commit/c4c96fd9481e9895bee6befac1ee604fac3e7f9d) ([uid11](https://github.com/uid11))
+
+  fix: read browsers list from config when run in docker
+
 ## [v0.11.20](https://github.com/joomcode/e2ed/tree/v0.11.20) (2022-08-13)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.19...v0.11.20)
