@@ -17,7 +17,7 @@ const config: Config = {
   ajaxRequestTimeout: 40_000,
   assertionTimeout: 10_000,
   browserInitTimeout: 30_000,
-  browsers: 'chromium:headless',
+  browsers: 'chromium:headless --no-sandbox --disable-dev-shm-usage --disable-web-security',
   concurrency: isLocalRun ? 1 : 2,
   liteReportFileName: 'lite-report.json',
   maxRetriesCountInDocker: 3,

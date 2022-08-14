@@ -1,5 +1,3 @@
-import {URL} from 'node:url';
-
 import {ClientFunction, expect, it, mockApiRoute, unmockApiRoute} from 'e2ed';
 import {assertPage, navigateToPage, pressKey, scroll} from 'e2ed/actions';
 import {Main, Search} from 'e2ed/pageObjects/pages';
@@ -65,20 +63,24 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 15_000, testTimeout: 50_000}
 
   const getMockedProduct = ClientFunction(
     () =>
-      fetch('/product/135865?size=13', {
-        body: JSON.stringify({cookies: [], input: 17, model: 'samsung', version: '12'}),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        method: 'POST',
-      }).then((res) => res.json() as Promise<ApiDeviceAndProductResponse['responseBody']>),
+      Promise.race([
+        fetch('https://api.com/product/135865?size=13', {
+          body: JSON.stringify({cookies: [], input: 17, model: 'samsung', version: '12'}),
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          method: 'POST',
+        }).then((res) => res.json() as Promise<ApiDeviceAndProductResponse['responseBody']>),
+        new Promise((resolve) => {
+          setTimeout(resolve, 2_000);
+        }),
+      ]),
     'getMockedProduct',
   );
 
   const mockedProduct = await getMockedProduct();
 
-  const {origin} = new URL(url);
-  const fetchUrl = `${origin}/product/135865?size=13` as Url;
+  const fetchUrl = 'https://api.com/product/135865?size=13' as Url;
 
   const productRouteParams = CreateProductRoute.getParamsFromUrl(fetchUrl);
 

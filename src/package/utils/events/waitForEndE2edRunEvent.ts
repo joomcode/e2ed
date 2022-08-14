@@ -1,6 +1,6 @@
 import {JSON_REPORT_PATH} from '../../constants/internal';
 
-import {getFileSize} from '../getFileSize';
+import {getFileSize} from '../fs';
 
 import {registerEndE2edRunEvent} from './registerEndE2edRunEvent';
 
