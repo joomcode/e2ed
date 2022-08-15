@@ -7,45 +7,52 @@ import {
   READ_FILE_OPTIONS,
 } from '../../constants/internal';
 
-import {assertValueIsDefined} from '../asserts';
+import {assertValueIsDefined, assertValueIsTrue} from '../asserts';
 import {generalLog} from '../generalLog';
 
-import type {FullTestRun, RunId, UtcTimeInMs} from '../../types/internal';
+import type {FullTestRun, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Read events objects from temporary directory, with skipping specified events.
  * @internal
  */
 export const readEventsFromFiles = async (
-  skippedRunIds: readonly RunId[],
+  skippedEventFiles: readonly string[],
 ): Promise<readonly FullTestRun[]> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const allEventFiles = await readdir(EVENTS_DIRECTORY_PATH);
-  const eventFiles = allEventFiles.filter((fileName) =>
-    skippedRunIds.every((runId) => !fileName.includes(runId)),
-  );
+
+  for (const skippedEventFile of skippedEventFiles) {
+    assertValueIsTrue(
+      allEventFiles.includes(skippedEventFile),
+      `skipped event file ${skippedEventFile} is present in the event directory`,
+      {allEventFiles, skippedEventFiles},
+    );
+  }
+
+  const newEventFiles = allEventFiles.filter((fileName) => !skippedEventFiles.includes(fileName));
 
   const testRuns: FullTestRun[] = [];
 
   for (
     let fileIndex = 0;
-    fileIndex < eventFiles.length;
+    fileIndex < newEventFiles.length;
     fileIndex += AMOUNT_OF_PARALLEL_OPEN_FILES
   ) {
     const readPromises: Promise<string>[] = [];
 
     for (
       let index = fileIndex;
-      index < eventFiles.length && index < fileIndex + AMOUNT_OF_PARALLEL_OPEN_FILES;
+      index < newEventFiles.length && index < fileIndex + AMOUNT_OF_PARALLEL_OPEN_FILES;
       index += 1
     ) {
-      const fileName = eventFiles[index];
+      const fileName = newEventFiles[index];
 
       assertValueIsDefined(fileName, 'fileName is defined', {
-        eventFilesLength: eventFiles.length,
         fileIndex,
         index,
+        newEventFilesLength: newEventFiles.length,
       });
 
       const filePath = join(EVENTS_DIRECTORY_PATH, fileName);

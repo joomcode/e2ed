@@ -15,6 +15,7 @@ export * from './replaceCookie';
 export * from './request';
 export * from './SetHeadersRequestHook';
 export * from './trimSemicolonsAtTheEnd';
+export * from './typeGuards';
 export * from './valueToString';
 export * from './wait';
 export * from './wrapInTestRunTracker';

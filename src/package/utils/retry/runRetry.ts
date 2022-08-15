@@ -2,13 +2,13 @@ import {fork} from 'node:child_process';
 
 import {E2EDError} from '../E2EDError';
 
-import type {TestCafeRunOptions} from '../../types/internal';
+import type {RunRetryOptions} from '../../types/internal';
 
 /**
  * Run one retry of remaining tests.
  * @internal
  */
-export const runRetry = (runOptions: TestCafeRunOptions): Promise<void> =>
+export const runRetry = (runOptions: RunRetryOptions): Promise<void> =>
   new Promise((resolve, reject) => {
     const testCafeSubprocess = fork('./node_modules/e2ed/bin/runTestCafeSubprocess.js');
 

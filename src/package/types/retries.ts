@@ -28,14 +28,16 @@ export type RetriesState = {
   readonly maxRetriesCount: number;
   remainingTests: readonly FailTest[];
   retryIndex: number;
+  successfulTestRunNamesHash: Record<string, true>;
+  readonly visitedTestRunEventsFileName: readonly string[];
 };
 
 /**
  * Options for running one retry of tests.
  * @internal
  */
-export type TestCafeRunOptions = Readonly<{
+export type RunRetryOptions = Readonly<{
   concurrency: number;
   runLabel: RunLabel;
-  tests: readonly FailTest[];
+  successfulTestRunNamesHash: Record<string, true>;
 }>;

@@ -11,10 +11,14 @@ const retriesState: RetriesState = {
   maxRetriesCount: 1,
   remainingTests: [],
   retryIndex: 1,
+  successfulTestRunNamesHash: {},
+  visitedTestRunEventsFileName: [],
 };
 
 runRetries(retriesState)
   .catch((error: unknown) => {
-    generalLog(`Caught unexpected error on ${getPrintedRetry(retriesState)}: ${String(error)}`);
+    const printedRetry = getPrintedRetry(retriesState);
+
+    generalLog(`Caught unexpected error on ${printedRetry}`, {error, retriesState});
   })
   .finally(getAfterRetries(retriesState));

@@ -5,6 +5,7 @@ import {EVENTS_DIRECTORY_PATH} from '../../constants/internal';
 
 import {E2EDError} from '../E2EDError';
 
+import {getTestRunEventFileName} from './getTestRunEventFileName';
 import {writeFile} from './writeFile';
 
 import type {FullTestRun} from '../../types/internal';
@@ -16,7 +17,8 @@ import type {FullTestRun} from '../../types/internal';
 export const writeTestRunToJsonFile = async (fullTestRun: FullTestRun): Promise<void> => {
   const {runId} = fullTestRun;
 
-  const filePath = join(EVENTS_DIRECTORY_PATH, `${runId}.json`);
+  const fileName = getTestRunEventFileName(runId);
+  const filePath = join(EVENTS_DIRECTORY_PATH, fileName);
 
   await stat(filePath).then(
     (stats) => {

@@ -3,10 +3,11 @@ import {createTestCafe} from '../testcafe';
 import {E2EDError} from './E2EDError';
 import {generalLog} from './generalLog';
 import {getFullConfig} from './getFullConfig';
+import {isArray} from './typeGuards';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
-import type {E2edEnvironment, TestCafeRunOptions} from '../types/internal';
+import type {E2edEnvironment, RunRetryOptions} from '../types/internal';
 
 /**
  * Runs TestCafe via JavaScript API (for running one retry in docker).
@@ -15,16 +16,16 @@ import type {E2edEnvironment, TestCafeRunOptions} from '../types/internal';
 export const runTestCafe = async ({
   concurrency,
   runLabel,
-  tests,
-}: TestCafeRunOptions): Promise<void> => {
+  successfulTestRunNamesHash,
+}: RunRetryOptions): Promise<void> => {
   (process.env as E2edEnvironment).E2ED_RUN_LABEL = runLabel;
 
   let maybeTestCafe: Inner.TestCafe | undefined;
 
   try {
     const {browsers: browsersAsStringOrArray} = getFullConfig();
-    const browsers = Array.isArray(browsersAsStringOrArray)
-      ? (browsersAsStringOrArray as string[])
+    const browsers = isArray<string>(browsersAsStringOrArray)
+      ? browsersAsStringOrArray
       : [browsersAsStringOrArray as string];
 
     const testCafe = await createTestCafe({
@@ -39,18 +40,7 @@ export const runTestCafe = async ({
     const failedTestsCount = await runner
       .browsers(browsers)
       .concurrency(concurrency)
-      .filter((testName: string, fixtureName: string, fixturePath: string) => {
-        if (tests.length === 0) {
-          return true;
-        }
-
-        return tests.some(
-          (test) =>
-            test.testName === testName &&
-            test.fixtureName === fixtureName &&
-            test.fixturePath === fixturePath,
-        );
-      })
+      .filter((testName: string) => !successfulTestRunNamesHash[testName])
       .run();
 
     if (failedTestsCount !== 0) {

@@ -29,7 +29,7 @@ export const runRetries = async (retriesState: RetriesState): Promise<void> => {
   const fullConfig = getFullConfig();
   const {maxRetriesCountInDocker: maxRetriesCount} = fullConfig;
 
-  Object.assign<RetriesState, Partial<RetriesState>>(retriesState, {maxRetriesCount});
+  (retriesState as {maxRetriesCount: number}).maxRetriesCount = maxRetriesCount;
 
   let {concurrency} = fullConfig;
   let previousTestsString = '';
@@ -56,7 +56,11 @@ export const runRetries = async (retriesState: RetriesState): Promise<void> => {
     generalLog(`Run tests (${printedRetry}, concurrency ${concurrency}${printedTestsString}`);
 
     try {
-      await runRetry({concurrency, runLabel, tests: retriesState.remainingTests});
+      await runRetry({
+        concurrency,
+        runLabel,
+        successfulTestRunNamesHash: retriesState.successfulTestRunNamesHash,
+      });
     } catch (error) {
       generalLog(`Caught an error on ${printedRetry}`, {error});
     }
