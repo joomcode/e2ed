@@ -2,15 +2,17 @@ import {RunEnvironment, setRunEnvironment} from '../configurator';
 import {generalLog} from '../utils/generalLog';
 import {getAfterRetries, getPrintedRetry, runRetries} from '../utils/retry';
 
-import type {RetriesState} from '../types/internal';
+import type {RetriesState, UtcTimeInMs} from '../types/internal';
 
 setRunEnvironment(RunEnvironment.Docker);
 
 const retriesState: RetriesState = {
-  allTestsCount: 0,
+  concurrency: 1,
+  failedTestNamesInLastRetry: [],
+  isLastRetrySuccessful: false,
   maxRetriesCount: 1,
-  remainingTests: [],
   retryIndex: 1,
+  startLastRetryTimeInMs: 0 as UtcTimeInMs,
   successfulTestRunNamesHash: {},
   visitedTestRunEventsFileName: [],
 };

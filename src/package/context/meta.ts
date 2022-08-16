@@ -2,8 +2,9 @@ import {useContext} from '../useContext';
 import {assertValueIsDefined} from '../utils/asserts';
 import {deepMerge} from '../utils/deepMerge';
 
-import type {TestMeta} from '../types';
 import type {DeepPartial} from '../types/internal';
+// eslint-disable-next-line import/no-restricted-paths
+import type {TestMeta} from '../types/userland/types';
 
 export const [getRawMeta, setRawMeta] = useContext<TestMeta>();
 

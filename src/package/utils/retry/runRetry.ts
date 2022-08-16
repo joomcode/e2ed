@@ -8,7 +8,7 @@ import type {RunRetryOptions} from '../../types/internal';
  * Run one retry of remaining tests.
  * @internal
  */
-export const runRetry = (runOptions: RunRetryOptions): Promise<void> =>
+export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
   new Promise((resolve, reject) => {
     const testCafeSubprocess = fork('./node_modules/e2ed/bin/runTestCafeSubprocess.js');
 
@@ -21,5 +21,5 @@ export const runRetry = (runOptions: RunRetryOptions): Promise<void> =>
       return exitCode === 0 ? resolve() : reject(error);
     });
 
-    testCafeSubprocess.send(runOptions);
+    testCafeSubprocess.send(runRetryOptions);
   });

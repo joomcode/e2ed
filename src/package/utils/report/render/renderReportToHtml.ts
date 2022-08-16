@@ -56,7 +56,7 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
   const duration = Date.now() - startTimeInMs;
 
   generalLog(
-    `HTML report was rendered for ${length} test run${length > 1 ? 's' : ''} in ${duration} ms`,
+    `HTML report was rendered for ${length} test run${length > 1 ? 's' : ''} in ${duration}ms`,
   );
 
   return safeHtml;

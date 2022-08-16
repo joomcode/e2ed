@@ -53,7 +53,7 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
           req.emit(
             'error',
             new E2EDError(
-              `The request to ${logParams.url} is timed out in ${timeout} ms`,
+              `The request to ${logParams.url} is timed out in ${timeout}ms`,
               fullLogParams,
             ),
           );

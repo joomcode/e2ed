@@ -51,7 +51,7 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
   }
 
   await log(
-    `Page "${PageClass.name}" loaded in ${Date.now() - startNavigateTimeInMs} ms`,
+    `Page "${PageClass.name}" loaded in ${Date.now() - startNavigateTimeInMs}ms`,
     {url},
     LogEventType.InternalAction,
   );

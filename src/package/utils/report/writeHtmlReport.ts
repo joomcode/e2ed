@@ -29,6 +29,6 @@ export const writeHtmlReport = async (reportData: ReportData): Promise<void> => 
   const duration = Date.now() - startTimeInMs;
 
   generalLog(
-    `HTML report was written (${reportHtml.length} symbols) to "${reportFilePath}" in ${duration} ms`,
+    `HTML report was written (${reportHtml.length} symbols) to "${reportFilePath}" in ${duration}ms`,
   );
 };

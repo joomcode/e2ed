@@ -1,26 +1,22 @@
 type Options = Readonly<{
   currentConcurrency: number;
-  lastRetryHasError: boolean;
+  noTestsInLastRetry: boolean;
   testsCount: number;
-  testsHaveNotChangedSinceLastTime: boolean;
 }>;
 
 /**
- * Gets concurrency for next tests-run retry,
- * by current concurrency, tests count, hasError flag and
- * testsHaveNotchangedsincelasttime flag.
+ * Gets concurrency for next tests-run retry by current concurrency,
+ * noTestsInLastRetry flag and tests count.
  * @internal
  */
 export const getConcurrencyForNextRetry = ({
   currentConcurrency,
-  lastRetryHasError,
+  noTestsInLastRetry,
   testsCount,
-  testsHaveNotChangedSinceLastTime,
 }: Options): number => {
-  const newBaseConcurrency =
-    lastRetryHasError || testsHaveNotChangedSinceLastTime
-      ? Math.ceil(currentConcurrency / 2)
-      : currentConcurrency;
+  const newBaseConcurrency = noTestsInLastRetry
+    ? Math.ceil(currentConcurrency / 1.5)
+    : currentConcurrency;
 
   if (testsCount > 0) {
     return Math.min(newBaseConcurrency, testsCount);

@@ -33,7 +33,7 @@ export const readEventsFromFiles = async (
 
   const newEventFiles = allEventFiles.filter((fileName) => !skippedEventFiles.includes(fileName));
 
-  const testRuns: FullTestRun[] = [];
+  const fullTestRuns: FullTestRun[] = [];
 
   for (
     let fileIndex = 0;
@@ -66,13 +66,15 @@ export const readEventsFromFiles = async (
     for (const file of files) {
       const fullTestRun = JSON.parse(file) as FullTestRun;
 
-      testRuns.push(fullTestRun);
+      fullTestRuns.push(fullTestRun);
     }
   }
 
   const duration = Date.now() - startTimeInMs;
 
-  generalLog(`Read ${testRuns.length} test runs from "${EVENTS_DIRECTORY_PATH}" in ${duration} ms`);
+  generalLog(
+    `Read ${fullTestRuns.length} test runs from "${EVENTS_DIRECTORY_PATH}" in ${duration}ms`,
+  );
 
-  return testRuns;
+  return fullTestRuns;
 };

@@ -3,7 +3,7 @@ import {startTimeInMs} from '../../configurator';
 import {registerEndE2edRunEvent} from '../events';
 import {generalLog} from '../generalLog';
 
-import {failTestsToString} from './failTestsToString';
+import {getPrintedTestsCount} from './getPrintedTestsCount';
 
 import type {RetriesState, UtcTimeInMs} from '../../types/internal';
 
@@ -12,31 +12,34 @@ import type {RetriesState, UtcTimeInMs} from '../../types/internal';
  * @internal
  */
 export const getAfterRetries =
-  ({allTestsCount, maxRetriesCount, remainingTests, retryIndex}: RetriesState): (() => void) =>
+  (retriesState: RetriesState): (() => void) =>
   () => {
-    const hasFailedTests = retryIndex > maxRetriesCount;
-
-    if (hasFailedTests) {
-      generalLog(
-        `[FAIL] There are ${
-          remainingTests.length
-        } failed tests (out of ${allTestsCount}) after ${maxRetriesCount} retries: ${failTestsToString(
-          remainingTests,
-        )}`,
-      );
-    }
-
-    const wordTest = allTestsCount === 1 ? 'test' : 'tests';
-    const wordRetry = maxRetriesCount === 1 ? 'retry' : 'retries';
-    const testsCountPrefix = allTestsCount > 0 ? `${allTestsCount} ${wordTest}` : 'Run';
+    const {
+      failedTestNamesInLastRetry,
+      isLastRetrySuccessful,
+      successfulTestRunNamesHash,
+      retryIndex,
+    } = retriesState;
 
     const endTimeInMs = Date.now() as UtcTimeInMs;
+    const durationString = `in ${endTimeInMs - startTimeInMs}ms`;
+    const retryString = `${retryIndex} ${retryIndex === 1 ? 'retry' : 'retries'}`;
 
-    generalLog(
-      `${testsCountPrefix} with all ${maxRetriesCount} ${wordRetry} lasted ${
-        endTimeInMs - startTimeInMs
-      } ms`,
-    );
+    if (isLastRetrySuccessful) {
+      generalLog(
+        `[OK] All ${getPrintedTestsCount(
+          Object.keys(successfulTestRunNamesHash).length,
+        )} completed successfully with ${retryString} ${durationString}`,
+      );
+    } else {
+      generalLog(
+        `[FAIL] There are ${getPrintedTestsCount(
+          failedTestNamesInLastRetry.length,
+          true,
+        )} after ${retryString} ${durationString}`,
+        {failedTestNamesInLastRetry},
+      );
+    }
 
     const endE2edRunEvent = {utcTimeInMs: endTimeInMs};
 

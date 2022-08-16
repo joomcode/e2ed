@@ -56,6 +56,15 @@ rules:
         - node:stream
         - node:url
         - node:util
+  import/no-restricted-paths:
+    - error
+    - zones:
+        - target: './src/package/!(constants)/**/*'
+          from: ./src/package/constants
+          except: [./internal.ts]
+        - target: './src/package/!(types)/**/*'
+          from: ./src/package/types
+          except: [./internal.ts]
   import/no-unassigned-import: error
   import/no-unused-modules:
     - error
@@ -69,6 +78,7 @@ rules:
         ]
       missingExports: false
       unusedExports: true
+  import/no-useless-path-segments: [error, {commonjs: true, noUselessIndex: true}]
   import/order: off
   import/prefer-default-export: off
   import/unambiguous: error

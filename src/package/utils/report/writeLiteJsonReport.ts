@@ -28,6 +28,6 @@ export const writeLiteJsonReport = async (reportData: ReportData): Promise<void>
   const duration = Date.now() - startTimeInMs;
 
   generalLog(
-    `Lite JSON report was written (${reportJson.length} symbols) to "${reportFilePath}" in ${duration} ms`,
+    `Lite JSON report was written (${reportJson.length} symbols) to "${reportFilePath}" in ${duration}ms`,
   );
 };

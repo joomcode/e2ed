@@ -1,36 +1,20 @@
+import type {UtcTimeInMs} from './date';
 import type {RunLabel} from './runLabel';
-
-/**
- * Fail test params.
- * @internal
- */
-export type FailTest = Readonly<{
-  fixtureName: string;
-  fixturePath: string;
-  testName: string;
-}>;
-
-/**
- * Fail tests with all tests count.
- * @internal
- */
-export type FailTests = Readonly<{
-  allTestsCount: number;
-  tests: readonly FailTest[];
-}>;
 
 /**
  * Internal state of one retry for remaining tests.
  * @internal
  */
-export type RetriesState = {
-  allTestsCount: number;
-  readonly maxRetriesCount: number;
-  remainingTests: readonly FailTest[];
+export type RetriesState = Readonly<{
+  concurrency: number;
+  failedTestNamesInLastRetry: readonly string[];
+  isLastRetrySuccessful: boolean;
+  maxRetriesCount: number;
   retryIndex: number;
+  startLastRetryTimeInMs: UtcTimeInMs;
   successfulTestRunNamesHash: Record<string, true>;
-  readonly visitedTestRunEventsFileName: readonly string[];
-};
+  visitedTestRunEventsFileName: readonly string[];
+}>;
 
 /**
  * Options for running one retry of tests.
