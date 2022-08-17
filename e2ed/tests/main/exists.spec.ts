@@ -71,7 +71,7 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 15_000, testTimeout: 50_000}
           },
           method: 'POST',
         }).then((res) => res.json() as Promise<ApiDeviceAndProductResponse['responseBody']>),
-        new Promise((resolve) => {
+        new Promise<ApiDeviceAndProductResponse['responseBody']>((resolve) => {
           setTimeout(resolve, 2_000);
         }),
       ]),
@@ -103,5 +103,7 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 15_000, testTimeout: 50_000}
 
   await unmockApiRoute(CreateProductRoute);
 
-  await expect(await getMockedProduct(), 'API mock on CreateProductRoute was umocked').eql(2);
+  await expect(await getMockedProduct(), 'API mock on CreateProductRoute was umocked').eql(
+    undefined,
+  );
 });
