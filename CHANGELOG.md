@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.11.22](https://github.com/joomcode/e2ed/tree/v0.11.22) (2022-08-17)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.21...v0.11.22)
+
+- [fix: type of mockApiRoute result in internal test](https://github.com/joomcode/e2ed/commit/a06329b569954d38fc78161829136fb91f9eeb57) ([uid11](https://github.com/uid11))
+- [chore: update @types/node to 18.7.6](https://github.com/joomcode/e2ed/commit/d8b1ce3691053b8a28674bb386d6042e1fa06b29) ([uid11](https://github.com/uid11))
+- [feat: read test runs statuses from test runs events files](https://github.com/joomcode/e2ed/commit/1758af2bb6cf964fef5617ee6b416386f7f13ac5) ([uid11](https://github.com/uid11))
+
+  chore: add eslint rule for forbidden imports
+
+- [chore: update devDependencies (@types/node, @typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/af5c9ee37b42fa3d32ebf4071a1f533483a66a2b) ([uid11](https://github.com/uid11))
+- [feat: on retry filter out passed tests (filter inversion)](https://github.com/joomcode/e2ed/commit/e06a3447a358a122f7ecbd2ac2c65276fab788bd) ([uid11](https://github.com/uid11))
+- [chore: update eslint to 8.22.0](https://github.com/joomcode/e2ed/commit/c5181beb36cefae2b47f18d6cb25a3a3242ed7c5) ([uid11](https://github.com/uid11))
+
 ## [v0.11.21](https://github.com/joomcode/e2ed/tree/v0.11.21) (2022-08-14)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.20...v0.11.21)
