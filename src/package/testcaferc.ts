@@ -5,7 +5,7 @@
 
 import {join} from 'node:path';
 
-import {COMPILED_USERLAND_CONFIG_PATH, JSON_REPORT_PATH} from './constants/internal';
+import {COMPILED_USERLAND_CONFIG_PATH} from './constants/internal';
 
 import type {FrozenPartOfTestCafeConfig, FullConfig} from './types/internal';
 
@@ -24,15 +24,7 @@ const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
   },
   hostname: 'localhost',
   pageLoadTimeout: 0,
-  reporter: [
-    {
-      name: 'spec',
-    },
-    {
-      name: 'json',
-      output: JSON_REPORT_PATH,
-    },
-  ],
+  reporter: [{name: 'spec'}],
   retryTestPages: true,
   screenshots: {
     path: 'e2ed/reports/screenshots',

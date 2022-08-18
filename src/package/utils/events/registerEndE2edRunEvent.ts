@@ -34,6 +34,6 @@ export const registerEndE2edRunEvent = async (endE2edRunEvent: EndE2edRunEvent):
       {error},
     );
   } finally {
-    processExit(reportData);
+    processExit(reportData?.exitStatus);
   }
 };

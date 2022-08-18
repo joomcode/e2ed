@@ -45,15 +45,6 @@ export const COMPILED_USERLAND_CONFIG_PATH = join(COMPILED_USERLAND_CONFIG_DIREC
 export const EVENTS_DIRECTORY_PATH = join(TMP_DIRECTORY_PATH, 'events') as DirectoryPathFromRoot;
 
 /**
- * Path to JSON-report file.
- * @internal
- */
-export const JSON_REPORT_PATH = join(
-  REPORTS_DIRECTORY_PATH,
-  'deprecated-report.json',
-) as DirectoryPathFromRoot;
-
-/**
  * Relative (from root) path to userland config file.
  * @internal
  */

@@ -2,7 +2,7 @@ import {join} from 'node:path';
 
 import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
 
-import {writeFile} from '../fs';
+import {getFileSize, writeFile} from '../fs';
 import {generalLog} from '../generalLog';
 
 import {getLiteReport} from './getLiteReport';
@@ -25,9 +25,11 @@ export const writeLiteJsonReport = async (reportData: ReportData): Promise<void>
 
   await writeFile(reportFilePath, reportJson);
 
+  const reportFileSize = await getFileSize(reportFilePath);
+
   const duration = Date.now() - startTimeInMs;
 
   generalLog(
-    `Lite JSON report was written (${reportJson.length} symbols) to "${reportFilePath}" in ${duration}ms`,
+    `Lite JSON report was written (${reportFileSize} bytes) to "${reportFilePath}" in ${duration}ms`,
   );
 };

@@ -60,6 +60,9 @@ If `null`, the lite report will not be saved.
 `your-project/e2ed/bin/runDocker.sh` (until the test passes).
 For example, if it is equal to three, the test will be run no more than three times.
 
+`packTimeout: number`: timeout (in millisecond) for the entire pack of tests (tasks).
+If the test pack takes longer than this timeout, the pack will fail with the appropriate error.
+
 `pageStabilizationInterval: number`: after navigating to the page, `e2ed` will wait until
 the page is stable for the specified time in millisecond, and only after that it will consider the page loaded.
 This parameter can be overridden on a specific page instance.

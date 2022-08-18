@@ -4,13 +4,13 @@
  */
 
 import {RunEnvironment, setRunEnvironment, startTimeInMs} from '../configurator';
-import {registerStartE2edRunEvent, waitForEndE2edRunEvent} from '../utils/events';
+import {registerEndE2edRunEvent, registerStartE2edRunEvent} from '../utils/events';
 import {generalLog} from '../utils/generalLog';
 import {getFullConfig} from '../utils/getFullConfig';
 import {hasBrowsersArg} from '../utils/hasBrowsersArg';
 import {getRunLabel} from '../utils/runLabel';
 
-import type {E2edEnvironment, E2edRunEvent} from '../types/internal';
+import type {E2edEnvironment, E2edRunEvent, UtcTimeInMs} from '../types/internal';
 
 /**
  * @todo Remove this hack when it becomes unnecessary.
@@ -25,7 +25,7 @@ try {
   // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
   delete require.cache[require.resolve('convert-source-map')];
 } catch (error) {
-  generalLog(`Error in convert-source-map fix: ${String(error)}`);
+  generalLog('Error in convert-source-map fix', {error});
 }
 
 setRunEnvironment(RunEnvironment.Local);
@@ -34,7 +34,7 @@ const e2edRunEvent: E2edRunEvent = {
   utcTimeInMs: startTimeInMs,
 };
 
-void registerStartE2edRunEvent(e2edRunEvent).then(() => {
+void registerStartE2edRunEvent(e2edRunEvent).then(async () => {
   const {browsers, concurrency} = getFullConfig();
   const runLabel = getRunLabel({concurrency, maxRetriesCount: 1, retryIndex: 1});
 
@@ -47,8 +47,15 @@ void registerStartE2edRunEvent(e2edRunEvent).then(() => {
   process.argv.push('--concurrency', String(concurrency));
   process.argv.push('--config-file', './node_modules/e2ed/testcaferc.js');
 
-  // eslint-disable-next-line global-require, import/no-internal-modules, import/no-unassigned-import
-  require('testcafe-without-typecheck/lib/cli/cli');
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const {
+    runTestCafePromise,
+  }: // eslint-disable-next-line global-require, import/no-internal-modules, @typescript-eslint/no-var-requires
+  typeof import('testcafe-without-typecheck/lib/cli/cli') = require('testcafe-without-typecheck/lib/cli/cli');
 
-  waitForEndE2edRunEvent();
+  await runTestCafePromise;
+
+  const utcTimeInMs = Date.now() as UtcTimeInMs;
+
+  await registerEndE2edRunEvent({utcTimeInMs});
 });

@@ -8,6 +8,7 @@ import type {DeepReadonly} from './deep';
 type OwnE2edConfig = Readonly<{
   maxRetriesCountInDocker: number;
   liteReportFileName: string | null;
+  packTimeout: number;
   pageStabilizationInterval: number;
   printTestLogsInConsole: boolean;
   reportFileName: string | null;

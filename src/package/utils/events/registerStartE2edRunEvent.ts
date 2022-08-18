@@ -5,6 +5,7 @@ import {compileUserlandConfig} from '../compileUserlandConfig';
 import {createDirectory, removeDirectory} from '../fs';
 import {generalLog} from '../generalLog';
 import {setFullStartInfo} from '../getAndSetFullStartInfo';
+import {getFullConfig} from '../getFullConfig';
 import {getStartInfo} from '../getStartInfo';
 
 import type {E2edRunEvent} from '../../types/internal';
@@ -29,4 +30,8 @@ export const registerStartE2edRunEvent = async (e2edRunEvent: E2edRunEvent): Pro
   generalLog(startMessage, fullStartInfo);
 
   setFullStartInfo(fullStartInfo);
+
+  const {packTimeout} = getFullConfig();
+
+  void packTimeout;
 };

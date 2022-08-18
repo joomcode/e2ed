@@ -1,5 +1,6 @@
 import type {RunId, TestRunEvent} from '../types/internal';
 
+export * from './events';
 export * from './fs';
 export * from './http';
 export * from './log';

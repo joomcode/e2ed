@@ -53,5 +53,21 @@ declare module 'testcafe-without-typecheck/lib/api/test-run-tracker' {
     _createContextSwitchingFunctionHook(ctxSwitchingFn: Fn, patchedArgsCount: number): Fn;
   };
 
+  /**
+   * Internal TestCafe test context runner tracker.
+   * @internal
+   */
   export default testRunTracker;
+}
+
+/**
+ * A patched TestCafe CLI module that exports a TestCafe run promise.
+ * @internal
+ */
+declare module 'testcafe-without-typecheck/lib/cli/cli' {
+  /**
+   * A promise that resolves when the TestCafe completes its tests run (in CLI).
+   * @internal
+   */
+  export const runTestCafePromise: Promise<number>;
 }

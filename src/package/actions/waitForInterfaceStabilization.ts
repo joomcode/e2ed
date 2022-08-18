@@ -113,7 +113,7 @@ const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterva
       if (Date.now() - startTimeInMs > TIMEOUT_IN_MS) {
         global.e2edWaitingForInterfaceStabilization = undefined;
         clearInterval(intervalId);
-        reject(new Error(`Time was out in waitForInterfaceStabilization (${TIMEOUT_IN_MS} ms)`));
+        reject(new Error(`Time was out in waitForInterfaceStabilization (${TIMEOUT_IN_MS}ms)`));
       }
     }, CHECK_INTERVAL_IN_MS);
   });
@@ -134,7 +134,7 @@ export const waitForInterfaceStabilization = async (stabilizationInterval = 500)
   const waitInMs = Date.now() - startTimeInMs;
 
   await log(
-    `Waited for interface stabilization for ${waitInMs} ms with stabilization interval ${stabilizationInterval}`,
+    `Waited for interface stabilization for ${waitInMs}ms with stabilization interval ${stabilizationInterval}`,
     LogEventType.InternalAction,
   );
 };

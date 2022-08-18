@@ -71,7 +71,7 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 15_000, testTimeout: 50_000}
           },
           method: 'POST',
         }).then((res) => res.json() as Promise<ApiDeviceAndProductResponse['responseBody']>),
-        new Promise<ApiDeviceAndProductResponse['responseBody']>((resolve) => {
+        new Promise<void>((resolve) => {
           setTimeout(resolve, 2_000);
         }),
       ]),

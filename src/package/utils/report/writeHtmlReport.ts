@@ -3,7 +3,7 @@ import {join} from 'node:path';
 import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
 
 import {assertValueIsNotNull} from '../asserts';
-import {writeFile} from '../fs';
+import {getFileSize, writeFile} from '../fs';
 import {generalLog} from '../generalLog';
 
 import {renderReportToHtml} from './render';
@@ -26,9 +26,11 @@ export const writeHtmlReport = async (reportData: ReportData): Promise<void> => 
 
   await writeFile(reportFilePath, String(reportHtml));
 
+  const reportFileSize = await getFileSize(reportFilePath);
+
   const duration = Date.now() - startTimeInMs;
 
   generalLog(
-    `HTML report was written (${reportHtml.length} symbols) to "${reportFilePath}" in ${duration}ms`,
+    `HTML report was written (${reportFileSize} bytes) to "${reportFilePath}" in ${duration}ms`,
   );
 };

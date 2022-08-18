@@ -9,4 +9,5 @@ set -eu
 ./bin/TestCafeFork/setReadme.sh
 ./bin/TestCafeFork/removeChangelog.sh
 ./bin/TestCafeFork/disableTypeCheck.sh
+./bin/TestCafeFork/exportRunTestCafePromiseFromCli.sh
 ./bin/TestCafeFork/wrapGlobalTypes.sh
