@@ -17,7 +17,9 @@ import {
 
 import {generalLog} from './generalLog';
 
-const compilerOptions = {
+import type {CompilerOptions} from 'typescript';
+
+const compilerOptions: CompilerOptions = {
   allowSyntheticDefaultImports: true,
   esModuleInterop: true,
   module: ModuleKind.CommonJS,

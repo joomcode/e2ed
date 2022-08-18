@@ -8,6 +8,7 @@ import {generalLog} from '../generalLog';
 import {getConcurrencyForNextRetry} from './getConcurrencyForNextRetry';
 import {getPrintedRetry} from './getPrintedRetry';
 import {getPrintedTestsCount} from './getPrintedTestsCount';
+import {truncateRetriesStateForLogs} from './truncateRetriesStateForLogs';
 
 import type {Mutable, RetriesState} from '../../types/internal';
 
@@ -32,7 +33,10 @@ export const updateRetriesStateAfterRetry = async (retriesState: RetriesState): 
     assertValueIsFalse(
       newFullTestRun.name in successfulTestRunNamesHash,
       `the test "${newFullTestRun.name}" from the last ${printedRetry} is not among the successful tests already passed in the previous retries`,
-      {newFullTestRun: cloneWithoutLogEvents(newFullTestRun), retriesState},
+      {
+        newFullTestRun: cloneWithoutLogEvents(newFullTestRun),
+        retriesState: truncateRetriesStateForLogs(retriesState),
+      },
     );
   }
 
@@ -76,13 +80,13 @@ export const updateRetriesStateAfterRetry = async (retriesState: RetriesState): 
     assertValueIsTrue(
       failedNewFullTestRuns.length === 0,
       'a successful retry has no failed tests',
-      {failedNewFullTestRuns, retriesState},
+      {failedNewFullTestRuns, retriesState: truncateRetriesStateForLogs(retriesState)},
     );
 
     assertValueIsTrue(
       successfulNewFullTestRuns.length > 0,
       'a successful retry has successful tests',
-      {retriesState, successfulNewFullTestRuns},
+      {retriesState: truncateRetriesStateForLogs(retriesState), successfulNewFullTestRuns},
     );
   }
 
