@@ -1,4 +1,4 @@
-import type {ExitStatus, TestRunStatus} from '../constants/internal';
+import type {EndE2edReason, ExitStatus, TestRunStatus} from '../constants/internal';
 
 import type {UtcTimeInMs} from './date';
 import type {TestFilePath} from './fs';
@@ -10,8 +10,9 @@ import type {FullTestRun, LiteTestRun, RunHash, RunId} from './testRun';
  * @internal
  */
 export type ReportData = Readonly<{
-  errors: readonly string[];
+  endE2edReason: EndE2edReason;
   endTimeInMs: UtcTimeInMs;
+  errors: readonly string[];
   exitStatus: ExitStatus;
   fullTestRuns: readonly FullTestRun[];
   liteReportFileName: string | null;
@@ -24,6 +25,7 @@ export type ReportData = Readonly<{
  * The lite report data (for printing lite JSON report).
  */
 export type LiteReport = Readonly<{
+  endE2edReason: EndE2edReason;
   endTimeInMs: UtcTimeInMs;
   errors: readonly string[];
   exitStatus: ExitStatus;

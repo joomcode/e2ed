@@ -1,4 +1,4 @@
-import type {LogEventType, TestRunStatus} from '../constants/internal';
+import type {EndE2edReason, LogEventType, TestRunStatus} from '../constants/internal';
 
 import type {UtcTimeInMs} from './date';
 import type {LogPayload} from './log';
@@ -32,6 +32,7 @@ export type EndTestRunEvent = Readonly<{
  * @internal
  */
 export type FullEventsData = Readonly<{
+  endE2edReason: EndE2edReason;
   endTimeInMs: UtcTimeInMs;
   fullTestRuns: readonly FullTestRun[];
   startInfo: StartInfo;

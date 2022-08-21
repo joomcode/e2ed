@@ -1,5 +1,6 @@
-import {TMP_DIRECTORY_PATH} from '../../constants/internal';
+import {EndE2edReason, TMP_DIRECTORY_PATH} from '../../constants/internal';
 
+import {endE2edReason as maybeEndE2edReason} from '../end';
 import {readEventsFromFiles, readStartInfo, removeDirectory} from '../fs';
 
 import type {FullEventsData, UtcTimeInMs} from '../../types/internal';
@@ -9,11 +10,12 @@ import type {FullEventsData, UtcTimeInMs} from '../../types/internal';
  * @internal
  */
 export const collectFullEventsData = async (): Promise<FullEventsData> => {
+  const endE2edReason = maybeEndE2edReason ?? EndE2edReason.Unknown;
   const endTimeInMs = Date.now() as UtcTimeInMs;
   const fullTestRuns = await readEventsFromFiles([]);
   const startInfo = await readStartInfo();
 
   await removeDirectory(TMP_DIRECTORY_PATH);
 
-  return {endTimeInMs, fullTestRuns, startInfo};
+  return {endE2edReason, endTimeInMs, fullTestRuns, startInfo};
 };

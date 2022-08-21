@@ -1,19 +1,19 @@
-import {createTestCafe} from '../testcafe';
+import {createTestCafe} from '../../testcafe';
 
-import {E2EDError} from './E2EDError';
-import {generalLog} from './generalLog';
-import {getFullConfig} from './getFullConfig';
-import {isArray} from './typeGuards';
+import {E2EDError} from '../E2EDError';
+import {generalLog} from '../generalLog';
+import {getFullConfig} from '../getFullConfig';
+import {isArray} from '../typeGuards';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
-import type {E2edEnvironment, RunRetryOptions} from '../types/internal';
+import type {E2edEnvironment, RunRetryOptions} from '../../types/internal';
 
 /**
- * Runs TestCafe via JavaScript API (for running one retry in docker).
+ * Runs tests (via TestCafe JavaScript API, for running one retry in docker).
  * Rejects, if there are some failed tests.
  */
-export const runTestCafe = async ({
+export const runTests = async ({
   concurrency,
   runLabel,
   successfulTestRunNamesHash,

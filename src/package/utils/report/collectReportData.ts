@@ -13,6 +13,7 @@ import type {FullEventsData, ReportData} from '../../types/internal';
  * @internal
  */
 export const collectReportData = async ({
+  endE2edReason,
   endTimeInMs,
   fullTestRuns,
   startInfo,
@@ -29,6 +30,7 @@ export const collectReportData = async ({
   const exitStatus = getExitStatus(retries);
 
   return {
+    endE2edReason,
     endTimeInMs,
     errors,
     exitStatus,

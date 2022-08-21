@@ -1,28 +1,38 @@
-import {registerStartE2edRunEvent} from '../events';
-import {getFullConfig} from '../getFullConfig';
+import {generalLog} from '../generalLog';
 
-import {processRetry} from './processRetry';
+import {afterRetries} from './afterRetries';
+import {getPrintedRetry} from './getPrintedRetry';
+import {processRetries} from './processRetries';
+import {truncateRetriesStateForLogs} from './truncateRetriesStateForLogs';
 
-import type {RetriesState} from '../../types/internal';
+import type {RetriesState, UtcTimeInMs} from '../../types/internal';
 
 /**
- * Run retries of remaining tests in a loop.
+ * Run e2ed tests (tasks) with retries.
  * @internal
  */
-export const runRetries = async (retriesState: RetriesState): Promise<void> => {
-  await registerStartE2edRunEvent();
+export const runRetries = async (): Promise<void> => {
+  const retriesState: RetriesState = {
+    concurrency: 1,
+    failedTestNamesInLastRetry: [],
+    isLastRetrySuccessful: false,
+    maxRetriesCount: 1,
+    retryIndex: 1,
+    startLastRetryTimeInMs: 0 as UtcTimeInMs,
+    successfulTestRunNamesHash: {},
+    visitedTestRunEventsFileName: [],
+  };
 
-  const fullConfig = getFullConfig();
-  const {concurrency, maxRetriesCountInDocker: maxRetriesCount} = fullConfig;
+  try {
+    await processRetries(retriesState);
+  } catch (error) {
+    const printedRetry = getPrintedRetry(retriesState);
 
-  Object.assign<RetriesState, Partial<RetriesState>>(retriesState, {concurrency, maxRetriesCount});
-
-  for (
-    ;
-    !retriesState.isLastRetrySuccessful && retriesState.retryIndex <= maxRetriesCount;
-    // eslint-disable-next-line no-param-reassign
-    (retriesState as {retryIndex: number}).retryIndex += 1
-  ) {
-    await processRetry(retriesState);
+    generalLog(`Caught unexpected error on ${printedRetry}`, {
+      error,
+      retriesState: truncateRetriesStateForLogs(retriesState),
+    });
+  } finally {
+    afterRetries(retriesState);
   }
 };

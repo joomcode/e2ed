@@ -1,18 +1,20 @@
 /**
- * Main status of test run.
- * Failed if it have run error and passed if not.
- * Broken if the test failed and TestCafe restarted it themself.
+ * Reason of ending e2ed.
  */
-export const enum TestRunStatus {
-  Passed = 'passed',
-  Failed = 'failed',
-  Skipped = 'skipped',
-  Broken = 'broken',
+export const enum EndE2edReason {
+  LocalTestCafeRunEnded = 'localTestCafeRunEnded',
+  PackTimeout = 'packTimeout',
+  ProcessEndSignal = 'processEndSignal',
+  RetriesCycleEnded = 'retriesCycleEnded',
   Unknown = 'unknown',
 }
 
 /**
- * Statuses, the presence of which in the retray indicates
- * that there are failed tests in the retray.
+ * Exit status of e2ed process.
  */
-export const FAILED_TEST_RUN_STATUSES = [TestRunStatus.Failed, TestRunStatus.Unknown];
+export const enum ExitStatus {
+  Passed = 0,
+  Failed = 1,
+  NoRetries = 2,
+  NoReportData = 3,
+}

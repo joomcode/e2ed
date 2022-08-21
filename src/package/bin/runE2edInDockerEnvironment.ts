@@ -1,34 +1,12 @@
 import {RunEnvironment, setRunEnvironment} from '../configurator';
-import {generalLog} from '../utils/generalLog';
-import {
-  getAfterRetries,
-  getPrintedRetry,
-  runRetries,
-  truncateRetriesStateForLogs,
-} from '../utils/retry';
-
-import type {RetriesState, UtcTimeInMs} from '../types/internal';
+import {setProcessEndHandlers} from '../utils/end';
+import {registerEndE2edRunEvent, registerStartE2edRunEvent} from '../utils/events';
+import {runRetries} from '../utils/retry';
 
 setRunEnvironment(RunEnvironment.Docker);
+setProcessEndHandlers();
 
-const retriesState: RetriesState = {
-  concurrency: 1,
-  failedTestNamesInLastRetry: [],
-  isLastRetrySuccessful: false,
-  maxRetriesCount: 1,
-  retryIndex: 1,
-  startLastRetryTimeInMs: 0 as UtcTimeInMs,
-  successfulTestRunNamesHash: {},
-  visitedTestRunEventsFileName: [],
-};
+const e2edRunPromise = registerStartE2edRunEvent().then(runRetries);
 
-runRetries(retriesState)
-  .catch((error: unknown) => {
-    const printedRetry = getPrintedRetry(retriesState);
-
-    generalLog(`Caught unexpected error on ${printedRetry}`, {
-      error,
-      retriesState: truncateRetriesStateForLogs(retriesState),
-    });
-  })
-  .finally(getAfterRetries(retriesState));
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
+e2edRunPromise.finally(registerEndE2edRunEvent);
