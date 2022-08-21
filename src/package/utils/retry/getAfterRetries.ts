@@ -41,7 +41,5 @@ export const getAfterRetries =
       );
     }
 
-    const endE2edRunEvent = {utcTimeInMs: endTimeInMs};
-
-    void registerEndE2edRunEvent(endE2edRunEvent);
+    void registerEndE2edRunEvent();
   };

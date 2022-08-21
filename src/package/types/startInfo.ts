@@ -1,18 +1,11 @@
 import type {RunEnvironment} from '../configurator';
 
 import type {FullConfig} from './config';
-import type {E2edRunEvent} from './events';
-
-/**
- * Full environment information that we receive
- * at the time of the start of the tests.
- * @internal
- */
-export type FullStartInfo = E2edRunEvent & StartInfo;
+import type {UtcTimeInMs} from './date';
 
 /**
  * Complete information about the state of the environment and
- * full e2ed configuration before the time the tests were started.
+ * full e2ed configuration before the time the pack were started.
  * Not internal because it is used in report data.
  */
 export type StartInfo = Readonly<{
@@ -24,4 +17,5 @@ export type StartInfo = Readonly<{
   nodeVersion: string;
   'process.argv': readonly string[];
   runEnvironment: RunEnvironment;
+  startTimeInMs: UtcTimeInMs;
 }>;

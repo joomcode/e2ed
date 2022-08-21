@@ -18,7 +18,6 @@ export type ReportData = Readonly<{
   reportFileName: string | null;
   retries: readonly Retry[];
   startInfo: StartInfo;
-  startTimeInMs: UtcTimeInMs;
 }>;
 
 /**
@@ -31,7 +30,6 @@ export type LiteReport = Readonly<{
   liteReportFileName: string;
   retries: readonly LiteRetry[];
   startInfo: StartInfo;
-  startTimeInMs: UtcTimeInMs;
 }>;
 
 /**

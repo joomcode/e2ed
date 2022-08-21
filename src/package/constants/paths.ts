@@ -30,7 +30,10 @@ export const TMP_DIRECTORY_PATH = join(REPORTS_DIRECTORY_PATH, 'tmp') as Directo
  * Relative (from root) path to directory with compiled userland config file.
  * @internal
  */
-export const COMPILED_USERLAND_CONFIG_DIRECTORY = join(TMP_DIRECTORY_PATH, 'config');
+export const COMPILED_USERLAND_CONFIG_DIRECTORY = join(
+  TMP_DIRECTORY_PATH,
+  'config',
+) as DirectoryPathFromRoot;
 
 /**
  * Relative (from root) path to compiled userland config file.
@@ -43,6 +46,12 @@ export const COMPILED_USERLAND_CONFIG_PATH = join(COMPILED_USERLAND_CONFIG_DIREC
  * @internal
  */
 export const EVENTS_DIRECTORY_PATH = join(TMP_DIRECTORY_PATH, 'events') as DirectoryPathFromRoot;
+
+/**
+ * Relative (from root) path to start info JSON file.
+ * @internal
+ */
+export const START_INFO_PATH = join(TMP_DIRECTORY_PATH, 'startInfo.json');
 
 /**
  * Relative (from root) path to userland config file.

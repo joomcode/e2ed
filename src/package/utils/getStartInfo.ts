@@ -1,4 +1,4 @@
-import {runEnvironment} from '../configurator';
+import {runEnvironment, startTimeInMs} from '../configurator';
 import {version as e2edVersion} from '../package.json';
 
 import {getFullConfig} from './getFullConfig';
@@ -30,5 +30,6 @@ export const getStartInfo = (): StartInfo => {
     nodeVersion: process.version,
     'process.argv': [...process.argv],
     runEnvironment,
+    startTimeInMs,
   };
 };

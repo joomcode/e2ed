@@ -4,19 +4,19 @@ import {collectReportData, writeHtmlReport, writeLiteJsonReport} from '../report
 
 import {collectFullEventsData} from './collectFullEventsData';
 
-import type {EndE2edRunEvent, ReportData} from '../../types/internal';
+import type {ReportData} from '../../types/internal';
 
 /**
  * Register end e2ed run event (for report) after closing of all tests.
  * @internal
  */
-export const registerEndE2edRunEvent = async (endE2edRunEvent: EndE2edRunEvent): Promise<void> => {
+export const registerEndE2edRunEvent = async (): Promise<void> => {
   generalLog('Close e2ed');
 
   let reportData: ReportData | undefined;
 
   try {
-    const fullEventsData = await collectFullEventsData(endE2edRunEvent);
+    const fullEventsData = await collectFullEventsData();
 
     reportData = await collectReportData(fullEventsData);
 

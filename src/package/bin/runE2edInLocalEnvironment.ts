@@ -3,14 +3,14 @@
  * {@link https://github.com/babel/babel/issues/11964}
  */
 
-import {RunEnvironment, setRunEnvironment, startTimeInMs} from '../configurator';
+import {RunEnvironment, setRunEnvironment} from '../configurator';
 import {registerEndE2edRunEvent, registerStartE2edRunEvent} from '../utils/events';
 import {generalLog} from '../utils/generalLog';
 import {getFullConfig} from '../utils/getFullConfig';
 import {hasBrowsersArg} from '../utils/hasBrowsersArg';
 import {getRunLabel} from '../utils/runLabel';
 
-import type {E2edEnvironment, E2edRunEvent, UtcTimeInMs} from '../types/internal';
+import type {E2edEnvironment} from '../types/internal';
 
 /**
  * @todo Remove this hack when it becomes unnecessary.
@@ -30,11 +30,7 @@ try {
 
 setRunEnvironment(RunEnvironment.Local);
 
-const e2edRunEvent: E2edRunEvent = {
-  utcTimeInMs: startTimeInMs,
-};
-
-void registerStartE2edRunEvent(e2edRunEvent).then(async () => {
+void registerStartE2edRunEvent().then(async () => {
   const {browsers, concurrency} = getFullConfig();
   const runLabel = getRunLabel({concurrency, maxRetriesCount: 1, retryIndex: 1});
 
@@ -55,7 +51,5 @@ void registerStartE2edRunEvent(e2edRunEvent).then(async () => {
 
   await runTestCafePromise;
 
-  const utcTimeInMs = Date.now() as UtcTimeInMs;
-
-  await registerEndE2edRunEvent({utcTimeInMs});
+  await registerEndE2edRunEvent();
 });

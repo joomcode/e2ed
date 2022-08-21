@@ -1,20 +1,16 @@
-import {startTimeInMs} from '../../configurator';
-
 import {registerStartE2edRunEvent} from '../events';
 import {getFullConfig} from '../getFullConfig';
 
 import {processRetry} from './processRetry';
 
-import type {E2edRunEvent, RetriesState} from '../../types/internal';
+import type {RetriesState} from '../../types/internal';
 
 /**
  * Run retries of remaining tests in a loop.
  * @internal
  */
 export const runRetries = async (retriesState: RetriesState): Promise<void> => {
-  const e2edRunEvent: E2edRunEvent = {utcTimeInMs: startTimeInMs};
-
-  await registerStartE2edRunEvent(e2edRunEvent);
+  await registerStartE2edRunEvent();
 
   const fullConfig = getFullConfig();
   const {concurrency, maxRetriesCountInDocker: maxRetriesCount} = fullConfig;

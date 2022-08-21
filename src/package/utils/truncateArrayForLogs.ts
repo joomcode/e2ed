@@ -1,3 +1,7 @@
+/**
+ * Maximum count of printed array elements.
+ * @internal
+ */
 const MAX_PRINTED_ELEMENTS_COUNT = 8;
 
 type Return<T> = readonly T[] | Readonly<{firstElements: readonly T[]; length: number}>;

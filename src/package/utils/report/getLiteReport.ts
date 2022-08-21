@@ -9,8 +9,7 @@ import type {LiteReport, ReportData} from '../../types/internal';
  * @internal
  */
 export const getLiteReport = (reportData: ReportData): LiteReport => {
-  const {endTimeInMs, errors, exitStatus, liteReportFileName, retries, startInfo, startTimeInMs} =
-    reportData;
+  const {endTimeInMs, errors, exitStatus, liteReportFileName, retries, startInfo} = reportData;
 
   assertValueIsNotNull(liteReportFileName, 'liteReportFileName is not null');
 
@@ -23,6 +22,5 @@ export const getLiteReport = (reportData: ReportData): LiteReport => {
     liteReportFileName,
     retries: liteRetries,
     startInfo,
-    startTimeInMs,
   };
 };

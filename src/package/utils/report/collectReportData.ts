@@ -13,13 +13,10 @@ import type {FullEventsData, ReportData} from '../../types/internal';
  * @internal
  */
 export const collectReportData = async ({
-  endE2edRunEvent,
-  fullStartInfo,
+  endTimeInMs,
   fullTestRuns,
+  startInfo,
 }: FullEventsData): Promise<ReportData> => {
-  const {utcTimeInMs: startTimeInMs, ...startInfo} = fullStartInfo;
-  const {utcTimeInMs: endTimeInMs} = endE2edRunEvent;
-
   const {liteReportFileName, reportFileName} = getFullConfig();
 
   const errors = await getReportErrors(startInfo.runEnvironment, fullTestRuns);
@@ -40,6 +37,5 @@ export const collectReportData = async ({
     reportFileName,
     retries,
     startInfo,
-    startTimeInMs,
   };
 };

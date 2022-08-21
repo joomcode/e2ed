@@ -3,7 +3,7 @@ import type {LogEventType, TestRunStatus} from '../constants/internal';
 import type {UtcTimeInMs} from './date';
 import type {LogPayload} from './log';
 import type {RunLabel} from './runLabel';
-import type {FullStartInfo} from './startInfo';
+import type {StartInfo} from './startInfo';
 import type {FullTestRun, RejectTestRun, RunId, TestFn, TestStaticOptions} from './testRun';
 
 /**
@@ -14,14 +14,6 @@ export type LogEvent = Readonly<{
   payload: LogPayload | undefined;
   type: LogEventType;
   time: UtcTimeInMs;
-}>;
-
-/**
- * EndE2edRun event (once event after all retries of all tests).
- * @internal
- */
-export type EndE2edRunEvent = Readonly<{
-  utcTimeInMs: UtcTimeInMs;
 }>;
 
 /**
@@ -40,17 +32,9 @@ export type EndTestRunEvent = Readonly<{
  * @internal
  */
 export type FullEventsData = Readonly<{
-  endE2edRunEvent: EndE2edRunEvent;
-  fullStartInfo: FullStartInfo;
+  endTimeInMs: UtcTimeInMs;
   fullTestRuns: readonly FullTestRun[];
-}>;
-
-/**
- * E2edRun event (once event on starting e2ed).
- * @internal
- */
-export type E2edRunEvent = Readonly<{
-  utcTimeInMs: UtcTimeInMs;
+  startInfo: StartInfo;
 }>;
 
 /**
