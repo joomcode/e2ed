@@ -10,7 +10,7 @@ import type {ApiDeviceAndProductResponse, DeviceId, Url} from 'e2ed/types';
 const language = 'en';
 const searchQuery = 'foo';
 
-it('exists', {meta: {testId: '1'}, testIdleTimeout: 15_000, testTimeout: 50_000}, async () => {
+it('exists', {meta: {testId: '1'}, testIdleTimeout: 20_000, testTimeout: 50_000}, async () => {
   await mockApiRoute(CreateProductRoute, (routeParams, {method, query, requestBody, url}) => {
     const responseBody = {
       id: routeParams.id,

@@ -3,7 +3,7 @@
  */
 export const enum EndE2edReason {
   LocalTestCafeRunEnded = 'localTestCafeRunEnded',
-  PackTimeout = 'packTimeout',
+  PackTimeoutExpired = 'packTimeoutExpired',
   ProcessEndSignal = 'processEndSignal',
   RetriesCycleEnded = 'retriesCycleEnded',
   Unknown = 'unknown',

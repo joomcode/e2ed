@@ -4,8 +4,8 @@ import {EVENTS_DIRECTORY_PATH, TMP_DIRECTORY_PATH} from '../../constants/interna
 import {compileUserlandConfig} from '../compileUserlandConfig';
 import {createDirectory, removeDirectory, writeStartInfo} from '../fs';
 import {generalLog} from '../generalLog';
-import {getFullConfig} from '../getFullConfig';
 import {getStartInfo} from '../getStartInfo';
+import {setPackTimeout} from '../packTimeout';
 
 /**
  * Register start e2ed run event (for report) before running any test.
@@ -27,7 +27,5 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
 
   await writeStartInfo(startInfo);
 
-  const {packTimeout} = getFullConfig();
-
-  void packTimeout;
+  setPackTimeout();
 };
