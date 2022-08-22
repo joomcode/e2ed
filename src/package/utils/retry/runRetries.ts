@@ -16,6 +16,7 @@ export const runRetries = async (): Promise<void> => {
     concurrency: 1,
     failedTestNamesInLastRetry: [],
     isLastRetrySuccessful: false,
+    isRetriesCycleEnded: false,
     maxRetriesCount: 1,
     retryIndex: 1,
     startLastRetryTimeInMs: 0 as UtcTimeInMs,

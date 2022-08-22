@@ -9,6 +9,7 @@ export type RetriesState = Readonly<{
   concurrency: number;
   failedTestNamesInLastRetry: readonly string[];
   isLastRetrySuccessful: boolean;
+  isRetriesCycleEnded: boolean;
   maxRetriesCount: number;
   retryIndex: number;
   startLastRetryTimeInMs: UtcTimeInMs;

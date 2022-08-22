@@ -28,5 +28,8 @@ export const processRetries = async (retriesState: RetriesState): Promise<void> 
     await processRetry(retriesState);
   }
 
+  // eslint-disable-next-line no-param-reassign
+  (retriesState as {isRetriesCycleEnded: boolean}).isRetriesCycleEnded = true;
+
   endE2ed(EndE2edReason.RetriesCycleEnded);
 };

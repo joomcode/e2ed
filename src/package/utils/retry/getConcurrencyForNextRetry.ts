@@ -15,7 +15,7 @@ export const getConcurrencyForNextRetry = ({
   testsCount,
 }: Options): number => {
   const newBaseConcurrency = noTestsInLastRetry
-    ? Math.ceil(currentConcurrency / 1.5)
+    ? Math.ceil(currentConcurrency / 2)
     : currentConcurrency;
 
   if (testsCount > 0) {

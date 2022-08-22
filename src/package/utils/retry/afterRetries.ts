@@ -14,12 +14,14 @@ export const afterRetries = (retriesState: RetriesState): void => {
   const {
     failedTestNamesInLastRetry,
     isLastRetrySuccessful,
+    isRetriesCycleEnded,
     successfulTestRunNamesHash,
-    retryIndex,
+    retryIndex: retryIndexMaybePlusOne,
   } = retriesState;
 
   const endTimeInMs = Date.now() as UtcTimeInMs;
   const durationString = `in ${endTimeInMs - startTimeInMs}ms`;
+  const retryIndex = isRetriesCycleEnded ? retryIndexMaybePlusOne - 1 : retryIndexMaybePlusOne;
   const retryString = `${retryIndex} ${retryIndex === 1 ? 'retry' : 'retries'}`;
 
   if (isLastRetrySuccessful) {
