@@ -1,5 +1,28 @@
 # Changelog
 
+## [v0.11.23](https://github.com/joomcode/e2ed/tree/v0.11.23) (2022-08-22)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.22...v0.11.23)
+
+- [fix: pack timeout for local run and docker run](https://github.com/joomcode/e2ed/commit/53a4bd26af61f3b80be112ca7eff7506ad5b2364) ([uid11](https://github.com/uid11))
+- [chore: update @types/node to 18.7.9](https://github.com/joomcode/e2ed/commit/1fb20af31a47ed9d9d37d3c7cef234ac5715cefb) ([uid11](https://github.com/uid11))
+- [feat: add end e2ed reasons enum](https://github.com/joomcode/e2ed/commit/917701f686b09a135b051eb9c558942fbe2c4f53) ([uid11](https://github.com/uid11))
+
+  refactor: runE2edDocker/runE2edLocal entrypoints
+  feat: nodejs process end handlers (on SIGINT, SIGTERM)
+
+- [chore: update @types/node to 18.7.8](https://github.com/joomcode/e2ed/commit/91e98a9bcb216b6b88fa721017b25cd43ff002cb) ([uid11](https://github.com/uid11))
+- [feat: read/write start info from file (JS-context independent)](https://github.com/joomcode/e2ed/commit/afa7a947ef3b3450a5b5736bbfa25018eb5f533b) ([uid11](https://github.com/uid11))
+
+  fix: move startTimeInMs to start info
+  feat: remove unnecessary types of start/end e2ed events
+
+- [fix: truncate long arrays in retries state logs](https://github.com/joomcode/e2ed/commit/dee72336dba00f9472c1c16e343399204ba48cef) ([uid11](https://github.com/uid11))
+- [feat: add blank for packTimeout config field](https://github.com/joomcode/e2ed/commit/92ffce2f31e145cb34482b0539f930e8936a1685) ([uid11](https://github.com/uid11))
+
+  fix: remove TestCafe JSON reporter
+  fix: update testcafe-without-typecheck for correct awaiting TestCafe tests run
+
 ## [v0.11.22](https://github.com/joomcode/e2ed/tree/v0.11.22) (2022-08-17)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.21...v0.11.22)
