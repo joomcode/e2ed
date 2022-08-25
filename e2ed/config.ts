@@ -21,7 +21,7 @@ const config: Config = {
   concurrency: isLocalRun ? 1 : 2,
   liteReportFileName: 'lite-report.json',
   maxRetriesCountInDocker: 3,
-  packTimeout: 90_000,
+  packTimeout: 90 * 60_000,
   pageRequestTimeout: 30_000,
   pageStabilizationInterval: 2_000,
   port1: 1337,
