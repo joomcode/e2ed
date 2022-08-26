@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.11.24](https://github.com/joomcode/e2ed/tree/v0.11.24) (2022-08-26)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.23...v0.11.24)
+
+- [chore: update TypeScript to 4.8.2; fix new type errors](https://github.com/joomcode/e2ed/commit/3a671ff9f88fa04ffca4886da224a03429bd4c6e) ([uid11](https://github.com/uid11))
+- [feat: add OptionalIfValueIncludeDefault type function](https://github.com/joomcode/e2ed/commit/ed568be0f04510455d1a2af705c86cbb3a41e0ad) ([uid11](https://github.com/uid11))
+
+  fix: add dynamic optionality for request function parameters
+
+- [chore: update devDependencies (@types/node, @typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/a9df264255afa54bccbbdb0f0b19d3d3dc7e58a2) ([uid11](https://github.com/uid11))
+- [chore: update @types/node to 18.7.11](https://github.com/joomcode/e2ed/commit/20838e8c4dc2b1bef8b40f798df46ccd15f16c85) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (@types/node, @typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/c717146928bf6d2683303033b3116038b90ec7c6) ([uid11](https://github.com/uid11))
+- [fix: wrong number of retries in OK/FAIL message after retries cycle](https://github.com/joomcode/e2ed/commit/75a01f829a00234e3a5c060ec9af15b028fd92e2) ([uid11](https://github.com/uid11))
+
 ## [v0.11.23](https://github.com/joomcode/e2ed/tree/v0.11.23) (2022-08-22)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.22...v0.11.23)
