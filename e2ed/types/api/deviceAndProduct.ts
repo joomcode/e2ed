@@ -19,7 +19,7 @@ type ResponseBody = Readonly<{
 /**
  * API request for common device and product endpoint.
  */
-export type ApiDeviceAndProductRequest = Request<RequestBody>;
+export type ApiDeviceAndProductRequest = Request<RequestBody, Query, {'x-my-request-id': string}>;
 
 /**
  * API response for common device and product endpoint.

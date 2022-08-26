@@ -9,6 +9,7 @@ import {log} from '../log';
 import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
 import {getContentJsonHeaders} from './getContentJsonHeaders';
+import {getRequestBodyAsString} from './getRequestBodyAsString';
 import {oneTryOfRequest} from './oneTryOfRequest';
 
 import type {
@@ -38,7 +39,7 @@ export const request = async <
     isNeedRetry = defaultIsNeedRetry,
     maxRetriesCount = 5,
     requestHeaders,
-    requestBody = '',
+    requestBody,
     routeParams,
     timeout = 30_000,
   }: Options<RouteParams, SomeRequest, SomeResponse>,
@@ -58,8 +59,7 @@ export const request = async <
     url,
   };
 
-  const requestBodyAsString =
-    typeof requestBody === 'string' ? requestBody : JSON.stringify(requestBody);
+  const requestBodyAsString = getRequestBodyAsString(requestBody);
   const options = {
     method,
     requestHeaders: {

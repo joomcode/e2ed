@@ -1,5 +1,5 @@
 import {CreateDevice} from 'e2ed/routes/apiRoutes';
-import {request} from 'e2ed/utils';
+import {getRandomId, request} from 'e2ed/utils';
 
 import type {ApiDeviceParams, Device} from 'e2ed/types';
 
@@ -13,6 +13,7 @@ export const createDevice = async (params: ApiDeviceParams): Promise<Device> => 
     responseBody: {payload: apiDevice},
   } = await request(CreateDevice, {
     requestBody: params,
+    requestHeaders: {'x-my-request-id': getRandomId()},
     routeParams: {model},
   });
 

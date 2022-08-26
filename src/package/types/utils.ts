@@ -12,11 +12,6 @@ declare const PARAMS_KEY: unique symbol;
 type EntryPair<T> = [keyof T, T[keyof T] | undefined];
 
 /**
- * List of pairs that Object.entries(T) returns.
- */
-export type ObjectEntries<T> = EntryPair<T>[];
-
-/**
  * Function by argument, return type, and this (context) type.
  */
 export type Fn<Args extends unknown[] = never[], Return = unknown, This = unknown> = (
@@ -25,9 +20,11 @@ export type Fn<Args extends unknown[] = never[], Return = unknown, This = unknow
 ) => Return;
 
 /**
- * Type of inner key for params type.
+ * Returns the type of instance params.
  */
-export type PARAMS_KEY_TYPE = typeof PARAMS_KEY;
+export type GetParamsType<C> = C extends {[PARAMS_KEY]: unknown}
+  ? Normalize<C[PARAMS_KEY_TYPE]>
+  : never;
 
 /**
  * Returns a copy of the object type with mutable properties.
@@ -48,17 +45,9 @@ export type Normalize<T> = keyof T extends never
   : {[K in keyof T]: Normalize<T[K]>};
 
 /**
- * Returns the type of instance params.
+ * List of pairs that Object.entries(T) returns.
  */
-export type GetParamsType<C> = C extends {[PARAMS_KEY]: unknown}
-  ? Normalize<C[PARAMS_KEY_TYPE]>
-  : never;
-
-/**
- * ZeroOrOneArg<string> = [arg: string].
- * ZeroOrOneArg<undefined | number> = [arg?: number].
- */
-export type ZeroOrOneArg<Arg> = IsIncludeUndefined<Arg> extends true ? [arg?: Arg] : [arg: Arg];
+export type ObjectEntries<T> = EntryPair<T>[];
 
 /**
  * OneOrTwoArgs<'foo', string> = [arg1: 'foo', arg2: string].
@@ -67,6 +56,25 @@ export type ZeroOrOneArg<Arg> = IsIncludeUndefined<Arg> extends true ? [arg?: Ar
 export type OneOrTwoArgs<Arg1, Arg2> = IsIncludeUndefined<Arg2> extends true
   ? [arg1: Arg1, arg2?: Arg2]
   : [arg1: Arg1, arg2: Arg2];
+
+/**
+ * The property value will be optional if its default value
+ * is included in the set of possible values.
+ * OptionalIfValueIncludeDefault<'foo', 1 | 2, 2> = {foo?: 1 | 2}.
+ * OptionalIfValueIncludeDefault<'foo', 1 | 2, 3> = {foo: 1 | 2}.
+ * OptionalIfValueIncludeDefault<'foo', {bar?: string}, {}> = {foo?: {bar?: string}}.
+ * OptionalIfValueIncludeDefault<'foo', {bar: string}, {}> = {foo: {bar: string}}.
+ */
+export type OptionalIfValueIncludeDefault<
+  Key extends string,
+  Value,
+  DefaultValue,
+> = DefaultValue extends Value ? {[K in Key]?: Value} : {[K in Key]: Value};
+
+/**
+ * Type of inner key for params type.
+ */
+export type PARAMS_KEY_TYPE = typeof PARAMS_KEY;
 
 /**
  * UnionToIntersection<((x: string) => number) | ((x: number) => string)> =
@@ -84,3 +92,9 @@ export type UnionToIntersection<U> = (U extends unknown ? (k: U) => void : never
  * UnwrapPromise<Promise<Promise<bigint>>> = bigint.
  */
 export type UnwrapPromise<T> = T extends Promise<infer V> ? UnwrapPromise<V> : T;
+
+/**
+ * ZeroOrOneArg<string> = [arg: string].
+ * ZeroOrOneArg<undefined | number> = [arg?: number].
+ */
+export type ZeroOrOneArg<Arg> = IsIncludeUndefined<Arg> extends true ? [arg?: Arg] : [arg: Arg];

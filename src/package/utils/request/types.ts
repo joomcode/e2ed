@@ -1,6 +1,13 @@
 import type {request as httpRequest} from 'node:http';
 
-import type {Headers, Method, Request, Response, Url} from '../../types/internal';
+import type {
+  Headers,
+  Method,
+  OptionalIfValueIncludeDefault,
+  Request,
+  Response,
+  Url,
+} from '../../types/internal';
 
 /**
  * Request log parameters.
@@ -35,11 +42,12 @@ export type Options<
   RouteParams,
   SomeRequest extends Request,
   SomeResponse extends Response,
-> = Readonly<{
-  requestHeaders?: SomeRequest['requestHeaders'];
-  routeParams?: RouteParams;
-  isNeedRetry?: (response: SomeResponse) => Promise<boolean> | boolean;
-  maxRetriesCount?: number;
-  requestBody?: SomeRequest['requestBody'];
-  timeout?: number;
-}>;
+> = Readonly<
+  {
+    isNeedRetry?: (response: SomeResponse) => Promise<boolean> | boolean;
+    maxRetriesCount?: number;
+    timeout?: number;
+  } & OptionalIfValueIncludeDefault<'requestBody', SomeRequest['requestBody'], undefined> &
+    OptionalIfValueIncludeDefault<'requestHeaders', SomeRequest['requestHeaders'], Headers> &
+    OptionalIfValueIncludeDefault<'routeParams', RouteParams, undefined>
+>;
