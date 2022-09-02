@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.11.25](https://github.com/joomcode/e2ed/tree/v0.11.25) (2022-09-02)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.24...v0.11.25)
+
+- [chore: update devDependencies (eslint, @types/node, @typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/170fb18a8f8bec4f39600b92ce12a895539150a5) ([uid11](https://github.com/uid11))
+- [feat: add dockerImage field to e2ed config; remove E2ED_DOCKER_IMAGE](https://github.com/joomcode/e2ed/commit/bf76590f322b077392b77a8ecb4245d220a67c78) ([uid11](https://github.com/uid11))
+
+  refactor: renamt exit status to exit code
+
 ## [v0.11.24](https://github.com/joomcode/e2ed/tree/v0.11.24) (2022-08-26)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.23...v0.11.24)
