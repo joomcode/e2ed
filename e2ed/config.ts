@@ -19,6 +19,7 @@ const config: Config = {
   browserInitTimeout: 30_000,
   browsers: 'chromium:headless --no-sandbox --disable-dev-shm-usage --disable-web-security',
   concurrency: isLocalRun ? 1 : 2,
+  dockerImage: 'e2edhub/e2ed',
   liteReportFileName: 'lite-report.json',
   maxRetriesCountInDocker: 3,
   packTimeout: 90 * 60_000,

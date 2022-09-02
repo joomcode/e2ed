@@ -19,7 +19,7 @@ with the command `npm run lint`.
 
 You can check that your changes doesn't break core functionality in runtime by building the project
 (`npm run build`) and running local tests (`npm run test:local`).
-The tests should complete without error, i.e. with an exit status of 0.
+The tests should complete without error, i.e. with an exit code 0.
 
 If you have [Docker](https://www.docker.com/) installed, you can also run tests in docker
 (`npm run test:docker`) to make sure they also complete without errors.

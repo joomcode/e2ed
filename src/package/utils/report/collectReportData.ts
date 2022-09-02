@@ -1,4 +1,4 @@
-import {getExitStatus} from '../exit';
+import {getExitCode} from '../exit';
 import {getFullConfig} from '../getFullConfig';
 
 import {assertThatTestNamesAndFilePathsAreUnique} from './assertThatTestNamesAndFilePathsAreUnique';
@@ -27,13 +27,13 @@ export const collectReportData = async ({
   unificateRunHashes(fullTestRuns);
 
   const retries = getRetries(fullTestRuns);
-  const exitStatus = getExitStatus(retries);
+  const exitCode = getExitCode(retries);
 
   return {
     endE2edReason,
     endTimeInMs,
     errors,
-    exitStatus,
+    exitCode,
     fullTestRuns,
     liteReportFileName,
     reportFileName,

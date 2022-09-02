@@ -27,7 +27,7 @@ else
     node --inspect-brk=0.0.0.0 ./node_modules/e2ed/bin/runE2edInDockerEnvironment.js
 fi
 
-EXIT_STATUS=$?
+EXIT_CODE=$?
 
 if [ -z $E2ED_DOCKER_DO_AFTER_TESTS ]
 then
@@ -36,4 +36,4 @@ else
     ./e2ed/bin/$E2ED_DOCKER_DO_AFTER_TESTS
 fi
 
-exit $EXIT_STATUS
+exit $EXIT_CODE

@@ -11,6 +11,11 @@
 
 E2E testing framework over [TestCafe](https://testcafe.io/).
 
+`e2ed` is designed to quickly parallel run a large number of independent atomic tests
+(or other scenarios) In an arbitrary browser inside a docker container.
+Tests are written in TypeScript, using explicit dependencies and the concept of page objects.
+After the run, a detailed html report and a summary in JSON format is generated.
+
 ## Install
 
 Requires [node](https://nodejs.org/en/) version 16 or higher:
@@ -37,7 +42,15 @@ Then run tests locally for `https://google.com`:
 E2ED_ORIGIN=https://google.com npx e2ed
 ```
 
-And run tests for `https://google.com` in docker:
+### Docker
+
+You can download the latest `e2ed` docker image from https://hub.docker.com/r/e2edhub/e2ed:
+
+```sh
+docker pull e2edhub/e2ed
+```
+
+And run tests for `https://google.com` in docker container:
 
 ```sh
 E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh
@@ -101,9 +114,6 @@ This parameter can be overridden in the test-specific options.
 `E2ED_DOCKER_DO_AFTER_TESTS`: the name of the executable file from the `e2ed/bin` directory that will be run (into container) after running the tests.
 
 `E2ED_DOCKER_DO_BEFORE_TESTS`: the name of the executable file from the `e2ed/bin` directory that will be run (into container) before running the tests.
-
-`E2ED_DOCKER_IMAGE`: the name of the docker image used to run tests with the `your-project/e2ed/bin/runDocker.sh` command
-(`e2ed` by default).
 
 ## License
 

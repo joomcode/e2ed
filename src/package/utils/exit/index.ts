@@ -1,2 +1,2 @@
-export * from './getExitStatus';
+export * from './getExitCode';
 export * from './processExit';

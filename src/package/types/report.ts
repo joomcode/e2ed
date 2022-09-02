@@ -1,4 +1,4 @@
-import type {EndE2edReason, ExitStatus, TestRunStatus} from '../constants/internal';
+import type {EndE2edReason, ExitCode, TestRunStatus} from '../constants/internal';
 
 import type {UtcTimeInMs} from './date';
 import type {TestFilePath} from './fs';
@@ -13,7 +13,7 @@ export type ReportData = Readonly<{
   endE2edReason: EndE2edReason;
   endTimeInMs: UtcTimeInMs;
   errors: readonly string[];
-  exitStatus: ExitStatus;
+  exitCode: ExitCode;
   fullTestRuns: readonly FullTestRun[];
   liteReportFileName: string | null;
   reportFileName: string | null;
@@ -28,7 +28,7 @@ export type LiteReport = Readonly<{
   endE2edReason: EndE2edReason;
   endTimeInMs: UtcTimeInMs;
   errors: readonly string[];
-  exitStatus: ExitStatus;
+  exitCode: ExitCode;
   liteReportFileName: string;
   retries: readonly LiteRetry[];
   startInfo: StartInfo;

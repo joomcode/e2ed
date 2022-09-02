@@ -1,16 +1,17 @@
 #!/usr/bin/env sh
 set -e
 
-DIR="${WORKDIR:-$PWD}"
-MOUNTDIR="${MOUNTDIR:-$DIR}"
-DOCKER_IMAGE="${E2ED_DOCKER_IMAGE:-e2ed}"
 DEBUG_PORT="${E2ED_DOCKER_DEBUG_PORT:-9229}"
+DIR="${E2ED_WORKDIR:-$PWD}"
+DOCKER_IMAGE=$(grep -m1 dockerImage ./e2ed/config.ts | sed -e "s/^[^'\"\`]*['\"\`]//" -e "s/['\"\`][^'\"\`]*$//")
+MOUNTDIR="${E2ED_MOUNTDIR:-$DIR}"
+VERSION=$(grep -m1 \"e2ed\": ./package.json | cut -d '"' -f 4)
 
 if [ -z $E2ED_DEBUG ]
 then
     PORT=""
 else
-    PORT="-p $DEBUG_PORT:$DEBUG_PORT"
+    PORT="--publish $DEBUG_PORT:$DEBUG_PORT"
 fi
 
 docker run --rm $PORT \
@@ -20,5 +21,4 @@ docker run --rm $PORT \
        --env E2ED_DEBUG=$E2ED_DEBUG \
        --env E2ED_DOCKER_DO_AFTER_TESTS=$E2ED_DOCKER_DO_AFTER_TESTS \
        --env E2ED_DOCKER_DO_BEFORE_TESTS=$E2ED_DOCKER_DO_BEFORE_TESTS \
-       --env E2ED_DOCKER_IMAGE=$E2ED_DOCKER_IMAGE \
-       $DOCKER_IMAGE
+       $DOCKER_IMAGE:$VERSION

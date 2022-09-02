@@ -1,16 +1,16 @@
-import {ExitStatus, FAILED_TEST_RUN_STATUSES} from '../../constants/internal';
+import {ExitCode, FAILED_TEST_RUN_STATUSES} from '../../constants/internal';
 
 import {assertValueIsDefined} from '../asserts';
 
 import type {Retry} from '../../types/internal';
 
 /**
- * Get e2ed exit status (from complete report data).
+ * Get e2ed exit code (from complete report data).
  * @internal
  */
-export const getExitStatus = (retries: readonly Retry[]): ExitStatus => {
+export const getExitCode = (retries: readonly Retry[]): ExitCode => {
   if (retries.length === 0) {
-    return ExitStatus.NoRetries;
+    return ExitCode.NoRetries;
   }
 
   const lastRetry = retries[retries.length - 1];
@@ -21,8 +21,8 @@ export const getExitStatus = (retries: readonly Retry[]): ExitStatus => {
   const hasFailedTests = fullTestRuns.some(({status}) => FAILED_TEST_RUN_STATUSES.includes(status));
 
   if (hasFailedTests) {
-    return ExitStatus.Failed;
+    return ExitCode.Failed;
   }
 
-  return ExitStatus.Passed;
+  return ExitCode.Passed;
 };

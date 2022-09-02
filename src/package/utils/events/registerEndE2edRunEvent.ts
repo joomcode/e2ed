@@ -34,6 +34,6 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
       {error},
     );
   } finally {
-    processExit(reportData?.exitStatus);
+    processExit(reportData?.exitCode);
   }
 };

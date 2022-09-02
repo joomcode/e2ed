@@ -10,9 +10,9 @@ export const enum EndE2edReason {
 }
 
 /**
- * Exit status of e2ed process.
+ * Exit code of e2ed process.
  */
-export const enum ExitStatus {
+export const enum ExitCode {
   Passed = 0,
   Failed = 1,
   NoRetries = 2,

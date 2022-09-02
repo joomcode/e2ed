@@ -8,6 +8,7 @@ export const enum TestRunStatus {
   Failed = 'failed',
   Skipped = 'skipped',
   Broken = 'broken',
+  Manual = 'manual',
   Unknown = 'unknown',
 }
 
