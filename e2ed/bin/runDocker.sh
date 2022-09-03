@@ -14,6 +14,8 @@ else
     PORT="--publish $DEBUG_PORT:$DEBUG_PORT"
 fi
 
+echo "Run docker image $DOCKER_IMAGE:$VERSION"
+
 docker run --rm $PORT \
        --workdir $DIR \
        --volume $MOUNTDIR:$MOUNTDIR \

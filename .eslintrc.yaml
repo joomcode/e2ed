@@ -105,9 +105,7 @@ rules:
   simple-import-sort/imports:
     - error
     - groups:
-        - [
-            '^(node:child_process|node:crypto|node:fs|node:http|node:https|node:module|node:path|node:querystring|node:stream|node:url|node:util)(/.*|$)',
-          ]
+        - ['^node:']
         - ['^\w']
         - ['^\u0000']
         - ['^\.\./\.\./\.\./\.\./\.\./\.\./\.\.(?!/?$)', '^\.\./\.\./\.\./\.\./\.\./?$']
