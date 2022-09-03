@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.11.26](https://github.com/joomcode/e2ed/tree/v0.11.26) (2022-09-03)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.25...v0.11.26)
+
+- [fix: update TestCafe docker image to 2.0.0](https://github.com/joomcode/e2ed/commit/43941e26f9398ee9a14009f0201e46398a79d805) ([uid11](https://github.com/uid11))
+- [chore: update TestCafe to 2.0.0](https://github.com/joomcode/e2ed/commit/3789654a992a44228009de6eefae4212a05feb04) ([uid11](https://github.com/uid11))
+
 ## [v0.11.25](https://github.com/joomcode/e2ed/tree/v0.11.25) (2022-09-02)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.24...v0.11.25)
