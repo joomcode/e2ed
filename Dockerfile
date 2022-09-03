@@ -1,4 +1,4 @@
-FROM testcafe/testcafe:1.20.0
+FROM testcafe/testcafe:2.0.0
 
 USER root
 
