@@ -3,9 +3,9 @@ import type {Email} from 'e2ed/types';
 const createdEmailsCounts: Record<string, number> = {};
 
 /**
- * Return unique email like 'test_2021-05-21T18-07-00.500Z_0001@example.com'.
+ * Return new unique email like 'test_2021-05-21T18-07-00.500Z_0001@example.com'.
  */
-export const getUserEmail = (): Email => {
+export const getNewUserEmail = (): Email => {
   const timeHash = new Date().toISOString().replace(/:/g, '-');
 
   const currentCount = createdEmailsCounts[timeHash] ?? 0;

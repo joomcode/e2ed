@@ -5,7 +5,7 @@ import {assertValueIsDefined} from '../../utils/asserts';
 import {getCurrentUrl} from '../../utils/getCurrentUrl';
 import {log} from '../../utils/log';
 
-import {waitForInterfaceStabilization} from '../waitForInterfaceStabilization';
+import {waitForInterfaceStabilization} from '../waitFor';
 
 import {createPageInstance} from './createPageInstance';
 

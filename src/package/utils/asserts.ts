@@ -3,6 +3,13 @@ import {E2EDError} from './E2EDError';
 import type {LogParams} from '../types/internal';
 
 /**
+ * Asserts that the value is never (throw in any case).
+ */
+export function assertNever(value: never, check: string, payload?: LogParams): value is never {
+  throw new E2EDError('Asserted value is not never', {check, payload, value});
+}
+
+/**
  * Asserts that the value is defined (is not undefined).
  */
 export function assertValueIsDefined<T>(
@@ -24,7 +31,7 @@ export function assertValueIsUndefined<T>(
   payload?: LogParams,
 ): asserts value is T & undefined {
   if (value !== undefined) {
-    throw new E2EDError('Asserted value is defined', {check, payload});
+    throw new E2EDError('Asserted value is defined', {check, payload, value});
   }
 }
 
@@ -50,7 +57,7 @@ export function assertValueIsNull<T>(
   payload?: LogParams,
 ): asserts value is null & T {
   if (value !== null) {
-    throw new E2EDError('Asserted value is not null', {check, payload});
+    throw new E2EDError('Asserted value is not null', {check, payload, value});
   }
 }
 

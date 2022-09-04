@@ -1,7 +1,8 @@
 import {createUser as apiCreateUser} from 'e2ed/api';
 import {DEFAULT_PASSWORD, LogEventType} from 'e2ed/constants';
 import {createDevice} from 'e2ed/entities';
-import {getUserEmail, log} from 'e2ed/utils';
+import {getNewUserEmail} from 'e2ed/generators';
+import {log} from 'e2ed/utils';
 
 import type {User, UserParams} from 'e2ed/types';
 
@@ -10,7 +11,7 @@ import type {User, UserParams} from 'e2ed/types';
  */
 export const createUser = async ({
   device,
-  email = getUserEmail(),
+  email = getNewUserEmail(),
   name = 'John Doe',
   password = DEFAULT_PASSWORD,
 }: UserParams = {}): Promise<User> => {

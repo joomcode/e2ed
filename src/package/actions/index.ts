@@ -1,3 +1,4 @@
+export * from './asserts';
 export * from './clearUpload';
 export * from './click';
 export * from './debug';
@@ -22,7 +23,7 @@ export * from './switchToIframe';
 export * from './takeElementScreenshot';
 export * from './takeScreenshot';
 export * from './typeText';
-export * from './waitForInterfaceStabilization';
+export * from './waitFor';
 
 /**
  * Userland actions. This exports must be the last.

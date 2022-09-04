@@ -1,6 +1,7 @@
 import {LogEventType} from 'e2ed/constants';
 import {createUser} from 'e2ed/entities';
-import {getRandomUserName, log} from 'e2ed/utils';
+import {getRandomUserName} from 'e2ed/generators';
+import {log} from 'e2ed/utils';
 
 import type {User} from 'e2ed/types';
 

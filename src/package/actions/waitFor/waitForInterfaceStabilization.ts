@@ -1,8 +1,8 @@
-import {ClientFunction} from '../ClientFunction';
-import {LogEventType} from '../constants/internal';
-import {log} from '../utils/log';
+import {ClientFunction} from '../../ClientFunction';
+import {LogEventType} from '../../constants/internal';
+import {log} from '../../utils/log';
 
-import type {TestClientGlobal, UtcTimeInMs} from '../types/internal';
+import type {TestClientGlobal, UtcTimeInMs} from '../../types/internal';
 
 /**
  * This function in a universal way waits for the end of the movements and redrawing

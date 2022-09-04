@@ -1,2 +1,1 @@
-export * from './getRandomUserName';
-export * from './getUserEmail';
+export * from './phone';

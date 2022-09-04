@@ -31,6 +31,11 @@ export type ApiUserParams = ApiUserRequest['requestBody'];
 export type UserParams = Partial<ApiUserParams>;
 
 /**
+ * User phone.
+ */
+export type UserPhone = Brand<string, 'UserPhone'>;
+
+/**
  * User object.
  */
 export type User = Readonly<ApiUserParams & {id: UserId}>;

@@ -2,7 +2,7 @@ import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {log} from '../utils/log';
 
-import {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
+import {waitForInterfaceStabilization} from './waitFor';
 
 type Options = Parameters<typeof testController.pressKey>[1];
 

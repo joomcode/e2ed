@@ -2,7 +2,7 @@ import {ClientFunction} from '../../ClientFunction';
 import {LogEventType} from '../../constants/internal';
 import {log} from '../../utils/log';
 
-import {waitForInterfaceStabilization} from '../waitForInterfaceStabilization';
+import {waitForInterfaceStabilization} from '../waitFor';
 
 import type {AnyPageClassType} from '../../types/internal';
 
