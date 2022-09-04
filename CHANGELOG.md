@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.11.27](https://github.com/joomcode/e2ed/tree/v0.11.27) (2022-09-04)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.26...v0.11.27)
+
+- [feat: add GitHub Pages with example of report html](https://github.com/joomcode/e2ed/commit/eed6929f28495b29d3aea54e3c8545c01d6616e4) ([uid11](https://github.com/uid11))
+- [chore: update eslint-plugin-simple-import-sort to 8.0.0](https://github.com/joomcode/e2ed/commit/4b8e6e3db177bce270cc917ccad4123d8a9c153a) ([uid11](https://github.com/uid11))
+
 ## [v0.11.26](https://github.com/joomcode/e2ed/tree/v0.11.26) (2022-09-03)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.25...v0.11.26)
