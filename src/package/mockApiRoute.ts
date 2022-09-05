@@ -1,6 +1,7 @@
 import {RequestMock} from 'testcafe-without-typecheck';
 
 import {LogEventType} from './constants/internal';
+import {getApiMockState} from './context/apiMockState';
 import {log} from './utils/log';
 import {getRequestsFilter, getSetResponse} from './utils/mockApiRoute';
 import {wrapInTestRunTracker} from './utils/wrapInTestRunTracker';
@@ -15,11 +16,6 @@ import type {
   Response,
 } from './types/internal';
 
-const apiMockState: ApiMockState = {
-  functionAndRouteByUrl: {},
-  functionByRoute: undefined,
-};
-
 /**
  * Mock API for some API route.
  */
@@ -31,6 +27,7 @@ export const mockApiRoute = async <
   Route: ApiRouteClassTypeWithGetParamsFromUrl<RouteParams, SomeRequest, SomeResponse>,
   apiMockFunction: ApiMockFunction<RouteParams, SomeRequest, SomeResponse>,
 ): Promise<void> => {
+  const apiMockState = getApiMockState();
   let {functionByRoute} = apiMockState;
 
   if (functionByRoute === undefined) {
@@ -67,6 +64,7 @@ export const unmockApiRoute = async <
 >(
   Route: ApiRouteClassTypeWithGetParamsFromUrl<RouteParams, SomeRequest, SomeResponse>,
 ): Promise<void> => {
+  const apiMockState = getApiMockState();
   const {functionByRoute} = apiMockState;
   let routeWasMocked = false;
 
