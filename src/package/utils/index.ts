@@ -11,6 +11,7 @@ export * from './getKeysCounter';
 export * from './getRandomId';
 export * from './getStackTrace';
 export * from './log';
+export * from './promise';
 export * from './replaceCookie';
 export * from './request';
 export * from './SetHeadersRequestHook';
