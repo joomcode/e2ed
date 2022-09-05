@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.12.0](https://github.com/joomcode/e2ed/tree/v0.12.0) (2022-09-05)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.27...v0.12.0)
+
+- [chore: update @types/node to 18.7.15](https://github.com/joomcode/e2ed/commit/dbc4b25b5ff4ddae6e304386903f67f9d2776a92) ([uid11](https://github.com/uid11))
+- [fix: use API mock state from test context (instead of global state)](https://github.com/joomcode/e2ed/commit/6763c4f64e3c8641d82bdb26e4cff1dd0739dc52) ([uid11](https://github.com/uid11))
+- [feat: add e2ed/generators for genertion any new test (mock) data](https://github.com/joomcode/e2ed/commit/f595605d346784a4e8ccc11a3a6c678e7bfc0094) ([uid11](https://github.com/uid11))
+
+  feat: add assert action assertUrlMatchRoute
+  feat: add promise's util waitForAllProperties
+
 ## [v0.11.27](https://github.com/joomcode/e2ed/tree/v0.11.27) (2022-09-04)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.26...v0.11.27)
