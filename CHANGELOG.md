@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.12.1](https://github.com/joomcode/e2ed/tree/v0.12.1) (2022-09-05)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.0...v0.12.1)
+
+- [fix: export promise utils from e2ed/utils](https://github.com/joomcode/e2ed/commit/f7f9cfd8bc26ae1c9411db6d5486d41d9b7a4d5e) ([uid11](https://github.com/uid11))
+
 ## [v0.12.0](https://github.com/joomcode/e2ed/tree/v0.12.0) (2022-09-05)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.27...v0.12.0)
