@@ -51,7 +51,7 @@ export const mockApiRoute = async <
 
   functionByRoute.set(Route, apiMockFunction as unknown as ApiMockFunction);
 
-  await log(`Mock API for route "${Route.name}"`, {apiMockFunction}, LogEventType.InternalCore);
+  await log(`Mock API for route "${Route.name}"`, undefined, LogEventType.InternalCore);
 };
 
 /**

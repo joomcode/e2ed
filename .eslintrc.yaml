@@ -66,6 +66,7 @@ rules:
           from: ./src/package/types
           except: [./internal.ts]
   import/no-unassigned-import: error
+  import/no-unresolved: [error, {commonjs: true, ignore: [e2ed/testcafe, e2ed/utils/asserts]}]
   import/no-unused-modules:
     - error
     - ignoreExports:
