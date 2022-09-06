@@ -1,21 +1,30 @@
 import {useContext} from '../useContext';
-import {assertValueIsDefined} from '../utils/asserts';
 
 import type {ApiMockState} from '../types/internal';
 
-const [getRawApiMockState] = useContext<ApiMockState>({
-  functionAndRouteByUrl: {},
-  functionByRoute: undefined,
-});
+/**
+ * Raw get and set internal (maybe undefined) API mock state.
+ * @internal
+ */
+const [getRawApiMockState, setRawApiMockState] = useContext<ApiMockState>();
 
 /**
- * Get internal API mock state (for mockApiRoute).
+ * Get internal always defined API mock state (for mockApiRoute).
  * @internal
  */
 export const getApiMockState = (): ApiMockState => {
-  const apiMockState = getRawApiMockState();
+  const maybeApiMockState = getRawApiMockState();
 
-  assertValueIsDefined(apiMockState, 'apiMockState is defined');
+  if (maybeApiMockState !== undefined) {
+    return maybeApiMockState;
+  }
+
+  const apiMockState = {
+    functionAndRouteByUrl: {},
+    functionByRoute: undefined,
+  };
+
+  setRawApiMockState(apiMockState);
 
   return apiMockState;
 };
