@@ -11,6 +11,7 @@ RUN npm install --omit=dev --omit=peer --package-lock=false && npm cache clean -
 WORKDIR /
 
 RUN mv /node_modules/testcafe-without-typecheck/node_modules/* /node_modules
+RUN rm -rf /node_modules/testcafe-without-typecheck/node_modules
 
 RUN mkdir --parents /node_modules/@types
 
