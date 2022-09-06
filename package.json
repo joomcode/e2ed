@@ -76,8 +76,7 @@
   },
   "scripts": {
     "precheck:all": "npm run clear:lint:cache && npm run build",
-    "check:all": "npm audit && npm run check:testcafe:version && npm run lint && npm test",
-    "check:testcafe:version": "node ./build/checkTestCafeVersion.js",
+    "check:all": "npm audit && npm run lint && npm test",
     "clear:lint:cache": "rm -f .lint-cache",
     "lint": "npm run parallel lint:es lint:prettier lint:types",
     "lint:es": "eslint --cache --cache-location=.lint-cache --ext=.ts --max-warnings=0 --report-unused-disable-directives .",

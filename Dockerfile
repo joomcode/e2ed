@@ -1,10 +1,18 @@
-FROM testcafe/testcafe:2.0.0
+FROM alpine:3.16.2
 
-USER root
-
-RUN mkdir -p /node_modules/@types
+RUN apk --no-cache upgrade && \
+  apk --no-cache add \
+  libevent nodejs npm chromium firefox xwininfo xvfb dbus eudev ttf-freefont fluxbox procps tzdata icu-data-full
 
 COPY ./node_modules/testcafe-without-typecheck /node_modules/testcafe-without-typecheck
+
+WORKDIR /node_modules/testcafe-without-typecheck
+RUN npm install --omit=dev --omit=peer --package-lock=false && npm cache clean --force
+WORKDIR /
+
+RUN mv /node_modules/testcafe-without-typecheck/node_modules/* /node_modules
+
+RUN mkdir --parents /node_modules/@types
 
 COPY ./node_modules/@types/node /node_modules/@types/node
 COPY ./node_modules/create-test-id /node_modules/create-test-id
@@ -13,14 +21,12 @@ COPY ./node_modules/typescript /node_modules/typescript
 
 COPY ./build/node_modules/e2ed /node_modules/e2ed
 
-RUN rm -rf /usr/lib/node_modules/testcafe/node_modules/@types/node
-RUN rm -rf /usr/lib/node_modules/testcafe/node_modules/pngjs
-RUN rm -rf /usr/lib/node_modules/testcafe/node_modules/typescript
-
-RUN cp -r /usr/lib/node_modules/testcafe/node_modules/* /node_modules
-
 RUN echo '{"dependencies":{"e2ed":"*","typescript":"*"}}' > /package.json
 
+RUN adduser -D user
+
 USER user
+
+EXPOSE 1337 1338
 
 ENTRYPOINT ["/node_modules/e2ed/bin/dockerEntrypoint.sh"]
