@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.12.2](https://github.com/joomcode/e2ed/tree/v0.12.2) (2022-09-06)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.1...v0.12.2)
+
+- [chore: update @typescript-eslint/\* to 5.36.2](https://github.com/joomcode/e2ed/commit/d157e32fe78842819ae792eb1db5cdfa7864cc0b) ([uid11](https://github.com/uid11))
+- [fix: create new API mock state for every test context](https://github.com/joomcode/e2ed/commit/c65ba2114098840398d3bfcec29fc0833ae3b9ca) ([uid11](https://github.com/uid11))
+- [fix: use stable alpine image instead of edge image from TestCafe](https://github.com/joomcode/e2ed/commit/b043856526630688c7a574d7b4aca81a0d9e3592) ([uid11](https://github.com/uid11))
+
+  fix: install icu-data-full in image for non-English locales
+
 ## [v0.12.1](https://github.com/joomcode/e2ed/tree/v0.12.1) (2022-09-05)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.0...v0.12.1)
