@@ -12,6 +12,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run lint
+
   test-local:
     runs-on: ubuntu-latest
     steps:
@@ -23,3 +24,15 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run test:local
+
+  test-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+          node-version: 16.11.1
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test:docker
