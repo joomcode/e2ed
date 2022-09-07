@@ -12,7 +12,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run lint
-  test:local:
+  test-local:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
