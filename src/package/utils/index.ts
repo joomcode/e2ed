@@ -1,4 +1,3 @@
-export * from './applyHeadersMapper';
 export * from './asserts';
 export * from './clone';
 export * from './deepMerge';
@@ -14,7 +13,7 @@ export * from './log';
 export * from './promise';
 export * from './replaceCookie';
 export * from './request';
-export * from './SetHeadersRequestHook';
+export {SetHeadersRequestHook} from './requestHooks';
 export * from './trimSemicolonsAtTheEnd';
 export * from './typeGuards';
 export * from './valueToString';

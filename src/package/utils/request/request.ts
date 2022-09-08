@@ -8,8 +8,8 @@ import {E2EDError} from '../E2EDError';
 import {log} from '../log';
 import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
+import {getBodyAsString} from './getBodyAsString';
 import {getContentJsonHeaders} from './getContentJsonHeaders';
-import {getRequestBodyAsString} from './getRequestBodyAsString';
 import {oneTryOfRequest} from './oneTryOfRequest';
 
 import type {
@@ -47,6 +47,8 @@ export const request = async <
   const route = new Route(...([routeParams] as ZeroOrOneArg<RouteParams>));
 
   const method = route.getMethod();
+  const requestBodyIsInJsonFormat = route.requestBodyIsInJsonFormat();
+  const responseBodyIsInJsonFormat = route.responseBodyIsInJsonFormat();
   const url = route.getUrl();
 
   const urlObject = new URL(url);
@@ -59,7 +61,7 @@ export const request = async <
     url,
   };
 
-  const requestBodyAsString = getRequestBodyAsString(requestBody);
+  const requestBodyAsString = getBodyAsString(requestBody, requestBodyIsInJsonFormat);
   const options = {
     method,
     requestHeaders: {
@@ -82,6 +84,7 @@ export const request = async <
         logParams: {...logParams, retry},
         options,
         requestBodyAsString,
+        responseBodyIsInJsonFormat,
         timeout,
         urlObject,
       });

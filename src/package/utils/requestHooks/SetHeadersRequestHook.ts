@@ -2,18 +2,19 @@
 
 import {RequestHook} from 'testcafe-without-typecheck';
 
-import {LogEventType} from '../constants/internal';
+import {LogEventType} from '../../constants/internal';
+
+import {log} from '../log';
+import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
 import {applyHeadersMapper} from './applyHeadersMapper';
-import {log} from './log';
-import {wrapInTestRunTracker} from './wrapInTestRunTracker';
 
-import type {DeepReadonly, Headers, MapOptions, Url} from '../types/internal';
+import type {Inner} from 'testcafe-without-typecheck';
+
+import type {DeepReadonly, Headers, MapOptions, Url} from '../../types/internal';
 
 type RequestEvent = DeepReadonly<{
-  requestOptions: {
-    headers: Headers;
-  };
+  requestOptions: Inner.RequestOptions;
 }>;
 
 type ResponseEvent = DeepReadonly<{
@@ -39,12 +40,11 @@ class SetHeadersRequestHook extends RequestHook {
   override async onRequest(event: RequestEvent): Promise<void> {
     const {headers} = event.requestOptions;
 
-    applyHeadersMapper(headers, this.options.mapRequestHeaders);
+    applyHeadersMapper(headers as Headers, this.options.mapRequestHeaders);
 
     await log(`Map request headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   override async onResponse(): Promise<void> {
     // do nothing
   }

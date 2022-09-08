@@ -31,6 +31,7 @@ export type OneTryOfRequestOptions = Readonly<{
   logParams: LogParams;
   options: Readonly<{method: Method; requestHeaders: Headers}>;
   requestBodyAsString: string;
+  responseBodyIsInJsonFormat: boolean;
   timeout: number;
   urlObject: URL;
 }>;

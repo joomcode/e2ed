@@ -8,7 +8,7 @@ const getStackTraceBody = function getStackTrace(): StackFrame[] {
 
   Error.stackTraceLimit = 5000;
 
-  const originPrepareStackTrace = Error.prepareStackTrace;
+  const originalPrepareStackTrace = Error.prepareStackTrace;
 
   Error.prepareStackTrace = function prepareStackTrace(_, stack) {
     return stack;
@@ -21,7 +21,7 @@ const getStackTraceBody = function getStackTrace(): StackFrame[] {
 
   const {stack} = error as unknown as {stack: StackFrame[]};
 
-  Error.prepareStackTrace = originPrepareStackTrace;
+  Error.prepareStackTrace = originalPrepareStackTrace;
 
   Error.stackTraceLimit = savedLimit;
 

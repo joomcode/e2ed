@@ -1,5 +1,5 @@
 import {testController} from '../testController';
-import {SetHeadersRequestHook} from '../utils/SetHeadersRequestHook';
+import {SetHeadersRequestHook} from '../utils/requestHooks';
 
 import type {MapOptions, Url} from '../types/internal';
 

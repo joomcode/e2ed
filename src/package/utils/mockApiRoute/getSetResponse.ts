@@ -1,16 +1,14 @@
-import {parse} from 'node:querystring';
-import {URL} from 'node:url';
-
 import {LogEventType} from '../../constants/internal';
 
 import {assertValueIsDefined} from '../asserts';
 import {cloneWithoutUndefinedProperties} from '../clone';
 import {log} from '../log';
-import {getContentJsonHeaders} from '../request';
+import {getBodyAsString, getContentJsonHeaders} from '../request';
+import {getRequestFromOriginalRequest} from '../requestHooks';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
-import type {ApiMockState, Method, Url} from '../../types/internal';
+import type {ApiMockState, Url} from '../../types/internal';
 
 /**
  * Get setResponse function for API mocks by ApiMockState.
@@ -20,49 +18,43 @@ export const getSetResponse =
   ({
     functionAndRouteByUrl,
   }: ApiMockState): ((
-    originRequest: Inner.RequestOptions,
-    originResponse: Inner.ResponseMock,
+    originalRequest: Inner.RequestOptions,
+    originalResponse: Inner.ResponseMock,
   ) => Promise<void>) =>
-  async (originRequest, originResponse) => {
-    const url = originRequest.url as Url;
+  async (originalRequest, originalResponse) => {
+    const url = originalRequest.url as Url;
     const functionAndRoute = functionAndRouteByUrl[url];
 
-    assertValueIsDefined(functionAndRoute, 'functionAndRoute is defined', {originRequest});
+    assertValueIsDefined(functionAndRoute, 'functionAndRoute is defined', {originalRequest});
 
     const {apiMockFunction, route} = functionAndRoute;
+    const requestBodyIsInJsonFormat = route.requestBodyIsInJsonFormat();
+    const responseBodyIsInJsonFormat = route.responseBodyIsInJsonFormat();
 
-    const {search} = new URL(url);
-
-    const method = (originRequest.method ?? 'GET').toUpperCase() as Method;
-    const query = parse(search ? search.slice(1) : '');
-    const requestBody: unknown = JSON.parse(String(originRequest.body));
-    const requestHeaders = originRequest.headers ?? {};
-
-    const request = {method, query, requestBody, requestHeaders, url};
+    const request = getRequestFromOriginalRequest(originalRequest, requestBodyIsInJsonFormat);
 
     const response = await apiMockFunction(route.params, request);
 
     const {responseBody, responseHeaders, statusCode = 200} = response;
 
-    const responseBodyAsString =
-      responseBody === undefined ? undefined : JSON.stringify(responseBody);
+    const responseBodyAsString = getBodyAsString(responseBody, responseBodyIsInJsonFormat);
 
     // eslint-disable-next-line no-param-reassign
-    originResponse.statusCode = statusCode;
+    originalResponse.statusCode = statusCode;
 
     // eslint-disable-next-line no-param-reassign
-    originResponse.headers = cloneWithoutUndefinedProperties({
+    originalResponse.headers = cloneWithoutUndefinedProperties({
       ...getContentJsonHeaders(responseBodyAsString),
       ...responseHeaders,
     }) as unknown as Record<string, string>;
 
-    if (responseBodyAsString !== undefined) {
-      originResponse.setBody(responseBodyAsString);
+    if (responseBodyAsString !== '') {
+      originalResponse.setBody(responseBodyAsString);
     }
 
     await log(
       `A mock was applied to the API route "${route.constructor.name}"`,
-      {apiMockFunction, originRequest, originResponse, request, response, route},
+      {apiMockFunction, originalRequest, originalResponse, request, response, route},
       LogEventType.InternalCore,
     );
   };

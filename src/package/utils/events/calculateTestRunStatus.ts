@@ -16,10 +16,10 @@ type Options = Readonly<{
  */
 export const calculateTestRunStatus = ({endTestRunEvent, testRunEvent}: Options): TestRunStatus => {
   const {hasRunError, unknownRunError} = endTestRunEvent;
-  const {status: originStatus} = testRunEvent;
+  const {status: originalStatus} = testRunEvent;
 
   let status =
-    originStatus === TestRunStatus.Skipped ? TestRunStatus.Skipped : TestRunStatus.Passed;
+    originalStatus === TestRunStatus.Skipped ? TestRunStatus.Skipped : TestRunStatus.Passed;
 
   if (hasRunError) {
     assertValueIsFalse(status === TestRunStatus.Skipped, `status is not ${TestRunStatus.Skipped}`, {

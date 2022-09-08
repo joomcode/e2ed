@@ -15,12 +15,13 @@ import type {LogParams, OneTryOfRequestOptions} from './types';
  * @internal
  */
 export const oneTryOfRequest = <SomeResponse extends Response>({
-  urlObject,
+  libRequest,
+  logParams,
   options,
   requestBodyAsString,
-  libRequest,
+  responseBodyIsInJsonFormat,
   timeout,
-  logParams,
+  urlObject,
 }: OneTryOfRequestOptions): Promise<{
   fullLogParams: LogParams;
   response: SomeResponse;
@@ -72,9 +73,16 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
           const statusCode = res.statusCode ?? BAD_REQUEST_STATUS_CODE;
 
           try {
-            const responseBody = (
-              responseBodyAsString === '' ? undefined : JSON.parse(responseBodyAsString)
-            ) as SomeResponse['responseBody'];
+            let responseBody: SomeResponse['responseBody'];
+
+            if (responseBodyAsString === '') {
+              responseBody = undefined;
+            } else {
+              responseBody = responseBodyIsInJsonFormat
+                ? (JSON.parse(responseBodyAsString) as unknown)
+                : responseBodyAsString;
+            }
+
             const response = {
               responseBody,
               responseHeaders: res.headers,

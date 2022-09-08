@@ -17,9 +17,7 @@ plugins: [simple-import-sort]
 root: true
 ignorePatterns: [bin/TestCafeFork/package, build]
 rules:
-  class-methods-use-this:
-    - error
-    - {exceptMethods: [getMethod, getOrigin, getPath, getRoute]}
+  class-methods-use-this: off
   curly: [error, all]
   default-param-last: off
   import/exports-last: error
@@ -76,6 +74,7 @@ rules:
           src/package/esm,
           src/package/testcafe.ts,
           src/package/types/index.ts,
+          src/package/utils/index.ts,
         ]
       missingExports: false
       unusedExports: true

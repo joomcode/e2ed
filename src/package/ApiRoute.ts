@@ -26,6 +26,14 @@ export abstract class ApiRoute<
 
   declare readonly [RESPONSE_KEY]: SomeResponse;
 
+  requestBodyIsInJsonFormat(): boolean {
+    return true;
+  }
+
+  responseBodyIsInJsonFormat(): boolean {
+    return true;
+  }
+
   getOrigin(): Url {
     return 'http://localhost' as Url;
   }

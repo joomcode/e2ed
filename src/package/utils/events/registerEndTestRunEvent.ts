@@ -25,15 +25,15 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
   const {
     logEvents,
     runLabel,
-    status: originStatus,
+    status: originalStatus,
     utcTimeInMs: startTimeInMs,
     filePath,
     name,
     options,
   } = testRunEvent;
 
-  if (originStatus !== TestRunStatus.Unknown && originStatus !== TestRunStatus.Skipped) {
-    generalLog(`Try to end test run event, but it is already ended with status ${originStatus}`, {
+  if (originalStatus !== TestRunStatus.Unknown && originalStatus !== TestRunStatus.Skipped) {
+    generalLog(`Try to end test run event, but it is already ended with status ${originalStatus}`, {
       endTestRunEvent,
       testRunEvent: cloneWithoutLogEvents(testRunEvent),
     });

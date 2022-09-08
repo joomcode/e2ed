@@ -19,7 +19,7 @@ export const pixelmatch = (
   output: ImgData | undefined,
   width: number,
   height: number,
-  originOptions: Partial<PixelmatchOptions>,
+  originalOptions: Partial<PixelmatchOptions>,
 ): number => {
   if (!isPixelData(img1) || !isPixelData(img2) || (output && !isPixelData(output))) {
     throw new Error('Image data: Uint8Array, Uint8ClampedArray or Buffer expected.');
@@ -33,7 +33,7 @@ export const pixelmatch = (
     throw new Error('Image data size does not match width/height.');
   }
 
-  const options: PixelmatchOptions = {...DEFAULT_PIXELMATCH_OPTIONS, ...originOptions};
+  const options: PixelmatchOptions = {...DEFAULT_PIXELMATCH_OPTIONS, ...originalOptions};
 
   const len = width * height;
   const a32 = new Uint32Array(img1.buffer, img1.byteOffset, len);
