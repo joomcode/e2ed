@@ -13,12 +13,12 @@ export const assertNumbersAreApproximatelyEqual = async (
   const diff = Math.abs(firstNumber - secondNumber);
   const result = diff < eps;
 
-  // TODO(@uid11): support Smart Assertions in this method after WEB-5031.
+  // TODO: support Smart Assertions.
   await log(
     'Assert that two numbers are approximately equal with specified EPS.',
-    {firstNumber, secondNumber, eps, diff},
+    {diff, firstNumber, eps, secondNumber},
     LogEventType.InternalAssert,
   );
 
-  await expect(result, 'Two numbers are approximately equal with specified EPS.').ok();
+  await expect(result, `two numbers are approximately equal with ${eps} precision.`).ok();
 };
