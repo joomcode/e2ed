@@ -6,7 +6,8 @@ export * from './log';
 export * from './pages';
 export * from './paths';
 export * from './pixelmatch';
-export * from './promise';
+/** @internal */
+export {RESOLVED_PROMISE} from './promise';
 export * from './report';
 export * from './testRun';
 

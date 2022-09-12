@@ -17,6 +17,12 @@ export * from './mockApiRoute';
 export * from './pages';
 export * from './pixelmatch';
 export * from './report';
+export type {
+  RequestHookCharset,
+  RequestHookEncoding,
+  RequestHookRequestEvent,
+  RequestHookResponseEvent,
+} from './requestHooks';
 export * from './retries';
 export * from './routes';
 export * from './runLabel';

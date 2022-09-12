@@ -86,6 +86,7 @@ rules:
   no-continue: off
   no-restricted-syntax: off
   no-shadow: off
+  no-underscore-dangle: [error, {allow: [_onConfigureResponse, _requestContext]}]
   no-useless-constructor: off
   no-use-before-define: off
   no-void: off

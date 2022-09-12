@@ -24,7 +24,15 @@ declare module 'bin-v8-flags-filter' {
  * @internal
  */
 declare module 'e2ed/testcafe' {
-  export const createTestCafe: typeof import('../testcafe').createTestCafe;
+  type TestCafeExports = typeof import('../testcafe');
+
+  export const createTestCafe: TestCafeExports['createTestCafe'];
+  export const fixture: TestCafeExports['fixture'];
+  export const RequestHook: TestCafeExports['RequestHook'];
+  export const RequestLogger: TestCafeExports['RequestLogger'];
+  export const RequestMock: TestCafeExports['RequestMock'];
+  export const Selector: TestCafeExports['Selector'];
+  export const test: TestCafeExports['test'];
 }
 
 /**

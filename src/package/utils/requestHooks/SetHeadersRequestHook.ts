@@ -1,43 +1,28 @@
-/* eslint-disable no-underscore-dangle */
-
-import {RequestHook} from 'testcafe-without-typecheck';
-
 import {LogEventType} from '../../constants/internal';
 
 import {log} from '../log';
-import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
 import {applyHeadersMapper} from './applyHeadersMapper';
+import {RequestHookWithEvents} from './RequestHookWithEvents';
 
-import type {Inner} from 'testcafe-without-typecheck';
-
-import type {DeepReadonly, Headers, MapOptions, Url} from '../../types/internal';
-
-type RequestEvent = DeepReadonly<{
-  requestOptions: Inner.RequestOptions;
-}>;
-
-type ResponseEvent = DeepReadonly<{
-  setHeader(name: string, value: string): Promise<void>;
-  removeHeader(name: string): Promise<void>;
-  _requestContext: {
-    destRes: {headers: Headers};
-  };
-}>;
+import type {
+  Headers,
+  MapOptions,
+  RequestHookRequestEvent,
+  RequestHookResponseEvent,
+  Url,
+} from '../../types/internal';
 
 /**
  * RequestHook that set mapped headers for request and response
  * for concrete url.
  */
-class SetHeadersRequestHook extends RequestHook {
+export class SetHeadersRequestHook extends RequestHookWithEvents {
   constructor(public url: Url, public options: MapOptions) {
     super([url], {includeHeaders: true});
-
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    this.resetMethods(this.onRequest, this._onConfigureResponse);
   }
 
-  override async onRequest(event: RequestEvent): Promise<void> {
+  override async onRequest(event: RequestHookRequestEvent): Promise<void> {
     const {headers} = event.requestOptions;
 
     applyHeadersMapper(headers as Headers, this.options.mapRequestHeaders);
@@ -45,12 +30,12 @@ class SetHeadersRequestHook extends RequestHook {
     await log(`Map request headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
   }
 
-  override async onResponse(): Promise<void> {
-    // do nothing
-  }
-
-  override async _onConfigureResponse(event: ResponseEvent): Promise<void> {
+  override async _onConfigureResponse(event: RequestHookResponseEvent): Promise<void> {
     await super._onConfigureResponse(event);
+
+    // import {decodeContent} from 'testcafe-hammerhead/lib/processing/encoding';
+    // const {charset, encoding} = event._requestContext.contentInfo;
+    // const responseBody = await decodeContent(event._requestContext.destResBody, encoding, charset);
 
     const {headers} = event._requestContext.destRes;
 
@@ -58,19 +43,4 @@ class SetHeadersRequestHook extends RequestHook {
 
     await log(`Map response headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
   }
-
-  resetMethods(
-    onRequest: SetHeadersRequestHook['onRequest'],
-    _onConfigureResponse: SetHeadersRequestHook['_onConfigureResponse'],
-  ): void {
-    this.onRequest = onRequest;
-    this._onConfigureResponse = _onConfigureResponse;
-  }
 }
-
-SetHeadersRequestHook.prototype.resetMethods = wrapInTestRunTracker(
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  SetHeadersRequestHook.prototype.resetMethods,
-);
-
-export {SetHeadersRequestHook};
