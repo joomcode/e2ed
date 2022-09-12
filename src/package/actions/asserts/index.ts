@@ -1,2 +1,2 @@
-export * from './assertNumbersAreApproximatelyEql';
+export * from './assertNumbersAreApproximatelyEqual';
 export * from './assertUrlMatchRoute';

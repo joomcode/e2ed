@@ -15,7 +15,7 @@ export const assertNumbersAreApproximatelyEqual = async (
 
   // TODO: support Smart Assertions.
   await log(
-    'Assert that two numbers are approximately equal with specified EPS.',
+    `Assert that two numbers are approximately equal with ${eps} precision`,
     {diff, eps, firstNumber, secondNumber},
     LogEventType.InternalAssert,
   );
