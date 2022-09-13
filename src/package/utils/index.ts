@@ -7,6 +7,7 @@ export * from './generalLog';
 export * from './getCurrentUrl';
 export * from './getFullConfig';
 export * from './getKeysCounter';
+export * from './getLocatorProperty';
 export * from './getRandomId';
 export * from './getRandomIntegerInRange';
 export * from './getStackTrace';
