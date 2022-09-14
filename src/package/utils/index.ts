@@ -8,6 +8,7 @@ export * from './getCurrentUrl';
 export * from './getFullConfig';
 export * from './getKeysCounter';
 export * from './getRandomId';
+export * from './getRandomIntegerInRange';
 export * from './getStackTrace';
 export * from './log';
 export * from './promise';
