@@ -47,8 +47,8 @@ export const request = async <
   const route = new Route(...([routeParams] as ZeroOrOneArg<RouteParams>));
 
   const method = route.getMethod();
-  const requestBodyIsInJsonFormat = route.requestBodyIsInJsonFormat();
-  const responseBodyIsInJsonFormat = route.responseBodyIsInJsonFormat();
+  const requestBodyIsInJsonFormat = route.getRequestBodyIsInJsonFormat();
+  const responseBodyIsInJsonFormat = route.getResponseBodyIsInJsonFormat();
   const url = route.getUrl();
 
   const urlObject = new URL(url);

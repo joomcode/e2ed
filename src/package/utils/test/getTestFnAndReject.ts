@@ -3,6 +3,7 @@ import {RESOLVED_PROMISE} from '../../constants/internal';
 import {E2EDError} from '../E2EDError';
 import {generalLog} from '../generalLog';
 import {getFullConfig} from '../getFullConfig';
+import {getPromiseWithResolveAndReject} from '../promise';
 
 import type {Onlog, RejectTestRun, RunId, TestFn} from '../../types/internal';
 
@@ -43,18 +44,22 @@ export const getTestFnAndReject = ({
   const testIdleTimeout = testIdleTimeoutFromTestOptions ?? testIdleTimeoutFromConfig;
   const testTimeout = testTimeoutFromTestOptions ?? testTimeoutFromConfig;
 
-  let isTestRunCompleted = false;
-  let rejectPromise: RejectTestRun | undefined;
+  const {promise, reject: rejectPromise} = getPromiseWithResolveAndReject<
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+    void,
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+    void,
+    Parameters<RejectTestRun>[0]
+  >();
 
-  const promiseWithReject = new Promise<void>((res, rej) => {
-    rejectPromise = rej;
-  });
+  let isTestRunCompleted = false;
+
   let idleTimeoutId: NodeJS.Timeout | undefined;
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const timeoutId = setTimeout(rejectByTimeoutError, testTimeout);
 
   const testFnWithReject: TestFn = () =>
-    Promise.race([testFn(), promiseWithReject]).finally(() => {
+    Promise.race([testFn(), promise]).finally(() => {
       isTestRunCompleted = true;
 
       clearTimeout(idleTimeoutId);
@@ -87,7 +92,7 @@ export const getTestFnAndReject = ({
 
     generalLog(`Reject test run ${runId} with run error`, {error});
 
-    rejectPromise?.(error);
+    rejectPromise(error);
   };
 
   /**

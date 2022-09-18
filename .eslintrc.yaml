@@ -27,6 +27,7 @@ rules:
   import/no-default-export: error
   import/no-deprecated: error
   import/no-duplicates: error
+  import/no-extraneous-dependencies: [error, {devDependencies: false, packageDir: .}]
   import/no-internal-modules:
     - error
     - allow:
@@ -68,14 +69,13 @@ rules:
   import/no-unused-modules:
     - error
     - ignoreExports:
-        [
-          src/package/context,
-          src/package/createTestId.ts,
-          src/package/esm,
-          src/package/testcafe.ts,
-          src/package/types/index.ts,
-          src/package/utils/index.ts,
-        ]
+        - src/package/context
+        - src/package/createTestId.ts
+        - src/package/esm
+        - src/package/index.ts
+        - src/package/testcafe.ts
+        - src/package/types/index.ts
+        - src/package/utils/index.ts
       missingExports: false
       unusedExports: true
   import/no-useless-path-segments: [error, {commonjs: true, noUselessIndex: true}]
@@ -84,6 +84,7 @@ rules:
   import/unambiguous: error
   no-await-in-loop: off
   no-continue: off
+  no-empty: [error, {allowEmptyCatch: true}]
   no-restricted-syntax: off
   no-shadow: off
   no-underscore-dangle: [error, {allow: [_onConfigureResponse, _requestContext]}]
@@ -132,6 +133,8 @@ rules:
   '@typescript-eslint/default-param-last': error
   '@typescript-eslint/explicit-function-return-type': [error, {allowExpressions: true}]
   '@typescript-eslint/explicit-member-accessibility': [error, {accessibility: no-public}]
+  '@typescript-eslint/no-invalid-void-type':
+    [error, {allowInGenericTypeArguments: true, allowAsThisParameter: true}]
   '@typescript-eslint/no-namespace': [error, {allowDeclarations: true}]
   '@typescript-eslint/no-shadow': error
   '@typescript-eslint/no-unnecessary-boolean-literal-compare': off

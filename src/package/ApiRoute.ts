@@ -26,11 +26,11 @@ export abstract class ApiRoute<
 
   declare readonly [RESPONSE_KEY]: SomeResponse;
 
-  requestBodyIsInJsonFormat(): boolean {
+  getRequestBodyIsInJsonFormat(): boolean {
     return true;
   }
 
-  responseBodyIsInJsonFormat(): boolean {
+  getResponseBodyIsInJsonFormat(): boolean {
     return true;
   }
 

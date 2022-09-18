@@ -37,9 +37,7 @@ const clientFunctionWrapper = function clientFunctionWrapper(): unknown {
   try {
     // @ts-expect-error: originalFn is out of scope
     result = originalFn.apply(undefined, args); // eslint-disable-line
-  } catch (error) {
-    // do nothing
-  }
+  } catch {}
 
   if (!result || typeof result.then !== 'function') {
     return result;
