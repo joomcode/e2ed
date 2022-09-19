@@ -26,7 +26,7 @@ export type RequestHookRequestEvent = Readonly<{
 export type RequestHookRequestContext = Readonly<{
   contentInfo: Readonly<{charset: RequestHookCharset; encoding: RequestHookEncoding}>;
   destRes: {headers?: Headers; statusCode?: StatusCode};
-  destResBody: Buffer;
+  destResBody?: Buffer;
 }>;
 
 /**

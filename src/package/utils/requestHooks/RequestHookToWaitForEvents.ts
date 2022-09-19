@@ -1,5 +1,6 @@
 import {LogEventType} from '../../constants/internal';
 
+import {E2EDError} from '../E2EDError';
 import {log} from '../log';
 
 import {getRequestFromRequestOptions} from './getRequestFromRequestOptions';
@@ -18,7 +19,7 @@ import type {
  */
 export class RequestHookToWaitForEvents extends RequestHookWithEvents {
   constructor(private waitForEventsState: WaitForEventsState) {
-    super([], {includeHeaders: true});
+    super();
   }
 
   override async onRequest({requestOptions}: RequestHookRequestEvent): Promise<void> {
@@ -34,11 +35,20 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
         if (isRequestMatched) {
           requestPredicates.delete(requestPredicateWithPromise);
 
-          await log('Have waited for the request', {request}, LogEventType.InternalUtil);
+          await log(
+            'Have waited for the request',
+            {predicateCode: predicate.toString(), request},
+            LogEventType.InternalUtil,
+          );
 
           resolve(request);
         }
-      } catch (error) {
+      } catch (cause) {
+        const error = new E2EDError(
+          'waitForRequest promise rejected due to error in predicate function',
+          {cause, predicateCode: predicate.toString(), request},
+        );
+
         requestPredicates.delete(requestPredicateWithPromise);
         reject(error);
       }
@@ -60,11 +70,20 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
         if (isResponseMatched) {
           responsePredicates.delete(responsePredicateWithPromise);
 
-          await log('Have waited for the response', {response}, LogEventType.InternalUtil);
+          await log(
+            'Have waited for the response',
+            {predicateCode: predicate.toString(), response},
+            LogEventType.InternalUtil,
+          );
 
           resolve(response);
         }
-      } catch (error) {
+      } catch (cause) {
+        const error = new E2EDError(
+          'waitForResponse promise rejected due to error in predicate function',
+          {cause, predicateCode: predicate.toString(), response},
+        );
+
         responsePredicates.delete(responsePredicateWithPromise);
         reject(error);
       }

@@ -11,7 +11,7 @@ export const updateWaitForEventsState = async (
 ): Promise<void> => {
   const {hook, hookAdded, requestPredicates, responsePredicates} = waitForEventsState;
 
-  const isHookNeeded = requestPredicates.size > 0 && responsePredicates.size > 0;
+  const isHookNeeded = requestPredicates.size > 0 || responsePredicates.size > 0;
 
   if (hookAdded && isHookNeeded !== true) {
     await testController.removeRequestHooks(hook);

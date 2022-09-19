@@ -19,7 +19,7 @@ import type {
  */
 export class SetHeadersRequestHook extends RequestHookWithEvents {
   constructor(private url: Url, private options: MapOptions) {
-    super([url], {includeHeaders: true});
+    super([url]);
   }
 
   override async onRequest(event: RequestHookRequestEvent): Promise<void> {

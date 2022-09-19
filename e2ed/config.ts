@@ -35,6 +35,8 @@ const config: Config = {
   testIdleTimeout: 25_000,
   testLogsFileName: 'test-logs.log',
   testTimeout: 90_000,
+  waitForRequestTimeout: 30_000,
+  waitForResponseTimeout: 30_000,
 };
 
 try {

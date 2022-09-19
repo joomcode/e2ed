@@ -54,7 +54,14 @@ export const getSetResponse =
 
     await log(
       `A mock was applied to the API route "${route.constructor.name}"`,
-      {apiMockFunction, request, requestOptions, response, responseOptions, route},
+      {
+        apiMockFunctionCode: apiMockFunction.toString(),
+        request,
+        requestOptions,
+        response,
+        responseOptions,
+        route,
+      },
       LogEventType.InternalCore,
     );
   };

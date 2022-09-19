@@ -51,7 +51,11 @@ export const mockApiRoute = async <
 
   functionByRoute.set(Route, apiMockFunction as unknown as ApiMockFunction);
 
-  await log(`Mock API for route "${Route.name}"`, undefined, LogEventType.InternalCore);
+  await log(
+    `Mock API for route "${Route.name}"`,
+    {apiMockFunctionCode: apiMockFunction.toString()},
+    LogEventType.InternalCore,
+  );
 };
 
 /**
@@ -66,12 +70,18 @@ export const unmockApiRoute = async <
 ): Promise<void> => {
   const apiMockState = getApiMockState();
   const {functionByRoute} = apiMockState;
+  let apiMockFunction: ApiMockFunction | undefined;
   let routeWasMocked = false;
 
   if (functionByRoute?.has(Route)) {
+    apiMockFunction = functionByRoute.get(Route);
     routeWasMocked = true;
     functionByRoute.delete(Route);
   }
 
-  await log(`Unmock API for route "${Route.name}"`, {routeWasMocked}, LogEventType.InternalCore);
+  await log(
+    `Unmock API for route "${Route.name}"`,
+    {apiMockFunctionCode: apiMockFunction?.toString(), routeWasMocked},
+    LogEventType.InternalCore,
+  );
 };

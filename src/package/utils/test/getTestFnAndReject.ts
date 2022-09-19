@@ -44,26 +44,29 @@ export const getTestFnAndReject = ({
   const testIdleTimeout = testIdleTimeoutFromTestOptions ?? testIdleTimeoutFromConfig;
   const testTimeout = testTimeoutFromTestOptions ?? testTimeoutFromConfig;
 
-  const {promise, reject: rejectPromise} = getPromiseWithResolveAndReject<
+  const {
+    clearRejectTimeout,
+    promise,
+    reject: rejectPromise,
+    setRejectTimeoutFunction,
+  } = getPromiseWithResolveAndReject<
     // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
     void,
     // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
     void,
     Parameters<RejectTestRun>[0]
-  >();
+  >(testTimeout);
 
   let isTestRunCompleted = false;
 
   let idleTimeoutId: NodeJS.Timeout | undefined;
-  // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  const timeoutId = setTimeout(rejectByTimeoutError, testTimeout);
 
   const testFnWithReject: TestFn = () =>
     Promise.race([testFn(), promise]).finally(() => {
       isTestRunCompleted = true;
 
       clearTimeout(idleTimeoutId);
-      clearTimeout(timeoutId);
+      clearRejectTimeout();
     });
 
   /**
@@ -107,14 +110,11 @@ export const getTestFnAndReject = ({
     reject(error);
   }
 
-  /**
-   * Reject test run by test timeout error.
-   */
-  function rejectByTimeoutError(): void {
+  setRejectTimeoutFunction(() => {
     const error = new E2EDError(`Test run ${runId} was rejected after ${testTimeout}ms timeout`);
 
     reject(error);
-  }
+  });
 
   return {onlog, reject, testFnWithReject};
 };

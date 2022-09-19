@@ -1,2 +1,3 @@
-export * from './historyGoBack';
-export * from './historyGoForward';
+export {backPageHistory} from './backPageHistory';
+export {forwardPageHistory} from './forwardPageHistory';
+export {goPageHistory} from './goPageHistory';

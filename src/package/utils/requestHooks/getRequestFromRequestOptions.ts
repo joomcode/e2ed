@@ -6,6 +6,12 @@ import type {Inner} from 'testcafe-without-typecheck';
 import type {Method, Request, Url} from '../../types/internal';
 
 /**
+ * Parse request body as JSON string.
+ * @internal
+ */
+const parseBody = (body: unknown): unknown => (body ? JSON.parse(String(body)) : undefined);
+
+/**
  * Get Request object from the original TestCafe request options object.
  * @internal
  */
@@ -23,12 +29,12 @@ export const getRequestFromRequestOptions = (
   let requestBody: unknown | undefined;
 
   if (requestBodyIsInJsonFormat === true) {
-    requestBody = JSON.parse(String(requestOptions.body));
+    requestBody = parseBody(requestOptions.body);
   } else if (requestBodyIsInJsonFormat === false) {
     requestBody = requestOptions.body;
   } else {
     try {
-      requestBody = JSON.parse(String(requestOptions.body));
+      requestBody = parseBody(requestOptions.body);
     } catch {
       requestBody = requestOptions.body;
     }

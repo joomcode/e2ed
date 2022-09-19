@@ -17,6 +17,8 @@ type OwnE2edConfig = Readonly<{
   testIdleTimeout: number;
   testLogsFileName: string | null;
   testTimeout: number;
+  waitForRequestTimeout: number;
+  waitForResponseTimeout: number;
 }>;
 
 /**

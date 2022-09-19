@@ -11,13 +11,16 @@ export const getResponseFromRequestContext = async (
   requestContext: RequestHookRequestContext,
 ): Promise<Response> => {
   const {charset, encoding} = requestContext.contentInfo;
-  const responseBodyAsString = await decodeContent(requestContext.destResBody, encoding, charset);
   let responseBody: unknown;
 
-  try {
-    responseBody = JSON.parse(responseBodyAsString);
-  } catch {
-    responseBody = responseBodyAsString;
+  if (requestContext.destResBody) {
+    const responseBodyAsString = await decodeContent(requestContext.destResBody, encoding, charset);
+
+    try {
+      responseBody = JSON.parse(responseBodyAsString);
+    } catch {
+      responseBody = responseBodyAsString;
+    }
   }
 
   const {headers = {}, statusCode = 200} = requestContext.destRes;
