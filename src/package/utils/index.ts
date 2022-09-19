@@ -7,7 +7,7 @@ export * from './generalLog';
 export * from './getCurrentUrl';
 export * from './getFullConfig';
 export * from './getKeysCounter';
-export * from './getLocatorProperty';
+export {getLocatorProperty} from './getLocatorProperty';
 export * from './getRandomId';
 export * from './getRandomIntegerInRange';
 export * from './getStackTrace';
@@ -17,9 +17,9 @@ export * from './replaceCookie';
 export * from './request';
 export {SetHeadersRequestHook} from './requestHooks';
 export * from './trimSemicolonsAtTheEnd';
-export * from './typeGuards';
-export * from './valueToString';
-export * from './wrapInTestRunTracker';
+export {isArray} from './typeGuards';
+export {valueToString} from './valueToString';
+export {wrapInTestRunTracker} from './wrapInTestRunTracker';
 
 /**
  * Userland utils. This export must be the last.

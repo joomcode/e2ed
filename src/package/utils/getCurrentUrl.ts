@@ -10,6 +10,9 @@ const clientGetCurrentUrl = ClientFunction<Url, []>(
   'getCurrentUrl',
 );
 
+/**
+ * Get current page url.
+ */
 export const getCurrentUrl = async (): Promise<Url | undefined> => {
   const url = await clientGetCurrentUrl();
 
