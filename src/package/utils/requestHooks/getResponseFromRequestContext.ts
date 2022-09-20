@@ -10,11 +10,15 @@ import type {RequestHookRequestContext, Response} from '../../types/internal';
 export const getResponseFromRequestContext = async (
   requestContext: RequestHookRequestContext,
 ): Promise<Response> => {
+  const destResBody =
+    // eslint-disable-next-line no-underscore-dangle
+    requestContext.destResBody ?? (await requestContext._getDestResBody(requestContext.destRes));
+
   const {charset, encoding} = requestContext.contentInfo;
   let responseBody: unknown;
 
-  if (requestContext.destResBody) {
-    const responseBodyAsString = await decodeContent(requestContext.destResBody, encoding, charset);
+  if (destResBody) {
+    const responseBodyAsString = await decodeContent(destResBody, encoding, charset);
 
     try {
       responseBody = JSON.parse(responseBodyAsString);

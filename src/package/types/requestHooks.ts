@@ -3,6 +3,8 @@ import type {Inner} from 'testcafe-without-typecheck';
 import type {Brand} from './brand';
 import type {Headers, StatusCode} from './http';
 
+type RequestContextDestRes = Readonly<{headers?: Headers; statusCode?: StatusCode}>;
+
 /**
  * TestCafe charset class for encode/decode request/response body buffers.
  */
@@ -25,8 +27,9 @@ export type RequestHookRequestEvent = Readonly<{
  */
 export type RequestHookRequestContext = Readonly<{
   contentInfo: Readonly<{charset: RequestHookCharset; encoding: RequestHookEncoding}>;
-  destRes: {headers?: Headers; statusCode?: StatusCode};
+  destRes: RequestContextDestRes;
   destResBody?: Buffer;
+  _getDestResBody(destRes: RequestContextDestRes): Promise<Buffer | undefined>;
 }>;
 
 /**

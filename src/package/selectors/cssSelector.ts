@@ -2,4 +2,8 @@ import {createSelector} from '../createSelector';
 
 import type {Selector} from '../types/internal';
 
-export const cssSelector = (locator: string): Selector => createSelector(locator);
+/**
+ * Selector of page elements by CSS selectors.
+ */
+export const cssSelector = (cssSelectorString: string): Selector =>
+  createSelector(cssSelectorString);

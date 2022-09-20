@@ -35,3 +35,9 @@ void waitForRequest(() => false, {foo: 10_000});
 
 // @ts-expect-error: unknown options property
 void waitForResponse(() => false, {foo: 10_000});
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+void waitForRequest(({method, query, requestBody, requestHeaders, url}) => true);
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+void waitForResponse(({responseBody, responseHeaders, statusCode}) => true);

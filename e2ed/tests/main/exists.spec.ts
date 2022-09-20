@@ -84,9 +84,7 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 20_000, testTimeout: 50_000}
       Promise.race([
         fetch('https://api.com/product/135865?size=13', {
           body: JSON.stringify({cookies: [], input: 17, model: 'samsung', version: '12'}),
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
+          headers: {'Content-Type': 'application/json; charset=UTF-8'},
           method: 'POST',
         }).then((res) => res.json() as Promise<ApiDeviceAndProductResponse['responseBody']>),
         new Promise<void>((resolve) => {
@@ -123,5 +121,19 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 20_000, testTimeout: 50_000}
 
   await expect(await getMockedProduct(), 'API mock on CreateProductRoute was umocked').eql(
     undefined,
+  );
+
+  await waitForRequest(() => false, {timeout: 100}).then(
+    () => {
+      throw new Error('waitForRequest did not throw an error after timeout');
+    },
+    () => undefined,
+  );
+
+  await waitForResponse(() => false, {timeout: 100}).then(
+    () => {
+      throw new Error('waitForResponse did not throw an error after timeout');
+    },
+    () => undefined,
   );
 });

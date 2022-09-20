@@ -1,5 +1,6 @@
-export * from './cssSelector';
-export * from './testIdSelector';
+export {cssSelector} from './cssSelector';
+export {htmlElementSelector} from './htmlElementSelector';
+export {testIdSelector} from './testIdSelector';
 
 /**
  * Userland selectors. This export must be the last.
