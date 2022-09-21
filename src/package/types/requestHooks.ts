@@ -1,8 +1,9 @@
 import type {Inner} from 'testcafe-without-typecheck';
 
 import type {Brand} from './brand';
-import type {DeepReadonly} from './deep';
 import type {Headers, StatusCode} from './http';
+
+type RequestContextDestRes = Readonly<{headers?: Headers; statusCode?: StatusCode}>;
 
 /**
  * TestCafe charset class for encode/decode request/response body buffers.
@@ -22,16 +23,20 @@ export type RequestHookRequestEvent = Readonly<{
 }>;
 
 /**
+ * TestCafe internal request context of response event in RequestHook.
+ */
+export type RequestHookRequestContext = Readonly<{
+  contentInfo: Readonly<{charset: RequestHookCharset; encoding: RequestHookEncoding}>;
+  destRes: RequestContextDestRes;
+  destResBody?: Buffer;
+  _getDestResBody(destRes: RequestContextDestRes): Promise<Buffer | undefined>;
+}>;
+
+/**
  * TestCafe internal response event in RequestHook.
  */
-export type RequestHookResponseEvent = DeepReadonly<{
+export type RequestHookResponseEvent = Readonly<{
   setHeader(name: string, value: string): Promise<void>;
-
   removeHeader(name: string): Promise<void>;
-
-  _requestContext: {
-    contentInfo: {charset: RequestHookCharset; encoding: RequestHookEncoding};
-    destRes: {headers: Headers; statusCode: StatusCode};
-    destResBody: Buffer;
-  };
+  _requestContext: RequestHookRequestContext;
 }>;

@@ -16,7 +16,7 @@ const isLocalRun = runEnvironment === RunEnvironment.Local;
 const config: Config = {
   ajaxRequestTimeout: 40_000,
   assertionTimeout: 10_000,
-  browserInitTimeout: 30_000,
+  browserInitTimeout: 60_000,
   browsers: 'chromium:headless --no-sandbox --disable-dev-shm-usage --disable-web-security',
   concurrency: isLocalRun ? 1 : 2,
   dockerImage: 'e2edhub/e2ed',
@@ -35,6 +35,8 @@ const config: Config = {
   testIdleTimeout: 25_000,
   testLogsFileName: 'test-logs.log',
   testTimeout: 90_000,
+  waitForRequestTimeout: 30_000,
+  waitForResponseTimeout: 30_000,
 };
 
 try {
@@ -42,8 +44,6 @@ try {
   const {overrideConfig} = require('./overrideConfig');
 
   Object.assign(config, overrideConfig);
-} catch (error) {
-  // no overrideConfig
-}
+} catch {}
 
 export {config};

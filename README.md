@@ -103,6 +103,12 @@ If `null`, the report will not be saved.
 If the test run takes longer than this timeout, the test fails and rerun on the next retry.
 This parameter can be overridden in the test-specific options.
 
+`waitForRequestTimeout: number`: default timeout (in milliseconds) for waitForRequest function.
+If the wait is longer than this timeout, then the promise returned by the waitForRequest function is rejected.
+
+`waitForResponseTimeout: number`: default timeout (in milliseconds) for waitForResponse function.
+If the wait is longer than this timeout, then the promise returned by the waitForResponse function is rejected.
+
 ### Environment variables
 
 `E2ED_ORIGIN`: origin-part of the url (`protocol` + `host`) on which the tests will be run. For example, `https://google.com`.

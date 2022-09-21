@@ -1,2 +1,2 @@
-export * from './waitForInterfaceStabilization';
-export * from './waitForTimeout';
+export {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
+export {waitForTimeout} from './waitForTimeout';

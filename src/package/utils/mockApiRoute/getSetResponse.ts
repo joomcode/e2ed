@@ -4,7 +4,7 @@ import {assertValueIsDefined} from '../asserts';
 import {cloneWithoutUndefinedProperties} from '../clone';
 import {log} from '../log';
 import {getBodyAsString, getContentJsonHeaders} from '../request';
-import {getRequestFromOriginalRequest} from '../requestHooks';
+import {getRequestFromRequestOptions} from '../requestHooks';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
@@ -18,20 +18,20 @@ export const getSetResponse =
   ({
     functionAndRouteByUrl,
   }: ApiMockState): ((
-    originalRequest: Inner.RequestOptions,
-    originalResponse: Inner.ResponseMock,
+    requestOptions: Inner.RequestOptions,
+    responseOptions: Inner.ResponseMock,
   ) => Promise<void>) =>
-  async (originalRequest, originalResponse) => {
-    const url = originalRequest.url as Url;
+  async (requestOptions, responseOptions) => {
+    const url = requestOptions.url as Url;
     const functionAndRoute = functionAndRouteByUrl[url];
 
-    assertValueIsDefined(functionAndRoute, 'functionAndRoute is defined', {originalRequest});
+    assertValueIsDefined(functionAndRoute, 'functionAndRoute is defined', {requestOptions});
 
     const {apiMockFunction, route} = functionAndRoute;
-    const requestBodyIsInJsonFormat = route.requestBodyIsInJsonFormat();
-    const responseBodyIsInJsonFormat = route.responseBodyIsInJsonFormat();
+    const requestBodyIsInJsonFormat = route.getRequestBodyIsInJsonFormat();
+    const responseBodyIsInJsonFormat = route.getResponseBodyIsInJsonFormat();
 
-    const request = getRequestFromOriginalRequest(originalRequest, requestBodyIsInJsonFormat);
+    const request = getRequestFromRequestOptions(requestOptions, requestBodyIsInJsonFormat);
 
     const response = await apiMockFunction(route.params, request);
 
@@ -40,21 +40,28 @@ export const getSetResponse =
     const responseBodyAsString = getBodyAsString(responseBody, responseBodyIsInJsonFormat);
 
     // eslint-disable-next-line no-param-reassign
-    originalResponse.statusCode = statusCode;
+    responseOptions.statusCode = statusCode;
 
     // eslint-disable-next-line no-param-reassign
-    originalResponse.headers = cloneWithoutUndefinedProperties({
+    responseOptions.headers = cloneWithoutUndefinedProperties({
       ...getContentJsonHeaders(responseBodyAsString),
       ...responseHeaders,
     }) as unknown as Record<string, string>;
 
     if (responseBodyAsString !== '') {
-      originalResponse.setBody(responseBodyAsString);
+      responseOptions.setBody(responseBodyAsString);
     }
 
     await log(
       `A mock was applied to the API route "${route.constructor.name}"`,
-      {apiMockFunction, originalRequest, originalResponse, request, response, route},
+      {
+        apiMockFunctionCode: apiMockFunction.toString(),
+        request,
+        requestOptions,
+        response,
+        responseOptions,
+        route,
+      },
       LogEventType.InternalCore,
     );
   };

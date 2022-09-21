@@ -21,7 +21,6 @@ export const getRequestsFilter =
     for (const [Route, apiMockFunction] of functionByRoute) {
       try {
         const routeParams = Route.getParamsFromUrl(url);
-
         const route = new Route(routeParams);
 
         assertValueIsTrue(route.isMatchUrl(url), 'route matches on url', {request, route});
@@ -42,7 +41,7 @@ export const getRequestsFilter =
         functionAndRouteByUrl[url] = {apiMockFunction, route};
 
         return true;
-      } catch (error) {
+      } catch {
         // eslint-disable-next-line no-param-reassign
         functionAndRouteByUrl[url] = undefined;
       }

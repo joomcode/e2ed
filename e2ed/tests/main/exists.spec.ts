@@ -1,4 +1,12 @@
-import {ClientFunction, expect, it, mockApiRoute, unmockApiRoute} from 'e2ed';
+import {
+  ClientFunction,
+  expect,
+  it,
+  mockApiRoute,
+  unmockApiRoute,
+  waitForRequest,
+  waitForResponse,
+} from 'e2ed';
 import {assertPage, navigateToPage, pressKey, scroll} from 'e2ed/actions';
 import {Main, Search} from 'e2ed/pageObjects/pages';
 import {CreateProduct as CreateProductRoute} from 'e2ed/routes/apiRoutes';
@@ -47,6 +55,16 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 20_000, testTimeout: 50_000}
 
   await pressKey('enter');
 
+  const requestWithQuery = await waitForRequest(({url}) => url.includes(searchQuery));
+
+  const successfulResponse = await waitForResponse(({statusCode}) => statusCode === 200);
+
+  await expect(requestWithQuery.url, 'request with query contains search query').contains(
+    searchQuery,
+  );
+
+  await expect(successfulResponse.statusCode, 'successful response has statusCode = 200').eql(200);
+
   const searchPage = await assertPage(Search, {searchQuery});
 
   await expect(searchPage.pageParams, 'pageParams is correct after assertPage').eql({searchQuery});
@@ -66,9 +84,7 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 20_000, testTimeout: 50_000}
       Promise.race([
         fetch('https://api.com/product/135865?size=13', {
           body: JSON.stringify({cookies: [], input: 17, model: 'samsung', version: '12'}),
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
+          headers: {'Content-Type': 'application/json; charset=UTF-8'},
           method: 'POST',
         }).then((res) => res.json() as Promise<ApiDeviceAndProductResponse['responseBody']>),
         new Promise<void>((resolve) => {
@@ -105,5 +121,19 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 20_000, testTimeout: 50_000}
 
   await expect(await getMockedProduct(), 'API mock on CreateProductRoute was umocked').eql(
     undefined,
+  );
+
+  await waitForRequest(() => false, {timeout: 100}).then(
+    () => {
+      throw new Error('waitForRequest did not throw an error after timeout');
+    },
+    () => undefined,
+  );
+
+  await waitForResponse(() => false, {timeout: 100}).then(
+    () => {
+      throw new Error('waitForResponse did not throw an error after timeout');
+    },
+    () => undefined,
   );
 });

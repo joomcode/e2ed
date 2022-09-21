@@ -44,6 +44,21 @@ declare module 'e2ed/utils/asserts' {
 }
 
 /**
+ * Internal TestCafe module, which is used to decode/encode response body buffers.
+ * @internal
+ */
+declare module 'testcafe-hammerhead/lib/processing/encoding' {
+  type RequestHookCharset = import('./requestHooks').RequestHookCharset;
+  type RequestHookEncoding = import('./requestHooks').RequestHookEncoding;
+
+  export const decodeContent: (
+    destResBody: Buffer,
+    encoding: RequestHookEncoding,
+    charset: RequestHookCharset,
+  ) => Promise<string>;
+}
+
+/**
  * Internal TestCafe module, which is used to track asynchronous calls in tests.
  * @internal
  */

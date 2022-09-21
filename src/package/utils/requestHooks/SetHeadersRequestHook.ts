@@ -18,12 +18,12 @@ import type {
  * for concrete url.
  */
 export class SetHeadersRequestHook extends RequestHookWithEvents {
-  constructor(public url: Url, public options: MapOptions) {
-    super([url], {includeHeaders: true});
+  constructor(private url: Url, private options: MapOptions) {
+    super([url]);
   }
 
   override async onRequest(event: RequestHookRequestEvent): Promise<void> {
-    const {headers} = event.requestOptions;
+    const {headers = {}} = event.requestOptions;
 
     applyHeadersMapper(headers as Headers, this.options.mapRequestHeaders);
 
@@ -33,11 +33,7 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
   override async _onConfigureResponse(event: RequestHookResponseEvent): Promise<void> {
     await super._onConfigureResponse(event);
 
-    // import {decodeContent} from 'testcafe-hammerhead/lib/processing/encoding';
-    // const {charset, encoding} = event._requestContext.contentInfo;
-    // const responseBody = await decodeContent(event._requestContext.destResBody, encoding, charset);
-
-    const {headers} = event._requestContext.destRes;
+    const {headers = {}} = event._requestContext.destRes;
 
     applyHeadersMapper(headers, this.options.mapResponseHeaders);
 

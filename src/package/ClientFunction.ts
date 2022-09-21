@@ -37,9 +37,7 @@ const clientFunctionWrapper = function clientFunctionWrapper(): unknown {
   try {
     // @ts-expect-error: originalFn is out of scope
     result = originalFn.apply(undefined, args); // eslint-disable-line
-  } catch (error) {
-    // do nothing
-  }
+  } catch {}
 
   if (!result || typeof result.then !== 'function') {
     return result;
@@ -70,26 +68,24 @@ export const ClientFunction = <R, A extends unknown[]>(
   originalFn: (...args: A) => R,
   name: string,
 ): WrappedClientFunction<R, A> => {
+  const originalFnCode = String(originalFn).slice(0, 200);
+
   const clientFunction = BaseClientFunction<Awaited<R> | undefined, A>(
     clientFunctionWrapper as unknown as (...args: A) => Awaited<R> | undefined,
-    {
-      dependencies: {originalFn},
-    },
+    {dependencies: {originalFn}},
   );
 
-  generalLog(`Create client function "${name}"`, {
-    originalFn: String(originalFn).slice(0, 80),
-  });
+  generalLog(`Create client function "${name}"`, {originalFnCode});
 
   const wrappedClientFunction = (async (...args: A) => {
     try {
       return clientFunction(...args).catch((error: unknown) => {
-        generalLog(`Client function "${name}" rejected with error`, {args, error, originalFn});
+        generalLog(`Client function "${name}" rejected with error`, {args, error, originalFnCode});
 
         return undefined;
       });
     } catch (error) {
-      generalLog(`Client function "${name}" thrown an error`, {args, error, originalFn});
+      generalLog(`Client function "${name}" thrown an error`, {args, error, originalFnCode});
     }
 
     return undefined;

@@ -20,6 +20,7 @@ export * from './report';
 export type {
   RequestHookCharset,
   RequestHookEncoding,
+  RequestHookRequestContext,
   RequestHookRequestEvent,
   RequestHookResponseEvent,
 } from './requestHooks';
@@ -33,6 +34,13 @@ export * from './testCafe';
 export * from './testRun';
 export * from './undefined';
 export * from './utils';
+/** * @internal */
+export type {
+  RequestPredicateWithPromise,
+  ResponsePredicateWithPromise,
+  WaitForEventsState,
+} from './waitForEvents';
+export type {RequestPredicate, ResponsePredicate} from './waitForEvents';
 
 /**
  * Selector type (which replaces the DOM element wrapper).

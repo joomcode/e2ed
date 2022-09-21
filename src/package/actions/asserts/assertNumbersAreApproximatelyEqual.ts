@@ -20,5 +20,5 @@ export const assertNumbersAreApproximatelyEqual = async (
     LogEventType.InternalAssert,
   );
 
-  await expect(result, `two numbers are approximately equal with ${eps} precision.`).ok();
+  await expect(result, `two numbers are approximately equal with ${eps} precision`).ok();
 };
