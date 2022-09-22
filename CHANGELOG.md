@@ -25,23 +25,23 @@
 
   add getLocatorProperty util
 
-- [add getLocatorProperty util](https://github.com/joomcode/e2ed/commit/ab7f8e0ea9479a36d22f6c956dce39ed116b161e) ([w84v2rhsq4](https://github.com/w84v2rhsq4))
+- [feat: add getLocatorProperty util](https://github.com/joomcode/e2ed/commit/ab7f8e0ea9479a36d22f6c956dce39ed116b161e) ([w84v2rhsq4](https://github.com/w84v2rhsq4))
 - [feat: add timeouts for waitForRequest/waitForResponse](https://github.com/joomcode/e2ed/commit/594d85d367cd6fc0eb8c3cb24506b4b51c596f44) ([uid11](https://github.com/uid11))
 - [feat: add waitForRequest/waitForResponse functions](https://github.com/joomcode/e2ed/commit/1fe5b9ed5fbd3d7c1f8768e762c4aba4e880b545) ([uid11](https://github.com/uid11))
 
   fix: add CODEOWNERS
 
-- [Kuraev Merge pull request #8 from joomcode/add-history-actions](https://github.com/joomcode/e2ed/commit/300dbf79b848f4742f140e8afcfbee22f70e292d) ([Roman](https://github.com/Roman))
+- [Merge pull request #8 from joomcode/add-history-actions](https://github.com/joomcode/e2ed/commit/300dbf79b848f4742f140e8afcfbee22f70e292d) ([naorunaoru](https://github.com/naorunaoru))
 
   add historyGoBack historyGoForward actions
 
-- [Kuraev Merge pull request #7 from joomcode/add-getRandomIntegerInRange-util](https://github.com/joomcode/e2ed/commit/1dfdd8b61fab90d696c128d3886db1295b45720d) ([Roman](https://github.com/Roman))
+- [Merge pull request #7 from joomcode/add-getRandomIntegerInRange-util](https://github.com/joomcode/e2ed/commit/1dfdd8b61fab90d696c128d3886db1295b45720d) ([naorunaoru](https://github.com/naorunaoru))
 
   feat: add getRandomIntegerInRange
 
-- [Kuraev add historyGoBack historyGoForward actions](https://github.com/joomcode/e2ed/commit/112a3e3d75ada6a5de007bbd967c3a54c34a1ab4) ([Roman](https://github.com/Roman))
-- [Kuraev add getRandomIntegerInRange](https://github.com/joomcode/e2ed/commit/57f7a93e2ebc5fdded986dae4a62e9579cb0fd4e) ([Roman](https://github.com/Roman))
-- [add assertDistanceBetweenElements util](https://github.com/joomcode/e2ed/commit/628e860d6e4e1384babe4fb7f5e2400ce73c8114) ([w84v2rhsq4](https://github.com/w84v2rhsq4))
+- [feat: add historyGoBack historyGoForward actions](https://github.com/joomcode/e2ed/commit/112a3e3d75ada6a5de007bbd967c3a54c34a1ab4) ([naorunaoru](https://github.com/naorunaoru))
+- [feat: add getRandomIntegerInRange](https://github.com/joomcode/e2ed/commit/57f7a93e2ebc5fdded986dae4a62e9579cb0fd4e) ([naorunaoru](https://github.com/naorunaoru))
+- [feat: add assertDistanceBetweenElements util](https://github.com/joomcode/e2ed/commit/628e860d6e4e1384babe4fb7f5e2400ce73c8114) ([w84v2rhsq4](https://github.com/w84v2rhsq4))
 - [Merge pull request #4 from joomcode/add-numbersAreAprroximatelyEql-assert](https://github.com/joomcode/e2ed/commit/a97f3daaa190665fb4b242f5bb7674f788db97de) ([uid11](https://github.com/uid11))
 
   feat: add assertNumbersAreApproximatelyEqual
