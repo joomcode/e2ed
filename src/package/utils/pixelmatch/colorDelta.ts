@@ -5,7 +5,7 @@ import {blend, rgb2i, rgb2q, rgb2y} from './colors';
 import type {ImgData} from '../../types/internal';
 
 /**
- * Return delta of two pixels in images data.
+ * Returns delta of two pixels in images data.
  * @internal
  */
 export const colorDelta = (

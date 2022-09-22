@@ -10,7 +10,7 @@ declare const BRAND: unique symbol;
 export type Brand<T, K extends string> = T & {readonly [BRAND]: K};
 
 /**
- * Return true, if T is brand type.
+ * Returns true, if T is brand type.
  * IsBrand<3> = false.
  * IsBrand<Brand<3, 'foo'> = true.
  */

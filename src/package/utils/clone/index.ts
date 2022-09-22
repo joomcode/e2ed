@@ -1,2 +1,3 @@
-export * from './cloneWithoutLogEvents';
-export * from './cloneWithoutUndefinedProperties';
+/** @internal */
+export {cloneWithoutLogEvents} from './cloneWithoutLogEvents';
+export {cloneWithoutUndefinedProperties} from './cloneWithoutUndefinedProperties';

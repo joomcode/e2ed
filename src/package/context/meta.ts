@@ -6,6 +6,11 @@ import type {DeepPartial} from '../types/internal';
 // eslint-disable-next-line import/no-restricted-paths
 import type {TestMeta} from '../types/userland/types';
 
+/**
+ * Raw get and set test metadata functions.
+ * @internal
+ */
+// eslint-disable-next-line import/no-unused-modules
 export const [getRawMeta, setRawMeta] = useContext<TestMeta>();
 
 /**

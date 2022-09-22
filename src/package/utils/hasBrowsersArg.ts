@@ -1,5 +1,5 @@
 /**
- * Return true, if current node args for TestCafe has browsers arg.
+ * Returns true, if current node args for TestCafe has browsers arg.
  * @internal
  */
 export const hasBrowsersArg = (): boolean => {

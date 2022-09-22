@@ -1,1 +1,2 @@
-export * from './Expect';
+/** @internal */
+export {Expect} from './Expect';

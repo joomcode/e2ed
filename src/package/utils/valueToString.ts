@@ -5,7 +5,7 @@ import {DEFAULT_INSPECT_OPTIONS, MAX_LINES_IN_STRINGIFY_VALUE} from '../constant
 const STACK_FRAMES = 'stackFrames: [';
 
 /**
- * Return string representation of arbitrary value.
+ * Returns string representation of arbitrary value.
  */
 export const valueToString = (
   value: unknown,

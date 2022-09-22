@@ -1,1 +1,2 @@
-export * from './getRunTest';
+/** @internal */
+export {getRunTest} from './getRunTest';

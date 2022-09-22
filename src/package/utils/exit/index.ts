@@ -1,2 +1,4 @@
-export * from './getExitCode';
-export * from './processExit';
+/** @internal */
+export {getExitCode} from './getExitCode';
+/** @internal */
+export {processExit} from './processExit';

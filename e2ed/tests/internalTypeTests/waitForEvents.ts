@@ -1,4 +1,4 @@
-import {waitForRequest, waitForResponse} from 'e2ed';
+import {waitForRequest, waitForResponse} from 'e2ed/actions';
 
 // ok
 void waitForRequest(() => false);

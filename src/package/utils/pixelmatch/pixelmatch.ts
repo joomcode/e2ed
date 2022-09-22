@@ -1,9 +1,9 @@
 import {DEFAULT_PIXELMATCH_OPTIONS} from '../../constants/internal';
 
-import {antialiased} from './antialiased';
 import {colorDelta} from './colorDelta';
 import {drawGrayPixel} from './drawGrayPixel';
 import {drawPixel} from './drawPixel';
+import {isAntialiased} from './isAntialiased';
 import {isPixelData} from './isPixelData';
 
 import type {ImgData, PixelmatchOptions} from '../../types/internal';
@@ -68,8 +68,8 @@ export const pixelmatch = (
       if (Math.abs(delta) > maxDelta) {
         if (
           !options.includeAA &&
-          (antialiased(img1, x, y, width, height, img2) ||
-            antialiased(img2, x, y, width, height, img1))
+          (isAntialiased(img1, x, y, width, height, img2) ||
+            isAntialiased(img2, x, y, width, height, img1))
         ) {
           if (output && !options.diffMask) {
             drawPixel(output, pos, ...options.aaColor);

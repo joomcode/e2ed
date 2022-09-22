@@ -1,5 +1,4 @@
 import {LogEventType} from '../../constants/internal';
-import {setPageLoaded} from '../../context/pageLoaded';
 import {log} from '../../utils/log';
 
 import {waitForInterfaceStabilization} from '../waitFor';
@@ -55,8 +54,6 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
     {url},
     LogEventType.InternalAction,
   );
-
-  setPageLoaded(true);
 
   return page;
 };

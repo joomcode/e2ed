@@ -1,2 +1,4 @@
-export * from './getRequestsFilter';
-export * from './getSetResponse';
+/** @internal */
+export {getRequestsFilter} from './getRequestsFilter';
+/** @internal */
+export {getSetResponse} from './getSetResponse';

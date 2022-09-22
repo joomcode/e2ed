@@ -28,5 +28,11 @@
     "types": ["node"],
     "useDefineForClassFields": true
   },
-  "include": ["build/e2ed/**/*.ts", "e2ed/**/*.ts", "scripts/**/*.ts", "src/**/*.ts"]
+  "include": [
+    "build/e2ed/**/*.ts",
+    "build/node_modules/e2ed/**/*.ts",
+    "e2ed/**/*.ts",
+    "scripts/**/*.ts",
+    "src/**/*.ts"
+  ]
 }

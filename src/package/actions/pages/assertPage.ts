@@ -1,5 +1,4 @@
 import {LogEventType} from '../../constants/internal';
-import {setPageLoaded} from '../../context/pageLoaded';
 import {expect} from '../../expect';
 import {assertValueIsDefined} from '../../utils/asserts';
 import {getCurrentUrl} from '../../utils/getCurrentUrl';
@@ -53,8 +52,6 @@ export const assertPage = async <SomePageClass extends AnyPageClassType>(
   );
 
   await expect(isMatch, message).ok();
-
-  setPageLoaded(true);
 
   if (page.afterAssertPage) {
     await page.afterAssertPage();

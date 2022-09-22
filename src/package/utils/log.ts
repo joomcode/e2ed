@@ -1,7 +1,5 @@
-import {CONSOLE_INSPECT_OPTIONS, LogEventType, SCREENSHOT_EVENT_TYPES} from '../constants/internal';
-import {getPageLoaded} from '../context/pageLoaded';
+import {CONSOLE_INSPECT_OPTIONS, LogEventType} from '../constants/internal';
 import {getRunId} from '../context/runId';
-import {testController} from '../testController';
 
 // eslint-disable-next-line import/no-internal-modules
 import {registerLogEvent} from './events/registerLogEvent';
@@ -59,12 +57,6 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
 
         addTestLog(`${logMessageHead} ${printedString}\n`);
       }
-    }
-
-    const pageLoaded = getPageLoaded();
-
-    if (pageLoaded && SCREENSHOT_EVENT_TYPES.includes(type)) {
-      return testController.takeScreenshot({path: `${runId}/${numberInRun}`}) as Promise<void>;
     }
 
     return undefined;

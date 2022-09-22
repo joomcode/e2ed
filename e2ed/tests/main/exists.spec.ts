@@ -1,13 +1,14 @@
+import {ClientFunction, expect, it} from 'e2ed';
 import {
-  ClientFunction,
-  expect,
-  it,
+  assertPage,
   mockApiRoute,
+  navigateToPage,
+  pressKey,
+  scroll,
   unmockApiRoute,
   waitForRequest,
   waitForResponse,
-} from 'e2ed';
-import {assertPage, navigateToPage, pressKey, scroll} from 'e2ed/actions';
+} from 'e2ed/actions';
 import {Main, Search} from 'e2ed/pageObjects/pages';
 import {CreateProduct as CreateProductRoute} from 'e2ed/routes/apiRoutes';
 import {Search as SearchRoute} from 'e2ed/routes/pageRoutes';

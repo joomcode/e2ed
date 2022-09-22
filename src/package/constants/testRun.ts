@@ -1,3 +1,5 @@
+import type {RunId, TestRunEvent} from '../types/internal';
+
 /**
  * Main status of test run.
  * Failed if it have run error and passed if not.
@@ -17,3 +19,9 @@ export const enum TestRunStatus {
  * that there are failed tests in the retray.
  */
 export const FAILED_TEST_RUN_STATUSES = [TestRunStatus.Failed, TestRunStatus.Unknown];
+
+/**
+ * Hash object with runId as keys and TestRunEvent as values.
+ * @internal
+ */
+export const RUN_IDS_HASH: Record<RunId, TestRunEvent> = {};

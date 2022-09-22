@@ -1,4 +1,4 @@
-import {mockApiRoute, unmockApiRoute} from 'e2ed';
+import {mockApiRoute, unmockApiRoute} from 'e2ed/actions';
 import {CreateDevice, CreateProduct} from 'e2ed/routes/apiRoutes';
 import {Main} from 'e2ed/routes/pageRoutes';
 

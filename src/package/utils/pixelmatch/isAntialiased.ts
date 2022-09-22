@@ -4,10 +4,10 @@ import {hasManySiblings} from './hasManySiblings';
 import type {ImgData} from '../../types/internal';
 
 /**
- * Return true if the rectangle is in antialiased state.
+ * Returns true if the rectangle is in antialiased state.
  * @internal
  */
-export const antialiased = (
+export const isAntialiased = (
   img: ImgData,
   x1: number,
   y1: number,

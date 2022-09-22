@@ -7,6 +7,7 @@ import type {E2edEnvironment, GeneralLog} from '../types/internal';
 
 /**
  * General (out of test context) log to stdout.
+ * @internal
  */
 export const generalLog: GeneralLog = (message, payload) => {
   const dateTimeInISO = new Date().toISOString();

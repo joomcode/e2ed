@@ -1,3 +1,3 @@
-export * from './assertDistanceBetweenElements';
-export * from './assertNumbersAreApproximatelyEqual';
-export * from './assertUrlMatchRoute';
+export {assertDistanceBetweenSelectors} from './assertDistanceBetweenSelectors';
+export {assertNumbersAreApproximatelyEqual} from './assertNumbersAreApproximatelyEqual';
+export {assertUrlMatchRoute} from './assertUrlMatchRoute';

@@ -1,7 +1,7 @@
 import type {ImgData} from '../../types/internal';
 
 /**
- * Return true if the rectangle has many sibling points.
+ * Returns true if the rectangle has many sibling points.
  * @internal
  */
 export const hasManySiblings = (

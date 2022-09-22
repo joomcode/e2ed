@@ -54,4 +54,5 @@ for (const [key, getAssertionMessage] of Object.entries(assertionMessageGetters)
   };
 }
 
+/** @internal */
 export {Expect};

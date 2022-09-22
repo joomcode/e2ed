@@ -1,29 +1,46 @@
-export * from './asserts';
-export * from './clearUpload';
-export * from './click';
-export * from './debug';
-export * from './dispatchEvent';
-export * from './doubleClick';
-export * from './drag';
-export * from './dragToElement';
-export * from './getBrowserConsoleMessages';
-export * from './hover';
-export * from './pages';
-export * from './pressKey';
-export * from './resizeWindow';
-export * from './rightClick';
-export * from './scroll';
-export * from './scrollBy';
-export * from './scrollIntoView';
-export * from './selectText';
-export * from './setFilesToUpload';
-export * from './setHeadersAndNavigateTo';
-export * from './setNativeDialogHandler';
-export * from './switchToIframe';
-export * from './takeElementScreenshot';
-export * from './takeScreenshot';
-export * from './typeText';
-export * from './waitFor';
+export {
+  assertDistanceBetweenSelectors,
+  assertNumbersAreApproximatelyEqual,
+  assertUrlMatchRoute,
+} from './asserts';
+export {clearUpload} from './clearUpload';
+export {click} from './click';
+export {debug} from './debug';
+export {dispatchEvent} from './dispatchEvent';
+export {doubleClick} from './doubleClick';
+export {drag} from './drag';
+export {dragToElement} from './dragToElement';
+export {getBrowserConsoleMessages} from './getBrowserConsoleMessages';
+export {hover} from './hover';
+export {mockApiRoute, unmockApiRoute} from './mockApiRoute';
+export {
+  assertPage,
+  backPageHistory,
+  forwardPageHistory,
+  goPageHistory,
+  navigateToPage,
+  reloadPage,
+} from './pages';
+export {pressKey} from './pressKey';
+export {resizeWindow} from './resizeWindow';
+export {rightClick} from './rightClick';
+export {scroll} from './scroll';
+export {scrollBy} from './scrollBy';
+export {scrollIntoView} from './scrollIntoView';
+export {selectText} from './selectText';
+export {setFilesToUpload} from './setFilesToUpload';
+export {setHeadersAndNavigateTo} from './setHeadersAndNavigateTo';
+export {setNativeDialogHandler} from './setNativeDialogHandler';
+export {switchToIframe} from './switchToIframe';
+export {takeElementScreenshot} from './takeElementScreenshot';
+export {takeScreenshot} from './takeScreenshot';
+export {typeText} from './typeText';
+export {
+  waitForInterfaceStabilization,
+  waitForRequest,
+  waitForResponse,
+  waitForTimeout,
+} from './waitFor';
 
 /**
  * Userland actions. This exports must be the last.

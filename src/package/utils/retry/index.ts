@@ -1,1 +1,2 @@
-export * from './runRetries';
+/** @internal */
+export {runRetries} from './runRetries';

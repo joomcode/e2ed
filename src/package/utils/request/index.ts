@@ -1,7 +1,4 @@
-/**
- * Get request or response body as string by original body.
- * * @internal
- */
+/** @internal */
 export {getBodyAsString} from './getBodyAsString';
 export {getContentJsonHeaders} from './getContentJsonHeaders';
 export {request} from './request';

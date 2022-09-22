@@ -4,6 +4,7 @@ import type {RawRunLabelObject, RunLabel, RunLabelObject} from '../../types/inte
 
 /**
  * Get RunLabelObject from RunLabel.
+ * @internal
  */
 export const getRunLabelObject = (runLabel: RunLabel): RunLabelObject => {
   const object = runLabel.match(

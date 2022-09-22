@@ -1,22 +1,34 @@
-export * from './asserts';
-export * from './clone';
-export * from './deepMerge';
-export * from './E2EDError';
-export * from './fs';
-export * from './generalLog';
-export * from './getCurrentUrl';
-export * from './getFullConfig';
-export * from './getKeysCounter';
+export {
+  assertNever,
+  assertValueIsDefined,
+  assertValueIsFalse,
+  assertValueIsNotNull,
+  assertValueIsNull,
+  assertValueIsTrue,
+  assertValueIsUndefined,
+} from './asserts';
+export {cloneWithoutUndefinedProperties} from './clone';
+export {deepMerge} from './deepMerge';
+export {
+  getDistanceBetweenSelectors,
+  getHorizontalDistanceBetweenSelectors,
+  getVerticalDistanceBetweenSelectors,
+} from './distanceBetweenSelectors';
+export {E2EDError} from './E2EDError';
+export {writeFile} from './fs';
+export {getCurrentUrl} from './getCurrentUrl';
+export {getFullConfig} from './getFullConfig';
+export {getKeysCounter} from './getKeysCounter';
 export {getLocatorProperty} from './getLocatorProperty';
-export * from './getRandomId';
-export * from './getRandomIntegerInRange';
-export * from './getStackTrace';
-export * from './log';
-export * from './promise';
-export * from './replaceCookie';
-export * from './request';
+export {getRandomId} from './getRandomId';
+export {getRandomIntegerInRange} from './getRandomIntegerInRange';
+export {getStackTrace} from './getStackTrace';
+export {log} from './log';
+export {getPromiseWithResolveAndReject, getTimeoutPromise, waitForAllProperties} from './promise';
+export {replaceCookie} from './replaceCookie';
+export {getContentJsonHeaders, request} from './request';
 export {SetHeadersRequestHook} from './requestHooks';
-export * from './trimSemicolonsAtTheEnd';
+export {trimSemicolonsAtTheEnd} from './trimSemicolonsAtTheEnd';
 export {isArray} from './typeGuards';
 export {valueToString} from './valueToString';
 export {wrapInTestRunTracker} from './wrapInTestRunTracker';

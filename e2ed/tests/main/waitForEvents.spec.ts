@@ -1,4 +1,5 @@
-import {ClientFunction, expect, it, waitForRequest, waitForResponse} from 'e2ed';
+import {ClientFunction, expect, it} from 'e2ed';
+import {waitForRequest, waitForResponse} from 'e2ed/actions';
 
 import type {Request, Response} from 'e2ed/types';
 
@@ -6,7 +7,7 @@ type Body = Readonly<{job: string; name: string}> | undefined;
 
 it(
   'waitForRequest/waitForResponse get correct request/response bodies',
-  {meta: {testId: '2'}, testIdleTimeout: 2_000},
+  {meta: {testId: '2'}, testIdleTimeout: 3_000},
   async () => {
     const addUser = ClientFunction(
       () =>

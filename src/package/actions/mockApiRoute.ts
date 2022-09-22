@@ -1,11 +1,11 @@
 import {RequestMock} from 'testcafe-without-typecheck';
 
-import {LogEventType} from './constants/internal';
-import {getApiMockState} from './context/apiMockState';
-import {log} from './utils/log';
-import {getRequestsFilter, getSetResponse} from './utils/mockApiRoute';
-import {wrapInTestRunTracker} from './utils/wrapInTestRunTracker';
-import {testController} from './testController';
+import {LogEventType} from '../constants/internal';
+import {getApiMockState} from '../context/apiMockState';
+import {testController} from '../testController';
+import {log} from '../utils/log';
+import {getRequestsFilter, getSetResponse} from '../utils/mockApiRoute';
+import {wrapInTestRunTracker} from '../utils/wrapInTestRunTracker';
 
 import type {
   ApiMockFunction,
@@ -14,7 +14,7 @@ import type {
   Mutable,
   Request,
   Response,
-} from './types/internal';
+} from '../types/internal';
 
 /**
  * Mock API for some API route.

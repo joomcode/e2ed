@@ -1,12 +1,12 @@
-import {LogEventType} from './constants/internal';
-import {getWaitForEventsState} from './context/waitForEventsState';
-import {E2EDError} from './utils/E2EDError';
-import {getFullConfig} from './utils/getFullConfig';
-import {log} from './utils/log';
-import {getPromiseWithResolveAndReject} from './utils/promise';
-import {updateWaitForEventsState} from './utils/waitForEvents';
+import {LogEventType} from '../../constants/internal';
+import {getWaitForEventsState} from '../../context/waitForEventsState';
+import {E2EDError} from '../../utils/E2EDError';
+import {getFullConfig} from '../../utils/getFullConfig';
+import {log} from '../../utils/log';
+import {getPromiseWithResolveAndReject} from '../../utils/promise';
+import {updateWaitForEventsState} from '../../utils/waitForEvents';
 
-import type {Response, ResponsePredicate} from './types/internal';
+import type {Response, ResponsePredicate} from '../../types/internal';
 
 /**
  * Wait for some response (from browser) by response predicate.

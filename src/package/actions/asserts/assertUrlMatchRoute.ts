@@ -22,11 +22,12 @@ export const assertUrlMatchRoute = async (
   assertValueIsDefined(urlOrPath, 'urlOrPath is defined', {routeParams: route.params, routeUrl});
   assertValueIsNotNull(urlOrPath, 'urlOrPath is not null', {routeParams: route.params, routeUrl});
 
-  await expect(routeUrl, 'route url contains the specified url or path').contains(urlOrPath);
-
   await log(
     'Assert that url or url path match route',
     {routeParams: route.params, routeUrl, urlOrPath},
     LogEventType.InternalAssert,
   );
+
+  // TODO: support Smart Assertions
+  await expect(routeUrl, 'route url contains the specified url or path').contains(urlOrPath);
 };

@@ -12,6 +12,7 @@ import type {E2edEnvironment, RunRetryOptions} from '../../types/internal';
 /**
  * Runs tests (via TestCafe JavaScript API, for running one retry in docker).
  * Rejects, if there are some failed tests.
+ * @internal
  */
 export const runTests = async ({
   concurrency,

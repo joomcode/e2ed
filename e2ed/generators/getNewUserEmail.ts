@@ -3,7 +3,7 @@ import type {Email} from 'e2ed/types';
 const createdEmailsCounts: Record<string, number> = {};
 
 /**
- * Return new unique email like 'test_2021-05-21T18-07-00.500Z_0001@example.com'.
+ * Returns new unique email like 'test_2021-05-21T18-07-00.500Z_0001@example.com'.
  */
 export const getNewUserEmail = (): Email => {
   const timeHash = new Date().toISOString().replace(/:/g, '-');

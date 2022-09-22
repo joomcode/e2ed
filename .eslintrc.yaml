@@ -69,9 +69,11 @@ rules:
   import/no-unused-modules:
     - error
     - ignoreExports:
-        - src/package/context
+        - src/package/actions/index.ts
+        - src/package/constants/index.ts
+        - src/package/context/index.ts
         - src/package/createTestId.ts
-        - src/package/esm
+        - src/package/esm/testcafe.ts
         - src/package/index.ts
         - src/package/selectors/index.ts
         - src/package/testcafe.ts
