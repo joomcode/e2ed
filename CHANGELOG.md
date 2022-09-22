@@ -1,5 +1,65 @@
 # Changelog
 
+## [v0.12.3](https://github.com/joomcode/e2ed/tree/v0.12.3) (2022-09-22)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.2...v0.12.3)
+
+- [feat: process all waitForRequest/waitForResponse event in parallel](https://github.com/joomcode/e2ed/commit/89518cc3b11bbf37a87d1a2d0878e4ecd76e102a) ([uid11](https://github.com/uid11))
+- [feat: add locatorProperty... selectors](https://github.com/joomcode/e2ed/commit/995f8630e263279d821324680ad567ee68138684) ([uid11](https://github.com/uid11))
+- [feat: use explicit exports instead of stars exports](https://github.com/joomcode/e2ed/commit/3ffdfb70a61371506d17d5a8fb89ba26f0732584) ([uid11](https://github.com/uid11))
+
+  fix: remove unused pageLoaded flag from context
+  fix: move mockApiRoute, waitForRequest/waitForResponse to actions
+
+- [Merge pull request #6 from joomcode/assertDistanceBetweenElements](https://github.com/joomcode/e2ed/commit/5a4c1382a850f842d002fac59ea96275204e3327) ([uid11](https://github.com/uid11))
+
+  add assertDistanceBetweenElements util
+
+- [Merge branch 'main' into assertDistanceBetweenElements](https://github.com/joomcode/e2ed/commit/31db4d4cac9dcf437a28284e7b724ace6aa1528f) ([uid11](https://github.com/uid11))
+- [fix: error with empty responseBody in waitForResponse function](https://github.com/joomcode/e2ed/commit/cdb6910691f667bb841560baea2b27d82f9635e6) ([uid11](https://github.com/uid11))
+
+  test: more tests with bodies in waitForRequest/waitForResponse
+
+- [chore: update devDependencies (@types/node, typescript, eslint, etc)](https://github.com/joomcode/e2ed/commit/f7aeeff999320177611e052ef01255d24551c62b) ([uid11](https://github.com/uid11))
+- [Merge pull request #5 from joomcode/add-getLocatorProperty](https://github.com/joomcode/e2ed/commit/6967ac374c6c43ea9963c6518c371637615db0ab) ([uid11](https://github.com/uid11))
+
+  add getLocatorProperty util
+
+- [add getLocatorProperty util](https://github.com/joomcode/e2ed/commit/ab7f8e0ea9479a36d22f6c956dce39ed116b161e) ([w84v2rhsq4](https://github.com/w84v2rhsq4))
+- [feat: add timeouts for waitForRequest/waitForResponse](https://github.com/joomcode/e2ed/commit/594d85d367cd6fc0eb8c3cb24506b4b51c596f44) ([uid11](https://github.com/uid11))
+- [feat: add waitForRequest/waitForResponse functions](https://github.com/joomcode/e2ed/commit/1fe5b9ed5fbd3d7c1f8768e762c4aba4e880b545) ([uid11](https://github.com/uid11))
+
+  fix: add CODEOWNERS
+
+- [Kuraev Merge pull request #8 from joomcode/add-history-actions](https://github.com/joomcode/e2ed/commit/300dbf79b848f4742f140e8afcfbee22f70e292d) ([Roman](https://github.com/Roman))
+
+  add historyGoBack historyGoForward actions
+
+- [Kuraev Merge pull request #7 from joomcode/add-getRandomIntegerInRange-util](https://github.com/joomcode/e2ed/commit/1dfdd8b61fab90d696c128d3886db1295b45720d) ([Roman](https://github.com/Roman))
+
+  feat: add getRandomIntegerInRange
+
+- [Kuraev add historyGoBack historyGoForward actions](https://github.com/joomcode/e2ed/commit/112a3e3d75ada6a5de007bbd967c3a54c34a1ab4) ([Roman](https://github.com/Roman))
+- [Kuraev add getRandomIntegerInRange](https://github.com/joomcode/e2ed/commit/57f7a93e2ebc5fdded986dae4a62e9579cb0fd4e) ([Roman](https://github.com/Roman))
+- [add assertDistanceBetweenElements util](https://github.com/joomcode/e2ed/commit/628e860d6e4e1384babe4fb7f5e2400ce73c8114) ([w84v2rhsq4](https://github.com/w84v2rhsq4))
+- [Merge pull request #4 from joomcode/add-numbersAreAprroximatelyEql-assert](https://github.com/joomcode/e2ed/commit/a97f3daaa190665fb4b242f5bb7674f788db97de) ([uid11](https://github.com/uid11))
+
+  feat: add assertNumbersAreApproximatelyEqual
+
+- [Merge branch 'main' into add-numbersAreAprroximatelyEql-assert](https://github.com/joomcode/e2ed/commit/82da91e73ca85ecb46a792f672a59867afda2032) ([w84v2rhsq4](https://github.com/w84v2rhsq4))
+- [improve logs and rename file](https://github.com/joomcode/e2ed/commit/06e28bb4184549f8fdc3f14f2c968a677606612b) ([w84v2rhsq4](https://github.com/w84v2rhsq4))
+- [refactor: add internal abstract class RequestHookWithEvents](https://github.com/joomcode/e2ed/commit/dc117bf9d592b2d101088dde6c3feb3745b0a6e9) ([uid11](https://github.com/uid11))
+- [add assertNumbersAreApproximatelyEqual](https://github.com/joomcode/e2ed/commit/31eff6ef81477764963bc2a935495e6fbaa07ea1) ([w84v2rhsq4](https://github.com/w84v2rhsq4))
+- [feat: add methods (request/response)BodyIsInJsonFormat to API routes](https://github.com/joomcode/e2ed/commit/0b3a1e18687043b54efd43927159564cc09e4926) ([uid11](https://github.com/uid11))
+- [fix: return name for CI GitHub Actions workflow](https://github.com/joomcode/e2ed/commit/53cb4c3d148c8ea85518337bd493afee7a778d5b) ([uid11](https://github.com/uid11))
+- [fix: use build:docker script in CI (instead of test:docker)](https://github.com/joomcode/e2ed/commit/c01a3df2db14e4d583243013d2898e85ea7235db) ([uid11](https://github.com/uid11))
+- [chore: add test-docker job to CI (via GitHub Actions)](https://github.com/joomcode/e2ed/commit/d7a13d45eab0d84a98b0d340e42ef466b533f3c8) ([uid11](https://github.com/uid11))
+- [fix: do not use colon in GitHub Actions job name](https://github.com/joomcode/e2ed/commit/df86ee8c038292bcc562d87ef70a6ff4ee040389) ([uid11](https://github.com/uid11))
+- [chore: add test:local to CI (via GitHub Actions)](https://github.com/joomcode/e2ed/commit/65e8c62364c2de4d962b222b5ab522e20d5e6364) ([uid11](https://github.com/uid11))
+- [fix: typo in e2ed/utils/asserts module path](https://github.com/joomcode/e2ed/commit/62c41c6b0ccc6efc4fec670e4c148139b6d404fe) ([uid11](https://github.com/uid11))
+- [fix: lint errors in GitHub Actions CI](https://github.com/joomcode/e2ed/commit/f33e436f1463526894b4fc41c3e0a40231c2c479) ([uid11](https://github.com/uid11))
+- [feat: add basic CI via GitHub Actions](https://github.com/joomcode/e2ed/commit/2ea10e287d2fbb37dcab4b724c61ef6fdacfd460) ([uid11](https://github.com/uid11))
+
 ## [v0.12.2](https://github.com/joomcode/e2ed/tree/v0.12.2) (2022-09-06)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.1...v0.12.2)
