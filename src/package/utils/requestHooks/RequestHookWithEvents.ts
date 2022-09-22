@@ -18,16 +18,25 @@ abstract class RequestHookWithEvents extends RequestHook {
     this.resetMethods(this.onRequest, this.onResponse, this._onConfigureResponse);
   }
 
+  /**
+   * TestCafe request event handler.
+   */
   override onRequest(event: RequestHookRequestEvent): Promise<void> {
     void event;
 
     return RESOLVED_PROMISE;
   }
 
+  /**
+   * TestCafe response event handler.
+   */
   override onResponse(): Promise<void> {
     return RESOLVED_PROMISE;
   }
 
+  /**
+   * Internal TestCafe response event handler.
+   */
   override async _onConfigureResponse(event: RequestHookResponseEvent): Promise<void> {
     await super._onConfigureResponse(event);
   }

@@ -12,14 +12,6 @@ declare const PARAMS_KEY: unique symbol;
 type EntryPair<T> = [keyof T, T[keyof T] | undefined];
 
 /**
- * Function by argument, return type, and this (context) type.
- */
-export type Fn<Args extends unknown[] = never[], Return = unknown, This = unknown> = (
-  this: This,
-  ...args: Args
-) => Return;
-
-/**
  * Returns the type of instance params.
  */
 export type GetParamsType<C> = C extends {[PARAMS_KEY]: unknown}
@@ -50,6 +42,8 @@ export type Normalize<T> = keyof T extends never
 export type ObjectEntries<T> = EntryPair<T>[];
 
 /**
+ * Returns a tuple of two elements. If the second element includes undefined,
+ * then it becomes optional in the tuple.
  * OneOrTwoArgs<'foo', string> = [arg1: 'foo', arg2: string].
  * OneOrTwoArgs<'foo', undefined | number> = [arg1: 'foo', arg2?: number].
  */
@@ -77,6 +71,7 @@ export type OptionalIfValueIncludeDefault<
 export type PARAMS_KEY_TYPE = typeof PARAMS_KEY;
 
 /**
+ * Takes a union, and returns the intersection of the elements of the union.
  * UnionToIntersection<((x: string) => number) | ((x: number) => string)> =
  *  ((x: string) => number) & ((x: number) => string)
  */
@@ -87,6 +82,8 @@ export type UnionToIntersection<U> = (U extends unknown ? (k: U) => void : never
   : never;
 
 /**
+ * If the type is a promise, unwraps it and returns the promise value type
+ * (until a non-promise value is obtained).
  * UnwrapPromise<number> = number.
  * UnwrapPromise<Promise<string>> = string.
  * UnwrapPromise<Promise<Promise<bigint>>> = bigint.
@@ -94,6 +91,15 @@ export type UnionToIntersection<U> = (U extends unknown ? (k: U) => void : never
 export type UnwrapPromise<T> = T extends Promise<infer V> ? UnwrapPromise<V> : T;
 
 /**
+ * If the type is a set, unwraps it and returns the set value type.
+ * UnwrapSet<number> = number.
+ * UnwrapSet<Set<string>> = string.
+ */
+export type UnwrapSet<T> = T extends Set<infer V> ? V : T;
+
+/**
+ * Returns a tuple of one element. If the element includes undefined,
+ * then it becomes optional in the tuple.
  * ZeroOrOneArg<string> = [arg: string].
  * ZeroOrOneArg<undefined | number> = [arg?: number].
  */

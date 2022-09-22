@@ -56,9 +56,10 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 20_000, testTimeout: 50_000}
 
   await pressKey('enter');
 
-  const requestWithQuery = await waitForRequest(({url}) => url.includes(searchQuery));
-
-  const successfulResponse = await waitForResponse(({statusCode}) => statusCode === 200);
+  const [requestWithQuery, successfulResponse] = await Promise.all([
+    waitForRequest(({url}) => url.includes(searchQuery)),
+    waitForResponse(({statusCode}) => statusCode === 200),
+  ]);
 
   await expect(requestWithQuery.url, 'request with query contains search query').contains(
     searchQuery,

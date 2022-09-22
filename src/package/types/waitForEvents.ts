@@ -1,6 +1,21 @@
 import type {RequestHookToWaitForEvents} from '../utils/requestHooks';
 
+import type {MergeFunctions} from './fn';
 import type {Request, Response} from './http';
+
+/**
+ * Request or response predicate for both event handlers.
+ * @internal
+ */
+type RequestOrResponsePredicate = MergeFunctions<RequestPredicate | ResponsePredicate>;
+
+/**
+ * Request or response resolve function for both event handlers.
+ * @internal
+ */
+type RequestOrResponseResolve = MergeFunctions<
+  (RequestPredicateWithPromise | ResponsePredicateWithPromise)['resolve']
+>;
 
 /**
  * Request predicate for waitForRequest function.
@@ -15,6 +30,16 @@ export type RequestPredicate<SomeRequest extends Request = Request> = (
 export type ResponsePredicate<SomeResponse extends Response = Response> = (
   request: SomeResponse,
 ) => Promise<boolean> | boolean;
+
+/**
+ * Request or response predicate with resolve and reject functions for both event handlers.
+ * @internal
+ */
+export type RequestOrResponsePredicateWithPromise = Readonly<{
+  predicate: RequestOrResponsePredicate;
+  reject: RequestPredicateWithPromise['reject'];
+  resolve: RequestOrResponseResolve;
+}>;
 
 /**
  * Request predicate with resolve and reject functions for his promise.

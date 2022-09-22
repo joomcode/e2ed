@@ -12,6 +12,7 @@ export type {MaybeWithIsTestRunBroken, OriginalTestRunError} from './errors';
 export type {LogEvent, Onlog, TestRunEvent} from './events';
 /** @internal */
 export type {EndTestRunEvent, FullEventsData} from './events';
+export type {Fn, MergeFunctions} from './fn';
 export type {DirectoryPathFromRoot, TestFilePath} from './fs';
 export type {
   Cookie,
@@ -81,26 +82,27 @@ export type {
 } from './testRun';
 /** @internal */
 export type {FullTestRun, Test} from './testRun';
+export type {MergeTuples, TupleRest} from './tuples';
 export type {
   CloneWithoutUndefinedProperties,
   ExcludeUndefinedFromProperties,
   IsIncludeUndefined,
 } from './undefined';
 export type {
-  Fn,
   GetParamsType,
   Mutable,
   Normalize,
   ObjectEntries,
-  OneOrTwoArgs,
   OptionalIfValueIncludeDefault,
   PARAMS_KEY_TYPE,
   UnionToIntersection,
   UnwrapPromise,
+  UnwrapSet,
   ZeroOrOneArg,
 } from './utils';
 /** * @internal */
 export type {
+  RequestOrResponsePredicateWithPromise,
   RequestPredicateWithPromise,
   ResponsePredicateWithPromise,
   WaitForEventsState,

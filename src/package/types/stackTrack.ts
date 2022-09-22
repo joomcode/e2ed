@@ -1,4 +1,4 @@
-import type {Fn} from './utils';
+import type {Fn} from './fn';
 
 /**
  * Frame object from execution stack.
