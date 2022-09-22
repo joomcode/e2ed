@@ -1,6 +1,12 @@
 export {cssSelector} from './cssSelector';
 export {htmlElementSelector} from './htmlElementSelector';
-export {testIdSelector} from './testIdSelector';
+export {locatorIdSelector, locatorIdSelector as testIdSelector} from './locatorIdSelector';
+export {
+  locatorPropertyEndsWithSelector,
+  locatorPropertyIncludesSelector,
+  locatorPropertySelector,
+  locatorPropertyStartsWithSelector,
+} from './locatorPropertySelector';
 
 /**
  * Userland selectors. This export must be the last.
