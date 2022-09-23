@@ -13,7 +13,7 @@
 
 - [Merge pull request #6 from joomcode/assertDistanceBetweenElements](https://github.com/joomcode/e2ed/commit/5a4c1382a850f842d002fac59ea96275204e3327) ([uid11](https://github.com/uid11))
 
-  add assertDistanceBetweenElements util
+  feat: add assertDistanceBetweenElements util
 
 - [Merge branch 'main' into assertDistanceBetweenElements](https://github.com/joomcode/e2ed/commit/31db4d4cac9dcf437a28284e7b724ace6aa1528f) ([uid11](https://github.com/uid11))
 - [fix: error with empty responseBody in waitForResponse function](https://github.com/joomcode/e2ed/commit/cdb6910691f667bb841560baea2b27d82f9635e6) ([uid11](https://github.com/uid11))
@@ -23,7 +23,7 @@
 - [chore: update devDependencies (@types/node, typescript, eslint, etc)](https://github.com/joomcode/e2ed/commit/f7aeeff999320177611e052ef01255d24551c62b) ([uid11](https://github.com/uid11))
 - [Merge pull request #5 from joomcode/add-getLocatorProperty](https://github.com/joomcode/e2ed/commit/6967ac374c6c43ea9963c6518c371637615db0ab) ([uid11](https://github.com/uid11))
 
-  add getLocatorProperty util
+  feat: add getLocatorProperty util
 
 - [feat: add getLocatorProperty util](https://github.com/joomcode/e2ed/commit/ab7f8e0ea9479a36d22f6c956dce39ed116b161e) ([w84v2rhsq4](https://github.com/w84v2rhsq4))
 - [feat: add timeouts for waitForRequest/waitForResponse](https://github.com/joomcode/e2ed/commit/594d85d367cd6fc0eb8c3cb24506b4b51c596f44) ([uid11](https://github.com/uid11))
@@ -33,7 +33,7 @@
 
 - [Merge pull request #8 from joomcode/add-history-actions](https://github.com/joomcode/e2ed/commit/300dbf79b848f4742f140e8afcfbee22f70e292d) ([naorunaoru](https://github.com/naorunaoru))
 
-  add historyGoBack historyGoForward actions
+  feat: add historyGoBack historyGoForward actions
 
 - [Merge pull request #7 from joomcode/add-getRandomIntegerInRange-util](https://github.com/joomcode/e2ed/commit/1dfdd8b61fab90d696c128d3886db1295b45720d) ([naorunaoru](https://github.com/naorunaoru))
 
@@ -49,7 +49,7 @@
 - [Merge branch 'main' into add-numbersAreAprroximatelyEql-assert](https://github.com/joomcode/e2ed/commit/82da91e73ca85ecb46a792f672a59867afda2032) ([w84v2rhsq4](https://github.com/w84v2rhsq4))
 - [improve logs and rename file](https://github.com/joomcode/e2ed/commit/06e28bb4184549f8fdc3f14f2c968a677606612b) ([w84v2rhsq4](https://github.com/w84v2rhsq4))
 - [refactor: add internal abstract class RequestHookWithEvents](https://github.com/joomcode/e2ed/commit/dc117bf9d592b2d101088dde6c3feb3745b0a6e9) ([uid11](https://github.com/uid11))
-- [add assertNumbersAreApproximatelyEqual](https://github.com/joomcode/e2ed/commit/31eff6ef81477764963bc2a935495e6fbaa07ea1) ([w84v2rhsq4](https://github.com/w84v2rhsq4))
+- [feat: add assertNumbersAreApproximatelyEqual](https://github.com/joomcode/e2ed/commit/31eff6ef81477764963bc2a935495e6fbaa07ea1) ([w84v2rhsq4](https://github.com/w84v2rhsq4))
 - [feat: add methods (request/response)BodyIsInJsonFormat to API routes](https://github.com/joomcode/e2ed/commit/0b3a1e18687043b54efd43927159564cc09e4926) ([uid11](https://github.com/uid11))
 - [fix: return name for CI GitHub Actions workflow](https://github.com/joomcode/e2ed/commit/53cb4c3d148c8ea85518337bd493afee7a778d5b) ([uid11](https://github.com/uid11))
 - [fix: use build:docker script in CI (instead of test:docker)](https://github.com/joomcode/e2ed/commit/c01a3df2db14e4d583243013d2898e85ea7235db) ([uid11](https://github.com/uid11))
