@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.12.4](https://github.com/joomcode/e2ed/tree/v0.12.4) (2022-09-25)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.3...v0.12.4)
+
+- [chore: update devDependencies (@types/node and eslint)](https://github.com/joomcode/e2ed/commit/32279190172b1bb00fac07b1c97bcabdcff2209e) ([uid11](https://github.com/uid11))
+- [fix: correct update waitForEventsState (before async actions)](https://github.com/joomcode/e2ed/commit/7545c86b88bdb709694b97f3c747bab8d912badd) ([uid11](https://github.com/uid11))
+- [fix: commit author name in CHANGELOG.md](https://github.com/joomcode/e2ed/commit/19747b68eb1848ce493892826217c427a382554e) ([uid11](https://github.com/uid11))
+
 ## [v0.12.3](https://github.com/joomcode/e2ed/tree/v0.12.3) (2022-09-22)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.2...v0.12.3)
