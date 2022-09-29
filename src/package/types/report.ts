@@ -74,6 +74,7 @@ export type ReportClientGlobal = {
  * @internal
  */
 export type Retry = Readonly<{
+  concurrency: number;
   endTimeInMs: UtcTimeInMs;
   fullTestRuns: readonly FullTestRun[];
   retryIndex: number;
@@ -85,6 +86,7 @@ export type Retry = Readonly<{
  */
 export type LiteRetry = Readonly<{
   brokenLiteTestRuns: readonly LiteTestRun[];
+  concurrency: number;
   endTimeInMs: UtcTimeInMs;
   liteTestRuns: readonly LiteTestRun[];
   retryIndex: number;

@@ -1,1 +1,1 @@
-export * from './user';
+export {getUser, setUser} from './user';

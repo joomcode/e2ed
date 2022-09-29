@@ -1,1 +1,1 @@
-export * from './user';
+export {DEFAULT_PASSWORD} from './user';

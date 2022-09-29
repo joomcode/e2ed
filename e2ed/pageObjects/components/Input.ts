@@ -3,6 +3,9 @@ import {inputSelector} from 'e2ed/selectors';
 
 import type {Selector} from 'e2ed/types';
 
+/**
+ * Common input pageObject component.
+ */
 export class Input {
   /**
    *  Input element.

@@ -28,6 +28,7 @@ export {getPromiseWithResolveAndReject, getTimeoutPromise, waitForAllProperties}
 export {replaceCookie} from './replaceCookie';
 export {getContentJsonHeaders, request} from './request';
 export {SetHeadersRequestHook} from './requestHooks';
+export {getRunLabelObject} from './runLabel';
 export {trimSemicolonsAtTheEnd} from './trimSemicolonsAtTheEnd';
 export {isArray} from './typeGuards';
 export {valueToString} from './valueToString';

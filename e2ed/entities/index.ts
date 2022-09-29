@@ -1,2 +1,2 @@
-export * from './device';
-export * from './user';
+export {createDevice} from './device';
+export {createUser} from './user';

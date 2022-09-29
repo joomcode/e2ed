@@ -1,4 +1,4 @@
-import {ClientFunction, expect, it} from 'e2ed';
+import {createClientFunction, expect, it} from 'e2ed';
 import {
   assertPage,
   mockApiRoute,
@@ -81,7 +81,7 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 20_000, testTimeout: 60_000}
 
   await expect(searchPage.mobileDevice, 'search page has right device').eql('iphone');
 
-  const getMockedProduct = ClientFunction(
+  const getMockedProduct = createClientFunction(
     () =>
       Promise.race([
         fetch('https://api.com/product/135865?size=13', {

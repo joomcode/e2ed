@@ -2,6 +2,27 @@ import type {Expect, UserlandTypesAreCorrect} from 'e2ed/types';
 
 export declare type check = Expect<UserlandTypesAreCorrect>;
 
-export * from './api';
-export * from './entities';
-export * from './testMeta';
+export type {
+  ApiDeviceAndProductRequest,
+  ApiDeviceAndProductResponse,
+  ApiUserRequest,
+  ApiUserResponse,
+} from './api';
+export type {
+  ApiDevice,
+  ApiDeviceParams,
+  ApiUser,
+  ApiUserParams,
+  Device,
+  DeviceId,
+  DeviceParams,
+  Email,
+  Language,
+  MobileDevice,
+  Password,
+  User,
+  UserId,
+  UserParams,
+  UserPhone,
+} from './entities';
+export type {TestMeta} from './testMeta';

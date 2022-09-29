@@ -70,6 +70,7 @@ export type {
   RunHash,
   RunId,
   RunLabel,
+  RunLabelObject,
   Selector,
   StackFrame,
   StartInfo,

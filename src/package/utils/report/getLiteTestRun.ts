@@ -13,7 +13,6 @@ export const getLiteTestRun = (fullTestRun: FullTestRun): LiteTestRun => {
     options,
     runError,
     runHash,
-    runLabel,
     startTimeInMs,
     status,
   } = fullTestRun;
@@ -26,7 +25,6 @@ export const getLiteTestRun = (fullTestRun: FullTestRun): LiteTestRun => {
     options,
     runError,
     runHash,
-    runLabel,
     startTimeInMs,
     status,
   };

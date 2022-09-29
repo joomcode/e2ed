@@ -1,11 +1,11 @@
-import {ClientFunction} from '../ClientFunction';
 import {LogEventType} from '../constants/internal';
+import {createClientFunction} from '../createClientFunction';
 
 import {log} from './log';
 
 import type {Url} from '../types/internal';
 
-const clientGetCurrentUrl = ClientFunction<Url, []>(
+const clientGetCurrentUrl = createClientFunction<Url, []>(
   () => window.location.href as Url,
   'getCurrentUrl',
 );

@@ -8,7 +8,7 @@ import type {RunHash, TestRun, TestStaticOptions} from '../testRun';
 /**
  * Hooks type that the e2ed/hooks userland module must correspond to.
  */
-export type ExpectedHooks = Readonly<{
+export type ExpectedHooks = {
   getLogContext(
     message: string,
     payload: LogPayload | undefined,
@@ -18,4 +18,4 @@ export type ExpectedHooks = Readonly<{
   getTestRunHash(testRun: TestRun): RunHash;
   isTestSkipped(testStaticOptions: TestStaticOptions): IsTestSkipped;
   navigateTo(url: Url): Promise<void>;
-}>;
+};

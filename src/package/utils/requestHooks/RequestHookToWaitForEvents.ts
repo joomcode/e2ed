@@ -15,7 +15,7 @@ import type {
  * @internal
  */
 export class RequestHookToWaitForEvents extends RequestHookWithEvents {
-  constructor(private waitForEventsState: WaitForEventsState) {
+  constructor(private readonly waitForEventsState: WaitForEventsState) {
     super();
   }
 

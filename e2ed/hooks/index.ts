@@ -1,5 +1,6 @@
-export * from './getLogContext';
-export * from './getMainTestRunParams';
-export * from './getTestRunHash';
-export * from './isTestSkipped';
-export * from './navigateTo';
+export {getLogContext} from './getLogContext';
+export {getMainTestRunParams} from './getMainTestRunParams';
+export {getTestRunHash} from './getTestRunHash';
+export type {SkipTests} from './isTestSkipped';
+export {isTestSkipped} from './isTestSkipped';
+export {navigateTo} from './navigateTo';

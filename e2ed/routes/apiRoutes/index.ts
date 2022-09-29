@@ -1,3 +1,3 @@
-export * from './CreateDevice';
-export * from './CreateProduct';
-export * from './UserSignUp';
+export {CreateDevice} from './CreateDevice';
+export {CreateProduct} from './CreateProduct';
+export {UserSignUp} from './UserSignUp';

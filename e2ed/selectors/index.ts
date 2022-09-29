@@ -1,1 +1,1 @@
-export * from './inputSelector';
+export {inputSelector} from './inputSelector';

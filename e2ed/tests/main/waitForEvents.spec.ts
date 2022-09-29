@@ -1,4 +1,4 @@
-import {ClientFunction, expect, it} from 'e2ed';
+import {createClientFunction, expect, it} from 'e2ed';
 import {waitForRequest, waitForResponse} from 'e2ed/actions';
 
 import type {Request, Response} from 'e2ed/types';
@@ -9,7 +9,7 @@ it(
   'waitForRequest/waitForResponse get correct request/response bodies',
   {meta: {testId: '2'}, testIdleTimeout: 3_000},
   async () => {
-    const addUser = ClientFunction(
+    const addUser = createClientFunction(
       () =>
         Promise.race([
           fetch('https://reqres.in/api/users', {

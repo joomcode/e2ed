@@ -1,1 +1,1 @@
-export * from './MobilePage';
+export {MobilePage} from './MobilePage';

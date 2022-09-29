@@ -1,4 +1,4 @@
-import {ClientFunction as BaseClientFunction} from 'testcafe-without-typecheck';
+import {ClientFunction} from 'testcafe-without-typecheck';
 
 import {generalLog} from './utils/generalLog';
 
@@ -64,13 +64,13 @@ const clientFunctionWrapper = function clientFunctionWrapper(): unknown {
 /**
  * Creates a client function.
  */
-export const ClientFunction = <R, A extends unknown[]>(
+export const createClientFunction = <R, A extends unknown[]>(
   originalFn: (...args: A) => R,
   name: string,
 ): WrappedClientFunction<R, A> => {
   const originalFnCode = String(originalFn).slice(0, 200);
 
-  const clientFunction = BaseClientFunction<Awaited<R> | undefined, A>(
+  const clientFunction = ClientFunction<Awaited<R> | undefined, A>(
     clientFunctionWrapper as unknown as (...args: A) => Awaited<R> | undefined,
     {dependencies: {originalFn}},
   );

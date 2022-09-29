@@ -1,12 +1,12 @@
-import {ClientFunction} from '../../ClientFunction';
 import {LogEventType} from '../../constants/internal';
+import {createClientFunction} from '../../createClientFunction';
 import {log} from '../../utils/log';
 
 import {waitForInterfaceStabilization} from '../waitFor';
 
 import type {AnyPageClassType} from '../../types/internal';
 
-const clientReloadPage = ClientFunction(() => window.location.reload(), 'reloadPage');
+const clientReloadPage = createClientFunction(() => window.location.reload(), 'reloadPage');
 
 /**
  * Reloads the page, taking into account its stabilization interval.

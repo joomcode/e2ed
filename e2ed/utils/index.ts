@@ -1,1 +1,1 @@
-export * from './phone';
+export {isValidUserPhone} from './phone';

@@ -1,12 +1,12 @@
-import {ClientFunction} from '../../../ClientFunction';
 import {LogEventType} from '../../../constants/internal';
+import {createClientFunction} from '../../../createClientFunction';
 import {log} from '../../../utils/log';
 
 import {waitForInterfaceStabilization} from '../../waitFor';
 
 import type {AnyPageClassType} from '../../../types/internal';
 
-const forwardPageHistoryClient = ClientFunction(
+const forwardPageHistoryClient = createClientFunction(
   () => window.history.forward(),
   'forwardPageHistory',
 );

@@ -9,6 +9,7 @@ export type DeviceId = Brand<string, 'DeviceId'>;
  * API params for device creation.
  */
 export type ApiDeviceParams = ApiDeviceAndProductRequest['requestBody'];
+
 /**
  * Params for device creation.
  */

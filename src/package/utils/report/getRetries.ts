@@ -2,26 +2,33 @@ import {getRunLabelObject} from '../runLabel';
 
 import type {FullTestRun, Retry, UtcTimeInMs} from '../../types/internal';
 
+type RawRetry = Readonly<{
+  concurrency: number;
+  retryFullTestRuns: FullTestRun[];
+}>;
+
 /**
  * Get array of retries from array of full test runs.
  * @internal
  */
 export const getRetries = (fullTestRuns: readonly FullTestRun[]): readonly Retry[] => {
   const retries: Retry[] = [];
-  const fullTestRunsHash: Record<number, FullTestRun[]> = {};
+  const fullTestRunsHash: Record<number, RawRetry> = {};
 
   for (const fullTestRun of fullTestRuns) {
     const {runLabel} = fullTestRun;
-    const {retryIndex} = getRunLabelObject(runLabel);
+    const {concurrency, retryIndex} = getRunLabelObject(runLabel);
 
     if (fullTestRunsHash[retryIndex] === undefined) {
-      fullTestRunsHash[retryIndex] = [];
+      const rawRetry: RawRetry = {concurrency, retryFullTestRuns: []};
+
+      fullTestRunsHash[retryIndex] = rawRetry;
     }
 
-    fullTestRunsHash[retryIndex]?.push(fullTestRun);
+    fullTestRunsHash[retryIndex]?.retryFullTestRuns.push(fullTestRun);
   }
 
-  for (const [retryString, retryFullTestRuns] of Object.entries(fullTestRunsHash)) {
+  for (const [retryString, {concurrency, retryFullTestRuns}] of Object.entries(fullTestRunsHash)) {
     retryFullTestRuns.sort((a, b) => {
       if (a.filePath > b.filePath) {
         return 1;
@@ -42,7 +49,13 @@ export const getRetries = (fullTestRuns: readonly FullTestRun[]): readonly Retry
 
     const retryIndex = Number(retryString);
 
-    const fullRetry = {endTimeInMs, fullTestRuns: retryFullTestRuns, retryIndex, startTimeInMs};
+    const fullRetry: Retry = {
+      concurrency,
+      endTimeInMs,
+      fullTestRuns: retryFullTestRuns,
+      retryIndex,
+      startTimeInMs,
+    };
 
     retries.push(fullRetry);
   }

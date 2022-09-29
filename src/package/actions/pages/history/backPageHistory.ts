@@ -1,12 +1,12 @@
-import {ClientFunction} from '../../../ClientFunction';
 import {LogEventType} from '../../../constants/internal';
+import {createClientFunction} from '../../../createClientFunction';
 import {log} from '../../../utils/log';
 
 import {waitForInterfaceStabilization} from '../../waitFor';
 
 import type {AnyPageClassType} from '../../../types/internal';
 
-const backPageHistoryClient = ClientFunction(() => window.history.back(), 'backPageHistory');
+const backPageHistoryClient = createClientFunction(() => window.history.back(), 'backPageHistory');
 
 /**
  * Go back in browser page history.

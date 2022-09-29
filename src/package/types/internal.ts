@@ -62,9 +62,9 @@ export type {
 /** @internal */
 export type {RetriesState, RunRetryOptions} from './retries';
 export type {ApiRouteClassType, ApiRouteClassTypeWithGetParamsFromUrl} from './routes';
-export type {RunLabel} from './runLabel';
+export type {RunLabel, RunLabelObject} from './runLabel';
 /** @internal */
-export type {RawRunLabelObject, RunLabelObject} from './runLabel';
+export type {RawRunLabelObject} from './runLabel';
 export type {Selector} from './selectors';
 export type {IsTestSkipped} from './skipTest';
 export type {StackFrame} from './stackTrack';

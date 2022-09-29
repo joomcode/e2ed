@@ -1,1 +1,1 @@
-export * from './createRandomUser';
+export {createRandomUser} from './createRandomUser';

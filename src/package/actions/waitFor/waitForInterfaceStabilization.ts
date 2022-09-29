@@ -1,5 +1,5 @@
-import {ClientFunction} from '../../ClientFunction';
 import {LogEventType} from '../../constants/internal';
+import {createClientFunction} from '../../createClientFunction';
 import {log} from '../../utils/log';
 
 import type {TestClientGlobal, UtcTimeInMs} from '../../types/internal';
@@ -16,112 +16,117 @@ import type {TestClientGlobal, UtcTimeInMs} from '../../types/internal';
  * Elements from different points on the page are taken as checked elements,
  * as well as a number of elements with the data-testid attribute used in tests.
  */
-const clientWaitForInterfaceStabilization = ClientFunction((stabilizationInterval: number) => {
-  const global: TestClientGlobal = window;
+const clientWaitForInterfaceStabilization = createClientFunction(
+  (stabilizationInterval: number) => {
+    const global: TestClientGlobal = window;
 
-  /**
-   * Asserts that the value is defined (is not undefined).
-   */
-  function assertValueIsDefined<T>(value: T): asserts value is Exclude<T, undefined> {
-    if (value === undefined) {
-      throw new TypeError('Asserted value is undefined');
-    }
-  }
-
-  if (global.e2edWaitingForInterfaceStabilization) {
-    if (stabilizationInterval > global.e2edWaitingForInterfaceStabilization.stabilizationInterval) {
-      global.e2edWaitingForInterfaceStabilization.stabilizationInterval = stabilizationInterval;
+    /**
+     * Asserts that the value is defined (is not undefined).
+     */
+    function assertValueIsDefined<T>(value: T): asserts value is Exclude<T, undefined> {
+      if (value === undefined) {
+        throw new TypeError('Asserted value is undefined');
+      }
     }
 
-    return global.e2edWaitingForInterfaceStabilization.promise;
-  }
+    if (global.e2edWaitingForInterfaceStabilization) {
+      if (
+        stabilizationInterval > global.e2edWaitingForInterfaceStabilization.stabilizationInterval
+      ) {
+        global.e2edWaitingForInterfaceStabilization.stabilizationInterval = stabilizationInterval;
+      }
 
-  const CHECK_INTERVAL_IN_MS = 250;
-  const TIMEOUT_IN_MS = 40_000;
-  const COUNT_OF_POINTED_NODES = 8;
-  const COUNT_OF_TEST_ID_NODES = 50;
-  const startTimeInMs = Date.now() as UtcTimeInMs;
-
-  const getInterfaceState = (): string => {
-    const {innerWidth, innerHeight} = window;
-    const elements: Element[] = [document.documentElement];
-    const elementsWithDataTestId = document.querySelectorAll('[data-test-id]');
-    const elementsWithDataTestid = document.querySelectorAll('[data-testid]');
-    const deltaX = innerWidth / (COUNT_OF_POINTED_NODES + 1);
-    const deltaY = innerHeight / (COUNT_OF_POINTED_NODES + 1);
-
-    for (let i = 0; i < elementsWithDataTestId.length && i < COUNT_OF_TEST_ID_NODES; i += 1) {
-      const elementWithDataTestId = elementsWithDataTestId[i];
-
-      assertValueIsDefined(elementWithDataTestId);
-
-      elements.push(elementWithDataTestId);
+      return global.e2edWaitingForInterfaceStabilization.promise;
     }
 
-    for (let i = 0; i < elementsWithDataTestid.length && i < COUNT_OF_TEST_ID_NODES; i += 1) {
-      const elementWithDataTestid = elementsWithDataTestid[i];
+    const CHECK_INTERVAL_IN_MS = 250;
+    const TIMEOUT_IN_MS = 40_000;
+    const COUNT_OF_POINTED_NODES = 8;
+    const COUNT_OF_TEST_ID_NODES = 50;
+    const startTimeInMs = Date.now() as UtcTimeInMs;
 
-      assertValueIsDefined(elementWithDataTestid);
+    const getInterfaceState = (): string => {
+      const {innerWidth, innerHeight} = window;
+      const elements: Element[] = [document.documentElement];
+      const elementsWithDataTestId = document.querySelectorAll('[data-test-id]');
+      const elementsWithDataTestid = document.querySelectorAll('[data-testid]');
+      const deltaX = innerWidth / (COUNT_OF_POINTED_NODES + 1);
+      const deltaY = innerHeight / (COUNT_OF_POINTED_NODES + 1);
 
-      elements.push(elementWithDataTestid);
-    }
+      for (let i = 0; i < elementsWithDataTestId.length && i < COUNT_OF_TEST_ID_NODES; i += 1) {
+        const elementWithDataTestId = elementsWithDataTestId[i];
 
-    for (let xIndex = 1; xIndex <= COUNT_OF_POINTED_NODES; xIndex += 1) {
-      for (let yIndex = 1; yIndex <= COUNT_OF_POINTED_NODES; yIndex += 1) {
-        const element = document.elementFromPoint(deltaX * xIndex, deltaY * yIndex);
+        assertValueIsDefined(elementWithDataTestId);
 
-        if (element) {
-          elements.push(element);
+        elements.push(elementWithDataTestId);
+      }
+
+      for (let i = 0; i < elementsWithDataTestid.length && i < COUNT_OF_TEST_ID_NODES; i += 1) {
+        const elementWithDataTestid = elementsWithDataTestid[i];
+
+        assertValueIsDefined(elementWithDataTestid);
+
+        elements.push(elementWithDataTestid);
+      }
+
+      for (let xIndex = 1; xIndex <= COUNT_OF_POINTED_NODES; xIndex += 1) {
+        for (let yIndex = 1; yIndex <= COUNT_OF_POINTED_NODES; yIndex += 1) {
+          const element = document.elementFromPoint(deltaX * xIndex, deltaY * yIndex);
+
+          if (element) {
+            elements.push(element);
+          }
         }
       }
-    }
 
-    const attributes = elements.map((element) => [
-      element.className,
-      element.getBoundingClientRect(),
-      element.scrollLeft,
-      element.scrollTop,
-    ]);
+      const attributes = elements.map((element) => [
+        element.className,
+        element.getBoundingClientRect(),
+        element.scrollLeft,
+        element.scrollTop,
+      ]);
 
-    return JSON.stringify([attributes, innerHeight, innerWidth]);
-  };
+      return JSON.stringify([attributes, innerHeight, innerWidth]);
+    };
 
-  let interfaceState = getInterfaceState();
-  let stabilizationIntervalStart = startTimeInMs;
+    let interfaceState = getInterfaceState();
+    let stabilizationIntervalStart = startTimeInMs;
 
-  const promise = new Promise<void>((resolve, reject) => {
-    const intervalId = setInterval(() => {
-      const newInterfaceState = getInterfaceState();
+    const promise = new Promise<void>((resolve, reject) => {
+      const intervalId = setInterval(() => {
+        const newInterfaceState = getInterfaceState();
 
-      if (newInterfaceState !== interfaceState) {
-        stabilizationIntervalStart = Date.now() as UtcTimeInMs;
-      }
+        if (newInterfaceState !== interfaceState) {
+          stabilizationIntervalStart = Date.now() as UtcTimeInMs;
+        }
 
-      interfaceState = newInterfaceState;
+        interfaceState = newInterfaceState;
 
-      const currentStabilizationInterval =
-        global.e2edWaitingForInterfaceStabilization?.stabilizationInterval ?? Infinity;
+        const currentStabilizationInterval =
+          global.e2edWaitingForInterfaceStabilization?.stabilizationInterval ?? Infinity;
 
-      if (Date.now() - stabilizationIntervalStart >= currentStabilizationInterval) {
-        global.e2edWaitingForInterfaceStabilization = undefined;
-        clearInterval(intervalId);
-        resolve();
+        if (Date.now() - stabilizationIntervalStart >= currentStabilizationInterval) {
+          global.e2edWaitingForInterfaceStabilization = undefined;
+          clearInterval(intervalId);
+          resolve();
 
-        return;
-      }
+          return;
+        }
 
-      if (Date.now() - startTimeInMs > TIMEOUT_IN_MS) {
-        global.e2edWaitingForInterfaceStabilization = undefined;
-        clearInterval(intervalId);
-        reject(new Error(`Time was out in waitForInterfaceStabilization (${TIMEOUT_IN_MS}ms)`));
-      }
-    }, CHECK_INTERVAL_IN_MS);
-  });
+        if (Date.now() - startTimeInMs > TIMEOUT_IN_MS) {
+          global.e2edWaitingForInterfaceStabilization = undefined;
+          clearInterval(intervalId);
+          reject(new Error(`Time was out in waitForInterfaceStabilization (${TIMEOUT_IN_MS}ms)`));
+        }
+      }, CHECK_INTERVAL_IN_MS);
+    });
 
-  global.e2edWaitingForInterfaceStabilization = {promise, stabilizationInterval};
+    global.e2edWaitingForInterfaceStabilization = {promise, stabilizationInterval};
 
-  return promise;
-}, 'waitForInterfaceStabilization');
+    return promise;
+  },
+  'waitForInterfaceStabilization',
+);
 
 /**
  * Wait until the page interface stabilizes (in particular, the page will stop scrolling).

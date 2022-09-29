@@ -1,1 +1,1 @@
-export * from './ApiRoute';
+export {ApiRoute} from './ApiRoute';

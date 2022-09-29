@@ -4,7 +4,7 @@ import type {RawRunLabelObject, RunLabel, RunLabelObject} from '../../types/inte
 
 /**
  * Get RunLabelObject from RunLabel.
- * @internal
+ * Not internal because runLabel is a part of TestRun type, used in userland hooks.
  */
 export const getRunLabelObject = (runLabel: RunLabel): RunLabelObject => {
   const object = runLabel.match(

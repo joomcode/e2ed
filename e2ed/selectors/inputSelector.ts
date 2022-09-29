@@ -1,5 +1,8 @@
-import {createSelector} from 'e2ed';
+import {cssSelector} from 'e2ed/selectors';
 
 import type {Selector} from 'e2ed/types';
 
-export const inputSelector = (name: string): Selector => createSelector(`input[name=${name}]`);
+/**
+ * Selector of input element by name.
+ */
+export const inputSelector = (name: string): Selector => cssSelector(`input[name=${name}]`);
