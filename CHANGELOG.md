@@ -1,5 +1,22 @@
 # Changelog
 
+## [v0.12.5](https://github.com/joomcode/e2ed/tree/v0.12.5) (2022-09-30)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.4...v0.12.5)
+
+- [chore: update TestCafe to 2.0.1](https://github.com/joomcode/e2ed/commit/a5c3f509c2f70b5d7511ff148c99bcf201fc902e) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (typescript, @typescript-eslint/...)](https://github.com/joomcode/e2ed/commit/0a7ed27a1c36fb82a9ba1f4ceacd33c14ddbe4ce) ([uid11](https://github.com/uid11))
+- [fix: use cssSelector in locator selectors](https://github.com/joomcode/e2ed/commit/e83f0eba1728276c8197393fb0d9cabb477a5a95) ([uid11](https://github.com/uid11))
+
+  fix: remove testIdSelector
+  fix: unused modules error in e2ed/context/user
+
+- [feat: add concurrency to report retry object (and to lite report retry)](https://github.com/joomcode/e2ed/commit/e8935efdb472a6c56cee0180022db96b5a55d0f5) ([uid11](https://github.com/uid11))
+
+  fix: use direct reexports in e2ed init example
+  fix: rename ClientFunction to createClientFunction
+  fix: export getRunLabelObject util for parsing test runLabel
+
 ## [v0.12.4](https://github.com/joomcode/e2ed/tree/v0.12.4) (2022-09-25)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.3...v0.12.4)
