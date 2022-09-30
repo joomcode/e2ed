@@ -17,7 +17,7 @@ const config: Config = {
   ajaxRequestTimeout: 40_000,
   assertionTimeout: 10_000,
   browserInitTimeout: 60_000,
-  browsers: 'chromium:headless --no-sandbox --disable-dev-shm-usage --disable-web-security',
+  browsers: 'chromium:headless --disable-dev-shm-usage --disable-web-security',
   concurrency: isLocalRun ? 1 : 2,
   dockerImage: 'e2edhub/e2ed',
   liteReportFileName: 'lite-report.json',
