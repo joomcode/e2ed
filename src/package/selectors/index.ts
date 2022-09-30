@@ -1,6 +1,6 @@
 export {cssSelector} from './cssSelector';
 export {htmlElementSelector} from './htmlElementSelector';
-export {locatorIdSelector, locatorIdSelector as testIdSelector} from './locatorIdSelector';
+export {locatorIdSelector} from './locatorIdSelector';
 export {
   locatorPropertyEndsWithSelector,
   locatorPropertyIncludesSelector,

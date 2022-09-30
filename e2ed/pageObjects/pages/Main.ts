@@ -2,7 +2,7 @@ import {Page} from 'e2ed';
 import {createTestId} from 'e2ed/createTestId';
 import {Input} from 'e2ed/pageObjects/components';
 import {Main as MainRoute} from 'e2ed/routes/pageRoutes';
-import {testIdSelector} from 'e2ed/selectors';
+import {locatorIdSelector} from 'e2ed/selectors';
 
 import type {GetParamsType, Language} from 'e2ed/types';
 
@@ -39,7 +39,7 @@ export class Main extends Page<CustomPageParams> {
   /**
    * Header selector.
    */
-  readonly headerSelector = testIdSelector(mainPageTestId.header);
+  readonly headerSelector = locatorIdSelector(mainPageTestId.header);
 
   /**
    * Current search string.

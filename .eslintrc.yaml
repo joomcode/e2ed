@@ -69,6 +69,7 @@ rules:
   import/no-unused-modules:
     - error
     - ignoreExports:
+        - e2ed/context/user.ts
         - src/package/actions/index.ts
         - src/package/constants/index.ts
         - src/package/context/index.ts
