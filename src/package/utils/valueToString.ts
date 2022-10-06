@@ -1,6 +1,8 @@
-import {type InspectOptions, inspect} from 'node:util';
+import {inspect} from 'node:util';
 
 import {DEFAULT_INSPECT_OPTIONS, MAX_LINES_IN_STRINGIFY_VALUE} from '../constants/internal';
+
+import type {InspectOptions} from 'node:util';
 
 const STACK_FRAMES = 'stackFrames: [';
 

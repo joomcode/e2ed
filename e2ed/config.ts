@@ -13,6 +13,9 @@ import type {Config} from 'e2ed/configurator';
 
 const isLocalRun = runEnvironment === RunEnvironment.Local;
 
+/**
+ * The complete config of pack of tests.
+ */
 const config: Config = {
   ajaxRequestTimeout: 40_000,
   assertionTimeout: 10_000,
