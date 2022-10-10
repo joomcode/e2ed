@@ -4,9 +4,18 @@ import {log} from '../utils/log';
 
 declare const window: {
   e2edClipboardText?: string;
-};
+} & Record<symbol, unknown>;
+
+const SYMBOL_NAME = 'e2ed.mockClipboard.original';
 
 const overrideClipboard = createClientFunction(() => {
+  window[Symbol(SYMBOL_NAME)] = {
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    readText: navigator.clipboard.readText,
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    writeText: navigator.clipboard.writeText,
+  };
+
   navigator.clipboard.writeText = (text) => {
     window.e2edClipboardText = text;
 
@@ -15,6 +24,10 @@ const overrideClipboard = createClientFunction(() => {
 
   navigator.clipboard.readText = () => Promise.resolve(window.e2edClipboardText ?? '');
 }, 'overrideClipboard');
+
+const revertClipboard = createClientFunction(() => {
+  Object.assign(navigator.clipboard, window[Symbol(SYMBOL_NAME)]);
+}, 'revertClipboard');
 
 const readClipboardText = createClientFunction(
   () => navigator.clipboard.readText(),
@@ -33,6 +46,10 @@ const clipboardApi = {
     await log('Read text from clipboard', {text}, LogEventType.Util);
 
     return text;
+  },
+  async revert(): Promise<void> {
+    await revertClipboard();
+    await log('Restore clipboard', {}, LogEventType.Util);
   },
   async writeText(text: string): Promise<void> {
     await writeClipboardText(text);
