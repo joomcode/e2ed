@@ -11,6 +11,7 @@ export type {
   ApiMockFunction,
   ApiRouteClassType,
   ApiRouteClassTypeWithGetParamsFromUrl,
+  AsyncVoid,
   Brand,
   CloneWithoutUndefinedProperties,
   Cookie,

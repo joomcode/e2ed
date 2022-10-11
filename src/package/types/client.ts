@@ -1,4 +1,4 @@
-import type {UnwrapPromise} from './utils';
+import type {UnwrapPromise} from './promise';
 
 /**
  * Client properties for waiting for interface stabilization.

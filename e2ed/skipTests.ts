@@ -6,7 +6,7 @@ import type {Config} from 'e2ed/configurator';
 export const skipTests: Config['skipTests'] = [
   {
     reason: 'Skip for testing skipping mechanism',
-    testIds: ['3'],
+    testIds: ['4'],
     unskipTaskUrl: 'https://tasktracker.com/3',
   },
 ];

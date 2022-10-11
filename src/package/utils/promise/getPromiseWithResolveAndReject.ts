@@ -1,12 +1,14 @@
 import {assertValueIsDefined} from '../asserts';
 import {E2EDError} from '../E2EDError';
 
+import type {AsyncVoid} from '../../types/internal';
+
 type Return<PromiseValue, ResolveValue, RejectValue> = Readonly<{
   clearRejectTimeout: () => void;
   promise: Promise<PromiseValue>;
   reject: (error: RejectValue) => void;
   resolve: (value: ResolveValue) => void;
-  setRejectTimeoutFunction: (rejectTimeoutFunction: () => void) => void;
+  setRejectTimeoutFunction: (rejectTimeoutFunction: () => AsyncVoid) => void;
 }>;
 
 /**
@@ -31,7 +33,7 @@ export const getPromiseWithResolveAndReject = <
   assertValueIsDefined(reject, 'reject is defined', {promiseWithoutClear, resolve});
   assertValueIsDefined(resolve, 'resolve is defined', {promiseWithoutClear, reject});
 
-  let rejectTimeoutFunction = (): void => {
+  let rejectTimeoutFunction = (): AsyncVoid => {
     const error = new E2EDError(
       `Promise was rejected after ${timeoutInMs}ms timeout by default reject function`,
     );
@@ -39,15 +41,18 @@ export const getPromiseWithResolveAndReject = <
     reject?.(error as RejectValue);
   };
 
-  const timeoutId = setTimeout(() => {
-    rejectTimeoutFunction();
-  }, timeoutInMs);
+  const timeoutId = setTimeout(
+    (async () => {
+      await rejectTimeoutFunction();
+    }) as () => void,
+    timeoutInMs,
+  );
 
   const clearRejectTimeout = (): void => {
     clearTimeout(timeoutId);
   };
 
-  const setRejectTimeoutFunction = (newRejectTimeoutFunction: () => void): void => {
+  const setRejectTimeoutFunction = (newRejectTimeoutFunction: () => AsyncVoid): void => {
     rejectTimeoutFunction = newRejectTimeoutFunction;
   };
 

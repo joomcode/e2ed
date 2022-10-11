@@ -3,7 +3,7 @@ import {assertValueIsTrue} from './utils/asserts';
 import {getFullConfig} from './utils/getFullConfig';
 
 import type {Route} from './Route';
-import type {PageClassTypeArgs, PARAMS_KEY_TYPE} from './types/internal';
+import type {AsyncVoid, PageClassTypeArgs, PARAMS_KEY_TYPE} from './types/internal';
 
 declare const PARAMS_KEY: PARAMS_KEY_TYPE;
 
@@ -44,27 +44,27 @@ export abstract class Page<PageParams = undefined> {
    * Optional initialization (asynchronous or synchronous) of the page after
    * the synchronous constructor has run.
    */
-  init?(): void | Promise<void>;
+  init?(): AsyncVoid;
 
   /**
    * Optional hook that runs after asserts the page.
    */
-  afterAssertPage?(): void | Promise<void>;
+  afterAssertPage?(): AsyncVoid;
 
   /**
    * Optional hook that runs after navigation to the page.
    */
-  afterNavigateToPage?(): void | Promise<void>;
+  afterNavigateToPage?(): AsyncVoid;
 
   /**
    * Optional hook that runs before asserts the page.
    */
-  beforeAssertPage?(): void | Promise<void>;
+  beforeAssertPage?(): AsyncVoid;
 
   /**
    * Optional hook that runs before navigation to the page (but after page initialization).
    */
-  beforeNavigateToPage?(): void | Promise<void>;
+  beforeNavigateToPage?(): AsyncVoid;
 
   /**
    * Get page route (for navigation to the page).

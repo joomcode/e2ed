@@ -5,8 +5,9 @@ import {getFullConfig} from '../../utils/getFullConfig';
 import {log} from '../../utils/log';
 import {getPromiseWithResolveAndReject} from '../../utils/promise';
 import {updateWaitForEventsState} from '../../utils/waitForEvents';
+import {wrapInTestRunTracker} from '../../utils/wrapInTestRunTracker';
 
-import type {Request, RequestPredicate} from '../../types/internal';
+import type {Request, RequestPredicate, RequestPredicateWithPromise} from '../../types/internal';
 
 /**
  * Wait for some request (from browser) by request predicate.
@@ -23,20 +24,28 @@ export const waitForRequest = async <SomeRequest extends Request>(
     Request
   >(rejectTimeout);
 
-  setRejectTimeoutFunction(() => {
+  const requestPredicateWithPromise: RequestPredicateWithPromise = {
+    predicate: predicate as RequestPredicate,
+    reject,
+    resolve,
+  };
+
+  const wrappedSetRejectTimeoutFunction = wrapInTestRunTracker(setRejectTimeoutFunction);
+
+  wrappedSetRejectTimeoutFunction(() => {
     const error = new E2EDError(
       `waitForRequest promise rejected after ${rejectTimeout}ms timeout`,
       {predicate},
     );
 
+    waitForEventsState.requestPredicates.delete(requestPredicateWithPromise);
+
     reject(error);
+
+    return updateWaitForEventsState(waitForEventsState);
   });
 
-  waitForEventsState.requestPredicates.add({
-    predicate: predicate as RequestPredicate,
-    reject,
-    resolve,
-  });
+  waitForEventsState.requestPredicates.add(requestPredicateWithPromise);
 
   await updateWaitForEventsState(waitForEventsState);
 
