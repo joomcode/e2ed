@@ -4,6 +4,6 @@
 
 import {it} from 'e2ed';
 
-it('skipped', {meta: {testId: '3'}}, () => {
+it('skipped', {meta: {testId: '4'}}, () => {
   throw new Error('Skipped test was running');
 });

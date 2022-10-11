@@ -42,6 +42,7 @@ export type {
 } from './pages';
 /** @internal */
 export type {ImgData, PixelmatchOptions} from './pixelmatch';
+export type {AsyncVoid, UnwrapPromise} from './promise';
 export type {LiteReport, LiteRetry} from './report';
 /** @internal */
 export type {
@@ -96,7 +97,6 @@ export type {
   OptionalIfValueIncludeDefault,
   PARAMS_KEY_TYPE,
   UnionToIntersection,
-  UnwrapPromise,
   UnwrapSet,
   ZeroOrOneArg,
 } from './utils';

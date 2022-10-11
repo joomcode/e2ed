@@ -82,15 +82,6 @@ export type UnionToIntersection<U> = (U extends unknown ? (k: U) => void : never
   : never;
 
 /**
- * If the type is a promise, unwraps it and returns the promise value type
- * (until a non-promise value is obtained).
- * UnwrapPromise<number> = number.
- * UnwrapPromise<Promise<string>> = string.
- * UnwrapPromise<Promise<Promise<bigint>>> = bigint.
- */
-export type UnwrapPromise<T> = T extends Promise<infer V> ? UnwrapPromise<V> : T;
-
-/**
  * If the type is a set, unwraps it and returns the set value type.
  * UnwrapSet<number> = number.
  * UnwrapSet<Set<string>> = string.

@@ -1,5 +1,24 @@
 # Changelog
 
+## [v0.12.6](https://github.com/joomcode/e2ed/tree/v0.12.6) (2022-10-11)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.5...v0.12.6)
+
+- [chore: update devDependencies (@types/node, eslint, etc)](https://github.com/joomcode/e2ed/commit/ecd6d068b38f7ae98837b0295fe620aeb6fcd3b2) ([uid11](https://github.com/uid11))
+- [Merge pull request #9 from joomcode/WEB-6125_parentSelector](https://github.com/joomcode/e2ed/commit/ea9d64132af856dbb0ea9a61639a60c993e26e8e) ([uid11](https://github.com/uid11))
+
+  feat: add locatorIdInParentSelector
+
+- [fix: remove waitForEvents hook when waits rejected by timeout](https://github.com/joomcode/e2ed/commit/c59d95ed1325b903a24943ee79dc63f5c39165dc) ([uid11](https://github.com/uid11))
+
+  fix: add utility type AsyncVoid (void | Promise<void>)
+  fix: temporary skip test of waitForResponse (need research)
+
+- [Kuraev Merge remote-tracking branch 'origin/main' into WEB-6125_parentSelector](https://github.com/joomcode/e2ed/commit/550476ca8452d4e12906ec76016410dbee3667fe) ([Roman](https://github.com/Roman))
+- [Kuraev feat: add locatorIdInParentSelector](https://github.com/joomcode/e2ed/commit/4d42f88aaefcb78efa0884dfb0a138281f9b4628) ([Roman](https://github.com/Roman))
+- [chore: update devDependencies (@types/node, etc)](https://github.com/joomcode/e2ed/commit/e40085fed8641b6126bdd46f406b83d12ec85773) ([uid11](https://github.com/uid11))
+- [fix: support TS 4.4](https://github.com/joomcode/e2ed/commit/f6475ac2881c52e93aa77989c0d251f5624b49f8) ([uid11](https://github.com/uid11))
+
 ## [v0.12.5](https://github.com/joomcode/e2ed/tree/v0.12.5) (2022-09-30)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.4...v0.12.5)

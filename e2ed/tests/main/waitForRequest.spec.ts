@@ -1,12 +1,12 @@
 import {createClientFunction, expect, it} from 'e2ed';
-import {waitForRequest, waitForResponse} from 'e2ed/actions';
+import {waitForRequest} from 'e2ed/actions';
 
-import type {Request, Response} from 'e2ed/types';
+import type {Request} from 'e2ed/types';
 
 type Body = Readonly<{job: string; name: string}> | undefined;
 
 it(
-  'waitForRequest/waitForResponse get correct request/response bodies',
+  'waitForRequest get correct request body',
   {meta: {testId: '2'}, testIdleTimeout: 3_000},
   async () => {
     const addUser = createClientFunction(
@@ -26,17 +26,11 @@ it(
 
     void addUser();
 
-    const [request, response] = await Promise.all([
-      waitForRequest(({requestBody}: Request<Body>) => requestBody?.name === 'John'),
-      waitForResponse(({responseBody}: Response<Body>) => responseBody?.name === 'John'),
-    ]);
+    const request = await waitForRequest(
+      ({requestBody}: Request<Body>) => requestBody?.name === 'John',
+    );
 
     await expect(request.requestBody, 'request has correct body').eql({
-      job: 'leader',
-      name: 'John',
-    });
-
-    await expect(response.responseBody, 'response has correct body').contains({
       job: 'leader',
       name: 'John',
     });
