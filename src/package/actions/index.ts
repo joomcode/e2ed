@@ -1,5 +1,6 @@
 export {
-  assertDistanceBetweenSelectors,
+  assertDistanceBetweenSelectorsGte,
+  assertDistanceBetweenSelectorsLte,
   assertNumbersAreApproximatelyEqual,
   assertUrlMatchRoute,
 } from './asserts';
