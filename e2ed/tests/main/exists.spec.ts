@@ -125,8 +125,6 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 20_000, testTimeout: 80_000}
     undefined,
   );
 
-  /*
-
   await waitForRequest(() => false, {timeout: 100}).then(
     () => {
       throw new Error('waitForRequest did not throw an error after timeout');
@@ -140,5 +138,4 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 20_000, testTimeout: 80_000}
     },
     () => undefined,
   );
-*/
 });
