@@ -3,10 +3,10 @@ set -e
 
 DEBUG_PORT="${E2ED_DOCKER_DEBUG_PORT:-9229}"
 DIR="${E2ED_WORKDIR:-$PWD}"
-DOCKER_IMAGE=$(grep -m1 dockerImage ./e2ed/config.ts | sed -e "s/^[^'\"\`]*['\"\`]//" -e "s/['\"\`][^'\"\`]*$//")
+DOCKER_IMAGE=$(grep -m1 dockerImage $DIR/e2ed/config.ts | sed -e "s/^[^'\"\`]*['\"\`]//" -e "s/['\"\`][^'\"\`]*$//")
 MOUNTDIR="${E2ED_MOUNTDIR:-$DIR}"
 PORT=$([ -z $E2ED_DEBUG ] && echo "" || echo "--publish $DEBUG_PORT:$DEBUG_PORT")
-VERSION=$(grep -m1 \"e2ed\": ./package.json | cut -d '"' -f 4)
+VERSION=$(grep -m1 \"e2ed\": $DIR/package.json | cut -d '"' -f 4)
 
 echo "Run docker image $DOCKER_IMAGE:$VERSION"
 

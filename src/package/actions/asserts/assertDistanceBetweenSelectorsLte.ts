@@ -6,9 +6,10 @@ import {log} from '../../utils/log';
 import type {Selector} from '../../types/internal';
 
 /**
- * Asserts that distance between selectors is less then value of maxDistance (in pixels).
+ * Asserts that distance between selectors is less than or equal
+ * to value of maxDistance (in pixels).
  */
-export const assertDistanceBetweenSelectors = async (
+export const assertDistanceBetweenSelectorsLte = async (
   selectorA: Selector,
   selectorB: Selector,
   maxDistance: number,
@@ -16,13 +17,13 @@ export const assertDistanceBetweenSelectors = async (
   const distance = await getDistanceBetweenSelectors(selectorA, selectorB);
 
   await log(
-    `Assert that distance between selectors is less or equal to ${maxDistance}`,
+    `Assert that distance between selectors is less than or equal to ${maxDistance}`,
     {distance, maxDistance},
     LogEventType.InternalAssert,
   );
 
   // TODO: support Smart Assertions
-  await expect(distance, `distance between selectors is less or equal to ${maxDistance}`).lte(
+  await expect(distance, `distance between selectors is less than or equal to ${maxDistance}`).lte(
     maxDistance,
   );
 };
