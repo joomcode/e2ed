@@ -6,4 +6,5 @@ export {FAILED_TEST_RUN_STATUSES, TestRunStatus} from './testRun';
 /**
  * Userland constants. This export must be the last.
  */
+// eslint-disable-next-line no-restricted-syntax
 export * from '../../../e2ed/constants';

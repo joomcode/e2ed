@@ -97,4 +97,5 @@ export type {
 /**
  * Userland types. This export must be the last.
  */
+// eslint-disable-next-line no-restricted-syntax
 export * from './userland/types';

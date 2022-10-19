@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+
 export * from '../../../e2ed/routes';
 
 /**

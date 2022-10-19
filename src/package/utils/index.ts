@@ -37,4 +37,5 @@ export {wrapInTestRunTracker} from './wrapInTestRunTracker';
 /**
  * Userland utils. This export must be the last.
  */
+// eslint-disable-next-line no-restricted-syntax
 export * from '../../../e2ed/utils';

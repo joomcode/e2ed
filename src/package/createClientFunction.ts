@@ -7,6 +7,7 @@ import type {TestClientGlobal, WrappedClientFunction} from './types/internal';
 /**
  * This client function wraps all ClientFunction bodies and terminates them on page unload.
  */
+// eslint-disable-next-line no-restricted-syntax
 const clientFunctionWrapper = function clientFunctionWrapper(): unknown {
   // eslint-disable-next-line
   const args: unknown[] = Array.prototype.slice.call(arguments);
@@ -19,11 +20,7 @@ const clientFunctionWrapper = function clientFunctionWrapper(): unknown {
     global.addEventListener('beforeunload', () => {
       const {e2edClientFunctionResolves} = global;
 
-      if (!e2edClientFunctionResolves) {
-        return;
-      }
-
-      e2edClientFunctionResolves.forEach((resolve, index) => {
+      e2edClientFunctionResolves?.forEach((resolve, index) => {
         e2edClientFunctionResolves[index] = undefined;
 
         resolve?.();

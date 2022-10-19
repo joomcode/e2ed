@@ -3,6 +3,7 @@ import type {StackFrame} from '../types/internal';
 /**
  * For using arguments.callee we need to eval this function in non-strict mode.
  */
+// eslint-disable-next-line no-restricted-syntax
 const getStackTraceBody = function getStackTrace(): StackFrame[] {
   const savedLimit = Error.stackTraceLimit;
 
@@ -10,6 +11,7 @@ const getStackTraceBody = function getStackTrace(): StackFrame[] {
 
   const originalPrepareStackTrace = Error.prepareStackTrace;
 
+  // eslint-disable-next-line no-restricted-syntax
   Error.prepareStackTrace = function prepareStackTrace(_, stack) {
     return stack;
   };

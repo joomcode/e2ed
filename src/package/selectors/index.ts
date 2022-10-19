@@ -12,4 +12,5 @@ export {
 /**
  * Userland selectors. This export must be the last.
  */
+// eslint-disable-next-line no-restricted-syntax
 export * from '../../../e2ed/selectors';

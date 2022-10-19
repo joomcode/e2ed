@@ -20,7 +20,7 @@ void request(UserSignUp, {});
 // ok
 void request(UserSignUp, {requestBody: apiUserParams});
 
-void async function test() {
+void (async () => {
   // ok
   const {
     responseBody: {payload},
@@ -52,4 +52,4 @@ void async function test() {
   const apiDevice: ApiDevice = responseBody.payload;
 
   void apiDevice;
-};
+})();

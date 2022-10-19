@@ -19,6 +19,7 @@ class Expect {
 }
 
 for (const [key, getAssertionMessage] of Object.entries(assertionMessageGetters)) {
+  // eslint-disable-next-line no-restricted-syntax
   Expect.prototype[key] = function method(...args: unknown[]) {
     const message = getAssertionMessage(...args);
 
