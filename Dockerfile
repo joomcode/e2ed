@@ -17,6 +17,7 @@ RUN mkdir --parents /node_modules/@types
 
 COPY ./node_modules/@types/node /node_modules/@types/node
 COPY ./node_modules/create-test-id /node_modules/create-test-id
+COPY ./node_modules/globby /node_modules/globby
 COPY ./node_modules/pngjs /node_modules/pngjs
 COPY ./node_modules/typescript /node_modules/typescript
 
