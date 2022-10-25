@@ -1,5 +1,6 @@
 import {RunEnvironment} from '../../configurator';
 
+import {getFullConfig} from '../getFullConfig';
 import {getUnvisitedTestFilePaths} from '../getUnvisitedTestFilePaths';
 
 import type {FullTestRun} from '../../types/internal';
@@ -12,6 +13,7 @@ export const getReportErrors = async (
   runEnvironment: RunEnvironment,
   fullTestRuns: readonly FullTestRun[],
 ): Promise<readonly string[]> => {
+  const {testFiles} = getFullConfig();
   const errors: string[] = [];
 
   if (runEnvironment === RunEnvironment.Docker) {
@@ -21,9 +23,11 @@ export const getReportErrors = async (
 
     if (numberOfUnvisited !== 0) {
       errors.push(
-        `Error: There ${onlyOne ? 'is' : 'are'} ${numberOfUnvisited} e2ed/tests/**/*.spec.ts-file${
+        `Error: There ${onlyOne ? 'is' : 'are'} ${numberOfUnvisited} test file${
           onlyOne ? '' : 's'
-        } not visited when running tests: ${unvisitedTestFilePaths.join(', ')}`,
+        } found by the globs "${testFiles.join(
+          ', ',
+        )}" and not visited when running tests: ${unvisitedTestFilePaths.join(', ')}`,
       );
     }
   }

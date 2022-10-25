@@ -1,6 +1,12 @@
 import {join} from 'node:path';
 
-import type {DirectoryPathFromRoot} from '../types/internal';
+import type {DirectoryPathFromRoot, FilePathFromRoot} from '../types/internal';
+
+/**
+ * Absolute path to the project root directory.
+ * @internal
+ */
+export const ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY = process.cwd();
 
 /**
  * Relative (from root) path to installed e2ed package directory.
@@ -13,12 +19,6 @@ export const E2ED_PACKAGE_DIRECTORY_PATH = join('node_modules', 'e2ed') as Direc
  * @internal
  */
 export const REPORTS_DIRECTORY_PATH = join('e2ed', 'reports') as DirectoryPathFromRoot;
-
-/**
- * Relative (from root) path to directory with all tests.
- * @internal
- */
-export const TESTS_DIRECTORY_PATH = join('e2ed', 'tests') as DirectoryPathFromRoot;
 
 /**
  * Relative (from root) path to tmp directory.
@@ -57,10 +57,10 @@ export const START_INFO_PATH = join(TMP_DIRECTORY_PATH, 'startInfo.json');
  * Relative (from root) path to userland config file.
  * @internal
  */
-export const USERLAND_CONFIG_PATH = join('e2ed', 'config.ts');
+export const USERLAND_CONFIG_PATH = join('e2ed', 'config.ts') as FilePathFromRoot;
 
 /**
  * Relative (from root) path to userland override config file.
  * @internal
  */
-export const USERLAND_OVERRIDE_CONFIG_PATH = join('e2ed', 'overrideConfig.ts');
+export const USERLAND_OVERRIDE_CONFIG_PATH = join('e2ed', 'overrideConfig.ts') as FilePathFromRoot;

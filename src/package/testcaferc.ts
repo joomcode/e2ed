@@ -36,7 +36,11 @@ const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
   skipJsErrors: true,
 };
 
-const fullConfig: FullConfig = {...userlandConfig, ...frozenPartOfTestCafeConfig};
+const fullConfig: FullConfig = {
+  ...userlandConfig,
+  src: userlandConfig.testFiles,
+  ...frozenPartOfTestCafeConfig,
+};
 
 Object.assign(exports, fullConfig);
 

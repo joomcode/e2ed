@@ -13,7 +13,9 @@ export type {LogEvent, Onlog, TestRunEvent} from './events';
 /** @internal */
 export type {EndTestRunEvent, FullEventsData} from './events';
 export type {Fn, MergeFunctions} from './fn';
-export type {DirectoryPathFromRoot, TestFilePath} from './fs';
+export type {TestFilePath} from './fs';
+/** @internal */
+export type {DirectoryPathFromRoot, FilePathFromRoot} from './fs';
 export type {
   Cookie,
   Headers,

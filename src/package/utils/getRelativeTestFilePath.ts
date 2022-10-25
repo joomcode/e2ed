@@ -1,24 +1,25 @@
-import {join, sep} from 'node:path';
+import {relative} from 'node:path';
 
-import {TESTS_DIRECTORY_PATH} from '../constants/internal';
+import {ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY} from '../constants/internal';
 
 import {E2EDError} from './E2EDError';
 
 import type {TestFilePath} from '../types/internal';
 
-const testPathString = join(TESTS_DIRECTORY_PATH, sep);
-
 /**
- * Get the path to the test file relative to the directory with all tests,
- * from the absolute or relative path containing the directory with all tests.
+ * Get the path to the test file relative to the project root directory,
+ * from the absolute path to the test file.
  * @internal
  */
-export const getRelativeTestFilePath = (filePath: string): TestFilePath => {
-  const index = filePath.lastIndexOf(testPathString);
+export const getRelativeTestFilePath = (absoluteFilePath: string): TestFilePath => {
+  const testFilePath = relative(
+    ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
+    absoluteFilePath,
+  ) as TestFilePath;
 
-  if (index === -1) {
-    throw new E2EDError('Not a path to test file', {filePath});
+  if (testFilePath.startsWith('.')) {
+    throw new E2EDError('Not a path to project file', {absoluteFilePath, testFilePath});
   }
 
-  return filePath.slice(index + testPathString.length) as TestFilePath;
+  return testFilePath;
 };

@@ -14,6 +14,7 @@ type OwnE2edConfig = Readonly<{
   printTestLogsInConsole: boolean;
   reportFileName: string | null;
   skipTests: SkipTests;
+  testFiles: readonly string[];
   testIdleTimeout: number;
   testLogsFileName: string | null;
   testTimeout: number;
@@ -34,7 +35,6 @@ type UserlangTestCafeConfig = Readonly<{
   port1: number;
   port2: number;
   selectorTimeout: number;
-  src: readonly string[];
 }>;
 
 /**
@@ -69,4 +69,6 @@ export type UserlandConfig = UserlangTestCafeConfig & OwnE2edConfig;
 /**
  * The complete e2ed config object.
  */
-export type FullConfig = UserlandConfig & FrozenPartOfTestCafeConfig;
+export type FullConfig = UserlandConfig &
+  FrozenPartOfTestCafeConfig &
+  Readonly<{src: readonly string[]}>;

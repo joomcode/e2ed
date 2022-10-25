@@ -19,7 +19,6 @@ export type {
   DeepPartial,
   DeepReadonly,
   DeepRequired,
-  DirectoryPathFromRoot,
   E2edClientFunctionResolves,
   E2edEnvironment,
   ExcludeUndefinedFromProperties,

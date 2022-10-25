@@ -1,6 +1,4 @@
-import {TESTS_DIRECTORY_PATH} from '../constants/internal';
-
-import {collectTestFilePathsFromDir} from './collectTestFilePathsFromDir';
+import {collectTestFilePaths} from './collectTestFilePaths';
 
 import type {FullTestRun, TestFilePath} from '../types/internal';
 
@@ -11,7 +9,7 @@ import type {FullTestRun, TestFilePath} from '../types/internal';
 export const getUnvisitedTestFilePaths = async (
   fullTestRuns: readonly FullTestRun[],
 ): Promise<readonly TestFilePath[]> => {
-  const allTestFilePaths = await collectTestFilePathsFromDir(TESTS_DIRECTORY_PATH);
+  const allTestFilePaths = await collectTestFilePaths();
 
   const visitedTestFilePathsHash: Record<TestFilePath, true> = {};
 
