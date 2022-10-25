@@ -1,5 +1,24 @@
 # Changelog
 
+## [v0.12.7](https://github.com/joomcode/e2ed/tree/v0.12.7) (2022-10-25)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.6...v0.12.7)
+
+- [chore: update devDependencies (@types/node, @typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/7c78155effec2b26642b67af68634602e6991f56) ([uid11](https://github.com/uid11))
+- [feat: remove spec.ts extension from test files](https://github.com/joomcode/e2ed/commit/1273bc5aa7ece31febfa4c050b9cafe8a0868202) ([uid11](https://github.com/uid11))
+
+  fix: rename src config field to testFiles
+
+- [feat: add globby to main e2ed dependencies (for searching test files)](https://github.com/joomcode/e2ed/commit/6472cf4dbac1aa612526ce444d790b62d6e24cd6) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies, update testcafe-without-typecheck](https://github.com/joomcode/e2ed/commit/163169bd64123b2d42193fcbab404f69f976fd12) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (@types/node, @typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/f40b579896e0d11b8fc0302f975ee474ca24323d) ([uid11](https://github.com/uid11))
+- [fix: restrict 'export \*' and function declarations in eslint rules](https://github.com/joomcode/e2ed/commit/cc256ec3039ef3e49b6227d6cb5e5893b204f82e) ([uid11](https://github.com/uid11))
+- [fix: uncomment waitForRequest/waitForResponse timeout tests](https://github.com/joomcode/e2ed/commit/78c4f1e4f541053989a5bd6b8dd37e9f03bd8a54) ([uid11](https://github.com/uid11))
+- [chore: update @types/node to 18.8.5](https://github.com/joomcode/e2ed/commit/6f0161cc4ac3cb7c3917ba2377facf5af9d278ce) ([uid11](https://github.com/uid11))
+- [fix: add assert actions assertDistanceBetweenSelectorsGte/Lte](https://github.com/joomcode/e2ed/commit/216421b35853689cadcef7b012a1052692317127) ([uid11](https://github.com/uid11))
+
+  fix: use correct absolute paths in runDocker shell script
+
 ## [v0.12.6](https://github.com/joomcode/e2ed/tree/v0.12.6) (2022-10-11)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.5...v0.12.6)
