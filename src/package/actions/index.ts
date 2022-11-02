@@ -13,7 +13,7 @@ export {drag} from './drag';
 export {dragToElement} from './dragToElement';
 export {getBrowserConsoleMessages} from './getBrowserConsoleMessages';
 export {hover} from './hover';
-export {mockApiRoute, unmockApiRoute} from './mockApiRoute';
+export {mockApiRoute, unmockApiRoute} from './mock';
 export {
   assertPage,
   backPageHistory,

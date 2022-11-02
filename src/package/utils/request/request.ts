@@ -53,6 +53,7 @@ export const request = async <
 
   const urlObject = new URL(url);
   const logParams: LogParams = {
+    cause: undefined,
     method,
     requestBody,
     requestHeaders,
@@ -105,9 +106,11 @@ export const request = async <
         return response;
       }
     } catch (cause) {
+      (logParams as Mutable<typeof logParams>).cause = cause;
+
       await log(
         `An error was received during the request to ${url}`,
-        {...logParams, cause, logEventStatus: LogEventStatus.Failed, retry},
+        {...logParams, logEventStatus: LogEventStatus.Failed, retry},
         LogEventType.InternalUtil,
       );
     }

@@ -14,8 +14,9 @@ import type {
  * @internal
  */
 export type LogParams = Readonly<{
-  requestHeaders: Headers | undefined;
+  cause: unknown;
   method: Method;
+  requestHeaders: Headers | undefined;
   requestBody: unknown;
   retry: string | undefined;
   timeout: number;

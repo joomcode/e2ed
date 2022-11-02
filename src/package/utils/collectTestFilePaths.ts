@@ -11,9 +11,9 @@ import type {TestFilePath} from '../types/internal';
  * @internal
  */
 export const collectTestFilePaths = async (): Promise<readonly TestFilePath[]> => {
-  const {testFiles} = getFullConfig();
+  const {testFileGlobs} = getFullConfig();
 
-  const rawTestFilesPaths = await globby(testFiles);
+  const rawTestFilesPaths = await globby(testFileGlobs);
   const testFilesPaths = rawTestFilesPaths.map(normalize as (path: string) => TestFilePath);
 
   return testFilesPaths;

@@ -1,11 +1,11 @@
 import {RequestMock} from 'testcafe-without-typecheck';
 
-import {LogEventType} from '../constants/internal';
-import {getApiMockState} from '../context/apiMockState';
-import {testController} from '../testController';
-import {log} from '../utils/log';
-import {getRequestsFilter, getSetResponse} from '../utils/mockApiRoute';
-import {wrapInTestRunTracker} from '../utils/wrapInTestRunTracker';
+import {LogEventType} from '../../constants/internal';
+import {getApiMockState} from '../../context/apiMockState';
+import {testController} from '../../testController';
+import {log} from '../../utils/log';
+import {getRequestsFilter, getSetResponse} from '../../utils/mockApiRoute';
+import {wrapInTestRunTracker} from '../../utils/wrapInTestRunTracker';
 
 import type {
   ApiMockFunction,
@@ -14,7 +14,7 @@ import type {
   Mutable,
   Request,
   Response,
-} from '../types/internal';
+} from '../../types/internal';
 
 /**
  * Mock API for some API route.
@@ -54,34 +54,6 @@ export const mockApiRoute = async <
   await log(
     `Mock API for route "${Route.name}"`,
     {apiMockFunctionCode: apiMockFunction.toString()},
-    LogEventType.InternalCore,
-  );
-};
-
-/**
- * Unmock API (remove mock, if any) for some API route.
- */
-export const unmockApiRoute = async <
-  RouteParams,
-  SomeRequest extends Request,
-  SomeResponse extends Response,
->(
-  Route: ApiRouteClassTypeWithGetParamsFromUrl<RouteParams, SomeRequest, SomeResponse>,
-): Promise<void> => {
-  const apiMockState = getApiMockState();
-  const {functionByRoute} = apiMockState;
-  let apiMockFunction: ApiMockFunction | undefined;
-  let routeWasMocked = false;
-
-  if (functionByRoute?.has(Route)) {
-    apiMockFunction = functionByRoute.get(Route);
-    routeWasMocked = true;
-    functionByRoute.delete(Route);
-  }
-
-  await log(
-    `Unmock API for route "${Route.name}"`,
-    {apiMockFunctionCode: apiMockFunction?.toString(), routeWasMocked},
     LogEventType.InternalCore,
   );
 };

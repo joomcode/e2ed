@@ -34,7 +34,7 @@ const config: Config = {
   reportFileName: 'report.html',
   selectorTimeout: 10_000,
   skipTests,
-  testFiles: ['./e2ed/tests/**/*.ts', '!**/*.skip.ts'],
+  testFileGlobs: ['./e2ed/tests/**/*.ts', '!**/*.skip.ts'],
   testIdleTimeout: 25_000,
   testLogsFileName: 'test-logs.log',
   testTimeout: 90_000,

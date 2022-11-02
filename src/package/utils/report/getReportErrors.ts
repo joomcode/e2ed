@@ -13,19 +13,21 @@ export const getReportErrors = async (
   runEnvironment: RunEnvironment,
   fullTestRuns: readonly FullTestRun[],
 ): Promise<readonly string[]> => {
-  const {testFiles} = getFullConfig();
+  const {testFileGlobs} = getFullConfig();
   const errors: string[] = [];
 
   if (runEnvironment === RunEnvironment.Docker) {
     const unvisitedTestFilePaths = await getUnvisitedTestFilePaths(fullTestRuns);
     const numberOfUnvisited = unvisitedTestFilePaths.length;
-    const onlyOne = numberOfUnvisited === 1;
+    const thereAreManyUnvisitedFiles = numberOfUnvisited > 1;
+    const wordFile = thereAreManyUnvisitedFiles ? 'files' : 'file';
+    const wordGlob = testFileGlobs.length > 1 ? 'globs' : 'glob';
 
     if (numberOfUnvisited !== 0) {
       errors.push(
-        `Error: There ${onlyOne ? 'is' : 'are'} ${numberOfUnvisited} test file${
-          onlyOne ? '' : 's'
-        } found by the globs "${testFiles.join(
+        `Error: There ${
+          thereAreManyUnvisitedFiles ? 'are' : 'is'
+        } ${numberOfUnvisited} test ${wordFile} found by the ${wordGlob} "${testFileGlobs.join(
           ', ',
         )}" and not visited when running tests: ${unvisitedTestFilePaths.join(', ')}`,
       );
