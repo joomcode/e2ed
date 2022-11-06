@@ -59,6 +59,31 @@ declare module 'testcafe-hammerhead/lib/processing/encoding' {
 }
 
 /**
+ * Internal TestCafe module with Charset class, which is used to decode/encode response body buffers.
+ * @internal
+ */
+declare module 'testcafe-hammerhead/lib/processing/encoding/charset' {
+  type ClassWithoutArgs<Prototype extends object> = import('./class').Class<[], Prototype>;
+  type RequestHookCharset = import('./requestHooks').RequestHookCharset;
+
+  const Charset: ClassWithoutArgs<RequestHookCharset>;
+
+  export default Charset;
+}
+
+/**
+ * Internal TestCafe module with request-hooks events factory class.
+ * @internal
+ */
+declare module 'testcafe-hammerhead/lib/request-pipeline/request-hooks/events/factory' {
+  type RequestHookClassWithContext = import('./requestHooks').RequestHookClassWithContext;
+
+  const RequestPipelineRequestHookEventFactory: RequestHookClassWithContext;
+
+  export default RequestPipelineRequestHookEventFactory;
+}
+
+/**
  * Internal TestCafe module, which is used to track asynchronous calls in tests.
  * @internal
  */
@@ -73,7 +98,7 @@ declare module 'testcafe-without-typecheck/lib/api/test-run-tracker' {
 
   type Fn = (...args: never[]) => unknown;
 
-  const testRunTracker: {
+  const testRunTracker: Readonly<{
     activeTestRuns: Record<string, InternalTestRun>;
     addTrackingMarkerToFunction(testRunId: string, fn: Fn): Fn;
     ensureEnabled(): void;
@@ -82,7 +107,7 @@ declare module 'testcafe-without-typecheck/lib/api/test-run-tracker' {
      * Wraps function in context tracker for asynchronous calls.
      */
     _createContextSwitchingFunctionHook(ctxSwitchingFn: Fn, patchedArgsCount: number): Fn;
-  };
+  }>;
 
   /**
    * Internal TestCafe test context runner tracker.

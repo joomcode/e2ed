@@ -1,6 +1,7 @@
 import type {CREATE_PAGE_TOKEN} from '../constants/internal';
 import type {Page} from '../Page';
 
+import type {Class} from './class';
 import type {GetParamsType, OneOrTwoArgs} from './utils';
 
 /**
@@ -11,10 +12,7 @@ export type PageClassTypeArgs<PageParams> = OneOrTwoArgs<typeof CREATE_PAGE_TOKE
 /**
  * Page class type by page parameters type.
  */
-export type PageClassType<PageParams> = {
-  new (...args: PageClassTypeArgs<PageParams>): Page<PageParams>;
-  prototype: Page<PageParams>;
-};
+export type PageClassType<PageParams> = Class<PageClassTypeArgs<PageParams>, Page<PageParams>>;
 
 /**
  * Base page class type for any page.

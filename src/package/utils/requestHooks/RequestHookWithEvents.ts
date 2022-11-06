@@ -1,10 +1,20 @@
+// eslint-disable-next-line import/no-internal-modules
+import RequestPipelineRequestHookEventFactory from 'testcafe-hammerhead/lib/request-pipeline/request-hooks/events/factory';
 import {RequestHook} from 'testcafe-without-typecheck';
 
 import {RESOLVED_PROMISE} from '../../constants/internal';
 
 import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
-import type {RequestHookRequestEvent, RequestHookResponseEvent} from '../../types/internal';
+import {addContextToResultsOfClassCreateMethods} from './addContextToResultsOfClassCreateMethods';
+
+import type {
+  RequestHookConfigureResponseEvent,
+  RequestHookRequestEvent,
+  RequestHookResponseEvent,
+} from '../../types/internal';
+
+addContextToResultsOfClassCreateMethods(RequestPipelineRequestHookEventFactory);
 
 /**
  * Abstract RequestHook class with request/respons events.
@@ -30,14 +40,16 @@ abstract class RequestHookWithEvents extends RequestHook {
   /**
    * TestCafe response event handler.
    */
-  override onResponse(): Promise<void> {
+  override onResponse(event: RequestHookResponseEvent): Promise<void> {
+    void event;
+
     return RESOLVED_PROMISE;
   }
 
   /**
    * Internal TestCafe response event handler.
    */
-  override async _onConfigureResponse(event: RequestHookResponseEvent): Promise<void> {
+  override async _onConfigureResponse(event: RequestHookConfigureResponseEvent): Promise<void> {
     await super._onConfigureResponse(event);
   }
 

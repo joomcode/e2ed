@@ -1,5 +1,6 @@
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual} from './checks';
+export type {Class} from './class';
 export type {E2edClientFunctionResolves, WrappedClientFunction} from './client';
 /** @internal */
 export type {TestClientGlobal} from './client';
@@ -56,12 +57,12 @@ export type {
   TestRunButtonProps,
 } from './report';
 export type {
-  RequestHookCharset,
-  RequestHookEncoding,
-  RequestHookRequestContext,
+  RequestHookConfigureResponseEvent,
   RequestHookRequestEvent,
   RequestHookResponseEvent,
 } from './requestHooks';
+/** @internal */
+export type {RequestHookClassWithContext, RequestHookEncoding} from './requestHooks';
 /** @internal */
 export type {RetriesState, RunRetryOptions} from './retries';
 export type {ApiRouteClassType, ApiRouteClassTypeWithGetParamsFromUrl} from './routes';

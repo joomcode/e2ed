@@ -20,12 +20,13 @@ declare const RESPONSE_KEY: unique symbol;
 export type Cookie = Readonly<{name: string; value: string}>;
 
 /**
- * HTTP headers.
+ * General type of arbitrary HTTP headers. All headers are in lower case.
  */
 export type Headers = Readonly<IncomingHttpHeaders>;
 
 /**
- * Map headers to new (overridden) headers.
+ * Maps headers to new (overridden) headers.
+ * All headers must be in lower case.
  */
 export type MapHeaders = (headers: Headers) => Partial<Headers>;
 

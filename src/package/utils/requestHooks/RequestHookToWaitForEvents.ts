@@ -1,7 +1,9 @@
+import {ANY_URL_REGEXP, INCLUDE_BODY_AND_HEADERS_IN_RESPONSE_EVENT} from '../../constants/internal';
+
 import {processEventsPredicates} from '../waitForEvents';
 
 import {getRequestFromRequestOptions} from './getRequestFromRequestOptions';
-import {getResponseFromRequestContext} from './getResponseFromRequestContext';
+import {getResponseFromResponseEvent} from './getResponseFromResponseEvent';
 import {RequestHookWithEvents} from './RequestHookWithEvents';
 
 import type {
@@ -16,14 +18,14 @@ import type {
  */
 export class RequestHookToWaitForEvents extends RequestHookWithEvents {
   constructor(private readonly waitForEventsState: WaitForEventsState) {
-    super();
+    super(ANY_URL_REGEXP, INCLUDE_BODY_AND_HEADERS_IN_RESPONSE_EVENT);
   }
 
   /**
    * Checks if the request matches any request predicate.
    */
-  override async onRequest({requestOptions}: RequestHookRequestEvent): Promise<void> {
-    const request = getRequestFromRequestOptions(requestOptions);
+  override async onRequest(event: RequestHookRequestEvent): Promise<void> {
+    const request = getRequestFromRequestOptions(event.requestOptions);
 
     await processEventsPredicates({
       eventType: 'Request',
@@ -35,10 +37,8 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
   /**
    * Checks if the response matches any request predicate.
    */
-  override async _onConfigureResponse(event: RequestHookResponseEvent): Promise<void> {
-    await super._onConfigureResponse(event);
-
-    const response = await getResponseFromRequestContext(event._requestContext);
+  override async onResponse(event: RequestHookResponseEvent): Promise<void> {
+    const response = await getResponseFromResponseEvent(event);
 
     await processEventsPredicates({
       eventType: 'Response',

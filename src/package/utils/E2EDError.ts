@@ -6,7 +6,7 @@ import type {LogParams} from '../types/internal';
  * Extended Error class for e2ed.
  */
 export class E2EDError extends Error {
-  constructor(message: string, params?: LogParams) {
+  constructor(override readonly message: string, readonly params?: LogParams) {
     const fullMessage = params === undefined ? message : `${message} ${valueToString(params)}`;
 
     const constructorArgs: [message: string, options?: {cause: unknown}] = [fullMessage];

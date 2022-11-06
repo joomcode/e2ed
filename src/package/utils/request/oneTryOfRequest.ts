@@ -30,7 +30,7 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
     const fullOptions = {
       ...options,
       requestHeaders: cloneWithoutUndefinedProperties({
-        'X-Request-ID': getRandomId(),
+        'x-request-id': getRandomId(),
         ...options.requestHeaders,
       }),
     };

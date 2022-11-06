@@ -13,7 +13,7 @@ import type {AssertionFunctionKeys, AssertionFunctions} from './types';
  * @internal
  */
 class Expect {
-  constructor(public actualValue: unknown, public description: string) {}
+  constructor(readonly actualValue: unknown, readonly description: string) {}
 
   [key: string]: unknown;
 }
