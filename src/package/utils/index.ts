@@ -8,6 +8,13 @@ export {
   assertValueIsUndefined,
 } from './asserts';
 export {cloneWithoutUndefinedProperties} from './clone';
+export {
+  getCookieHeaderString,
+  getSetCookieHeaderString,
+  replaceCookie,
+  replaceSetCookie,
+  trimSemicolonsAtTheEnd,
+} from './cookie';
 export {deepMerge} from './deepMerge';
 export {
   getDistanceBetweenSelectors,
@@ -25,11 +32,9 @@ export {getRandomIntegerInRange} from './getRandomIntegerInRange';
 export {getStackTrace} from './getStackTrace';
 export {log} from './log';
 export {getPromiseWithResolveAndReject, getTimeoutPromise, waitForAllProperties} from './promise';
-export {replaceCookie} from './replaceCookie';
 export {getContentJsonHeaders, request} from './request';
 export {SetHeadersRequestHook} from './requestHooks';
 export {getRunLabelObject} from './runLabel';
-export {trimSemicolonsAtTheEnd} from './trimSemicolonsAtTheEnd';
 export {isArray} from './typeGuards';
 export {valueToString} from './valueToString';
 export {wrapInTestRunTracker} from './wrapInTestRunTracker';

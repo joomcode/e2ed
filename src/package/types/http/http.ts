@@ -2,6 +2,7 @@ import type {IncomingHttpHeaders} from 'node:http';
 
 import type {Brand} from '../brand';
 
+import type {CookieHeaderString, SetCookieHeaderString} from './cookie';
 import type {StatusCode} from './statusCode';
 
 /**
@@ -15,14 +16,14 @@ declare const REQUEST_KEY: unique symbol;
 declare const RESPONSE_KEY: unique symbol;
 
 /**
- * Cookie object.
- */
-export type Cookie = Readonly<{name: string; value: string}>;
-
-/**
  * General type of arbitrary HTTP headers. All headers are in lower case.
  */
-export type Headers = Readonly<IncomingHttpHeaders>;
+export type Headers = Readonly<
+  Omit<IncomingHttpHeaders, 'cookie' | 'set-cookie'> & {
+    cookie?: CookieHeaderString;
+    'set-cookie'?: SetCookieHeaderString[];
+  }
+>;
 
 /**
  * Maps headers to new (overridden) headers.
@@ -42,15 +43,15 @@ export type MapOptions = Readonly<{
  * HTTP method.
  */
 export type Method =
-  | 'HEAD'
+  | 'CONNECT'
+  | 'DELETE'
   | 'GET'
+  | 'HEAD'
+  | 'OPTIONS'
+  | 'PATCH'
   | 'POST'
   | 'PUT'
-  | 'DELETE'
-  | 'CONNECT'
-  | 'OPTIONS'
-  | 'TRACE'
-  | 'PATCH';
+  | 'TRACE';
 
 /**
  * Object with query (search) part of the url, or query string itself.

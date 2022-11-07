@@ -21,7 +21,7 @@ export const applyHeadersMapper = (headers: Headers, mapper?: MapHeaders): void 
       // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete mutableHeaders[key];
     } else {
-      mutableHeaders[key] = value;
+      mutableHeaders[key] = value as string | string[] | undefined;
     }
   }
 };

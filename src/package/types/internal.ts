@@ -19,6 +19,7 @@ export type {TestFilePath} from './fs';
 export type {DirectoryPathFromRoot, FilePathFromRoot} from './fs';
 export type {
   Cookie,
+  CookieHeaderString,
   Headers,
   MapHeaders,
   MapOptions,
@@ -28,6 +29,7 @@ export type {
   REQUEST_KEY_TYPE,
   Response,
   RESPONSE_KEY_TYPE,
+  SetCookieHeaderString,
   StatusCode,
   Url,
 } from './http';

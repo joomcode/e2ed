@@ -90,6 +90,9 @@ If `null`, the report will not be saved.
 `skipTests: SkipTests`: this setting allows you to describe a set of skipped tests in a custom form.
 You can define the `SkipTests` type and `skipTests` processing rules in the hook `e2ed/hooks/isTestSkipped.ts`.
 
+`testFileGlobs: readonly string[]`: an array of globs with pack test (task) files.
+https://www.npmjs.com/package/globby is used for matching globs.
+
 `testIdleTimeout: number`: timeout (in milliseconds) for each individual test step.
 If the test step (interval between two `log` function calls) takes longer than this timeout,
 the test fails and rerun on the next retry.

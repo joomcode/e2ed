@@ -1,5 +1,5 @@
+export type {Cookie, CookieHeaderString, SetCookieHeaderString} from './cookie';
 export type {
-  Cookie,
   Headers,
   MapHeaders,
   MapOptions,

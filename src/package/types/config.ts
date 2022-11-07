@@ -14,6 +14,10 @@ type OwnE2edConfig = Readonly<{
   printTestLogsInConsole: boolean;
   reportFileName: string | null;
   skipTests: SkipTests;
+  /**
+   * An array of globs with pack test (task) files.
+   * {@link https://www.npmjs.com/package/globby} is used for matching globs.
+   */
   testFileGlobs: readonly string[];
   testIdleTimeout: number;
   testLogsFileName: string | null;
