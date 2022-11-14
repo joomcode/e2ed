@@ -1,4 +1,6 @@
 import {testController} from 'e2ed';
+import {setPageCookiesAndNavigateTo} from 'e2ed/actions';
+import {clearPageCookies, getPageCookies} from 'e2ed/context';
 
 import type {Url} from 'e2ed/types';
 
@@ -7,6 +9,15 @@ import type {Url} from 'e2ed/types';
  * under the already computed url.
  * Use context (e2ed/context) to get parameters inside a hook.
  */
-export const navigateTo = (url: Url): Promise<void> =>
-  // As with all hooks, you can replace it with your own implementation.
-  testController.navigateTo(url);
+export const navigateTo = async (url: Url): Promise<void> => {
+  const pageCookies = getPageCookies();
+
+  if (pageCookies === undefined) {
+    // As with all hooks, you can replace it with your own implementation.
+    await testController.navigateTo(url);
+  } else {
+    clearPageCookies();
+
+    await setPageCookiesAndNavigateTo(url, pageCookies);
+  }
+};

@@ -1,9 +1,4 @@
 /**
- * Regexp that accept any url.
- */
-export const ANY_URL_REGEXP = /.*/;
-
-/**
  * Request hook options that includes body and headers in response event.
  */
 export const INCLUDE_BODY_AND_HEADERS_IN_RESPONSE_EVENT = {includeBody: true, includeHeaders: true};

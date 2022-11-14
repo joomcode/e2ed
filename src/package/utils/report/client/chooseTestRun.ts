@@ -1,12 +1,13 @@
 import {assertValueIsDefined as clientAssertValueIsDefined} from './assertValueIsDefined';
 import {renderTestRunDetails as clientRenderTestRunDetails} from './render';
 
-import type {ReportClientGlobal, RunHash} from '../../../types/internal';
+import type {ReportClientState, RunHash} from '../../../types/internal';
 
 const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
 const renderTestRunDetails = clientRenderTestRunDetails;
 
 declare const e2edTestRunDetailsContainer: HTMLElement;
+declare const reportClientState: ReportClientState;
 
 /**
  * Choose TestRun (render chosen TestRun in right panel).
@@ -18,13 +19,11 @@ export function chooseTestRun(runHash: RunHash): void {
 
   window.location.hash = runHash;
 
-  const global: ReportClientGlobal = window;
-
-  if (global.e2edTestRunDetailsElementsByHash === undefined) {
-    global.e2edTestRunDetailsElementsByHash = {};
+  if (reportClientState.e2edTestRunDetailsElementsByHash === undefined) {
+    reportClientState.e2edTestRunDetailsElementsByHash = {};
   }
 
-  const {e2edTestRunDetailsElementsByHash} = global;
+  const {e2edTestRunDetailsElementsByHash} = reportClientState;
 
   const previousTestRunDetailsElement =
     e2edTestRunDetailsContainer.firstElementChild as HTMLElement;
@@ -43,7 +42,7 @@ export function chooseTestRun(runHash: RunHash): void {
     return;
   }
 
-  const {e2edFullTestRuns} = global;
+  const {e2edFullTestRuns} = reportClientState;
 
   if (e2edFullTestRuns === undefined) {
     // eslint-disable-next-line no-console

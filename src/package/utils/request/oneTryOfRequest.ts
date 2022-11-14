@@ -1,8 +1,8 @@
 import {BAD_REQUEST_STATUS_CODE, LogEventType} from '../../constants/internal';
+import {getRandomId} from '../../generators/internal';
 
 import {cloneWithoutUndefinedProperties} from '../clone';
 import {E2EDError} from '../E2EDError';
-import {getRandomId} from '../getRandomId';
 import {log} from '../log';
 import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
@@ -30,7 +30,7 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
     const fullOptions = {
       ...options,
       requestHeaders: cloneWithoutUndefinedProperties({
-        'x-request-id': getRandomId(),
+        'x-e2ed-request-id': getRandomId(),
         ...options.requestHeaders,
       }),
     };

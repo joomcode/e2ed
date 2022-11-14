@@ -1,1 +1,1 @@
-export {getUser, setUser} from './user';
+export {clearPageCookies, getPageCookies, setPageCookies} from './pageCookies';

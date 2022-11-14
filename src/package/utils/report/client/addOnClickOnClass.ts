@@ -1,4 +1,6 @@
-import type {ReportClientGlobal} from '../../../types/internal';
+import type {ReportClientState} from '../../../types/internal';
+
+declare const reportClientState: ReportClientState;
 
 /**
  * Add onclick event listener on all elements with some class.
@@ -6,13 +8,11 @@ import type {ReportClientGlobal} from '../../../types/internal';
  * @internal
  */
 export function addOnClickOnClass(className: string, onclick: (event: HTMLElement) => void): void {
-  const global: ReportClientGlobal = window;
-
-  let {e2edClickListeners} = global;
+  let {e2edClickListeners} = reportClientState;
 
   if (!e2edClickListeners) {
     e2edClickListeners = {};
-    global.e2edClickListeners = e2edClickListeners;
+    reportClientState.e2edClickListeners = e2edClickListeners;
 
     document.addEventListener('click', (event) => {
       let currentElement = event.target as HTMLElement | null;

@@ -7,7 +7,7 @@ import type {ApiDeviceAndProductRequest, ApiDeviceAndProductResponse, Url} from 
 
 type Params = Readonly<{id: number; size: number}>;
 
-const pathStart = '/product/';
+const pathStart = '/api/product/';
 
 /**
  * Test API route for creating a product.

@@ -1,5 +1,6 @@
 import {assertValueIsDefined} from '../asserts';
 import {E2EDError} from '../E2EDError';
+import {generalLog} from '../generalLog';
 
 import type {AsyncVoid} from '../../types/internal';
 
@@ -43,7 +44,14 @@ export const getPromiseWithResolveAndReject = <
 
   const timeoutId = setTimeout(
     (async () => {
-      await rejectTimeoutFunction();
+      try {
+        await rejectTimeoutFunction();
+      } catch (error) {
+        generalLog('Reject timeout function rejected with error', {
+          error,
+          rejectTimeoutFunctionCode: rejectTimeoutFunction.toString(),
+        });
+      }
     }) as () => void,
     timeoutInMs,
   );

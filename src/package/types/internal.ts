@@ -1,9 +1,13 @@
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual} from './checks';
 export type {Class} from './class';
-export type {E2edClientFunctionResolves, WrappedClientFunction} from './client';
+export type {WrappedClientFunction} from './client';
 /** @internal */
-export type {TestClientGlobal} from './client';
+export type {
+  E2edClientFunctionResolvesSymbol,
+  E2edWaitingForInterfaceStabilizationSymbol,
+  TestClientGlobal,
+} from './client';
 export type {FrozenPartOfTestCafeConfig, FullConfig, UserlandConfig} from './config';
 export type {UtcTimeInMs} from './date';
 export type {DeepMutable, DeepPartial, DeepReadonly, DeepRequired} from './deep';
@@ -51,7 +55,7 @@ export type {AsyncVoid, UnwrapPromise} from './promise';
 export type {LiteReport, LiteRetry} from './report';
 /** @internal */
 export type {
-  ReportClientGlobal,
+  ReportClientState,
   ReportData,
   Retry,
   RetryButtonProps,
@@ -93,6 +97,7 @@ export type {
   CloneWithoutUndefinedProperties,
   ExcludeUndefinedFromProperties,
   IsIncludeUndefined,
+  Void,
 } from './undefined';
 export type {
   GetParamsType,

@@ -1,5 +1,6 @@
+import {getRandomId} from 'e2ed/generators';
 import {CreateDevice} from 'e2ed/routes/apiRoutes';
-import {getRandomId, request} from 'e2ed/utils';
+import {request} from 'e2ed/utils';
 
 import type {ApiDeviceParams, Device} from 'e2ed/types';
 

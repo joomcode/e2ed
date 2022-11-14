@@ -1,9 +1,12 @@
 import {TestRunStatus} from '../../constants/internal';
 import {setRawMeta} from '../../context/meta';
 import {setRunId} from '../../context/runId';
+import {setTestIdleTimeout} from '../../context/testIdleTimeout';
+import {setTestTimeout} from '../../context/testTimeout';
 import {isTestSkipped} from '../../hooks';
 
 import {registerStartTestRunEvent} from '../events';
+import {getFullConfig} from '../getFullConfig';
 import {getRelativeTestFilePath} from '../getRelativeTestFilePath';
 
 import {getTestFnAndReject} from './getTestFnAndReject';
@@ -35,6 +38,14 @@ export const beforeTest = ({previousRunId, runId, test, testController}: Options
   setRunId(runId);
   setRawMeta(test.options.meta);
 
+  const {testIdleTimeout: testIdleTimeoutFromConfig, testTimeout: testTimeoutFromConfig} =
+    getFullConfig();
+  const testIdleTimeout = test.options.testIdleTimeout ?? testIdleTimeoutFromConfig;
+  const testTimeout = test.options.testTimeout ?? testTimeoutFromConfig;
+
+  setTestIdleTimeout(testIdleTimeout);
+  setTestTimeout(testTimeout);
+
   const {filename: absoluteFilePath} = testController.testRun.test.testFile;
   const filePath = getRelativeTestFilePath(absoluteFilePath);
   const testStaticOptions: TestStaticOptions = {
@@ -52,8 +63,8 @@ export const beforeTest = ({previousRunId, runId, test, testController}: Options
     isSkipped,
     runId,
     testFn: test.testFn,
-    testIdleTimeout: test.options.testIdleTimeout,
-    testTimeout: test.options.testTimeout,
+    testIdleTimeout,
+    testTimeout,
   });
 
   const runLabel = (process.env as E2edEnvironment).E2ED_RUN_LABEL as RunLabel;

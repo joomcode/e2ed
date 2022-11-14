@@ -7,11 +7,14 @@ import type {Cookie, SetCookieHeaderString} from '../../types/internal';
  */
 export const getSetCookieHeaderString = (cookie: Cookie): SetCookieHeaderString => {
   const {domain, expires, httpOnly, name, path, sameSite, secure, value} = cookie;
+  const expiresDate = new Date(expires);
+  const maxAge = Math.round((expires - Date.now()) / 1000);
 
   const cookieStringParts = [
     `${name}=${value}`,
-    `expires=${expires.toUTCString()}`,
-    `path=${path}`,
+    `Max-Age=${maxAge}`,
+    `Path=${path}`,
+    `Expires=${expiresDate.toUTCString()}`,
   ];
 
   if (domain) {

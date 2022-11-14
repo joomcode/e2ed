@@ -38,6 +38,7 @@ const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
 
 const fullConfig: FullConfig = {
   ...userlandConfig,
+  browsers: userlandConfig.browser,
   src: userlandConfig.testFileGlobs,
   ...frozenPartOfTestCafeConfig,
 };

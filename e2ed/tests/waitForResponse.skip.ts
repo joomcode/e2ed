@@ -6,22 +6,17 @@ import type {Response} from 'e2ed/types';
 type Body = Readonly<{job: string; name: string}> | undefined;
 
 it(
-  'waitForResponse get correct response body',
+  'waitForResponse gets correct response body and rejects on timeout',
   {meta: {testId: '3'}, testIdleTimeout: 3_000},
   async () => {
     const addUser = createClientFunction(
       () =>
-        Promise.race([
-          fetch('https://reqres.in/api/users', {
-            body: JSON.stringify({job: 'leader', name: 'John'}),
-            headers: {'Content-Type': 'application/json; charset=UTF-8'},
-            method: 'POST',
-          }).then((res) => res.json()),
-          new Promise<void>((resolve) => {
-            setTimeout(resolve, 2_000);
-          }),
-        ]),
-      'addUser',
+        fetch('https://reqres.in/api/users', {
+          body: JSON.stringify({job: 'leader', name: 'John'}),
+          headers: {'Content-Type': 'application/json; charset=UTF-8'},
+          method: 'POST',
+        }).then((res) => res.json()),
+      {name: 'addUser'},
     );
 
     void addUser();
@@ -34,5 +29,12 @@ it(
       job: 'leader',
       name: 'John',
     });
+
+    await waitForResponse(() => false, {timeout: 100}).then(
+      () => {
+        throw new Error('waitForResponse did not throw an error after timeout');
+      },
+      () => undefined,
+    );
   },
 );

@@ -1,4 +1,5 @@
-import {createRunId} from '../createRunId';
+import {createRunId} from '../../generators/internal';
+
 import {generalLog} from '../generalLog';
 
 import {afterTest} from './afterTest';
@@ -10,7 +11,7 @@ import type {RunId, Test, TestController} from '../../types/internal';
 type RunTest = (testController: TestController) => Promise<void>;
 
 /**
- * Get complete run test function by TestRun state.
+ * Get complete run test function by the complete test options.
  * @internal
  */
 export const getRunTest = (test: Test): RunTest => {

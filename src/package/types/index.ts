@@ -21,7 +21,6 @@ export type {
   DeepPartial,
   DeepReadonly,
   DeepRequired,
-  E2edClientFunctionResolves,
   E2edEnvironment,
   ExcludeUndefinedFromProperties,
   Expect,
@@ -91,6 +90,7 @@ export type {
   Url,
   UserlandConfig,
   UtcTimeInMs,
+  Void,
   WrappedClientFunction,
 } from './internal';
 

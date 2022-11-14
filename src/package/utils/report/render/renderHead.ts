@@ -3,6 +3,7 @@ import {getContentFromRenderedElement} from '../getContentFromRenderedElement';
 import {getCspHash} from '../getCspHash';
 
 import {renderFavicon} from './renderFavicon';
+import {renderScript} from './renderScript';
 import {renderStyle} from './renderStyle';
 
 import type {SafeHtml} from '../../../types/internal';
@@ -11,8 +12,11 @@ import type {SafeHtml} from '../../../types/internal';
  * Render tag <head>.
  * @internal
  */
-export const renderHead = (reportFileName: string, scriptContent: string): SafeHtml => {
+export const renderHead = (reportFileName: string): SafeHtml => {
+  const renderedScript = renderScript();
   const renderedStyle = renderStyle();
+
+  const scriptContent = getContentFromRenderedElement(renderedScript);
   const styleContent = getContentFromRenderedElement(renderedStyle);
 
   const cspStyleHash = getCspHash(styleContent);
@@ -33,5 +37,6 @@ export const renderHead = (reportFileName: string, scriptContent: string): SafeH
   <title>${reportFileName}</title>
   ${renderFavicon()}
   ${renderedStyle}
+  ${renderedScript}
 </head>`;
 };

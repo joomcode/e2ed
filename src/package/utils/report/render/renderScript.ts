@@ -10,10 +10,12 @@ import type {SafeHtml} from '../../../types/internal';
  * @internal
  */
 export const renderScript = (): SafeHtml => createSafeHtmlWithoutSanitize`
-<script>
-'use strict'; {
+<script type="module">
 ${renderScriptConstants()};
+
 ${renderScriptFunctions()};
+
 document.addEventListener("DOMContentLoaded", ${domContentLoadedCallback.toString()});
+
 (${initialScript.toString()})();
-}</script>`;
+</script>`;

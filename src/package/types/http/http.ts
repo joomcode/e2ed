@@ -29,7 +29,7 @@ export type Headers = Readonly<
  * Maps headers to new (overridden) headers.
  * All headers must be in lower case.
  */
-export type MapHeaders = (headers: Headers) => Partial<Headers>;
+export type MapHeaders = (headers: Headers) => Headers;
 
 /**
  * Options for mappers of headers.

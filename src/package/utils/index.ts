@@ -24,12 +24,11 @@ export {
 export {E2EDError} from './E2EDError';
 export {writeFile} from './fs';
 export {getCurrentUrl} from './getCurrentUrl';
+export {getDocumentCookie} from './getDocumentCookie';
 export {getFullConfig} from './getFullConfig';
 export {getKeysCounter} from './getKeysCounter';
-export {getLocatorProperty} from './getLocatorProperty';
-export {getRandomId} from './getRandomId';
-export {getRandomIntegerInRange} from './getRandomIntegerInRange';
 export {getStackTrace} from './getStackTrace';
+export {getLocatorProperty} from './locators';
 export {log} from './log';
 export {getPromiseWithResolveAndReject, getTimeoutPromise, waitForAllProperties} from './promise';
 export {getContentJsonHeaders, request} from './request';

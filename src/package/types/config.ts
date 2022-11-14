@@ -33,7 +33,7 @@ type UserlangTestCafeConfig = Readonly<{
   ajaxRequestTimeout: number;
   assertionTimeout: number;
   browserInitTimeout: number;
-  browsers: string | readonly string[];
+  browser: string;
   concurrency: number;
   pageRequestTimeout: number;
   port1: number;
@@ -75,4 +75,4 @@ export type UserlandConfig = UserlangTestCafeConfig & OwnE2edConfig;
  */
 export type FullConfig = UserlandConfig &
   FrozenPartOfTestCafeConfig &
-  Readonly<{src: readonly string[]}>;
+  Readonly<{browsers: string; src: readonly string[]}>;

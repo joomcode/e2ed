@@ -1,80 +1,41 @@
 import {ClientFunction} from 'testcafe-without-typecheck';
 
+import {getTestIdleTimeout} from './context/testIdleTimeout';
+import {clientFunctionWrapper} from './utils/clientFunction';
 import {generalLog} from './utils/generalLog';
 
-import type {TestClientGlobal, WrappedClientFunction} from './types/internal';
+import type {Fn, WrappedClientFunction} from './types/internal';
 
-/**
- * This client function wraps all ClientFunction bodies and terminates them on page unload.
- */
-// eslint-disable-next-line no-restricted-syntax
-const clientFunctionWrapper = function clientFunctionWrapper(): unknown {
-  // eslint-disable-next-line
-  const args: unknown[] = Array.prototype.slice.call(arguments);
-
-  const global: TestClientGlobal = window;
-
-  if (!global.e2edClientFunctionResolves) {
-    global.e2edClientFunctionResolves = [];
-
-    global.addEventListener('beforeunload', () => {
-      const {e2edClientFunctionResolves} = global;
-
-      e2edClientFunctionResolves?.forEach((resolve, index) => {
-        e2edClientFunctionResolves[index] = undefined;
-
-        resolve?.();
-      });
-    });
-  }
-
-  const {e2edClientFunctionResolves} = global;
-  let result: Promise<void> | undefined;
-
-  try {
-    // @ts-expect-error: originalFn is out of scope
-    result = originalFn.apply(undefined, args); // eslint-disable-line
-  } catch {}
-
-  if (!result || typeof result.then !== 'function') {
-    return result;
-  }
-
-  return new Promise<void>((resolve, reject) => {
-    const index = e2edClientFunctionResolves.push(resolve) - 1;
-
-    result?.then(
-      (value) => {
-        e2edClientFunctionResolves[index] = undefined;
-
-        resolve(value);
-      },
-      (error) => {
-        e2edClientFunctionResolves[index] = undefined;
-
-        reject(error);
-      },
-    );
-  });
-};
+type Options = Readonly<{name?: string; timeout?: number}>;
 
 /**
  * Creates a client function.
  */
-export const createClientFunction = <R, A extends unknown[]>(
+export const createClientFunction = <A extends unknown[], R>(
   originalFn: (...args: A) => R,
-  name: string,
+  {name: nameFromOptions, timeout}: Options = {},
 ): WrappedClientFunction<R, A> => {
+  const name = nameFromOptions ?? originalFn.name;
   const originalFnCode = String(originalFn).slice(0, 200);
 
-  const clientFunction = ClientFunction<Awaited<R> | undefined, A>(
-    clientFunctionWrapper as unknown as (...args: A) => Awaited<R> | undefined,
-    {dependencies: {originalFn}},
-  );
+  let clientFunction: Fn<A, Promise<Awaited<R> | undefined>> | undefined;
 
-  generalLog(`Create client function "${name}"`, {originalFnCode});
+  generalLog(`Create client function${name ? ` "${name}"` : ''}`, {originalFnCode});
 
-  const wrappedClientFunction = (async (...args: A) => {
+  /**
+   * Wrapped client function with error logging.
+   * TODO: support Smart Assertions.
+   */
+  const wrappedClientFunction = ((...args: A) => {
+    if (clientFunction === undefined) {
+      const clientFunctionTimeout = timeout ?? getTestIdleTimeout();
+
+      clientFunction = ClientFunction<Awaited<R> | undefined, A>(
+        clientFunctionWrapper as unknown as Fn<A, Awaited<R> | undefined>,
+        {dependencies: {clientFunctionTimeout, originalFn}},
+      );
+    }
+
     try {
       return clientFunction(...args).catch((error: unknown) => {
         generalLog(`Client function "${name}" rejected with error`, {args, error, originalFnCode});
@@ -85,7 +46,7 @@ export const createClientFunction = <R, A extends unknown[]>(
       generalLog(`Client function "${name}" thrown an error`, {args, error, originalFnCode});
     }
 
-    return undefined;
+    return Promise.resolve();
   }) as WrappedClientFunction<R, A>;
 
   return wrappedClientFunction;

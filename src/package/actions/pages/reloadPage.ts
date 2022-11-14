@@ -6,7 +6,10 @@ import {waitForInterfaceStabilization} from '../waitFor';
 
 import type {AnyPageClassType} from '../../types/internal';
 
-const clientReloadPage = createClientFunction(() => window.location.reload(), 'reloadPage');
+const clientReloadPage = createClientFunction(() => window.location.reload(), {
+  name: 'reloadPage',
+  timeout: 500,
+});
 
 /**
  * Reloads the page, taking into account its stabilization interval.

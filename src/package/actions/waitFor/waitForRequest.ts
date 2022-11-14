@@ -1,4 +1,5 @@
 import {LogEventType} from '../../constants/internal';
+import {getTestRunPromise} from '../../context/testRunPromise';
 import {getWaitForEventsState} from '../../context/waitForEventsState';
 import {E2EDError} from '../../utils/E2EDError';
 import {getFullConfig} from '../../utils/getFullConfig';
@@ -19,16 +20,17 @@ export const waitForRequest = async <SomeRequest extends Request>(
   const waitForEventsState = getWaitForEventsState();
   const {waitForRequestTimeout} = getFullConfig();
   const rejectTimeout = timeout ?? waitForRequestTimeout;
-  const {promise, reject, resolve, setRejectTimeoutFunction} = getPromiseWithResolveAndReject<
-    SomeRequest,
-    Request
-  >(rejectTimeout);
+  const {clearRejectTimeout, promise, reject, resolve, setRejectTimeoutFunction} =
+    getPromiseWithResolveAndReject<SomeRequest, Request>(rejectTimeout);
 
   const requestPredicateWithPromise: RequestPredicateWithPromise = {
     predicate: predicate as RequestPredicate,
     reject,
     resolve,
   };
+  const testRunPromise = getTestRunPromise();
+
+  void testRunPromise.then(clearRejectTimeout);
 
   const wrappedSetRejectTimeoutFunction = wrapInTestRunTracker(setRejectTimeoutFunction);
 

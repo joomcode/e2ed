@@ -1,4 +1,4 @@
-import type {Selector} from '../types/internal';
+import type {Selector} from '../../types/internal';
 
 /**
  * Get locator property value by property name (value of data-test-* attribute).

@@ -3,6 +3,7 @@ import {
   LogEventType,
   REQUEST_HOOK_CONTEXT_KEY,
 } from '../../constants/internal';
+import {testController} from '../../testController';
 
 import {log} from '../log';
 
@@ -35,6 +36,10 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
     (requestOptions as {headers: Headers}).headers = headers;
 
     await log(`Map request headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
+  }
+
+  override async onResponse(): Promise<void> {
+    await testController.removeRequestHooks(this);
   }
 
   override async _onConfigureResponse(event: RequestHookConfigureResponseEvent): Promise<void> {

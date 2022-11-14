@@ -2,17 +2,16 @@ import {RESOLVED_PROMISE} from '../../constants/internal';
 
 import {E2EDError} from '../E2EDError';
 import {generalLog} from '../generalLog';
-import {getFullConfig} from '../getFullConfig';
 import {getPromiseWithResolveAndReject} from '../promise';
 
-import type {Onlog, RejectTestRun, RunId, TestFn} from '../../types/internal';
+import type {Onlog, RejectTestRun, RunId, TestFn, Void} from '../../types/internal';
 
 type Options = Readonly<{
   isSkipped: boolean;
   runId: RunId;
   testFn: TestFn;
-  testIdleTimeout: number | undefined;
-  testTimeout: number | undefined;
+  testIdleTimeout: number;
+  testTimeout: number;
 }>;
 
 type Return = Readonly<{onlog: Onlog; reject: RejectTestRun; testFnWithReject: TestFn}>;
@@ -32,30 +31,19 @@ export const getTestFnAndReject = ({
   isSkipped,
   runId,
   testFn,
-  testIdleTimeout: testIdleTimeoutFromTestOptions,
-  testTimeout: testTimeoutFromTestOptions,
+  testIdleTimeout,
+  testTimeout,
 }: Options): Return => {
   if (isSkipped) {
     return skippedTestFnAndReject;
   }
-
-  const {testIdleTimeout: testIdleTimeoutFromConfig, testTimeout: testTimeoutFromConfig} =
-    getFullConfig();
-  const testIdleTimeout = testIdleTimeoutFromTestOptions ?? testIdleTimeoutFromConfig;
-  const testTimeout = testTimeoutFromTestOptions ?? testTimeoutFromConfig;
 
   const {
     clearRejectTimeout,
     promise,
     reject: rejectPromise,
     setRejectTimeoutFunction,
-  } = getPromiseWithResolveAndReject<
-    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-    void,
-    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-    void,
-    Parameters<RejectTestRun>[0]
-  >(testTimeout);
+  } = getPromiseWithResolveAndReject<Void, Void, Parameters<RejectTestRun>[0]>(testTimeout);
 
   let isTestRunCompleted = false;
 

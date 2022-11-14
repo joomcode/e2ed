@@ -37,6 +37,7 @@ rules:
         - '**/context/*'
         - '**/e2ed/*'
         - '**/e2ed/*/*'
+        - '**/generators/internal'
         - '**/types/internal'
         - '**/types/userland/*'
         - '**/utils/*'
@@ -69,12 +70,13 @@ rules:
   import/no-unused-modules:
     - error
     - ignoreExports:
-        - e2ed/context/user.ts
+        - e2ed/context/pageCookies.ts
         - src/package/actions/index.ts
         - src/package/constants/index.ts
         - src/package/context/index.ts
         - src/package/createTestId.ts
         - src/package/esm/testcafe.ts
+        - src/package/generators/index.ts
         - src/package/index.ts
         - src/package/selectors/index.ts
         - src/package/testcafe.ts

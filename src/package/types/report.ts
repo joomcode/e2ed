@@ -60,14 +60,14 @@ export type TestRunButtonProps = Readonly<{
 }>;
 
 /**
- * Global object on report html page.
+ * Global state object on report html page.
  * @internal
  */
-export type ReportClientGlobal = {
+export type ReportClientState = {
   e2edClickListeners?: Record<string, (event: HTMLElement) => void>;
   e2edTestRunDetailsElementsByHash?: Record<RunHash, HTMLElement>;
   e2edFullTestRuns?: readonly FullTestRun[];
-} & Window;
+};
 
 /**
  * Retry object with all his full test runs.

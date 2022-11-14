@@ -3,7 +3,6 @@ import {createTestCafe} from '../../testcafe';
 import {E2EDError} from '../E2EDError';
 import {generalLog} from '../generalLog';
 import {getFullConfig} from '../getFullConfig';
-import {isArray} from '../typeGuards';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
@@ -24,10 +23,8 @@ export const runTests = async ({
   let maybeTestCafe: Inner.TestCafe | undefined;
 
   try {
-    const {browsers: browsersAsStringOrArray} = getFullConfig();
-    const browsers = isArray<string>(browsersAsStringOrArray)
-      ? browsersAsStringOrArray
-      : [browsersAsStringOrArray as string];
+    const {browser} = getFullConfig();
+    const browsers = [browser];
 
     const testCafe = await createTestCafe({
       browsers,

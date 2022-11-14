@@ -2,7 +2,11 @@ import {LogEventType} from '../../constants/internal';
 import {createClientFunction} from '../../createClientFunction';
 import {log} from '../../utils/log';
 
-import type {TestClientGlobal, UtcTimeInMs} from '../../types/internal';
+import type {
+  E2edWaitingForInterfaceStabilizationSymbol,
+  TestClientGlobal,
+  UtcTimeInMs,
+} from '../../types/internal';
 
 /**
  * This function in a universal way waits for the end of the movements and redrawing
@@ -18,6 +22,11 @@ import type {TestClientGlobal, UtcTimeInMs} from '../../types/internal';
  */
 const clientWaitForInterfaceStabilization = createClientFunction(
   (stabilizationInterval: number) => {
+    const e2edWaitingForInterfaceStabilizationSymbol: E2edWaitingForInterfaceStabilizationSymbol =
+      Symbol.for(
+        'e2edwaitingforinterfacestabilizationsymbol',
+      ) as E2edWaitingForInterfaceStabilizationSymbol;
+
     const global: TestClientGlobal = window;
 
     /**
@@ -29,27 +38,29 @@ const clientWaitForInterfaceStabilization = createClientFunction(
       }
     }
 
-    if (global.e2edWaitingForInterfaceStabilization) {
+    if (global[e2edWaitingForInterfaceStabilizationSymbol]) {
       if (
-        stabilizationInterval > global.e2edWaitingForInterfaceStabilization.stabilizationInterval
+        stabilizationInterval >
+        global[e2edWaitingForInterfaceStabilizationSymbol].stabilizationInterval
       ) {
-        global.e2edWaitingForInterfaceStabilization.stabilizationInterval = stabilizationInterval;
+        global[e2edWaitingForInterfaceStabilizationSymbol].stabilizationInterval =
+          stabilizationInterval;
       }
 
-      return global.e2edWaitingForInterfaceStabilization.promise;
+      return global[e2edWaitingForInterfaceStabilizationSymbol].promise;
     }
 
     const CHECK_INTERVAL_IN_MS = 250;
-    const TIMEOUT_IN_MS = 40_000;
     const COUNT_OF_POINTED_NODES = 8;
     const COUNT_OF_TEST_ID_NODES = 50;
     const startTimeInMs = Date.now() as UtcTimeInMs;
+    const TOTAL_TIMEOUT_IN_STABILIZATION_INTERVAL = 30;
 
     const getInterfaceState = (): string => {
       const {innerWidth, innerHeight} = window;
       const elements: Element[] = [document.documentElement];
       const elementsWithDataTestId = document.querySelectorAll('[data-test-id]');
-      const elementsWithDataTestid = document.querySelectorAll('[data-testid]');
+      const elementsWithDataTestIdInLowerCase = document.querySelectorAll('[data-testid]');
       const deltaX = innerWidth / (COUNT_OF_POINTED_NODES + 1);
       const deltaY = innerHeight / (COUNT_OF_POINTED_NODES + 1);
 
@@ -61,12 +72,16 @@ const clientWaitForInterfaceStabilization = createClientFunction(
         elements.push(elementWithDataTestId);
       }
 
-      for (let i = 0; i < elementsWithDataTestid.length && i < COUNT_OF_TEST_ID_NODES; i += 1) {
-        const elementWithDataTestid = elementsWithDataTestid[i];
+      for (
+        let i = 0;
+        i < elementsWithDataTestIdInLowerCase.length && i < COUNT_OF_TEST_ID_NODES;
+        i += 1
+      ) {
+        const elementWithDataTestIdInLowerCase = elementsWithDataTestIdInLowerCase[i];
 
-        assertValueIsDefined(elementWithDataTestid);
+        assertValueIsDefined(elementWithDataTestIdInLowerCase);
 
-        elements.push(elementWithDataTestid);
+        elements.push(elementWithDataTestIdInLowerCase);
       }
 
       for (let xIndex = 1; xIndex <= COUNT_OF_POINTED_NODES; xIndex += 1) {
@@ -92,7 +107,7 @@ const clientWaitForInterfaceStabilization = createClientFunction(
     let interfaceState = getInterfaceState();
     let stabilizationIntervalStart = startTimeInMs;
 
-    const promise = new Promise<void>((resolve, reject) => {
+    const promise = new Promise<string | undefined>((resolve) => {
       const intervalId = setInterval(() => {
         const newInterfaceState = getInterfaceState();
 
@@ -103,29 +118,34 @@ const clientWaitForInterfaceStabilization = createClientFunction(
         interfaceState = newInterfaceState;
 
         const currentStabilizationInterval =
-          global.e2edWaitingForInterfaceStabilization?.stabilizationInterval ?? Infinity;
+          global[e2edWaitingForInterfaceStabilizationSymbol]?.stabilizationInterval ?? Infinity;
 
         if (Date.now() - stabilizationIntervalStart >= currentStabilizationInterval) {
-          global.e2edWaitingForInterfaceStabilization = undefined;
+          global[e2edWaitingForInterfaceStabilizationSymbol] = undefined;
+
           clearInterval(intervalId);
-          resolve();
+          resolve(undefined);
 
           return;
         }
 
-        if (Date.now() - startTimeInMs > TIMEOUT_IN_MS) {
-          global.e2edWaitingForInterfaceStabilization = undefined;
+        const totalTimeoutInMs =
+          currentStabilizationInterval * TOTAL_TIMEOUT_IN_STABILIZATION_INTERVAL;
+
+        if (Date.now() - startTimeInMs > totalTimeoutInMs) {
+          global[e2edWaitingForInterfaceStabilizationSymbol] = undefined;
+
           clearInterval(intervalId);
-          reject(new Error(`Time was out in waitForInterfaceStabilization (${TIMEOUT_IN_MS}ms)`));
+          resolve(`Time was out in waitForInterfaceStabilization (${totalTimeoutInMs}ms)`);
         }
       }, CHECK_INTERVAL_IN_MS);
     });
 
-    global.e2edWaitingForInterfaceStabilization = {promise, stabilizationInterval};
+    global[e2edWaitingForInterfaceStabilizationSymbol] = {promise, stabilizationInterval};
 
     return promise;
   },
-  'waitForInterfaceStabilization',
+  {name: 'waitForInterfaceStabilization'},
 );
 
 /**
@@ -134,12 +154,13 @@ const clientWaitForInterfaceStabilization = createClientFunction(
 export const waitForInterfaceStabilization = async (stabilizationInterval = 500): Promise<void> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
-  await clientWaitForInterfaceStabilization(stabilizationInterval);
+  const maybeErrorReason = await clientWaitForInterfaceStabilization(stabilizationInterval);
 
   const waitInMs = Date.now() - startTimeInMs;
 
   await log(
-    `Waited for interface stabilization for ${waitInMs}ms with stabilization interval ${stabilizationInterval}`,
+    `Waited for interface stabilization for ${waitInMs}ms with stabilization interval ${stabilizationInterval}ms`,
+    {error: maybeErrorReason, startTimeInMs},
     LogEventType.InternalAction,
   );
 };

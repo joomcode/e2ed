@@ -12,9 +12,12 @@ type CustomPageParams = Partial<RouteParams> | undefined;
 const mainPageTestId = createTestId<{header: unknown}>('google');
 
 /**
- * The main (index) page.
+ * The Main (index) page.
  */
 export class Main extends Page<CustomPageParams> {
+  /**
+   * Page language.
+   */
   readonly language!: Language;
 
   override init(): void {
@@ -29,7 +32,7 @@ export class Main extends Page<CustomPageParams> {
     return new MainRoute({language});
   }
 
-  override pageStabilizationInterval = 2_500;
+  override readonly pageStabilizationInterval = 8_000;
 
   /**
    * Search input.

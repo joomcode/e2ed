@@ -4,7 +4,7 @@ import {assertValueIsDefined} from '../asserts';
 import {cloneWithoutUndefinedProperties} from '../clone';
 import {log} from '../log';
 import {getBodyAsString, getContentJsonHeaders} from '../request';
-import {getRequestFromRequestOptions} from '../requestHooks';
+import {getMainRequestOptions, getRequestFromRequestOptions} from '../requestHooks';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
@@ -25,7 +25,9 @@ export const getSetResponse =
     const url = requestOptions.url as Url;
     const functionAndRoute = functionAndRouteByUrl[url];
 
-    assertValueIsDefined(functionAndRoute, 'functionAndRoute is defined', {requestOptions});
+    const mainRequestOptions = getMainRequestOptions(requestOptions);
+
+    assertValueIsDefined(functionAndRoute, 'functionAndRoute is defined', {mainRequestOptions});
 
     const {apiMockFunction, route} = functionAndRoute;
     const requestBodyIsInJsonFormat = route.getRequestBodyIsInJsonFormat();
@@ -56,8 +58,8 @@ export const getSetResponse =
       `A mock was applied to the API route "${route.constructor.name}"`,
       {
         apiMockFunctionCode: apiMockFunction.toString(),
+        mainRequestOptions,
         request,
-        requestOptions,
         response,
         responseOptions,
         route,

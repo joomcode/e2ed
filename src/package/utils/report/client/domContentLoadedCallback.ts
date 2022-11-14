@@ -1,6 +1,7 @@
-import type {FullTestRun, ReportClientGlobal} from '../../../types/internal';
+import type {FullTestRun, ReportClientState} from '../../../types/internal';
 
 declare const e2edJsonReportData: HTMLScriptElement;
+declare const reportClientState: ReportClientState;
 
 /**
  * DOMContentloaded callback for report page.
@@ -12,7 +13,5 @@ export const domContentLoadedCallback = (): void => {
     e2edJsonReportData.textContent ?? 'Cannot parse JSON report data',
   ) as readonly FullTestRun[];
 
-  const global: ReportClientGlobal = window;
-
-  global.e2edFullTestRuns = e2edFullTestRuns;
+  reportClientState.e2edFullTestRuns = e2edFullTestRuns;
 };

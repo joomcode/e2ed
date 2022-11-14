@@ -30,7 +30,6 @@ export {DEFAULT_PIXELMATCH_OPTIONS} from './pixelmatch';
 export {RESOLVED_PROMISE} from './promise';
 export {EndE2edReason, ExitCode} from './report';
 export {
-  ANY_URL_REGEXP,
   INCLUDE_BODY_AND_HEADERS_IN_RESPONSE_EVENT,
   INCLUDE_HEADERS_IN_RESPONSE_EVENT,
   REQUEST_HOOK_CONTEXT_KEY,
@@ -38,3 +37,4 @@ export {
 export {FAILED_TEST_RUN_STATUSES, TestRunStatus} from './testRun';
 /** @internal */
 export {RUN_IDS_HASH} from './testRun';
+export {ANY_URL_REGEXP, SLASHES_AT_THE_END_REGEXP, SLASHES_AT_THE_START_REGEXP} from './url';

@@ -6,4 +6,6 @@ import type {SafeHtml} from '../../../types/internal';
  * Render JS constants for report page.
  * @internal
  */
-export const renderScriptConstants = (): SafeHtml => createSafeHtmlWithoutSanitize``;
+export const renderScriptConstants = (): SafeHtml => createSafeHtmlWithoutSanitize`
+const reportClientState = {};
+`;

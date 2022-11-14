@@ -13,21 +13,24 @@ import type {Config} from 'e2ed/configurator';
 
 const isLocalRun = runEnvironment === RunEnvironment.Local;
 
+const browser = isLocalRun ? 'chrome:headless' : 'chromium:headless';
+const browserFlags = ['--disable-dev-shm-usage', '--disable-web-security'];
+
 /**
  * The complete config of pack of tests.
  */
 const config: Config = {
   ajaxRequestTimeout: 40_000,
   assertionTimeout: 10_000,
+  browser: [browser, ...browserFlags].join(' '),
   browserInitTimeout: 60_000,
-  browsers: 'chromium:headless --disable-dev-shm-usage --disable-web-security',
   concurrency: isLocalRun ? 1 : 2,
   dockerImage: 'e2edhub/e2ed',
   liteReportFileName: 'lite-report.json',
   maxRetriesCountInDocker: 3,
   packTimeout: 90 * 60_000,
   pageRequestTimeout: 30_000,
-  pageStabilizationInterval: 2_000,
+  pageStabilizationInterval: 5_000,
   port1: 1337,
   port2: 1338,
   printTestLogsInConsole: true,
@@ -35,9 +38,9 @@ const config: Config = {
   selectorTimeout: 10_000,
   skipTests,
   testFileGlobs: ['./e2ed/tests/**/*.ts', '!**/*.skip.ts'],
-  testIdleTimeout: 25_000,
+  testIdleTimeout: 20_000,
   testLogsFileName: 'test-logs.log',
-  testTimeout: 90_000,
+  testTimeout: 60_000,
   waitForRequestTimeout: 30_000,
   waitForResponseTimeout: 30_000,
 };

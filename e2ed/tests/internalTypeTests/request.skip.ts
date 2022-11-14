@@ -1,6 +1,7 @@
+import {getRandomId} from 'e2ed/generators';
 import {CreateDevice, UserSignUp} from 'e2ed/routes/apiRoutes';
 import {Main} from 'e2ed/routes/pageRoutes';
-import {getRandomId, request} from 'e2ed/utils';
+import {request} from 'e2ed/utils';
 
 import type {ApiDevice, ApiDeviceParams, ApiUserParams, MobileDevice} from 'e2ed/types';
 

@@ -12,6 +12,4 @@ export const setHeadersAndNavigateTo = async (url: Url, options: MapOptions): Pr
   await testController.addRequestHooks(setHeadersRequestHook);
 
   await testController.navigateTo(url);
-
-  await testController.removeRequestHooks(setHeadersRequestHook);
 };

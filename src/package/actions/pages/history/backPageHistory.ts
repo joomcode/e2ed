@@ -6,7 +6,10 @@ import {waitForInterfaceStabilization} from '../../waitFor';
 
 import type {AnyPageClassType} from '../../../types/internal';
 
-const backPageHistoryClient = createClientFunction(() => window.history.back(), 'backPageHistory');
+const backPageHistoryClient = createClientFunction(() => window.history.back(), {
+  name: 'backPageHistory',
+  timeout: 500,
+});
 
 /**
  * Go back in browser page history.

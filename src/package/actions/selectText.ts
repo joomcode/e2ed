@@ -1,6 +1,6 @@
 import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
-import {getLocatorFromSelector} from '../utils/getLocatorFromSelector';
+import {getLocatorFromSelector} from '../utils/locators';
 import {log} from '../utils/log';
 
 import type {Selector, TestCafeSelector} from '../types/internal';

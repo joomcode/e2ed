@@ -25,3 +25,9 @@ export type ExcludeUndefinedFromProperties<T extends object> = {
 export type IsIncludeUndefined<T> = true extends (T extends undefined ? true : never)
   ? true
   : false;
+
+/**
+ * Alias for void type (to suppress the @typescript-eslint/no-invalid-void-type rule).
+ */
+// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+export type Void = void;

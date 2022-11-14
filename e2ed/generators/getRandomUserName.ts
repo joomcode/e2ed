@@ -1,4 +1,4 @@
-import {getRandomId} from 'e2ed/utils';
+import {getRandomId} from 'e2ed/generators';
 
 /**
  * Get random user name.

@@ -1,6 +1,6 @@
-import {LOCATOR_KEY} from '../constants/internal';
+import {LOCATOR_KEY} from '../../constants/internal';
 
-import type {Selector} from '../types/internal';
+import type {Selector} from '../../types/internal';
 
 /**
  * Get string locator from selector if any.

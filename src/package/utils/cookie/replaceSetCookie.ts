@@ -9,7 +9,7 @@ import type {Cookie, SetCookieHeaderString} from '../../types/internal';
 export const replaceSetCookie = (
   setCookies: readonly SetCookieHeaderString[],
   cookie: Cookie,
-): readonly SetCookieHeaderString[] => {
+): SetCookieHeaderString[] => {
   const newSetCookies = [...setCookies];
   const newSetCookieString = getSetCookieHeaderString(cookie);
   const cookieIndex = newSetCookies.findIndex((setCookieString) =>

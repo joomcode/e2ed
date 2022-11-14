@@ -6,10 +6,10 @@ import {waitForInterfaceStabilization} from '../../waitFor';
 
 import type {AnyPageClassType} from '../../../types/internal';
 
-const forwardPageHistoryClient = createClientFunction(
-  () => window.history.forward(),
-  'forwardPageHistory',
-);
+const forwardPageHistoryClient = createClientFunction(() => window.history.forward(), {
+  name: 'forwardPageHistory',
+  timeout: 500,
+});
 
 /**
  * Go forward in browser page history.

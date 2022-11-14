@@ -6,10 +6,10 @@ import {waitForInterfaceStabilization} from '../../waitFor';
 
 import type {AnyPageClassType} from '../../../types/internal';
 
-const goPageHistoryClient = createClientFunction(
-  (delta: number) => window.history.go(delta),
-  'goPageHistory',
-);
+const goPageHistoryClient = createClientFunction((delta: number) => window.history.go(delta), {
+  name: 'goPageHistory',
+  timeout: 500,
+});
 
 /**
  * Go delta steps in browser page history.

@@ -58,8 +58,8 @@ void mockApiRoute(
       url,
     };
     const responseHeaders = {
-      'X-Request-Id': 'Gd8obEgq81x',
       referer: String(query),
+      'x-request-id': 'Gd8obEgq81x',
     };
     const statusCode = method === 'GET' ? 201 : 200;
 

@@ -1,6 +1,5 @@
 import {LogEventType} from '../../constants/internal';
 import {expect} from '../../expect';
-import {assertValueIsDefined} from '../../utils/asserts';
 import {getCurrentUrl} from '../../utils/getCurrentUrl';
 import {log} from '../../utils/log';
 
@@ -29,12 +28,6 @@ export const assertPage = async <SomePageClass extends AnyPageClassType>(
   }
 
   const currentUrl = await getCurrentUrl();
-
-  assertValueIsDefined(currentUrl, 'currentUrl is defined', {
-    pageName: PageClass.name,
-    pageParams,
-    route,
-  });
 
   const isMatch = route.isMatchUrl(currentUrl);
 

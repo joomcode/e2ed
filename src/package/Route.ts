@@ -1,3 +1,5 @@
+import {SLASHES_AT_THE_END_REGEXP, SLASHES_AT_THE_START_REGEXP} from './constants/internal';
+
 import type {PARAMS_KEY_TYPE, Url, ZeroOrOneArg} from './types/internal';
 
 declare const PARAMS_KEY: PARAMS_KEY_TYPE;
@@ -44,6 +46,9 @@ export abstract class Route<RouteParams> {
    * Returns the url of the route.
    */
   getUrl(): Url {
-    return `${this.getOrigin()}${this.getPath()}` as Url;
+    const originWithoutSlashesAtTheEnd = this.getOrigin().replace(SLASHES_AT_THE_END_REGEXP, '');
+    const pathWithoutSlashesAtTheStart = this.getPath().replace(SLASHES_AT_THE_START_REGEXP, '');
+
+    return `${originWithoutSlashesAtTheEnd}/${pathWithoutSlashesAtTheStart}` as Url;
   }
 }
