@@ -27,7 +27,7 @@
     "create-test-id": "0.0.5",
     "globby": "11.1.0",
     "pngjs": "6.0.0",
-    "testcafe-without-typecheck": "2.0.2-rc.1"
+    "testcafe-without-typecheck": "2.1.0-rc.1"
   },
   "devDependencies": {
     "@types/node": "18.11.9",
@@ -38,9 +38,9 @@
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-simple-import-sort": "8.0.0",
-    "husky": "8.0.1",
+    "husky": "8.0.2",
     "prettier": "2.7.1",
-    "testcafe": "2.0.2",
+    "testcafe": "2.1.0",
     "typescript": "4.8.4"
   },
   "peerDependencies": {
