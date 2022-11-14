@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.12.9](https://github.com/joomcode/e2ed/tree/v0.12.9) (2022-11-14)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.8...v0.12.9)
+
+- [chore: update TestCafe to 2.1.0 and husky to 8.0.2](https://github.com/joomcode/e2ed/commit/68515c5c60ce331030b3ad3ee7eb55929dc8b389) ([uid11](https://github.com/uid11))
+
 ## [v0.12.8](https://github.com/joomcode/e2ed/tree/v0.12.8) (2022-11-14)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.7...v0.12.8)
