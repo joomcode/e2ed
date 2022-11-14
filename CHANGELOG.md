@@ -1,5 +1,32 @@
 # Changelog
 
+## [v0.12.8](https://github.com/joomcode/e2ed/tree/v0.12.8) (2022-11-14)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.7...v0.12.8)
+
+- [fix: error in internal tests with unmockApiRoute](https://github.com/joomcode/e2ed/commit/17ef320b65fd574ceabb59a1e6ccc1deb04eae8c) ([uid11](https://github.com/uid11))
+
+  refactor: working with cookies on testing pages
+  fix: error with premature removing request hooks
+  refactor: working with request hook events is more secure and covered with more logs
+  refactor: working with client functions is more secure and covered with more logs
+  refactor: some simplifications in the e2ed config
+
+- [chore: update devDependencies (eslint, @typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/cb517745a549953a9402bb882fa2a84161f4b8d6) ([uid11](https://github.com/uid11))
+- [feat: add more functions to work with cookies](https://github.com/joomcode/e2ed/commit/0ac4111c0d9ee48ee111a02c706e697a68028349) ([uid11](https://github.com/uid11))
+
+  docs: the testFileGlobs config field is described in README.md
+
+- [fix: add request hook context to request/response events](https://github.com/joomcode/e2ed/commit/41eeeec671286a879d34990654c3b6b5dde7f979) ([uid11](https://github.com/uid11))
+
+  chore: update TestCafe to 2.0.2
+
+- [chore: update devDependencies (@types/node, @typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/31c2d59cd4ad292fcf346063b6bddb8e3f536c8b) ([uid11](https://github.com/uid11))
+- [fix: rename config field testFiles to testFileGlobs](https://github.com/joomcode/e2ed/commit/078594e2fda61639b86f303c05a17725539b9e4f) ([uid11](https://github.com/uid11))
+
+  fix: report's message about unvisited test files
+  refactor: move mock API actions to separate files
+
 ## [v0.12.7](https://github.com/joomcode/e2ed/tree/v0.12.7) (2022-10-25)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.6...v0.12.7)
