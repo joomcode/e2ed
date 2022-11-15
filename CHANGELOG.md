@@ -13,9 +13,13 @@
 - [fix: error in internal tests with unmockApiRoute](https://github.com/joomcode/e2ed/commit/17ef320b65fd574ceabb59a1e6ccc1deb04eae8c) ([uid11](https://github.com/uid11))
 
   refactor: working with cookies on testing pages
+
   fix: error with premature removing request hooks
+
   refactor: working with request hook events is more secure and covered with more logs
+
   refactor: working with client functions is more secure and covered with more logs
+
   refactor: some simplifications in the e2ed config
 
 - [chore: update devDependencies (eslint, @typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/cb517745a549953a9402bb882fa2a84161f4b8d6) ([uid11](https://github.com/uid11))
@@ -31,6 +35,7 @@
 - [fix: rename config field testFiles to testFileGlobs](https://github.com/joomcode/e2ed/commit/078594e2fda61639b86f303c05a17725539b9e4f) ([uid11](https://github.com/uid11))
 
   fix: report's message about unvisited test files
+
   refactor: move mock API actions to separate files
 
 ## [v0.12.7](https://github.com/joomcode/e2ed/tree/v0.12.7) (2022-10-25)
@@ -64,6 +69,7 @@
 - [fix: remove waitForEvents hook when waits rejected by timeout](https://github.com/joomcode/e2ed/commit/c59d95ed1325b903a24943ee79dc63f5c39165dc) ([uid11](https://github.com/uid11))
 
   fix: add utility type AsyncVoid (void | Promise<void>)
+
   fix: temporary skip test of waitForResponse (need research)
 
 - [Kuraev Merge remote-tracking branch 'origin/main' into WEB-6125_parentSelector](https://github.com/joomcode/e2ed/commit/550476ca8452d4e12906ec76016410dbee3667fe) ([Roman](https://github.com/Roman))
@@ -80,12 +86,15 @@
 - [fix: use cssSelector in locator selectors](https://github.com/joomcode/e2ed/commit/e83f0eba1728276c8197393fb0d9cabb477a5a95) ([uid11](https://github.com/uid11))
 
   fix: remove testIdSelector
+
   fix: unused modules error in e2ed/context/user
 
 - [feat: add concurrency to report retry object (and to lite report retry)](https://github.com/joomcode/e2ed/commit/e8935efdb472a6c56cee0180022db96b5a55d0f5) ([uid11](https://github.com/uid11))
 
   fix: use direct reexports in e2ed init example
+
   fix: rename ClientFunction to createClientFunction
+
   fix: export getRunLabelObject util for parsing test runLabel
 
 ## [v0.12.4](https://github.com/joomcode/e2ed/tree/v0.12.4) (2022-09-25)
@@ -105,6 +114,7 @@
 - [feat: use explicit exports instead of stars exports](https://github.com/joomcode/e2ed/commit/3ffdfb70a61371506d17d5a8fb89ba26f0732584) ([uid11](https://github.com/uid11))
 
   fix: remove unused pageLoaded flag from context
+
   fix: move mockApiRoute, waitForRequest/waitForResponse to actions
 
 - [Merge pull request #6 from joomcode/assertDistanceBetweenElements](https://github.com/joomcode/e2ed/commit/5a4c1382a850f842d002fac59ea96275204e3327) ([uid11](https://github.com/uid11))
@@ -181,6 +191,7 @@
 - [feat: add e2ed/generators for genertion any new test (mock) data](https://github.com/joomcode/e2ed/commit/f595605d346784a4e8ccc11a3a6c678e7bfc0094) ([uid11](https://github.com/uid11))
 
   feat: add assert action assertUrlMatchRoute
+
   feat: add promise's util waitForAllProperties
 
 ## [v0.11.27](https://github.com/joomcode/e2ed/tree/v0.11.27) (2022-09-04)
@@ -229,18 +240,21 @@
 - [feat: add end e2ed reasons enum](https://github.com/joomcode/e2ed/commit/917701f686b09a135b051eb9c558942fbe2c4f53) ([uid11](https://github.com/uid11))
 
   refactor: runE2edDocker/runE2edLocal entrypoints
+
   feat: nodejs process end handlers (on SIGINT, SIGTERM)
 
 - [chore: update @types/node to 18.7.8](https://github.com/joomcode/e2ed/commit/91e98a9bcb216b6b88fa721017b25cd43ff002cb) ([uid11](https://github.com/uid11))
 - [feat: read/write start info from file (JS-context independent)](https://github.com/joomcode/e2ed/commit/afa7a947ef3b3450a5b5736bbfa25018eb5f533b) ([uid11](https://github.com/uid11))
 
   fix: move startTimeInMs to start info
+
   feat: remove unnecessary types of start/end e2ed events
 
 - [fix: truncate long arrays in retries state logs](https://github.com/joomcode/e2ed/commit/dee72336dba00f9472c1c16e343399204ba48cef) ([uid11](https://github.com/uid11))
 - [feat: add blank for packTimeout config field](https://github.com/joomcode/e2ed/commit/92ffce2f31e145cb34482b0539f930e8936a1685) ([uid11](https://github.com/uid11))
 
   fix: remove TestCafe JSON reporter
+
   fix: update testcafe-without-typecheck for correct awaiting TestCafe tests run
 
 ## [v0.11.22](https://github.com/joomcode/e2ed/tree/v0.11.22) (2022-08-17)
@@ -292,6 +306,7 @@
 - [fix: reject current test run if previous run of this test already passed](https://github.com/joomcode/e2ed/commit/ef587c65f98f4ff4a9358c31d902203815e229a4) ([uid11](https://github.com/uid11))
 
   fix: change previous test run status to broken, if it was failed
+
   refactor: move all utils for working with filesystem to utils/fs directory
 
 ## [v0.11.16](https://github.com/joomcode/e2ed/tree/v0.11.16) (2022-08-12)
@@ -301,6 +316,7 @@
 - [fix: add main log message about test run error](https://github.com/joomcode/e2ed/commit/90dd9327a423a79aad2cceb2ee833cafd3e39da5) ([uid11](https://github.com/uid11))
 
   fix: clear test timeout when test promise completed
+
   fix: do not log about reject, if test run already completed
 
 - [fix: add type MaybeWithIsTestRunBroken for reject error params](https://github.com/joomcode/e2ed/commit/d92d73c6ff76a1c6920ca6c9656c1ff351f6684e) ([uid11](https://github.com/uid11))
@@ -392,6 +408,7 @@
 - [refactor: split it.ts into several files](https://github.com/joomcode/e2ed/commit/cf9083ba7c7b2cf46443697b5494cb0c3d3dfd4a) ([uid11](https://github.com/uid11))
 
   refactor: rename it to test; add aliases for it (task, test)
+
   fix: cut long stackFrames messages from logs (in valueToString)
 
 ## [v0.11.3](https://github.com/joomcode/e2ed/tree/v0.11.3) (2022-08-06)
@@ -462,14 +479,18 @@
 - [chore: update devDependencies (@typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/06a74ee4a372258d63dd2a0f102fb6487bc5ce8b) ([uid11](https://github.com/uid11))
 - [feat: add runtime tests for doApiMock function](https://github.com/joomcode/e2ed/commit/843f4fabfaa1dc0c3bf0c83b44c4f28e9affd64c) ([uid11](https://github.com/uid11))
 
-  Fix comparing of request's method
-  Fix doApiMock types
-  Refactor Request and Response types
+  fix: comparing of request's method
+
+  fix: doApiMock types
+
+  refactor: Request and Response types
 
 - [feat: add base version of doApiMock](https://github.com/joomcode/e2ed/commit/06213d6955b4d8911a08d4f9b30c21d0311711ec) ([uid11](https://github.com/uid11))
 
   refactor: use request and response instead of input and output
+
   refactor: move userland types checks inside of e2ed
+
   fix: remove E2ED_API_ORIGIN environment variable
 
 ## [v0.10.16](https://github.com/joomcode/e2ed/tree/v0.10.16) (2022-06-27)

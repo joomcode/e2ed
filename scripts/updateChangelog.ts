@@ -46,7 +46,7 @@ const markdownCommits = commits.map((commit) => {
   const hash = firstLine.slice(0, 40);
   const authorName = firstLine.slice(40, firstSpaceIndex);
 
-  const body = bodyLines.length === 0 ? '' : `\n\n  ${bodyLines.join('\n  ')}\n`;
+  const body = bodyLines.length === 0 ? '' : `\n\n  ${bodyLines.join('\n\n  ')}\n`;
 
   return `- [${subject}](${repoUrl}/commit/${hash}) ([${authorName}](${repoOrigin}/${authorName}))${body}`;
 });
