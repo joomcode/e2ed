@@ -1,5 +1,20 @@
 # Changelog
 
+## [v0.12.10](https://github.com/joomcode/e2ed/tree/v0.12.10) (2022-11-17)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.9...v0.12.10)
+
+- [chore: update devDependencies (includes TypeScript to 4.9.3)](https://github.com/joomcode/e2ed/commit/22933eddb031f4cdcedce1459db757a64e3c0294) ([uid11](https://github.com/uid11))
+- [refactor: rename route params to routeParams](https://github.com/joomcode/e2ed/commit/9d893d57d62483ba98415a89c9a8f68120c188a9) ([uid11](https://github.com/uid11))
+
+  fix: remove unnecessary peer dependencies
+
+  refactor: rename "request/response body in JSON format" flags
+
+  fix: error with empty request body in mock API routes
+
+- [fix: separate messages in CHANGELOG.md start on a new line](https://github.com/joomcode/e2ed/commit/4abcc4a7fd836ff8f5e0bad03e7e3c9b8b10310c) ([uid11](https://github.com/uid11))
+
 ## [v0.12.9](https://github.com/joomcode/e2ed/tree/v0.12.9) (2022-11-14)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.8...v0.12.9)
