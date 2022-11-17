@@ -5,6 +5,9 @@ import {getFullConfig} from './utils/getFullConfig';
 import type {Route} from './Route';
 import type {AsyncVoid, PageClassTypeArgs, PARAMS_KEY_TYPE} from './types/internal';
 
+/**
+ * Inner key for parameters type.
+ */
 declare const PARAMS_KEY: PARAMS_KEY_TYPE;
 
 /**
@@ -38,6 +41,9 @@ export abstract class Page<PageParams = undefined> {
    */
   readonly pageStabilizationInterval: number;
 
+  /**
+   * Type of page parameters.
+   */
   declare readonly [PARAMS_KEY]: PageParams;
 
   /**

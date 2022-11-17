@@ -21,6 +21,8 @@ export type {Fn, MergeFunctions} from './fn';
 export type {TestFilePath} from './fs';
 /** @internal */
 export type {DirectoryPathFromRoot, FilePathFromRoot} from './fs';
+/** @internal */
+export type {SafeHtml} from './html';
 export type {
   Cookie,
   CookieHeaderString,
@@ -37,8 +39,6 @@ export type {
   StatusCode,
   Url,
 } from './http';
-/** @internal */
-export type {SafeHtml} from './html';
 export type {GeneralLog, Log, LogContext, LogParams, LogPayload} from './log';
 export type {ApiMockFunction} from './mockApiRoute';
 /** @internal */

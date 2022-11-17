@@ -45,8 +45,6 @@
   },
   "peerDependencies": {
     "@types/node": ">=16.11.1",
-    "bin-v8-flags-filter": ">=1.2.0",
-    "testcafe-hammerhead": ">=28",
     "typescript": ">=4.4"
   },
   "exports": {

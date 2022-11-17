@@ -1,7 +1,9 @@
-// eslint-disable-next-line import/no-internal-modules
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-internal-modules
 import {decodeContent} from 'testcafe-hammerhead/lib/processing/encoding';
-// eslint-disable-next-line import/no-internal-modules
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-internal-modules
 import Charset from 'testcafe-hammerhead/lib/processing/encoding/charset';
+
+import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 
 import type {RequestHookEncoding, RequestHookResponseEvent, Response} from '../../types/internal';
 
@@ -23,7 +25,7 @@ export const getResponseFromResponseEvent = async ({
     const responseBodyAsString = await decodeContent(body, encoding, charset);
 
     try {
-      responseBody = JSON.parse(responseBodyAsString);
+      responseBody = parseMaybeEmptyValueAsJson(responseBodyAsString);
     } catch {
       responseBody = responseBodyAsString;
     }

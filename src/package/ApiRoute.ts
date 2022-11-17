@@ -9,7 +9,14 @@ import type {
   Url,
 } from './types/internal';
 
+/**
+ * Inner key for request type.
+ */
 declare const REQUEST_KEY: REQUEST_KEY_TYPE;
+
+/**
+ * Inner key for response type.
+ */
 declare const RESPONSE_KEY: RESPONSE_KEY_TYPE;
 
 /**
@@ -20,17 +27,32 @@ export abstract class ApiRoute<
   SomeRequest extends Request = Request,
   SomeResponse extends Response = Response,
 > extends Route<Params> {
+  /**
+   * Get HTTP method of API route.
+   */
   abstract getMethod(): Method;
 
+  /**
+   * Request type of API route.
+   */
   declare readonly [REQUEST_KEY]: SomeRequest;
 
+  /**
+   * Response type of API route.
+   */
   declare readonly [RESPONSE_KEY]: SomeResponse;
 
-  getRequestBodyIsInJsonFormat(): boolean {
+  /**
+   * Return true, if the request body is in JSON format.
+   */
+  getIsRequestBodyInJsonFormat(): boolean {
     return true;
   }
 
-  getResponseBodyIsInJsonFormat(): boolean {
+  /**
+   * Return true, if the response body is in JSON format.
+   */
+  getIsResponseBodyInJsonFormat(): boolean {
     return true;
   }
 

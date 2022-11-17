@@ -47,8 +47,8 @@ export const request = async <
   const route = new Route(...([routeParams] as ZeroOrOneArg<RouteParams>));
 
   const method = route.getMethod();
-  const requestBodyIsInJsonFormat = route.getRequestBodyIsInJsonFormat();
-  const responseBodyIsInJsonFormat = route.getResponseBodyIsInJsonFormat();
+  const isRequestBodyInJsonFormat = route.getIsRequestBodyInJsonFormat();
+  const isResponseBodyInJsonFormat = route.getIsResponseBodyInJsonFormat();
   const url = route.getUrl();
 
   const urlObject = new URL(url);
@@ -62,7 +62,7 @@ export const request = async <
     url,
   };
 
-  const requestBodyAsString = getBodyAsString(requestBody, requestBodyIsInJsonFormat);
+  const requestBodyAsString = getBodyAsString(requestBody, isRequestBodyInJsonFormat);
   const options = {
     method,
     requestHeaders: {
@@ -81,11 +81,11 @@ export const request = async <
 
     try {
       const {fullLogParams, response} = await oneTryOfRequest<SomeResponse>({
+        isResponseBodyInJsonFormat,
         libRequest,
         logParams: {...logParams, retry},
         options,
         requestBodyAsString,
-        responseBodyIsInJsonFormat,
         timeout,
         urlObject,
       });

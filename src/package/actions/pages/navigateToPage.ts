@@ -20,17 +20,14 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
   const page = await createPageInstance(PageClass, pageParams);
 
   const route = page.getRoute();
+  const {routeParams} = route;
   const url = route.getUrl();
   const startNavigateTimeInMs = Date.now() as UtcTimeInMs;
+  const pageInstanceCreatedInMs = startNavigateTimeInMs - startTimeInMs;
 
   await log(
     `Will navigate to the page "${PageClass.name}"`,
-    {
-      pageInstanceCreatedInMs: startNavigateTimeInMs - startTimeInMs,
-      pageParams,
-      routeParams: route.params,
-      url,
-    },
+    {pageInstanceCreatedInMs, pageParams, routeParams, url},
     LogEventType.InternalAction,
   );
 

@@ -30,16 +30,16 @@ export const getSetResponse =
     assertValueIsDefined(functionAndRoute, 'functionAndRoute is defined', {mainRequestOptions});
 
     const {apiMockFunction, route} = functionAndRoute;
-    const requestBodyIsInJsonFormat = route.getRequestBodyIsInJsonFormat();
-    const responseBodyIsInJsonFormat = route.getResponseBodyIsInJsonFormat();
+    const isRequestBodyInJsonFormat = route.getIsRequestBodyInJsonFormat();
+    const isResponseBodyInJsonFormat = route.getIsResponseBodyInJsonFormat();
 
-    const request = getRequestFromRequestOptions(requestOptions, requestBodyIsInJsonFormat);
+    const request = getRequestFromRequestOptions(requestOptions, isRequestBodyInJsonFormat);
 
-    const response = await apiMockFunction(route.params, request);
+    const response = await apiMockFunction(route.routeParams, request);
 
     const {responseBody, responseHeaders, statusCode = 200} = response;
 
-    const responseBodyAsString = getBodyAsString(responseBody, responseBodyIsInJsonFormat);
+    const responseBodyAsString = getBodyAsString(responseBody, isResponseBodyInJsonFormat);
 
     // eslint-disable-next-line no-param-reassign
     responseOptions.statusCode = statusCode;

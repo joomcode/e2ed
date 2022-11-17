@@ -15,14 +15,17 @@ export abstract class Route<RouteParams> {
   static getParamsFromUrl?(url: Url): unknown;
 
   constructor(...args: ZeroOrOneArg<RouteParams>) {
-    [this.params] = args as [params: RouteParams];
+    [this.routeParams] = args as [params: RouteParams];
   }
 
   /**
    * Immutable route parameters.
    */
-  readonly params: RouteParams;
+  readonly routeParams: RouteParams;
 
+  /**
+   * Type of route parameters.
+   */
   declare readonly [PARAMS_KEY]: RouteParams;
 
   /**

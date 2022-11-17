@@ -40,12 +40,12 @@ it(
     const productRouteFromUrl = new CreateProductRoute(productRouteParams);
 
     await expect(mockedProduct, 'mocked API returns correct result').eql({
-      id: productRouteFromUrl.params.id,
+      id: productRouteFromUrl.routeParams.id,
       method: productRouteFromUrl.getMethod(),
       output: '17',
       payload: {
         cookies: [],
-        id: String(productRouteFromUrl.params.id) as DeviceId,
+        id: String(productRouteFromUrl.routeParams.id) as DeviceId,
         input: 17,
         model: 'samsung',
         version: '12',

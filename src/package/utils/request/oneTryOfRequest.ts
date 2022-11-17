@@ -4,6 +4,7 @@ import {getRandomId} from '../../generators/internal';
 import {cloneWithoutUndefinedProperties} from '../clone';
 import {E2EDError} from '../E2EDError';
 import {log} from '../log';
+import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
 import type {Response} from '../../types/internal';
@@ -15,11 +16,11 @@ import type {LogParams, OneTryOfRequestOptions} from './types';
  * @internal
  */
 export const oneTryOfRequest = <SomeResponse extends Response>({
+  isResponseBodyInJsonFormat,
   libRequest,
   logParams,
   options,
   requestBodyAsString,
-  responseBodyIsInJsonFormat,
   timeout,
   urlObject,
 }: OneTryOfRequestOptions): Promise<{
@@ -73,15 +74,9 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
           const statusCode = res.statusCode ?? BAD_REQUEST_STATUS_CODE;
 
           try {
-            let responseBody: SomeResponse['responseBody'];
-
-            if (responseBodyAsString === '') {
-              responseBody = undefined;
-            } else {
-              responseBody = responseBodyIsInJsonFormat
-                ? (JSON.parse(responseBodyAsString) as unknown)
-                : responseBodyAsString;
-            }
+            const responseBody: SomeResponse['responseBody'] = isResponseBodyInJsonFormat
+              ? parseMaybeEmptyValueAsJson(responseBodyAsString)
+              : responseBodyAsString;
 
             const response = {
               responseBody,

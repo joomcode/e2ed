@@ -22,7 +22,7 @@ export class Search extends PageRoute<Params> {
   }
 
   getPath(): string {
-    const {searchQuery = 'bar'} = this.params ?? {};
+    const {searchQuery = 'bar'} = this.routeParams ?? {};
 
     return `/search?q=${searchQuery}`;
   }

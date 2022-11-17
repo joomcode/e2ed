@@ -30,11 +30,6 @@ export const getRequestsFilter =
         assertValueIsTrue(
           routeMethod.toLowerCase() === request.method?.toLocaleLowerCase(),
           'route method equals to request method',
-          {
-            request,
-            route,
-            routeMethod,
-          },
         );
 
         // eslint-disable-next-line no-param-reassign

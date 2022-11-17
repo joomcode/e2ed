@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-internal-modules
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-internal-modules
 import RequestPipelineRequestHookEventFactory from 'testcafe-hammerhead/lib/request-pipeline/request-hooks/events/factory';
 import {RequestHook} from 'testcafe-without-typecheck';
 

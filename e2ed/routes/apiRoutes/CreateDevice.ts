@@ -21,7 +21,7 @@ export class CreateDevice extends ApiRoute<
   }
 
   getPath(): string {
-    const {model} = this.params;
+    const {model} = this.routeParams;
 
     return `/device/${model}/create`;
   }

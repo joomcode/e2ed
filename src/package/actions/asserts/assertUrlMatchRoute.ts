@@ -16,15 +16,16 @@ export const assertUrlMatchRoute = async (
   maybeUrlOrPath: MaybeUrlOrPath | Promise<MaybeUrlOrPath>,
   route: Route<unknown>,
 ): Promise<void> => {
+  const {routeParams} = route;
   const routeUrl = route.getUrl();
   const urlOrPath = await maybeUrlOrPath;
 
-  assertValueIsDefined(urlOrPath, 'urlOrPath is defined', {routeParams: route.params, routeUrl});
-  assertValueIsNotNull(urlOrPath, 'urlOrPath is not null', {routeParams: route.params, routeUrl});
+  assertValueIsDefined(urlOrPath, 'urlOrPath is defined', {routeParams, routeUrl});
+  assertValueIsNotNull(urlOrPath, 'urlOrPath is not null', {routeParams, routeUrl});
 
   await log(
     'Assert that url or url path match route',
-    {routeParams: route.params, routeUrl, urlOrPath},
+    {routeParams, routeUrl, urlOrPath},
     LogEventType.InternalAssert,
   );
 

@@ -30,6 +30,7 @@ export {getKeysCounter} from './getKeysCounter';
 export {getStackTrace} from './getStackTrace';
 export {getLocatorProperty} from './locators';
 export {log} from './log';
+export {parseMaybeEmptyValueAsJson} from './parseMaybeEmptyValueAsJson';
 export {getPromiseWithResolveAndReject, getTimeoutPromise, waitForAllProperties} from './promise';
 export {getContentJsonHeaders, request} from './request';
 export {SetHeadersRequestHook} from './requestHooks';

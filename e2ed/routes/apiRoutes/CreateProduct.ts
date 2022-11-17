@@ -40,7 +40,7 @@ export class CreateProduct extends ApiRoute<
   }
 
   getPath(): string {
-    const {id, size} = this.params;
+    const {id, size} = this.routeParams;
 
     return `${pathStart}${id}?size=${size}`;
   }
