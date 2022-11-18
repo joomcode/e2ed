@@ -62,8 +62,8 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
     status,
   };
 
-  // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
-  const hooks: typeof import('../../hooks') = require('../../hooks');
+  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+  const hooks = require<typeof import('../../hooks')>('../../hooks');
 
   const mainParams = hooks.getMainTestRunParams(testRun);
   const runHash = hooks.getTestRunHash(testRun);

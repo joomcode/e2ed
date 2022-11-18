@@ -1,4 +1,5 @@
-import type {DeepReadonly, OriginalTestRunError} from './internal';
+import type {DeepReadonly} from './deep';
+import type {OriginalTestRunError} from './errors';
 
 /**
  * Internal extend TestController type.

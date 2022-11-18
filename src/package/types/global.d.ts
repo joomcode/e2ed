@@ -1,6 +1,16 @@
 /* eslint-disable import/no-default-export, import/no-unused-modules, import/unambiguous */
 
 /**
+ * Extends node's require function.
+ * @internal
+ */
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+interface NodeRequire {
+  // eslint-disable-next-line @typescript-eslint/prefer-function-type
+  <ModuleExports = import('./utils').Any>(modulePath: string): ModuleExports;
+}
+
+/**
  * Package for filtering V8 command line flags when run TestCafe via CLI.
  * @internal
  */
@@ -126,4 +136,10 @@ declare module 'testcafe-without-typecheck/lib/cli/cli' {
    * @internal
    */
   export const runTestCafePromise: Promise<number>;
+
+  /**
+   * Absolute path to testcafe-hammerhead package (to main file), used in testcafe-without-typecheck.
+   * @internal
+   */
+  export const testCafeHammerheadPath: string;
 }

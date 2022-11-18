@@ -12,6 +12,12 @@ declare const PARAMS_KEY: unique symbol;
 type EntryPair<T> = [keyof T, T[keyof T] | undefined];
 
 /**
+ * Alias for type any (to suppress the @typescript-eslint/no-explicit-any rule).
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Any = any;
+
+/**
  * Returns the type of instance params.
  */
 export type GetParamsType<C> = C extends {[PARAMS_KEY]: unknown}

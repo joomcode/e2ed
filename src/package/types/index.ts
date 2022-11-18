@@ -7,6 +7,7 @@ export type {UserlandTypesAreCorrect} from './userland/typesChecks';
  * Public types that form the API (for using in the e2ed package and in userland).
  */
 export type {
+  Any,
   AnyPageClassType,
   ApiMockFunction,
   ApiRouteClassType,

@@ -27,11 +27,11 @@ export const runTestsWithArgs = async (): Promise<void> => {
 
   const packTimeoutPromise = getPackTimeoutPromise();
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const {
-    runTestCafePromise,
-  }: // eslint-disable-next-line global-require, import/no-internal-modules, @typescript-eslint/no-var-requires
-  typeof import('testcafe-without-typecheck/lib/cli/cli') = require('testcafe-without-typecheck/lib/cli/cli');
+  type TestCafeWithoutTypeCheckCli = typeof import('testcafe-without-typecheck/lib/cli/cli');
+
+  const {runTestCafePromise} =
+    // eslint-disable-next-line global-require, import/no-internal-modules, @typescript-eslint/no-var-requires
+    require<TestCafeWithoutTypeCheckCli>('testcafe-without-typecheck/lib/cli/cli');
 
   await Promise.race([runTestCafePromise, packTimeoutPromise]);
 

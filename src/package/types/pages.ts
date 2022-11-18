@@ -2,7 +2,7 @@ import type {CREATE_PAGE_TOKEN} from '../constants/internal';
 import type {Page} from '../Page';
 
 import type {Class} from './class';
-import type {GetParamsType, OneOrTwoArgs} from './utils';
+import type {Any, GetParamsType, OneOrTwoArgs} from './utils';
 
 /**
  * Arguments of page class constructor by page parameters type.
@@ -17,8 +17,7 @@ export type PageClassType<PageParams> = Class<PageClassTypeArgs<PageParams>, Pag
 /**
  * Base page class type for any page.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type AnyPageClassType = PageClassType<any>;
+export type AnyPageClassType = PageClassType<Any>;
 
 /**
  * Arguments of navigateToPage and assertPage functions.

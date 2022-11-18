@@ -35,8 +35,8 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
     await page.beforeNavigateToPage();
   }
 
-  // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
-  const hooks: typeof import('../../hooks') = require('../../hooks');
+  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+  const hooks = require<typeof import('../../hooks')>('../../hooks');
 
   await hooks.navigateTo(url);
 

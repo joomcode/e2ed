@@ -14,8 +14,8 @@ import type {E2edEnvironment, Log, LogPayload, UtcTimeInMs} from '../types/inter
  * Log every actions and API requests in E2ED tests.
  */
 export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: unknown) => {
-  // eslint-disable-next-line global-require, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
-  const hooks: typeof import('../hooks') = require('../hooks');
+  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+  const hooks = require<typeof import('../hooks')>('../hooks');
 
   const time = Date.now() as UtcTimeInMs;
   const dateTimeInISO = new Date(time).toISOString();

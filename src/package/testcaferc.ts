@@ -11,9 +11,10 @@ import type {FrozenPartOfTestCafeConfig, FullConfig} from './types/internal';
 
 const relativeUserlandConfigPath = join('..', '..', COMPILED_USERLAND_CONFIG_PATH);
 
-// eslint-disable-next-line global-require, @typescript-eslint/no-var-requires, import/no-dynamic-require
-const userlandConfig = (require(relativeUserlandConfigPath) as typeof import('../../e2ed/config'))
-  .config;
+// eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
+const userlandConfig = require<
+  typeof import('../../e2ed/config')
+>(relativeUserlandConfigPath).config;
 
 const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
   color: true,

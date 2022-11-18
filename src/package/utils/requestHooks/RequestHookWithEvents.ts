@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies, import/no-internal-modules
-import RequestPipelineRequestHookEventFactory from 'testcafe-hammerhead/lib/request-pipeline/request-hooks/events/factory';
 import {RequestHook} from 'testcafe-without-typecheck';
 
 import {RESOLVED_PROMISE} from '../../constants/internal';
@@ -7,12 +5,20 @@ import {RESOLVED_PROMISE} from '../../constants/internal';
 import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
 import {addContextToResultsOfClassCreateMethods} from './addContextToResultsOfClassCreateMethods';
+import {eventsFactoryPath} from './testCafeHammerheadPaths';
 
 import type {
   RequestHookConfigureResponseEvent,
   RequestHookRequestEvent,
   RequestHookResponseEvent,
 } from '../../types/internal';
+
+type RequestPipelineRequestHookEventFactoryType =
+  typeof import('testcafe-hammerhead/lib/request-pipeline/request-hooks/events/factory').default;
+
+const RequestPipelineRequestHookEventFactory =
+  // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
+  require<RequestPipelineRequestHookEventFactoryType>(eventsFactoryPath);
 
 addContextToResultsOfClassCreateMethods(RequestPipelineRequestHookEventFactory);
 

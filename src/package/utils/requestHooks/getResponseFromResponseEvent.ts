@@ -1,11 +1,16 @@
-// eslint-disable-next-line import/no-extraneous-dependencies, import/no-internal-modules
-import {decodeContent} from 'testcafe-hammerhead/lib/processing/encoding';
-// eslint-disable-next-line import/no-extraneous-dependencies, import/no-internal-modules
-import Charset from 'testcafe-hammerhead/lib/processing/encoding/charset';
-
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 
+import {charsetPath, encodingPath} from './testCafeHammerheadPaths';
+
 import type {RequestHookEncoding, RequestHookResponseEvent, Response} from '../../types/internal';
+
+type CharsetType = typeof import('testcafe-hammerhead/lib/processing/encoding/charset').default;
+type EncodingType = typeof import('testcafe-hammerhead/lib/processing/encoding');
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
+const Charset = require<CharsetType>(charsetPath);
+// eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
+const {decodeContent} = require<EncodingType>(encodingPath);
 
 /**
  * Get Response object from the original TestCafe request context.

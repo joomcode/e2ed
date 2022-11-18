@@ -6,8 +6,8 @@ import type {FullConfig} from '../types/internal';
  * because the userland configuration (e2ed/config.ts) is compiled when this event is registered.
  */
 export const getFullConfig = (): FullConfig => {
-  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-assignment
-  const {fullConfig}: typeof import('../testcaferc') = require('../testcaferc');
+  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+  const {fullConfig} = require<typeof import('../testcaferc')>('../testcaferc');
 
   return fullConfig;
 };

@@ -10,4 +10,5 @@ set -eu
 ./bin/TestCafeFork/removeChangelog.sh
 ./bin/TestCafeFork/disableTypeCheck.sh
 ./bin/TestCafeFork/exportRunTestCafePromiseFromCli.sh
+./bin/TestCafeFork/exportTestCafeHammerheadPath.sh
 ./bin/TestCafeFork/wrapGlobalTypes.sh
