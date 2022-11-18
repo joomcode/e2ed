@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.12.11](https://github.com/joomcode/e2ed/tree/v0.12.11) (2022-11-18)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.10...v0.12.11)
+
+- [fix: import correct version of testcafe-hammerhead](https://github.com/joomcode/e2ed/commit/f8ce0f67074f04174a0bd9522ad4f1ec5be47ed1) ([uid11](https://github.com/uid11))
+
+  refactor: add types to "require" function
+
 ## [v0.12.10](https://github.com/joomcode/e2ed/tree/v0.12.10) (2022-11-17)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.9...v0.12.10)
