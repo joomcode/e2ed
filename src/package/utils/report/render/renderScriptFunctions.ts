@@ -1,4 +1,5 @@
 import {
+  addDomContentLoadedHandler,
   addOnClickOnClass,
   assertValueIsDefined,
   chooseTestRun,
@@ -6,6 +7,7 @@ import {
   clickOnStep,
   clickOnTestRun,
   createSafeHtmlWithoutSanitize,
+  domContentLoadedHandler,
   renderDatesInterval,
   renderDuration,
   renderSteps,
@@ -22,6 +24,7 @@ import type {SafeHtml} from '../../../types/internal';
  * @internal
  */
 export const renderScriptFunctions = (): SafeHtml => createSafeHtmlWithoutSanitize`
+${addDomContentLoadedHandler.toString()}
 ${addOnClickOnClass.toString()}
 ${assertValueIsDefined.toString()}
 ${chooseTestRun.toString()}
@@ -29,6 +32,7 @@ ${createSafeHtmlWithoutSanitize.toString()}
 ${clickOnRetry.toString()}
 ${clickOnStep.toString()}
 ${clickOnTestRun.toString()}
+${domContentLoadedHandler.toString()}
 ${renderDatesInterval.toString()}
 ${renderDuration.toString()}
 ${renderSteps.toString()}

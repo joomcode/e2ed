@@ -1,4 +1,4 @@
-import {createSafeHtmlWithoutSanitize, domContentLoadedCallback, initialScript} from '../client';
+import {createSafeHtmlWithoutSanitize, initialScript} from '../client';
 
 import {renderScriptConstants} from './renderScriptConstants';
 import {renderScriptFunctions} from './renderScriptFunctions';
@@ -10,12 +10,10 @@ import type {SafeHtml} from '../../../types/internal';
  * @internal
  */
 export const renderScript = (): SafeHtml => createSafeHtmlWithoutSanitize`
-<script type="module">
+<script async type="module">
 ${renderScriptConstants()};
 
 ${renderScriptFunctions()};
-
-document.addEventListener("DOMContentLoaded", ${domContentLoadedCallback.toString()});
 
 (${initialScript.toString()})();
 </script>`;

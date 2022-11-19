@@ -1,4 +1,6 @@
 /** @internal */
+export {addDomContentLoadedHandler} from './addDomContentLoadedHandler';
+/** @internal */
 export {addOnClickOnClass} from './addOnClickOnClass';
 /** @internal */
 export {assertValueIsDefined} from './assertValueIsDefined';
@@ -11,7 +13,7 @@ export {clickOnStep} from './clickOnStep';
 /** @internal */
 export {clickOnTestRun} from './clickOnTestRun';
 /** @internal */
-export {domContentLoadedCallback} from './domContentLoadedCallback';
+export {domContentLoadedHandler} from './domContentLoadedHandler';
 /** @internal */
 export {initialScript} from './initialScript';
 /** @internal */
