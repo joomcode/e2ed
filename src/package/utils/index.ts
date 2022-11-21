@@ -21,8 +21,9 @@ export {
   getHorizontalDistanceBetweenSelectors,
   getVerticalDistanceBetweenSelectors,
 } from './distanceBetweenSelectors';
-export {E2EDError} from './E2EDError';
+export {E2edError} from './E2edError';
 export {writeFile} from './fs';
+export {valueToString} from './generalLog';
 export {getCurrentUrl} from './getCurrentUrl';
 export {getDocumentCookie} from './getDocumentCookie';
 export {getFullConfig} from './getFullConfig';
@@ -36,7 +37,6 @@ export {getContentJsonHeaders, request} from './request';
 export {SetHeadersRequestHook} from './requestHooks';
 export {getRunLabelObject} from './runLabel';
 export {isArray} from './typeGuards';
-export {valueToString} from './valueToString';
 export {wrapInTestRunTracker} from './wrapInTestRunTracker';
 
 /**

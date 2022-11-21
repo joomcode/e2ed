@@ -1,4 +1,4 @@
-import {truncateArrayForLogs} from '../truncateArrayForLogs';
+import {truncateArrayForLogs} from '../generalLog';
 
 import type {RetriesState} from '../../types/internal';
 

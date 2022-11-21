@@ -4,7 +4,7 @@ import {join} from 'node:path';
 import {EVENTS_DIRECTORY_PATH, READ_FILE_OPTIONS, TestRunStatus} from '../../constants/internal';
 
 import {assertValueIsTrue} from '../asserts';
-import {E2EDError} from '../E2EDError';
+import {E2edError} from '../E2edError';
 import {generalLog} from '../generalLog';
 
 import {writeFile} from './writeFile';
@@ -19,7 +19,7 @@ export const writeBrokenStatusToTestRunJsonFile = async (runId: RunId): Promise<
   const filePath = join(EVENTS_DIRECTORY_PATH, `${runId}.json`);
 
   await stat(filePath).catch((cause: unknown) => {
-    throw new E2EDError(`Test run JSON file ${filePath} does not exists in temporary directory`, {
+    throw new E2edError(`Test run JSON file ${filePath} does not exists in temporary directory`, {
       cause,
     });
   });

@@ -2,7 +2,7 @@ import {BAD_REQUEST_STATUS_CODE, LogEventType} from '../../constants/internal';
 import {getRandomId} from '../../generators/internal';
 
 import {cloneWithoutUndefinedProperties} from '../clone';
-import {E2EDError} from '../E2EDError';
+import {E2edError} from '../E2edError';
 import {log} from '../log';
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
@@ -54,7 +54,7 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
           req.destroy();
           req.emit(
             'error',
-            new E2EDError(
+            new E2edError(
               `The request to ${logParams.url} is timed out in ${timeout}ms`,
               fullLogParams,
             ),
@@ -89,7 +89,7 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
           } catch (cause) {
             clearTimeout(endTimeout);
             reject(
-              new E2EDError(
+              new E2edError(
                 `The response data string to request ${logParams.url} is not valid JSON: ${responseBodyAsString}`,
                 {...fullLogParams, cause, statusCode},
               ),
@@ -103,7 +103,7 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
 
       req.on('error', (cause) => {
         clearTimeout(endTimeout);
-        reject(new E2EDError(`Error on request to ${logParams.url}`, {...fullLogParams, cause}));
+        reject(new E2edError(`Error on request to ${logParams.url}`, {...fullLogParams, cause}));
       });
 
       req.write(requestBodyAsString);

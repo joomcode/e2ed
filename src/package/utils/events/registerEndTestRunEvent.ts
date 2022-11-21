@@ -2,9 +2,8 @@ import {TestRunStatus} from '../../constants/internal';
 
 import {cloneWithoutLogEvents} from '../clone';
 import {writeTestRunToJsonFile} from '../fs';
-import {generalLog} from '../generalLog';
-import {writeTestLogsToFile} from '../testLogs';
-import {valueToString} from '../valueToString';
+import {generalLog, valueToString} from '../generalLog';
+import {writeTestLogsToFile} from '../log';
 
 import {calculateTestRunStatus} from './calculateTestRunStatus';
 import {getTestRunEvent} from './getTestRunEvent';

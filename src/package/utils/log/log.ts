@@ -1,21 +1,22 @@
-import {CONSOLE_INSPECT_OPTIONS, LogEventType} from '../constants/internal';
-import {getRunId} from '../context/runId';
+import {CONSOLE_INSPECT_OPTIONS, LogEventType} from '../../constants/internal';
+import {getRunId} from '../../context/runId';
 
+import {assertValueIsDefined} from '../asserts';
 // eslint-disable-next-line import/no-internal-modules
-import {registerLogEvent} from './events/registerLogEvent';
-import {assertValueIsDefined} from './asserts';
-import {getFullConfig} from './getFullConfig';
-import {addTestLog} from './testLogs';
-import {valueToString} from './valueToString';
+import {registerLogEvent} from '../events/registerLogEvent';
+import {valueToString} from '../generalLog';
+import {getFullConfig} from '../getFullConfig';
 
-import type {E2edEnvironment, Log, LogPayload, UtcTimeInMs} from '../types/internal';
+import {addTestLog} from './testLogs';
+
+import type {E2edEnvironment, Log, LogPayload, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Log every actions and API requests in E2ED tests.
  */
 export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: unknown) => {
   // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-  const hooks = require<typeof import('../hooks')>('../hooks');
+  const hooks = require<typeof import('../../hooks')>('../../hooks');
 
   const time = Date.now() as UtcTimeInMs;
   const dateTimeInISO = new Date(time).toISOString();

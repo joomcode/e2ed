@@ -2,6 +2,7 @@ import {RequestHook} from 'testcafe-without-typecheck';
 
 import {RESOLVED_PROMISE} from '../../constants/internal';
 
+import {createTestRunCallback} from '../test';
 import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
 import {addContextToResultsOfClassCreateMethods} from './addContextToResultsOfClassCreateMethods';
@@ -30,8 +31,13 @@ abstract class RequestHookWithEvents extends RequestHook {
     // @ts-expect-error: RequestHook constructor require any[] as arguments
     super(...args);
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    this.resetMethods(this.onRequest, this.onResponse, this._onConfigureResponse);
+    /* eslint-disable @typescript-eslint/unbound-method */
+    const onRequest = createTestRunCallback(this.onRequest);
+    const onResponse = createTestRunCallback(this.onResponse);
+    const onConfigureResponse = createTestRunCallback(this._onConfigureResponse);
+    /* eslint-enable @typescript-eslint/unbound-method */
+
+    this.resetMethods(onRequest, onResponse, onConfigureResponse);
   }
 
   /**

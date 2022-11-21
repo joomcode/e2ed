@@ -9,7 +9,7 @@ declare const PARAMS_KEY: unique symbol;
 /**
  * Entry pair that Object.entries(T) returns.
  */
-type EntryPair<T> = [keyof T, T[keyof T] | undefined];
+type EntryPair<T> = [keyof T, Values<T> | undefined];
 
 /**
  * Alias for type any (to suppress the @typescript-eslint/no-explicit-any rule).
@@ -93,6 +93,11 @@ export type UnionToIntersection<U> = (U extends unknown ? (k: U) => void : never
  * UnwrapSet<Set<string>> = string.
  */
 export type UnwrapSet<T> = T extends Set<infer V> ? V : T;
+
+/**
+ * Values of all properties of type T.
+ */
+export type Values<T> = T[keyof T];
 
 /**
  * Returns a tuple of one element. If the element includes undefined,

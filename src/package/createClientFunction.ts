@@ -2,6 +2,7 @@ import {ClientFunction} from 'testcafe-without-typecheck';
 
 import {getTestIdleTimeout} from './context/testIdleTimeout';
 import {clientFunctionWrapper} from './utils/clientFunction';
+// import {E2edError} from './utils/E2edError';
 import {generalLog} from './utils/generalLog';
 
 import type {Fn, WrappedClientFunction} from './types/internal';
@@ -36,17 +37,15 @@ export const createClientFunction = <A extends unknown[], R>(
       );
     }
 
-    try {
-      return clientFunction(...args).catch((error: unknown) => {
-        generalLog(`Client function "${name}" rejected with error`, {args, error, originalFnCode});
+    return clientFunction(...args).catch((cause: unknown) => {
+      generalLog(`Client function "${name}" rejected with cause`, {args, cause, originalFnCode});
 
-        return undefined;
-      });
-    } catch (error) {
-      generalLog(`Client function "${name}" thrown an error`, {args, error, originalFnCode});
-    }
-
-    return Promise.resolve();
+      // throw new E2edError(`Client function "${name}" rejected with cause`, {
+      //  args,
+      //  cause,
+      //  originalFnCode,
+      // });
+    });
   }) as WrappedClientFunction<R, A>;
 
   return wrappedClientFunction;

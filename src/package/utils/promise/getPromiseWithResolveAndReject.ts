@@ -1,5 +1,5 @@
 import {assertValueIsDefined} from '../asserts';
-import {E2EDError} from '../E2EDError';
+import {E2edError} from '../E2edError';
 import {generalLog} from '../generalLog';
 
 import type {AsyncVoid} from '../../types/internal';
@@ -35,7 +35,7 @@ export const getPromiseWithResolveAndReject = <
   assertValueIsDefined(resolve, 'resolve is defined', {promiseWithoutClear, reject});
 
   let rejectTimeoutFunction = (): AsyncVoid => {
-    const error = new E2EDError(
+    const error = new E2edError(
       `Promise was rejected after ${timeoutInMs}ms timeout by default reject function`,
     );
 

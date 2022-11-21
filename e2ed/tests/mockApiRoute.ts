@@ -56,7 +56,7 @@ it(
 
     await unmockApiRoute(CreateProductRoute);
 
-    const newMockedProduct = (await getMockedProduct()) ?? {createdAt: ''};
+    const newMockedProduct = (await getMockedProduct().catch(() => undefined)) ?? {createdAt: ''};
 
     await expect(
       'createdAt' in newMockedProduct,

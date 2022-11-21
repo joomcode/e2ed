@@ -1,6 +1,6 @@
 import {fork} from 'node:child_process';
 
-import {E2EDError} from '../E2EDError';
+import {E2edError} from '../E2edError';
 import {setTestsSubprocess, testsSubprocess} from '../tests';
 
 import type {RunRetryOptions} from '../../types/internal';
@@ -21,7 +21,7 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
 
     newTestsSubprocess.on('error', reject);
     newTestsSubprocess.on('exit', (exitCode) => {
-      const error = new E2EDError(
+      const error = new E2edError(
         `Retry subprocess exit with non-zero exit code ${String(exitCode)}`,
       );
 

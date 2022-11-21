@@ -1,6 +1,6 @@
 import {createTestCafe} from '../../testcafe';
 
-import {E2EDError} from '../E2EDError';
+import {E2edError} from '../E2edError';
 import {generalLog} from '../generalLog';
 import {getFullConfig} from '../getFullConfig';
 
@@ -42,7 +42,7 @@ export const runTests = async ({
       .run();
 
     if (failedTestsCount !== 0) {
-      throw new E2EDError(`Got ${failedTestsCount} failed tests in retry with label "${runLabel}"`);
+      throw new E2edError(`Got ${failedTestsCount} failed tests in retry with label "${runLabel}"`);
     }
   } catch (error) {
     generalLog(`Caught an error when running tests in retry with label "${runLabel}"`, {error});

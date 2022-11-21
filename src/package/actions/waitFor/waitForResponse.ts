@@ -1,7 +1,7 @@
 import {LogEventType} from '../../constants/internal';
 import {getTestRunPromise} from '../../context/testRunPromise';
 import {getWaitForEventsState} from '../../context/waitForEventsState';
-import {E2EDError} from '../../utils/E2EDError';
+import {E2edError} from '../../utils/E2edError';
 import {getFullConfig} from '../../utils/getFullConfig';
 import {log} from '../../utils/log';
 import {getPromiseWithResolveAndReject} from '../../utils/promise';
@@ -35,7 +35,7 @@ export const waitForResponse = async <SomeResponse extends Response>(
   const wrappedSetRejectTimeoutFunction = wrapInTestRunTracker(setRejectTimeoutFunction);
 
   wrappedSetRejectTimeoutFunction(() => {
-    const error = new E2EDError(
+    const error = new E2edError(
       `waitForResponse promise rejected after ${rejectTimeout}ms timeout`,
       {predicateCode: predicate.toString()},
     );

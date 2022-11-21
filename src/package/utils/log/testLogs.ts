@@ -1,9 +1,9 @@
 import {appendFile} from 'node:fs/promises';
 import {join} from 'node:path';
 
-import {REPORTS_DIRECTORY_PATH} from '../constants/internal';
+import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
 
-import {getFullConfig} from './getFullConfig';
+import {getFullConfig} from '../getFullConfig';
 
 /**
  * Array of test logs. Logs are stored in this array for further saving in test logs file.

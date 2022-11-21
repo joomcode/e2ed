@@ -72,7 +72,7 @@
     "./types": "./types/index.js",
     "./utils": "./utils/index.js",
     "./utils/asserts": "./utils/asserts.js",
-    "./utils/E2EDError": "./utils/E2EDError.js"
+    "./utils/E2edError": "./utils/E2edError.js"
   },
   "scripts": {
     "precheck:all": "npm run clear:lint:cache && npm run build",

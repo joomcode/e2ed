@@ -1,4 +1,4 @@
-import {E2EDError} from './E2EDError';
+import {E2edError} from './E2edError';
 
 import type {LogParams} from '../types/internal';
 
@@ -6,7 +6,7 @@ import type {LogParams} from '../types/internal';
  * Asserts that the value is never (throw in any case).
  */
 export function assertNever(value: never, check: string, payload?: LogParams): value is never {
-  throw new E2EDError('Asserted value is not never', {check, payload, value});
+  throw new E2edError('Asserted value is not never', {check, payload, value});
 }
 
 /**
@@ -18,7 +18,7 @@ export function assertValueIsDefined<T>(
   payload?: LogParams,
 ): asserts value is Exclude<T, undefined> {
   if (value === undefined) {
-    throw new E2EDError('Asserted value is undefined', {check, payload});
+    throw new E2edError('Asserted value is undefined', {check, payload});
   }
 }
 
@@ -31,7 +31,7 @@ export function assertValueIsUndefined<T>(
   payload?: LogParams,
 ): asserts value is T & undefined {
   if (value !== undefined) {
-    throw new E2EDError('Asserted value is defined', {check, payload, value});
+    throw new E2edError('Asserted value is defined', {check, payload, value});
   }
 }
 
@@ -44,7 +44,7 @@ export function assertValueIsNotNull<T>(
   payload?: LogParams,
 ): asserts value is Exclude<T, null> {
   if (value === null) {
-    throw new E2EDError('Asserted value is null', {check, payload});
+    throw new E2edError('Asserted value is null', {check, payload});
   }
 }
 
@@ -57,7 +57,7 @@ export function assertValueIsNull<T>(
   payload?: LogParams,
 ): asserts value is null & T {
   if (value !== null) {
-    throw new E2EDError('Asserted value is not null', {check, payload, value});
+    throw new E2edError('Asserted value is not null', {check, payload, value});
   }
 }
 
@@ -70,7 +70,7 @@ export function assertValueIsFalse<T>(
   payload?: LogParams,
 ): asserts value is false {
   if (value !== false) {
-    throw new E2EDError('Asserted value is not false', {check, payload, value});
+    throw new E2edError('Asserted value is not false', {check, payload, value});
   }
 }
 
@@ -83,6 +83,6 @@ export function assertValueIsTrue<T>(
   payload?: LogParams,
 ): asserts value is true {
   if (value !== true) {
-    throw new E2EDError('Asserted value is not true', {check, payload, value});
+    throw new E2edError('Asserted value is not true', {check, payload, value});
   }
 }

@@ -1,6 +1,6 @@
 import {LogEventType} from '../../constants/internal';
 
-import {E2EDError} from '../E2EDError';
+import {E2edError} from '../E2edError';
 import {log} from '../log';
 
 import type {Request, RequestOrResponsePredicateWithPromise, Response} from '../../types/internal';
@@ -38,7 +38,7 @@ export const processEventsPredicate = async ({
 
     resolve(requestOrResponse);
   } catch (cause) {
-    const error = new E2EDError(
+    const error = new E2edError(
       `waitFor${eventType} promise rejected due to error in predicate function`,
       {cause, predicateCode: predicate.toString(), [eventType.toLowerCase()]: requestOrResponse},
     );

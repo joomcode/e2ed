@@ -1,6 +1,6 @@
 import {RESOLVED_PROMISE} from '../../constants/internal';
 
-import {E2EDError} from '../E2EDError';
+import {E2edError} from '../E2edError';
 import {generalLog} from '../generalLog';
 import {getPromiseWithResolveAndReject} from '../promise';
 
@@ -78,6 +78,7 @@ export const getTestFnAndReject = ({
    */
   const reject: RejectTestRun = (error) => {
     if (isTestRunCompleted) {
+      // TODO: save errors that come after the test run is completed.
       return;
     }
 
@@ -91,7 +92,7 @@ export const getTestFnAndReject = ({
    * @internal
    */
   function rejectByIdleTimeoutError(): void {
-    const error = new E2EDError(
+    const error = new E2edError(
       `Test run ${runId} was rejected after ${testIdleTimeout}ms idle timeout`,
     );
 
@@ -99,7 +100,7 @@ export const getTestFnAndReject = ({
   }
 
   setRejectTimeoutFunction(() => {
-    const error = new E2EDError(`Test run ${runId} was rejected after ${testTimeout}ms timeout`);
+    const error = new E2edError(`Test run ${runId} was rejected after ${testTimeout}ms timeout`);
 
     reject(error);
   });

@@ -2,7 +2,7 @@ import {relative} from 'node:path';
 
 import {ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY} from '../constants/internal';
 
-import {E2EDError} from './E2EDError';
+import {E2edError} from './E2edError';
 
 import type {TestFilePath} from '../types/internal';
 
@@ -18,7 +18,7 @@ export const getRelativeTestFilePath = (absoluteFilePath: string): TestFilePath 
   ) as TestFilePath;
 
   if (testFilePath.startsWith('.')) {
-    throw new E2EDError('Not a path to project file', {absoluteFilePath, testFilePath});
+    throw new E2edError('Not a path to project file', {absoluteFilePath, testFilePath});
   }
 
   return testFilePath;

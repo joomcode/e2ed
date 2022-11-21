@@ -27,5 +27,5 @@ export function renderDatesInterval({endTimeInMs, startTimeInMs}: Options): Safe
   const endTime = endDatetime.slice(11, 19);
 
   return sanitizeHtml`<time datetime="${startDatetime}">${date} ${startTime}</time> –
-<time datetime="${endDatetime}">${endTime}</time>`;
+<time datetime="${endDatetime}">${endTime}</time> UTC`;
 }

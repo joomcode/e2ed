@@ -5,6 +5,7 @@ import {setTestIdleTimeout} from '../../context/testIdleTimeout';
 import {setTestTimeout} from '../../context/testTimeout';
 import {isTestSkipped} from '../../hooks';
 
+import {assertValueIsDefined} from '../asserts';
 import {registerStartTestRunEvent} from '../events';
 import {getFullConfig} from '../getFullConfig';
 import {getRelativeTestFilePath} from '../getRelativeTestFilePath';
@@ -15,7 +16,6 @@ import {processBrokenTestRuns} from './processBrokenTestRuns';
 import type {
   E2edEnvironment,
   RunId,
-  RunLabel,
   Test,
   TestController,
   TestRunEvent,
@@ -67,8 +67,10 @@ export const beforeTest = ({previousRunId, runId, test, testController}: Options
     testTimeout,
   });
 
-  const runLabel = (process.env as E2edEnvironment).E2ED_RUN_LABEL as RunLabel;
+  const runLabel = (process.env as E2edEnvironment).E2ED_RUN_LABEL;
   const utcTimeInMs = Date.now() as UtcTimeInMs;
+
+  assertValueIsDefined(runLabel, 'runLabel is defined', {runId, testStaticOptions});
 
   const testRunEvent: TestRunEvent = {
     ...testStaticOptions,

@@ -16,7 +16,7 @@ export const afterTest = async (options: Options): Promise<void> => {
   try {
     await registerEndTestRunEvent(endTestRunEvent);
   } catch (error) {
-    generalLog('Caught error when register end test run event', {endTestRunEvent, error});
+    generalLog('Caught an error when register end test run event', {endTestRunEvent, error});
 
     throw error;
   }

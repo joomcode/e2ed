@@ -3,7 +3,7 @@ import {join} from 'node:path';
 
 import {EVENTS_DIRECTORY_PATH} from '../../constants/internal';
 
-import {E2EDError} from '../E2EDError';
+import {E2edError} from '../E2edError';
 
 import {getTestRunEventFileName} from './getTestRunEventFileName';
 import {writeFile} from './writeFile';
@@ -22,7 +22,7 @@ export const writeTestRunToJsonFile = async (fullTestRun: FullTestRun): Promise<
 
   await stat(filePath).then(
     (stats) => {
-      throw new E2EDError(`Test run JSON file ${filePath} already exists in temporary directory`, {
+      throw new E2edError(`Test run JSON file ${filePath} already exists in temporary directory`, {
         stats,
       });
     },

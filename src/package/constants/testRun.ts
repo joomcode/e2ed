@@ -18,7 +18,10 @@ export const enum TestRunStatus {
  * Statuses, the presence of which in the retray indicates
  * that there are failed tests in the retray.
  */
-export const FAILED_TEST_RUN_STATUSES = [TestRunStatus.Failed, TestRunStatus.Unknown];
+export const FAILED_TEST_RUN_STATUSES: readonly TestRunStatus[] = [
+  TestRunStatus.Failed,
+  TestRunStatus.Unknown,
+];
 
 /**
  * Hash object with runId as keys and TestRunEvent as values.

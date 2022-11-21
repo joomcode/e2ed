@@ -1,7 +1,7 @@
 import {TestRunStatus} from '../../constants/internal';
 
 import {cloneWithoutLogEvents} from '../clone';
-import {E2EDError} from '../E2EDError';
+import {E2edError} from '../E2edError';
 import {getTestRunEvent} from '../events';
 import {writeBrokenStatusToTestRunJsonFile} from '../fs';
 
@@ -34,7 +34,7 @@ export const processBrokenTestRuns = (testRunEvent: TestRunEvent): void => {
 
       void writeBrokenStatusToTestRunJsonFile(previousTestRunEvent.runId);
     } else {
-      const error = new E2EDError(
+      const error = new E2edError(
         `The previous test has not failed status ${previousTestRunEvent.status}, so current test run should be rejected`,
         errorParamsForBrokenTest,
       );
@@ -45,7 +45,7 @@ export const processBrokenTestRuns = (testRunEvent: TestRunEvent): void => {
     return;
   }
 
-  const error = new E2EDError(
+  const error = new E2edError(
     'The test was rerun, so previous test run should be rejected',
     errorParamsForBrokenTest,
   );

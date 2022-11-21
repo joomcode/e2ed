@@ -18,7 +18,13 @@ export const CONSOLE_INSPECT_OPTIONS = {
 } as const;
 
 /**
+ * Maximum count of elements in printed array.
+ * @internal
+ */
+export const MAX_ELEMENTS_COUNT_IN_PRINTED_ARRAY = 8;
+
+/**
  * Max number of lines in printed stringify values (in logs).
  * @internal
  */
-export const MAX_LINES_IN_STRINGIFY_VALUE = 300;
+export const MAX_LINES_COUNT_IN_PRINTED_VALUE = 250;

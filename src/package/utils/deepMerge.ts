@@ -1,7 +1,7 @@
 import {assertValueIsDefined} from './asserts';
 import {isObjectAndNotAnArray} from './isObjectAndNotAnArray';
 
-import type {DeepPartial, ObjectEntries} from '../types/internal';
+import type {DeepPartial, ObjectEntries, Values} from '../types/internal';
 
 /**
  * Deep merge two objects (arrays does not merge).
@@ -20,7 +20,7 @@ export const deepMerge = <T extends object>(x: T, y: DeepPartial<T>): T => {
 
   for (const [key, value] of Object.entries(y) as ObjectEntries<T>) {
     if (isObjectAndNotAnArray(x[key]) && isObjectAndNotAnArray(value)) {
-      result[key] = deepMerge(x[key] as object, value) as T[keyof T];
+      result[key] = deepMerge(x[key] as object, value) as Values<T>;
     } else {
       const descriptor = Object.getOwnPropertyDescriptor(y, key);
 

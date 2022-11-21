@@ -1,9 +1,10 @@
-import {CONSOLE_INSPECT_OPTIONS} from '../constants/internal';
+import {CONSOLE_INSPECT_OPTIONS} from '../../constants/internal';
 
-import {getPrintedRunLabel} from './runLabel';
+import {getPrintedRunLabel} from '../runLabel';
+
 import {valueToString} from './valueToString';
 
-import type {E2edEnvironment, GeneralLog} from '../types/internal';
+import type {E2edEnvironment, GeneralLog} from '../../types/internal';
 
 /**
  * General (out of test context) log to stdout.

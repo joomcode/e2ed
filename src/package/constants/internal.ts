@@ -5,7 +5,8 @@ export {BAD_REQUEST_STATUS_CODE} from './http';
 export {
   CONSOLE_INSPECT_OPTIONS,
   DEFAULT_INSPECT_OPTIONS,
-  MAX_LINES_IN_STRINGIFY_VALUE,
+  MAX_ELEMENTS_COUNT_IN_PRINTED_ARRAY,
+  MAX_LINES_COUNT_IN_PRINTED_VALUE,
 } from './inspect';
 /** @internal */
 export {LOCATOR_KEY} from './locator';
