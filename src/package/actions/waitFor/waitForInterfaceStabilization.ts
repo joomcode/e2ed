@@ -24,7 +24,7 @@ const clientWaitForInterfaceStabilization = createClientFunction(
   (stabilizationInterval: number) => {
     const e2edWaitingForInterfaceStabilizationSymbol: E2edWaitingForInterfaceStabilizationSymbol =
       Symbol.for(
-        'e2edwaitingforinterfacestabilizationsymbol',
+        'E2edWaitingForInterfaceStabilizationSymbol',
       ) as E2edWaitingForInterfaceStabilizationSymbol;
 
     const global: TestClientGlobal = window;

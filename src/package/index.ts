@@ -12,6 +12,11 @@ export {useContext} from './useContext';
 /**
  * Public modules, dependent on internal utils.
  */
-export {createClientFunction} from './createClientFunction';
 export {expect} from './expect';
 export {it, task, test} from './test';
+
+/**
+ * Public module, dependent on test-modules.
+ * This export should be the last.
+ */
+export {createClientFunction} from './createClientFunction';

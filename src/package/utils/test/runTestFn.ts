@@ -4,7 +4,7 @@ import {getTestTimeout} from '../../context/testTimeout';
 import {getTestRunEvent} from '../events';
 import {getPromiseWithResolveAndReject} from '../promise';
 
-import type {RunId, Void} from '../../types/internal';
+import type {RunId} from '../../types/internal';
 
 /**
  * Run test function with reject in test run event.
@@ -15,9 +15,9 @@ export const runTestFn = async (runId: RunId): Promise<void> => {
   const testTimeout = getTestTimeout();
 
   const {promise: testRunPromise, resolve: resolveTestRunPromise} =
-    getPromiseWithResolveAndReject<Void>(testTimeout + 100);
+    getPromiseWithResolveAndReject<undefined>(testTimeout + 100);
 
   setTestRunPromise(testRunPromise);
 
-  await testRunEvent.testFnWithReject().finally(resolveTestRunPromise);
+  await testRunEvent.testFnWithReject().finally(() => resolveTestRunPromise(undefined));
 };

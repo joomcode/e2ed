@@ -3,10 +3,11 @@ import type {MergeTuples} from './tuples';
 /**
  * Function by argument, return type, and this (context) type.
  */
-export type Fn<Args extends unknown[] = never[], Return = unknown, This = unknown> = (
-  this: This,
-  ...args: Args
-) => Return;
+export type Fn<
+  Args extends readonly unknown[] = readonly never[],
+  Return = unknown,
+  This = unknown,
+> = (this: This, ...args: Args) => Return;
 
 /**
  * Merge (union) multiple functions in a broad sense

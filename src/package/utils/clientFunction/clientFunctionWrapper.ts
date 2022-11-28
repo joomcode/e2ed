@@ -1,90 +1,53 @@
-import type {E2edClientFunctionResolvesSymbol, TestClientGlobal} from '../../types/internal';
+import type {ClientFunctionWrapperResult, Fn} from '../../types/internal';
 
-type ClientFunctionResult = Promise<unknown> | null | undefined;
+type MaybePromiseLike = {then?: Fn<[unknown?, unknown?]>} | null | undefined;
+type OriginalClientFunctionResult = Promise<unknown> | null | undefined;
 
-declare const clientFunctionTimeout: number;
-declare const originalFn: (...args: unknown[]) => ClientFunctionResult;
+declare const originalFn: (...args: unknown[]) => OriginalClientFunctionResult;
+declare const printedClientFunctionName: string;
 
 /**
- * This client function wraps all ClientFunction bodies and terminates them on page unload.
+ * This client function wraps all ClientFunction bodies and maps them errors to error messages.
  * @internal
  */
-// eslint-disable-next-line no-restricted-syntax
-export const clientFunctionWrapper = function clientFunctionWrapper(): unknown {
-  const e2edClientFunctionResolvesSymbol: E2edClientFunctionResolvesSymbol = Symbol.for(
-    'e2edClientFunctionResolvesSymbol',
-  ) as E2edClientFunctionResolvesSymbol;
+export const clientFunctionWrapper = <Args extends readonly unknown[], R>(
+  ...args: Args
+): Promise<ClientFunctionWrapperResult<R>> => {
+  let errorMessage: string | undefined;
+  let resolve!: (value: ClientFunctionWrapperResult<R>) => void;
 
-  const log = (message: string): void => {
-    const dateTimeInISO = new Date().toISOString();
+  const promise = new Promise<ClientFunctionWrapperResult<R>>((res) => {
+    resolve = res;
+  });
 
-    // eslint-disable-next-line no-console
-    console.log(`[e2ed:client][${dateTimeInISO}] ${message}\n`);
+  const getErrorMessage = (message: string, error: unknown): string => {
+    const stack = error ? String((error as Error).stack ?? '') : '';
+
+    return `${message} on calling ${printedClientFunctionName}: ${String(error ?? '')}\n${stack}`;
   };
 
-  // eslint-disable-next-line
-  const args: unknown[] = Array.prototype.slice.call(arguments);
-
-  const global: TestClientGlobal = window;
-
-  if (!global[e2edClientFunctionResolvesSymbol]) {
-    global[e2edClientFunctionResolvesSymbol] = [];
-
-    global.addEventListener('beforeunload', () => {
-      const e2edClientFunctionResolves = global[e2edClientFunctionResolvesSymbol];
-
-      e2edClientFunctionResolves?.forEach((resolve, index) => {
-        e2edClientFunctionResolves[index] = undefined;
-
-        try {
-          resolve?.(undefined);
-        } catch (error) {
-          log(`Error on resolving client function promise: ${String(error)}`);
-        }
-      });
-    });
-  }
-
-  const e2edClientFunctionResolves = global[e2edClientFunctionResolvesSymbol];
-  let result: ClientFunctionResult;
-
   try {
-    result = originalFn.call(undefined, ...args);
-  } catch (error) {
-    log(`Error on calling client function: ${String(error)}`);
-  }
+    const result = originalFn.call(undefined, ...args) as R;
 
-  if (!result || typeof result.then !== 'function') {
-    return result;
-  }
-
-  return new Promise<unknown>((resolve, reject) => {
-    const index = e2edClientFunctionResolves.push(resolve) - 1;
-    const timeoutId = setTimeout(() => {
-      const timeoutError = new Error(
-        `Client function promise rejected after ${clientFunctionTimeout}ms timeout`,
-      );
-
-      reject(timeoutError);
-    }, clientFunctionTimeout);
-
-    try {
-      result?.then(
-        (value) => {
-          e2edClientFunctionResolves[index] = undefined;
-          clearTimeout(timeoutId);
-
-          resolve(value);
+    if (typeof (result as MaybePromiseLike)?.then === 'function') {
+      (result as MaybePromiseLike)?.then?.(
+        (awaitedResult: R) => {
+          resolve({errorMessage: undefined, result: awaitedResult});
         },
-        (error) => {
-          e2edClientFunctionResolves[index] = undefined;
-          clearTimeout(timeoutId);
+        (error: unknown) => {
+          errorMessage = getErrorMessage('Catch rejected promise', error);
 
-          reject(error);
+          resolve({errorMessage, result: undefined});
         },
       );
-    } catch (error) {
-      log(`Error on calling then(...) on client function promise: ${String(error)}`);
+    } else {
+      resolve({errorMessage: undefined, result});
     }
-  });
+  } catch (error) {
+    errorMessage = getErrorMessage('Catch error', error);
+
+    resolve({errorMessage, result: undefined});
+  }
+
+  return promise;
 };

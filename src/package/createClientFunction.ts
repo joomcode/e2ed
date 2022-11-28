@@ -2,51 +2,90 @@ import {ClientFunction} from 'testcafe-without-typecheck';
 
 import {getTestIdleTimeout} from './context/testIdleTimeout';
 import {clientFunctionWrapper} from './utils/clientFunction';
-// import {E2edError} from './utils/E2edError';
+import {E2edError} from './utils/E2edError';
 import {generalLog} from './utils/generalLog';
+import {getPromiseWithResolveAndReject} from './utils/promise';
+import {createTestRunCallback} from './utils/test';
+import {wrapInTestRunTracker} from './utils/wrapInTestRunTracker';
 
-import type {Fn, WrappedClientFunction} from './types/internal';
+import type {ClientFunctionWrapper, ClientFunctionWrapperResult} from './types/internal';
 
 type Options = Readonly<{name?: string; timeout?: number}>;
 
 /**
  * Creates a client function.
  */
-export const createClientFunction = <A extends unknown[], R>(
-  originalFn: (...args: A) => R,
+export const createClientFunction = <Args extends unknown[], R>(
+  originalFn: (...args: Args) => R,
   {name: nameFromOptions, timeout}: Options = {},
-): WrappedClientFunction<R, A> => {
+): ((this: void, ...args: Args) => Promise<R>) => {
   const name = nameFromOptions ?? originalFn.name;
   const originalFnCode = String(originalFn).slice(0, 200);
+  const printedClientFunctionName = `client function${name ? ` "${name}"` : ''}`;
 
-  let clientFunction: Fn<A, Promise<Awaited<R> | undefined>> | undefined;
+  let clientFunction: ClientFunctionWrapper<Args, R> | undefined;
 
-  generalLog(`Create client function${name ? ` "${name}"` : ''}`, {originalFnCode});
+  generalLog(`Create ${printedClientFunctionName}`, {originalFnCode});
 
   /**
-   * Wrapped client function with error logging.
+   * Wrapped client function with timeout and error logging.
    * TODO: support Smart Assertions.
    */
-  const wrappedClientFunction = ((...args: A) => {
+  const clientFunctionWithTimeout = (...args: Args): Promise<R> => {
     if (clientFunction === undefined) {
-      const clientFunctionTimeout = timeout ?? getTestIdleTimeout();
-
-      clientFunction = ClientFunction<Awaited<R> | undefined, A>(
-        clientFunctionWrapper as unknown as Fn<A, Awaited<R> | undefined>,
-        {dependencies: {clientFunctionTimeout, originalFn}},
+      clientFunction = ClientFunction<ClientFunctionWrapperResult<Awaited<R>>, Args>(
+        clientFunctionWrapper as unknown as (
+          ...args: Args
+        ) => ClientFunctionWrapperResult<Awaited<R>>,
+        {dependencies: {originalFn, printedClientFunctionName}},
       );
     }
 
-    return clientFunction(...args).catch((cause: unknown) => {
-      generalLog(`Client function "${name}" rejected with cause`, {args, cause, originalFnCode});
+    const clientFunctionTimeout = timeout ?? getTestIdleTimeout();
 
-      // throw new E2edError(`Client function "${name}" rejected with cause`, {
-      //  args,
-      //  cause,
-      //  originalFnCode,
-      // });
+    const {promise, reject, resolve, setRejectTimeoutFunction} =
+      getPromiseWithResolveAndReject<Awaited<R>>(clientFunctionTimeout);
+    const wrappedSetRejectTimeoutFunction = wrapInTestRunTracker(setRejectTimeoutFunction);
+
+    wrappedSetRejectTimeoutFunction(() => {
+      const error = new E2edError(
+        `Promise of ${printedClientFunctionName} was rejected after ${String(
+          clientFunctionTimeout,
+        )}ms timeout`,
+      );
+
+      reject(error);
     });
-  }) as WrappedClientFunction<R, A>;
 
-  return wrappedClientFunction;
+    clientFunction(...args)
+      .then(({errorMessage, result}) => {
+        if (errorMessage === undefined) {
+          resolve(result);
+        } else {
+          const error = new E2edError(
+            `A ${printedClientFunctionName} rejected in browser with cause`,
+            {args, cause: new Error(errorMessage), originalFnCode},
+          );
+
+          reject(error);
+        }
+      })
+      .catch((cause: unknown) => {
+        const error = new E2edError(`A ${printedClientFunctionName} rejected with cause`, {
+          args,
+          cause,
+          originalFnCode,
+        });
+
+        reject(error);
+      });
+
+    return promise;
+  };
+
+  return (...args: Args) => {
+    const clientFunctionWithTestRun = createTestRunCallback(clientFunctionWithTimeout, true);
+
+    return clientFunctionWithTestRun(...args);
+  };
 };

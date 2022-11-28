@@ -90,7 +90,6 @@ export type {
   UtcTimeInMs,
   Values,
   Void,
-  WrappedClientFunction,
 } from './internal';
 
 /**

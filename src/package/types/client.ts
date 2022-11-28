@@ -1,5 +1,3 @@
-import type {UnwrapPromise} from './promise';
-
 /**
  * Client's properties for waiting for interface stabilization.
  * @internal
@@ -9,20 +7,30 @@ type WaitingForInterfaceStabilization = {
   stabilizationInterval: number;
 };
 
-/**
- * Resolve of one async client function.
- * @internal
- */
-type E2edClientFunctionResolve = ((value: unknown) => void) | undefined;
-
-declare const e2edClientFunctionResolvesSymbol: unique symbol;
 declare const e2edWaitingForInterfaceStabilizationSymbol: unique symbol;
 
 /**
- * Symbol of list of resolves for async client functions.
+ * Type of the internal client function wrapper.
  * @internal
  */
-export type E2edClientFunctionResolvesSymbol = typeof e2edClientFunctionResolvesSymbol;
+export type ClientFunctionWrapper<Args extends readonly unknown[], R> = (
+  ...args: Args
+) => Promise<ClientFunctionWrapperResult<Awaited<R>>>;
+
+/**
+ * Result of the internal client function wrapper (object with error as string or with value).
+ * @internal
+ */
+export type ClientFunctionWrapperResult<R = unknown> = Readonly<
+  | {
+      errorMessage: undefined;
+      result: R;
+    }
+  | {
+      errorMessage: string;
+      result: undefined;
+    }
+>;
 
 /**
  * Symbol of client's properties for waiting for interface stabilization.
@@ -36,13 +44,5 @@ export type E2edWaitingForInterfaceStabilizationSymbol =
  * @internal
  */
 export type TestClientGlobal = {
-  [e2edClientFunctionResolvesSymbol]?: E2edClientFunctionResolve[];
   [e2edWaitingForInterfaceStabilizationSymbol]?: WaitingForInterfaceStabilization | undefined;
 } & Window;
-
-/**
- * Type of the wrapped client function.
- */
-export type WrappedClientFunction<R, A extends unknown[]> = (
-  ...args: A
-) => Promise<UnwrapPromise<R> | undefined>;

@@ -1,10 +1,10 @@
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual} from './checks';
 export type {Class} from './class';
-export type {WrappedClientFunction} from './client';
 /** @internal */
 export type {
-  E2edClientFunctionResolvesSymbol,
+  ClientFunctionWrapper,
+  ClientFunctionWrapperResult,
   E2edWaitingForInterfaceStabilizationSymbol,
   TestClientGlobal,
 } from './client';

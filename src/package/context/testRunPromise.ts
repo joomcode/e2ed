@@ -5,13 +5,13 @@ import {assertValueIsDefined, assertValueIsUndefined} from '../utils/asserts';
  * Raw versions of getTestRunPromise and setTestRunPromise.
  * @internal
  */
-const [getRawTestRunPromise, setRawTestRunPromise] = useContext<Promise<void>>();
+const [getRawTestRunPromise, setRawTestRunPromise] = useContext<Promise<undefined>>();
 
 /**
  * Get test run promise (it resolves when the test completes).
  * @internal
  */
-export const getTestRunPromise = (): Promise<void> => {
+export const getTestRunPromise = (): Promise<undefined> => {
   const testRunPromise = getRawTestRunPromise();
 
   assertValueIsDefined(testRunPromise, 'testRunPromise is defined');

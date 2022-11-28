@@ -32,9 +32,9 @@ abstract class RequestHookWithEvents extends RequestHook {
     super(...args);
 
     /* eslint-disable @typescript-eslint/unbound-method */
-    const onRequest = createTestRunCallback(this.onRequest);
-    const onResponse = createTestRunCallback(this.onResponse);
-    const onConfigureResponse = createTestRunCallback(this._onConfigureResponse);
+    const onRequest = createTestRunCallback(this.onRequest, false);
+    const onResponse = createTestRunCallback(this.onResponse, false);
+    const onConfigureResponse = createTestRunCallback(this._onConfigureResponse, false);
     /* eslint-enable @typescript-eslint/unbound-method */
 
     this.resetMethods(onRequest, onResponse, onConfigureResponse);
