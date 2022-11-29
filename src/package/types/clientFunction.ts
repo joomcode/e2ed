@@ -2,18 +2,18 @@
  * Type of the internal client function wrapper.
  * @internal
  */
-type ClientFunctionWrapper<Args extends readonly unknown[], R> = (
+type ClientFunctionWrapper<Args extends readonly unknown[], Result> = (
   ...args: Args
-) => Promise<ClientFunctionWrapperResult<Awaited<R>>>;
+) => Promise<ClientFunctionWrapperResult<Awaited<Result>>>;
 
 /**
  * Client function call state.
  * @internal
  */
-export type ClientFunctionState<Args extends unknown[], R> = {
-  clientFunction: ClientFunctionWrapper<Args, R> | undefined;
+export type ClientFunctionState<Args extends unknown[], Result> = {
+  clientFunction: ClientFunctionWrapper<Args, Result> | undefined;
   readonly name: string;
-  readonly originalFn: (this: void, ...args: Args) => R;
+  readonly originalFn: (this: void, ...args: Args) => Result;
   readonly timeout: number | undefined;
 };
 
@@ -21,10 +21,10 @@ export type ClientFunctionState<Args extends unknown[], R> = {
  * Result of the internal client function wrapper (object with error as string or with value).
  * @internal
  */
-export type ClientFunctionWrapperResult<R = unknown> = Readonly<
+export type ClientFunctionWrapperResult<Result = unknown> = Readonly<
   | {
       errorMessage: undefined;
-      result: R;
+      result: Result;
     }
   | {
       errorMessage: string;

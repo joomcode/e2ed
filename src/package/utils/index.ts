@@ -37,8 +37,8 @@ export {getPromiseWithResolveAndReject, getTimeoutPromise, waitForAllProperties}
 export {getContentJsonHeaders, request} from './request';
 export {SetHeadersRequestHook} from './requestHooks';
 export {getRunLabelObject} from './runLabel';
+export {wrapInTestRunTracker} from './testRun';
 export {isArray} from './typeGuards';
-export {wrapInTestRunTracker} from './wrapInTestRunTracker';
 
 /**
  * Userland utils. This export must be the last.

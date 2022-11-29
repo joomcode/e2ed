@@ -4,14 +4,24 @@ import {getTestRunPromise} from '../../context/testRunPromise';
 import {E2edError} from '../E2edError';
 import {getTestRunEvent} from '../events';
 
+import type {Fn} from '../../types/internal';
+
+type Options<
+  Args extends readonly unknown[],
+  Result,
+  This,
+  ThrowExceptionAtCallPoint extends boolean,
+> = Readonly<{
+  targetFunction: (this: This, ...args: Args) => Promise<Result>;
+  throwExceptionAtCallPoint: ThrowExceptionAtCallPoint;
+}>;
+
 type CreateTestRunCallback = (<Args extends readonly unknown[], Result, This>(
-  targetFunction: (this: This, ...args: Args) => Promise<Result>,
-  throwExceptionAtCallPoint: true,
-) => (this: This, ...args: Args) => Promise<Result>) &
+  options: Options<Args, Result, This, true>,
+) => Fn<Args, Promise<Result>, This>) &
   (<Args extends readonly unknown[], Result, This>(
-    targetFunction: (this: This, ...args: Args) => Promise<Result>,
-    throwExceptionAtCallPoint: false,
-  ) => (this: This, ...args: Args) => Promise<Result | undefined>);
+    options: Options<Args, Result, This, false>,
+  ) => Fn<Args, Promise<Result | undefined>, This>);
 
 /**
  * Creates a callback for a test run from the target function.
@@ -22,9 +32,10 @@ type CreateTestRunCallback = (<Args extends readonly unknown[], Result, This>(
  * @internal
  */
 export const createTestRunCallback = (<Args extends readonly unknown[], Result, This>(
-  targetFunction: (this: This, ...args: Args) => Promise<Result>,
-  throwExceptionAtCallPoint: boolean,
+  options: Options<Args, Result, This, boolean>,
 ) => {
+  const {targetFunction, throwExceptionAtCallPoint} = options;
+
   const runId = getRunId();
   const testRunEvent = getTestRunEvent(runId);
   const testRunPromise = getTestRunPromise();

@@ -19,6 +19,7 @@ export type ReportData = Readonly<{
   reportFileName: string | null;
   retries: readonly Retry[];
   startInfo: StartInfo;
+  summaryRunE2edResults: string;
 }>;
 
 /**
@@ -32,6 +33,7 @@ export type LiteReport = Readonly<{
   liteReportFileName: string;
   retries: readonly LiteRetry[];
   startInfo: StartInfo;
+  summaryRunE2edResults: string;
 }>;
 
 /**
@@ -88,6 +90,9 @@ export type LiteRetry = Readonly<{
   brokenLiteTestRuns: readonly LiteTestRun[];
   concurrency: number;
   endTimeInMs: UtcTimeInMs;
+  /**
+   * Test runs of all statuses except broken.
+   */
   liteTestRuns: readonly LiteTestRun[];
   retryIndex: number;
   startTimeInMs: UtcTimeInMs;

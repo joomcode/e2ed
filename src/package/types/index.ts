@@ -31,6 +31,7 @@ export type {
   GeneralLog,
   GetParamsType,
   Headers,
+  IsArray,
   IsBrand,
   IsEqual,
   IsIncludeUndefined,

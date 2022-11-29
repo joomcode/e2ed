@@ -4,7 +4,7 @@ import {assertValueIsDefined} from '../asserts';
 import {E2edError} from '../E2edError';
 import {getFunctionCode} from '../fn';
 import {log} from '../log';
-import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
+import {wrapInTestRunTracker} from '../testRun';
 
 import {getPrintedClientFunctionName} from './getPrintedClientFunctionName';
 import {isNeedRerunClientFunction} from './isNeedRerunClientFunction';

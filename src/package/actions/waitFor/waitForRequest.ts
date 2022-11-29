@@ -6,8 +6,8 @@ import {getFunctionCode} from '../../utils/fn';
 import {getFullConfig} from '../../utils/getFullConfig';
 import {log} from '../../utils/log';
 import {getPromiseWithResolveAndReject} from '../../utils/promise';
+import {wrapInTestRunTracker} from '../../utils/testRun';
 import {updateWaitForEventsState} from '../../utils/waitForEvents';
-import {wrapInTestRunTracker} from '../../utils/wrapInTestRunTracker';
 
 import type {Request, RequestPredicate, RequestPredicateWithPromise} from '../../types/internal';
 

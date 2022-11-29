@@ -37,5 +37,9 @@ export {
 } from './requestHook';
 export {FAILED_TEST_RUN_STATUSES, TestRunStatus} from './testRun';
 /** @internal */
-export {RUN_IDS_HASH} from './testRun';
+export {
+  ORDER_OF_TEST_RUN_STATUSES_FOR_SUMMARY_RESULTS,
+  RUN_IDS_HASH,
+  TEST_RUN_STATUSES_OF_UNIQUE_TESTS,
+} from './testRun';
 export {ANY_URL_REGEXP, SLASHES_AT_THE_END_REGEXP, SLASHES_AT_THE_START_REGEXP} from './url';

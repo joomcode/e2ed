@@ -5,7 +5,7 @@ import {cloneWithoutUndefinedProperties} from '../clone';
 import {E2edError} from '../E2edError';
 import {log} from '../log';
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
-import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
+import {wrapInTestRunTracker} from '../testRun';
 
 import type {Response} from '../../types/internal';
 

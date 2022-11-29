@@ -1,7 +1,7 @@
 import {getClientFunctionWithTimeout, getPrintedClientFunctionName} from './utils/clientFunction';
 import {getFunctionCode} from './utils/fn';
 import {generalLog} from './utils/generalLog';
-import {createTestRunCallback} from './utils/test';
+import {createTestRunCallback} from './utils/testRun';
 
 import type {ClientFunctionState} from './types/internal';
 
@@ -33,7 +33,10 @@ export const createClientFunction = <Args extends unknown[], R>(
    * TODO: support Smart Assertions.
    */
   return (...args: Args) => {
-    const clientFunctionWithTestRun = createTestRunCallback(clientFunctionWithTimeout, true);
+    const clientFunctionWithTestRun = createTestRunCallback({
+      targetFunction: clientFunctionWithTimeout,
+      throwExceptionAtCallPoint: true,
+    });
 
     return clientFunctionWithTestRun(...args);
   };

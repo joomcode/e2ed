@@ -25,6 +25,16 @@ export type GetParamsType<C> = C extends {[PARAMS_KEY]: unknown}
   : never;
 
 /**
+ * Returns true if type is an arra/ (or tuple) of given element's type.
+ * IsArray<[]> = true.
+ * IsArray<[true, false]> = true.
+ * IsArray<readonly [1, 2], number> = true.
+ * IsArray<[1, 2], string> = false.
+ * IsArray<string[], string> = true.
+ */
+export type IsArray<T, E = unknown> = T extends readonly E[] ? true : false;
+
+/**
  * Returns a copy of the object type with mutable properties.
  * Mutable<{readonly foo: string}> = {foo: string}.
  */
@@ -96,8 +106,14 @@ export type UnwrapSet<T> = T extends Set<infer V> ? V : T;
 
 /**
  * Values of all properties of type T.
+ * Values<{foo: 1, bar: 2}> = 1 | 2.
+ * Values<[1, 2], true> = 1 | 2.
  */
-export type Values<T> = T[keyof T];
+export type Values<T, WithArrays extends boolean = false> = WithArrays extends true
+  ? T extends readonly unknown[]
+    ? T[number]
+    : T[keyof T]
+  : T[keyof T];
 
 /**
  * Returns a tuple of one element. If the element includes undefined,

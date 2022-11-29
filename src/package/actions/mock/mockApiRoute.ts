@@ -5,7 +5,7 @@ import {getApiMockState} from '../../context/apiMockState';
 import {testController} from '../../testController';
 import {log} from '../../utils/log';
 import {getRequestsFilter, getSetResponse} from '../../utils/mockApiRoute';
-import {wrapInTestRunTracker} from '../../utils/wrapInTestRunTracker';
+import {wrapInTestRunTracker} from '../../utils/testRun';
 
 import type {
   ApiMockFunction,

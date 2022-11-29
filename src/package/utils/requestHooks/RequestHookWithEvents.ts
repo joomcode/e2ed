@@ -2,13 +2,13 @@ import {RequestHook} from 'testcafe-without-typecheck';
 
 import {RESOLVED_PROMISE} from '../../constants/internal';
 
-import {createTestRunCallback} from '../test';
-import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
+import {createTestRunCallback, wrapInTestRunTracker} from '../testRun';
 
 import {addContextToResultsOfClassCreateMethods} from './addContextToResultsOfClassCreateMethods';
 import {eventsFactoryPath} from './testCafeHammerheadPaths';
 
 import type {
+  Fn,
   RequestHookConfigureResponseEvent,
   RequestHookRequestEvent,
   RequestHookResponseEvent,
@@ -24,6 +24,13 @@ const RequestPipelineRequestHookEventFactory =
 addContextToResultsOfClassCreateMethods(RequestPipelineRequestHookEventFactory);
 
 /**
+ * Get options for creating test run callback for request hook events.
+ */
+const getTestRunCallbackOptions = <Args extends readonly unknown[], Result, This>(
+  targetFunction: Fn<Args, Promise<Result>, This>,
+) => ({targetFunction, throwExceptionAtCallPoint: false} as const);
+
+/**
  * Abstract RequestHook class with request/respons events.
  */
 abstract class RequestHookWithEvents extends RequestHook {
@@ -32,9 +39,11 @@ abstract class RequestHookWithEvents extends RequestHook {
     super(...args);
 
     /* eslint-disable @typescript-eslint/unbound-method */
-    const onRequest = createTestRunCallback(this.onRequest, false);
-    const onResponse = createTestRunCallback(this.onResponse, false);
-    const onConfigureResponse = createTestRunCallback(this._onConfigureResponse, false);
+    const onRequest = createTestRunCallback(getTestRunCallbackOptions(this.onRequest));
+    const onResponse = createTestRunCallback(getTestRunCallbackOptions(this.onResponse));
+    const onConfigureResponse = createTestRunCallback(
+      getTestRunCallbackOptions(this._onConfigureResponse),
+    );
     /* eslint-enable @typescript-eslint/unbound-method */
 
     this.resetMethods(onRequest, onResponse, onConfigureResponse);

@@ -6,7 +6,7 @@ import {LogEventStatus, LogEventType} from '../../constants/internal';
 
 import {E2edError} from '../E2edError';
 import {log} from '../log';
-import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
+import {wrapInTestRunTracker} from '../testRun';
 
 import {getBodyAsString} from './getBodyAsString';
 import {getContentJsonHeaders} from './getContentJsonHeaders';

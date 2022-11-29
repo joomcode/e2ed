@@ -101,6 +101,7 @@ export type {
 export type {
   Any,
   GetParamsType,
+  IsArray,
   Mutable,
   Normalize,
   ObjectEntries,

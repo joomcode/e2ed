@@ -4,7 +4,7 @@ import {getTestIdleTimeout} from '../../context/testIdleTimeout';
 
 import {E2edError} from '../E2edError';
 import {getPromiseWithResolveAndReject} from '../promise';
-import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
+import {wrapInTestRunTracker} from '../testRun';
 
 import {clientFunctionWrapper} from './clientFunctionWrapper';
 import {getPrintedClientFunctionName} from './getPrintedClientFunctionName';

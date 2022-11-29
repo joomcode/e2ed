@@ -4,6 +4,7 @@ import {getFullConfig} from '../getFullConfig';
 import {assertThatTestNamesAndFilePathsAreUnique} from './assertThatTestNamesAndFilePathsAreUnique';
 import {getReportErrors} from './getReportErrors';
 import {getRetries} from './getRetries';
+import {getSummaryRunE2edResults} from './getSummaryRunE2edResults';
 import {unificateRunHashes} from './unificateRunHashes';
 
 import type {FullEventsData, ReportData} from '../../types/internal';
@@ -29,6 +30,8 @@ export const collectReportData = async ({
   const retries = getRetries(fullTestRuns);
   const exitCode = getExitCode(retries);
 
+  const summaryRunE2edResults = getSummaryRunE2edResults(fullTestRuns, retries.at(-1));
+
   return {
     endE2edReason,
     endTimeInMs,
@@ -39,5 +42,6 @@ export const collectReportData = async ({
     reportFileName,
     retries,
     startInfo,
+    summaryRunE2edResults,
   };
 };
