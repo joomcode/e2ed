@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.12.14](https://github.com/joomcode/e2ed/tree/v0.12.14) (2022-11-29)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.13...v0.12.14)
+
+- [fix: client function actions timeouts is equal to test idle timeouts](https://github.com/joomcode/e2ed/commit/a7e7c6efb945d51edc96e54bf8ed9f94dd3f45bc) ([uid11](https://github.com/uid11))
+
 ## [v0.12.13](https://github.com/joomcode/e2ed/tree/v0.12.13) (2022-11-29)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.12...v0.12.13)
