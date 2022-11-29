@@ -8,7 +8,6 @@ import type {AnyPageClassType} from '../../../types/internal';
 
 const goPageHistoryClient = createClientFunction((delta: number) => window.history.go(delta), {
   name: 'goPageHistory',
-  timeout: 500,
 });
 
 /**

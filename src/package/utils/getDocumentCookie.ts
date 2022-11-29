@@ -8,7 +8,7 @@ import type {CookieHeaderString} from '../types/internal';
 
 const clientGetDocumentCookie = createClientFunction<[], CookieHeaderString>(
   () => document.cookie as CookieHeaderString,
-  {name: 'getDocumentCookie', timeout: 500},
+  {name: 'getDocumentCookie'},
 );
 
 /**

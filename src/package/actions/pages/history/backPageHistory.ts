@@ -8,7 +8,6 @@ import type {AnyPageClassType} from '../../../types/internal';
 
 const backPageHistoryClient = createClientFunction(() => window.history.back(), {
   name: 'backPageHistory',
-  timeout: 500,
 });
 
 /**

@@ -8,7 +8,6 @@ import type {AnyPageClassType} from '../../../types/internal';
 
 const forwardPageHistoryClient = createClientFunction(() => window.history.forward(), {
   name: 'forwardPageHistory',
-  timeout: 500,
 });
 
 /**

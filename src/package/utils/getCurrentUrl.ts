@@ -8,7 +8,6 @@ import type {Url} from '../types/internal';
 
 const clientGetCurrentUrl = createClientFunction<[], Url>(() => window.location.href as Url, {
   name: 'getCurrentUrl',
-  timeout: 500,
 });
 
 /**
