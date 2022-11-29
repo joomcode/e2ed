@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.12.13](https://github.com/joomcode/e2ed/tree/v0.12.13) (2022-11-29)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.12...v0.12.13)
+
+- [fix: error with cycle imports in createClientFunction](https://github.com/joomcode/e2ed/commit/d1a901a58565eeb097e1f26e73b19fc9f1220f76) ([uid11](https://github.com/uid11))
+
+  feat: add summaryRunE2edResults field to JSON lite report
+
 ## [v0.12.12](https://github.com/joomcode/e2ed/tree/v0.12.12) (2022-11-29)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.11...v0.12.12)
