@@ -1,6 +1,9 @@
+import {LogEventType} from '../../constants/internal';
+
 import {assertValueIsDefined} from '../asserts';
 import {E2edError} from '../E2edError';
 import {getFunctionCode} from '../fn';
+import {log} from '../log';
 import {wrapInTestRunTracker} from '../wrapInTestRunTracker';
 
 import {getPrintedClientFunctionName} from './getPrintedClientFunctionName';
@@ -28,6 +31,8 @@ export const getRunClientFunction = <Args extends unknown[], R>(
   const originalFnCode = getFunctionCode(originalFn);
   const printedClientFunctionName = getPrintedClientFunctionName(name);
 
+  let isClientFunctionAlreadyRerunned = false;
+
   /**
    * Cicle function for running client function.
    */
@@ -48,23 +53,32 @@ export const getRunClientFunction = <Args extends unknown[], R>(
           resolve(result);
         } else {
           const error = new E2edError(
-            `A ${printedClientFunctionName} rejected in browser with cause`,
+            `The ${printedClientFunctionName} rejected in browser with cause`,
             {args, cause: new Error(errorMessage), originalFnCode},
           );
 
           reject(error);
         }
       },
-      (cause: MaybeTestCafeError) => {
-        if (isNeedRerunClientFunction(cause, clientFunctionState)) {
-          clientFunctionState.isClientFunctionAlreadyRerunned = true;
+      async (cause: MaybeTestCafeError) => {
+        if (
+          isClientFunctionAlreadyRerunned !== true &&
+          isNeedRerunClientFunction(cause, clientFunctionState)
+        ) {
+          isClientFunctionAlreadyRerunned = true;
+
+          await log(
+            `The ${printedClientFunctionName} will be restarted`,
+            {args, originalFnCode},
+            LogEventType.InternalUtil,
+          );
 
           runClientFunction();
 
           return;
         }
 
-        const error = new E2edError(`A ${printedClientFunctionName} rejected with cause`, {
+        const error = new E2edError(`The ${printedClientFunctionName} rejected with cause`, {
           args,
           cause,
           originalFnCode,

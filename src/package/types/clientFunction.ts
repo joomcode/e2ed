@@ -12,7 +12,6 @@ type ClientFunctionWrapper<Args extends readonly unknown[], R> = (
  */
 export type ClientFunctionState<Args extends unknown[], R> = {
   clientFunction: ClientFunctionWrapper<Args, R> | undefined;
-  isClientFunctionAlreadyRerunned: boolean;
   readonly name: string;
   readonly originalFn: (this: void, ...args: Args) => R;
   readonly timeout: number | undefined;

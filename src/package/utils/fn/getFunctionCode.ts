@@ -1,6 +1,6 @@
 import type {Fn} from '../../types/internal';
 
-const DEFAULT_MAX_CODE_LENGTH = 200;
+const DEFAULT_MAX_CODE_LENGTH = 300;
 
 /**
  * Get function code with max code length.

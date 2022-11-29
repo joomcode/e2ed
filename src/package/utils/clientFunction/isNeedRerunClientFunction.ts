@@ -14,11 +14,7 @@ export const isNeedRerunClientFunction = <Args extends unknown[], R>(
   clientFunctionState: ClientFunctionState<Args, R>,
 ): boolean => {
   const {code} = error ?? {};
-  const {isClientFunctionAlreadyRerunned, name} = clientFunctionState;
-
-  if (isClientFunctionAlreadyRerunned) {
-    return false;
-  }
+  const {name} = clientFunctionState;
 
   return code === INTERRUPTED_BY_PAGE_UNLOAD_CODE && name === 'waitForInterfaceStabilization';
 };

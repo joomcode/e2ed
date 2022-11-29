@@ -20,7 +20,6 @@ export const createClientFunction = <Args extends unknown[], R>(
 
   const clientFunctionState: ClientFunctionState<Args, R> = {
     clientFunction: undefined,
-    isClientFunctionAlreadyRerunned: false,
     name,
     originalFn,
     timeout,
