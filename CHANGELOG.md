@@ -1,5 +1,34 @@
 # Changelog
 
+## [v0.12.12](https://github.com/joomcode/e2ed/tree/v0.12.12) (2022-11-29)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.11...v0.12.12)
+
+- [fix: move flag isNeedRerunClientFunction into call context](https://github.com/joomcode/e2ed/commit/b173af356115a221cccc4dc3eda10a1209d3977a) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (@typescript-eslint/\*, prettier)](https://github.com/joomcode/e2ed/commit/7373909f4de05fee54f39b5f42b1c345f5d7b029) ([uid11](https://github.com/uid11))
+- [fix: rerun client function after "interrupted by page unload" error](https://github.com/joomcode/e2ed/commit/aa87c77d20a9fc662477cca9b58e2e308ef08d6f) ([uid11](https://github.com/uid11))
+
+  refactor: client function wrappers
+
+  refactor: simplify waitForInterfaceStabilization
+
+  fix: add getFunctionCode utility
+
+- [feat: get errors messages from client functions](https://github.com/joomcode/e2ed/commit/b106b0fdcfd21cb64169c133ea156a3fc5745229) ([uid11](https://github.com/uid11))
+
+  refactor: createTestRunCallback support throwExceptionAtCallPoint parameter
+
+- [chore: update eslint to 8.28.0](https://github.com/joomcode/e2ed/commit/8e04b3f58a67fbbc1ffdce4955082748498d1732) ([uid11](https://github.com/uid11))
+- [refactor: rename E2EDError to E2edError (strict CamelCase)](https://github.com/joomcode/e2ed/commit/33af72446cfede7597962ce225e18c1de3879203) ([uid11](https://github.com/uid11))
+
+  fix: log errors with losing TestCafe test context
+
+  fix: log errors in test run callback (like RequestHook events)
+
+  refactor: more separate directories for internal utils
+
+- [fix: init JS in HTML report as soon as possible](https://github.com/joomcode/e2ed/commit/beeff9c37d7cd74bc612823cb27234978c0ccb64) ([uid11](https://github.com/uid11))
+
 ## [v0.12.11](https://github.com/joomcode/e2ed/tree/v0.12.11) (2022-11-18)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.10...v0.12.11)
