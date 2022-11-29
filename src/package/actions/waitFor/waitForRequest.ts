@@ -2,6 +2,7 @@ import {LogEventType} from '../../constants/internal';
 import {getTestRunPromise} from '../../context/testRunPromise';
 import {getWaitForEventsState} from '../../context/waitForEventsState';
 import {E2edError} from '../../utils/E2edError';
+import {getFunctionCode} from '../../utils/fn';
 import {getFullConfig} from '../../utils/getFullConfig';
 import {log} from '../../utils/log';
 import {getPromiseWithResolveAndReject} from '../../utils/promise';
@@ -53,7 +54,7 @@ export const waitForRequest = async <SomeRequest extends Request>(
 
   await log(
     `Set wait for request with timeout ${rejectTimeout}ms`,
-    {predicateCode: predicate.toString()},
+    {predicateCode: getFunctionCode(predicate)},
     LogEventType.InternalCore,
   );
 

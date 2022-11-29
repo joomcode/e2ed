@@ -3,11 +3,10 @@ export type {Expect, IsEqual} from './checks';
 export type {Class} from './class';
 /** @internal */
 export type {
-  ClientFunctionWrapper,
+  ClientFunctionState,
   ClientFunctionWrapperResult,
-  E2edWaitingForInterfaceStabilizationSymbol,
-  TestClientGlobal,
-} from './client';
+  MaybeTestCafeError,
+} from './clientFunction';
 export type {FrozenPartOfTestCafeConfig, FullConfig, UserlandConfig} from './config';
 export type {UtcTimeInMs} from './date';
 export type {DeepMutable, DeepPartial, DeepReadonly, DeepRequired} from './deep';

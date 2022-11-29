@@ -22,6 +22,7 @@ export {
   getVerticalDistanceBetweenSelectors,
 } from './distanceBetweenSelectors';
 export {E2edError} from './E2edError';
+export {getFunctionCode} from './fn';
 export {writeFile} from './fs';
 export {valueToString} from './generalLog';
 export {getCurrentUrl} from './getCurrentUrl';

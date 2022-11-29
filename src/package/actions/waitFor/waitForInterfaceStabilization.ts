@@ -2,11 +2,7 @@ import {LogEventType} from '../../constants/internal';
 import {createClientFunction} from '../../createClientFunction';
 import {log} from '../../utils/log';
 
-import type {
-  E2edWaitingForInterfaceStabilizationSymbol,
-  TestClientGlobal,
-  UtcTimeInMs,
-} from '../../types/internal';
+import type {UtcTimeInMs} from '../../types/internal';
 
 /**
  * This function in a universal way waits for the end of the movements and redrawing
@@ -22,13 +18,6 @@ import type {
  */
 const clientWaitForInterfaceStabilization = createClientFunction(
   (stabilizationInterval: number) => {
-    const e2edWaitingForInterfaceStabilizationSymbol: E2edWaitingForInterfaceStabilizationSymbol =
-      Symbol.for(
-        'E2edWaitingForInterfaceStabilizationSymbol',
-      ) as E2edWaitingForInterfaceStabilizationSymbol;
-
-    const global: TestClientGlobal = window;
-
     /**
      * Asserts that the value is defined (is not undefined).
      */
@@ -36,18 +25,6 @@ const clientWaitForInterfaceStabilization = createClientFunction(
       if (value === undefined) {
         throw new TypeError('Asserted value is undefined');
       }
-    }
-
-    if (global[e2edWaitingForInterfaceStabilizationSymbol]) {
-      if (
-        stabilizationInterval >
-        global[e2edWaitingForInterfaceStabilizationSymbol].stabilizationInterval
-      ) {
-        global[e2edWaitingForInterfaceStabilizationSymbol].stabilizationInterval =
-          stabilizationInterval;
-      }
-
-      return global[e2edWaitingForInterfaceStabilizationSymbol].promise;
     }
 
     const CHECK_INTERVAL_IN_MS = 250;
@@ -117,31 +94,21 @@ const clientWaitForInterfaceStabilization = createClientFunction(
 
         interfaceState = newInterfaceState;
 
-        const currentStabilizationInterval =
-          global[e2edWaitingForInterfaceStabilizationSymbol]?.stabilizationInterval ?? Infinity;
-
-        if (Date.now() - stabilizationIntervalStart >= currentStabilizationInterval) {
-          global[e2edWaitingForInterfaceStabilizationSymbol] = undefined;
-
+        if (Date.now() - stabilizationIntervalStart >= stabilizationInterval) {
           clearInterval(intervalId);
           resolve(undefined);
 
           return;
         }
 
-        const totalTimeoutInMs =
-          currentStabilizationInterval * TOTAL_TIMEOUT_IN_STABILIZATION_INTERVAL;
+        const totalTimeoutInMs = stabilizationInterval * TOTAL_TIMEOUT_IN_STABILIZATION_INTERVAL;
 
         if (Date.now() - startTimeInMs > totalTimeoutInMs) {
-          global[e2edWaitingForInterfaceStabilizationSymbol] = undefined;
-
           clearInterval(intervalId);
           resolve(`Time was out in waitForInterfaceStabilization (${totalTimeoutInMs}ms)`);
         }
       }, CHECK_INTERVAL_IN_MS);
     });
-
-    global[e2edWaitingForInterfaceStabilizationSymbol] = {promise, stabilizationInterval};
 
     return promise;
   },
