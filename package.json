@@ -31,15 +31,15 @@
   },
   "devDependencies": {
     "@types/node": "18.11.9",
-    "@typescript-eslint/eslint-plugin": "5.43.0",
-    "@typescript-eslint/parser": "5.43.0",
+    "@typescript-eslint/eslint-plugin": "5.45.0",
+    "@typescript-eslint/parser": "5.45.0",
     "eslint": "8.28.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-simple-import-sort": "8.0.0",
     "husky": "8.0.2",
-    "prettier": "2.7.1",
+    "prettier": "2.8.0",
     "testcafe": "2.1.0",
     "typescript": "4.9.3"
   },
@@ -76,7 +76,7 @@
   },
   "scripts": {
     "precheck:all": "npm run clear:lint:cache && npm run build",
-    "check:all": "npm audit && npm run lint && npm test",
+    "check:all": "npm run lint && npm test",
     "clear:lint:cache": "rm -f .lint-cache",
     "lint": "npm run parallel lint:es lint:prettier lint:types",
     "lint:es": "eslint --cache --cache-location=.lint-cache --cache-strategy=content --ext=.ts --max-warnings=0 --report-unused-disable-directives .",
