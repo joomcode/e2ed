@@ -40,6 +40,12 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
 
   await hooks.navigateTo(url);
 
+  log(
+    `Navigation to the page "${PageClass.name}" completed`,
+    {pageParams, routeParams, url},
+    LogEventType.InternalAction,
+  );
+
   await waitForInterfaceStabilization(page.pageStabilizationInterval);
 
   if (page.afterNavigateToPage) {

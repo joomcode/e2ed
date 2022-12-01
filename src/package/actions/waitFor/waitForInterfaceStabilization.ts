@@ -119,6 +119,10 @@ const clientWaitForInterfaceStabilization = createClientFunction(
  * Wait until the page interface stabilizes (in particular, the page will stop scrolling).
  */
 export const waitForInterfaceStabilization = async (stabilizationInterval = 500): Promise<void> => {
+  if (!(stabilizationInterval > 0)) {
+    return;
+  }
+
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const maybeErrorReason = await clientWaitForInterfaceStabilization(stabilizationInterval);

@@ -32,8 +32,6 @@ export class Main extends Page<CustomPageParams> {
     return new MainRoute({language});
   }
 
-  override readonly pageStabilizationInterval = 8_000;
-
   /**
    * Search input.
    */
