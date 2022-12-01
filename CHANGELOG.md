@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.12.16](https://github.com/joomcode/e2ed/tree/v0.12.16) (2022-12-01)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.15...v0.12.16)
+
+- [fix: skip waitForInterfaceStabilization if stabilization internal equals 0](https://github.com/joomcode/e2ed/commit/a9c458151949b29955d51df1fc43215f5b832e67) ([uid11](https://github.com/uid11))
+
+  fix: skip client function, rejected due to page unload
+
 ## [v0.12.15](https://github.com/joomcode/e2ed/tree/v0.12.15) (2022-12-01)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.14...v0.12.15)
