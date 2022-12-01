@@ -1,3 +1,5 @@
+import type {Inner} from 'testcafe-without-typecheck';
+
 import type {ApiRoute} from '../ApiRoute';
 
 import type {Request, Response, Url} from './http';
@@ -29,6 +31,7 @@ export type ApiMockFunction<
  * @internal
  */
 export type ApiMockState = Readonly<{
+  apiMock: Inner.RequestMock | undefined;
   functionAndRouteByUrl: Record<Url, MockFunctionAndRoute | undefined>;
   functionByRoute: Map<ApiRouteClassTypeWithGetParamsFromUrl, ApiMockFunction> | undefined;
 }>;

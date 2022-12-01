@@ -19,7 +19,7 @@ export const createDevice = async ({
     version,
   });
 
-  await log('New device have been created', {device}, LogEventType.Entity);
+  log('New device have been created', {device}, LogEventType.Entity);
 
   return device;
 };

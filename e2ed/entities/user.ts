@@ -22,7 +22,7 @@ export const createUser = async ({
     password,
   });
 
-  await log('New user have been created', {user}, LogEventType.Entity);
+  log('New user have been created', {user}, LogEventType.Entity);
 
   return user;
 };

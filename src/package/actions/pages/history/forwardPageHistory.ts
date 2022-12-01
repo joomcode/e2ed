@@ -14,7 +14,7 @@ const forwardPageHistoryClient = createClientFunction(() => window.history.forwa
  * Go forward in browser page history.
  */
 export const forwardPageHistory = async (page: InstanceType<AnyPageClassType>): Promise<void> => {
-  await log(
+  log(
     `Go forward in browser history from page "${page.constructor.name}"`,
     undefined,
     LogEventType.InternalAction,

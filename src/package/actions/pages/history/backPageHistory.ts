@@ -14,7 +14,7 @@ const backPageHistoryClient = createClientFunction(() => window.history.back(), 
  * Go back in browser page history.
  */
 export const backPageHistory = async (page: InstanceType<AnyPageClassType>): Promise<void> => {
-  await log(
+  log(
     `Go back in browser history from page "${page.constructor.name}"`,
     undefined,
     LogEventType.InternalAction,

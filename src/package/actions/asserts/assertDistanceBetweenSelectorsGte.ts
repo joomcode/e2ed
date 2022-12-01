@@ -16,7 +16,7 @@ export const assertDistanceBetweenSelectorsGte = async (
 ): Promise<void> => {
   const distance = await getDistanceBetweenSelectors(selectorA, selectorB);
 
-  await log(
+  log(
     `Assert that distance between selectors is greater than or equal to ${minDistance}`,
     {distance, minDistance},
     LogEventType.InternalAssert,

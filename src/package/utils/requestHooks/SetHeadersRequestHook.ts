@@ -2,6 +2,7 @@ import {
   INCLUDE_HEADERS_IN_RESPONSE_EVENT,
   LogEventType,
   REQUEST_HOOK_CONTEXT_KEY,
+  RESOLVED_PROMISE,
 } from '../../constants/internal';
 import {testController} from '../../testController';
 
@@ -27,7 +28,7 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
     super([url], INCLUDE_HEADERS_IN_RESPONSE_EVENT);
   }
 
-  override async onRequest(event: RequestHookRequestEvent): Promise<void> {
+  override onRequest(event: RequestHookRequestEvent): Promise<void> {
     const {requestOptions} = event;
     const {headers = {}} = requestOptions;
 
@@ -35,7 +36,9 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
 
     (requestOptions as {headers: Headers}).headers = headers;
 
-    await log(`Map request headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
+    log(`Map request headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
+
+    return RESOLVED_PROMISE;
   }
 
   override async onResponse(): Promise<void> {
@@ -52,6 +55,6 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
 
     (requestHookContext.destRes as {headers: Headers}).headers = headers;
 
-    await log(`Map response headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
+    log(`Map response headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
   }
 }

@@ -8,10 +8,10 @@ type NativeDialogType = 'alert' | 'confirm' | 'beforeunload' | 'prompt';
  * Specifies handler function for the browser native dialogs
  * (alert, confirm, beforeunload, prompt).
  */
-export const setNativeDialogHandler = async (
+export const setNativeDialogHandler = (
   handler: (type: NativeDialogType, text: string, url: string) => boolean | string | undefined,
 ): Promise<void> => {
-  await log('Set handler function for the browser native dialogs', LogEventType.InternalAction);
+  log('Set handler function for the browser native dialogs', LogEventType.InternalAction);
 
   return testController.setNativeDialogHandler(handler);
 };

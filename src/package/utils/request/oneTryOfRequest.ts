@@ -39,74 +39,70 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
     const {requestHeaders, ...fullOptionsWithoutHeaders} = fullOptions;
     const fullOptionsWithHeaders = {...fullOptionsWithoutHeaders, headers: requestHeaders};
 
-    void log(
-      `Will be send a request to ${logParams.url}`,
-      fullLogParams,
-      LogEventType.InternalUtil,
-    ).then(() => {
-      let endTimeout: NodeJS.Timeout;
+    log(`Will be send a request to ${logParams.url}`, fullLogParams, LogEventType.InternalUtil);
 
-      const req = libRequest(urlObject, fullOptionsWithHeaders, (res) => {
-        // eslint-disable-next-line @typescript-eslint/unbound-method
-        res.on = wrapInTestRunTracker(res.on);
+    let endTimeout: NodeJS.Timeout;
 
-        endTimeout = setTimeout(() => {
-          req.destroy();
-          req.emit(
-            'error',
+    const req = libRequest(urlObject, fullOptionsWithHeaders, (res) => {
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      res.on = wrapInTestRunTracker(res.on);
+
+      endTimeout = setTimeout(() => {
+        req.destroy();
+        req.emit(
+          'error',
+          new E2edError(
+            `The request to ${logParams.url} is timed out in ${timeout}ms`,
+            fullLogParams,
+          ),
+        );
+      }, timeout);
+
+      res.setEncoding('utf8');
+
+      const chunks: string[] = [];
+
+      res.on('data', (chunk: string) => {
+        chunks.push(chunk);
+      });
+
+      res.on('end', () => {
+        const responseBodyAsString = chunks.join('');
+        const statusCode = res.statusCode ?? BAD_REQUEST_STATUS_CODE;
+
+        try {
+          const responseBody: SomeResponse['responseBody'] = isResponseBodyInJsonFormat
+            ? parseMaybeEmptyValueAsJson(responseBodyAsString)
+            : responseBodyAsString;
+
+          const response = {
+            responseBody,
+            responseHeaders: res.headers,
+            statusCode,
+          } as SomeResponse;
+
+          clearTimeout(endTimeout);
+          resolve({fullLogParams, response});
+        } catch (cause) {
+          clearTimeout(endTimeout);
+          reject(
             new E2edError(
-              `The request to ${logParams.url} is timed out in ${timeout}ms`,
-              fullLogParams,
+              `The response data string to request ${logParams.url} is not valid JSON: ${responseBodyAsString}`,
+              {...fullLogParams, cause, statusCode},
             ),
           );
-        }, timeout);
-
-        res.setEncoding('utf8');
-
-        const chunks: string[] = [];
-
-        res.on('data', (chunk: string) => {
-          chunks.push(chunk);
-        });
-
-        res.on('end', () => {
-          const responseBodyAsString = chunks.join('');
-          const statusCode = res.statusCode ?? BAD_REQUEST_STATUS_CODE;
-
-          try {
-            const responseBody: SomeResponse['responseBody'] = isResponseBodyInJsonFormat
-              ? parseMaybeEmptyValueAsJson(responseBodyAsString)
-              : responseBodyAsString;
-
-            const response = {
-              responseBody,
-              responseHeaders: res.headers,
-              statusCode,
-            } as SomeResponse;
-
-            clearTimeout(endTimeout);
-            resolve({fullLogParams, response});
-          } catch (cause) {
-            clearTimeout(endTimeout);
-            reject(
-              new E2edError(
-                `The response data string to request ${logParams.url} is not valid JSON: ${responseBodyAsString}`,
-                {...fullLogParams, cause, statusCode},
-              ),
-            );
-          }
-        });
+        }
       });
-
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      req.on = wrapInTestRunTracker(req.on);
-
-      req.on('error', (cause) => {
-        clearTimeout(endTimeout);
-        reject(new E2edError(`Error on request to ${logParams.url}`, {...fullLogParams, cause}));
-      });
-
-      req.write(requestBodyAsString);
-      req.end();
     });
+
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    req.on = wrapInTestRunTracker(req.on);
+
+    req.on('error', (cause) => {
+      clearTimeout(endTimeout);
+      reject(new E2edError(`Error on request to ${logParams.url}`, {...fullLogParams, cause}));
+    });
+
+    req.write(requestBodyAsString);
+    req.end();
   });

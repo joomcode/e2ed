@@ -54,7 +54,7 @@ export const getSetResponse =
       responseOptions.setBody(responseBodyAsString);
     }
 
-    await log(
+    log(
       `A mock was applied to the API route "${route.constructor.name}"`,
       {
         apiMockFunctionCode: apiMockFunction.toString(),

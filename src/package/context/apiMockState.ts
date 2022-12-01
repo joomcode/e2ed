@@ -20,6 +20,7 @@ export const getApiMockState = (): ApiMockState => {
   }
 
   const apiMockState: ApiMockState = {
+    apiMock: undefined,
     functionAndRouteByUrl: {},
     functionByRoute: undefined,
   };

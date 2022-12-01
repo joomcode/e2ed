@@ -20,7 +20,7 @@ export const dragToElement = async (
   const locator = getLocatorFromSelector(selector);
   const destinationLocator = getLocatorFromSelector(destinationSelector);
 
-  await log(
+  log(
     'Drag an element onto another one',
     {destinationLocator, locator, options},
     LogEventType.InternalAction,

@@ -10,7 +10,7 @@ type Options = Parameters<typeof testController.selectText>[3];
 /**
  * Selects text in input elements.
  */
-export const selectText = async (
+export const selectText = (
   selector: Selector,
   startPos = 0,
   endPos?: number,
@@ -18,7 +18,7 @@ export const selectText = async (
 ): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
-  await log(
+  log(
     `Select text in input element, from ${startPos} to ${
       endPos === undefined ? 'the end' : endPos
     }`,

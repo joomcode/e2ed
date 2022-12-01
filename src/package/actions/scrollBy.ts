@@ -14,7 +14,7 @@ type ScrollBy = ((x: number, y: number) => Promise<void>) &
  * Scrolls the document (or element) by the given offset.
  */
 // @ts-expect-error: e2ed Selector type is incompatible with TS Selector
-export const scrollBy: ScrollBy = async (...args) => {
+export const scrollBy: ScrollBy = (...args) => {
   const locator = getLocatorFromSelector(args[0] as Selector);
   const printedArgs = [...args];
 
@@ -22,7 +22,7 @@ export const scrollBy: ScrollBy = async (...args) => {
     printedArgs.shift();
   }
 
-  await log(
+  log(
     'Scroll the document (or element) by the given offset',
     {args: printedArgs, locator},
     LogEventType.InternalAction,

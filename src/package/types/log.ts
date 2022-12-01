@@ -26,9 +26,5 @@ export type LogContext = Record<string, unknown>;
 /**
  * Type for log function in test context.
  */
-export type Log = ((
-  message: string,
-  payload?: LogPayload,
-  logEventType?: LogEventType,
-) => Promise<void>) &
-  ((message: string, logEventType: LogEventType) => Promise<void>);
+export type Log = ((message: string, payload?: LogPayload, logEventType?: LogEventType) => void) &
+  ((message: string, logEventType: LogEventType) => void);

@@ -52,7 +52,7 @@ export const waitForRequest = async <SomeRequest extends Request>(
 
   await updateWaitForEventsState(waitForEventsState);
 
-  await log(
+  log(
     `Set wait for request with timeout ${rejectTimeout}ms`,
     {predicateCode: getFunctionCode(predicate)},
     LogEventType.InternalCore,

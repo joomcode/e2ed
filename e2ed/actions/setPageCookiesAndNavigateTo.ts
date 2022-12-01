@@ -25,7 +25,7 @@ export const setPageCookiesAndNavigateTo = async (
     return {'set-cookie': setCookies};
   };
 
-  await log(`Navigate to ${url} and set page cookie`, {pageCookies, url}, LogEventType.Action);
+  log(`Navigate to ${url} and set page cookie`, {pageCookies, url}, LogEventType.Action);
 
   await setHeadersAndNavigateTo(url, {mapResponseHeaders});
 };

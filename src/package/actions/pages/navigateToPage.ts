@@ -25,7 +25,7 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
   const startNavigateTimeInMs = Date.now() as UtcTimeInMs;
   const pageInstanceCreatedInMs = startNavigateTimeInMs - startTimeInMs;
 
-  await log(
+  log(
     `Will navigate to the page "${PageClass.name}"`,
     {pageInstanceCreatedInMs, pageParams, routeParams, url},
     LogEventType.InternalAction,
@@ -46,7 +46,7 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
     await page.afterNavigateToPage();
   }
 
-  await log(
+  log(
     `Page "${PageClass.name}" loaded in ${Date.now() - startNavigateTimeInMs}ms`,
     {url},
     LogEventType.InternalAction,

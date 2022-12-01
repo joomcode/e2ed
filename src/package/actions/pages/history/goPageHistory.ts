@@ -17,7 +17,7 @@ export const goPageHistory = async (
   page: InstanceType<AnyPageClassType>,
   delta: number,
 ): Promise<void> => {
-  await log(
+  log(
     `Go ${delta} steps in browser history from page "${page.constructor.name}"`,
     undefined,
     LogEventType.InternalAction,

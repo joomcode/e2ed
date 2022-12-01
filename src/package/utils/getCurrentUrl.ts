@@ -18,7 +18,7 @@ export const getCurrentUrl = async (): Promise<Url> => {
 
   assertValueIsDefined(url, 'url is defined');
 
-  await log('Get current page url', {url}, LogEventType.InternalUtil);
+  log('Get current page url', {url}, LogEventType.InternalUtil);
 
   return url;
 };

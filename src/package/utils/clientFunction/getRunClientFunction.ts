@@ -60,14 +60,14 @@ export const getRunClientFunction = <Args extends unknown[], R>(
           reject(error);
         }
       },
-      async (cause: MaybeTestCafeError) => {
+      (cause: MaybeTestCafeError) => {
         if (
           isClientFunctionAlreadyRerunned !== true &&
           isNeedRerunClientFunction(cause, clientFunctionState)
         ) {
           isClientFunctionAlreadyRerunned = true;
 
-          await log(
+          log(
             `The ${printedClientFunctionName} will be restarted`,
             {args, originalFnCode},
             LogEventType.InternalUtil,

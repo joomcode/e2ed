@@ -31,7 +31,7 @@ export const processEventsPredicate = async ({
       return false;
     }
 
-    await log(
+    log(
       `Have waited for the ${eventType}`,
       {predicateCode: getFunctionCode(predicate), [eventType.toLowerCase()]: requestOrResponse},
       LogEventType.InternalUtil,

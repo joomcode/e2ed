@@ -91,7 +91,7 @@ export const request = async <
       });
       const needRetry = await isNeedRetry(response);
 
-      await log(
+      log(
         `Got a response to the request to ${url}`,
         {
           ...fullLogParams,
@@ -108,7 +108,7 @@ export const request = async <
     } catch (cause) {
       (logParams as Mutable<typeof logParams>).cause = cause;
 
-      await log(
+      log(
         `An error was received during the request to ${url}`,
         {...logParams, logEventStatus: LogEventStatus.Failed, retry},
         LogEventType.InternalUtil,

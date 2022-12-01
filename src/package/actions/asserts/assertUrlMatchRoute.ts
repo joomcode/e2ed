@@ -23,7 +23,7 @@ export const assertUrlMatchRoute = async (
   assertValueIsDefined(urlOrPath, 'urlOrPath is defined', {routeParams, routeUrl});
   assertValueIsNotNull(urlOrPath, 'urlOrPath is not null', {routeParams, routeUrl});
 
-  await log(
+  log(
     'Assert that url or url path match route',
     {routeParams, routeUrl, urlOrPath},
     LogEventType.InternalAssert,

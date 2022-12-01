@@ -10,8 +10,8 @@ type TakeScreenshot = ((path?: string) => Promise<void>) &
 /**
  * Takes a screenshot of the tested page.
  */
-export const takeScreenshot: TakeScreenshot = async (pathOrOptions) => {
-  await log('Take a screenshot of the tested page', LogEventType.InternalAction);
+export const takeScreenshot: TakeScreenshot = (pathOrOptions) => {
+  log('Take a screenshot of the tested page', LogEventType.InternalAction);
 
   return testController.takeScreenshot(pathOrOptions as never);
 };

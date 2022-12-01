@@ -11,8 +11,8 @@ type ConsoleMessages = ReturnType<typeof testController.getBrowserConsoleMessage
 /**
  * Returns an object that contains messages output to the browser console.
  */
-export const getBrowserConsoleMessages = async (): Promise<ConsoleMessages> => {
-  await log('Get browser console messages', LogEventType.InternalAction);
+export const getBrowserConsoleMessages = (): Promise<ConsoleMessages> => {
+  log('Get browser console messages', LogEventType.InternalAction);
 
   return testController.getBrowserConsoleMessages();
 };

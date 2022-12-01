@@ -25,7 +25,7 @@ type Scroll = ((posX: number, posY: number) => Promise<void>) &
  * Scrolls the document (or element) to the specified absolute position.
  */
 // @ts-expect-error: e2ed Selector type is incompatible with TS Selector
-export const scroll: Scroll = async (...args) => {
+export const scroll: Scroll = (...args) => {
   const locator = getLocatorFromSelector(args[0] as Selector);
   const printedArgs = [...args];
 
@@ -33,7 +33,7 @@ export const scroll: Scroll = async (...args) => {
     printedArgs.shift();
   }
 
-  await log(
+  log(
     'Scroll the document (or element) to the specified position',
     {args: printedArgs, locator},
     LogEventType.InternalAction,

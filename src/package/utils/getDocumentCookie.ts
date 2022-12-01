@@ -19,7 +19,7 @@ export const getDocumentCookie = async (): Promise<CookieHeaderString> => {
 
   assertValueIsDefined(cookie, 'cookie is defined');
 
-  await log('Get current document cookie', {cookie}, LogEventType.InternalUtil);
+  log('Get current document cookie', {cookie}, LogEventType.InternalUtil);
 
   return cookie;
 };

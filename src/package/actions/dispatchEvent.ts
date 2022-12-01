@@ -19,7 +19,7 @@ export const dispatchEvent = async (
 ): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 
-  await log('Click an element', {locator, options}, LogEventType.InternalAction);
+  log('Click an element', {locator, options}, LogEventType.InternalAction);
 
   await testController.dispatchEvent(selector as TestCafeSelector, eventName, options);
 

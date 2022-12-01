@@ -29,37 +29,28 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
       : (maybeLogEventType as LogEventType) || LogEventType.Unspecified;
   const context = hooks.getLogContext(message, payload, type);
 
-  return registerLogEvent(runId, {message, payload, time, type}).then((numberInRun) => {
-    const {printTestLogsInConsole, testLogsFileName} = getFullConfig();
+  registerLogEvent(runId, {message, payload, time, type});
 
-    if (printTestLogsInConsole || testLogsFileName) {
-      assertValueIsDefined(runLabel, 'runLabel is defined', {
-        message,
-        numberInRun,
-        payload,
-        runId,
-        time,
-        type,
-      });
+  const {printTestLogsInConsole, testLogsFileName} = getFullConfig();
 
-      const logMessageHead = `[e2ed][${dateTimeInISO}][${runLabel}][${runId}] ${message}`;
-      // eslint-disable-next-line sort-keys
-      const printedValue = context ? {payload, context} : {payload};
+  if (printTestLogsInConsole || testLogsFileName) {
+    assertValueIsDefined(runLabel, 'runLabel is defined', {message, payload, runId, type});
 
-      if (printTestLogsInConsole) {
-        const printedString = valueToString(printedValue, CONSOLE_INSPECT_OPTIONS);
+    const logMessageHead = `[e2ed][${dateTimeInISO}][${runLabel}][${runId}] ${message}`;
+    // eslint-disable-next-line sort-keys
+    const printedValue = context ? {payload, context} : {payload};
 
-        // eslint-disable-next-line no-console
-        console.log(`${logMessageHead} ${printedString}\n`);
-      }
+    if (printTestLogsInConsole) {
+      const printedString = valueToString(printedValue, CONSOLE_INSPECT_OPTIONS);
 
-      if (testLogsFileName) {
-        const printedString = valueToString(printedValue);
-
-        addTestLog(`${logMessageHead} ${printedString}\n`);
-      }
+      // eslint-disable-next-line no-console
+      console.log(`${logMessageHead} ${printedString}\n`);
     }
 
-    return undefined;
-  });
+    if (testLogsFileName) {
+      const printedString = valueToString(printedValue);
+
+      addTestLog(`${logMessageHead} ${printedString}\n`);
+    }
+  }
 };

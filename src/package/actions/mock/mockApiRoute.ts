@@ -3,6 +3,8 @@ import {RequestMock} from 'testcafe-without-typecheck';
 import {LogEventType} from '../../constants/internal';
 import {getApiMockState} from '../../context/apiMockState';
 import {testController} from '../../testController';
+import {assertValueIsDefined} from '../../utils/asserts';
+import {getFunctionCode} from '../../utils/fn';
 import {log} from '../../utils/log';
 import {getRequestsFilter, getSetResponse} from '../../utils/mockApiRoute';
 import {wrapInTestRunTracker} from '../../utils/testRun';
@@ -32,6 +34,7 @@ export const mockApiRoute = async <
 
   if (functionByRoute === undefined) {
     functionByRoute = new Map();
+
     (apiMockState as Mutable<ApiMockState>).functionByRoute = functionByRoute;
 
     let requestMock = RequestMock();
@@ -46,14 +49,22 @@ export const mockApiRoute = async <
 
     const apiMock = requestMock.respond(getSetResponse(apiMockState));
 
+    (apiMockState as Mutable<ApiMockState>).apiMock = apiMock;
+  }
+
+  if (functionByRoute.size === 0) {
+    const {apiMock} = apiMockState;
+
+    assertValueIsDefined(apiMock, 'apiMock is defined', {apiMockState, routeName: Route.name});
+
     await testController.addRequestHooks(apiMock);
   }
 
   functionByRoute.set(Route, apiMockFunction as unknown as ApiMockFunction);
 
-  await log(
+  log(
     `Mock API for route "${Route.name}"`,
-    {apiMockFunctionCode: apiMockFunction.toString()},
+    {apiMockFunctionCode: getFunctionCode(apiMockFunction)},
     LogEventType.InternalCore,
   );
 };

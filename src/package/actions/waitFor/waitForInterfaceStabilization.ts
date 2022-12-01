@@ -125,7 +125,7 @@ export const waitForInterfaceStabilization = async (stabilizationInterval = 500)
 
   const waitInMs = Date.now() - startTimeInMs;
 
-  await log(
+  log(
     `Waited for interface stabilization for ${waitInMs}ms with stabilization interval ${stabilizationInterval}ms`,
     {error: maybeErrorReason, startTimeInMs},
     LogEventType.InternalAction,

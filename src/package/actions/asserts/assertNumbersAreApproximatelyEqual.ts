@@ -13,7 +13,7 @@ export const assertNumbersAreApproximatelyEqual = async (
   const diff = Math.abs(firstNumber - secondNumber);
   const result = diff < eps;
 
-  await log(
+  log(
     `Assert that two numbers are approximately equal with ${eps} precision`,
     {diff, eps, firstNumber, secondNumber},
     LogEventType.InternalAssert,

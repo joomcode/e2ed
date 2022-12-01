@@ -13,11 +13,7 @@ import type {Selector, TestCafeSelector} from '../types/internal';
 export const switchToIframe = async (iframeSelector: Selector): Promise<void> => {
   const locator = getLocatorFromSelector(iframeSelector);
 
-  await log(
-    'Switch browsing context to the specified iframe',
-    {locator},
-    LogEventType.InternalAction,
-  );
+  log('Switch browsing context to the specified iframe', {locator}, LogEventType.InternalAction);
 
   await testController.switchToIframe(iframeSelector as TestCafeSelector);
 
