@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.12.15](https://github.com/joomcode/e2ed/tree/v0.12.15) (2022-12-01)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.14...v0.12.15)
+
+- [chore: update @types/node to 18.11.10](https://github.com/joomcode/e2ed/commit/a4d9db4f2b96d6d67d89f48e21461e82d6d490c2) ([uid11](https://github.com/uid11))
+- [fix: make log function synchronous again (for simplicity)](https://github.com/joomcode/e2ed/commit/3ecfd0140b2cea1b180bbe951d7e46af04f5dd65) ([uid11](https://github.com/uid11))
+
+  fix: remove request mock hook when it is unnecessary
+
 ## [v0.12.14](https://github.com/joomcode/e2ed/tree/v0.12.14) (2022-11-29)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.13...v0.12.14)
