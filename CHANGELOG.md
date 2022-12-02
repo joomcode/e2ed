@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.12.17](https://github.com/joomcode/e2ed/tree/v0.12.17) (2022-12-02)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.16...v0.12.17)
+
+- [fix: use custom navigateToUrl function instead of navigateTo from TestCafe](https://github.com/joomcode/e2ed/commit/345249e25952aef1ecfc79dc449aaaf3622d50c6) ([uid11](https://github.com/uid11))
+
+  fix: rerun client functions (waitForInterfaceStabilization), rejected by page unload
+
 ## [v0.12.16](https://github.com/joomcode/e2ed/tree/v0.12.16) (2022-12-01)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.15...v0.12.16)
