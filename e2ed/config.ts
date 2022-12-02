@@ -30,7 +30,7 @@ const config: Config = {
   maxRetriesCountInDocker: 3,
   packTimeout: 90 * 60_000,
   pageRequestTimeout: 30_000,
-  pageStabilizationInterval: 0,
+  pageStabilizationInterval: 1_000,
   port1: 1337,
   port2: 1338,
   printTestLogsInConsole: true,

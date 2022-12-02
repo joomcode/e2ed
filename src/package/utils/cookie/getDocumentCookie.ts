@@ -1,10 +1,10 @@
-import {LogEventType} from '../constants/internal';
-import {createClientFunction} from '../createClientFunction';
+import {LogEventType} from '../../constants/internal';
+import {createClientFunction} from '../../createClientFunction';
 
-import {assertValueIsDefined} from './asserts';
-import {log} from './log';
+import {assertValueIsDefined} from '../asserts';
+import {log} from '../log';
 
-import type {CookieHeaderString} from '../types/internal';
+import type {CookieHeaderString} from '../../types/internal';
 
 const clientGetDocumentCookie = createClientFunction<[], CookieHeaderString>(
   () => document.cookie as CookieHeaderString,

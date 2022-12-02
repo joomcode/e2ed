@@ -14,6 +14,7 @@ export {dragToElement} from './dragToElement';
 export {getBrowserConsoleMessages} from './getBrowserConsoleMessages';
 export {hover} from './hover';
 export {mockApiRoute, unmockApiRoute} from './mock';
+export {navigateToUrl} from './navigateToUrl';
 export {
   assertPage,
   backPageHistory,
@@ -30,7 +31,7 @@ export {scrollBy} from './scrollBy';
 export {scrollIntoView} from './scrollIntoView';
 export {selectText} from './selectText';
 export {setFilesToUpload} from './setFilesToUpload';
-export {setHeadersAndNavigateTo} from './setHeadersAndNavigateTo';
+export {setHeadersAndNavigateToUrl} from './setHeadersAndNavigateToUrl';
 export {setNativeDialogHandler} from './setNativeDialogHandler';
 export {switchToIframe} from './switchToIframe';
 export {takeElementScreenshot} from './takeElementScreenshot';

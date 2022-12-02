@@ -7,7 +7,7 @@ import {log} from '../log';
 import {wrapInTestRunTracker} from '../testRun';
 
 import {getPrintedClientFunctionName} from './getPrintedClientFunctionName';
-import {isNeedCancelClientFunction} from './isNeedCancelClientFunction';
+import {isNeedRerunClientFunction} from './isNeedRerunClientFunction';
 
 import type {ClientFunctionState, MaybeTestCafeError} from '../../types/internal';
 
@@ -30,6 +30,8 @@ export const getRunClientFunction = <Args extends unknown[], R>(
 
   const originalFnCode = getFunctionCode(originalFn);
   const printedClientFunctionName = getPrintedClientFunctionName(name);
+
+  let isClientFunctionAlreadyRerunned = false;
 
   /**
    * Potentially cicle function for running client function.
@@ -59,14 +61,19 @@ export const getRunClientFunction = <Args extends unknown[], R>(
         }
       },
       (cause: MaybeTestCafeError) => {
-        if (isNeedCancelClientFunction(cause, clientFunctionState)) {
+        if (
+          isClientFunctionAlreadyRerunned !== true &&
+          isNeedRerunClientFunction(cause, clientFunctionState)
+        ) {
+          isClientFunctionAlreadyRerunned = true;
+
           log(
-            `The ${printedClientFunctionName} canceled due to page unload`,
+            `The ${printedClientFunctionName} will be rerun`,
             {args, originalFnCode},
             LogEventType.InternalUtil,
           );
 
-          resolve(undefined as Awaited<R>);
+          runClientFunction();
 
           return;
         }

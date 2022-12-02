@@ -1,5 +1,4 @@
-import {testController} from 'e2ed';
-import {setPageCookiesAndNavigateTo} from 'e2ed/actions';
+import {navigateToUrl, setPageCookiesAndNavigateToUrl} from 'e2ed/actions';
 import {clearPageCookies, getPageCookies} from 'e2ed/context';
 
 import type {Url} from 'e2ed/types';
@@ -14,10 +13,10 @@ export const navigateTo = async (url: Url): Promise<void> => {
 
   if (pageCookies === undefined) {
     // As with all hooks, you can replace it with your own implementation.
-    await testController.navigateTo(url);
+    await navigateToUrl(url, {skipLogs: true});
   } else {
     clearPageCookies();
 
-    await setPageCookiesAndNavigateTo(url, pageCookies);
+    await setPageCookiesAndNavigateToUrl(url, pageCookies);
   }
 };

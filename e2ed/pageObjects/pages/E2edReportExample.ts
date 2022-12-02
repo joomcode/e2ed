@@ -25,8 +25,6 @@ export class E2edReportExample extends Page<CustomPageParams> {
     return new E2edReportExampleRoute();
   }
 
-  override readonly pageStabilizationInterval = 4_000;
-
   /**
    * Set page cookies to context before navigate.
    */

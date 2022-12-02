@@ -1,2 +1,2 @@
 export {createRandomUser} from './createRandomUser';
-export {setPageCookiesAndNavigateTo} from './setPageCookiesAndNavigateTo';
+export {setPageCookiesAndNavigateToUrl} from './setPageCookiesAndNavigateToUrl';

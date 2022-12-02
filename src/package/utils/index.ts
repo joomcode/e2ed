@@ -10,6 +10,7 @@ export {
 export {cloneWithoutUndefinedProperties} from './clone';
 export {
   getCookieHeaderString,
+  getDocumentCookie,
   getSetCookieHeaderString,
   replaceCookie,
   replaceSetCookie,
@@ -26,7 +27,6 @@ export {getFunctionCode} from './fn';
 export {writeFile} from './fs';
 export {valueToString} from './generalLog';
 export {getCurrentUrl} from './getCurrentUrl';
-export {getDocumentCookie} from './getDocumentCookie';
 export {getFullConfig} from './getFullConfig';
 export {getKeysCounter} from './getKeysCounter';
 export {getStackTrace} from './getStackTrace';

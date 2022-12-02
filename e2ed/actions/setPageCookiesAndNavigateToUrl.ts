@@ -1,13 +1,13 @@
-import {setHeadersAndNavigateTo} from 'e2ed/actions';
+import {setHeadersAndNavigateToUrl} from 'e2ed/actions';
 import {LogEventType} from 'e2ed/constants';
 import {log, replaceSetCookie} from 'e2ed/utils';
 
 import type {Cookie, Headers, Url} from 'e2ed/types';
 
 /**
- * Navigate to the page and set custom page cookies.
+ * Navigate to the url and set custom page cookies.
  */
-export const setPageCookiesAndNavigateTo = async (
+export const setPageCookiesAndNavigateToUrl = async (
   url: Url,
   pageCookies: readonly Cookie[],
 ): Promise<void> => {
@@ -27,5 +27,5 @@ export const setPageCookiesAndNavigateTo = async (
 
   log(`Navigate to ${url} and set page cookie`, {pageCookies, url}, LogEventType.Action);
 
-  await setHeadersAndNavigateTo(url, {mapResponseHeaders});
+  await setHeadersAndNavigateToUrl(url, {mapResponseHeaders});
 };
