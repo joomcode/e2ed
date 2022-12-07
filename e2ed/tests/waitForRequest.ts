@@ -1,4 +1,5 @@
-import {createClientFunction, expect, it} from 'e2ed';
+import {it} from 'autotests';
+import {createClientFunction, expect} from 'e2ed';
 import {waitForRequest} from 'e2ed/actions';
 
 import type {Request} from 'e2ed/types';

@@ -14,4 +14,3 @@ export {useContext} from './useContext';
  */
 export {createClientFunction} from './createClientFunction';
 export {expect} from './expect';
-export {it, task, test} from './test';

@@ -1,4 +1,5 @@
-import {expect, it} from 'e2ed';
+import {it} from 'autotests';
+import {expect} from 'e2ed';
 import {
   assertPage,
   navigateToPage,

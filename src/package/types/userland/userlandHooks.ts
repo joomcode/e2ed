@@ -8,14 +8,15 @@ import type {RunHash, TestRun, TestStaticOptions} from '../testRun';
 /**
  * Hooks type that the e2ed/hooks userland module must correspond to.
  */
-export type ExpectedHooks = {
+export type UserlandHooks = {
   getLogContext(
+    this: void,
     message: string,
     payload: LogPayload | undefined,
     type: LogEventType,
   ): LogContext | undefined;
-  getMainTestRunParams(testRun: TestRun): string;
-  getTestRunHash(testRun: TestRun): RunHash;
-  isTestSkipped(testStaticOptions: TestStaticOptions): IsTestSkipped;
-  navigateTo(url: Url): Promise<void>;
+  getMainTestRunParams(this: void, testRun: TestRun): string;
+  getTestRunHash(this: void, testRun: TestRun): RunHash;
+  isTestSkipped(this: void, testStaticOptions: TestStaticOptions): IsTestSkipped;
+  navigateTo(this: void, url: Url): Promise<void>;
 };

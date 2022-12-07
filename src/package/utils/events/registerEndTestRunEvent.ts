@@ -4,6 +4,7 @@ import {cloneWithoutLogEvents} from '../clone';
 import {writeTestRunToJsonFile} from '../fs';
 import {generalLog, valueToString} from '../generalLog';
 import {writeTestLogsToFile} from '../log';
+import {getUserlandHooks} from '../userlandHooks';
 
 import {calculateTestRunStatus} from './calculateTestRunStatus';
 import {getTestRunEvent} from './getTestRunEvent';
@@ -61,11 +62,10 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
     status,
   };
 
-  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-  const hooks = require<typeof import('../../hooks')>('../../hooks');
+  const {getMainTestRunParams, getTestRunHash} = getUserlandHooks();
 
-  const mainParams = hooks.getMainTestRunParams(testRun);
-  const runHash = hooks.getTestRunHash(testRun);
+  const mainParams = getMainTestRunParams(testRun);
+  const runHash = getTestRunHash(testRun);
 
   const fullTestRun: FullTestRun = {mainParams, runHash, ...testRun};
 

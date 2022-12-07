@@ -13,15 +13,3 @@ export const test = (name: string, options: TestOptions, testFn: TestFn): void =
 
   testcafeTest(name, runTest);
 };
-
-/**
- * Creates test with name, metatags,
- * options and test function (alias for test function).
- */
-export const it = test;
-
-/**
- * Creates independent task with name, metatags,
- * options and task function (alias for test function).
- */
-export const task = test;

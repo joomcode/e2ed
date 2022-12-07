@@ -1,9 +1,4 @@
 /**
- * Userland types checks in the e2ed directory of the project.
- */
-export type {UserlandTypesAreCorrect} from './userland/typesChecks';
-
-/**
  * Public types that form the API (for using in the e2ed package and in userland).
  */
 export type {

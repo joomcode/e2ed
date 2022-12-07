@@ -27,7 +27,7 @@ rules:
   import/no-default-export: error
   import/no-deprecated: error
   import/no-duplicates: error
-  import/no-extraneous-dependencies: [error, {devDependencies: false, packageDir: .}]
+  import/no-extraneous-dependencies: [error, {devDependencies: false, packageDir: [., ./e2ed]}]
   import/no-internal-modules:
     - error
     - allow:
@@ -56,6 +56,7 @@ rules:
         - node:stream
         - node:url
         - node:util
+  import/no-relative-packages: off
   import/no-restricted-paths:
     - error
     - zones:
@@ -66,14 +67,18 @@ rules:
           from: ./src/package/types
           except: [./internal.ts]
   import/no-unassigned-import: error
-  import/no-unresolved: [error, {commonjs: true, ignore: [e2ed/testcafe, e2ed/utils/asserts]}]
+  import/no-unresolved:
+    - error
+    - {commonjs: true, ignore: [autotests, e2ed/testcafe, e2ed/utils/asserts]}
   import/no-unused-modules:
     - error
     - ignoreExports:
+        - e2ed/index.ts
         - e2ed/context/pageCookies.ts
         - src/package/actions/index.ts
         - src/package/constants/index.ts
         - src/package/context/index.ts
+        - src/package/createTestFunction.ts
         - src/package/createTestId.ts
         - src/package/esm/testcafe.ts
         - src/package/generators/index.ts

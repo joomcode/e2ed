@@ -1,7 +1,3 @@
-import type {Expect, UserlandTypesAreCorrect} from 'e2ed/types';
-
-export declare type Check = Expect<UserlandTypesAreCorrect>;
-
 export type {
   ApiDeviceAndProductRequest,
   ApiDeviceAndProductResponse,

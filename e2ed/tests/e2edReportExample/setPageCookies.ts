@@ -1,4 +1,5 @@
-import {expect, it} from 'e2ed';
+import {it} from 'autotests';
+import {expect} from 'e2ed';
 import {navigateToPage} from 'e2ed/actions';
 import {E2edReportExample} from 'e2ed/pageObjects/pages';
 import {getDocumentCookie} from 'e2ed/utils';

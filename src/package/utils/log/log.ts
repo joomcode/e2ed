@@ -6,6 +6,7 @@ import {assertValueIsDefined} from '../asserts';
 import {registerLogEvent} from '../events/registerLogEvent';
 import {valueToString} from '../generalLog';
 import {getFullConfig} from '../getFullConfig';
+import {getUserlandHooks} from '../userlandHooks';
 
 import {addTestLog} from './testLogs';
 
@@ -15,8 +16,7 @@ import type {E2edEnvironment, Log, LogPayload, UtcTimeInMs} from '../../types/in
  * Log every actions and API requests in E2ED tests.
  */
 export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: unknown) => {
-  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-  const hooks = require<typeof import('../../hooks')>('../../hooks');
+  const {getLogContext} = getUserlandHooks();
 
   const time = Date.now() as UtcTimeInMs;
   const dateTimeInISO = new Date(time).toISOString();
@@ -27,7 +27,7 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
     typeof maybePayload === 'number'
       ? (maybePayload as LogEventType)
       : (maybeLogEventType as LogEventType) || LogEventType.Unspecified;
-  const context = hooks.getLogContext(message, payload, type);
+  const context = getLogContext(message, payload, type);
 
   registerLogEvent(runId, {message, payload, time, type});
 

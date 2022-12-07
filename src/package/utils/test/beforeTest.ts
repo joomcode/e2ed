@@ -3,12 +3,12 @@ import {setRawMeta} from '../../context/meta';
 import {setRunId} from '../../context/runId';
 import {setTestIdleTimeout} from '../../context/testIdleTimeout';
 import {setTestTimeout} from '../../context/testTimeout';
-import {isTestSkipped} from '../../hooks';
 
 import {assertValueIsDefined} from '../asserts';
 import {registerStartTestRunEvent} from '../events';
 import {getFullConfig} from '../getFullConfig';
 import {getRelativeTestFilePath} from '../getRelativeTestFilePath';
+import {getUserlandHooks} from '../userlandHooks';
 
 import {getTestFnAndReject} from './getTestFnAndReject';
 import {processBrokenTestRuns} from './processBrokenTestRuns';
@@ -53,6 +53,9 @@ export const beforeTest = ({previousRunId, runId, test, testController}: Options
     name: test.name,
     options: test.options,
   };
+
+  const {isTestSkipped} = getUserlandHooks();
+
   const {isSkipped, reason: skipReason} = isTestSkipped(testStaticOptions);
 
   if (isSkipped && !('skipReason' in test.options.meta)) {
