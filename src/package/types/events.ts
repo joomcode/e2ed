@@ -5,6 +5,7 @@ import type {LogPayload} from './log';
 import type {RunLabel} from './runLabel';
 import type {StartInfo} from './startInfo';
 import type {FullTestRun, RejectTestRun, RunId, TestFn, TestStaticOptions} from './testRun';
+import type {TestMetaPlaceholder} from './userland';
 
 /**
  * Log event (on log call).
@@ -44,9 +45,9 @@ export type FullEventsData = Readonly<{
 export type Onlog = () => void;
 
 /**
- * TestRun event (on starting one test).
+ * TestRun event (on starting one test) with userland metadata.
  */
-export type TestRunEvent = Readonly<{
+export type TestRunEvent<TestMeta = TestMetaPlaceholder> = Readonly<{
   logEvents: readonly LogEvent[];
   onlog: Onlog;
   previousRunId: RunId | undefined;
@@ -57,4 +58,4 @@ export type TestRunEvent = Readonly<{
   testFnWithReject: TestFn;
   utcTimeInMs: UtcTimeInMs;
 }> &
-  TestStaticOptions;
+  TestStaticOptions<TestMeta>;

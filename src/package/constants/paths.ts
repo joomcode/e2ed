@@ -18,7 +18,7 @@ export const E2ED_PACKAGE_DIRECTORY_PATH = join('node_modules', 'e2ed') as Direc
  * Relative (from root) path to reports directory.
  * @internal
  */
-export const REPORTS_DIRECTORY_PATH = join('e2ed', 'reports') as DirectoryPathFromRoot;
+export const REPORTS_DIRECTORY_PATH = join('autotests', 'reports') as DirectoryPathFromRoot;
 
 /**
  * Relative (from root) path to tmp directory.
@@ -57,10 +57,13 @@ export const START_INFO_PATH = join(TMP_DIRECTORY_PATH, 'startInfo.json');
  * Relative (from root) path to userland config file.
  * @internal
  */
-export const USERLAND_CONFIG_PATH = join('e2ed', 'config.ts') as FilePathFromRoot;
+export const USERLAND_CONFIG_PATH = join('autotests', 'config.ts') as FilePathFromRoot;
 
 /**
  * Relative (from root) path to userland override config file.
  * @internal
  */
-export const USERLAND_OVERRIDE_CONFIG_PATH = join('e2ed', 'overrideConfig.ts') as FilePathFromRoot;
+export const USERLAND_OVERRIDE_CONFIG_PATH = join(
+  'autotests',
+  'overrideConfig.ts',
+) as FilePathFromRoot;

@@ -85,6 +85,7 @@ export type {
   RunHash,
   RunId,
   TestFn,
+  TestFunction,
   TestOptions,
   TestRun,
   TestStaticOptions,
@@ -98,7 +99,7 @@ export type {
   IsIncludeUndefined,
   Void,
 } from './undefined';
-export type {UserlandHooks} from './userland';
+export type {SkipTestsPlaceholder, TestMetaPlaceholder, UserlandHooks} from './userland';
 export type {
   Any,
   GetParamsType,

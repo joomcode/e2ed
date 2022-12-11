@@ -1,12 +1,13 @@
 import {getRunTest} from './utils/test';
 import {fixture, test as testcafeTest} from './testcafe';
 
-import type {TestFn, TestOptions} from './types/internal';
+import type {TestFunction} from './types/internal';
 
 /**
  * Creates test with name, metatags, options and test function.
+ * @internal
  */
-export const test = (name: string, options: TestOptions, testFn: TestFn): void => {
+export const test: TestFunction = (name, options, testFn) => {
   fixture(' - e2ed - ');
 
   const runTest = getRunTest({name, options, testFn});

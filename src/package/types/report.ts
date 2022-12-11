@@ -4,6 +4,7 @@ import type {UtcTimeInMs} from './date';
 import type {TestFilePath} from './fs';
 import type {StartInfo} from './startInfo';
 import type {FullTestRun, LiteTestRun, RunHash, RunId} from './testRun';
+import type {TestMetaPlaceholder} from './userland';
 
 /**
  * The complete report data (for printing report).
@@ -23,15 +24,15 @@ export type ReportData = Readonly<{
 }>;
 
 /**
- * The lite report data (for printing lite JSON report).
+ * The lite report data (for printing lite JSON report) with userland meta.
  */
-export type LiteReport = Readonly<{
+export type LiteReport<TestMeta = TestMetaPlaceholder> = Readonly<{
   endE2edReason: EndE2edReason;
   endTimeInMs: UtcTimeInMs;
   errors: readonly string[];
   exitCode: ExitCode;
   liteReportFileName: string;
-  retries: readonly LiteRetry[];
+  retries: readonly LiteRetry<TestMeta>[];
   startInfo: StartInfo;
   summaryRunE2edResults: string;
 }>;
@@ -86,14 +87,14 @@ export type Retry = Readonly<{
 /**
  * Lite retry object with all his lite test runs.
  */
-export type LiteRetry = Readonly<{
-  brokenLiteTestRuns: readonly LiteTestRun[];
+export type LiteRetry<TestMeta = TestMetaPlaceholder> = Readonly<{
+  brokenLiteTestRuns: readonly LiteTestRun<TestMeta>[];
   concurrency: number;
   endTimeInMs: UtcTimeInMs;
   /**
    * Test runs of all statuses except broken.
    */
-  liteTestRuns: readonly LiteTestRun[];
+  liteTestRuns: readonly LiteTestRun<TestMeta>[];
   retryIndex: number;
   startTimeInMs: UtcTimeInMs;
 }>;

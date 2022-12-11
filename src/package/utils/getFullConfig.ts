@@ -5,9 +5,9 @@ import type {FullConfig} from '../types/internal';
  * This function can only be called after the E2edRunEvent is registered,
  * because the userland configuration (e2ed/config.ts) is compiled when this event is registered.
  */
-export const getFullConfig = (): FullConfig => {
+export const getFullConfig = <SkipTests = unknown>(): FullConfig<SkipTests> => {
   // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
   const {fullConfig} = require<typeof import('../testcaferc')>('../testcaferc');
 
-  return fullConfig;
+  return fullConfig as FullConfig<SkipTests>;
 };

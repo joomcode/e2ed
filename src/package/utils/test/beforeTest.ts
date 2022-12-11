@@ -1,5 +1,5 @@
 import {TestRunStatus} from '../../constants/internal';
-import {setRawMeta} from '../../context/meta';
+import {setMeta} from '../../context/meta';
 import {setRunId} from '../../context/runId';
 import {setTestIdleTimeout} from '../../context/testIdleTimeout';
 import {setTestTimeout} from '../../context/testTimeout';
@@ -36,7 +36,7 @@ type Options = Readonly<{
  */
 export const beforeTest = ({previousRunId, runId, test, testController}: Options): void => {
   setRunId(runId);
-  setRawMeta(test.options.meta);
+  setMeta(test.options.meta);
 
   const {testIdleTimeout: testIdleTimeoutFromConfig, testTimeout: testTimeoutFromConfig} =
     getFullConfig();

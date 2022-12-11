@@ -6,7 +6,7 @@ import type {UtcTimeInMs} from './date';
 import type {DeepReadonly} from './deep';
 import type {TestRunEvent} from './events';
 import type {TestFilePath} from './fs';
-import type {TestMeta} from './userland/types';
+import type {TestMetaPlaceholder} from './userland';
 
 /**
  * Reject test run.
@@ -30,9 +30,9 @@ export type RunId = Brand<string, 'RunId'>;
 export type TestFn = () => Promise<void>;
 
 /**
- * Test options.
+ * Test options with userland metadata.
  */
-export type TestOptions = DeepReadonly<{
+export type TestOptions<TestMeta = TestMetaPlaceholder> = DeepReadonly<{
   meta: TestMeta;
   testIdleTimeout?: number;
   testTimeout?: number;
@@ -42,22 +42,25 @@ export type TestOptions = DeepReadonly<{
  * The complete static test options, that is, the options
  * available from the code before the tests are run.
  */
-export type TestStaticOptions = Readonly<{
+export type TestStaticOptions<TestMeta = TestMetaPlaceholder> = Readonly<{
   filePath: TestFilePath;
   name: string;
-  options: TestOptions;
+  options: TestOptions<TestMeta>;
 }>;
 
 /**
- * Completed test run object.
+ * Completed test run object with userland metadata.
  * Not internal because it used in user hooks.
  */
-export type TestRun = Readonly<{
+export type TestRun<TestMeta = TestMetaPlaceholder> = Readonly<{
   endTimeInMs: UtcTimeInMs;
   runError: string | undefined;
   startTimeInMs: UtcTimeInMs;
 }> &
-  Omit<TestRunEvent, 'onlog' | 'previousRunId' | 'reject' | 'testFnWithReject' | 'utcTimeInMs'>;
+  Omit<
+    TestRunEvent<TestMeta>,
+    'onlog' | 'previousRunId' | 'reject' | 'testFnWithReject' | 'utcTimeInMs'
+  >;
 
 /**
  * The complete test options, that is, all information about the test
@@ -67,9 +70,18 @@ export type TestRun = Readonly<{
 export type Test = Readonly<{testFn: TestFn}> & Omit<TestStaticOptions, 'filePath'>;
 
 /**
- * Lite test run object.
+ * Test function as part of public API, with userland metadata.
  */
-export type LiteTestRun = Readonly<{
+export type TestFunction<TestMeta = TestMetaPlaceholder> = (
+  name: string,
+  options: TestOptions<TestMeta>,
+  testFn: TestFn,
+) => void;
+
+/**
+ * Lite test run object with userland metadata.
+ */
+export type LiteTestRun<TestMeta = TestMetaPlaceholder> = Readonly<{
   endTimeInMs: UtcTimeInMs;
   mainParams: string;
   runError: string | undefined;
@@ -77,7 +89,7 @@ export type LiteTestRun = Readonly<{
   startTimeInMs: UtcTimeInMs;
   status: TestRunStatus;
 }> &
-  TestStaticOptions;
+  TestStaticOptions<TestMeta>;
 
 /**
  * Full test run object result of userland hooks (like mainParams and runHash).

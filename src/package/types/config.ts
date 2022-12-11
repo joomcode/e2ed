@@ -1,11 +1,10 @@
-import type {SkipTests} from '../hooks';
-
 import type {DeepReadonly} from './deep';
+import type {SkipTestsPlaceholder} from './userland';
 
 /**
  * Own e2ed config properties.
  */
-type OwnE2edConfig = Readonly<{
+type OwnE2edConfig<SkipTests = SkipTestsPlaceholder> = Readonly<{
   dockerImage: string;
   maxRetriesCountInDocker: number;
   liteReportFileName: string | null;
@@ -68,11 +67,14 @@ export type FrozenPartOfTestCafeConfig = DeepReadonly<{
 /**
  * The complete userland e2ed config.
  */
-export type UserlandConfig = UserlangTestCafeConfig & OwnE2edConfig;
+export type UserlandConfig<SkipTests = SkipTestsPlaceholder> = UserlangTestCafeConfig &
+  OwnE2edConfig<SkipTests>;
 
 /**
  * The complete e2ed config object.
  */
-export type FullConfig = UserlandConfig &
+export type FullConfig<SkipTests = unknown> = (unknown extends SkipTests
+  ? UserlandConfig
+  : UserlandConfig<SkipTests>) &
   FrozenPartOfTestCafeConfig &
   Readonly<{browsers: string; src: readonly string[]}>;

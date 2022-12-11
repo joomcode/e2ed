@@ -7,14 +7,12 @@ import {join} from 'node:path';
 
 import {COMPILED_USERLAND_CONFIG_PATH} from './constants/internal';
 
-import type {FrozenPartOfTestCafeConfig, FullConfig} from './types/internal';
+import type {FrozenPartOfTestCafeConfig, FullConfig, UserlandConfig} from './types/internal';
 
 const relativeUserlandConfigPath = join('..', '..', COMPILED_USERLAND_CONFIG_PATH);
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
-const userlandConfig = require<
-  typeof import('../../e2ed/config')
->(relativeUserlandConfigPath).config;
+const userlandConfig = require<{config: UserlandConfig}>(relativeUserlandConfigPath).config;
 
 const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
   color: true,

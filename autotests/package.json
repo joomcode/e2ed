@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "autotests": "*"
+  },
+  "exports": {
+    ".": "./index.ts",
+    "./*": "./*/index.ts"
+  },
+  "name": "autotests"
+}

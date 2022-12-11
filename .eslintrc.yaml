@@ -27,19 +27,15 @@ rules:
   import/no-default-export: error
   import/no-deprecated: error
   import/no-duplicates: error
-  import/no-extraneous-dependencies: [error, {devDependencies: false, packageDir: [., ./e2ed]}]
+  import/no-extraneous-dependencies: [error, {devDependencies: false, packageDir: [., ./autotests]}]
   import/no-internal-modules:
     - error
     - allow:
-        - '**/actions/*'
-        - '**/configurator'
         - '**/constants/internal'
         - '**/context/*'
         - '**/e2ed/*'
-        - '**/e2ed/*/*'
         - '**/generators/internal'
         - '**/types/internal'
-        - '**/types/userland/*'
         - '**/utils/*'
   import/no-nodejs-modules:
     - error
@@ -69,25 +65,24 @@ rules:
   import/no-unassigned-import: error
   import/no-unresolved:
     - error
-    - {commonjs: true, ignore: [autotests, e2ed/testcafe, e2ed/utils/asserts]}
+    - {commonjs: true, ignore: [autotests, e2ed/testcafe]}
   import/no-unused-modules:
     - error
     - ignoreExports:
-        - e2ed/index.ts
-        - e2ed/context/pageCookies.ts
-        - src/package/actions/index.ts
-        - src/package/constants/index.ts
-        - src/package/context/index.ts
+        - autotests/**/index.ts
+        - autotests/tests/**
+        - autotests/context/pageCookies.ts
+        - scripts/*.ts
+        - src/package/*/index.ts
+        - src/package/*/internal.ts
+        - src/package/bin/*.ts
         - src/package/createTestFunction.ts
         - src/package/createTestId.ts
         - src/package/esm/testcafe.ts
-        - src/package/generators/index.ts
         - src/package/index.ts
-        - src/package/selectors/index.ts
         - src/package/testcafe.ts
-        - src/package/types/index.ts
-        - src/package/utils/index.ts
-      missingExports: false
+        - src/package/types/extends.ts
+      missingExports: true
       unusedExports: true
   import/no-useless-path-segments: [error, {commonjs: true, noUselessIndex: true}]
   import/order: off

@@ -43,9 +43,3 @@ export {
   waitForResponse,
   waitForTimeout,
 } from './waitFor';
-
-/**
- * Userland actions. This exports must be the last.
- */
-// eslint-disable-next-line no-restricted-syntax
-export * from '../../../e2ed/actions';

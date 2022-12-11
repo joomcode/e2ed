@@ -39,9 +39,3 @@ export {SetHeadersRequestHook} from './requestHooks';
 export {getRunLabelObject} from './runLabel';
 export {wrapInTestRunTracker} from './testRun';
 export {isArray} from './typeGuards';
-
-/**
- * Userland utils. This export must be the last.
- */
-// eslint-disable-next-line no-restricted-syntax
-export * from '../../../e2ed/utils';

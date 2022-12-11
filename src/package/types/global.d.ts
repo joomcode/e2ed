@@ -46,14 +46,6 @@ declare module 'e2ed/testcafe' {
 }
 
 /**
- * Assert functions (with assertion signatures) for out-of-test-context scope.
- * @internal
- */
-declare module 'e2ed/utils/asserts' {
-  export const assertValueIsDefined: typeof import('../utils/asserts').assertValueIsDefined;
-}
-
-/**
  * Internal TestCafe module, which is used to decode/encode response body buffers.
  * @internal
  */

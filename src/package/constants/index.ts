@@ -7,9 +7,3 @@ export {
 } from './requestHook';
 export {FAILED_TEST_RUN_STATUSES, TestRunStatus} from './testRun';
 export {ANY_URL_REGEXP, SLASHES_AT_THE_END_REGEXP, SLASHES_AT_THE_START_REGEXP} from './url';
-
-/**
- * Userland constants. This export must be the last.
- */
-// eslint-disable-next-line no-restricted-syntax
-export * from '../../../e2ed/constants';

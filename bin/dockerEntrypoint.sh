@@ -17,7 +17,7 @@ if [ -z $E2ED_DOCKER_DO_BEFORE_TESTS ]
 then
     echo "No before tests script"
 else
-    ./e2ed/bin/$E2ED_DOCKER_DO_BEFORE_TESTS
+    ./autotests/bin/$E2ED_DOCKER_DO_BEFORE_TESTS
 fi
 
 if [ -z $E2ED_DEBUG ]
@@ -33,7 +33,7 @@ if [ -z $E2ED_DOCKER_DO_AFTER_TESTS ]
 then
     echo "No after tests script"
 else
-    ./e2ed/bin/$E2ED_DOCKER_DO_AFTER_TESTS
+    ./autotests/bin/$E2ED_DOCKER_DO_AFTER_TESTS
 fi
 
 exit $EXIT_CODE

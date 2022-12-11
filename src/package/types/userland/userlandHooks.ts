@@ -5,18 +5,20 @@ import type {LogContext, LogPayload} from '../log';
 import type {IsTestSkipped} from '../skipTest';
 import type {RunHash, TestRun, TestStaticOptions} from '../testRun';
 
+import type {TestMetaPlaceholder} from './placeholders';
+
 /**
  * Hooks type that the e2ed/hooks userland module must correspond to.
  */
-export type UserlandHooks = {
+export type UserlandHooks<TestMeta = TestMetaPlaceholder> = {
   getLogContext(
     this: void,
     message: string,
     payload: LogPayload | undefined,
     type: LogEventType,
   ): LogContext | undefined;
-  getMainTestRunParams(this: void, testRun: TestRun): string;
-  getTestRunHash(this: void, testRun: TestRun): RunHash;
-  isTestSkipped(this: void, testStaticOptions: TestStaticOptions): IsTestSkipped;
+  getMainTestRunParams(this: void, testRun: TestRun<TestMeta>): string;
+  getTestRunHash(this: void, testRun: TestRun<TestMeta>): RunHash;
+  isTestSkipped(this: void, testStaticOptions: TestStaticOptions<TestMeta>): IsTestSkipped;
   navigateTo(this: void, url: Url): Promise<void>;
 };

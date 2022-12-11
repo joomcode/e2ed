@@ -9,7 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",
     "incremental": true,
-    "outDir": "build/out",
+    "outDir": "build",
     "module": "nodenext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
@@ -18,7 +18,10 @@
     "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
-    "paths": {"autotests": ["./e2ed/index.ts"], "autotests/*": ["./e2ed/*"]},
+    "paths": {
+      "autotests": ["./autotests/index.ts"],
+      "autotests/*": ["./autotests/*"]
+    },
     "preserveConstEnums": true,
     "resolveJsonModule": true,
     "rootDir": ".",
@@ -29,11 +32,5 @@
     "types": ["node"],
     "useDefineForClassFields": true
   },
-  "include": [
-    "build/e2ed/**/*.ts",
-    "build/node_modules/e2ed/**/*.ts",
-    "e2ed/**/*.ts",
-    "scripts/**/*.ts",
-    "src/**/*.ts"
-  ]
+  "include": ["autotests/**/*.ts", "node_modules/e2ed/**/*.ts", "scripts/**/*.ts", "src/**/*.ts"]
 }

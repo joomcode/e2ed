@@ -1,23 +1,18 @@
 import {useContext} from '../useContext';
-import {assertValueIsDefined} from '../utils/asserts';
-import {deepMerge} from '../utils/deepMerge';
+import {assertValueIsDefined, assertValueIsUndefined} from '../utils/asserts';
 
-import type {DeepPartial} from '../types/internal';
-// eslint-disable-next-line import/no-restricted-paths
-import type {TestMeta} from '../types/userland/types';
+import type {TestMetaPlaceholder} from '../types/internal';
 
 /**
  * Raw get and set test metadata functions.
- * @internal
  */
-// eslint-disable-next-line import/no-unused-modules
-export const [getRawMeta, setRawMeta] = useContext<TestMeta>();
+const [getRawMeta, setRawMeta] = useContext<TestMetaPlaceholder>();
 
 /**
  * Get test metadata.
  */
-export const getMeta = (): TestMeta => {
-  const meta = getRawMeta();
+export const getMeta = <TestMeta>(): TestMeta => {
+  const meta = getRawMeta() as TestMeta;
 
   assertValueIsDefined(meta, 'meta is defined');
 
@@ -26,10 +21,12 @@ export const getMeta = (): TestMeta => {
 
 /**
  * Set test metadata.
+ * @internal
  */
-export const setMeta = (partialMeta: DeepPartial<TestMeta>): void => {
-  const meta = getMeta();
-  const mergedMeta = deepMerge<TestMeta>(meta, partialMeta);
+export const setMeta: typeof setRawMeta = (meta) => {
+  const currentMeta = getRawMeta();
 
-  setRawMeta(mergedMeta);
+  assertValueIsUndefined(currentMeta, 'currentMeta is not defined', {meta});
+
+  setRawMeta(meta);
 };

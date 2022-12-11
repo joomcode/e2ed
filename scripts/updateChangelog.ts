@@ -7,9 +7,13 @@ import {readFileSync, writeFileSync} from 'node:fs';
 import {join} from 'node:path';
 import {URL} from 'node:url';
 
-import {assertValueIsDefined} from 'e2ed/utils/asserts';
-
 import {repository, version} from '../package.json';
+
+function assertValueIsDefined<T>(value: T): asserts value is Exclude<T, undefined> {
+  if (value === undefined) {
+    throw new TypeError('Asserted value is undefined');
+  }
+}
 
 const {href: repoUrl, origin: repoOrigin} = new URL(repository.url);
 const changelogPath = join(__dirname, '..', 'CHANGELOG.md');
@@ -34,7 +38,7 @@ const commits = execFileSync('git', gitOptions, {encoding: 'utf8'})
 const markdownCommits = commits.map((commit) => {
   const [firstLine, ...bodyLines] = commit.split('\n');
 
-  assertValueIsDefined(firstLine, 'firstLine is defined', {bodyLines, commit});
+  assertValueIsDefined(firstLine);
 
   const firstSpaceIndex = firstLine.indexOf(' ');
   const subject = firstLine.slice(firstSpaceIndex + 1);
