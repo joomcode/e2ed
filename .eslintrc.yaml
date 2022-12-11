@@ -56,11 +56,11 @@ rules:
   import/no-restricted-paths:
     - error
     - zones:
-        - target: './src/package/!(constants)/**/*'
-          from: ./src/package/constants
+        - target: './src/!(constants)/**/*'
+          from: ./src/constants
           except: [./internal.ts]
-        - target: './src/package/!(types)/**/*'
-          from: ./src/package/types
+        - target: './src/!(types)/**/*'
+          from: ./src/types
           except: [./internal.ts]
   import/no-unassigned-import: error
   import/no-unresolved:
@@ -73,15 +73,15 @@ rules:
         - autotests/tests/**
         - autotests/context/pageCookies.ts
         - scripts/*.ts
-        - src/package/*/index.ts
-        - src/package/*/internal.ts
-        - src/package/bin/*.ts
-        - src/package/createTestFunction.ts
-        - src/package/createTestId.ts
-        - src/package/esm/testcafe.ts
-        - src/package/index.ts
-        - src/package/testcafe.ts
-        - src/package/types/extends.ts
+        - src/*/index.ts
+        - src/*/internal.ts
+        - src/bin/*.ts
+        - src/createTestFunction.ts
+        - src/createTestId.ts
+        - src/esm/testcafe.ts
+        - src/index.ts
+        - src/testcafe.ts
+        - src/types/extends.ts
       missingExports: true
       unusedExports: true
   import/no-useless-path-segments: [error, {commonjs: true, noUselessIndex: true}]

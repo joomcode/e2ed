@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -u
 
-mkdir -p ./node_modules/@types
+mkdir --parents ./node_modules/@types
 
 if [ ! -d "./node_modules/e2ed" ]
 then
