@@ -1,5 +1,44 @@
 # Changelog
 
+## [v0.13.0](https://github.com/joomcode/e2ed/tree/v0.13.0) (2022-12-12)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.17...v0.13.0)
+
+- [feat: add utils isSelectorEntirelyInViewport/isSelectorInViewport](https://github.com/joomcode/e2ed/commit/9b86bbd2976b5e0aa28d314daf65ed989de00863) ([uid11](https://github.com/uid11))
+- [fix: calculate real-time path to installed e2ed package directory](https://github.com/joomcode/e2ed/commit/89650ba9b107d11ae29c8369cb17dda12b9c098a) ([uid11](https://github.com/uid11))
+
+  docs: fix name of directory with autotests code in README.md
+
+  fix: init command use real path to installed e2ed package
+
+  docs: Renders instead of Render in JSDoc description of render functions
+
+- [feat: use src directory instead of src/package for package source code](https://github.com/joomcode/e2ed/commit/93221f5376a45e6887dc8154fde857e485193a2f) ([uid11](https://github.com/uid11))
+
+  fix: path to compiled userland config (from package)
+
+- [chore: update devDependencies (eslint, prettier, typescript, typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/72a8c0637ba30b97677830f9bd0711fcea44e242) ([uid11](https://github.com/uid11))
+
+  fix: TypeScript errors with building (restore symlink to node_modules/e2ed)
+
+- [feat: use separate namespaces for import from package and from project](https://github.com/joomcode/e2ed/commit/bd74d79cd9ddc8153c698a9af4437a2254b24bce) ([uid11](https://github.com/uid11))
+
+  feat: rename e2ed directory to autotests (separate namespace)
+
+  feat: import types TestMeta and SkipTests from userland project code
+
+  fix: remove setMeta from public API (metadata is immutable during the test run)
+
+  fix: do not import from internal.ts in index.ts (not to import too much)
+
+- [feat: add createTestFunction in e2ed's API instead of it/test/task](https://github.com/joomcode/e2ed/commit/deac7441d675bc834c8c2ace0b34420eefd839f9) ([uid11](https://github.com/uid11))
+
+  feat: directly read hooks from userland (in createTestFunction)
+
+  feat: remove unnecessary internal userland types checks
+
+  feat: add autotests bare import for project utils
+
 ## [v0.12.17](https://github.com/joomcode/e2ed/tree/v0.12.17) (2022-12-02)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.16...v0.12.17)
