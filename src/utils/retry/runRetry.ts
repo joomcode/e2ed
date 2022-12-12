@@ -1,9 +1,18 @@
 import {fork} from 'node:child_process';
+import {join} from 'node:path';
+
+import {INSTALLED_E2ED_DIRECTORY_PATH} from '../../constants/internal';
 
 import {E2edError} from '../E2edError';
 import {setTestsSubprocess, testsSubprocess} from '../tests';
 
 import type {RunRetryOptions} from '../../types/internal';
+
+const pathToRunTestsSubprocess = join(
+  INSTALLED_E2ED_DIRECTORY_PATH,
+  'bin',
+  'runTestsSubprocess.js',
+);
 
 /**
  * Run one retry of remaining tests.
@@ -15,7 +24,7 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
       testsSubprocess.kill();
     }
 
-    const newTestsSubprocess = fork('./node_modules/e2ed/bin/runTestsSubprocess.js');
+    const newTestsSubprocess = fork(pathToRunTestsSubprocess);
 
     setTestsSubprocess(newTestsSubprocess);
 

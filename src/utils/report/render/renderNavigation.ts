@@ -6,7 +6,7 @@ import {renderRetriesButtons} from './renderRetriesButtons';
 import type {RetryProps, SafeHtml} from '../../../types/internal';
 
 /**
- * Render tag <nav>.
+ * Renders tag <nav>.
  * @internal
  */
 export const renderNavigation = (retries: readonly RetryProps[]): SafeHtml => sanitizeHtml`

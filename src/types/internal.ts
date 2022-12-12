@@ -17,9 +17,6 @@ export type {LogEvent, Onlog, TestRunEvent} from './events';
 /** @internal */
 export type {EndTestRunEvent, FullEventsData} from './events';
 export type {Fn, MergeFunctions} from './fn';
-export type {TestFilePath} from './fs';
-/** @internal */
-export type {DirectoryPathFromRoot, FilePathFromRoot} from './fs';
 /** @internal */
 export type {SafeHtml} from './html';
 export type {
@@ -48,6 +45,9 @@ export type {
   PageClassType,
   PageClassTypeArgs,
 } from './pages';
+export type {AbsolutePathToDirectory, DirectoryPathFromRoot, TestFilePath} from './paths';
+/** @internal */
+export type {FilePathFromRoot} from './paths';
 /** @internal */
 export type {ImgData, PixelmatchOptions} from './pixelmatch';
 export type {AsyncVoid, UnwrapPromise} from './promise';

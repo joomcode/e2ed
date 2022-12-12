@@ -1,4 +1,6 @@
-import {EndE2edReason} from '../constants/internal';
+import {join} from 'node:path';
+
+import {EndE2edReason, INSTALLED_E2ED_DIRECTORY_PATH} from '../constants/internal';
 
 import {endE2ed} from './end';
 import {getFullConfig} from './getFullConfig';
@@ -7,6 +9,8 @@ import {getPackTimeoutPromise} from './packTimeout';
 import {getRunLabel} from './runLabel';
 
 import type {E2edEnvironment} from '../types/internal';
+
+const pathToTestcaferc = join(INSTALLED_E2ED_DIRECTORY_PATH, 'testcaferc.js');
 
 /**
  * Run e2ed tests (tasks) with command line arguments.
@@ -23,7 +27,7 @@ export const runTestsWithArgs = async (): Promise<void> => {
   }
 
   process.argv.push('--concurrency', String(concurrency));
-  process.argv.push('--config-file', './node_modules/e2ed/testcaferc.js');
+  process.argv.push('--config-file', pathToTestcaferc);
 
   const packTimeoutPromise = getPackTimeoutPromise();
 

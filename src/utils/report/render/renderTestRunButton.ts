@@ -3,7 +3,7 @@ import {sanitizeHtml} from '../client';
 import type {SafeHtml, TestRunButtonProps} from '../../../types/internal';
 
 /**
- * Render single test run button (in test runs list).
+ * Renders single test run button (in test runs list).
  * @internal
  */
 export const renderTestRunButton = (

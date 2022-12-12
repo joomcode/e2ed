@@ -14,7 +14,7 @@ const renderTestRunError = clientRenderTestRunError;
 const sanitizeHtml = clientSanitizeHtml;
 
 /**
- * Render tag <article class="test-details"> with test run details.
+ * Renders tag <article class="test-details"> with test run details.
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */

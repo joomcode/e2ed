@@ -3,7 +3,7 @@ import {createSafeHtmlWithoutSanitize, sanitizeHtml} from '../client';
 import type {SafeHtml} from '../../../types/internal';
 
 /**
- * Render report errors.
+ * Renders report errors.
  * @internal
  */
 export const renderErrors = (errors: readonly string[]): SafeHtml => {

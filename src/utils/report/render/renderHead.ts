@@ -9,7 +9,7 @@ import {renderStyle} from './renderStyle';
 import type {SafeHtml} from '../../../types/internal';
 
 /**
- * Render tag <head>.
+ * Renders tag <head>.
  * @internal
  */
 export const renderHead = (reportFileName: string): SafeHtml => {

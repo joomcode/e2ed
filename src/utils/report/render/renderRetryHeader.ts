@@ -3,7 +3,7 @@ import {renderDatesInterval, renderDuration, sanitizeHtml} from '../client';
 import type {RetryProps, SafeHtml} from '../../../types/internal';
 
 /**
- * Render retry header.
+ * Renders retry header.
  * @internal
  */
 export const renderRetryHeader = ({

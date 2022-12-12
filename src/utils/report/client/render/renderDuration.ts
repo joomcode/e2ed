@@ -5,7 +5,7 @@ import type {SafeHtml} from '../../../../types/internal';
 const sanitizeHtml = clientSanitizeHtml;
 
 /**
- * Render the duration of time interval in minutes and seconds.
+ * Renders the duration of time interval in minutes and seconds.
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */

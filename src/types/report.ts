@@ -1,7 +1,7 @@
 import type {EndE2edReason, ExitCode, TestRunStatus} from '../constants/internal';
 
 import type {UtcTimeInMs} from './date';
-import type {TestFilePath} from './fs';
+import type {TestFilePath} from './paths';
 import type {StartInfo} from './startInfo';
 import type {FullTestRun, LiteTestRun, RunHash, RunId} from './testRun';
 import type {TestMetaPlaceholder} from './userland';

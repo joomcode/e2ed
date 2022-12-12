@@ -5,7 +5,7 @@ import type {Brand} from './brand';
 import type {UtcTimeInMs} from './date';
 import type {DeepReadonly} from './deep';
 import type {TestRunEvent} from './events';
-import type {TestFilePath} from './fs';
+import type {TestFilePath} from './paths';
 import type {TestMetaPlaceholder} from './userland';
 
 /**

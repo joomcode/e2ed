@@ -14,7 +14,7 @@ const renderDuration = clientRenderDuration;
 const sanitizeHtml = clientSanitizeHtml;
 
 /**
- * Render tag <dl class="test-description"> with test run description.
+ * Renders tag <dl class="test-description"> with test run description.
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */

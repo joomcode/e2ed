@@ -3,7 +3,7 @@ import {createSafeHtmlWithoutSanitize} from '../client';
 import type {SafeHtml} from '../../../types/internal';
 
 /**
- * Render tag <link rel="icon"> with favicon in data-uri format.
+ * Renders tag <link rel="icon"> with favicon in data-uri format.
  * @internal
  */
 export const renderFavicon = (): SafeHtml => createSafeHtmlWithoutSanitize`

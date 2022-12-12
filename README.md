@@ -30,7 +30,7 @@ npm install e2ed --save-dev
 
 First create the necessary initial structure of directories and files in the project,
 with a sample test and pageObject (all the code related to `e2ed`
-will be in the `e2ed` directory in the root of the project):
+will be in the `autotests` directory in the root of the project):
 
 ```sh
 npx e2ed-init
@@ -53,24 +53,24 @@ docker pull e2edhub/e2ed
 And run tests for `https://google.com` in docker container:
 
 ```sh
-E2ED_ORIGIN=https://google.com ./e2ed/bin/runDocker.sh
+E2ED_ORIGIN=https://google.com ./autotests/bin/runDocker.sh
 ```
 
 ### Config
 
-The config is defined in the file `e2ed/config.ts`.
-You can locally override some config fields in an `e2ed/overrideConfig.ts` file that is not included in the repository.
+The config is defined in the file `autotests/config.ts`.
+You can locally override some config fields in an `autotests/overrideConfig.ts` file that is not included in the repository.
 
 #### Base config fields
 
 `concurrency: number`: the number of browser windows in which tests will run in parallel.
 
 `liteReportFileName: string | null`: the name of the file under which, after running the tests,
-the lite JSON report will be saved in the `e2ed/reports` directory, for example, `lite-report.json`.
+the lite JSON report will be saved in the `autotests/reports` directory, for example, `lite-report.json`.
 If `null`, the lite report will not be saved.
 
 `maxRetriesCountInDocker: number`: the maximum number of retries to run a test with the command
-`your-project/e2ed/bin/runDocker.sh` (until the test passes).
+`your-project/autotests/bin/runDocker.sh` (until the test passes).
 For example, if it is equal to three, the test will be run no more than three times.
 
 `packTimeout: number`: timeout (in millisecond) for the entire pack of tests (tasks).
@@ -83,12 +83,12 @@ This parameter can be overridden on a specific page instance.
 `printTestLogsInConsole: boolean`: if true, print test logs to the console (literally in console.log).
 
 `reportFileName: string | null`: the name of the file under which, after running the tests,
-the HTML report will be saved in the `e2ed/reports` directory, for example, `report.html`.
+the HTML report will be saved in the `autotests/reports` directory, for example, `report.html`.
 Also this name is used as the title of the report page.
 If `null`, the report will not be saved.
 
 `skipTests: SkipTests`: this setting allows you to describe a set of skipped tests in a custom form.
-You can define the `SkipTests` type and `skipTests` processing rules in the hook `e2ed/hooks/isTestSkipped.ts`.
+You can define the `SkipTests` type and `skipTests` processing rules in the hook `autotests/hooks/isTestSkipped.ts`.
 
 `testFileGlobs: readonly string[]`: an array of globs with pack test (task) files.
 https://www.npmjs.com/package/globby is used for matching globs.
@@ -99,7 +99,7 @@ the test fails and rerun on the next retry.
 This parameter can be overridden in the test-specific options.
 
 `testLogsFileName: string | null`: the name of the file under which, after running the tests,
-the test logs will be saved in the `e2ed/reports` directory, for example, `test-logs.log`.
+the test logs will be saved in the `autotests/reports` directory, for example, `test-logs.log`.
 If `null`, the report will not be saved.
 
 `testTimeout: number`: timeout (in milliseconds) for each individual test run.
@@ -120,9 +120,9 @@ If the wait is longer than this timeout, then the promise returned by the waitFo
 
 `E2ED_DOCKER_DEBUG_PORT`: debug port when run in docker (9229 by default).
 
-`E2ED_DOCKER_DO_AFTER_TESTS`: the name of the executable file from the `e2ed/bin` directory that will be run (into container) after running the tests.
+`E2ED_DOCKER_DO_AFTER_TESTS`: the name of the executable file from the `autotests/bin` directory that will be run (into container) after running the tests.
 
-`E2ED_DOCKER_DO_BEFORE_TESTS`: the name of the executable file from the `e2ed/bin` directory that will be run (into container) before running the tests.
+`E2ED_DOCKER_DO_BEFORE_TESTS`: the name of the executable file from the `autotests/bin` directory that will be run (into container) before running the tests.
 
 ## License
 

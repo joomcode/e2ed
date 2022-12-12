@@ -1,18 +1,34 @@
-import {join} from 'node:path';
+import {join, relative} from 'node:path';
 
-import type {DirectoryPathFromRoot, FilePathFromRoot} from '../types/internal';
+import type {
+  AbsolutePathToDirectory,
+  DirectoryPathFromRoot,
+  FilePathFromRoot,
+} from '../types/internal';
+
+/**
+ * Absolute path to the directory with installed e2ed package (usually in node_modules).
+ * @internal
+ */
+export const ABSOLUTE_PATH_TO_INSTALLED_E2ED_DIRECTORY = join(
+  __dirname,
+  '..',
+) as AbsolutePathToDirectory;
 
 /**
  * Absolute path to the project root directory.
  * @internal
  */
-export const ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY = process.cwd();
+export const ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY = process.cwd() as AbsolutePathToDirectory;
 
 /**
  * Relative (from root) path to installed e2ed package directory.
  * @internal
  */
-export const E2ED_PACKAGE_DIRECTORY_PATH = join('node_modules', 'e2ed') as DirectoryPathFromRoot;
+export const INSTALLED_E2ED_DIRECTORY_PATH = relative(
+  ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
+  ABSOLUTE_PATH_TO_INSTALLED_E2ED_DIRECTORY,
+) as DirectoryPathFromRoot;
 
 /**
  * Relative (from root) path to reports directory.

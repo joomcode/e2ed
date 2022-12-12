@@ -5,7 +5,7 @@ import type {SafeHtml} from '../../../../types/internal';
 const sanitizeHtml = clientSanitizeHtml;
 
 /**
- * Render TestRun error as simple message.
+ * Renders TestRun error as simple message.
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */

@@ -3,7 +3,7 @@ import {sanitizeHtml} from '../client';
 import type {RetryButtonProps, SafeHtml} from '../../../types/internal';
 
 /**
- * Render tag <button> with single retry button.
+ * Renders tag <button> with single retry button.
  * @internal
  */
 export const renderRetryButton = ({

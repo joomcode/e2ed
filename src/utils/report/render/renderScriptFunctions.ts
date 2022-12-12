@@ -20,7 +20,7 @@ import {
 import type {SafeHtml} from '../../../types/internal';
 
 /**
- * Render JS client functions for report.
+ * Renders JS client functions for report.
  * @internal
  */
 export const renderScriptFunctions = (): SafeHtml => createSafeHtmlWithoutSanitize`

@@ -1,3 +1,6 @@
+import {join} from 'node:path';
+
+import {INSTALLED_E2ED_DIRECTORY_PATH} from '../../constants/internal';
 import {createTestCafe} from '../../testcafe';
 
 import {E2edError} from '../E2edError';
@@ -7,6 +10,8 @@ import {getFullConfig} from '../getFullConfig';
 import type {Inner} from 'testcafe-without-typecheck';
 
 import type {E2edEnvironment, RunRetryOptions} from '../../types/internal';
+
+const pathToTestcaferc = join(INSTALLED_E2ED_DIRECTORY_PATH, 'testcaferc.js');
 
 /**
  * Runs tests (via TestCafe JavaScript API, for running one retry in docker).
@@ -26,10 +31,7 @@ export const runTests = async ({
     const {browser} = getFullConfig();
     const browsers = [browser];
 
-    const testCafe = await createTestCafe({
-      browsers,
-      configFile: './node_modules/e2ed/testcaferc.js',
-    });
+    const testCafe = await createTestCafe({browsers, configFile: pathToTestcaferc});
 
     maybeTestCafe = testCafe;
 

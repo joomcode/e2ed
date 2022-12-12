@@ -6,7 +6,6 @@ export type {DeepMutable, DeepPartial, DeepReadonly, DeepRequired} from './deep'
 export type {E2edEnvironment} from './environment';
 export type {LogEvent, Onlog, TestRunEvent} from './events';
 export type {Fn, MergeFunctions} from './fn';
-export type {TestFilePath} from './fs';
 export type {
   Cookie,
   CookieHeaderString,

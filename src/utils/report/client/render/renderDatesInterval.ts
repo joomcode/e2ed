@@ -10,7 +10,7 @@ type Options = Readonly<{
 const sanitizeHtml = clientSanitizeHtml;
 
 /**
- * Render the interval between two dates.
+ * Renders the interval between two dates.
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */

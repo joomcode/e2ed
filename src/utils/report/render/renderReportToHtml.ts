@@ -13,7 +13,7 @@ import {renderRetries} from './renderRetries';
 import type {ReportData, SafeHtml, UtcTimeInMs} from '../../../types/internal';
 
 /**
- * Render report data to HTML report page.
+ * Renders report data to HTML report page.
  * @internal
  */
 export const renderReportToHtml = (reportData: ReportData): SafeHtml => {

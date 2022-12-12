@@ -1,4 +1,9 @@
 import {runEnvironment, startTimeInMs} from '../configurator';
+import {
+  ABSOLUTE_PATH_TO_INSTALLED_E2ED_DIRECTORY,
+  ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
+  INSTALLED_E2ED_DIRECTORY_PATH,
+} from '../constants/internal';
 import {version as e2edVersion} from '../package.json';
 
 import {getFullConfig} from './getFullConfig';
@@ -23,10 +28,13 @@ export const getStartInfo = (): StartInfo => {
 
   return {
     PWD: (process.env as E2edEnvironment).PWD,
+    absolutePathToInstalledE2edDirectory: ABSOLUTE_PATH_TO_INSTALLED_E2ED_DIRECTORY,
+    absolutePathToProjectRootDirectory: ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
     'cwd()': process.cwd(),
     e2edEnvironmentVariables,
     e2edVersion,
     fullConfig: getFullConfig(),
+    installedE2edDirectoryPath: INSTALLED_E2ED_DIRECTORY_PATH,
     nodeVersion: process.version,
     'process.argv': [...process.argv],
     runEnvironment,

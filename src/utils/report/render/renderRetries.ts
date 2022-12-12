@@ -5,7 +5,7 @@ import {renderRetry} from './renderRetry';
 import type {RetryProps, SafeHtml} from '../../../types/internal';
 
 /**
- * Render list of retries (with test runs).
+ * Renders list of retries (with test runs).
  * @internal
  */
 export const renderRetries = (retries: readonly RetryProps[]): SafeHtml => {

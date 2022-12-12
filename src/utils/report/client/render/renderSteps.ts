@@ -18,7 +18,7 @@ type Options = Readonly<{
 }>;
 
 /**
- * Render single step of test run.
+ * Renders single step of test run.
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */

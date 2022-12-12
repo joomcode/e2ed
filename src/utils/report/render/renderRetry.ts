@@ -6,7 +6,7 @@ import {renderTestRunButton} from './renderTestRunButton';
 import type {RetryProps, SafeHtml} from '../../../types/internal';
 
 /**
- * Render test runs list for one retry.
+ * Renders test runs list for one retry.
  * @internal
  */
 export const renderRetry = (retryProps: RetryProps): SafeHtml => {

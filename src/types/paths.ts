@@ -1,8 +1,12 @@
 import type {Brand} from './brand';
 
 /**
+ * Absolute path to some directory.
+ */
+export type AbsolutePathToDirectory = Brand<string, 'AbsolutePathToDirectory'>;
+
+/**
  * Path to the directory from project root (for example "e2ed/tests").
- * @internal
  */
 export type DirectoryPathFromRoot = Brand<string, 'DirectoryPathFromRoot'>;
 

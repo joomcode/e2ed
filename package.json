@@ -11,7 +11,7 @@
   "license": "MIT",
   "bin": {
     "e2ed": "./bin/localEntrypoint.js",
-    "e2ed-init": "./bin/init.sh"
+    "e2ed-init": "./bin/init.js"
   },
   "bugs": "https://github.com/joomcode/e2ed/issues",
   "engines": {
@@ -86,8 +86,8 @@
     "postbuild:remove": "touch ./build/node_modules/e2ed/types/index.js",
     "build:copy": "npm run build:copy:bin && npm run build:copy:scripts && npm run build:copy:meta && npm run build:copy:example && npm run build:copy:tsconfig",
     "prebuild:copy:bin": "rm -r ./build/node_modules/e2ed/bin/*.d.ts",
-    "build:copy:bin": "cp ./bin/init.sh ./bin/dockerEntrypoint.sh ./build/node_modules/e2ed/bin",
-    "postbuild:copy:bin": "npm run make:executable build/node_modules/e2ed/bin/localEntrypoint.js build/node_modules/e2ed/bin/runE2edInDockerEnvironment.js",
+    "build:copy:bin": "cp ./bin/dockerEntrypoint.sh ./build/node_modules/e2ed/bin",
+    "postbuild:copy:bin": "npm run make:executable build/node_modules/e2ed/bin/init.js build/node_modules/e2ed/bin/localEntrypoint.js build/node_modules/e2ed/bin/runE2edInDockerEnvironment.js",
     "build:copy:scripts": "cp ./build/scripts/*.js ./build",
     "postbuild:copy:scripts": "cp ./scripts/testEsmExports.ts ./build/testEsmExports.mjs",
     "build:copy:meta": "cp -r ./LICENSE ./logo.svg ./README.md ./styles ./build/node_modules/e2ed",
@@ -98,7 +98,7 @@
     "build:copy:tsconfig": "cp ./tsconfig.json ./build",
     "prebuild:esm": "rm -r ./build/node_modules/e2ed/esm/*",
     "build:esm": "cp ./src/esm/testcafe.ts ./build/node_modules/e2ed/esm/testcafe.mjs",
-    "build:init": "(cd ./build && ./node_modules/e2ed/bin/init.sh)",
+    "build:init": "(cd ./build && ./node_modules/e2ed/bin/init.js)",
     "postbuild:init": "cp ./src/package.json ./build && cp -r ./autotests/tests/internalTypeTests ./build/autotests/tests",
     "preversion": "npm run check:all",
     "version": "npm run update:changelog && npm run update:github:pages",
