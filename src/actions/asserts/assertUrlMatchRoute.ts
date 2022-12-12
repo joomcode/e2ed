@@ -30,5 +30,5 @@ export const assertUrlMatchRoute = async (
   );
 
   // TODO: support Smart Assertions
-  await expect(routeUrl, 'route url contains the specified url or path').contains(urlOrPath);
+  await expect(routeUrl, 'route url contains the specified url or url path').contains(urlOrPath);
 };

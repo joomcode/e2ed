@@ -2,6 +2,8 @@ export {
   assertDistanceBetweenSelectorsGte,
   assertDistanceBetweenSelectorsLte,
   assertNumbersAreApproximatelyEqual,
+  assertSelectorEntirelyInViewport,
+  assertSelectorInViewport,
   assertUrlMatchRoute,
 } from './asserts';
 export {clearUpload} from './clearUpload';
