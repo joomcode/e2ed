@@ -39,3 +39,4 @@ export {SetHeadersRequestHook} from './requestHooks';
 export {getRunLabelObject} from './runLabel';
 export {wrapInTestRunTracker} from './testRun';
 export {isArray} from './typeGuards';
+export {isSelectorEntirelyInViewport, isSelectorInViewport} from './viewport';
