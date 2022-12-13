@@ -1,5 +1,5 @@
 /**
- * @file Temporary script for migrating to a separate import system (autotest/... and e2ed/...).
+ * @file Temporary script for migrating to a splitted imports system (autotest/... and e2ed/...).
  */
 
 import {readFileSync} from 'node:fs';
@@ -68,7 +68,10 @@ function getImport(isImportType: boolean, names: readonly string[], from: string
   return `${importString} {${rawNames}} from '${from}'`;
 }
 
-function getSplittedImports(parsedImportStatement: ParsedImportStatement): string[] {
+function getSplittedImports(
+  parsedImportStatement: ParsedImportStatement,
+  filePath: string,
+): string[] {
   const {fromPath, isAutotestsImport, isImportType, names} = parsedImportStatement;
   const splittedImports: string[] = [];
 
@@ -76,17 +79,25 @@ function getSplittedImports(parsedImportStatement: ParsedImportStatement): strin
   const autotestsNames = names.filter((name) => !isE2edName(name));
   const e2edNames = names.filter(isE2edName);
 
+  const isNeedToFixImportType = !isImportType && fromPath.startsWith('/types');
+
+  if (isNeedToFixImportType) {
+    generalLog('Fix runtime import to types import', {e2edNames, filePath, parsedImportStatement});
+  }
+
+  const newIsImportType = isNeedToFixImportType ? true : isImportType;
+
   if (autotestsNames.length !== 0) {
-    splittedImports.push(getImport(isImportType, autotestsNames, `autotests${fromPath}`));
+    splittedImports.push(getImport(newIsImportType, autotestsNames, `autotests${fromPath}`));
   }
 
   if (e2edNames.length !== 0) {
-    splittedImports.push(getImport(isImportType, e2edNames, `e2ed${fromPath}`));
+    splittedImports.push(getImport(newIsImportType, e2edNames, `e2ed${fromPath}`));
   }
 
   const isImportChanged = isAutotestsImport ? e2edNames.length !== 0 : autotestsNames.length !== 0;
 
-  return isImportChanged ? splittedImports : [];
+  return isImportChanged || isNeedToFixImportType ? splittedImports : [];
 }
 
 function parseStatement(statement: string, filePath: string): ParsedImportStatement | undefined {
@@ -138,7 +149,7 @@ function processStatement(statement: string, statements: string[], filePath: str
     return;
   }
 
-  const splittedImports = getSplittedImports(parsedStatement);
+  const splittedImports = getSplittedImports(parsedStatement, filePath);
 
   if (splittedImports.length > 0) {
     // generalLog('Replace import statement', {parsedStatement, splittedImports});
