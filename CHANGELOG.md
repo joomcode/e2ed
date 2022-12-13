@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.13.1](https://github.com/joomcode/e2ed/tree/v0.13.1) (2022-12-13)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.0...v0.13.1)
+
+- [chore: update devDependencies (@typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/c2d27db2d745bd15743d2a3f3b885946b19c66d8) ([uid11](https://github.com/uid11))
+- [feat: add temporary scripts for splitting imports (autotests or e2ed)](https://github.com/joomcode/e2ed/commit/8231b93cf6a9b687ce8eb81891e3be99cd3488c7) ([uid11](https://github.com/uid11))
+- [feat: add assertSelectorEntirelyInViewport/assertSelectorInViewport](https://github.com/joomcode/e2ed/commit/bdcbda470992484b07305facc24d18ea4b28d564) ([uid11](https://github.com/uid11))
+
+  refactor: utils about distance between selectors
+
 ## [v0.13.0](https://github.com/joomcode/e2ed/tree/v0.13.0) (2022-12-12)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.12.17...v0.13.0)
