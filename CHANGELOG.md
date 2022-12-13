@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.13.2](https://github.com/joomcode/e2ed/tree/v0.13.2) (2022-12-13)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.1...v0.13.2)
+
+- [feat: use import type instead of import for types in split imports script](https://github.com/joomcode/e2ed/commit/a89b0bd2b46633acadd51b922e4b23d7524f5d6d) ([uid11](https://github.com/uid11))
+
 ## [v0.13.1](https://github.com/joomcode/e2ed/tree/v0.13.1) (2022-12-13)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.0...v0.13.1)
