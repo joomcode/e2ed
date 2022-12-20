@@ -25,6 +25,7 @@
     "url": "https://github.com/joomcode/e2ed"
   },
   "dependencies": {
+    "bin-v8-flags-filter": "1.2.0",
     "create-test-id": "0.0.5",
     "globby": "11.1.0",
     "pngjs": "6.0.0",
