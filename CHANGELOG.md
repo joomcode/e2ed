@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.13.3](https://github.com/joomcode/e2ed/tree/v0.13.3) (2022-12-20)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.2...v0.13.3)
+
+- [fix: add bin-v8-flags-filter to main dependencies](https://github.com/joomcode/e2ed/commit/abcd5ed9c737a494ca0d94f86d60ede634c5de05) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (eslint, @types/node, ...)](https://github.com/joomcode/e2ed/commit/814d0a17a9440bc400f55f06a4e04ba97e87272f) ([uid11](https://github.com/uid11))
+
 ## [v0.13.2](https://github.com/joomcode/e2ed/tree/v0.13.2) (2022-12-13)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.1...v0.13.2)
