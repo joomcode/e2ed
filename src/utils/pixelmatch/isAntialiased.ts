@@ -7,6 +7,7 @@ import type {ImgData} from '../../types/internal';
  * Returns true if the rectangle is in antialiased state.
  * @internal
  */
+// eslint-disable-next-line complexity, max-statements
 export const isAntialiased = (
   img: ImgData,
   x1: number,
@@ -14,6 +15,7 @@ export const isAntialiased = (
   width: number,
   height: number,
   img2: ImgData,
+  // eslint-disable-next-line max-params
 ): boolean => {
   const x0 = Math.max(x1 - 1, 0);
   const y0 = Math.max(y1 - 1, 0);
@@ -38,6 +40,8 @@ export const isAntialiased = (
 
       if (delta === 0) {
         zeroes += 1;
+
+        // eslint-disable-next-line max-depth
         if (zeroes > 2) {
           return false;
         }

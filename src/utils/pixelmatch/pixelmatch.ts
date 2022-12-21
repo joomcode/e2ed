@@ -1,3 +1,5 @@
+/* eslint-disable max-depth */
+
 import {DEFAULT_PIXELMATCH_OPTIONS} from '../../constants/internal';
 
 import {colorDelta} from './colorDelta';
@@ -10,9 +12,10 @@ import type {ImgData, PixelmatchOptions} from '../../types/internal';
 
 /**
  * A simple algorithm for comparing the proximity of two images.
- * {@link https://www.npmjs.com/package/pixelmatch}
+ * {@link https://www.npmjs.com/package/pixelmatch/v/5.3.0}
  * @internal
  */
+// eslint-disable-next-line complexity, max-statements
 export const pixelmatch = (
   img1: ImgData,
   img2: ImgData,
@@ -20,6 +23,7 @@ export const pixelmatch = (
   width: number,
   height: number,
   originalOptions: Partial<PixelmatchOptions>,
+  // eslint-disable-next-line max-params
 ): number => {
   if (!isPixelData(img1) || !isPixelData(img2) || (output && !isPixelData(output))) {
     throw new Error('Image data: Uint8Array, Uint8ClampedArray or Buffer expected.');

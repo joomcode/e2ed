@@ -4,12 +4,14 @@ import type {ImgData} from '../../types/internal';
  * Returns true if the rectangle has many sibling points.
  * @internal
  */
+// eslint-disable-next-line complexity
 export const hasManySiblings = (
   img: ImgData,
   x1: number,
   y1: number,
   width: number,
   height: number,
+  // eslint-disable-next-line max-params
 ): boolean => {
   const x0 = Math.max(x1 - 1, 0);
   const y0 = Math.max(y1 - 1, 0);

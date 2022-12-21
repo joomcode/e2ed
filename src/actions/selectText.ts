@@ -15,6 +15,7 @@ export const selectText = (
   startPos = 0,
   endPos?: number,
   options?: Options,
+  // eslint-disable-next-line max-params
 ): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 

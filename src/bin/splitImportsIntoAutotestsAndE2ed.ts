@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 /**
  * @file Temporary script for migrating to a splitted imports system (autotest/... and e2ed/...).
  */

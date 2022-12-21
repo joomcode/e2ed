@@ -17,6 +17,7 @@ export const drag = async (
   dragOffsetX: number,
   dragOffsetY: number,
   options?: Options,
+  // eslint-disable-next-line max-params
 ): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
 

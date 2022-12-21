@@ -18,6 +18,7 @@ root: true
 ignorePatterns: [bin/TestCafeFork/package, build]
 rules:
   class-methods-use-this: off
+  complexity: [error, {max: 10}]
   curly: [error, all]
   default-param-last: off
   import/exports-last: error
@@ -96,10 +97,15 @@ rules:
     - ExportAllDeclaration
     - ':not(MethodDefinition, Property) > FunctionExpression'
   no-shadow: off
-  no-underscore-dangle: [error, {allow: [_onConfigureResponse, _requestContext]}]
+  no-underscore-dangle: [error, {allow: [_onConfigureResponse]}]
   no-useless-constructor: off
   no-use-before-define: off
   no-void: off
+  max-depth: [error, {max: 3}]
+  max-lines: [error, {max: 120, skipBlankLines: true, skipComments: true}]
+  max-lines-per-function: [error, {IIFEs: true, max: 100, skipBlankLines: true, skipComments: true}]
+  max-params: [error, {max: 3}]
+  max-statements: [error, {max: 25}]
   padding-line-between-statements:
     - error
     - {blankLine: always, prev: class, next: '*'}

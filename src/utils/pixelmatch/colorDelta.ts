@@ -8,12 +8,14 @@ import type {ImgData} from '../../types/internal';
  * Returns delta of two pixels in images data.
  * @internal
  */
+// eslint-disable-next-line max-statements
 export const colorDelta = (
   img1: ImgData,
   img2: ImgData,
   k: number,
   m: number,
   yOnly: boolean,
+  // eslint-disable-next-line max-params
 ): number => {
   let r1 = img1[k + 0];
   let g1 = img1[k + 1];
