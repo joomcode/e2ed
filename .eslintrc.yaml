@@ -37,6 +37,7 @@ rules:
         - '**/e2ed/*'
         - '**/generators/internal'
         - '**/types/internal'
+        - '**/types/skipTests'
         - '**/utils/*'
   import/no-nodejs-modules:
     - error

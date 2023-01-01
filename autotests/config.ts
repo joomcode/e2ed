@@ -1,6 +1,6 @@
 /**
  * @file Userland configuration for e2ed.
- * Do not import anything into this file other than
+ * Do not import anything from common index files into this file other than
  * the types and values from configurator, or optional local overrideConfig
  * (because the config is compiled separately from the tests themselves).
  */
@@ -9,8 +9,9 @@ import {RunEnvironment, runEnvironment} from 'e2ed/configurator';
 
 import {skipTests} from './skipTests';
 
-import type {SkipTests} from 'autotests/types';
 import type {Config} from 'e2ed/configurator';
+
+import type {SkipTests} from './types/skipTests';
 
 const isLocalRun = runEnvironment === RunEnvironment.Local;
 

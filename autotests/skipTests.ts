@@ -1,4 +1,4 @@
-import type {SkipTests} from 'autotests/types';
+import type {SkipTests} from './types/skipTests';
 
 /**
  * Array of groups of skipped tests, grouped by skip reason.
