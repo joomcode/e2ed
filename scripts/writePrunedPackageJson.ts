@@ -1,15 +1,15 @@
 /**
- * @file Generate and write pruned package.json for npm package.
+ * @file Generates and writes pruned lightweight package.json for npm package.
  */
 
 import {writeFileSync} from 'node:fs';
 import {join} from 'node:path';
 
-import pkg from '../package.json';
+import originaPackageJson from '../package.json';
 
 const prunedPackageJsonPath = join(__dirname, 'node_modules', 'e2ed', 'package.json');
 
-const prunedPackageJson: Partial<typeof pkg> = {...pkg};
+const prunedPackageJson: Partial<typeof originaPackageJson> = {...originaPackageJson};
 
 delete prunedPackageJson.devDependencies;
 delete prunedPackageJson.scripts;

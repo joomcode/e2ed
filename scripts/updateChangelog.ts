@@ -1,5 +1,5 @@
 /**
- * @file Generate CHANGELOG.md with changes relative to the previous version.
+ * @file Generates CHANGELOG.md with changes relative to the previous version.
  */
 
 import {execFileSync} from 'node:child_process';

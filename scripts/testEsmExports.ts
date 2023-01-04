@@ -1,11 +1,15 @@
 /**
  * @file This file must be a syntactically valid ESM module.
+ * Tests ESM-exports of package.
  */
 
 import {createTestCafe} from 'e2ed/testcafe';
 
+/**
+ * Tests that createTestCafe from e2ed/testcafe has correct interface.
+ */
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const checkCreateTestCafe = async () => {
+const testCreateTestCafe = async () => {
   const testCafe = await createTestCafe();
   const runner = testCafe.createRunner();
 
@@ -18,4 +22,4 @@ const checkCreateTestCafe = async () => {
 };
 
 // @ts-expect-error: top-level await is not allowed with "module": "CommonJS"
-await checkCreateTestCafe();
+await testCreateTestCafe();
