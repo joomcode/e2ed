@@ -4,26 +4,15 @@ RUN apk --no-cache upgrade && \
   apk --no-cache add \
   libevent nodejs npm chromium firefox xwininfo xvfb dbus eudev ttf-freefont fluxbox procps tzdata icu-data-full
 
-COPY ./node_modules/testcafe-without-typecheck /node_modules/testcafe-without-typecheck
-
-WORKDIR /node_modules/testcafe-without-typecheck
-RUN npm install --omit=dev --omit=peer --package-lock=false && npm cache clean --force
-WORKDIR /
-
-RUN mv /node_modules/testcafe-without-typecheck/node_modules/* /node_modules
-RUN rm -rf /node_modules/testcafe-without-typecheck/node_modules
-
-RUN mkdir --parents /node_modules/@types
-
-COPY ./node_modules/@types/node /node_modules/@types/node
-COPY ./node_modules/create-test-id /node_modules/create-test-id
-COPY ./node_modules/globby /node_modules/globby
-COPY ./node_modules/pngjs /node_modules/pngjs
-COPY ./node_modules/typescript /node_modules/typescript
-
 COPY ./build/node_modules/e2ed /node_modules/e2ed
 
-RUN echo '{"dependencies":{"e2ed":"*","typescript":"*"}}' > /package.json
+WORKDIR /node_modules/e2ed
+COPY ./package-lock.json .
+RUN npm install --legacy-peer-deps=true --no-save --omit=dev --omit=peer && npm cache clean --force
+RUN rm -rf package-lock.json ./node_modules/@types/node ./node_modules/.bin ./node_modules/.package-lock.json
+COPY ./node_modules/@types/node ./node_modules/@types/node
+COPY ./node_modules/typescript ./node_modules/typescript
+WORKDIR /
 
 RUN adduser -D user
 
