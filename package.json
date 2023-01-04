@@ -96,7 +96,7 @@
     "postbuild:copy:meta": "node ./build/writePrunedPackageJson.js",
     "prebuild:copy:example": "rm -r ./build/autotests",
     "build:copy:example": "cp -r ./autotests ./build/node_modules/e2ed/",
-    "postbuild:copy:example": "rm -r ./build/node_modules/e2ed/autotests/node_modules ./build/node_modules/e2ed/autotests/tests/internalTypeTests",
+    "postbuild:copy:example": "(cd ./build/node_modules/e2ed/autotests && rm -r ./node_modules ./tests/internalTypeTests && mv ./.gitignore ./gitignore)",
     "build:copy:tsconfig": "cp ./tsconfig.json ./build",
     "prebuild:esm": "rm -r ./build/node_modules/e2ed/esm/*",
     "build:esm": "cp ./src/esm/testcafe.ts ./build/node_modules/e2ed/esm/testcafe.mjs",

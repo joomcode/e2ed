@@ -9,6 +9,8 @@ import {URL} from 'node:url';
 
 import {repository, version} from '../package.json';
 
+const EXEC_FILE_OPTIONS = {encoding: 'utf8'} as const;
+
 function assertValueIsDefined<T>(value: T): asserts value is Exclude<T, undefined> {
   if (value === undefined) {
     throw new TypeError('Asserted value is undefined');
@@ -30,7 +32,7 @@ const gitOptions = [
   `--pretty=tformat:%H%aN %s%n%b${'%n'.repeat(SEPARATOR.length)}`,
 ];
 
-const commits = execFileSync('git', gitOptions, {encoding: 'utf8'})
+const commits = execFileSync('git', gitOptions, EXEC_FILE_OPTIONS)
   .split(SEPARATOR)
   .map((part) => part.trim())
   .filter(Boolean);

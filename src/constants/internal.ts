@@ -1,4 +1,6 @@
 /** @internal */
+export {EXEC_FILE_OPTIONS} from './childProcess';
+/** @internal */
 export {AMOUNT_OF_PARALLEL_OPEN_FILES, DEFAULT_FILE_CHUNK_LENGTH, READ_FILE_OPTIONS} from './fs';
 export {BAD_REQUEST_STATUS_CODE} from './http';
 /** @internal */
