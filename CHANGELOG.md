@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.13.4](https://github.com/joomcode/e2ed/tree/v0.13.4) (2023-01-04)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.3...v0.13.4)
+
+- [fix: in docker run e2ed from image (instead of copied local e2ed)](https://github.com/joomcode/e2ed/commit/b1deae2f95fbf77288e958180314c8edf7b86197) ([uid11](https://github.com/uid11))
+- [fix: add test of e2ed dependencies (matches with testcafe-without-typecheck dependencies)](https://github.com/joomcode/e2ed/commit/dc90ae69bee5b191a3a5b120d4994757c74dcfec) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (@typescript-eslint/\*, husky, etc)](https://github.com/joomcode/e2ed/commit/589f6874b3340a1f8f339df78c7134299522fb42) ([uid11](https://github.com/uid11))
+- [fix: install e2ed dependencies via npm install in docker image](https://github.com/joomcode/e2ed/commit/c5e30096cc589062ebddc1215b50a99faaa542fa) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (eslint, @typescript-eslint/\*, @types/node)](https://github.com/joomcode/e2ed/commit/c75d83b0d52a7c447aaf9ef4e61e75f89ab4e0a0) ([uid11](https://github.com/uid11))
+- [fix: TypeScript errors on compiling e2ed config](https://github.com/joomcode/e2ed/commit/daf23e3bda8268dd2fb38bc7264df7ae1d9c25a6) ([uid11](https://github.com/uid11))
+- [style: add some eslint max-rules (max-depth, max-lines, etc)](https://github.com/joomcode/e2ed/commit/24a001adead0219db5a4acf5a472d8604dbc06fd) ([uid11](https://github.com/uid11))
+
 ## [v0.13.3](https://github.com/joomcode/e2ed/tree/v0.13.3) (2022-12-20)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.2...v0.13.3)
