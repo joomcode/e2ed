@@ -3,4 +3,4 @@ set -eu
 
 VERSION=`./bin/getVersion.sh`
 
-docker build --tag e2edhub/e2ed:$VERSION .
+docker build --tag e2edhub/e2ed:$VERSION --tag e2edhub/e2ed:latest .

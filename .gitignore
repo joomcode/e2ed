@@ -1,6 +1,5 @@
 .lint-cache
 bin/TestCafeFork/package
 build
-e2ed/reports/
 local
 node_modules
