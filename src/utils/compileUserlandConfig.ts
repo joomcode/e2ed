@@ -25,6 +25,7 @@ const compilerOptions: CompilerOptions = {
   module: ModuleKind.CommonJS,
   outDir: COMPILED_USERLAND_CONFIG_DIRECTORY,
   resolveJsonModule: true,
+  rootDir: '.',
   skipLibCheck: true,
   target: ScriptTarget.ESNext,
   types: ['node'],

@@ -31,10 +31,19 @@ export const INSTALLED_E2ED_DIRECTORY_PATH = relative(
 ) as DirectoryPathFromRoot;
 
 /**
+ * Relative (from root) path to directory with autotests.
+ * @internal
+ */
+export const AUTOTESTS_DIRECTORY_PATH = 'autotests';
+
+/**
  * Relative (from root) path to reports directory.
  * @internal
  */
-export const REPORTS_DIRECTORY_PATH = join('autotests', 'reports') as DirectoryPathFromRoot;
+export const REPORTS_DIRECTORY_PATH = join(
+  AUTOTESTS_DIRECTORY_PATH,
+  'reports',
+) as DirectoryPathFromRoot;
 
 /**
  * Relative (from root) path to tmp directory.
@@ -55,7 +64,11 @@ export const COMPILED_USERLAND_CONFIG_DIRECTORY = join(
  * Relative (from root) path to compiled userland config file.
  * @internal
  */
-export const COMPILED_USERLAND_CONFIG_PATH = join(COMPILED_USERLAND_CONFIG_DIRECTORY, 'config.js');
+export const COMPILED_USERLAND_CONFIG_PATH = join(
+  COMPILED_USERLAND_CONFIG_DIRECTORY,
+  AUTOTESTS_DIRECTORY_PATH,
+  'config.js',
+);
 
 /**
  * Relative (from root) path to events directory.
@@ -73,13 +86,13 @@ export const START_INFO_PATH = join(TMP_DIRECTORY_PATH, 'startInfo.json');
  * Relative (from root) path to userland config file.
  * @internal
  */
-export const USERLAND_CONFIG_PATH = join('autotests', 'config.ts') as FilePathFromRoot;
+export const USERLAND_CONFIG_PATH = join(AUTOTESTS_DIRECTORY_PATH, 'config.ts') as FilePathFromRoot;
 
 /**
  * Relative (from root) path to userland override config file.
  * @internal
  */
 export const USERLAND_OVERRIDE_CONFIG_PATH = join(
-  'autotests',
+  AUTOTESTS_DIRECTORY_PATH,
   'overrideConfig.ts',
 ) as FilePathFromRoot;
