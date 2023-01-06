@@ -9,10 +9,15 @@ export type Cookie = Readonly<{
   httpOnly: boolean;
   name: string;
   path: string;
-  sameSite: 'lax' | 'none' | 'strict';
+  sameSite: SameSite;
   secure: boolean;
   value: string;
 }>;
+
+/**
+ * Cookie's sameSite property.
+ */
+export type SameSite = 'lax' | 'none' | 'strict';
 
 /**
  * Value of cookie (request) header for one or several cookies.

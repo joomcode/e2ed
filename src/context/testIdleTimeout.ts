@@ -26,7 +26,7 @@ export const getTestIdleTimeout = (): number => {
 export const setTestIdleTimeout: typeof setRawTestIdleTimeout = (testIdleTimeout) => {
   const currentTestIdleTimeout = getRawTestIdleTimeout();
 
-  assertValueIsUndefined(currentTestIdleTimeout, 'currentTestIdleTimeout is not defined', {
+  assertValueIsUndefined(currentTestIdleTimeout, 'currentTestIdleTimeout is undefined', {
     testIdleTimeout,
   });
 

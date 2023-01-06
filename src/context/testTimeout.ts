@@ -26,7 +26,7 @@ export const getTestTimeout = (): number => {
 export const setTestTimeout: typeof setRawTestTimeout = (testTimeout) => {
   const currentTestTimeout = getRawTestTimeout();
 
-  assertValueIsUndefined(currentTestTimeout, 'currentTestTimeout is not defined', {testTimeout});
+  assertValueIsUndefined(currentTestTimeout, 'currentTestTimeout is undefined', {testTimeout});
 
   return setRawTestTimeout(testTimeout);
 };

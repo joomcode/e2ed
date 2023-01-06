@@ -16,6 +16,7 @@ export type {
   Query,
   Request,
   Response,
+  SameSite,
   SetCookieHeaderString,
   StatusCode,
   Url,

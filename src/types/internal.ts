@@ -31,6 +31,7 @@ export type {
   REQUEST_KEY_TYPE,
   Response,
   RESPONSE_KEY_TYPE,
+  SameSite,
   SetCookieHeaderString,
   StatusCode,
   Url,

@@ -1,7 +1,7 @@
 export {
-  assertNever,
   assertValueIsDefined,
   assertValueIsFalse,
+  assertValueIsNever,
   assertValueIsNotNull,
   assertValueIsNull,
   assertValueIsTrue,
@@ -9,6 +9,7 @@ export {
 } from './asserts';
 export {cloneWithoutUndefinedProperties} from './clone';
 export {
+  assertStringIsSameSite,
   getCookieHeaderString,
   getDocumentCookie,
   getSetCookieHeaderString,

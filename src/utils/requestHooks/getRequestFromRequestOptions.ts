@@ -11,7 +11,7 @@ import type {Method, Request, Url} from '../../types/internal';
  * Get Request object from the original TestCafe request options object.
  * If isRequestBodyInJsonFormat = true, then parses body as JSON.
  * If isRequestBodyInJsonFormat = false, then returns body as is.
- * If isRequestBodyInJsonFormat is not defined, then safely tries to parse body as JSON.
+ * If isRequestBodyInJsonFormat is undefined, then safely tries to parse body as JSON.
  * @internal
  */
 export const getRequestFromRequestOptions = (

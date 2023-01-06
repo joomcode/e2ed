@@ -28,7 +28,7 @@ export const getRunId = (): RunId => {
 export const setRunId: typeof setRawRunId = (runId) => {
   const currentRunId = getRawRunId();
 
-  assertValueIsUndefined(currentRunId, 'currentRunId is not defined', {runId});
+  assertValueIsUndefined(currentRunId, 'currentRunId is undefined', {runId});
 
   return setRawRunId(runId);
 };
