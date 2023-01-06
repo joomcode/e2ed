@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.13.5](https://github.com/joomcode/e2ed/tree/v0.13.5) (2023-01-06)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.4...v0.13.5)
+
+- [feat: add actions deleteCookies, getCookies and setCookies](https://github.com/joomcode/e2ed/commit/1bb8dbddd652f199778bed9266c120f7583df828) ([uid11](https://github.com/uid11))
+
+  fix: rename assertNever to assertValueIsNever
+
+- [fix: stable path to compiled config](https://github.com/joomcode/e2ed/commit/2d2e097b7c6e31af8708b11cba81e9aef31adfc0) ([uid11](https://github.com/uid11))
+- [fix: add copying of .gitignore to e2ed init command](https://github.com/joomcode/e2ed/commit/0218d1b31c32c1e7f8af3c01857dd885a798eff9) ([uid11](https://github.com/uid11))
+
 ## [v0.13.4](https://github.com/joomcode/e2ed/tree/v0.13.4) (2023-01-04)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.3...v0.13.4)
