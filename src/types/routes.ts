@@ -24,5 +24,5 @@ export type ApiRouteClassTypeWithGetParamsFromUrl<
   SomeResponse extends Response = Response,
 > = ApiRouteClassType<RouteParams, SomeRequest, SomeResponse> &
   Readonly<{
-    getParamsFromUrl: Exclude<typeof ApiRoute['getParamsFromUrl'], undefined>;
+    getParamsFromUrl: Exclude<(typeof ApiRoute)['getParamsFromUrl'], undefined>;
   }>;

@@ -34,7 +34,7 @@ export const INSTALLED_E2ED_DIRECTORY_PATH = relative(
  * Relative (from root) path to directory with autotests.
  * @internal
  */
-export const AUTOTESTS_DIRECTORY_PATH = 'autotests';
+export const AUTOTESTS_DIRECTORY_PATH = 'autotests' as DirectoryPathFromRoot;
 
 /**
  * Relative (from root) path to reports directory.
