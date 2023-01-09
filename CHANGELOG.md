@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.13.6](https://github.com/joomcode/e2ed/tree/v0.13.6) (2023-01-09)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.5...v0.13.6)
+
+- [chore: update prettier to 2.8.2](https://github.com/joomcode/e2ed/commit/10a995eb1709138d12424cdc6593b6417629497e) ([uid11](https://github.com/uid11))
+
 ## [v0.13.5](https://github.com/joomcode/e2ed/tree/v0.13.5) (2023-01-06)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.4...v0.13.5)
