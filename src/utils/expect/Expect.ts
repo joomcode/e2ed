@@ -1,8 +1,8 @@
 import {LogEventStatus, LogEventType} from '../../constants/internal';
 import {testController} from '../../testController';
 
-import {valueToString} from '../generalLog';
 import {log} from '../log';
+import {valueToString} from '../valueToString';
 
 import {assertionMessageGetters} from './assertionMessageGetters';
 

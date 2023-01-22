@@ -1,8 +1,7 @@
 import {CONSOLE_INSPECT_OPTIONS} from '../../constants/internal';
 
 import {getPrintedRunLabel} from '../runLabel';
-
-import {valueToString} from './valueToString';
+import {valueToString} from '../valueToString';
 
 import type {E2edEnvironment, GeneralLog} from '../../types/internal';
 

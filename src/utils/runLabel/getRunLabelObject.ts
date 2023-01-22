@@ -7,15 +7,15 @@ import type {RawRunLabelObject, RunLabel, RunLabelObject} from '../../types/inte
  * Not internal because runLabel is a part of TestRun type, used in userland hooks.
  */
 export const getRunLabelObject = (runLabel: RunLabel): RunLabelObject => {
-  const object = runLabel.match(
+  const rawRunLabelObject = runLabel.match(
     /r:(?<retryIndex>\d+)\/(?<maxRetriesCount>\d+),c:(?<concurrency>\d+)/,
   )?.groups as RawRunLabelObject | undefined;
 
-  assertValueIsDefined(object, 'runLabel is not match template', {runLabel});
+  assertValueIsDefined(rawRunLabelObject, 'runLabel is not match template', {runLabel});
 
   return {
-    concurrency: Number(object.concurrency),
-    maxRetriesCount: Number(object.maxRetriesCount),
-    retryIndex: Number(object.retryIndex),
+    concurrency: Number(rawRunLabelObject.concurrency),
+    maxRetriesCount: Number(rawRunLabelObject.maxRetriesCount),
+    retryIndex: Number(rawRunLabelObject.retryIndex),
   };
 };

@@ -1,6 +1,6 @@
 import {inspect} from 'node:util';
 
-import {valueToString} from './generalLog';
+import {valueToString} from './valueToString';
 
 import type {E2edEnvironment, LogParams, RunLabel, UtcTimeInMs} from '../types/internal';
 

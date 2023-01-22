@@ -1,4 +1,4 @@
-import {valueToString} from '../generalLog';
+import {valueToString} from '../valueToString';
 
 import type {AssertionFunctions} from './types';
 

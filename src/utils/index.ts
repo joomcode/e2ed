@@ -26,7 +26,6 @@ export {
 export {E2edError} from './E2edError';
 export {getFunctionCode} from './fn';
 export {writeFile} from './fs';
-export {valueToString} from './generalLog';
 export {getCurrentUrl} from './getCurrentUrl';
 export {getFullConfig} from './getFullConfig';
 export {getKeysCounter} from './getKeysCounter';
@@ -40,4 +39,5 @@ export {SetHeadersRequestHook} from './requestHooks';
 export {getRunLabelObject} from './runLabel';
 export {wrapInTestRunTracker} from './testRun';
 export {isArray} from './typeGuards';
+export {valueToString} from './valueToString';
 export {isSelectorEntirelyInViewport, isSelectorInViewport} from './viewport';

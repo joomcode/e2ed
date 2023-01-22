@@ -2,9 +2,10 @@ import {TestRunStatus} from '../../constants/internal';
 
 import {cloneWithoutLogEvents} from '../clone';
 import {writeTestRunToJsonFile} from '../fs';
-import {generalLog, valueToString} from '../generalLog';
+import {generalLog} from '../generalLog';
 import {writeTestLogsToFile} from '../log';
 import {getUserlandHooks} from '../userlandHooks';
+import {valueToString} from '../valueToString';
 
 import {calculateTestRunStatus} from './calculateTestRunStatus';
 import {getTestRunEvent} from './getTestRunEvent';

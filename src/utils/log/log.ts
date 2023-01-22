@@ -4,9 +4,9 @@ import {getRunId} from '../../context/runId';
 import {assertValueIsDefined} from '../asserts';
 // eslint-disable-next-line import/no-internal-modules
 import {registerLogEvent} from '../events/registerLogEvent';
-import {valueToString} from '../generalLog';
 import {getFullConfig} from '../getFullConfig';
 import {getUserlandHooks} from '../userlandHooks';
+import {valueToString} from '../valueToString';
 
 import {addTestLog} from './testLogs';
 
