@@ -1,11 +1,11 @@
 import {useContext} from '../useContext';
-import {RequestHookToWaitForEvents} from '../utils/requestHooks';
 
 import type {
   RequestPredicateWithPromise,
   ResponsePredicateWithPromise,
   WaitForEventsState,
 } from '../types/internal';
+import type {RequestHookToWaitForEvents} from '../utils/requestHooks';
 
 /**
  * Raw get and set internal (maybe undefined) "wait for events" state.
@@ -17,7 +17,9 @@ const [getRawWaitForEventsState, setRawWaitForEventsState] = useContext<WaitForE
  * Get internal always defined "wait for events" state (for waitForRequest/waitForResponse).
  * @internal
  */
-export const getWaitForEventsState = (): WaitForEventsState => {
+export const getWaitForEventsState = (
+  RequestHookToWaitForEventsClass: typeof RequestHookToWaitForEvents,
+): WaitForEventsState => {
   const maybeWaitForEventsState = getRawWaitForEventsState();
 
   if (maybeWaitForEventsState !== undefined) {
@@ -31,7 +33,7 @@ export const getWaitForEventsState = (): WaitForEventsState => {
     responsePredicates: new Set<ResponsePredicateWithPromise>(),
   };
 
-  const hook = new RequestHookToWaitForEvents(waitForEventsState);
+  const hook = new RequestHookToWaitForEventsClass(waitForEventsState);
 
   (waitForEventsState as {hook: RequestHookToWaitForEvents}).hook = hook;
 

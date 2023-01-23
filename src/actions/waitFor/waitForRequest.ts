@@ -6,6 +6,7 @@ import {getFunctionCode} from '../../utils/fn';
 import {getFullConfig} from '../../utils/getFullConfig';
 import {log} from '../../utils/log';
 import {getPromiseWithResolveAndReject} from '../../utils/promise';
+import {RequestHookToWaitForEvents} from '../../utils/requestHooks';
 import {wrapInTestRunTracker} from '../../utils/testRun';
 import {updateWaitForEventsState} from '../../utils/waitForEvents';
 
@@ -18,7 +19,7 @@ export const waitForRequest = async <SomeRequest extends Request>(
   predicate: RequestPredicate<SomeRequest>,
   {timeout}: {timeout?: number} = {},
 ): Promise<SomeRequest> => {
-  const waitForEventsState = getWaitForEventsState();
+  const waitForEventsState = getWaitForEventsState(RequestHookToWaitForEvents);
   const {waitForRequestTimeout} = getFullConfig();
   const rejectTimeout = timeout ?? waitForRequestTimeout;
   const {clearRejectTimeout, promise, reject, resolve, setRejectTimeoutFunction} =

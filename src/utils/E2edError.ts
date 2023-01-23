@@ -44,6 +44,9 @@ export class E2edError extends Error {
     });
   }
 
+  /**
+   * Custom presentation of error for nodejs `inspect`.
+   */
   [inspect.custom](): string {
     const printedParams = {
       dateTimeInISO: new Date(this.utcTimeInMs).toISOString(),
