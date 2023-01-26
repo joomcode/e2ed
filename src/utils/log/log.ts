@@ -19,7 +19,7 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
   const {getLogContext} = getUserlandHooks();
 
   const time = Date.now() as UtcTimeInMs;
-  const dateTimeInISO = new Date(time).toISOString();
+  const dateTimeInIso = new Date(time).toISOString();
   const runId = getRunId();
   const runLabel = (process.env as E2edEnvironment).E2ED_RUN_LABEL;
   const payload = typeof maybePayload === 'object' ? (maybePayload as LogPayload) : undefined;
@@ -36,7 +36,7 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
   if (printTestLogsInConsole || testLogsFileName) {
     assertValueIsDefined(runLabel, 'runLabel is defined', {message, payload, runId, type});
 
-    const logMessageHead = `[e2ed][${dateTimeInISO}][${runLabel}][${runId}] ${message}`;
+    const logMessageHead = `[e2ed][${dateTimeInIso}][${runLabel}][${runId}] ${message}`;
     // eslint-disable-next-line sort-keys
     const printedValue = context ? {payload, context} : {payload};
 

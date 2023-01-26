@@ -2,16 +2,12 @@ import {CreateDevice, CreateProduct} from 'autotests/routes/apiRoutes';
 import {Main} from 'autotests/routes/pageRoutes';
 import {mockApiRoute, unmockApiRoute} from 'e2ed/actions';
 
-import type {
-  ApiDeviceAndProductRequest,
-  ApiDeviceAndProductResponse,
-  DeviceId,
-} from 'autotests/types';
+import type {ApiCreateDeviceRequest, ApiCreateDeviceResponse, DeviceId} from 'autotests/types';
 
 const apiMockFunction = (
   routeParams: object,
-  {method, query, requestBody, url}: ApiDeviceAndProductRequest,
-): Partial<ApiDeviceAndProductResponse> => {
+  {method, query, requestBody, url}: ApiCreateDeviceRequest,
+): Partial<ApiCreateDeviceResponse> => {
   const {input} = requestBody;
 
   const responseBody = {

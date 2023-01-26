@@ -18,14 +18,14 @@ export function renderDatesInterval({endTimeInMs, startTimeInMs}: Options): Safe
   const startDate = new Date(startTimeInMs);
   const endDate = new Date(endTimeInMs);
 
-  const startDatetime = startDate.toISOString();
-  const endDatetime = endDate.toISOString();
+  const startDateTime = startDate.toISOString();
+  const endDateTime = endDate.toISOString();
 
-  const date = startDatetime.slice(0, 10);
+  const date = startDateTime.slice(0, 10);
 
-  const startTime = startDatetime.slice(11, 19);
-  const endTime = endDatetime.slice(11, 19);
+  const startTime = startDateTime.slice(11, 19);
+  const endTime = endDateTime.slice(11, 19);
 
-  return sanitizeHtml`<time datetime="${startDatetime}">${date} ${startTime}</time> –
-<time datetime="${endDatetime}">${endTime}</time> UTC`;
+  return sanitizeHtml`<time datetime="${startDateTime}">${date} ${startTime}</time> –
+<time datetime="${endDateTime}">${endTime}</time> UTC`;
 }

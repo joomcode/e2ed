@@ -1,2 +1,4 @@
-export type {ApiDeviceAndProductRequest, ApiDeviceAndProductResponse} from './deviceAndProduct';
-export type {ApiUserRequest, ApiUserResponse} from './user';
+export type {ApiCreateDeviceRequest, ApiCreateDeviceResponse} from './CreateDevice';
+export type {ApiCreateProductRequest, ApiCreateProductResponse} from './CreateProduct';
+export type {ApiGetUserRequest, ApiGetUserResponse} from './GetUser';
+export type {ApiUserSignUpRequest, ApiUserSignUpResponse} from './UserSignUp';

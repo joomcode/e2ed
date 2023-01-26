@@ -1,4 +1,4 @@
-import type {ApiUserRequest} from 'autotests/types';
+import type {Device} from 'autotests/types';
 import type {Brand} from 'e2ed/types';
 
 /**
@@ -24,7 +24,12 @@ export type UserId = Brand<string, 'UserId'>;
 /**
  * API params for user creation.
  */
-export type ApiUserParams = ApiUserRequest['requestBody'];
+export type ApiUserParams = Readonly<{
+  device: Device;
+  name: string;
+  email: Email;
+  password: Password;
+}>;
 
 /**
  * Params for user creation.

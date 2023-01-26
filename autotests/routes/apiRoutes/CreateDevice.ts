@@ -1,10 +1,6 @@
 import {ApiRoute} from 'autotests/routes';
 
-import type {
-  ApiDeviceAndProductRequest,
-  ApiDeviceAndProductResponse,
-  MobileDevice,
-} from 'autotests/types';
+import type {ApiCreateDeviceRequest, ApiCreateDeviceResponse, MobileDevice} from 'autotests/types';
 
 type Params = Readonly<{model: MobileDevice}>;
 
@@ -13,8 +9,8 @@ type Params = Readonly<{model: MobileDevice}>;
  */
 export class CreateDevice extends ApiRoute<
   Params,
-  ApiDeviceAndProductRequest,
-  ApiDeviceAndProductResponse
+  ApiCreateDeviceRequest,
+  ApiCreateDeviceResponse
 > {
   getMethod(): 'POST' {
     return 'POST';

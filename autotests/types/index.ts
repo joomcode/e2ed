@@ -1,8 +1,12 @@
 export type {
-  ApiDeviceAndProductRequest,
-  ApiDeviceAndProductResponse,
-  ApiUserRequest,
-  ApiUserResponse,
+  ApiCreateDeviceRequest,
+  ApiCreateDeviceResponse,
+  ApiCreateProductRequest,
+  ApiCreateProductResponse,
+  ApiGetUserRequest,
+  ApiGetUserResponse,
+  ApiUserSignUpRequest,
+  ApiUserSignUpResponse,
 } from './api';
 export type {
   ApiDevice,

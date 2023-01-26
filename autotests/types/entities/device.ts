@@ -1,4 +1,3 @@
-import type {ApiDeviceAndProductRequest} from 'autotests/types';
 import type {Brand} from 'e2ed/types';
 
 /**
@@ -9,7 +8,12 @@ export type DeviceId = Brand<string, 'DeviceId'>;
 /**
  * API params for device creation.
  */
-export type ApiDeviceParams = ApiDeviceAndProductRequest['requestBody'];
+export type ApiDeviceParams = Readonly<{
+  cookies: readonly string[];
+  input: number;
+  model: MobileDevice;
+  version: string;
+}>;
 
 /**
  * Params for device creation.

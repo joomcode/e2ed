@@ -3,7 +3,7 @@ import {CreateProduct as CreateProductRoute} from 'autotests/routes/apiRoutes';
 import {createClientFunction, expect} from 'e2ed';
 import {mockApiRoute, unmockApiRoute} from 'e2ed/actions';
 
-import type {ApiDeviceAndProductResponse, DeviceId} from 'autotests/types';
+import type {ApiCreateDeviceResponse, DeviceId} from 'autotests/types';
 import type {Url} from 'e2ed/types';
 
 it(
@@ -29,7 +29,7 @@ it(
           body: JSON.stringify({cookies: [], input: 17, model: 'samsung', version: '12'}),
           headers: {'Content-Type': 'application/json; charset=UTF-8'},
           method: 'POST',
-        }).then((res) => res.json() as Promise<ApiDeviceAndProductResponse['responseBody']>),
+        }).then((res) => res.json() as Promise<ApiCreateDeviceResponse['responseBody']>),
       {name: 'getMockedProduct', timeout: 2_000},
     );
 

@@ -21,9 +21,9 @@ export class E2edError extends Error {
   constructor(readonly originalMessage: string, readonly params?: LogParams) {
     const runLabel = (process.env as E2edEnvironment).E2ED_RUN_LABEL;
     const utcTimeInMs = Date.now() as UtcTimeInMs;
-    const dateTimeInISO = new Date(utcTimeInMs).toISOString();
+    const dateTimeInIso = new Date(utcTimeInMs).toISOString();
 
-    const fullMessage = `${originalMessage} ${valueToString({dateTimeInISO, params, runLabel})}`;
+    const fullMessage = `${originalMessage} ${valueToString({dateTimeInIso, params, runLabel})}`;
     const constructorArgs: [message: string, options?: {cause: unknown}] = [fullMessage];
 
     if (params?.cause) {
@@ -49,7 +49,7 @@ export class E2edError extends Error {
    */
   [inspect.custom](): string {
     const printedParams = {
-      dateTimeInISO: new Date(this.utcTimeInMs).toISOString(),
+      dateTimeInIso: new Date(this.utcTimeInMs).toISOString(),
       message: this.originalMessage,
       params: this.params,
       runLabel: this.runLabel,
