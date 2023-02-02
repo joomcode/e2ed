@@ -30,7 +30,7 @@ export class E2edError extends Error {
       constructorArgs.push({cause: params.cause});
     }
 
-    // @ts-expect-error: constructor Error still doesn't support second argument
+    // @ts-expect-error: Error constructor still doesn't support second argument
     super(...constructorArgs);
 
     this.utcTimeInMs = utcTimeInMs;

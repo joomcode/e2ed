@@ -25,6 +25,8 @@
 
   --drag-container-width: 8px;
   --test-details-padding: 15px;
+
+  --test-link-selected-color: hsl(54 100% 90%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -39,6 +41,9 @@
     --passed-color: #306001;
     --failed-color: #a61b03;
     --unknown-color: #aa138e;
+
+    --failed-bg-color: hsl(0 28% 21%);
+    --test-link-selected-color: hsl(221 31% 20%);
   }
 }
 
@@ -228,23 +233,26 @@ button:disabled {
   border-top: 1px solid var(--border-color);
 }
 .test-button[aria-selected='true'] {
-  background-color: #fffacd;
+  background-color: var(--test-link-selected-color);
   cursor: default;
 }
 .test-button__time {
   flex-grow: 1;
   text-align: right;
   flex-shrink: 0;
+  user-select: text;
 }
 .test-button__order {
   width: 35px;
   text-align: left;
   flex-shrink: 0;
+  user-select: text;
 }
 .test-button__name {
   text-align: left;
   overflow-wrap: break-word;
   overflow: hidden;
+  user-select: text;
 }
 .test-button__parameters {
   color: var(--subtitle-color);
@@ -458,6 +466,7 @@ button:disabled {
 }
 .status-detail__content {
   flex-grow: 1;
+  padding: 0 var(--test-details-padding);
 }
 .status-detail__button {
   margin: 7px 0;
@@ -627,11 +636,13 @@ button:disabled {
   text-align: left;
   overflow-wrap: break-word;
   overflow: hidden;
+  user-select: text;
 }
 .step-expanded__time {
   flex-grow: 1;
   text-align: right;
   color: var(--subtitle-color);
+  user-select: text;
 }
 
 @media (max-width: 1366px) {

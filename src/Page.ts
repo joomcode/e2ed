@@ -2,7 +2,7 @@ import {CREATE_PAGE_TOKEN} from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
 import {getFullConfig} from './utils/getFullConfig';
 
-import type {Route} from './Route';
+import type {PageRoute} from './PageRoute';
 import type {AsyncVoid, PageClassTypeArgs, PARAMS_KEY_TYPE} from './types/internal';
 
 /**
@@ -75,5 +75,5 @@ export abstract class Page<PageParams = undefined> {
   /**
    * Get page route (for navigation to the page).
    */
-  abstract getRoute(): Route<unknown>;
+  abstract getRoute(): PageRoute<unknown>;
 }
