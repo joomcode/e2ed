@@ -29,7 +29,7 @@
     "create-test-id": "0.0.5",
     "globby": "11.1.0",
     "pngjs": "6.0.0",
-    "testcafe-without-typecheck": "2.2.0-rc.3"
+    "testcafe-without-typecheck": "2.3.0-rc.1"
   },
   "devDependencies": {
     "@types/node": "18.11.18",
@@ -67,7 +67,7 @@
   },
   "scripts": {
     "precheck:all": "npm run clear:lint:cache && npm run build",
-    "check:all": "npm run parallel lint test",
+    "check:all": "npm audit && npm run parallel lint test",
     "clear:lint:cache": "rm -f .lint-cache",
     "lint": "npm run parallel lint:es lint:prettier lint:types",
     "lint:es": "eslint --cache --cache-location=.lint-cache --cache-strategy=content --ext=.ts --max-warnings=0 --report-unused-disable-directives .",
