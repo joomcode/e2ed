@@ -1,5 +1,24 @@
 # Changelog
 
+## [v0.13.7](https://github.com/joomcode/e2ed/tree/v0.13.7) (2023-02-03)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.6...v0.13.7)
+
+- [chore: update TestCafe to 2.3.0](https://github.com/joomcode/e2ed/commit/d6fa8c7f5bfef2c8c297950bbfd389889d4eeee2) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (eslint, typescript, etc)](https://github.com/joomcode/e2ed/commit/1ac71c438ee4b1d1e08b375bc11e5f9d5f346586) ([uid11](https://github.com/uid11))
+- [fix: dark theme in HTML report](https://github.com/joomcode/e2ed/commit/c5273afcc9dee142699abbb6977e32c060a8dd42) ([uid11](https://github.com/uid11))
+
+  fix: ability to copy text from HTML report
+
+- [refactor: API routes in autotests example](https://github.com/joomcode/e2ed/commit/6c71c48e083571b75193e4e8f9631abc3beb2e34) ([uid11](https://github.com/uid11))
+- [docs: add src/README.md with base dependency graph](https://github.com/joomcode/e2ed/commit/e79fd320c6fa5491ce397af3ad1043c262aaf992) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (eslint, prettier, etc)](https://github.com/joomcode/e2ed/commit/5e7081a7fd5e0e2c045d86f904539ca858ae44ad) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (@typescript-eslint/\*, eslint-plugin-import)](https://github.com/joomcode/e2ed/commit/ef47f58bc825dc0352fdb19705bad6b145ceb654) ([uid11](https://github.com/uid11))
+
+  fix: cycled import error (with valueToString)
+
+  feat: add getTestsThatRunningAtGivenTime internal util
+
 ## [v0.13.6](https://github.com/joomcode/e2ed/tree/v0.13.6) (2023-01-09)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.5...v0.13.6)
