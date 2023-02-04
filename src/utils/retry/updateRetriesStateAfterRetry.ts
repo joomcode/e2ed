@@ -90,10 +90,9 @@ export const updateRetriesStateAfterRetry = async (retriesState: RetriesState): 
     );
   }
 
-  const noTestsInLastRetry = newFullTestRuns.length === 0;
   const concurrencyForNextRetry = getConcurrencyForNextRetry({
     currentConcurrency: concurrency,
-    noTestsInLastRetry,
+    noSuccessfulTestsInLastRetry: successfulNewFullTestRuns.length === 0,
     testsCount: failedNewFullTestRuns.length,
   });
 
@@ -104,7 +103,7 @@ export const updateRetriesStateAfterRetry = async (retriesState: RetriesState): 
     failedTestNamesInLastRetry,
   };
 
-  if (noTestsInLastRetry && concurrencyForNextRetry !== concurrency) {
+  if (newFullTestRuns.length === 0 && concurrencyForNextRetry !== concurrency) {
     retriesStateUpdate.retryIndex = retriesState.retryIndex - 1;
   }
 
