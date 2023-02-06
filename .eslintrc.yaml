@@ -15,7 +15,7 @@ parserOptions:
   sourceType: module
 plugins: [simple-import-sort]
 root: true
-ignorePatterns: [bin/TestCafeFork/package, build, local]
+ignorePatterns: [bin/forks/*/package, build, local]
 rules:
   class-methods-use-this: off
   complexity: [error, {max: 10}]

@@ -1,5 +1,5 @@
 .lint-cache
-bin/TestCafeFork/package
+bin/forks/*/package
 build
 local
 node_modules

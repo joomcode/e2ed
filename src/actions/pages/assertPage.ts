@@ -1,5 +1,5 @@
-import {LogEventType} from '../../constants/internal';
-import {expect} from '../../expect';
+import {LogEventStatus, LogEventType} from '../../constants/internal';
+import {assertValueIsTrue} from '../../utils/asserts';
 import {getCurrentUrl} from '../../utils/getCurrentUrl';
 import {log} from '../../utils/log';
 
@@ -30,16 +30,14 @@ export const assertPage = async <SomePageClass extends AnyPageClassType>(
   const currentUrl = await getCurrentUrl();
   const isMatch = route.isMatchUrl(currentUrl);
 
+  const logEventStatus = isMatch ? LogEventStatus.Passed : LogEventStatus.Failed;
   const message = `the current url matches the specified page "${PageClass.name}"`;
   const {routeParams} = route;
+  const payload = {currentUrl, isMatch, pageParams, routeParams};
 
-  log(
-    `Assert that ${message}`,
-    {currentUrl, isMatch, pageParams, routeParams},
-    LogEventType.InternalAction,
-  );
+  log(`Assert that ${message}"`, {...payload, logEventStatus}, LogEventType.InternalAction);
 
-  await expect(isMatch, message).ok();
+  assertValueIsTrue(isMatch, message, payload);
 
   if (page.afterAssertPage) {
     await page.afterAssertPage();

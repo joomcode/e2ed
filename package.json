@@ -29,7 +29,7 @@
     "create-test-id": "0.0.5",
     "globby": "11.1.0",
     "pngjs": "6.0.0",
-    "testcafe-without-typecheck": "2.3.0-rc.1"
+    "testcafe-without-typecheck": "2.3.0-rc.2"
   },
   "devDependencies": {
     "@types/node": "18.11.18",
@@ -111,7 +111,7 @@
     "prerelease": "npm run build",
     "release": "npm publish ./build/node_modules/e2ed",
     "postrelease": "if [ -f ./local/postrelease.sh ]; then ./local/postrelease.sh; else echo 'No postrelease hook'; fi",
-    "split:imports:into:autotests:and:e2ed": "(cd ./build && ./node_modules/e2ed/bin/splitImportsIntoAutotestsAndE2ed.js)",
+    "split-imports-into-autotests-and-e2ed": "(cd ./build && ./node_modules/e2ed/bin/splitImportsIntoAutotestsAndE2ed.js)",
     "build:docker": "./bin/buildDocker.sh",
     "pretest:docker": "npm run build:docker && npm run test:docker:copy",
     "test:docker:copy": "rm -rf ./build/docker && mkdir build/docker && cp -r ./build/autotests ./build/docker/autotests",
@@ -120,9 +120,12 @@
     "test:dependencies": "node ./build/testDependencies.js",
     "test:esm": "node ./build/testEsmExports.mjs",
     "test:local": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/localEntrypoint.js)",
-    "testcafefork:publish": "./bin/TestCafeFork/publish.sh",
-    "testcafefork:clean": "./bin/TestCafeFork/clean.sh",
-    "testcafefork:test:install": "./bin/TestCafeFork/testInstall.sh"
+    "testcafe-hammerhead-up:publish": "./bin/forks/testcafe-hammerhead-up/publish.sh",
+    "testcafe-hammerhead-up:clean": "./bin/forks/testcafe-hammerhead-up/clean.sh",
+    "testcafe-hammerhead-up:test:install": "./bin/forks/testcafe-hammerhead-up/testInstall.sh",
+    "testcafe-without-typecheck:publish": "./bin/forks/testcafe-without-typecheck/publish.sh",
+    "testcafe-without-typecheck:clean": "./bin/forks/testcafe-without-typecheck/clean.sh",
+    "testcafe-without-typecheck:test:install": "./bin/forks/testcafe-without-typecheck/testInstall.sh"
   },
   "sideEffects": false,
   "types": "index.d.ts"
