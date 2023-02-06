@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.13.8](https://github.com/joomcode/e2ed/tree/v0.13.8) (2023-02-06)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.7...v0.13.8)
+
+- [chore: update @types/node to 18.11.19](https://github.com/joomcode/e2ed/commit/2445ee06327106c9cfae13a4c1150e40a78ccf72) ([uid11](https://github.com/uid11))
+- [fix: add testcafe-hammerhead fork with fix for srcset proxy url bug](https://github.com/joomcode/e2ed/commit/b6e43f7ce3b338214829bf94297b95304ad27ccb) ([uid11](https://github.com/uid11))
+- [fix: reduce in next retry concurrency if no test passes](https://github.com/joomcode/e2ed/commit/dfc2fcbae856e727a3b92459affc1a0c59b50bd9) ([uid11](https://github.com/uid11))
+
 ## [v0.13.7](https://github.com/joomcode/e2ed/tree/v0.13.7) (2023-02-03)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.6...v0.13.7)
