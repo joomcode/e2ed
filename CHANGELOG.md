@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.13.9](https://github.com/joomcode/e2ed/tree/v0.13.9) (2023-02-07)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.8...v0.13.9)
+
+- [chore: update @typescript-eslint/\* to 5.51.0](https://github.com/joomcode/e2ed/commit/b1e4bcc31a0397c08b009ce1dcc9abccca8c2729) ([uid11](https://github.com/uid11))
+- [fix: name of testcafe-hammerhead package in testcafe-without-typecheck package](https://github.com/joomcode/e2ed/commit/9d0b40a543ca82d2b36b439519fa79c5ceb779b7) ([uid11](https://github.com/uid11))
+
 ## [v0.13.8](https://github.com/joomcode/e2ed/tree/v0.13.8) (2023-02-06)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.7...v0.13.8)
