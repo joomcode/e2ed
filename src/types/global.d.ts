@@ -49,7 +49,7 @@ declare module 'e2ed/testcafe' {
  * Internal TestCafe module, which is used to decode/encode response body buffers.
  * @internal
  */
-declare module 'testcafe-hammerhead/lib/processing/encoding' {
+declare module 'testcafe-hammerhead-up/lib/processing/encoding' {
   type RequestHookCharset = import('./requestHooks').RequestHookCharset;
   type RequestHookEncoding = import('./requestHooks').RequestHookEncoding;
 
@@ -64,7 +64,7 @@ declare module 'testcafe-hammerhead/lib/processing/encoding' {
  * Internal TestCafe module with Charset class, which is used to decode/encode response body buffers.
  * @internal
  */
-declare module 'testcafe-hammerhead/lib/processing/encoding/charset' {
+declare module 'testcafe-hammerhead-up/lib/processing/encoding/charset' {
   type ClassWithoutArgs<Prototype extends object> = import('./class').Class<[], Prototype>;
   type RequestHookCharset = import('./requestHooks').RequestHookCharset;
 
@@ -77,7 +77,7 @@ declare module 'testcafe-hammerhead/lib/processing/encoding/charset' {
  * Internal TestCafe module with request-hooks events factory class.
  * @internal
  */
-declare module 'testcafe-hammerhead/lib/request-pipeline/request-hooks/events/factory' {
+declare module 'testcafe-hammerhead-up/lib/request-pipeline/request-hooks/events/factory' {
   type RequestHookClassWithContext = import('./requestHooks').RequestHookClassWithContext;
 
   const RequestPipelineRequestHookEventFactory: RequestHookClassWithContext;
@@ -130,7 +130,7 @@ declare module 'testcafe-without-typecheck/lib/cli/cli' {
   export const runTestCafePromise: Promise<number>;
 
   /**
-   * Absolute path to testcafe-hammerhead package (to main file), used in testcafe-without-typecheck.
+   * Absolute path to testcafe-hammerhead-up package (to main file), used in testcafe-without-typecheck.
    * @internal
    */
   export const testCafeHammerheadPath: string;

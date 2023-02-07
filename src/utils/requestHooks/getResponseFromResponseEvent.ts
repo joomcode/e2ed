@@ -4,8 +4,8 @@ import {charsetPath, encodingPath} from './testCafeHammerheadPaths';
 
 import type {RequestHookEncoding, RequestHookResponseEvent, Response} from '../../types/internal';
 
-type CharsetType = typeof import('testcafe-hammerhead/lib/processing/encoding/charset').default;
-type EncodingType = typeof import('testcafe-hammerhead/lib/processing/encoding');
+type CharsetType = typeof import('testcafe-hammerhead-up/lib/processing/encoding/charset').default;
+type EncodingType = typeof import('testcafe-hammerhead-up/lib/processing/encoding');
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
 const Charset = require<CharsetType>(charsetPath);

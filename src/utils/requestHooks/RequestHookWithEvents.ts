@@ -15,7 +15,7 @@ import type {
 } from '../../types/internal';
 
 type RequestPipelineRequestHookEventFactoryType =
-  typeof import('testcafe-hammerhead/lib/request-pipeline/request-hooks/events/factory').default;
+  typeof import('testcafe-hammerhead-up/lib/request-pipeline/request-hooks/events/factory').default;
 
 const RequestPipelineRequestHookEventFactory =
   // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require

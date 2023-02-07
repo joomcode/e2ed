@@ -29,7 +29,7 @@
     "create-test-id": "0.0.5",
     "globby": "11.1.0",
     "pngjs": "6.0.0",
-    "testcafe-without-typecheck": "2.3.0-rc.2"
+    "testcafe-without-typecheck": "2.3.0-rc.3"
   },
   "devDependencies": {
     "@types/node": "18.11.19",

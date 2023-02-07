@@ -12,3 +12,4 @@ set -eu
 ./bin/forks/testcafe-without-typecheck/transforms/exportRunTestCafePromiseFromCli.sh
 ./bin/forks/testcafe-without-typecheck/transforms/exportTestCafeHammerheadPath.sh
 ./bin/forks/testcafe-without-typecheck/transforms/wrapGlobalTypes.sh
+./bin/forks/testcafe-without-typecheck/transforms/renameTestCafeHammerhead.sh
