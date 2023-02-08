@@ -5,7 +5,7 @@ import {RESOLVED_PROMISE} from '../../constants/internal';
 import {createTestRunCallback, wrapInTestRunTracker} from '../testRun';
 
 import {addContextToResultsOfClassCreateMethods} from './addContextToResultsOfClassCreateMethods';
-import {eventsFactoryPath} from './testCafeHammerheadPaths';
+import {eventsFactoryPath} from './testCafeHammerheadUpPaths';
 
 import type {
   Fn,

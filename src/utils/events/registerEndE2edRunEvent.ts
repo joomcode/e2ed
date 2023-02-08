@@ -30,7 +30,7 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
     }
   } catch (error) {
     generalLog(
-      'Got an error while collecting the report data or writing the html report and lite report',
+      'Caught an error while collecting the report data or writing the html report and lite report',
       {error},
     );
   } finally {

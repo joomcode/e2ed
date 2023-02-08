@@ -128,10 +128,17 @@ declare module 'testcafe-without-typecheck/lib/cli/cli' {
    * @internal
    */
   export const runTestCafePromise: Promise<number>;
+}
 
+/**
+ * Additional TestCafe module that exports an absolute path to installed testcafe-hammerhead-up package.
+ * @internal
+ */
+declare module 'testcafe-without-typecheck/lib/testCafeHammerheadUpPath' {
   /**
-   * Absolute path to testcafe-hammerhead-up package (to main file), used in testcafe-without-typecheck.
+   * Absolute path to testcafe-hammerhead-up package (to main file in lib directly),
+   * used in testcafe-without-typecheck.
    * @internal
    */
-  export const testCafeHammerheadPath: string;
+  export const testCafeHammerheadUpPath: string;
 }

@@ -4,8 +4,8 @@ import {EVENTS_DIRECTORY_PATH, TMP_DIRECTORY_PATH} from '../../constants/interna
 import {compileUserlandConfig} from '../compileUserlandConfig';
 import {createDirectory, removeDirectory, writeStartInfo} from '../fs';
 import {generalLog} from '../generalLog';
-import {getStartInfo} from '../getStartInfo';
 import {setPackTimeout} from '../packTimeout';
+import {getStartInfo} from '../startInfo';
 
 /**
  * Register start e2ed run event (for report) before running any test.
@@ -19,9 +19,9 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
 
   const startInfo = getStartInfo();
 
-  const {e2edVersion, runEnvironment} = startInfo;
+  const {e2ed, runEnvironment} = startInfo;
   const isDockerRun = runEnvironment === RunEnvironment.Docker;
-  const startMessage = `Run tests ${isDockerRun ? 'in docker' : 'local'} with e2ed@${e2edVersion}`;
+  const startMessage = `Run tests ${isDockerRun ? 'in docker' : 'local'} with e2ed@${e2ed.version}`;
 
   generalLog(startMessage, startInfo);
 

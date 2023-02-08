@@ -1,6 +1,6 @@
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 
-import {charsetPath, encodingPath} from './testCafeHammerheadPaths';
+import {charsetPath, encodingPath} from './testCafeHammerheadUpPaths';
 
 import type {RequestHookEncoding, RequestHookResponseEvent, Response} from '../../types/internal';
 

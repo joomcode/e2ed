@@ -37,6 +37,7 @@ export {getPromiseWithResolveAndReject, getTimeoutPromise, waitForAllProperties}
 export {getContentJsonHeaders, request} from './request';
 export {SetHeadersRequestHook} from './requestHooks';
 export {getRunLabelObject} from './runLabel';
+export {getPackageInfo} from './startInfo';
 export {wrapInTestRunTracker} from './testRun';
 export {isArray} from './typeGuards';
 export {valueToString} from './valueToString';
