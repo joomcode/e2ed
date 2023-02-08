@@ -41,7 +41,7 @@
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-simple-import-sort": "10.0.0",
     "husky": "8.0.3",
-    "prettier": "2.8.3",
+    "prettier": "2.8.4",
     "testcafe": "2.3.0",
     "typescript": "4.9.5"
   },
@@ -68,10 +68,10 @@
   "scripts": {
     "precheck:all": "npm run clear:lint:cache && npm run build",
     "check:all": "npm audit && npm run parallel lint test",
-    "clear:lint:cache": "rm -f .lint-cache",
+    "clear:lint:cache": "rm -f ./node_modules/.cache/lint-*",
     "lint": "npm run parallel lint:es lint:prettier lint:types",
-    "lint:es": "eslint --cache --cache-location=.lint-cache --cache-strategy=content --ext=.ts --max-warnings=0 --report-unused-disable-directives .",
-    "lint:prettier": "prettier --cache --cache-strategy=content --check --ignore-path=.gitignore . !docs/index.html",
+    "lint:es": "eslint --cache --cache-location=./node_modules/.cache/lint-es --cache-strategy=content --ext=.ts --max-warnings=0 --report-unused-disable-directives .",
+    "lint:prettier": "prettier --cache --cache-location=./node_modules/.cache/lint-prettier --cache-strategy=content --check --ignore-path=.gitignore . !docs/index.html",
     "lint:types": "npm run parallel lint:types:base lint:types:build",
     "lint:types:base": "tsc --noEmit",
     "lint:types:build": "if [ -f ./build/tsconfig.json ]; then tsc --noEmit --project ./build; else echo 'No build directory'; fi",
