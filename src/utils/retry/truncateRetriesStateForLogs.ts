@@ -7,9 +7,9 @@ type TruncatedFields =
   | 'successfulTestRunNamesHash'
   | 'visitedTestRunEventsFileName';
 
-type Return = {
+type Return = Readonly<{
   [Key in keyof RetriesState]: Key extends TruncatedFields ? object : RetriesState[Key];
-};
+}>;
 
 /**
  * Truncate a retries state for a short printout.

@@ -1,14 +1,16 @@
-import {runEnvironment, startTimeInMs} from '../configurator';
+import {runEnvironment, startTimeInMs} from '../../configurator';
 import {
   ABSOLUTE_PATH_TO_INSTALLED_E2ED_DIRECTORY,
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
   INSTALLED_E2ED_DIRECTORY_PATH,
-} from '../constants/internal';
-import {version as e2edVersion} from '../package.json';
+} from '../../constants/internal';
 
-import {getFullConfig} from './getFullConfig';
+import {getFullConfig} from '../getFullConfig';
+import {testCafeHammerheadUpPackagePath} from '../paths';
 
-import type {E2edEnvironment, StartInfo} from '../types/internal';
+import {getPackageInfo} from './getPackageInfo';
+
+import type {E2edEnvironment, StartInfo} from '../../types/internal';
 
 /**
  * Get complete start info (CLI params, e2ed environment variables
@@ -26,18 +28,26 @@ export const getStartInfo = (): StartInfo => {
     }
   }
 
+  const e2ed = getPackageInfo('e2ed', ABSOLUTE_PATH_TO_INSTALLED_E2ED_DIRECTORY);
+  const testCafeWithoutTypeCheck = getPackageInfo('testcafe-without-typecheck');
+  const testCafeHammerheadUp = getPackageInfo(
+    'testcafe-hammerhead-up',
+    testCafeHammerheadUpPackagePath,
+  );
+
   return {
     PWD: (process.env as E2edEnvironment).PWD,
-    absolutePathToInstalledE2edDirectory: ABSOLUTE_PATH_TO_INSTALLED_E2ED_DIRECTORY,
     absolutePathToProjectRootDirectory: ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
     'cwd()': process.cwd(),
+    e2ed,
     e2edEnvironmentVariables,
-    e2edVersion,
     fullConfig: getFullConfig(),
     installedE2edDirectoryPath: INSTALLED_E2ED_DIRECTORY_PATH,
     nodeVersion: process.version,
     'process.argv': [...process.argv],
     runEnvironment,
     startTimeInMs,
+    testCafeHammerheadUp,
+    testCafeWithoutTypeCheck,
   };
 };

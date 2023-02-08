@@ -78,7 +78,7 @@ export type {RawRunLabelObject} from './runLabel';
 export type {Selector} from './selectors';
 export type {IsTestSkipped} from './skipTest';
 export type {StackFrame} from './stackTrack';
-export type {StartInfo} from './startInfo';
+export type {PackageInfo, StartInfo} from './startInfo';
 export type {TestCafeSelector, TestController} from './testCafe';
 export type {
   LiteTestRun,

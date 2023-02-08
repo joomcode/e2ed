@@ -2,9 +2,9 @@ import type {Inner} from 'testcafe-without-typecheck';
 
 type MainOptionsKeys = 'headers' | 'method' | 'url';
 
-type Return = {
+type Return = Readonly<{
   [Key in MainOptionsKeys]: Inner.RequestOptions[Key] | undefined;
-};
+}>;
 
 /**
  * Get main request options for printing in logs.
