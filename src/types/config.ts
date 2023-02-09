@@ -1,5 +1,5 @@
 import type {DeepReadonly} from './deep';
-import type {SkipTestsPlaceholder} from './userland';
+import type {CustomPackPropertiesPlaceholder, SkipTestsPlaceholder} from './userland';
 
 /**
  * Own e2ed config properties.
@@ -28,12 +28,13 @@ type OwnE2edConfig<SkipTests = SkipTestsPlaceholder> = Readonly<{
 /**
  * Userland part of TestCafe config.
  */
-type UserlangTestCafeConfig = Readonly<{
+type UserlangTestCafeConfig<CustomPackProperties = CustomPackPropertiesPlaceholder> = Readonly<{
   ajaxRequestTimeout: number;
   assertionTimeout: number;
   browserInitTimeout: number;
   browser: string;
   concurrency: number;
+  customPackProperties: CustomPackProperties;
   pageRequestTimeout: number;
   port1: number;
   port2: number;
@@ -67,8 +68,10 @@ export type FrozenPartOfTestCafeConfig = DeepReadonly<{
 /**
  * The complete userland e2ed config.
  */
-export type UserlandConfig<SkipTests = SkipTestsPlaceholder> = UserlangTestCafeConfig &
-  OwnE2edConfig<SkipTests>;
+export type UserlandConfig<
+  SkipTests = SkipTestsPlaceholder,
+  CustomPackProperties = CustomPackPropertiesPlaceholder,
+> = UserlangTestCafeConfig<CustomPackProperties> & OwnE2edConfig<SkipTests>;
 
 /**
  * The complete e2ed config object.

@@ -11,6 +11,7 @@ import {skipTests} from './skipTests';
 
 import type {Config} from 'e2ed/configurator';
 
+import type {CustomPackProperties} from './types/customPackProperties';
 import type {SkipTests} from './types/skipTests';
 
 const isLocalRun = runEnvironment === RunEnvironment.Local;
@@ -21,12 +22,13 @@ const browserFlags = ['--disable-dev-shm-usage', '--disable-web-security'];
 /**
  * The complete config of pack of tests.
  */
-const config: Config<SkipTests> = {
+const config: Config<SkipTests, CustomPackProperties> = {
   ajaxRequestTimeout: 40_000,
   assertionTimeout: 10_000,
   browser: [browser, ...browserFlags].join(' '),
   browserInitTimeout: 60_000,
   concurrency: isLocalRun ? 1 : 2,
+  customPackProperties: {name: 'allTests'},
   dockerImage: 'e2edhub/e2ed',
   liteReportFileName: 'lite-report.json',
   maxRetriesCountInDocker: 3,
