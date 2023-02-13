@@ -10,7 +10,9 @@ import {
   waitForRequest,
   waitForResponse,
 } from 'e2ed/actions';
-import {getCurrentUrl} from 'e2ed/utils';
+import {getCurrentUrl, getFullConfig} from 'e2ed/utils';
+
+import type {CustomPackProperties, SkipTests} from 'autotests/types';
 
 const language = 'en';
 const searchQuery = 'foo';
@@ -26,6 +28,10 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}
       },
       () => undefined,
     );
+
+  const {customPackProperties} = getFullConfig<SkipTests, CustomPackProperties>();
+
+  await expect(customPackProperties.name, 'custom pack properties is correct').eql('allTests');
 
   const mainPage = await navigateToPage(Main, {language});
 

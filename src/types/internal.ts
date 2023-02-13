@@ -100,7 +100,12 @@ export type {
   IsIncludeUndefined,
   Void,
 } from './undefined';
-export type {SkipTestsPlaceholder, TestMetaPlaceholder, UserlandHooks} from './userland';
+export type {
+  CustomPackPropertiesPlaceholder,
+  SkipTestsPlaceholder,
+  TestMetaPlaceholder,
+  UserlandHooks,
+} from './userland';
 export type {
   Any,
   GetParamsType,

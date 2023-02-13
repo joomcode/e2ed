@@ -36,6 +36,7 @@ rules:
         - '**/context/*'
         - '**/e2ed/*'
         - '**/generators/internal'
+        - '**/types/customPackProperties'
         - '**/types/internal'
         - '**/types/skipTests'
         - '**/utils/*'

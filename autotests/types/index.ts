@@ -8,6 +8,7 @@ export type {
   ApiUserSignUpRequest,
   ApiUserSignUpResponse,
 } from './api';
+export type {CustomPackProperties} from './customPackProperties';
 export type {
   ApiDevice,
   ApiDeviceParams,
