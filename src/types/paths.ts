@@ -6,13 +6,12 @@ import type {Brand} from './brand';
 export type AbsolutePathToDirectory = Brand<string, 'AbsolutePathToDirectory'>;
 
 /**
- * Path to the directory from project root (for example "e2ed/tests").
+ * Path to the directory from project root (for example "autotests/tests").
  */
 export type DirectoryPathFromRoot = Brand<string, 'DirectoryPathFromRoot'>;
 
 /**
- * Path to the file from project root (for example "e2ed/config.ts").
- * @internal
+ * Path to the file from project root (for example "autotests/packs/allTests.ts").
  */
 export type FilePathFromRoot = Brand<string, 'FilePathFromRoot'>;
 

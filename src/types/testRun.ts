@@ -1,5 +1,5 @@
 import type {TestRunStatus} from '../constants/internal';
-import type {E2edError} from '../utils/E2edError';
+import type {E2edError} from '../utils/error';
 
 import type {Brand} from './brand';
 import type {UtcTimeInMs} from './date';

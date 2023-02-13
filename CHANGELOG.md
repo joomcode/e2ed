@@ -288,8 +288,8 @@
 
   fix: temporary skip test of waitForResponse (need research)
 
-- [Kuraev Merge remote-tracking branch 'origin/main' into WEB-6125_parentSelector](https://github.com/joomcode/e2ed/commit/550476ca8452d4e12906ec76016410dbee3667fe) ([Roman](https://github.com/Roman))
-- [Kuraev feat: add locatorIdInParentSelector](https://github.com/joomcode/e2ed/commit/4d42f88aaefcb78efa0884dfb0a138281f9b4628) ([Roman](https://github.com/Roman))
+- [Merge remote-tracking branch 'origin/main' into WEB-6125_parentSelector](https://github.com/joomcode/e2ed/commit/550476ca8452d4e12906ec76016410dbee3667fe) ([naorunaoru](https://github.com/naorunaoru))
+- [feat: add locatorIdInParentSelector](https://github.com/joomcode/e2ed/commit/4d42f88aaefcb78efa0884dfb0a138281f9b4628) ([naorunaoru](https://github.com/naorunaoru))
 - [chore: update devDependencies (@types/node, etc)](https://github.com/joomcode/e2ed/commit/e40085fed8641b6126bdd46f406b83d12ec85773) ([uid11](https://github.com/uid11))
 - [fix: support TS 4.4](https://github.com/joomcode/e2ed/commit/f6475ac2881c52e93aa77989c0d251f5624b49f8) ([uid11](https://github.com/uid11))
 

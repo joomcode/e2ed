@@ -1,9 +1,9 @@
-import {CONSOLE_INSPECT_OPTIONS} from '../../constants/internal';
+import {CONSOLE_INSPECT_OPTIONS, e2edEnvironment} from '../../constants/internal';
 
 import {getPrintedRunLabel} from '../runLabel';
 import {valueToString} from '../valueToString';
 
-import type {E2edEnvironment, GeneralLog} from '../../types/internal';
+import type {GeneralLog} from '../../types/internal';
 
 /**
  * General (out of test context) log to stdout.
@@ -11,7 +11,7 @@ import type {E2edEnvironment, GeneralLog} from '../../types/internal';
  */
 export const generalLog: GeneralLog = (message, payload) => {
   const dateTimeInIso = new Date().toISOString();
-  const printedRunLabel = getPrintedRunLabel((process.env as E2edEnvironment).E2ED_RUN_LABEL);
+  const printedRunLabel = getPrintedRunLabel(e2edEnvironment.E2ED_RUN_LABEL);
 
   const printedString =
     payload === undefined ? '' : valueToString(payload, CONSOLE_INSPECT_OPTIONS);

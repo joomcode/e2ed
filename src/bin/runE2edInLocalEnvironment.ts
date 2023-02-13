@@ -1,13 +1,21 @@
 import {RunEnvironment, setRunEnvironment} from '../configurator';
+import {assertValueIsDefined} from '../utils/asserts';
 import {setProcessEndHandlers} from '../utils/end';
 import {registerEndE2edRunEvent, registerStartE2edRunEvent} from '../utils/events';
 import {logStartE2edError} from '../utils/generalLog';
-import {runTestsWithArgs} from '../utils/runTestsWithArgs';
+import {runPackWithArgs, setPathToPack} from '../utils/pack';
 
-setRunEnvironment(RunEnvironment.Local);
+import type {FilePathFromRoot} from '../types/internal';
+
+const [pathToPack] = process.argv.splice(2, 1);
+
+assertValueIsDefined(pathToPack, 'pathToPack is defined', {argv: process.argv});
+
+setPathToPack(pathToPack as FilePathFromRoot);
 setProcessEndHandlers();
+setRunEnvironment(RunEnvironment.Local);
 
-const e2edRunPromise = registerStartE2edRunEvent().then(runTestsWithArgs, logStartE2edError);
+const e2edRunPromise = registerStartE2edRunEvent().then(runPackWithArgs).catch(logStartE2edError);
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 e2edRunPromise.finally(registerEndE2edRunEvent);

@@ -1,12 +1,13 @@
-import {createTestFunction} from 'e2ed';
+import {createProjectApi} from 'e2ed';
 
-import {config} from './config';
 import * as hooks from './hooks';
 
-import type {CustomPackProperties, SkipTests, TestMeta} from './types';
+import type {TestMeta} from 'autotests/types';
+import type {Pack} from 'autotests/types/pack';
 
 /**
  * Test function that describes the test or the task
- * (test does not necessarily contain checks).
+ * (test does not necessarily contain checks), and getFullPackconfig function.
+ * that return the full pack configuration object.
  */
-export const it = createTestFunction<TestMeta, SkipTests, CustomPackProperties>({config, hooks});
+export const {getFullPackConfig, test: it} = createProjectApi<TestMeta, Pack>(hooks);

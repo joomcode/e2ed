@@ -2,7 +2,7 @@ import {ClientFunction} from 'testcafe-without-typecheck';
 
 import {getTestIdleTimeout} from '../../context/testIdleTimeout';
 
-import {E2edError} from '../E2edError';
+import {E2edError} from '../error';
 import {getPromiseWithResolveAndReject} from '../promise';
 import {wrapInTestRunTracker} from '../testRun';
 

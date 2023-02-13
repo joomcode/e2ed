@@ -13,5 +13,5 @@ export {useContext} from './useContext';
  * Public modules, dependent on internal utils.
  */
 export {createClientFunction} from './createClientFunction';
-export {createTestFunction} from './createTestFunction';
+export {createProjectApi} from './createProjectApi';
 export {expect} from './expect';

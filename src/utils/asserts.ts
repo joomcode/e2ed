@@ -1,4 +1,4 @@
-import {E2edError} from './E2edError';
+import {E2edError} from './error';
 
 import type {LogParams} from '../types/internal';
 

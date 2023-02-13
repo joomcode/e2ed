@@ -2,15 +2,17 @@ import {runEnvironment, startTimeInMs} from '../../configurator';
 import {
   ABSOLUTE_PATH_TO_INSTALLED_E2ED_DIRECTORY,
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
+  e2edEnvironment,
   INSTALLED_E2ED_DIRECTORY_PATH,
 } from '../../constants/internal';
 
-import {getFullConfig} from '../getFullConfig';
+import {getFullPackConfig} from '../getFullPackConfig';
+import {getPathToPack} from '../pack';
 import {testCafeHammerheadUpPackagePath} from '../paths';
 
 import {getPackageInfo} from './getPackageInfo';
 
-import type {E2edEnvironment, StartInfo} from '../../types/internal';
+import type {StartInfo} from '../../types/internal';
 
 /**
  * Get complete start info (CLI params, e2ed environment variables
@@ -20,8 +22,8 @@ import type {E2edEnvironment, StartInfo} from '../../types/internal';
 export const getStartInfo = (): StartInfo => {
   const e2edEnvironmentVariables: Record<string, string | undefined> = {};
 
-  for (const name of Object.keys(process.env).sort()) {
-    const value = process.env[name];
+  for (const name of Object.keys(e2edEnvironment).sort()) {
+    const value = e2edEnvironment[name];
 
     if (name.toUpperCase().startsWith('E2ED')) {
       e2edEnvironmentVariables[name] = value;
@@ -36,14 +38,15 @@ export const getStartInfo = (): StartInfo => {
   );
 
   return {
-    PWD: (process.env as E2edEnvironment).PWD,
+    PWD: e2edEnvironment.PWD,
     absolutePathToProjectRootDirectory: ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
     'cwd()': process.cwd(),
     e2ed,
     e2edEnvironmentVariables,
-    fullConfig: getFullConfig(),
+    fullPackConfig: getFullPackConfig(),
     installedE2edDirectoryPath: INSTALLED_E2ED_DIRECTORY_PATH,
     nodeVersion: process.version,
+    pathToPack: getPathToPack(),
     'process.argv': [...process.argv],
     runEnvironment,
     startTimeInMs,

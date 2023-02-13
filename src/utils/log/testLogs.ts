@@ -3,7 +3,7 @@ import {join} from 'node:path';
 
 import {REPORTS_DIRECTORY_PATH, RESOLVED_PROMISE} from '../../constants/internal';
 
-import {getFullConfig} from '../getFullConfig';
+import {getFullPackConfig} from '../getFullPackConfig';
 
 /**
  * Array of test logs. Logs are stored in this array for further saving in test logs file.
@@ -24,7 +24,7 @@ export const addTestLog = (logMessage: string): void => {
  * @internal
  */
 export const writeTestLogsToFile = (): Promise<void> => {
-  const {testLogsFileName} = getFullConfig();
+  const {testLogsFileName} = getFullPackConfig();
 
   if (testLogsFileName === null) {
     return RESOLVED_PROMISE;

@@ -1,10 +1,10 @@
-import type {StackFrame} from '../types/internal';
+import type {StackFrame} from '../../types/internal';
 
 /**
  * For using arguments.callee we need to eval this function in non-strict mode.
  */
 // eslint-disable-next-line no-restricted-syntax
-const getStackTraceBody = function getStackTrace(): StackFrame[] {
+const getStackTraceBody = function getStackTrace(): readonly StackFrame[] | undefined {
   const savedLimit = Error.stackTraceLimit;
 
   Error.stackTraceLimit = 5000;
@@ -21,7 +21,7 @@ const getStackTraceBody = function getStackTrace(): StackFrame[] {
   // eslint-disable-next-line no-caller, no-restricted-properties
   Error.captureStackTrace(error, arguments.callee);
 
-  const {stack} = error as unknown as {stack: StackFrame[]};
+  const {stack} = error as unknown as {stack: readonly StackFrame[]};
 
   Error.prepareStackTrace = originalPrepareStackTrace;
 

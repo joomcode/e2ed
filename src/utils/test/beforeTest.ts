@@ -1,4 +1,4 @@
-import {TestRunStatus} from '../../constants/internal';
+import {e2edEnvironment, TestRunStatus} from '../../constants/internal';
 import {setMeta} from '../../context/meta';
 import {setRunId} from '../../context/runId';
 import {setTestIdleTimeout} from '../../context/testIdleTimeout';
@@ -6,7 +6,7 @@ import {setTestTimeout} from '../../context/testTimeout';
 
 import {assertValueIsDefined} from '../asserts';
 import {registerStartTestRunEvent} from '../events';
-import {getFullConfig} from '../getFullConfig';
+import {getFullPackConfig} from '../getFullPackConfig';
 import {getRelativeTestFilePath} from '../getRelativeTestFilePath';
 import {getUserlandHooks} from '../userlandHooks';
 
@@ -14,7 +14,6 @@ import {getTestFnAndReject} from './getTestFnAndReject';
 import {processBrokenTestRuns} from './processBrokenTestRuns';
 
 import type {
-  E2edEnvironment,
   RunId,
   Test,
   TestController,
@@ -39,7 +38,7 @@ export const beforeTest = ({previousRunId, runId, test, testController}: Options
   setMeta(test.options.meta);
 
   const {testIdleTimeout: testIdleTimeoutFromConfig, testTimeout: testTimeoutFromConfig} =
-    getFullConfig();
+    getFullPackConfig();
   const testIdleTimeout = test.options.testIdleTimeout ?? testIdleTimeoutFromConfig;
   const testTimeout = test.options.testTimeout ?? testTimeoutFromConfig;
 
@@ -70,7 +69,7 @@ export const beforeTest = ({previousRunId, runId, test, testController}: Options
     testTimeout,
   });
 
-  const runLabel = (process.env as E2edEnvironment).E2ED_RUN_LABEL;
+  const runLabel = e2edEnvironment.E2ED_RUN_LABEL;
   const utcTimeInMs = Date.now() as UtcTimeInMs;
 
   assertValueIsDefined(runLabel, 'runLabel is defined', {runId, testStaticOptions});

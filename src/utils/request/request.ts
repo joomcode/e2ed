@@ -4,7 +4,7 @@ import {URL} from 'node:url';
 
 import {LogEventStatus, LogEventType} from '../../constants/internal';
 
-import {E2edError} from '../E2edError';
+import {E2edError} from '../error';
 import {log} from '../log';
 import {wrapInTestRunTracker} from '../testRun';
 

@@ -1,6 +1,6 @@
 import {RunEnvironment} from '../../configurator';
 
-import {getFullConfig} from '../getFullConfig';
+import {getFullPackConfig} from '../getFullPackConfig';
 import {getUnvisitedTestFilePaths} from '../getUnvisitedTestFilePaths';
 
 import type {FullTestRun} from '../../types/internal';
@@ -13,7 +13,7 @@ export const getReportErrors = async (
   runEnvironment: RunEnvironment,
   fullTestRuns: readonly FullTestRun[],
 ): Promise<readonly string[]> => {
-  const {testFileGlobs} = getFullConfig();
+  const {testFileGlobs} = getFullPackConfig();
   const errors: string[] = [];
 
   if (runEnvironment === RunEnvironment.Docker) {

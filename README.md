@@ -39,7 +39,7 @@ npx e2ed-init
 Then run tests locally for `https://google.com`:
 
 ```sh
-E2ED_ORIGIN=https://google.com npx e2ed
+E2ED_ORIGIN=https://google.com npx e2ed ./autotests/packs/allTests.ts
 ```
 
 ### Docker
@@ -53,17 +53,23 @@ docker pull e2edhub/e2ed
 And run tests for `https://google.com` in docker container:
 
 ```sh
-E2ED_ORIGIN=https://google.com ./autotests/bin/runDocker.sh
+E2ED_ORIGIN=https://google.com ./autotests/bin/runDocker.sh ./autotests/packs/allTests.ts
 ```
 
-### Config
+### Pack
 
-The config is defined in the file `autotests/config.ts`.
-You can locally override some config fields in an `autotests/overrideConfig.ts` file that is not included in the repository.
+`e2ed` always runs packs of tests (or jobs), one pack at a time. A pack is a set of tests (tasks)
+with their launch config, described in one file. `e2ed` takes one mandatory argument — the path
+to the pack (absolute or relative to the current directory).
 
-#### Base config fields
+Packs are usually stored in the `autotests/packs` directory.
+
+#### Base pack config fields
 
 `concurrency: number`: the number of browser windows in which tests will run in parallel.
+
+`customPackProperties: CustomPackProperties`: A custom set of fields defined within the project.
+These fields allow, for example, to customize the behavior of hooks for different packs.
 
 `liteReportFileName: string | null`: the name of the file under which, after running the tests,
 the lite JSON report will be saved in the `autotests/reports` directory, for example, `lite-report.json`.

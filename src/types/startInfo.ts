@@ -1,8 +1,8 @@
 import type {RunEnvironment} from '../configurator';
 
-import type {FullConfig} from './config';
+import type {FullPackConfig} from './config';
 import type {UtcTimeInMs} from './date';
-import type {AbsolutePathToDirectory, DirectoryPathFromRoot} from './paths';
+import type {AbsolutePathToDirectory, DirectoryPathFromRoot, FilePathFromRoot} from './paths';
 
 /**
  * Information about used installed npm package (usually from node_modules).
@@ -20,9 +20,10 @@ export type StartInfo = Readonly<{
   'cwd()': string;
   e2ed: PackageInfo;
   e2edEnvironmentVariables: Record<string, string | undefined>;
-  fullConfig: FullConfig;
+  fullPackConfig: FullPackConfig;
   installedE2edDirectoryPath: DirectoryPathFromRoot;
   nodeVersion: string;
+  pathToPack: FilePathFromRoot;
   'process.argv': readonly string[];
   runEnvironment: RunEnvironment;
   startTimeInMs: UtcTimeInMs;

@@ -1,6 +1,6 @@
 import {CREATE_PAGE_TOKEN} from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
-import {getFullConfig} from './utils/getFullConfig';
+import {getFullPackConfig} from './utils/getFullPackConfig';
 
 import type {PageRoute} from './PageRoute';
 import type {AsyncVoid, PageClassTypeArgs, PARAMS_KEY_TYPE} from './types/internal';
@@ -24,7 +24,7 @@ export abstract class Page<PageParams = undefined> {
 
     this.pageParams = pageParams as PageParams;
 
-    const {pageStabilizationInterval} = getFullConfig();
+    const {pageStabilizationInterval} = getFullPackConfig();
 
     this.pageStabilizationInterval = pageStabilizationInterval;
   }

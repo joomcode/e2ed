@@ -1,16 +1,16 @@
-import {CONSOLE_INSPECT_OPTIONS, LogEventType} from '../../constants/internal';
+import {CONSOLE_INSPECT_OPTIONS, e2edEnvironment, LogEventType} from '../../constants/internal';
 import {getRunId} from '../../context/runId';
 
 import {assertValueIsDefined} from '../asserts';
 // eslint-disable-next-line import/no-internal-modules
 import {registerLogEvent} from '../events/registerLogEvent';
-import {getFullConfig} from '../getFullConfig';
+import {getFullPackConfig} from '../getFullPackConfig';
 import {getUserlandHooks} from '../userlandHooks';
 import {valueToString} from '../valueToString';
 
 import {addTestLog} from './testLogs';
 
-import type {E2edEnvironment, Log, LogPayload, UtcTimeInMs} from '../../types/internal';
+import type {Log, LogPayload, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Log every actions and API requests in E2ED tests.
@@ -21,7 +21,7 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
   const time = Date.now() as UtcTimeInMs;
   const dateTimeInIso = new Date(time).toISOString();
   const runId = getRunId();
-  const runLabel = (process.env as E2edEnvironment).E2ED_RUN_LABEL;
+  const runLabel = e2edEnvironment.E2ED_RUN_LABEL;
   const payload = typeof maybePayload === 'object' ? (maybePayload as LogPayload) : undefined;
   const type =
     typeof maybePayload === 'number'
@@ -31,7 +31,7 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
 
   registerLogEvent(runId, {message, payload, time, type});
 
-  const {printTestLogsInConsole, testLogsFileName} = getFullConfig();
+  const {printTestLogsInConsole, testLogsFileName} = getFullPackConfig();
 
   if (printTestLogsInConsole || testLogsFileName) {
     assertValueIsDefined(runLabel, 'runLabel is defined', {message, payload, runId, type});
