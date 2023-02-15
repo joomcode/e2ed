@@ -2,7 +2,7 @@ import {normalize} from 'node:path';
 
 import globby from 'globby';
 
-import {getFullConfig} from './getFullConfig';
+import {getFullPackConfig} from './getFullPackConfig';
 
 import type {TestFilePath} from '../types/internal';
 
@@ -11,7 +11,7 @@ import type {TestFilePath} from '../types/internal';
  * @internal
  */
 export const collectTestFilePaths = async (): Promise<readonly TestFilePath[]> => {
-  const {testFileGlobs} = getFullConfig();
+  const {testFileGlobs} = getFullPackConfig();
 
   const rawTestFilesPaths = await globby(testFileGlobs);
   const testFilesPaths = rawTestFilesPaths.map(normalize as (path: string) => TestFilePath);

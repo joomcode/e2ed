@@ -52,23 +52,13 @@ export const REPORTS_DIRECTORY_PATH = join(
 export const TMP_DIRECTORY_PATH = join(REPORTS_DIRECTORY_PATH, 'tmp') as DirectoryPathFromRoot;
 
 /**
- * Relative (from root) path to directory with compiled userland config file.
+ * Relative (from root) path to directory with compiled pack configuration files.
  * @internal
  */
 export const COMPILED_USERLAND_CONFIG_DIRECTORY = join(
   TMP_DIRECTORY_PATH,
   'config',
 ) as DirectoryPathFromRoot;
-
-/**
- * Relative (from root) path to compiled userland config file.
- * @internal
- */
-export const COMPILED_USERLAND_CONFIG_PATH = join(
-  COMPILED_USERLAND_CONFIG_DIRECTORY,
-  AUTOTESTS_DIRECTORY_PATH,
-  'config.js',
-);
 
 /**
  * Relative (from root) path to events directory.
@@ -80,19 +70,14 @@ export const EVENTS_DIRECTORY_PATH = join(TMP_DIRECTORY_PATH, 'events') as Direc
  * Relative (from root) path to start info JSON file.
  * @internal
  */
-export const START_INFO_PATH = join(TMP_DIRECTORY_PATH, 'startInfo.json');
+export const START_INFO_PATH = join(TMP_DIRECTORY_PATH, 'startInfo.json') as FilePathFromRoot;
 
 /**
- * Relative (from root) path to userland config file.
+ * Relative (from root) path to testcaferc file,
+ * that plays the role of the internal TestCafe config.
  * @internal
  */
-export const USERLAND_CONFIG_PATH = join(AUTOTESTS_DIRECTORY_PATH, 'config.ts') as FilePathFromRoot;
-
-/**
- * Relative (from root) path to userland override config file.
- * @internal
- */
-export const USERLAND_OVERRIDE_CONFIG_PATH = join(
-  AUTOTESTS_DIRECTORY_PATH,
-  'overrideConfig.ts',
+export const TESTCAFERC_PATH = join(
+  INSTALLED_E2ED_DIRECTORY_PATH,
+  'testcaferc.js',
 ) as FilePathFromRoot;

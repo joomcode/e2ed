@@ -1,27 +1,36 @@
 /**
- * @file Full e2ed configuration (Extended TestCafe config) for running tests.
- * Don't import this module. Instead, use utils/getFullConfig.ts.
+ * @file Full pack configuration (extended TestCafe configuration) for running tests.
+ * Don't import this module. Instead, use utils/getFullPackConfig.
  */
 
 import {join} from 'node:path';
 
 import {
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
-  COMPILED_USERLAND_CONFIG_PATH,
+  COMPILED_USERLAND_CONFIG_DIRECTORY,
   REPORTS_DIRECTORY_PATH,
 } from './constants/internal';
+import {assertValueIsTrue} from './utils/asserts';
+import {getPathToPack} from './utils/pack';
 
-import type {FrozenPartOfTestCafeConfig, FullConfig, UserlandConfig} from './types/internal';
+import type {FrozenPartOfTestCafeConfig, FullPackConfig, UserlandConfig} from './types/internal';
+
+const pathToPack = getPathToPack();
+
+assertValueIsTrue(pathToPack.endsWith('.ts'), 'pathToPack ends with ".ts"', {pathToPack});
+
+const pathFromCompiledConfigDirectoryToCompiledPack = `${pathToPack.slice(0, -3)}.js`;
 
 const absoluteCompiledUserlandConfigPath = join(
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
-  COMPILED_USERLAND_CONFIG_PATH,
+  COMPILED_USERLAND_CONFIG_DIRECTORY,
+  pathFromCompiledConfigDirectoryToCompiledPack,
 );
 
 const pathToScreenshotsDirectory = join(REPORTS_DIRECTORY_PATH, 'screenshots');
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
-const userlandConfig = require<{config: UserlandConfig}>(absoluteCompiledUserlandConfigPath).config;
+const userlandConfig = require<{pack: UserlandConfig}>(absoluteCompiledUserlandConfigPath).pack;
 
 const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
   color: true,
@@ -44,14 +53,14 @@ const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
   skipJsErrors: true,
 };
 
-const fullConfig: FullConfig = {
+const fullPackConfig: FullPackConfig = {
   ...userlandConfig,
   browsers: userlandConfig.browser,
   src: userlandConfig.testFileGlobs,
   ...frozenPartOfTestCafeConfig,
 };
 
-Object.assign(exports, fullConfig);
+Object.assign(exports, fullPackConfig);
 
 // eslint-disable-next-line import/no-unused-modules
-export {fullConfig};
+export {fullPackConfig};

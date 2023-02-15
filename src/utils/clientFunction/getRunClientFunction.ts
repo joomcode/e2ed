@@ -1,7 +1,7 @@
 import {LogEventType} from '../../constants/internal';
 
 import {assertValueIsDefined} from '../asserts';
-import {E2edError} from '../E2edError';
+import {E2edError} from '../error';
 import {getFunctionCode} from '../fn';
 import {log} from '../log';
 import {wrapInTestRunTracker} from '../testRun';

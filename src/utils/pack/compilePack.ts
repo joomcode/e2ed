@@ -1,5 +1,3 @@
-import {existsSync} from 'node:fs';
-
 import {
   createProgram,
   flattenDiagnosticMessageText,
@@ -10,12 +8,13 @@ import {
 } from 'typescript';
 
 import {
+  AUTOTESTS_DIRECTORY_PATH,
   COMPILED_USERLAND_CONFIG_DIRECTORY,
-  USERLAND_CONFIG_PATH,
-  USERLAND_OVERRIDE_CONFIG_PATH,
-} from '../constants/internal';
+} from '../../constants/internal';
 
-import {generalLog} from './generalLog';
+import {generalLog} from '../generalLog';
+
+import {getPathToPack} from './getPathToPack';
 
 import type {CompilerOptions} from 'typescript';
 
@@ -24,6 +23,10 @@ const compilerOptions: CompilerOptions = {
   esModuleInterop: true,
   module: ModuleKind.CommonJS,
   outDir: COMPILED_USERLAND_CONFIG_DIRECTORY,
+  paths: {
+    [AUTOTESTS_DIRECTORY_PATH]: [`./${AUTOTESTS_DIRECTORY_PATH}/index.ts`],
+    [`${AUTOTESTS_DIRECTORY_PATH}/*`]: [`./${AUTOTESTS_DIRECTORY_PATH}/*`],
+  },
   resolveJsonModule: true,
   rootDir: '.',
   skipLibCheck: true,
@@ -32,17 +35,13 @@ const compilerOptions: CompilerOptions = {
 };
 
 /**
- * Compile userland config.ts file before running tests.
+ * Compiles pack file before running tests (or tasks).
  * @internal
  */
-export const compileUserlandConfig = (): void => {
-  const rootNames = [USERLAND_CONFIG_PATH];
+export const compilePack = (): void => {
+  const pathToPack = getPathToPack();
 
-  if (existsSync(USERLAND_OVERRIDE_CONFIG_PATH)) {
-    rootNames.push(USERLAND_OVERRIDE_CONFIG_PATH);
-  }
-
-  const program = createProgram(rootNames, compilerOptions);
+  const program = createProgram([pathToPack], compilerOptions);
   const {diagnostics} = program.emit();
 
   const allDiagnostics = getPreEmitDiagnostics(program).concat(diagnostics);
@@ -60,6 +59,6 @@ export const compileUserlandConfig = (): void => {
       logData.file = `${diagnostic.file.fileName} (${line + 1},${character + 1})`;
     }
 
-    generalLog('Error on compiling config.ts', logData);
+    generalLog(`Error on compiling pack ${pathToPack}`, logData);
   });
 };

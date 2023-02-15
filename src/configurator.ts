@@ -12,7 +12,7 @@ const startTimeInMs = (Number(process.env[START_TIME_VARIABLE_NAME]) || Date.now
 process.env[START_TIME_VARIABLE_NAME] = String(startTimeInMs);
 
 // eslint-disable-next-line import/no-internal-modules, import/no-unused-modules
-export type {UserlandConfig as Config} from './types/config';
+export type {UserlandConfig as PackConfig} from './types/config';
 
 /**
  * Run environment enum (run in docker or local run).

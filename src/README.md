@@ -14,7 +14,7 @@ Modules in the dependency graph should only import the modules above them:
 7. `generators/*`
 8. `utils/paths`
 9. `utils/valueToString`
-10. `utils/E2edError`
+10. `utils/error`
 11. `utils/asserts`
 12. `utils/runLabel`
 13. `utils/generalLog`
@@ -26,5 +26,5 @@ Modules in the dependency graph should only import the modules above them:
 19. `testController`
 20. `useContext`
 21. `context/*`
-22. `utils/getFullConfig`
+22. `utils/getFullPackConfig`
 23. ...

@@ -1,17 +1,13 @@
-import {join} from 'node:path';
-
-import {INSTALLED_E2ED_DIRECTORY_PATH} from '../../constants/internal';
+import {e2edEnvironment, TESTCAFERC_PATH} from '../../constants/internal';
 import {createTestCafe} from '../../testcafe';
 
-import {E2edError} from '../E2edError';
+import {E2edError} from '../error';
 import {generalLog} from '../generalLog';
-import {getFullConfig} from '../getFullConfig';
+import {getFullPackConfig} from '../getFullPackConfig';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
-import type {E2edEnvironment, RunRetryOptions} from '../../types/internal';
-
-const pathToTestcaferc = join(INSTALLED_E2ED_DIRECTORY_PATH, 'testcaferc.js');
+import type {RunRetryOptions} from '../../types/internal';
 
 /**
  * Runs tests (via TestCafe JavaScript API, for running one retry in docker).
@@ -23,15 +19,15 @@ export const runTests = async ({
   runLabel,
   successfulTestRunNamesHash,
 }: RunRetryOptions): Promise<void> => {
-  (process.env as E2edEnvironment).E2ED_RUN_LABEL = runLabel;
+  e2edEnvironment.E2ED_RUN_LABEL = runLabel;
 
   let maybeTestCafe: Inner.TestCafe | undefined;
 
   try {
-    const {browser} = getFullConfig();
+    const {browser} = getFullPackConfig();
     const browsers = [browser];
 
-    const testCafe = await createTestCafe({browsers, configFile: pathToTestcaferc});
+    const testCafe = await createTestCafe({browsers, configFile: TESTCAFERC_PATH});
 
     maybeTestCafe = testCafe;
 

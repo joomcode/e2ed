@@ -1,10 +1,9 @@
 import {RunEnvironment} from '../../configurator';
 import {EVENTS_DIRECTORY_PATH, TMP_DIRECTORY_PATH} from '../../constants/internal';
 
-import {compileUserlandConfig} from '../compileUserlandConfig';
 import {createDirectory, removeDirectory, writeStartInfo} from '../fs';
 import {generalLog} from '../generalLog';
-import {setPackTimeout} from '../packTimeout';
+import {compilePack, setPackTimeout} from '../pack';
 import {getStartInfo} from '../startInfo';
 
 /**
@@ -15,7 +14,7 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
   await removeDirectory(TMP_DIRECTORY_PATH);
   await createDirectory(EVENTS_DIRECTORY_PATH);
 
-  compileUserlandConfig();
+  compilePack();
 
   const startInfo = getStartInfo();
 

@@ -1,18 +1,15 @@
 /**
- * @file Userland configuration for e2ed.
+ * @file Pack file (file with configuration of pack).
  * Do not import anything from common index files into this file other than
- * the types and values from configurator, or optional local overrideConfig
- * (because the config is compiled separately from the tests themselves).
+ * the types and values from configurator, or from point imports for pack configuration,
+ * like `./skipTests` (because the pack config is compiled separately from the tests themselves).
  */
 
 import {RunEnvironment, runEnvironment} from 'e2ed/configurator';
 
-import {skipTests} from './skipTests';
+import {skipTests} from '../skipTests';
 
-import type {Config} from 'e2ed/configurator';
-
-import type {CustomPackProperties} from './types/customPackProperties';
-import type {SkipTests} from './types/skipTests';
+import type {Pack} from 'autotests/types/pack';
 
 const isLocalRun = runEnvironment === RunEnvironment.Local;
 
@@ -20,9 +17,9 @@ const browser = isLocalRun ? 'chrome:headless' : 'chromium:headless';
 const browserFlags = ['--disable-dev-shm-usage', '--disable-web-security'];
 
 /**
- * The complete config of pack of tests.
+ * Pack of tests or tasks (pack configuration object).
  */
-const config: Config<SkipTests, CustomPackProperties> = {
+export const pack: Pack = {
   ajaxRequestTimeout: 40_000,
   assertionTimeout: 10_000,
   browser: [browser, ...browserFlags].join(' '),
@@ -48,12 +45,3 @@ const config: Config<SkipTests, CustomPackProperties> = {
   waitForRequestTimeout: 30_000,
   waitForResponseTimeout: 30_000,
 };
-
-try {
-  // eslint-disable-next-line
-  const {overrideConfig} = require('./overrideConfig');
-
-  Object.assign(config, overrideConfig);
-} catch {}
-
-export {config};

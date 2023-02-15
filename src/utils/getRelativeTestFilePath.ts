@@ -2,7 +2,7 @@ import {relative} from 'node:path';
 
 import {ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY} from '../constants/internal';
 
-import {E2edError} from './E2edError';
+import {E2edError} from './error';
 
 import type {TestFilePath} from '../types/internal';
 

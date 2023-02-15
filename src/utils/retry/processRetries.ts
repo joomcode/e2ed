@@ -1,7 +1,7 @@
 import {EndE2edReason} from '../../constants/internal';
 
 import {endE2ed, endE2edReason} from '../end';
-import {getFullConfig} from '../getFullConfig';
+import {getFullPackConfig} from '../getFullPackConfig';
 
 import {processRetry} from './processRetry';
 
@@ -12,7 +12,7 @@ import type {RetriesState} from '../../types/internal';
  * @internal
  */
 export const processRetries = async (retriesState: RetriesState): Promise<void> => {
-  const fullConfig = getFullConfig();
+  const fullConfig = getFullPackConfig();
   const {concurrency, maxRetriesCountInDocker: maxRetriesCount} = fullConfig;
 
   Object.assign<RetriesState, Partial<RetriesState>>(retriesState, {concurrency, maxRetriesCount});

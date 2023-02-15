@@ -1,3 +1,5 @@
+import {AUTOTESTS_DIRECTORY_PATH} from '../constants/internal';
+
 /**
  * Returns true, if current node args for TestCafe has browsers arg.
  * @internal
@@ -9,5 +11,5 @@ export const hasBrowsersArg = (): boolean => {
     return false;
   }
 
-  return !browsersArg.startsWith('-') && !browsersArg.startsWith('e2ed');
+  return !browsersArg.startsWith('-') && !browsersArg.startsWith(AUTOTESTS_DIRECTORY_PATH);
 };

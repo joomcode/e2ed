@@ -2,11 +2,9 @@ import {join} from 'node:path';
 
 import v8FlagsFilter from 'bin-v8-flags-filter';
 
-import {INSTALLED_E2ED_DIRECTORY_PATH} from '../constants/internal';
+import {e2edEnvironment, INSTALLED_E2ED_DIRECTORY_PATH} from '../constants/internal';
 
-import type {E2edEnvironment} from '../types/internal';
-
-if ((process.env as E2edEnvironment).E2ED_DEBUG) {
+if (e2edEnvironment.E2ED_DEBUG) {
   process.argv.push('--inspect-brk');
 }
 

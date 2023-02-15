@@ -1,6 +1,6 @@
 import {RESOLVED_PROMISE} from '../../constants/internal';
 
-import {E2edError} from '../E2edError';
+import {E2edError} from '../error';
 import {generalLog} from '../generalLog';
 import {getPromiseWithResolveAndReject} from '../promise';
 

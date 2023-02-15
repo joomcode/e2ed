@@ -3,7 +3,7 @@ import {join} from 'node:path';
 
 import {EVENTS_DIRECTORY_PATH} from '../../constants/internal';
 
-import {E2edError} from '../E2edError';
+import {E2edError} from '../error';
 
 import {getTestRunEventFileName} from './getTestRunEventFileName';
 import {writeFile} from './writeFile';

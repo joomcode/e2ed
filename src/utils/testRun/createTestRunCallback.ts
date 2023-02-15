@@ -1,7 +1,7 @@
 import {getRunId} from '../../context/runId';
 import {getTestRunPromise} from '../../context/testRunPromise';
 
-import {E2edError} from '../E2edError';
+import {E2edError} from '../error';
 import {getTestRunEvent} from '../events';
 
 import type {Fn} from '../../types/internal';

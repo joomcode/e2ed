@@ -1,7 +1,7 @@
 import {TestRunStatus} from '../../constants/internal';
 
 import {cloneWithoutLogEvents} from '../clone';
-import {E2edError} from '../E2edError';
+import {E2edError} from '../error';
 import {getTestRunEvent} from '../events';
 import {writeBrokenStatusToTestRunJsonFile} from '../fs';
 

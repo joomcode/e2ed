@@ -144,9 +144,9 @@ export type UserlandConfig<
 > = UserlangTestCafeConfig & OwnE2edConfig<SkipTests, CustomPackProperties>;
 
 /**
- * The complete e2ed config object.
+ * The complete pack configuration object.
  */
-export type FullConfig<
+export type FullPackConfig<
   SkipTests = unknown,
   CustomPackProperties = unknown,
 > = (unknown extends SkipTests
@@ -156,3 +156,11 @@ export type FullConfig<
   : UserlandConfig<SkipTests, CustomPackProperties>) &
   FrozenPartOfTestCafeConfig &
   Readonly<{browsers: string; src: readonly string[]}>;
+
+/**
+ * Type of userland getFullPackConfig function (with defined Pack type).
+ */
+export type GetFullPackConfig<Pack extends UserlandConfig<unknown, unknown>> = () => FullPackConfig<
+  Pack['skipTests'],
+  Pack['customPackProperties']
+>;

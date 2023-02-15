@@ -1,9 +1,9 @@
 import {LogEventType} from '../../constants/internal';
 import {getTestRunPromise} from '../../context/testRunPromise';
 import {getWaitForEventsState} from '../../context/waitForEventsState';
-import {E2edError} from '../../utils/E2edError';
+import {E2edError} from '../../utils/error';
 import {getFunctionCode} from '../../utils/fn';
-import {getFullConfig} from '../../utils/getFullConfig';
+import {getFullPackConfig} from '../../utils/getFullPackConfig';
 import {log} from '../../utils/log';
 import {getPromiseWithResolveAndReject} from '../../utils/promise';
 import {RequestHookToWaitForEvents} from '../../utils/requestHooks';
@@ -20,7 +20,7 @@ export const waitForRequest = async <SomeRequest extends Request>(
   {timeout}: {timeout?: number} = {},
 ): Promise<SomeRequest> => {
   const waitForEventsState = getWaitForEventsState(RequestHookToWaitForEvents);
-  const {waitForRequestTimeout} = getFullConfig();
+  const {waitForRequestTimeout} = getFullPackConfig();
   const rejectTimeout = timeout ?? waitForRequestTimeout;
   const {clearRejectTimeout, promise, reject, resolve, setRejectTimeoutFunction} =
     getPromiseWithResolveAndReject<SomeRequest, Request>(rejectTimeout);

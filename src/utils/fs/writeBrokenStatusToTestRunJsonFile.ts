@@ -4,7 +4,7 @@ import {join} from 'node:path';
 import {EVENTS_DIRECTORY_PATH, READ_FILE_OPTIONS, TestRunStatus} from '../../constants/internal';
 
 import {assertValueIsTrue} from '../asserts';
-import {E2edError} from '../E2edError';
+import {E2edError} from '../error';
 import {generalLog} from '../generalLog';
 
 import {writeFile} from './writeFile';

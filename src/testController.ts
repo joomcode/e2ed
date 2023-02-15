@@ -1,6 +1,6 @@
 import {t as originalTestController} from 'testcafe-without-typecheck';
 
-import {E2edError} from './utils/E2edError';
+import {E2edError} from './utils/error';
 
 import type {TestController, Values} from './types/internal';
 

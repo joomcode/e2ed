@@ -1,4 +1,4 @@
-import {it} from 'autotests';
+import {getFullPackConfig, it} from 'autotests';
 import {Main, Search} from 'autotests/pageObjects/pages';
 import {Search as SearchRoute} from 'autotests/routes/pageRoutes';
 import {expect} from 'e2ed';
@@ -10,9 +10,7 @@ import {
   waitForRequest,
   waitForResponse,
 } from 'e2ed/actions';
-import {getCurrentUrl, getFullConfig} from 'e2ed/utils';
-
-import type {CustomPackProperties, SkipTests} from 'autotests/types';
+import {getCurrentUrl} from 'e2ed/utils';
 
 const language = 'en';
 const searchQuery = 'foo';
@@ -29,7 +27,7 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}
       () => undefined,
     );
 
-  const {customPackProperties} = getFullConfig<SkipTests, CustomPackProperties>();
+  const {customPackProperties} = getFullPackConfig();
 
   await expect(customPackProperties.name, 'custom pack properties is correct').eql('allTests');
 

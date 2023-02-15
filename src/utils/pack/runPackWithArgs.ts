@@ -1,33 +1,28 @@
-import {join} from 'node:path';
+import {e2edEnvironment, EndE2edReason, TESTCAFERC_PATH} from '../../constants/internal';
 
-import {EndE2edReason, INSTALLED_E2ED_DIRECTORY_PATH} from '../constants/internal';
+import {endE2ed} from '../end';
+import {getFullPackConfig} from '../getFullPackConfig';
+import {hasBrowsersArg} from '../hasBrowsersArg';
+import {getRunLabel} from '../runLabel';
 
-import {endE2ed} from './end';
-import {getFullConfig} from './getFullConfig';
-import {hasBrowsersArg} from './hasBrowsersArg';
 import {getPackTimeoutPromise} from './packTimeout';
-import {getRunLabel} from './runLabel';
-
-import type {E2edEnvironment} from '../types/internal';
-
-const pathToTestcaferc = join(INSTALLED_E2ED_DIRECTORY_PATH, 'testcaferc.js');
 
 /**
- * Run e2ed tests (tasks) with command line arguments.
+ * Run e2ed pack of tests (or tasks) with command line arguments.
  * @internal
  */
-export const runTestsWithArgs = async (): Promise<void> => {
-  const {browsers, concurrency} = getFullConfig();
+export const runPackWithArgs = async (): Promise<void> => {
+  const {browsers, concurrency} = getFullPackConfig();
   const runLabel = getRunLabel({concurrency, maxRetriesCount: 1, retryIndex: 1});
 
-  (process.env as E2edEnvironment).E2ED_RUN_LABEL = runLabel;
+  e2edEnvironment.E2ED_RUN_LABEL = runLabel;
 
   if (browsers.length > 0 && hasBrowsersArg() === false) {
     process.argv.splice(2, 0, String(browsers));
   }
 
   process.argv.push('--concurrency', String(concurrency));
-  process.argv.push('--config-file', pathToTestcaferc);
+  process.argv.push('--config-file', TESTCAFERC_PATH);
 
   const packTimeoutPromise = getPackTimeoutPromise();
 

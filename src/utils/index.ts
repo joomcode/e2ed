@@ -23,13 +23,11 @@ export {
   getHorizontalDistanceBetweenSelectors,
   getVerticalDistanceBetweenSelectors,
 } from './distanceBetweenSelectors';
-export {E2edError} from './E2edError';
+export {E2edError, getStackTrace} from './error';
 export {getFunctionCode} from './fn';
 export {writeFile} from './fs';
 export {getCurrentUrl} from './getCurrentUrl';
-export {getFullConfig} from './getFullConfig';
 export {getKeysCounter} from './getKeysCounter';
-export {getStackTrace} from './getStackTrace';
 export {getLocatorProperty} from './locators';
 export {log} from './log';
 export {parseMaybeEmptyValueAsJson} from './parseMaybeEmptyValueAsJson';

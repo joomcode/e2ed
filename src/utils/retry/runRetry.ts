@@ -3,7 +3,7 @@ import {join} from 'node:path';
 
 import {INSTALLED_E2ED_DIRECTORY_PATH} from '../../constants/internal';
 
-import {E2edError} from '../E2edError';
+import {E2edError} from '../error';
 import {setTestsSubprocess, testsSubprocess} from '../tests';
 
 import type {RunRetryOptions} from '../../types/internal';

@@ -2,7 +2,7 @@ import {BAD_REQUEST_STATUS_CODE, LogEventType} from '../../constants/internal';
 import {getRandomId} from '../../generators/internal';
 
 import {cloneWithoutUndefinedProperties} from '../clone';
-import {E2edError} from '../E2edError';
+import {E2edError} from '../error';
 import {log} from '../log';
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 import {wrapInTestRunTracker} from '../testRun';

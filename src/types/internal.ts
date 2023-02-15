@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual} from './checks';
 export type {Class} from './class';
@@ -7,9 +9,15 @@ export type {
   ClientFunctionWrapperResult,
   MaybeTestCafeError,
 } from './clientFunction';
-export type {FrozenPartOfTestCafeConfig, FullConfig, UserlandConfig} from './config';
+export type {
+  FrozenPartOfTestCafeConfig,
+  FullPackConfig,
+  GetFullPackConfig,
+  UserlandConfig,
+} from './config';
 export type {UtcTimeInMs} from './date';
 export type {DeepMutable, DeepPartial, DeepReadonly, DeepRequired} from './deep';
+/** @internal */
 export type {E2edEnvironment} from './environment';
 /** @internal */
 export type {MaybeWithIsTestRunBroken} from './errors';
@@ -46,9 +54,12 @@ export type {
   PageClassType,
   PageClassTypeArgs,
 } from './pages';
-export type {AbsolutePathToDirectory, DirectoryPathFromRoot, TestFilePath} from './paths';
-/** @internal */
-export type {FilePathFromRoot} from './paths';
+export type {
+  AbsolutePathToDirectory,
+  DirectoryPathFromRoot,
+  FilePathFromRoot,
+  TestFilePath,
+} from './paths';
 /** @internal */
 export type {ImgData, PixelmatchOptions} from './pixelmatch';
 export type {AsyncVoid, UnwrapPromise} from './promise';

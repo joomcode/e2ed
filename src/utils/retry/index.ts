@@ -1,2 +1,2 @@
 /** @internal */
-export {runRetries} from './runRetries';
+export {runPackWithRetries} from './runPackWithRetries';

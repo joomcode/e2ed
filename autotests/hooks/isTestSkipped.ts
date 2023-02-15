@@ -1,6 +1,6 @@
-import {getFullConfig} from 'e2ed/utils';
+import {getFullPackConfig} from 'autotests';
 
-import type {SkipTests, TestMeta} from 'autotests/types';
+import type {TestMeta} from 'autotests/types';
 import type {IsTestSkipped, TestStaticOptions} from 'e2ed/types';
 
 /**
@@ -11,7 +11,7 @@ import type {IsTestSkipped, TestStaticOptions} from 'e2ed/types';
 export const isTestSkipped = (testStaticOptions: TestStaticOptions<TestMeta>): IsTestSkipped => {
   // As with all hooks, you can replace it with your own implementation.
   const {options} = testStaticOptions;
-  const {skipTests = []} = getFullConfig<SkipTests>();
+  const {skipTests = []} = getFullPackConfig();
 
   if ('skipAll' in skipTests) {
     return {isSkipped: true, reason: skipTests.reason};

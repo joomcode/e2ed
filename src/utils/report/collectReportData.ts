@@ -1,5 +1,5 @@
 import {getExitCode} from '../exit';
-import {getFullConfig} from '../getFullConfig';
+import {getFullPackConfig} from '../getFullPackConfig';
 
 import {assertThatTestNamesAndFilePathsAreUnique} from './assertThatTestNamesAndFilePathsAreUnique';
 import {getReportErrors} from './getReportErrors';
@@ -19,7 +19,7 @@ export const collectReportData = async ({
   fullTestRuns,
   startInfo,
 }: FullEventsData): Promise<ReportData> => {
-  const {liteReportFileName, reportFileName} = getFullConfig();
+  const {liteReportFileName, reportFileName} = getFullPackConfig();
 
   const errors = await getReportErrors(startInfo.runEnvironment, fullTestRuns);
 

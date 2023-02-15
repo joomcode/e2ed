@@ -237,6 +237,7 @@ button:disabled {
   cursor: default;
 }
 .test-button__time {
+  color: var(--subtitle-color);
   flex-grow: 1;
   text-align: right;
   flex-shrink: 0;

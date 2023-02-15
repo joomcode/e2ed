@@ -1,8 +1,8 @@
-import {startTimeInMs} from '../configurator';
-import {EndE2edReason} from '../constants/internal';
+import {startTimeInMs} from '../../configurator';
+import {EndE2edReason} from '../../constants/internal';
 
-import {endE2ed, endE2edReason} from './end';
-import {getFullConfig} from './getFullConfig';
+import {endE2ed, endE2edReason} from '../end';
+import {getFullPackConfig} from '../getFullPackConfig';
 
 let rejectPackTimeoutPromise: (() => void) | undefined;
 
@@ -20,11 +20,11 @@ export const getPackTimeoutPromise = (): Promise<void> =>
   });
 
 /**
- * Set pack timeout from config field "packTimeout".
+ * Set pack timeout from pack config field "packTimeout".
  * @internal
  */
 export const setPackTimeout = (): void => {
-  const {packTimeout} = getFullConfig();
+  const {packTimeout} = getFullPackConfig();
   const timeIntervalElapsedSinceStart = Date.now() - startTimeInMs;
 
   setTimeout(() => {
