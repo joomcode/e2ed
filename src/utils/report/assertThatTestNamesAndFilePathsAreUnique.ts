@@ -5,7 +5,7 @@ import {assertThatTestNamesAndFilePathsAreUniqueInOneRetry} from './assertThatTe
 import type {FullTestRun} from '../../types/internal';
 
 /**
- * Assert that test names and file paths are unique (except of names internally retried runs).
+ * Asserts that test names and file paths are unique (except of names internally retried runs).
  * @internal
  */
 export const assertThatTestNamesAndFilePathsAreUnique = (

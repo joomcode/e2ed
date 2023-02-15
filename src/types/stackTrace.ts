@@ -1,7 +1,7 @@
 import type {Fn} from './fn';
 
 /**
- * Frame object from execution stack.
+ * Frame object from V8 execution stack.
  */
 export type StackFrame<F extends Fn = Fn, This = unknown> = Readonly<{
   getThis(): This;

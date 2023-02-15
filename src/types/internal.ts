@@ -10,9 +10,11 @@ export type {
   MaybeTestCafeError,
 } from './clientFunction';
 export type {
+  AnyPack,
   FrozenPartOfTestCafeConfig,
   FullPackConfig,
   GetFullPackConfig,
+  GetPackParameters,
   UserlandConfig,
 } from './config';
 export type {UtcTimeInMs} from './date';
@@ -88,7 +90,7 @@ export type {RunLabel, RunLabelObject} from './runLabel';
 export type {RawRunLabelObject} from './runLabel';
 export type {Selector} from './selectors';
 export type {IsTestSkipped} from './skipTest';
-export type {StackFrame} from './stackTrack';
+export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';
 export type {TestCafeSelector, TestController} from './testCafe';
 export type {

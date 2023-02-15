@@ -4,6 +4,8 @@ import {generalLog} from '../generalLog';
 
 import {afterTest} from './afterTest';
 import {beforeTest} from './beforeTest';
+import {getIsTestIncludedInPack} from './getIsTestIncludedInPack';
+import {getTestStaticOptions} from './getTestStaticOptions';
 import {runTestFn} from './runTestFn';
 
 import type {RunId, Test, TestController} from '../../types/internal';
@@ -17,14 +19,23 @@ type RunTest = (testController: TestController) => Promise<void>;
 export const getRunTest = (test: Test): RunTest => {
   let previousRunId: RunId | undefined;
 
-  return async (testController: TestController) => {
+  return async (testController: TestController): Promise<void> => {
     const runId = createRunId();
 
     let hasRunError = false;
+    let isTestIncludedInPack = false;
     let unknownRunError: unknown;
 
     try {
-      beforeTest({previousRunId, runId, test, testController});
+      const testStaticOptions = getTestStaticOptions(test, testController);
+
+      isTestIncludedInPack = getIsTestIncludedInPack(testStaticOptions);
+
+      if (!isTestIncludedInPack) {
+        return;
+      }
+
+      beforeTest({previousRunId, runId, testFn: test.testFn, testStaticOptions});
 
       previousRunId = runId;
 
@@ -37,7 +48,9 @@ export const getRunTest = (test: Test): RunTest => {
 
       throw error;
     } finally {
-      await afterTest({hasRunError, runId, unknownRunError});
+      if (isTestIncludedInPack) {
+        await afterTest({hasRunError, runId, unknownRunError});
+      }
     }
   };
 };

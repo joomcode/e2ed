@@ -1,5 +1,5 @@
 import {generalLog} from '../generalLog';
-import {getRunLabel} from '../runLabel';
+import {createRunLabel} from '../runLabel';
 
 import {getPrintedRetry} from './getPrintedRetry';
 import {runRetry} from './runRetry';
@@ -14,7 +14,7 @@ import type {RetriesState, UtcTimeInMs} from '../../types/internal';
  */
 export const processRetry = async (retriesState: RetriesState): Promise<void> => {
   const {concurrency, maxRetriesCount, retryIndex, successfulTestRunNamesHash} = retriesState;
-  const runLabel = getRunLabel({concurrency, maxRetriesCount, retryIndex});
+  const runLabel = createRunLabel({concurrency, maxRetriesCount, retryIndex});
 
   const startLastRetryTimeInMs = Date.now() as UtcTimeInMs;
   const printedRetry = getPrintedRetry({maxRetriesCount, retryIndex});

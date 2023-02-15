@@ -1,7 +1,13 @@
 /** @internal */
 export {EXEC_FILE_OPTIONS} from './childProcess';
 /** @internal */
-export {e2edEnvironment, PATH_TO_PACK_VARIABLE_NAME} from './environment';
+export {
+  e2edEnvironment,
+  PATH_TO_PACK_VARIABLE_NAME,
+  RUN_ENVIRONMENT_VARIABLE_NAME,
+  RUN_LABEL_VARIABLE_NAME,
+  START_TIME_VARIABLE_NAME,
+} from './environment';
 /** @internal */
 export {AMOUNT_OF_PARALLEL_OPEN_FILES, DEFAULT_FILE_CHUNK_LENGTH, READ_FILE_OPTIONS} from './fs';
 export {BAD_REQUEST_STATUS_CODE} from './http';

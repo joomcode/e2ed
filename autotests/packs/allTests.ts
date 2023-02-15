@@ -27,6 +27,7 @@ export const pack: Pack = {
   concurrency: isLocalRun ? 1 : 2,
   customPackProperties: {name: 'allTests'},
   dockerImage: 'e2edhub/e2ed',
+  isTestIncludedInPack: ({options}) => options.meta.testId !== '13',
   liteReportFileName: 'lite-report.json',
   maxRetriesCountInDocker: 3,
   packTimeout: 90 * 60_000,

@@ -7,11 +7,12 @@ import type {FullPackConfig} from '../types/internal';
  * @internal
  */
 export const getFullPackConfig = <
-  SkipTests = unknown,
   CustomPackProperties = unknown,
->(): FullPackConfig<SkipTests, CustomPackProperties> => {
+  SkipTests = unknown,
+  TestMeta = unknown,
+>(): FullPackConfig<CustomPackProperties, SkipTests, TestMeta> => {
   // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
   const {fullPackConfig} = require<typeof import('../testcaferc')>('../testcaferc');
 
-  return fullPackConfig as FullPackConfig<SkipTests, CustomPackProperties>;
+  return fullPackConfig as FullPackConfig<CustomPackProperties, SkipTests, TestMeta>;
 };

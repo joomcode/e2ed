@@ -3,15 +3,16 @@ import {setUserlandHooks} from './utils/userlandHooks';
 import {test} from './test';
 
 import type {
+  AnyPack,
   GetFullPackConfig,
+  GetPackParameters,
   TestFunction,
-  UserlandConfig,
   UserlandHooks,
 } from './types/internal';
 
-type Return<TestMeta, Pack extends UserlandConfig<unknown, unknown>> = Readonly<{
+type Return<Pack extends AnyPack> = Readonly<{
   getFullPackConfig: GetFullPackConfig<Pack>;
-  test: TestFunction<TestMeta>;
+  test: TestFunction<GetPackParameters<Pack>['TestMeta']>;
 }>;
 
 /**
@@ -19,13 +20,13 @@ type Return<TestMeta, Pack extends UserlandConfig<unknown, unknown>> = Readonly<
  * (test does not necessarily contain checks), and getFullPackConfig function
  * that return the full pack configuration object.
  */
-export const createProjectApi = <TestMeta, Pack extends UserlandConfig<unknown, unknown>>(
-  hooks: UserlandHooks<TestMeta>,
-): Return<TestMeta, Pack> => {
+export const createProjectApi = <Pack extends AnyPack>(
+  hooks: UserlandHooks<GetPackParameters<Pack>['TestMeta']>,
+): Return<Pack> => {
   setUserlandHooks(hooks as UserlandHooks);
 
   return {
     getFullPackConfig: getFullPackConfig as GetFullPackConfig<Pack>,
-    test: test as TestFunction<TestMeta>,
+    test: test as TestFunction<GetPackParameters<Pack>['TestMeta']>,
   };
 };

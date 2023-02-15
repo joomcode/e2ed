@@ -4,7 +4,7 @@ import {cloneWithoutLogEvents} from '../clone';
 import type {TestRunEvent} from '../../types/internal';
 
 /**
- * Assert that test run event is previous (broken) of other test run event.
+ * Asserts that test run event is previous (broken) of other test run event.
  * @internal
  */
 export const assertTestRunEventIsPreviousOfTestRunEvent = (

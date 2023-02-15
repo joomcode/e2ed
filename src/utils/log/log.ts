@@ -1,7 +1,8 @@
-import {CONSOLE_INSPECT_OPTIONS, e2edEnvironment, LogEventType} from '../../constants/internal';
+import {CONSOLE_INSPECT_OPTIONS, LogEventType} from '../../constants/internal';
 import {getRunId} from '../../context/runId';
 
 import {assertValueIsDefined} from '../asserts';
+import {getRunLabel} from '../environment';
 // eslint-disable-next-line import/no-internal-modules
 import {registerLogEvent} from '../events/registerLogEvent';
 import {getFullPackConfig} from '../getFullPackConfig';
@@ -21,7 +22,7 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
   const time = Date.now() as UtcTimeInMs;
   const dateTimeInIso = new Date(time).toISOString();
   const runId = getRunId();
-  const runLabel = e2edEnvironment.E2ED_RUN_LABEL;
+  const runLabel = getRunLabel();
   const payload = typeof maybePayload === 'object' ? (maybePayload as LogPayload) : undefined;
   const type =
     typeof maybePayload === 'number'
