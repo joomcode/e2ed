@@ -6,8 +6,8 @@ import {
   INSTALLED_E2ED_DIRECTORY_PATH,
 } from '../../constants/internal';
 
+import {getPathToPack} from '../environment';
 import {getFullPackConfig} from '../getFullPackConfig';
-import {getPathToPack} from '../pack';
 import {testCafeHammerheadUpPackagePath} from '../paths';
 
 import {getPackageInfo} from './getPackageInfo';

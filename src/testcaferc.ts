@@ -11,7 +11,7 @@ import {
   REPORTS_DIRECTORY_PATH,
 } from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
-import {getPathToPack} from './utils/pack';
+import {getPathToPack} from './utils/environment';
 
 import type {FrozenPartOfTestCafeConfig, FullPackConfig, UserlandConfig} from './types/internal';
 

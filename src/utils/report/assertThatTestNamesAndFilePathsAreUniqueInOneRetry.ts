@@ -6,7 +6,7 @@ import {cloneWithoutLogEvents} from '../clone';
 import type {FullTestRun, TestFilePath} from '../../types/internal';
 
 /**
- * Assert that test names and file paths inside one retry are unique.
+ * Asserts that test names and file paths inside one retry are unique.
  * @internal
  */
 export const assertThatTestNamesAndFilePathsAreUniqueInOneRetry = (

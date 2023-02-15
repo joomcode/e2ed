@@ -1,18 +1,21 @@
-// eslint-disable-next-line import/no-internal-modules
-import type {UtcTimeInMs} from './types/date';
+import {
+  e2edEnvironment,
+  RUN_ENVIRONMENT_VARIABLE_NAME,
+  START_TIME_VARIABLE_NAME,
+} from './constants/internal';
 
-const START_TIME_VARIABLE_NAME = '__INTERNAL_E2ED_START_TIME';
-const RUN_ENVIRONMENT_VARIABLE_NAME = '__INTERNAL_E2ED_RUN_ENVIRONMENT';
+import type {UtcTimeInMs} from './types/internal';
 
 /**
  * e2ed start time (UTC, in milliseconds).
  */
-const startTimeInMs = (Number(process.env[START_TIME_VARIABLE_NAME]) || Date.now()) as UtcTimeInMs;
+const startTimeInMs = (Number(e2edEnvironment[START_TIME_VARIABLE_NAME]) ||
+  Date.now()) as UtcTimeInMs;
 
-process.env[START_TIME_VARIABLE_NAME] = String(startTimeInMs);
+e2edEnvironment[START_TIME_VARIABLE_NAME] = String(startTimeInMs);
 
-// eslint-disable-next-line import/no-internal-modules, import/no-unused-modules
-export type {UserlandConfig as PackConfig} from './types/config';
+// eslint-disable-next-line import/no-unused-modules
+export type {UserlandConfig as PackConfig} from './types/internal';
 
 /**
  * Run environment enum (run in docker or local run).
@@ -26,8 +29,7 @@ export const enum RunEnvironment {
  * Run environment for current e2ed run.
  */
 // eslint-disable-next-line import/no-mutable-exports
-export let runEnvironment = (process.env[RUN_ENVIRONMENT_VARIABLE_NAME] ??
-  RunEnvironment.Local) as RunEnvironment;
+export let runEnvironment = e2edEnvironment[RUN_ENVIRONMENT_VARIABLE_NAME] ?? RunEnvironment.Local;
 
 /**
  * Sets current run environment before e2ed start.
@@ -35,7 +37,7 @@ export let runEnvironment = (process.env[RUN_ENVIRONMENT_VARIABLE_NAME] ??
  */
 export const setRunEnvironment = (newRunEnvironment: RunEnvironment): void => {
   runEnvironment = newRunEnvironment;
-  process.env[RUN_ENVIRONMENT_VARIABLE_NAME] = newRunEnvironment;
+  e2edEnvironment[RUN_ENVIRONMENT_VARIABLE_NAME] = newRunEnvironment;
 };
 
 export {startTimeInMs};

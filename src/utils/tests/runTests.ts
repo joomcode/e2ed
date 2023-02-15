@@ -1,6 +1,7 @@
-import {e2edEnvironment, TESTCAFERC_PATH} from '../../constants/internal';
+import {TESTCAFERC_PATH} from '../../constants/internal';
 import {createTestCafe} from '../../testcafe';
 
+import {setRunLabel} from '../environment';
 import {E2edError} from '../error';
 import {generalLog} from '../generalLog';
 import {getFullPackConfig} from '../getFullPackConfig';
@@ -19,7 +20,7 @@ export const runTests = async ({
   runLabel,
   successfulTestRunNamesHash,
 }: RunRetryOptions): Promise<void> => {
-  e2edEnvironment.E2ED_RUN_LABEL = runLabel;
+  setRunLabel(runLabel);
 
   let maybeTestCafe: Inner.TestCafe | undefined;
 

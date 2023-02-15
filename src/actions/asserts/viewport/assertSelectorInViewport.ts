@@ -15,7 +15,7 @@ export const assertSelectorInViewport = async (selector: Selector): Promise<void
   const locator = getLocatorFromSelector(selector);
   const message = 'selector is in the viewport';
 
-  log(`Assert that ${message}`, {locator}, LogEventType.InternalAssert);
+  log(`Asserts that ${message}`, {locator}, LogEventType.InternalAssert);
 
   // TODO: support Smart Assertions
   await expect(isInViewport, message).ok();

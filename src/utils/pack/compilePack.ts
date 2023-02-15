@@ -12,14 +12,14 @@ import {
   COMPILED_USERLAND_CONFIG_DIRECTORY,
 } from '../../constants/internal';
 
+import {getPathToPack} from '../environment';
 import {generalLog} from '../generalLog';
-
-import {getPathToPack} from './getPathToPack';
 
 import type {CompilerOptions} from 'typescript';
 
 const compilerOptions: CompilerOptions = {
   allowSyntheticDefaultImports: true,
+  declaration: false,
   esModuleInterop: true,
   module: ModuleKind.CommonJS,
   outDir: COMPILED_USERLAND_CONFIG_DIRECTORY,

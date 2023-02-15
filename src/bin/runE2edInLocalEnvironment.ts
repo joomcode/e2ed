@@ -1,9 +1,10 @@
 import {RunEnvironment, setRunEnvironment} from '../configurator';
 import {assertValueIsDefined} from '../utils/asserts';
 import {setProcessEndHandlers} from '../utils/end';
+import {setPathToPack} from '../utils/environment';
 import {registerEndE2edRunEvent, registerStartE2edRunEvent} from '../utils/events';
 import {logStartE2edError} from '../utils/generalLog';
-import {runPackWithArgs, setPathToPack} from '../utils/pack';
+import {runPackWithArgs} from '../utils/pack';
 
 import type {FilePathFromRoot} from '../types/internal';
 

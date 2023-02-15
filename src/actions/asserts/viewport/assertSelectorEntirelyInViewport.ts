@@ -15,7 +15,7 @@ export const assertSelectorEntirelyInViewport = async (selector: Selector): Prom
   const locator = getLocatorFromSelector(selector);
   const message = 'selector is entirely in the viewport';
 
-  log(`Assert that ${message}`, {locator}, LogEventType.InternalAssert);
+  log(`Asserts that ${message}`, {locator}, LogEventType.InternalAssert);
 
   // TODO: support Smart Assertions
   await expect(isEntirelyInViewport, message).ok();

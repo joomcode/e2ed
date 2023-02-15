@@ -68,8 +68,15 @@ Packs are usually stored in the `autotests/packs` directory.
 
 `concurrency: number`: the number of browser windows in which tests will run in parallel.
 
-`customPackProperties: CustomPackProperties`: A custom set of fields defined within the project.
+`customPackProperties: CustomPackProperties`: a custom set of fields defined within the project.
 These fields allow, for example, to customize the behavior of hooks for different packs.
+
+`dockerImage: string`: the name of the docker image where the tests will run.
+The image must be based on the e2ed base image.
+
+`isTestIncludedInPack: (testStaticOptions: TestStaticOptions<TestMeta>) => boolean`: this function
+filters tests (tasks) by their static options —
+only those tests for which the function returned true get into the pack.
 
 `liteReportFileName: string | null`: the name of the file under which, after running the tests,
 the lite JSON report will be saved in the `autotests/reports` directory, for example, `lite-report.json`.

@@ -15,7 +15,7 @@ export const assertNumbersAreApproximatelyEqual = async (
   const message = `two numbers are approximately equal with ${eps} precision`;
 
   log(
-    `Assert that ${message}`,
+    `Asserts that ${message}`,
     {diff, eps, firstNumber, secondNumber},
     LogEventType.InternalAssert,
   );

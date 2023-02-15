@@ -1,7 +1,7 @@
 /** @internal */
-export {getPrintedRunLabel} from './getPrintedRunLabel';
+export {createRunLabel} from './createRunLabel';
 /** @internal */
-export {getRunLabel} from './getRunLabel';
+export {getPrintedRunLabel} from './getPrintedRunLabel';
 /**
  * This export should be the last.
  */

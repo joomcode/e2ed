@@ -1,13 +1,13 @@
-import {e2edEnvironment, TestRunStatus} from '../../constants/internal';
+import {TestRunStatus} from '../../constants/internal';
 import {setMeta} from '../../context/meta';
 import {setRunId} from '../../context/runId';
 import {setTestIdleTimeout} from '../../context/testIdleTimeout';
 import {setTestTimeout} from '../../context/testTimeout';
 
 import {assertValueIsDefined} from '../asserts';
+import {getRunLabel} from '../environment';
 import {registerStartTestRunEvent} from '../events';
 import {getFullPackConfig} from '../getFullPackConfig';
-import {getRelativeTestFilePath} from '../getRelativeTestFilePath';
 import {getUserlandHooks} from '../userlandHooks';
 
 import {getTestFnAndReject} from './getTestFnAndReject';
@@ -15,8 +15,7 @@ import {processBrokenTestRuns} from './processBrokenTestRuns';
 
 import type {
   RunId,
-  Test,
-  TestController,
+  TestFn,
   TestRunEvent,
   TestStaticOptions,
   UtcTimeInMs,
@@ -25,51 +24,45 @@ import type {
 type Options = Readonly<{
   previousRunId: RunId | undefined;
   runId: RunId;
-  test: Test;
-  testController: TestController;
+  testFn: TestFn;
+  testStaticOptions: TestStaticOptions;
 }>;
 
 /**
- * Internal before test hook with TestRun state.
+ * Internal before test hook.
  * @internal
  */
-export const beforeTest = ({previousRunId, runId, test, testController}: Options): void => {
+export const beforeTest = ({previousRunId, runId, testFn, testStaticOptions}: Options): void => {
+  const {options} = testStaticOptions;
+
   setRunId(runId);
-  setMeta(test.options.meta);
+  setMeta(options.meta);
 
   const {testIdleTimeout: testIdleTimeoutFromConfig, testTimeout: testTimeoutFromConfig} =
     getFullPackConfig();
-  const testIdleTimeout = test.options.testIdleTimeout ?? testIdleTimeoutFromConfig;
-  const testTimeout = test.options.testTimeout ?? testTimeoutFromConfig;
+  const testIdleTimeout = options.testIdleTimeout ?? testIdleTimeoutFromConfig;
+  const testTimeout = options.testTimeout ?? testTimeoutFromConfig;
 
   setTestIdleTimeout(testIdleTimeout);
   setTestTimeout(testTimeout);
-
-  const {filename: absoluteFilePath} = testController.testRun.test.testFile;
-  const filePath = getRelativeTestFilePath(absoluteFilePath);
-  const testStaticOptions: TestStaticOptions = {
-    filePath,
-    name: test.name,
-    options: test.options,
-  };
 
   const {isTestSkipped} = getUserlandHooks();
 
   const {isSkipped, reason: skipReason} = isTestSkipped(testStaticOptions);
 
-  if (isSkipped && !('skipReason' in test.options.meta)) {
-    Object.assign(test.options.meta, {skipReason});
+  if (isSkipped && !('skipReason' in options.meta)) {
+    Object.assign(options.meta, {skipReason});
   }
 
   const {onlog, reject, testFnWithReject} = getTestFnAndReject({
     isSkipped,
     runId,
-    testFn: test.testFn,
+    testFn,
     testIdleTimeout,
     testTimeout,
   });
 
-  const runLabel = e2edEnvironment.E2ED_RUN_LABEL;
+  const runLabel = getRunLabel();
   const utcTimeInMs = Date.now() as UtcTimeInMs;
 
   assertValueIsDefined(runLabel, 'runLabel is defined', {runId, testStaticOptions});

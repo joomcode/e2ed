@@ -1,6 +1,6 @@
 import {inspect} from 'node:util';
 
-import {e2edEnvironment} from '../../constants/internal';
+import {e2edEnvironment, RUN_LABEL_VARIABLE_NAME} from '../../constants/internal';
 
 import {valueToString} from '../valueToString';
 
@@ -21,7 +21,7 @@ export class E2edError extends Error {
   /**
    * Current V8 stack trace (if available).
    */
-  readonly stackTrace: readonly StackFrame[];
+  readonly stackTrace: readonly string[];
 
   /**
    * The time the error was generated.
@@ -29,7 +29,7 @@ export class E2edError extends Error {
   readonly utcTimeInMs: UtcTimeInMs;
 
   constructor(readonly originalMessage: string, readonly params?: LogParams) {
-    const runLabel = e2edEnvironment.E2ED_RUN_LABEL;
+    const runLabel = e2edEnvironment[RUN_LABEL_VARIABLE_NAME];
     const utcTimeInMs = Date.now() as UtcTimeInMs;
     const dateTimeInIso = new Date(utcTimeInMs).toISOString();
 
@@ -44,7 +44,10 @@ export class E2edError extends Error {
     super(...constructorArgs);
 
     this.runLabel = runLabel;
-    this.stackTrace = getStackTrace() ?? ([] as readonly StackFrame[]);
+
+    const framesStackTrace = getStackTrace() ?? ([] as readonly StackFrame[]);
+
+    this.stackTrace = framesStackTrace.map(getPrintedStackFrame);
     this.utcTimeInMs = utcTimeInMs;
 
     Object.defineProperty(this, 'message', {
@@ -59,14 +62,12 @@ export class E2edError extends Error {
    * Custom presentation of error for nodejs `inspect`.
    */
   [inspect.custom](): string {
-    const stack = this.stackTrace.map(getPrintedStackFrame);
-
     const printedParams = {
       dateTimeInIso: new Date(this.utcTimeInMs).toISOString(),
       message: this.originalMessage,
       params: this.params,
       runLabel: this.runLabel,
-      stack,
+      stackTrace: this.stackTrace,
     };
     const printedString = valueToString(printedParams);
 
