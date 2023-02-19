@@ -4,7 +4,7 @@ import {LogEventType} from '../../constants/internal';
 import {getApiMockState} from '../../context/apiMockState';
 import {testController} from '../../testController';
 import {assertValueIsDefined} from '../../utils/asserts';
-import {getFunctionCode} from '../../utils/fn';
+import {setCustomInspectOnFunction} from '../../utils/fn';
 import {log} from '../../utils/log';
 import {getRequestsFilter, getSetResponse} from '../../utils/mockApiRoute';
 import {wrapInTestRunTracker} from '../../utils/testRun';
@@ -29,6 +29,8 @@ export const mockApiRoute = async <
   Route: ApiRouteClassTypeWithGetParamsFromUrl<RouteParams, SomeRequest, SomeResponse>,
   apiMockFunction: ApiMockFunction<RouteParams, SomeRequest, SomeResponse>,
 ): Promise<void> => {
+  setCustomInspectOnFunction(apiMockFunction);
+
   const apiMockState = getApiMockState();
   let {functionByRoute} = apiMockState;
 
@@ -62,9 +64,5 @@ export const mockApiRoute = async <
 
   functionByRoute.set(Route, apiMockFunction as unknown as ApiMockFunction);
 
-  log(
-    `Mock API for route "${Route.name}"`,
-    {apiMockFunctionCode: getFunctionCode(apiMockFunction)},
-    LogEventType.InternalCore,
-  );
+  log(`Mock API for route "${Route.name}"`, {apiMockFunction}, LogEventType.InternalCore);
 };

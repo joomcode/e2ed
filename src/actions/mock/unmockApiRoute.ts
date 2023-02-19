@@ -2,7 +2,7 @@ import {LogEventType} from '../../constants/internal';
 import {getApiMockState} from '../../context/apiMockState';
 import {testController} from '../../testController';
 import {assertValueIsDefined} from '../../utils/asserts';
-import {getFunctionCode} from '../../utils/fn';
+import {setCustomInspectOnFunction} from '../../utils/fn';
 import {log} from '../../utils/log';
 
 import type {
@@ -39,11 +39,13 @@ export const unmockApiRoute = async <
     await testController.removeRequestHooks(apiMock);
   }
 
-  const apiMockFunctionCode = apiMockFunction ? getFunctionCode(apiMockFunction) : undefined;
+  if (apiMockFunction) {
+    setCustomInspectOnFunction(apiMockFunction);
+  }
 
   log(
     `Unmock API for route "${Route.name}"`,
-    {apiMockFunctionCode, routeWasMocked},
+    {apiMockFunction, routeWasMocked},
     LogEventType.InternalCore,
   );
 };

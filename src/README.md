@@ -16,10 +16,10 @@ Modules in the dependency graph should only import the modules above them:
 9. `utils/valueToString`
 10. `utils/error`
 11. `utils/asserts`
-12. `utils/environment`
-13. `utils/runLabel`
-14. `utils/generalLog`
-15. `utils/fn`
+12. `utils/fn`
+13. `utils/environment`
+14. `utils/runLabel`
+15. `utils/generalLog`
 16. `utils/fs`
 17. `Route`
 18. `ApiRoute`

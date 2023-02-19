@@ -1,4 +1,5 @@
 export {
+  assertValueHasProperty,
   assertValueIsDefined,
   assertValueIsFalse,
   assertValueIsNever,
@@ -24,7 +25,7 @@ export {
   getVerticalDistanceBetweenSelectors,
 } from './distanceBetweenSelectors';
 export {E2edError, getStackTrace} from './error';
-export {getFunctionCode} from './fn';
+export {getFunctionPresentationForLogs, setCustomInspectOnFunction} from './fn';
 export {writeFile} from './fs';
 export {getCurrentUrl} from './getCurrentUrl';
 export {getKeysCounter} from './getKeysCounter';

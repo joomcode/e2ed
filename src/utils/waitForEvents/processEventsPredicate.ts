@@ -1,7 +1,7 @@
 import {LogEventType} from '../../constants/internal';
 
 import {E2edError} from '../error';
-import {getFunctionCode} from '../fn';
+import {setCustomInspectOnFunction} from '../fn';
 import {log} from '../log';
 
 import type {Request, RequestOrResponsePredicateWithPromise, Response} from '../../types/internal';
@@ -24,6 +24,8 @@ export const processEventsPredicate = async ({
 }: Options): Promise<boolean> => {
   const {predicate, reject, resolve} = requestOrResponsePredicateWithPromise;
 
+  setCustomInspectOnFunction(predicate);
+
   try {
     const isRequestMatched = await predicate(requestOrResponse);
 
@@ -33,7 +35,7 @@ export const processEventsPredicate = async ({
 
     log(
       `Have waited for the ${eventType}`,
-      {predicateCode: getFunctionCode(predicate), [eventType.toLowerCase()]: requestOrResponse},
+      {predicate, [eventType.toLowerCase()]: requestOrResponse},
       LogEventType.InternalUtil,
     );
 
@@ -41,11 +43,7 @@ export const processEventsPredicate = async ({
   } catch (cause) {
     const error = new E2edError(
       `waitFor${eventType} promise rejected due to error in predicate function`,
-      {
-        cause,
-        predicateCode: getFunctionCode(predicate),
-        [eventType.toLowerCase()]: requestOrResponse,
-      },
+      {cause, predicate, [eventType.toLowerCase()]: requestOrResponse},
     );
 
     reject(error);

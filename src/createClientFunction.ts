@@ -1,5 +1,5 @@
 import {getClientFunctionWithTimeout, getPrintedClientFunctionName} from './utils/clientFunction';
-import {getFunctionCode} from './utils/fn';
+import {setCustomInspectOnFunction} from './utils/fn';
 import {generalLog} from './utils/generalLog';
 import {createTestRunCallback} from './utils/testRun';
 
@@ -14,8 +14,9 @@ export const createClientFunction = <Args extends unknown[], R>(
   originalFn: (...args: Args) => R,
   {name: nameFromOptions, timeout}: Options = {},
 ): ((this: void, ...args: Args) => Promise<R>) => {
+  setCustomInspectOnFunction(originalFn);
+
   const name = nameFromOptions ?? originalFn.name;
-  const originalFnCode = getFunctionCode(originalFn);
   const printedClientFunctionName = getPrintedClientFunctionName(name);
 
   const clientFunctionState: ClientFunctionState<Args, R> = {
@@ -27,7 +28,7 @@ export const createClientFunction = <Args extends unknown[], R>(
 
   const clientFunctionWithTimeout = getClientFunctionWithTimeout(clientFunctionState);
 
-  generalLog(`Create ${printedClientFunctionName}`, {originalFnCode});
+  generalLog(`Create ${printedClientFunctionName}`, {originalFn});
 
   /**
    * TODO: support Smart Assertions.

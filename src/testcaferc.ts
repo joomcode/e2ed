@@ -12,6 +12,7 @@ import {
 } from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
 import {getPathToPack} from './utils/environment';
+import {setCustomInspectOnFunction} from './utils/fn';
 
 import type {FrozenPartOfTestCafeConfig, FullPackConfig, UserlandConfig} from './types/internal';
 
@@ -59,6 +60,10 @@ const fullPackConfig: FullPackConfig = {
   src: userlandConfig.testFileGlobs,
   ...frozenPartOfTestCafeConfig,
 };
+
+const {isTestIncludedInPack} = fullPackConfig;
+
+setCustomInspectOnFunction(isTestIncludedInPack);
 
 Object.assign(exports, fullPackConfig);
 

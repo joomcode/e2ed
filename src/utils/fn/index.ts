@@ -1,1 +1,2 @@
-export {getFunctionCode} from './getFunctionCode';
+export {getFunctionPresentationForLogs} from './getFunctionPresentationForLogs';
+export {setCustomInspectOnFunction} from './setCustomInspectOnFunction';
