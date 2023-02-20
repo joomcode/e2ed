@@ -1,5 +1,99 @@
 # Changelog
 
+## [v0.14.0](https://github.com/joomcode/e2ed/tree/v0.14.0) (2023-02-20)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.9...v0.14.0)
+
+- [Merge pull request #15 from joomcode/feature/add-before-and-after-pack-functions](https://github.com/joomcode/e2ed/commit/4a540fd97bbc6a91abcc0aef2bddf9de9ee748c5) ([uid11](https://github.com/uid11))
+
+  feat: add doBeforePack/doAfterPack fields to pack config
+
+- [feat: add customReportProperties field to lite report](https://github.com/joomcode/e2ed/commit/70b90820b66d4810ad77c6426a3da2a3dd6a949b) ([uid11](https://github.com/uid11))
+
+  feat: add doAfterPack field to pack config (array of functions)
+
+  feat: add doBeforePack field to pack config (array of functions)
+
+  refactor: organization of pack config types code
+
+- [feat: add setCustomInspectOnFunction utility for logging functions](https://github.com/joomcode/e2ed/commit/8e1866e79a6b4909af9f5d003b013a7cec8bbc16) ([uid11](https://github.com/uid11))
+
+  chore: updat alpine to 3.17.2 (node@18, Chrome 109)
+
+  chore: update @types/node to 18.14.0
+
+  fix: use setCustomInspectOnFunction instead of getFunctionCode
+
+  refactor: separate asserts.ts to several files
+
+  feat: add assertValueHasProperty utility
+
+- [Merge pull request #14 from joomcode/feature/add-pack-tests-filter](https://github.com/joomcode/e2ed/commit/ac65dcc2f6a8c25ca56ee0f3d36e91fa1df55a60) ([uid11](https://github.com/uid11))
+
+  feat: add pack tests filter
+
+- [feat: add isTestIncludedInPack filter for tests in pack](https://github.com/joomcode/e2ed/commit/8ef47e29e8d86a13917048c8c517cba4cbbd1438) ([uid11](https://github.com/uid11))
+
+  fix: use 'Asserts that ...' instead of 'Assert that ...' everywhere
+
+  fix: move all project custom types to Pack type
+
+  fix: add descriptions for all own pack config fields
+
+  fix: move all internal environment variables to E2edEnvironment type
+
+  fix: add printed stackTrace to E2edError
+
+  fix: add getters and setters for internal environment variables
+
+- [chore: update devDependencies (@typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/f6dbd6b286790573da6edb3bb72a08b2daba1331) ([uid11](https://github.com/uid11))
+- [Merge pull request #13 from joomcode/feature/add-packs](https://github.com/joomcode/e2ed/commit/ab1fb2e2484084c2cb9d1b9281af2e1ca9b85e70) ([uid11](https://github.com/uid11))
+
+  feat: add packs
+
+- [feat: add packs support (for local and docker e2ed runs)](https://github.com/joomcode/e2ed/commit/d0fa5db9a254b97d98813bebf5bad16c8a80f1da) ([uid11](https://github.com/uid11))
+
+  fix: rename userland config to pack
+
+  fix: use local gitignored pack instead of overrideConfig
+
+  fix: contributor names in CHANGELOG.md
+
+  fix: color of test duration string in HTML report
+
+  fix: add stacktrace to E2edError presentation
+
+- [Merge pull request #12 from joomcode/feature/add-custom-pack-properties](https://github.com/joomcode/e2ed/commit/630f050de11689c525c742bd39b1be684a808194) ([uid11](https://github.com/uid11))
+
+  feat: Add custom pack properties
+
+- [chore: update eslint to 8.34.0](https://github.com/joomcode/e2ed/commit/deb65e3c362690d34f84bfd971c993922d1d61ad) ([uid11](https://github.com/uid11))
+- [chore: update TestCafe to 2.3.1 (and testcafe-hammerhead to 28.4.2)](https://github.com/joomcode/e2ed/commit/e77195168c686884a68ec1ed79b162f74115ffa4) ([uid11](https://github.com/uid11))
+- [feat: add test on custom pack properties](https://github.com/joomcode/e2ed/commit/44aeec78036dbb87f749d07e065808dc17d59ffa) ([uid11](https://github.com/uid11))
+
+  fix: add JSDoc comments for all userland config properties
+
+- [feat: add custom pack properties for customizing hooks and so on](https://github.com/joomcode/e2ed/commit/87134dc6299467918deecf151862f390911da31e) ([uid11](https://github.com/uid11))
+- [chore: update prettier to 2.8.4](https://github.com/joomcode/e2ed/commit/29b14eb24f94142b5c99859068ffd12a2a291109) ([uid11](https://github.com/uid11))
+
+  fix: clear prettier cache by npm run clear:\* command
+
+  fix: move eslint cache file to node_modules/.cache
+
+- [Merge pull request #11 from joomcode/feature/add-info-about-packages](https://github.com/joomcode/e2ed/commit/e4f5678b46ce886c6bd64383ea19010efefd58b3) ([uid11](https://github.com/uid11))
+
+  feat: add info about used installed packages
+
+- [feat: add info about used installed packages](https://github.com/joomcode/e2ed/commit/4510786d4112a5da39a9c4440eb6c614e8a70d6d) ([uid11](https://github.com/uid11))
+
+  fix: log about errors on start e2ed
+
+  fix: correct export of testCafeHammerheadUpPath
+
+  fix: correct name of testcafe-hammerhead-up package
+
+- [chore: update @types/node to 18.13.0](https://github.com/joomcode/e2ed/commit/fb8a32c1c59d77cdb24226e5afa9793bccbd7a41) ([uid11](https://github.com/uid11))
+
 ## [v0.13.9](https://github.com/joomcode/e2ed/tree/v0.13.9) (2023-02-07)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.8...v0.13.9)
