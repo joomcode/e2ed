@@ -71,6 +71,18 @@ Packs are usually stored in the `autotests/packs` directory.
 `customPackProperties: CustomPackProperties`: a custom set of fields defined within the project.
 These fields allow, for example, to customize the behavior of hooks for different packs.
 
+`doAfterPack: ((liteReport: LiteReport) => CustomReportProperties | undefined)[]`:
+an array of functions that will be executed, in order, after the pack completes.
+The functions accept a lite report object, and can return custom report properties,
+which in this case will be included in the lite report.
+Each function can thus access the results of the previous function.
+
+`doBeforePack: ((startInfo: StartInfo) => FullPackConfig | undefined)[]`:
+an array of functions that will be executed, in order, before the pack starts.
+The functions accept a start info object, and can return new full pack config,
+which in this case will be included in the start info object, and will be used for running pack.
+Each function can thus access the results of the previous function.
+
 `dockerImage: string`: the name of the docker image where the tests will run.
 The image must be based on the e2ed base image.
 
@@ -132,10 +144,6 @@ If the wait is longer than this timeout, then the promise returned by the waitFo
 `E2ED_DEBUG`: run e2ed in nodejs-debug mode (`--inspect-brk=0.0.0.0`) if this variable is not empty.
 
 `E2ED_DOCKER_DEBUG_PORT`: debug port when run in docker (9229 by default).
-
-`E2ED_DOCKER_DO_AFTER_TESTS`: the name of the executable file from the `autotests/bin` directory that will be run (into container) after running the tests.
-
-`E2ED_DOCKER_DO_BEFORE_TESTS`: the name of the executable file from the `autotests/bin` directory that will be run (into container) before running the tests.
 
 ## License
 

@@ -28,7 +28,7 @@ export type {
   PageClassType,
   PageClassTypeArgs,
 } from './pages';
-export type {AsyncVoid, UnwrapPromise} from './promise';
+export type {AsyncVoid, MaybePromise, UnwrapPromise} from './promise';
 export type {LiteReport, LiteRetry} from './report';
 export type {
   RequestHookConfigureResponseEvent,

@@ -2,7 +2,7 @@ import {LogEventType} from '../../constants/internal';
 
 import {assertValueIsDefined} from '../asserts';
 import {E2edError} from '../error';
-import {getFunctionCode} from '../fn';
+import {setCustomInspectOnFunction} from '../fn';
 import {log} from '../log';
 import {wrapInTestRunTracker} from '../testRun';
 
@@ -27,11 +27,11 @@ export const getRunClientFunction = <Args extends unknown[], R>(
 ): (() => void) => {
   const {args, clientFunctionState, reject, resolve} = options;
   const {name, originalFn} = clientFunctionState;
-
-  const originalFnCode = getFunctionCode(originalFn);
   const printedClientFunctionName = getPrintedClientFunctionName(name);
 
   let isClientFunctionAlreadyRerunned = false;
+
+  setCustomInspectOnFunction(originalFn);
 
   /**
    * Potentially cicle function for running client function.
@@ -40,7 +40,7 @@ export const getRunClientFunction = <Args extends unknown[], R>(
     const clientFunctionPromise = clientFunctionState.clientFunction?.(...args);
 
     assertValueIsDefined(clientFunctionPromise, 'clientFunctionPromise is defined', {
-      originalFnCode,
+      originalFn,
       printedClientFunctionName,
     });
 
@@ -54,7 +54,7 @@ export const getRunClientFunction = <Args extends unknown[], R>(
         } else {
           const error = new E2edError(
             `The ${printedClientFunctionName} rejected in browser with cause`,
-            {args, cause: new Error(errorMessage), originalFnCode},
+            {args, cause: new Error(errorMessage), originalFn},
           );
 
           reject(error);
@@ -69,7 +69,7 @@ export const getRunClientFunction = <Args extends unknown[], R>(
 
           log(
             `The ${printedClientFunctionName} will be rerun`,
-            {args, originalFnCode},
+            {args, originalFn},
             LogEventType.InternalUtil,
           );
 
@@ -81,7 +81,7 @@ export const getRunClientFunction = <Args extends unknown[], R>(
         const error = new E2edError(`The ${printedClientFunctionName} rejected with cause`, {
           args,
           cause,
-          originalFnCode,
+          originalFn,
         });
 
         reject(error);

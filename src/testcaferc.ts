@@ -12,8 +12,9 @@ import {
 } from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
 import {getPathToPack} from './utils/environment';
+import {setCustomInspectOnFunction} from './utils/fn';
 
-import type {FrozenPartOfTestCafeConfig, FullPackConfig, UserlandConfig} from './types/internal';
+import type {FrozenPartOfTestCafeConfig, FullPackConfig, UserlandPack} from './types/internal';
 
 const pathToPack = getPathToPack();
 
@@ -21,7 +22,7 @@ assertValueIsTrue(pathToPack.endsWith('.ts'), 'pathToPack ends with ".ts"', {pat
 
 const pathFromCompiledConfigDirectoryToCompiledPack = `${pathToPack.slice(0, -3)}.js`;
 
-const absoluteCompiledUserlandConfigPath = join(
+const absoluteCompiledUserlandPackPath = join(
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
   COMPILED_USERLAND_CONFIG_DIRECTORY,
   pathFromCompiledConfigDirectoryToCompiledPack,
@@ -30,7 +31,7 @@ const absoluteCompiledUserlandConfigPath = join(
 const pathToScreenshotsDirectory = join(REPORTS_DIRECTORY_PATH, 'screenshots');
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
-const userlandConfig = require<{pack: UserlandConfig}>(absoluteCompiledUserlandConfigPath).pack;
+const userlandPack = require<{pack: UserlandPack}>(absoluteCompiledUserlandPackPath).pack;
 
 const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
   color: true,
@@ -54,11 +55,23 @@ const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
 };
 
 const fullPackConfig: FullPackConfig = {
-  ...userlandConfig,
-  browsers: userlandConfig.browser,
-  src: userlandConfig.testFileGlobs,
+  ...userlandPack,
+  browsers: userlandPack.browser,
+  src: userlandPack.testFileGlobs,
   ...frozenPartOfTestCafeConfig,
 };
+
+const {doAfterPack, doBeforePack, isTestIncludedInPack} = fullPackConfig;
+
+for (const fn of doAfterPack) {
+  setCustomInspectOnFunction(fn);
+}
+
+for (const fn of doBeforePack) {
+  setCustomInspectOnFunction(fn);
+}
+
+setCustomInspectOnFunction(isTestIncludedInPack);
 
 Object.assign(exports, fullPackConfig);
 

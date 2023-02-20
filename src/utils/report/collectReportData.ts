@@ -33,6 +33,7 @@ export const collectReportData = async ({
   const summaryRunE2edResults = getSummaryRunE2edResults(fullTestRuns, retries.at(-1));
 
   return {
+    customReportProperties: undefined,
     endE2edReason,
     endTimeInMs,
     errors,

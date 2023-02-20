@@ -35,7 +35,7 @@ export const clientFunctionWrapper = <Args extends readonly unknown[], R>(
           resolve({errorMessage: undefined, result: awaitedResult});
         },
         (error: unknown) => {
-          errorMessage = getErrorMessage('Catch rejected promise', error);
+          errorMessage = getErrorMessage('Caught rejected promise', error);
 
           resolve({errorMessage, result: undefined});
         },
@@ -44,7 +44,7 @@ export const clientFunctionWrapper = <Args extends readonly unknown[], R>(
       resolve({errorMessage: undefined, result});
     }
   } catch (error) {
-    errorMessage = getErrorMessage('Catch error', error);
+    errorMessage = getErrorMessage('Caught an error', error);
 
     resolve({errorMessage, result: undefined});
   }

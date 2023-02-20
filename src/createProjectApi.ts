@@ -4,14 +4,14 @@ import {test} from './test';
 
 import type {
   AnyPack,
-  GetFullPackConfig,
+  GetFullPackConfigFn,
   GetPackParameters,
   TestFunction,
   UserlandHooks,
 } from './types/internal';
 
 type Return<Pack extends AnyPack> = Readonly<{
-  getFullPackConfig: GetFullPackConfig<Pack>;
+  getFullPackConfig: GetFullPackConfigFn<Pack>;
   test: TestFunction<GetPackParameters<Pack>['TestMeta']>;
 }>;
 
@@ -26,7 +26,7 @@ export const createProjectApi = <Pack extends AnyPack>(
   setUserlandHooks(hooks as UserlandHooks);
 
   return {
-    getFullPackConfig: getFullPackConfig as GetFullPackConfig<Pack>,
+    getFullPackConfig: getFullPackConfig as GetFullPackConfigFn<Pack>,
     test: test as TestFunction<GetPackParameters<Pack>['TestMeta']>,
   };
 };

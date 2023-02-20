@@ -4,6 +4,7 @@ const DEFAULT_MAX_CODE_LENGTH = 300;
 
 /**
  * Get function code with max code length.
+ * @internal
  */
 export const getFunctionCode = <Args extends readonly unknown[], R>(
   fn: Fn<Args, R>,

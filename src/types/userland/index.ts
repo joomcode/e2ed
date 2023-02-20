@@ -1,5 +1,6 @@
 export type {
   CustomPackPropertiesPlaceholder,
+  CustomReportPropertiesPlaceholder,
   SkipTestsPlaceholder,
   TestMetaPlaceholder,
 } from './placeholders';

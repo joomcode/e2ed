@@ -32,7 +32,7 @@
     "testcafe-without-typecheck": "2.3.1-rc.2"
   },
   "devDependencies": {
-    "@types/node": "18.13.0",
+    "@types/node": "18.14.0",
     "@typescript-eslint/eslint-plugin": "5.52.0",
     "@typescript-eslint/parser": "5.52.0",
     "eslint": "8.34.0",
@@ -116,7 +116,7 @@
     "pretest:docker": "npm run build:docker && npm run test:docker:copy",
     "test:docker:copy": "rm -rf ./build/docker && mkdir build/docker && cp -r ./build/autotests ./build/docker/autotests",
     "posttest:docker:copy": "./bin/addPackageJsonToBuildDocker.sh",
-    "test:docker": "(cd ./build/docker && E2ED_DOCKER_DO_AFTER_TESTS=doAfterTests.sh E2ED_DOCKER_DO_BEFORE_TESTS=doBeforeTests.sh E2ED_ORIGIN=https://google.com ./autotests/bin/runDocker.sh ./autotests/packs/allTests.ts)",
+    "test:docker": "(cd ./build/docker && E2ED_ORIGIN=https://google.com ./autotests/bin/runDocker.sh ./autotests/packs/allTests.ts)",
     "test:dependencies": "node ./build/testDependencies.js",
     "test:esm": "node ./build/testEsmExports.mjs",
     "test:local": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/localEntrypoint.js ./autotests/packs/allTests.ts)",

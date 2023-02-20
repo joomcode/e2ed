@@ -1,17 +1,18 @@
 import type {DeepReadonly} from '../deep';
 import type {
   CustomPackPropertiesPlaceholder,
+  CustomReportPropertiesPlaceholder,
   SkipTestsPlaceholder,
   TestMetaPlaceholder,
 } from '../userland';
-import type {Any} from '../utils';
 
+import type {WithDoBeforePack} from './doBeforePack';
 import type {OwnE2edConfig} from './ownE2edConfig';
 
 /**
  * Userland part of TestCafe config.
  */
-type UserlangTestCafeConfig = Readonly<{
+type UserlandTestCafeConfig = Readonly<{
   ajaxRequestTimeout: number;
   assertionTimeout: number;
   browserInitTimeout: number;
@@ -22,11 +23,6 @@ type UserlangTestCafeConfig = Readonly<{
   port2: number;
   selectorTimeout: number;
 }>;
-
-/**
- * Common type of any pack for extends constraint.
- */
-export type AnyPack = UserlandConfig<Any, Any, Any>;
 
 /**
  * Frozen (readonly) part of TestCafe config.
@@ -53,49 +49,47 @@ export type FrozenPartOfTestCafeConfig = DeepReadonly<{
 }>;
 
 /**
- * The complete pack configuration object.
+ * The complete pack configuration object without `doBeforePack` property.
  */
-export type FullPackConfig<
+export type FullPackConfigWithoutDoBeforePack<
   CustomPackProperties = unknown,
+  CustomReportProperties = unknown,
   SkipTests = unknown,
   TestMeta = unknown,
 > = (unknown extends CustomPackProperties
-  ? UserlandConfig
-  : UserlandConfig<CustomPackProperties, SkipTests, TestMeta>) &
+  ? UserlandPackWithoutDoBeforePack
+  : UserlandPackWithoutDoBeforePack<
+      CustomPackProperties,
+      CustomReportProperties,
+      SkipTests,
+      TestMeta
+    >) &
   FrozenPartOfTestCafeConfig &
   Readonly<{browsers: string; src: readonly string[]}>;
 
 /**
- * Type of userland getFullPackConfig function (with defined Pack type).
+ * The complete userland pack config.
  */
-export type GetFullPackConfig<Pack extends AnyPack> = Pack extends UserlandConfig<
-  infer CustomPackProperties,
-  infer SkipTests,
-  infer TestMeta
->
-  ? () => FullPackConfig<CustomPackProperties, SkipTests, TestMeta>
-  : never;
-
-/**
- * Get pack type parameters (CustomPackProperties, SkipTests and TestMeta) from given Pack type.
- */
-export type GetPackParameters<Pack extends AnyPack> = Pack extends UserlandConfig<
-  infer CustomPackProperties,
-  infer SkipTests,
-  infer TestMeta
->
-  ? Readonly<{
-      CustomPackProperties: CustomPackProperties;
-      SkipTests: SkipTests;
-      TestMeta: TestMeta;
-    }>
-  : never;
-
-/**
- * The complete userland e2ed config.
- */
-export type UserlandConfig<
+export type UserlandPack<
   CustomPackProperties = CustomPackPropertiesPlaceholder,
+  CustomReportProperties = CustomReportPropertiesPlaceholder,
   SkipTests = SkipTestsPlaceholder,
   TestMeta = TestMetaPlaceholder,
-> = UserlangTestCafeConfig & OwnE2edConfig<CustomPackProperties, SkipTests, TestMeta>;
+> = UserlandPackWithoutDoBeforePack<
+  CustomPackProperties,
+  CustomReportProperties,
+  SkipTests,
+  TestMeta
+> &
+  WithDoBeforePack<CustomPackProperties, CustomReportProperties, SkipTests, TestMeta>;
+
+/**
+ * The complete userland pack config without `doBeforePack` property.
+ */
+export type UserlandPackWithoutDoBeforePack<
+  CustomPackProperties = CustomPackPropertiesPlaceholder,
+  CustomReportProperties = CustomReportPropertiesPlaceholder,
+  SkipTests = SkipTestsPlaceholder,
+  TestMeta = TestMetaPlaceholder,
+> = UserlandTestCafeConfig &
+  OwnE2edConfig<CustomPackProperties, CustomReportProperties, SkipTests, TestMeta>;

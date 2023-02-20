@@ -14,13 +14,13 @@ export type PackageInfo = Readonly<{packagePath: AbsolutePathToDirectory; versio
  * full e2ed configuration before the time the pack were started.
  * Not internal because it is used in report data.
  */
-export type StartInfo = Readonly<{
+export type StartInfo<FullPackConfigArg = FullPackConfig> = Readonly<{
   PWD: string | undefined;
   absolutePathToProjectRootDirectory: AbsolutePathToDirectory;
   'cwd()': string;
   e2ed: PackageInfo;
   e2edEnvironmentVariables: Record<string, string | undefined>;
-  fullPackConfig: FullPackConfig;
+  fullPackConfig: FullPackConfigArg;
   installedE2edDirectoryPath: DirectoryPathFromRoot;
   nodeVersion: string;
   pathToPack: FilePathFromRoot;

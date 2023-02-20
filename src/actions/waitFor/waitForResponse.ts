@@ -2,7 +2,7 @@ import {LogEventType} from '../../constants/internal';
 import {getTestRunPromise} from '../../context/testRunPromise';
 import {getWaitForEventsState} from '../../context/waitForEventsState';
 import {E2edError} from '../../utils/error';
-import {getFunctionCode} from '../../utils/fn';
+import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getFullPackConfig} from '../../utils/getFullPackConfig';
 import {log} from '../../utils/log';
 import {getPromiseWithResolveAndReject} from '../../utils/promise';
@@ -19,6 +19,8 @@ export const waitForResponse = async <SomeResponse extends Response>(
   predicate: ResponsePredicate<SomeResponse>,
   {timeout}: {timeout?: number} = {},
 ): Promise<SomeResponse> => {
+  setCustomInspectOnFunction(predicate);
+
   const waitForEventsState = getWaitForEventsState(RequestHookToWaitForEvents);
   const {waitForResponseTimeout} = getFullPackConfig();
   const rejectTimeout = timeout ?? waitForResponseTimeout;
@@ -55,7 +57,7 @@ export const waitForResponse = async <SomeResponse extends Response>(
 
   log(
     `Set wait for response with timeout ${rejectTimeout}ms`,
-    {predicateCode: getFunctionCode(predicate)},
+    {predicate},
     LogEventType.InternalCore,
   );
 
