@@ -25,7 +25,39 @@ export const pack: Pack = {
   browser: [browser, ...browserFlags].join(' '),
   browserInitTimeout: 60_000,
   concurrency: isLocalRun ? 1 : 2,
-  customPackProperties: {name: 'allTests'},
+  customPackProperties: {internalPackRunId: 0, name: 'allTests'},
+  doAfterPack: [
+    ({endTimeInMs}) => ({externalPackRunId: endTimeInMs}),
+    ({customReportProperties}) => ({
+      externalPackRunId: customReportProperties ? customReportProperties.externalPackRunId + 1 : 0,
+    }),
+    ({customReportProperties, endTimeInMs}) => {
+      if (customReportProperties?.externalPackRunId !== endTimeInMs + 1) {
+        throw new Error('Custom report properties were calculated incorrectly');
+      }
+    },
+  ],
+  doBeforePack: [
+    ({fullPackConfig, startTimeInMs}) => ({
+      ...fullPackConfig,
+      customPackProperties: {
+        ...fullPackConfig.customPackProperties,
+        internalPackRunId: startTimeInMs,
+      },
+    }),
+    ({fullPackConfig}) => ({
+      ...fullPackConfig,
+      customPackProperties: {
+        ...fullPackConfig.customPackProperties,
+        internalPackRunId: fullPackConfig.customPackProperties.internalPackRunId + 1,
+      },
+    }),
+    ({fullPackConfig, startTimeInMs}) => {
+      if (fullPackConfig.customPackProperties.internalPackRunId !== startTimeInMs + 1) {
+        throw new Error('Custom pack properties were calculated incorrectly');
+      }
+    },
+  ],
   dockerImage: 'e2edhub/e2ed',
   isTestIncludedInPack: ({options}) => options.meta.testId !== '13',
   liteReportFileName: 'lite-report.json',

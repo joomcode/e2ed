@@ -13,9 +13,10 @@ export type {
   AnyPack,
   FrozenPartOfTestCafeConfig,
   FullPackConfig,
-  GetFullPackConfig,
+  FullPackConfigWithoutDoBeforePack,
+  GetFullPackConfigFn,
   GetPackParameters,
-  UserlandConfig,
+  UserlandPack,
 } from './config';
 export type {UtcTimeInMs} from './date';
 export type {DeepMutable, DeepPartial, DeepReadonly, DeepRequired} from './deep';
@@ -64,7 +65,7 @@ export type {
 } from './paths';
 /** @internal */
 export type {ImgData, PixelmatchOptions} from './pixelmatch';
-export type {AsyncVoid, UnwrapPromise} from './promise';
+export type {AsyncVoid, MaybePromise, UnwrapPromise} from './promise';
 export type {LiteReport, LiteRetry} from './report';
 /** @internal */
 export type {
@@ -115,6 +116,7 @@ export type {
 } from './undefined';
 export type {
   CustomPackPropertiesPlaceholder,
+  CustomReportPropertiesPlaceholder,
   SkipTestsPlaceholder,
   TestMetaPlaceholder,
   UserlandHooks,

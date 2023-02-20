@@ -15,7 +15,7 @@ const startTimeInMs = (Number(e2edEnvironment[START_TIME_VARIABLE_NAME]) ||
 e2edEnvironment[START_TIME_VARIABLE_NAME] = String(startTimeInMs);
 
 // eslint-disable-next-line import/no-unused-modules
-export type {UserlandConfig as PackConfig} from './types/internal';
+export type {UserlandPack as PackConfig} from './types/internal';
 
 /**
  * Run environment enum (run in docker or local run).

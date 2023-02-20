@@ -1,8 +1,9 @@
 import {processExit} from '../exit';
 import {generalLog} from '../generalLog';
-import {collectReportData, writeHtmlReport, writeLiteJsonReport} from '../report';
+import {collectReportData, getLiteReport, writeHtmlReport, writeLiteJsonReport} from '../report';
 
 import {collectFullEventsData} from './collectFullEventsData';
+import {runAfterPackFunctions} from './runAfterPackFunctions';
 
 import type {ReportData} from '../../types/internal';
 
@@ -20,10 +21,20 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
 
     reportData = await collectReportData(fullEventsData);
 
+    const liteReport = getLiteReport(reportData);
+
+    await runAfterPackFunctions(liteReport);
+
+    const {customReportProperties} = liteReport;
+
+    if (customReportProperties !== undefined) {
+      Object.assign<ReportData, Partial<ReportData>>(reportData, {customReportProperties});
+    }
+
     const {liteReportFileName, reportFileName} = reportData;
 
     if (liteReportFileName !== null) {
-      await writeLiteJsonReport(reportData);
+      await writeLiteJsonReport(liteReport);
     }
     if (reportFileName !== null) {
       await writeHtmlReport(reportData);

@@ -4,13 +4,14 @@ import type {UtcTimeInMs} from './date';
 import type {TestFilePath} from './paths';
 import type {StartInfo} from './startInfo';
 import type {FullTestRun, LiteTestRun, RunHash, RunId} from './testRun';
-import type {TestMetaPlaceholder} from './userland';
+import type {CustomReportPropertiesPlaceholder, TestMetaPlaceholder} from './userland';
 
 /**
  * The complete report data (for printing report).
  * @internal
  */
 export type ReportData = Readonly<{
+  customReportProperties: CustomReportPropertiesPlaceholder | undefined;
   endE2edReason: EndE2edReason;
   endTimeInMs: UtcTimeInMs;
   errors: readonly string[];
@@ -26,7 +27,11 @@ export type ReportData = Readonly<{
 /**
  * The lite report data (for printing lite JSON report) with userland meta.
  */
-export type LiteReport<TestMeta = TestMetaPlaceholder> = Readonly<{
+export type LiteReport<
+  CustomReportProperties = CustomReportPropertiesPlaceholder,
+  TestMeta = TestMetaPlaceholder,
+> = Readonly<{
+  customReportProperties: CustomReportProperties | undefined;
   endE2edReason: EndE2edReason;
   endTimeInMs: UtcTimeInMs;
   errors: readonly string[];

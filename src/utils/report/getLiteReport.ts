@@ -25,6 +25,7 @@ export const getLiteReport = (reportData: ReportData): LiteReport => {
   const liteRetries = retries.map(getLiteRetry);
 
   return {
+    customReportProperties: undefined,
     endE2edReason,
     endTimeInMs,
     errors,

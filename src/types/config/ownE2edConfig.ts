@@ -1,15 +1,20 @@
+import type {MaybePromise} from '../promise';
+import type {LiteReport} from '../report';
 import type {TestStaticOptions} from '../testRun';
+import type {Void} from '../undefined';
 import type {
   CustomPackPropertiesPlaceholder,
+  CustomReportPropertiesPlaceholder,
   SkipTestsPlaceholder,
   TestMetaPlaceholder,
 } from '../userland';
 
 /**
- * Own e2ed pack config properties.
+ * Own e2ed pack config properties without `doBeforepack` properties.
  */
 export type OwnE2edConfig<
   CustomPackProperties = CustomPackPropertiesPlaceholder,
+  CustomReportProperties = CustomReportPropertiesPlaceholder,
   SkipTests = SkipTestsPlaceholder,
   TestMeta = TestMetaPlaceholder,
 > = Readonly<{
@@ -17,6 +22,17 @@ export type OwnE2edConfig<
    * Custom pack properties for using in hooks, etc.
    */
   customPackProperties: CustomPackProperties;
+
+  /**
+   * An array of functions that will be executed, in order, after the pack completes.
+   * The functions accept a lite report object, and can return custom report properties,
+   * which in this case will be included in the lite report.
+   * Each function can thus access the results of the previous function.
+   */
+  doAfterPack: readonly ((
+    this: void,
+    liteReport: LiteReport<CustomReportProperties, TestMeta>,
+  ) => MaybePromise<CustomReportProperties | Void>)[];
 
   /**
    * The name of the docker image where the tests will run.
@@ -28,7 +44,7 @@ export type OwnE2edConfig<
    * This function filters tests (tasks) by their static options —
    * only those tests for which the function returned true get into the pack.
    */
-  isTestIncludedInPack: (testStaticOptions: TestStaticOptions<TestMeta>) => boolean;
+  isTestIncludedInPack: (this: void, testStaticOptions: TestStaticOptions<TestMeta>) => boolean;
 
   /**
    * The name of the file under which, after running the tests,
