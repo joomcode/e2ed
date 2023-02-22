@@ -1,5 +1,5 @@
 import type {pack as allTestsPack} from 'autotests/packs/allTests';
-import type {Pack} from 'autotests/types/pack';
+import type {Pack} from 'autotests/types/projectApi';
 import type {Expect, IsEqual} from 'e2ed/types';
 
 /**

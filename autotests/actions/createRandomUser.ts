@@ -6,7 +6,7 @@ import {log} from 'e2ed/utils';
 import type {User} from 'autotests/types';
 
 /**
- * Create new user with random name.
+ * Creates new user with random name.
  */
 export const createRandomUser = async (): Promise<User> => {
   const name = getRandomUserName();

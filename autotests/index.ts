@@ -2,7 +2,7 @@ import {createProjectApi} from 'e2ed';
 
 import * as hooks from './hooks';
 
-import type {Pack} from 'autotests/types/pack';
+import type {Pack} from 'autotests/types/projectApi';
 
 /**
  * Test function that describes the test or the task

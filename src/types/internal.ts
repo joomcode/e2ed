@@ -90,7 +90,7 @@ export type {RunLabel, RunLabelObject} from './runLabel';
 /** @internal */
 export type {RawRunLabelObject} from './runLabel';
 export type {Selector} from './selectors';
-export type {IsTestSkipped} from './skipTest';
+export type {IsTestSkippedResult} from './skipTest';
 export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';
 export type {TestCafeSelector, TestController} from './testCafe';
@@ -115,6 +115,7 @@ export type {
   Void,
 } from './undefined';
 export type {
+  CreateProjectApiTypes,
   CustomPackPropertiesPlaceholder,
   CustomReportPropertiesPlaceholder,
   SkipTestsPlaceholder,

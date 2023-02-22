@@ -10,19 +10,6 @@ import type {
 } from './config';
 
 /**
- * Type of complete pack configuration object, get by type of Pack (userland part of config).
- */
-type FullPackConfigByPack<
-  Pack extends AnyPack,
-  PackParams extends PackParameters = GetPackParameters<Pack>,
-> = FullPackConfig<
-  PackParams['CustomPackProperties'],
-  PackParams['CustomReportProperties'],
-  PackParams['SkipTests'],
-  PackParams['TestMeta']
->;
-
-/**
  * Typed parameters of pack, defined in userland.
  */
 type PackParameters<
@@ -36,6 +23,15 @@ type PackParameters<
   SkipTests: SkipTests;
   TestMeta: TestMeta;
 }>;
+
+type UntypedGetPackParameters<Pack extends AnyPack> = Pack extends UserlandPack<
+  infer CustomPackProperties,
+  infer CustomReportProperties,
+  infer SkipTests,
+  infer TestMeta
+>
+  ? PackParameters<CustomPackProperties, CustomReportProperties, SkipTests, TestMeta>
+  : never;
 
 /**
  * Separate property `doBeforePack` of userland pack config.
@@ -71,6 +67,11 @@ export type WithDoBeforePack<
 export type AnyPack = UserlandPackWithoutDoBeforePack<Any, Any, Any, Any>;
 
 /**
+ * Common type of any pack parameters.
+ */
+export type AnyPackParameters = PackParameters<Any, Any, Any, Any>;
+
+/**
  * The complete pack configuration object.
  */
 export type FullPackConfig<
@@ -87,6 +88,19 @@ export type FullPackConfig<
   WithDoBeforePack<CustomPackProperties, CustomReportProperties, SkipTests, TestMeta>;
 
 /**
+ * Type of complete pack configuration object, get by type of Pack (userland part of config).
+ */
+export type FullPackConfigByPack<
+  Pack extends AnyPack,
+  PackParams extends PackParameters = GetPackParameters<Pack>,
+> = FullPackConfig<
+  PackParams['CustomPackProperties'],
+  PackParams['CustomReportProperties'],
+  PackParams['SkipTests'],
+  PackParams['TestMeta']
+>;
+
+/**
  * Type of userland getFullPackConfig function (with defined Pack type).
  */
 export type GetFullPackConfigFn<Pack extends AnyPack> = () => FullPackConfigByPack<Pack>;
@@ -94,11 +108,7 @@ export type GetFullPackConfigFn<Pack extends AnyPack> = () => FullPackConfigByPa
 /**
  * Get pack type parameters (CustomPackProperties, SkipTests and TestMeta) from given Pack type.
  */
-export type GetPackParameters<Pack extends AnyPack> = Pack extends UserlandPack<
-  infer CustomPackProperties,
-  infer CustomReportProperties,
-  infer SkipTests,
-  infer TestMeta
->
-  ? PackParameters<CustomPackProperties, CustomReportProperties, SkipTests, TestMeta>
-  : never;
+export type GetPackParameters<
+  Pack extends AnyPack,
+  UntypedPackParameters = UntypedGetPackParameters<Pack>,
+> = UntypedPackParameters extends AnyPackParameters ? UntypedPackParameters : never;

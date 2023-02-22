@@ -25,4 +25,11 @@ export type {
   UserParams,
   UserPhone,
 } from './entities';
+export type {
+  GetLogContext,
+  GetMainTestRunParams,
+  GetTestRunHash,
+  IsTestSkipped,
+  NavigateTo,
+} from './projectApi';
 export type {TestMeta} from './testMeta';

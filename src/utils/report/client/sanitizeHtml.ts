@@ -5,7 +5,7 @@ import type {SafeHtml} from '../../../types/internal';
 const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
 
 /**
- * Create SafeHtml from string without sanitize.
+ * Creates SafeHtml from string without sanitize.
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */

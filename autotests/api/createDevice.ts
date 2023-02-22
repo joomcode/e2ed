@@ -5,7 +5,7 @@ import {request} from 'e2ed/utils';
 import type {ApiDeviceParams, Device} from 'autotests/types';
 
 /**
- * Create new device by API request.
+ * Creates new device by API request.
  */
 export const createDevice = async (params: ApiDeviceParams): Promise<Device> => {
   const {model} = params;

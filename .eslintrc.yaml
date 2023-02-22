@@ -74,10 +74,9 @@ rules:
     - ignoreExports:
         - autotests/**/index.ts
         - autotests/context/pageCookies.ts
-        - autotests/packs/**
+        - autotests/packs/*
         - autotests/tests/**
-        - autotests/types/pack.ts
-        - autotests/types/packsTypechecks.ts
+        - autotests/types/*
         - scripts/*.ts
         - src/*/index.ts
         - src/*/internal.ts
