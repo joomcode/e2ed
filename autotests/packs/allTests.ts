@@ -11,7 +11,7 @@ import {doAfterPack} from '../doAfterPack';
 import {doBeforePack} from '../doBeforePack';
 import {skipTests} from '../skipTests';
 
-import type {IsTestIncludedInPack, Pack} from 'autotests/types/projectApi';
+import type {IsTestIncludedInPack, Pack} from 'autotests/types/packSpecific';
 
 const isLocalRun = runEnvironment === RunEnvironment.Local;
 

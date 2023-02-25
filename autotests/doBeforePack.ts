@@ -1,4 +1,4 @@
-import type {DoBeforePack} from 'autotests/types/projectApi';
+import type {DoBeforePack} from 'autotests/types/packSpecific';
 
 /**
  * An array of functions that will be run before the pack.

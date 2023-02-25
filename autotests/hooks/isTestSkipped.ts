@@ -1,4 +1,4 @@
-import {getFullPackConfig} from 'autotests';
+import {getFullPackConfig} from '../utils/getFullPackConfig';
 
 import type {IsTestSkipped} from 'autotests/types';
 

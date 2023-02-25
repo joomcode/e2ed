@@ -14,7 +14,6 @@ export type {
   FrozenPartOfTestCafeConfig,
   FullPackConfig,
   FullPackConfigWithoutDoBeforePack,
-  GetFullPackConfigFn,
   GetPackParameters,
   UserlandPack,
 } from './config';
@@ -115,7 +114,7 @@ export type {
   Void,
 } from './undefined';
 export type {
-  CreateProjectApiTypes,
+  CreatePackSpecificTypes,
   CustomPackPropertiesPlaceholder,
   CustomReportPropertiesPlaceholder,
   SkipTestsPlaceholder,

@@ -1,4 +1,4 @@
-import type {DoAfterPack} from 'autotests/types/projectApi';
+import type {DoAfterPack} from 'autotests/types/packSpecific';
 
 /**
  * An array of functions that will be run after the pack.

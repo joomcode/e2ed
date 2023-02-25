@@ -46,7 +46,7 @@ export type {
   IsIncludeUndefined,
   Void,
 } from './undefined';
-export type {CreateProjectApiTypes} from './userland';
+export type {CreatePackSpecificTypes} from './userland';
 export type {
   Any,
   GetParamsType,

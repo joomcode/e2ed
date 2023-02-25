@@ -101,11 +101,6 @@ export type FullPackConfigByPack<
 >;
 
 /**
- * Type of userland getFullPackConfig function (with defined Pack type).
- */
-export type GetFullPackConfigFn<Pack extends AnyPack> = () => FullPackConfigByPack<Pack>;
-
-/**
  * Get pack type parameters (CustomPackProperties, SkipTests and TestMeta) from given Pack type.
  */
 export type GetPackParameters<

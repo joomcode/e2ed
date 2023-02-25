@@ -3,15 +3,16 @@ import type {AnyPack, AnyPackParameters, FullPackConfigByPack, GetPackParameters
 import type {UserlandHooks} from './userlandHooks';
 
 /**
- * Creates types of some project API functions (of hooks and functions in pack config).
+ * Creates pack-specific types of some functions (of hooks and functions in pack config).
  */
-export type CreateProjectApiTypes<
+export type CreatePackSpecificTypes<
   Pack extends AnyPack,
   PackParameters extends AnyPackParameters = GetPackParameters<Pack>,
   Hooks extends UserlandHooks<AnyPackParameters> = UserlandHooks<PackParameters['TestMeta']>,
 > = Readonly<{
   DoAfterPack: Pack['doAfterPack'][number];
   DoBeforePack: FullPackConfigByPack<Pack>['doBeforePack'][number];
+  GetFullPackConfig: () => FullPackConfigByPack<Pack>;
   GetLogContext: Hooks['getLogContext'];
   GetMainTestRunParams: Hooks['getMainTestRunParams'];
   GetTestRunHash: Hooks['getTestRunHash'];

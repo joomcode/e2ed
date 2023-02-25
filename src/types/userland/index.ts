@@ -1,4 +1,4 @@
-export type {CreateProjectApiTypes} from './createProjectApiTypes';
+export type {CreatePackSpecificTypes} from './createPackSpecificTypes';
 export type {
   CustomPackPropertiesPlaceholder,
   CustomReportPropertiesPlaceholder,

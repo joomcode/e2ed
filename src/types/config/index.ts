@@ -8,6 +8,5 @@ export type {
   AnyPackParameters,
   FullPackConfig,
   FullPackConfigByPack,
-  GetFullPackConfigFn,
   GetPackParameters,
 } from './doBeforePack';

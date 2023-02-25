@@ -28,6 +28,7 @@ export {E2edError, getStackTrace} from './error';
 export {getFunctionPresentationForLogs, setCustomInspectOnFunction} from './fn';
 export {writeFile} from './fs';
 export {getCurrentUrl} from './getCurrentUrl';
+export {getFullPackConfig as untypedGetFullPackConfig} from './getFullPackConfig';
 export {getKeysCounter} from './getKeysCounter';
 export {getLocatorProperty} from './locators';
 export {log} from './log';

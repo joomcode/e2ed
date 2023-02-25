@@ -31,5 +31,5 @@ export type {
   GetTestRunHash,
   IsTestSkipped,
   NavigateTo,
-} from './projectApi';
+} from './packSpecific';
 export type {TestMeta} from './testMeta';
