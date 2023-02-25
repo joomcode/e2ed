@@ -24,6 +24,9 @@ type PackParameters<
   TestMeta: TestMeta;
 }>;
 
+/**
+ * Get pack type parameters from given Pack type (without extends of AnyPackParameters).
+ */
 type UntypedGetPackParameters<Pack extends AnyPack> = Pack extends UserlandPack<
   infer CustomPackProperties,
   infer CustomReportProperties,

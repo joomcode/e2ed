@@ -40,6 +40,7 @@ const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
       options: {esModuleInterop: true, resolveJsonModule: true},
     },
   },
+  experimentalProxyless: false,
   hostname: 'localhost',
   pageLoadTimeout: 0,
   reporter: [{name: 'spec'}],
