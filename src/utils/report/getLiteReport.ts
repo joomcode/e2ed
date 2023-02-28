@@ -14,10 +14,11 @@ export const getLiteReport = (reportData: ReportData): LiteReport => {
     endTimeInMs,
     errors,
     exitCode,
+    failedTestsMainParams,
     liteReportFileName,
     retries,
     startInfo,
-    summaryRunE2edResults,
+    summaryPackResults,
   } = reportData;
 
   assertValueIsNotNull(liteReportFileName, 'liteReportFileName is not null');
@@ -30,9 +31,10 @@ export const getLiteReport = (reportData: ReportData): LiteReport => {
     endTimeInMs,
     errors,
     exitCode,
+    failedTestsMainParams,
     liteReportFileName,
     retries: liteRetries,
     startInfo,
-    summaryRunE2edResults,
+    summaryPackResults,
   };
 };

@@ -2,9 +2,10 @@ import {getExitCode} from '../exit';
 import {getFullPackConfig} from '../getFullPackConfig';
 
 import {assertThatTestNamesAndFilePathsAreUnique} from './assertThatTestNamesAndFilePathsAreUnique';
+import {getFailedTestsMainParams} from './getFailedTestsMainParams';
 import {getReportErrors} from './getReportErrors';
 import {getRetries} from './getRetries';
-import {getSummaryRunE2edResults} from './getSummaryRunE2edResults';
+import {getSummaryPackResults} from './getSummaryPackResults';
 import {unificateRunHashes} from './unificateRunHashes';
 
 import type {FullEventsData, ReportData} from '../../types/internal';
@@ -30,7 +31,8 @@ export const collectReportData = async ({
   const retries = getRetries(fullTestRuns);
   const exitCode = getExitCode(retries);
 
-  const summaryRunE2edResults = getSummaryRunE2edResults(fullTestRuns, retries.at(-1));
+  const failedTestsMainParams = getFailedTestsMainParams(retries.at(-1));
+  const summaryPackResults = getSummaryPackResults(fullTestRuns, retries.at(-1));
 
   return {
     customReportProperties: undefined,
@@ -38,11 +40,12 @@ export const collectReportData = async ({
     endTimeInMs,
     errors,
     exitCode,
+    failedTestsMainParams,
     fullTestRuns,
     liteReportFileName,
     reportFileName,
     retries,
     startInfo,
-    summaryRunE2edResults,
+    summaryPackResults,
   };
 };
