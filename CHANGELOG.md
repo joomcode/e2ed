@@ -1,5 +1,34 @@
 # Changelog
 
+## [v0.14.1](https://github.com/joomcode/e2ed/tree/v0.14.1) (2023-03-01)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.0...v0.14.1)
+
+- [chore: update pngjs to 7.0.0 in testcafe-without-typecheck](https://github.com/joomcode/e2ed/commit/3c78624af1846cf6169963d74ef662f589ac0c2c) ([uid11](https://github.com/uid11))
+- [Merge pull request #16 from joomcode/feature/add-userland-functions-types](https://github.com/joomcode/e2ed/commit/ba53913a7355626a2da6e84ccb9592470257edd2) ([uid11](https://github.com/uid11))
+
+  feat: add userland functions types
+
+- [feat: add failedTestsMainParams field to report and lite report](https://github.com/joomcode/e2ed/commit/091758f2b2ab38daf0907fe31af2c090291a8c85) ([uid11](https://github.com/uid11))
+
+  refactor: rename summaryRunE2edResults to summaryPackResults
+
+- [chore: update devDependencies (eslint, @typescript-eslint/\*, etc)](https://github.com/joomcode/e2ed/commit/d192c2e3ad18b7152f66b587512067d92b773fab) ([uid11](https://github.com/uid11))
+- [chore: update @types/node to 18.14.1](https://github.com/joomcode/e2ed/commit/52592445db10416c6cf14b7df1eeb92b9c457977) ([uid11](https://github.com/uid11))
+- [fix: remove import cycle with getFullPackConfig](https://github.com/joomcode/e2ed/commit/67f18125c90a3a5d97244d338e39f3f4ca6e8b5f) ([uid11](https://github.com/uid11))
+
+  refactor: rename projectApi types to pack-specific types
+
+  refactor: replace createProjectApi with createTestFunction
+
+  refactor: remove GetFullPackConfigFn type
+
+- [feat: add ready-made types for project functions](https://github.com/joomcode/e2ed/commit/1b5e7e897cf4e2f31681769a093fb99a059c3856) ([uid11](https://github.com/uid11))
+
+  refactor: use verb 'creates' in functions JSDoc
+
+- [chore: update pngjs to 7.0.0; update @typescript-eslint/\*](https://github.com/joomcode/e2ed/commit/f9697695ce18a790538c98b39d45d8f040c358e7) ([uid11](https://github.com/uid11))
+
 ## [v0.14.0](https://github.com/joomcode/e2ed/tree/v0.14.0) (2023-02-20)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.13.9...v0.14.0)
