@@ -3,7 +3,7 @@ import {CREATE_PAGE_TOKEN} from '../../constants/internal';
 import type {AnyPageClassType} from '../../types/internal';
 
 /**
- * Create page instance by page class and page parameters.
+ * Creates page instance by page class and page parameters.
  * @internal
  */
 export const createPageInstance = async <SomePageClass extends AnyPageClassType>(

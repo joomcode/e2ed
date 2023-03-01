@@ -1,5 +1,4 @@
-import type {TestMeta} from 'autotests/types';
-import type {RunHash, TestRun} from 'e2ed/types';
+import type {GetTestRunHash} from 'autotests/types';
 
 /**
  * This hook is used before runnig the test to get unique test run hash.
@@ -7,9 +6,9 @@ import type {RunHash, TestRun} from 'e2ed/types';
  * therefore, it is desirable that this hash does not contain
  * special characters like number signs, question marks, colons, and so on.
  */
-export const getTestRunHash = (testRun: TestRun<TestMeta>): RunHash => {
+export const getTestRunHash: GetTestRunHash = (testRun) => {
   // As with all hooks, you can replace it with your own implementation.
   const {options, runLabel} = testRun;
 
-  return `${options.meta.testId}-${runLabel}` as RunHash;
+  return `${options.meta.testId}-${runLabel}` as ReturnType<GetTestRunHash>;
 };

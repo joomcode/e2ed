@@ -4,25 +4,24 @@ import {
   TestRunStatus,
 } from '../../constants/internal';
 
+import {getFailedTestsMainParams} from './getFailedTestsMainParams';
+
 import type {FullTestRun, Retry} from '../../types/internal';
 
 const MAX_FAILED_TESTS_COUNT = 8;
 
 /**
- * Get summary run e2ed results (count of tests for each status).
+ * Get summary pack results (count of tests for each status).
  * @internal
  */
-export const getSummaryRunE2edResults = (
+export const getSummaryPackResults = (
   fullTestRuns: readonly FullTestRun[],
   lastRetry: Retry | undefined,
 ): string => {
-  const failedTests =
-    lastRetry?.fullTestRuns.filter((fullTestRun) => fullTestRun.status === TestRunStatus.Failed) ??
-    [];
-  const firstFailedTests = failedTests.slice(0, MAX_FAILED_TESTS_COUNT);
-  const failedTestsMainParams = firstFailedTests.map(({mainParams}) => mainParams);
+  const allFailedTestsMainParams = getFailedTestsMainParams(lastRetry);
+  const failedTestsMainParams = allFailedTestsMainParams.slice(0, MAX_FAILED_TESTS_COUNT);
 
-  if (failedTests.length > MAX_FAILED_TESTS_COUNT) {
+  if (allFailedTestsMainParams.length > MAX_FAILED_TESTS_COUNT) {
     failedTestsMainParams.push('...');
   }
 

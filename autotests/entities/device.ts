@@ -5,7 +5,7 @@ import {log} from 'e2ed/utils';
 import type {Device, DeviceParams} from 'autotests/types';
 
 /**
- * Create new device.
+ * Creates new device.
  */
 export const createDevice = async ({
   cookies = [],

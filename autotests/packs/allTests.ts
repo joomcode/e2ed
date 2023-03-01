@@ -7,14 +7,18 @@
 
 import {RunEnvironment, runEnvironment} from 'e2ed/configurator';
 
+import {doAfterPack} from '../doAfterPack';
+import {doBeforePack} from '../doBeforePack';
 import {skipTests} from '../skipTests';
 
-import type {Pack} from 'autotests/types/pack';
+import type {IsTestIncludedInPack, Pack} from 'autotests/types/packSpecific';
 
 const isLocalRun = runEnvironment === RunEnvironment.Local;
 
 const browser = isLocalRun ? 'chrome:headless' : 'chromium:headless';
 const browserFlags = ['--disable-dev-shm-usage', '--disable-web-security'];
+
+const isTestIncludedInPack: IsTestIncludedInPack = ({options}) => options.meta.testId !== '13';
 
 /**
  * Pack of tests or tasks (pack configuration object).
@@ -26,40 +30,10 @@ export const pack: Pack = {
   browserInitTimeout: 60_000,
   concurrency: isLocalRun ? 1 : 2,
   customPackProperties: {internalPackRunId: 0, name: 'allTests'},
-  doAfterPack: [
-    ({endTimeInMs}) => ({externalPackRunId: endTimeInMs}),
-    ({customReportProperties}) => ({
-      externalPackRunId: customReportProperties ? customReportProperties.externalPackRunId + 1 : 0,
-    }),
-    ({customReportProperties, endTimeInMs}) => {
-      if (customReportProperties?.externalPackRunId !== endTimeInMs + 1) {
-        throw new Error('Custom report properties were calculated incorrectly');
-      }
-    },
-  ],
-  doBeforePack: [
-    ({fullPackConfig, startTimeInMs}) => ({
-      ...fullPackConfig,
-      customPackProperties: {
-        ...fullPackConfig.customPackProperties,
-        internalPackRunId: startTimeInMs,
-      },
-    }),
-    ({fullPackConfig}) => ({
-      ...fullPackConfig,
-      customPackProperties: {
-        ...fullPackConfig.customPackProperties,
-        internalPackRunId: fullPackConfig.customPackProperties.internalPackRunId + 1,
-      },
-    }),
-    ({fullPackConfig, startTimeInMs}) => {
-      if (fullPackConfig.customPackProperties.internalPackRunId !== startTimeInMs + 1) {
-        throw new Error('Custom pack properties were calculated incorrectly');
-      }
-    },
-  ],
+  doAfterPack,
+  doBeforePack,
   dockerImage: 'e2edhub/e2ed',
-  isTestIncludedInPack: ({options}) => options.meta.testId !== '13',
+  isTestIncludedInPack,
   liteReportFileName: 'lite-report.json',
   maxRetriesCountInDocker: 3,
   packTimeout: 90 * 60_000,

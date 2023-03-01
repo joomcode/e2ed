@@ -37,7 +37,7 @@ export const FAILED_TEST_RUN_STATUSES: readonly TestRunStatus[] = [
 ];
 
 /**
- * Order of test run statuses for summary run e2ed results.
+ * Order of test run statuses for summary pack results.
  * @internal
  */
 export const ORDER_OF_TEST_RUN_STATUSES_FOR_SUMMARY_RESULTS = [

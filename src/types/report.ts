@@ -16,12 +16,13 @@ export type ReportData = Readonly<{
   endTimeInMs: UtcTimeInMs;
   errors: readonly string[];
   exitCode: ExitCode;
+  failedTestsMainParams: readonly string[];
   fullTestRuns: readonly FullTestRun[];
   liteReportFileName: string | null;
   reportFileName: string | null;
   retries: readonly Retry[];
   startInfo: StartInfo;
-  summaryRunE2edResults: string;
+  summaryPackResults: string;
 }>;
 
 /**
@@ -36,10 +37,11 @@ export type LiteReport<
   endTimeInMs: UtcTimeInMs;
   errors: readonly string[];
   exitCode: ExitCode;
+  failedTestsMainParams: readonly string[];
   liteReportFileName: string;
   retries: readonly LiteRetry<TestMeta>[];
   startInfo: StartInfo;
-  summaryRunE2edResults: string;
+  summaryPackResults: string;
 }>;
 
 /**

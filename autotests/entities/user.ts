@@ -8,7 +8,7 @@ import {log} from 'e2ed/utils';
 import type {User, UserParams} from 'autotests/types';
 
 /**
- * Create new user.
+ * Creates new user.
  */
 export const createUser = async ({
   device,

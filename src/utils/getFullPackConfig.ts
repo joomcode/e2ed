@@ -4,7 +4,6 @@ import type {FullPackConfig} from '../types/internal';
  * Get full pack configuration object.
  * This function can only be called after the E2edRunEvent is registered,
  * because the packs with configurations (e2ed/packs) is compiled when this event is registered.
- * @internal
  */
 export const getFullPackConfig = <
   CustomPackProperties = unknown,

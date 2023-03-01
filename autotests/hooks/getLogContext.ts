@@ -1,14 +1,6 @@
 import {getMeta} from 'e2ed/context';
 
-import type {TestMeta} from 'autotests/types';
-import type {LogEventType} from 'e2ed/constants';
-import type {LogContext, LogPayload} from 'e2ed/types';
-
-type GetLogContext = (
-  message: string,
-  payload: LogPayload | undefined,
-  type: LogEventType,
-) => LogContext | undefined;
+import type {GetLogContext, TestMeta} from 'autotests/types';
 
 /**
  * This hook is used inside the log function to get a snapshot

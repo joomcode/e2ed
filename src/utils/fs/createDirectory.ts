@@ -5,7 +5,7 @@ import type {DirectoryPathFromRoot} from '../../types/internal';
 const options = {recursive: true};
 
 /**
- * Create directory by path.
+ * Creates directory by path.
  * @internal
  */
 export const createDirectory = async (path: DirectoryPathFromRoot): Promise<void> => {

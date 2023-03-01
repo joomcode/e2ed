@@ -3,4 +3,10 @@ export type {
   FullPackConfigWithoutDoBeforePack,
   UserlandPack,
 } from './config';
-export type {AnyPack, FullPackConfig, GetFullPackConfigFn, GetPackParameters} from './doBeforePack';
+export type {
+  AnyPack,
+  AnyPackParameters,
+  FullPackConfig,
+  FullPackConfigByPack,
+  GetPackParameters,
+} from './doBeforePack';

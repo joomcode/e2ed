@@ -1,5 +1,5 @@
 /**
- * Test metadata type (testId, severity, etc).
+ * Test metadata parameters (testId, severity, etc).
  */
 export type TestMeta = Readonly<{
   testId: string;

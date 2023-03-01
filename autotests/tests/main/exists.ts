@@ -1,6 +1,7 @@
-import {getFullPackConfig, it} from 'autotests';
+import {it} from 'autotests';
 import {Main, Search} from 'autotests/pageObjects/pages';
 import {Search as SearchRoute} from 'autotests/routes/pageRoutes';
+import {getFullPackConfig} from 'autotests/utils';
 import {expect} from 'e2ed';
 import {
   assertPage,

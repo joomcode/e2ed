@@ -1,3 +1,4 @@
+export type {CreatePackSpecificTypes} from './createPackSpecificTypes';
 export type {
   CustomPackPropertiesPlaceholder,
   CustomReportPropertiesPlaceholder,
