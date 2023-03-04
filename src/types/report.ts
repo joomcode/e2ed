@@ -1,10 +1,16 @@
 import type {EndE2edReason, ExitCode, TestRunStatus} from '../constants/internal';
 
+import type {FullPackConfig} from './config';
 import type {UtcTimeInMs} from './date';
 import type {TestFilePath} from './paths';
 import type {StartInfo} from './startInfo';
 import type {FullTestRun, LiteTestRun, RunHash, RunId} from './testRun';
-import type {CustomReportPropertiesPlaceholder, TestMetaPlaceholder} from './userland';
+import type {
+  CustomPackPropertiesPlaceholder,
+  CustomReportPropertiesPlaceholder,
+  SkipTestsPlaceholder,
+  TestMetaPlaceholder,
+} from './userland';
 
 /**
  * The complete report data (for printing report).
@@ -29,7 +35,9 @@ export type ReportData = Readonly<{
  * The lite report data (for printing lite JSON report) with userland meta.
  */
 export type LiteReport<
+  CustomPackProperties = CustomPackPropertiesPlaceholder,
   CustomReportProperties = CustomReportPropertiesPlaceholder,
+  SkipTests = SkipTestsPlaceholder,
   TestMeta = TestMetaPlaceholder,
 > = Readonly<{
   customReportProperties: CustomReportProperties | undefined;
@@ -40,7 +48,9 @@ export type LiteReport<
   failedTestsMainParams: readonly string[];
   liteReportFileName: string;
   retries: readonly LiteRetry<TestMeta>[];
-  startInfo: StartInfo;
+  startInfo: StartInfo<
+    FullPackConfig<CustomPackProperties, CustomReportProperties, SkipTests, TestMeta>
+  >;
   summaryPackResults: string;
 }>;
 

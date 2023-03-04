@@ -31,7 +31,7 @@ export type OwnE2edConfig<
    */
   doAfterPack: readonly ((
     this: void,
-    liteReport: LiteReport<CustomReportProperties, TestMeta>,
+    liteReport: LiteReport<CustomPackProperties, CustomReportProperties, SkipTests, TestMeta>,
   ) => MaybePromise<CustomReportProperties | Void>)[];
 
   /**

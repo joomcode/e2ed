@@ -67,7 +67,7 @@ export type WithDoBeforePack<
 /**
  * Common type of any pack for extends constraint.
  */
-export type AnyPack = UserlandPackWithoutDoBeforePack<Any, Any, Any, Any>;
+export type AnyPack = Omit<UserlandPackWithoutDoBeforePack<Any, Any, Any, Any>, 'doAfterPack'>;
 
 /**
  * Common type of any pack parameters.
