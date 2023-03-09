@@ -30,7 +30,7 @@ function getIsE2edName(fromPath: string): (name: string) => boolean {
   return (name: string): boolean => {
     if (
       fromPath.startsWith('/configurator') ||
-      fromPath.startsWith('/createTestId') ||
+      fromPath.startsWith('/createLocator') ||
       fromPath.startsWith('/testcafe')
     ) {
       return true;

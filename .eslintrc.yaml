@@ -81,7 +81,7 @@ rules:
         - src/*/index.ts
         - src/*/internal.ts
         - src/bin/*.ts
-        - src/createTestId.ts
+        - src/createLocator.ts
         - src/esm/testcafe.ts
         - src/index.ts
         - src/testcafe.ts
