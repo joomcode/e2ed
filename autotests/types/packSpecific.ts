@@ -14,5 +14,6 @@ export type GetMainTestRunParams = PackSpecificTypes['GetMainTestRunParams'];
 export type GetTestRunHash = PackSpecificTypes['GetTestRunHash'];
 export type IsTestIncludedInPack = PackSpecificTypes['IsTestIncludedInPack'];
 export type IsTestSkipped = PackSpecificTypes['IsTestSkipped'];
+export type LiteReport = PackSpecificTypes['LiteReport'];
 export type NavigateTo = PackSpecificTypes['NavigateTo'];
 export type {Pack};

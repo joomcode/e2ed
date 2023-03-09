@@ -1,16 +1,18 @@
 import type {AnyPack, AnyPackParameters, FullPackConfigByPack, GetPackParameters} from '../config';
+import type {LiteReport} from '../report';
 
 import type {UserlandHooks} from './userlandHooks';
 
 /**
- * Creates pack-specific types of some functions (of hooks and functions in pack config).
+ * Creates pack-specific types of some functions (of hooks and functions in pack config)
+ * and objects (lite report).
  */
 export type CreatePackSpecificTypes<
   Pack extends AnyPack,
   PackParameters extends AnyPackParameters = GetPackParameters<Pack>,
   Hooks extends UserlandHooks<AnyPackParameters> = UserlandHooks<PackParameters['TestMeta']>,
 > = Readonly<{
-  DoAfterPack: Pack['doAfterPack'][number];
+  DoAfterPack: FullPackConfigByPack<Pack>['doAfterPack'][number];
   DoBeforePack: FullPackConfigByPack<Pack>['doBeforePack'][number];
   GetFullPackConfig: () => FullPackConfigByPack<Pack>;
   GetLogContext: Hooks['getLogContext'];
@@ -18,5 +20,11 @@ export type CreatePackSpecificTypes<
   GetTestRunHash: Hooks['getTestRunHash'];
   IsTestIncludedInPack: Pack['isTestIncludedInPack'];
   IsTestSkipped: Hooks['isTestSkipped'];
+  LiteReport: LiteReport<
+    PackParameters['CustomPackProperties'],
+    PackParameters['CustomReportProperties'],
+    PackParameters['SkipTests'],
+    PackParameters['TestMeta']
+  >;
   NavigateTo: Hooks['navigateTo'];
 }>;

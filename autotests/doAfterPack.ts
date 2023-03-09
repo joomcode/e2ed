@@ -9,7 +9,11 @@ export const doAfterPack: readonly DoAfterPack[] = [
   ({customReportProperties}) => ({
     externalPackRunId: customReportProperties ? customReportProperties.externalPackRunId + 1 : 0,
   }),
-  ({customReportProperties, endTimeInMs}) => {
+  ({customReportProperties, endTimeInMs, startInfo}) => {
+    if (!(startInfo.fullPackConfig.customPackProperties.internalPackRunId > 0)) {
+      throw new Error('Custom pack properties were calculated incorrectly');
+    }
+
     if (customReportProperties?.externalPackRunId !== endTimeInMs + 1) {
       throw new Error('Custom report properties were calculated incorrectly');
     }
