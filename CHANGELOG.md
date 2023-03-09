@@ -1,5 +1,22 @@
 # Changelog
 
+## [v0.14.2](https://github.com/joomcode/e2ed/tree/v0.14.2) (2023-03-09)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.1...v0.14.2)
+
+- [Merge pull request #17 from joomcode/feature/add-create-locator](https://github.com/joomcode/e2ed/commit/eadb4027b02b3e9b3a3a23ab8ac261a5c6a766b1) ([uid11](https://github.com/uid11))
+
+  feat: add create-locator
+
+- [feat: add create-locator@0.0.3](https://github.com/joomcode/e2ed/commit/f06ed5cd72221764135ed0897bf439c05e4a30dd) ([uid11](https://github.com/uid11))
+
+  chore: update TestCafe to 2.4.0
+
+- [chore: update devDependencies (@typescript-eslint/\*, etc)](https://github.com/joomcode/e2ed/commit/97900782df86d212770565391664b6f71643b89d) ([uid11](https://github.com/uid11))
+- [fix: type of liteReport.startInfo.fullPackConfig in userland](https://github.com/joomcode/e2ed/commit/dddbc3ce581aa8e940fef0d4aa25941668533600) ([uid11](https://github.com/uid11))
+
+  feat: add LiteReport type to PackSpecificTypes
+
 ## [v0.14.1](https://github.com/joomcode/e2ed/tree/v0.14.1) (2023-03-01)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.0...v0.14.1)
