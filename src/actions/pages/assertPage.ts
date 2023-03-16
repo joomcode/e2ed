@@ -35,7 +35,7 @@ export const assertPage = async <SomePageClass extends AnyPageClassType>(
   const {routeParams} = route;
   const payload = {currentUrl, isMatch, pageParams, routeParams};
 
-  log(`Asserts that ${message}"`, {...payload, logEventStatus}, LogEventType.InternalAction);
+  log(`Asserts that ${message}`, {...payload, logEventStatus}, LogEventType.InternalAction);
 
   assertValueIsTrue(isMatch, message, payload);
 

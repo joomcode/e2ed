@@ -32,5 +32,10 @@
     "types": ["node"],
     "useDefineForClassFields": true
   },
-  "include": ["autotests/**/*.ts", "node_modules/e2ed/**/*.ts", "scripts/**/*.ts", "src/**/*.ts"]
+  "include": [
+    "./autotests/**/*.ts",
+    "./node_modules/e2ed/**/*.ts",
+    "./scripts/**/*.ts",
+    "./src/**/*.ts"
+  ]
 }

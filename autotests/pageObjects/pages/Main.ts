@@ -1,7 +1,7 @@
 import {Input} from 'autotests/pageObjects/components';
 import {Main as MainRoute} from 'autotests/routes/pageRoutes';
+import {createLocator, type Locator} from 'create-locator';
 import {Page} from 'e2ed';
-import {createLocator, type Locator} from 'e2ed/createLocator';
 import {locatorIdSelector} from 'e2ed/selectors';
 
 import type {Language} from 'autotests/types';
@@ -10,7 +10,6 @@ import type {GetParamsType, Selector} from 'e2ed/types';
 type RouteParams = GetParamsType<MainRoute>;
 type CustomPageParams = Partial<RouteParams> | undefined;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 type MainLocator = Locator<{header: {}}>;
 
 const mainPageLocator = createLocator<MainLocator, Selector>('google', {

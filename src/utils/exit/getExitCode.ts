@@ -5,10 +5,14 @@ import {assertValueIsDefined} from '../asserts';
 import type {Retry} from '../../types/internal';
 
 /**
- * Get e2ed exit code (from complete report data).
+ * Get e2ed exit code by hasErrors flag and array of retries.
  * @internal
  */
-export const getExitCode = (retries: readonly Retry[]): ExitCode => {
+export const getExitCode = (hasErrors: boolean, retries: readonly Retry[]): ExitCode => {
+  if (hasErrors) {
+    return ExitCode.HasErrors;
+  }
+
   if (retries.length === 0) {
     return ExitCode.NoRetries;
   }

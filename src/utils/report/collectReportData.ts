@@ -29,7 +29,7 @@ export const collectReportData = async ({
   unificateRunHashes(fullTestRuns);
 
   const retries = getRetries(fullTestRuns);
-  const exitCode = getExitCode(retries);
+  const exitCode = getExitCode(errors.length > 0, retries);
 
   const failedTestsMainParams = getFailedTestsMainParams(retries.at(-1));
   const summaryPackResults = getSummaryPackResults(fullTestRuns, retries.at(-1));

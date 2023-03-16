@@ -12,37 +12,109 @@
 E2E testing framework over [TestCafe](https://testcafe.io/).
 
 `e2ed` is designed to quickly parallel run a large number of independent atomic tests
-(or other scenarios) In an arbitrary browser inside a docker container.
+(or others tasks) in an arbitrary browser inside a docker container.
 Tests are written in TypeScript, using explicit dependencies and the concept of page objects.
-After the run, a detailed html report and a summary in JSON format is generated.
+After the run, a detailed HTML report and a summary lite report in JSON format is generated.
 
-## Install
+## Adding e2ed to a project
 
-Requires [node](https://nodejs.org/en/) version 16 or higher:
+Prerequisites: [node](https://nodejs.org/en/) >=16,
+[TypeScript](https://www.typescriptlang.org/) >=4.5.
+
+All commands below are run from the root directory of the project.
+
+1. Install the latest version of `e2ed` in devDependencies with the exact version:
 
 ```sh
-npm install e2ed --save-dev
+npm install e2ed --save-dev --save-exact
 ```
 
-## Usage
-
-### CLI
-
-First create the necessary initial structure of directories and files in the project,
-with a sample test and pageObject (all the code related to `e2ed`
-will be in the `autotests` directory in the root of the project):
+2. Initialize `e2ed` in the project; this will add an `autotests` directory
+   with working sample tests and pageObject-s to the project:
 
 ```sh
 npx e2ed-init
 ```
 
-Then run tests locally for `https://google.com`:
+All the code related to `e2ed` will be in the `autotests` directory in the root of the project.
+
+3. [Add](tsconfig.json#L36) the `autotests` directory in field `include` of the project's `tsconfig.json`
+   in the form `"./autotests/**/*.ts"`, to make type checking work in the tests code:
+
+```json
+  "include": [
+    "./autotests/**/*.ts",
+    "..."
+  ],
+```
+
+4. Also [add](tsconfig.json#L21-L24) the re-map of imports from the `autotests` directory in field `paths`
+   of the project's `tsconfig.json`, to use bare imports from the `autotests` directory
+   (`import {...} from 'autotests/...';`):
+
+```json
+  "paths": {
+    "autotests": ["./autotests/index.ts"],
+    "autotests/*": ["./autotests/*"]
+  },
+```
+
+It is assumed here that the `baseUrl` field is not specified in the project's `tsconfig.json`,
+or that the `baseUrl` is specified as `"baseUrl": "."`.
+
+After that you can run pack with tests in the project locally (sample tests are run on `google.com`):
 
 ```sh
 E2ED_ORIGIN=https://google.com npx e2ed ./autotests/packs/allTests.ts
 ```
 
-### Docker
+Now you can edit tests, pageObject-s and other files in the `autotests` directory as you need.
+
+## Usage
+
+### Pack
+
+`e2ed` always runs packs of tests (or tasks), one pack at a time.
+A [pack](autotests/packs/allTests.ts) is a set of tests (tasks) with their run config,
+described in one file. `e2ed` takes one mandatory argument — the path
+to the pack (absolute or relative to the current directory,
+which should be the root directory of the project).
+
+Packs are usually stored in the `autotests/packs` directory.
+
+### Run local
+
+To run pack with tests locally for `https://google.com`:
+
+```sh
+E2ED_ORIGIN=https://google.com npx e2ed ./autotests/packs/allTests.ts
+```
+
+For convenience, you can add a command to run concrete pack in the `scripts` field
+of the `package.json`:
+
+```json
+  "scripts": {
+    "e2ed:all-tests": "e2ed ./autotests/packs/allTests.ts",
+    "..."
+  },
+```
+
+After that, you can run the pack like this:
+
+```sh
+E2ED_ORIGIN=https://google.com npm run e2ed:all-tests
+```
+
+Also, when running locally, you can pass additional
+[TestCafe-supported](https://testcafe.io/documentation/402639/reference/command-line-interface)
+command-line arguments, such as the path to a specific test file from a pack, to run just that test:
+
+```sh
+E2ED_ORIGIN=https://google.com npm run e2ed:all-tests ./autotests/tests/main/exists.ts
+```
+
+### Run in docker
 
 You can download the latest `e2ed` docker image from https://hub.docker.com/r/e2edhub/e2ed:
 
@@ -56,15 +128,50 @@ And run tests for `https://google.com` in docker container:
 E2ED_ORIGIN=https://google.com ./autotests/bin/runDocker.sh ./autotests/packs/allTests.ts
 ```
 
-### Pack
+For convenience, you can add a command to run concrete pack in docker in the `scripts` field
+of the `package.json`:
 
-`e2ed` always runs packs of tests (or jobs), one pack at a time. A pack is a set of tests (tasks)
-with their launch config, described in one file. `e2ed` takes one mandatory argument — the path
-to the pack (absolute or relative to the current directory).
+```json
+  "scripts": {
+    "e2ed:docker:all-tests": "./autotests/bin/runDocker.sh ./autotests/packs/allTests.ts",
+    "..."
+  },
+```
 
-Packs are usually stored in the `autotests/packs` directory.
+After that, you can run the pack in docker like this:
 
-#### Base pack config fields
+```sh
+E2ED_ORIGIN=https://google.com npm run e2ed:docker:all-tests
+```
+
+### Personal local pack for development
+
+You can add your local pack with custom settings for developing tests
+that will not be stored in the repository, under the name `local.ts` in directory `autotests/packs`
+(it's already [listed](autotests/.gitignore#L1) in `.gitignore`).
+
+This pack might look like this:
+
+```ts
+import {pack as allTestsPack} from './allTests';
+
+import type {Pack} from 'autotests/types/pack';
+
+/**
+ * Pack from .gitignore for local development.
+ */
+export const pack: Pack = {
+  ...allTestsPack,
+  browserInitTimeout: 40_000,
+};
+```
+
+### Basic fields of pack config
+
+The [pack](autotests/packs/allTests.ts) is a single `ts` file
+that exports the pack's config under the name `pack`.
+
+Here are the basic fields of the pack config.
 
 `concurrency: number`: the number of browser windows in which tests will run in parallel.
 
