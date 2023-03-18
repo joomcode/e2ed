@@ -11,19 +11,19 @@ import type {FullTestRun} from '../../types/internal';
 export const assertThatTestNamesAndFilePathsAreUnique = (
   fullTestRuns: readonly FullTestRun[],
 ): void => {
-  const testRunsByRunLabel: Record<string, FullTestRun[]> = {};
+  const testRunsByRetryIndex: Record<string, FullTestRun[]> = {};
 
   for (const fullTestRun of fullTestRuns) {
     const {retryIndex} = getRunLabelObject(fullTestRun.runLabel);
 
-    if (!(retryIndex in testRunsByRunLabel)) {
-      testRunsByRunLabel[retryIndex] = [];
+    if (!(retryIndex in testRunsByRetryIndex)) {
+      testRunsByRetryIndex[retryIndex] = [];
     }
 
-    testRunsByRunLabel[retryIndex]?.push(fullTestRun);
+    testRunsByRetryIndex[retryIndex]?.push(fullTestRun);
   }
 
-  for (const testRunsInOneRetry of Object.values(testRunsByRunLabel)) {
+  for (const testRunsInOneRetry of Object.values(testRunsByRetryIndex)) {
     assertThatTestNamesAndFilePathsAreUniqueInOneRetry(testRunsInOneRetry);
   }
 };

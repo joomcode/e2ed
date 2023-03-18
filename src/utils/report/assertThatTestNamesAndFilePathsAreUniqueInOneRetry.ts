@@ -12,8 +12,8 @@ import type {FullTestRun, TestFilePath} from '../../types/internal';
 export const assertThatTestNamesAndFilePathsAreUniqueInOneRetry = (
   fullTestRuns: readonly FullTestRun[],
 ): void => {
-  const filePathsHash: Record<TestFilePath, FullTestRun> = {};
-  const namesHash: Record<string, FullTestRun> = {};
+  const filePathsHash: Record<TestFilePath, FullTestRun> = Object.create(null) as {};
+  const namesHash: Record<string, FullTestRun> = Object.create(null) as {};
 
   const unbrokenTestRuns = fullTestRuns.filter(({status}) => status !== TestRunStatus.Broken);
 

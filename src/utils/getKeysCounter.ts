@@ -5,7 +5,7 @@ import {assertValueIsDefined} from './asserts';
  * the number of function calls with that key.
  */
 export const getKeysCounter = (): ((key: string) => number) => {
-  const cache: Record<string, number> = {};
+  const cache: Record<string, number> = Object.create(null) as {};
 
   return (key: string): number => {
     if (!(key in cache)) {

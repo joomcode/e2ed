@@ -1,3 +1,4 @@
+import {assertValueIsFalse} from './asserts';
 import {collectTestFilePaths} from './collectTestFilePaths';
 
 import type {FullTestRun, TestFilePath} from '../types/internal';
@@ -8,12 +9,23 @@ import type {FullTestRun, TestFilePath} from '../types/internal';
  */
 export const getUnvisitedTestFilePaths = async (
   fullTestRuns: readonly FullTestRun[],
+  notIncludedInPackTests: readonly TestFilePath[],
 ): Promise<readonly TestFilePath[]> => {
   const allTestFilePaths = await collectTestFilePaths();
 
-  const visitedTestFilePathsHash: Record<TestFilePath, true> = {};
+  const visitedTestFilePathsHash: Record<TestFilePath, true> = Object.create(null) as {};
 
   for (const {filePath} of fullTestRuns) {
+    visitedTestFilePathsHash[filePath] = true;
+  }
+
+  for (const filePath of notIncludedInPackTests) {
+    assertValueIsFalse(
+      filePath in visitedTestFilePathsHash,
+      'There is no duplicate test file path in included and not included in pack tests',
+      {filePath, notIncludedInPackTests},
+    );
+
     visitedTestFilePathsHash[filePath] = true;
   }
 

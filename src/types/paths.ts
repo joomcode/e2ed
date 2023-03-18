@@ -16,6 +16,6 @@ export type DirectoryPathFromRoot = Brand<string, 'DirectoryPathFromRoot'>;
 export type FilePathFromRoot = Brand<string, 'FilePathFromRoot'>;
 
 /**
- * Relative file path for files with tests from project root directory.
+ * Relative file path for files with tests or tasks from project root directory.
  */
 export type TestFilePath = Brand<string, 'TestFilePath'>;

@@ -10,7 +10,7 @@ import type {SafeHtml} from '../../../types/internal';
  * @internal
  */
 export const renderScript = (): SafeHtml => createSafeHtmlWithoutSanitize`
-<script async nomodule></script>
+<script type="plain/text"></script>
 <script async type="module">
 ${renderScriptConstants()};
 

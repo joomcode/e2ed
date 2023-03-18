@@ -13,7 +13,7 @@ type RawRetry = Readonly<{
  */
 export const getRetries = (fullTestRuns: readonly FullTestRun[]): readonly Retry[] => {
   const retries: Retry[] = [];
-  const fullTestRunsHash: Record<number, RawRetry> = {};
+  const fullTestRunsHash: Record<number, RawRetry> = Object.create(null) as {};
 
   for (const fullTestRun of fullTestRuns) {
     const {runLabel} = fullTestRun;

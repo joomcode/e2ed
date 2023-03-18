@@ -1,6 +1,7 @@
 import {createRunId} from '../../generators/internal';
 
 import {generalLog} from '../generalLog';
+import {addTestToNotIncludedInPackTests} from '../notIncludedInPackTests';
 
 import {afterTest} from './afterTest';
 import {beforeTest} from './beforeTest';
@@ -32,6 +33,8 @@ export const getRunTest = (test: Test): RunTest => {
       isTestIncludedInPack = getIsTestIncludedInPack(testStaticOptions);
 
       if (!isTestIncludedInPack) {
+        await addTestToNotIncludedInPackTests(testStaticOptions.filePath);
+
         return;
       }
 

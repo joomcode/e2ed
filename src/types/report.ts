@@ -25,6 +25,7 @@ export type ReportData = Readonly<{
   failedTestsMainParams: readonly string[];
   fullTestRuns: readonly FullTestRun[];
   liteReportFileName: string | null;
+  notIncludedInPackTests: readonly TestFilePath[];
   reportFileName: string | null;
   retries: readonly Retry[];
   startInfo: StartInfo;

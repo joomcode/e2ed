@@ -2,6 +2,7 @@ import type {EndE2edReason, LogEventType, TestRunStatus} from '../constants/inte
 
 import type {UtcTimeInMs} from './date';
 import type {LogPayload} from './log';
+import type {TestFilePath} from './paths';
 import type {RunLabel} from './runLabel';
 import type {StartInfo} from './startInfo';
 import type {FullTestRun, RejectTestRun, RunId, TestFn, TestStaticOptions} from './testRun';
@@ -36,6 +37,7 @@ export type FullEventsData = Readonly<{
   endE2edReason: EndE2edReason;
   endTimeInMs: UtcTimeInMs;
   fullTestRuns: readonly FullTestRun[];
+  notIncludedInPackTests: readonly TestFilePath[];
   startInfo: StartInfo;
 }>;
 

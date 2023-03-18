@@ -5,7 +5,7 @@ import {assertValueIsTrue} from '../asserts';
 import type {AbsolutePathToDirectory, PackageInfo} from '../../types/internal';
 
 /**
- * Gets information about used installed npm package from dependencies by package name.
+ * Get information about used installed npm package from dependencies by package name.
  * If the second argument packagePath is given, then we look for the package at this absolute path.
  */
 export const getPackageInfo = (
