@@ -43,7 +43,7 @@ const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
   experimentalProxyless: false,
   hostname: 'localhost',
   pageLoadTimeout: 0,
-  reporter: [{name: 'spec'}],
+  reporter: [{name: 'for-e2ed'}],
   retryTestPages: true,
   screenshots: {
     path: pathToScreenshotsDirectory,
