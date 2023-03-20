@@ -4,6 +4,7 @@ import {getRunId} from '../context/runId';
 // eslint-disable-next-line import/no-internal-modules
 import {registerLogEvent} from './events/registerLogEvent';
 import {generalLog} from './generalLog';
+import {getFullPackConfig} from './getFullPackConfig';
 import {getUserlandHooks} from './userlandHooks';
 
 import type {Log, LogPayload, UtcTimeInMs} from '../types/internal';
@@ -22,7 +23,10 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
       ? (maybePayload as LogEventType)
       : (maybeLogEventType as LogEventType) || LogEventType.Unspecified;
 
-  registerLogEvent(runId, {message, payload, time, type});
+  const {mapLogPayloadInReport} = getFullPackConfig();
+  const payloadInReport = mapLogPayloadInReport(message, payload, type);
+
+  registerLogEvent(runId, {message, payload: payloadInReport, time, type});
 
   const context = getLogContext(message, payload, type);
 

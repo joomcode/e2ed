@@ -1,4 +1,4 @@
-import type {MapLogPayload} from '../log';
+import type {MapLogPayload, MapLogPayloadInReport} from '../log';
 import type {MaybePromise} from '../promise';
 import type {LiteReport} from '../report';
 import type {TestStaticOptions} from '../testRun';
@@ -69,10 +69,16 @@ export type OwnE2edConfig<
   mapLogPayloadInConsole: MapLogPayload;
 
   /**
-   * Maps log payload for logging in file to clarify, shorten or skip a file log entry.
+   * Maps log payload for logging in file to clarify, shorten or skip a log file entry.
    * If the mapping returns `null`, the log entry is skipped.
    */
-  mapLogPayloadInFile: MapLogPayload;
+  mapLogPayloadInLogFile: MapLogPayload;
+
+  /**
+   * Maps log payload for logging step in HTML report and lite report to clarify,
+   * shorten or skip a report step. If the mapping returns `null`, the step is skipped.
+   */
+  mapLogPayloadInReport: MapLogPayloadInReport;
 
   /**
    * The maximum number of retries to run a test with the command

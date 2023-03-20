@@ -30,3 +30,13 @@ export type MapLogPayload = (
   payload: LogPayload | undefined,
   logEventType?: LogEventType,
 ) => LogPayload | null | undefined;
+
+/**
+ * Maps log payload for logging step in HTML report to clarify, shorten or skip a report step.
+ * If the mapping returns `null`, the step is skipped.
+ */
+export type MapLogPayloadInReport = (
+  message: string,
+  payload: LogPayload | undefined,
+  logEventType: LogEventType,
+) => LogPayload | null | undefined;

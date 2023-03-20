@@ -10,8 +10,8 @@ import type {GetLogContext, TestMeta} from 'autotests/types';
  * If the log payload already contains a context field, the context from this hook is ignored.
  * It is convenient to display some test identifier in the context, and, possibly,
  * its run parameters, in order to immediately understand in the logs what test they are from.
- * The context is not displayed in the HTML report and in the lite report,
- * it is displayed only in the logs (in the log file or in the console).
+ * The context is not displayed in the HTML report and in the lite report; it is not available
+ * when mapping logs, it is displayed only in the logs (in the log file or in the console).
  * Use test context (`e2ed/context`) to get parameters inside a hook.
  */
 export const getLogContext: GetLogContext = () => {

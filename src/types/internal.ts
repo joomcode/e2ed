@@ -46,7 +46,14 @@ export type {
   StatusCode,
   Url,
 } from './http';
-export type {Log, LogContext, LogParams, LogPayload, MapLogPayload} from './log';
+export type {
+  Log,
+  LogContext,
+  LogParams,
+  LogPayload,
+  MapLogPayload,
+  MapLogPayloadInReport,
+} from './log';
 export type {ApiMockFunction} from './mockApiRoute';
 /** @internal */
 export type {ApiMockState} from './mockApiRoute';

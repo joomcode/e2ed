@@ -210,10 +210,15 @@ If `null`, the log will not be saved.
 shorten or skip a console log entry.
 If the mapping returns `null`, the log entry is skipped.
 
-`mapLogPayloadInFile: (message: string, payload: LogPayload | undefined, logEventType?: LogEventType)
+`mapLogPayloadInLogFile: (message: string, payload: LogPayload | undefined, logEventType?: LogEventType)
 => LogPayload | null | undefined`: maps log payload for logging in file to clarify,
 shorten or skip a file log entry.
 If the mapping returns `null`, the log entry is skipped.
+
+`mapLogPayloadInReport: (message: string, payload: LogPayload | undefined, logEventType?: LogEventType)
+=> LogPayload | null | undefined`: maps log payload for logging step in HTML report and lite report to clarify,
+shorten or skip a report step.
+If the mapping returns `null`, the step is skipped.
 
 `maxRetriesCountInDocker: number`: the maximum number of retries to run a test with the command
 `your-project/autotests/bin/runDocker.sh` (until the test passes).

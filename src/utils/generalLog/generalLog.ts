@@ -23,7 +23,7 @@ export const generalLog = (
   payload?: LogPayload,
   testLogParams?: TestLogParams,
 ): void => {
-  const {logFileName, mapLogPayloadInConsole, mapLogPayloadInFile} = getFullPackConfig();
+  const {logFileName, mapLogPayloadInConsole, mapLogPayloadInLogFile} = getFullPackConfig();
 
   const context = testLogParams?.context;
   const logPrefix = testLogParams
@@ -32,22 +32,22 @@ export const generalLog = (
   const logMessageHead = `${logPrefix} ${message}`;
 
   if (logFileName) {
-    const payloadForLogInFile = mapLogPayloadInFile(message, payload, testLogParams?.type);
+    const payloadInLogFile = mapLogPayloadInLogFile(message, payload, testLogParams?.type);
 
-    if (payloadForLogInFile !== null) {
-      const logMessageBody = getLogMessageBody(context, false, payloadForLogInFile);
+    if (payloadInLogFile !== null) {
+      const logMessageBody = getLogMessageBody(context, false, payloadInLogFile);
 
       addLogToLogFile(`${logMessageHead}${logMessageBody}\n`);
     }
   }
 
-  const payloadForLogInConsole = mapLogPayloadInConsole(message, payload, testLogParams?.type);
+  const payloadInConsole = mapLogPayloadInConsole(message, payload, testLogParams?.type);
 
-  if (payloadForLogInConsole === null) {
+  if (payloadInConsole === null) {
     return;
   }
 
-  const logMessageBody = getLogMessageBody(context, true, payloadForLogInConsole);
+  const logMessageBody = getLogMessageBody(context, true, payloadInConsole);
 
   // eslint-disable-next-line no-console
   console.log(`${logMessageHead}${logMessageBody}\n`);
