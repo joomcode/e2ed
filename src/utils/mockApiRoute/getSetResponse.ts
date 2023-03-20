@@ -48,7 +48,7 @@ export const getSetResponse =
     responseOptions.headers = cloneWithoutUndefinedProperties({
       ...getContentJsonHeaders(responseBodyAsString),
       ...responseHeaders,
-    }) as unknown as Record<string, string>;
+    }) as unknown as Readonly<Record<string, string>>;
 
     if (responseBodyAsString !== '') {
       responseOptions.setBody(responseBodyAsString);

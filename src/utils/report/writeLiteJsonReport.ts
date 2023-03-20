@@ -8,7 +8,7 @@ import {generalLog} from '../generalLog';
 import type {LiteReport, UtcTimeInMs} from '../../types/internal';
 
 /**
- * Write lite JSON report (lite-report.json file) with test runs results
+ * Writes lite JSON report (lite-report.json file) with test runs results
  * (and without test run logs).
  * @internal
  */

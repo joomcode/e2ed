@@ -212,7 +212,7 @@ If the test pack takes longer than this timeout, the pack will fail with the app
 the page is stable for the specified time in millisecond, and only after that it will consider the page loaded.
 This parameter can be overridden on a specific page instance.
 
-`printTestLogsInConsole: boolean`: if true, print test logs to the console (literally in console.log).
+`printLogsInConsole: boolean`: if true, print pack logs to the console (literally in console.log).
 
 `reportFileName: string | null`: the name of the file under which, after running the tests,
 the HTML report will be saved in the `autotests/reports` directory, for example, `report.html`.
@@ -230,9 +230,9 @@ If the test step (interval between two `log` function calls) takes longer than t
 the test fails and rerun on the next retry.
 This parameter can be overridden in the test-specific options.
 
-`testLogsFileName: string | null`: the name of the file under which, after running the tests,
-the test logs will be saved in the `autotests/reports` directory, for example, `test-logs.log`.
-If `null`, the report will not be saved.
+`logFileName: string | null`: the name of the file under which, after running the tests,
+the pack logs will be saved in the `autotests/reports` directory, for example, `pack-logs.log`.
+If `null`, the log will not be saved.
 
 `testTimeout: number`: timeout (in milliseconds) for each individual test run.
 If the test run takes longer than this timeout, the test fails and rerun on the next retry.

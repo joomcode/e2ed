@@ -2,8 +2,7 @@ import {TestRunStatus} from '../../constants/internal';
 
 import {cloneWithoutLogEvents} from '../clone';
 import {writeTestRunToJsonFile} from '../fs';
-import {generalLog} from '../generalLog';
-import {writeTestLogsToFile} from '../log';
+import {generalLog, writeLogsToFile} from '../generalLog';
 import {getUserlandHooks} from '../userlandHooks';
 import {valueToString} from '../valueToString';
 
@@ -17,7 +16,7 @@ import type {EndTestRunEvent, FullTestRun, TestRun} from '../../types/internal';
  * @internal
  */
 export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent): Promise<void> => {
-  await writeTestLogsToFile();
+  await writeLogsToFile();
 
   const {runId} = endTestRunEvent;
 

@@ -7,7 +7,7 @@ import testCafeWithoutTypecheckPackageJson from '../node_modules/testcafe-withou
 import e2edPackageJson from '../package.json';
 
 const e2edDependencies = e2edPackageJson.dependencies;
-const testCafeWithoutTypecheckDependencies: Record<string, string> =
+const testCafeWithoutTypecheckDependencies: Readonly<Record<string, string>> =
   testCafeWithoutTypecheckPackageJson.dependencies;
 const testCafeWithoutTypecheckVersion = testCafeWithoutTypecheckPackageJson.version;
 

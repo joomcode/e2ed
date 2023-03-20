@@ -75,9 +75,9 @@ export type OwnE2edConfig<
   pageStabilizationInterval: number;
 
   /**
-   * If true, print test logs to the console (literally in console.log).
+   * If true, print pack logs to the console (literally in console.log).
    */
-  printTestLogsInConsole: boolean;
+  printLogsInConsole: boolean;
 
   /**
    * The name of the file under which, after running the tests,
@@ -110,10 +110,10 @@ export type OwnE2edConfig<
 
   /**
    * The name of the file under which, after running the tests,
-   * the test logs will be saved in the `autotests/reports` directory, for example, `test-logs.log`.
-   * If `null`, the report will not be saved.
+   * the pack logs will be saved in the `autotests/reports` directory, for example, `pack-logs.log`.
+   * If `null`, the log will not be saved.
    */
-  testLogsFileName: string | null;
+  logFileName: string | null;
 
   /**
    * Timeout (in milliseconds) for each individual test run.

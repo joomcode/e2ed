@@ -19,7 +19,7 @@ export type StartInfo<FullPackConfigArg = FullPackConfig> = Readonly<{
   absolutePathToProjectRootDirectory: AbsolutePathToDirectory;
   'cwd()': string;
   e2ed: PackageInfo;
-  e2edEnvironmentVariables: Record<string, string | undefined>;
+  e2edEnvironmentVariables: Readonly<Record<string, string | undefined>>;
   fullPackConfig: FullPackConfigArg;
   installedE2edDirectoryPath: DirectoryPathFromRoot;
   nodeVersion: string;

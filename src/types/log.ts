@@ -3,25 +3,17 @@ import type {LogEventStatus, LogEventType} from '../constants/internal';
 /**
  * Payload of log event.
  */
-export type LogPayload = {
-  [x: string]: unknown;
-  logEventStatus?: LogEventStatus;
-};
+export type LogPayload = Readonly<Record<string, unknown> & {logEventStatus?: LogEventStatus}>;
 
 /**
  * Log parameters for E2Ederror and assert functions.
  */
-export type LogParams = Record<string, unknown> & Readonly<{cause?: unknown}>;
-
-/**
- * Type for generalLog log.
- */
-export type GeneralLog = (message: string, payload?: LogPayload) => void;
+export type LogParams = Readonly<Record<string, unknown> & {cause?: unknown}>;
 
 /**
  * Context of log event.
  */
-export type LogContext = Record<string, unknown>;
+export type LogContext = Readonly<Record<string, unknown>>;
 
 /**
  * Type for log function in test context.

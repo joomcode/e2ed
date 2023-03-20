@@ -1,6 +1,6 @@
-import {generalLog} from '../generalLog';
+import {generalLog} from './generalLog';
 
-import type {Fn} from '../../types/internal';
+import type {Fn} from '../types/internal';
 
 /**
  * Safely run array of userland function (from `doBeforePack`/`doAfterPack`).

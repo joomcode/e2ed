@@ -1,25 +1,54 @@
-import {
-  CONSOLE_INSPECT_OPTIONS,
-  e2edEnvironment,
-  RUN_LABEL_VARIABLE_NAME,
-} from '../../constants/internal';
+import {CONSOLE_INSPECT_OPTIONS} from '../../constants/internal';
 
-import {getPrintedRunLabel} from '../runLabel';
+import {getFullPackConfig} from '../getFullPackConfig';
 import {valueToString} from '../valueToString';
 
-import type {GeneralLog} from '../../types/internal';
+import {getLogPrefix} from './getLogPrefix';
+import {addLogToLogFile} from './logFile';
+
+import type {LogContext, LogPayload, UtcTimeInMs} from '../../types/internal';
+
+type TestLogParams = Readonly<{
+  context: LogContext | undefined;
+  prefixEnding: string;
+  utcTimeInMs: UtcTimeInMs;
+}>;
 
 /**
  * General (out of test context) log to stdout.
  * @internal
  */
-export const generalLog: GeneralLog = (message, payload) => {
-  const dateTimeInIso = new Date().toISOString();
-  const printedRunLabel = getPrintedRunLabel(e2edEnvironment[RUN_LABEL_VARIABLE_NAME]);
+// eslint-disable-next-line complexity
+export const generalLog = (
+  message: string,
+  payload?: LogPayload,
+  testLogParams?: TestLogParams,
+): void => {
+  const {printLogsInConsole, logFileName} = getFullPackConfig();
 
-  const printedString =
-    payload === undefined ? '' : valueToString(payload, CONSOLE_INSPECT_OPTIONS);
+  if (!printLogsInConsole && !logFileName) {
+    return;
+  }
 
-  // eslint-disable-next-line no-console
-  console.log(`[e2ed][${dateTimeInIso}]${printedRunLabel} ${message} ${printedString}\n`);
+  const context = testLogParams?.context;
+  const logPrefix = testLogParams
+    ? getLogPrefix(testLogParams.prefixEnding, testLogParams.utcTimeInMs)
+    : getLogPrefix();
+  const logMessageHead = `${logPrefix} ${message}`;
+  const printedValue =
+    context && payload && !('context' in payload) ? {...payload, context} : payload;
+
+  if (printLogsInConsole) {
+    const printedString =
+      payload === undefined ? '' : ` ${valueToString(printedValue, CONSOLE_INSPECT_OPTIONS)}`;
+
+    // eslint-disable-next-line no-console
+    console.log(`${logMessageHead}${printedString}\n`);
+  }
+
+  if (logFileName) {
+    const printedString = payload === undefined ? '' : ` ${valueToString(printedValue)}`;
+
+    addLogToLogFile(`${logMessageHead}${printedString}\n`);
+  }
 };

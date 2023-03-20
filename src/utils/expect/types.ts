@@ -10,4 +10,6 @@ export type AssertionFunctionKeys = keyof Inner.Assertion;
  * Object with all assertion functions.
  * @internal
  */
-export type AssertionFunctions<T> = Record<AssertionFunctionKeys, (...args: unknown[]) => T>;
+export type AssertionFunctions<T> = Readonly<
+  Record<AssertionFunctionKeys, (...args: unknown[]) => T>
+>;

@@ -5,7 +5,7 @@ import {writeFile} from './writeFile';
 import type {StartInfo} from '../../types/internal';
 
 /**
- * Write start info to file in tmp directory.
+ * Writes start info to file in tmp directory.
  * @internal
  */
 export const writeStartInfo = async (startInfo: StartInfo): Promise<void> => {
