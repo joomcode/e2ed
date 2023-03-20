@@ -25,7 +25,7 @@ export type GetParamsType<C> = C extends {[PARAMS_KEY]: unknown}
   : never;
 
 /**
- * Returns true if type is an arra/ (or tuple) of given element's type.
+ * Returns `true` if type is an array (or tuple) of given element's type, and `false` otherwise.
  * IsArray<[]> = true.
  * IsArray<[true, false]> = true.
  * IsArray<readonly [1, 2], number> = true.
@@ -58,7 +58,7 @@ export type Normalize<T> = keyof T extends never
 export type ObjectEntries<T> = EntryPair<T>[];
 
 /**
- * Returns a tuple of two elements. If the second element includes undefined,
+ * Returns a tuple of two elements. If the second element includes `undefined`,
  * then it becomes optional in the tuple.
  * OneOrTwoArgs<'foo', string> = [arg1: 'foo', arg2: string].
  * OneOrTwoArgs<'foo', undefined | number> = [arg1: 'foo', arg2?: number].
@@ -116,7 +116,7 @@ export type Values<T, WithArrays extends boolean = false> = WithArrays extends t
   : T[keyof T];
 
 /**
- * Returns a tuple of one element. If the element includes undefined,
+ * Returns a tuple of one element. If the element includes `undefined`,
  * then it becomes optional in the tuple.
  * ZeroOrOneArg<string> = [arg: string].
  * ZeroOrOneArg<undefined | number> = [arg?: number].

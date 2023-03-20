@@ -4,13 +4,12 @@ import {getRunId} from '../context/runId';
 // eslint-disable-next-line import/no-internal-modules
 import {registerLogEvent} from './events/registerLogEvent';
 import {generalLog} from './generalLog';
-import {getFullPackConfig} from './getFullPackConfig';
 import {getUserlandHooks} from './userlandHooks';
 
 import type {Log, LogPayload, UtcTimeInMs} from '../types/internal';
 
 /**
- * Log every actions and API requests in E2ED tests.
+ * Logs every actions and API requests in e2ed tests.
  */
 export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: unknown) => {
   const {getLogContext} = getUserlandHooks();
@@ -25,13 +24,7 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
 
   registerLogEvent(runId, {message, payload, time, type});
 
-  const {printLogsInConsole, logFileName} = getFullPackConfig();
-
-  if (!printLogsInConsole && !logFileName) {
-    return;
-  }
-
   const context = getLogContext(message, payload, type);
 
-  generalLog(message, payload, {context, prefixEnding: `[${runId}]`, utcTimeInMs: time});
+  generalLog(message, payload, {context, prefixEnding: `[${runId}]`, type, utcTimeInMs: time});
 };

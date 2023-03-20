@@ -1,3 +1,4 @@
+import type {MapLogPayload} from '../log';
 import type {MaybePromise} from '../promise';
 import type {LiteReport} from '../report';
 import type {TestStaticOptions} from '../testRun';
@@ -55,6 +56,25 @@ export type OwnE2edConfig<
   liteReportFileName: string | null;
 
   /**
+   * The name of the file under which, after running the tests,
+   * the pack logs will be saved in the `autotests/reports` directory, for example, `pack-logs.log`.
+   * If `null`, the log will not be saved.
+   */
+  logFileName: string | null;
+
+  /**
+   * Maps log payload for logging in console to clarify, shorten or skip a console log entry.
+   * If the mapping returns `null`, the log entry is skipped.
+   */
+  mapLogPayloadInConsole: MapLogPayload;
+
+  /**
+   * Maps log payload for logging in file to clarify, shorten or skip a file log entry.
+   * If the mapping returns `null`, the log entry is skipped.
+   */
+  mapLogPayloadInFile: MapLogPayload;
+
+  /**
    * The maximum number of retries to run a test with the command
    * `your-project/autotests/bin/runDocker.sh` (until the test passes).
    * For example, if it is equal to three, the test will be run no more than three times.
@@ -73,11 +93,6 @@ export type OwnE2edConfig<
    * This parameter can be overridden on a specific page instance.
    */
   pageStabilizationInterval: number;
-
-  /**
-   * If true, print pack logs to the console (literally in console.log).
-   */
-  printLogsInConsole: boolean;
 
   /**
    * The name of the file under which, after running the tests,
@@ -107,13 +122,6 @@ export type OwnE2edConfig<
    * This parameter can be overridden in the test-specific options.
    */
   testIdleTimeout: number;
-
-  /**
-   * The name of the file under which, after running the tests,
-   * the pack logs will be saved in the `autotests/reports` directory, for example, `pack-logs.log`.
-   * If `null`, the log will not be saved.
-   */
-  logFileName: string | null;
 
   /**
    * Timeout (in milliseconds) for each individual test run.

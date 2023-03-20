@@ -201,6 +201,20 @@ only those tests for which the function returned true get into the pack.
 the lite JSON report will be saved in the `autotests/reports` directory, for example, `lite-report.json`.
 If `null`, the lite report will not be saved.
 
+`logFileName: string | null`: the name of the file under which, after running the tests,
+the pack logs will be saved in the `autotests/reports` directory, for example, `pack-logs.log`.
+If `null`, the log will not be saved.
+
+`mapLogPayloadInConsole: (message: string, payload: LogPayload | undefined, logEventType?: LogEventType)
+=> LogPayload | null | undefined`: maps log payload for logging in console to clarify,
+shorten or skip a console log entry.
+If the mapping returns `null`, the log entry is skipped.
+
+`mapLogPayloadInFile: (message: string, payload: LogPayload | undefined, logEventType?: LogEventType)
+=> LogPayload | null | undefined`: maps log payload for logging in file to clarify,
+shorten or skip a file log entry.
+If the mapping returns `null`, the log entry is skipped.
+
 `maxRetriesCountInDocker: number`: the maximum number of retries to run a test with the command
 `your-project/autotests/bin/runDocker.sh` (until the test passes).
 For example, if it is equal to three, the test will be run no more than three times.
@@ -211,8 +225,6 @@ If the test pack takes longer than this timeout, the pack will fail with the app
 `pageStabilizationInterval: number`: after navigating to the page, `e2ed` will wait until
 the page is stable for the specified time in millisecond, and only after that it will consider the page loaded.
 This parameter can be overridden on a specific page instance.
-
-`printLogsInConsole: boolean`: if true, print pack logs to the console (literally in console.log).
 
 `reportFileName: string | null`: the name of the file under which, after running the tests,
 the HTML report will be saved in the `autotests/reports` directory, for example, `report.html`.
@@ -229,10 +241,6 @@ https://www.npmjs.com/package/globby is used for matching globs.
 If the test step (interval between two `log` function calls) takes longer than this timeout,
 the test fails and rerun on the next retry.
 This parameter can be overridden in the test-specific options.
-
-`logFileName: string | null`: the name of the file under which, after running the tests,
-the pack logs will be saved in the `autotests/reports` directory, for example, `pack-logs.log`.
-If `null`, the log will not be saved.
 
 `testTimeout: number`: timeout (in milliseconds) for each individual test run.
 If the test run takes longer than this timeout, the test fails and rerun on the next retry.

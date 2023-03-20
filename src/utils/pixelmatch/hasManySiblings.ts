@@ -1,7 +1,7 @@
 import type {ImgData} from '../../types/internal';
 
 /**
- * Returns true if the rectangle has many sibling points.
+ * Returns `true` if the rectangle has many sibling points, and `false` otherwise.
  * @internal
  */
 // eslint-disable-next-line complexity

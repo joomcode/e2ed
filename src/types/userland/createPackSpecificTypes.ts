@@ -1,4 +1,5 @@
 import type {AnyPack, AnyPackParameters, FullPackConfigByPack, GetPackParameters} from '../config';
+import type {MapLogPayload} from '../log';
 import type {LiteReport} from '../report';
 
 import type {UserlandHooks} from './userlandHooks';
@@ -26,5 +27,6 @@ export type CreatePackSpecificTypes<
     PackParameters['SkipTests'],
     PackParameters['TestMeta']
   >;
+  MapLogPayload: MapLogPayload;
   NavigateTo: Hooks['navigateTo'];
 }>;

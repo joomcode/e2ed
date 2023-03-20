@@ -20,3 +20,13 @@ export type LogContext = Readonly<Record<string, unknown>>;
  */
 export type Log = ((message: string, payload?: LogPayload, logEventType?: LogEventType) => void) &
   ((message: string, logEventType: LogEventType) => void);
+
+/**
+ * Maps log payload to clarify, shorten or skip a log entry.
+ * If the mapping returns `null`, the log entry is skipped.
+ */
+export type MapLogPayload = (
+  message: string,
+  payload: LogPayload | undefined,
+  logEventType?: LogEventType,
+) => LogPayload | null | undefined;

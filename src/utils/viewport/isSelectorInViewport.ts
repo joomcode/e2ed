@@ -3,8 +3,8 @@ import {htmlElementSelector} from '../../selectors';
 import type {Selector} from '../../types/internal';
 
 /**
- * Returns true, if the selector is in the viewport
- * (intersects with the viewport at least in one point), false otherwise.
+ * Returns `true`, if the selector is in the viewport
+ * (intersects with the viewport at least in one point), and `false` otherwise.
  */
 export const isSelectorInViewport = async (selector: Selector): Promise<boolean> => {
   const clientHeight = await htmlElementSelector.clientHeight;

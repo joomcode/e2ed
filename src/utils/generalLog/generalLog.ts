@@ -1,16 +1,16 @@
-import {CONSOLE_INSPECT_OPTIONS} from '../../constants/internal';
-
 import {getFullPackConfig} from '../getFullPackConfig';
-import {valueToString} from '../valueToString';
 
+import {getLogMessageBody} from './getLogMessageBody';
 import {getLogPrefix} from './getLogPrefix';
 import {addLogToLogFile} from './logFile';
 
+import type {LogEventType} from '../../constants/internal';
 import type {LogContext, LogPayload, UtcTimeInMs} from '../../types/internal';
 
 type TestLogParams = Readonly<{
   context: LogContext | undefined;
   prefixEnding: string;
+  type: LogEventType;
   utcTimeInMs: UtcTimeInMs;
 }>;
 
@@ -18,37 +18,37 @@ type TestLogParams = Readonly<{
  * General (out of test context) log to stdout.
  * @internal
  */
-// eslint-disable-next-line complexity
 export const generalLog = (
   message: string,
   payload?: LogPayload,
   testLogParams?: TestLogParams,
 ): void => {
-  const {printLogsInConsole, logFileName} = getFullPackConfig();
-
-  if (!printLogsInConsole && !logFileName) {
-    return;
-  }
+  const {logFileName, mapLogPayloadInConsole, mapLogPayloadInFile} = getFullPackConfig();
 
   const context = testLogParams?.context;
   const logPrefix = testLogParams
     ? getLogPrefix(testLogParams.prefixEnding, testLogParams.utcTimeInMs)
     : getLogPrefix();
   const logMessageHead = `${logPrefix} ${message}`;
-  const printedValue =
-    context && payload && !('context' in payload) ? {...payload, context} : payload;
-
-  if (printLogsInConsole) {
-    const printedString =
-      payload === undefined ? '' : ` ${valueToString(printedValue, CONSOLE_INSPECT_OPTIONS)}`;
-
-    // eslint-disable-next-line no-console
-    console.log(`${logMessageHead}${printedString}\n`);
-  }
 
   if (logFileName) {
-    const printedString = payload === undefined ? '' : ` ${valueToString(printedValue)}`;
+    const payloadForLogInFile = mapLogPayloadInFile(message, payload, testLogParams?.type);
 
-    addLogToLogFile(`${logMessageHead}${printedString}\n`);
+    if (payloadForLogInFile !== null) {
+      const logMessageBody = getLogMessageBody(context, false, payloadForLogInFile);
+
+      addLogToLogFile(`${logMessageHead}${logMessageBody}\n`);
+    }
   }
+
+  const payloadForLogInConsole = mapLogPayloadInConsole(message, payload, testLogParams?.type);
+
+  if (payloadForLogInConsole === null) {
+    return;
+  }
+
+  const logMessageBody = getLogMessageBody(context, true, payloadForLogInConsole);
+
+  // eslint-disable-next-line no-console
+  console.log(`${logMessageHead}${logMessageBody}\n`);
 };
