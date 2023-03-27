@@ -95,7 +95,7 @@ of the `package.json`:
 
 ```json
   "scripts": {
-    "e2ed:all-tests": "e2ed ./autotests/packs/allTests.ts",
+    "e2ed:allTests": "e2ed ./autotests/packs/allTests.ts",
     "..."
   },
 ```
@@ -103,7 +103,7 @@ of the `package.json`:
 After that, you can run the pack like this:
 
 ```sh
-E2ED_ORIGIN=https://google.com npm run e2ed:all-tests
+E2ED_ORIGIN=https://google.com npm run e2ed:allTests
 ```
 
 Also, when running locally, you can pass additional
@@ -111,7 +111,7 @@ Also, when running locally, you can pass additional
 command-line arguments, such as the path to a specific test file from a pack, to run just that test:
 
 ```sh
-E2ED_ORIGIN=https://google.com npm run e2ed:all-tests ./autotests/tests/main/exists.ts
+E2ED_ORIGIN=https://google.com npm run e2ed:allTests ./autotests/tests/main/exists.ts
 ```
 
 ### Run in docker
@@ -133,7 +133,7 @@ of the `package.json`:
 
 ```json
   "scripts": {
-    "e2ed:docker:all-tests": "./autotests/bin/runDocker.sh ./autotests/packs/allTests.ts",
+    "e2ed:docker:allTests": "./autotests/bin/runDocker.sh ./autotests/packs/allTests.ts",
     "..."
   },
 ```
@@ -141,7 +141,7 @@ of the `package.json`:
 After that, you can run the pack in docker like this:
 
 ```sh
-E2ED_ORIGIN=https://google.com npm run e2ed:docker:all-tests
+E2ED_ORIGIN=https://google.com npm run e2ed:docker:allTests
 ```
 
 ### Personal local pack for development

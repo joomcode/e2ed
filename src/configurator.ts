@@ -32,7 +32,7 @@ export const enum RunEnvironment {
 export let runEnvironment = e2edEnvironment[RUN_ENVIRONMENT_VARIABLE_NAME] ?? RunEnvironment.Local;
 
 /**
- * Sets current run environment before e2ed start.
+ * Set current run environment before e2ed start.
  * @internal
  */
 export const setRunEnvironment = (newRunEnvironment: RunEnvironment): void => {

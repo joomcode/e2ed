@@ -11,7 +11,7 @@ function getFunctionPresentationForThis(this: Fn): string {
 }
 
 /**
- * Set custom `node:inspect` presentation (with function code) on function.
+ * Set custom `node:inspect` and toJSON presentation (with function code) on function.
  */
 export const setCustomInspectOnFunction = <Args extends readonly unknown[], Return, This>(
   fn: Fn<Args, Return, This>,
@@ -27,4 +27,6 @@ export const setCustomInspectOnFunction = <Args extends readonly unknown[], Retu
 
   // eslint-disable-next-line no-param-reassign
   fn[inspect.custom] = getFunctionPresentationForThis;
+  // eslint-disable-next-line no-param-reassign
+  (fn as unknown as {toJSON(): string}).toJSON = getFunctionPresentationForThis;
 };

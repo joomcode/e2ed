@@ -3,7 +3,7 @@ import {testController} from '../testController';
 import {log} from '../utils/log';
 
 /**
- * Sets the browser window size.
+ * Set the browser window size.
  */
 export const resizeWindow = (width: number, height: number): Promise<void> => {
   log(

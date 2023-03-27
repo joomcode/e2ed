@@ -1,6 +1,6 @@
-import {cssSelector} from './cssSelector';
+import {createSelectorByCss} from './createSelectorByCss';
 
 /**
  * Selector of page HTML element ("documentElement").
  */
-export const htmlElementSelector = cssSelector('html');
+export const htmlElementSelector = createSelectorByCss('html');

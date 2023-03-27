@@ -5,7 +5,7 @@ import {valueToString} from '../valueToString';
 import type {LogContext, LogPayload} from '../../types/internal';
 
 /**
- * General (out of test context) log to stdout.
+ * Get body of log message by context, isLogInConsole flag and log payload.
  * @internal
  */
 export const getLogMessageBody = (
