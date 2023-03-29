@@ -116,6 +116,18 @@ export type OwnE2edConfig<
   skipTests: SkipTests;
 
   /**
+   * If `true`, then takes a screenshot of the full page (not just the viewport)
+   * at the time of the test error, for display in the HTML report.
+   */
+  takeFullPageScreenshotOnError: boolean;
+
+  /**
+   * If `true`, then takes a screenshot of the page viewport
+   * at the time of the test error, for display in the HTML report.
+   */
+  takeViewportScreenshotOnError: boolean;
+
+  /**
    * An array of globs with pack test (task) files.
    * {@link https://www.npmjs.com/package/globby} is used for matching globs.
    */

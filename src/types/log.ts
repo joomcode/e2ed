@@ -26,6 +26,7 @@ export type Log = ((message: string, payload?: LogPayload, logEventType?: LogEve
  * If the mapping returns `null`, the log entry is skipped.
  */
 export type MapLogPayload = (
+  this: void,
   message: string,
   payload: LogPayload | undefined,
   logEventType?: LogEventType,
@@ -36,6 +37,7 @@ export type MapLogPayload = (
  * If the mapping returns `null`, the step is skipped.
  */
 export type MapLogPayloadInReport = (
+  this: void,
   message: string,
   payload: LogPayload | undefined,
   logEventType: LogEventType,

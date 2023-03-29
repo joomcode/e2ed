@@ -7,7 +7,7 @@ import type {Expect, RunId, TestRunEvent, Values} from '../types/internal';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 declare type TestRunTypesChecks = [
   Expect<
-    TestRunStatus extends Values<typeof ORDER_OF_TEST_RUN_STATUSES_FOR_SUMMARY_RESULTS, true>
+    TestRunStatus extends Values<typeof ORDER_OF_TEST_RUN_STATUSES_FOR_PRINTING, true>
       ? true
       : false
   >,
@@ -37,15 +37,15 @@ export const FAILED_TEST_RUN_STATUSES: readonly TestRunStatus[] = [
 ];
 
 /**
- * Order of test run statuses for summary pack results.
+ * Order of test run statuses for printing in summary pack results, in HTML report, etc.
  * @internal
  */
-export const ORDER_OF_TEST_RUN_STATUSES_FOR_SUMMARY_RESULTS = [
-  TestRunStatus.Passed,
+export const ORDER_OF_TEST_RUN_STATUSES_FOR_PRINTING = [
   TestRunStatus.Failed,
+  TestRunStatus.Unknown,
+  TestRunStatus.Passed,
   TestRunStatus.Skipped,
   TestRunStatus.Manual,
-  TestRunStatus.Unknown,
   TestRunStatus.Broken,
 ] as const;
 

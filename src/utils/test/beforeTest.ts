@@ -4,7 +4,6 @@ import {setRunId} from '../../context/runId';
 import {setTestIdleTimeout} from '../../context/testIdleTimeout';
 import {setTestTimeout} from '../../context/testTimeout';
 
-import {assertValueIsDefined} from '../asserts';
 import {getRunLabel} from '../environment';
 import {registerStartTestRunEvent} from '../events';
 import {getFullPackConfig} from '../getFullPackConfig';
@@ -64,8 +63,6 @@ export const beforeTest = ({previousRunId, runId, testFn, testStaticOptions}: Op
 
   const runLabel = getRunLabel();
   const utcTimeInMs = Date.now() as UtcTimeInMs;
-
-  assertValueIsDefined(runLabel, 'runLabel is defined', {runId, testStaticOptions});
 
   const testRunEvent: TestRunEvent = {
     ...testStaticOptions,

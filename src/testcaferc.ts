@@ -8,7 +8,7 @@ import {join} from 'node:path';
 import {
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
   COMPILED_USERLAND_CONFIG_DIRECTORY,
-  REPORTS_DIRECTORY_PATH,
+  SCREENSHOTS_DIRECTORY_PATH,
 } from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
 import {getPathToPack} from './utils/environment';
@@ -28,8 +28,6 @@ const absoluteCompiledUserlandPackPath = join(
   pathFromCompiledConfigDirectoryToCompiledPack,
 );
 
-const pathToScreenshotsDirectory = join(REPORTS_DIRECTORY_PATH, 'screenshots');
-
 // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
 const userlandPack = require<{pack: UserlandPack}>(absoluteCompiledUserlandPackPath).pack;
 
@@ -46,10 +44,10 @@ const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
   reporter: [{name: 'for-e2ed'}],
   retryTestPages: true,
   screenshots: {
-    path: pathToScreenshotsDirectory,
+    path: SCREENSHOTS_DIRECTORY_PATH,
     // eslint-disable-next-line no-template-curly-in-string
     pathPattern: '${DATE}_${TIME}_${BROWSER}_${BROWSER_VERSION}/${TEST}/${FILE_INDEX}.png',
-    takeOnFails: true,
+    takeOnFails: false,
     thumbnails: false,
   },
   skipJsErrors: true,

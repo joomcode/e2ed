@@ -34,6 +34,8 @@ export type TestFn = () => Promise<void>;
  */
 export type TestOptions<TestMeta = TestMetaPlaceholder> = DeepReadonly<{
   meta: TestMeta;
+  takeFullPageScreenshotOnError?: boolean;
+  takeViewportScreenshotOnError?: boolean;
   testIdleTimeout?: number;
   testTimeout?: number;
 }>;

@@ -62,6 +62,16 @@ All the code related to `e2ed` will be in the `autotests` directory in the root 
 It is assumed here that the `baseUrl` field is not specified in the project's `tsconfig.json`,
 or that the `baseUrl` is specified as `"baseUrl": "."`.
 
+If, for example, `baseUrl` is equal to `./src`, then it will be necessary
+to correct the path to `autotests` directory accordingly:
+
+```json
+  "paths": {
+    "autotests": ["../autotests/index.ts"],
+    "autotests/*": ["../autotests/*"]
+  },
+```
+
 After that you can run pack with tests in the project locally (sample tests are run on `google.com`):
 
 ```sh
@@ -238,6 +248,12 @@ If `null`, the report will not be saved.
 
 `skipTests: SkipTests`: this setting allows you to describe a set of skipped tests in a custom form.
 You can define the `SkipTests` type and `skipTests` processing rules in the hook `autotests/hooks/isTestSkipped.ts`.
+
+`takeFullPageScreenshotOnError: boolean`: if `true`, then takes a screenshot of the full page
+(not just the viewport) at the time of the test error, for display in the HTML report.
+
+`takeViewportScreenshotOnError: boolean`: if `true`, then takes a screenshot of the page viewport
+at the time of the test error, for display in the HTML report.
 
 `testFileGlobs: readonly string[]`: an array of globs with pack test (task) files.
 https://www.npmjs.com/package/globby is used for matching globs.

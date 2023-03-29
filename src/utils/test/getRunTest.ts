@@ -1,5 +1,6 @@
 import {createRunId} from '../../generators/internal';
 
+import {assertValueIsDefined} from '../asserts';
 import {generalLog} from '../generalLog';
 import {addTestToNotIncludedInPackTests} from '../notIncludedInPackTests';
 
@@ -8,8 +9,9 @@ import {beforeTest} from './beforeTest';
 import {getIsTestIncludedInPack} from './getIsTestIncludedInPack';
 import {getTestStaticOptions} from './getTestStaticOptions';
 import {runTestFn} from './runTestFn';
+import {takeScreenshotsOnErrorIfNeeded} from './takeScreenshotsOnErrorIfNeeded';
 
-import type {RunId, Test, TestController} from '../../types/internal';
+import type {RunId, Test, TestController, TestStaticOptions} from '../../types/internal';
 
 type RunTest = (testController: TestController) => Promise<void>;
 
@@ -25,10 +27,11 @@ export const getRunTest = (test: Test): RunTest => {
 
     let hasRunError = false;
     let isTestIncludedInPack = false;
+    let testStaticOptions: TestStaticOptions | undefined;
     let unknownRunError: unknown;
 
     try {
-      const testStaticOptions = getTestStaticOptions(test, testController);
+      testStaticOptions = getTestStaticOptions(test, testController);
 
       isTestIncludedInPack = getIsTestIncludedInPack(testStaticOptions);
 
@@ -48,6 +51,10 @@ export const getRunTest = (test: Test): RunTest => {
       unknownRunError = error;
 
       generalLog(`Test run ${runId} failed with error`, {error});
+
+      assertValueIsDefined(testStaticOptions, 'testStaticOptions is defined', {error, runId});
+
+      await takeScreenshotsOnErrorIfNeeded(testStaticOptions);
 
       throw error;
     } finally {

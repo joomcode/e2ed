@@ -48,6 +48,8 @@ export const pack: Pack = {
   reportFileName: 'report.html',
   selectorTimeout: 10_000,
   skipTests,
+  takeFullPageScreenshotOnError: false,
+  takeViewportScreenshotOnError: true,
   testFileGlobs: ['./autotests/tests/**/*.ts', '!**/*.skip.ts'],
   testIdleTimeout: 20_000,
   testTimeout: 60_000,
