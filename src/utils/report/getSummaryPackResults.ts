@@ -1,5 +1,5 @@
 import {
-  ORDER_OF_TEST_RUN_STATUSES_FOR_PRINTING,
+  ORDER_OF_TEST_RUN_STATUSES_FOR_DISPLAY,
   TEST_RUN_STATUSES_OF_UNIQUE_TESTS,
   TestRunStatus,
 } from '../../constants/internal';
@@ -29,7 +29,7 @@ export const getSummaryPackResults = (
 
   const countsOfStatuses: string[] = [];
 
-  for (const status of ORDER_OF_TEST_RUN_STATUSES_FOR_PRINTING) {
+  for (const status of ORDER_OF_TEST_RUN_STATUSES_FOR_DISPLAY) {
     const source = TEST_RUN_STATUSES_OF_UNIQUE_TESTS.includes(status)
       ? fullTestRuns
       : lastRetry?.fullTestRuns;

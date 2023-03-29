@@ -1,7 +1,6 @@
 import {createRunId} from '../../generators/internal';
 
 import {assertValueIsDefined} from '../asserts';
-import {generalLog} from '../generalLog';
 import {addTestToNotIncludedInPackTests} from '../notIncludedInPackTests';
 
 import {afterTest} from './afterTest';
@@ -49,8 +48,6 @@ export const getRunTest = (test: Test): RunTest => {
     } catch (error) {
       hasRunError = true;
       unknownRunError = error;
-
-      generalLog(`Test run ${runId} failed with error`, {error});
 
       assertValueIsDefined(testStaticOptions, 'testStaticOptions is defined', {error, runId});
 

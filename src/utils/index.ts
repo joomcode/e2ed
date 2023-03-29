@@ -27,6 +27,7 @@ export {
 export {E2edError, getStackTrace} from './error';
 export {getFunctionPresentationForLogs, setCustomInspectOnFunction} from './fn';
 export {writeFile} from './fs';
+export {removeStyleFromString} from './generalLog';
 export {getCurrentUrl} from './getCurrentUrl';
 export {getFullPackConfig as untypedGetFullPackConfig} from './getFullPackConfig';
 export {getKeysCounter} from './getKeysCounter';

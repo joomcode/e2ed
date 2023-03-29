@@ -3,6 +3,7 @@ import {getFullPackConfig} from '../getFullPackConfig';
 import {getLogMessageBody} from './getLogMessageBody';
 import {getLogPrefix} from './getLogPrefix';
 import {addLogToLogFile} from './logFile';
+import {removeStyleFromString} from './removeStyleFromString';
 
 import type {LogEventType} from '../../constants/internal';
 import type {LogContext, LogPayload, UtcTimeInMs} from '../../types/internal';
@@ -29,15 +30,19 @@ export const generalLog = (
   const logPrefix = testLogParams
     ? getLogPrefix(testLogParams.prefixEnding, testLogParams.utcTimeInMs)
     : getLogPrefix();
-  const logMessageHead = `${logPrefix} ${message}`;
 
   if (logFileName) {
-    const payloadInLogFile = mapLogPayloadInLogFile(message, payload, testLogParams?.type);
+    const messageWithoutStyle = removeStyleFromString(message);
+    const payloadInLogFile = mapLogPayloadInLogFile(
+      messageWithoutStyle,
+      payload,
+      testLogParams?.type,
+    );
 
     if (payloadInLogFile !== null) {
       const logMessageBody = getLogMessageBody(context, false, payloadInLogFile);
 
-      addLogToLogFile(`${logMessageHead}${logMessageBody}\n`);
+      addLogToLogFile(`${logPrefix} ${messageWithoutStyle}${logMessageBody}\n`);
     }
   }
 
@@ -50,5 +55,5 @@ export const generalLog = (
   const logMessageBody = getLogMessageBody(context, true, payloadInConsole);
 
   // eslint-disable-next-line no-console
-  console.log(`${logMessageHead}${logMessageBody}\n`);
+  console.log(`${logPrefix} ${message}${logMessageBody}\n`);
 };

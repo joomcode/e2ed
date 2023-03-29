@@ -4,12 +4,10 @@
  * setting the test run status to a broken.
  * @internal
  */
-export type MaybeWithIsTestRunBroken = {isTestRunBroken: unknown} | undefined;
+export type MaybeWithIsTestRunBroken = Readonly<{isTestRunBroken: unknown}> | undefined;
 
 /**
  * Original TestCafe test run error object.
  * @internal
  */
-export type OriginalTestRunError = Readonly<{
-  errMsg: string;
-}>;
+export type OriginalTestRunError = Readonly<{errMsg: string}>;

@@ -3,7 +3,7 @@ import {runEnvironment} from '../../configurator';
 import {generalLog} from './generalLog';
 
 /**
- * Log an error on start of e2ed.
+ * Logs an error on start of e2ed.
  * @internal
  */
 export const logStartE2edError = (error: unknown): void => {

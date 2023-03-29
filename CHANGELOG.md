@@ -646,7 +646,7 @@
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.11.18...v0.11.19)
 
-- [feat: print skip reason for skipped tests in html report (as metatag)](https://github.com/joomcode/e2ed/commit/97d8991451330abbe997e738505c3e8e46dda35c) ([uid11](https://github.com/uid11))
+- [feat: print skip reason for skipped tests in HTML report (as metatag)](https://github.com/joomcode/e2ed/commit/97d8991451330abbe997e738505c3e8e46dda35c) ([uid11](https://github.com/uid11))
 - [fix: remove unnecessary flag isSkipped from test run event (use status instead)](https://github.com/joomcode/e2ed/commit/4d82233f135dcd87bcfd5d445fa3c38c9e336ee9) ([uid11](https://github.com/uid11))
 
 ## [v0.11.18](https://github.com/joomcode/e2ed/tree/v0.11.18) (2022-08-13)

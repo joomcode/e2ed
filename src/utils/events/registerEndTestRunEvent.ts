@@ -2,7 +2,7 @@ import {TestRunStatus} from '../../constants/internal';
 
 import {cloneWithoutLogEvents} from '../clone';
 import {writeTestRunToJsonFile} from '../fs';
-import {generalLog, writeLogsToFile} from '../generalLog';
+import {generalLog, logEndTestRunEvent, writeLogsToFile} from '../generalLog';
 import {getUserlandHooks} from '../userlandHooks';
 import {valueToString} from '../valueToString';
 
@@ -68,6 +68,8 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
   const runHash = getTestRunHash(testRun);
 
   const fullTestRun: FullTestRun = {mainParams, runHash, ...testRun};
+
+  logEndTestRunEvent(fullTestRun);
 
   await writeTestRunToJsonFile(fullTestRun);
 };
