@@ -103,6 +103,7 @@ export type {TestCafeSelector, TestController} from './testCafe';
 export type {
   LiteTestRun,
   RejectTestRun,
+  RunError,
   RunHash,
   RunId,
   TestFn,

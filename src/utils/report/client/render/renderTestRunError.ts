@@ -1,6 +1,6 @@
 import {sanitizeHtml as clientSanitizeHtml} from '../sanitizeHtml';
 
-import type {SafeHtml} from '../../../../types/internal';
+import type {RunError, SafeHtml} from '../../../../types/internal';
 
 const sanitizeHtml = clientSanitizeHtml;
 
@@ -9,7 +9,7 @@ const sanitizeHtml = clientSanitizeHtml;
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function renderTestRunError(runError: string | undefined): SafeHtml {
+export function renderTestRunError(runError: RunError): SafeHtml {
   if (runError === undefined) {
     return sanitizeHtml``;
   }

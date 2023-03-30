@@ -2,7 +2,7 @@ import {LogEventStatus, LogEventType} from '../../constants/internal';
 import {testController} from '../../testController';
 
 import {log} from '../log';
-import {valueToString} from '../valueToString';
+import {valueToString, wrapStringForLogs} from '../valueToString';
 
 import {assertionMessageGetters} from './assertionMessageGetters';
 
@@ -38,7 +38,7 @@ for (const [key, getAssertionMessage] of Object.entries(assertionMessageGetters)
             `Assert: ${this.description}`,
             {
               actualValue,
-              assertion: `value ${valueToString(actualValue)} ${message}`,
+              assertion: wrapStringForLogs(`value ${valueToString(actualValue)} ${message}`),
               assertionArguments: args,
               error: maybeError,
               logEventStatus: maybeError ? LogEventStatus.Failed : LogEventStatus.Passed,

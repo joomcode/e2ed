@@ -4,4 +4,5 @@ import type {Brand} from './brand';
  * Sanitized HTML for rendering on HTML-page (like report).
  * @internal
  */
-export type SafeHtml = Brand<String, 'SafeHtml'>; // eslint-disable-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type SafeHtml = Brand<String, 'SafeHtml'>;

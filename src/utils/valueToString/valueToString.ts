@@ -8,7 +8,7 @@ import {getLinesArrayTrimmedToLength} from './getLinesArrayTrimmedToLength';
 import type {InspectOptions} from 'node:util';
 
 /**
- * Returns string representation of arbitrary value.
+ * Returns string presentation of arbitrary value.
  */
 export const valueToString = (
   value: unknown,
