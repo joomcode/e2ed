@@ -1,10 +1,10 @@
 import {TestRunStatus} from '../../constants/internal';
 
 import {cloneWithoutLogEvents} from '../clone';
+import {getRunErrorFromError} from '../error';
 import {writeTestRunToJsonFile} from '../fs';
 import {generalLog, logEndTestRunEvent, writeLogsToFile} from '../generalLog';
 import {getUserlandHooks} from '../userlandHooks';
-import {valueToString, wrapStringForLogs} from '../valueToString';
 
 import {calculateTestRunStatus} from './calculateTestRunStatus';
 import {getTestRunEvent} from './getTestRunEvent';
@@ -47,7 +47,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
 
   (testRunEvent as {status: TestRunStatus}).status = status;
 
-  const runError = hasRunError ? wrapStringForLogs(valueToString(unknownRunError)) : undefined;
+  const runError = hasRunError ? getRunErrorFromError(unknownRunError) : undefined;
 
   const testRun: TestRun = {
     endTimeInMs,

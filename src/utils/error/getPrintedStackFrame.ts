@@ -5,7 +5,7 @@ import type {StackFrame} from '../../types/internal';
  * @internal
  */
 export const getPrintedStackFrame = (stackFrame: StackFrame): string => {
-  const functionName = stackFrame.getFunctionName() || 'anonymous';
+  const functionName = stackFrame.getFunctionName() ?? 'anonymous';
   const sourceUrl = stackFrame.getScriptNameOrSourceURL();
   const lineNumber = stackFrame.getLineNumber();
   const columnNumber = stackFrame.getColumnNumber();

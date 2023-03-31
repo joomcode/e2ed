@@ -21,6 +21,8 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
 
     reportData = await collectReportData(fullEventsData);
 
+    generalLog(`Pack results: ${reportData.summaryPackResults}`);
+
     const liteReport = getLiteReport(reportData);
 
     await runAfterPackFunctions(liteReport);
