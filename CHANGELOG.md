@@ -1,5 +1,96 @@
 # Changelog
 
+## [v0.14.3](https://github.com/joomcode/e2ed/tree/v0.14.3) (2023-04-01)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.2...v0.14.3)
+
+- [Merge pull request #18 from joomcode/fix/exclude-tests-outside-of-packs](https://github.com/joomcode/e2ed/commit/2d6be9304fa44db8a9f5ab0fb329c88a2fafa57d) ([uid11](https://github.com/uid11))
+
+  fix: exclude tests that are outside of the packs
+
+- [chore: update TypeScript to 5.0](https://github.com/joomcode/e2ed/commit/c307e50380776889fb8fb1e914e59ff8fb07d4fd) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (@types/node, eslint, etc)](https://github.com/joomcode/e2ed/commit/d4f404028d1ce4afe4cb22ffa2d75c9259959971) ([uid11](https://github.com/uid11))
+- [feat: add successful test run counts in test run result logs](https://github.com/joomcode/e2ed/commit/4ccc018080e2c57a11be9930dcb79b29772300bb) ([uid11](https://github.com/uid11))
+
+  fix: typo in FAILED_TEST_RUN_STATUSES JSDoc
+
+- [fix: add stackTrace to runError from TestCafe](https://github.com/joomcode/e2ed/commit/12a971b2073602db919b229b1775628d58942bdd) ([uid11](https://github.com/uid11))
+
+  feat: print summary pack results in logs
+
+- [fix: presentation of test run error in logs](https://github.com/joomcode/e2ed/commit/3df979f86110cb9d9cf914c6775a372117e6212f) ([uid11](https://github.com/uid11))
+
+  fix: presentation of E2edError in JSON
+
+  fix: presentation of multiline assertions in logs
+
+  fix: presentation of functions in logs
+
+- [feat: print status of test run on test run end](https://github.com/joomcode/e2ed/commit/80c13595eee22d06bb388adb009c3e53fe122ab5) ([uid11](https://github.com/uid11))
+
+  refactor: use "HTML report" instead of "html report" :)
+
+  feat: remove text style from log messages
+
+- [feat: add fields takeFullPageScreenshotOnError/takeViewportScreenshotOnError to pack config](https://github.com/joomcode/e2ed/commit/40d2a660de78eb9c1a4c1b994439d90d73696d85) ([uid11](https://github.com/uid11))
+
+  fix: error with Google main page input locator (sometimes it's textarea)
+
+  fix: error with copying test result from local build to docker build
+
+  fix: order of test statuses for printing
+
+- [refactor: rename cssSelector to createSelectorByCss](https://github.com/joomcode/e2ed/commit/3f5e2a2318e9a371f073ed98f061baea292fc85a) ([uid11](https://github.com/uid11))
+
+  fix: error with run in docker with locally installed e2ed package
+
+  fix: error with printing of functions in steps in HTML report
+
+- [feat: add testcafe-reporter-for-e2ed instead of testcafe-reporter-spec](https://github.com/joomcode/e2ed/commit/70cbf8bd7d68cdb7b0164d3011237e2e2fb38d14) ([uid11](https://github.com/uid11))
+- [fix: add field mapLogPayloadInReport in pack config](https://github.com/joomcode/e2ed/commit/07505b6718c7cad1f84a7ae37f3b5b857d8a4c86) ([uid11](https://github.com/uid11))
+
+  refactor: rename config field mapLogPayloadInFile to mapLogPayloadInLogFile
+
+  fix: add MapLogPayload-types in PackSpecificTypes generic type
+
+- [feat: add fields mapLogPayloadInConsole/mapLogPayloadInFile to pack config](https://github.com/joomcode/e2ed/commit/e49ef274ee7a72d23e26746a967681fc8a6466f7) ([uid11](https://github.com/uid11))
+
+  feat: remove field printLogsInConsole from pack config
+
+  docs: in the comments, highlight JS-values with apostrophes
+
+- [feat: join test logs and general logs to single logs stream](https://github.com/joomcode/e2ed/commit/235b137a7a12b49bd0178b19e4f6b02a50528ffe) ([uid11](https://github.com/uid11))
+
+  fix: add readonly modifier to indexed types (to Records)
+
+- [fix: add list of not included in pack tests](https://github.com/joomcode/e2ed/commit/33221a6c5d398aa4fd650d63359420f37df7cfda) ([uid11](https://github.com/uid11))
+
+  fix: do not run not included in pack test in retry
+
+  fix: skip test that not included in pack in unvisited test files assert
+
+  fix: use objects without prototype for hashes with arbitrary string keys
+
+  fix: throw an error if test file is duplicate in "not included in pack test" files
+
+  fix: exit with code 2 if there are unvisited test files
+
+  fix: attributes of empty script tag in HTML report (for Firefox bug)
+
+- [fix: import create-locator in tests directly](https://github.com/joomcode/e2ed/commit/ea108569a89f37a37b9ea8d6f648e50fbe464636) ([uid11](https://github.com/uid11))
+
+  fix: add create-locator in e2ed container as everywhere available package
+
+  docs: add item "Adding e2ed to a project" to README.md
+
+  docs: describe packs and commands to run packs in README.md
+
+  fix: extra \" in assertPage logs
+
+  fix: exit from e2ed with positive code if there are global errors
+
+  fix: Firefox error with <script async type=module>...
+
 ## [v0.14.2](https://github.com/joomcode/e2ed/tree/v0.14.2) (2023-03-09)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.1...v0.14.2)
