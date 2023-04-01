@@ -6,7 +6,7 @@ import type {Fn} from './fn';
 export type StackFrame<F extends Fn = Fn, This = unknown> = Readonly<{
   getThis(): This;
   getTypeName(): string;
-  getFunctionName(): string;
+  getFunctionName(): string | null;
   getMethodName(): string;
   getFileName(): string;
   getLineNumber(): number;

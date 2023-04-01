@@ -15,6 +15,7 @@ export const enum EndE2edReason {
 export const enum ExitCode {
   Passed = 0,
   Failed = 1,
-  NoRetries = 2,
-  NoReportData = 3,
+  HasErrors = 2,
+  NoRetries = 3,
+  NoReportData = 4,
 }

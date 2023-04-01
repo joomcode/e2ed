@@ -48,7 +48,7 @@ export const getSetResponse =
     responseOptions.headers = cloneWithoutUndefinedProperties({
       ...getContentJsonHeaders(responseBodyAsString),
       ...responseHeaders,
-    }) as unknown as Record<string, string>;
+    }) as unknown as Readonly<Record<string, string>>;
 
     if (responseBodyAsString !== '') {
       responseOptions.setBody(responseBodyAsString);
@@ -57,7 +57,7 @@ export const getSetResponse =
     log(
       `A mock was applied to the API route "${route.constructor.name}"`,
       {
-        apiMockFunctionCode: apiMockFunction.toString(),
+        apiMockFunction,
         mainRequestOptions,
         request,
         response,

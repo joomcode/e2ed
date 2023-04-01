@@ -4,7 +4,7 @@ import type {IsTestSkipped} from 'autotests/types';
 
 /**
  * This hook is used to determine if a given test should be skipped.
- * Skipped tests are displayed in the html report with the corresponding "skipped" status,
+ * Skipped tests are displayed in the HTML report with the corresponding "skipped" status,
  * and with skip reason.
  */
 export const isTestSkipped: IsTestSkipped = (testStaticOptions) => {

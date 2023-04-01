@@ -1,5 +1,5 @@
 /**
- * RGB color representation (as three numbers).
+ * RGB color presentation (as three numbers).
  * @internal
  */
 type RGBTuple = readonly [number, number, number];

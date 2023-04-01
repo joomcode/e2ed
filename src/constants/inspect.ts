@@ -5,6 +5,7 @@
 export const DEFAULT_INSPECT_OPTIONS = {
   colors: false,
   depth: 16,
+  numericSeparator: true,
   showHidden: true,
 } as const;
 

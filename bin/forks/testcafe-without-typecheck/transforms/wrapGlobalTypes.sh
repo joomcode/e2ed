@@ -14,4 +14,4 @@ sed -i "s/const createTestCafe: /const createTestCafe: Inner./" ./bin/forks/test
 sed -i "s/declare const fixture: [^;]*;//" ./bin/forks/testcafe-without-typecheck/package/ts-defs/index.d.ts
 sed -i "s/declare const test: [^;]*;//" ./bin/forks/testcafe-without-typecheck/package/ts-defs/index.d.ts
 
-sed -i "s/interface RequestHook {/interface RequestHook { _onConfigureResponse(event: Record<string, unknown>): Promise<void>;/" ./bin/forks/testcafe-without-typecheck/package/ts-defs/index.d.ts
+sed -i "s/interface RequestHook {/interface RequestHook { _onConfigureResponse(event: Readonly<Record<string, unknown>>): Promise<void>;/" ./bin/forks/testcafe-without-typecheck/package/ts-defs/index.d.ts

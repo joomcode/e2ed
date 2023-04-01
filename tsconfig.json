@@ -7,7 +7,6 @@
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
-    "importsNotUsedAsValues": "error",
     "incremental": true,
     "outDir": "build",
     "module": "nodenext",
@@ -30,7 +29,13 @@
     "stripInternal": true,
     "target": "ES2016",
     "types": ["node"],
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
+    "verbatimModuleSyntax": false
   },
-  "include": ["autotests/**/*.ts", "node_modules/e2ed/**/*.ts", "scripts/**/*.ts", "src/**/*.ts"]
+  "include": [
+    "./autotests/**/*.ts",
+    "./node_modules/e2ed/**/*.ts",
+    "./scripts/**/*.ts",
+    "./src/**/*.ts"
+  ]
 }

@@ -92,7 +92,7 @@ declare module 'testcafe-hammerhead-up/lib/request-pipeline/request-hooks/events
 declare module 'testcafe-without-typecheck/lib/api/test-run-tracker' {
   type InternalTestRun = {
     id: string;
-    controller: Record<string, unknown>;
+    controller: Readonly<Record<string, unknown>>;
 
     executeAction(apiMethodName: string, command: unknown, callsite: unknown): Promise<unknown>;
     executeCommand(command: unknown): Promise<unknown>;

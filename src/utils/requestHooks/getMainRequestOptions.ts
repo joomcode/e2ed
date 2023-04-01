@@ -7,7 +7,7 @@ type Return = Readonly<{
 }>;
 
 /**
- * Get main request options for printing in logs.
+ * Get main request options for display in logs.
  * @internal
  */
 export const getMainRequestOptions = (requestOptions: Inner.RequestOptions): Return => {

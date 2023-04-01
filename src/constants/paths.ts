@@ -67,6 +67,15 @@ export const COMPILED_USERLAND_CONFIG_DIRECTORY = join(
 export const EVENTS_DIRECTORY_PATH = join(TMP_DIRECTORY_PATH, 'events') as DirectoryPathFromRoot;
 
 /**
+ * Relative (from root) path to directory with tests screenshots.
+ * @internal
+ */
+export const SCREENSHOTS_DIRECTORY_PATH = join(
+  REPORTS_DIRECTORY_PATH,
+  'screenshots',
+) as DirectoryPathFromRoot;
+
+/**
  * Relative (from root) path to start info JSON file.
  * @internal
  */

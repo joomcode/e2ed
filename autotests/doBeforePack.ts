@@ -20,7 +20,7 @@ export const doBeforePack: readonly DoBeforePack[] = [
     },
   }),
   ({fullPackConfig, startTimeInMs}) => {
-    if (fullPackConfig.customPackProperties.internalPackRunId !== startTimeInMs + 1) {
+    if (fullPackConfig.customPackProperties.internalPackRunId !== Number(startTimeInMs) + 1) {
       throw new Error('Custom pack properties were calculated incorrectly');
     }
   },

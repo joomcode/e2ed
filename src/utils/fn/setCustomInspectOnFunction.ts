@@ -6,12 +6,13 @@ import {getFunctionPresentationForLogs} from './getFunctionPresentationForLogs';
 
 import type {Fn} from '../../types/internal';
 
-function getFunctionPresentationForThis(this: Fn): string {
+// eslint-disable-next-line @typescript-eslint/ban-types
+function getFunctionPresentationForThis(this: Fn): string | String {
   return getFunctionPresentationForLogs(this);
 }
 
 /**
- * Set custom `node:inspect` presentation (with function code) on function.
+ * Set custom `node:inspect` and toJSON presentation (with function code) on function.
  */
 export const setCustomInspectOnFunction = <Args extends readonly unknown[], Return, This>(
   fn: Fn<Args, Return, This>,
@@ -27,4 +28,6 @@ export const setCustomInspectOnFunction = <Args extends readonly unknown[], Retu
 
   // eslint-disable-next-line no-param-reassign
   fn[inspect.custom] = getFunctionPresentationForThis;
+  // eslint-disable-next-line no-param-reassign, @typescript-eslint/ban-types
+  (fn as unknown as {toJSON(): string | String}).toJSON = getFunctionPresentationForThis;
 };

@@ -18,18 +18,23 @@ export const collectReportData = async ({
   endE2edReason,
   endTimeInMs,
   fullTestRuns,
+  notIncludedInPackTests,
   startInfo,
 }: FullEventsData): Promise<ReportData> => {
   const {liteReportFileName, reportFileName} = getFullPackConfig();
 
-  const errors = await getReportErrors(startInfo.runEnvironment, fullTestRuns);
+  const errors = await getReportErrors(
+    startInfo.runEnvironment,
+    fullTestRuns,
+    notIncludedInPackTests,
+  );
 
   assertThatTestNamesAndFilePathsAreUnique(fullTestRuns);
 
   unificateRunHashes(fullTestRuns);
 
   const retries = getRetries(fullTestRuns);
-  const exitCode = getExitCode(retries);
+  const exitCode = getExitCode(errors.length > 0, retries);
 
   const failedTestsMainParams = getFailedTestsMainParams(retries.at(-1));
   const summaryPackResults = getSummaryPackResults(fullTestRuns, retries.at(-1));
@@ -43,6 +48,7 @@ export const collectReportData = async ({
     failedTestsMainParams,
     fullTestRuns,
     liteReportFileName,
+    notIncludedInPackTests,
     reportFileName,
     retries,
     startInfo,

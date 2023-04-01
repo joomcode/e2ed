@@ -1,7 +1,7 @@
 import type {ImgData} from '../../types/internal';
 
 /**
- * Returns true for image pixel data.
+ * Returns `true` for image pixel data, and `false` otherwise.
  * @internal
  */
 export const isPixelData = (img: ImgData): boolean =>

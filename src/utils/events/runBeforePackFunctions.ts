@@ -1,4 +1,4 @@
-import {runArrayOfFunctionsSafely} from '../fn';
+import {runArrayOfFunctionsSafely} from '../runArrayOfFunctionsSafely';
 
 import type {
   FullPackConfig,

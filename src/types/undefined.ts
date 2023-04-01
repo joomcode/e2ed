@@ -18,7 +18,7 @@ export type ExcludeUndefinedFromProperties<T extends object> = {
 };
 
 /**
- * Returns true if type includes undefined and false otherwise.
+ * Returns `true` if type includes `undefined` and `false` otherwise.
  * IsIncludeUndefined<string> = false.
  * IncludeUndefined<string | undefined> = true.
  */

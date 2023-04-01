@@ -9,6 +9,19 @@ import {getStackTrace} from './getStackTrace';
 
 import type {LogParams, RunLabel, StackFrame, UtcTimeInMs} from '../../types/internal';
 
+function toString(this: E2edError): string {
+  const printedParams = {
+    dateTimeInIso: new Date(this.utcTimeInMs).toISOString(),
+    message: this.message,
+    params: this.params,
+    runLabel: this.runLabel,
+    stackTrace: this.stackTrace,
+  };
+  const printedString = valueToString(printedParams);
+
+  return `E2edError ${printedString}`;
+}
+
 /**
  * Extended Error class for e2ed.
  */
@@ -24,17 +37,30 @@ export class E2edError extends Error {
   readonly stackTrace: readonly string[];
 
   /**
+   * Custom JSON presentation of error.
+   */
+  readonly toJSON = toString;
+
+  /**
+   * Custom string presentation of error.
+   */
+  override readonly toString = toString;
+
+  /**
    * The time the error was generated.
    */
   readonly utcTimeInMs: UtcTimeInMs;
 
-  constructor(readonly originalMessage: string, readonly params?: LogParams) {
+  /**
+   * Custom presentation of error for nodejs `inspect`.
+   */
+  readonly [inspect.custom] = toString;
+
+  constructor(message: string, readonly params?: LogParams) {
     const runLabel = e2edEnvironment[RUN_LABEL_VARIABLE_NAME];
     const utcTimeInMs = Date.now() as UtcTimeInMs;
-    const dateTimeInIso = new Date(utcTimeInMs).toISOString();
 
-    const fullMessage = `${originalMessage} ${valueToString({dateTimeInIso, params, runLabel})}`;
-    const constructorArgs: [message: string, options?: {cause: unknown}] = [fullMessage];
+    const constructorArgs: [message: string, options?: {cause: unknown}] = [message];
 
     if (params?.cause) {
       constructorArgs.push({cause: params.cause});
@@ -49,28 +75,5 @@ export class E2edError extends Error {
 
     this.stackTrace = framesStackTrace.map(getPrintedStackFrame);
     this.utcTimeInMs = utcTimeInMs;
-
-    Object.defineProperty(this, 'message', {
-      configurable: true,
-      enumerable: true,
-      value: fullMessage,
-      writable: true,
-    });
-  }
-
-  /**
-   * Custom presentation of error for nodejs `inspect`.
-   */
-  [inspect.custom](): string {
-    const printedParams = {
-      dateTimeInIso: new Date(this.utcTimeInMs).toISOString(),
-      message: this.originalMessage,
-      params: this.params,
-      runLabel: this.runLabel,
-      stackTrace: this.stackTrace,
-    };
-    const printedString = valueToString(printedParams);
-
-    return `E2edError ${printedString}`;
   }
 }

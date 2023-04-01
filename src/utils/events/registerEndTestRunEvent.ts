@@ -1,11 +1,10 @@
 import {TestRunStatus} from '../../constants/internal';
 
 import {cloneWithoutLogEvents} from '../clone';
+import {getRunErrorFromError} from '../error';
 import {writeTestRunToJsonFile} from '../fs';
-import {generalLog} from '../generalLog';
-import {writeTestLogsToFile} from '../log';
+import {generalLog, logEndTestRunEvent, writeLogsToFile} from '../generalLog';
 import {getUserlandHooks} from '../userlandHooks';
-import {valueToString} from '../valueToString';
 
 import {calculateTestRunStatus} from './calculateTestRunStatus';
 import {getTestRunEvent} from './getTestRunEvent';
@@ -17,7 +16,7 @@ import type {EndTestRunEvent, FullTestRun, TestRun} from '../../types/internal';
  * @internal
  */
 export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent): Promise<void> => {
-  await writeTestLogsToFile();
+  await writeLogsToFile();
 
   const {runId} = endTestRunEvent;
 
@@ -48,7 +47,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
 
   (testRunEvent as {status: TestRunStatus}).status = status;
 
-  const runError = hasRunError ? valueToString(unknownRunError) : undefined;
+  const runError = hasRunError ? getRunErrorFromError(unknownRunError) : undefined;
 
   const testRun: TestRun = {
     endTimeInMs,
@@ -69,6 +68,8 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
   const runHash = getTestRunHash(testRun);
 
   const fullTestRun: FullTestRun = {mainParams, runHash, ...testRun};
+
+  logEndTestRunEvent(fullTestRun);
 
   await writeTestRunToJsonFile(fullTestRun);
 };

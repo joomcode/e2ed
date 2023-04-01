@@ -14,7 +14,7 @@ type Options = Readonly<{
 
 /**
  * Resolve/reject waitForRequest/waitForResponse promise if request/response matches one predicate.
- * Returns true if the promise was fulfilled.
+ * Returns `true` if the promise was fulfilled, and `false` otherwise.
  * @internal
  */
 export const processEventsPredicate = async ({

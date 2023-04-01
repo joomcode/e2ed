@@ -7,9 +7,7 @@ import type {Expect, RunId, TestRunEvent, Values} from '../types/internal';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 declare type TestRunTypesChecks = [
   Expect<
-    TestRunStatus extends Values<typeof ORDER_OF_TEST_RUN_STATUSES_FOR_SUMMARY_RESULTS, true>
-      ? true
-      : false
+    TestRunStatus extends Values<typeof ORDER_OF_TEST_RUN_STATUSES_FOR_DISPLAY, true> ? true : false
   >,
 ];
 
@@ -28,8 +26,7 @@ export const enum TestRunStatus {
 }
 
 /**
- * Statuses, the presence of which in the retray indicates * Userland types checks in the e2ed directory of the project.
- * that there are failed tests in the retray.
+ * Statuses, the presence of which in the retry indicates that there are failed tests in the retry.
  */
 export const FAILED_TEST_RUN_STATUSES: readonly TestRunStatus[] = [
   TestRunStatus.Failed,
@@ -37,23 +34,36 @@ export const FAILED_TEST_RUN_STATUSES: readonly TestRunStatus[] = [
 ];
 
 /**
- * Order of test run statuses for summary pack results.
+ * Order of test run statuses for display in summary pack results, in HTML report, etc.
  * @internal
  */
-export const ORDER_OF_TEST_RUN_STATUSES_FOR_SUMMARY_RESULTS = [
-  TestRunStatus.Passed,
+export const ORDER_OF_TEST_RUN_STATUSES_FOR_DISPLAY = [
   TestRunStatus.Failed,
+  TestRunStatus.Unknown,
+  TestRunStatus.Passed,
   TestRunStatus.Skipped,
   TestRunStatus.Manual,
-  TestRunStatus.Unknown,
   TestRunStatus.Broken,
-] as const;
+] as const satisfies readonly TestRunStatus[];
 
 /**
  * Hash object with runId as keys and TestRunEvent as values.
  * @internal
  */
 export const RUN_IDS_HASH: Record<RunId, TestRunEvent> = {};
+
+/**
+ * Emoji symbols of test run statuses for display in logs and in the report.
+ * @internal
+ */
+export const TEST_RUN_STATUS_SYMBOLS = {
+  [TestRunStatus.Failed]: '×',
+  [TestRunStatus.Unknown]: '?',
+  [TestRunStatus.Passed]: '✓',
+  [TestRunStatus.Skipped]: '⊘',
+  [TestRunStatus.Manual]: '⚒',
+  [TestRunStatus.Broken]: '!',
+};
 
 /**
  * Test run statuses of unique tests (which are not repeated in different reteries).

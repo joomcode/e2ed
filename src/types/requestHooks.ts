@@ -43,7 +43,7 @@ export type RequestHookCharset = Brand<object, 'RequestHookCharset'>;
  */
 export type RequestHookClassWithContext = Class<
   unknown[],
-  {_ctx: RequestHookContext} & Record<string, Fn<never[], MaybeWithContextKey>>
+  Readonly<{_ctx: RequestHookContext} & Record<string, Fn<never[], MaybeWithContextKey>>>
 >;
 
 /**

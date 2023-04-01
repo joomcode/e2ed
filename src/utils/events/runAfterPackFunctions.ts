@@ -1,5 +1,5 @@
-import {runArrayOfFunctionsSafely} from '../fn';
 import {getFullPackConfig} from '../getFullPackConfig';
+import {runArrayOfFunctionsSafely} from '../runArrayOfFunctionsSafely';
 
 import type {CustomReportPropertiesPlaceholder, LiteReport, Void} from '../../types/internal';
 

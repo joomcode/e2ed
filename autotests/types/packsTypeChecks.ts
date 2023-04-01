@@ -3,6 +3,6 @@ import type {Pack} from 'autotests/types/packSpecific';
 import type {Expect, IsEqual} from 'e2ed/types';
 
 /**
- * Typechecks of all project packs.
+ * Type checks of all project packs.
  */
-export type PacksTypechecks = [Expect<IsEqual<Pack, typeof allTestsPack>>];
+export type PacksTypeChecks = [Expect<IsEqual<Pack, typeof allTestsPack>>];

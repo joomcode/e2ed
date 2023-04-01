@@ -15,5 +15,8 @@ export type GetTestRunHash = PackSpecificTypes['GetTestRunHash'];
 export type IsTestIncludedInPack = PackSpecificTypes['IsTestIncludedInPack'];
 export type IsTestSkipped = PackSpecificTypes['IsTestSkipped'];
 export type LiteReport = PackSpecificTypes['LiteReport'];
+export type MapLogPayloadInConsole = PackSpecificTypes['MapLogPayloadInConsole'];
+export type MapLogPayloadInLogFile = PackSpecificTypes['MapLogPayloadInLogFile'];
+export type MapLogPayloadInReport = PackSpecificTypes['MapLogPayloadInReport'];
 export type NavigateTo = PackSpecificTypes['NavigateTo'];
 export type {Pack};

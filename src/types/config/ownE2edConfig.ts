@@ -1,3 +1,4 @@
+import type {MapLogPayload, MapLogPayloadInReport} from '../log';
 import type {MaybePromise} from '../promise';
 import type {LiteReport} from '../report';
 import type {TestStaticOptions} from '../testRun';
@@ -55,6 +56,31 @@ export type OwnE2edConfig<
   liteReportFileName: string | null;
 
   /**
+   * The name of the file under which, after running the tests,
+   * the pack logs will be saved in the `autotests/reports` directory, for example, `pack-logs.log`.
+   * If `null`, the log will not be saved.
+   */
+  logFileName: string | null;
+
+  /**
+   * Maps log payload for logging in console to clarify, shorten or skip a console log entry.
+   * If the mapping returns `null`, the log entry is skipped.
+   */
+  mapLogPayloadInConsole: MapLogPayload;
+
+  /**
+   * Maps log payload for logging in file to clarify, shorten or skip a log file entry.
+   * If the mapping returns `null`, the log entry is skipped.
+   */
+  mapLogPayloadInLogFile: MapLogPayload;
+
+  /**
+   * Maps log payload for logging step in HTML report and lite report to clarify,
+   * shorten or skip a report step. If the mapping returns `null`, the step is skipped.
+   */
+  mapLogPayloadInReport: MapLogPayloadInReport;
+
+  /**
    * The maximum number of retries to run a test with the command
    * `your-project/autotests/bin/runDocker.sh` (until the test passes).
    * For example, if it is equal to three, the test will be run no more than three times.
@@ -75,11 +101,6 @@ export type OwnE2edConfig<
   pageStabilizationInterval: number;
 
   /**
-   * If true, print test logs to the console (literally in console.log).
-   */
-  printTestLogsInConsole: boolean;
-
-  /**
    * The name of the file under which, after running the tests,
    * the HTML report will be saved in the `autotests/reports` directory, for example, `report.html`.
    * Also this name is used as the title of the report page.
@@ -95,6 +116,18 @@ export type OwnE2edConfig<
   skipTests: SkipTests;
 
   /**
+   * If `true`, then takes a screenshot of the full page (not just the viewport)
+   * at the time of the test error, for display in the HTML report.
+   */
+  takeFullPageScreenshotOnError: boolean;
+
+  /**
+   * If `true`, then takes a screenshot of the page viewport
+   * at the time of the test error, for display in the HTML report.
+   */
+  takeViewportScreenshotOnError: boolean;
+
+  /**
    * An array of globs with pack test (task) files.
    * {@link https://www.npmjs.com/package/globby} is used for matching globs.
    */
@@ -107,13 +140,6 @@ export type OwnE2edConfig<
    * This parameter can be overridden in the test-specific options.
    */
   testIdleTimeout: number;
-
-  /**
-   * The name of the file under which, after running the tests,
-   * the test logs will be saved in the `autotests/reports` directory, for example, `test-logs.log`.
-   * If `null`, the report will not be saved.
-   */
-  testLogsFileName: string | null;
 
   /**
    * Timeout (in milliseconds) for each individual test run.

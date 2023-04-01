@@ -47,16 +47,18 @@ export type Method =
  * Object with query (search) part of the url, or query string itself.
  */
 export type Query =
-  | Record<
-      string,
-      | string
-      | number
-      | boolean
-      | readonly string[]
-      | readonly number[]
-      | readonly boolean[]
-      | null
-      | undefined
+  | Readonly<
+      Record<
+        string,
+        | string
+        | number
+        | boolean
+        | readonly string[]
+        | readonly number[]
+        | readonly boolean[]
+        | null
+        | undefined
+      >
     >
   | string;
 

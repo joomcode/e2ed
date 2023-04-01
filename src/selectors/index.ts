@@ -1,4 +1,4 @@
-export {cssSelector} from './cssSelector';
+export {createSelectorByCss} from './createSelectorByCss';
 export {htmlElementSelector} from './htmlElementSelector';
 export {locatorIdInParentSelector} from './locatorIdInParentSelector';
 export {locatorIdSelector} from './locatorIdSelector';

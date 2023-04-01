@@ -3,7 +3,7 @@ import {createSafeHtmlWithoutSanitize, sanitizeJson} from '../client';
 import type {ReportData, SafeHtml} from '../../../types/internal';
 
 /**
- * Renders tag <script type="application/json"> with JSON representation of report data.
+ * Renders tag <script type="application/json"> with JSON presentation of report data.
  * @internal
  */
 export const renderJsonData = (reportData: ReportData): SafeHtml => {

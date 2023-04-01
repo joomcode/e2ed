@@ -3,7 +3,7 @@ import {createSelector} from '../createSelector';
 import type {Selector} from '../types/internal';
 
 /**
- * Selector of page elements by CSS selectors.
+ * Creates selector of page elements by CSS selector.
  */
-export const cssSelector = (cssSelectorString: string): Selector =>
+export const createSelectorByCss = (cssSelectorString: string): Selector =>
   createSelector(cssSelectorString);

@@ -1,25 +1,59 @@
-import {
-  CONSOLE_INSPECT_OPTIONS,
-  e2edEnvironment,
-  RUN_LABEL_VARIABLE_NAME,
-} from '../../constants/internal';
+import {getFullPackConfig} from '../getFullPackConfig';
 
-import {getPrintedRunLabel} from '../runLabel';
-import {valueToString} from '../valueToString';
+import {getLogMessageBody} from './getLogMessageBody';
+import {getLogPrefix} from './getLogPrefix';
+import {addLogToLogFile} from './logFile';
+import {removeStyleFromString} from './removeStyleFromString';
 
-import type {GeneralLog} from '../../types/internal';
+import type {LogEventType} from '../../constants/internal';
+import type {LogContext, LogPayload, UtcTimeInMs} from '../../types/internal';
+
+type TestLogParams = Readonly<{
+  context: LogContext | undefined;
+  prefixEnding: string;
+  type: LogEventType;
+  utcTimeInMs: UtcTimeInMs;
+}>;
 
 /**
  * General (out of test context) log to stdout.
  * @internal
  */
-export const generalLog: GeneralLog = (message, payload) => {
-  const dateTimeInIso = new Date().toISOString();
-  const printedRunLabel = getPrintedRunLabel(e2edEnvironment[RUN_LABEL_VARIABLE_NAME]);
+export const generalLog = (
+  message: string,
+  payload?: LogPayload,
+  testLogParams?: TestLogParams,
+): void => {
+  const {logFileName, mapLogPayloadInConsole, mapLogPayloadInLogFile} = getFullPackConfig();
 
-  const printedString =
-    payload === undefined ? '' : valueToString(payload, CONSOLE_INSPECT_OPTIONS);
+  const context = testLogParams?.context;
+  const logPrefix = testLogParams
+    ? getLogPrefix(testLogParams.prefixEnding, testLogParams.utcTimeInMs)
+    : getLogPrefix();
+
+  if (logFileName) {
+    const messageWithoutStyle = removeStyleFromString(message);
+    const payloadInLogFile = mapLogPayloadInLogFile(
+      messageWithoutStyle,
+      payload,
+      testLogParams?.type,
+    );
+
+    if (payloadInLogFile !== null) {
+      const logMessageBody = getLogMessageBody(context, false, payloadInLogFile);
+
+      addLogToLogFile(`${logPrefix} ${messageWithoutStyle}${logMessageBody}\n`);
+    }
+  }
+
+  const payloadInConsole = mapLogPayloadInConsole(message, payload, testLogParams?.type);
+
+  if (payloadInConsole === null) {
+    return;
+  }
+
+  const logMessageBody = getLogMessageBody(context, true, payloadInConsole);
 
   // eslint-disable-next-line no-console
-  console.log(`[e2ed][${dateTimeInIso}]${printedRunLabel} ${message} ${printedString}\n`);
+  console.log(`${logPrefix} ${message}${logMessageBody}\n`);
 };

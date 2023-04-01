@@ -5,7 +5,7 @@ type Options = Readonly<{
 }>;
 
 /**
- * Gets concurrency for next tests-run retry by current concurrency,
+ * Get concurrency for next tests-run retry by current concurrency,
  * noSuccessfulTestsInLastRetry flag and tests count.
  * @internal
  */

@@ -1,10 +1,13 @@
-import {TESTCAFERC_PATH} from '../../constants/internal';
+import {join} from 'node:path';
+
+import {ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY, TESTCAFERC_PATH} from '../../constants/internal';
 import {createTestCafe} from '../../testcafe';
 
 import {setRunLabel} from '../environment';
 import {E2edError} from '../error';
-import {generalLog} from '../generalLog';
+import {generalLog, setSuccessfulTotalInPreviousRetries} from '../generalLog';
 import {getFullPackConfig} from '../getFullPackConfig';
+import {getNotIncludedInPackTests} from '../notIncludedInPackTests';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
@@ -25,8 +28,17 @@ export const runTests = async ({
   let maybeTestCafe: Inner.TestCafe | undefined;
 
   try {
+    const successfulTotalInPreviousRetries = Object.keys(successfulTestRunNamesHash).length;
+
+    setSuccessfulTotalInPreviousRetries(successfulTotalInPreviousRetries);
+
     const {browser} = getFullPackConfig();
     const browsers = [browser];
+
+    const notIncludedInPackTests = await getNotIncludedInPackTests();
+    const notIncludedInPackTestsInAbsolutePaths = notIncludedInPackTests.map((testFilePath) =>
+      join(ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY, testFilePath),
+    );
 
     const testCafe = await createTestCafe({browsers, configFile: TESTCAFERC_PATH});
 
@@ -37,7 +49,13 @@ export const runTests = async ({
     const failedTestsCount = await runner
       .browsers(browsers)
       .concurrency(concurrency)
-      .filter((testName: string) => !successfulTestRunNamesHash[testName])
+      .filter((testName: string, fixtureName: string, absoluteTestFilePath: string) => {
+        if (notIncludedInPackTestsInAbsolutePaths.includes(absoluteTestFilePath)) {
+          return false;
+        }
+
+        return !successfulTestRunNamesHash[testName];
+      })
       .run();
 
     if (failedTestsCount !== 0) {

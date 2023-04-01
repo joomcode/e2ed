@@ -4,7 +4,7 @@ import {hasManySiblings} from './hasManySiblings';
 import type {ImgData} from '../../types/internal';
 
 /**
- * Returns true if the rectangle is in antialiased state.
+ * Returns `true` if the rectangle is in antialiased state, and `false` otherwise.
  * @internal
  */
 // eslint-disable-next-line complexity, max-statements

@@ -29,7 +29,7 @@ export abstract class Route<RouteParams> {
   declare readonly [PARAMS_KEY]: RouteParams;
 
   /**
-   *  Returns true if url matches the page with given parameters.
+   *  Returns `true` if url matches the page with given parameters, and `false` otherwise.
    */
   isMatchUrl(url: Url): boolean {
     return url.includes(this.getPath());

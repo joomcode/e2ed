@@ -8,7 +8,7 @@ export const getTestsThatRunningAtGivenTime = (
   utcTimeInMs: UtcTimeInMs,
   liteReport: LiteReport,
 ): readonly string[] => {
-  const namesOfRunningTests: Record<string, true> = {};
+  const namesOfRunningTests: Record<string, true> = Object.create(null) as {};
   const {retries} = liteReport;
 
   for (const retry of retries) {
