@@ -1,6 +1,11 @@
-import {TEST_RUN_STATUS_SYMBOLS, TestRunStatus} from '../../constants/internal';
+import {
+  FAILED_TEST_RUN_STATUSES,
+  TEST_RUN_STATUS_SYMBOLS,
+  TestRunStatus,
+} from '../../constants/internal';
 
 import {generalLog} from './generalLog';
+import {addSuccessfulInCurrentRetry, getSuccessfulTestRunCount} from './successfulTestRunCount';
 
 import type {FullTestRun} from '../../types/internal';
 
@@ -20,11 +25,16 @@ const messageBgColorByStatus: Readonly<Record<TestRunStatus, number>> = {
 export const logEndTestRunEvent = (fullTestRun: FullTestRun): void => {
   const {filePath, mainParams, name, options, runError, runId, status} = fullTestRun;
 
+  if (FAILED_TEST_RUN_STATUSES.includes(status) === false) {
+    addSuccessfulInCurrentRetry();
+  }
+
   const messageBgColor = messageBgColorByStatus[status];
   const messageSymbol = TEST_RUN_STATUS_SYMBOLS[status];
   const messageText = `${messageSymbol} ${status} ${mainParams} ${name}`;
 
   const message = `\x1B[${messageBgColor}m\x1B[30m${messageText}\x1B[39m\x1B[49m`;
+  const successful = getSuccessfulTestRunCount();
 
-  generalLog(message, {filePath, options, runError, runId});
+  generalLog(message, {filePath, options, runError, runId, successful});
 };

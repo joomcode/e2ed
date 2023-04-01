@@ -5,7 +5,7 @@ import {createTestCafe} from '../../testcafe';
 
 import {setRunLabel} from '../environment';
 import {E2edError} from '../error';
-import {generalLog} from '../generalLog';
+import {generalLog, setSuccessfulTotalInPreviousRetries} from '../generalLog';
 import {getFullPackConfig} from '../getFullPackConfig';
 import {getNotIncludedInPackTests} from '../notIncludedInPackTests';
 
@@ -28,6 +28,10 @@ export const runTests = async ({
   let maybeTestCafe: Inner.TestCafe | undefined;
 
   try {
+    const successfulTotalInPreviousRetries = Object.keys(successfulTestRunNamesHash).length;
+
+    setSuccessfulTotalInPreviousRetries(successfulTotalInPreviousRetries);
+
     const {browser} = getFullPackConfig();
     const browsers = [browser];
 

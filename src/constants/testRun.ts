@@ -26,8 +26,7 @@ export const enum TestRunStatus {
 }
 
 /**
- * Statuses, the presence of which in the retray indicates * Userland types checks in the e2ed directory of the project.
- * that there are failed tests in the retray.
+ * Statuses, the presence of which in the retry indicates that there are failed tests in the retry.
  */
 export const FAILED_TEST_RUN_STATUSES: readonly TestRunStatus[] = [
   TestRunStatus.Failed,
