@@ -1,5 +1,5 @@
 import {processExit} from '../exit';
-import {generalLog} from '../generalLog';
+import {failMessage, generalLog, okMessage} from '../generalLog';
 import {collectReportData, getLiteReport, writeHtmlReport, writeLiteJsonReport} from '../report';
 
 import {collectFullEventsData} from './collectFullEventsData';
@@ -12,7 +12,7 @@ import type {ReportData} from '../../types/internal';
  * @internal
  */
 export const registerEndE2edRunEvent = async (): Promise<void> => {
-  generalLog('Close e2ed');
+  generalLog('Starting to close e2ed...');
 
   let reportData: ReportData | undefined;
 
@@ -21,7 +21,9 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
 
     reportData = await collectReportData(fullEventsData);
 
-    generalLog(`Pack results: ${reportData.summaryPackResults}`);
+    const stateMessage = reportData.exitCode === 0 ? okMessage : failMessage;
+
+    generalLog(`Results of pack: ${stateMessage} ${reportData.summaryPackResults}`);
 
     const liteReport = getLiteReport(reportData);
 
@@ -47,6 +49,6 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
       {error},
     );
   } finally {
-    processExit(reportData?.exitCode);
+    await processExit(reportData?.exitCode);
   }
 };

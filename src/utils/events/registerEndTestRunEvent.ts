@@ -16,8 +16,6 @@ import type {EndTestRunEvent, FullTestRun, TestRun} from '../../types/internal';
  * @internal
  */
 export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent): Promise<void> => {
-  await writeLogsToFile();
-
   const {runId} = endTestRunEvent;
 
   const testRunEvent = getTestRunEvent(runId);
@@ -72,4 +70,5 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
   logEndTestRunEvent(fullTestRun);
 
   await writeTestRunToJsonFile(fullTestRun);
+  await writeLogsToFile();
 };

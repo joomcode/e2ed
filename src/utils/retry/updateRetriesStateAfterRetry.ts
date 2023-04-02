@@ -3,7 +3,7 @@ import {TestRunStatus} from '../../constants/internal';
 import {assertValueIsFalse, assertValueIsTrue} from '../asserts';
 import {cloneWithoutLogEvents} from '../clone';
 import {getTestRunEventFileName, readEventsFromFiles} from '../fs';
-import {generalLog} from '../generalLog';
+import {failMessage, generalLog, okMessage} from '../generalLog';
 
 import {getConcurrencyForNextRetry} from './getConcurrencyForNextRetry';
 import {getPrintedRetry} from './getPrintedRetry';
@@ -66,12 +66,14 @@ export const updateRetriesStateAfterRetry = async (retriesState: RetriesState): 
     (visitedTestRunEventsFileName as string[]).push(getTestRunEventFileName(runId));
   }
 
+  const stateMessage = retriesState.isLastRetrySuccessful ? okMessage : failMessage;
+
   generalLog(
-    `${getPrintedTestsCount(
+    `Results of ${printedRetry}: ${stateMessage} ${getPrintedTestsCount(
       newFullTestRuns.length,
-    )} with ${printedRetry} and concurrency ${concurrency} ran in ${
-      Date.now() - startLastRetryTimeInMs
-    }ms (${successfulNewFullTestRuns.length} successful, ${failedNewFullTestRuns.length} failed, ${
+    )} with concurrency ${concurrency} ran in ${Date.now() - startLastRetryTimeInMs}ms (${
+      successfulNewFullTestRuns.length
+    } successful, ${failedNewFullTestRuns.length} failed, ${
       newFullTestRuns.length - unbrokenNewFullTestRuns.length
     } broken)`,
   );

@@ -4,7 +4,7 @@ import type {GetLogContext, TestMeta} from 'autotests/types';
 
 /**
  * This hook is used inside the log function to get a snapshot
- * of the text context at the time the log was invoked.
+ * of the test context at the time the log was invoked.
  * The resulting value is displayed in the log message in the context field.
  * If hook returns `undefined`, context field is not displayed.
  * If the log payload already contains a context field, the context from this hook is ignored.

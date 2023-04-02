@@ -2,7 +2,7 @@ import {RunEnvironment} from '../../configurator';
 import {EVENTS_DIRECTORY_PATH, TMP_DIRECTORY_PATH} from '../../constants/internal';
 
 import {createDirectory, removeDirectory, writeStartInfo} from '../fs';
-import {generalLog} from '../generalLog';
+import {generalLog, writeLogsToFile} from '../generalLog';
 import {compilePack, setPackTimeout} from '../pack';
 import {getStartInfo} from '../startInfo';
 
@@ -29,6 +29,7 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
   generalLog(startMessage, startInfo);
 
   await writeStartInfo(startInfo);
+  await writeLogsToFile();
 
   setPackTimeout();
 };

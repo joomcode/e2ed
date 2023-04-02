@@ -1,4 +1,4 @@
-import {generalLog} from '../generalLog';
+import {generalLog, writeLogsToFile} from '../generalLog';
 import {createRunLabel} from '../runLabel';
 
 import {getPrintedRetry} from './getPrintedRetry';
@@ -28,6 +28,8 @@ export const processRetry = async (retriesState: RetriesState): Promise<void> =>
   });
 
   try {
+    await writeLogsToFile();
+
     await runRetry({concurrency, runLabel, successfulTestRunNamesHash});
 
     // eslint-disable-next-line no-param-reassign

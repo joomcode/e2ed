@@ -26,13 +26,13 @@ export const afterRetries = (retriesState: RetriesState): void => {
 
   if (isLastRetrySuccessful) {
     generalLog(
-      `[OK] All ${getPrintedTestsCount(
+      `All ${getPrintedTestsCount(
         Object.keys(successfulTestRunNamesHash).length,
       )} completed successfully with ${retryString} ${durationString}`,
     );
   } else {
     generalLog(
-      `[FAIL] There are ${getPrintedTestsCount(
+      `There are ${getPrintedTestsCount(
         failedTestNamesInLastRetry.length,
         true,
       )} after ${retryString} ${durationString}`,

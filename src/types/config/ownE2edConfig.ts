@@ -65,18 +65,21 @@ export type OwnE2edConfig<
   /**
    * Maps log payload for logging in console to clarify, shorten or skip a console log entry.
    * If the mapping returns `null`, the log entry is skipped.
+   * If the mapping returns `undefined`, the log entry is not skipped, but is printed with an empty payload.
    */
   mapLogPayloadInConsole: MapLogPayload;
 
   /**
    * Maps log payload for logging in file to clarify, shorten or skip a log file entry.
    * If the mapping returns `null`, the log entry is skipped.
+   * If the mapping returns `undefined`, the log entry is not skipped, but is printed with an empty payload.
    */
   mapLogPayloadInLogFile: MapLogPayload;
 
   /**
    * Maps log payload for logging step in HTML report and lite report to clarify,
    * shorten or skip a report step. If the mapping returns `null`, the step is skipped.
+   * If the mapping returns `undefined`, the log entry is not skipped, but is printed with an empty payload.
    */
   mapLogPayloadInReport: MapLogPayloadInReport;
 
