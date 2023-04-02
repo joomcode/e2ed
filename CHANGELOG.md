@@ -1,5 +1,25 @@
 # Changelog
 
+## [v0.14.4](https://github.com/joomcode/e2ed/tree/v0.14.4) (2023-04-02)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.3...v0.14.4)
+
+- [Merge pull request #19 from joomcode/fix/local-run-and-logs](https://github.com/joomcode/e2ed/commit/40f837948c73c94192c0467a2b3faf6b8af8389b) ([uid11](https://github.com/uid11))
+
+  fix: error with local run and skipped general logs in pack logs file
+
+- [fix: error with local run (because of testcafe-reporter-for-e2ed)](https://github.com/joomcode/e2ed/commit/ea9d3f613b8e8d0a210c24be445e685b5fabfbd7) ([uid11](https://github.com/uid11))
+
+  docs: format of list in README.md
+
+  docs: add example of mapLogPayloadInConsole
+
+  feat: add assert-modules-support-case-insensitive-fs and assert-package-lock-is-consistent
+
+  fix: code of mapLogPayload-functions in logs
+
+  fix: write all general logs to pack logs file
+
 ## [v0.14.3](https://github.com/joomcode/e2ed/tree/v0.14.3) (2023-04-01)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.2...v0.14.3)
