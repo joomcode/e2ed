@@ -60,7 +60,14 @@ const fullPackConfig: FullPackConfig = {
   ...frozenPartOfTestCafeConfig,
 };
 
-const {doAfterPack, doBeforePack, isTestIncludedInPack} = fullPackConfig;
+const {
+  doAfterPack,
+  doBeforePack,
+  isTestIncludedInPack,
+  mapLogPayloadInConsole,
+  mapLogPayloadInLogFile,
+  mapLogPayloadInReport,
+} = fullPackConfig;
 
 for (const fn of doAfterPack) {
   setCustomInspectOnFunction(fn);
@@ -71,6 +78,9 @@ for (const fn of doBeforePack) {
 }
 
 setCustomInspectOnFunction(isTestIncludedInPack);
+setCustomInspectOnFunction(mapLogPayloadInConsole);
+setCustomInspectOnFunction(mapLogPayloadInLogFile);
+setCustomInspectOnFunction(mapLogPayloadInReport);
 
 Object.assign(exports, fullPackConfig);
 

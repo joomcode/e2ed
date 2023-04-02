@@ -11,7 +11,9 @@ type TakeScreenshot = ((path?: string) => Promise<void>) &
  * Takes a screenshot of the tested page.
  */
 export const takeScreenshot: TakeScreenshot = (pathOrOptions) => {
-  log('Take a screenshot of the tested page', {pathOrOptions}, LogEventType.InternalAction);
+  const options = typeof pathOrOptions === 'string' ? {path: pathOrOptions} : pathOrOptions;
+
+  log('Take a screenshot of the page', {options}, LogEventType.InternalAction);
 
   return testController.takeScreenshot(pathOrOptions as never);
 };

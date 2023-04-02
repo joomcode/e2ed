@@ -23,14 +23,14 @@ Prerequisites: [node](https://nodejs.org/en/) >=16,
 
 All commands below are run from the root directory of the project.
 
-1. Install the latest version of `e2ed` in devDependencies with the exact version:
+**1** Install the latest version of `e2ed` in devDependencies with the exact version:
 
 ```sh
 npm install e2ed --save-dev --save-exact
 ```
 
-2. Initialize `e2ed` in the project; this will add an `autotests` directory
-   with working sample tests and pageObject-s to the project:
+**2** Initialize `e2ed` in the project; this will add an `autotests` directory
+with working sample tests and pageObject-s to the project:
 
 ```sh
 npx e2ed-init
@@ -38,8 +38,8 @@ npx e2ed-init
 
 All the code related to `e2ed` will be in the `autotests` directory in the root of the project.
 
-3. [Add](tsconfig.json#L36) the `autotests` directory in field `include` of the project's `tsconfig.json`
-   in the form `"./autotests/**/*.ts"`, to make type checking work in the tests code:
+**3** [Add](tsconfig.json#L36) the `autotests` directory in field `include` of the project's `tsconfig.json`
+in the form `"./autotests/**/*.ts"`, to make type checking work in the tests code:
 
 ```json
   "include": [
@@ -48,9 +48,9 @@ All the code related to `e2ed` will be in the `autotests` directory in the root 
   ],
 ```
 
-4. Also [add](tsconfig.json#L21-L24) the re-map of imports from the `autotests` directory in field `paths`
-   of the project's `tsconfig.json`, to use bare imports from the `autotests` directory
-   (`import {...} from 'autotests/...';`):
+**4** Also [add](tsconfig.json#L21-L24) the re-map of imports from the `autotests` directory in field `paths`
+of the project's `tsconfig.json`, to use bare imports from the `autotests` directory
+(`import {...} from 'autotests/...';`):
 
 ```json
   "paths": {
@@ -219,16 +219,19 @@ If `null`, the log will not be saved.
 => LogPayload | null | undefined`: maps log payload for logging in console to clarify,
 shorten or skip a console log entry.
 If the mapping returns `null`, the log entry is skipped.
+If the mapping returns `undefined`, the log entry is not skipped, but is printed with an empty payload.
 
 `mapLogPayloadInLogFile: (message: string, payload: LogPayload | undefined, logEventType?: LogEventType)
 => LogPayload | null | undefined`: maps log payload for logging in file to clarify,
 shorten or skip a file log entry.
 If the mapping returns `null`, the log entry is skipped.
+If the mapping returns `undefined`, the log entry is not skipped, but is printed with an empty payload.
 
 `mapLogPayloadInReport: (message: string, payload: LogPayload | undefined, logEventType?: LogEventType)
 => LogPayload | null | undefined`: maps log payload for logging step in HTML report and lite report to clarify,
 shorten or skip a report step.
 If the mapping returns `null`, the step is skipped.
+If the mapping returns `undefined`, the log entry is not skipped, but is printed with an empty payload.
 
 `maxRetriesCountInDocker: number`: the maximum number of retries to run a test with the command
 `your-project/autotests/bin/runDocker.sh` (until the test passes).

@@ -3,7 +3,13 @@ import type {LogEventStatus, LogEventType} from '../constants/internal';
 /**
  * Payload of log event.
  */
-export type LogPayload = Readonly<Record<string, unknown> & {logEventStatus?: LogEventStatus}>;
+export type LogPayload = Readonly<
+  Record<string, unknown> & {
+    filePath?: unknown;
+    logEventStatus?: LogEventStatus;
+    successful?: unknown;
+  }
+>;
 
 /**
  * Log parameters for E2Ederror and assert functions.

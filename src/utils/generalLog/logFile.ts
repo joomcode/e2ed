@@ -24,6 +24,10 @@ export const addLogToLogFile = (logMessage: string): void => {
  * @internal
  */
 export const writeLogsToFile = (): Promise<void> => {
+  if (logs.length === 0) {
+    return RESOLVED_PROMISE;
+  }
+
   const {logFileName} = getFullPackConfig();
 
   if (logFileName === null) {

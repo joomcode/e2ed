@@ -5,7 +5,7 @@ import {createTestCafe} from '../../testcafe';
 
 import {setRunLabel} from '../environment';
 import {E2edError} from '../error';
-import {generalLog, setSuccessfulTotalInPreviousRetries} from '../generalLog';
+import {generalLog, setSuccessfulTotalInPreviousRetries, writeLogsToFile} from '../generalLog';
 import {getFullPackConfig} from '../getFullPackConfig';
 import {getNotIncludedInPackTests} from '../notIncludedInPackTests';
 
@@ -66,6 +66,15 @@ export const runTests = async ({
 
     throw error;
   } finally {
+    try {
+      await writeLogsToFile();
+    } catch (error) {
+      generalLog(
+        `Caught an error when writing logs to log file in retry with label "${runLabel}"`,
+        {error},
+      );
+    }
+
     await maybeTestCafe?.close();
   }
 };

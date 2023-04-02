@@ -9,6 +9,7 @@ import {RunEnvironment, runEnvironment} from 'e2ed/configurator';
 
 import {doAfterPack} from '../doAfterPack';
 import {doBeforePack} from '../doBeforePack';
+import {mapLogPayloadInConsole} from '../mapLogPayloadInConsole';
 import {skipTests} from '../skipTests';
 
 import type {IsTestIncludedInPack, Pack} from 'autotests/types/packSpecific';
@@ -36,7 +37,7 @@ export const pack: Pack = {
   isTestIncludedInPack,
   liteReportFileName: 'lite-report.json',
   logFileName: 'pack-logs.log',
-  mapLogPayloadInConsole: (message, payload) => payload,
+  mapLogPayloadInConsole,
   mapLogPayloadInLogFile: (message, payload) => payload,
   mapLogPayloadInReport: (message, payload) => payload,
   maxRetriesCountInDocker: 3,

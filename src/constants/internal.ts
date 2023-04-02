@@ -1,6 +1,8 @@
 /** @internal */
 export {EXEC_FILE_OPTIONS} from './childProcess';
 /** @internal */
+export {ConsoleBackgroundColor} from './color';
+/** @internal */
 export {
   e2edEnvironment,
   PATH_TO_PACK_VARIABLE_NAME,
@@ -21,6 +23,8 @@ export {
 /** @internal */
 export {LOCATOR_KEY} from './locator';
 export {LogEventStatus, LogEventType} from './log';
+/** @internal */
+export {MESSAGE_BACKGROUND_COLOR_BY_STATUS} from './log';
 export {CREATE_PAGE_TOKEN} from './pages';
 /** @internal */
 export {
