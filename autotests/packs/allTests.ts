@@ -44,6 +44,7 @@ export const pack: Pack = {
   packTimeout: 90 * 60_000,
   pageRequestTimeout: 30_000,
   pageStabilizationInterval: 1_000,
+  pathToScreenshotsDirectoryForReport: './screenshots',
   port1: 1337,
   port2: 1338,
   reportFileName: 'report.html',

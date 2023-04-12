@@ -33,8 +33,8 @@ export const MESSAGE_BACKGROUND_COLOR_BY_STATUS: Readonly<
 > = {
   [TestRunStatus.Failed]: ConsoleBackgroundColor.Red,
   [TestRunStatus.Unknown]: ConsoleBackgroundColor.Magenta,
-  [TestRunStatus.Passed]: ConsoleBackgroundColor.GreenBright,
+  [TestRunStatus.Passed]: ConsoleBackgroundColor.Green,
   [TestRunStatus.Skipped]: ConsoleBackgroundColor.BlackBright,
-  [TestRunStatus.Manual]: ConsoleBackgroundColor.Green,
+  [TestRunStatus.Manual]: ConsoleBackgroundColor.YellowGreen,
   [TestRunStatus.Broken]: ConsoleBackgroundColor.Yellow,
 };

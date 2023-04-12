@@ -29,7 +29,7 @@
     "create-locator": "0.0.3",
     "globby": "11.1.0",
     "pngjs": "7.0.0",
-    "testcafe-without-typecheck": "2.4.0-rc.3"
+    "testcafe-without-typecheck": "2.4.0-rc.4"
   },
   "devDependencies": {
     "@types/node": "18.15.11",

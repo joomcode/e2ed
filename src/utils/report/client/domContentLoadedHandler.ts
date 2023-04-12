@@ -9,9 +9,9 @@ declare const reportClientState: ReportClientState;
  * @internal
  */
 export function domContentLoadedHandler(): void {
-  const e2edFullTestRuns = JSON.parse(
+  const fullTestRuns = JSON.parse(
     e2edJsonReportData.textContent ?? 'Cannot parse JSON report data',
   ) as readonly FullTestRun[];
 
-  reportClientState.e2edFullTestRuns = e2edFullTestRuns;
+  reportClientState.fullTestRuns = fullTestRuns;
 }

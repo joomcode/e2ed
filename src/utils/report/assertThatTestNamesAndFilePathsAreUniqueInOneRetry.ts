@@ -20,10 +20,12 @@ export const assertThatTestNamesAndFilePathsAreUniqueInOneRetry = (
   for (const fullTestRun of unbrokenTestRuns) {
     const {filePath, name} = fullTestRun;
 
-    assertValueIsFalse(filePath in filePathsHash, 'filePath is unique', {
-      fullTestRun: cloneWithoutLogEvents(fullTestRun),
-    });
-    assertValueIsFalse(name in namesHash, 'name is unique', {
+    assertValueIsFalse(
+      filePath in filePathsHash,
+      'filePath is unique: each test should be in a separate file',
+      {fullTestRun: cloneWithoutLogEvents(fullTestRun)},
+    );
+    assertValueIsFalse(name in namesHash, 'name is unique: each test must have a unique name', {
       fullTestRun: cloneWithoutLogEvents(fullTestRun),
     });
 
