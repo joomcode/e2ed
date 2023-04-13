@@ -28,4 +28,4 @@ export const RUN_LABEL_VARIABLE_NAME = '__INTERNAL_E2ED_RUN_LABEL';
  * Name of e2ed environment variable with start e2ed time (in UtcTimeInMs).
  * @internal
  */
-export const START_TIME_VARIABLE_NAME = '__INTERNAL_E2ED_START_TIME';
+export const START_TIME_IN_MS_VARIABLE_NAME = '__INTERNAL_E2ED_START_TIME_IN_MS';

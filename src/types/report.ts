@@ -81,7 +81,7 @@ export type TestRunButtonProps = Readonly<{
 }>;
 
 /**
- * Global state object on report html page.
+ * Global state object on HTML report page.
  * @internal
  */
 export type ReportClientState = {

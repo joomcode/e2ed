@@ -33,19 +33,19 @@
   },
   "devDependencies": {
     "@types/node": "18.15.11",
-    "@typescript-eslint/eslint-plugin": "5.57.0",
-    "@typescript-eslint/parser": "5.57.0",
+    "@typescript-eslint/eslint-plugin": "5.58.0",
+    "@typescript-eslint/parser": "5.58.0",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
     "assert-package-lock-is-consistent": "1.0.0",
-    "eslint": "8.37.0",
+    "eslint": "8.38.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-simple-import-sort": "10.0.0",
     "husky": "8.0.3",
     "prettier": "2.8.7",
-    "testcafe": "2.4.0",
-    "typescript": "5.0.3"
+    "testcafe": "2.5.0",
+    "typescript": "5.0.4"
   },
   "peerDependencies": {
     "@types/node": ">=16.11.1",
