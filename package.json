@@ -26,10 +26,10 @@
   },
   "dependencies": {
     "bin-v8-flags-filter": "1.2.0",
-    "create-locator": "0.0.3",
+    "create-locator": "0.0.4",
     "globby": "11.1.0",
     "pngjs": "7.0.0",
-    "testcafe-without-typecheck": "2.4.0-rc.4"
+    "testcafe-without-typecheck": "2.5.0-rc.1"
   },
   "devDependencies": {
     "@types/node": "18.15.11",

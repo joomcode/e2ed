@@ -1,1 +1,7 @@
-export {createLocator, getLocatorParameters, type Locator, type Node} from 'create-locator';
+export {
+  createLocator,
+  getLocatorParameters,
+  type Locator,
+  type Node,
+  removeLocatorFromProperties,
+} from 'create-locator';
