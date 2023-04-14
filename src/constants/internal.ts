@@ -24,7 +24,7 @@ export {
 export {LOCATOR_KEY} from './locator';
 export {LogEventStatus, LogEventType} from './log';
 /** @internal */
-export {MESSAGE_BACKGROUND_COLOR_BY_STATUS} from './log';
+export {MESSAGE_BACKGROUND_COLOR_BY_STATUS, TESTCAFE_WARNINGS_KEY} from './log';
 export {CREATE_PAGE_TOKEN} from './pages';
 /** @internal */
 export {
