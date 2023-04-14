@@ -1,5 +1,39 @@
 # Changelog
 
+## [v0.14.5](https://github.com/joomcode/e2ed/tree/v0.14.5) (2023-04-14)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.4...v0.14.5)
+
+- [Merge pull request #20 from joomcode/feature/add-screenshots-to-report](https://github.com/joomcode/e2ed/commit/88ee935cd993394af8ec98e8e0da09cb9d7abf4b) ([uid11](https://github.com/uid11))
+
+  feat: add screenshots with error in HTML report
+
+- [feat: read warnings from TestCafe and logs it as usual logs](https://github.com/joomcode/e2ed/commit/863df16e514c6d437af5528d8332b6ce0b75a2af) ([uid11](https://github.com/uid11))
+- [chore: update testcafe-without-typecheck and create-locator](https://github.com/joomcode/e2ed/commit/c5320c368186b54c470b343f86799d672513f138) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (@typescript-eslint/\*, eslint, typescript, etc)](https://github.com/joomcode/e2ed/commit/fc9f5413f292469e12011ff021108d8895b51a3b) ([uid11](https://github.com/uid11))
+
+  fix: display retry errors in console (for run in docker)
+
+  chore: update testcafe-reporter-for-e2ed (include TestCafe warnings in logs)
+
+  refactor: rename START_TIME_VARIABLE_NAME to START_TIME_IN_MS_VARIABLE_NAME
+
+- [feat: add screenshots with error in HTML report](https://github.com/joomcode/e2ed/commit/cd5db557b605af80631263765d9c80c759d63753) ([uid11](https://github.com/uid11))
+
+  docs: update "Adding e2ed to a project" guide
+
+  feat: add field pathToScreenshotsDirectoryForReport to pack config
+
+  chore: update testcafe-reporter-for-e2ed (support warnings)
+
+  fix: use Green instead of GreenBright for console logs
+
+  refactor: remove unnecessary prefix e2ed from reportClientState fields
+
+  fix: error with saving screenshots with double quotes in names
+
+  fix: error messages for rules "one test in one file" and "test name is unique"
+
 ## [v0.14.4](https://github.com/joomcode/e2ed/tree/v0.14.4) (2023-04-02)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.3...v0.14.4)
