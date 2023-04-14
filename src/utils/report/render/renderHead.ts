@@ -37,6 +37,7 @@ export const renderHead = (reportFileName: string): SafeHtml => {
   <title>${reportFileName}</title>
   ${renderFavicon()}
   ${renderedStyle}
+  <script type="plain/text"></script>
   ${renderedScript}
 </head>`;
 };

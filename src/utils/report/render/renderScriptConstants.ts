@@ -1,11 +1,19 @@
+import {getFullPackConfig} from '../../getFullPackConfig';
+
 import {createSafeHtmlWithoutSanitize} from '../client';
 
-import type {SafeHtml} from '../../../types/internal';
+import type {ReportClientState, SafeHtml} from '../../../types/internal';
 
 /**
  * Renders JS constants for report page.
  * @internal
  */
-export const renderScriptConstants = (): SafeHtml => createSafeHtmlWithoutSanitize`
-const reportClientState = {};
+export const renderScriptConstants = (): SafeHtml => {
+  const {pathToScreenshotsDirectoryForReport} = getFullPackConfig();
+
+  const reportClientState: ReportClientState = {pathToScreenshotsDirectoryForReport};
+
+  return createSafeHtmlWithoutSanitize`
+const reportClientState = ${JSON.stringify(reportClientState)};
 `;
+};

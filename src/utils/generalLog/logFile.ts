@@ -6,13 +6,13 @@ import {REPORTS_DIRECTORY_PATH, RESOLVED_PROMISE} from '../../constants/internal
 import {getFullPackConfig} from '../getFullPackConfig';
 
 /**
- * Array of pack logs. Logs are stored in this array for further saving in the pack log file.
+ * Array of pack logs. Logs are stored in this array for further saving in the pack logs file.
  * @internal
  */
 const logs: string[] = [];
 
 /**
- * Adds log message to pack logs (for later saving to the pack log file).
+ * Adds log message to pack logs (for later saving to the pack logs file).
  * @internal
  */
 export const addLogToLogFile = (logMessage: string): void => {

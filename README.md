@@ -23,13 +23,17 @@ Prerequisites: [node](https://nodejs.org/en/) >=16,
 
 All commands below are run from the root directory of the project.
 
-**1** Install the latest version of `e2ed` in devDependencies with the exact version:
+### Install
+
+Install the latest version of `e2ed` in devDependencies with the exact version:
 
 ```sh
 npm install e2ed --save-dev --save-exact
 ```
 
-**2** Initialize `e2ed` in the project; this will add an `autotests` directory
+### Initialize
+
+Initialize `e2ed` in the project; this will add an `autotests` directory
 with working sample tests and pageObject-s to the project:
 
 ```sh
@@ -38,7 +42,9 @@ npx e2ed-init
 
 All the code related to `e2ed` will be in the `autotests` directory in the root of the project.
 
-**3** [Add](tsconfig.json#L36) the `autotests` directory in field `include` of the project's `tsconfig.json`
+### Add to TypeScript config
+
+[Add](tsconfig.json#L36) the `autotests` directory in field `include` of the project's `tsconfig.json`
 in the form `"./autotests/**/*.ts"`, to make type checking work in the tests code:
 
 ```json
@@ -48,7 +54,9 @@ in the form `"./autotests/**/*.ts"`, to make type checking work in the tests cod
   ],
 ```
 
-**4** Also [add](tsconfig.json#L21-L24) the re-map of imports from the `autotests` directory in field `paths`
+### Re-map imports
+
+Also [add](tsconfig.json#L21-L24) the re-map of imports from the `autotests` directory in field `paths`
 of the project's `tsconfig.json`, to use bare imports from the `autotests` directory
 (`import {...} from 'autotests/...';`):
 
@@ -243,6 +251,15 @@ If the test pack takes longer than this timeout, the pack will fail with the app
 `pageStabilizationInterval: number`: after navigating to the page, `e2ed` will wait until
 the page is stable for the specified time in millisecond, and only after that it will consider the page loaded.
 This parameter can be overridden on a specific page instance.
+
+`pathToScreenshotsDirectoryForReport: string | null`: path to the directory where screenshots
+will be stored for displaying them in the HTML report.
+This path must be either relative (from the HTML report file) or absolute (i.e. with http/https protocol).
+The screenshot directory should be served by the web server with appropriate headers,
+like a normal static directory. The `autotests/reports/screenshots` directory from the project
+should be copied to this directory after the pack is completed,
+and then screenshots from this directory will be displayed in the HTML report.
+If `null`, screenshots will not be displayed in the HTML report.
 
 `reportFileName: string | null`: the name of the file under which, after running the tests,
 the HTML report will be saved in the `autotests/reports` directory, for example, `report.html`.

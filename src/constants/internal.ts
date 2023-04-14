@@ -8,7 +8,7 @@ export {
   PATH_TO_PACK_VARIABLE_NAME,
   RUN_ENVIRONMENT_VARIABLE_NAME,
   RUN_LABEL_VARIABLE_NAME,
-  START_TIME_VARIABLE_NAME,
+  START_TIME_IN_MS_VARIABLE_NAME,
 } from './environment';
 /** @internal */
 export {AMOUNT_OF_PARALLEL_OPEN_FILES, DEFAULT_FILE_CHUNK_LENGTH, READ_FILE_OPTIONS} from './fs';
@@ -24,7 +24,7 @@ export {
 export {LOCATOR_KEY} from './locator';
 export {LogEventStatus, LogEventType} from './log';
 /** @internal */
-export {MESSAGE_BACKGROUND_COLOR_BY_STATUS} from './log';
+export {MESSAGE_BACKGROUND_COLOR_BY_STATUS, TESTCAFE_WARNINGS_KEY} from './log';
 export {CREATE_PAGE_TOKEN} from './pages';
 /** @internal */
 export {

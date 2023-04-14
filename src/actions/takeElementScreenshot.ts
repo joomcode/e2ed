@@ -12,17 +12,20 @@ type Options = Parameters<typeof testController.takeElementScreenshot>[2];
  */
 export const takeElementScreenshot = (
   selector: Selector,
-  path?: string,
+  pathToScreenshot?: string,
   options?: Options,
 ): Promise<void> => {
   const locator = getLocatorFromSelector(selector);
-  const pathMessage = path === undefined ? '' : ` to path "${path}"`;
 
   log(
-    `Take a screenshot of the element${pathMessage}`,
-    {locator, options},
+    'Take a screenshot of the element',
+    {locator, options, pathToScreenshot},
     LogEventType.InternalAction,
   );
 
-  return testController.takeElementScreenshot(selector as TestCafeSelector, path, options);
+  return testController.takeElementScreenshot(
+    selector as TestCafeSelector,
+    pathToScreenshot,
+    options,
+  );
 };

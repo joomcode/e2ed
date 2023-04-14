@@ -1,7 +1,7 @@
 import {
   e2edEnvironment,
   RUN_ENVIRONMENT_VARIABLE_NAME,
-  START_TIME_VARIABLE_NAME,
+  START_TIME_IN_MS_VARIABLE_NAME,
 } from './constants/internal';
 
 import type {UtcTimeInMs} from './types/internal';
@@ -9,10 +9,10 @@ import type {UtcTimeInMs} from './types/internal';
 /**
  * e2ed start time (UTC, in milliseconds).
  */
-const startTimeInMs = (Number(e2edEnvironment[START_TIME_VARIABLE_NAME]) ||
+const startTimeInMs = (Number(e2edEnvironment[START_TIME_IN_MS_VARIABLE_NAME]) ||
   Date.now()) as UtcTimeInMs;
 
-e2edEnvironment[START_TIME_VARIABLE_NAME] = String(startTimeInMs);
+e2edEnvironment[START_TIME_IN_MS_VARIABLE_NAME] = String(startTimeInMs);
 
 // eslint-disable-next-line import/no-unused-modules
 export type {UserlandPack as PackConfig} from './types/internal';

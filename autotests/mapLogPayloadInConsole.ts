@@ -18,6 +18,13 @@ export const mapLogPayloadInConsole: MapLogPayloadInConsole = (message, payload)
     return {filePath: payload.filePath, successful: payload.successful};
   }
 
+  if (
+    message.startsWith('Caught an error when running tests in retry') ||
+    message.startsWith('Warning from TestCafe:')
+  ) {
+    return payload;
+  }
+
   if (message.startsWith('Results of ')) {
     return undefined;
   }

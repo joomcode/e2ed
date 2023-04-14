@@ -8,6 +8,8 @@ export {failMessage, okMessage} from './messages';
 export {writeLogsToFile} from './logFile';
 /** @internal */
 export {logStartE2edError} from './logStartE2edError';
+/** @internal */
+export {readTestCafeWarnings} from './readTestCafeWarnings';
 export {removeStyleFromString} from './removeStyleFromString';
 /** @internal */
 export {truncateArrayForLogs} from './truncateArrayForLogs';

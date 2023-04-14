@@ -35,8 +35,8 @@ export type FrozenPartOfTestCafeConfig = DeepReadonly<{
       options?: {esModuleInterop?: boolean; resolveJsonModule?: boolean};
     };
   };
-  experimentalProxyless: boolean;
   hostname: string;
+  nativeAutomation: boolean;
   pageLoadTimeout: number;
   reporter: readonly {name: string; output?: string}[];
   retryTestPages: boolean;

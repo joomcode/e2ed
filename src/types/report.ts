@@ -81,13 +81,14 @@ export type TestRunButtonProps = Readonly<{
 }>;
 
 /**
- * Global state object on report html page.
+ * Global state object on HTML report page.
  * @internal
  */
 export type ReportClientState = {
-  e2edClickListeners?: Record<string, (event: HTMLElement) => void>;
-  e2edTestRunDetailsElementsByHash?: Record<RunHash, HTMLElement>;
-  e2edFullTestRuns?: readonly FullTestRun[];
+  clickListeners?: Record<string, (event: HTMLElement) => void>;
+  fullTestRuns?: readonly FullTestRun[];
+  pathToScreenshotsDirectoryForReport: string | null;
+  testRunDetailsElementsByHash?: Record<RunHash, HTMLElement>;
 };
 
 /**

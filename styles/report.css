@@ -614,6 +614,9 @@ button:disabled {
 .step-expanded[aria-expanded='true'] + .step-expanded-panel {
   display: block;
 }
+.step-expanded-panel > pre {
+  margin: 0 0 6px 0;
+}
 .step-expanded[aria-expanded='true']::after {
   transform: translate(0, 25%) rotate(-45deg);
 }

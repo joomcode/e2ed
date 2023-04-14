@@ -104,6 +104,18 @@ export type OwnE2edConfig<
   pageStabilizationInterval: number;
 
   /**
+   * Path to the directory where screenshots will be stored for displaying them in the HTML report.
+   * This path must be either relative (from the HTML report file) or absolute (i.e. with http/https protocol).
+   * The screenshot directory should be served by the web server with appropriate headers,
+   * like a normal static directory.
+   * The `autotests/reports/screenshots` directory from the project should be copied
+   * to this directory after the pack is completed,
+   * and then screenshots from this directory will be displayed in the HTML report.
+   * If `null`, screenshots will not be displayed in the HTML report.
+   */
+  pathToScreenshotsDirectoryForReport: string | null;
+
+  /**
    * The name of the file under which, after running the tests,
    * the HTML report will be saved in the `autotests/reports` directory, for example, `report.html`.
    * Also this name is used as the title of the report page.

@@ -8,20 +8,20 @@ declare const reportClientState: ReportClientState;
  * @internal
  */
 export function addOnClickOnClass(className: string, onclick: (event: HTMLElement) => void): void {
-  let {e2edClickListeners} = reportClientState;
+  let {clickListeners} = reportClientState;
 
-  if (!e2edClickListeners) {
-    e2edClickListeners = {};
-    reportClientState.e2edClickListeners = e2edClickListeners;
+  if (!clickListeners) {
+    clickListeners = {};
+    reportClientState.clickListeners = clickListeners;
 
     document.addEventListener('click', (event) => {
       let currentElement = event.target as HTMLElement | null;
 
       while (currentElement) {
-        for (const currentClass of Object.keys(e2edClickListeners as object)) {
+        for (const currentClass of Object.keys(clickListeners as object)) {
           // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
           if (currentElement.classList?.contains(currentClass)) {
-            const listener = e2edClickListeners?.[currentClass];
+            const listener = clickListeners?.[currentClass];
 
             listener?.(currentElement);
 
@@ -34,5 +34,5 @@ export function addOnClickOnClass(className: string, onclick: (event: HTMLElemen
     });
   }
 
-  e2edClickListeners[className] = onclick;
+  clickListeners[className] = onclick;
 }

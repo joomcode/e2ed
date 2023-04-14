@@ -12,4 +12,4 @@ export const failMessage = getMessageWithBackgroundColor('[FAIL]', ConsoleBackgr
  * Ok message with bright green background color (for printing in the console).
  * @internal
  */
-export const okMessage = getMessageWithBackgroundColor('[OK]', ConsoleBackgroundColor.GreenBright);
+export const okMessage = getMessageWithBackgroundColor('[OK]', ConsoleBackgroundColor.Green);

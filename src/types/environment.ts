@@ -3,7 +3,7 @@ import type {
   PATH_TO_PACK_VARIABLE_NAME,
   RUN_ENVIRONMENT_VARIABLE_NAME,
   RUN_LABEL_VARIABLE_NAME,
-  START_TIME_VARIABLE_NAME,
+  START_TIME_IN_MS_VARIABLE_NAME,
 } from '../constants/internal';
 
 import type {RunLabel} from './runLabel';
@@ -18,6 +18,6 @@ export type E2edEnvironment = {
   [PATH_TO_PACK_VARIABLE_NAME]?: string;
   [RUN_ENVIRONMENT_VARIABLE_NAME]?: RunEnvironment;
   [RUN_LABEL_VARIABLE_NAME]?: RunLabel;
-  [START_TIME_VARIABLE_NAME]?: string;
+  [START_TIME_IN_MS_VARIABLE_NAME]?: string;
   [key: string]: string | undefined;
 };

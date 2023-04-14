@@ -1,3 +1,5 @@
+import {ExitCode} from '../../constants/internal';
+
 import {processExit} from '../exit';
 import {failMessage, generalLog, okMessage} from '../generalLog';
 import {collectReportData, getLiteReport, writeHtmlReport, writeLiteJsonReport} from '../report';
@@ -21,7 +23,7 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
 
     reportData = await collectReportData(fullEventsData);
 
-    const stateMessage = reportData.exitCode === 0 ? okMessage : failMessage;
+    const stateMessage = reportData.exitCode === ExitCode.Passed ? okMessage : failMessage;
 
     generalLog(`Results of pack: ${stateMessage} ${reportData.summaryPackResults}`);
 

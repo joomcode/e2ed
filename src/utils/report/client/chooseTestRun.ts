@@ -19,21 +19,21 @@ export function chooseTestRun(runHash: RunHash): void {
 
   window.location.hash = runHash;
 
-  if (reportClientState.e2edTestRunDetailsElementsByHash === undefined) {
-    reportClientState.e2edTestRunDetailsElementsByHash = {};
+  if (reportClientState.testRunDetailsElementsByHash === undefined) {
+    reportClientState.testRunDetailsElementsByHash = {};
   }
 
-  const {e2edTestRunDetailsElementsByHash} = reportClientState;
+  const {testRunDetailsElementsByHash} = reportClientState;
 
   const previousTestRunDetailsElement =
     e2edTestRunDetailsContainer.firstElementChild as HTMLElement;
 
-  if (!(previousHash in e2edTestRunDetailsElementsByHash)) {
-    e2edTestRunDetailsElementsByHash[previousHash] = previousTestRunDetailsElement;
+  if (!(previousHash in testRunDetailsElementsByHash)) {
+    testRunDetailsElementsByHash[previousHash] = previousTestRunDetailsElement;
   }
 
-  if (runHash in e2edTestRunDetailsElementsByHash) {
-    const e2edTestRunDetailsElement = e2edTestRunDetailsElementsByHash[runHash];
+  if (runHash in testRunDetailsElementsByHash) {
+    const e2edTestRunDetailsElement = testRunDetailsElementsByHash[runHash];
 
     assertValueIsDefined(e2edTestRunDetailsElement);
 
@@ -42,16 +42,16 @@ export function chooseTestRun(runHash: RunHash): void {
     return;
   }
 
-  const {e2edFullTestRuns} = reportClientState;
+  const {fullTestRuns} = reportClientState;
 
-  if (e2edFullTestRuns === undefined) {
+  if (fullTestRuns === undefined) {
     // eslint-disable-next-line no-console
     console.log('JSON report data not yet loaded. Please try click again later');
 
     return;
   }
 
-  const fullTestRun = e2edFullTestRuns.find((testRun) => testRun.runHash === runHash);
+  const fullTestRun = fullTestRuns.find((testRun) => testRun.runHash === runHash);
 
   if (fullTestRun === undefined) {
     // eslint-disable-next-line no-console
@@ -66,5 +66,5 @@ export function chooseTestRun(runHash: RunHash): void {
 
   const nextTestRunDetailsElement = e2edTestRunDetailsContainer.firstElementChild as HTMLElement;
 
-  e2edTestRunDetailsElementsByHash[runHash] = nextTestRunDetailsElement;
+  testRunDetailsElementsByHash[runHash] = nextTestRunDetailsElement;
 }
