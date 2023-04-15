@@ -1,5 +1,21 @@
 # Changelog
 
+## [v0.14.6](https://github.com/joomcode/e2ed/tree/v0.14.6) (2023-04-15)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.5...v0.14.6)
+
+- [Merge pull request #21 from joomcode/feature/fast-errors-loading-in-report](https://github.com/joomcode/e2ed/commit/5d050b9e6b5f23e0440ebd9a5424bc2e30ee9a37) ([uid11](https://github.com/uid11))
+
+  feat: fast errors loading (tests with errors) in HTML report
+
+- [feat: fast errors loading (tests with errors) in HTML report](https://github.com/joomcode/e2ed/commit/c97464f33c03c42455d8297ea2622f32fc50aee7) ([uid11](https://github.com/uid11))
+
+  feat: support nativeAutomation field in pack config (new TestCafe option)
+
+  fix: support nativeAutomation in navigateToUrl action
+
+  fix: load screenshots in HTML report immediately
+
 ## [v0.14.5](https://github.com/joomcode/e2ed/tree/v0.14.5) (2023-04-14)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.4...v0.14.5)
