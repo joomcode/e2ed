@@ -18,6 +18,7 @@ type UserlandTestCafeConfig = Readonly<{
   browserInitTimeout: number;
   browser: string;
   concurrency: number;
+  nativeAutomation: boolean;
   pageRequestTimeout: number;
   port1: number;
   port2: number;
@@ -36,7 +37,6 @@ export type FrozenPartOfTestCafeConfig = DeepReadonly<{
     };
   };
   hostname: string;
-  nativeAutomation: boolean;
   pageLoadTimeout: number;
   reporter: readonly {name: string; output?: string}[];
   retryTestPages: boolean;

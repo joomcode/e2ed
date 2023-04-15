@@ -17,6 +17,8 @@ export {domContentLoadedHandler} from './domContentLoadedHandler';
 /** @internal */
 export {initialScript} from './initialScript';
 /** @internal */
+export {readJsonReportData} from './readJsonReportData';
+/** @internal */
 export {
   renderDatesInterval,
   renderDuration,

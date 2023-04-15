@@ -55,7 +55,7 @@ export function renderSteps({endTimeInMs, logEvents}: Options): SafeHtml {
         const pathToScreenshotFromReportPage = `${pathToDirectoryWithoutSlashes}/${pathToScreenshot}`;
 
         contentTag = 'div';
-        content = sanitizeHtml`<pre>${code}</pre><img src="${pathToScreenshotFromReportPage}" alt="Screenshot from test" loading="lazy">`;
+        content = sanitizeHtml`<pre>${code}</pre><img src="${pathToScreenshotFromReportPage}" alt="Screenshot from test">`;
       }
     }
 

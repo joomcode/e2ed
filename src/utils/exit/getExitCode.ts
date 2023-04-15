@@ -17,7 +17,7 @@ export const getExitCode = (hasErrors: boolean, retries: readonly Retry[]): Exit
     return ExitCode.NoRetries;
   }
 
-  const lastRetry = retries[retries.length - 1];
+  const lastRetry = retries.at(-1);
 
   assertValueIsDefined(lastRetry, 'lastRetry is defined', {retries});
 

@@ -86,8 +86,10 @@ export type TestRunButtonProps = Readonly<{
  */
 export type ReportClientState = {
   clickListeners?: Record<string, (event: HTMLElement) => void>;
-  fullTestRuns?: readonly FullTestRun[];
-  pathToScreenshotsDirectoryForReport: string | null;
+  readonly fullTestRuns: readonly FullTestRun[];
+  lengthOfReadedJsonReportDataParts: number;
+  readonly pathToScreenshotsDirectoryForReport: string | null;
+  readonly readJsonReportDataIntervalId?: number;
   testRunDetailsElementsByHash?: Record<RunHash, HTMLElement>;
 };
 

@@ -41,6 +41,7 @@ export const pack: Pack = {
   mapLogPayloadInLogFile: (message, payload) => payload,
   mapLogPayloadInReport: (message, payload) => payload,
   maxRetriesCountInDocker: 3,
+  nativeAutomation: false,
   packTimeout: 90 * 60_000,
   pageRequestTimeout: 30_000,
   pageStabilizationInterval: 1_000,

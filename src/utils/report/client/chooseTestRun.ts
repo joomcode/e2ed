@@ -43,19 +43,13 @@ export function chooseTestRun(runHash: RunHash): void {
   }
 
   const {fullTestRuns} = reportClientState;
-
-  if (fullTestRuns === undefined) {
-    // eslint-disable-next-line no-console
-    console.log('JSON report data not yet loaded. Please try click again later');
-
-    return;
-  }
-
   const fullTestRun = fullTestRuns.find((testRun) => testRun.runHash === runHash);
 
   if (fullTestRun === undefined) {
     // eslint-disable-next-line no-console
-    console.error(`Cannot find test run with hash ${runHash} in JSON report data`);
+    console.error(
+      `Cannot find test run with hash ${runHash} in JSON report data. Probably JSON report data for this test run not yet loaded. Please try click again later`,
+    );
 
     return;
   }
