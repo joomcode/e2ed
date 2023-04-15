@@ -39,7 +39,6 @@ const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
     },
   },
   hostname: 'localhost',
-  nativeAutomation: false,
   pageLoadTimeout: 0,
   reporter: [{name: 'for-e2ed'}],
   retryTestPages: true,

@@ -1,5 +1,7 @@
 import {LogEventType} from '../constants/internal';
 import {createClientFunction} from '../createClientFunction';
+import {testController} from '../testController';
+import {getFullPackConfig} from '../utils/getFullPackConfig';
 import {log} from '../utils/log';
 
 import type {Url, Void} from '../types/internal';
@@ -25,7 +27,13 @@ export const navigateToUrl = async (url: Url, options: Options = {}): Promise<vo
     log(`Will navigate to the url ${url}`, LogEventType.InternalAction);
   }
 
-  await clientNavigateToUrl(url);
+  const {nativeAutomation} = getFullPackConfig();
+
+  if (nativeAutomation) {
+    await testController.navigateTo(url);
+  } else {
+    await clientNavigateToUrl(url);
+  }
 
   if (skipLogs !== true) {
     log(`Navigation to the url ${url} completed`, LogEventType.InternalAction);

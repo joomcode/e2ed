@@ -13,7 +13,7 @@ export function createSafeHtmlWithoutSanitize(
   stringParts: readonly string[],
   ...values: readonly unknown[]
 ): SafeHtml {
-  const key = Symbol.for('e2ed SafeHtml key');
+  const key = Symbol.for('e2ed:SafeHtml key');
   const parts: string[] = [];
 
   for (let index = 0; index < values.length; index += 1) {
@@ -50,7 +50,7 @@ export function sanitizeHtml(
   stringParts: readonly string[],
   ...values: readonly unknown[]
 ): SafeHtml {
-  const key = Symbol.for('e2ed SafeHtml key');
+  const key = Symbol.for('e2ed:SafeHtml key');
 
   const sanitizeValue = (value: unknown): string =>
     String(value)

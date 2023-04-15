@@ -1,7 +1,10 @@
-import type {FullTestRun, ReportClientState} from '../../../types/internal';
+import {readJsonReportData as clientReadJsonReportData} from './readJsonReportData';
 
-declare const e2edJsonReportData: HTMLScriptElement;
+import type {Mutable, ReportClientState} from '../../../types/internal';
+
 declare const reportClientState: ReportClientState;
+
+const readJsonReportData = clientReadJsonReportData;
 
 /**
  * DOMContentloaded handler for report page.
@@ -9,9 +12,9 @@ declare const reportClientState: ReportClientState;
  * @internal
  */
 export function domContentLoadedHandler(): void {
-  const fullTestRuns = JSON.parse(
-    e2edJsonReportData.textContent ?? 'Cannot parse JSON report data',
-  ) as readonly FullTestRun[];
+  readJsonReportData();
 
-  reportClientState.fullTestRuns = fullTestRuns;
+  window.clearInterval(reportClientState.readJsonReportDataIntervalId);
+
+  (reportClientState as Mutable<ReportClientState>).readJsonReportDataIntervalId = 0;
 }
