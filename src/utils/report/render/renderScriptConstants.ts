@@ -15,6 +15,7 @@ export const renderScriptConstants = (): SafeHtml => {
     fullTestRuns: [],
     lengthOfReadedJsonReportDataParts: 0,
     pathToScreenshotsDirectoryForReport,
+    readJsonReportDataObservers: [],
   };
 
   return createSafeHtmlWithoutSanitize`

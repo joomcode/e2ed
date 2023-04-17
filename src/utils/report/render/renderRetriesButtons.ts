@@ -11,7 +11,6 @@ import type {RetryProps, SafeHtml} from '../../../types/internal';
 export const renderRetriesButtons = (retries: readonly RetryProps[]): SafeHtml => {
   const retryNumbers = retries.map(({retryIndex}) => retryIndex);
   const maxRetry = Math.max(...retryNumbers);
-  const minRetry = Math.min(...retryNumbers);
   const buttons: SafeHtml[] = [];
 
   for (let index = 1; index <= maxRetry; index += 1) {
@@ -20,7 +19,7 @@ export const renderRetriesButtons = (retries: readonly RetryProps[]): SafeHtml =
     buttons[index] = renderRetryButton({
       disabled: !isRetry,
       retry: index,
-      selected: index === minRetry,
+      selected: index === maxRetry,
     });
   }
 

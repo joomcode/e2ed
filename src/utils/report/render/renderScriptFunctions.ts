@@ -16,6 +16,7 @@ import {
   renderTestRunDetails,
   renderTestRunError,
   sanitizeHtml,
+  setReadJsonReportDataObservers,
 } from '../client';
 
 import type {SafeHtml} from '../../../types/internal';
@@ -42,4 +43,5 @@ ${renderTestRunDescription.toString()}
 ${renderTestRunDetails.toString()}
 ${renderTestRunError.toString()}
 ${sanitizeHtml.toString()}
+${setReadJsonReportDataObservers.toString()}
 `;

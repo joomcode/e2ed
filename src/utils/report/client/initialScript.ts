@@ -4,11 +4,7 @@ import {clickOnRetry as clientClickOnRetry} from './clickOnRetry';
 import {clickOnStep as clientClickOnStep} from './clickOnStep';
 import {clickOnTestRun as clientClickOnTestRun} from './clickOnTestRun';
 import {domContentLoadedHandler as clientDomContentLoadedHandler} from './domContentLoadedHandler';
-import {readJsonReportData as clientReadJsonReportData} from './readJsonReportData';
-
-import type {Mutable, ReportClientState} from '../../../types/internal';
-
-declare const reportClientState: ReportClientState;
+import {setReadJsonReportDataObservers as clientSetReadJsonReportDataObservers} from './setReadJsonReportDataObservers';
 
 const addDomContentLoadedHandler = clientAddDomContentLoadedHandler;
 const addOnClickOnClass = clientAddOnClickOnClass;
@@ -16,7 +12,7 @@ const clickOnRetry = clientClickOnRetry;
 const clickOnStep = clientClickOnStep;
 const clickOnTestRun = clientClickOnTestRun;
 const domContentLoadedHandler = clientDomContentLoadedHandler;
-const readJsonReportData = clientReadJsonReportData;
+const setReadJsonReportDataObservers = clientSetReadJsonReportDataObservers;
 
 /**
  * Initial report page script.
@@ -28,12 +24,7 @@ export const initialScript = (): void => {
   addOnClickOnClass('step-expanded', clickOnStep);
   addOnClickOnClass('test-button', clickOnTestRun);
 
+  setReadJsonReportDataObservers();
+
   addDomContentLoadedHandler(domContentLoadedHandler);
-
-  if (!('readJsonReportDataIntervalId' in reportClientState)) {
-    readJsonReportData();
-
-    (reportClientState as Mutable<ReportClientState>).readJsonReportDataIntervalId =
-      window.setInterval(readJsonReportData, 50);
-  }
 };

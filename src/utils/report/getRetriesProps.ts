@@ -15,8 +15,8 @@ export const getRetriesProps = ({retries}: ReportData): readonly RetryProps[] =>
     },
   );
 
-  if (retryProps[0]) {
-    (retryProps[0] as {hidden: boolean}).hidden = false;
+  if (retryProps.at(-1)) {
+    (retryProps.at(-1) as {hidden: boolean}).hidden = false;
   }
 
   return retryProps;
