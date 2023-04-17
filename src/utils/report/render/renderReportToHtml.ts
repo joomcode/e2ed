@@ -25,6 +25,8 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
   assertValueIsNotNull(reportFileName, 'reportFileName is not null');
 
   const retries = getRetriesProps(reportData);
+  const retryNumbers = retries.map(({retryIndex}) => retryIndex);
+  const maxRetry = Math.max(...retryNumbers);
 
   const safeHtml = sanitizeHtml`<!DOCTYPE html>
 <html lang="en">
@@ -32,7 +34,7 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
   <body>
     ${renderNavigation(retries)}
     <div class="main" role="tabpanel">
-      <section class="main__section _position_left" aria-label="Retry 1">
+      <section class="main__section _position_left" aria-label="Retry ${maxRetry}">
         ${renderRetries(retries)}
         ${renderErrors(reportData.errors)}
       </section>

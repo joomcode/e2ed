@@ -89,7 +89,7 @@ export type ReportClientState = {
   readonly fullTestRuns: readonly FullTestRun[];
   lengthOfReadedJsonReportDataParts: number;
   readonly pathToScreenshotsDirectoryForReport: string | null;
-  readonly readJsonReportDataIntervalId?: number;
+  readonly readJsonReportDataObservers: MutationObserver[];
   testRunDetailsElementsByHash?: Record<RunHash, HTMLElement>;
 };
 

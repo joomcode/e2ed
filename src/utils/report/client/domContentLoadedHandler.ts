@@ -1,6 +1,6 @@
 import {readJsonReportData as clientReadJsonReportData} from './readJsonReportData';
 
-import type {Mutable, ReportClientState} from '../../../types/internal';
+import type {ReportClientState} from '../../../types/internal';
 
 declare const reportClientState: ReportClientState;
 
@@ -12,9 +12,11 @@ const readJsonReportData = clientReadJsonReportData;
  * @internal
  */
 export function domContentLoadedHandler(): void {
-  readJsonReportData();
+  readJsonReportData(true);
 
-  window.clearInterval(reportClientState.readJsonReportDataIntervalId);
+  for (const observer of reportClientState.readJsonReportDataObservers) {
+    observer.disconnect();
+  }
 
-  (reportClientState as Mutable<ReportClientState>).readJsonReportDataIntervalId = 0;
+  reportClientState.readJsonReportDataObservers.length = 0;
 }

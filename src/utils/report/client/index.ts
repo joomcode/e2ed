@@ -29,3 +29,5 @@ export {
 } from './render';
 /** @internal */
 export {createSafeHtmlWithoutSanitize, sanitizeHtml, sanitizeJson} from './sanitizeHtml';
+/** @internal */
+export {setReadJsonReportDataObservers} from './setReadJsonReportDataObservers';
