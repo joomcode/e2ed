@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.14.9](https://github.com/joomcode/e2ed/tree/v0.14.9) (2023-04-17)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.8...v0.14.9)
+
+- [Merge pull request #22 from joomcode/fix/read-json-report-data](https://github.com/joomcode/e2ed/commit/263e5d8eb5fc0dba17064abcc87dcc4d1ffba8a6) ([uid11](https://github.com/uid11))
+
+  fix: mechanism of reading JSON report data from scripts
+
+- [chore: update devDependencies (@typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/a5c3b9b1419da158b7b24bc57d61c3856d5186e8) ([uid11](https://github.com/uid11))
+- [fix: mechanism of reading JSON report data from scripts fix: open last retry as default retry in HTML report](https://github.com/joomcode/e2ed/commit/3e1ba1c3e2d7271698f44602b87894cbd0c6db1e) ([uid11](https://github.com/uid11))
+
 ## [v0.14.8](https://github.com/joomcode/e2ed/tree/v0.14.8) (2023-04-15)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.7...v0.14.8)
