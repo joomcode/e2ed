@@ -47,17 +47,6 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
       // eslint-disable-next-line @typescript-eslint/unbound-method
       res.on = wrapInTestRunTracker(res.on);
 
-      endTimeout = setTimeout(() => {
-        req.destroy();
-        req.emit(
-          'error',
-          new E2edError(
-            `The request to ${logParams.url} is timed out in ${timeout}ms`,
-            fullLogParams,
-          ),
-        );
-      }, timeout);
-
       res.setEncoding('utf8');
 
       const chunks: string[] = [];
@@ -94,6 +83,17 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
         }
       });
     });
+
+    endTimeout = setTimeout(() => {
+      req.destroy();
+      req.emit(
+        'error',
+        new E2edError(`The request to ${logParams.url} is timed out in ${timeout}ms`, {
+          ...fullLogParams,
+          cause: undefined,
+        }),
+      );
+    }, timeout);
 
     // eslint-disable-next-line @typescript-eslint/unbound-method
     req.on = wrapInTestRunTracker(req.on);

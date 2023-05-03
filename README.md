@@ -184,6 +184,60 @@ export const pack: Pack = {
 };
 ```
 
+The `npx e2ed-init` command is already creating such a file as an example.
+
+### How to debug tests
+
+For debugging tests, the local run of the pack is intended.
+
+For example, you can use the `debug` action from `e2ed/actions` in the test code:
+
+```ts
+await debug();
+```
+
+When calling the `debug` action, TestCafe will stop the test execution and enter
+the [debug-mode](https://testcafe.io/documentation/402639/reference/command-line-interface?search#-d---debug-mode).
+
+In this mode, using the buttons on the TestCafe panel built into the bottom of the page,
+you can proceed to the next action (an action is considered to be a call of `action` or
+a call of the `expect`), and between actions you can inspect the page using browser's DevTools
+by opening them as usual (before that, you need to unlock the page with tests using the button
+on the same panel — without this, the page will not respond to the keyboard and mouse).
+
+After debugging is complete, remember to remove the call of the `debug` action.
+
+In addition, when run pack locally tests can be debugged using the usual `nodejs` debugging flags
+(`--inspect-brk`, `--inspect`), as `nodejs` application (for brevity, we omit the setting of
+environment variables before commands):
+
+```sh
+npm run e2ed:allTests ./autotests/tests/main/exists.ts -- --inspect-brk
+```
+
+You can use the `debugger` instruction to stop execution at the desired line.
+
+Or you can set any non-empty value to the `E2ED_DEBUG` environment variable,
+which will also run `e2ed` in `nodejs` debug mode
+(this is equivalentto passing the `--inspect-brk` flag):
+
+```sh
+E2ED_DEBUG=true npm run e2ed:allTests ./autotests/tests/main/exists.ts
+```
+
+`E2ED_DEBUG` also works for run in docker, and allows you to connect a debugger
+to the `e2ed` running in docker container.
+
+Finally, TestCafe itself has flags `--debug-mode` and `--debug-on-fail` for
+[debug-mode](https://testcafe.io/documentation/402639/reference/command-line-interface?search#-d---debug-mode)
+and [debug-on-fail](https://testcafe.io/documentation/402639/reference/command-line-interface?search#--debug-on-fail)
+modes that call up the debug panel (either immediately when the test is run or when the test fails)
+and allow you to open browser's DevTools:
+
+```sh
+npm run e2ed:allTests ./autotests/tests/main/exists.ts -- --debug-on-fail
+```
+
 ### Basic fields of pack config
 
 The [pack](autotests/packs/allTests.ts) is a single `ts` file
@@ -297,7 +351,7 @@ If the wait is longer than this timeout, then the promise returned by the waitFo
 
 `E2ED_ORIGIN`: origin-part of the url (`protocol` + `host`) on which the tests will be run. For example, `https://google.com`.
 
-`E2ED_DEBUG`: run e2ed in nodejs-debug mode (`--inspect-brk=0.0.0.0`) if this variable is not empty.
+`E2ED_DEBUG`: run e2ed in `nodejs` debug mode (`--inspect-brk=0.0.0.0`) if this variable is not empty.
 
 `E2ED_DOCKER_DEBUG_PORT`: debug port when run in docker (9229 by default).
 

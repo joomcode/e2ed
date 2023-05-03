@@ -72,8 +72,8 @@ export const updateRetriesStateAfterRetry = async (retriesState: RetriesState): 
     `Results of ${printedRetry}: ${stateMessage} ${getPrintedTestsCount(
       newFullTestRuns.length,
     )} with concurrency ${concurrency} ran in ${Date.now() - startLastRetryTimeInMs}ms (${
-      successfulNewFullTestRuns.length
-    } successful, ${failedNewFullTestRuns.length} failed, ${
+      failedNewFullTestRuns.length
+    } failed, ${successfulNewFullTestRuns.length} successful, ${
       newFullTestRuns.length - unbrokenNewFullTestRuns.length
     } broken)`,
   );
