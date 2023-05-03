@@ -1,5 +1,30 @@
 # Changelog
 
+## [v0.14.10](https://github.com/joomcode/e2ed/tree/v0.14.10) (2023-05-03)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.9...v0.14.10)
+
+- [Merge pull request #23 from joomcode/feature/update-docs-about-local-run](https://github.com/joomcode/e2ed/commit/874d40c897fec21de7040661545275fb3e70723d) ([uid11](https://github.com/uid11))
+
+  feat: add pack ./autotests/packs/local.ts to e2ed-init command
+
+- [chore: update devDependencies (@types/node, @typescript-eslint/\*, etc)](https://github.com/joomcode/e2ed/commit/6a8ec37f6372db730615b434f8ef50d51efc0418) ([uid11](https://github.com/uid11))
+- [feat: add getDocumentTitle utility](https://github.com/joomcode/e2ed/commit/826293b598a2c83c8de02f94eb5afc56611170d5) ([uid11](https://github.com/uid11))
+
+  refactor: rename utility getCurrentUrl to getDocumentUrl
+
+  fix: error with timeout option in request utility
+
+  tests: add tests for request utility
+
+- [chore: update devDependencies (@types/node, eslint, prettier, etc)](https://github.com/joomcode/e2ed/commit/e7ab7d1c5c11a1904c09430cc694dc6ed8aad6af) ([uid11](https://github.com/uid11))
+
+  docs: add E2ED_DEBUG to README.md item about debugging tests
+
+- [feat: add pack ./autotests/packs/local.ts to e2ed-init command](https://github.com/joomcode/e2ed/commit/9c1664279cb4af1abaa6639defa37c6c95c0eb33) ([uid11](https://github.com/uid11))
+
+  docs: add brief item about debugging tests
+
 ## [v0.14.9](https://github.com/joomcode/e2ed/tree/v0.14.9) (2023-04-17)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.8...v0.14.9)
