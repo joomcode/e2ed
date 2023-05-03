@@ -42,7 +42,11 @@ export const request = async <
     requestBody,
     routeParams,
     timeout = 30_000,
-  }: Options<RouteParams, SomeRequest, SomeResponse>,
+  }: Options<RouteParams, SomeRequest, SomeResponse> = {} as Options<
+    RouteParams,
+    SomeRequest,
+    SomeResponse
+  >,
 ): Promise<SomeResponse> => {
   const route = new Route(...([routeParams] as ZeroOrOneArg<RouteParams>));
 

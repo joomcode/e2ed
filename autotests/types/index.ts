@@ -5,6 +5,8 @@ export type {
   ApiCreateProductResponse,
   ApiGetUserRequest,
   ApiGetUserResponse,
+  ApiGetUsersRequest,
+  ApiGetUsersResponse,
   ApiUserSignUpRequest,
   ApiUserSignUpResponse,
 } from './api';
