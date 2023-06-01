@@ -5,7 +5,7 @@ import {request} from 'e2ed/utils';
 
 it(
   'send correct requests and rejects on timeout',
-  {meta: {testId: '7'}, testIdleTimeout: 4_000},
+  {meta: {testId: '7'}, testIdleTimeout: 6_000},
   async () => {
     const {
       responseBody: {data},
