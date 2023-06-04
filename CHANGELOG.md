@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.14.11](https://github.com/joomcode/e2ed/tree/v0.14.11) (2023-06-04)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.10...v0.14.11)
+
+- [Merge pull request #24 from joomcode/fix/end-hung-retray](https://github.com/joomcode/e2ed/commit/5f8bd849a1aa5f7f9d4435c40a441e4d921242a3) ([uid11](https://github.com/uid11))
+
+  feat: end hung retry
+
+- [chore: update devDependencies (eslint to 8.42.0)](https://github.com/joomcode/e2ed/commit/12747fa54cc58d8b17540473dbac3ab721a13ea2) ([uid11](https://github.com/uid11))
+- [feat: kill TestCafe processes occupying ports after each retry](https://github.com/joomcode/e2ed/commit/2180cf490be7a2c72f47db21ef29c02e61f9c6b7) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies and TestCafe (to 2.6.2)](https://github.com/joomcode/e2ed/commit/28986547fb6e7393f1cd92c319d0478f357ce6c1) ([uid11](https://github.com/uid11))
+
 ## [v0.14.10](https://github.com/joomcode/e2ed/tree/v0.14.10) (2023-05-03)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.9...v0.14.10)
