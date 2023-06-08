@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.14.12](https://github.com/joomcode/e2ed/tree/v0.14.12) (2023-06-08)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.11...v0.14.12)
+
+- [Merge pull request #25 from joomcode/fix/end-hung-retray-by-file](https://github.com/joomcode/e2ed/commit/0724633d57178d6640f788bc333f37bc45305c59) ([uid11](https://github.com/uid11))
+
+  fix: end hung retray in timeout by last log event date
+
+- [chore: update devDependencies (@typescript-eslint/\*)](https://github.com/joomcode/e2ed/commit/1a4174e63e4106b8f45f5ce4f3c0905b9b81e3ec) ([uid11](https://github.com/uid11))
+- [fix: end hung retray in timeout by last log event date](https://github.com/joomcode/e2ed/commit/1ac1656021650fed3a01604b6d6eac2e3b0a7bd2) ([uid11](https://github.com/uid11))
+
 ## [v0.14.11](https://github.com/joomcode/e2ed/tree/v0.14.11) (2023-06-04)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.10...v0.14.11)
