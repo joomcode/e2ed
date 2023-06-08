@@ -1,6 +1,7 @@
 import {RESOLVED_PROMISE} from '../../constants/internal';
 
 import {E2edError} from '../error';
+import {writeLogEventTime} from '../fs';
 import {generalLog} from '../generalLog';
 import {getPromiseWithResolveAndReject} from '../promise';
 
@@ -63,6 +64,8 @@ export const getTestFnAndReject = ({
    */
   const onlog = (): void => {
     clearTimeout(idleTimeoutId);
+
+    void writeLogEventTime();
 
     if (isTestRunCompleted) {
       return;

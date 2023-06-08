@@ -8,7 +8,7 @@ import {generalLog} from '../generalLog';
 
 import {renderReportToHtml} from './render';
 
-import type {ReportData, UtcTimeInMs} from '../../types/internal';
+import type {FilePathFromRoot, ReportData, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Writes HTML report (report.html file) with test runs results.
@@ -22,7 +22,7 @@ export const writeHtmlReport = async (reportData: ReportData): Promise<void> => 
 
   assertValueIsNotNull(reportFileName, 'reportFileName is not null');
 
-  const reportFilePath = join(REPORTS_DIRECTORY_PATH, reportFileName);
+  const reportFilePath = join(REPORTS_DIRECTORY_PATH, reportFileName) as FilePathFromRoot;
 
   await writeFile(reportFilePath, String(reportHtml));
 

@@ -4,6 +4,7 @@ import {join} from 'node:path';
 import {INSTALLED_E2ED_DIRECTORY_PATH} from '../../constants/internal';
 
 import {E2edError} from '../error';
+import {getLastLogEventTimeInMs} from '../fs';
 import {getFullPackConfig} from '../getFullPackConfig';
 import {setTestsSubprocess, testsSubprocess} from '../tests';
 
@@ -63,6 +64,12 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
     };
     const resetInterruptTimeout = (): void => {
       clearTimeout(timeoutId);
+
+      void getLastLogEventTimeInMs().then((lastLogEventTimeInMs) => {
+        if (lastLogEventTimeInMs > 0 && Date.now() - lastLogEventTimeInMs > interruptTimeout) {
+          killByTimeout();
+        }
+      });
 
       timeoutId = setTimeout(killByTimeout, interruptTimeout);
     };

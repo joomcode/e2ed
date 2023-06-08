@@ -8,7 +8,7 @@ import {E2edError} from '../error';
 import {getTestRunEventFileName} from './getTestRunEventFileName';
 import {writeFile} from './writeFile';
 
-import type {FullTestRun} from '../../types/internal';
+import type {FilePathFromRoot, FullTestRun} from '../../types/internal';
 
 /**
  * Write completed (full) test run object to temporary JSON file.
@@ -18,7 +18,7 @@ export const writeTestRunToJsonFile = async (fullTestRun: FullTestRun): Promise<
   const {runId} = fullTestRun;
 
   const fileName = getTestRunEventFileName(runId);
-  const filePath = join(EVENTS_DIRECTORY_PATH, fileName);
+  const filePath = join(EVENTS_DIRECTORY_PATH, fileName) as FilePathFromRoot;
 
   await stat(filePath).then(
     (stats) => {
