@@ -9,14 +9,14 @@ import {generalLog} from '../generalLog';
 
 import {writeFile} from './writeFile';
 
-import type {FullTestRun, RunId} from '../../types/internal';
+import type {FilePathFromRoot, FullTestRun, RunId} from '../../types/internal';
 
 /**
  * Rewrite test run JSON file with broken status.
  * @internal
  */
 export const writeBrokenStatusToTestRunJsonFile = async (runId: RunId): Promise<void> => {
-  const filePath = join(EVENTS_DIRECTORY_PATH, `${runId}.json`);
+  const filePath = join(EVENTS_DIRECTORY_PATH, `${runId}.json`) as FilePathFromRoot;
 
   await stat(filePath).catch((cause: unknown) => {
     throw new E2edError(`Test run JSON file ${filePath} does not exists in temporary directory`, {

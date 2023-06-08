@@ -5,7 +5,7 @@ import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
 import {getFileSize, writeFile} from '../fs';
 import {generalLog} from '../generalLog';
 
-import type {LiteReport, UtcTimeInMs} from '../../types/internal';
+import type {FilePathFromRoot, LiteReport, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Writes lite JSON report (lite-report.json file) with test runs results
@@ -18,7 +18,7 @@ export const writeLiteJsonReport = async (liteReport: LiteReport): Promise<void>
   const {liteReportFileName} = liteReport;
   const reportJson = JSON.stringify(liteReport);
 
-  const reportFilePath = join(REPORTS_DIRECTORY_PATH, liteReportFileName);
+  const reportFilePath = join(REPORTS_DIRECTORY_PATH, liteReportFileName) as FilePathFromRoot;
 
   await writeFile(reportFilePath, reportJson);
 

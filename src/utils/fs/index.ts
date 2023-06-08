@@ -5,6 +5,8 @@ export {getFileSize} from './getFileSize';
 /** @internal */
 export {getTestRunEventFileName} from './getTestRunEventFileName';
 /** @internal */
+export {getLastLogEventTimeInMs, writeLogEventTime} from './logIsoString';
+/** @internal */
 export {readEventsFromFiles} from './readEventsFromFiles';
 /** @internal */
 export {readStartInfo} from './readStartInfo';

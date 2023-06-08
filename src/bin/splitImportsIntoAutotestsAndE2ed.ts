@@ -17,6 +17,8 @@ import {assertValueIsDefined} from '../utils/asserts';
 import {writeFile} from '../utils/fs';
 import {generalLog} from '../utils/generalLog';
 
+import type {FilePathFromRoot} from '../types/internal';
+
 type ParsedImportStatement = Readonly<{
   fromPath: string;
   isAutotestsImport: boolean;
@@ -181,7 +183,7 @@ async function processFile(filePath: string): Promise<void> {
   if (source !== newSource) {
     // generalLog('Rewrite file', {filePath});
 
-    await writeFile(filePath, newSource);
+    await writeFile(filePath as FilePathFromRoot, newSource);
   }
 }
 
