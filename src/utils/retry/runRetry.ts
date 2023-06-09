@@ -4,7 +4,7 @@ import {join} from 'node:path';
 import {INSTALLED_E2ED_DIRECTORY_PATH} from '../../constants/internal';
 
 import {E2edError} from '../error';
-import {getLastLogEventTimeInMs} from '../fs';
+import {getLastLogEventTimeInMs, writeLogEventTime} from '../fs';
 import {getFullPackConfig} from '../getFullPackConfig';
 import {setTestsSubprocess, testsSubprocess} from '../tests';
 
@@ -27,6 +27,8 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
     if (testsSubprocess?.killed === false) {
       testsSubprocess.kill();
     }
+
+    void writeLogEventTime('NaN');
 
     const {runLabel} = runRetryOptions;
     const newTestsSubprocess = fork(pathToRunTestsSubprocess);
@@ -51,13 +53,14 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
 
     const {testIdleTimeout} = getFullPackConfig();
     const interruptTimeout = 2 * testIdleTimeout;
-    const killByTimeout = (): void => {
+    const killByTimeout = (reason = 'timeout'): void => {
       if (!newTestsSubprocess.killed) {
         newTestsSubprocess.kill();
       }
 
       const error = new E2edError(
         `Retry subprocess with label "${runLabel}" did not respond within ${interruptTimeout}ms and was killed`,
+        {reason},
       );
 
       reject(error);
@@ -66,8 +69,11 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
       clearTimeout(timeoutId);
 
       void getLastLogEventTimeInMs().then((lastLogEventTimeInMs) => {
-        if (lastLogEventTimeInMs > 0 && Date.now() - lastLogEventTimeInMs > interruptTimeout) {
-          killByTimeout();
+        if (
+          Number.isInteger(lastLogEventTimeInMs) &&
+          Date.now() - lastLogEventTimeInMs > interruptTimeout
+        ) {
+          killByTimeout(`last log event time (${lastLogEventTimeInMs}) is outdated`);
         }
       });
 

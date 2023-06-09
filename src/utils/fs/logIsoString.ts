@@ -25,15 +25,13 @@ export const getLastLogEventTimeInMs = async (): Promise<number> => {
 
   const lastLogEventTimeInMs = new Date(logIsoStringFile.trim());
 
-  return lastLogEventTimeInMs.valueOf() || 0;
+  return lastLogEventTimeInMs.valueOf();
 };
 
 /**
  * Write log event time.
  * @internal
  */
-export const writeLogEventTime = async (): Promise<void> => {
-  const logIsoString = new Date().toISOString();
-
+export const writeLogEventTime = async (logIsoString = new Date().toISOString()): Promise<void> => {
   await writeFile(LOG_ISO_STRING_PATH, logIsoString);
 };
