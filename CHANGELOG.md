@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.14.13](https://github.com/joomcode/e2ed/tree/v0.14.13) (2023-06-09)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.12...v0.14.13)
+
+- [Merge pull request #26 from joomcode/fix/end-hung-retry-timeout](https://github.com/joomcode/e2ed/commit/c2577c44e5f520375d76f2122c9a694b33f48e96) ([uid11](https://github.com/uid11))
+
+  fix: reset last log event time on each retry
+
+- [fix: reset last log event time on each retry](https://github.com/joomcode/e2ed/commit/a43eef2638e3bc19a66a58fa702b0268b61ad6bd) ([uid11](https://github.com/uid11))
+
 ## [v0.14.12](https://github.com/joomcode/e2ed/tree/v0.14.12) (2023-06-08)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.11...v0.14.12)
