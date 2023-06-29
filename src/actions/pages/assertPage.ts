@@ -3,8 +3,6 @@ import {assertValueIsTrue} from '../../utils/asserts';
 import {getDocumentUrl} from '../../utils/document';
 import {log} from '../../utils/log';
 
-import {waitForInterfaceStabilization} from '../waitFor';
-
 import {createPageInstance} from './createPageInstance';
 
 import type {AnyPageClassType, NavigateToOrAssertPageArgs} from '../../types/internal';
@@ -19,13 +17,11 @@ export const assertPage = async <SomePageClass extends AnyPageClassType>(
 
   const page = await createPageInstance(PageClass, pageParams);
 
-  await waitForInterfaceStabilization(page.pageStabilizationInterval);
-
   const route = page.getRoute();
 
-  if (page.beforeAssertPage) {
-    await page.beforeAssertPage();
-  }
+  await page.beforeAssertPage?.();
+
+  await page.waitForPageLoaded();
 
   const documentUrl = await getDocumentUrl();
   const isMatch = route.isMatchUrl(documentUrl);
@@ -39,9 +35,7 @@ export const assertPage = async <SomePageClass extends AnyPageClassType>(
 
   assertValueIsTrue(isMatch, message, payload);
 
-  if (page.afterAssertPage) {
-    await page.afterAssertPage();
-  }
+  await page.afterAssertPage?.();
 
   return page;
 };

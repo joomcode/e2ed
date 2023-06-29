@@ -9,7 +9,7 @@ import {updateRetriesStateAfterRetry} from './updateRetriesStateAfterRetry';
 import type {RetriesState, UtcTimeInMs} from '../../types/internal';
 
 /**
- * Process current retry in retries cycle.
+ * Processes current retry in retries cycle.
  * @internal
  */
 export const processRetry = async (retriesState: RetriesState): Promise<void> => {

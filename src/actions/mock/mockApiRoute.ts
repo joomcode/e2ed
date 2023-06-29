@@ -7,13 +7,12 @@ import {assertValueIsDefined} from '../../utils/asserts';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {log} from '../../utils/log';
 import {getRequestsFilter, getSetResponse} from '../../utils/mockApiRoute';
+import {setReadonlyProperty} from '../../utils/setReadonlyProperty';
 import {wrapInTestRunTracker} from '../../utils/testRun';
 
 import type {
   ApiMockFunction,
-  ApiMockState,
   ApiRouteClassTypeWithGetParamsFromUrl,
-  Mutable,
   Request,
   Response,
 } from '../../types/internal';
@@ -37,7 +36,7 @@ export const mockApiRoute = async <
   if (functionByRoute === undefined) {
     functionByRoute = new Map();
 
-    (apiMockState as Mutable<ApiMockState>).functionByRoute = functionByRoute;
+    setReadonlyProperty(apiMockState, 'functionByRoute', functionByRoute);
 
     let requestMock = RequestMock();
 
@@ -51,7 +50,7 @@ export const mockApiRoute = async <
 
     const apiMock = requestMock.respond(getSetResponse(apiMockState));
 
-    (apiMockState as Mutable<ApiMockState>).apiMock = apiMock;
+    setReadonlyProperty(apiMockState, 'apiMock', apiMock);
   }
 
   if (functionByRoute.size === 0) {

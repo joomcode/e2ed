@@ -2,8 +2,6 @@ import {LogEventType} from '../../constants/internal';
 import {log} from '../../utils/log';
 import {getUserlandHooks} from '../../utils/userlandHooks';
 
-import {waitForInterfaceStabilization} from '../waitFor';
-
 import {createPageInstance} from './createPageInstance';
 
 import type {AnyPageClassType, NavigateToOrAssertPageArgs, UtcTimeInMs} from '../../types/internal';
@@ -32,9 +30,7 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
     LogEventType.InternalAction,
   );
 
-  if (page.beforeNavigateToPage) {
-    await page.beforeNavigateToPage();
-  }
+  await page.beforeNavigateToPage?.();
 
   const {navigateTo} = getUserlandHooks();
 
@@ -46,11 +42,9 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
     LogEventType.InternalAction,
   );
 
-  await waitForInterfaceStabilization(page.pageStabilizationInterval);
+  await page.waitForPageLoaded();
 
-  if (page.afterNavigateToPage) {
-    await page.afterNavigateToPage();
-  }
+  await page.afterNavigateToPage?.();
 
   log(
     `Page "${PageClass.name}" loaded in ${Date.now() - startNavigateTimeInMs}ms`,

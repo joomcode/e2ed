@@ -164,16 +164,35 @@ export type OwnE2edConfig<
   testTimeout: number;
 
   /**
+   * Group of settings for the waitForAllRequestsComplete function.
+   */
+  waitForAllRequestsComplete: Readonly<{
+    /**
+     * Default timeout (in milliseconds) for first request for waitForAllRequestsComplete function.
+     * If before the expiration of this timeout there is no request that satisfies the predicate,
+     * then the promise returned by the waitForAllRequestsComplete function will be successfully resolved.
+     */
+    firstRequestTimeout: number;
+
+    /**
+     * Default timeout (in milliseconds) for waitForAllRequestsComplete function.
+     * If the wait is longer than this timeout, then the promise
+     * returned by the waitForAllRequestsComplete function will be rejected.
+     */
+    timeout: number;
+  }>;
+
+  /**
    * Default timeout (in milliseconds) for waitForRequest function.
    * If the wait is longer than this timeout, then the promise
-   * returned by the waitForRequest function is rejected.
+   * returned by the waitForRequest function will be rejected.
    */
   waitForRequestTimeout: number;
 
   /**
    * Default timeout (in milliseconds) for waitForResponse function.
    * If the wait is longer than this timeout, then the promise
-   * returned by the waitForResponse function is rejected.
+   * returned by the waitForResponse function will be rejected.
    */
   waitForResponseTimeout: number;
 }>;

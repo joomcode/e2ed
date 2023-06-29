@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-internal-modules
+import {waitForAllRequestsComplete, waitForInterfaceStabilization} from './actions/waitFor';
 import {CREATE_PAGE_TOKEN} from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
 import {getFullPackConfig} from './utils/getFullPackConfig';
@@ -76,4 +78,10 @@ export abstract class Page<PageParams = undefined> {
    * Get page route (for navigation to the page).
    */
   abstract getRoute(): PageRoute<unknown>;
+
+  async waitForPageLoaded(): Promise<void> {
+    await waitForAllRequestsComplete(() => true);
+
+    await waitForInterfaceStabilization(this.pageStabilizationInterval);
+  }
 }

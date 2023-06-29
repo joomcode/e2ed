@@ -2,8 +2,6 @@ import {LogEventType} from '../../constants/internal';
 import {createClientFunction} from '../../createClientFunction';
 import {log} from '../../utils/log';
 
-import {waitForInterfaceStabilization} from '../waitFor';
-
 import type {AnyPageClassType} from '../../types/internal';
 
 const clientReloadPage = createClientFunction(() => window.location.reload(), {name: 'reloadPage'});
@@ -16,5 +14,5 @@ export const reloadPage = async (page: InstanceType<AnyPageClassType>): Promise<
 
   await clientReloadPage();
 
-  await waitForInterfaceStabilization(page.pageStabilizationInterval);
+  await page.waitForPageLoaded();
 };

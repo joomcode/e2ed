@@ -1,4 +1,8 @@
 /** @internal */
-export {processEventsPredicates} from './processEventsPredicates';
+export {addNotCompleteRequest} from './addNotCompleteRequest';
 /** @internal */
-export {updateWaitForEventsState} from './updateWaitForEventsState';
+export {completeRequest} from './completeRequest';
+/** @internal */
+export {getInitialIdsForAllRequestsCompletePredicate} from './getInitialIdsForAllRequestsCompletePredicate';
+/** @internal */
+export {processEventsPredicates} from './processEventsPredicates';

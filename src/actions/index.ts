@@ -43,6 +43,7 @@ export {takeElementScreenshot} from './takeElementScreenshot';
 export {takeScreenshot} from './takeScreenshot';
 export {typeText} from './typeText';
 export {
+  waitForAllRequestsComplete,
   waitForInterfaceStabilization,
   waitForRequest,
   waitForResponse,

@@ -8,7 +8,7 @@ import {processRetry} from './processRetry';
 import type {RetriesState} from '../../types/internal';
 
 /**
- * Process retries of remaining tests in a loop.
+ * Processes retries of remaining tests in a loop.
  * @internal
  */
 export const processRetries = async (retriesState: RetriesState): Promise<void> => {

@@ -1,6 +1,7 @@
 import {setPageCookies} from 'autotests/context';
 import {E2edReportExample as E2edReportExampleRoute} from 'autotests/routes/pageRoutes';
 import {Page} from 'e2ed';
+import {setReadonlyProperty} from 'e2ed/utils';
 
 import type {Cookie} from 'e2ed/types';
 
@@ -20,7 +21,7 @@ export class E2edReportExample extends Page<CustomPageParams> {
   override init(): void {
     const {pageCookies = []} = this.pageParams ?? {};
 
-    Object.assign<E2edReportExample, Partial<E2edReportExample>>(this, {pageCookies});
+    setReadonlyProperty(this as E2edReportExample, 'pageCookies', pageCookies);
   }
 
   getRoute(): E2edReportExampleRoute {

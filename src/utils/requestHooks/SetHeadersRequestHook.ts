@@ -6,7 +6,9 @@ import {
 } from '../../constants/internal';
 import {testController} from '../../testController';
 
+import {assertValueIsDefined} from '../asserts';
 import {log} from '../log';
+import {setReadonlyProperty} from '../setReadonlyProperty';
 
 import {applyHeadersMapper} from './applyHeadersMapper';
 import {RequestHookWithEvents} from './RequestHookWithEvents';
@@ -34,7 +36,7 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
 
     applyHeadersMapper(headers as Headers, this.options.mapRequestHeaders);
 
-    (requestOptions as {headers: Headers}).headers = headers;
+    setReadonlyProperty(requestOptions, 'headers', headers);
 
     log(`Map request headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
 
@@ -49,11 +51,11 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
     await super._onConfigureResponse(event);
 
     const requestHookContext = event[REQUEST_HOOK_CONTEXT_KEY];
-    const {headers = {}} = requestHookContext.destRes;
+    const {headers} = requestHookContext.destRes;
+
+    assertValueIsDefined(headers, 'headers is defined', {requestHookConfigureResponseEvent: event});
 
     applyHeadersMapper(headers, this.options.mapResponseHeaders);
-
-    (requestHookContext.destRes as {headers: Headers}).headers = headers;
 
     log(`Map response headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
   }

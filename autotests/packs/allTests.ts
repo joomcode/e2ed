@@ -38,8 +38,8 @@ export const pack: Pack = {
   liteReportFileName: 'lite-report.json',
   logFileName: 'pack-logs.log',
   mapLogPayloadInConsole,
-  mapLogPayloadInLogFile: (message, payload) => payload,
-  mapLogPayloadInReport: (message, payload) => payload,
+  mapLogPayloadInLogFile: (_message, payload) => payload,
+  mapLogPayloadInReport: (_message, payload) => payload,
   maxRetriesCountInDocker: 3,
   nativeAutomation: false,
   packTimeout: 90 * 60_000,
@@ -56,6 +56,10 @@ export const pack: Pack = {
   testFileGlobs: ['./autotests/tests/**/*.ts', '!**/*.skip.ts'],
   testIdleTimeout: 20_000,
   testTimeout: 60_000,
+  waitForAllRequestsComplete: {
+    firstRequestTimeout: 500,
+    timeout: 30_000,
+  },
   waitForRequestTimeout: 30_000,
   waitForResponseTimeout: 30_000,
 };

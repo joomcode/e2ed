@@ -1,6 +1,6 @@
 import type {Inner} from 'testcafe-without-typecheck';
 
-import type {REQUEST_HOOK_CONTEXT_KEY} from '../constants/internal';
+import type {REQUEST_HOOK_CONTEXT_ID_KEY, REQUEST_HOOK_CONTEXT_KEY} from '../constants/internal';
 
 import type {Brand} from './brand';
 import type {Class} from './class';
@@ -23,12 +23,13 @@ type RequestHookContext = DeepReadonly<{
   destRes: {
     headers?: Headers;
   };
+  [REQUEST_HOOK_CONTEXT_ID_KEY]?: RequestHookContextId;
 }>;
 
 /**
  * Any object with request hook context key.
  */
-type WithContextKey = {[REQUEST_HOOK_CONTEXT_KEY]: RequestHookContext};
+type WithContextKey = {readonly [REQUEST_HOOK_CONTEXT_KEY]: RequestHookContext};
 
 /**
  * TestCafe charset class instance for encode/decode request/response body buffers.
@@ -47,6 +48,11 @@ export type RequestHookClassWithContext = Class<
 >;
 
 /**
+ * id of TestCafe's request hook context.
+ */
+export type RequestHookContextId = Brand<string, 'RequestHookContextId'>;
+
+/**
  * Encoding for encode/decode request/response body buffers.
  * @internal
  */
@@ -56,7 +62,7 @@ export type RequestHookEncoding = Brand<string, 'RequestHookEncoding'>;
  * TestCafe internal request event in RequestHook.
  */
 export type RequestHookRequestEvent = DeepReadonly<{
-  requestOptions: WithContextKey & Inner.RequestOptions;
+  requestOptions: RequestOptions;
 }>;
 
 /**
@@ -79,3 +85,8 @@ export type RequestHookResponseEvent = Readonly<{
   headers?: Headers;
   statusCode?: StatusCode;
 }>;
+
+/**
+ * TestCafe internal request options with request hook context.
+ */
+export type RequestOptions = WithContextKey & Inner.RequestOptions;

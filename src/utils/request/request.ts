@@ -6,19 +6,14 @@ import {LogEventStatus, LogEventType} from '../../constants/internal';
 
 import {E2edError} from '../error';
 import {log} from '../log';
+import {setReadonlyProperty} from '../setReadonlyProperty';
 import {wrapInTestRunTracker} from '../testRun';
 
 import {getBodyAsString} from './getBodyAsString';
 import {getContentJsonHeaders} from './getContentJsonHeaders';
 import {oneTryOfRequest} from './oneTryOfRequest';
 
-import type {
-  ApiRouteClassType,
-  Mutable,
-  Request,
-  Response,
-  ZeroOrOneArg,
-} from '../../types/internal';
+import type {ApiRouteClassType, Request, Response, ZeroOrOneArg} from '../../types/internal';
 
 import type {LogParams, Options} from './types';
 
@@ -78,7 +73,7 @@ export const request = async <
     urlObject.protocol === 'http:' ? httpRequest : httpsRequest,
   );
 
-  (logParams as Mutable<typeof logParams>).requestHeaders = options.requestHeaders;
+  setReadonlyProperty(logParams, 'requestHeaders', requestHeaders);
 
   for (let retryIndex = 1; retryIndex <= maxRetriesCount; retryIndex += 1) {
     const retry = `${retryIndex}/${maxRetriesCount}`;
@@ -110,7 +105,7 @@ export const request = async <
         return response;
       }
     } catch (cause) {
-      (logParams as Mutable<typeof logParams>).cause = cause;
+      setReadonlyProperty(logParams, 'cause', cause);
 
       log(
         `An error was received during the request to ${url}`,

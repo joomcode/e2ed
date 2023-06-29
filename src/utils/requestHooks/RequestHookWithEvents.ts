@@ -1,7 +1,8 @@
 import {RequestHook} from 'testcafe-without-typecheck';
 
-import {RESOLVED_PROMISE} from '../../constants/internal';
+import {REQUEST_HOOK_CONTEXT_KEY, RESOLVED_PROMISE} from '../../constants/internal';
 
+import {setReadonlyProperty} from '../setReadonlyProperty';
 import {createTestRunCallback, wrapInTestRunTracker} from '../testRun';
 
 import {addContextToResultsOfClassCreateMethods} from './addContextToResultsOfClassCreateMethods';
@@ -68,13 +69,6 @@ abstract class RequestHookWithEvents extends RequestHook {
   }
 
   /**
-   * Internal TestCafe response event handler.
-   */
-  override async _onConfigureResponse(event: RequestHookConfigureResponseEvent): Promise<void> {
-    await super._onConfigureResponse(event);
-  }
-
-  /**
    * Wrap RequestHook on-methods to TestRunTracker.
    * @internal
    */
@@ -86,6 +80,18 @@ abstract class RequestHookWithEvents extends RequestHook {
     this.onRequest = onRequest;
     this.onResponse = onResponse;
     this._onConfigureResponse = _onConfigureResponse;
+  }
+
+  /**
+   * Internal TestCafe response event handler.
+   */
+  override async _onConfigureResponse(event: RequestHookConfigureResponseEvent): Promise<void> {
+    await super._onConfigureResponse(event);
+
+    const requestHookContext = event[REQUEST_HOOK_CONTEXT_KEY];
+    const {headers = {}} = requestHookContext.destRes;
+
+    setReadonlyProperty(requestHookContext.destRes, 'headers', headers);
   }
 }
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 set -e
+set +u
 
 DEBUG_PORT="${E2ED_DOCKER_DEBUG_PORT:-9229}"
 DIR="${E2ED_WORKDIR:-$PWD}"
