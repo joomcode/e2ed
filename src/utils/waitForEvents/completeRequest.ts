@@ -1,4 +1,7 @@
+import {LogEventType} from '../../constants/internal';
+
 import {assertValueIsDefined} from '../asserts';
+import {log} from '../log';
 
 import type {RequestHookContextId, WaitForEventsState} from '../../types/internal';
 
@@ -23,10 +26,16 @@ export const completeRequest = (
 
     requestHookContextIds.delete(requestHookContextId);
 
-    if (requestHookContextIds.size === 0 && requestWasWaited) {
-      allRequestsCompletePredicates.delete(allRequestsCompletePredicateWithPromise);
-
-      resolve();
+    if (requestHookContextIds.size > 0 || !requestWasWaited) {
+      continue;
     }
+
+    allRequestsCompletePredicates.delete(allRequestsCompletePredicateWithPromise);
+
+    const {predicate} = allRequestsCompletePredicateWithPromise;
+
+    log('Have waited for all requests complete', {predicate}, LogEventType.InternalUtil);
+
+    resolve();
   }
 };

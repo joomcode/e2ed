@@ -44,7 +44,7 @@ export const pack: Pack = {
   nativeAutomation: false,
   packTimeout: 90 * 60_000,
   pageRequestTimeout: 30_000,
-  pageStabilizationInterval: 1_000,
+  pageStabilizationInterval: 500,
   pathToScreenshotsDirectoryForReport: './screenshots',
   port1: 1337,
   port2: 1338,

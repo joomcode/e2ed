@@ -16,7 +16,7 @@ export class E2edReportExample extends Page<CustomPageParams> {
    */
   readonly pageCookies!: readonly Cookie[];
 
-  override readonly pageStabilizationInterval = 1500;
+  override readonly pageStabilizationInterval = 600;
 
   override init(): void {
     const {pageCookies = []} = this.pageParams ?? {};
