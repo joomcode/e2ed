@@ -40,7 +40,8 @@ export function renderSteps({endTimeInMs, logEvents}: Options): SafeHtml {
     const status = payload?.logEventStatus ?? LogEventStatus.Passed;
 
     const code = sanitizeHtml`<code>${payloadString}</code>`;
-    let contentTag: 'div' | 'pre' = 'pre';
+    let isErrorScreenshot = false;
+
     let content = code;
 
     if (type === LogEventType.InternalAction && typeof payload?.['pathToScreenshot'] === 'string') {
@@ -54,13 +55,15 @@ export function renderSteps({endTimeInMs, logEvents}: Options): SafeHtml {
         );
         const pathToScreenshotFromReportPage = `${pathToDirectoryWithoutSlashes}/${pathToScreenshot}`;
 
-        contentTag = 'div';
+        isErrorScreenshot = true;
         content = sanitizeHtml`<pre>${code}</pre><img src="${pathToScreenshotFromReportPage}" alt="Screenshot from test">`;
       }
     }
 
+    const contentTag = isErrorScreenshot ? 'div' : 'pre';
+
     const stepHtml = sanitizeHtml`
-<button aria-expanded="false" class="step-expanded step-expanded_status_${status}">
+<button aria-expanded="${isErrorScreenshot}" class="step-expanded step-expanded_status_${status}">
   <span class="step-expanded__name">${message}</span>
   <span class="step-expanded__time">${durationMs}ms</span>
 </button>

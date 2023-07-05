@@ -27,12 +27,12 @@ export const navigateToUrl = async (url: Url, options: Options = {}): Promise<vo
     log(`Will navigate to the url ${url}`, LogEventType.InternalAction);
   }
 
-  const {nativeAutomation} = getFullPackConfig();
+  const {disableNativeAutomation} = getFullPackConfig();
 
-  if (nativeAutomation) {
-    await testController.navigateTo(url);
-  } else {
+  if (disableNativeAutomation) {
     await clientNavigateToUrl(url);
+  } else {
+    await testController.navigateTo(url);
   }
 
   if (skipLogs !== true) {

@@ -89,6 +89,12 @@ export const waitForAllRequestsComplete = async (
         allRequestsCompletePredicateWithPromise,
       );
 
+      log(
+        'Have waited for all requests complete by first request timeout',
+        {firstRequestResolveTimeout, predicate, rejectTimeout},
+        LogEventType.InternalUtil,
+      );
+
       resolve();
     });
   }
