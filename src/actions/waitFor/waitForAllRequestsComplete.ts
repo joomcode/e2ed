@@ -61,6 +61,8 @@ export const waitForAllRequestsComplete = async (
       allRequestsCompletePredicateWithPromise,
     );
 
+    allRequestsCompletePredicateWithPromise.clearResolveTimeout?.();
+
     reject(error);
   });
 
