@@ -22,6 +22,8 @@ export {readJsonReportData} from './readJsonReportData';
 export {
   renderDatesInterval,
   renderDuration,
+  renderStep,
+  renderStepContent,
   renderSteps,
   renderTestRunDescription,
   renderTestRunDetails,

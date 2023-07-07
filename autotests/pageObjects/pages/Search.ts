@@ -35,7 +35,10 @@ export class Search extends MobilePage<CustomPageParams> {
 
   override async waitForPageLoaded(): Promise<void> {
     await waitForAllRequestsComplete(({url}) => {
-      if (url.includes('https://adservice.google.com') || url.includes('https://play.google.com')) {
+      if (
+        url.startsWith('https://adservice.google.com') ||
+        url.startsWith('https://play.google.com')
+      ) {
         return false;
       }
 

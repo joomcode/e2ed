@@ -65,7 +65,7 @@ export class Main extends Page<CustomPageParams> {
 
   override async waitForPageLoaded(): Promise<void> {
     await waitForAllRequestsComplete(({url}) => {
-      if (url.includes('https://adservice.google.com')) {
+      if (url.startsWith('https://adservice.google.com')) {
         return false;
       }
 
