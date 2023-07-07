@@ -56,7 +56,10 @@ export class E2edError extends Error {
    */
   readonly [inspect.custom] = toString;
 
-  constructor(message: string, readonly params?: LogParams) {
+  constructor(
+    message: string,
+    readonly params?: LogParams,
+  ) {
     const runLabel = e2edEnvironment[RUN_LABEL_VARIABLE_NAME];
     const utcTimeInMs = Date.now() as UtcTimeInMs;
 

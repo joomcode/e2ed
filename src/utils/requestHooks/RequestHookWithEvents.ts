@@ -29,7 +29,7 @@ addContextToResultsOfClassCreateMethods(RequestPipelineRequestHookEventFactory);
  */
 const getTestRunCallbackOptions = <Args extends readonly unknown[], Result, This>(
   targetFunction: Fn<Args, Promise<Result>, This>,
-) => ({targetFunction, throwExceptionAtCallPoint: false} as const);
+) => ({targetFunction, throwExceptionAtCallPoint: false}) as const;
 
 /**
  * Abstract RequestHook class with request/respons events.

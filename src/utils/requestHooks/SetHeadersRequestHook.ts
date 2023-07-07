@@ -26,7 +26,10 @@ import type {
  * for concrete url.
  */
 export class SetHeadersRequestHook extends RequestHookWithEvents {
-  constructor(private readonly url: Url, private readonly options: MapOptions) {
+  constructor(
+    private readonly url: Url,
+    private readonly options: MapOptions,
+  ) {
     super([url], INCLUDE_HEADERS_IN_RESPONSE_EVENT);
   }
 
