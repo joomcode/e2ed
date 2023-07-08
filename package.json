@@ -31,7 +31,7 @@
     "testcafe-without-typecheck": "3.0.1-rc.1"
   },
   "devDependencies": {
-    "@types/node": "20.4.0",
+    "@types/node": "20.4.1",
     "@typescript-eslint/eslint-plugin": "5.61.0",
     "@typescript-eslint/parser": "5.61.0",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
