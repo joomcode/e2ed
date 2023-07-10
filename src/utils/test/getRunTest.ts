@@ -44,7 +44,7 @@ export const getRunTest = (test: Test): RunTest => {
 
       previousRunId = runId;
 
-      await runTestFn(runId);
+      await runTestFn(runId, testController);
     } catch (error) {
       hasRunError = true;
       unknownRunError = error;

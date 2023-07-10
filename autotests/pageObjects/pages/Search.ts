@@ -1,5 +1,6 @@
 import {MobilePage} from 'autotests/pageObjects';
 import {Search as SearchRoute} from 'autotests/routes/pageRoutes';
+import {waitForAllRequestsComplete, waitForInterfaceStabilization} from 'e2ed/actions';
 
 import type {GetParamsType} from 'e2ed/types';
 
@@ -30,5 +31,20 @@ export class Search extends MobilePage<CustomPageParams> {
     const {searchQuery} = this;
 
     return new SearchRoute({searchQuery});
+  }
+
+  override async waitForPageLoaded(): Promise<void> {
+    await waitForAllRequestsComplete(({url}) => {
+      if (
+        url.startsWith('https://adservice.google.com/') ||
+        url.startsWith('https://play.google.com/')
+      ) {
+        return false;
+      }
+
+      return true;
+    });
+
+    await waitForInterfaceStabilization(this.pageStabilizationInterval);
   }
 }

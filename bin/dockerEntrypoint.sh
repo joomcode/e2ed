@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-set -u
+set +u
 
 if [ -d "./node_modules/e2ed" ]
 then

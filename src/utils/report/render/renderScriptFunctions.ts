@@ -11,6 +11,8 @@ import {
   readJsonReportData,
   renderDatesInterval,
   renderDuration,
+  renderStep,
+  renderStepContent,
   renderSteps,
   renderTestRunDescription,
   renderTestRunDetails,
@@ -38,6 +40,8 @@ ${domContentLoadedHandler.toString()}
 ${readJsonReportData.toString()}
 ${renderDatesInterval.toString()}
 ${renderDuration.toString()}
+${renderStep.toString()}
+${renderStepContent.toString()}
 ${renderSteps.toString()}
 ${renderTestRunDescription.toString()}
 ${renderTestRunDetails.toString()}

@@ -1,7 +1,6 @@
 import {LogEventType} from '../../constants/internal';
 
 import {E2edError} from '../error';
-import {setCustomInspectOnFunction} from '../fn';
 import {log} from '../log';
 
 import type {Request, RequestOrResponsePredicateWithPromise, Response} from '../../types/internal';
@@ -23,8 +22,6 @@ export const processEventsPredicate = async ({
   requestOrResponsePredicateWithPromise,
 }: Options): Promise<boolean> => {
   const {predicate, reject, resolve} = requestOrResponsePredicateWithPromise;
-
-  setCustomInspectOnFunction(predicate);
 
   try {
     const isRequestMatched = await predicate(requestOrResponse);

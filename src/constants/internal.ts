@@ -48,6 +48,7 @@ export {EndE2edReason, ExitCode} from './report';
 export {
   INCLUDE_BODY_AND_HEADERS_IN_RESPONSE_EVENT,
   INCLUDE_HEADERS_IN_RESPONSE_EVENT,
+  REQUEST_HOOK_CONTEXT_ID_KEY,
   REQUEST_HOOK_CONTEXT_KEY,
 } from './requestHook';
 export {FAILED_TEST_RUN_STATUSES, TestRunStatus} from './testRun';

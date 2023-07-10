@@ -1,6 +1,8 @@
 import {useContext} from '../useContext';
+import {setReadonlyProperty} from '../utils/setReadonlyProperty';
 
 import type {
+  AllRequestsCompletePredicateWithPromise,
   RequestPredicateWithPromise,
   ResponsePredicateWithPromise,
   WaitForEventsState,
@@ -27,15 +29,16 @@ export const getWaitForEventsState = (
   }
 
   const waitForEventsState: WaitForEventsState = {
+    allRequestsCompletePredicates: new Set<AllRequestsCompletePredicateWithPromise>(),
+    hashOfNotCompleteRequests: {},
     hook: {} as RequestHookToWaitForEvents,
-    hookAdded: false,
     requestPredicates: new Set<RequestPredicateWithPromise>(),
     responsePredicates: new Set<ResponsePredicateWithPromise>(),
   };
 
   const hook = new RequestHookToWaitForEventsClass(waitForEventsState);
 
-  (waitForEventsState as {hook: RequestHookToWaitForEvents}).hook = hook;
+  setReadonlyProperty(waitForEventsState, 'hook', hook);
 
   setRawWaitForEventsState(waitForEventsState);
 

@@ -8,7 +8,7 @@ import {getMainRequestOptions, getRequestFromRequestOptions} from '../requestHoo
 
 import type {Inner} from 'testcafe-without-typecheck';
 
-import type {ApiMockState, Url} from '../../types/internal';
+import type {ApiMockState, RequestOptions, Url} from '../../types/internal';
 
 /**
  * Get setResponse function for API mocks by ApiMockState.
@@ -18,7 +18,7 @@ export const getSetResponse =
   ({
     functionAndRouteByUrl,
   }: ApiMockState): ((
-    requestOptions: Inner.RequestOptions,
+    requestOptions: RequestOptions,
     responseOptions: Inner.ResponseMock,
   ) => Promise<void>) =>
   async (requestOptions, responseOptions) => {

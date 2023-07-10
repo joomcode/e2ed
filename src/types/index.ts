@@ -1,5 +1,5 @@
 export type {Brand, IsBrand} from './brand';
-export type {Expect, IsEqual} from './checks';
+export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';
 export type {UtcTimeInMs} from './date';
 export type {DeepMutable, DeepPartial, DeepReadonly, DeepRequired} from './deep';

@@ -2,6 +2,7 @@ import type {RequestHookToWaitForEvents} from '../utils/requestHooks';
 
 import type {MergeFunctions} from './fn';
 import type {Request, Response} from './http';
+import type {RequestHookContextId} from './requestHooks';
 
 /**
  * Request or response predicate for both event handlers.
@@ -16,6 +17,18 @@ type RequestOrResponsePredicate = MergeFunctions<RequestPredicate | ResponsePred
 type RequestOrResponseResolve = MergeFunctions<
   (RequestPredicateWithPromise | ResponsePredicateWithPromise)['resolve']
 >;
+
+/**
+ * "All requests complete" predicate with resolve and reject functions for his promise.
+ * @internal
+ */
+export type AllRequestsCompletePredicateWithPromise = Readonly<{
+  clearResolveTimeout: (() => void) | undefined;
+  predicate: RequestPredicate;
+  reject: (error: unknown) => void;
+  requestHookContextIds: Set<RequestHookContextId>;
+  resolve: () => void;
+}>;
 
 /**
  * Request predicate for waitForRequest function.
@@ -66,8 +79,9 @@ export type ResponsePredicateWithPromise = Readonly<{
  * @internal
  */
 export type WaitForEventsState = Readonly<{
+  allRequestsCompletePredicates: Set<AllRequestsCompletePredicateWithPromise>;
   hook: RequestHookToWaitForEvents;
-  hookAdded: boolean;
+  hashOfNotCompleteRequests: Record<RequestHookContextId, Request>;
   requestPredicates: Set<RequestPredicateWithPromise>;
   responsePredicates: Set<ResponsePredicateWithPromise>;
 }>;

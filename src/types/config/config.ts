@@ -18,7 +18,7 @@ type UserlandTestCafeConfig = Readonly<{
   browserInitTimeout: number;
   browser: string;
   concurrency: number;
-  nativeAutomation: boolean;
+  disableNativeAutomation: boolean;
   pageRequestTimeout: number;
   port1: number;
   port2: number;

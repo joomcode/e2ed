@@ -3,9 +3,7 @@ import {URL} from 'node:url';
 
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 
-import type {Inner} from 'testcafe-without-typecheck';
-
-import type {Method, Request, Url} from '../../types/internal';
+import type {Method, Request, RequestOptions, Url} from '../../types/internal';
 
 /**
  * Get Request object from the original TestCafe request options object.
@@ -15,7 +13,7 @@ import type {Method, Request, Url} from '../../types/internal';
  * @internal
  */
 export const getRequestFromRequestOptions = (
-  requestOptions: Inner.RequestOptions,
+  requestOptions: RequestOptions,
   isRequestBodyInJsonFormat?: boolean,
 ): Request => {
   const url = String(requestOptions.url) as Url;

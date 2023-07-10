@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 
 export type {Brand, IsBrand} from './brand';
-export type {Expect, IsEqual} from './checks';
+export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';
 /** @internal */
 export type {
@@ -84,8 +84,10 @@ export type {
 } from './report';
 export type {
   RequestHookConfigureResponseEvent,
+  RequestHookContextId,
   RequestHookRequestEvent,
   RequestHookResponseEvent,
+  RequestOptions,
 } from './requestHooks';
 /** @internal */
 export type {RequestHookClassWithContext, RequestHookEncoding} from './requestHooks';
@@ -145,6 +147,7 @@ export type {
 } from './utils';
 /** * @internal */
 export type {
+  AllRequestsCompletePredicateWithPromise,
   RequestOrResponsePredicateWithPromise,
   RequestPredicateWithPromise,
   ResponsePredicateWithPromise,

@@ -2,6 +2,7 @@ import {Input} from 'autotests/pageObjects/components';
 import {Main as MainRoute} from 'autotests/routes/pageRoutes';
 import {createLocator, type Locator} from 'create-locator';
 import {Page} from 'e2ed';
+import {waitForAllRequestsComplete, waitForInterfaceStabilization} from 'e2ed/actions';
 import {locatorIdSelector} from 'e2ed/selectors';
 
 import type {Language} from 'autotests/types';
@@ -60,5 +61,17 @@ export class Main extends Page<CustomPageParams> {
    */
   typeIntoSearchInput(text: string): Promise<void> {
     return this.searchInput.type(text);
+  }
+
+  override async waitForPageLoaded(): Promise<void> {
+    await waitForAllRequestsComplete(({url}) => {
+      if (url.startsWith('https://adservice.google.com/')) {
+        return false;
+      }
+
+      return true;
+    });
+
+    await waitForInterfaceStabilization(this.pageStabilizationInterval);
   }
 }

@@ -73,7 +73,9 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
           Number.isInteger(lastLogEventTimeInMs) &&
           Date.now() - lastLogEventTimeInMs > interruptTimeout
         ) {
-          killByTimeout(`last log event time (${lastLogEventTimeInMs}) is outdated`);
+          const lastLogEventTime = new Date(lastLogEventTimeInMs).toISOString();
+
+          killByTimeout(`last log event time (${lastLogEventTime}) is outdated`);
         }
       });
 

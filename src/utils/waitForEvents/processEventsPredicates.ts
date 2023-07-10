@@ -1,5 +1,4 @@
 import {processEventsPredicate} from './processEventsPredicate';
-import {updateWaitForEventsState} from './updateWaitForEventsState';
 
 import type {
   Request,
@@ -24,7 +23,7 @@ type ProcessEventsPredicates = ((options: OptionsForRequest) => Promise<void>) &
   ((options: OptionsForResponse) => Promise<void>);
 
 /**
- * Process waitForRequest/waitForResponse predicates for concrete request/response.
+ * Processes waitForRequest/waitForResponse predicates for new concrete request/response.
  * @internal
  */
 export const processEventsPredicates: ProcessEventsPredicates = async ({
@@ -50,6 +49,4 @@ export const processEventsPredicates: ProcessEventsPredicates = async ({
   });
 
   await Promise.all(promises);
-
-  await updateWaitForEventsState(waitForEventsState);
 };

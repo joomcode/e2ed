@@ -1,21 +1,21 @@
 import {testController} from './testController';
 
-type Ctx<T> = {contexts: Record<number, T>};
+type Context<Type> = {contexts: Record<number, Type>};
 
-type Get<T> = () => T | undefined;
-type GetWithDefaultValue<T> = () => T;
-type Set<T> = (value: T) => void;
+type Get<Type> = () => Type | undefined;
+type GetWithDefaultValue<Type> = () => Type;
+type Set<Type> = (value: Type) => void;
 type Clear = () => void;
 
-type UseContext = (<T>() => [get: Get<T>, set: Set<T>, clear: Clear]) &
-  (<T>(defaultValue: T) => [get: GetWithDefaultValue<T>, set: Set<T>, clear: Clear]);
+type UseContext = (<Type>() => [get: Get<Type>, set: Set<Type>, clear: Clear]) &
+  (<Type>(defaultValue: Type) => [get: GetWithDefaultValue<Type>, set: Set<Type>, clear: Clear]);
 
 let callCount = 0;
 
 /**
  * Creates functions for get, set and clear some typed value in test context.
  */
-export const useContext = (<T>(defaultValue?: T) => {
+export const useContext = (<Type>(defaultValue?: Type) => {
   callCount += 1;
 
   const contextIndex = callCount;
@@ -23,12 +23,12 @@ export const useContext = (<T>(defaultValue?: T) => {
   /**
    * Set value to test context.
    */
-  const set = (value: T): void => {
-    if ((testController.ctx as Partial<Ctx<T>>).contexts === undefined) {
-      (testController.ctx as Partial<Ctx<T>>).contexts = {};
+  const set = (value: Type): void => {
+    if ((testController.ctx as Partial<Context<Type>>).contexts === undefined) {
+      (testController.ctx as Partial<Context<Type>>).contexts = {};
     }
 
-    const {contexts} = testController.ctx as Ctx<T>;
+    const {contexts} = testController.ctx as Context<Type>;
 
     contexts[contextIndex] = value;
   };
@@ -36,14 +36,14 @@ export const useContext = (<T>(defaultValue?: T) => {
   /**
    * Clear value in test context (set value to undefined).
    */
-  const clear = (): void => set(undefined as unknown as T);
+  const clear = (): void => set(undefined as unknown as Type);
 
   if (defaultValue === undefined) {
     /**
      * Get value from test context.
      */
-    const get = (): T | undefined => {
-      const {contexts}: Partial<Ctx<T>> = testController.ctx;
+    const get = (): Type | undefined => {
+      const {contexts}: Partial<Context<Type>> = testController.ctx;
 
       return contexts?.[contextIndex];
     };
@@ -54,8 +54,8 @@ export const useContext = (<T>(defaultValue?: T) => {
   /**
    * Get value from test context (or default value, if it is undefined).
    */
-  const getWithDefaultValue = (): T => {
-    const {contexts}: Partial<Ctx<T>> = testController.ctx;
+  const getWithDefaultValue = (): Type => {
+    const {contexts}: Partial<Context<Type>> = testController.ctx;
 
     return contexts?.[contextIndex] ?? defaultValue;
   };

@@ -7,15 +7,13 @@ import {getFullPackConfig} from '../../utils/getFullPackConfig';
 import {log} from '../../utils/log';
 import {getPromiseWithResolveAndReject} from '../../utils/promise';
 import {RequestHookToWaitForEvents} from '../../utils/requestHooks';
-import {wrapInTestRunTracker} from '../../utils/testRun';
-import {updateWaitForEventsState} from '../../utils/waitForEvents';
 
 import type {Request, RequestPredicate, RequestPredicateWithPromise} from '../../types/internal';
 
 /**
- * Wait for some request (from browser) by request predicate.
+ * Wait for some request (from browser) by the request predicate.
  */
-export const waitForRequest = async <SomeRequest extends Request>(
+export const waitForRequest = <SomeRequest extends Request>(
   predicate: RequestPredicate<SomeRequest>,
   {timeout}: {timeout?: number} = {},
 ): Promise<SomeRequest> => {
@@ -36,9 +34,7 @@ export const waitForRequest = async <SomeRequest extends Request>(
 
   void testRunPromise.then(clearRejectTimeout);
 
-  const wrappedSetRejectTimeoutFunction = wrapInTestRunTracker(setRejectTimeoutFunction);
-
-  wrappedSetRejectTimeoutFunction(() => {
+  setRejectTimeoutFunction(() => {
     const error = new E2edError(
       `waitForRequest promise rejected after ${rejectTimeout}ms timeout`,
       {predicate},
@@ -47,13 +43,9 @@ export const waitForRequest = async <SomeRequest extends Request>(
     waitForEventsState.requestPredicates.delete(requestPredicateWithPromise);
 
     reject(error);
-
-    return updateWaitForEventsState(waitForEventsState);
   });
 
   waitForEventsState.requestPredicates.add(requestPredicateWithPromise);
-
-  await updateWaitForEventsState(waitForEventsState);
 
   log(
     `Set wait for request with timeout ${rejectTimeout}ms`,

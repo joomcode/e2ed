@@ -3,6 +3,10 @@ export {renderDatesInterval} from './renderDatesInterval';
 /** @internal */
 export {renderDuration} from './renderDuration';
 /** @internal */
+export {renderStep} from './renderStep';
+/** @internal */
+export {renderStepContent} from './renderStepContent';
+/** @internal */
 export {renderSteps} from './renderSteps';
 /** @internal */
 export {renderTestRunDescription} from './renderTestRunDescription';
