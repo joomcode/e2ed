@@ -1,5 +1,31 @@
 # Changelog
 
+## [v0.14.14](https://github.com/joomcode/e2ed/tree/v0.14.14) (2023-07-10)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.13...v0.14.14)
+
+- [Merge pull request #27 from joomcode/feature/add-wait-for-all-requests-complete](https://github.com/joomcode/e2ed/commit/9cb516ce61bf15404c933dd9ce055ccacb9edc2d) ([uid11](https://github.com/uid11))
+
+  feat: add waitForAllRequestsComplete function
+
+- [chore: update @types/node to 20.4.1](https://github.com/joomcode/e2ed/commit/e16715478299e90429695d03d2aa07e04a01f75d) ([uid11](https://github.com/uid11))
+- [fix: error with unnecessary clear resolve timeout in waitForAllRequestsComplete](https://github.com/joomcode/e2ed/commit/94345fe5ed10b4d2fbaec7d06039efbac91c80fa) ([uid11](https://github.com/uid11))
+- [chore: update prettier to 3.0](https://github.com/joomcode/e2ed/commit/6e7f090b641238d61a2cbaabe5111a5fdba0f25e) ([uid11](https://github.com/uid11))
+
+  fix: Incomplete URL substring sanitization issues from CodeQL
+
+- [feat: do not render empty content of test run step](https://github.com/joomcode/e2ed/commit/070f21978ab02963051f0b80bc02a09061cef9ee) ([uid11](https://github.com/uid11))
+- [chore: update TestCafe to 3.0.1 and create-locator to 0.0.15](https://github.com/joomcode/e2ed/commit/fe613a26f3447ec1c10abcbc372151f1f2cdd9b3) ([uid11](https://github.com/uid11))
+
+  fix: steps with screenshot of error is opened from the beginning
+
+- [chore: update devDependencies (eslint, typescript, etc)](https://github.com/joomcode/e2ed/commit/f467454bd41c5d06feca088d20d9b6b4fe77b0fc) ([uid11](https://github.com/uid11))
+- [feat: add waitForAllRequestsComplete function](https://github.com/joomcode/e2ed/commit/93356e276399b132267d5d65901915af9c4f6359) ([uid11](https://github.com/uid11))
+
+  feat: add waitForPageLoaded method to base Page class
+
+  feat: add util setReadonlyProperty
+
 ## [v0.14.13](https://github.com/joomcode/e2ed/tree/v0.14.13) (2023-06-09)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.12...v0.14.13)
