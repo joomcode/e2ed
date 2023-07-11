@@ -28,6 +28,7 @@ export function renderStep({logEvent, nextLogEventTime}: Options): SafeHtml {
 
   let pathToScreenshotFromReportPage: string | undefined;
 
+  // eslint-disable-next-line dot-notation
   if (type === LogEventType.InternalAction && typeof payload?.['pathToScreenshot'] === 'string') {
     const {pathToScreenshot} = payload;
     const {pathToScreenshotsDirectoryForReport} = reportClientState;

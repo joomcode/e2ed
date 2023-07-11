@@ -23,7 +23,7 @@ export const getRequestFromRequestOptions = (
 
   const query = parse(search ? search.slice(1) : '');
 
-  let requestBody: unknown | undefined;
+  let requestBody: unknown;
 
   if (isRequestBodyInJsonFormat === true) {
     requestBody = parseMaybeEmptyValueAsJson(requestOptions.body);

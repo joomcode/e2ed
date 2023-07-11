@@ -58,7 +58,6 @@ export const addContextToResultsOfClassCreateMethods = (
       const context = this._ctx;
 
       if (isResultAnObject && !(REQUEST_HOOK_CONTEXT_KEY in result)) {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (context && !(REQUEST_HOOK_CONTEXT_ID_KEY in context)) {
           requestHookContextCount += 1;
 

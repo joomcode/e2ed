@@ -18,7 +18,6 @@ export function setReadJsonReportDataObservers(): void {
 
   readJsonReportDataObservers.push(scriptsObserver);
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (document.body) {
     scriptsObserver.observe(document.body, observeChildList);
   } else {
