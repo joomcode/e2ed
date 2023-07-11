@@ -15,7 +15,7 @@ import type {AssertionFunctionKeys, AssertionFunctions} from './types';
 class Expect {
   constructor(
     readonly actualValue: unknown,
-    readonly description: string,
+    readonly description: string, // eslint-disable-next-line no-empty-function
   ) {}
 
   [key: string]: unknown;

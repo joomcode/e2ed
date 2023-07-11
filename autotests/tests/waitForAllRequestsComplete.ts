@@ -21,10 +21,10 @@ it(
       () => {
         throw new Error('waitForAllRequestsComplete did not throw an error after timeout');
       },
-      () => undefined,
+      (error: unknown) => {
+        log('Catch error from waitForAllRequestsComplete for {timeout: 100}', {error});
+      },
     );
-
-    log('Catch error from waitForAllRequestsComplete for {timeout: 100}');
 
     await waitForAllRequestsComplete(() => true, {timeout: 1000});
 
@@ -45,10 +45,10 @@ it(
           'waitForAllRequestsComplete did not throw an error after timeout with real request',
         );
       },
-      () => undefined,
+      (error: unknown) => {
+        log('Catch error from waitForAllRequestsComplete for {timeout: 1000}', {error});
+      },
     );
-
-    log('Catch error from waitForAllRequestsComplete for {timeout: 1000}');
 
     waitedInMs = Date.now() - startRequestInMs;
 

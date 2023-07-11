@@ -19,7 +19,6 @@ export function addOnClickOnClass(className: string, onclick: (event: HTMLElemen
 
       while (currentElement) {
         for (const currentClass of Object.keys(clickListeners as object)) {
-          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
           if (currentElement.classList?.contains(currentClass)) {
             const listener = clickListeners?.[currentClass];
 
