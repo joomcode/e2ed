@@ -8,7 +8,10 @@ import {log} from '../../utils/log';
 import {getPromiseWithResolveAndReject} from '../../utils/promise';
 import {RequestHookToWaitForEvents} from '../../utils/requestHooks';
 import {setReadonlyProperty} from '../../utils/setReadonlyProperty';
-import {getInitialIdsForAllRequestsCompletePredicate} from '../../utils/waitForEvents';
+import {
+  getInitialIdsForAllRequestsCompletePredicate,
+  getUrlsByRequestHookContextIds,
+} from '../../utils/waitForEvents';
 
 import type {
   AllRequestsCompletePredicateWithPromise,
@@ -25,15 +28,15 @@ export const waitForAllRequestsComplete = async (
 ): Promise<void> => {
   setCustomInspectOnFunction(predicate);
 
-  const waitForEventsState = getWaitForEventsState(RequestHookToWaitForEvents);
-
+  const {allRequestsCompletePredicates, hashOfNotCompleteRequests} = getWaitForEventsState(
+    RequestHookToWaitForEvents,
+  );
   const requestHookContextIds = await getInitialIdsForAllRequestsCompletePredicate(
-    waitForEventsState.hashOfNotCompleteRequests,
+    hashOfNotCompleteRequests,
     predicate,
   );
 
   const {waitForAllRequestsComplete: defaultTimeouts} = getFullPackConfig();
-
   const firstRequestResolveTimeout = firstRequestTimeout ?? defaultTimeouts.firstRequestTimeout;
   const rejectTimeout = timeout ?? defaultTimeouts.timeout;
 
@@ -52,21 +55,23 @@ export const waitForAllRequestsComplete = async (
   void testRunPromise.then(clearRejectTimeout);
 
   setRejectTimeoutFunction(() => {
+    const urlsOfNotCompleteRequests = getUrlsByRequestHookContextIds(
+      requestHookContextIds,
+      hashOfNotCompleteRequests,
+    );
     const error = new E2edError(
       `waitForAllRequestsComplete promise rejected after ${rejectTimeout}ms timeout`,
-      {predicate},
+      {predicate, urlsOfNotCompleteRequests},
     );
 
-    waitForEventsState.allRequestsCompletePredicates.delete(
-      allRequestsCompletePredicateWithPromise,
-    );
+    allRequestsCompletePredicates.delete(allRequestsCompletePredicateWithPromise);
 
     allRequestsCompletePredicateWithPromise.clearResolveTimeout?.();
 
     reject(error);
   });
 
-  waitForEventsState.allRequestsCompletePredicates.add(allRequestsCompletePredicateWithPromise);
+  allRequestsCompletePredicates.add(allRequestsCompletePredicateWithPromise);
 
   log(
     `Set wait for all requests complete with timeout ${rejectTimeout}ms and first request timeout ${firstRequestResolveTimeout}ms`,
@@ -87,9 +92,7 @@ export const waitForAllRequestsComplete = async (
     void testRunPromise.then(clearResolveTimeout);
 
     firstRequestResolvePromise.catch(() => {
-      waitForEventsState.allRequestsCompletePredicates.delete(
-        allRequestsCompletePredicateWithPromise,
-      );
+      allRequestsCompletePredicates.delete(allRequestsCompletePredicateWithPromise);
 
       log(
         'Have waited for all requests complete by first request timeout',
