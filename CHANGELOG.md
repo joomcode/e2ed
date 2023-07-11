@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.14.15](https://github.com/joomcode/e2ed/tree/v0.14.15) (2023-07-11)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.14...v0.14.15)
+
+- [Merge pull request #28 from joomcode/fix/log-urls-of-uncomplete-requests](https://github.com/joomcode/e2ed/commit/d6137f1c2b4d2d95335ff2a54b17b72861e88af0) ([uid11](https://github.com/uid11))
+
+  fix(waitForAllRequestsComplete): add urls of not complete requests to logs
+
+- [chore: update @typescript-eslint/\* to 6.0.0](https://github.com/joomcode/e2ed/commit/cbb88e9f67a82d4c809698da2c776dce65f08949) ([uid11](https://github.com/uid11))
+- [fix: add urls of not complete requests to logs (for waitForAllRequestsComplete)](https://github.com/joomcode/e2ed/commit/00867dac19a03dae48963b7b301f929fe36c4dc3) ([uid11](https://github.com/uid11))
+
 ## [v0.14.14](https://github.com/joomcode/e2ed/tree/v0.14.14) (2023-07-10)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.13...v0.14.14)
