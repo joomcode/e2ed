@@ -8,7 +8,12 @@ import {log} from '../../utils/log';
 import {getPromiseWithResolveAndReject} from '../../utils/promise';
 import {RequestHookToWaitForEvents} from '../../utils/requestHooks';
 
-import type {Request, RequestPredicate, RequestPredicateWithPromise} from '../../types/internal';
+import type {
+  Request,
+  RequestPredicate,
+  RequestPredicateWithPromise,
+  UtcTimeInMs,
+} from '../../types/internal';
 
 /**
  * Wait for some request (from browser) by the request predicate.
@@ -17,6 +22,8 @@ export const waitForRequest = <SomeRequest extends Request>(
   predicate: RequestPredicate<SomeRequest>,
   {timeout}: {timeout?: number} = {},
 ): Promise<SomeRequest> => {
+  const startTimeInMs = Date.now() as UtcTimeInMs;
+
   setCustomInspectOnFunction(predicate);
 
   const waitForEventsState = getWaitForEventsState(RequestHookToWaitForEvents);
@@ -29,6 +36,7 @@ export const waitForRequest = <SomeRequest extends Request>(
     predicate: predicate as RequestPredicate,
     reject,
     resolve,
+    startTimeInMs,
   };
   const testRunPromise = getTestRunPromise();
 

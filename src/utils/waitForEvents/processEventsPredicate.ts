@@ -21,7 +21,7 @@ export const processEventsPredicate = async ({
   requestOrResponse,
   requestOrResponsePredicateWithPromise,
 }: Options): Promise<boolean> => {
-  const {predicate, reject, resolve} = requestOrResponsePredicateWithPromise;
+  const {predicate, reject, resolve, startTimeInMs} = requestOrResponsePredicateWithPromise;
 
   try {
     const isRequestMatched = await predicate(requestOrResponse);
@@ -30,8 +30,10 @@ export const processEventsPredicate = async ({
       return false;
     }
 
+    const waitInMs = Date.now() - startTimeInMs;
+
     log(
-      `Have waited for the ${eventType}`,
+      `Have waited for the ${eventType} for ${waitInMs}ms`,
       {predicate, [eventType.toLowerCase()]: requestOrResponse},
       LogEventType.InternalUtil,
     );
