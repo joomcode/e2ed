@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.14.16](https://github.com/joomcode/e2ed/tree/v0.14.16) (2023-07-12)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.15...v0.14.16)
+
+- [Merge pull request #29 from joomcode/feat/add-wait-time-to-wait-for](https://github.com/joomcode/e2ed/commit/19c616c7279913bab07d134417b7fdb0dc4c5cd9) ([uid11](https://github.com/uid11))
+
+  feat: add wait time to all wait-for actions
+
+- [feat: add wait time to all wait-for actions](https://github.com/joomcode/e2ed/commit/7876d68b7a175f9c8056c63e124b944c0531df9c) ([uid11](https://github.com/uid11))
+
 ## [v0.14.15](https://github.com/joomcode/e2ed/tree/v0.14.15) (2023-07-11)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.14...v0.14.15)
