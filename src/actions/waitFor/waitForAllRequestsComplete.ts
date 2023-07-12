@@ -16,6 +16,7 @@ import {
 import type {
   AllRequestsCompletePredicateWithPromise,
   RequestPredicate,
+  UtcTimeInMs,
   Void,
 } from '../../types/internal';
 
@@ -26,6 +27,8 @@ export const waitForAllRequestsComplete = async (
   predicate: RequestPredicate,
   {firstRequestTimeout, timeout}: {firstRequestTimeout?: number; timeout?: number} = {},
 ): Promise<void> => {
+  const startTimeInMs = Date.now() as UtcTimeInMs;
+
   setCustomInspectOnFunction(predicate);
 
   const {allRequestsCompletePredicates, hashOfNotCompleteRequests} = getWaitForEventsState(
@@ -49,6 +52,7 @@ export const waitForAllRequestsComplete = async (
     reject,
     requestHookContextIds,
     resolve,
+    startTimeInMs,
   };
   const testRunPromise = getTestRunPromise();
 
@@ -94,8 +98,10 @@ export const waitForAllRequestsComplete = async (
     firstRequestResolvePromise.catch(() => {
       allRequestsCompletePredicates.delete(allRequestsCompletePredicateWithPromise);
 
+      const waitInMs = Date.now() - startTimeInMs;
+
       log(
-        'Have waited for all requests complete by first request timeout',
+        `Have waited for all requests complete by first request timeout for ${waitInMs}ms`,
         {firstRequestResolveTimeout, predicate, rejectTimeout},
         LogEventType.InternalUtil,
       );

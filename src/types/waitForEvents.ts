@@ -1,5 +1,6 @@
 import type {RequestHookToWaitForEvents} from '../utils/requestHooks';
 
+import type {UtcTimeInMs} from './date';
 import type {MergeFunctions} from './fn';
 import type {Request, Response} from './http';
 import type {RequestHookContextId} from './requestHooks';
@@ -28,6 +29,7 @@ export type AllRequestsCompletePredicateWithPromise = Readonly<{
   reject: (error: unknown) => void;
   requestHookContextIds: Set<RequestHookContextId>;
   resolve: () => void;
+  startTimeInMs: UtcTimeInMs;
 }>;
 
 /**
@@ -52,6 +54,7 @@ export type RequestOrResponsePredicateWithPromise = Readonly<{
   predicate: RequestOrResponsePredicate;
   reject: RequestPredicateWithPromise['reject'];
   resolve: RequestOrResponseResolve;
+  startTimeInMs: UtcTimeInMs;
 }>;
 
 /**
@@ -62,6 +65,7 @@ export type RequestPredicateWithPromise = Readonly<{
   predicate: RequestPredicate;
   reject: (error: unknown) => void;
   resolve: (request: Request) => void;
+  startTimeInMs: UtcTimeInMs;
 }>;
 
 /**
@@ -72,6 +76,7 @@ export type ResponsePredicateWithPromise = Readonly<{
   predicate: ResponsePredicate;
   reject: (error: unknown) => void;
   resolve: (response: Response) => void;
+  startTimeInMs: UtcTimeInMs;
 }>;
 
 /**

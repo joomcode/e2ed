@@ -21,7 +21,7 @@ export const completeRequest = (
   delete hashOfNotCompleteRequests[requestHookContextId];
 
   for (const allRequestsCompletePredicateWithPromise of allRequestsCompletePredicates) {
-    const {requestHookContextIds, resolve} = allRequestsCompletePredicateWithPromise;
+    const {requestHookContextIds, resolve, startTimeInMs} = allRequestsCompletePredicateWithPromise;
     const requestWasWaited = requestHookContextIds.has(requestHookContextId);
 
     requestHookContextIds.delete(requestHookContextId);
@@ -34,7 +34,13 @@ export const completeRequest = (
 
     const {predicate} = allRequestsCompletePredicateWithPromise;
 
-    log('Have waited for all requests complete', {predicate}, LogEventType.InternalUtil);
+    const waitInMs = Date.now() - startTimeInMs;
+
+    log(
+      `Have waited for all requests complete for ${waitInMs}ms`,
+      {predicate},
+      LogEventType.InternalUtil,
+    );
 
     resolve();
   }
