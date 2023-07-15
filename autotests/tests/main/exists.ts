@@ -11,7 +11,7 @@ import {
   waitForRequest,
   waitForResponse,
 } from 'e2ed/actions';
-import {getDocumentUrl} from 'e2ed/utils';
+import {E2edError, getDocumentUrl} from 'e2ed/utils';
 
 const language = 'en';
 const searchQuery = 'foo';
@@ -23,7 +23,7 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}
     .eql(2)
     .then(
       () => {
-        throw new Error('the "expect" function did not throw an error');
+        throw new E2edError('the "expect" function did not throw an error');
       },
       () => undefined,
     );

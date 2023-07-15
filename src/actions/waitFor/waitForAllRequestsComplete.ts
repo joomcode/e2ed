@@ -20,12 +20,17 @@ import type {
   Void,
 } from '../../types/internal';
 
+type Options = Readonly<{maxIntervalBetweenRequestsInMs?: number; timeout?: number}>;
+
 /**
  * Wait for the complete of all requests that satisfy the request predicate.
+ * If the function runs longer than the specified timeout, it is rejected.
+ * If there are no new requests for more than `maxIntervalBetweenRequestsInMs`ms,
+ * the function resolves successfully.
  */
 export const waitForAllRequestsComplete = async (
   predicate: RequestPredicate,
-  {firstRequestTimeout, timeout}: {firstRequestTimeout?: number; timeout?: number} = {},
+  {maxIntervalBetweenRequestsInMs, timeout}: Options = {},
 ): Promise<void> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
@@ -34,25 +39,31 @@ export const waitForAllRequestsComplete = async (
   const {allRequestsCompletePredicates, hashOfNotCompleteRequests} = getWaitForEventsState(
     RequestHookToWaitForEvents,
   );
+  const {waitForAllRequestsComplete: defaultTimeouts} = getFullPackConfig();
+  const resolveTimeout =
+    maxIntervalBetweenRequestsInMs ?? defaultTimeouts.maxIntervalBetweenRequestsInMs;
+  const rejectTimeout = timeout ?? defaultTimeouts.timeout;
+
+  log(
+    `Set wait for all requests complete with timeout ${rejectTimeout}ms`,
+    {maxIntervalBetweenRequestsInMs: resolveTimeout, predicate},
+    LogEventType.InternalCore,
+  );
+
   const requestHookContextIds = await getInitialIdsForAllRequestsCompletePredicate(
     hashOfNotCompleteRequests,
     predicate,
   );
 
-  const {waitForAllRequestsComplete: defaultTimeouts} = getFullPackConfig();
-  const firstRequestResolveTimeout = firstRequestTimeout ?? defaultTimeouts.firstRequestTimeout;
-  const rejectTimeout = timeout ?? defaultTimeouts.timeout;
-
   const {clearRejectTimeout, promise, reject, resolve, setRejectTimeoutFunction} =
     getPromiseWithResolveAndReject<Void>(rejectTimeout);
 
   const allRequestsCompletePredicateWithPromise: AllRequestsCompletePredicateWithPromise = {
-    clearResolveTimeout: undefined,
+    clearResolveTimeout: () => {},
     predicate,
     reject,
     requestHookContextIds,
-    resolve,
-    startTimeInMs,
+    setResolveTimeout: () => {},
   };
   const testRunPromise = getTestRunPromise();
 
@@ -70,22 +81,16 @@ export const waitForAllRequestsComplete = async (
 
     allRequestsCompletePredicates.delete(allRequestsCompletePredicateWithPromise);
 
-    allRequestsCompletePredicateWithPromise.clearResolveTimeout?.();
+    allRequestsCompletePredicateWithPromise.clearResolveTimeout();
 
     reject(error);
   });
 
-  allRequestsCompletePredicates.add(allRequestsCompletePredicateWithPromise);
+  const setResolveTimeout = (): void => {
+    allRequestsCompletePredicateWithPromise.clearResolveTimeout();
 
-  log(
-    `Set wait for all requests complete with timeout ${rejectTimeout}ms and first request timeout ${firstRequestResolveTimeout}ms`,
-    {predicate},
-    LogEventType.InternalCore,
-  );
-
-  if (requestHookContextIds.size === 0) {
-    const {clearRejectTimeout: clearResolveTimeout, promise: firstRequestResolvePromise} =
-      getPromiseWithResolveAndReject<Void>(firstRequestResolveTimeout);
+    const {clearRejectTimeout: clearResolveTimeout, promise: resolvePromise} =
+      getPromiseWithResolveAndReject<Void>(resolveTimeout);
 
     setReadonlyProperty(
       allRequestsCompletePredicateWithPromise,
@@ -95,19 +100,31 @@ export const waitForAllRequestsComplete = async (
 
     void testRunPromise.then(clearResolveTimeout);
 
-    firstRequestResolvePromise.catch(() => {
+    resolvePromise.catch(() => {
       allRequestsCompletePredicates.delete(allRequestsCompletePredicateWithPromise);
 
       const waitInMs = Date.now() - startTimeInMs;
 
       log(
-        `Have waited for all requests complete by first request timeout for ${waitInMs}ms`,
-        {firstRequestResolveTimeout, predicate, rejectTimeout},
+        `Have waited for all requests complete for ${waitInMs}ms`,
+        {maxIntervalBetweenRequestsInMs: resolveTimeout, predicate, timeout: rejectTimeout},
         LogEventType.InternalUtil,
       );
 
       resolve();
     });
+  };
+
+  setReadonlyProperty(
+    allRequestsCompletePredicateWithPromise,
+    'setResolveTimeout',
+    setResolveTimeout,
+  );
+
+  allRequestsCompletePredicates.add(allRequestsCompletePredicateWithPromise);
+
+  if (requestHookContextIds.size === 0) {
+    allRequestsCompletePredicateWithPromise.setResolveTimeout();
   }
 
   return promise;

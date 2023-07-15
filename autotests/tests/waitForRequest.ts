@@ -1,6 +1,7 @@
 import {it} from 'autotests';
 import {createClientFunction, expect} from 'e2ed';
 import {waitForRequest} from 'e2ed/actions';
+import {E2edError} from 'e2ed/utils';
 
 import type {Request} from 'e2ed/types';
 
@@ -33,7 +34,7 @@ it(
 
     await waitForRequest(() => false, {timeout: 100}).then(
       () => {
-        throw new Error('waitForRequest did not throw an error after timeout');
+        throw new E2edError('waitForRequest did not throw an error after timeout');
       },
       () => undefined,
     );

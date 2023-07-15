@@ -17,6 +17,7 @@ import type {
 
 /**
  * Wait for some response (from browser) by the response predicate.
+ * If the function runs longer than the specified timeout, it is rejected.
  */
 export const waitForResponse = <SomeResponse extends Response>(
   predicate: ResponsePredicate<SomeResponse>,
