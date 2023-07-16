@@ -1,5 +1,20 @@
 # Changelog
 
+## [v0.14.17](https://github.com/joomcode/e2ed/tree/v0.14.17) (2023-07-16)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.16...v0.14.17)
+
+- [Merge pull request #30 from joomcode/feature/add-max-step-between-requests](https://github.com/joomcode/e2ed/commit/ca97f187b67a931660bd82c5e24600744aead883) ([uid11](https://github.com/uid11))
+
+  feat: add maxIntervalBetweenRequestsInMs option to waitForAllRequestsComplete
+
+- [chore: update devDependencies (@types/node and eslint)](https://github.com/joomcode/e2ed/commit/085e8e3f36736b94288096bd1d5b4171ae9c32ef) ([uid11](https://github.com/uid11))
+- [feat: add maxIntervalBetweenRequestsInMs option to waitForAllRequestsComplete](https://github.com/joomcode/e2ed/commit/c2c5d989141ac98c8c910e4fbb019e6d031dda85) ([uid11](https://github.com/uid11))
+
+  tests: add more tests for waitForAllRequestsComplete function
+
+  refactor: use E2edError instead of Error in internal runtime tests
+
 ## [v0.14.16](https://github.com/joomcode/e2ed/tree/v0.14.16) (2023-07-12)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.15...v0.14.16)
