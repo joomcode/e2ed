@@ -26,11 +26,11 @@ export const processAllRequestsCompletePredicate = async (
       return false;
     }
 
-    clearResolveTimeout?.();
+    clearResolveTimeout();
 
     requestHookContextIds.add(requestHookContextId);
   } catch (cause) {
-    clearResolveTimeout?.();
+    clearResolveTimeout();
 
     const error = new E2edError(
       'waitForAllRequestsComplete promise rejected due to error in predicate function',

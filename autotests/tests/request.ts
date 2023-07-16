@@ -1,7 +1,7 @@
 import {it} from 'autotests';
 import {GetUsers} from 'autotests/routes/apiRoutes';
 import {expect} from 'e2ed';
-import {request} from 'e2ed/utils';
+import {E2edError, request} from 'e2ed/utils';
 
 it(
   'send correct requests and rejects on timeout',
@@ -15,7 +15,7 @@ it(
 
     await request(GetUsers, {maxRetriesCount: 1, timeout: 2_000}).then(
       () => {
-        throw new Error('the "request" function did not throw timeout error');
+        throw new E2edError('the "request" function did not throw timeout error');
       },
       () => undefined,
     );

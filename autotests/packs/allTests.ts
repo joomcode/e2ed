@@ -57,7 +57,7 @@ export const pack: Pack = {
   testIdleTimeout: 20_000,
   testTimeout: 60_000,
   waitForAllRequestsComplete: {
-    firstRequestTimeout: 500,
+    maxIntervalBetweenRequestsInMs: 500,
     timeout: 30_000,
   },
   waitForRequestTimeout: 30_000,

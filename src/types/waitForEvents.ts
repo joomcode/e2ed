@@ -24,12 +24,11 @@ type RequestOrResponseResolve = MergeFunctions<
  * @internal
  */
 export type AllRequestsCompletePredicateWithPromise = Readonly<{
-  clearResolveTimeout: (() => void) | undefined;
+  clearResolveTimeout: () => void;
   predicate: RequestPredicate;
   reject: (error: unknown) => void;
   requestHookContextIds: Set<RequestHookContextId>;
-  resolve: () => void;
-  startTimeInMs: UtcTimeInMs;
+  setResolveTimeout: () => void;
 }>;
 
 /**
