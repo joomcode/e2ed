@@ -28,7 +28,7 @@
     "create-locator": "0.0.17",
     "globby": "11.1.0",
     "pngjs": "7.0.0",
-    "testcafe-without-typecheck": "3.0.1-rc.1"
+    "testcafe-without-typecheck": "3.2.0-rc.2"
   },
   "devDependencies": {
     "@types/node": "20.5.7",
@@ -43,7 +43,7 @@
     "eslint-plugin-simple-import-sort": "10.0.0",
     "husky": "8.0.3",
     "prettier": "3.0.2",
-    "testcafe": "3.0.1",
+    "testcafe": "3.2.0",
     "typescript": "5.2.2"
   },
   "peerDependencies": {
@@ -69,7 +69,7 @@
   "scripts": {
     "asserts": "assert-modules-support-case-insensitive-fs ./autotests ./src && assert-package-lock-is-consistent",
     "precheck:all": "npm run asserts && npm run clear:lint:cache && npm run build",
-    "check:all": "npm run parallel lint test",
+    "check:all": "npm audit && npm run parallel lint test",
     "clear:lint:cache": "rm -f ./node_modules/.cache/lint-*",
     "lint": "npm run parallel lint:es lint:prettier lint:types",
     "lint:es": "eslint --cache --cache-location=./node_modules/.cache/lint-es --cache-strategy=content --ext=.ts --max-warnings=0 --report-unused-disable-directives .",
