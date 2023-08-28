@@ -10,6 +10,7 @@ import type {CustomReportPropertiesPlaceholder, LiteReport, Void} from '../../ty
 export const runAfterPackFunctions = async (liteReport: LiteReport): Promise<void> => {
   const {doAfterPack: functions} = getFullPackConfig();
   const args: [LiteReport] = [liteReport];
+
   const processCurrentFunctionResult = (result: CustomReportPropertiesPlaceholder | Void): void => {
     if (result === undefined) {
       return;

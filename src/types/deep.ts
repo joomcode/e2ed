@@ -2,40 +2,40 @@ import type {IsBrand} from './brand';
 
 /**
  * Mutable type with recursive applying.
- * DeepMutable<{readonly foo: {readonly bar: 0}}> = {foo: {bar: 0}}.
+ * `DeepMutable<{readonly foo: {readonly bar: 0}}>` = `{foo: {bar: 0}}`.
  */
-export type DeepMutable<T> = keyof T extends never
-  ? T
-  : IsBrand<T> extends true
-  ? T
-  : {-readonly [K in keyof T]: DeepMutable<T[K]>};
+export type DeepMutable<Type> = keyof Type extends never
+  ? Type
+  : IsBrand<Type> extends true
+  ? Type
+  : {-readonly [Key in keyof Type]: DeepMutable<Type[Key]>};
 
 /**
  * Partial type with recursive applying.
- * DeepPartial<{foo: {bar: 0}}> = {foo?: {bar?: 0}}.
+ * `DeepPartial<{foo: {bar: 0}}>` = `{foo?: {bar?: 0}}`.
  */
-export type DeepPartial<T> = keyof T extends never
-  ? T
-  : IsBrand<T> extends true
-  ? T
-  : {[K in keyof T]?: DeepPartial<T[K]>};
+export type DeepPartial<Type> = keyof Type extends never
+  ? Type
+  : IsBrand<Type> extends true
+  ? Type
+  : {[Key in keyof Type]?: DeepPartial<Type[Key]>};
 
 /**
  * Readonly type with recursive applying.
- * DeepReadonly<{foo: {bar: 0}}> = {readonly foo: {readonly bar: 0}}.
+ * `DeepReadonly<{foo: {bar: 0}}>` = `{readonly foo: {readonly bar: 0}}`.
  */
-export type DeepReadonly<T> = keyof T extends never
-  ? T
-  : IsBrand<T> extends true
-  ? T
-  : {readonly [K in keyof T]: DeepReadonly<T[K]>};
+export type DeepReadonly<Type> = keyof Type extends never
+  ? Type
+  : IsBrand<Type> extends true
+  ? Type
+  : {readonly [Key in keyof Type]: DeepReadonly<Type[Key]>};
 
 /**
  * Required type with recursive applying.
- * DeepRequired<{foo?: {bar?: 0}}> = {foo: {bar: 0}}.
+ * `DeepRequired<{foo?: {bar?: 0}}>` = `{foo: {bar: 0}}`.
  */
-export type DeepRequired<T> = keyof T extends never
-  ? T
-  : IsBrand<T> extends true
-  ? T
-  : {[K in keyof T]-?: DeepRequired<Exclude<T[K], undefined>>};
+export type DeepRequired<Type> = keyof Type extends never
+  ? Type
+  : IsBrand<Type> extends true
+  ? Type
+  : {[Key in keyof Type]-?: DeepRequired<Exclude<Type[Key], undefined>>};

@@ -14,7 +14,7 @@ const pathToDirectoryWithInitialExample = join(
 
 const outputOfCopy = execFileSync(
   'cp',
-  ['--recursive', '--verbose', pathToDirectoryWithInitialExample, '.'],
+  ['-R', '-v', pathToDirectoryWithInitialExample, '.'],
   EXEC_FILE_OPTIONS,
 );
 
@@ -23,7 +23,7 @@ const pathToDotGitignore = join(AUTOTESTS_DIRECTORY_PATH, '.gitignore');
 
 const outputOfMove = execFileSync(
   'mv',
-  ['--verbose', pathToGitignore, pathToDotGitignore],
+  ['-v', pathToGitignore, pathToDotGitignore],
   EXEC_FILE_OPTIONS,
 );
 

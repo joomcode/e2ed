@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "autotests": "*"
+    "autotests": "*",
+    "create-locator": "*",
+    "e2ed": "*"
   },
   "exports": {
     ".": "./index.ts",

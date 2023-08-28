@@ -82,6 +82,7 @@ export const pixelmatch = (
           if (output) {
             drawPixel(output, pos, ...((delta < 0 && options.diffColorAlt) || options.diffColor));
           }
+
           diff += 1;
         }
       } else if (output) {

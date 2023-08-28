@@ -3,10 +3,10 @@ import {E2edError} from '../error';
 import type {LogParams} from '../../types/internal';
 
 /**
- * Asserts that the value is false (strictly equal to false).
+ * Asserts that the value is `false` (strictly equal to `false`).
  */
-export function assertValueIsFalse<T>(
-  value: T | false,
+export function assertValueIsFalse<Type>(
+  value: Type | false,
   check: string,
   payload?: LogParams,
 ): asserts value is false {
@@ -16,10 +16,10 @@ export function assertValueIsFalse<T>(
 }
 
 /**
- * Asserts that the value is true (strictly equal to true).
+ * Asserts that the value is `true` (strictly equal to `true`).
  */
-export function assertValueIsTrue<T>(
-  value: T | true,
+export function assertValueIsTrue<Type>(
+  value: Type | true,
   check: string,
   payload?: LogParams,
 ): asserts value is true {
