@@ -1,5 +1,27 @@
 # Changelog
 
+## [v0.14.18](https://github.com/joomcode/e2ed/tree/v0.14.18) (2023-08-29)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.17...v0.14.18)
+
+- [Merge pull request #31 from joomcode/feature/update-dependencies](https://github.com/joomcode/e2ed/commit/bd948bb8497bdbf2573226490a703b9818da5127) ([uid11](https://github.com/uid11))
+
+  chore: update dependencies
+
+- [refactor: rename getCssSelectorFromSelector to getCssSelectorStringFromSelector](https://github.com/joomcode/e2ed/commit/cd509a88846e586544823ede0d54f1d75eec3533) ([uid11](https://github.com/uid11))
+- [chore: update alpine to 3.18.3](https://github.com/joomcode/e2ed/commit/25cdb3c670c76f5d0fe3fc33d54ce8898d714d30) ([uid11](https://github.com/uid11))
+
+  fix: add error with message when dockerImage is missed in pack config
+
+  fix: add CSS selector string (if any) to logs of expect function
+
+  fix: add getCssSelectorFromSelector to public API (to e2ed/utils)
+
+- [chore: update TestCafe to 3.2.0; update testcafe-hammerhead](https://github.com/joomcode/e2ed/commit/7c9329c3bfb8698b106e7331ad05ab4553d0cc23) ([uid11](https://github.com/uid11))
+- [fix: bash flags for Mac OS](https://github.com/joomcode/e2ed/commit/b82d5f06f5d2f975a87301549a02bb2a0129051b) ([uid11](https://github.com/uid11))
+
+  chore: update devDependencies (eslint, typescript)
+
 ## [v0.14.17](https://github.com/joomcode/e2ed/tree/v0.14.17) (2023-07-16)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.16...v0.14.17)
