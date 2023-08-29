@@ -3,7 +3,7 @@ import {E2edError} from '../error';
 import type {LogParams} from '../../types/internal';
 
 /**
- * Asserts that the value is never (throw in any case).
+ * Asserts that the value is `never` (throw in any case).
  */
 export function assertValueIsNever(
   value: never,

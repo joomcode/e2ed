@@ -1,10 +1,13 @@
 import {LogEventStatus, LogEventType} from '../../constants/internal';
 import {testController} from '../../testController';
 
+import {getLocatorFromSelector} from '../locators';
 import {log} from '../log';
 import {valueToString, wrapStringForLogs} from '../valueToString';
 
 import {assertionMessageGetters} from './assertionMessageGetters';
+
+import type {Selector} from '../../types/internal';
 
 import type {AssertionFunctionKeys, AssertionFunctions} from './types';
 
@@ -43,6 +46,7 @@ for (const [key, getAssertionMessage] of Object.entries(assertionMessageGetters)
               actualValue,
               assertion: wrapStringForLogs(`value ${valueToString(actualValue)} ${message}`),
               assertionArguments: args,
+              cssSelector: getLocatorFromSelector(this.actualValue as Selector),
               error: maybeError,
               logEventStatus: maybeError ? LogEventStatus.Failed : LogEventStatus.Passed,
             },

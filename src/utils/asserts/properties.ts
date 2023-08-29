@@ -7,11 +7,11 @@ type Options = Readonly<{check: string; payload?: LogParams; skipCheckInRuntime:
 /**
  * Asserts that the value has concrete property (maybe not own).
  */
-export function assertValueHasProperty<T extends object, Property extends string | symbol>(
-  value: T,
+export function assertValueHasProperty<Type extends object, Property extends string | symbol>(
+  value: Type,
   property: Property,
   options: Options,
-): asserts value is T & Record<Property, unknown> {
+): asserts value is Type & Record<Property, unknown> {
   const {check, payload, skipCheckInRuntime} = options;
 
   if (skipCheckInRuntime) {

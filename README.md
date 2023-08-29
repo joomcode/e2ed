@@ -14,7 +14,7 @@ E2E testing framework over [TestCafe](https://testcafe.io/).
 `e2ed` is designed to quickly parallel run a large number of independent atomic tests
 (or others tasks) in an arbitrary browser inside a docker container.
 Tests are written in TypeScript, using explicit dependencies and the concept of page objects.
-After the run, a detailed HTML report and a summary lite report in JSON format is generated.
+After the run, a detailed HTML report and a summary lite report in JSON format are generated.
 
 ## Adding e2ed to a project
 

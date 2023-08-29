@@ -40,6 +40,7 @@ it(
       (delay: number) => fetch(`https://reqres.in/api/users?delay=${delay}`, {method: 'GET'}),
       {name: 'getUsers', timeout: 6_000},
     );
+
     const getUsers = (delay: number): Promise<unknown> => {
       log(`Send API request with delay = ${delay}000ms`);
 

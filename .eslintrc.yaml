@@ -116,11 +116,11 @@ rules:
     - {blankLine: always, prev: [const, let], next: '*'}
     - {blankLine: always, prev: '*', next: [const, let]}
     - {blankLine: any, prev: [const, let], next: [const, let]}
-    - {blankLine: always, prev: for, next: '*'}
-    - {blankLine: always, prev: '*', next: for}
+    - {blankLine: always, prev: block-like, next: '*'}
+    - {blankLine: always, prev: '*', next: block-like}
     - {blankLine: always, prev: '*', next: return}
-    - {blankLine: always, prev: try, next: '*'}
-    - {blankLine: always, prev: '*', next: try}
+    - {blankLine: always, prev: throw, next: '*'}
+    - {blankLine: always, prev: '*', next: throw}
   simple-import-sort/exports: error
   simple-import-sort/imports:
     - error

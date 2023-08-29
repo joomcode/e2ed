@@ -9,6 +9,8 @@ sed -i "s/global {/export namespace Inner {/" ./bin/forks/testcafe-without-typec
 
 sed -ri "s/export const ([^:]*): /export const \1: Inner./" ./bin/forks/testcafe-without-typecheck/package/ts-defs/index.d.ts
 
+sed -ri "s/Inner.string/string/" ./bin/forks/testcafe-without-typecheck/package/ts-defs/index.d.ts
+
 sed -i "s/const createTestCafe: /const createTestCafe: Inner./" ./bin/forks/testcafe-without-typecheck/package/ts-defs/index.d.ts
 
 sed -i "s/declare const fixture: [^;]*;//" ./bin/forks/testcafe-without-typecheck/package/ts-defs/index.d.ts

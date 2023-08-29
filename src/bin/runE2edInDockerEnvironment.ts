@@ -12,4 +12,4 @@ const e2edRunPromise = registerStartE2edRunEvent()
   .catch(logStartE2edError);
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-e2edRunPromise.finally(registerEndE2edRunEvent);
+void e2edRunPromise.finally(registerEndE2edRunEvent);

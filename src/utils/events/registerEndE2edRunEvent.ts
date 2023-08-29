@@ -42,6 +42,7 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
     if (liteReportFileName !== null) {
       await writeLiteJsonReport(liteReport);
     }
+
     if (reportFileName !== null) {
       await writeHtmlReport(reportData);
     }

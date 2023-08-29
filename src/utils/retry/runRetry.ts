@@ -32,7 +32,7 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
 
     const {runLabel} = runRetryOptions;
     const newTestsSubprocess = fork(pathToRunTestsSubprocess);
-    let timeoutId: NodeJS.Timer;
+    let timeoutId: NodeJS.Timeout;
 
     setTestsSubprocess(newTestsSubprocess);
 
@@ -53,6 +53,7 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
 
     const {testIdleTimeout} = getFullPackConfig();
     const interruptTimeout = 2 * testIdleTimeout;
+
     const killByTimeout = (reason = 'timeout'): void => {
       if (!newTestsSubprocess.killed) {
         newTestsSubprocess.kill();
@@ -65,6 +66,7 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
 
       reject(error);
     };
+
     const resetInterruptTimeout = (): void => {
       clearTimeout(timeoutId);
 

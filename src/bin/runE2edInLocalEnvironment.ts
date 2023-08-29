@@ -19,4 +19,4 @@ setRunEnvironment(RunEnvironment.Local);
 const e2edRunPromise = registerStartE2edRunEvent().then(runPackWithArgs).catch(logStartE2edError);
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-e2edRunPromise.finally(registerEndE2edRunEvent);
+void e2edRunPromise.finally(registerEndE2edRunEvent);

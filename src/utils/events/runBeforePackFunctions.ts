@@ -22,6 +22,7 @@ export const runBeforePackFunctions = async (startInfo: StartInfo): Promise<void
   });
 
   const args: [StartInfoWithoutDoBeforePack] = [startInfo];
+
   const processCurrentFunctionResult = (result: FullPackConfigWithoutDoBeforePack | Void): void => {
     if (result === undefined) {
       return;

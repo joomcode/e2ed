@@ -12,9 +12,7 @@ export const createPageInstance = async <SomePageClass extends AnyPageClassType>
 ): Promise<InstanceType<SomePageClass>> => {
   const page = new PageClass(CREATE_PAGE_TOKEN, pageParams) as InstanceType<SomePageClass>;
 
-  if (page.init) {
-    await page.init();
-  }
+  await page.init?.();
 
   return page;
 };

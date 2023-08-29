@@ -37,7 +37,9 @@ export class Search extends MobilePage<CustomPageParams> {
     await waitForAllRequestsComplete(({url}) => {
       if (
         url.startsWith('https://adservice.google.com/') ||
-        url.startsWith('https://play.google.com/')
+        url.startsWith('https://googleads.g.doubleclick.net/') ||
+        url.startsWith('https://play.google.com/') ||
+        url.startsWith('https://static.doubleclick.net/')
       ) {
         return false;
       }
