@@ -9,6 +9,14 @@ MOUNTDIR="${E2ED_MOUNTDIR:-$DIR}"
 PORT=$([ -z $E2ED_DEBUG ] && echo "" || echo "--publish $DEBUG_PORT:$DEBUG_PORT")
 VERSION=$(grep -m1 \"e2ed\": $DIR/package.json | cut -d '"' -f 4)
 
+if [ -z $DOCKER_IMAGE ]
+then
+    echo "Error: The pack config does not contain an explicit line with \"dockerImage\"."
+    echo "Add it so that the bash script can read the docker image."
+    echo "Exit with code 9"
+    exit 9
+fi
+
 echo "Run docker image $DOCKER_IMAGE:$VERSION"
 
 docker run \

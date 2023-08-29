@@ -4,7 +4,6 @@ import type {Selector} from '../../types/internal';
 
 /**
  * Get string locator from selector if any.
- * @internal
  */
 export const getLocatorFromSelector = (selector: Selector): string | undefined =>
   // @ts-expect-error: native Selector type does not have LOCATOR_KEY
