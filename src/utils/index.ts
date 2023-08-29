@@ -30,7 +30,10 @@ export {writeFile} from './fs';
 export {removeStyleFromString} from './generalLog';
 export {getFullPackConfig as untypedGetFullPackConfig} from './getFullPackConfig';
 export {getKeysCounter} from './getKeysCounter';
-export {getLocatorFromSelector as getCssSelectorFromSelector, getLocatorProperty} from './locators';
+export {
+  getLocatorFromSelector as getCssSelectorStringFromSelector,
+  getLocatorProperty,
+} from './locators';
 export {log} from './log';
 export {parseMaybeEmptyValueAsJson} from './parseMaybeEmptyValueAsJson';
 export {getPromiseWithResolveAndReject, getTimeoutPromise, waitForAllProperties} from './promise';
