@@ -28,12 +28,12 @@
     "create-locator": "0.0.17",
     "globby": "11.1.0",
     "pngjs": "7.0.0",
-    "testcafe-without-typecheck": "3.2.0-rc.2"
+    "testcafe-without-typecheck": "3.3.0-rc.1"
   },
   "devDependencies": {
     "@types/node": "20.5.7",
-    "@typescript-eslint/eslint-plugin": "6.4.1",
-    "@typescript-eslint/parser": "6.4.1",
+    "@typescript-eslint/eslint-plugin": "6.5.0",
+    "@typescript-eslint/parser": "6.5.0",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
     "assert-package-lock-is-consistent": "1.0.0",
     "eslint": "8.48.0",
@@ -42,8 +42,8 @@
     "eslint-plugin-import": "2.28.1",
     "eslint-plugin-simple-import-sort": "10.0.0",
     "husky": "8.0.3",
-    "prettier": "3.0.2",
-    "testcafe": "3.2.0",
+    "prettier": "3.0.3",
+    "testcafe": "3.3.0",
     "typescript": "5.2.2"
   },
   "peerDependencies": {

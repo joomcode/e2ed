@@ -42,6 +42,8 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}
 
   await expect(mainPage.searchString, 'search string has setted value').eql(searchQuery);
 
+  await expect(mainPage.body.find('input').exists, 'page contains some input element').ok();
+
   await pressKey('enter');
 
   const [requestWithQuery, successfulResponse] = await Promise.all([
