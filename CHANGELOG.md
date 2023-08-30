@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.14.19](https://github.com/joomcode/e2ed/tree/v0.14.19) (2023-08-30)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.18...v0.14.19)
+
+- [Merge pull request #32 from joomcode/fix/reading-locator-key](https://github.com/joomcode/e2ed/commit/83bdbef35b72168f5fb115a4676d55e617094f46) ([uid11](https://github.com/uid11))
+
+  fix: reading locator key from expect argument
+
+- [chore: update TestCafe to 3.3.0](https://github.com/joomcode/e2ed/commit/bcbc2b76917d625960ea0775ef27d4880494898a) ([uid11](https://github.com/uid11))
+- [fix: error with reading locator key from argument of expect function](https://github.com/joomcode/e2ed/commit/a0ea06fb5faaa9f8dc25e744ba8160589051c2a0) ([uid11](https://github.com/uid11))
+
 ## [v0.14.18](https://github.com/joomcode/e2ed/tree/v0.14.18) (2023-08-29)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.17...v0.14.18)
