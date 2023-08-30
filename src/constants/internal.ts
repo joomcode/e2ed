@@ -20,7 +20,6 @@ export {
   MAX_ELEMENTS_COUNT_IN_PRINTED_ARRAY,
   MAX_LINES_COUNT_IN_PRINTED_VALUE,
 } from './inspect';
-/** @internal */
 export {LOCATOR_KEY} from './locator';
 export {LogEventStatus, LogEventType} from './log';
 /** @internal */

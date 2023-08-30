@@ -3,7 +3,7 @@ import {Main as MainRoute} from 'autotests/routes/pageRoutes';
 import {createLocator, type Locator} from 'create-locator';
 import {Page} from 'e2ed';
 import {waitForAllRequestsComplete, waitForInterfaceStabilization} from 'e2ed/actions';
-import {locatorIdSelector} from 'e2ed/selectors';
+import {createSelectorByCss, locatorIdSelector} from 'e2ed/selectors';
 
 import type {Language} from 'autotests/types';
 import type {GetParamsType, Selector} from 'e2ed/types';
@@ -40,14 +40,19 @@ export class Main extends Page<CustomPageParams> {
   }
 
   /**
-   * Search input.
+   * Body selector.
    */
-  readonly searchInput = new Input('q');
+  readonly body = createSelectorByCss('body');
 
   /**
    * Header selector.
    */
   readonly headerSelector = mainPageLocator.header();
+
+  /**
+   * Search input.
+   */
+  readonly searchInput = new Input('q');
 
   /**
    * Current search string.
