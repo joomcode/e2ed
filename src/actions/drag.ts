@@ -1,6 +1,6 @@
 import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
-import {getLocatorFromSelector} from '../utils/locators';
+import {getDescriptionFromSelector} from '../utils/locators';
 import {log} from '../utils/log';
 
 import {waitForInterfaceStabilization} from './waitFor';
@@ -19,7 +19,7 @@ export const drag = async (
   options?: Options,
   // eslint-disable-next-line max-params
 ): Promise<void> => {
-  const locator = getLocatorFromSelector(selector);
+  const locator = getDescriptionFromSelector(selector);
 
   log(
     'Drag an element by an offset',

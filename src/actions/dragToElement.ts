@@ -1,6 +1,6 @@
 import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
-import {getLocatorFromSelector} from '../utils/locators';
+import {getDescriptionFromSelector} from '../utils/locators';
 import {log} from '../utils/log';
 
 import {waitForInterfaceStabilization} from './waitFor';
@@ -17,8 +17,8 @@ export const dragToElement = async (
   destinationSelector: Selector,
   options?: Options,
 ): Promise<void> => {
-  const locator = getLocatorFromSelector(selector);
-  const destinationLocator = getLocatorFromSelector(destinationSelector);
+  const locator = getDescriptionFromSelector(selector);
+  const destinationLocator = getDescriptionFromSelector(destinationSelector);
 
   log(
     'Drag an element onto another one',

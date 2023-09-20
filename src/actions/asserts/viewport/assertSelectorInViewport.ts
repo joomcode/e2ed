@@ -1,6 +1,6 @@
 import {LogEventType} from '../../../constants/internal';
 import {expect} from '../../../expect';
-import {getLocatorFromSelector} from '../../../utils/locators';
+import {getDescriptionFromSelector} from '../../../utils/locators';
 import {log} from '../../../utils/log';
 import {isSelectorInViewport} from '../../../utils/viewport';
 
@@ -12,7 +12,7 @@ import type {Selector} from '../../../types/internal';
  */
 export const assertSelectorInViewport = async (selector: Selector): Promise<void> => {
   const isInViewport = await isSelectorInViewport(selector);
-  const locator = getLocatorFromSelector(selector);
+  const locator = getDescriptionFromSelector(selector);
   const message = 'selector is in the viewport';
 
   log(`Asserts that ${message}`, {locator}, LogEventType.InternalAssert);

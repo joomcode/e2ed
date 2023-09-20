@@ -1,6 +1,6 @@
 import {Selector} from 'testcafe-without-typecheck';
 
-import {LOCATOR_KEY} from './constants/internal';
+import {DESCRIPTION_KEY} from './constants/internal';
 
 import type {Fn, Selector as SelectorType, Values} from './types/internal';
 
@@ -9,14 +9,14 @@ import type {Fn, Selector as SelectorType, Values} from './types/internal';
  */
 const get: Required<ProxyHandler<SelectorType>>['get'] = (target, property, receiver) => {
   let result = Reflect.get(target, property, receiver) as Values<SelectorType> & {
-    [LOCATOR_KEY]?: string;
+    [DESCRIPTION_KEY]?: string;
   };
 
   if (typeof property === 'symbol') {
     return result;
   }
 
-  const locator = target[LOCATOR_KEY] || '';
+  const locator = target[DESCRIPTION_KEY] || '';
 
   if ((typeof result !== 'object' || result === null) && typeof result !== 'function') {
     return result;
@@ -36,9 +36,9 @@ const get: Required<ProxyHandler<SelectorType>>['get'] = (target, property, rece
           return callResult;
         }
 
-        const callLocator = `${result[LOCATOR_KEY]}(${args.join(', ')})`;
+        const callLocator = `${result[DESCRIPTION_KEY]}(${args.join(', ')})`;
 
-        (callResult as typeof result)[LOCATOR_KEY] = callLocator;
+        (callResult as typeof result)[DESCRIPTION_KEY] = callLocator;
 
         if (Object.prototype.hasOwnProperty.call(callResult, 'getBoundingClientRectProperty')) {
           return new Proxy(callResult, {get});
@@ -48,7 +48,7 @@ const get: Required<ProxyHandler<SelectorType>>['get'] = (target, property, rece
       } as typeof result;
   }
 
-  result[LOCATOR_KEY] = `${locator}.${property}`;
+  result[DESCRIPTION_KEY] = `${locator}.${property}`;
 
   return result;
 };
@@ -58,14 +58,13 @@ const get: Required<ProxyHandler<SelectorType>>['get'] = (target, property, rece
  */
 export const createSelector = (...args: Parameters<typeof Selector>): SelectorType => {
   const locator = args[0];
-  const selector = Selector(...args);
+  const selector = Selector(...args) as SelectorType;
 
   if (typeof locator !== 'string') {
     return selector;
   }
 
-  // @ts-expect-error: native Selector type does not have LOCATOR_KEY
-  selector[LOCATOR_KEY] = locator;
+  selector[DESCRIPTION_KEY] = locator;
 
   return new Proxy(selector, {get});
 };

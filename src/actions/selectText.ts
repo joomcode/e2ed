@@ -1,6 +1,6 @@
 import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
-import {getLocatorFromSelector} from '../utils/locators';
+import {getDescriptionFromSelector} from '../utils/locators';
 import {log} from '../utils/log';
 
 import type {Selector, TestCafeSelector} from '../types/internal';
@@ -17,7 +17,7 @@ export const selectText = (
   options?: Options,
   // eslint-disable-next-line max-params
 ): Promise<void> => {
-  const locator = getLocatorFromSelector(selector);
+  const locator = getDescriptionFromSelector(selector);
 
   log(
     `Select text in input element, from ${startPos} to ${

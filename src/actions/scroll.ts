@@ -1,6 +1,6 @@
 import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
-import {getLocatorFromSelector} from '../utils/locators';
+import {getDescriptionFromSelector} from '../utils/locators';
 import {log} from '../utils/log';
 
 import type {Inner} from 'testcafe-without-typecheck';
@@ -26,7 +26,7 @@ type Scroll = ((posX: number, posY: number) => Promise<void>) &
  */
 // @ts-expect-error: e2ed Selector type is incompatible with TS Selector
 export const scroll: Scroll = (...args) => {
-  const locator = getLocatorFromSelector(args[0] as Selector);
+  const locator = getDescriptionFromSelector(args[0] as Selector);
   const printedArgs = [...args];
 
   if (typeof args[0] === 'object') {
