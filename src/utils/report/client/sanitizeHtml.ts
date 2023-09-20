@@ -42,7 +42,7 @@ export function createSafeHtmlWithoutSanitize(
 }
 
 /**
- * Sanitize HTML code (simple protection against XSS attacks).
+ * Sanitizes HTML code (simple protection against XSS attacks).
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
