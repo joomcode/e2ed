@@ -5,19 +5,26 @@ import {log} from '../utils/log';
 
 import {waitForInterfaceStabilization} from './waitFor';
 
-import type {Selector, TestCafeSelector} from '../types/internal';
+import type {Selector, TestCafeSelector, WithStabilizationInterval} from '../types/internal';
 
-type Options = Parameters<typeof testController.hover>[1];
+type Options = Parameters<typeof testController.hover>[1] & WithStabilizationInterval;
 
 /**
  * Hovers the mouse pointer over an element.
  */
-export const hover = async (selector: Selector, options?: Options): Promise<void> => {
+export const hover = async (
+  selector: Selector,
+  {stabilizationInterval, ...options}: Options = {},
+): Promise<void> => {
   const locator = getDescriptionFromSelector(selector);
 
-  log('Hover the mouse pointer over an element', {locator, options}, LogEventType.InternalAction);
+  log(
+    'Hover the mouse pointer over an element',
+    {locator, ...options, stabilizationInterval},
+    LogEventType.InternalAction,
+  );
 
   await testController.hover(selector as TestCafeSelector, options);
 
-  await waitForInterfaceStabilization();
+  await waitForInterfaceStabilization(stabilizationInterval);
 };

@@ -5,17 +5,24 @@ import {log} from '../utils/log';
 
 import {waitForInterfaceStabilization} from './waitFor';
 
-import type {Selector, TestCafeSelector} from '../types/internal';
+import type {Selector, TestCafeSelector, WithStabilizationInterval} from '../types/internal';
 
 /**
  * Switches browsing context to the specified iframe (by iframe selector).
  */
-export const switchToIframe = async (iframeSelector: Selector): Promise<void> => {
+export const switchToIframe = async (
+  iframeSelector: Selector,
+  {stabilizationInterval}: WithStabilizationInterval = {},
+): Promise<void> => {
   const locator = getDescriptionFromSelector(iframeSelector);
 
-  log('Switch browsing context to the specified iframe', {locator}, LogEventType.InternalAction);
+  log(
+    'Switch browsing context to the specified iframe',
+    {locator, stabilizationInterval},
+    LogEventType.InternalAction,
+  );
 
   await testController.switchToIframe(iframeSelector as TestCafeSelector);
 
-  await waitForInterfaceStabilization();
+  await waitForInterfaceStabilization(stabilizationInterval);
 };

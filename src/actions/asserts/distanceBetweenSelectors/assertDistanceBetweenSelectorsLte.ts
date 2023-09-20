@@ -17,7 +17,7 @@ export const assertDistanceBetweenSelectorsLte = async (
   const distance = await getDistanceBetweenSelectors(selectorA, selectorB);
   const message = `distance between selectors is less than or equal to ${maxDistance}`;
 
-  log(`Assert that ${message}`, {distance, maxDistance}, LogEventType.InternalAssert);
+  log(`Asserts that ${message}`, {distance, maxDistance}, LogEventType.InternalAssert);
 
   // TODO: support Smart Assertions
   await expect(distance, message).lte(maxDistance);

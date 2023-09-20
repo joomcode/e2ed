@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
 
+export type {WithStabilizationInterval} from './actions';
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';

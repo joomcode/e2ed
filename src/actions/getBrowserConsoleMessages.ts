@@ -3,9 +3,9 @@ import {testController} from '../testController';
 import {log} from '../utils/log';
 
 type ConsoleMessages = ReturnType<typeof testController.getBrowserConsoleMessages> extends Promise<
-  infer T
+  infer Type
 >
-  ? T
+  ? Type
   : never;
 
 /**

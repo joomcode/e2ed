@@ -5,20 +5,27 @@ import {log} from '../utils/log';
 
 import {waitForInterfaceStabilization} from './waitFor';
 
-import type {Selector, TestCafeSelector} from '../types/internal';
+import type {Selector, TestCafeSelector, WithStabilizationInterval} from '../types/internal';
 
-type Options = Parameters<typeof testController.click>[1];
+type Options = Parameters<typeof testController.click>[1] & WithStabilizationInterval;
 
 /**
  * Clicks an element.
  */
-export const click = async (selector: Selector, options?: Options): Promise<void> => {
+export const click = async (
+  selector: Selector,
+  {stabilizationInterval, ...options}: Options = {},
+): Promise<void> => {
   const locator = getDescriptionFromSelector(selector);
   const withLocator = locator ? ` with locator ${locator}` : '';
 
-  log(`Click an element${withLocator}`, {options}, LogEventType.InternalAction);
+  log(
+    `Click an element${withLocator}`,
+    {...options, stabilizationInterval},
+    LogEventType.InternalAction,
+  );
 
   await testController.click(selector as TestCafeSelector, options);
 
-  await waitForInterfaceStabilization();
+  await waitForInterfaceStabilization(stabilizationInterval);
 };

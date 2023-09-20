@@ -131,6 +131,11 @@ export type OwnE2edConfig<
   skipTests: SkipTests;
 
   /**
+   * Default stabilization interval for `waitForInterfaceStabilization` action.
+   */
+  stabilizationInterval: number;
+
+  /**
    * If `true`, then takes a screenshot of the full page (not just the viewport)
    * at the time of the test error, for display in the HTML report.
    */

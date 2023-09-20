@@ -1,5 +1,6 @@
 import {LogEventType} from '../../constants/internal';
 import {createClientFunction} from '../../createClientFunction';
+import {getFullPackConfig} from '../../utils/getFullPackConfig';
 import {log} from '../../utils/log';
 
 import type {UtcTimeInMs} from '../../types/internal';
@@ -118,7 +119,16 @@ const clientWaitForInterfaceStabilization = createClientFunction(
 /**
  * Wait until the page interface stabilizes (in particular, the page will stop scrolling).
  */
-export const waitForInterfaceStabilization = async (stabilizationInterval = 500): Promise<void> => {
+export const waitForInterfaceStabilization = async (
+  stabilizationInterval?: number,
+): Promise<void> => {
+  if (stabilizationInterval === undefined) {
+    const {stabilizationInterval: stabilizationIntervalFromConfig} = getFullPackConfig();
+
+    // eslint-disable-next-line no-param-reassign
+    stabilizationInterval = stabilizationIntervalFromConfig;
+  }
+
   if (!(stabilizationInterval > 0)) {
     return;
   }
