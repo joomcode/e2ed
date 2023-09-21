@@ -1,5 +1,28 @@
 # Changelog
 
+## [v0.15.0](https://github.com/joomcode/e2ed/tree/v0.15.0) (2023-09-21)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.19...v0.15.0)
+
+- [Merge pull request #33 from joomcode/feature/add-get-modules-graph](https://github.com/joomcode/e2ed/commit/48c3e3658e92873175045213048900a8a4e66a29) ([uid11](https://github.com/uid11))
+
+  feat: add get modules graph
+
+- [feat: add `get-modules-graph` package to reexport from `e2ed`](https://github.com/joomcode/e2ed/commit/555daf5b5a634745e98d89e67f4c55acf47cd652) ([uid11](https://github.com/uid11))
+
+  feat: add `globby` package to reexport from `e2ed`
+
+- [chore: update devDependencies (@types/node, @typescript-eslint/\*, eslint)](https://github.com/joomcode/e2ed/commit/14956aee8a6342b6a0a5effaea627fe79c220406) ([uid11](https://github.com/uid11))
+- [feat: support markdown links in meta values in HTML report](https://github.com/joomcode/e2ed/commit/793ffdc7ca4c1d16b33a24c186e13b3d7f4a0ab5) ([uid11](https://github.com/uid11))
+
+  feat: add `parseMarkdownLinks` client function for report
+
+- [feat: add `stabilizationInterval` field to pack config](https://github.com/joomcode/e2ed/commit/c2dc91cf78d383d10ee2dbd1fefeceaf523cbb80) ([uid11](https://github.com/uid11))
+
+  feat: add `stabilizationInterval` option to all actions with `waitForInterfaceStabilization`
+
+- [refactor: rename getLocatorProperty to getDescriptionFromSelector](https://github.com/joomcode/e2ed/commit/fda2c3264a529ba0c38256130570a16e28fb48fb) ([uid11](https://github.com/uid11))
+
 ## [v0.14.19](https://github.com/joomcode/e2ed/tree/v0.14.19) (2023-08-30)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.18...v0.14.19)
