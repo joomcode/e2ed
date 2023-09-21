@@ -26,17 +26,18 @@
   "dependencies": {
     "bin-v8-flags-filter": "1.2.0",
     "create-locator": "0.0.17",
+    "get-modules-graph": "0.0.8",
     "globby": "11.1.0",
     "pngjs": "7.0.0",
     "testcafe-without-typecheck": "3.3.0-rc.1"
   },
   "devDependencies": {
-    "@types/node": "20.5.7",
-    "@typescript-eslint/eslint-plugin": "6.5.0",
-    "@typescript-eslint/parser": "6.5.0",
+    "@types/node": "20.6.3",
+    "@typescript-eslint/eslint-plugin": "6.7.2",
+    "@typescript-eslint/parser": "6.7.2",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
     "assert-package-lock-is-consistent": "1.0.0",
-    "eslint": "8.48.0",
+    "eslint": "8.49.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-import": "2.28.1",
@@ -58,6 +59,8 @@
     "./context": "./context/index.js",
     "./createLocator": "./createLocator.js",
     "./generators": "./generators/index.js",
+    "./getModulesGraph": "./getModulesGraph.js",
+    "./globby": "./globby.js",
     "./selectors": "./selectors/index.js",
     "./testcafe": {
       "import": "./esm/testcafe.mjs",

@@ -44,7 +44,7 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}
 
   await expect(mainPage.body.find('input').exists, 'page contains some input element').ok();
 
-  await pressKey('enter');
+  await pressKey('enter', {stabilizationInterval: 300});
 
   const [requestWithQuery, successfulResponse] = await Promise.all([
     waitForRequest(({url}) => url.includes(searchQuery)),

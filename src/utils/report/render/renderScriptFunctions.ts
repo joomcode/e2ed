@@ -8,6 +8,7 @@ import {
   clickOnTestRun,
   createSafeHtmlWithoutSanitize,
   domContentLoadedHandler,
+  parseMarkdownLinks,
   readJsonReportData,
   renderDatesInterval,
   renderDuration,
@@ -37,6 +38,7 @@ ${clickOnRetry.toString()}
 ${clickOnStep.toString()}
 ${clickOnTestRun.toString()}
 ${domContentLoadedHandler.toString()}
+${parseMarkdownLinks.toString()}
 ${readJsonReportData.toString()}
 ${renderDatesInterval.toString()}
 ${renderDuration.toString()}

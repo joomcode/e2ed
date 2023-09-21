@@ -17,6 +17,8 @@ export {domContentLoadedHandler} from './domContentLoadedHandler';
 /** @internal */
 export {initialScript} from './initialScript';
 /** @internal */
+export {parseMarkdownLinks} from './parseMarkdownLinks';
+/** @internal */
 export {readJsonReportData} from './readJsonReportData';
 /** @internal */
 export {

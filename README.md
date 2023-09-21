@@ -323,6 +323,8 @@ If `null`, the report will not be saved.
 `skipTests: SkipTests`: this setting allows you to describe a set of skipped tests in a custom form.
 You can define the `SkipTests` type and `skipTests` processing rules in the hook `autotests/hooks/isTestSkipped.ts`.
 
+`stabilizationInterval: number`: default stabilization interval for `waitForInterfaceStabilization` action.
+
 `takeFullPageScreenshotOnError: boolean`: if `true`, then takes a screenshot of the full page
 (not just the viewport) at the time of the test error, for display in the HTML report.
 

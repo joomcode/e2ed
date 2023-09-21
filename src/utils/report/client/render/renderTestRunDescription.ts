@@ -1,3 +1,4 @@
+import {parseMarkdownLinks as clientParseMarkdownLinks} from '../parseMarkdownLinks';
 import {
   createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize,
   sanitizeHtml as clientSanitizeHtml,
@@ -9,12 +10,14 @@ import {renderDuration as clientRenderDuration} from './renderDuration';
 import type {FullTestRun, SafeHtml} from '../../../../types/internal';
 
 const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
+const parseMarkdownLinks = clientParseMarkdownLinks;
 const renderDatesInterval = clientRenderDatesInterval;
 const renderDuration = clientRenderDuration;
 const sanitizeHtml = clientSanitizeHtml;
 
 /**
- * Renders tag <dl class="test-description"> with test run description.
+ * Renders tag `<dl class="test-description">` with test run description.
+ * The value strings of meta can contain links in markdown format.
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
@@ -25,9 +28,10 @@ export function renderTestRunDescription(fullTestRun: FullTestRun): SafeHtml {
   const metaHtmls: SafeHtml[] = [];
 
   for (const [key, value] of Object.entries(meta)) {
+    const valueWithLinks = parseMarkdownLinks`${value}`;
     const metaHtml = sanitizeHtml`
 <dt class="test-description__term">${key}</dt>
-<dd class="test-description__definition">${value}</dd>`;
+<dd class="test-description__definition">${valueWithLinks}</dd>`;
 
     metaHtmls.push(metaHtml);
   }

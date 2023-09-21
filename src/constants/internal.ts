@@ -20,7 +20,6 @@ export {
   MAX_ELEMENTS_COUNT_IN_PRINTED_ARRAY,
   MAX_LINES_COUNT_IN_PRINTED_VALUE,
 } from './inspect';
-export {LOCATOR_KEY} from './locator';
 export {LogEventStatus, LogEventType} from './log';
 /** @internal */
 export {MESSAGE_BACKGROUND_COLOR_BY_STATUS, TESTCAFE_WARNINGS_KEY} from './log';
@@ -50,6 +49,7 @@ export {
   REQUEST_HOOK_CONTEXT_ID_KEY,
   REQUEST_HOOK_CONTEXT_KEY,
 } from './requestHook';
+export {DESCRIPTION_KEY} from './selector';
 export {FAILED_TEST_RUN_STATUSES, TestRunStatus} from './testRun';
 /** @internal */
 export {

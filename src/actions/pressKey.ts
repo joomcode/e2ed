@@ -4,15 +4,24 @@ import {log} from '../utils/log';
 
 import {waitForInterfaceStabilization} from './waitFor';
 
-type Options = Parameters<typeof testController.pressKey>[1];
+import type {WithStabilizationInterval} from '../types/internal';
+
+type Options = Parameters<typeof testController.pressKey>[1] & WithStabilizationInterval;
 
 /**
  * Presses the specified keyboard keys.
  */
-export const pressKey = async (keys: string, options?: Options): Promise<void> => {
-  log(`Press keyboard keys: "${keys}"`, {options}, LogEventType.InternalAction);
+export const pressKey = async (
+  keys: string,
+  {stabilizationInterval, ...options}: Options = {},
+): Promise<void> => {
+  log(
+    `Press keyboard keys: "${keys}"`,
+    {...options, stabilizationInterval},
+    LogEventType.InternalAction,
+  );
 
   await testController.pressKey(keys, options);
 
-  await waitForInterfaceStabilization();
+  await waitForInterfaceStabilization(stabilizationInterval);
 };
