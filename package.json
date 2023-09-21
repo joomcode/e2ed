@@ -26,6 +26,7 @@
   "dependencies": {
     "bin-v8-flags-filter": "1.2.0",
     "create-locator": "0.0.17",
+    "get-modules-graph": "0.0.8",
     "globby": "11.1.0",
     "pngjs": "7.0.0",
     "testcafe-without-typecheck": "3.3.0-rc.1"
@@ -58,6 +59,8 @@
     "./context": "./context/index.js",
     "./createLocator": "./createLocator.js",
     "./generators": "./generators/index.js",
+    "./getModulesGraph": "./getModulesGraph.js",
+    "./globby": "./globby.js",
     "./selectors": "./selectors/index.js",
     "./testcafe": {
       "import": "./esm/testcafe.mjs",

@@ -82,6 +82,8 @@ rules:
         - src/*/internal.ts
         - src/bin/*.ts
         - src/createLocator.ts
+        - src/getModulesGraph.ts
+        - src/globby.ts
         - src/esm/testcafe.ts
         - src/index.ts
         - src/testcafe.ts
