@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.15.2](https://github.com/joomcode/e2ed/tree/v0.15.2) (2023-09-23)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.1...v0.15.2)
+
+- [Merge pull request #35 from joomcode/fix/update-config-after-do-before-functions](https://github.com/joomcode/e2ed/commit/15a0eb2c38d439df863dff1eab2029159b3c6578) ([uid11](https://github.com/uid11))
+
+  fix: update pack config by values from `doBeforePack` functions
+
+- [fix: update pack config by values from `doBeforePack` functions](https://github.com/joomcode/e2ed/commit/071675ee4102d8806d50ae558ee2cc6adbcf5e32) ([uid11](https://github.com/uid11))
+
 ## [v0.15.1](https://github.com/joomcode/e2ed/tree/v0.15.1) (2023-09-23)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.0...v0.15.1)
