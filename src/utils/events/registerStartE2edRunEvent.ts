@@ -3,6 +3,7 @@ import {EVENTS_DIRECTORY_PATH, TMP_DIRECTORY_PATH} from '../../constants/interna
 
 import {createDirectory, removeDirectory, writeStartInfo} from '../fs';
 import {generalLog, writeLogsToFile} from '../generalLog';
+import {getFullPackConfig, updateConfig} from '../getFullPackConfig';
 import {compilePack, setPackTimeout} from '../pack';
 import {getStartInfo} from '../startInfo';
 
@@ -21,6 +22,10 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
   const startInfo = getStartInfo();
 
   await runBeforePackFunctions(startInfo);
+
+  const fullPackConfig = getFullPackConfig();
+
+  updateConfig(fullPackConfig, startInfo);
 
   const {e2ed, runEnvironment} = startInfo;
   const isDockerRun = runEnvironment === RunEnvironment.Docker;
