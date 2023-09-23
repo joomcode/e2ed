@@ -21,7 +21,7 @@
 
   feat: add `stabilizationInterval` option to all actions with `waitForInterfaceStabilization`
 
-- [refactor: rename getLocatorProperty to getDescriptionFromSelector](https://github.com/joomcode/e2ed/commit/fda2c3264a529ba0c38256130570a16e28fb48fb) ([uid11](https://github.com/uid11))
+- [refactor: rename `getLocatorFromSelector` to `getDescriptionFromSelector`](https://github.com/joomcode/e2ed/commit/fda2c3264a529ba0c38256130570a16e28fb48fb) ([uid11](https://github.com/uid11))
 
 ## [v0.14.19](https://github.com/joomcode/e2ed/tree/v0.14.19) (2023-08-30)
 
