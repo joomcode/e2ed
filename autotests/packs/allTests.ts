@@ -9,8 +9,8 @@ import {RunEnvironment, runEnvironment} from 'e2ed/configurator';
 
 import {doAfterPack} from '../doAfterPack';
 import {doBeforePack} from '../doBeforePack';
-import {mapLogPayloadInConsole} from '../mapLogPayloadInConsole';
 import {skipTests} from '../skipTests';
+import {mapLogPayloadInConsole} from '../utils/mapLogPayloadInConsole';
 
 import type {IsTestIncludedInPack, Pack} from 'autotests/types/packSpecific';
 

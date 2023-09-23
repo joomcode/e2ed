@@ -11,7 +11,6 @@ COPY ./package-lock.json .
 RUN npm install --legacy-peer-deps=true --no-save --omit=dev --omit=peer && npm cache clean --force
 RUN rm -rf package-lock.json ./node_modules/@types ./node_modules/.bin ./node_modules/.package-lock.json
 RUN mv ./node_modules/create-locator /node_modules/create-locator
-RUN mv ./node_modules/get-modules-graph /node_modules/get-modules-graph
 COPY ./node_modules/typescript ./node_modules/typescript
 WORKDIR /
 
