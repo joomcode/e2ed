@@ -1,5 +1,21 @@
 # Changelog
 
+## [v0.15.1](https://github.com/joomcode/e2ed/tree/v0.15.1) (2023-09-23)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.0...v0.15.1)
+
+- [Merge pull request #34 from joomcode/fix/deps-in-docker-image](https://github.com/joomcode/e2ed/commit/0e82cdd6035b8818e6d234ff91f148f32c30572a) ([uid11](https://github.com/uid11))
+
+  fix: error with `get-modules-graph` dependencies in docker image
+
+- [fix: error with `get-modules-graph` dependencies in docker image](https://github.com/joomcode/e2ed/commit/72fa9ce55498e0fea5470d63b55ffc27ea82db66) ([uid11](https://github.com/uid11))
+
+  fix: typo in CHANGELOG.md
+
+  chore: update eslint to 8.50.0
+
+  refactor: move `mapLogPayloadInConsole` to utils
+
 ## [v0.15.0](https://github.com/joomcode/e2ed/tree/v0.15.0) (2023-09-21)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.14.19...v0.15.0)
