@@ -32,6 +32,11 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}
 
   await expect(customPackProperties.name, 'custom pack properties is correct').eql('allTests');
 
+  await expect(
+    customPackProperties.internalPackRunId,
+    'dynamic custom pack properties is correct',
+  ).gt(0);
+
   const mainPage = await navigateToPage(Main, {language});
 
   await expect(mainPage.pageParams, 'pageParams is correct after navigateToPage').eql({language});
