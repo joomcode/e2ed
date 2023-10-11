@@ -5,10 +5,10 @@ import type {DeepPartial, ObjectEntries, Values} from '../types/internal';
 
 /**
  * Deep merge two objects (arrays does not merge).
- * y overwrites x; x and y are immutable.
+ * `y` overwrites `x`; `x` and `y` are immutable.
  */
-export const deepMerge = <T extends object>(x: T, y: DeepPartial<T>): T => {
-  const result = {} as T;
+export const deepMerge = <Type extends object>(x: Type, y: DeepPartial<Type>): Type => {
+  const result = {} as Type;
 
   for (const key of Object.keys(x)) {
     const descriptor = Object.getOwnPropertyDescriptor(x, key);
@@ -18,9 +18,9 @@ export const deepMerge = <T extends object>(x: T, y: DeepPartial<T>): T => {
     Object.defineProperty(result, key, descriptor);
   }
 
-  for (const [key, value] of Object.entries(y) as ObjectEntries<T>) {
+  for (const [key, value] of Object.entries(y) as ObjectEntries<Type>) {
     if (isObjectAndNotAnArray(x[key]) && isObjectAndNotAnArray(value)) {
-      result[key] = deepMerge(x[key] as object, value) as Values<T>;
+      result[key] = deepMerge(x[key] as object, value) as Values<Type>;
     } else {
       const descriptor = Object.getOwnPropertyDescriptor(y, key);
 

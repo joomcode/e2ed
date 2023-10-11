@@ -11,12 +11,12 @@ export const renderRetryHeader = ({
   retryIndex,
   startTimeInMs,
 }: RetryProps): SafeHtml => {
-  const durationMs = endTimeInMs - startTimeInMs;
+  const durationInMs = endTimeInMs - startTimeInMs;
 
   return sanitizeHtml`
 <h3 class="__title">Retry ${retryIndex}</h3>
 <p class="__date">
   ${renderDatesInterval({endTimeInMs, startTimeInMs})}
-  (${renderDuration(durationMs)})
+  (${renderDuration(durationInMs)})
 </p>`;
 };

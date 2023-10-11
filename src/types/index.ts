@@ -27,7 +27,7 @@ export type {
   PageClassType,
   PageClassTypeArgs,
 } from './pages';
-export type {TestFilePath} from './paths';
+export type {FilePathFromRoot, TestFilePath} from './paths';
 export type {AsyncVoid, MaybePromise, UnwrapPromise} from './promise';
 export type {LiteReport, LiteRetry} from './report';
 export type {
