@@ -2,7 +2,7 @@
  * RGB color presentation (as three numbers).
  * @internal
  */
-type RGBTuple = readonly [number, number, number];
+type RgbTuple = readonly [number, number, number];
 
 /**
  * Image data as buffer or typed array.
@@ -15,11 +15,11 @@ export type ImgData = Buffer | Uint8Array | Uint8ClampedArray;
  * @internal
  */
 export type PixelmatchOptions = Readonly<{
-  aaColor: RGBTuple;
+  aaColor: RgbTuple;
   alpha: number;
-  diffColor: RGBTuple;
-  diffColorAlt: RGBTuple | undefined;
+  diffColor: RgbTuple;
+  diffColorAlt: RgbTuple | undefined;
   diffMask: boolean;
-  includeAA: boolean;
+  includeAa: boolean;
   threshold: number;
 }>;

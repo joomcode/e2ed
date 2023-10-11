@@ -14,6 +14,6 @@ export const DEFAULT_PIXELMATCH_OPTIONS: PixelmatchOptions = {
    */
   diffColorAlt: undefined,
   diffMask: false, // draw the diff over a transparent background (a mask)
-  includeAA: false, // whether to skip anti-aliasing detection
+  includeAa: false, // whether to skip anti-aliasing detection
   threshold: 0.1, // matching threshold (0 to 1); smaller is more sensitive
 };

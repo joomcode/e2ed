@@ -38,7 +38,6 @@ export const getStartInfo = (): StartInfo => {
   );
 
   return {
-    PWD: e2edEnvironment.PWD,
     absolutePathToProjectRootDirectory: ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
     'cwd()': process.cwd(),
     e2ed,
@@ -48,6 +47,7 @@ export const getStartInfo = (): StartInfo => {
     nodeVersion: process.version,
     pathToPack: getPathToPack(),
     'process.argv': [...process.argv],
+    pwd: e2edEnvironment.PWD,
     runEnvironment,
     startTimeInMs,
     testCafeHammerheadUp,

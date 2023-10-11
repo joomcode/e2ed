@@ -3,21 +3,21 @@ import {Route} from './Route';
 import type {
   Method,
   Request,
-  REQUEST_KEY_TYPE,
+  RequestKeyType,
   Response,
-  RESPONSE_KEY_TYPE,
+  ResponseKeyType,
   Url,
 } from './types/internal';
 
 /**
  * Inner key for request type.
  */
-declare const REQUEST_KEY: REQUEST_KEY_TYPE;
+declare const REQUEST_KEY: RequestKeyType;
 
 /**
  * Inner key for response type.
  */
-declare const RESPONSE_KEY: RESPONSE_KEY_TYPE;
+declare const RESPONSE_KEY: ResponseKeyType;
 
 /**
  * Abstract route for API requests.

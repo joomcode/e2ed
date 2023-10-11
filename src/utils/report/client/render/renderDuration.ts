@@ -31,5 +31,5 @@ export function renderDuration(durationInMs: number): SafeHtml {
     parts.unshift(`${durationInHours}h`);
   }
 
-  return createSafeHtmlWithoutSanitize`${parts.slice(-2).join(' ')}`;
+  return createSafeHtmlWithoutSanitize`${parts.slice(0, 2).join(' ')}`;
 }

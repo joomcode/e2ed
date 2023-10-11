@@ -71,7 +71,7 @@ export const pixelmatch = (
 
       if (Math.abs(delta) > maxDelta) {
         if (
-          !options.includeAA &&
+          !options.includeAa &&
           (isAntialiased(img1, x, y, width, height, img2) ||
             isAntialiased(img2, x, y, width, height, img1))
         ) {

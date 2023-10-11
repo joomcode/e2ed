@@ -21,7 +21,7 @@ export type Any = any;
  * Returns the type of instance params.
  */
 export type GetParamsType<Class> = Class extends {[PARAMS_KEY]: unknown}
-  ? Normalize<Class[PARAMS_KEY_TYPE]>
+  ? Normalize<Class[ParamsKeyType]>
   : never;
 
 /**
@@ -84,7 +84,7 @@ export type OptionalIfValueIncludeDefault<
 /**
  * Type of inner key for params type.
  */
-export type PARAMS_KEY_TYPE = typeof PARAMS_KEY;
+export type ParamsKeyType = typeof PARAMS_KEY;
 
 /**
  * Takes a union, and returns the intersection of the elements of the union.

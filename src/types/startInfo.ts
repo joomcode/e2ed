@@ -15,7 +15,6 @@ export type PackageInfo = Readonly<{packagePath: AbsolutePathToDirectory; versio
  * Not internal because it is used in report data.
  */
 export type StartInfo<FullPackConfigArg = FullPackConfig> = Readonly<{
-  PWD: string | undefined;
   absolutePathToProjectRootDirectory: AbsolutePathToDirectory;
   'cwd()': string;
   e2ed: PackageInfo;
@@ -25,6 +24,7 @@ export type StartInfo<FullPackConfigArg = FullPackConfig> = Readonly<{
   nodeVersion: string;
   pathToPack: FilePathFromRoot;
   'process.argv': readonly string[];
+  pwd: string | undefined;
   runEnvironment: RunEnvironment;
   startTimeInMs: UtcTimeInMs;
   testCafeHammerheadUp: PackageInfo;
