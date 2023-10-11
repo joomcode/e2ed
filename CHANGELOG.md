@@ -1,5 +1,21 @@
 # Changelog
 
+## [v0.15.3](https://github.com/joomcode/e2ed/tree/v0.15.3) (2023-10-11)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.2...v0.15.3)
+
+- [Merge pull request #36 from joomcode/feature/update-get-modules-graph](https://github.com/joomcode/e2ed/commit/e24ca1a049b7993b03054e95f5bb2d3fbce04eca) ([uid11](https://github.com/uid11))
+
+  chore: update `get-modules-graph` to 0.0.9
+
+- [chore: update `get-modules-graph` to 0.0.9](https://github.com/joomcode/e2ed/commit/e30bd34be3f565f7a8162e8af42f16fa456c9cb2) ([uid11](https://github.com/uid11))
+
+  chore: update devDependencies (eslint, @typescript-eslint/\*, etc)
+
+  fix: add type `FilePathFromRoot` to public API
+
+  fix: duration for long time intervals (in HTML report)
+
 ## [v0.15.2](https://github.com/joomcode/e2ed/tree/v0.15.2) (2023-09-23)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.1...v0.15.2)
