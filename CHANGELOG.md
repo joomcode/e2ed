@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.15.4](https://github.com/joomcode/e2ed/tree/v0.15.4) (2023-10-11)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.3...v0.15.4)
+
+- [Merge pull request #37 from joomcode/fix/duration-in-report](https://github.com/joomcode/e2ed/commit/ddc43f861181c956176823fa8f6c08bf9ce04e4e) ([uid11](https://github.com/uid11))
+
+  fix: error with output of duration in HTML report
+
+- [fix: error with output of duration in HTML report](https://github.com/joomcode/e2ed/commit/20377ff8041a1e6444ec1e000471862b1c1b894f) ([uid11](https://github.com/uid11))
+
+  chore: turn on rule `@typescript-eslint/naming-convention`
+
 ## [v0.15.3](https://github.com/joomcode/e2ed/tree/v0.15.3) (2023-10-11)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.2...v0.15.3)
