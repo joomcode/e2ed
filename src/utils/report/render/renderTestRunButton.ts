@@ -1,4 +1,4 @@
-import {sanitizeHtml} from '../client';
+import {renderDuration, sanitizeHtml} from '../client';
 
 import type {SafeHtml, TestRunButtonProps} from '../../../types/internal';
 
@@ -20,6 +20,6 @@ export const renderTestRunButton = (
 >
   <span class="test-button__order">#${index + 1}</span>
   <span class="test-button__name">${name}<span class="test-button__parameters">${mainParams}</span></span>
-  <span class="test-button__time">${durationInMs}ms</span>
+  <span class="test-button__time">${renderDuration(durationInMs)}</span>
 </button>`;
 };

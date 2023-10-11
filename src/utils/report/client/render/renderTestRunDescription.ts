@@ -23,7 +23,7 @@ const sanitizeHtml = clientSanitizeHtml;
  */
 export function renderTestRunDescription(fullTestRun: FullTestRun): SafeHtml {
   const {endTimeInMs, startTimeInMs} = fullTestRun;
-  const durationMs = endTimeInMs - startTimeInMs;
+  const durationInMs = endTimeInMs - startTimeInMs;
   const {meta} = fullTestRun.options;
   const metaHtmls: SafeHtml[] = [];
 
@@ -47,7 +47,7 @@ export function renderTestRunDescription(fullTestRun: FullTestRun): SafeHtml {
   </dd>
   <dt class="test-description__term">Duration</dt>
   <dd class="test-description__definition">
-    ${renderDuration(durationMs)}
+    ${renderDuration(durationInMs)}
   </dd>
 </dl>`;
 }
