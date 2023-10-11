@@ -1,8 +1,8 @@
 import {SLASHES_AT_THE_END_REGEXP, SLASHES_AT_THE_START_REGEXP} from './constants/internal';
 
-import type {PARAMS_KEY_TYPE, Url, ZeroOrOneArg} from './types/internal';
+import type {ParamsKeyType, Url, ZeroOrOneArg} from './types/internal';
 
-declare const PARAMS_KEY: PARAMS_KEY_TYPE;
+declare const PARAMS_KEY: ParamsKeyType;
 
 /**
  * Abstract route with base methods.

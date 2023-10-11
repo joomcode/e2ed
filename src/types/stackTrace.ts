@@ -13,6 +13,7 @@ export type StackFrame<F extends Fn = Fn, This = unknown> = Readonly<{
   getColumnNumber(): number;
   getFunction(): F;
   getEvalOrigin(): string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   getScriptNameOrSourceURL(): string;
   isNative(): boolean;
   isToplevel(): boolean;

@@ -5,12 +5,12 @@ import {assertValueIsTrue} from './utils/asserts';
 import {getFullPackConfig} from './utils/getFullPackConfig';
 
 import type {PageRoute} from './PageRoute';
-import type {AsyncVoid, PageClassTypeArgs, PARAMS_KEY_TYPE} from './types/internal';
+import type {AsyncVoid, PageClassTypeArgs, ParamsKeyType} from './types/internal';
 
 /**
  * Inner key for parameters type.
  */
-declare const PARAMS_KEY: PARAMS_KEY_TYPE;
+declare const PARAMS_KEY: ParamsKeyType;
 
 /**
  * Abstract page with base methods.
