@@ -27,6 +27,9 @@
   --test-details-padding: 15px;
 
   --test-link-selected-color: hsl(54 100% 90%);
+
+  --link-color: #0000ee;
+  --link-color-visited: #551a8b;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -44,6 +47,9 @@
 
     --failed-bg-color: hsl(0 28% 21%);
     --test-link-selected-color: hsl(221 31% 20%);
+
+    --link-color: #38a2ff;
+    --link-color-visited: #a06eff;
   }
 }
 
@@ -73,6 +79,17 @@ button:hover {
 button:disabled {
   color: #1010104d;
   cursor: not-allowed;
+}
+
+a,
+a:hover,
+a:active,
+a:focus {
+  color: var(--link-color);
+}
+
+a:visited {
+  color: var(--link-color-visited);
 }
 
 .header {
