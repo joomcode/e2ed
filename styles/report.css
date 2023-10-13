@@ -29,7 +29,7 @@
   --test-link-selected-color: hsl(54 100% 90%);
 
   --link-color: #0000ee;
-  --link-color-visited: #551a8b;
+  --link-visited-color: #551a8b;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -49,7 +49,7 @@
     --test-link-selected-color: hsl(221 31% 20%);
 
     --link-color: #38a2ff;
-    --link-color-visited: #a06eff;
+    --link-visited-color: #b68fff;
   }
 }
 
@@ -89,7 +89,7 @@ a:focus {
 }
 
 a:visited {
-  color: var(--link-color-visited);
+  color: var(--link-visited-color);
 }
 
 .header {
