@@ -6,16 +6,15 @@
     "declaration": true,
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
-    "forceConsistentCasingInFileNames": true,
     "incremental": true,
-    "outDir": "build",
-    "module": "NodeNext",
+    "module": "CommonJS",
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
+    "outDir": "build",
     "paths": {
       "autotests": ["./autotests/index.ts"],
       "autotests/*": ["./autotests/*"]
@@ -28,8 +27,7 @@
     "stripInternal": true,
     "target": "ES2016",
     "types": ["node"],
-    "useDefineForClassFields": true,
-    "verbatimModuleSyntax": false
+    "useDefineForClassFields": true
   },
   "include": [
     "./autotests/**/*.ts",

@@ -1,6 +1,7 @@
 import {LogEventType} from '../../constants/internal';
 
 import {E2edError} from '../error';
+import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
 
 import type {Request, RequestOrResponsePredicateWithPromise, Response} from '../../types/internal';
@@ -30,10 +31,10 @@ export const processEventsPredicate = async ({
       return false;
     }
 
-    const waitInMs = Date.now() - startTimeInMs;
+    const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
 
     log(
-      `Have waited for the ${eventType} for ${waitInMs}ms`,
+      `Have waited for the ${eventType} for ${waitWithUnits}`,
       {predicate, [eventType.toLowerCase()]: requestOrResponse},
       LogEventType.InternalUtil,
     );

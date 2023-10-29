@@ -5,6 +5,7 @@ import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
 import {assertValueIsNotNull} from '../asserts';
 import {getFileSize, writeFile} from '../fs';
 import {generalLog} from '../generalLog';
+import {getDurationWithUnits} from '../getDurationWithUnits';
 
 import {renderReportToHtml} from './render';
 
@@ -28,9 +29,9 @@ export const writeHtmlReport = async (reportData: ReportData): Promise<void> => 
 
   const reportFileSize = await getFileSize(reportFilePath);
 
-  const duration = Date.now() - startTimeInMs;
+  const durationWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
 
   generalLog(
-    `HTML report was written (${reportFileSize} bytes) to "${reportFilePath}" in ${duration}ms`,
+    `HTML report was written (${reportFileSize} bytes) to "${reportFilePath}" in ${durationWithUnits}`,
   );
 };

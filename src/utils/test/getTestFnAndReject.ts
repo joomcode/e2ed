@@ -3,6 +3,7 @@ import {RESOLVED_PROMISE} from '../../constants/internal';
 import {E2edError} from '../error';
 import {writeLogEventTime} from '../fs';
 import {generalLog} from '../generalLog';
+import {getDurationWithUnits} from '../getDurationWithUnits';
 import {getPromiseWithResolveAndReject} from '../promise';
 
 import type {Onlog, RejectTestRun, RunId, TestFn, Void} from '../../types/internal';
@@ -95,15 +96,19 @@ export const getTestFnAndReject = ({
    * @internal
    */
   function rejectByIdleTimeoutError(): void {
+    const timeoutWithUnits = getDurationWithUnits(testIdleTimeout);
+
     const error = new E2edError(
-      `Test run ${runId} was rejected after ${testIdleTimeout}ms idle timeout`,
+      `Test run ${runId} was rejected after ${timeoutWithUnits} idle timeout`,
     );
 
     reject(error);
   }
 
   setRejectTimeoutFunction(() => {
-    const error = new E2edError(`Test run ${runId} was rejected after ${testTimeout}ms timeout`);
+    const timeoutWithUnits = getDurationWithUnits(testTimeout);
+
+    const error = new E2edError(`Test run ${runId} was rejected after ${timeoutWithUnits} timeout`);
 
     reject(error);
   });

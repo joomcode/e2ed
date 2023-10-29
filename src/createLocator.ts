@@ -1,4 +1,6 @@
 export type {
+  AnyMark,
+  Attributes,
   CreateLocator,
   GetLocatorParameters,
   Locator,
@@ -11,5 +13,13 @@ export type {
   PropertiesWithMarkConstraint,
   PropertiesWithMarkWithParametersConstraint,
   RemoveMarkFromProperties,
+  RootOptions,
 } from 'create-locator';
-export {createLocator, getLocatorParameters, removeMarkFromProperties} from 'create-locator';
+export {
+  createLocator,
+  getLocatorParameters,
+  removeMarkFromProperties,
+  setGlobalProductionMode,
+} from 'create-locator';
+// eslint-disable-next-line import/no-internal-modules
+export {getCssSelectorFromAttributesChain} from 'create-locator/getCssSelectorFromAttributesChain';

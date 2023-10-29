@@ -86,6 +86,11 @@ a:hover,
 a:active,
 a:focus {
   color: var(--link-color);
+  text-decoration-line: none;
+}
+
+a:hover {
+  text-decoration-line: underline;
 }
 
 a:visited {

@@ -3,6 +3,7 @@ import {ClientFunction} from 'testcafe-without-typecheck';
 import {getTestIdleTimeout} from '../../context/testIdleTimeout';
 
 import {E2edError} from '../error';
+import {getDurationWithUnits} from '../getDurationWithUnits';
 import {getPromiseWithResolveAndReject} from '../promise';
 import {wrapInTestRunTracker} from '../testRun';
 
@@ -41,10 +42,11 @@ export const getClientFunctionWithTimeout = <Args extends unknown[], R>(
     const {promise, reject, resolve, setRejectTimeoutFunction} =
       getPromiseWithResolveAndReject<Awaited<R>>(clientFunctionTimeout);
     const wrappedSetRejectTimeoutFunction = wrapInTestRunTracker(setRejectTimeoutFunction);
+    const timeoutWithUnits = getDurationWithUnits(clientFunctionTimeout);
 
     wrappedSetRejectTimeoutFunction(() => {
       const error = new E2edError(
-        `Promise of ${printedClientFunctionName} was rejected after ${clientFunctionTimeout}ms timeout`,
+        `Promise of ${printedClientFunctionName} was rejected after ${timeoutWithUnits} timeout`,
       );
 
       reject(error);

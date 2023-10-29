@@ -1,5 +1,6 @@
 import {assertValueIsNotNull} from '../../asserts';
 import {generalLog} from '../../generalLog';
+import {getDurationWithUnits} from '../../getDurationWithUnits';
 
 import {sanitizeHtml} from '../client';
 import {getRetriesProps} from '../getRetriesProps';
@@ -49,10 +50,12 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
   </body>
 </html>`;
 
-  const duration = Date.now() - startTimeInMs;
+  const durationWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
 
   generalLog(
-    `HTML report was rendered for ${length} test run${length > 1 ? 's' : ''} in ${duration}ms`,
+    `HTML report was rendered for ${length} test run${
+      length > 1 ? 's' : ''
+    } in ${durationWithUnits}`,
   );
 
   return safeHtml;

@@ -3,6 +3,7 @@ import {getTestRunPromise} from '../../context/testRunPromise';
 import {getWaitForEventsState} from '../../context/waitForEventsState';
 import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
+import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {getFullPackConfig} from '../../utils/getFullPackConfig';
 import {log} from '../../utils/log';
 import {getPromiseWithResolveAndReject} from '../../utils/promise';
@@ -43,9 +44,10 @@ export const waitForAllRequestsComplete = async (
   const resolveTimeout =
     maxIntervalBetweenRequestsInMs ?? defaultTimeouts.maxIntervalBetweenRequestsInMs;
   const rejectTimeout = timeout ?? defaultTimeouts.timeout;
+  const rejectTimeoutWithUnits = getDurationWithUnits(rejectTimeout);
 
   log(
-    `Set wait for all requests complete with timeout ${rejectTimeout}ms`,
+    `Set wait for all requests complete with timeout ${rejectTimeoutWithUnits}`,
     {maxIntervalBetweenRequestsInMs: resolveTimeout, predicate},
     LogEventType.InternalCore,
   );
@@ -75,7 +77,7 @@ export const waitForAllRequestsComplete = async (
       hashOfNotCompleteRequests,
     );
     const error = new E2edError(
-      `waitForAllRequestsComplete promise rejected after ${rejectTimeout}ms timeout`,
+      `waitForAllRequestsComplete promise rejected after ${rejectTimeoutWithUnits} timeout`,
       {predicate, urlsOfNotCompleteRequests},
     );
 
@@ -103,10 +105,10 @@ export const waitForAllRequestsComplete = async (
     resolvePromise.catch(() => {
       allRequestsCompletePredicates.delete(allRequestsCompletePredicateWithPromise);
 
-      const waitInMs = Date.now() - startTimeInMs;
+      const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
 
       log(
-        `Have waited for all requests complete for ${waitInMs}ms`,
+        `Have waited for all requests complete for ${waitWithUnits}`,
         {maxIntervalBetweenRequestsInMs: resolveTimeout, predicate, timeout: rejectTimeout},
         LogEventType.InternalUtil,
       );

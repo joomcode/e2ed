@@ -2,12 +2,12 @@ import {TestRunStatus} from '../../constants/internal';
 
 import {assertValueIsFalse, assertValueIsTrue} from '../asserts';
 import {cloneWithoutLogEvents} from '../clone';
-import {getTestRunEventFileName, readEventsFromFiles} from '../fs';
-import {failMessage, generalLog, okMessage} from '../generalLog';
+import {getTestRunEventFileName} from '../fs';
 
 import {getConcurrencyForNextRetry} from './getConcurrencyForNextRetry';
+import {getNewFullTestRuns} from './getNewFullTestRuns';
 import {getPrintedRetry} from './getPrintedRetry';
-import {getPrintedTestsCount} from './getPrintedTestsCount';
+import {logRetryResult} from './logRetryResult';
 import {truncateRetriesStateForLogs} from './truncateRetriesStateForLogs';
 
 import type {Mutable, RetriesState} from '../../types/internal';
@@ -21,24 +21,10 @@ export const updateRetriesStateAfterRetry = async (retriesState: RetriesState): 
     concurrency,
     maxRetriesCount,
     retryIndex,
-    startLastRetryTimeInMs,
     successfulTestRunNamesHash,
     visitedTestRunEventsFileName,
   } = retriesState;
-  const printedRetry = getPrintedRetry({maxRetriesCount, retryIndex});
-
-  const newFullTestRuns = await readEventsFromFiles(visitedTestRunEventsFileName);
-
-  for (const newFullTestRun of newFullTestRuns) {
-    assertValueIsFalse(
-      newFullTestRun.name in successfulTestRunNamesHash,
-      `the test "${newFullTestRun.name}" from the last ${printedRetry} is not among the successful tests already passed in the previous retries`,
-      {
-        newFullTestRun: cloneWithoutLogEvents(newFullTestRun),
-        retriesState: truncateRetriesStateForLogs(retriesState),
-      },
-    );
-  }
+  const newFullTestRuns = await getNewFullTestRuns(retriesState);
 
   const unbrokenNewFullTestRuns = newFullTestRuns.filter(
     ({status}) => status !== TestRunStatus.Broken,
@@ -49,6 +35,8 @@ export const updateRetriesStateAfterRetry = async (retriesState: RetriesState): 
   const successfulNewFullTestRuns = unbrokenNewFullTestRuns.filter(
     ({status}) => status !== TestRunStatus.Failed,
   );
+
+  const printedRetry = getPrintedRetry({maxRetriesCount, retryIndex});
 
   for (const successfulNewFullTestRun of successfulNewFullTestRuns) {
     const {name} = successfulNewFullTestRun;
@@ -66,17 +54,13 @@ export const updateRetriesStateAfterRetry = async (retriesState: RetriesState): 
     (visitedTestRunEventsFileName as string[]).push(getTestRunEventFileName(runId));
   }
 
-  const stateMessage = retriesState.isLastRetrySuccessful ? okMessage : failMessage;
-
-  generalLog(
-    `Results of ${printedRetry}: ${stateMessage} ${getPrintedTestsCount(
-      newFullTestRuns.length,
-    )} with concurrency ${concurrency} ran in ${Date.now() - startLastRetryTimeInMs}ms (${
-      failedNewFullTestRuns.length
-    } failed, ${successfulNewFullTestRuns.length} successful, ${
-      newFullTestRuns.length - unbrokenNewFullTestRuns.length
-    } broken)`,
-  );
+  logRetryResult({
+    failedLength: failedNewFullTestRuns.length,
+    newLength: newFullTestRuns.length,
+    retriesState,
+    successfulLength: successfulNewFullTestRuns.length,
+    unbrokenLength: unbrokenNewFullTestRuns.length,
+  });
 
   if (retriesState.isLastRetrySuccessful) {
     assertValueIsTrue(

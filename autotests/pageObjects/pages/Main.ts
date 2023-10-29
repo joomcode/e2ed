@@ -3,7 +3,8 @@ import {Main as MainRoute} from 'autotests/routes/pageRoutes';
 import {createLocator, type Locator} from 'create-locator';
 import {Page} from 'e2ed';
 import {waitForAllRequestsComplete, waitForInterfaceStabilization} from 'e2ed/actions';
-import {createSelectorByCss, locatorIdSelector} from 'e2ed/selectors';
+import {getCssSelectorFromAttributesChain} from 'e2ed/createLocator';
+import {createSelectorByCss} from 'e2ed/selectors';
 
 import type {Language} from 'autotests/types';
 import type {GetParamsType, Selector} from 'e2ed/types';
@@ -14,7 +15,11 @@ type CustomPageParams = Partial<RouteParams> | undefined;
 type MainLocator = Locator<{header: {}}>;
 
 const mainPageLocator = createLocator<MainLocator, Selector>('google', {
-  mapAttributes: (attributes) => locatorIdSelector(attributes['data-testid'] ?? ''),
+  mapAttributesChain: (attributesChain) => {
+    const cssSelector = getCssSelectorFromAttributesChain(attributesChain);
+
+    return createSelectorByCss(cssSelector);
+  },
   pathAttribute: 'data-testid',
 });
 
