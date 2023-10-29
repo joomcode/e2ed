@@ -3,6 +3,7 @@ import {getRandomId} from '../../generators/internal';
 
 import {cloneWithoutUndefinedProperties} from '../clone';
 import {E2edError} from '../error';
+import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 import {wrapInTestRunTracker} from '../testRun';
@@ -85,10 +86,12 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
     });
 
     endTimeout = setTimeout(() => {
+      const timeoutWithUnits = getDurationWithUnits(timeout);
+
       req.destroy();
       req.emit(
         'error',
-        new E2edError(`The request to ${logParams.url} is timed out in ${timeout}ms`, {
+        new E2edError(`The request to ${logParams.url} is timed out in ${timeoutWithUnits}`, {
           ...fullLogParams,
           cause: undefined,
         }),

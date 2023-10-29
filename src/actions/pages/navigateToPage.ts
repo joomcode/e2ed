@@ -1,4 +1,5 @@
 import {LogEventType} from '../../constants/internal';
+import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
 import {getUserlandHooks} from '../../utils/userlandHooks';
 
@@ -46,8 +47,10 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
 
   await page.afterNavigateToPage?.();
 
+  const durationWithUnits = getDurationWithUnits(Date.now() - startNavigateTimeInMs);
+
   log(
-    `Page "${PageClass.name}" loaded in ${Date.now() - startNavigateTimeInMs}ms`,
+    `Page "${PageClass.name}" loaded in ${durationWithUnits}`,
     {url},
     LogEventType.InternalAction,
   );

@@ -3,6 +3,7 @@ import {getTestRunPromise} from '../../context/testRunPromise';
 import {getWaitForEventsState} from '../../context/waitForEventsState';
 import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
+import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {getFullPackConfig} from '../../utils/getFullPackConfig';
 import {log} from '../../utils/log';
 import {getPromiseWithResolveAndReject} from '../../utils/promise';
@@ -43,9 +44,11 @@ export const waitForResponse = <SomeResponse extends Response>(
 
   void testRunPromise.then(clearRejectTimeout);
 
+  const timeoutWithUnits = getDurationWithUnits(rejectTimeout);
+
   setRejectTimeoutFunction(() => {
     const error = new E2edError(
-      `waitForResponse promise rejected after ${rejectTimeout}ms timeout`,
+      `waitForResponse promise rejected after ${timeoutWithUnits} timeout`,
       {predicateCode: predicate.toString()},
     );
 
@@ -57,7 +60,7 @@ export const waitForResponse = <SomeResponse extends Response>(
   waitForEventsState.responsePredicates.add(responsePredicateWithPromise);
 
   log(
-    `Set wait for response with timeout ${rejectTimeout}ms`,
+    `Set wait for response with timeout ${timeoutWithUnits}`,
     {predicate},
     LogEventType.InternalCore,
   );

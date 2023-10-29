@@ -4,6 +4,7 @@ import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
 
 import {getFileSize, writeFile} from '../fs';
 import {generalLog} from '../generalLog';
+import {getDurationWithUnits} from '../getDurationWithUnits';
 
 import type {FilePathFromRoot, LiteReport, UtcTimeInMs} from '../../types/internal';
 
@@ -24,9 +25,9 @@ export const writeLiteJsonReport = async (liteReport: LiteReport): Promise<void>
 
   const reportFileSize = await getFileSize(reportFilePath);
 
-  const duration = Date.now() - startTimeInMs;
+  const durationWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
 
   generalLog(
-    `Lite JSON report was written (${reportFileSize} bytes) to "${reportFilePath}" in ${duration}ms`,
+    `Lite JSON report was written (${reportFileSize} bytes) to "${reportFilePath}" in ${durationWithUnits}`,
   );
 };

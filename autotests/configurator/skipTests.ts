@@ -1,7 +1,7 @@
-import type {SkipTests} from './types/skipTests';
+import type {SkipTests} from 'autotests/types/skipTests';
 
 /**
- * Array of groups of skipped tests, grouped by skip reason.
+ * Get array of groups of skipped tests, grouped by skip reason.
  */
 export const skipTests: SkipTests = [
   {

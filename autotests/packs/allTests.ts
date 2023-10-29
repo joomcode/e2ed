@@ -1,16 +1,13 @@
 /**
  * @file Pack file (file with configuration of pack).
- * Do not import anything from common index files into this file other than
- * the types and values from configurator, or from point imports for pack configuration,
- * like `./skipTests` (because the pack config is compiled separately from the tests themselves).
+ * Do not import anything (from `utils`, etc) into this file other than
+ * the types and values from `../configurator`, `e2ed/configurator` or other packs
+ * (because the pack is compiled separately from the tests themselves and has separate scope).
  */
 
 import {RunEnvironment, runEnvironment} from 'e2ed/configurator';
 
-import {doAfterPack} from '../doAfterPack';
-import {doBeforePack} from '../doBeforePack';
-import {skipTests} from '../skipTests';
-import {mapLogPayloadInConsole} from '../utils/mapLogPayloadInConsole';
+import {doAfterPack, doBeforePack, mapLogPayloadInConsole, skipTests} from '../configurator';
 
 import type {IsTestIncludedInPack, Pack} from 'autotests/types/packSpecific';
 

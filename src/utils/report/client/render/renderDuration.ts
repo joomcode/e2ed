@@ -1,7 +1,10 @@
+import {getDurationWithUnits as clientGetDurationWithUnits} from '../../../getDurationWithUnits';
+
 import {createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize} from '../sanitizeHtml';
 
 import type {SafeHtml} from '../../../../types/internal';
 
+const getDurationWithUnits = clientGetDurationWithUnits;
 const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
 
 /**
@@ -10,26 +13,7 @@ const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
  * @internal
  */
 export function renderDuration(durationInMs: number): SafeHtml {
-  const remainderInMs = durationInMs % 1000;
-  const durationInSeconds = Math.round((durationInMs - remainderInMs) / 1000);
-  const remainderInSeconds = durationInSeconds % 60;
-  const durationInMinutes = Math.round((durationInSeconds - remainderInSeconds) / 60);
-  const remainderInMinutes = durationInMinutes % 60;
-  const durationInHours = Math.round((durationInMinutes - remainderInMinutes) / 60);
+  const durationWithUnits = getDurationWithUnits(durationInMs);
 
-  const parts: string[] = [`${remainderInMs}ms`];
-
-  if (remainderInSeconds > 0) {
-    parts.unshift(`${remainderInSeconds}s`);
-  }
-
-  if (remainderInMinutes > 0) {
-    parts.unshift(`${remainderInMinutes}m`);
-  }
-
-  if (durationInHours > 0) {
-    parts.unshift(`${durationInHours}h`);
-  }
-
-  return createSafeHtmlWithoutSanitize`${parts.slice(0, 2).join(' ')}`;
+  return createSafeHtmlWithoutSanitize`${durationWithUnits}`;
 }

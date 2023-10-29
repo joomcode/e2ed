@@ -1,3 +1,5 @@
+import {getDurationWithUnits} from '../../getDurationWithUnits';
+
 import {
   addDomContentLoadedHandler,
   addOnClickOnClass,
@@ -38,6 +40,7 @@ ${clickOnRetry.toString()}
 ${clickOnStep.toString()}
 ${clickOnTestRun.toString()}
 ${domContentLoadedHandler.toString()}
+${getDurationWithUnits.toString()}
 ${parseMarkdownLinks.toString()}
 ${readJsonReportData.toString()}
 ${renderDatesInterval.toString()}

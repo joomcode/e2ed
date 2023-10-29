@@ -5,6 +5,7 @@ import {INSTALLED_E2ED_DIRECTORY_PATH} from '../../constants/internal';
 
 import {E2edError} from '../error';
 import {getLastLogEventTimeInMs, writeLogEventTime} from '../fs';
+import {getDurationWithUnits} from '../getDurationWithUnits';
 import {getFullPackConfig} from '../getFullPackConfig';
 import {setTestsSubprocess, testsSubprocess} from '../tests';
 
@@ -59,8 +60,10 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
         newTestsSubprocess.kill();
       }
 
+      const timeoutWithUnits = getDurationWithUnits(interruptTimeout);
+
       const error = new E2edError(
-        `Retry subprocess with label "${runLabel}" did not respond within ${interruptTimeout}ms and was killed`,
+        `Retry subprocess with label "${runLabel}" did not respond within ${timeoutWithUnits} and was killed`,
         {reason},
       );
 

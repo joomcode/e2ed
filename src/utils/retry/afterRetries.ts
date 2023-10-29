@@ -1,10 +1,11 @@
 import {startTimeInMs} from '../../configurator';
 
 import {generalLog} from '../generalLog';
+import {getDurationWithUnits} from '../getDurationWithUnits';
 
 import {getPrintedTestsCount} from './getPrintedTestsCount';
 
-import type {RetriesState, UtcTimeInMs} from '../../types/internal';
+import type {RetriesState} from '../../types/internal';
 
 /**
  * After docker retries handler.
@@ -19,8 +20,8 @@ export const afterRetries = (retriesState: RetriesState): void => {
     retryIndex: retryIndexMaybePlusOne,
   } = retriesState;
 
-  const endTimeInMs = Date.now() as UtcTimeInMs;
-  const durationString = `in ${endTimeInMs - startTimeInMs}ms`;
+  const durationWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
+  const durationString = `in ${durationWithUnits}`;
   const retryIndex = isRetriesCycleEnded ? retryIndexMaybePlusOne - 1 : retryIndexMaybePlusOne;
   const retryString = `${retryIndex} ${retryIndex === 1 ? 'retry' : 'retries'}`;
 

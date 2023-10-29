@@ -9,6 +9,7 @@ import {
 
 import {assertValueIsDefined, assertValueIsTrue} from '../asserts';
 import {generalLog} from '../generalLog';
+import {getDurationWithUnits} from '../getDurationWithUnits';
 
 import type {FullTestRun, UtcTimeInMs} from '../../types/internal';
 
@@ -70,10 +71,10 @@ export const readEventsFromFiles = async (
     }
   }
 
-  const duration = Date.now() - startTimeInMs;
+  const durationWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
 
   generalLog(
-    `Read ${fullTestRuns.length} test runs from "${EVENTS_DIRECTORY_PATH}" in ${duration}ms`,
+    `Read ${fullTestRuns.length} test runs from "${EVENTS_DIRECTORY_PATH}" in ${durationWithUnits}`,
   );
 
   return fullTestRuns;

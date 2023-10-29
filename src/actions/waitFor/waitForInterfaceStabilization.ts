@@ -1,5 +1,6 @@
 import {LogEventType} from '../../constants/internal';
 import {createClientFunction} from '../../createClientFunction';
+import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {getFullPackConfig} from '../../utils/getFullPackConfig';
 import {log} from '../../utils/log';
 
@@ -105,8 +106,10 @@ const clientWaitForInterfaceStabilization = createClientFunction(
         const totalTimeoutInMs = stabilizationInterval * TOTAL_TIMEOUT_IN_STABILIZATION_INTERVAL;
 
         if (Date.now() - startTimeInMs > totalTimeoutInMs) {
+          const timeoutWithUnits = getDurationWithUnits(totalTimeoutInMs);
+
           clearInterval(intervalId);
-          resolve(`Time was out in waitForInterfaceStabilization (${totalTimeoutInMs}ms)`);
+          resolve(`Time was out in waitForInterfaceStabilization (${timeoutWithUnits})`);
         }
       }, CHECK_INTERVAL_IN_MS);
     });
@@ -141,8 +144,11 @@ export const waitForInterfaceStabilization = async (
 
   const startDateTimeInIso = new Date(startTimeInMs).toISOString();
 
+  const stabilizationIntervalWithUnits = getDurationWithUnits(stabilizationInterval);
+  const waitWithUnits = getDurationWithUnits(waitInMs);
+
   log(
-    `Have waited for interface stabilization for ${waitInMs}ms with stabilization interval ${stabilizationInterval}ms`,
+    `Have waited for interface stabilization for ${waitWithUnits} with stabilization interval ${stabilizationIntervalWithUnits}`,
     {error: maybeErrorReason, startDateTimeInIso},
     LogEventType.InternalAction,
   );
