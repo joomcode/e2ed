@@ -1,5 +1,32 @@
 # Changelog
 
+## [v0.15.5](https://github.com/joomcode/e2ed/tree/v0.15.5) (2023-10-29)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.4...v0.15.5)
+
+- [Merge pull request #39 from joomcode/feat/time-with-units-everywhere](https://github.com/joomcode/e2ed/commit/4ffbd76ab1fb815521f8395c194e5a3f814168dd) ([uid11](https://github.com/uid11))
+
+  feat: use duration with units everywhere
+
+- [feat: use duration with units everywhere](https://github.com/joomcode/e2ed/commit/01440bc4d11705d6ac4ee3cedc46fee5cf48f32c) ([uid11](https://github.com/uid11))
+
+  fix: add `autotests/configurator` directory
+
+  docs: add `README.md` to `autotests/configurator` directory
+
+  chore: update devDependencies (`eslint`, `@types/node`, etc)
+
+  chore: update `create-locator` to 0.0.18
+
+  fix: change `tsconfig.json` options to more explicit ones (`"module": "CommonJS"`)
+
+- [Torchinskiy Merge pull request #38 from joomcode/FI-901](https://github.com/joomcode/e2ed/commit/b401f8323cdb0d19ffeb380e75ccdd83fac13e0f) ([Nikita](https://github.com/Nikita))
+
+  fix(report): link color styles for dark theme
+
+- [Torchinskiy fix(report): color contrast and var name](https://github.com/joomcode/e2ed/commit/7d09f1c37edd9f7dd6e8ad064f2863f519c544b4) ([Nikita](https://github.com/Nikita))
+- [fix(report): link color styles for dark theme](https://github.com/joomcode/e2ed/commit/7cf3da6c6db555969f8d3b7098c96a92f952df76) ([Nikita_Torchinskiy](https://github.com/Nikita_Torchinskiy))
+
 ## [v0.15.4](https://github.com/joomcode/e2ed/tree/v0.15.4) (2023-10-11)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.3...v0.15.4)
