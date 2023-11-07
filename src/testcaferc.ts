@@ -62,7 +62,7 @@ const fullPackConfig: FullPackConfig = {
 const {
   doAfterPack,
   doBeforePack,
-  isTestIncludedInPack,
+  filterTestsIntoPack,
   mapLogPayloadInConsole,
   mapLogPayloadInLogFile,
   mapLogPayloadInReport,
@@ -76,7 +76,7 @@ for (const fn of doBeforePack) {
   setCustomInspectOnFunction(fn);
 }
 
-setCustomInspectOnFunction(isTestIncludedInPack);
+setCustomInspectOnFunction(filterTestsIntoPack);
 setCustomInspectOnFunction(mapLogPayloadInConsole);
 setCustomInspectOnFunction(mapLogPayloadInLogFile);
 setCustomInspectOnFunction(mapLogPayloadInReport);

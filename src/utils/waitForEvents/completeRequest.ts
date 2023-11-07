@@ -1,5 +1,3 @@
-import {assertValueIsDefined} from '../asserts';
-
 import type {RequestHookContextId, WaitForEventsState} from '../../types/internal';
 
 /**
@@ -7,11 +5,9 @@ import type {RequestHookContextId, WaitForEventsState} from '../../types/interna
  * @internal
  */
 export const completeRequest = (
-  requestHookContextId: RequestHookContextId | undefined,
+  requestHookContextId: RequestHookContextId,
   waitForEventsState: WaitForEventsState,
 ): void => {
-  assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined');
-
   const {allRequestsCompletePredicates, hashOfNotCompleteRequests} = waitForEventsState;
 
   // eslint-disable-next-line @typescript-eslint/no-dynamic-delete

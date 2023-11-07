@@ -21,7 +21,8 @@ import type {
 } from '../../types/internal';
 
 /**
- * RequestHook to wait for request/response events (waitForRequest/waitForResponse).
+ * `RequestHook` to wait for request/response events (`waitForAllRequestsComplete`,
+ * `waitForRequest`/`waitForResponse`).
  * @internal
  */
 export class RequestHookToWaitForEvents extends RequestHookWithEvents {
@@ -35,12 +36,11 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
   override async onRequest(event: RequestHookRequestEvent): Promise<void> {
     const request = getRequestFromRequestOptions(event.requestOptions);
     const requestHookContext = event.requestOptions[REQUEST_HOOK_CONTEXT_KEY];
+    const requestHookContextId = requestHookContext[REQUEST_HOOK_CONTEXT_ID_KEY];
 
-    await addNotCompleteRequest(
-      request,
-      requestHookContext[REQUEST_HOOK_CONTEXT_ID_KEY],
-      this.waitForEventsState,
-    );
+    assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {request});
+
+    await addNotCompleteRequest(request, requestHookContextId, this.waitForEventsState);
 
     if (this.waitForEventsState.requestPredicates.size > 0) {
       await processEventsPredicates({
@@ -56,12 +56,16 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
    */
   override async onResponse(event: RequestHookResponseEvent): Promise<void> {
     const {headers} = event;
+    const requestHookContextId = (headers as Record<symbol, RequestHookContextId>)[
+      REQUEST_HOOK_CONTEXT_ID_KEY
+    ];
+
+    assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {
+      requestHookResponseEvent: event,
+    });
 
     if (headers) {
-      completeRequest(
-        (headers as Record<symbol, RequestHookContextId>)[REQUEST_HOOK_CONTEXT_ID_KEY],
-        this.waitForEventsState,
-      );
+      completeRequest(requestHookContextId, this.waitForEventsState);
     }
 
     if (this.waitForEventsState.responsePredicates.size > 0) {

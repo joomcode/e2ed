@@ -9,14 +9,14 @@ import {RunEnvironment, runEnvironment} from 'e2ed/configurator';
 
 import {doAfterPack, doBeforePack, mapLogPayloadInConsole, skipTests} from '../configurator';
 
-import type {IsTestIncludedInPack, Pack} from 'autotests/types/packSpecific';
+import type {FilterTestsIntoPack, Pack} from 'autotests/types/packSpecific';
 
 const isLocalRun = runEnvironment === RunEnvironment.Local;
 
 const browser = isLocalRun ? 'chrome:headless' : 'chromium:headless';
 const browserFlags = ['--disable-dev-shm-usage', '--disable-web-security'];
 
-const isTestIncludedInPack: IsTestIncludedInPack = ({options}) => options.meta.testId !== '13';
+const filterTestsIntoPack: FilterTestsIntoPack = ({options}) => options.meta.testId !== '13';
 
 /**
  * Pack of tests or tasks (pack configuration object).
@@ -32,7 +32,7 @@ export const pack: Pack = {
   doAfterPack,
   doBeforePack,
   dockerImage: 'e2edhub/e2ed',
-  isTestIncludedInPack,
+  filterTestsIntoPack,
   liteReportFileName: 'lite-report.json',
   logFileName: 'pack-logs.log',
   mapLogPayloadInConsole,

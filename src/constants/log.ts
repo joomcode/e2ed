@@ -2,7 +2,7 @@ import {ConsoleBackgroundColor} from './color';
 import {TestRunStatus} from './testRun';
 
 /**
- * Status of LogEvent.
+ * Status of `LogEvent`.
  */
 export const enum LogEventStatus {
   Passed = 'passed',
@@ -10,7 +10,7 @@ export const enum LogEventStatus {
 }
 
 /**
- * Type of LogEvent.
+ * Type of `LogEvent`.
  */
 export const enum LogEventType {
   Action,

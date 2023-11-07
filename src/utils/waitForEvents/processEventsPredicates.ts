@@ -23,7 +23,7 @@ type ProcessEventsPredicates = ((options: OptionsForRequest) => Promise<void>) &
   ((options: OptionsForResponse) => Promise<void>);
 
 /**
- * Processes waitForRequest/waitForResponse predicates for new concrete request/response.
+ * Processes `waitForRequest`/`waitForResponse` predicates for new concrete request/response.
  * @internal
  */
 export const processEventsPredicates: ProcessEventsPredicates = async ({

@@ -265,9 +265,9 @@ Each function can thus access the results of the previous function.
 `dockerImage: string`: the name of the docker image where the tests will run.
 The image must be based on the e2ed base image.
 
-`isTestIncludedInPack: (testStaticOptions: TestStaticOptions<TestMeta>) => boolean`: this function
+`filterTestsIntoPack: (testStaticOptions: TestStaticOptions<TestMeta>) => boolean`: this function
 filters tests (tasks) by their static options —
-only those tests for which the function returned true get into the pack.
+only those tests for which the function returned `true` get into the pack.
 
 `liteReportFileName: string | null`: the name of the file under which, after running the tests,
 the lite JSON report will be saved in the `autotests/reports` directory, for example, `lite-report.json`.
