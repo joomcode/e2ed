@@ -79,13 +79,15 @@ export type Request<
 }>;
 
 /**
- * HTTP response object.
+ * HTTP response object with its corresponding request..
  */
 export type Response<
   ResponseBody = unknown,
   ResponseHeaders extends Headers = Headers,
   SomeStatusCode extends StatusCode = StatusCode,
+  SomeRequest extends Request = Request,
 > = Readonly<{
+  request?: SomeRequest;
   responseBody: ResponseBody;
   responseHeaders: ResponseHeaders;
   statusCode: SomeStatusCode;

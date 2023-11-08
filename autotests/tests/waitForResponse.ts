@@ -23,7 +23,7 @@ it(
 
     void addUser();
 
-    const response = await waitForResponse(
+    let response = await waitForResponse(
       ({responseBody}: Response<Body>) => responseBody?.name === 'John',
     );
 
@@ -38,5 +38,16 @@ it(
       },
       () => undefined,
     );
+
+    void addUser();
+
+    response = await waitForResponse(
+      ({request}: Response<Body>) => request?.url === 'https://reqres.in/api/users',
+    );
+
+    await expect(response.responseBody, 'second response has correct body').contains({
+      job: 'leader',
+      name: 'John',
+    });
   },
 );

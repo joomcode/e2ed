@@ -8,9 +8,7 @@ import type {Fn, RequestHookClassWithContext, RequestHookContextId} from '../../
 /**
  * If class has this symbol, then the context has already been added to the methods of the class.
  */
-const IS_CONTEXT_ADDED_KEY = Symbol(
-  'If class has this symbol, then the context has already been added',
-);
+const IS_CONTEXT_ADDED_KEY = Symbol('e2ed:IS_CONTEXT_ADDED_KEY');
 
 /**
  * Count of all created request hook contexts.
