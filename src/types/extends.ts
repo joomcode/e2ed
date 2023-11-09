@@ -2,7 +2,7 @@ import type {DeepReadonly} from './deep';
 import type {OriginalTestRunError} from './errors';
 
 /**
- * Internal extend TestController type.
+ * Internal extend `TestController` type.
  * @internal
  */
 declare module 'testcafe-without-typecheck' {
@@ -22,7 +22,7 @@ declare module 'testcafe-without-typecheck' {
 }
 
 /**
- * We add export so that the `d.ts`-module from this file does not remain empty
+ * We add this export so that the `d.ts`-module from this file does not remain empty
  * after build and was not removed (since TypeScript will leave a `reference` to it).
  */
-export type ModuleShouldNotBeEmpty = 0;
+export type {};

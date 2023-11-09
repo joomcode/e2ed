@@ -11,7 +11,7 @@ import {
   waitForRequest,
   waitForResponse,
 } from 'e2ed/actions';
-import {E2edError, getDocumentUrl} from 'e2ed/utils';
+import {assertFunctionThrows, getDocumentUrl} from 'e2ed/utils';
 
 const language = 'en';
 const searchQuery = 'foo';
@@ -19,14 +19,13 @@ const searchQuery = 'foo';
 it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}, async () => {
   await scroll(0, 200);
 
-  await expect(1, 'throw an error when actual value do not fit expected value')
-    .eql(2)
-    .then(
-      () => {
-        throw new E2edError('the "expect" function did not throw an error');
-      },
-      () => undefined,
-    );
+  assertFunctionThrows(() => {
+    void window.document;
+  }, '`assertFunctionThrows` works');
+
+  await assertFunctionThrows(async () => {
+    await expect(1, 'should throws').eql(2);
+  }, 'throws an error when actual value do not fit expected value');
 
   const {customPackProperties} = getFullPackConfig();
 

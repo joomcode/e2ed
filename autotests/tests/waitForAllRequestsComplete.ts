@@ -1,7 +1,7 @@
 import {it} from 'autotests';
 import {createClientFunction} from 'e2ed';
 import {waitForAllRequestsComplete, waitForTimeout} from 'e2ed/actions';
-import {E2edError, log} from 'e2ed/utils';
+import {assertFunctionThrows, E2edError, log} from 'e2ed/utils';
 
 it(
   'waitForAllRequestsComplete works correct with timeout and predicate in base cases',
@@ -21,14 +21,9 @@ it(
       );
     }
 
-    await waitForAllRequestsComplete(() => true, {timeout: 100}).then(
-      () => {
-        throw new E2edError('waitForAllRequestsComplete did not throw an error after timeout');
-      },
-      (error: unknown) => {
-        log('Catch error from waitForAllRequestsComplete for {timeout: 100}', {error});
-      },
-    );
+    await assertFunctionThrows(async () => {
+      await waitForAllRequestsComplete(() => true, {timeout: 100});
+    }, 'Catch error from waitForAllRequestsComplete for {timeout: 100}');
 
     await waitForAllRequestsComplete(() => true, {timeout: 1000});
 
@@ -49,15 +44,9 @@ it(
 
     void getUsers(2);
 
-    await promise.then(
-      () => {
-        throw new E2edError(
-          'waitForAllRequestsComplete did not throw an error after timeout with real request',
-        );
-      },
-      (error: unknown) => {
-        log('Catch error from waitForAllRequestsComplete for {timeout: 1000}', {error});
-      },
+    await assertFunctionThrows(
+      () => promise,
+      'Catch error from waitForAllRequestsComplete for {timeout: 1000}',
     );
 
     waitedInMs = Date.now() - startRequestInMs;
