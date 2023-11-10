@@ -6,6 +6,7 @@ import {
 } from '../../constants/internal';
 
 import {assertValueIsDefined} from '../asserts';
+import {setReadonlyProperty} from '../setReadonlyProperty';
 import {addNotCompleteRequest, completeRequest, processEventsPredicates} from '../waitForEvents';
 
 import {getRequestFromRequestOptions} from './getRequestFromRequestOptions';
@@ -13,6 +14,7 @@ import {getResponseFromResponseEvent} from './getResponseFromResponseEvent';
 import {RequestHookWithEvents} from './RequestHookWithEvents';
 
 import type {
+  Request,
   RequestHookConfigureResponseEvent,
   RequestHookContextId,
   RequestHookRequestEvent,
@@ -21,7 +23,8 @@ import type {
 } from '../../types/internal';
 
 /**
- * RequestHook to wait for request/response events (waitForRequest/waitForResponse).
+ * `RequestHook` to wait for request/response events (`waitForAllRequestsComplete`,
+ * `waitForRequest`/`waitForResponse`).
  * @internal
  */
 export class RequestHookToWaitForEvents extends RequestHookWithEvents {
@@ -35,12 +38,11 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
   override async onRequest(event: RequestHookRequestEvent): Promise<void> {
     const request = getRequestFromRequestOptions(event.requestOptions);
     const requestHookContext = event.requestOptions[REQUEST_HOOK_CONTEXT_KEY];
+    const requestHookContextId = requestHookContext[REQUEST_HOOK_CONTEXT_ID_KEY];
 
-    await addNotCompleteRequest(
-      request,
-      requestHookContext[REQUEST_HOOK_CONTEXT_ID_KEY],
-      this.waitForEventsState,
-    );
+    assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {request});
+
+    await addNotCompleteRequest(request, requestHookContextId, this.waitForEventsState);
 
     if (this.waitForEventsState.requestPredicates.size > 0) {
       await processEventsPredicates({
@@ -56,16 +58,26 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
    */
   override async onResponse(event: RequestHookResponseEvent): Promise<void> {
     const {headers} = event;
+    let request: Request | undefined;
 
     if (headers) {
-      completeRequest(
-        (headers as Record<symbol, RequestHookContextId>)[REQUEST_HOOK_CONTEXT_ID_KEY],
-        this.waitForEventsState,
-      );
+      const requestHookContextId = (headers as Record<symbol, RequestHookContextId>)[
+        REQUEST_HOOK_CONTEXT_ID_KEY
+      ];
+
+      assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {
+        requestHookResponseEvent: event,
+      });
+
+      request = this.waitForEventsState.hashOfNotCompleteRequests[requestHookContextId];
+
+      completeRequest(requestHookContextId, this.waitForEventsState);
     }
 
     if (this.waitForEventsState.responsePredicates.size > 0) {
       const response = await getResponseFromResponseEvent(event);
+
+      setReadonlyProperty(response, 'request', request);
 
       await processEventsPredicates({
         eventType: 'Response',

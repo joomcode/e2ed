@@ -32,7 +32,7 @@ const getTestRunCallbackOptions = <Args extends readonly unknown[], Result, This
 ) => ({targetFunction, throwExceptionAtCallPoint: false}) as const;
 
 /**
- * Abstract RequestHook class with request/respons events.
+ * Abstract `RequestHook` class with request/response events.
  */
 abstract class RequestHookWithEvents extends RequestHook {
   constructor(...args: unknown[]) {

@@ -43,9 +43,9 @@ export type OwnE2edConfig<
 
   /**
    * This function filters tests (tasks) by their static options —
-   * only those tests for which the function returned true get into the pack.
+   * only those tests for which the function returned `true` get into the pack.
    */
-  isTestIncludedInPack: (this: void, testStaticOptions: TestStaticOptions<TestMeta>) => boolean;
+  filterTestsIntoPack: (this: void, testStaticOptions: TestStaticOptions<TestMeta>) => boolean;
 
   /**
    * The name of the file under which, after running the tests,

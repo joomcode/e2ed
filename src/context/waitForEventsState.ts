@@ -10,13 +10,13 @@ import type {
 import type {RequestHookToWaitForEvents} from '../utils/requestHooks';
 
 /**
- * Raw get and set internal (maybe undefined) "wait for events" state.
+ * Raw get and set internal (maybe `undefined`) "wait for events" state.
  * @internal
  */
 const [getRawWaitForEventsState, setRawWaitForEventsState] = useContext<WaitForEventsState>();
 
 /**
- * Get internal always defined "wait for events" state (for waitForRequest/waitForResponse).
+ * Get internal always defined "wait for events" state (for `waitForRequest`/`waitForResponse`).
  * @internal
  */
 export const getWaitForEventsState = (

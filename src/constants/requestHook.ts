@@ -14,9 +14,9 @@ export const INCLUDE_HEADERS_IN_RESPONSE_EVENT = {includeHeaders: true} as const
 /**
  * Key for id of TestCafe's request hook context.
  */
-export const REQUEST_HOOK_CONTEXT_ID_KEY = Symbol('Key for id of request hook context');
+export const REQUEST_HOOK_CONTEXT_ID_KEY = Symbol('e2ed:REQUEST_HOOK_CONTEXT_ID_KEY');
 
 /**
  * Key for TestCafe's request hook context on request hook events.
  */
-export const REQUEST_HOOK_CONTEXT_KEY = Symbol('Key for request hook context');
+export const REQUEST_HOOK_CONTEXT_KEY = Symbol('e2ed:REQUEST_HOOK_CONTEXT_KEY');

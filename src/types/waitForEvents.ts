@@ -32,14 +32,14 @@ export type AllRequestsCompletePredicateWithPromise = Readonly<{
 }>;
 
 /**
- * Request predicate for waitForRequest function.
+ * Request predicate for `waitForRequest` function.
  */
 export type RequestPredicate<SomeRequest extends Request = Request> = (
   request: SomeRequest,
 ) => Promise<boolean> | boolean;
 
 /**
- * Response predicate for waitForResponse function.
+ * Response predicate for `waitForResponse` function.
  */
 export type ResponsePredicate<SomeResponse extends Response = Response> = (
   request: SomeResponse,
@@ -79,7 +79,7 @@ export type ResponsePredicateWithPromise = Readonly<{
 }>;
 
 /**
- * State of requests/responses predicates for waitForRequest/waitForResponse.
+ * State of requests/responses predicates for `waitForRequest`/`waitForResponse`.
  * @internal
  */
 export type WaitForEventsState = Readonly<{

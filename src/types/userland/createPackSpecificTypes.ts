@@ -15,11 +15,11 @@ export type CreatePackSpecificTypes<
 > = Readonly<{
   DoAfterPack: FullPackConfigByPack<Pack>['doAfterPack'][number];
   DoBeforePack: FullPackConfigByPack<Pack>['doBeforePack'][number];
+  FilterTestsIntoPack: Pack['filterTestsIntoPack'];
   GetFullPackConfig: () => FullPackConfigByPack<Pack>;
   GetLogContext: Hooks['getLogContext'];
   GetMainTestRunParams: Hooks['getMainTestRunParams'];
   GetTestRunHash: Hooks['getTestRunHash'];
-  IsTestIncludedInPack: Pack['isTestIncludedInPack'];
   IsTestSkipped: Hooks['isTestSkipped'];
   LiteReport: LiteReport<
     PackParameters['CustomPackProperties'],

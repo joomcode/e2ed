@@ -1,4 +1,4 @@
-import {assertValueIsDefined, assertValueIsUndefined} from '../asserts';
+import {assertValueIsUndefined} from '../asserts';
 
 import {processAllRequestsCompletePredicates} from './processAllRequestsCompletePredicates';
 
@@ -10,11 +10,9 @@ import type {Request, RequestHookContextId, WaitForEventsState} from '../../type
  */
 export const addNotCompleteRequest = async (
   request: Request,
-  requestHookContextId: RequestHookContextId | undefined,
+  requestHookContextId: RequestHookContextId,
   waitForEventsState: WaitForEventsState,
 ): Promise<void> => {
-  assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {request});
-
   const {hashOfNotCompleteRequests} = waitForEventsState;
 
   assertValueIsUndefined(
