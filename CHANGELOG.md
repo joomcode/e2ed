@@ -1,5 +1,25 @@
 # Changelog
 
+## [v0.15.6](https://github.com/joomcode/e2ed/tree/v0.15.6) (2023-11-10)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.5...v0.15.6)
+
+- [Merge pull request #40 from joomcode/feat/update-dependencies](https://github.com/joomcode/e2ed/commit/1174b92e1ccc95fb56d40fa1a1e50b815c6bce31) ([uid11](https://github.com/uid11))
+
+  feat: add optional `request` field to `Response` object
+
+- [FI-646 chore: update TestCafe to 3.4.0](https://github.com/joomcode/e2ed/commit/45e999b26622ef1f2fc50b84e1c5bdda48344ae1) ([uid11](https://github.com/uid11))
+- [FI-646 chore: update devDependencies (eslint, @typescript-eslint, etc)](https://github.com/joomcode/e2ed/commit/25187472e0ad235d7682692bb2541c5b9ed1986a) ([uid11](https://github.com/uid11))
+
+  feat: add `assertFunctionThrows` utility
+
+- [FI-646 feat: add optional `request` field to `Response` object](https://github.com/joomcode/e2ed/commit/26d7c0d5d92c6ed19c26436d34a8a149868327c9) ([uid11](https://github.com/uid11))
+
+  tests: add test for `request` field in `Response` object
+
+- [refactor: rename `isTestIncludedInPack` to `filterTestsIntoPack`](https://github.com/joomcode/e2ed/commit/66acbf620031c881c7d6dd1a4e7ec461b1d6feff) ([uid11](https://github.com/uid11))
+- [fix: remove empty d.ts-modules from builded package](https://github.com/joomcode/e2ed/commit/a1d8e97f85d4ac8ff3df9444cde5d139111f1a32) ([uid11](https://github.com/uid11))
+
 ## [v0.15.5](https://github.com/joomcode/e2ed/tree/v0.15.5) (2023-10-29)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.4...v0.15.5)
