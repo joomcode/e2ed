@@ -22,6 +22,7 @@ export type {UtcTimeInMs} from './date';
 export type {DeepMutable, DeepPartial, DeepReadonly, DeepRequired} from './deep';
 /** @internal */
 export type {E2edEnvironment} from './environment';
+export type {BrowserJsError} from './errors';
 /** @internal */
 export type {MaybeWithIsTestRunBroken} from './errors';
 export type {LogEvent, Onlog, TestRunEvent} from './events';

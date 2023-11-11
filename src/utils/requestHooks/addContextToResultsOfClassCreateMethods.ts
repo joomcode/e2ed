@@ -16,7 +16,7 @@ const IS_CONTEXT_ADDED_KEY = Symbol('e2ed:IS_CONTEXT_ADDED_KEY');
 let requestHookContextCount = 0;
 
 /**
- * Add request hook context to results of all class's methods, that starts with "create".
+ * Adds request hook context to results of all class's methods, that starts with "create".
  * @internal
  */
 export const addContextToResultsOfClassCreateMethods = (

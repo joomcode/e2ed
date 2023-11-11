@@ -131,11 +131,6 @@ export type OwnE2edConfig<
   skipTests: SkipTests;
 
   /**
-   * Default stabilization interval for `waitForInterfaceStabilization` action.
-   */
-  stabilizationInterval: number;
-
-  /**
    * If `true`, then takes a screenshot of the full page (not just the viewport)
    * at the time of the test error, for display in the HTML report.
    */
@@ -180,9 +175,26 @@ export type OwnE2edConfig<
     maxIntervalBetweenRequestsInMs: number;
 
     /**
-     * Default timeout (in milliseconds) for waitForAllRequestsComplete function.
+     * Default timeout (in milliseconds) for `waitForAllRequestsComplete` function.
      * If the wait is longer than this timeout, then the promise
      * returned by the `waitForAllRequestsComplete` function will be rejected.
+     */
+    timeout: number;
+  }>;
+
+  /**
+   * Group of settings for the `waitForInterfaceStabilization` function.
+   */
+  waitForInterfaceStabilization: Readonly<{
+    /**
+     * Default stabilization interval for `waitForInterfaceStabilization` function.
+     */
+    stabilizationInterval: number;
+
+    /**
+     * Default timeout (in milliseconds) for `waitForInterfaceStabilization` function.
+     * If the wait is longer than this timeout, then the promise
+     * returned by the `waitForInterfaceStabilization` function will be rejected.
      */
     timeout: number;
   }>;

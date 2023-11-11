@@ -60,7 +60,7 @@ export const getTestFnAndReject = ({
     });
 
   /**
-   * Reset idle timeout on log call.
+   * Resets idle timeout on log call.
    * @internal
    */
   const onlog = (): void => {
@@ -77,7 +77,7 @@ export const getTestFnAndReject = ({
   };
 
   /**
-   * Reject test run by some run error.
+   * Rejects test run by some run error.
    * @internal
    */
   const reject: RejectTestRun = (error) => {
@@ -92,7 +92,7 @@ export const getTestFnAndReject = ({
   };
 
   /**
-   * Reject test run by test idle timeout error (timeout between steps).
+   * Rejects test run by test idle timeout error (timeout between steps).
    * @internal
    */
   function rejectByIdleTimeoutError(): void {

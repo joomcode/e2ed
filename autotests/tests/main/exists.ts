@@ -38,7 +38,9 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}
 
   const mainPage = await navigateToPage(Main, {language});
 
-  await expect(mainPage.pageParams, 'pageParams is correct after navigateToPage').eql({language});
+  await expect(mainPage.pageParams, '`pageParams` is correct after `navigateToPage`').eql({
+    language,
+  });
 
   await expect(mainPage.searchString, 'search string is empty').eql('');
 
@@ -67,7 +69,9 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}
    * Do not use the following pageParams and url (by getParamsFromUrl) checks in your code.
    * These are e2ed internal checks. Use `assertPage` instead.
    */
-  await expect(searchPage.pageParams, 'pageParams is correct after assertPage').eql({searchQuery});
+  await expect(searchPage.pageParams, '`pageParams` is correct after `assertPage`').eql({
+    searchQuery,
+  });
 
   const url = await getDocumentUrl();
 

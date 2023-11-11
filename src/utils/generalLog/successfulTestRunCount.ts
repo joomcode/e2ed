@@ -11,7 +11,7 @@ let successfulInCurrentRetry = 0;
 let successfulTotalInPreviousRetries = 0;
 
 /**
- * Add one successful test run (in current retry).
+ * Adds one successful test run (in current retry).
  * @internal
  */
 export const addSuccessfulInCurrentRetry = (): void => {

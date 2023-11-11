@@ -3,7 +3,7 @@ import type {ReportClientState} from '../../../types/internal';
 declare const reportClientState: ReportClientState;
 
 /**
- * Add onclick event listener on all elements with some class.
+ * Adds `onclick` event listener on all elements with some class.
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */

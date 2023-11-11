@@ -1,3 +1,5 @@
+/* eslint-disable no-labels */
+
 import {LogEventType} from '../../constants/internal';
 import {createClientFunction} from '../../createClientFunction';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
@@ -10,64 +12,64 @@ import type {UtcTimeInMs} from '../../types/internal';
  * This function in a universal way waits for the end of the movements and redrawing
  * of the page interface. The function takes on the duration of an interval during
  * which the interface must not change to be considered stable.
- * Then, every 250 ms, a snapshot of the state of the interface is taken.
+ * Then, every 250ms, a snapshot of the state of the interface is taken.
  * If the state does not change within the specified period, the function successfully
  * resolves the returned promise.
  * The state of the interface is the size of the window, scrolling in the entire window,
  * as well as the classes, sizes and positions of some DOM elements on the page.
- * Elements from different points on the page are taken as checked elements,
- * as well as a number of elements with the data-testid attribute used in tests.
+ * Elements from different points on the page are taken as checked elements.
  */
 const clientWaitForInterfaceStabilization = createClientFunction(
-  (stabilizationInterval: number) => {
-    /**
-     * Asserts that the value is defined (is not undefined).
-     */
-    function assertValueIsDefined<T>(value: T): asserts value is Exclude<T, undefined> {
-      if (value === undefined) {
-        throw new TypeError('Asserted value is undefined');
-      }
-    }
+  (stabilizationInterval: number, timeout: number) => {
+    const isPointInsideRectangle = (
+      x: number,
+      y: number,
+      {left, top, width, height}: DOMRect,
+    ): boolean => x >= left && x <= left + width && y >= top && y <= top + height;
+
+    const keyOfIgnoredElements = Symbol.for('e2ed:PageElementsIgnoredOnInterfaceStabilization');
+    const global = globalThis as {[keyOfIgnoredElements]?: readonly string[] | undefined};
+    const ignoredElementsSelectors = global[keyOfIgnoredElements] || [];
 
     const CHECK_INTERVAL_IN_MS = 250;
     const COUNT_OF_POINTED_NODES = 8;
-    const COUNT_OF_TEST_ID_NODES = 50;
     const startTimeInMs = Date.now() as UtcTimeInMs;
-    const TOTAL_TIMEOUT_IN_STABILIZATION_INTERVAL = 30;
 
     const getInterfaceState = (): string => {
+      const ignoredElements: Element[] = [];
+
+      for (const selector of ignoredElementsSelectors) {
+        for (const element of document.querySelectorAll(selector)) {
+          if (!ignoredElements.includes(element)) {
+            ignoredElements.push(element);
+          }
+        }
+      }
+
+      const ignoredRectangles: DOMRect[] = ignoredElements.map((element) =>
+        element.getBoundingClientRect(),
+      );
+
       const {innerWidth, innerHeight} = window;
       const elements: Element[] = [document.documentElement];
-      const elementsWithDataTestId = document.querySelectorAll('[data-test-id]');
-      const elementsWithDataTestIdInLowerCase = document.querySelectorAll('[data-testid]');
       const deltaX = innerWidth / (COUNT_OF_POINTED_NODES + 1);
       const deltaY = innerHeight / (COUNT_OF_POINTED_NODES + 1);
 
-      for (let i = 0; i < elementsWithDataTestId.length && i < COUNT_OF_TEST_ID_NODES; i += 1) {
-        const elementWithDataTestId = elementsWithDataTestId[i];
-
-        assertValueIsDefined(elementWithDataTestId);
-
-        elements.push(elementWithDataTestId);
-      }
-
-      for (
-        let i = 0;
-        i < elementsWithDataTestIdInLowerCase.length && i < COUNT_OF_TEST_ID_NODES;
-        i += 1
-      ) {
-        const elementWithDataTestIdInLowerCase = elementsWithDataTestIdInLowerCase[i];
-
-        assertValueIsDefined(elementWithDataTestIdInLowerCase);
-
-        elements.push(elementWithDataTestIdInLowerCase);
-      }
-
       for (let xIndex = 1; xIndex <= COUNT_OF_POINTED_NODES; xIndex += 1) {
-        for (let yIndex = 1; yIndex <= COUNT_OF_POINTED_NODES; yIndex += 1) {
-          const element = document.elementFromPoint(deltaX * xIndex, deltaY * yIndex);
+        Points: for (let yIndex = 1; yIndex <= COUNT_OF_POINTED_NODES; yIndex += 1) {
+          const x = deltaX * xIndex;
+          const y = deltaY * yIndex;
 
-          if (element) {
+          for (const rectangle of ignoredRectangles) {
+            // eslint-disable-next-line max-depth
+            if (isPointInsideRectangle(x, y, rectangle)) {
+              continue Points;
+            }
+          }
+
+          const element = document.elementFromPoint(x, y);
+
+          if (element && !elements.includes(element)) {
             elements.push(element);
           }
         }
@@ -103,13 +105,9 @@ const clientWaitForInterfaceStabilization = createClientFunction(
           return;
         }
 
-        const totalTimeoutInMs = stabilizationInterval * TOTAL_TIMEOUT_IN_STABILIZATION_INTERVAL;
-
-        if (Date.now() - startTimeInMs > totalTimeoutInMs) {
-          const timeoutWithUnits = getDurationWithUnits(totalTimeoutInMs);
-
+        if (Date.now() - startTimeInMs > timeout) {
           clearInterval(intervalId);
-          resolve(`Time was out in waitForInterfaceStabilization (${timeoutWithUnits})`);
+          resolve(`Time was out in waitForInterfaceStabilization (${timeout}ms)`);
         }
       }, CHECK_INTERVAL_IN_MS);
     });
@@ -124,32 +122,41 @@ const clientWaitForInterfaceStabilization = createClientFunction(
  */
 export const waitForInterfaceStabilization = async (
   stabilizationInterval?: number,
+  timeout?: number,
 ): Promise<void> => {
-  if (stabilizationInterval === undefined) {
-    const {stabilizationInterval: stabilizationIntervalFromConfig} = getFullPackConfig();
+  if (stabilizationInterval === undefined || timeout === undefined) {
+    const {waitForInterfaceStabilization: config} = getFullPackConfig();
+    const {stabilizationInterval: stabilizationIntervalFromConfig, timeout: timeoutFromConfig} =
+      config;
 
     // eslint-disable-next-line no-param-reassign
     stabilizationInterval = stabilizationIntervalFromConfig;
+    // eslint-disable-next-line no-param-reassign
+    timeout = timeoutFromConfig;
   }
 
-  if (!(stabilizationInterval > 0)) {
+  if (!(stabilizationInterval > 0) || !(timeout > 0)) {
     return;
   }
 
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
-  const maybeErrorReason = await clientWaitForInterfaceStabilization(stabilizationInterval);
+  const maybeErrorReason = await clientWaitForInterfaceStabilization(
+    stabilizationInterval,
+    timeout,
+  );
 
   const waitInMs = Date.now() - startTimeInMs;
 
   const startDateTimeInIso = new Date(startTimeInMs).toISOString();
 
   const stabilizationIntervalWithUnits = getDurationWithUnits(stabilizationInterval);
+  const timeoutWithUnits = getDurationWithUnits(timeout);
   const waitWithUnits = getDurationWithUnits(waitInMs);
 
   log(
     `Have waited for interface stabilization for ${waitWithUnits} with stabilization interval ${stabilizationIntervalWithUnits}`,
-    {error: maybeErrorReason, startDateTimeInIso},
+    {error: maybeErrorReason, startDateTimeInIso, timeout: timeoutWithUnits},
     LogEventType.InternalAction,
   );
 };
