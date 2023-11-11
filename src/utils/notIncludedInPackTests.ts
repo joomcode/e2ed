@@ -38,7 +38,7 @@ export const getNotIncludedInPackTests = async (): Promise<readonly TestFilePath
 };
 
 /**
- * Add test to not included in pack tests.
+ * Adds test to not included in pack tests.
  * @internal
  */
 export const addTestToNotIncludedInPackTests = async (

@@ -52,7 +52,7 @@ export class Main extends Page<CustomPageParams> {
   /**
    * Header selector.
    */
-  readonly headerSelector = mainPageLocator.header();
+  readonly header = mainPageLocator.header();
 
   /**
    * Search input.

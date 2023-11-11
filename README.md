@@ -323,8 +323,6 @@ If `null`, the report will not be saved.
 `skipTests: SkipTests`: this setting allows you to describe a set of skipped tests in a custom form.
 You can define the `SkipTests` type and `skipTests` processing rules in the hook `autotests/hooks/isTestSkipped.ts`.
 
-`stabilizationInterval: number`: default stabilization interval for `waitForInterfaceStabilization` action.
-
 `takeFullPageScreenshotOnError: boolean`: if `true`, then takes a screenshot of the full page
 (not just the viewport) at the time of the test error, for display in the HTML report.
 
@@ -351,6 +349,12 @@ returned by the `waitForAllRequestsComplete` function will be successfully resol
 `waitForAllRequestsComplete.timeout: number`: default timeout (in milliseconds) for `waitForAllRequestsComplete` function.
 If the wait is longer than this timeout, then the promise
 returned by the `waitForAllRequestsComplete` function will be rejected.
+
+`waitForInterfaceStabilization.stabilizationInterval: number`: default stabilization interval for `waitForInterfaceStabilization` function.
+
+`waitForInterfaceStabilization.timeout: number`: default timeout (in milliseconds) for `waitForInterfaceStabilization` function.
+If the wait is longer than this timeout, then the promise
+returned by the `waitForInterfaceStabilization` function will be rejected.
 
 `waitForRequestTimeout: number`: default timeout (in milliseconds) for `waitForRequest` function.
 If the wait is longer than this timeout, then the promise returned by the `waitForRequest` function will be rejected.

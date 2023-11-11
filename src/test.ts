@@ -1,4 +1,4 @@
-import {getRunTest} from './utils/test';
+import {getRunTest, safeJsError} from './utils/test';
 import {fixture, test as testcafeTest} from './testcafe';
 
 import type {TestFunction} from './types/internal';
@@ -8,7 +8,7 @@ import type {TestFunction} from './types/internal';
  * @internal
  */
 export const test: TestFunction = (name, options, testFn) => {
-  fixture(' - e2ed - ');
+  fixture(' - e2ed - ').skipJsErrors(safeJsError);
 
   const runTest = getRunTest({name, options, testFn});
 

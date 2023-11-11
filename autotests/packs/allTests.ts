@@ -48,7 +48,6 @@ export const pack: Pack = {
   reportFileName: 'report.html',
   selectorTimeout: 10_000,
   skipTests,
-  stabilizationInterval: 500,
   takeFullPageScreenshotOnError: false,
   takeViewportScreenshotOnError: true,
   testFileGlobs: ['./autotests/tests/**/*.ts', '!**/*.skip.ts'],
@@ -56,6 +55,10 @@ export const pack: Pack = {
   testTimeout: 60_000,
   waitForAllRequestsComplete: {
     maxIntervalBetweenRequestsInMs: 500,
+    timeout: 30_000,
+  },
+  waitForInterfaceStabilization: {
+    stabilizationInterval: 500,
     timeout: 30_000,
   },
   waitForRequestTimeout: 30_000,

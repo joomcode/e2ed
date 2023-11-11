@@ -22,6 +22,7 @@ export const processEventsPredicate = async ({
   requestOrResponse,
   requestOrResponsePredicateWithPromise,
 }: Options): Promise<boolean> => {
+  const eventTypeInLowerCase = eventType.toLowerCase();
   const {predicate, reject, resolve, startTimeInMs} = requestOrResponsePredicateWithPromise;
 
   try {
@@ -34,8 +35,8 @@ export const processEventsPredicate = async ({
     const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
 
     log(
-      `Have waited for the ${eventType} for ${waitWithUnits}`,
-      {predicate, [eventType.toLowerCase()]: requestOrResponse},
+      `Have waited for ${eventTypeInLowerCase} for ${waitWithUnits}`,
+      {[eventTypeInLowerCase]: requestOrResponse, predicate},
       LogEventType.InternalUtil,
     );
 
@@ -43,7 +44,7 @@ export const processEventsPredicate = async ({
   } catch (cause) {
     const error = new E2edError(
       `waitFor${eventType} promise rejected due to error in predicate function`,
-      {cause, predicate, [eventType.toLowerCase()]: requestOrResponse},
+      {cause, [eventTypeInLowerCase]: requestOrResponse, predicate},
     );
 
     reject(error);
