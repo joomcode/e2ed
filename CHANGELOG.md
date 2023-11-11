@@ -1,5 +1,27 @@
 # Changelog
 
+## [v0.15.7](https://github.com/joomcode/e2ed/tree/v0.15.7) (2023-11-11)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.6...v0.15.7)
+
+- [Merge pull request #41 from joomcode/fix/error-in-interface-stabilization](https://github.com/joomcode/e2ed/commit/e8ee29e474d5a767e63e4d055257030d19a38f47) ([uid11](https://github.com/uid11))
+
+  fix: error in interface stabilization mechanism
+
+- [FI-1011 fix: error in interface stabilization mechanism](https://github.com/joomcode/e2ed/commit/e70c52278e8b2ef59c97ab17fd9c349d9cf761b3) ([uid11](https://github.com/uid11))
+
+  feat: add `getBrowserJsErrors` action
+
+  tests: add tests on `getBrowserJsErrors` action
+
+  feat: add `setPageElementsIgnoredOnInterfaceStabilization` action
+
+  tests: add tests on `setPageElementsIgnoredOnInterfaceStabilization` action
+
+  refactor: add `waitForInterfaceStabilization` block with `timeout` into pack config
+
+  fix: regexp for removing console styles from string
+
 ## [v0.15.6](https://github.com/joomcode/e2ed/tree/v0.15.6) (2023-11-10)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.5...v0.15.6)
