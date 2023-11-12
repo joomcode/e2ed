@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.15.8](https://github.com/joomcode/e2ed/tree/v0.15.8) (2023-11-12)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.7...v0.15.8)
+
+- [Merge pull request #42 from joomcode/fix/stabilization-interface-argument](https://github.com/joomcode/e2ed/commit/cd368b90b2a0007e7ba080ff4772e3729cf2391b) ([uid11](https://github.com/uid11))
+
+  fix: error with `stabilizationInterval` argument
+
+- [FI-1011 fix: error with `stabilizationInterval` argument](https://github.com/joomcode/e2ed/commit/1c02a3996a01b50e33b0d417bbf26c0642c7e670) ([uid11](https://github.com/uid11))
+
+  fix: by default open failed test in HTML report (if any)
+
+  fix: add timeout option to `takeScreenshot` action
+
 ## [v0.15.7](https://github.com/joomcode/e2ed/tree/v0.15.7) (2023-11-11)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.6...v0.15.7)
