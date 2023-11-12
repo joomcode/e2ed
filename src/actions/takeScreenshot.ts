@@ -10,12 +10,14 @@ import type {Inner} from 'testcafe-without-typecheck';
 type TakeScreenshot = ((path?: string) => Promise<void>) &
   ((options: Inner.TakeScreenshotOptions & Readonly<{timeout?: number}>) => Promise<void>);
 
+const defaultTimeoutInMs = 20_000;
+
 /**
  * Takes a screenshot of the tested page.
  */
 export const takeScreenshot: TakeScreenshot = (pathOrOptions) => {
   const options = typeof pathOrOptions === 'string' ? {path: pathOrOptions} : pathOrOptions;
-  const {fullPage, path: pathToScreenshot, timeout = 10_0000} = options ?? {};
+  const {fullPage, path: pathToScreenshot, timeout = defaultTimeoutInMs} = options ?? {};
 
   const timeoutWithUnits = getDurationWithUnits(timeout);
 
@@ -25,7 +27,8 @@ export const takeScreenshot: TakeScreenshot = (pathOrOptions) => {
     LogEventType.InternalAction,
   );
 
-  const {promise, reject, setRejectTimeoutFunction} = getPromiseWithResolveAndReject(timeout);
+  const {clearRejectTimeout, promiseWithTimeout, reject, setRejectTimeoutFunction} =
+    getPromiseWithResolveAndReject(timeout);
 
   setRejectTimeoutFunction(() => {
     const error = new E2edError(
@@ -36,11 +39,11 @@ export const takeScreenshot: TakeScreenshot = (pathOrOptions) => {
     reject(error);
   });
 
-  return Promise.race([
-    promise,
-    testController.takeScreenshot({
-      fullPage,
-      path: pathToScreenshot,
-    } as Inner.TakeScreenshotOptions),
-  ]) as Promise<void>;
+  const takeScreenshotOptions = {fullPage, path: pathToScreenshot} as Inner.TakeScreenshotOptions;
+
+  const takeScreenshotPromise = testController.takeScreenshot(takeScreenshotOptions);
+
+  const racePromise = Promise.race([takeScreenshotPromise, promiseWithTimeout]);
+
+  return racePromise.finally(clearRejectTimeout) as Promise<void>;
 };

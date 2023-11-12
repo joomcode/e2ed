@@ -57,7 +57,7 @@ export const waitForAllRequestsComplete = async (
     predicate,
   );
 
-  const {clearRejectTimeout, promise, reject, resolve, setRejectTimeoutFunction} =
+  const {clearRejectTimeout, promiseWithTimeout, reject, resolve, setRejectTimeoutFunction} =
     getPromiseWithResolveAndReject<Void>(rejectTimeout);
 
   const allRequestsCompletePredicateWithPromise: AllRequestsCompletePredicateWithPromise = {
@@ -91,7 +91,7 @@ export const waitForAllRequestsComplete = async (
   const setResolveTimeout = (): void => {
     allRequestsCompletePredicateWithPromise.clearResolveTimeout();
 
-    const {clearRejectTimeout: clearResolveTimeout, promise: resolvePromise} =
+    const {clearRejectTimeout: clearResolveTimeout, promiseWithTimeout: resolvePromise} =
       getPromiseWithResolveAndReject<Void>(resolveTimeout);
 
     setReadonlyProperty(
@@ -129,5 +129,5 @@ export const waitForAllRequestsComplete = async (
     allRequestsCompletePredicateWithPromise.setResolveTimeout();
   }
 
-  return promise;
+  return promiseWithTimeout;
 };
