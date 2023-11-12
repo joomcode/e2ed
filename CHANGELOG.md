@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.15.9](https://github.com/joomcode/e2ed/tree/v0.15.9) (2023-11-12)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.8...v0.15.9)
+
+- [Merge pull request #43 from joomcode/fix/take-screenshot-timeout-error](https://github.com/joomcode/e2ed/commit/cba1619735015ada52be1a932090b32550e0144e) ([uid11](https://github.com/uid11))
+
+  fix: error with option `timeout` of `takeScreenshot` action
+
+- [fix: error with option `timeout` of `takeScreenshot` action](https://github.com/joomcode/e2ed/commit/bbddb8d8e362e255f540ab5c4f081587a856dc94) ([uid11](https://github.com/uid11))
+
+  refactor: rename `promise` with timeout to `promiseWithTimeout`
+
+  fix: more logs for duplicates of `filePath` and names of tests
+
 ## [v0.15.8](https://github.com/joomcode/e2ed/tree/v0.15.8) (2023-11-12)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.7...v0.15.8)
