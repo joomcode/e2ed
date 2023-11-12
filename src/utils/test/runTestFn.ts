@@ -16,7 +16,7 @@ export const runTestFn = async (runId: RunId, testController: TestController): P
   const testRunEvent = getTestRunEvent(runId);
   const testTimeout = getTestTimeout();
 
-  const {promise: testRunPromise, resolve: resolveTestRunPromise} =
+  const {promiseWithTimeout: testRunPromise, resolve: resolveTestRunPromise} =
     getPromiseWithResolveAndReject<undefined>(testTimeout + 100);
 
   setTestRunPromise(testRunPromise);

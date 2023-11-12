@@ -39,7 +39,7 @@ export const getClientFunctionWithTimeout = <Args extends unknown[], R>(
 
     const clientFunctionTimeout = timeout ?? getTestIdleTimeout();
 
-    const {promise, reject, resolve, setRejectTimeoutFunction} =
+    const {promiseWithTimeout, reject, resolve, setRejectTimeoutFunction} =
       getPromiseWithResolveAndReject<Awaited<R>>(clientFunctionTimeout);
     const wrappedSetRejectTimeoutFunction = wrapInTestRunTracker(setRejectTimeoutFunction);
     const timeoutWithUnits = getDurationWithUnits(clientFunctionTimeout);
@@ -56,7 +56,7 @@ export const getClientFunctionWithTimeout = <Args extends unknown[], R>(
 
     runClientFunction();
 
-    return promise;
+    return promiseWithTimeout;
   };
 
   return clientFunctionWithTimeout;

@@ -8,7 +8,7 @@ import type {AsyncVoid} from '../../types/internal';
 
 type Return<PromiseValue, ResolveValue, RejectValue> = Readonly<{
   clearRejectTimeout: () => void;
-  promise: Promise<PromiseValue>;
+  promiseWithTimeout: Promise<PromiseValue>;
   reject: (error: RejectValue) => void;
   resolve: (value: ResolveValue) => void;
   setRejectTimeoutFunction: (rejectTimeoutFunction: () => AsyncVoid) => void;
@@ -67,7 +67,7 @@ export const getPromiseWithResolveAndReject = <
     rejectTimeoutFunction = newRejectTimeoutFunction;
   };
 
-  const promise = promiseWithoutClear.finally(clearRejectTimeout);
+  const promiseWithTimeout = promiseWithoutClear.finally(clearRejectTimeout);
 
-  return {clearRejectTimeout, promise, reject, resolve, setRejectTimeoutFunction};
+  return {clearRejectTimeout, promiseWithTimeout, reject, resolve, setRejectTimeoutFunction};
 };

@@ -31,7 +31,7 @@ export const waitForResponse = <SomeResponse extends Response>(
   const waitForEventsState = getWaitForEventsState(RequestHookToWaitForEvents);
   const {waitForResponseTimeout} = getFullPackConfig();
   const rejectTimeout = timeout ?? waitForResponseTimeout;
-  const {clearRejectTimeout, promise, reject, resolve, setRejectTimeoutFunction} =
+  const {clearRejectTimeout, promiseWithTimeout, reject, resolve, setRejectTimeoutFunction} =
     getPromiseWithResolveAndReject<SomeResponse, Response>(rejectTimeout);
 
   const responsePredicateWithPromise: ResponsePredicateWithPromise = {
@@ -65,5 +65,5 @@ export const waitForResponse = <SomeResponse extends Response>(
     LogEventType.InternalCore,
   );
 
-  return promise;
+  return promiseWithTimeout;
 };

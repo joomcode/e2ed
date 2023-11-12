@@ -42,7 +42,7 @@ export const getTestFnAndReject = ({
 
   const {
     clearRejectTimeout,
-    promise,
+    promiseWithTimeout,
     reject: rejectPromise,
     setRejectTimeoutFunction,
   } = getPromiseWithResolveAndReject<Void, Void, Parameters<RejectTestRun>[0]>(testTimeout);
@@ -52,7 +52,7 @@ export const getTestFnAndReject = ({
   let idleTimeoutId: NodeJS.Timeout | undefined;
 
   const testFnWithReject: TestFn = () =>
-    Promise.race([testFn(), promise]).finally(() => {
+    Promise.race([testFn(), promiseWithTimeout]).finally(() => {
       isTestRunCompleted = true;
 
       clearTimeout(idleTimeoutId);
