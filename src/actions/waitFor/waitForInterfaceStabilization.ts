@@ -130,9 +130,9 @@ export const waitForInterfaceStabilization = async (
       config;
 
     // eslint-disable-next-line no-param-reassign
-    stabilizationInterval = stabilizationIntervalFromConfig;
+    stabilizationInterval ??= stabilizationIntervalFromConfig;
     // eslint-disable-next-line no-param-reassign
-    timeout = timeoutFromConfig;
+    timeout ??= timeoutFromConfig;
   }
 
   if (!(stabilizationInterval > 0) || !(timeout > 0)) {

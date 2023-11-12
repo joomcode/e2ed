@@ -3,7 +3,7 @@ import {addOnClickOnClass as clientAddOnClickOnClass} from './addOnClickOnClass'
 import {clickOnRetry as clientClickOnRetry} from './clickOnRetry';
 import {clickOnStep as clientClickOnStep} from './clickOnStep';
 import {clickOnTestRun as clientClickOnTestRun} from './clickOnTestRun';
-import {domContentLoadedHandler as clientDomContentLoadedHandler} from './domContentLoadedHandler';
+import {onDomContentLoad as clientOnDomContentLoad} from './onDomContentLoad';
 import {setReadJsonReportDataObservers as clientSetReadJsonReportDataObservers} from './setReadJsonReportDataObservers';
 
 const addDomContentLoadedHandler = clientAddDomContentLoadedHandler;
@@ -11,7 +11,7 @@ const addOnClickOnClass = clientAddOnClickOnClass;
 const clickOnRetry = clientClickOnRetry;
 const clickOnStep = clientClickOnStep;
 const clickOnTestRun = clientClickOnTestRun;
-const domContentLoadedHandler = clientDomContentLoadedHandler;
+const onDomContentLoad = clientOnDomContentLoad;
 const setReadJsonReportDataObservers = clientSetReadJsonReportDataObservers;
 
 /**
@@ -26,5 +26,5 @@ export const initialScript = (): void => {
 
   setReadJsonReportDataObservers();
 
-  addDomContentLoadedHandler(domContentLoadedHandler);
+  addDomContentLoadedHandler(onDomContentLoad);
 };

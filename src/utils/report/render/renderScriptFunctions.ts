@@ -9,9 +9,11 @@ import {
   clickOnStep,
   clickOnTestRun,
   createSafeHtmlWithoutSanitize,
-  domContentLoadedHandler,
+  onDomContentLoad,
+  onFirstJsonReportDataLoad,
   parseMarkdownLinks,
   readJsonReportData,
+  readPartOfJsonReportData,
   renderDatesInterval,
   renderDuration,
   renderStep,
@@ -39,10 +41,12 @@ ${createSafeHtmlWithoutSanitize.toString()}
 ${clickOnRetry.toString()}
 ${clickOnStep.toString()}
 ${clickOnTestRun.toString()}
-${domContentLoadedHandler.toString()}
+${onDomContentLoad.toString()}
+${onFirstJsonReportDataLoad.toString()}
 ${getDurationWithUnits.toString()}
 ${parseMarkdownLinks.toString()}
 ${readJsonReportData.toString()}
+${readPartOfJsonReportData.toString()}
 ${renderDatesInterval.toString()}
 ${renderDuration.toString()}
 ${renderStep.toString()}

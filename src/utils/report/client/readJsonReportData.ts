@@ -1,4 +1,10 @@
-import type {FullTestRun, ReportClientState} from '../../../types/internal';
+import {onFirstJsonReportDataLoad as clientOnFirstJsonReportDataLoad} from './onFirstJsonReportDataLoad';
+import {readPartOfJsonReportData as clientReadPartOfJsonReportData} from './readPartOfJsonReportData';
+
+import type {ReportClientState} from '../../../types/internal';
+
+const onFirstJsonReportDataLoad = clientOnFirstJsonReportDataLoad;
+const readPartOfJsonReportData = clientReadPartOfJsonReportData;
 
 declare const reportClientState: ReportClientState;
 
@@ -9,7 +15,7 @@ declare const reportClientState: ReportClientState;
  * This client function should not use scope variables (except global functions).
  * @internal
  */
-export function readJsonReportData(areAllScriptsLoaded?: boolean): void {
+export function readJsonReportData(areAllScriptsLoaded = false): void {
   const {lengthOfReadedJsonReportDataParts} = reportClientState;
   const scripts = document.querySelectorAll('body > script.e2edJsonReportData');
   const {length} = scripts;
@@ -18,26 +24,20 @@ export function readJsonReportData(areAllScriptsLoaded?: boolean): void {
     return;
   }
 
-  let hasParseErrorForLastScript = false;
+  let isLastReadSuccessful = true;
 
-  for (let i = lengthOfReadedJsonReportDataParts; i < length; i += 1) {
-    try {
-      const fullTestRuns = JSON.parse(scripts[i]?.textContent ?? '') as readonly FullTestRun[];
-
-      (reportClientState.fullTestRuns as FullTestRun[]).push(...fullTestRuns);
-    } catch (error) {
-      if (i < length - 1 || areAllScriptsLoaded) {
-        // eslint-disable-next-line no-console
-        console.error(`Cannot parse JSON report data from script number ${i}`);
-      }
-
-      if (i === length - 1) {
-        hasParseErrorForLastScript = true;
-      }
-    }
+  for (let index = lengthOfReadedJsonReportDataParts; index < length; index += 1) {
+    isLastReadSuccessful = readPartOfJsonReportData({
+      scriptToRead: scripts[index],
+      shouldLogError: index < length - 1 || areAllScriptsLoaded,
+    });
   }
 
-  const newLength = !areAllScriptsLoaded && hasParseErrorForLastScript ? length - 1 : length;
+  const newLength = areAllScriptsLoaded || isLastReadSuccessful ? length : length - 1;
+
+  if (reportClientState.lengthOfReadedJsonReportDataParts === 0 && newLength > 0) {
+    onFirstJsonReportDataLoad();
+  }
 
   reportClientState.lengthOfReadedJsonReportDataParts = newLength;
 }
