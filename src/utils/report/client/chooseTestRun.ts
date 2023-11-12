@@ -10,7 +10,7 @@ declare const e2edTestRunDetailsContainer: HTMLElement;
 declare const reportClientState: ReportClientState;
 
 /**
- * Choose TestRun (render chosen TestRun in right panel).
+ * Chooses TestRun (render chosen TestRun in right panel).
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */

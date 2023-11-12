@@ -13,13 +13,17 @@ export {clickOnStep} from './clickOnStep';
 /** @internal */
 export {clickOnTestRun} from './clickOnTestRun';
 /** @internal */
-export {domContentLoadedHandler} from './domContentLoadedHandler';
+export {onDomContentLoad} from './onDomContentLoad';
+/** @internal */
+export {onFirstJsonReportDataLoad} from './onFirstJsonReportDataLoad';
 /** @internal */
 export {initialScript} from './initialScript';
 /** @internal */
 export {parseMarkdownLinks} from './parseMarkdownLinks';
 /** @internal */
 export {readJsonReportData} from './readJsonReportData';
+/** @internal */
+export {readPartOfJsonReportData} from './readPartOfJsonReportData';
 /** @internal */
 export {
   renderDatesInterval,
