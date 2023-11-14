@@ -1,11 +1,9 @@
-import {inspect} from 'node:util';
+import {inspect, type InspectOptions} from 'node:util';
 
 import {DEFAULT_INSPECT_OPTIONS, MAX_LINES_COUNT_IN_PRINTED_VALUE} from '../../constants/internal';
 
 import {cutVerboseLinesFromPrintedLines} from './cutVerboseLinesFromPrintedLines';
 import {getLinesArrayTrimmedToLength} from './getLinesArrayTrimmedToLength';
-
-import type {InspectOptions} from 'node:util';
 
 /**
  * Returns string presentation of arbitrary value.

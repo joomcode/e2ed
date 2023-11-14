@@ -2,6 +2,7 @@
 export {EXEC_FILE_OPTIONS} from './childProcess';
 /** @internal */
 export {ConsoleBackgroundColor} from './color';
+export {RunEnvironment} from './environment';
 /** @internal */
 export {
   e2edEnvironment,

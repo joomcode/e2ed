@@ -1,13 +1,14 @@
+/* eslint-disable no-param-reassign */
+
 import {inspect} from 'node:util';
 
 import {assertValueHasProperty} from '../asserts';
 
 import {getFunctionPresentationForLogs} from './getFunctionPresentationForLogs';
 
-import type {Fn} from '../../types/internal';
+import type {Fn, StringForLogs} from '../../types/internal';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-function getFunctionPresentationForThis(this: Fn): string | String {
+function getFunctionPresentationForThis(this: Fn): string | StringForLogs {
   return getFunctionPresentationForLogs(this);
 }
 
@@ -15,19 +16,18 @@ function getFunctionPresentationForThis(this: Fn): string | String {
  * Set custom `node:inspect` and toJSON presentation (with function code) on function.
  */
 export const setCustomInspectOnFunction = <Args extends readonly unknown[], Return, This>(
-  fn: Fn<Args, Return, This>,
+  func: Fn<Args, Return, This>,
 ): void => {
-  assertValueHasProperty(fn, inspect.custom, {
-    check: 'fn has inspect.custom property',
+  assertValueHasProperty(func, inspect.custom, {
+    check: '`func` has `inspect.custom` property',
     skipCheckInRuntime: true,
   });
 
-  if (fn[inspect.custom]) {
+  if (func[inspect.custom]) {
     return;
   }
 
-  // eslint-disable-next-line no-param-reassign
-  fn[inspect.custom] = getFunctionPresentationForThis;
-  // eslint-disable-next-line no-param-reassign, @typescript-eslint/ban-types
-  (fn as unknown as {toJSON(): string | String}).toJSON = getFunctionPresentationForThis;
+  func[inspect.custom] = getFunctionPresentationForThis;
+
+  (func as unknown as {toJSON(): string | StringForLogs}).toJSON = getFunctionPresentationForThis;
 };

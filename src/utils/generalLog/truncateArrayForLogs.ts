@@ -1,12 +1,12 @@
 import {MAX_ELEMENTS_COUNT_IN_PRINTED_ARRAY} from '../../constants/internal';
 
-type Return<T> = readonly T[] | Readonly<{firstElements: readonly T[]; length: number}>;
+type Return<Type> = readonly Type[] | Readonly<{firstElements: readonly Type[]; length: number}>;
 
 /**
  * Truncate a long array for a short printout.
  * @internal
  */
-export const truncateArrayForLogs = <T>(array: readonly T[]): Return<T> => {
+export const truncateArrayForLogs = <Type>(array: readonly Type[]): Return<Type> => {
   if (array.length <= MAX_ELEMENTS_COUNT_IN_PRINTED_ARRAY) {
     return array;
   }

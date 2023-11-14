@@ -1,4 +1,5 @@
 import {
+  type CompilerOptions,
   createProgram,
   flattenDiagnosticMessageText,
   getLineAndCharacterOfPosition,
@@ -14,8 +15,6 @@ import {
 
 import {getPathToPack} from '../environment';
 import {generalLog} from '../generalLog';
-
-import type {CompilerOptions} from 'typescript';
 
 const compilerOptions: CompilerOptions = {
   allowSyntheticDefaultImports: true,

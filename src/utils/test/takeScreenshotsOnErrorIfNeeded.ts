@@ -40,10 +40,10 @@ export const takeScreenshotsOnErrorIfNeeded = async (
   const {fullPage, viewport} = await getScreenshotFileNames(retryDirectoryName, testStaticOptions);
 
   if (takeFullPageScreenshotOnError) {
-    await takeScreenshot({fullPage: true, path: join(retryDirectoryName, fullPage)});
+    await takeScreenshot({fullPage: true, path: join(retryDirectoryName, fullPage), timeout: 0});
   }
 
   if (takeViewportScreenshotOnError) {
-    await takeScreenshot({fullPage: false, path: join(retryDirectoryName, viewport)});
+    await takeScreenshot({fullPage: false, path: join(retryDirectoryName, viewport), timeout: 0});
   }
 };

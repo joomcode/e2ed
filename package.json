@@ -54,7 +54,7 @@
   "exports": {
     ".": "./index.js",
     "./actions": "./actions/index.js",
-    "./configurator": "./configurator.js",
+    "./configurator": "./configurator/index.js",
     "./constants": "./constants/index.js",
     "./context": "./context/index.js",
     "./createLocator": "./createLocator.js",
