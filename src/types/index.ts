@@ -37,7 +37,7 @@ export type {
   RequestHookResponseEvent,
 } from './requestHooks';
 export type {ApiRouteClassType, ApiRouteClassTypeWithGetParamsFromUrl} from './routes';
-export type {Selector} from './selectors';
+export type {CreateSelectorsOptions, GetTestAttrNameFn, Selector} from './selectors';
 export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';
 export type {TestCafeSelector, TestController} from './testCafe';

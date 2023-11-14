@@ -1,6 +1,7 @@
 import {setPageCookies} from 'autotests/context';
 import {E2edReportExample as E2edReportExampleRoute} from 'autotests/routes/pageRoutes';
 import {Page} from 'e2ed';
+import {locatorIdSelector} from 'e2ed/selectors';
 import {setReadonlyProperty} from 'e2ed/utils';
 
 import type {Cookie} from 'e2ed/types';
@@ -27,6 +28,20 @@ export class E2edReportExample extends Page<CustomPageParams> {
   getRoute(): E2edReportExampleRoute {
     return new E2edReportExampleRoute();
   }
+
+  /** Navigation bar with test retries */
+  readonly navigationRetries = locatorIdSelector('app-navigation-retries');
+
+  /** Button tabs in navigation bar with test retries */
+  readonly navigationRetriesButton = this.navigationRetries.findByTestId(
+    'app-navigation-retries-button',
+  );
+
+  /** Selected button tab in navigation bar with test retries */
+  readonly navigationRetriesButtonSelected = this.navigationRetriesButton.filterByTestProp(
+    'selected',
+    'true',
+  );
 
   /**
    * Set page cookies to context before navigate.

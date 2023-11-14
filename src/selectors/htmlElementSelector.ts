@@ -1,6 +1,11 @@
-import {createSelectorByCss} from './createSelectorByCss';
+import type {RawSelector, SelectorCustomMethods} from '../types/internal';
 
-/**
- * Selector of page HTML element ("documentElement").
- */
-export const htmlElementSelector = createSelectorByCss('html');
+import type {CreateSelector} from './createSelector';
+
+export const htmlElementSelectorCreator = <CustomMethods extends SelectorCustomMethods = {}>(
+  createSelector: CreateSelector<CustomMethods>,
+): RawSelector<CustomMethods> =>
+  /**
+   * Selector of page HTML element ("documentElement").
+   */
+  createSelector('html');
