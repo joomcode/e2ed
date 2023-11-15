@@ -1,5 +1,8 @@
 import {inspect} from 'node:util';
 
+import {getLinesArrayTrimmedToMaxLength} from './getLinesArrayTrimmedToMaxLength';
+import {getStringTrimmedToMaxLength} from './getStringTrimmedToMaxLength';
+
 import type {Mutable, StringForLogs} from '../../types/internal';
 
 function toMultipleString(this: StringForLogs): string {
@@ -15,11 +18,15 @@ function toMultipleString(this: StringForLogs): string {
  */
 export const wrapStringForLogs = (text: string): string | StringForLogs => {
   if (!text.includes('\n')) {
-    return text;
+    return getStringTrimmedToMaxLength(text);
   }
 
+  const lines = text.split('\n');
+  const trimmedLines = getLinesArrayTrimmedToMaxLength(lines);
+  const trimmedText = getStringTrimmedToMaxLength(trimmedLines.join('\n'));
+
   // eslint-disable-next-line no-new-wrappers
-  const result = new String(text) as Mutable<StringForLogs>;
+  const result = new String(trimmedText) as Mutable<StringForLogs>;
 
   result[inspect.custom as unknown as number] = toMultipleString as unknown as string;
   (result as unknown as {toJSON(): string}).toJSON = toMultipleString;
