@@ -27,6 +27,13 @@ export const takeScreenshot: TakeScreenshot = (pathOrOptions) => {
     LogEventType.InternalAction,
   );
 
+  const takeScreenshotOptions = {fullPage, path: pathToScreenshot} as Inner.TakeScreenshotOptions;
+  const takeScreenshotPromise = testController.takeScreenshot(takeScreenshotOptions);
+
+  if (!(timeout > 0)) {
+    return takeScreenshotPromise;
+  }
+
   const {clearRejectTimeout, promiseWithTimeout, reject, setRejectTimeoutFunction} =
     getPromiseWithResolveAndReject(timeout);
 
@@ -38,10 +45,6 @@ export const takeScreenshot: TakeScreenshot = (pathOrOptions) => {
 
     reject(error);
   });
-
-  const takeScreenshotOptions = {fullPage, path: pathToScreenshot} as Inner.TakeScreenshotOptions;
-
-  const takeScreenshotPromise = testController.takeScreenshot(takeScreenshotOptions);
 
   const racePromise = Promise.race([takeScreenshotPromise, promiseWithTimeout]);
 

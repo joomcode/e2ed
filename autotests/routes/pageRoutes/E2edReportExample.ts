@@ -7,7 +7,7 @@ import type {Url} from 'e2ed/types';
  */
 export class E2edReportExample extends PageRoute {
   override getOrigin(): Url {
-    return 'https://uid11.github.io' as Url;
+    return 'https://joomcode.github.io' as Url;
   }
 
   getPath(): string {

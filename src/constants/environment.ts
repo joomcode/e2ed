@@ -19,6 +19,14 @@ export const PATH_TO_PACK_VARIABLE_NAME = '__INTERNAL_E2ED_PATH_TO_PACK';
 export const RUN_ENVIRONMENT_VARIABLE_NAME = '__INTERNAL_E2ED_RUN_ENVIRONMENT';
 
 /**
+ * Run environment enum (run in docker or local run).
+ */
+export const enum RunEnvironment {
+  Docker = 'docker',
+  Local = 'local',
+}
+
+/**
  * Name of e2ed environment variable for run label.
  * @internal
  */

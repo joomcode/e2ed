@@ -49,8 +49,8 @@ export type Mutable<Type> = {
 export type Normalize<Type> = keyof Type extends never
   ? Type
   : IsBrand<Type> extends true
-  ? Type
-  : {[Key in keyof Type]: Normalize<Type[Key]>};
+    ? Type
+    : {[Key in keyof Type]: Normalize<Type[Key]>};
 
 /**
  * List of pairs that `Object.entries<Type>` returns.
