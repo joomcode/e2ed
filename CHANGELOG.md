@@ -1,5 +1,25 @@
 # Changelog
 
+## [v0.15.10](https://github.com/joomcode/e2ed/tree/v0.15.10) (2023-11-15)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.9...v0.15.10)
+
+- [Merge pull request #45 from joomcode/fix/timeout-for-take-screenshot](https://github.com/joomcode/e2ed/commit/ff05c039df004d94e87195a971caa993e1cb555b) ([uid11](https://github.com/uid11))
+
+  fix: disable timeout for taking error screenshot
+
+- [FI-1015 feat: add locators to HTML report for testing locator utils](https://github.com/joomcode/e2ed/commit/14e743a5345f327d98d2fd7ccc13a4514955cf17) ([uid11](https://github.com/uid11))
+- [chore: update devDependencies (@typescript-eslint/\*, prettier)](https://github.com/joomcode/e2ed/commit/65238598df2529dfce2cd164b3159a991ad2ad17) ([uid11](https://github.com/uid11))
+- [fix: trim strings in logs by default](https://github.com/joomcode/e2ed/commit/96844c19ca8cba477ae58699df7a3faa50ae13cc) ([uid11](https://github.com/uid11))
+
+  fix: improving the stability of `exists` test (`waitFor*` checks)
+
+- [FI-1013 fix: disable timeout for taking error screenshot](https://github.com/joomcode/e2ed/commit/9ab6f35b1162ec45ce6113ee6c140bf9f9533546) ([uid11](https://github.com/uid11))
+
+  feat: add `replaceFields` utility in configurator to reduce logs
+
+  fix: add more eslint rules abouts type imports
+
 ## [v0.15.9](https://github.com/joomcode/e2ed/tree/v0.15.9) (2023-11-12)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.8...v0.15.9)
