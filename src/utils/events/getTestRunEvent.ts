@@ -5,7 +5,7 @@ import {assertValueIsDefined, assertValueIsTrue} from '../asserts';
 import type {RunId, TestRunEvent} from '../../types/internal';
 
 /**
- * Get registered TestRun event by its RunId.
+ * Get registered `TestRunEvent` by its `RunId`.
  * @internal
  */
 export const getTestRunEvent = (runId: RunId): TestRunEvent => {

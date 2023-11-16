@@ -1,5 +1,5 @@
 import type {AnyPack, AnyPackParameters, FullPackConfigByPack, GetPackParameters} from '../config';
-import type {MapLogPayload, MapLogPayloadInReport} from '../log';
+import type {MapBackendResponseToLog, MapLogPayload, MapLogPayloadInReport} from '../log';
 import type {LiteReport} from '../report';
 
 import type {UserlandHooks} from './userlandHooks';
@@ -27,6 +27,8 @@ export type CreatePackSpecificTypes<
     PackParameters['SkipTests'],
     PackParameters['TestMeta']
   >;
+  MapBackendResponseErrorToLog: MapBackendResponseToLog;
+  MapBackendResponseToLog: MapBackendResponseToLog;
   MapLogPayloadInConsole: MapLogPayload;
   MapLogPayloadInLogFile: MapLogPayload;
   MapLogPayloadInReport: MapLogPayloadInReport;

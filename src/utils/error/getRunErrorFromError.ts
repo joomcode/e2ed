@@ -30,5 +30,9 @@ export const getRunErrorFromError = (unknownRunError: unknown): RunError => {
     error.stackTrace = filteredStackFrames.map(getPrintedStackFrame);
   }
 
+  if ('toJSON' in error && typeof error.toJSON === 'function') {
+    return String(error.toJSON());
+  }
+
   return wrapStringForLogs(valueToString(error));
 };

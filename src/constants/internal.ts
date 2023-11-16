@@ -51,6 +51,8 @@ export {
   REQUEST_HOOK_CONTEXT_ID_KEY,
   REQUEST_HOOK_CONTEXT_KEY,
 } from './requestHook';
+/** @internal */
+export {DEFAULT_TAKE_SCREENSHOT_TIMEOUT_IN_MS} from './screenshots';
 export {DESCRIPTION_KEY} from './selector';
 export {FAILED_TEST_RUN_STATUSES, TestRunStatus} from './testRun';
 /** @internal */

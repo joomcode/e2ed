@@ -6,7 +6,7 @@ const isLocalRun = runEnvironment === RunEnvironment.Local;
 
 /**
  * Maps log payload for logging in console to clarify, shorten or skip a console log entry.
- * If the mapping returns `null`, the log entry is skipped.
+ * If the mapping returns `skipLog`, the log entry is skipped.
  * If the mapping returns `undefined`, the log entry is not skipped, but is printed with an empty payload.
  */
 export const mapLogPayloadInConsole: MapLogPayloadInConsole = (message, payload) => {
@@ -29,5 +29,5 @@ export const mapLogPayloadInConsole: MapLogPayloadInConsole = (message, payload)
     return undefined;
   }
 
-  return null;
+  return 'skipLog';
 };

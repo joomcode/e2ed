@@ -6,6 +6,7 @@ import {
 } from '../../constants/internal';
 
 import {assertValueIsDefined} from '../asserts';
+import {mapBackendResponseForLogs} from '../log';
 import {setReadonlyProperty} from '../setReadonlyProperty';
 import {addNotCompleteRequest, completeRequest, processEventsPredicates} from '../waitForEvents';
 
@@ -74,11 +75,13 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
       completeRequest(requestHookContextId, this.waitForEventsState);
     }
 
+    const response = await getResponseFromResponseEvent(event);
+
+    setReadonlyProperty(response, 'request', request);
+
+    mapBackendResponseForLogs(response);
+
     if (this.waitForEventsState.responsePredicates.size > 0) {
-      const response = await getResponseFromResponseEvent(event);
-
-      setReadonlyProperty(response, 'request', request);
-
       await processEventsPredicates({
         eventType: 'Response',
         requestOrResponse: response,

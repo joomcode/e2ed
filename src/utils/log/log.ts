@@ -1,13 +1,13 @@
-import {LogEventType} from '../constants/internal';
-import {getRunId} from '../context/runId';
+import {LogEventType} from '../../constants/internal';
+import {getRunId} from '../../context/runId';
 
 // eslint-disable-next-line import/no-internal-modules
-import {registerLogEvent} from './events/registerLogEvent';
-import {generalLog} from './generalLog';
-import {getFullPackConfig} from './getFullPackConfig';
-import {getUserlandHooks} from './userlandHooks';
+import {registerLogEvent} from '../events/registerLogEvent';
+import {generalLog} from '../generalLog';
+import {getFullPackConfig} from '../getFullPackConfig';
+import {getUserlandHooks} from '../userlandHooks';
 
-import type {Log, LogPayload, UtcTimeInMs} from '../types/internal';
+import type {Log, LogPayload, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Logs every actions and API requests in e2ed tests.

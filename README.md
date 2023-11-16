@@ -277,16 +277,31 @@ If `null`, the lite report will not be saved.
 the pack logs will be saved in the `autotests/reports` directory, for example, `pack-logs.log`.
 If `null`, the log will not be saved.
 
+`mapBackendResponseErrorToLog: (response: Response) => Payload | undefined`: maps responses
+with errors from the backend to "red" logs (as errors) during the test.
+It is assumed that the function will select responses with statuse codes
+of 400 and higher (client and server errors).
+Backend responses with errors are accumulated in separate "red" log step (with `logEventStatus: 'failed'`).
+Log the `responseBody` field carefully, as the body of backend response can be very large.
+If the function returns `undefined`, the response is not logged (skipped).
+
+`mapBackendResponseToLog: (response: Response) => Payload | undefined`: maps responses
+from the backend to logs during the test.
+Backend responses received during a certain test step are accumulated
+in an array in the `backendResponses` field of the log of this step.
+Log the `responseBody` field carefully, as the body of backend response can be very large.
+If the function returns `undefined`, the response is not logged (skipped).
+
 `mapLogPayloadInConsole: (message: string, payload: LogPayload | undefined, logEventType?: LogEventType)
-=> LogPayload | null | undefined`: maps log payload for logging in console to clarify,
+=> LogPayload | 'skipLog' | undefined`: maps log payload for logging in console to clarify,
 shorten or skip a console log entry.
-If the mapping returns `null`, the log entry is skipped.
+If the mapping returns `'skipLog'`, the log entry is skipped.
 If the mapping returns `undefined`, the log entry is not skipped, but is printed with an empty payload.
 
 `mapLogPayloadInLogFile: (message: string, payload: LogPayload | undefined, logEventType?: LogEventType)
-=> LogPayload | null | undefined`: maps log payload for logging in file to clarify,
+=> LogPayload | 'skipLog' | undefined`: maps log payload for logging in file to clarify,
 shorten or skip a file log entry.
-If the mapping returns `null`, the log entry is skipped.
+If the mapping returns `'skipLog'`, the log entry is skipped.
 If the mapping returns `undefined`, the log entry is not skipped, but is printed with an empty payload.
 
 `mapLogPayloadInReport: (message: string, payload: LogPayload | undefined, logEventType?: LogEventType)

@@ -53,8 +53,10 @@ export type {
   LogContext,
   LogParams,
   LogPayload,
+  MapBackendResponseToLog,
   MapLogPayload,
   MapLogPayloadInReport,
+  Payload,
 } from './log';
 export type {ApiMockFunction} from './mockApiRoute';
 /** @internal */
