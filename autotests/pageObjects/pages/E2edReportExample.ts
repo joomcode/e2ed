@@ -1,7 +1,7 @@
 import {setPageCookies} from 'autotests/context';
 import {E2edReportExample as E2edReportExampleRoute} from 'autotests/routes/pageRoutes';
+import {locatorIdSelector} from 'autotests/selectors';
 import {Page} from 'e2ed';
-import {locatorIdSelector} from 'e2ed/selectors';
 import {setReadonlyProperty} from 'e2ed/utils';
 
 import type {Cookie} from 'e2ed/types';

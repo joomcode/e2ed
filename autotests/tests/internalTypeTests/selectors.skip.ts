@@ -3,7 +3,7 @@ import {
   createSelectorByCss,
   htmlElementSelector,
   locatorIdSelector,
-} from 'e2ed/selectors';
+} from 'autotests/selectors';
 
 // @ts-expect-error: wrong number of arguments
 htmlElementSelector.findByTestId();

@@ -1,10 +1,10 @@
 import {Input} from 'autotests/pageObjects/components';
 import {Main as MainRoute} from 'autotests/routes/pageRoutes';
+import {createSelectorByCss} from 'autotests/selectors';
 import {createLocator, type Locator} from 'create-locator';
 import {Page} from 'e2ed';
 import {waitForAllRequestsComplete, waitForInterfaceStabilization} from 'e2ed/actions';
 import {getCssSelectorFromAttributesChain} from 'e2ed/createLocator';
-import {createSelectorByCss} from 'e2ed/selectors';
 
 import type {Language} from 'autotests/types';
 import type {GetParamsType, Selector} from 'e2ed/types';

@@ -1,4 +1,4 @@
-import {createSelectorByCss} from 'e2ed/selectors';
+import {createSelectorByCss} from 'autotests/selectors';
 
 import type {Selector} from 'e2ed/types';
 
