@@ -2,6 +2,7 @@
 export {EXEC_FILE_OPTIONS} from './childProcess';
 /** @internal */
 export {ConsoleBackgroundColor} from './color';
+export {RunEnvironment} from './environment';
 /** @internal */
 export {
   e2edEnvironment,
@@ -19,6 +20,7 @@ export {
   DEFAULT_INSPECT_OPTIONS,
   MAX_ELEMENTS_COUNT_IN_PRINTED_ARRAY,
   MAX_LINES_COUNT_IN_PRINTED_VALUE,
+  MAX_STRING_LENGTH_IN_PRINTED_VALUE,
 } from './inspect';
 export {LogEventStatus, LogEventType} from './log';
 /** @internal */

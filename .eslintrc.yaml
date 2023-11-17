@@ -27,7 +27,7 @@ rules:
   import/no-commonjs: error
   import/no-default-export: error
   import/no-deprecated: error
-  import/no-duplicates: error
+  import/no-duplicates: [error, {prefer-inline: true}]
   import/no-extraneous-dependencies: [error, {devDependencies: false, packageDir: [., ./autotests]}]
   import/no-internal-modules:
     - error
@@ -166,6 +166,7 @@ rules:
     - {selector: typeLike, format: [StrictPascalCase]}
     - {selector: [objectLiteralProperty, typeProperty], format: null, modifiers: [requiresQuotes]}
     - {selector: [classProperty, typeMethod], filter: '^toJSON$', format: null}
+  '@typescript-eslint/no-import-type-side-effects': error
   '@typescript-eslint/no-invalid-void-type':
     [error, {allowInGenericTypeArguments: true, allowAsThisParameter: true}]
   '@typescript-eslint/no-namespace': [error, {allowDeclarations: true}]

@@ -2,27 +2,27 @@ import type {IsEqual} from './checks';
 
 /**
  * Clone object without properties with undefined value.
- * CloneWithoutUndefinedProperties<{foo: 1 | undefined, bar: undefined}> =
- *  {foo: 1 | undefined, bar: never}.
+ * `CloneWithoutUndefinedProperties<{foo: 1 | undefined, bar: undefined}>` =
+ *  `{foo: 1 | undefined, bar: never}`.
  */
-export type CloneWithoutUndefinedProperties<T extends object> = {
-  [Key in keyof T]: IsEqual<T[Key], undefined> extends true ? never : T[Key];
+export type CloneWithoutUndefinedProperties<Type extends object> = {
+  [Key in keyof Type]: IsEqual<Type[Key], undefined> extends true ? never : Type[Key];
 };
 
 /**
  * Exclude type undefined from object properties.
- * ExcludeUndefinedFromProperties<{foo: 1 | undefined}> = {foo: 1}.
+ * `ExcludeUndefinedFromProperties<{foo: 1 | undefined}>` = `{foo: 1}`.
  */
-export type ExcludeUndefinedFromProperties<T extends object> = {
-  [Key in keyof T]: Exclude<T[Key], undefined>;
+export type ExcludeUndefinedFromProperties<Type extends object> = {
+  [Key in keyof Type]: Exclude<Type[Key], undefined>;
 };
 
 /**
- * Returns `true` if type includes `undefined` and `false` otherwise.
- * IsIncludeUndefined<string> = false.
- * IncludeUndefined<string | undefined> = true.
+ * Returns `true` if union type includes `undefined` and `false` otherwise.
+ * `IsIncludeUndefined<string>` = `false`.
+ * `IncludeUndefined<string | undefined>` = `true`.
  */
-export type IsIncludeUndefined<T> = true extends (T extends undefined ? true : never)
+export type IsIncludeUndefined<Type> = true extends (Type extends undefined ? true : never)
   ? true
   : false;
 

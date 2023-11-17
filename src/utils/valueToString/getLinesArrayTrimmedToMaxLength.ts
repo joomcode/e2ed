@@ -4,7 +4,7 @@ import {MAX_LINES_COUNT_IN_PRINTED_VALUE} from '../../constants/internal';
  * Get lines array trimmed to max lines count in printed value.
  * @internal
  */
-export const getLinesArrayTrimmedToLength = (lines: readonly string[]): readonly string[] => {
+export const getLinesArrayTrimmedToMaxLength = (lines: readonly string[]): readonly string[] => {
   if (lines.length <= MAX_LINES_COUNT_IN_PRINTED_VALUE) {
     return lines;
   }

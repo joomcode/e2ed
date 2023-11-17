@@ -42,20 +42,22 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}
     language,
   });
 
-  await expect(mainPage.searchString, 'search string is empty').eql('');
+  await expect(mainPage.searchQuery, 'search query on page is empty').eql('');
 
   await mainPage.typeIntoSearchInput(searchQuery);
 
-  await expect(mainPage.searchString, 'search string has setted value').eql(searchQuery);
+  await expect(mainPage.searchQuery, 'search query on page has setted value').eql(searchQuery);
 
   await expect(mainPage.body.find('input').exists, 'page contains some input element').ok();
 
-  await pressKey('enter', {stabilizationInterval: 300});
-
-  const [requestWithQuery, successfulResponse] = await Promise.all([
+  const requestsPromises = Promise.all([
     waitForRequest(({url}) => url.includes(searchQuery)),
     waitForResponse(({statusCode}) => statusCode === 200),
   ]);
+
+  await pressKey('enter', {stabilizationInterval: 300});
+
+  const [requestWithQuery, successfulResponse] = await requestsPromises;
 
   await expect(requestWithQuery.url, 'request with query contains search query').contains(
     searchQuery,

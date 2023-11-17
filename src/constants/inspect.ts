@@ -29,3 +29,9 @@ export const MAX_ELEMENTS_COUNT_IN_PRINTED_ARRAY = 8;
  * @internal
  */
 export const MAX_LINES_COUNT_IN_PRINTED_VALUE = 250;
+
+/**
+ * Max string length in printed stringify values (in logs).
+ * @internal
+ */
+export const MAX_STRING_LENGTH_IN_PRINTED_VALUE = 100 * MAX_LINES_COUNT_IN_PRINTED_VALUE;

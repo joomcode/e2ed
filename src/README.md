@@ -6,7 +6,7 @@ Modules in the dependency graph should only import the modules above them:
 
 0. `../scripts/*`
 1. `types/*`
-2. `configurator`
+2. `configurator/*`
 3. `constants/*`
 4. `testcaferc`
 5. `testcafe`

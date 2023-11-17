@@ -7,8 +7,8 @@ import type {IsBrand} from './brand';
 export type DeepMutable<Type> = keyof Type extends never
   ? Type
   : IsBrand<Type> extends true
-  ? Type
-  : {-readonly [Key in keyof Type]: DeepMutable<Type[Key]>};
+    ? Type
+    : {-readonly [Key in keyof Type]: DeepMutable<Type[Key]>};
 
 /**
  * Partial type with recursive applying.
@@ -17,8 +17,8 @@ export type DeepMutable<Type> = keyof Type extends never
 export type DeepPartial<Type> = keyof Type extends never
   ? Type
   : IsBrand<Type> extends true
-  ? Type
-  : {[Key in keyof Type]?: DeepPartial<Type[Key]>};
+    ? Type
+    : {[Key in keyof Type]?: DeepPartial<Type[Key]>};
 
 /**
  * Readonly type with recursive applying.
@@ -27,8 +27,8 @@ export type DeepPartial<Type> = keyof Type extends never
 export type DeepReadonly<Type> = keyof Type extends never
   ? Type
   : IsBrand<Type> extends true
-  ? Type
-  : {readonly [Key in keyof Type]: DeepReadonly<Type[Key]>};
+    ? Type
+    : {readonly [Key in keyof Type]: DeepReadonly<Type[Key]>};
 
 /**
  * Required type with recursive applying.
@@ -37,5 +37,5 @@ export type DeepReadonly<Type> = keyof Type extends never
 export type DeepRequired<Type> = keyof Type extends never
   ? Type
   : IsBrand<Type> extends true
-  ? Type
-  : {[Key in keyof Type]-?: DeepRequired<Exclude<Type[Key], undefined>>};
+    ? Type
+    : {[Key in keyof Type]-?: DeepRequired<Exclude<Type[Key], undefined>>};

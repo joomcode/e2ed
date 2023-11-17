@@ -60,9 +60,9 @@ export class Main extends Page<CustomPageParams> {
   readonly searchInput = new Input('q');
 
   /**
-   * Current search string.
+   * Current value of search query.
    */
-  get searchString(): Promise<string> {
+  get searchQuery(): Promise<string> {
     return this.searchInput.value;
   }
 

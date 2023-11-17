@@ -7,7 +7,13 @@
 
 import {RunEnvironment, runEnvironment} from 'e2ed/configurator';
 
-import {doAfterPack, doBeforePack, mapLogPayloadInConsole, skipTests} from '../configurator';
+import {
+  doAfterPack,
+  doBeforePack,
+  mapLogPayloadInConsole,
+  mapLogPayloadInReport,
+  skipTests,
+} from '../configurator';
 
 import type {FilterTestsIntoPack, Pack} from 'autotests/types/packSpecific';
 
@@ -37,7 +43,7 @@ export const pack: Pack = {
   logFileName: 'pack-logs.log',
   mapLogPayloadInConsole,
   mapLogPayloadInLogFile: (_message, payload) => payload,
-  mapLogPayloadInReport: (_message, payload) => payload,
+  mapLogPayloadInReport,
   maxRetriesCountInDocker: 3,
   packTimeout: 90 * 60_000,
   pageRequestTimeout: 30_000,

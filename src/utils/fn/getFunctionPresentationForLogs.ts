@@ -2,13 +2,12 @@ import {valueToString, wrapStringForLogs} from '../valueToString';
 
 import {getFunctionCode} from './getFunctionCode';
 
-import type {Fn} from '../../types/internal';
+import type {Fn, StringForLogs} from '../../types/internal';
 
 /**
  * Get custom function string presentation for logs.
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-export const getFunctionPresentationForLogs = (fn: Fn): string | String => {
+export const getFunctionPresentationForLogs = (fn: Fn): string | StringForLogs => {
   const {length, name} = fn;
   const code = getFunctionCode(fn);
   const withName = name ? `: ${name}` : '';

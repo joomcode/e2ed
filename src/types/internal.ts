@@ -74,6 +74,7 @@ export type {
 /** @internal */
 export type {ImgData, PixelmatchOptions} from './pixelmatch';
 export type {AsyncVoid, MaybePromise, UnwrapPromise} from './promise';
+export type {AnyObject, FieldReplacer, PropertyDescriptor, PropertyKey} from './properties';
 export type {LiteReport, LiteRetry} from './report';
 /** @internal */
 export type {
@@ -110,6 +111,7 @@ export type {
 export type {IsTestSkippedResult} from './skipTest';
 export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';
+export type {StringForLogs} from './string';
 export type {TestCafeSelector, TestController} from './testCafe';
 export type {
   LiteTestRun,

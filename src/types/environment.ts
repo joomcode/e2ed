@@ -14,6 +14,7 @@ import type {RunLabel} from './runLabel';
  */
 export type E2edEnvironment = {
   ['E2ED_DEBUG']?: string;
+  ['E2ED_ORIGIN']?: string;
   ['PWD']?: string;
   [PATH_TO_PACK_VARIABLE_NAME]?: string;
   [RUN_ENVIRONMENT_VARIABLE_NAME]?: RunEnvironment;

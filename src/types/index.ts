@@ -1,3 +1,4 @@
+export type {ReportRootLocator} from '../utils/report';
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';
@@ -30,6 +31,7 @@ export type {
 } from './pages';
 export type {FilePathFromRoot, TestFilePath} from './paths';
 export type {AsyncVoid, MaybePromise, UnwrapPromise} from './promise';
+export type {AnyObject, FieldReplacer, PropertyDescriptor, PropertyKey} from './properties';
 export type {LiteReport, LiteRetry} from './report';
 export type {
   RequestHookConfigureResponseEvent,
@@ -40,6 +42,7 @@ export type {ApiRouteClassType, ApiRouteClassTypeWithGetParamsFromUrl} from './r
 export type {CreateSelectorsOptions, GetTestAttrNameFn, Selector} from './selectors';
 export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';
+export type {StringForLogs} from './string';
 export type {TestCafeSelector, TestController} from './testCafe';
 export type {MergeTuples, TupleRest} from './tuples';
 export type {
