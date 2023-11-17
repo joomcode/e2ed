@@ -26,30 +26,30 @@ type ReplaceObjectSelectors<
         (...args: A1): ReplaceSelector<R1, CustomMethods>;
       }
     : Obj[Key] extends {
-        (...args: infer A1): infer R1;
-        (...args: infer A2): infer R2;
-        (...args: infer A3): infer R3;
-      }
-    ? {
-        (...args: A3): ReplaceSelector<R3, CustomMethods>;
-        (...args: A2): ReplaceSelector<R2, CustomMethods>;
-        (...args: A1): ReplaceSelector<R1, CustomMethods>;
-      }
-    : Obj[Key] extends {
-        (...args: infer A1): infer R1;
-        (...args: infer A2): infer R2;
-      }
-    ? {
-        (...args: A2): ReplaceSelector<R2, CustomMethods>;
-        (...args: A1): ReplaceSelector<R1, CustomMethods>;
-      }
-    : Obj[Key] extends {
-        (...args: infer A1): infer R1;
-      }
-    ? {
-        (...args: A1): ReplaceSelector<R1, CustomMethods>;
-      }
-    : Obj[Key];
+          (...args: infer A1): infer R1;
+          (...args: infer A2): infer R2;
+          (...args: infer A3): infer R3;
+        }
+      ? {
+          (...args: A3): ReplaceSelector<R3, CustomMethods>;
+          (...args: A2): ReplaceSelector<R2, CustomMethods>;
+          (...args: A1): ReplaceSelector<R1, CustomMethods>;
+        }
+      : Obj[Key] extends {
+            (...args: infer A1): infer R1;
+            (...args: infer A2): infer R2;
+          }
+        ? {
+            (...args: A2): ReplaceSelector<R2, CustomMethods>;
+            (...args: A1): ReplaceSelector<R1, CustomMethods>;
+          }
+        : Obj[Key] extends {
+              (...args: infer A1): infer R1;
+            }
+          ? {
+              (...args: A1): ReplaceSelector<R1, CustomMethods>;
+            }
+          : Obj[Key];
 };
 
 export type SelectorCustomMethods = Record<
