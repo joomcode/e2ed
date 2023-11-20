@@ -103,11 +103,9 @@ export type {RawRunLabelObject} from './runLabel';
 export type {
   CreateSelector,
   CreateSelectorsOptions,
-  GetTestAttributeNameFn,
-  RawSelector,
+  GetLocatorAttributeNameFn,
   Selector,
   SelectorCustomMethods,
-  SelectorDefaultCustomMethods,
 } from './selectors';
 export type {IsTestSkippedResult} from './skipTest';
 export type {StackFrame} from './stackTrace';

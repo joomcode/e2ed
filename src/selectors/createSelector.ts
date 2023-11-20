@@ -5,7 +5,7 @@ import {DESCRIPTION_KEY} from '../constants/internal';
 import type {
   CreateSelector,
   Fn,
-  RawSelector,
+  Selector as SelectorType,
   SelectorCustomMethods,
   Values,
 } from '../types/internal';
@@ -13,20 +13,18 @@ import type {
 /**
  * Proxy handler for wrapping all selector properties.
  */
-const createGet = <CustomMethods extends SelectorCustomMethods = {}>(
-  customMethods?: CustomMethods,
-): Required<ProxyHandler<RawSelector<CustomMethods>>>['get'] => {
-  const get: Required<ProxyHandler<RawSelector<CustomMethods>>>['get'] = (
-    target,
-    property,
-    receiver,
-  ) => {
+const createGet = (
+  customMethods: SelectorCustomMethods,
+): Required<ProxyHandler<SelectorType>>['get'] => {
+  const get: Required<ProxyHandler<SelectorType>>['get'] = (target, property, receiver) => {
     const customMethod =
-      customMethods && typeof property === 'string' ? customMethods[property] : undefined;
+      typeof property === 'string'
+        ? customMethods[property as keyof SelectorCustomMethods]
+        : undefined;
 
     let result = (
       customMethod ? customMethod.bind(target) : Reflect.get(target, property, receiver)
-    ) as Values<RawSelector<CustomMethods>> & {
+    ) as Values<SelectorType> & {
       [DESCRIPTION_KEY]?: string;
     };
 
@@ -42,7 +40,7 @@ const createGet = <CustomMethods extends SelectorCustomMethods = {}>(
       const originalFunction = result as Fn;
 
       result = // eslint-disable-next-line no-restricted-syntax
-        function selectorMethodWrapper(this: RawSelector, ...args: never[]) {
+        function selectorMethodWrapper(this: SelectorType, ...args: never[]) {
           const callResult = originalFunction.apply(this, args);
 
           if (
@@ -75,12 +73,10 @@ const createGet = <CustomMethods extends SelectorCustomMethods = {}>(
   return get;
 };
 
-export const createSelectorCreator = <CustomMethods extends SelectorCustomMethods = {}>(
-  customMethods?: CustomMethods,
-): CreateSelector<CustomMethods> => {
-  const createSelector: CreateSelector<CustomMethods> = (...args) => {
+export const createSelectorCreator = (customMethods: SelectorCustomMethods): CreateSelector => {
+  const createSelector: CreateSelector = (...args) => {
     const locator = args[0];
-    const selector = Selector(...args) as RawSelector<CustomMethods>;
+    const selector = Selector(...args) as SelectorType;
 
     if (typeof locator === 'string') {
       selector[DESCRIPTION_KEY] = locator;

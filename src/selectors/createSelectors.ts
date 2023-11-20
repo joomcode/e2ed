@@ -1,19 +1,19 @@
 import {createSelectorCreator} from './createSelector';
 import {createSelectorByCssCreator} from './createSelectorByCss';
-import {createDefaultCustomMethods} from './defaultCustomMethods';
+import {createCustomMethods} from './customMethods';
 import {htmlElementSelectorCreator} from './htmlElementSelector';
 import {locatorIdSelectorCreator} from './locatorIdSelector';
 
 import type {
   CreateSelectorsOptions,
-  GetTestAttributeNameFn,
+  GetLocatorAttributeNameFn,
   SelectorCustomMethods,
 } from '../types/internal';
 
-const createSelectorsWithCustomMethods = <CustomMethods extends SelectorCustomMethods = {}>(
-  getTestAttributeName: GetTestAttributeNameFn,
+const createSelectorsWithCustomMethods = (
+  getLocatorAttributeName: GetLocatorAttributeNameFn,
   // force `this` to be Selector
-  customMethods?: CustomMethods,
+  customMethods: SelectorCustomMethods,
 ): typeof selectorsWithCustomMethods => {
   const createSelector = createSelectorCreator(customMethods);
 
@@ -33,15 +33,15 @@ const createSelectorsWithCustomMethods = <CustomMethods extends SelectorCustomMe
     /**
      * Selector of locator elements by locator id.
      */
-    locatorIdSelector: locatorIdSelectorCreator(createSelector, getTestAttributeName),
+    locatorIdSelector: locatorIdSelectorCreator(createSelector, getLocatorAttributeName),
   };
 
   return selectorsWithCustomMethods;
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const createSelectors = ({getTestAttributeName}: CreateSelectorsOptions) =>
+export const createSelectors = ({getLocatorAttributeName}: CreateSelectorsOptions) =>
   createSelectorsWithCustomMethods(
-    getTestAttributeName,
-    createDefaultCustomMethods(getTestAttributeName),
+    getLocatorAttributeName,
+    createCustomMethods(getLocatorAttributeName),
   );

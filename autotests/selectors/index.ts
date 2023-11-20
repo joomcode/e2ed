@@ -4,6 +4,6 @@ export {inputSelector} from './inputSelector';
 
 export const {createSelector, createSelectorByCss, locatorIdSelector, htmlElementSelector} =
   createSelectors({
-    getTestAttributeName: (property) =>
+    getLocatorAttributeName: (property) =>
       property === 'id' ? 'data-testid' : `data-test-${property}`,
   });

@@ -1,18 +1,13 @@
-import type {
-  CreateSelector,
-  GetTestAttributeNameFn,
-  RawSelector,
-  SelectorCustomMethods,
-} from '../types/internal';
+import type {CreateSelector, GetLocatorAttributeNameFn, Selector} from '../types/internal';
 
-export const locatorIdSelectorCreator = <CustomMethods extends SelectorCustomMethods = {}>(
-  createSelector: CreateSelector<CustomMethods>,
-  getTestAttrName: GetTestAttributeNameFn,
+export const locatorIdSelectorCreator = (
+  createSelector: CreateSelector,
+  getTestAttrName: GetLocatorAttributeNameFn,
 ): typeof locatorIdSelector => {
   /**
    * Selector of locator elements by locator id.
    */
-  const locatorIdSelector = (id: string): RawSelector<CustomMethods> =>
+  const locatorIdSelector = (id: string): Selector =>
     createSelector(`[${getTestAttrName('id')}="${id}"]`);
 
   return locatorIdSelector;

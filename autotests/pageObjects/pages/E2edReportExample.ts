@@ -33,12 +33,12 @@ export class E2edReportExample extends Page<CustomPageParams> {
   readonly navigationRetries = locatorIdSelector('app-navigation-retries');
 
   /** Button tabs in navigation bar with test retries */
-  readonly navigationRetriesButton = this.navigationRetries.findByTestId(
+  readonly navigationRetriesButton = this.navigationRetries.findByLocatorId(
     'app-navigation-retries-button',
   );
 
   /** Selected button tab in navigation bar with test retries */
-  readonly navigationRetriesButtonSelected = this.navigationRetriesButton.filterByTestProp(
+  readonly navigationRetriesButtonSelected = this.navigationRetriesButton.filterByLocatorProperty(
     'selected',
     'true',
   );

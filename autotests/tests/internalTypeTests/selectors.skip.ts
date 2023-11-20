@@ -6,57 +6,57 @@ import {
 } from 'autotests/selectors';
 
 // @ts-expect-error: wrong number of arguments
-htmlElementSelector.findByTestId();
+htmlElementSelector.findByLocatorId();
 // @ts-expect-error: wrong type of arguments
-htmlElementSelector.findByTestId(0);
+htmlElementSelector.findByLocatorId(0);
 // ok
-htmlElementSelector.findByTestId('id');
+htmlElementSelector.findByLocatorId('id');
 // ok
-htmlElementSelector.findByTestId('id').findByTestId('id2');
+htmlElementSelector.findByLocatorId('id').findByLocatorId('id2');
 // ok
-htmlElementSelector.findByTestId('id').find('.test-children');
+htmlElementSelector.findByLocatorId('id').find('.test-children');
 // ok
-htmlElementSelector.find('body').findByTestId('id');
+htmlElementSelector.find('body').findByLocatorId('id');
 
 // ok
-createSelector('id').findByTestId('id').find('body').findByTestId('id');
+createSelector('id').findByLocatorId('id').find('body').findByLocatorId('id');
 // ok
-createSelectorByCss('id').findByTestId('id').find('body').findByTestId('id');
+createSelectorByCss('id').findByLocatorId('id').find('body').findByLocatorId('id');
 // ok
-locatorIdSelector('id').findByTestId('id').find('body').findByTestId('id');
+locatorIdSelector('id').findByLocatorId('id').find('body').findByLocatorId('id');
 
 // ok
-htmlElementSelector.filterByTestId('id');
+htmlElementSelector.filterByLocatorId('id');
 // ok
-htmlElementSelector.parentByTestId('id');
+htmlElementSelector.parentByLocatorId('id');
 // ok
-htmlElementSelector.childByTestId('id');
+htmlElementSelector.childByLocatorId('id');
 // ok
-htmlElementSelector.siblingByTestId('id');
+htmlElementSelector.siblingByLocatorId('id');
 // ok
-htmlElementSelector.nextSiblingByTestId('id');
+htmlElementSelector.nextSiblingByLocatorId('id');
 // ok
-htmlElementSelector.prevSiblingByTestId('id');
+htmlElementSelector.prevSiblingByLocatorId('id');
 
 // ok
-htmlElementSelector.filterByTestProp('prop', 'value');
+htmlElementSelector.filterByLocatorProperty('prop', 'value');
 // ok
-htmlElementSelector.findByTestProp('prop', 'value');
+htmlElementSelector.findByLocatorProperty('prop', 'value');
 // ok
-htmlElementSelector.parentByTestProp('prop', 'value');
+htmlElementSelector.parentByLocatorProperty('prop', 'value');
 // ok
-htmlElementSelector.childByTestProp('prop', 'value');
+htmlElementSelector.childByLocatorProperty('prop', 'value');
 // ok
-htmlElementSelector.siblingByTestProp('prop', 'value');
+htmlElementSelector.siblingByLocatorProperty('prop', 'value');
 // ok
-htmlElementSelector.nextSiblingByTestProp('prop', 'value');
+htmlElementSelector.nextSiblingByLocatorProperty('prop', 'value');
 // ok
-htmlElementSelector.prevSiblingByTestProp('prop', 'value');
+htmlElementSelector.prevSiblingByLocatorProperty('prop', 'value');
 
 // ok
-void htmlElementSelector.getTestProp('prop');
+void htmlElementSelector.getLocatorProperty('prop');
 // ok
-void htmlElementSelector.hasTestProp('prop');
+void htmlElementSelector.hasLocatorProperty('prop');
 
 // ok
 htmlElementSelector.getDescription() satisfies string | undefined;
