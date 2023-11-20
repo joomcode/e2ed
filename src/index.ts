@@ -2,7 +2,6 @@
  * Base public modules.
  */
 export {ApiRoute} from './ApiRoute';
-export {createSelector} from './createSelector';
 export {Page} from './Page';
 export {PageRoute} from './PageRoute';
 export {Route} from './Route';

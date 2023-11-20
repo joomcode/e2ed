@@ -1,4 +1,4 @@
-import {htmlElementSelector} from '../../selectors';
+import {htmlElementSelector} from '../../selectors/internal';
 
 import type {Selector} from '../../types/internal';
 

@@ -32,7 +32,7 @@ export {removeStyleFromString} from './generalLog';
 export {getDurationWithUnits} from './getDurationWithUnits';
 export {getFullPackConfig as untypedGetFullPackConfig} from './getFullPackConfig';
 export {getKeysCounter} from './getKeysCounter';
-export {getDescriptionFromSelector, getLocatorProperty} from './locators';
+export {getDescriptionFromSelector} from './locators';
 export {log} from './log';
 export {parseMaybeEmptyValueAsJson} from './parseMaybeEmptyValueAsJson';
 export {getPromiseWithResolveAndReject, getTimeoutPromise, waitForAllProperties} from './promise';

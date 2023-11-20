@@ -100,7 +100,13 @@ export type {ApiRouteClassType, ApiRouteClassTypeWithGetParamsFromUrl} from './r
 export type {RunLabel, RunLabelObject} from './runLabel';
 /** @internal */
 export type {RawRunLabelObject} from './runLabel';
-export type {Selector} from './selectors';
+export type {
+  CreateSelector,
+  CreateSelectorsOptions,
+  GetLocatorAttributeNameFn,
+  Selector,
+  SelectorCustomMethods,
+} from './selectors';
 export type {IsTestSkippedResult} from './skipTest';
 export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';
