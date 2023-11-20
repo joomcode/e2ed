@@ -2,7 +2,13 @@ import {Selector} from 'testcafe-without-typecheck';
 
 import {DESCRIPTION_KEY} from '../constants/internal';
 
-import type {Fn, RawSelector, SelectorCustomMethods, Values} from '../types/internal';
+import type {
+  CreateSelector,
+  Fn,
+  RawSelector,
+  SelectorCustomMethods,
+  Values,
+} from '../types/internal';
 
 /**
  * Proxy handler for wrapping all selector properties.
@@ -68,10 +74,6 @@ const createGet = <CustomMethods extends SelectorCustomMethods = {}>(
 
   return get;
 };
-
-export type CreateSelector<CustomMethods extends SelectorCustomMethods = {}> = (
-  ...args: Parameters<typeof Selector>
-) => RawSelector<CustomMethods>;
 
 export const createSelectorCreator = <CustomMethods extends SelectorCustomMethods = {}>(
   customMethods?: CustomMethods,

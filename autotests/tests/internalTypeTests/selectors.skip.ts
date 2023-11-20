@@ -59,5 +59,4 @@ void htmlElementSelector.getTestProp('prop');
 void htmlElementSelector.hasTestProp('prop');
 
 // ok
-declare function testStringOrUndefined(val: string | undefined): void;
-testStringOrUndefined(htmlElementSelector.getDescription());
+htmlElementSelector.getDescription() satisfies string | undefined;

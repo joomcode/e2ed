@@ -6,12 +6,12 @@ import {locatorIdSelectorCreator} from './locatorIdSelector';
 
 import type {
   CreateSelectorsOptions,
-  GetTestAttrNameFn,
+  GetTestAttributeNameFn,
   SelectorCustomMethods,
 } from '../types/internal';
 
 const createSelectorsWithCustomMethods = <CustomMethods extends SelectorCustomMethods = {}>(
-  getTestAttrName: GetTestAttrNameFn,
+  getTestAttributeName: GetTestAttributeNameFn,
   // force `this` to be Selector
   customMethods?: CustomMethods,
 ): typeof selectorsWithCustomMethods => {
@@ -33,12 +33,15 @@ const createSelectorsWithCustomMethods = <CustomMethods extends SelectorCustomMe
     /**
      * Selector of locator elements by locator id.
      */
-    locatorIdSelector: locatorIdSelectorCreator(createSelector, getTestAttrName),
+    locatorIdSelector: locatorIdSelectorCreator(createSelector, getTestAttributeName),
   };
 
   return selectorsWithCustomMethods;
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const createSelectors = ({getTestAttrName}: CreateSelectorsOptions) =>
-  createSelectorsWithCustomMethods(getTestAttrName, createDefaultCustomMethods(getTestAttrName));
+export const createSelectors = ({getTestAttributeName}: CreateSelectorsOptions) =>
+  createSelectorsWithCustomMethods(
+    getTestAttributeName,
+    createDefaultCustomMethods(getTestAttributeName),
+  );

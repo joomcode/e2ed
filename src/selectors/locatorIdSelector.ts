@@ -1,10 +1,13 @@
-import type {GetTestAttrNameFn, RawSelector, SelectorCustomMethods} from '../types/internal';
-
-import type {CreateSelector} from './createSelector';
+import type {
+  CreateSelector,
+  GetTestAttributeNameFn,
+  RawSelector,
+  SelectorCustomMethods,
+} from '../types/internal';
 
 export const locatorIdSelectorCreator = <CustomMethods extends SelectorCustomMethods = {}>(
   createSelector: CreateSelector<CustomMethods>,
-  getTestAttrName: GetTestAttrNameFn,
+  getTestAttrName: GetTestAttributeNameFn,
 ): typeof locatorIdSelector => {
   /**
    * Selector of locator elements by locator id.

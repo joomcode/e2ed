@@ -1,6 +1,4 @@
-import type {RawSelector, SelectorCustomMethods} from '../types/internal';
-
-import type {CreateSelector} from './createSelector';
+import type {CreateSelector, RawSelector, SelectorCustomMethods} from '../types/internal';
 
 export const createSelectorByCssCreator = <CustomMethods extends SelectorCustomMethods = {}>(
   createSelector: CreateSelector<CustomMethods>,

@@ -1,4 +1,4 @@
-import type {Inner} from 'testcafe-without-typecheck';
+import type {Inner, Selector as TestcafeSelector} from 'testcafe-without-typecheck';
 
 import type {DESCRIPTION_KEY} from '../constants/internal';
 
@@ -57,10 +57,10 @@ export type SelectorCustomMethods = Record<
   (this: RawSelector, ...args: never[]) => unknown
 >;
 
-export type GetTestAttrNameFn = (property: string) => string;
+export type GetTestAttributeNameFn = (property: string) => string;
 
 export type CreateSelectorsOptions = {
-  getTestAttrName: GetTestAttrNameFn;
+  getTestAttributeName: GetTestAttributeNameFn;
 };
 
 export type SelectorDefaultCustomMethods = {
@@ -102,6 +102,10 @@ export type SelectorDefaultCustomMethods = {
   /** Get string description of selector if any. */
   getDescription(this: RawSelector): string | undefined;
 };
+
+export type CreateSelector<CustomMethods extends SelectorCustomMethods = {}> = (
+  ...args: Parameters<typeof TestcafeSelector>
+) => RawSelector<CustomMethods>;
 
 export type RawSelector<CustomMethods extends SelectorCustomMethods = {}> = ((
   ...args: unknown[]

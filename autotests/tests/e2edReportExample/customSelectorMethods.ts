@@ -3,7 +3,7 @@ import {E2edReportExample} from 'autotests/pageObjects/pages';
 import {expect} from 'e2ed';
 import {navigateToPage} from 'e2ed/actions';
 
-it('custom selector methods', {meta: {testId: '6'}, testIdleTimeout: 35_000}, async () => {
+it('custom selector methods', {meta: {testId: '15'}}, async () => {
   const reportPage = await navigateToPage(E2edReportExample);
 
   await expect(reportPage.navigationRetries.exists, 'navigation retries exists').ok();

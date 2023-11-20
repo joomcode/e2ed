@@ -101,8 +101,9 @@ export type {RunLabel, RunLabelObject} from './runLabel';
 /** @internal */
 export type {RawRunLabelObject} from './runLabel';
 export type {
+  CreateSelector,
   CreateSelectorsOptions,
-  GetTestAttrNameFn,
+  GetTestAttributeNameFn,
   RawSelector,
   Selector,
   SelectorCustomMethods,
