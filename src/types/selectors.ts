@@ -45,7 +45,7 @@ type ReplaceObjectSelectors<Obj extends object> = {
           : Obj[Key];
 };
 
-export type GetLocatorAttributeNameFn = (property: string) => string;
+export type GetLocatorAttributeNameFn = (parameter: string) => string;
 
 export type CreateSelectorsOptions = {
   getLocatorAttributeName: GetLocatorAttributeNameFn;
@@ -67,33 +67,35 @@ export type SelectorCustomMethods = {
   /** Finds all preceding sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
   prevSiblingByLocatorId(this: Inner.Selector, locatorId: string): Inner.Selector;
 
-  /** Creates a selector that filters a matching set by locator property. */
-  filterByLocatorProperty(this: Inner.Selector, property: string, value: string): Inner.Selector;
-  /** Finds all descendants of all nodes in the matching set and filters them by locator property. */
-  findByLocatorProperty(this: Inner.Selector, property: string, value: string): Inner.Selector;
-  /** Finds all parents of all nodes in the matching set and filters them by locator property. */
-  parentByLocatorProperty(this: Inner.Selector, property: string, value: string): Inner.Selector;
-  /** Finds all child elements (not nodes) of all nodes in the matching set and filters them by locator property. */
-  childByLocatorProperty(this: Inner.Selector, property: string, value: string): Inner.Selector;
-  /** Finds all sibling elements (not nodes) of all nodes in the matching set and filters them by locator property. */
-  siblingByLocatorProperty(this: Inner.Selector, property: string, value: string): Inner.Selector;
-  /** Finds all succeeding sibling elements (not nodes) of all nodes in the matching set and filters them by locator property. */
-  nextSiblingByLocatorProperty(
+  /** Creates a selector that filters a matching set by locator parameter. */
+  filterByLocatorParameter(this: Inner.Selector, parameter: string, value: string): Inner.Selector;
+  /** Finds all descendants of all nodes in the matching set and filters them by locator parameter. */
+  findByLocatorParameter(this: Inner.Selector, parameter: string, value: string): Inner.Selector;
+  /** Finds all parents of all nodes in the matching set and filters them by locator parameter. */
+  parentByLocatorParameter(this: Inner.Selector, parameter: string, value: string): Inner.Selector;
+  /** Finds all child elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
+  childByLocatorParameter(this: Inner.Selector, parameter: string, value: string): Inner.Selector;
+  /** Finds all sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
+  siblingByLocatorParameter(this: Inner.Selector, parameter: string, value: string): Inner.Selector;
+  /** Finds all succeeding sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
+  nextSiblingByLocatorParameter(
     this: Inner.Selector,
-    property: string,
+    parameter: string,
     value: string,
   ): Inner.Selector;
-  /** Finds all preceding sibling elements (not nodes) of all nodes in the matching set and filters them by locator property. */
-  prevSiblingByLocatorProperty(
+  /** Finds all preceding sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
+  prevSiblingByLocatorParameter(
     this: Inner.Selector,
-    property: string,
+    parameter: string,
     value: string,
   ): Inner.Selector;
 
-  /** Returns the value of the locator attribute. */
-  getLocatorProperty(this: Inner.Selector, property: string): Promise<string | null>;
-  /** true if the element has the locator attribute. */
-  hasLocatorProperty(this: Inner.Selector, property: string): Promise<boolean>;
+  /** Returns the value of the locator id. */
+  getLocatorId(this: Inner.Selector): Promise<string | null>;
+  /** Returns the value of the locator parameter. */
+  getLocatorParameter(this: Inner.Selector, parameter: string): Promise<string | null>;
+  /** true if the element has the locator parameter. */
+  hasLocatorParameter(this: Inner.Selector, parameter: string): Promise<boolean>;
 
   /** Get string description of selector if any. */
   getDescription(this: Inner.Selector): string | undefined;

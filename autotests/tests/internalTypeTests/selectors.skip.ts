@@ -39,24 +39,24 @@ htmlElementSelector.nextSiblingByLocatorId('id');
 htmlElementSelector.prevSiblingByLocatorId('id');
 
 // ok
-htmlElementSelector.filterByLocatorProperty('prop', 'value');
+htmlElementSelector.filterByLocatorParameter('prop', 'value');
 // ok
-htmlElementSelector.findByLocatorProperty('prop', 'value');
+htmlElementSelector.findByLocatorParameter('prop', 'value');
 // ok
-htmlElementSelector.parentByLocatorProperty('prop', 'value');
+htmlElementSelector.parentByLocatorParameter('prop', 'value');
 // ok
-htmlElementSelector.childByLocatorProperty('prop', 'value');
+htmlElementSelector.childByLocatorParameter('prop', 'value');
 // ok
-htmlElementSelector.siblingByLocatorProperty('prop', 'value');
+htmlElementSelector.siblingByLocatorParameter('prop', 'value');
 // ok
-htmlElementSelector.nextSiblingByLocatorProperty('prop', 'value');
+htmlElementSelector.nextSiblingByLocatorParameter('prop', 'value');
 // ok
-htmlElementSelector.prevSiblingByLocatorProperty('prop', 'value');
+htmlElementSelector.prevSiblingByLocatorParameter('prop', 'value');
 
 // ok
-void htmlElementSelector.getLocatorProperty('prop');
+void htmlElementSelector.getLocatorParameter('prop');
 // ok
-void htmlElementSelector.hasLocatorProperty('prop');
+void htmlElementSelector.hasLocatorParameter('prop');
 
 // ok
 htmlElementSelector.getDescription() satisfies string | undefined;

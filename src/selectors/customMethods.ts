@@ -31,33 +31,36 @@ export const createCustomMethods = (
       return this.prevSibling(`[${locatorIdAttributeName}="${locatorId}"]`);
     },
 
-    filterByLocatorProperty(property, value) {
-      return this.filter(`[${getLocatorAttributeName(property)}="${value}"]`);
+    filterByLocatorParameter(parameter, value) {
+      return this.filter(`[${getLocatorAttributeName(parameter)}="${value}"]`);
     },
-    findByLocatorProperty(property, value) {
-      return this.find(`[${getLocatorAttributeName(property)}="${value}"]`);
+    findByLocatorParameter(parameter, value) {
+      return this.find(`[${getLocatorAttributeName(parameter)}="${value}"]`);
     },
-    parentByLocatorProperty(property, value) {
-      return this.parent(`[${getLocatorAttributeName(property)}="${value}"]`);
+    parentByLocatorParameter(parameter, value) {
+      return this.parent(`[${getLocatorAttributeName(parameter)}="${value}"]`);
     },
-    childByLocatorProperty(property, value) {
-      return this.child(`[${getLocatorAttributeName(property)}="${value}"]`);
+    childByLocatorParameter(parameter, value) {
+      return this.child(`[${getLocatorAttributeName(parameter)}="${value}"]`);
     },
-    siblingByLocatorProperty(property, value) {
-      return this.sibling(`[${getLocatorAttributeName(property)}="${value}"]`);
+    siblingByLocatorParameter(parameter, value) {
+      return this.sibling(`[${getLocatorAttributeName(parameter)}="${value}"]`);
     },
-    nextSiblingByLocatorProperty(property, value) {
-      return this.nextSibling(`[${getLocatorAttributeName(property)}="${value}"]`);
+    nextSiblingByLocatorParameter(parameter, value) {
+      return this.nextSibling(`[${getLocatorAttributeName(parameter)}="${value}"]`);
     },
-    prevSiblingByLocatorProperty(property, value) {
-      return this.prevSibling(`[${getLocatorAttributeName(property)}="${value}"]`);
+    prevSiblingByLocatorParameter(parameter, value) {
+      return this.prevSibling(`[${getLocatorAttributeName(parameter)}="${value}"]`);
     },
 
-    getLocatorProperty(property) {
-      return this.getAttribute(getLocatorAttributeName(property));
+    getLocatorId() {
+      return this.getAttribute(locatorIdAttributeName);
     },
-    hasLocatorProperty(property) {
-      return this.hasAttribute(getLocatorAttributeName(property));
+    getLocatorParameter(parameter) {
+      return this.getAttribute(getLocatorAttributeName(parameter));
+    },
+    hasLocatorParameter(parameter) {
+      return this.hasAttribute(getLocatorAttributeName(parameter));
     },
 
     getDescription(): string | undefined {

@@ -18,12 +18,12 @@ it('custom selector methods', {meta: {testId: '15'}}, async () => {
   const buttonsCount = await reportPage.navigationRetriesButton.count;
 
   await expect(
-    reportPage.navigationRetriesButtonSelected.getLocatorProperty('retry'),
+    reportPage.navigationRetriesButtonSelected.getLocatorParameter('retry'),
     'last navigation retries button selected',
   ).eql(String(buttonsCount));
 
   await expect(
-    reportPage.navigationRetriesButtonSelected.hasLocatorProperty('disabled'),
+    reportPage.navigationRetriesButtonSelected.hasLocatorParameter('disabled'),
     'selected navigation retries button has "disabled" test prop',
   ).ok();
 
@@ -31,6 +31,6 @@ it('custom selector methods', {meta: {testId: '15'}}, async () => {
     reportPage.navigationRetriesButtonSelected.getDescription(),
     'selector has apropriate description',
   ).eql(
-    '[data-testid="app-navigation-retries"].findByLocatorId(app-navigation-retries-button).filterByLocatorProperty(selected, true)',
+    '[data-testid="app-navigation-retries"].findByLocatorId(app-navigation-retries-button).filterByLocatorParameter(selected, true)',
   );
 });

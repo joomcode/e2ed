@@ -38,7 +38,7 @@ export class E2edReportExample extends Page<CustomPageParams> {
   );
 
   /** Selected button tab in navigation bar with test retries */
-  readonly navigationRetriesButtonSelected = this.navigationRetriesButton.filterByLocatorProperty(
+  readonly navigationRetriesButtonSelected = this.navigationRetriesButton.filterByLocatorParameter(
     'selected',
     'true',
   );
