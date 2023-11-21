@@ -10,6 +10,8 @@ type MaybeWithStackTrace = {
   stackTrace?: readonly string[];
 } | null;
 
+const wrapOptions = {doNotWrapInBacktick: true} as const;
+
 /**
  * Get test run error from unknownRunError.
  * @internal
@@ -30,9 +32,5 @@ export const getRunErrorFromError = (unknownRunError: unknown): RunError => {
     error.stackTrace = filteredStackFrames.map(getPrintedStackFrame);
   }
 
-  if ('toJSON' in error && typeof error.toJSON === 'function') {
-    return String(error.toJSON());
-  }
-
-  return wrapStringForLogs(valueToString(error));
+  return wrapStringForLogs(valueToString(error), wrapOptions);
 };

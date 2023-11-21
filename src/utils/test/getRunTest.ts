@@ -3,12 +3,12 @@ import {createRunId} from '../../generators/internal';
 import {assertValueIsDefined} from '../asserts';
 import {addTestToNotIncludedInPackTests} from '../notIncludedInPackTests';
 
+import {afterErrorInTest} from './afterErrorInTest';
 import {afterTest} from './afterTest';
 import {beforeTest} from './beforeTest';
 import {getIsTestIncludedInPack} from './getIsTestIncludedInPack';
 import {getTestStaticOptions} from './getTestStaticOptions';
 import {runTestFn} from './runTestFn';
-import {takeScreenshotsOnErrorIfNeeded} from './takeScreenshotsOnErrorIfNeeded';
 
 import type {RunId, Test, TestController, TestStaticOptions} from '../../types/internal';
 
@@ -51,7 +51,7 @@ export const getRunTest = (test: Test): RunTest => {
 
       assertValueIsDefined(testStaticOptions, 'testStaticOptions is defined', {error, runId});
 
-      await takeScreenshotsOnErrorIfNeeded(testStaticOptions);
+      await afterErrorInTest(testStaticOptions);
 
       throw error;
     } finally {

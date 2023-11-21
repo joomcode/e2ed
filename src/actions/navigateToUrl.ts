@@ -18,7 +18,7 @@ type Options = Readonly<{
 }>;
 
 /**
- * Navigate to the url (without waiting of interface stabilization).
+ * Navigate to the `url` (without waiting of interface stabilization).
  */
 export const navigateToUrl = async (url: Url, options: Options = {}): Promise<void> => {
   const {skipLogs = false} = options;
