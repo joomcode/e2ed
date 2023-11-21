@@ -1,4 +1,4 @@
-import type {fixture as testcafeFixture, test as testcafeTest} from 'testcafe-without-typecheck';
+import type {fixture as testCafeFixture, test as testCafeTest} from 'testcafe-without-typecheck';
 
 declare const global: Readonly<{fixture?: unknown; test?: unknown}>;
 
@@ -22,5 +22,5 @@ export {
   Selector,
 } from 'testcafe-without-typecheck';
 
-export declare const fixture: typeof testcafeFixture;
-export declare const test: typeof testcafeTest;
+export declare const fixture: typeof testCafeFixture;
+export declare const test: typeof testCafeTest;

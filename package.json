@@ -32,12 +32,12 @@
     "testcafe-without-typecheck": "3.4.0-rc.1"
   },
   "devDependencies": {
-    "@types/node": "20.9.0",
-    "@typescript-eslint/eslint-plugin": "6.11.0",
-    "@typescript-eslint/parser": "6.11.0",
+    "@types/node": "20.9.3",
+    "@typescript-eslint/eslint-plugin": "6.12.0",
+    "@typescript-eslint/parser": "6.12.0",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
     "assert-package-lock-is-consistent": "1.0.0",
-    "eslint": "8.53.0",
+    "eslint": "8.54.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-import": "2.29.0",

@@ -1,6 +1,7 @@
 import {Selector} from 'testcafe-without-typecheck';
 
 import {DESCRIPTION_KEY} from '../constants/internal';
+import {setReadonlyProperty} from '../utils/setReadonlyProperty';
 
 import type {
   CreateSelector,
@@ -79,7 +80,7 @@ export const createSelectorCreator = (customMethods: SelectorCustomMethods): Cre
     const selector = Selector(...args) as SelectorType;
 
     if (typeof locator === 'string') {
-      selector[DESCRIPTION_KEY] = locator;
+      setReadonlyProperty(selector, DESCRIPTION_KEY, locator);
     }
 
     return new Proxy(selector, {get: createGet(customMethods)});
