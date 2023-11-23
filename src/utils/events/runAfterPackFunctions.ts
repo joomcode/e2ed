@@ -4,7 +4,7 @@ import {runArrayOfFunctionsSafely} from '../runArrayOfFunctionsSafely';
 import type {CustomReportPropertiesPlaceholder, LiteReport, Void} from '../../types/internal';
 
 /**
- * Run functions from `doAfterPack` pack config property.
+ * Runs functions from `doAfterPack` pack config field.
  * @internal
  */
 export const runAfterPackFunctions = async (liteReport: LiteReport): Promise<void> => {

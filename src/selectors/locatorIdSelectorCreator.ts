@@ -1,9 +1,18 @@
-import type {CreateSelector, GetLocatorAttributeNameFn, Selector} from '../types/internal';
+import type {
+  CreateSelector,
+  GetLocatorAttributeNameFn,
+  LocatorIdSelector,
+  Selector,
+} from '../types/internal';
 
+/**
+ * Creates `locatorIdSelector` function.
+ * @internal
+ */
 export const locatorIdSelectorCreator = (
   createSelector: CreateSelector,
   getLocatorAttributeName: GetLocatorAttributeNameFn,
-): typeof locatorIdSelector => {
+): LocatorIdSelector => {
   /**
    * Selector of locator elements by locator id.
    */

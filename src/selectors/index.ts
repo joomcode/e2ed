@@ -1,1 +1,1 @@
-export {createSelectors} from './createSelectors';
+export {createSelectorFunctions} from './createSelectorFunctions';

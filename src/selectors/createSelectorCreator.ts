@@ -74,6 +74,10 @@ const createGet = (
   return get;
 };
 
+/**
+ * Creates `createSelector` function.
+ * @internal
+ */
 export const createSelectorCreator = (customMethods: SelectorCustomMethods): CreateSelector => {
   const createSelector: CreateSelector = (...args) => {
     const locator = args[0];

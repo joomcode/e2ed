@@ -1,20 +1,21 @@
-import {createSelectorCreator} from './createSelector';
-import {createSelectorByCssCreator} from './createSelectorByCss';
-import {createCustomMethods} from './customMethods';
-import {htmlElementSelectorCreator} from './htmlElementSelector';
-import {locatorIdSelectorCreator} from './locatorIdSelector';
+import {createCustomMethods} from './createCustomMethods';
+import {createSelectorByCssCreator} from './createSelectorByCssCreator';
+import {createSelectorCreator} from './createSelectorCreator';
+import {htmlElementSelectorCreator} from './htmlElementSelectorCreator';
+import {locatorIdSelectorCreator} from './locatorIdSelectorCreator';
 
 import type {
-  CreateSelectorsOptions,
+  CreateSelectorFunctionsOptions,
   GetLocatorAttributeNameFn,
   SelectorCustomMethods,
+  SelectorFunctions,
 } from '../types/internal';
 
-const createSelectorsWithCustomMethods = (
+const createSelectorFunctionsWithCustomMethods = (
   getLocatorAttributeName: GetLocatorAttributeNameFn,
   // force `this` to be Selector
   customMethods: SelectorCustomMethods,
-): typeof selectorsWithCustomMethods => {
+): SelectorFunctions => {
   const createSelector = createSelectorCreator(customMethods);
 
   const selectorsWithCustomMethods = {
@@ -39,9 +40,13 @@ const createSelectorsWithCustomMethods = (
   return selectorsWithCustomMethods;
 };
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const createSelectors = ({getLocatorAttributeName}: CreateSelectorsOptions) =>
-  createSelectorsWithCustomMethods(
+/**
+ * Creates main functions for creating selectors and working with selectors.
+ */
+export const createSelectorFunctions = ({
+  getLocatorAttributeName,
+}: CreateSelectorFunctionsOptions): SelectorFunctions =>
+  createSelectorFunctionsWithCustomMethods(
     getLocatorAttributeName,
     createCustomMethods(getLocatorAttributeName),
   );

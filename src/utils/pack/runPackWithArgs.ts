@@ -10,7 +10,7 @@ import {createRunLabel} from '../runLabel';
 import {getPackTimeoutPromise} from './packTimeout';
 
 /**
- * Run e2ed pack of tests (or tasks) with command line arguments.
+ * Runs e2ed pack of tests (or tasks) with command line arguments.
  * @internal
  */
 export const runPackWithArgs = async (): Promise<void> => {

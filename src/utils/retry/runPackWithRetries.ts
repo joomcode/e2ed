@@ -8,7 +8,7 @@ import {truncateRetriesStateForLogs} from './truncateRetriesStateForLogs';
 import type {RetriesState, UtcTimeInMs} from '../../types/internal';
 
 /**
- * Run e2ed pack of tests (or tasks) with retries.
+ * Runs e2ed pack of tests (or tasks) with retries.
  * @internal
  */
 export const runPackWithRetries = async (): Promise<void> => {

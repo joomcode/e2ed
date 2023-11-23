@@ -9,7 +9,7 @@ import {RequestHookToWaitForEvents} from '../requestHooks';
 import type {RunId, TestController} from '../../types/internal';
 
 /**
- * Run test function with reject in test run event.
+ * Runs test function with reject in test run event.
  * @internal
  */
 export const runTestFn = async (runId: RunId, testController: TestController): Promise<void> => {

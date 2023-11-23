@@ -24,7 +24,7 @@ export type LogParams = Readonly<{
 }>;
 
 /**
- * Options of oneTryOfRequest function.
+ * Options of `oneTryOfRequest` function.
  * @internal
  */
 export type OneTryOfRequestOptions = Readonly<{
@@ -38,7 +38,7 @@ export type OneTryOfRequestOptions = Readonly<{
 }>;
 
 /**
- * Options of request function.
+ * Options of `request` function.
  */
 export type Options<
   RouteParams,

@@ -6,7 +6,7 @@ import {endE2edReason, setEndE2edReason} from './endReason';
 import type {EndE2edReason} from '../../constants/internal';
 
 /**
- * End e2ed run by end e2ed reason (kill tests subprocess and exit).
+ * Ends e2ed run by end e2ed reason (kill tests subprocess and exit).
  * @internal
  */
 export const endE2ed = (definedEndE2edReason: EndE2edReason): void => {
