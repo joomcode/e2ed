@@ -7,7 +7,7 @@ import type {
 } from '../../types/internal';
 
 /**
- * Processes one waitForAllRequestsComplete predicate for new request.
+ * Processes one `waitForAllRequestsComplete` predicate for new request.
  * Returns `true` if the promise was fulfilled, and `false` otherwise.
  * @internal
  */

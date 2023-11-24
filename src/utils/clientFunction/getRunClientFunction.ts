@@ -11,19 +11,19 @@ import {isNeedRerunClientFunction} from './isNeedRerunClientFunction';
 
 import type {ClientFunctionState, MaybeTestCafeError} from '../../types/internal';
 
-type Options<Args extends unknown[], R> = Readonly<{
+type Options<Args extends readonly unknown[], Result> = Readonly<{
   args: Args;
-  clientFunctionState: ClientFunctionState<Args, R>;
+  clientFunctionState: ClientFunctionState<Args, Result>;
   reject: (error: unknown) => void;
-  resolve: (value: Awaited<R>) => void;
+  resolve: (value: Awaited<Result>) => void;
 }>;
 
 /**
  * Get cicle function for running client function.
  * @internal
  */
-export const getRunClientFunction = <Args extends unknown[], R>(
-  options: Options<Args, R>,
+export const getRunClientFunction = <Args extends readonly unknown[], Result>(
+  options: Options<Args, Result>,
 ): (() => void) => {
   const {args, clientFunctionState, reject, resolve} = options;
   const {name, originalFn} = clientFunctionState;

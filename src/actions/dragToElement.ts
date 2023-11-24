@@ -27,8 +27,8 @@ export const dragToElement = async (
   );
 
   await testController.dragToElement(
-    selector as TestCafeSelector,
-    destinationSelector as TestCafeSelector,
+    selector as unknown as TestCafeSelector,
+    destinationSelector as unknown as TestCafeSelector,
     options,
   );
 

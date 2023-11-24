@@ -32,7 +32,10 @@ it(
     let promise = waitForAllRequestsComplete(() => true, {timeout: 1000});
 
     const clientGetUsers = createClientFunction(
-      (delay: number) => fetch(`https://reqres.in/api/users?delay=${delay}`, {method: 'GET'}),
+      (delay: number) =>
+        fetch(`https://reqres.in/api/users?delay=${delay}`, {method: 'GET'}).then((res) =>
+          res.json(),
+        ),
       {name: 'getUsers', timeout: 6_000},
     );
 

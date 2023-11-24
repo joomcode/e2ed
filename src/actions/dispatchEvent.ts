@@ -25,7 +25,7 @@ export const dispatchEvent = async (
     LogEventType.InternalAction,
   );
 
-  await testController.dispatchEvent(selector as TestCafeSelector, eventName, options);
+  await testController.dispatchEvent(selector as unknown as TestCafeSelector, eventName, options);
 
   await waitForInterfaceStabilization(stabilizationInterval);
 };

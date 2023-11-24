@@ -25,7 +25,7 @@ export const rightClick = async (
     LogEventType.InternalAction,
   );
 
-  await testController.rightClick(selector as TestCafeSelector, options);
+  await testController.rightClick(selector as unknown as TestCafeSelector, options);
 
   await waitForInterfaceStabilization(stabilizationInterval);
 };

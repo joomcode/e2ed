@@ -1,6 +1,6 @@
-import {DESCRIPTION_KEY} from '../constants/internal';
+import {getDescriptionFromSelector} from '../utils/locators';
 
-import type {GetLocatorAttributeNameFn, SelectorCustomMethods} from '../types/internal';
+import type {GetLocatorAttributeNameFn, Selector, SelectorCustomMethods} from '../types/internal';
 
 /**
  * Creates native `e2ed` methods of selector.
@@ -60,6 +60,9 @@ export const createCustomMethods = (
     getLocatorId() {
       return this.getAttribute(locatorIdAttributeName);
     },
+    hasLocatorId() {
+      return this.hasAttribute(locatorIdAttributeName);
+    },
     getLocatorParameter(parameter) {
       return this.getAttribute(getLocatorAttributeName(parameter));
     },
@@ -68,7 +71,7 @@ export const createCustomMethods = (
     },
 
     getDescription(): string | undefined {
-      return (this as {[DESCRIPTION_KEY]?: string})[DESCRIPTION_KEY];
+      return getDescriptionFromSelector(this as unknown as Selector);
     },
   };
   /* eslint-enable sort-keys */

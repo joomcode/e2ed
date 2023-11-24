@@ -1,7 +1,7 @@
 import type {RequestHookContextId, WaitForEventsState} from '../../types/internal';
 
 /**
- * Completes request on getting his response.
+ * Completes request on getting of its response.
  * @internal
  */
 export const completeRequest = (

@@ -1,4 +1,4 @@
-import {ClientFunction} from 'testcafe-without-typecheck';
+import {ClientFunction as TestCafeClientFunction} from 'testcafe-without-typecheck';
 
 import {getTestIdleTimeout} from '../../context/testIdleTimeout';
 
@@ -11,28 +11,33 @@ import {clientFunctionWrapper} from './clientFunctionWrapper';
 import {getPrintedClientFunctionName} from './getPrintedClientFunctionName';
 import {getRunClientFunction} from './getRunClientFunction';
 
-import type {ClientFunctionState, ClientFunctionWrapperResult} from '../../types/internal';
+import type {
+  ClientFunction,
+  ClientFunctionState,
+  ClientFunctionWrapperResult,
+} from '../../types/internal';
 
 /**
  * Get client function with timeout (wrapped into timeout) and error logging.
  * @internal
  */
-export const getClientFunctionWithTimeout = <Args extends unknown[], R>(
-  clientFunctionState: ClientFunctionState<Args, R>,
-): ((...args: Args) => Promise<R>) => {
+export const getClientFunctionWithTimeout = <Args extends readonly unknown[], Result>(
+  clientFunctionState: ClientFunctionState<Args, Result>,
+): ClientFunction<Args, Result> => {
   const {name, originalFn, timeout} = clientFunctionState;
   const printedClientFunctionName = getPrintedClientFunctionName(name);
 
-  const clientFunctionWithTimeout = (...args: Args): Promise<R> => {
+  const clientFunctionWithTimeout = (...args: Args): Promise<Result> => {
     if (clientFunctionState.clientFunction === undefined) {
       // eslint-disable-next-line no-param-reassign
-      clientFunctionState.clientFunction = ClientFunction<
-        ClientFunctionWrapperResult<Awaited<R>>,
+      clientFunctionState.clientFunction = TestCafeClientFunction<
+        ClientFunctionWrapperResult<Awaited<Result>>,
+        // @ts-expect-error; readonly unknown[] cannot be assigned to any[]
         Args
       >(
         clientFunctionWrapper as unknown as (
           ...args: Args
-        ) => ClientFunctionWrapperResult<Awaited<R>>,
+        ) => ClientFunctionWrapperResult<Awaited<Result>>,
         {dependencies: {originalFn, printedClientFunctionName}},
       );
     }
@@ -40,7 +45,7 @@ export const getClientFunctionWithTimeout = <Args extends unknown[], R>(
     const clientFunctionTimeout = timeout ?? getTestIdleTimeout();
 
     const {promiseWithTimeout, reject, resolve, setRejectTimeoutFunction} =
-      getPromiseWithResolveAndReject<Awaited<R>>(clientFunctionTimeout);
+      getPromiseWithResolveAndReject<Awaited<Result>>(clientFunctionTimeout);
     const wrappedSetRejectTimeoutFunction = wrapInTestRunTracker(setRejectTimeoutFunction);
     const timeoutWithUnits = getDurationWithUnits(clientFunctionTimeout);
 

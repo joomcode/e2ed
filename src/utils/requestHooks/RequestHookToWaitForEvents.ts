@@ -15,7 +15,6 @@ import {getResponseFromResponseEvent} from './getResponseFromResponseEvent';
 import {RequestHookWithEvents} from './RequestHookWithEvents';
 
 import type {
-  Request,
   RequestHookConfigureResponseEvent,
   RequestHookContextId,
   RequestHookRequestEvent,
@@ -58,22 +57,33 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
    * Checks if the response matches any request predicate.
    */
   override async onResponse(event: RequestHookResponseEvent): Promise<void> {
-    const {headers} = event;
-    let request: Request | undefined;
+    const {body, headers} = event;
 
-    if (headers) {
-      const requestHookContextId = (headers as Record<symbol, RequestHookContextId>)[
-        REQUEST_HOOK_CONTEXT_ID_KEY
-      ];
-
-      assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {
-        requestHookResponseEvent: event,
-      });
-
-      request = this.waitForEventsState.hashOfNotCompleteRequests[requestHookContextId];
-
-      completeRequest(requestHookContextId, this.waitForEventsState);
+    if (headers === undefined) {
+      return;
     }
+
+    const contentLength = String(headers['content-length']);
+
+    if (contentLength !== '0' && body === undefined) {
+      return;
+    }
+
+    const requestHookContextId = (headers as Record<symbol, RequestHookContextId>)[
+      REQUEST_HOOK_CONTEXT_ID_KEY
+    ];
+
+    assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {
+      responseHeaders: headers,
+    });
+
+    const request = this.waitForEventsState.hashOfNotCompleteRequests[requestHookContextId];
+
+    if (request === undefined) {
+      return;
+    }
+
+    completeRequest(requestHookContextId, this.waitForEventsState);
 
     const response = await getResponseFromResponseEvent(event);
 
@@ -97,9 +107,9 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
     const requestHookContextId = requestHookContext[REQUEST_HOOK_CONTEXT_ID_KEY];
     const {headers} = requestHookContext.destRes;
 
-    assertValueIsDefined(headers, 'headers is defined', {requestHookConfigureResponseEvent: event});
+    assertValueIsDefined(headers, 'headers is defined', {requestHookContextId});
     assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {
-      requestHookConfigureResponseEvent: event,
+      responseHeaders: headers,
     });
 
     (headers as {[REQUEST_HOOK_CONTEXT_ID_KEY]: RequestHookContextId})[

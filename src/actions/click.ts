@@ -25,7 +25,7 @@ export const click = async (
     LogEventType.InternalAction,
   );
 
-  await testController.click(selector as TestCafeSelector, options);
+  await testController.click(selector as unknown as TestCafeSelector, options);
 
   await waitForInterfaceStabilization(stabilizationInterval);
 };

@@ -21,5 +21,5 @@ export const setFilesToUpload = (
     LogEventType.InternalAction,
   );
 
-  return testController.setFilesToUpload(selector as TestCafeSelector, filePath);
+  return testController.setFilesToUpload(selector as unknown as TestCafeSelector, filePath);
 };

@@ -11,6 +11,7 @@ import {
   doAfterPack,
   doBeforePack,
   mapLogPayloadInConsole,
+  mapLogPayloadInLogFile,
   mapLogPayloadInReport,
   skipTests,
 } from '../configurator';
@@ -46,7 +47,7 @@ export const pack: Pack = {
   mapBackendResponseToLog: ({request, statusCode}) =>
     statusCode < 400 ? {statusCode, url: request?.url} : undefined,
   mapLogPayloadInConsole,
-  mapLogPayloadInLogFile: (_message, payload) => payload,
+  mapLogPayloadInLogFile,
   mapLogPayloadInReport,
   maxRetriesCountInDocker: 3,
   packTimeout: 90 * 60_000,

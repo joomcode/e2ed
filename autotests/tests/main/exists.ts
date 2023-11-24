@@ -22,7 +22,7 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}
 
   assertFunctionThrows(() => {
     void window.document;
-  }, '`assertFunctionThrows` works');
+  }, 'assertFunctionThrows works');
 
   await assertFunctionThrows(async () => {
     await expect(1, 'should throws').eql(2);
@@ -39,7 +39,7 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}
 
   const mainPage = await navigateToPage(Main, {language});
 
-  await expect(mainPage.pageParams, '`pageParams` is correct after `navigateToPage`').eql({
+  await expect(mainPage.pageParams, 'pageParams is correct after navigateToPage').eql({
     language,
   });
 
@@ -76,7 +76,7 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}
    * Do not use the following pageParams and url (by getParamsFromUrl) checks in your code.
    * These are e2ed internal checks. Use `assertPage` instead.
    */
-  await expect(searchPage.pageParams, '`pageParams` is correct after `assertPage`').eql({
+  await expect(searchPage.pageParams, 'pageParams is correct after assertPage').eql({
     searchQuery,
   });
 

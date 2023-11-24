@@ -15,5 +15,5 @@ export const scrollIntoView = (selector: Selector, options?: Options): Promise<v
 
   log('Scroll the specified element into view', {locator, options}, LogEventType.InternalAction);
 
-  return testController.scrollIntoView(selector as TestCafeSelector, options);
+  return testController.scrollIntoView(selector as unknown as TestCafeSelector, options);
 };

@@ -29,6 +29,11 @@ export type FieldReplacer = (
 ) => unknown;
 
 /**
+ * Primitive value.
+ */
+export type PrimitiveValue = bigint | boolean | null | number | string | symbol | undefined;
+
+/**
  * Property descriptor.
  */
 export type PropertyDescriptor<Value = unknown> =

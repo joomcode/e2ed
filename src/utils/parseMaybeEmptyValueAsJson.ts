@@ -1,7 +1,7 @@
 /**
- * Parse maybe empty value (undefined, empty string or empty buffer) as JSON.
+ * Parses maybe empty value (undefined, empty string or empty buffer) as JSON.
  */
-export const parseMaybeEmptyValueAsJson = <R>(value: unknown): R | undefined => {
+export const parseMaybeEmptyValueAsJson = <Return>(value: unknown): Return | undefined => {
   if (!value) {
     return undefined;
   }
@@ -12,5 +12,5 @@ export const parseMaybeEmptyValueAsJson = <R>(value: unknown): R | undefined => 
     return undefined;
   }
 
-  return JSON.parse(stringValue) as R;
+  return JSON.parse(stringValue) as Return;
 };

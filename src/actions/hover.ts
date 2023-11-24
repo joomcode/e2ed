@@ -24,7 +24,7 @@ export const hover = async (
     LogEventType.InternalAction,
   );
 
-  await testController.hover(selector as TestCafeSelector, options);
+  await testController.hover(selector as unknown as TestCafeSelector, options);
 
   await waitForInterfaceStabilization(stabilizationInterval);
 };

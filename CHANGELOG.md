@@ -31,17 +31,17 @@
 
   fix: remove unnecessary backticks around the error message
 
-- [Torchinskiy Merge pull request #44 from joomcode/FI-494](https://github.com/joomcode/e2ed/commit/eba8a49e65fc100ca3dc4e1c492c6c86968fb689) ([Nikita](https://github.com/Nikita))
+- [Merge pull request #44 from joomcode/FI-494](https://github.com/joomcode/e2ed/commit/eba8a49e65fc100ca3dc4e1c492c6c86968fb689) ([nnn3d](https://github.com/nnn3d))
 
   FI-494: add selectors with custom methods
 
-- [FI-494: review fixes](https://github.com/joomcode/e2ed/commit/c69b98dc548a66c043ca99f52e1e8b8ddf89100a) ([Nikita_Torchinskiy](https://github.com/Nikita_Torchinskiy))
-- [FI-494: review fixes](https://github.com/joomcode/e2ed/commit/349c95d7800810ab03b7f2cab4a058e6e988833c) ([Nikita_Torchinskiy](https://github.com/Nikita_Torchinskiy))
-- [FI-494: review fixes](https://github.com/joomcode/e2ed/commit/ef71561bedc4a27428b27bfbecc84fcc106c69e3) ([Nikita_Torchinskiy](https://github.com/Nikita_Torchinskiy))
-- [FI-494: fix prettier](https://github.com/joomcode/e2ed/commit/daa939c3088ef1e41390e79ec2d5293fbe2a578f) ([Nikita_Torchinskiy](https://github.com/Nikita_Torchinskiy))
-- [Torchinskiy Merge branch 'main' into FI-494](https://github.com/joomcode/e2ed/commit/ab4f9114b4e3694c363e53f5a2567fed8c77bf4a) ([Nikita](https://github.com/Nikita))
-- [FI-494: remove default selector exports](https://github.com/joomcode/e2ed/commit/b03ad55d24c53d58fc217efc70b74ec876a4c2a2) ([Nikita_Torchinskiy](https://github.com/Nikita_Torchinskiy))
-- [FI-494: add selectors with custom methods](https://github.com/joomcode/e2ed/commit/3e577d3b7dd113eaba2a135b1bd362e9eeca8d90) ([Nikita_Torchinskiy](https://github.com/Nikita_Torchinskiy))
+- [FI-494: review fixes](https://github.com/joomcode/e2ed/commit/c69b98dc548a66c043ca99f52e1e8b8ddf89100a) ([nnn3d](https://github.com/nnn3d))
+- [FI-494: review fixes](https://github.com/joomcode/e2ed/commit/349c95d7800810ab03b7f2cab4a058e6e988833c) ([nnn3d](https://github.com/nnn3d))
+- [FI-494: review fixes](https://github.com/joomcode/e2ed/commit/ef71561bedc4a27428b27bfbecc84fcc106c69e3) ([nnn3d](https://github.com/nnn3d))
+- [FI-494: fix prettier](https://github.com/joomcode/e2ed/commit/daa939c3088ef1e41390e79ec2d5293fbe2a578f) ([nnn3d](https://github.com/nnn3d))
+- [Merge branch 'main' into FI-494](https://github.com/joomcode/e2ed/commit/ab4f9114b4e3694c363e53f5a2567fed8c77bf4a) ([nnn3d](https://github.com/nnn3d))
+- [FI-494: remove default selector exports](https://github.com/joomcode/e2ed/commit/b03ad55d24c53d58fc217efc70b74ec876a4c2a2) ([nnn3d](https://github.com/nnn3d))
+- [FI-494: add selectors with custom methods](https://github.com/joomcode/e2ed/commit/3e577d3b7dd113eaba2a135b1bd362e9eeca8d90) ([nnn3d](https://github.com/nnn3d))
 
 ## [v0.15.10](https://github.com/joomcode/e2ed/tree/v0.15.10) (2023-11-15)
 
@@ -153,12 +153,12 @@
 
   fix: change `tsconfig.json` options to more explicit ones (`"module": "CommonJS"`)
 
-- [Torchinskiy Merge pull request #38 from joomcode/FI-901](https://github.com/joomcode/e2ed/commit/b401f8323cdb0d19ffeb380e75ccdd83fac13e0f) ([Nikita](https://github.com/Nikita))
+- [Merge pull request #38 from joomcode/FI-901](https://github.com/joomcode/e2ed/commit/b401f8323cdb0d19ffeb380e75ccdd83fac13e0f) ([nnn3d](https://github.com/nnn3d))
 
   fix(report): link color styles for dark theme
 
-- [Torchinskiy fix(report): color contrast and var name](https://github.com/joomcode/e2ed/commit/7d09f1c37edd9f7dd6e8ad064f2863f519c544b4) ([Nikita](https://github.com/Nikita))
-- [fix(report): link color styles for dark theme](https://github.com/joomcode/e2ed/commit/7cf3da6c6db555969f8d3b7098c96a92f952df76) ([Nikita_Torchinskiy](https://github.com/Nikita_Torchinskiy))
+- [fix(report): color contrast and var name](https://github.com/joomcode/e2ed/commit/7d09f1c37edd9f7dd6e8ad064f2863f519c544b4) ([nnn3d](https://github.com/nnn3d))
+- [fix(report): link color styles for dark theme](https://github.com/joomcode/e2ed/commit/7cf3da6c6db555969f8d3b7098c96a92f952df76) ([nnn3d](https://github.com/nnn3d))
 
 ## [v0.15.4](https://github.com/joomcode/e2ed/tree/v0.15.4) (2023-10-11)
 
