@@ -1,5 +1,48 @@
 # Changelog
 
+## [v0.15.11](https://github.com/joomcode/e2ed/tree/v0.15.11) (2023-11-24)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.10...v0.15.11)
+
+- [Merge pull request #46 from joomcode/feat/add-log-backend-response-options](https://github.com/joomcode/e2ed/commit/180b38a6552c61b9bccc091ed320265f544fabfe) ([uid11](https://github.com/uid11))
+
+  feat: add `mapBackendResponseErrorToLog`/`mapBackendResponseToLog` options
+
+- [FI-1025 fix: stop docker container if tests are interrupted externally](https://github.com/joomcode/e2ed/commit/25370e36108f907dd78bd374d13165f86706a84f) ([uid11](https://github.com/uid11))
+
+  chore: update alpine to 3.18.4 (so update Chrome to 117, etc)
+
+  chore: update devDependencies (@types/node)
+
+  fix: add `bash` to docker container
+
+  refactor: rename files according to the names of exported functions
+
+- [chore: update devDependencies (@types/node, @typescript-eslint/\*, etc)](https://github.com/joomcode/e2ed/commit/c59ed10ab5ac3c013ff4a3da74bfd6a7c9b51dda) ([uid11](https://github.com/uid11))
+
+  refactor: add `readonly` modifier to `DESCRIPTION_KEY` and other fields
+
+  refactor: use name in form [T/t]estCafe everywhere
+
+- [feat: add JS errors and console messages for failed tests in HTML report](https://github.com/joomcode/e2ed/commit/4f233415d4d3e886bb38ca088f8ff855c16eff16) ([uid11](https://github.com/uid11))
+- [FI-665 feat: add `mapBackendResponseErrorToLog`/`mapBackendResponseToLog` options](https://github.com/joomcode/e2ed/commit/d9385a7c14b3104be48fe439e99b7d57fd5699d9) ([uid11](https://github.com/uid11))
+
+  feat: add `timeout` option to `takeElementScreenshot` action
+
+  fix: remove unnecessary backticks around the error message
+
+- [Torchinskiy Merge pull request #44 from joomcode/FI-494](https://github.com/joomcode/e2ed/commit/eba8a49e65fc100ca3dc4e1c492c6c86968fb689) ([Nikita](https://github.com/Nikita))
+
+  FI-494: add selectors with custom methods
+
+- [FI-494: review fixes](https://github.com/joomcode/e2ed/commit/c69b98dc548a66c043ca99f52e1e8b8ddf89100a) ([Nikita_Torchinskiy](https://github.com/Nikita_Torchinskiy))
+- [FI-494: review fixes](https://github.com/joomcode/e2ed/commit/349c95d7800810ab03b7f2cab4a058e6e988833c) ([Nikita_Torchinskiy](https://github.com/Nikita_Torchinskiy))
+- [FI-494: review fixes](https://github.com/joomcode/e2ed/commit/ef71561bedc4a27428b27bfbecc84fcc106c69e3) ([Nikita_Torchinskiy](https://github.com/Nikita_Torchinskiy))
+- [FI-494: fix prettier](https://github.com/joomcode/e2ed/commit/daa939c3088ef1e41390e79ec2d5293fbe2a578f) ([Nikita_Torchinskiy](https://github.com/Nikita_Torchinskiy))
+- [Torchinskiy Merge branch 'main' into FI-494](https://github.com/joomcode/e2ed/commit/ab4f9114b4e3694c363e53f5a2567fed8c77bf4a) ([Nikita](https://github.com/Nikita))
+- [FI-494: remove default selector exports](https://github.com/joomcode/e2ed/commit/b03ad55d24c53d58fc217efc70b74ec876a4c2a2) ([Nikita_Torchinskiy](https://github.com/Nikita_Torchinskiy))
+- [FI-494: add selectors with custom methods](https://github.com/joomcode/e2ed/commit/3e577d3b7dd113eaba2a135b1bd362e9eeca8d90) ([Nikita_Torchinskiy](https://github.com/Nikita_Torchinskiy))
+
 ## [v0.15.10](https://github.com/joomcode/e2ed/tree/v0.15.10) (2023-11-15)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.9...v0.15.10)
