@@ -1,8 +1,8 @@
-FROM alpine:3.18.3
+FROM alpine:3.18.4
 
 RUN apk --no-cache upgrade && \
   apk --no-cache add \
-  libevent nodejs npm chromium firefox xwininfo xvfb dbus eudev ttf-freefont fluxbox procps tzdata icu-data-full
+  bash libevent nodejs npm chromium firefox xwininfo xvfb dbus eudev ttf-freefont fluxbox procps tzdata icu-data-full
 
 COPY ./build/node_modules/e2ed /node_modules/e2ed
 

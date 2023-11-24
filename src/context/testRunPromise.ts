@@ -2,7 +2,7 @@ import {useContext} from '../useContext';
 import {assertValueIsDefined, assertValueIsUndefined} from '../utils/asserts';
 
 /**
- * Raw versions of getTestRunPromise and setTestRunPromise.
+ * Raw versions of `getTestRunPromise` and `setTestRunPromise`.
  * @internal
  */
 const [getRawTestRunPromise, setRawTestRunPromise] = useContext<Promise<undefined>>();

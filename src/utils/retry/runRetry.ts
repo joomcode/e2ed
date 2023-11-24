@@ -20,7 +20,7 @@ const pathToRunTestsSubprocess = join(
 );
 
 /**
- * Run one retry of remaining tests.
+ * Runs one retry of remaining tests.
  * @internal
  */
 export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>

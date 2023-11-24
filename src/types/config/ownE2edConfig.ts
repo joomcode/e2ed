@@ -1,4 +1,4 @@
-import type {MapLogPayload, MapLogPayloadInReport} from '../log';
+import type {MapBackendResponseToLog, MapLogPayload, MapLogPayloadInReport} from '../log';
 import type {MaybePromise} from '../promise';
 import type {LiteReport} from '../report';
 import type {TestStaticOptions} from '../testRun';
@@ -61,6 +61,26 @@ export type OwnE2edConfig<
    * If `null`, the log will not be saved.
    */
   logFileName: string | null;
+
+  /**
+   * Maps responses with errors from the backend to "red" logs (as errors) during the test.
+   * It is assumed that the function will select responses with
+   * statuse codes of 400 and higher (client and server errors).
+   * Backend responses with errors are accumulated in separate "red" log step
+   * (with `logEventStatus: 'failed'`).
+   * Log the `responseBody` field carefully, as the body of backend response can be very large.
+   * If the function returns `undefined`, the response is not logged (skipped).
+   */
+  mapBackendResponseErrorToLog: MapBackendResponseToLog;
+
+  /**
+   * Maps responses from the backend to logs during the test.
+   * Backend responses received during a certain test step are accumulated
+   * in an array in the `backendResponses` field of the log of this step.
+   * Log the `responseBody` field carefully, as the body of backend response can be very large.
+   * If the function returns `undefined`, the response is not logged (skipped).
+   */
+  mapBackendResponseToLog: MapBackendResponseToLog;
 
   /**
    * Maps log payload for logging in console to clarify, shorten or skip a console log entry.

@@ -1,10 +1,10 @@
-import type {Inner, Selector as TestcafeSelector} from 'testcafe-without-typecheck';
+import type {Inner, Selector as TestCafeSelector} from 'testcafe-without-typecheck';
 
 import type {DESCRIPTION_KEY} from '../constants/internal';
 
-type ReplaceSelector<T> = T extends Inner.Selector ? Selector : T;
+type ReplaceSelector<Type> = Type extends Inner.Selector ? Selector : Type;
 
-type ReplaceObjectSelectors<Obj extends object> = {
+type ReplaceObjectSelectors<Obj extends object> = Readonly<{
   // check overloads, Selector methods has up to 4
   [Key in keyof Obj]: Obj[Key] extends {
     (...args: infer A1): infer R1;
@@ -43,15 +43,47 @@ type ReplaceObjectSelectors<Obj extends object> = {
               (...args: A1): ReplaceSelector<R1>;
             }
           : Obj[Key];
-};
+}>;
 
-export type GetLocatorAttributeNameFn = (parameter: string) => string;
-
-export type CreateSelectorsOptions = {
+/**
+ * Options of `createSelectorFunctions` function.
+ */
+export type CreateSelectorFunctionsOptions = Readonly<{
   getLocatorAttributeName: GetLocatorAttributeNameFn;
-};
+}>;
 
-export type SelectorCustomMethods = {
+/**
+ * Type of `getLocatorAttributeName` function.
+ */
+export type GetLocatorAttributeNameFn = (this: void, parameter: string) => string;
+
+/**
+ * Creates selector by locator and optional parameters.
+ */
+export type CreateSelector = (this: void, ...args: Parameters<typeof TestCafeSelector>) => Selector;
+
+/**
+ * Type of `createSelectorByCss` function.
+ */
+export type CreateSelectorByCss = (this: void, cssSelectorString: string) => Selector;
+
+/**
+ * Type of `locatorIdSelector` function.
+ */
+export type LocatorIdSelector = (this: void, id: string) => Selector;
+
+/**
+ * Selector type (which replaces the DOM element wrapper).
+ */
+export type Selector = ((this: void, ...args: unknown[]) => Inner.SelectorPromise) &
+  ReplaceObjectSelectors<Inner.SelectorAPI> &
+  ReplaceObjectSelectors<SelectorCustomMethods> &
+  Readonly<{[DESCRIPTION_KEY]?: string}>;
+
+/**
+ * Native `e2ed` methods of selector.
+ */
+export type SelectorCustomMethods = Readonly<{
   /** Creates a selector that filters a matching set by locatorId. */
   filterByLocatorId(this: Inner.Selector, locatorId: string): Inner.Selector;
   /** Finds all descendants of all nodes in the matching set and filters them by locatorId. */
@@ -99,15 +131,14 @@ export type SelectorCustomMethods = {
 
   /** Get string description of selector if any. */
   getDescription(this: Inner.Selector): string | undefined;
-};
-
-export type CreateSelector = (...args: Parameters<typeof TestcafeSelector>) => Selector;
+}>;
 
 /**
- * Selector type (which replaces the DOM element wrapper).
+ * Object with main functions for creating selectors and working with selectors.
  */
-export type Selector = ((...args: unknown[]) => Inner.SelectorPromise) &
-  ReplaceObjectSelectors<Inner.SelectorAPI> &
-  ReplaceObjectSelectors<SelectorCustomMethods> & {
-    [DESCRIPTION_KEY]?: string;
-  };
+export type SelectorFunctions = Readonly<{
+  createSelector: CreateSelector;
+  createSelectorByCss: CreateSelectorByCss;
+  htmlElementSelector: Selector;
+  locatorIdSelector: LocatorIdSelector;
+}>;

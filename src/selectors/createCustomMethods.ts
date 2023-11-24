@@ -2,6 +2,10 @@ import {DESCRIPTION_KEY} from '../constants/internal';
 
 import type {GetLocatorAttributeNameFn, SelectorCustomMethods} from '../types/internal';
 
+/**
+ * Creates native `e2ed` methods of selector.
+ * @internal
+ */
 export const createCustomMethods = (
   getLocatorAttributeName: GetLocatorAttributeNameFn,
 ): SelectorCustomMethods => {

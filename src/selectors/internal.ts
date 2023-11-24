@@ -1,6 +1,10 @@
-import {createSelectors} from './createSelectors';
+import {createSelectorFunctions} from './createSelectorFunctions';
 
-export const {htmlElementSelector} = createSelectors({
-  getLocatorAttributeName: (property) =>
-    property === 'id' ? 'data-testid' : `data-test-${property}`,
+/**
+ * Internal implementation of `htmlElementSelector` selector.
+ * @internal
+ */
+export const {htmlElementSelector} = createSelectorFunctions({
+  getLocatorAttributeName: (parameter) =>
+    parameter === 'id' ? 'data-testid' : `data-test-${parameter}`,
 });

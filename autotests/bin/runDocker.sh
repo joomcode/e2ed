@@ -1,7 +1,8 @@
-#!/usr/bin/env sh
-set -e
+#!/usr/bin/env bash
+set -eo pipefail
 set +u
 
+CONTAINER_LABEL="e2ed"
 DEBUG_PORT="${E2ED_DOCKER_DEBUG_PORT:-9229}"
 DIR="${E2ED_WORKDIR:-$PWD}"
 DOCKER_IMAGE=$(grep -m1 dockerImage $DIR/$1 | sed -e "s/^[^'\"\`]*['\"\`]//" -e "s/['\"\`][^'\"\`]*$//")
@@ -17,11 +18,28 @@ then
     exit 9
 fi
 
+onExit() {
+    CONTAINER_ID=$(docker ps --filter "label=$CONTAINER_LABEL" --format "{{.ID}}")
+
+    if [ -z $CONTAINER_ID ]
+    then
+        echo "Docker container from image $DOCKER_IMAGE:$VERSION already stopped"
+    else
+        echo "Stop docker container from image $DOCKER_IMAGE:$VERSION"
+        docker stop --time=60 $CONTAINER_ID
+    fi
+
+    exit
+}
+
 echo "Run docker image $DOCKER_IMAGE:$VERSION"
+
+trap "onExit" EXIT
 
 docker run \
        --rm \
        $PORT \
+       --label $CONTAINER_LABEL \
        --workdir $DIR \
        --volume $MOUNTDIR:$MOUNTDIR \
        --env E2ED_ORIGIN=$E2ED_ORIGIN \
@@ -29,4 +47,7 @@ docker run \
        --env E2ED_DOCKER_DO_AFTER_TESTS=$E2ED_DOCKER_DO_AFTER_TESTS \
        --env E2ED_DOCKER_DO_BEFORE_TESTS=$E2ED_DOCKER_DO_BEFORE_TESTS \
        --env __INTERNAL_E2ED_PATH_TO_PACK=$1 \
-       $DOCKER_IMAGE:$VERSION
+       $DOCKER_IMAGE:$VERSION \
+    & PID=$!
+
+wait $PID

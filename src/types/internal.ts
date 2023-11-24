@@ -53,8 +53,10 @@ export type {
   LogContext,
   LogParams,
   LogPayload,
+  MapBackendResponseToLog,
   MapLogPayload,
   MapLogPayloadInReport,
+  Payload,
 } from './log';
 export type {ApiMockFunction} from './mockApiRoute';
 /** @internal */
@@ -102,10 +104,13 @@ export type {RunLabel, RunLabelObject} from './runLabel';
 export type {RawRunLabelObject} from './runLabel';
 export type {
   CreateSelector,
-  CreateSelectorsOptions,
+  CreateSelectorByCss,
+  CreateSelectorFunctionsOptions,
   GetLocatorAttributeNameFn,
+  LocatorIdSelector,
   Selector,
   SelectorCustomMethods,
+  SelectorFunctions,
 } from './selectors';
 export type {IsTestSkippedResult} from './skipTest';
 export type {StackFrame} from './stackTrace';

@@ -50,7 +50,7 @@ export type FrozenPartOfTestCafeConfig = DeepReadonly<{
 }>;
 
 /**
- * The complete pack configuration object without `doBeforePack` property.
+ * The complete pack configuration object without `doBeforePack` field.
  */
 export type FullPackConfigWithoutDoBeforePack<
   CustomPackProperties = unknown,
@@ -85,7 +85,7 @@ export type UserlandPack<
   WithDoBeforePack<CustomPackProperties, CustomReportProperties, SkipTests, TestMeta>;
 
 /**
- * The complete userland pack config without `doBeforePack` property.
+ * The complete userland pack config without `doBeforePack` field.
  */
 export type UserlandPackWithoutDoBeforePack<
   CustomPackProperties = CustomPackPropertiesPlaceholder,

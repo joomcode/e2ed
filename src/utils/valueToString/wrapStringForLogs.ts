@@ -5,6 +5,10 @@ import {getStringTrimmedToMaxLength} from './getStringTrimmedToMaxLength';
 
 import type {Mutable, StringForLogs} from '../../types/internal';
 
+type Options = Readonly<{
+  doNotWrapInBacktick?: boolean;
+}>;
+
 function toMultipleString(this: StringForLogs): string {
   const lines = this.split('\n');
 
@@ -16,7 +20,7 @@ function toMultipleString(this: StringForLogs): string {
  * with a more beautiful presentation through nodejs `inspect`.
  * @internal
  */
-export const wrapStringForLogs = (text: string): string | StringForLogs => {
+export const wrapStringForLogs = (text: string, options?: Options): string | StringForLogs => {
   if (!text.includes('\n')) {
     return getStringTrimmedToMaxLength(text);
   }
@@ -28,8 +32,11 @@ export const wrapStringForLogs = (text: string): string | StringForLogs => {
   // eslint-disable-next-line no-new-wrappers
   const result = new String(trimmedText) as Mutable<StringForLogs>;
 
-  result[inspect.custom as unknown as number] = toMultipleString as unknown as string;
-  (result as unknown as {toJSON(): string}).toJSON = toMultipleString;
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const toString = options?.doNotWrapInBacktick ? String.prototype.toString : toMultipleString;
+
+  result[inspect.custom as unknown as number] = toString as unknown as string;
+  (result as unknown as {toJSON(): string}).toJSON = toString;
 
   return result;
 };

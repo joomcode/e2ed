@@ -39,7 +39,15 @@ export type {
   RequestHookResponseEvent,
 } from './requestHooks';
 export type {ApiRouteClassType, ApiRouteClassTypeWithGetParamsFromUrl} from './routes';
-export type {CreateSelectorsOptions, GetLocatorAttributeNameFn, Selector} from './selectors';
+export type {
+  CreateSelector,
+  CreateSelectorByCss,
+  CreateSelectorFunctionsOptions,
+  GetLocatorAttributeNameFn,
+  LocatorIdSelector,
+  Selector,
+  SelectorFunctions,
+} from './selectors';
 export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';
 export type {StringForLogs} from './string';

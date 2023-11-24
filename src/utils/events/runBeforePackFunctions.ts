@@ -8,7 +8,7 @@ import type {
 } from '../../types/internal';
 
 /**
- * Run functions from `doBeforePack` pack config property.
+ * Runs functions from `doBeforePack` pack config field.
  * @internal
  */
 export const runBeforePackFunctions = async (startInfo: StartInfo): Promise<void> => {

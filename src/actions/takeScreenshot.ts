@@ -1,4 +1,4 @@
-import {LogEventType} from '../constants/internal';
+import {DEFAULT_TAKE_SCREENSHOT_TIMEOUT_IN_MS, LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {E2edError} from '../utils/error';
 import {getDurationWithUnits} from '../utils/getDurationWithUnits';
@@ -10,14 +10,16 @@ import type {Inner} from 'testcafe-without-typecheck';
 type TakeScreenshot = ((path?: string) => Promise<void>) &
   ((options: Inner.TakeScreenshotOptions & Readonly<{timeout?: number}>) => Promise<void>);
 
-const defaultTimeoutInMs = 20_000;
-
 /**
  * Takes a screenshot of the tested page.
  */
 export const takeScreenshot: TakeScreenshot = (pathOrOptions) => {
   const options = typeof pathOrOptions === 'string' ? {path: pathOrOptions} : pathOrOptions;
-  const {fullPage, path: pathToScreenshot, timeout = defaultTimeoutInMs} = options ?? {};
+  const {
+    fullPage,
+    path: pathToScreenshot,
+    timeout = DEFAULT_TAKE_SCREENSHOT_TIMEOUT_IN_MS,
+  } = options ?? {};
 
   const timeoutWithUnits = getDurationWithUnits(timeout);
 

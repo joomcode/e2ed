@@ -8,6 +8,7 @@ import {
   navigateToPage,
   pressKey,
   scroll,
+  takeElementScreenshot,
   waitForRequest,
   waitForResponse,
 } from 'e2ed/actions';
@@ -49,6 +50,10 @@ it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}
   await expect(mainPage.searchQuery, 'search query on page has setted value').eql(searchQuery);
 
   await expect(mainPage.body.find('input').exists, 'page contains some input element').ok();
+
+  await assertFunctionThrows(async () => {
+    await takeElementScreenshot(mainPage.body, 'screenshot.png', {timeout: 100});
+  }, 'takeElementScreenshot throws an error on timeout end');
 
   const requestsPromises = Promise.all([
     waitForRequest(({url}) => url.includes(searchQuery)),

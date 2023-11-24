@@ -39,7 +39,7 @@ export const generalLog = (
       testLogParams?.type,
     );
 
-    if (payloadInLogFile !== null) {
+    if (payloadInLogFile !== 'skipLog') {
       const logMessageBody = getLogMessageBody(context, false, payloadInLogFile);
 
       addLogToLogFile(`${logPrefix} ${messageWithoutStyle}${logMessageBody}\n`);
@@ -48,7 +48,7 @@ export const generalLog = (
 
   const payloadInConsole = mapLogPayloadInConsole(message, payload, testLogParams?.type);
 
-  if (payloadInConsole === null) {
+  if (payloadInConsole === 'skipLog') {
     return;
   }
 

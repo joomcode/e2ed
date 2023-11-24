@@ -41,6 +41,10 @@ export const pack: Pack = {
   filterTestsIntoPack,
   liteReportFileName: 'lite-report.json',
   logFileName: 'pack-logs.log',
+  mapBackendResponseErrorToLog: ({request, responseHeaders, statusCode}) =>
+    statusCode >= 400 ? {request, responseHeaders, statusCode} : undefined,
+  mapBackendResponseToLog: ({request, statusCode}) =>
+    statusCode < 400 ? {statusCode, url: request?.url} : undefined,
   mapLogPayloadInConsole,
   mapLogPayloadInLogFile: (_message, payload) => payload,
   mapLogPayloadInReport,

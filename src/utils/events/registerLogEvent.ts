@@ -2,17 +2,17 @@ import {getTestRunEvent} from './getTestRunEvent';
 
 import type {LogEvent, RunId} from '../../types/internal';
 
-type LogEventWithNullablePayload = Omit<LogEvent, 'payload'> &
-  Readonly<{payload: LogEvent['payload'] | null}>;
+type LogEventWithMaybeSkippedPayload = Omit<LogEvent, 'payload'> &
+  Readonly<{payload: LogEvent['payload'] | 'skipLog'}>;
 
 /**
  * Register log event (for report).
  * @internal
  */
-export const registerLogEvent = (runId: RunId, logEvent: LogEventWithNullablePayload): void => {
+export const registerLogEvent = (runId: RunId, logEvent: LogEventWithMaybeSkippedPayload): void => {
   const runTestEvent = getTestRunEvent(runId);
 
-  if (logEvent.payload !== null) {
+  if (logEvent.payload !== 'skipLog') {
     (runTestEvent.logEvents as LogEvent[]).push(logEvent as LogEvent);
   }
 
