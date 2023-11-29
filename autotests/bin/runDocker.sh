@@ -44,8 +44,6 @@ docker run \
        --volume $MOUNTDIR:$MOUNTDIR \
        --env E2ED_ORIGIN=$E2ED_ORIGIN \
        --env E2ED_DEBUG=$E2ED_DEBUG \
-       --env E2ED_DOCKER_DO_AFTER_TESTS=$E2ED_DOCKER_DO_AFTER_TESTS \
-       --env E2ED_DOCKER_DO_BEFORE_TESTS=$E2ED_DOCKER_DO_BEFORE_TESTS \
        --env __INTERNAL_E2ED_PATH_TO_PACK=$1 \
        $DOCKER_IMAGE:$VERSION \
     & PID=$!
