@@ -25,7 +25,7 @@ export const doubleClick = async (
     LogEventType.InternalAction,
   );
 
-  await testController.doubleClick(selector as TestCafeSelector, options);
+  await testController.doubleClick(selector as unknown as TestCafeSelector, options);
 
   await waitForInterfaceStabilization(stabilizationInterval);
 };

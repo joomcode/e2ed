@@ -27,5 +27,10 @@ export const selectText = (
     LogEventType.InternalAction,
   );
 
-  return testController.selectText(selector as TestCafeSelector, startPos, endPos, options);
+  return testController.selectText(
+    selector as unknown as TestCafeSelector,
+    startPos,
+    endPos,
+    options,
+  );
 };

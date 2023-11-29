@@ -15,11 +15,11 @@ export const mapBackendResponseForLogs = (response: Response): void => {
   const errorPayload = mapBackendResponseErrorToLog(response);
   const payload = mapBackendResponseToLog(response);
 
-  if (payload !== undefined) {
-    logBackendResponse(payload);
-  }
-
   if (errorPayload !== undefined) {
     logBackendResponseError(response, errorPayload);
+  }
+
+  if (payload !== undefined) {
+    logBackendResponse(payload);
   }
 };

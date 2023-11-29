@@ -25,6 +25,12 @@ createSelectorByCss('id').findByLocatorId('id').find('body').findByLocatorId('id
 // ok
 locatorIdSelector('id').findByLocatorId('id').find('body').findByLocatorId('id');
 
+// @ts-expect-error: wrong number of arguments
+locatorIdSelector();
+
+// @ts-expect-error: wrong type of arguments
+locatorIdSelector(3);
+
 // ok
 htmlElementSelector.filterByLocatorId('id');
 // ok
@@ -52,6 +58,24 @@ htmlElementSelector.siblingByLocatorParameter('prop', 'value');
 htmlElementSelector.nextSiblingByLocatorParameter('prop', 'value');
 // ok
 htmlElementSelector.prevSiblingByLocatorParameter('prop', 'value');
+
+// ok
+void htmlElementSelector.getLocatorId();
+
+// TODO: should be an error "wrong number of arguments"
+void htmlElementSelector.getLocatorId('foo');
+
+// ok
+void htmlElementSelector.hasLocatorId();
+
+// TODO: should be an error "wrong number of arguments"
+void htmlElementSelector.hasLocatorId('foo');
+
+// @ts-expect-error: wrong number of arguments
+void htmlElementSelector.hasLocatorParameter();
+
+// @ts-expect-error: wrong number of arguments
+void htmlElementSelector.getLocatorParameter();
 
 // ok
 void htmlElementSelector.getLocatorParameter('prop');

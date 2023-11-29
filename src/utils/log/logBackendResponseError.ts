@@ -9,11 +9,12 @@ import type {Payload, Response} from '../../types/internal';
  * @internal
  */
 export const logBackendResponseError = (response: Response, payload: Payload): void => {
+  const {statusCode} = response;
   const {url} = response.request ?? {};
-  const onUrl = url === undefined ? '' : ` on url ${url}`;
+  const onUrl = url === undefined ? '' : ` on ${url}`;
 
   log(
-    `Got a backend response with error${onUrl}`,
+    `Got a backend response (${statusCode}) with error${onUrl}`,
     {...payload, logEventStatus: LogEventStatus.Failed},
     LogEventType.InternalUtil,
   );

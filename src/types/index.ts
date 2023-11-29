@@ -2,6 +2,7 @@ export type {ReportRootLocator} from '../utils/report';
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';
+export type {ClientFunction} from './clientFunction';
 export type {UtcTimeInMs} from './date';
 export type {DeepMutable, DeepPartial, DeepReadonly, DeepRequired} from './deep';
 export type {BrowserJsError} from './errors';
@@ -31,7 +32,13 @@ export type {
 } from './pages';
 export type {FilePathFromRoot, TestFilePath} from './paths';
 export type {AsyncVoid, MaybePromise, UnwrapPromise} from './promise';
-export type {AnyObject, FieldReplacer, PropertyDescriptor, PropertyKey} from './properties';
+export type {
+  AnyObject,
+  FieldReplacer,
+  PrimitiveValue,
+  PropertyDescriptor,
+  PropertyKey,
+} from './properties';
 export type {LiteReport, LiteRetry} from './report';
 export type {
   RequestHookConfigureResponseEvent,

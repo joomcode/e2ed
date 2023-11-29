@@ -1,7 +1,7 @@
 import {it} from 'autotests';
 import {E2edReportExample} from 'autotests/pageObjects/pages';
 import {expect} from 'e2ed';
-import {navigateToPage} from 'e2ed/actions';
+import {click, navigateToPage} from 'e2ed/actions';
 
 it('custom selector methods', {meta: {testId: '15'}}, async () => {
   const reportPage = await navigateToPage(E2edReportExample);
@@ -24,7 +24,7 @@ it('custom selector methods', {meta: {testId: '15'}}, async () => {
 
   await expect(
     reportPage.navigationRetriesButtonSelected.hasLocatorParameter('disabled'),
-    'selected navigation retries button has "disabled" test prop',
+    'selected navigation retries button has "disabled" locator parameter',
   ).ok();
 
   await expect(
@@ -33,4 +33,11 @@ it('custom selector methods', {meta: {testId: '15'}}, async () => {
   ).eql(
     '[data-testid="app-navigation-retries"].findByLocatorId(app-navigation-retries-button).filterByLocatorParameter(selected, true)',
   );
+
+  await click(reportPage.navigationRetriesButton);
+
+  await expect(
+    reportPage.testRunButton.nth(2).getLocatorParameter('status'),
+    'nested selectors also get custom methods',
+  ).eql('passed');
 });

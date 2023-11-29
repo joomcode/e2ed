@@ -28,7 +28,7 @@ export const renderRetry = ({retry, ...rest}: Props): SafeHtml => {
   return createSafeHtmlWithoutSanitize`
 <article class="retry" id="retry${retry.retryIndex}" ${
     retry.hidden ? 'hidden' : ''
-  } {${renderAttributes(locator({index: String(retry.retryIndex)}))}}>
+  } ${renderAttributes(locator({index: String(retry.retryIndex)}))}>
   ${renderRetryHeader({...retry, ...locator.header()})}
   ${buttons.join('')}
 </article>`;

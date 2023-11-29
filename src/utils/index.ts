@@ -43,5 +43,9 @@ export {setReadonlyProperty} from './setReadonlyProperty';
 export {getPackageInfo} from './startInfo';
 export {wrapInTestRunTracker} from './testRun';
 export {isArray} from './typeGuards';
-export {valueToString} from './valueToString';
+export {
+  getShallowCopyOfObjectForLogs,
+  getStringTrimmedToMaxLength,
+  valueToString,
+} from './valueToString';
 export {isSelectorEntirelyInViewport, isSelectorInViewport} from './viewport';

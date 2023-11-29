@@ -25,7 +25,7 @@ export const typeText = async (
     LogEventType.InternalAction,
   );
 
-  await testController.typeText(selector as TestCafeSelector, text, options);
+  await testController.typeText(selector as unknown as TestCafeSelector, text, options);
 
   await waitForInterfaceStabilization(stabilizationInterval);
 };

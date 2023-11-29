@@ -27,7 +27,12 @@ export const drag = async (
     LogEventType.InternalAction,
   );
 
-  await testController.drag(selector as TestCafeSelector, dragOffsetX, dragOffsetY, options);
+  await testController.drag(
+    selector as unknown as TestCafeSelector,
+    dragOffsetX,
+    dragOffsetY,
+    options,
+  );
 
   await waitForInterfaceStabilization(stabilizationInterval);
 };

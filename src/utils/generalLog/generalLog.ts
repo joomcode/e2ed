@@ -16,7 +16,7 @@ type TestLogParams = Readonly<{
 }>;
 
 /**
- * General (out of test context) log to stdout.
+ * Logs general (out of test context) message with optional payload to console and to log file.
  * @internal
  */
 export const generalLog = (

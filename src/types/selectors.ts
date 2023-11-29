@@ -75,8 +75,7 @@ export type LocatorIdSelector = (this: void, id: string) => Selector;
 /**
  * Selector type (which replaces the DOM element wrapper).
  */
-export type Selector = ((this: void, ...args: unknown[]) => Inner.SelectorPromise) &
-  ReplaceObjectSelectors<Inner.SelectorAPI> &
+export type Selector = ReplaceObjectSelectors<Inner.SelectorAPI> &
   ReplaceObjectSelectors<SelectorCustomMethods> &
   Readonly<{[DESCRIPTION_KEY]?: string}>;
 
@@ -124,6 +123,8 @@ export type SelectorCustomMethods = Readonly<{
 
   /** Returns the value of the locator id. */
   getLocatorId(this: Inner.Selector): Promise<string | null>;
+  /** true if the element has the locator id. */
+  hasLocatorId(this: Inner.Selector): Promise<boolean>;
   /** Returns the value of the locator parameter. */
   getLocatorParameter(this: Inner.Selector, parameter: string): Promise<string | null>;
   /** true if the element has the locator parameter. */

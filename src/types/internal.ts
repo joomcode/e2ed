@@ -4,6 +4,7 @@ export type {WithStabilizationInterval} from './actions';
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';
+export type {ClientFunction} from './clientFunction';
 /** @internal */
 export type {
   ClientFunctionState,
@@ -76,7 +77,13 @@ export type {
 /** @internal */
 export type {ImgData, PixelmatchOptions} from './pixelmatch';
 export type {AsyncVoid, MaybePromise, UnwrapPromise} from './promise';
-export type {AnyObject, FieldReplacer, PropertyDescriptor, PropertyKey} from './properties';
+export type {
+  AnyObject,
+  FieldReplacer,
+  PrimitiveValue,
+  PropertyDescriptor,
+  PropertyKey,
+} from './properties';
 export type {LiteReport, LiteRetry} from './report';
 /** @internal */
 export type {

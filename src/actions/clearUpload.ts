@@ -13,5 +13,5 @@ export const clearUpload = (selector: Selector): Promise<void> => {
 
   log('Remove all file paths from file upload input', {locator}, LogEventType.InternalAction);
 
-  return testController.clearUpload(selector as TestCafeSelector);
+  return testController.clearUpload(selector as unknown as TestCafeSelector);
 };

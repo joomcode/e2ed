@@ -2,12 +2,12 @@ import {replaceFields} from 'e2ed/configurator';
 
 import {logFieldReplacer} from './logFieldReplacer';
 
-import type {MapLogPayloadInReport} from 'autotests/types/packSpecific';
+import type {MapLogPayloadInLogFile} from 'autotests/types/packSpecific';
 
 /**
- * Maps log payload for logging in HTML console to clarify, shorten or skip a console log entry.
+ * Maps log payload for logging in file to clarify, shorten or skip a console log entry.
  * If the mapping returns `skipLog`, the log entry is skipped.
  * If the mapping returns `undefined`, the log entry is not skipped, but is printed with an empty payload.
  */
-export const mapLogPayloadInReport: MapLogPayloadInReport = (_message, payload) =>
+export const mapLogPayloadInLogFile: MapLogPayloadInLogFile = (_message, payload) =>
   replaceFields(payload, logFieldReplacer);

@@ -8,6 +8,7 @@ import type {
   Fn,
   Selector as SelectorType,
   SelectorCustomMethods,
+  TestCafeSelector,
   Values,
 } from '../types/internal';
 
@@ -24,10 +25,10 @@ const createGet = (
         : undefined;
 
     let result = (
-      customMethod ? customMethod.bind(target) : Reflect.get(target, property, receiver)
-    ) as Values<SelectorType> & {
-      [DESCRIPTION_KEY]?: string;
-    };
+      customMethod
+        ? customMethod.bind(target as unknown as TestCafeSelector)
+        : Reflect.get(target, property, receiver)
+    ) as Values<SelectorType> & {[DESCRIPTION_KEY]?: string};
 
     if (typeof property === 'symbol') {
       return result;
@@ -51,9 +52,9 @@ const createGet = (
             return callResult;
           }
 
-          const callLocator = `${result[DESCRIPTION_KEY]}(${args.join(', ')})`;
+          const callDescription = `${result[DESCRIPTION_KEY]}(${args.join(', ')})`;
 
-          (callResult as typeof result)[DESCRIPTION_KEY] = callLocator;
+          (callResult as typeof result)[DESCRIPTION_KEY] = callDescription;
 
           // callResult is Selector
           if (Object.prototype.hasOwnProperty.call(callResult, 'getBoundingClientRectProperty')) {
@@ -64,9 +65,9 @@ const createGet = (
         } as typeof result;
     }
 
-    const locator = target[DESCRIPTION_KEY] || '';
+    const description = target[DESCRIPTION_KEY] || '';
 
-    result[DESCRIPTION_KEY] = `${locator}.${property}`;
+    result[DESCRIPTION_KEY] = `${description}.${property}`;
 
     return result;
   };
@@ -81,7 +82,7 @@ const createGet = (
 export const createSelectorCreator = (customMethods: SelectorCustomMethods): CreateSelector => {
   const createSelector: CreateSelector = (...args) => {
     const locator = args[0];
-    const selector = Selector(...args) as SelectorType;
+    const selector = Selector(...args) as unknown as SelectorType;
 
     if (typeof locator === 'string') {
       setReadonlyProperty(selector, DESCRIPTION_KEY, locator);

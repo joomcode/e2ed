@@ -9,9 +9,9 @@ const INTERRUPTED_BY_PAGE_UNLOAD_CODE = 'E49';
  * Return true if client function rerun is needed, false otherwise.
  * @internal
  */
-export const isNeedRerunClientFunction = <Args extends unknown[], R>(
+export const isNeedRerunClientFunction = <Args extends readonly unknown[], Result>(
   error: MaybeTestCafeError,
-  clientFunctionState: ClientFunctionState<Args, R>,
+  clientFunctionState: ClientFunctionState<Args, Result>,
 ): boolean => {
   const {code} = error ?? {};
   const {name} = clientFunctionState;

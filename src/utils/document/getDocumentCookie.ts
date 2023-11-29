@@ -4,17 +4,21 @@ import {createClientFunction} from '../../createClientFunction';
 import {assertValueIsDefined} from '../asserts';
 import {log} from '../log';
 
-import type {CookieHeaderString} from '../../types/internal';
+import type {ClientFunction, CookieHeaderString} from '../../types/internal';
 
-const clientGetDocumentCookie = createClientFunction<[], CookieHeaderString>(
-  () => document.cookie as CookieHeaderString,
-  {name: 'getDocumentCookie'},
-);
+let clientGetDocumentCookie: ClientFunction<[], CookieHeaderString> | undefined;
 
 /**
  * Get current document cookie.
  */
 export const getDocumentCookie = async (): Promise<CookieHeaderString> => {
+  if (clientGetDocumentCookie === undefined) {
+    clientGetDocumentCookie = createClientFunction<[], CookieHeaderString>(
+      () => document.cookie as CookieHeaderString,
+      {name: 'getDocumentCookie'},
+    );
+  }
+
   const cookie = await clientGetDocumentCookie();
 
   assertValueIsDefined(cookie, 'cookie is defined');

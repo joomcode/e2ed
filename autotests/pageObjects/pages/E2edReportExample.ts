@@ -4,7 +4,7 @@ import {locatorIdSelector} from 'autotests/selectors';
 import {Page} from 'e2ed';
 import {setReadonlyProperty} from 'e2ed/utils';
 
-import type {Cookie} from 'e2ed/types';
+import type {Cookie, Selector} from 'e2ed/types';
 
 type CustomPageParams = {pageCookies?: readonly Cookie[]} | undefined;
 
@@ -19,10 +19,10 @@ export class E2edReportExample extends Page<CustomPageParams> {
 
   override readonly pageStabilizationInterval = 600;
 
-  override init(): void {
+  override init(this: E2edReportExample): void {
     const {pageCookies = []} = this.pageParams ?? {};
 
-    setReadonlyProperty(this as E2edReportExample, 'pageCookies', pageCookies);
+    setReadonlyProperty(this, 'pageCookies', pageCookies);
   }
 
   getRoute(): E2edReportExampleRoute {
@@ -30,18 +30,26 @@ export class E2edReportExample extends Page<CustomPageParams> {
   }
 
   /** Navigation bar with test retries */
-  readonly navigationRetries = locatorIdSelector('app-navigation-retries');
+  readonly navigationRetries: Selector = locatorIdSelector('app-navigation-retries');
 
   /** Button tabs in navigation bar with test retries */
-  readonly navigationRetriesButton = this.navigationRetries.findByLocatorId(
+  readonly navigationRetriesButton: Selector = this.navigationRetries.findByLocatorId(
     'app-navigation-retries-button',
   );
 
   /** Selected button tab in navigation bar with test retries */
-  readonly navigationRetriesButtonSelected = this.navigationRetriesButton.filterByLocatorParameter(
-    'selected',
-    'true',
-  );
+  readonly navigationRetriesButtonSelected: Selector =
+    this.navigationRetriesButton.filterByLocatorParameter('selected', 'true');
+
+  /**
+   * List of test runs of retry.
+   */
+  readonly testRunsList: Selector = locatorIdSelector('app-column1');
+
+  /**
+   * Test run button.
+   */
+  readonly testRunButton: Selector = this.testRunsList.findByLocatorId('app-retries-retry-button');
 
   /**
    * Set page cookies to context before navigate.

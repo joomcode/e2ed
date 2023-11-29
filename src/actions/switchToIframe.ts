@@ -22,7 +22,7 @@ export const switchToIframe = async (
     LogEventType.InternalAction,
   );
 
-  await testController.switchToIframe(iframeSelector as TestCafeSelector);
+  await testController.switchToIframe(iframeSelector as unknown as TestCafeSelector);
 
   await waitForInterfaceStabilization(stabilizationInterval);
 };

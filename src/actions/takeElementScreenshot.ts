@@ -30,7 +30,7 @@ export const takeElementScreenshot = (
   );
 
   const takeElementScreenshotPromise = testController.takeElementScreenshot(
-    selector as TestCafeSelector,
+    selector as unknown as TestCafeSelector,
     pathToScreenshot,
     options,
   );
