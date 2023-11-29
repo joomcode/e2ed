@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import {it} from 'autotests';
+import {test} from 'autotests';
 import {E2edReportExample} from 'autotests/pageObjects/pages';
 import {createClientFunction, expect} from 'e2ed';
 import {
@@ -11,7 +11,7 @@ import {
   waitForInterfaceStabilization,
 } from 'e2ed/actions';
 
-it('correctly read data from browser', {meta: {testId: '14'}}, async () => {
+test('correctly read data from browser', {meta: {testId: '14'}}, async () => {
   await navigateToPage(E2edReportExample);
 
   await setPageElementsIgnoredOnInterfaceStabilization(['.retry']);

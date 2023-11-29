@@ -11,8 +11,9 @@ import type {LogParams, RunLabel, StackFrame, UtcTimeInMs} from '../../types/int
 
 function toString(this: E2edError): string {
   const printedParams = {
-    dateTimeInIso: new Date(this.utcTimeInMs).toISOString(),
     message: this.message,
+    // eslint-disable-next-line sort-keys
+    dateTimeInIso: new Date(this.utcTimeInMs).toISOString(),
     params: this.params,
     runLabel: this.runLabel,
     stackTrace: this.stackTrace,
@@ -71,6 +72,22 @@ export class E2edError extends Error {
 
     // @ts-expect-error: Error constructor still doesn't support second argument
     super(...constructorArgs);
+
+    Object.defineProperty(this, 'message', {
+      configurable: true,
+      enumerable: true,
+      value: this.message,
+      writable: true,
+    });
+
+    if (params?.cause) {
+      Object.defineProperty(this, 'cause', {
+        configurable: true,
+        enumerable: true,
+        value: params.cause,
+        writable: true,
+      });
+    }
 
     this.runLabel = runLabel;
 

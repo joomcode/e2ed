@@ -1,4 +1,4 @@
-import type {CreateSelector, Selector} from '../types/internal';
+import type {CreateSelector, Selector} from '../../types/internal';
 
 /**
  * Creates selector of page HTML element ("documentElement").

@@ -583,6 +583,9 @@ a:visited {
   font-size: 14px;
   color: var(--font-color);
 }
+.step-expanded.step-expanded_is-empty {
+  cursor: default;
+}
 .step-expanded_type_inner {
   padding: 7px calc(var(--test-details-padding) * 2);
   transition: top 0.2s linear;

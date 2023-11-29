@@ -1,1 +1,0 @@
-export {getDescriptionFromSelector} from './getDescriptionFromSelector';

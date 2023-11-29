@@ -15,9 +15,7 @@ type Options = Readonly<{
  * @internal
  */
 export function renderStepContent({pathToScreenshotFromReportPage, payload}: Options): SafeHtml {
-  const isPayloadEmpty = !payload || Object.keys(payload).length === 0;
-
-  if (isPayloadEmpty) {
+  if (payload === undefined) {
     return sanitizeHtml``;
   }
 

@@ -2,7 +2,12 @@ import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 
 import {charsetPath, encodingPath} from './testCafeHammerheadUpPaths';
 
-import type {RequestHookEncoding, RequestHookResponseEvent, Response} from '../../types/internal';
+import type {
+  RequestHookEncoding,
+  RequestHookResponseEvent,
+  Response,
+  UtcTimeInMs,
+} from '../../types/internal';
 
 type CharsetType = typeof import('testcafe-hammerhead-up/lib/processing/encoding/charset').default;
 type EncodingType = typeof import('testcafe-hammerhead-up/lib/processing/encoding');
@@ -13,14 +18,15 @@ const Charset = require<CharsetType>(charsetPath);
 const {decodeContent} = require<EncodingType>(encodingPath);
 
 /**
- * Get Response object from the original TestCafe request context.
+ * Get response object from the original TestCafe request context.
  * @internal
  */
 export const getResponseFromResponseEvent = async ({
   body,
   headers = {},
   statusCode = 200,
-}: RequestHookResponseEvent): Promise<Response> => {
+}: RequestHookResponseEvent): Promise<Response & {completionTimeInMs: UtcTimeInMs}> => {
+  const completionTimeInMs = Date.now() as UtcTimeInMs;
   const charset = new Charset();
   const encoding = (headers['content-encoding'] ?? 'identity') as RequestHookEncoding;
 
@@ -36,5 +42,5 @@ export const getResponseFromResponseEvent = async ({
     }
   }
 
-  return {responseBody, responseHeaders: headers, statusCode};
+  return {completionTimeInMs, responseBody, responseHeaders: headers, statusCode};
 };

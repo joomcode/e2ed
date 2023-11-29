@@ -74,13 +74,19 @@ export class Main extends Page<CustomPageParams> {
   }
 
   override async waitForPageLoaded(): Promise<void> {
-    await waitForAllRequestsComplete(({url}) => {
-      if (url.startsWith('https://adservice.google.com/')) {
-        return false;
-      }
+    await waitForAllRequestsComplete(
+      ({url}) => {
+        if (
+          url.startsWith('https://adservice.google.com/') ||
+          url.startsWith('https://play.google.com/')
+        ) {
+          return false;
+        }
 
-      return true;
-    });
+        return true;
+      },
+      {maxIntervalBetweenRequestsInMs: this.maxIntervalBetweenRequestsInMs},
+    );
 
     await waitForInterfaceStabilization(this.pageStabilizationInterval);
   }

@@ -1,24 +1,26 @@
-import {createCustomMethods} from './createCustomMethods';
-import {createSelectorByCssCreator} from './createSelectorByCssCreator';
-import {createSelectorCreator} from './createSelectorCreator';
-import {htmlElementSelectorCreator} from './htmlElementSelectorCreator';
-import {locatorIdSelectorCreator} from './locatorIdSelectorCreator';
+import {setCustomInspectOnFunction} from '../utils/fn';
+import {generalLog} from '../utils/generalLog';
+import {
+  createSelectorByCssCreator,
+  createSelectorCreator,
+  htmlElementSelectorCreator,
+  locatorIdSelectorCreator,
+} from '../utils/selectors';
 
-import type {
-  CreateSelectorFunctionsOptions,
-  GetLocatorAttributeNameFn,
-  SelectorCustomMethods,
-  SelectorFunctions,
-} from '../types/internal';
+import type {CreateSelectorFunctionsOptions, SelectorFunctions} from '../types/internal';
 
-const createSelectorFunctionsWithCustomMethods = (
-  getLocatorAttributeName: GetLocatorAttributeNameFn,
-  // force `this` to be Selector
-  customMethods: SelectorCustomMethods,
-): SelectorFunctions => {
-  const createSelector = createSelectorCreator(customMethods);
+/**
+ * Creates main functions for creating selectors and working with selectors.
+ */
+export const createSelectorFunctions = ({
+  getLocatorAttributeName,
+}: CreateSelectorFunctionsOptions): SelectorFunctions => {
+  setCustomInspectOnFunction(getLocatorAttributeName);
+  generalLog('Create selector functions', {getLocatorAttributeName});
 
-  const selectorsWithCustomMethods = {
+  const createSelector = createSelectorCreator(getLocatorAttributeName);
+
+  return {
     /**
      * Creates selector by locator and optional parameters.
      */
@@ -36,17 +38,4 @@ const createSelectorFunctionsWithCustomMethods = (
      */
     locatorIdSelector: locatorIdSelectorCreator(createSelector, getLocatorAttributeName),
   };
-
-  return selectorsWithCustomMethods;
 };
-
-/**
- * Creates main functions for creating selectors and working with selectors.
- */
-export const createSelectorFunctions = ({
-  getLocatorAttributeName,
-}: CreateSelectorFunctionsOptions): SelectorFunctions =>
-  createSelectorFunctionsWithCustomMethods(
-    getLocatorAttributeName,
-    createCustomMethods(getLocatorAttributeName),
-  );

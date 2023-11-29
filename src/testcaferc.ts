@@ -1,6 +1,6 @@
 /**
  * @file Full pack configuration (extended TestCafe configuration) for running tests.
- * Don't import this module. Instead, use utils/getFullPackConfig.
+ * Don't import this module. Instead, use `utils/getFullPackConfig`.
  */
 
 import {join} from 'node:path';

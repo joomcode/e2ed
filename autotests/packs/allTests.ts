@@ -10,6 +10,8 @@ import {RunEnvironment, runEnvironment} from 'e2ed/configurator';
 import {
   doAfterPack,
   doBeforePack,
+  mapBackendResponseErrorToLog,
+  mapBackendResponseToLog,
   mapLogPayloadInConsole,
   mapLogPayloadInLogFile,
   mapLogPayloadInReport,
@@ -30,7 +32,7 @@ const filterTestsIntoPack: FilterTestsIntoPack = ({options}) => options.meta.tes
  */
 export const pack: Pack = {
   ajaxRequestTimeout: 40_000,
-  assertionTimeout: 10_000,
+  assertionTimeout: 5_000,
   browser: [browser, ...browserFlags].join(' '),
   browserInitTimeout: 60_000,
   concurrency: isLocalRun ? 1 : 2,
@@ -42,10 +44,8 @@ export const pack: Pack = {
   filterTestsIntoPack,
   liteReportFileName: 'lite-report.json',
   logFileName: 'pack-logs.log',
-  mapBackendResponseErrorToLog: ({request, responseHeaders, statusCode}) =>
-    statusCode >= 400 ? {request, responseHeaders, statusCode} : undefined,
-  mapBackendResponseToLog: ({request, statusCode}) =>
-    statusCode < 400 ? {statusCode, url: request?.url} : undefined,
+  mapBackendResponseErrorToLog,
+  mapBackendResponseToLog,
   mapLogPayloadInConsole,
   mapLogPayloadInLogFile,
   mapLogPayloadInReport,

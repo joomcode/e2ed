@@ -4,11 +4,15 @@ import {E2edError} from '../error';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
 
-import type {Request, RequestOrResponsePredicateWithPromise, Response} from '../../types/internal';
+import type {
+  Request,
+  RequestOrResponsePredicateWithPromise,
+  ResponseWithRequest,
+} from '../../types/internal';
 
 type Options = Readonly<{
   eventType: 'Request' | 'Response';
-  requestOrResponse: Request | Response;
+  requestOrResponse: Request | ResponseWithRequest;
   requestOrResponsePredicateWithPromise: RequestOrResponsePredicateWithPromise;
 }>;
 

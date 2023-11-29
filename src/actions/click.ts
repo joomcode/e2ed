@@ -1,7 +1,7 @@
 import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
-import {getDescriptionFromSelector} from '../utils/locators';
 import {log} from '../utils/log';
+import {getDescriptionFromSelector} from '../utils/selectors';
 
 import {waitForInterfaceStabilization} from './waitFor';
 
@@ -16,11 +16,11 @@ export const click = async (
   selector: Selector,
   {stabilizationInterval, ...options}: Options = {},
 ): Promise<void> => {
-  const locator = getDescriptionFromSelector(selector);
-  const withLocator = locator ? ` with locator ${locator}` : '';
+  const description = getDescriptionFromSelector(selector);
+  const withDescription = description ? ` with description ${description}` : '';
 
   log(
-    `Click an element${withLocator}`,
+    `Click an element${withDescription}`,
     {...options, stabilizationInterval},
     LogEventType.InternalAction,
   );

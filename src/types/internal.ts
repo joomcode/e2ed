@@ -44,6 +44,7 @@ export type {
   RequestKeyType,
   Response,
   ResponseKeyType,
+  ResponseWithRequest,
   SameSite,
   SetCookieHeaderString,
   StatusCode,
@@ -76,7 +77,13 @@ export type {
 } from './paths';
 /** @internal */
 export type {ImgData, PixelmatchOptions} from './pixelmatch';
-export type {AsyncVoid, MaybePromise, UnwrapPromise} from './promise';
+export type {
+  AsyncVoid,
+  MaybePromise,
+  ReExecutablePromise,
+  Thenable,
+  UnwrapPromise,
+} from './promise';
 export type {
   AnyObject,
   FieldReplacer,

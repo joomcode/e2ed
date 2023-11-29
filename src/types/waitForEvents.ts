@@ -85,7 +85,7 @@ export type ResponsePredicateWithPromise = Readonly<{
 export type WaitForEventsState = Readonly<{
   allRequestsCompletePredicates: Set<AllRequestsCompletePredicateWithPromise>;
   hook: RequestHookToWaitForEvents;
-  hashOfNotCompleteRequests: Record<RequestHookContextId, Request>;
+  hashOfNotCompleteRequests: Record<RequestHookContextId, Required<Request>>;
   requestPredicates: Set<RequestPredicateWithPromise>;
   responsePredicates: Set<ResponsePredicateWithPromise>;
 }>;

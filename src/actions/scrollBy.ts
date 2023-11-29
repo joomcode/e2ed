@@ -1,7 +1,7 @@
 import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
-import {getDescriptionFromSelector} from '../utils/locators';
 import {log} from '../utils/log';
+import {getDescriptionFromSelector} from '../utils/selectors';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
@@ -15,7 +15,7 @@ type ScrollBy = ((x: number, y: number) => Promise<void>) &
  */
 // @ts-expect-error: e2ed Selector type is incompatible with TS Selector
 export const scrollBy: ScrollBy = (...args) => {
-  const locator = getDescriptionFromSelector(args[0] as Selector);
+  const description = getDescriptionFromSelector(args[0] as Selector);
   const printedArgs = [...args];
 
   if (typeof args[0] === 'object') {
@@ -24,7 +24,7 @@ export const scrollBy: ScrollBy = (...args) => {
 
   log(
     'Scroll the document (or element) by the given offset',
-    {args: printedArgs, locator},
+    {args: printedArgs, description},
     LogEventType.InternalAction,
   );
 

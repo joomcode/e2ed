@@ -5,25 +5,30 @@ import {
   locatorIdSelector,
 } from 'autotests/selectors';
 
+import type {Selector} from 'e2ed/types';
+
 // @ts-expect-error: wrong number of arguments
 htmlElementSelector.findByLocatorId();
 // @ts-expect-error: wrong type of arguments
 htmlElementSelector.findByLocatorId(0);
 // ok
-htmlElementSelector.findByLocatorId('id');
+htmlElementSelector.findByLocatorId('id') satisfies Selector;
 // ok
-htmlElementSelector.findByLocatorId('id').findByLocatorId('id2');
+htmlElementSelector.findByLocatorId('id').findByLocatorId('id2') satisfies Selector;
 // ok
-htmlElementSelector.findByLocatorId('id').find('.test-children');
+htmlElementSelector.findByLocatorId('id').find('.test-children') satisfies Selector;
 // ok
-htmlElementSelector.find('body').findByLocatorId('id');
+htmlElementSelector.find('body').findByLocatorId('id') satisfies Selector;
 
 // ok
-createSelector('id').findByLocatorId('id').find('body').findByLocatorId('id');
+createSelector('id').findByLocatorId('id').find('body').findByLocatorId('id') satisfies Selector;
 // ok
-createSelectorByCss('id').findByLocatorId('id').find('body').findByLocatorId('id');
+createSelectorByCss('id')
+  .findByLocatorId('id')
+  .find('body')
+  .findByLocatorId('id') satisfies Selector;
 // ok
-locatorIdSelector('id').findByLocatorId('id').find('body').findByLocatorId('id');
+locatorIdSelector('id').findByLocatorId('id').find('body').findByLocatorId('id') satisfies Selector;
 
 // @ts-expect-error: wrong number of arguments
 locatorIdSelector();
@@ -32,44 +37,44 @@ locatorIdSelector();
 locatorIdSelector(3);
 
 // ok
-htmlElementSelector.filterByLocatorId('id');
+htmlElementSelector.filterByLocatorId('id') satisfies Selector;
 // ok
-htmlElementSelector.parentByLocatorId('id');
+htmlElementSelector.parentByLocatorId('id') satisfies Selector;
 // ok
-htmlElementSelector.childByLocatorId('id');
+htmlElementSelector.childByLocatorId('id') satisfies Selector;
 // ok
-htmlElementSelector.siblingByLocatorId('id');
+htmlElementSelector.siblingByLocatorId('id') satisfies Selector;
 // ok
-htmlElementSelector.nextSiblingByLocatorId('id');
+htmlElementSelector.nextSiblingByLocatorId('id') satisfies Selector;
 // ok
-htmlElementSelector.prevSiblingByLocatorId('id');
+htmlElementSelector.prevSiblingByLocatorId('id') satisfies Selector;
 
 // ok
-htmlElementSelector.filterByLocatorParameter('prop', 'value');
+htmlElementSelector.filterByLocatorParameter('prop', 'value') satisfies Selector;
 // ok
-htmlElementSelector.findByLocatorParameter('prop', 'value');
+htmlElementSelector.findByLocatorParameter('prop', 'value') satisfies Selector;
 // ok
-htmlElementSelector.parentByLocatorParameter('prop', 'value');
+htmlElementSelector.parentByLocatorParameter('prop', 'value') satisfies Selector;
 // ok
-htmlElementSelector.childByLocatorParameter('prop', 'value');
+htmlElementSelector.childByLocatorParameter('prop', 'value') satisfies Selector;
 // ok
-htmlElementSelector.siblingByLocatorParameter('prop', 'value');
+htmlElementSelector.siblingByLocatorParameter('prop', 'value') satisfies Selector;
 // ok
-htmlElementSelector.nextSiblingByLocatorParameter('prop', 'value');
+htmlElementSelector.nextSiblingByLocatorParameter('prop', 'value') satisfies Selector;
 // ok
-htmlElementSelector.prevSiblingByLocatorParameter('prop', 'value');
+htmlElementSelector.prevSiblingByLocatorParameter('prop', 'value') satisfies Selector;
 
 // ok
 void htmlElementSelector.getLocatorId();
 
-// TODO: should be an error "wrong number of arguments"
-void htmlElementSelector.getLocatorId('foo');
+// @ts-expect-error: wrong number of arguments
+void htmlElementSelector.getLocatorId('id');
 
-// ok
-void htmlElementSelector.hasLocatorId();
+// @ts-expect-error: TODO: should be ok
+void htmlElementSelector.hasLocatorId() satisfies Promise<boolean>;
 
-// TODO: should be an error "wrong number of arguments"
-void htmlElementSelector.hasLocatorId('foo');
+// @ts-expect-error: wrong number of arguments
+void htmlElementSelector.hasLocatorId('id');
 
 // @ts-expect-error: wrong number of arguments
 void htmlElementSelector.hasLocatorParameter();
@@ -77,10 +82,10 @@ void htmlElementSelector.hasLocatorParameter();
 // @ts-expect-error: wrong number of arguments
 void htmlElementSelector.getLocatorParameter();
 
-// ok
-void htmlElementSelector.getLocatorParameter('prop');
-// ok
-void htmlElementSelector.hasLocatorParameter('prop');
+// @ts-expect-error: TODO: should be ok
+void htmlElementSelector.getLocatorParameter('prop') satisfies Promise<string | null>;
+// @ts-expect-error: TODO: should be ok
+void htmlElementSelector.hasLocatorParameter('prop') satisfies Promise<boolean>;
 
 // ok
 htmlElementSelector.getDescription() satisfies string | undefined;

@@ -1,21 +1,14 @@
-import {LogEventStatus, LogEventType} from '../../constants/internal';
-import {testController} from '../../testController';
-
-import {getDescriptionFromSelector} from '../locators';
-import {log} from '../log';
-import {valueToString, wrapStringForLogs} from '../valueToString';
-
 import {assertionMessageGetters} from './assertionMessageGetters';
+import {createExpectMethod} from './createExpectMethod';
 
-import type {Selector} from '../../types/internal';
-
-import type {AssertionFunctionKeys, AssertionFunctions} from './types';
+import type {AssertionFunctionKey} from './types';
 
 /**
- * testController.expect wrapper with logs.
+ * `testController.expect` wrapper with logs.
  * @internal
  */
-class Expect {
+// eslint-disable-next-line import/exports-last
+export class Expect {
   constructor(
     readonly actualValue: unknown,
     readonly description: string, // eslint-disable-next-line no-empty-function
@@ -25,42 +18,5 @@ class Expect {
 }
 
 for (const [key, getAssertionMessage] of Object.entries(assertionMessageGetters)) {
-  // eslint-disable-next-line no-restricted-syntax
-  Expect.prototype[key] = function method(...args: unknown[]) {
-    const message = getAssertionMessage(...args);
-
-    const assertPromise = new Promise<Error | undefined>((resolve) => {
-      const assert = testController.expect(this.actualValue) as AssertionFunctions<Promise<void>>;
-
-      assert[key as AssertionFunctionKeys](...args)
-        .then(() => resolve(undefined))
-        .catch((error: Error) => resolve(error));
-    });
-
-    return assertPromise.then((maybeError) =>
-      Promise.resolve(this.actualValue)
-        .then((actualValue) =>
-          log(
-            `Assert: ${this.description}`,
-            {
-              actualValue,
-              assertion: wrapStringForLogs(`value ${valueToString(actualValue)} ${message}`),
-              assertionArguments: args,
-              error: maybeError,
-              locator: getDescriptionFromSelector(this.actualValue as Selector),
-              logEventStatus: maybeError ? LogEventStatus.Failed : LogEventStatus.Passed,
-            },
-            LogEventType.InternalAssert,
-          ),
-        )
-        .then(() => {
-          if (maybeError) {
-            throw maybeError;
-          }
-        }),
-    );
-  };
+  Expect.prototype[key] = createExpectMethod(key as AssertionFunctionKey, getAssertionMessage);
 }
-
-/** @internal */
-export {Expect};

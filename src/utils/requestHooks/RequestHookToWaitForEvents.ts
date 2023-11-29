@@ -19,6 +19,7 @@ import type {
   RequestHookContextId,
   RequestHookRequestEvent,
   RequestHookResponseEvent,
+  ResponseWithRequest,
   WaitForEventsState,
 } from '../../types/internal';
 
@@ -89,12 +90,14 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
 
     setReadonlyProperty(response, 'request', request);
 
-    mapBackendResponseForLogs(response);
+    const responseWithRequest = response as ResponseWithRequest;
+
+    mapBackendResponseForLogs(responseWithRequest);
 
     if (this.waitForEventsState.responsePredicates.size > 0) {
       await processEventsPredicates({
         eventType: 'Response',
-        requestOrResponse: response,
+        requestOrResponse: responseWithRequest,
         waitForEventsState: this.waitForEventsState,
       });
     }

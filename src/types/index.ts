@@ -18,6 +18,7 @@ export type {
   Query,
   Request,
   Response,
+  ResponseWithRequest,
   SameSite,
   SetCookieHeaderString,
   StatusCode,
@@ -31,7 +32,13 @@ export type {
   PageClassTypeArgs,
 } from './pages';
 export type {FilePathFromRoot, TestFilePath} from './paths';
-export type {AsyncVoid, MaybePromise, UnwrapPromise} from './promise';
+export type {
+  AsyncVoid,
+  MaybePromise,
+  ReExecutablePromise,
+  Thenable,
+  UnwrapPromise,
+} from './promise';
 export type {
   AnyObject,
   FieldReplacer,

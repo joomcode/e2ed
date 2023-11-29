@@ -1,4 +1,4 @@
-import {htmlElementSelector} from '../../selectors/internal';
+import {Selector as TestCafeSelector} from 'testcafe-without-typecheck';
 
 import type {Selector} from '../../types/internal';
 
@@ -7,6 +7,8 @@ import type {Selector} from '../../types/internal';
  * (intersects with the viewport at least in one point), and `false` otherwise.
  */
 export const isSelectorInViewport = async (selector: Selector): Promise<boolean> => {
+  const htmlElementSelector = TestCafeSelector('html');
+
   const clientHeight = await htmlElementSelector.clientHeight;
   const clientWidth = await htmlElementSelector.clientWidth;
 

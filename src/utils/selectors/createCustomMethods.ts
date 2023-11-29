@@ -1,9 +1,13 @@
-import {getDescriptionFromSelector} from '../utils/locators';
+import {getDescriptionFromSelector} from './getDescriptionFromSelector';
 
-import type {GetLocatorAttributeNameFn, Selector, SelectorCustomMethods} from '../types/internal';
+import type {
+  GetLocatorAttributeNameFn,
+  Selector,
+  SelectorCustomMethods,
+} from '../../types/internal';
 
 /**
- * Creates native `e2ed` methods of selector.
+ * Creates custom `e2ed` methods of selector (additional to selector's own methods from TestCafe).
  * @internal
  */
 export const createCustomMethods = (

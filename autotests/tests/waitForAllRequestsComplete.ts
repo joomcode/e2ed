@@ -1,9 +1,9 @@
-import {it} from 'autotests';
+import {test} from 'autotests';
 import {createClientFunction} from 'e2ed';
 import {waitForAllRequestsComplete, waitForTimeout} from 'e2ed/actions';
 import {assertFunctionThrows, E2edError, log} from 'e2ed/utils';
 
-it(
+test(
   'waitForAllRequestsComplete works correct with timeout and predicate in base cases',
   {meta: {testId: '9'}, testIdleTimeout: 6_000},
   // eslint-disable-next-line complexity, max-statements

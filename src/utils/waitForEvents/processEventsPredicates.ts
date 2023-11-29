@@ -3,7 +3,7 @@ import {processEventsPredicate} from './processEventsPredicate';
 import type {
   Request,
   RequestOrResponsePredicateWithPromise,
-  Response,
+  ResponseWithRequest,
   WaitForEventsState,
 } from '../../types/internal';
 
@@ -15,7 +15,7 @@ type OptionsForRequest = Readonly<{
 
 type OptionsForResponse = Readonly<{
   eventType: 'Response';
-  requestOrResponse: Response;
+  requestOrResponse: ResponseWithRequest;
   waitForEventsState: WaitForEventsState;
 }>;
 

@@ -9,7 +9,7 @@ import type {Request, RequestHookContextId, WaitForEventsState} from '../../type
  * @internal
  */
 export const addNotCompleteRequest = async (
-  request: Request,
+  request: Required<Request>,
   requestHookContextId: RequestHookContextId,
   waitForEventsState: WaitForEventsState,
 ): Promise<void> => {

@@ -34,18 +34,21 @@ export class Search extends MobilePage<CustomPageParams> {
   }
 
   override async waitForPageLoaded(): Promise<void> {
-    await waitForAllRequestsComplete(({url}) => {
-      if (
-        url.startsWith('https://adservice.google.com/') ||
-        url.startsWith('https://googleads.g.doubleclick.net/') ||
-        url.startsWith('https://play.google.com/') ||
-        url.startsWith('https://static.doubleclick.net/')
-      ) {
-        return false;
-      }
+    await waitForAllRequestsComplete(
+      ({url}) => {
+        if (
+          url.startsWith('https://adservice.google.com/') ||
+          url.startsWith('https://googleads.g.doubleclick.net/') ||
+          url.startsWith('https://play.google.com/') ||
+          url.startsWith('https://static.doubleclick.net/')
+        ) {
+          return false;
+        }
 
-      return true;
-    });
+        return true;
+      },
+      {maxIntervalBetweenRequestsInMs: this.maxIntervalBetweenRequestsInMs},
+    );
 
     await waitForInterfaceStabilization(this.pageStabilizationInterval);
   }

@@ -1,4 +1,4 @@
-import {it} from 'autotests';
+import {test} from 'autotests';
 import {E2edReportExample} from 'autotests/pageObjects/pages';
 import {expect} from 'e2ed';
 import {navigateToPage} from 'e2ed/actions';
@@ -14,7 +14,7 @@ const cookie = {
   value: 'bar',
 } as const;
 
-it('set page cookies', {meta: {testId: '5'}, testIdleTimeout: 35_000}, async () => {
+test('set page cookies correctly', {meta: {testId: '5'}, testIdleTimeout: 35_000}, async () => {
   await navigateToPage(E2edReportExample, {pageCookies: [cookie]});
 
   const documentCookie = await getDocumentCookie();
