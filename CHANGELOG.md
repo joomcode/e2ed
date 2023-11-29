@@ -1,5 +1,37 @@
 # Changelog
 
+## [v0.15.12](https://github.com/joomcode/e2ed/tree/v0.15.12) (2023-11-29)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.11...v0.15.12)
+
+- [Merge pull request #47 from joomcode/fix/remove-extra-logs](https://github.com/joomcode/e2ed/commit/88a90399cfbf0c35676f6eae347e413c9e85691a) ([uid11](https://github.com/uid11))
+
+  feat: remove extra logs from `mockApiRoute`
+
+- [FI-1038 feat: remove extra logs from `mockApiRoute`](https://github.com/joomcode/e2ed/commit/5e13a6e3405911c773a80d9defa15c3bbf5c6fb6) ([uid11](https://github.com/uid11))
+
+  fix: do not create client functions on `e2ed/utils` initialization
+
+  fix: mistakes in CHANGELOG.md
+
+  feat: add function `getShallowCopyOfObjectForLogs` to public API
+
+  feat: add function `getStringTrimmedToMaxLength` to public API
+
+  fix: correctly map backend responses to log payload
+
+  tests: add tests for `replaceFields` function
+
+  fix: remove call signature from `Selector` type
+
+  tests: add more tests and type tests on selectors methods
+
+  chore: update devDependencies (@typescript-eslint/\*)
+
+  fix: do not duplicate backend responses (with or without body)
+
+  fix: error with duplicate mocked backend responses
+
 ## [v0.15.11](https://github.com/joomcode/e2ed/tree/v0.15.11) (2023-11-24)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.10...v0.15.11)
