@@ -1,5 +1,21 @@
 # Changelog
 
+## [v0.15.14](https://github.com/joomcode/e2ed/tree/v0.15.14) (2023-12-07)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.13...v0.15.14)
+
+- [Merge pull request #50 from joomcode/fix/changelog-errors](https://github.com/joomcode/e2ed/commit/1a677918f1221b28b38a5620a47b72e1f9a3287d) ([uid11](https://github.com/uid11))
+
+  fix: errors in `updateChangelog` script
+
+- [fix: errors in `updateChangelog` script](https://github.com/joomcode/e2ed/commit/78c30fdfb0afb594a8c7d04c09a14159c2fb2769) ([uid11](https://github.com/uid11))
+
+  fix: typos in `CHANGELOG.md`
+
+  fix: errors in `package.json` by `npm pkg fix`
+
+  fix: simplify `mapBackendResponseErrorToLog` function
+
 ## [v0.15.13](https://github.com/joomcode/e2ed/tree/v0.15.13) (2023-12-07)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.12...v0.15.13)
