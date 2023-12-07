@@ -1,7 +1,7 @@
 import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
-import {getDescriptionFromSelector} from '../utils/locators';
 import {log} from '../utils/log';
+import {getDescriptionFromSelector} from '../utils/selectors';
 
 import {waitForInterfaceStabilization} from './waitFor';
 
@@ -17,11 +17,11 @@ export const typeText = async (
   text: string,
   {stabilizationInterval, ...options}: Options = {},
 ): Promise<void> => {
-  const locator = getDescriptionFromSelector(selector);
+  const description = getDescriptionFromSelector(selector);
 
   log(
     `Type "${text}" into an input element`,
-    {locator, ...options, stabilizationInterval},
+    {description, ...options, stabilizationInterval},
     LogEventType.InternalAction,
   );
 

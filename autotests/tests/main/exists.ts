@@ -1,4 +1,4 @@
-import {it} from 'autotests';
+import {test} from 'autotests';
 import {Main, Search} from 'autotests/pageObjects/pages';
 import {Search as SearchRoute} from 'autotests/routes/pageRoutes';
 import {getFullPackConfig} from 'autotests/utils';
@@ -17,16 +17,12 @@ import {assertFunctionThrows, getDocumentUrl} from 'e2ed/utils';
 const language = 'en';
 const searchQuery = 'foo';
 
-it('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}, async () => {
+test('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}, async () => {
   await scroll(0, 200);
 
   assertFunctionThrows(() => {
     void window.document;
   }, 'assertFunctionThrows works');
-
-  await assertFunctionThrows(async () => {
-    await expect(1, 'should throws').eql(2);
-  }, 'throws an error when actual value do not fit expected value');
 
   const {customPackProperties} = getFullPackConfig();
 

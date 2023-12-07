@@ -1,4 +1,4 @@
-import {it} from 'autotests';
+import {test} from 'autotests';
 import {createClientFunction, expect} from 'e2ed';
 import {waitForResponse} from 'e2ed/actions';
 import {assertFunctionThrows} from 'e2ed/utils';
@@ -7,7 +7,7 @@ import type {Response} from 'e2ed/types';
 
 type Body = Readonly<{job: string; name: string}> | undefined;
 
-it(
+test(
   'waitForResponse gets correct response body and rejects on timeout',
   {meta: {testId: '3'}, testIdleTimeout: 3_000},
   async () => {

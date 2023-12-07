@@ -1,9 +1,9 @@
-import {it} from 'autotests';
+import {test} from 'autotests';
 import {GetUsers} from 'autotests/routes/apiRoutes';
 import {expect} from 'e2ed';
 import {assertFunctionThrows, request} from 'e2ed/utils';
 
-it(
+test(
   'send correct requests and rejects on timeout',
   {meta: {testId: '7'}, testIdleTimeout: 6_000},
   async () => {

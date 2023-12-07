@@ -17,7 +17,7 @@
   "engines": {
     "node": ">=16.11.1"
   },
-  "packageManager": "npm@8",
+  "packageManager": "npm@10",
   "homepage": "https://github.com/joomcode/e2ed#readme",
   "repository": {
     "type": "git",
@@ -32,20 +32,20 @@
     "testcafe-without-typecheck": "3.4.0-rc.1"
   },
   "devDependencies": {
-    "@types/node": "20.10.0",
-    "@typescript-eslint/eslint-plugin": "6.13.1",
-    "@typescript-eslint/parser": "6.13.1",
+    "@types/node": "20.10.3",
+    "@typescript-eslint/eslint-plugin": "6.13.2",
+    "@typescript-eslint/parser": "6.13.2",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
     "assert-package-lock-is-consistent": "1.0.0",
-    "eslint": "8.54.0",
+    "eslint": "8.55.0",
     "eslint-config-airbnb-base": "15.0.0",
-    "eslint-config-prettier": "9.0.0",
+    "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.29.0",
     "eslint-plugin-simple-import-sort": "10.0.0",
     "husky": "8.0.3",
     "prettier": "3.1.0",
     "testcafe": "3.4.0",
-    "typescript": "5.2.2"
+    "typescript": "5.3.3"
   },
   "peerDependencies": {
     "@types/node": ">=16.11.1",

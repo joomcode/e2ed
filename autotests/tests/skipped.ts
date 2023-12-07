@@ -2,8 +2,8 @@
  * @file Skipped test for testing skipping mechanism.
  */
 
-import {it} from 'autotests';
+import {test} from 'autotests';
 
-it('skipped', {meta: {testId: '4'}}, () => {
+test('skipped', {meta: {testId: '4'}}, () => {
   throw new Error('Skipped test was running');
 });

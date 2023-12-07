@@ -1,12 +1,12 @@
 import {valueToString} from '../valueToString';
 
-import type {AssertionFunctions} from './types';
+import type {AssertionFunctionsRecord} from './types';
 
 /**
  * Assertion message getters.
  * @internal
  */
-export const assertionMessageGetters: AssertionFunctions<string> = {
+export const assertionMessageGetters: AssertionFunctionsRecord<string> = {
   contains: (expected) => `contains ${valueToString(expected)}`,
   eql: (expected) => `is deeply equal to ${valueToString(expected)}`,
   gt: (expected) => `is strictly greater than ${valueToString(expected)}`,

@@ -1,24 +1,21 @@
-import {Selector} from 'testcafe-without-typecheck';
-
-import {DESCRIPTION_KEY} from '../constants/internal';
-import {setReadonlyProperty} from '../utils/setReadonlyProperty';
+import {DESCRIPTION_KEY} from '../../constants/internal';
 
 import type {
-  CreateSelector,
   Fn,
-  Selector as SelectorType,
+  Selector,
   SelectorCustomMethods,
   TestCafeSelector,
   Values,
-} from '../types/internal';
+} from '../../types/internal';
+
+type Return = Required<ProxyHandler<Selector>>['get'];
 
 /**
- * Proxy handler for wrapping all selector properties.
+ * Creates "get" trap for proxy handler for wrapping all selector properties.
+ * @internal
  */
-const createGet = (
-  customMethods: SelectorCustomMethods,
-): Required<ProxyHandler<SelectorType>>['get'] => {
-  const get: Required<ProxyHandler<SelectorType>>['get'] = (target, property, receiver) => {
+export const createGetTrap = (customMethods: SelectorCustomMethods): Return => {
+  const get: Return = (target, property, receiver) => {
     const customMethod =
       typeof property === 'string'
         ? customMethods[property as keyof SelectorCustomMethods]
@@ -28,7 +25,7 @@ const createGet = (
       customMethod
         ? customMethod.bind(target as unknown as TestCafeSelector)
         : Reflect.get(target, property, receiver)
-    ) as Values<SelectorType> & {[DESCRIPTION_KEY]?: string};
+    ) as Values<Selector> & {[DESCRIPTION_KEY]?: string};
 
     if (typeof property === 'symbol') {
       return result;
@@ -42,7 +39,7 @@ const createGet = (
       const originalFunction = result as Fn;
 
       result = // eslint-disable-next-line no-restricted-syntax
-        function selectorMethodWrapper(this: SelectorType, ...args: never[]) {
+        function selectorMethodWrapper(this: Selector, ...args: never[]) {
           const callResult = originalFunction.apply(this, args);
 
           if (
@@ -73,23 +70,4 @@ const createGet = (
   };
 
   return get;
-};
-
-/**
- * Creates `createSelector` function.
- * @internal
- */
-export const createSelectorCreator = (customMethods: SelectorCustomMethods): CreateSelector => {
-  const createSelector: CreateSelector = (...args) => {
-    const locator = args[0];
-    const selector = Selector(...args) as unknown as SelectorType;
-
-    if (typeof locator === 'string') {
-      setReadonlyProperty(selector, DESCRIPTION_KEY, locator);
-    }
-
-    return new Proxy(selector, {get: createGet(customMethods)});
-  };
-
-  return createSelector;
 };

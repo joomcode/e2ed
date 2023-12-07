@@ -1,7 +1,7 @@
 import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
-import {getDescriptionFromSelector} from '../utils/locators';
 import {log} from '../utils/log';
+import {getDescriptionFromSelector} from '../utils/selectors';
 
 import {waitForInterfaceStabilization} from './waitFor';
 
@@ -14,11 +14,11 @@ export const switchToIframe = async (
   iframeSelector: Selector,
   {stabilizationInterval}: WithStabilizationInterval = {},
 ): Promise<void> => {
-  const locator = getDescriptionFromSelector(iframeSelector);
+  const description = getDescriptionFromSelector(iframeSelector);
 
   log(
     'Switch browsing context to the specified iframe',
-    {locator, stabilizationInterval},
+    {description, stabilizationInterval},
     LogEventType.InternalAction,
   );
 

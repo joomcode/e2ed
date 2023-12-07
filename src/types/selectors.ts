@@ -80,7 +80,7 @@ export type Selector = ReplaceObjectSelectors<Inner.SelectorAPI> &
   Readonly<{[DESCRIPTION_KEY]?: string}>;
 
 /**
- * Native `e2ed` methods of selector.
+ * Custom methods that `e2ed` adds to selector.
  */
 export type SelectorCustomMethods = Readonly<{
   /** Creates a selector that filters a matching set by locatorId. */

@@ -1,4 +1,4 @@
-import type {CreateSelector, CreateSelectorByCss, Selector} from '../types/internal';
+import type {CreateSelector, CreateSelectorByCss, Selector} from '../../types/internal';
 
 /**
  * Creates `createSelectorByCss` function.

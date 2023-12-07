@@ -191,6 +191,7 @@ export type OwnE2edConfig<
      * Default maximum interval (in milliseconds) between requests.
      * If there are no new requests for more than this interval, then the promise
      * returned by the `waitForAllRequestsComplete` function will be successfully resolved.
+     * This parameter can be overridden on a specific page instance.
      */
     maxIntervalBetweenRequestsInMs: number;
 

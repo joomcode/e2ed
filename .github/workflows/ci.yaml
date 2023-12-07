@@ -6,11 +6,11 @@ jobs:
   build-docker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 16.11.1
+          node-version: 20.10.0
       - run: npm ci
       - run: npm run build
       - run: npm run build:docker
@@ -18,11 +18,11 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 16.11.1
+          node-version: 20.10.0
       - run: npm ci
       - run: npm run build
       - run: npm run lint
@@ -30,11 +30,11 @@ jobs:
   test-local:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 16.11.1
+          node-version: 20.10.0
       - run: npm ci
       - run: npm run build
       - run: npm run test:local

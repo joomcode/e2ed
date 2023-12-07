@@ -1,6 +1,6 @@
 import type {LogEventStatus, LogEventType} from '../constants/internal';
 
-import type {Response} from './http';
+import type {ResponseWithRequest} from './http';
 
 /**
  * Type for `log` function in test context.
@@ -39,7 +39,10 @@ export type LogPayload = Readonly<{
  * Log the `responseBody` field carefully, as the body of backend response can be very large.
  * If the function returns `undefined`, the response is not logged (skipped).
  */
-export type MapBackendResponseToLog = (this: void, response: Response) => Payload | undefined;
+export type MapBackendResponseToLog = (
+  this: void,
+  response: ResponseWithRequest,
+) => Payload | undefined;
 
 /**
  * Maps log payload to clarify, shorten or skip a log entry.

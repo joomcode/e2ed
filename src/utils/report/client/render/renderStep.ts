@@ -26,6 +26,7 @@ type Options = Readonly<{
 export function renderStep({logEvent, nextLogEventTime}: Options): SafeHtml {
   const {message, payload, time, type} = logEvent;
   const durationInMs = nextLogEventTime - time;
+  const isPayloadEmpty = !payload || Object.keys(payload).length === 0;
   const status = payload?.logEventStatus ?? LogEventStatus.Passed;
 
   let pathToScreenshotFromReportPage: string | undefined;
@@ -42,11 +43,15 @@ export function renderStep({logEvent, nextLogEventTime}: Options): SafeHtml {
     }
   }
 
-  const content = renderStepContent({pathToScreenshotFromReportPage, payload});
+  const content = renderStepContent({
+    pathToScreenshotFromReportPage,
+    payload: isPayloadEmpty ? undefined : payload,
+  });
+  const maybeEmptyClass = isPayloadEmpty ? 'step-expanded_is-empty' : '';
   const isErrorScreenshot = pathToScreenshotFromReportPage !== undefined;
 
   return sanitizeHtml`
-<button aria-expanded="${isErrorScreenshot}" class="step-expanded step-expanded_status_${status}">
+<button aria-expanded="${isErrorScreenshot}" class="step-expanded step-expanded_status_${status} ${maybeEmptyClass}">
   <span class="step-expanded__name">${message}</span>
   <span class="step-expanded__time">${renderDuration(durationInMs)}</span>
 </button>

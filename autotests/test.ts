@@ -8,4 +8,4 @@ import type {Pack} from 'autotests/types/packSpecific';
  * Test function that describes the test or the task
  * (test does not necessarily contain checks).
  */
-export const it = createTestFunction<Pack>(hooks);
+export const test = createTestFunction<Pack>(hooks);

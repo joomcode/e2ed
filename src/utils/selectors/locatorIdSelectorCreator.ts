@@ -3,7 +3,7 @@ import type {
   GetLocatorAttributeNameFn,
   LocatorIdSelector,
   Selector,
-} from '../types/internal';
+} from '../../types/internal';
 
 /**
  * Creates `locatorIdSelector` function.

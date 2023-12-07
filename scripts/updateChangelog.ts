@@ -29,7 +29,7 @@ const SEPARATOR = '\n'.repeat(64);
 const gitOptions = [
   'log',
   `HEAD...v${previousVersion}`,
-  `--pretty=tformat:%H%aN %s%n%b${'%n'.repeat(SEPARATOR.length)}`,
+  `--pretty="tformat:%H%aN|%s%n%b${'%n'.repeat(SEPARATOR.length)}"`,
 ];
 
 const commits = execFileSync('git', gitOptions, EXEC_FILE_OPTIONS)
@@ -42,15 +42,19 @@ const markdownCommits = commits.map((commit) => {
 
   assertValueIsDefined(firstLine);
 
-  const firstSpaceIndex = firstLine.indexOf(' ');
-  const subject = firstLine.slice(firstSpaceIndex + 1);
+  const authorNameIndex = firstLine.indexOf('|');
+  const subject = firstLine.slice(authorNameIndex + 1);
 
   if (/^\d+\.\d+\.\d+$/.test(subject)) {
     return '';
   }
 
   const hash = firstLine.slice(0, 40);
-  const authorName = firstLine.slice(40, firstSpaceIndex);
+  let authorName = firstLine.slice(40, authorNameIndex);
+
+  if (authorName.includes('Torchinskiy')) {
+    authorName = 'nnn3d';
+  }
 
   const body = bodyLines.length === 0 ? '' : `\n\n  ${bodyLines.join('\n\n  ')}\n`;
 

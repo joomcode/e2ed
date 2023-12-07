@@ -3,20 +3,21 @@ import {URL} from 'node:url';
 
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 
-import type {Method, Request, RequestOptions, Url} from '../../types/internal';
+import type {Method, Request, RequestOptions, Url, UtcTimeInMs} from '../../types/internal';
 
 /**
- * Get Request object from the original TestCafe request options object.
- * If isRequestBodyInJsonFormat = true, then parses body as JSON.
- * If isRequestBodyInJsonFormat = false, then returns body as is.
- * If isRequestBodyInJsonFormat is undefined, then safely tries to parse body as JSON.
+ * Get request object from the original TestCafe request options object.
+ * If `isRequestBodyInJsonFormat` is `true`, then parses body as JSON.
+ * If `isRequestBodyInJsonFormat` is `false`, then returns body as is.
+ * If `isRequestBodyInJsonFormat` is `undefined`, then safely tries to parse body as JSON.
  * @internal
  */
 export const getRequestFromRequestOptions = (
   requestOptions: RequestOptions,
   isRequestBodyInJsonFormat?: boolean,
-): Request => {
+): Required<Request> => {
   const url = String(requestOptions.url) as Url;
+  const utcTimeInMs = Date.now() as UtcTimeInMs;
   const {search} = new URL(url);
 
   const method = (requestOptions.method ?? 'GET').toUpperCase() as Method;
@@ -39,5 +40,5 @@ export const getRequestFromRequestOptions = (
 
   const requestHeaders = requestOptions.headers ?? {};
 
-  return {method, query, requestBody, requestHeaders, url};
+  return {method, query, requestBody, requestHeaders, url, utcTimeInMs};
 };

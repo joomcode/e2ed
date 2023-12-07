@@ -32,17 +32,17 @@ export {removeStyleFromString} from './generalLog';
 export {getDurationWithUnits} from './getDurationWithUnits';
 export {getFullPackConfig as untypedGetFullPackConfig} from './getFullPackConfig';
 export {getKeysCounter} from './getKeysCounter';
-export {getDescriptionFromSelector} from './locators';
 export {log} from './log';
 export {parseMaybeEmptyValueAsJson} from './parseMaybeEmptyValueAsJson';
 export {getPromiseWithResolveAndReject, getTimeoutPromise, waitForAllProperties} from './promise';
 export {getContentJsonHeaders, request} from './request';
 export {SetHeadersRequestHook} from './requestHooks';
 export {getRunLabelObject} from './runLabel';
+export {getDescriptionFromSelector} from './selectors';
 export {setReadonlyProperty} from './setReadonlyProperty';
 export {getPackageInfo} from './startInfo';
 export {wrapInTestRunTracker} from './testRun';
-export {isArray} from './typeGuards';
+export {isArray, isReExecutablePromise, isThenable} from './typeGuards';
 export {
   getShallowCopyOfObjectForLogs,
   getStringTrimmedToMaxLength,

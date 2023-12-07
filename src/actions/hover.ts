@@ -1,7 +1,7 @@
 import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
-import {getDescriptionFromSelector} from '../utils/locators';
 import {log} from '../utils/log';
+import {getDescriptionFromSelector} from '../utils/selectors';
 
 import {waitForInterfaceStabilization} from './waitFor';
 
@@ -16,11 +16,11 @@ export const hover = async (
   selector: Selector,
   {stabilizationInterval, ...options}: Options = {},
 ): Promise<void> => {
-  const locator = getDescriptionFromSelector(selector);
+  const description = getDescriptionFromSelector(selector);
 
   log(
     'Hover the mouse pointer over an element',
-    {locator, ...options, stabilizationInterval},
+    {description, ...options, stabilizationInterval},
     LogEventType.InternalAction,
   );
 

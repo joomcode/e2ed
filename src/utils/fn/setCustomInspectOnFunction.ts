@@ -16,18 +16,18 @@ function getFunctionPresentationForThis(this: Fn): string | StringForLogs {
  * Set custom `node:inspect` and toJSON presentation (with function code) on function.
  */
 export const setCustomInspectOnFunction = <Args extends readonly unknown[], Return, This>(
-  func: Fn<Args, Return, This>,
+  fn: Fn<Args, Return, This>,
 ): void => {
-  assertValueHasProperty(func, inspect.custom, {
+  assertValueHasProperty(fn, inspect.custom, {
     check: '`func` has `inspect.custom` property',
     skipCheckInRuntime: true,
   });
 
-  if (func[inspect.custom]) {
+  if (fn[inspect.custom]) {
     return;
   }
 
-  func[inspect.custom] = getFunctionPresentationForThis;
+  fn[inspect.custom] = getFunctionPresentationForThis;
 
-  (func as unknown as {toJSON(): string | StringForLogs}).toJSON = getFunctionPresentationForThis;
+  (fn as unknown as {toJSON(): string | StringForLogs}).toJSON = getFunctionPresentationForThis;
 };

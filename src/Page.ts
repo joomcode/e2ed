@@ -26,10 +26,24 @@ export abstract class Page<PageParams = undefined> {
 
     this.pageParams = pageParams as PageParams;
 
-    const {pageStabilizationInterval} = getFullPackConfig();
+    const {
+      pageStabilizationInterval,
+      waitForAllRequestsComplete: {maxIntervalBetweenRequestsInMs},
+    } = getFullPackConfig();
 
+    this.maxIntervalBetweenRequestsInMs = maxIntervalBetweenRequestsInMs;
     this.pageStabilizationInterval = pageStabilizationInterval;
   }
+
+  /**
+   * Default maximum interval (in milliseconds) between requests.
+   * After navigating to the page, `e2ed` will wait until
+   * all requests will complete, and only after that it will consider the page loaded.
+   * If there are no new requests for more than this interval,
+   * then we will consider that all requests completes
+   * The default value is taken from the corresponding field of the pack config.
+   */
+  readonly maxIntervalBetweenRequestsInMs: number;
 
   /**
    * Immutable page parameters.
@@ -40,6 +54,7 @@ export abstract class Page<PageParams = undefined> {
    * After navigating to the page, `e2ed` will wait until
    * the page is stable for the specified time in millisecond,
    * and only after that it will consider the page loaded.
+   * The default value is taken from the corresponding field of the pack config.
    */
   readonly pageStabilizationInterval: number;
 
@@ -80,7 +95,9 @@ export abstract class Page<PageParams = undefined> {
   abstract getRoute(): PageRoute<unknown>;
 
   async waitForPageLoaded(): Promise<void> {
-    await waitForAllRequestsComplete(() => true);
+    await waitForAllRequestsComplete(() => true, {
+      maxIntervalBetweenRequestsInMs: this.maxIntervalBetweenRequestsInMs,
+    });
 
     await waitForInterfaceStabilization(this.pageStabilizationInterval);
   }

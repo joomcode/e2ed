@@ -1,4 +1,4 @@
-import {it} from 'autotests';
+import {test} from 'autotests';
 import {CreateProduct as CreateProductRoute} from 'autotests/routes/apiRoutes';
 import {createClientFunction, expect} from 'e2ed';
 import {mockApiRoute, unmockApiRoute} from 'e2ed/actions';
@@ -6,7 +6,7 @@ import {mockApiRoute, unmockApiRoute} from 'e2ed/actions';
 import type {ApiCreateDeviceResponse, DeviceId} from 'autotests/types';
 import type {Url} from 'e2ed/types';
 
-it(
+test(
   'mockApiRoute correctly intercepts requests, and unmockApiRoute cancels the interception',
   {meta: {testId: '6'}, testIdleTimeout: 15_000},
   async () => {
