@@ -1,5 +1,69 @@
 # Changelog
 
+## [v0.15.13](https://github.com/joomcode/e2ed/tree/v0.15.13) (2023-12-07)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.12...v0.15.13)
+
+- [Merge pull request #49 from joomcode/fix/stricter-type-of-expect-function](https://github.com/joomcode/e2ed/commit/"tformat:5bef95cc0d010394d9654af7d112bf8) ([a5ff85146uid11](https://github.com/a5ff85146uid11))
+
+  fix: stricter type of `expect` function
+
+- ["](https://github.com/joomcode/e2ed/commit/") ([](https://github.com/))
+
+  "tformat:d72142f57210d289f7fc5b780122f093e82903d5uid11|FI-705 fix: stricter type of `expect` function
+
+  fix: support usual promises in `expect` function
+
+  feat: add field `maxIntervalBetweenRequestsInMs` ot abstract class `Page`
+
+  feat: add examples of `mapBackendResponseErrorToLog`/`mapBackendResponseToLog`
+
+  tests: more tests of types of selectors methods
+
+  chore: update nodejs to current LTS (20.10.0)
+
+  chore: update alpine to 3.18.5
+
+  fix: support new contributor in `updateChangelog` script
+
+  refactor: move selectors code to `utils/selectors`
+
+  refactor: remove `utils/locators`
+
+  fix: use default cursor for empty expanded steps
+
+  feat: add duration to backend response logs
+
+  refactor: rename function `it` to `test` in initial autotests examples
+
+  fix: print `message` and `cause` fields of `E2edError` in `replaceFields`
+
+  fix: reject stuck assertion of `expect` by timeout
+
+  tests: add separate tests for `expect` function
+
+  feat: add type `ResponseWithRequest` to public API
+
+  feat: use `ResponseWithRequest` for mapping backend responses to logs
+
+  chore: update devDependencies (typescript, eslint, @types/node, etc)
+
+  chore: update npm `lockfileVersion` (package-lock.json) from 2 to 3
+
+  chore: update github action and node version in ci.yaml
+
+- ["](https://github.com/joomcode/e2ed/commit/") ([](https://github.com/))
+
+  "tformat:791ed2f932f0cdd541c8d0f719c44dfce8f312eaNikita Torchinskiy|Merge pull request #48 from joomcode/FI-1028
+
+  FI-1028: remove E2ED*DOCKER_DO*\* params
+
+- ["](https://github.com/joomcode/e2ed/commit/") ([](https://github.com/))
+
+  "tformat:15794d3a1ab9c227cf4a687bb065e5d60589334aNikita*Torchinskiy|FI-1028: remove E2ED_DOCKER_DO*\* params
+
+- ["](https://github.com/joomcode/e2ed/commit/") ([](https://github.com/))
+
 ## [v0.15.12](https://github.com/joomcode/e2ed/tree/v0.15.12) (2023-11-29)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.11...v0.15.12)
