@@ -11,13 +11,15 @@ import {repository, version} from '../package.json';
 
 const EXEC_FILE_OPTIONS = {encoding: 'utf8'} as const;
 
-function assertValueIsDefined<T>(value: T): asserts value is Exclude<T, undefined> {
+function assertValueIsDefined<Type>(value: Type): asserts value is Exclude<Type, undefined> {
   if (value === undefined) {
     throw new TypeError('Asserted value is undefined');
   }
 }
 
-const {href: repoUrl, origin: repoOrigin} = new URL(repository.url);
+const {hostname, pathname} = new URL(repository.url);
+const repoOrigin = `https://${hostname}`;
+const repoUrl = `${repoOrigin}${pathname.slice(0, -4)}`;
 const changelogPath = join(__dirname, '..', 'CHANGELOG.md');
 
 const fullDate = new Date().toISOString().slice(0, 10);
@@ -29,7 +31,7 @@ const SEPARATOR = '\n'.repeat(64);
 const gitOptions = [
   'log',
   `HEAD...v${previousVersion}`,
-  `--pretty="tformat:%H%aN|%s%n%b${'%n'.repeat(SEPARATOR.length)}"`,
+  `--pretty=tformat:%H%aN|%s%n%b${'%n'.repeat(SEPARATOR.length)}`,
 ];
 
 const commits = execFileSync('git', gitOptions, EXEC_FILE_OPTIONS)

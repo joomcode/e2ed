@@ -12,27 +12,13 @@ import type {MapBackendResponseToLog} from 'autotests/types/packSpecific';
 export const mapBackendResponseToLog: MapBackendResponseToLog = ({
   completionTimeInMs,
   request,
-  responseBody,
-  responseHeaders,
   statusCode,
 }) => {
   if (statusCode >= 400) {
     return undefined;
   }
 
-  if (request) {
-    const maybeWithDuration: {duration?: string} = {};
+  const duration = getDurationWithUnits(completionTimeInMs - request.utcTimeInMs);
 
-    if (completionTimeInMs !== undefined && request.utcTimeInMs !== undefined) {
-      maybeWithDuration.duration = getDurationWithUnits(completionTimeInMs - request.utcTimeInMs);
-    }
-
-    return {...maybeWithDuration, statusCode, url: request?.url};
-  }
-
-  return {
-    responseBody: responseBody instanceof Buffer ? String(responseBody) : responseBody,
-    responseHeaders,
-    statusCode,
-  };
+  return {duration, statusCode, url: request?.url};
 };
