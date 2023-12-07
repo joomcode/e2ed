@@ -4,13 +4,11 @@
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.12...v0.15.13)
 
-- [Merge pull request #49 from joomcode/fix/stricter-type-of-expect-function](https://github.com/joomcode/e2ed/commit/"tformat:5bef95cc0d010394d9654af7d112bf8) ([a5ff85146uid11](https://github.com/a5ff85146uid11))
+- [Merge pull request #49 from joomcode/fix/stricter-type-of-expect-function](https://github.com/joomcode/e2ed/commit/5bef95cc0d010394d9654af7d112bf8a5ff85146) ([uid11](https://github.com/uid11))
 
   fix: stricter type of `expect` function
 
-- ["](https://github.com/joomcode/e2ed/commit/") ([](https://github.com/))
-
-  "tformat:d72142f57210d289f7fc5b780122f093e82903d5uid11|FI-705 fix: stricter type of `expect` function
+- [FI-705 fix: stricter type of `expect` function](https://github.com/joomcode/e2ed/commit/d72142f57210d289f7fc5b780122f093e82903d5) ([uid11](https://github.com/uid11))
 
   fix: support usual promises in `expect` function
 
@@ -52,17 +50,11 @@
 
   chore: update github action and node version in ci.yaml
 
-- ["](https://github.com/joomcode/e2ed/commit/") ([](https://github.com/))
-
-  "tformat:791ed2f932f0cdd541c8d0f719c44dfce8f312eaNikita Torchinskiy|Merge pull request #48 from joomcode/FI-1028
+- [Merge pull request #48 from joomcode/FI-1028](https://github.com/joomcode/e2ed/commit/791ed2f932f0cdd541c8d0f719c44dfce8f312ea) ([nnn3d](https://github.com/nnn3d))
 
   FI-1028: remove E2ED*DOCKER_DO*\* params
 
-- ["](https://github.com/joomcode/e2ed/commit/") ([](https://github.com/))
-
-  "tformat:15794d3a1ab9c227cf4a687bb065e5d60589334aNikita*Torchinskiy|FI-1028: remove E2ED_DOCKER_DO*\* params
-
-- ["](https://github.com/joomcode/e2ed/commit/") ([](https://github.com/))
+- [FI-1028: remove E2ED*DOCKER_DO*\* params](https://github.com/joomcode/e2ed/commit/15794d3a1ab9c227cf4a687bb065e5d60589334a) ([nnn3d](https://github.com/nnn3d))
 
 ## [v0.15.12](https://github.com/joomcode/e2ed/tree/v0.15.12) (2023-11-29)
 
