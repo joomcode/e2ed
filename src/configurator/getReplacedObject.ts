@@ -19,9 +19,7 @@ export const getReplacedObject = <Value extends object>(
     return value;
   }
 
-  const replacedObject = (
-    Array.isArray(value) ? [] : Object.create(Object.getPrototypeOf(value) as object | null)
-  ) as Value;
+  const replacedObject = (Array.isArray(value) ? [] : {}) as Value;
 
   const keys: PropertyKey[] = Object.keys(value);
 

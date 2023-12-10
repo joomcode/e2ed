@@ -33,7 +33,7 @@ export const createExpectMethod = (
   function method(...args: Parameters<ExpectMethod>) {
     assertionTimeout ??= getFullPackConfig().assertionTimeout;
 
-    const timeout = assertionTimeout ?? 0;
+    const timeout = assertionTimeout + 1_000;
     const message = getAssertionMessage(...args);
 
     const {clearRejectTimeout, promiseWithTimeout, reject, setRejectTimeoutFunction} =
@@ -42,7 +42,7 @@ export const createExpectMethod = (
     setRejectTimeoutFunction(() => {
       const timeoutWithUnits = getDurationWithUnits(timeout);
       const error = new E2edError(
-        `${key}-assertion promise rejected after ${timeoutWithUnits} timeout`,
+        `"${key}" assertion promise rejected after ${timeoutWithUnits} timeout`,
       );
 
       reject(error);

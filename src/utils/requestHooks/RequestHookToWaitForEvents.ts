@@ -6,6 +6,7 @@ import {
 } from '../../constants/internal';
 
 import {assertValueIsDefined} from '../asserts';
+import {getDurationWithUnits} from '../getDurationWithUnits';
 import {mapBackendResponseForLogs} from '../log';
 import {setReadonlyProperty} from '../setReadonlyProperty';
 import {addNotCompleteRequest, completeRequest, processEventsPredicates} from '../waitForEvents';
@@ -87,6 +88,10 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
     completeRequest(requestHookContextId, this.waitForEventsState);
 
     const response = await getResponseFromResponseEvent(event);
+
+    const duration = getDurationWithUnits(response.completionTimeInMs - request.utcTimeInMs);
+
+    setReadonlyProperty(response, 'duration', duration);
 
     setReadonlyProperty(response, 'request', request);
 

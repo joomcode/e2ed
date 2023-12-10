@@ -1,4 +1,4 @@
-import {getShallowCopyOfObjectForLogs, getStringTrimmedToMaxLength} from 'e2ed/utils';
+import {getShallowCopyOfObjectForLogs, getStringTrimmedToMaxLength} from 'e2ed/configurator';
 
 import type {FieldReplacer} from 'e2ed/types';
 

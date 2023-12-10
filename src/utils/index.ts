@@ -29,7 +29,6 @@ export {E2edError, getStackTrace} from './error';
 export {getFunctionPresentationForLogs, setCustomInspectOnFunction} from './fn';
 export {writeFile} from './fs';
 export {removeStyleFromString} from './generalLog';
-export {getDurationWithUnits} from './getDurationWithUnits';
 export {getFullPackConfig as untypedGetFullPackConfig} from './getFullPackConfig';
 export {getKeysCounter} from './getKeysCounter';
 export {log} from './log';
@@ -43,9 +42,5 @@ export {setReadonlyProperty} from './setReadonlyProperty';
 export {getPackageInfo} from './startInfo';
 export {wrapInTestRunTracker} from './testRun';
 export {isArray, isReExecutablePromise, isThenable} from './typeGuards';
-export {
-  getShallowCopyOfObjectForLogs,
-  getStringTrimmedToMaxLength,
-  valueToString,
-} from './valueToString';
+export {valueToString} from './valueToString';
 export {isSelectorEntirelyInViewport, isSelectorInViewport} from './viewport';
