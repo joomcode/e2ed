@@ -1,6 +1,6 @@
-FROM node:20.10.0-alpine AS node
+FROM node:20.3.1-alpine AS node
 
-FROM alpine:3.18.5
+FROM alpine:3.19.0
 
 COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
@@ -9,7 +9,7 @@ COPY --from=node /usr/local/bin /usr/local/bin
 
 RUN apk --no-cache upgrade && \
   apk --no-cache add \
-  bash libevent npm chromium firefox xwininfo xvfb dbus eudev ttf-freefont fluxbox procps tzdata icu-data-full
+  bash libevent chromium firefox xwininfo xvfb dbus eudev ttf-freefont fluxbox procps tzdata icu-data-full
 
 COPY ./build/node_modules/e2ed /node_modules/e2ed
 

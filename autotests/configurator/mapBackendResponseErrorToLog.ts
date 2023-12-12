@@ -1,5 +1,3 @@
-import {getDurationWithUnits} from 'e2ed/utils';
-
 import type {MapBackendResponseErrorToLog} from 'autotests/types/packSpecific';
 
 /**
@@ -12,7 +10,7 @@ import type {MapBackendResponseErrorToLog} from 'autotests/types/packSpecific';
  * If the function returns `undefined`, the response is not logged (skipped).
  */
 export const mapBackendResponseErrorToLog: MapBackendResponseErrorToLog = ({
-  completionTimeInMs,
+  duration,
   request,
   responseBody,
   responseHeaders,
@@ -22,17 +20,5 @@ export const mapBackendResponseErrorToLog: MapBackendResponseErrorToLog = ({
     return undefined;
   }
 
-  const {requestBody, utcTimeInMs, ...requestWithoutBody} = request;
-
-  const duration = getDurationWithUnits(completionTimeInMs - utcTimeInMs);
-
-  return {
-    duration,
-    request: {
-      requestBody: requestBody instanceof Buffer ? String(requestBody) : requestBody,
-      ...requestWithoutBody,
-    },
-    responseBody: responseBody instanceof Buffer ? String(responseBody) : responseBody,
-    responseHeaders,
-  };
+  return {duration, request, responseBody, responseHeaders};
 };

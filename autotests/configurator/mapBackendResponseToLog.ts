@@ -1,5 +1,3 @@
-import {getDurationWithUnits} from 'e2ed/utils';
-
 import type {MapBackendResponseToLog} from 'autotests/types/packSpecific';
 
 /**
@@ -10,15 +8,13 @@ import type {MapBackendResponseToLog} from 'autotests/types/packSpecific';
  * If the function returns `undefined`, the response is not logged (skipped).
  */
 export const mapBackendResponseToLog: MapBackendResponseToLog = ({
-  completionTimeInMs,
-  request,
+  duration,
   statusCode,
+  request,
 }) => {
   if (statusCode >= 400) {
     return undefined;
   }
 
-  const duration = getDurationWithUnits(completionTimeInMs - request.utcTimeInMs);
-
-  return {duration, statusCode, url: request?.url};
+  return {duration, statusCode, url: request.url};
 };

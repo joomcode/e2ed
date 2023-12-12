@@ -90,6 +90,7 @@ export type Response<
   SomeRequest extends Request = Request,
 > = Readonly<{
   completionTimeInMs?: UtcTimeInMs;
+  duration?: string;
   request?: SomeRequest;
   responseBody: ResponseBody;
   responseHeaders: ResponseHeaders;
