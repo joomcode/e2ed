@@ -1,5 +1,27 @@
 # Changelog
 
+## [v0.15.15](https://github.com/joomcode/e2ed/tree/v0.15.15) (2023-12-12)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.14...v0.15.15)
+
+- [Merge pull request #51 from joomcode/fix/failed-assertion-message](https://github.com/joomcode/e2ed/commit/4326f27b5dce2795cd7a27a5238bf805cb664f21) ([uid11](https://github.com/uid11))
+
+  fix: message for failed assertion
+
+- [FI-1063 fix: message for failed assertion](https://github.com/joomcode/e2ed/commit/ccfa7b0075940218e8b23d8058b13f45c15d7c3e) ([uid11](https://github.com/uid11))
+
+  feat: add `duration` field to `ResponseWithRequest`
+
+  fix: move some independent functions to `e2ed/configurator` from `e2ed/utils`
+
+  chore: update alpine to 3.19.0
+
+  fix: use latest version of nodejs, in which browser connection in Docker is stable
+
+  fix: `replaceFields` function for objects with nontrivial prototypes
+
+  chore: update devDependencies (@types/node, @typescript-eslint/\*, etc)
+
 ## [v0.15.14](https://github.com/joomcode/e2ed/tree/v0.15.14) (2023-12-07)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.13...v0.15.14)
