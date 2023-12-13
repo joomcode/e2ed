@@ -9,8 +9,8 @@ import type {MapBackendResponseToLog} from 'autotests/types/packSpecific';
  */
 export const mapBackendResponseToLog: MapBackendResponseToLog = ({
   duration,
-  statusCode,
   request,
+  statusCode,
 }) => {
   if (statusCode >= 400) {
     return undefined;

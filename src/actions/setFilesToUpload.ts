@@ -10,7 +10,7 @@ import type {Selector, TestCafeSelector} from '../types/internal';
  */
 export const setFilesToUpload = (
   selector: Selector,
-  filePath: string | string[],
+  filePath: string[] | string,
 ): Promise<void> => {
   const hasManyFiles = Array.isArray(filePath) && filePath.length > 0;
   const description = getDescriptionFromSelector(selector);

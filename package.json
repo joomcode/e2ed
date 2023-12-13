@@ -49,7 +49,7 @@
   },
   "peerDependencies": {
     "@types/node": ">=16.11.1",
-    "typescript": ">=4.4"
+    "typescript": ">=4.8"
   },
   "exports": {
     ".": "./index.js",
@@ -104,8 +104,9 @@
     "build:copy:example": "cp -R ./autotests ./build/node_modules/e2ed/",
     "postbuild:copy:example": "(cd ./build/node_modules/e2ed/autotests && rm -r ./node_modules ./tests/internalTypeTests && mv ./.gitignore ./gitignore && mv ./packs/local.example.ts ./packs/local.ts)",
     "build:copy:tsconfig": "cp ./tsconfig.json ./build",
-    "prebuild:esm": "rm -r ./build/node_modules/e2ed/esm/*",
+    "prebuild:esm": "rm -r ./build/node_modules/e2ed/esm/*.js ./build/node_modules/e2ed/esm/testcafe.d.ts",
     "build:esm": "cp ./src/esm/testcafe.ts ./build/node_modules/e2ed/esm/testcafe.mjs",
+    "postbuild:esm": "(cd ./build/node_modules/e2ed/esm && mv ./testcafe.types.d.ts ./testcafe.d.mts)",
     "build:init": "(cd ./build && ./node_modules/e2ed/bin/init.js)",
     "postbuild:init": "cp ./src/package.json ./build && cp -R ./autotests/tests/internalTypeTests ./build/autotests/tests",
     "preversion": "npm run check:all",

@@ -1,4 +1,5 @@
-import {runArrayOfFunctionsSafely} from '../runArrayOfFunctionsSafely';
+import {generalLog} from '../generalLog';
+import {runArrayOfUserlandFunctions} from '../userland';
 
 import type {
   FullPackConfig,
@@ -33,7 +34,14 @@ export const runBeforePackFunctions = async (startInfo: StartInfo): Promise<void
     });
   };
 
-  await runArrayOfFunctionsSafely(functions, () => args, processCurrentFunctionResult);
+  const message =
+    functions.length > 0
+      ? `Will be run ${functions.length} before pack function${functions.length > 1 ? 's' : ''}`
+      : 'There are no before pack functions';
+
+  generalLog(message);
+
+  await runArrayOfUserlandFunctions(functions, () => args, processCurrentFunctionResult);
 
   Object.assign<FullPackConfigWithoutDoBeforePack, Partial<FullPackConfig>>(
     startInfo.fullPackConfig,

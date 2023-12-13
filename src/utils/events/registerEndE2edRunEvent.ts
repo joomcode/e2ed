@@ -3,6 +3,7 @@ import {ExitCode} from '../../constants/internal';
 import {processExit} from '../exit';
 import {failMessage, generalLog, okMessage} from '../generalLog';
 import {collectReportData, getLiteReport, writeHtmlReport, writeLiteJsonReport} from '../report';
+import {setReadonlyProperty} from '../setReadonlyProperty';
 
 import {collectFullEventsData} from './collectFullEventsData';
 import {runAfterPackFunctions} from './runAfterPackFunctions';
@@ -29,7 +30,13 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
 
     const liteReport = getLiteReport(reportData);
 
-    await runAfterPackFunctions(liteReport);
+    try {
+      await runAfterPackFunctions(liteReport);
+    } catch (error) {
+      generalLog('Caught an error on run "after pack" functions', {error});
+
+      setReadonlyProperty(reportData, 'exitCode', ExitCode.HasErrorsInDoAfterPackFunctions);
+    }
 
     const {customReportProperties} = liteReport;
 

@@ -4,7 +4,7 @@ import {cloneWithoutLogEvents} from '../clone';
 import {getRunErrorFromError} from '../error';
 import {writeTestRunToJsonFile} from '../fs';
 import {generalLog, logEndTestRunEvent, writeLogsToFile} from '../generalLog';
-import {getUserlandHooks} from '../userlandHooks';
+import {getUserlandHooks} from '../userland';
 
 import {calculateTestRunStatus} from './calculateTestRunStatus';
 import {getTestRunEvent} from './getTestRunEvent';

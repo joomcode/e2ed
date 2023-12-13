@@ -7,7 +7,7 @@ import type {FieldReplacer} from 'e2ed/types';
  */
 export const logFieldReplacer: FieldReplacer = (path, value) => {
   if (typeof value === 'string') {
-    return getStringTrimmedToMaxLength(value, 512);
+    return getStringTrimmedToMaxLength(value, 500);
   }
 
   const key = path[path.length - 1];

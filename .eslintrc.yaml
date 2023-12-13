@@ -83,9 +83,9 @@ rules:
         - src/*/internal.ts
         - src/bin/*.ts
         - src/createLocator.ts
+        - src/esm/*.ts
         - src/getModulesGraph.ts
         - src/globby.ts
-        - src/esm/testcafe.ts
         - src/index.ts
         - src/testcafe.ts
         - src/types/extends.ts
@@ -174,6 +174,7 @@ rules:
   '@typescript-eslint/no-unnecessary-boolean-literal-compare': off
   '@typescript-eslint/no-use-before-define': error
   '@typescript-eslint/quotes': [error, single, {avoidEscape: true}]
+  '@typescript-eslint/sort-type-constituents': [error, {checkIntersections: false}]
 settings:
   import/extensions: [.ts]
   import/resolver: {node: {extensions: [.ts]}}

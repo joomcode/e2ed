@@ -1,12 +1,12 @@
-import {generalLog} from './generalLog';
+import {E2edError} from '../error';
 
-import type {Fn} from '../types/internal';
+import type {Fn} from '../../types/internal';
 
 /**
- * Safely run array of userland function (from `doBeforePack`/`doAfterPack`).
+ * Run array of userland function (from `doBeforePack`/`doAfterPack`).
  * @internal
  */
-export const runArrayOfFunctionsSafely = async <Args extends readonly unknown[], Return>(
+export const runArrayOfUserlandFunctions = async <Args extends readonly unknown[], Return>(
   functions: readonly Fn<Args, Return>[],
   getCurrentFunctionArgs: () => Args,
   processCurrentFunctionResult: (result: Awaited<Return>) => void,
@@ -21,8 +21,8 @@ export const runArrayOfFunctionsSafely = async <Args extends readonly unknown[],
       const result = await fn(...args);
 
       processCurrentFunctionResult(result);
-    } catch (error) {
-      generalLog('Caught an error on running current function in array', {args, error, fn});
+    } catch (cause) {
+      throw new E2edError('Caught an error on running userland function', {args, cause, fn});
     }
   }
 };

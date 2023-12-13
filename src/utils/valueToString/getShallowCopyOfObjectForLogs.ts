@@ -10,7 +10,7 @@ export const getShallowCopyOfObjectForLogs = (value: object): Return => {
   const copy = {} as Mutable<Return>;
 
   for (const key of Reflect.ownKeys(value)) {
-    const property = (value as Record<PropertyKey, object | PrimitiveValue>)[key];
+    const property = (value as Record<PropertyKey, PrimitiveValue | object>)[key];
 
     if (property && (typeof property === 'object' || typeof property === 'function')) {
       try {

@@ -1,0 +1,1 @@
+export {createTestCafe} from '../testcafe';

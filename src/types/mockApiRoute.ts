@@ -24,7 +24,7 @@ export type ApiMockFunction<
 > = (
   routeParams: RouteParams,
   request: SomeRequest,
-) => Promise<Partial<SomeResponse>> | Partial<SomeResponse>;
+) => Partial<SomeResponse> | Promise<Partial<SomeResponse>>;
 
 /**
  * Internal state of mockApiRoute/unmockApiRoute.

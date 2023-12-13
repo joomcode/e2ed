@@ -2,7 +2,8 @@
 
 import type {AnyObject, FieldReplacer, PropertyKey} from '../types/internal';
 
-const maxPathLength = 512;
+const maxKeysCount = 1_000;
+const maxPathLength = 500;
 
 /**
  * Recursively get replaced object with replaced fields.
@@ -21,9 +22,14 @@ export const getReplacedObject = <Value extends object>(
 
   const replacedObject = (Array.isArray(value) ? [] : {}) as Value;
 
-  const keys: PropertyKey[] = Object.keys(value);
+  const keys: PropertyKey[] =
+    value instanceof Error ? Object.getOwnPropertyNames(value) : Object.keys(value);
 
   keys.push(...Object.getOwnPropertySymbols(value));
+
+  if (keys.length > maxKeysCount) {
+    keys.length = maxKeysCount;
+  }
 
   for (const key of keys) {
     path[pathLength] = key;

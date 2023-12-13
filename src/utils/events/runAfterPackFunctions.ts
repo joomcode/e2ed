@@ -1,5 +1,6 @@
+import {generalLog} from '../generalLog';
 import {getFullPackConfig} from '../getFullPackConfig';
-import {runArrayOfFunctionsSafely} from '../runArrayOfFunctionsSafely';
+import {runArrayOfUserlandFunctions} from '../userland';
 
 import type {CustomReportPropertiesPlaceholder, LiteReport, Void} from '../../types/internal';
 
@@ -19,5 +20,12 @@ export const runAfterPackFunctions = async (liteReport: LiteReport): Promise<voi
     Object.assign<LiteReport, Partial<LiteReport>>(liteReport, {customReportProperties: result});
   };
 
-  await runArrayOfFunctionsSafely(functions, () => args, processCurrentFunctionResult);
+  const message =
+    functions.length > 0
+      ? `Will be run ${functions.length} after pack function${functions.length > 1 ? 's' : ''}`
+      : 'There are no after pack functions';
+
+  generalLog(message);
+
+  await runArrayOfUserlandFunctions(functions, () => args, processCurrentFunctionResult);
 };

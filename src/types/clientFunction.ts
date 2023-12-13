@@ -33,12 +33,12 @@ export type ClientFunctionState<Args extends readonly unknown[], Result> = {
  */
 export type ClientFunctionWrapperResult<Result = unknown> = Readonly<
   | {
-      errorMessage: undefined;
-      result: Result;
-    }
-  | {
       errorMessage: string;
       result: undefined;
+    }
+  | {
+      errorMessage: undefined;
+      result: Result;
     }
 >;
 

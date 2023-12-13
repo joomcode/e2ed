@@ -1,6 +1,6 @@
 import {MAX_ELEMENTS_COUNT_IN_PRINTED_ARRAY} from '../../constants/internal';
 
-type Return<Type> = readonly Type[] | Readonly<{firstElements: readonly Type[]; length: number}>;
+type Return<Type> = Readonly<{firstElements: readonly Type[]; length: number}> | readonly Type[];
 
 /**
  * Truncate a long array for a short printout.

@@ -51,12 +51,12 @@ export type Query =
   | Readonly<
       Record<
         string,
-        | string
-        | number
         | boolean
-        | readonly string[]
-        | readonly number[]
+        | number
+        | string
         | readonly boolean[]
+        | readonly number[]
+        | readonly string[]
         | null
         | undefined
       >

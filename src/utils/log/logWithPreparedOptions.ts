@@ -1,7 +1,7 @@
 import {getRunId} from '../../context/runId';
 
 import {generalLog} from '../generalLog';
-import {getUserlandHooks} from '../userlandHooks';
+import {getUserlandHooks} from '../userland';
 
 import type {LogEventType} from '../../constants/internal';
 import type {LogPayload, RunId, UtcTimeInMs} from '../../types/internal';

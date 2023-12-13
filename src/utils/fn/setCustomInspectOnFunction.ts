@@ -8,7 +8,7 @@ import {getFunctionPresentationForLogs} from './getFunctionPresentationForLogs';
 
 import type {Fn, StringForLogs} from '../../types/internal';
 
-function getFunctionPresentationForThis(this: Fn): string | StringForLogs {
+function getFunctionPresentationForThis(this: Fn): StringForLogs | string {
   return getFunctionPresentationForLogs(this);
 }
 
@@ -29,5 +29,5 @@ export const setCustomInspectOnFunction = <Args extends readonly unknown[], Retu
 
   fn[inspect.custom] = getFunctionPresentationForThis;
 
-  (fn as unknown as {toJSON(): string | StringForLogs}).toJSON = getFunctionPresentationForThis;
+  (fn as unknown as {toJSON(): StringForLogs | string}).toJSON = getFunctionPresentationForThis;
 };

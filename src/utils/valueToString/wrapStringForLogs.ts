@@ -20,7 +20,7 @@ function toMultipleString(this: StringForLogs): string {
  * with a more beautiful presentation through nodejs `inspect`.
  * @internal
  */
-export const wrapStringForLogs = (text: string, options?: Options): string | StringForLogs => {
+export const wrapStringForLogs = (text: string, options?: Options): StringForLogs | string => {
   if (!text.includes('\n')) {
     return getStringTrimmedToMaxLength(text);
   }
