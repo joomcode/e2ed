@@ -2,8 +2,8 @@ import {E2edError} from '../error';
 
 import type {
   AllRequestsCompletePredicateWithPromise,
-  Request,
   RequestHookContextId,
+  RequestWithUtcTimeInMs,
 } from '../../types/internal';
 
 /**
@@ -13,7 +13,7 @@ import type {
  */
 export const processAllRequestsCompletePredicate = async (
   allRequestsCompletePredicateWithPromise: AllRequestsCompletePredicateWithPromise,
-  request: Request,
+  request: RequestWithUtcTimeInMs,
   requestHookContextId: RequestHookContextId,
 ): Promise<boolean> => {
   const {clearResolveTimeout, predicate, reject, requestHookContextIds} =

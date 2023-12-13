@@ -5,9 +5,9 @@ import {navigateToUrl} from 'e2ed/actions';
 import type {NavigateTo} from 'autotests/types';
 
 /**
- * This hook is used inside the navigateToPage function to navigate to the page
+ * This hook is used inside the `navigateToPage` function to navigate to the page
  * under the already computed url.
- * Use context (e2ed/context) to get parameters inside a hook.
+ * Use context (`e2ed/context`) to get parameters inside a hook.
  */
 export const navigateTo: NavigateTo = async (url) => {
   const pageCookies = getPageCookies();

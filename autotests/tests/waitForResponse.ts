@@ -1,50 +1,90 @@
 import {test} from 'autotests';
-import {createClientFunction, expect} from 'e2ed';
-import {waitForResponse} from 'e2ed/actions';
+import {addUser} from 'autotests/entities';
+import {AddUser} from 'autotests/routes/apiRoutes';
+import {expect} from 'e2ed';
+import {waitForResponse, waitForResponseToRoute} from 'e2ed/actions';
 import {assertFunctionThrows} from 'e2ed/utils';
 
-import type {Response} from 'e2ed/types';
+import type {ApiAddUserRequest, ApiAddUserResponse, UserWorker} from 'autotests/types';
 
-type Body = Readonly<{job: string; name: string}> | undefined;
+const worker: UserWorker = {job: 'leader', name: 'John'};
 
 test(
-  'waitForResponse gets correct response body and rejects on timeout',
+  'waitForResponse/waitForResponseToRoute gets correct response body and rejects on timeout',
   {meta: {testId: '3'}, testIdleTimeout: 3_000},
   async () => {
-    const addUser = createClientFunction(
-      () =>
-        fetch('https://reqres.in/api/users', {
-          body: JSON.stringify({job: 'leader', name: 'John'}),
-          headers: {'Content-Type': 'application/json; charset=UTF-8'},
-          method: 'POST',
-        }).then((res) => res.json()),
-      {name: 'addUser'},
+    void addUser(worker);
+
+    let response = await waitForResponse<ApiAddUserResponse, ApiAddUserRequest>(
+      ({responseBody}) => responseBody.name === 'John',
     );
 
-    void addUser();
-
-    let response = await waitForResponse(
-      ({responseBody}: Response<Body>) => responseBody?.name === 'John',
-    );
-
-    await expect(response.responseBody, 'response has correct body').contains({
-      job: 'leader',
-      name: 'John',
-    });
+    await expect(response.responseBody, 'response has correct body').contains(worker);
 
     await assertFunctionThrows(async () => {
       await waitForResponse(() => false, {timeout: 100});
-    }, '`waitForResponse` throws an error on timeout');
+    }, 'waitForResponse throws an error on timeout');
 
-    void addUser();
+    void addUser(worker);
 
-    response = await waitForResponse(
-      ({request}: Response<Body>) => request?.url === 'https://reqres.in/api/users',
+    response = await waitForResponse<ApiAddUserResponse, ApiAddUserRequest>(
+      ({request}) => request.url === 'https://reqres.in/api/users',
     );
 
-    await expect(response.responseBody, 'second response has correct body').contains({
-      job: 'leader',
-      name: 'John',
-    });
+    await expect(response.responseBody, 'second response has correct body').contains(worker);
+
+    void addUser(worker);
+
+    await assertFunctionThrows(async () => {
+      await waitForResponse(() => {
+        throw new Error('foo');
+      }).catch((error: Error & {cause?: {message?: string}}) => {
+        if (error.cause?.message === 'foo') {
+          throw error;
+        }
+      });
+    }, 'waitForResponse throws an error from predicate');
+
+    void addUser(worker, 1);
+
+    let {response: routeResponse, routeParams} = await waitForResponseToRoute(AddUser);
+
+    await expect(
+      routeResponse.request.requestBody,
+      'request from waitForResponseToRoute has correct body',
+    ).eql(worker);
+
+    await expect(routeParams, 'routeParams from waitForResponseToRoute is correct').eql({delay: 1});
+
+    void addUser(worker, 1);
+
+    ({response: routeResponse, routeParams} = await waitForResponseToRoute(
+      AddUser,
+      ({delay}, {request, responseBody}) =>
+        delay === 1 && request.requestBody.job === worker.job && responseBody.name === worker.name,
+    ));
+
+    await expect(
+      routeParams,
+      'routeParams from waitForRequestToRoute with predicate is correct',
+    ).eql({delay: 1});
+
+    void addUser(worker);
+
+    await assertFunctionThrows(async () => {
+      await waitForResponseToRoute(AddUser, ({delay}) => delay === 1, {timeout: 2_000});
+    }, 'waitForResponseToRoute throws an error on timeout');
+
+    void addUser(worker);
+
+    await assertFunctionThrows(async () => {
+      await waitForResponseToRoute(AddUser, () => {
+        throw new Error('foo');
+      }).catch((error: Error & {cause?: {message?: string}}) => {
+        if (error.cause?.message === 'foo') {
+          throw error;
+        }
+      });
+    }, 'waitForResponseToRoute throws an error from predicate');
   },
 );

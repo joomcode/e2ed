@@ -26,7 +26,7 @@ export const getMeta = <TestMeta>(): TestMeta => {
 export const setMeta: typeof setRawMeta = (meta) => {
   const currentMeta = getRawMeta();
 
-  assertValueIsUndefined(currentMeta, 'currentMeta is undefined', {meta});
+  assertValueIsUndefined(currentMeta, 'currentMeta is not defined', {meta});
 
   setRawMeta(meta);
 };

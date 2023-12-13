@@ -17,12 +17,12 @@ declare type TestRunTypesChecks = [
  * Broken if the test failed and TestCafe restarted it themself.
  */
 export const enum TestRunStatus {
-  Passed = 'passed',
-  Failed = 'failed',
-  Skipped = 'skipped',
-  Manual = 'manual',
-  Unknown = 'unknown',
   Broken = 'broken',
+  Failed = 'failed',
+  Manual = 'manual',
+  Passed = 'passed',
+  Skipped = 'skipped',
+  Unknown = 'unknown',
 }
 
 /**

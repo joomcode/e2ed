@@ -13,7 +13,7 @@ const EXEC_FILE_OPTIONS = {encoding: 'utf8'} as const;
 
 function assertValueIsDefined<Type>(value: Type): asserts value is Exclude<Type, undefined> {
   if (value === undefined) {
-    throw new TypeError('Asserted value is undefined');
+    throw new TypeError('Asserted value is not defined');
   }
 }
 

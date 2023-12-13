@@ -2,7 +2,7 @@ import {useContext} from '../useContext';
 import {assertValueIsDefined, assertValueIsUndefined} from '../utils/asserts';
 
 /**
- * Raw versions of getTestIdleTimeout and setTestIdleTimeout.
+ * Raw versions of `getTestIdleTimeout` and `setTestIdleTimeout`.
  * @internal
  */
 const [getRawTestIdleTimeout, setRawTestIdleTimeout] = useContext<number>();
@@ -26,7 +26,7 @@ export const getTestIdleTimeout = (): number => {
 export const setTestIdleTimeout: typeof setRawTestIdleTimeout = (testIdleTimeout) => {
   const currentTestIdleTimeout = getRawTestIdleTimeout();
 
-  assertValueIsUndefined(currentTestIdleTimeout, 'currentTestIdleTimeout is undefined', {
+  assertValueIsUndefined(currentTestIdleTimeout, 'currentTestIdleTimeout is not defined', {
     testIdleTimeout,
   });
 

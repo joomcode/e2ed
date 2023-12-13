@@ -5,8 +5,8 @@ import {TestRunStatus} from './testRun';
  * Status of `LogEvent`.
  */
 export const enum LogEventStatus {
-  Passed = 'passed',
   Failed = 'failed',
+  Passed = 'passed',
 }
 
 /**

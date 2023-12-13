@@ -77,8 +77,13 @@ export type Request<
   requestBody: RequestBody;
   requestHeaders: RequestHeaders;
   url: Url;
-  utcTimeInMs?: UtcTimeInMs;
 }>;
+
+/**
+ * HTTP request object with creation time.
+ */
+export type RequestWithUtcTimeInMs<SomeRequest extends Request = Request> = SomeRequest &
+  Readonly<{utcTimeInMs: UtcTimeInMs}>;
 
 /**
  * HTTP response object with its corresponding request.
@@ -87,11 +92,7 @@ export type Response<
   ResponseBody = unknown,
   ResponseHeaders extends Headers = Headers,
   SomeStatusCode extends StatusCode = StatusCode,
-  SomeRequest extends Request = Request,
 > = Readonly<{
-  completionTimeInMs?: UtcTimeInMs;
-  duration?: string;
-  request?: SomeRequest;
   responseBody: ResponseBody;
   responseHeaders: ResponseHeaders;
   statusCode: SomeStatusCode;
@@ -101,13 +102,14 @@ export type Response<
  * Completed HTTP response with mandatory request.
  */
 export type ResponseWithRequest<
-  ResponseBody = unknown,
-  ResponseHeaders extends Headers = Headers,
-  SomeStatusCode extends StatusCode = StatusCode,
+  SomeResponse extends Response = Response,
   SomeRequest extends Request = Request,
-> = Required<
-  Response<ResponseBody, ResponseHeaders, SomeStatusCode, SomeRequest & {utcTimeInMs: UtcTimeInMs}>
->;
+> = Readonly<{
+  completionTimeInMs: UtcTimeInMs;
+  duration: string;
+  request: RequestWithUtcTimeInMs<SomeRequest>;
+}> &
+  SomeResponse;
 
 /**
  * Brand type for the full url string.

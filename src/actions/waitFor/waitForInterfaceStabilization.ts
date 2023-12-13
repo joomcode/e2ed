@@ -118,7 +118,7 @@ const clientWaitForInterfaceStabilization = createClientFunction(
 );
 
 /**
- * Wait until the page interface stabilizes (in particular, the page will stop scrolling).
+ * Waits until the page interface stabilizes (in particular, the page will stop scrolling).
  */
 export const waitForInterfaceStabilization = async (
   stabilizationInterval?: number,
@@ -157,6 +157,6 @@ export const waitForInterfaceStabilization = async (
   log(
     `Have waited for interface stabilization for ${waitWithUnits} with stabilization interval ${stabilizationIntervalWithUnits}`,
     {error: maybeErrorReason, startDateTimeInIso, timeout: timeoutWithUnits},
-    LogEventType.InternalAction,
+    LogEventType.InternalCore,
   );
 };

@@ -24,9 +24,9 @@ import type {
 type Options = Readonly<{maxIntervalBetweenRequestsInMs?: number; timeout?: number}>;
 
 /**
- * Wait for the complete of all requests that satisfy the request predicate.
+ * Waits for the complete of all requests that satisfy the request predicate.
  * If the function runs longer than the specified timeout, it is rejected.
- * If there are no new requests for more than `maxIntervalBetweenRequestsInMs`ms,
+ * If there are no new requests for more than `maxIntervalBetweenRequestsInMs` milliseconds,
  * the function resolves successfully.
  */
 export const waitForAllRequestsComplete = async (

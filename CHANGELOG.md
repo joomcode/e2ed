@@ -2,11 +2,7 @@
 
 ## [v0.15.17](https://github.com/joomcode/e2ed/tree/v0.15.17) (2023-12-13)
 
-[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.16...v0.15.17)
-
-## [v0.15.16](https://github.com/joomcode/e2ed/tree/v0.15.16) (2023-12-13)
-
-[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.15...v0.15.16)
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.15...v0.15.17)
 
 - [fix: update minimal version of TypeScript in `package-lock.json`](https://github.com/joomcode/e2ed/commit/e2e384132d95e577a6eafda727ebc8424e62d4ac) ([uid11](https://github.com/uid11))
 - [Merge pull request #52 from joomcode/fix/respect-errors-from-doBeforePack-doAfterPack](https://github.com/joomcode/e2ed/commit/c3238464719f2ad50b25a606d427b0327bbb6d37) ([uid11](https://github.com/uid11))

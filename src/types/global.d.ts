@@ -15,9 +15,9 @@ interface NodeRequire {
  */
 declare module 'bin-v8-flags-filter' {
   type Options = Readonly<{
+    forcedKillDelay?: number;
     ignore?: string[];
     useShutdownMessage?: boolean;
-    forcedKillDelay?: number;
   }>;
 
   /**
@@ -90,24 +90,23 @@ declare module 'testcafe-hammerhead-up/lib/request-pipeline/request-hooks/events
  */
 declare module 'testcafe-without-typecheck/lib/api/test-run-tracker' {
   type InternalTestRun = {
-    id: string;
     controller: Readonly<Record<string, unknown>>;
-
     executeAction(apiMethodName: string, command: unknown, callsite: unknown): Promise<unknown>;
     executeCommand(command: unknown): Promise<unknown>;
+    id: string;
   };
 
   type Fn = (...args: never[]) => unknown;
 
   const testRunTracker: Readonly<{
-    activeTestRuns: Record<string, InternalTestRun>;
-    addTrackingMarkerToFunction(testRunId: string, fn: Fn): Fn;
-    ensureEnabled(): void;
-    resolveContextTestRun(): InternalTestRun;
     /**
      * Wraps function in context tracker for asynchronous calls.
      */
     _createContextSwitchingFunctionHook(ctxSwitchingFn: Fn, patchedArgsCount: number): Fn;
+    activeTestRuns: Record<string, InternalTestRun>;
+    addTrackingMarkerToFunction(testRunId: string, fn: Fn): Fn;
+    ensureEnabled(): void;
+    resolveContextTestRun(): InternalTestRun;
   }>;
 
   /**

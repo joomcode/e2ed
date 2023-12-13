@@ -14,8 +14,8 @@ import type {TestMetaPlaceholder} from './userland';
 export type LogEvent = Readonly<{
   message: string;
   payload: LogPayload | undefined;
-  type: LogEventType;
   time: UtcTimeInMs;
+  type: LogEventType;
 }>;
 
 /**

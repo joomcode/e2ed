@@ -13,12 +13,12 @@ import type {RunLabel} from './runLabel';
  * @internal
  */
 export type E2edEnvironment = {
+  [key: string]: string | undefined;
   ['E2ED_DEBUG']?: string;
   ['E2ED_ORIGIN']?: string;
-  ['PWD']?: string;
   [PATH_TO_PACK_VARIABLE_NAME]?: string;
+  ['PWD']?: string;
   [RUN_ENVIRONMENT_VARIABLE_NAME]?: RunEnvironment;
   [RUN_LABEL_VARIABLE_NAME]?: RunLabel;
   [START_TIME_IN_MS_VARIABLE_NAME]?: string;
-  [key: string]: string | undefined;
 };

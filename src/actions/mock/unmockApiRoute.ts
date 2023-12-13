@@ -46,6 +46,6 @@ export const unmockApiRoute = async <
   log(
     `Unmock API for route "${Route.name}"`,
     {apiMockFunction, routeWasMocked},
-    LogEventType.InternalCore,
+    LogEventType.InternalAction,
   );
 };

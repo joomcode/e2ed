@@ -5,7 +5,7 @@ import {E2edError} from '../error';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {getFullPackConfig} from '../getFullPackConfig';
 import {log} from '../log';
-import {getPromiseWithResolveAndReject} from '../promise';
+import {addTimeoutToPromise} from '../promise';
 import {getDescriptionFromSelector} from '../selectors';
 import {isReExecutablePromise, isThenable} from '../typeGuards';
 import {valueToString, wrapStringForLogs} from '../valueToString';
@@ -36,22 +36,15 @@ export const createExpectMethod = (
     const timeout = assertionTimeout + 1_000;
     const message = getAssertionMessage(...args);
 
-    const {clearRejectTimeout, promiseWithTimeout, reject, setRejectTimeoutFunction} =
-      getPromiseWithResolveAndReject(timeout);
-
-    setRejectTimeoutFunction(() => {
-      const timeoutWithUnits = getDurationWithUnits(timeout);
-      const error = new E2edError(
-        `"${key}" assertion promise rejected after ${timeoutWithUnits} timeout`,
-      );
-
-      reject(error);
-    });
+    const timeoutWithUnits = getDurationWithUnits(timeout);
+    const error = new E2edError(
+      `"${key}" assertion promise rejected after ${timeoutWithUnits} timeout`,
+    );
 
     const runAssertion = (value: unknown): Promise<unknown> => {
       const assertion = testController.expect(value) as AssertionFunctionsRecord<Promise<void>>;
 
-      return assertion[key](...args);
+      return addTimeoutToPromise(assertion[key](...args), timeout, error);
     };
 
     const assertionPromise = RESOLVED_PROMISE.then(() => {
@@ -59,18 +52,18 @@ export const createExpectMethod = (
         isThenable(this.actualValue) &&
         !isReExecutablePromise<unknown>(this.actualValue as Promise<unknown>)
       ) {
-        return this.actualValue.then(runAssertion);
+        return addTimeoutToPromise(this.actualValue as Promise<unknown>, timeout, error).then(
+          runAssertion,
+        );
       }
 
       return runAssertion(this.actualValue);
-    });
-
-    const assertionPromiseWithTimeout = Promise.race([assertionPromise, promiseWithTimeout]).then(
+    }).then(
       () => undefined,
-      (error: Error) => error,
+      (assertionError: Error) => assertionError,
     );
 
-    return assertionPromiseWithTimeout.then((maybeError) => {
+    return assertionPromise.then((maybeError) => {
       const logMessage = `Assert: ${this.description}`;
       const logPayload = {
         assertionArguments: args,
@@ -81,7 +74,7 @@ export const createExpectMethod = (
         logEventStatus: maybeError ? LogEventStatus.Failed : LogEventStatus.Passed,
       };
 
-      return Promise.race([this.actualValue, promiseWithTimeout])
+      return addTimeoutToPromise(Promise.resolve(this.actualValue), timeout, error)
         .then(
           (actualValue) =>
             log(
@@ -101,7 +94,6 @@ export const createExpectMethod = (
           if (maybeError) {
             throw maybeError;
           }
-        })
-        .finally(clearRejectTimeout);
+        });
     });
   };

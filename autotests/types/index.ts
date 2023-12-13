@@ -1,4 +1,6 @@
 export type {
+  ApiAddUserRequest,
+  ApiAddUserResponse,
   ApiCreateDeviceRequest,
   ApiCreateDeviceResponse,
   ApiCreateProductRequest,
@@ -26,6 +28,7 @@ export type {
   UserId,
   UserParams,
   UserPhone,
+  UserWorker,
 } from './entities';
 export type {
   GetLogContext,

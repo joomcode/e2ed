@@ -4,7 +4,7 @@ import {log} from '../../utils/log';
 import {getTimeoutPromise} from '../../utils/promise';
 
 /**
- * Wait for timeout in delayInMs milliseconds.
+ * Waits for timeout in `delayInMs` milliseconds.
  */
 export const waitForTimeout = (delayInMs: number): Promise<void> => {
   const delayWithUnits = getDurationWithUnits(delayInMs);

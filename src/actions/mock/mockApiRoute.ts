@@ -19,6 +19,9 @@ import type {
 
 /**
  * Mock API for some API route.
+ * Applicable only for routes with the `getParamsFromUrl` method.
+ * The mock is applied to a request that matches the route by url
+ * (by methods `getParamsFromUrl` and `isMatchUrl`) and by HTTP method (by `getMethod`).
  */
 export const mockApiRoute = async <
   RouteParams,
@@ -63,5 +66,5 @@ export const mockApiRoute = async <
 
   functionByRoute.set(Route, apiMockFunction as unknown as ApiMockFunction);
 
-  log(`Mock API for route "${Route.name}"`, {apiMockFunction}, LogEventType.InternalCore);
+  log(`Mock API for route "${Route.name}"`, {apiMockFunction}, LogEventType.InternalAction);
 };

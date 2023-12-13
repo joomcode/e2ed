@@ -26,7 +26,7 @@ export const getTestRunPromise = (): Promise<undefined> => {
 export const setTestRunPromise: typeof setRawTestRunPromise = (testRunPromise) => {
   const currentTestRunPromise = getRawTestRunPromise();
 
-  assertValueIsUndefined(currentTestRunPromise, 'currentTestRunPromise is undefined', {
+  assertValueIsUndefined(currentTestRunPromise, 'currentTestRunPromise is not defined', {
     testRunPromise,
   });
 

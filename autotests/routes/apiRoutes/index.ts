@@ -1,3 +1,4 @@
+export {AddUser} from './AddUser';
 export {CreateDevice} from './CreateDevice';
 export {CreateProduct} from './CreateProduct';
 export {GetUser} from './GetUser';

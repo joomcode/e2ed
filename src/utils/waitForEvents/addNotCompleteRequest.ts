@@ -2,14 +2,18 @@ import {assertValueIsUndefined} from '../asserts';
 
 import {processAllRequestsCompletePredicates} from './processAllRequestsCompletePredicates';
 
-import type {Request, RequestHookContextId, WaitForEventsState} from '../../types/internal';
+import type {
+  RequestHookContextId,
+  RequestWithUtcTimeInMs,
+  WaitForEventsState,
+} from '../../types/internal';
 
 /**
  * Adds new request to hash of not complete requests.
  * @internal
  */
 export const addNotCompleteRequest = async (
-  request: Required<Request>,
+  request: RequestWithUtcTimeInMs,
   requestHookContextId: RequestHookContextId,
   waitForEventsState: WaitForEventsState,
 ): Promise<void> => {

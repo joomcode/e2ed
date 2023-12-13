@@ -41,10 +41,10 @@ test('correctly read data from browser', {meta: {testId: '14'}}, async () => {
 
   await expect(
     error[0] === 'error' && info[0] === 'info' && log[0] === 'log' && warn[0] === 'warn',
-    '`getBrowserConsoleMessages` read all of messages',
+    'getBrowserConsoleMessages read all of messages',
   ).eql(true);
 
-  await expect(log[1], '`setPageElementsIgnoredOnInterfaceStabilization` works correct').eql(
+  await expect(log[1], 'setPageElementsIgnoredOnInterfaceStabilization works correct').eql(
     '.retry',
   );
 
@@ -52,6 +52,6 @@ test('correctly read data from browser', {meta: {testId: '14'}}, async () => {
 
   await expect(
     jsErrors.length === 2 && jsErrors[0]?.message === 'foo' && jsErrors[1]?.message === 'bar',
-    '`getBrowserJsErrors` read JS errors',
+    'getBrowserJsErrors read JS errors',
   ).eql(true);
 });

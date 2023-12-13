@@ -8,7 +8,6 @@ import {
 import {assertValueIsDefined} from '../asserts';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {mapBackendResponseForLogs} from '../log';
-import {setReadonlyProperty} from '../setReadonlyProperty';
 import {addNotCompleteRequest, completeRequest, processEventsPredicates} from '../waitForEvents';
 
 import {getRequestFromRequestOptions} from './getRequestFromRequestOptions';
@@ -20,7 +19,9 @@ import type {
   RequestHookContextId,
   RequestHookRequestEvent,
   RequestHookResponseEvent,
+  RequestWithUtcTimeInMs,
   ResponseWithRequest,
+  UtcTimeInMs,
   WaitForEventsState,
 } from '../../types/internal';
 
@@ -39,17 +40,28 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
    */
   override async onRequest(event: RequestHookRequestEvent): Promise<void> {
     const request = getRequestFromRequestOptions(event.requestOptions);
+    const requestWithUtcTimeInMs: RequestWithUtcTimeInMs = {
+      ...request,
+      utcTimeInMs: Date.now() as UtcTimeInMs,
+    };
+
     const requestHookContext = event.requestOptions[REQUEST_HOOK_CONTEXT_KEY];
     const requestHookContextId = requestHookContext[REQUEST_HOOK_CONTEXT_ID_KEY];
 
-    assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {request});
+    assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {
+      requestWithUtcTimeInMs,
+    });
 
-    await addNotCompleteRequest(request, requestHookContextId, this.waitForEventsState);
+    await addNotCompleteRequest(
+      requestWithUtcTimeInMs,
+      requestHookContextId,
+      this.waitForEventsState,
+    );
 
     if (this.waitForEventsState.requestPredicates.size > 0) {
       await processEventsPredicates({
         eventType: 'Request',
-        requestOrResponse: request,
+        requestOrResponse: requestWithUtcTimeInMs,
         waitForEventsState: this.waitForEventsState,
       });
     }
@@ -88,14 +100,15 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
     completeRequest(requestHookContextId, this.waitForEventsState);
 
     const response = await getResponseFromResponseEvent(event);
+    const completionTimeInMs = Date.now() as UtcTimeInMs;
+    const duration = getDurationWithUnits(completionTimeInMs - request.utcTimeInMs);
 
-    const duration = getDurationWithUnits(response.completionTimeInMs - request.utcTimeInMs);
-
-    setReadonlyProperty(response, 'duration', duration);
-
-    setReadonlyProperty(response, 'request', request);
-
-    const responseWithRequest = response as ResponseWithRequest;
+    const responseWithRequest: ResponseWithRequest = {
+      completionTimeInMs,
+      duration,
+      request,
+      ...response,
+    };
 
     mapBackendResponseForLogs(responseWithRequest);
 

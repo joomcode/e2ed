@@ -2,6 +2,7 @@
 export {EXEC_FILE_OPTIONS} from './childProcess';
 /** @internal */
 export {ConsoleBackgroundColor} from './color';
+export {EndE2edReason, ExitCode} from './end';
 export {RunEnvironment} from './environment';
 /** @internal */
 export {
@@ -44,7 +45,6 @@ export {
 export {DEFAULT_PIXELMATCH_OPTIONS} from './pixelmatch';
 /** @internal */
 export {RESOLVED_PROMISE} from './promise';
-export {EndE2edReason, ExitCode} from './report';
 export {
   INCLUDE_BODY_AND_HEADERS_IN_RESPONSE_EVENT,
   INCLUDE_HEADERS_IN_RESPONSE_EVENT,
