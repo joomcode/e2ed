@@ -1,5 +1,24 @@
 # Changelog
 
+## [v0.15.16](https://github.com/joomcode/e2ed/tree/v0.15.16) (2023-12-13)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.15...v0.15.16)
+
+- [fix: update minimal version of TypeScript in `package-lock.json`](https://github.com/joomcode/e2ed/commit/e2e384132d95e577a6eafda727ebc8424e62d4ac) ([uid11](https://github.com/uid11))
+- [Merge pull request #52 from joomcode/fix/respect-errors-from-doBeforePack-doAfterPack](https://github.com/joomcode/e2ed/commit/c3238464719f2ad50b25a606d427b0327bbb6d37) ([uid11](https://github.com/uid11))
+
+  fix: fail tests run if `doAfterPack`/`doBeforePack` throw an error
+
+- [FI-1072 fix: fail tests run if `doAfterPack`/`doBeforePack` throw an error](https://github.com/joomcode/e2ed/commit/e138727782a988a95dd89f51da9bd623385e5d51) ([uid11](https://github.com/uid11))
+
+  fix: do not lose error fields after `replaceFields`
+
+  fix: limit the number of copied keys in `replaceFields` function
+
+  refactor: turn on `@typescript-eslint/sort-type-constituents` rule
+
+  fix: add types for `e2ed/testcafe` import from ESM
+
 ## [v0.15.15](https://github.com/joomcode/e2ed/tree/v0.15.15) (2023-12-12)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.14...v0.15.15)
