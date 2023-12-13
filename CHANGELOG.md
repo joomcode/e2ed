@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.15.17](https://github.com/joomcode/e2ed/tree/v0.15.17) (2023-12-13)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.16...v0.15.17)
+
 ## [v0.15.16](https://github.com/joomcode/e2ed/tree/v0.15.16) (2023-12-13)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.15...v0.15.16)
