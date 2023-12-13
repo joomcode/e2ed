@@ -18,4 +18,6 @@ export const enum ExitCode {
   HasErrors = 2,
   NoRetries = 3,
   NoReportData = 4,
+  HasErrorsInDoAfterPackFunctions = 5,
+  HasErrorsInDoBeforePackFunctions = 6,
 }

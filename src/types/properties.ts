@@ -9,7 +9,7 @@ type DataPropertyDescriptor<Value> = Readonly<
   GenericPropertyDescriptor;
 
 type AccessorPropertyDescriptor<Value> = Readonly<
-  {get(): Value; set?(value: Value): void} | {get?(): Value; set(value: Value): void}
+  {get?(): Value; set(value: Value): void} | {get(): Value; set?(value: Value): void}
 > &
   GenericPropertyDescriptor;
 
@@ -31,15 +31,15 @@ export type FieldReplacer = (
 /**
  * Primitive value.
  */
-export type PrimitiveValue = bigint | boolean | null | number | string | symbol | undefined;
+export type PrimitiveValue = bigint | boolean | number | string | symbol | null | undefined;
 
 /**
  * Property descriptor.
  */
 export type PropertyDescriptor<Value = unknown> =
-  | GenericPropertyDescriptor
+  | AccessorPropertyDescriptor<Value>
   | DataPropertyDescriptor<Value>
-  | AccessorPropertyDescriptor<Value>;
+  | GenericPropertyDescriptor;
 
 /**
  * Property key.

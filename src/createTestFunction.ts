@@ -1,4 +1,4 @@
-import {setUserlandHooks} from './utils/userlandHooks';
+import {setUserlandHooks} from './utils/userland';
 import {test} from './test';
 
 import type {AnyPack, GetPackParameters, TestFunction, UserlandHooks} from './types/internal';

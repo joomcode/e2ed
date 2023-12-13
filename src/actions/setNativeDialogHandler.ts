@@ -2,7 +2,7 @@ import {LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {log} from '../utils/log';
 
-type NativeDialogType = 'alert' | 'confirm' | 'beforeunload' | 'prompt';
+type NativeDialogType = 'alert' | 'beforeunload' | 'confirm' | 'prompt';
 
 /**
  * Specifies handler function for the browser native dialogs

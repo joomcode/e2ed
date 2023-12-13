@@ -1,7 +1,7 @@
 import {LogEventType} from '../../constants/internal';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
-import {getUserlandHooks} from '../../utils/userlandHooks';
+import {getUserlandHooks} from '../../utils/userland';
 
 import {createPageInstance} from './createPageInstance';
 

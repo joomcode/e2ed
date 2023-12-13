@@ -1,6 +1,6 @@
-import {assertValueIsDefined, assertValueIsUndefined} from './asserts';
+import {assertValueIsDefined, assertValueIsUndefined} from '../asserts';
 
-import type {UserlandHooks} from '../types/internal';
+import type {UserlandHooks} from '../../types/internal';
 
 let userlandHooks: UserlandHooks | undefined;
 

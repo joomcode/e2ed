@@ -1,6 +1,8 @@
 import {RunEnvironment} from '../../configurator';
-import {EVENTS_DIRECTORY_PATH, TMP_DIRECTORY_PATH} from '../../constants/internal';
+import {EVENTS_DIRECTORY_PATH, ExitCode, TMP_DIRECTORY_PATH} from '../../constants/internal';
 
+import {E2edError} from '../error';
+import {setGlobalExitCode} from '../exit';
 import {createDirectory, removeDirectory, writeStartInfo} from '../fs';
 import {generalLog, writeLogsToFile} from '../generalLog';
 import {getFullPackConfig, updateConfig} from '../getFullPackConfig';
@@ -21,7 +23,13 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
 
   const startInfo = getStartInfo();
 
-  await runBeforePackFunctions(startInfo);
+  try {
+    await runBeforePackFunctions(startInfo);
+  } catch (cause) {
+    setGlobalExitCode(ExitCode.HasErrorsInDoBeforePackFunctions);
+
+    throw new E2edError('Caught an error on running "before pack" functions', {cause});
+  }
 
   const fullPackConfig = getFullPackConfig();
 

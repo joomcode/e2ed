@@ -7,7 +7,7 @@ import {setTestTimeout} from '../../context/testTimeout';
 import {getRunLabel} from '../environment';
 import {registerStartTestRunEvent} from '../events';
 import {getFullPackConfig} from '../getFullPackConfig';
-import {getUserlandHooks} from '../userlandHooks';
+import {getUserlandHooks} from '../userland';
 
 import {getTestFnAndReject} from './getTestFnAndReject';
 import {processBrokenTestRuns} from './processBrokenTestRuns';
