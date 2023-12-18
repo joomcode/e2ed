@@ -1,5 +1,45 @@
 # Changelog
 
+## [v0.15.18](https://github.com/joomcode/e2ed/tree/v0.15.18) (2023-12-18)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.17...v0.15.18)
+
+- [Merge pull request #53 from joomcode/feat/add-waitForRequestToRoute](https://github.com/joomcode/e2ed/commit/13e45547ceca0bdb771f50b096f41698d09a0cf5) ([uid11](https://github.com/uid11))
+
+  feat: add functions `waitForRequestToRoute`/`waitForResponseToRoute`
+
+- [FI-714 feat: add functions `waitForRequestToRoute`/`waitForResponseToRoute`](https://github.com/joomcode/e2ed/commit/2d9c5fdc899f2fc8b5b4ec9078954ea1beac653a) ([uid11](https://github.com/uid11))
+
+  feat: add `RequestWithUtcTimeInMs` public type
+
+  fix: correct definition of `ResponseWithRequest` type
+
+  fix: use `ResponseWithRequest` for `waitForResponse`
+
+  fix: use `RequestWithUtcTimeInMs` for `waitForRequest`
+
+  fix: add `skipLogs` option to `waitForRequest`/`waitForResponse`
+
+  fix: tests for timeout in `expect` functions
+
+  fix: add check that methods `isMatchUrl` and `getParamsFromUrl` are consistent
+
+  fix: printing of `E2edError` after `replaceFields` applying
+
+  chore: add eslint plugin `typescript-sort-keys/recommended`
+
+  tests: add tests for `waitForRequestToRoute` function
+
+  tests: add tests for `waitForResponseToRoute` function
+
+  docs: add mentions about `waitForRequestToRoute`/`waitForResponseToRoute` to README.md
+
+  chore: update devDependencies (eslint, @types/node, etc)
+
+  fix: waiting actual value when it is a promise in `expect` function assertions
+
+  fix: make exports of branches `import` and `require` from `e2ed/testcafe` equal
+
 ## [v0.15.17](https://github.com/joomcode/e2ed/tree/v0.15.17) (2023-12-13)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.15...v0.15.17)
