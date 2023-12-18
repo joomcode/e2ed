@@ -19,7 +19,7 @@ After the run, a detailed HTML report and a summary lite report in JSON format a
 ## Adding e2ed to a project
 
 Prerequisites: [node](https://nodejs.org/en/) >=16,
-[TypeScript](https://www.typescriptlang.org/) >=4.5.
+[TypeScript](https://www.typescriptlang.org/) >=4.8.
 
 All commands below are run from the root directory of the project.
 
@@ -371,11 +371,11 @@ returned by the `waitForAllRequestsComplete` function will be rejected.
 If the wait is longer than this timeout, then the promise
 returned by the `waitForInterfaceStabilization` function will be rejected.
 
-`waitForRequestTimeout: number`: default timeout (in milliseconds) for `waitForRequest` function.
-If the wait is longer than this timeout, then the promise returned by the `waitForRequest` function will be rejected.
+`waitForRequestTimeout: number`: default timeout (in milliseconds) for `waitForRequest`/`waitForRequestToRoute` functions.
+If the wait is longer than this timeout, then the promise returned by the `waitForRequest`/`waitForRequestToRoute` function will be rejected.
 
-`waitForResponseTimeout: number`: default timeout (in milliseconds) for `waitForResponse` function.
-If the wait is longer than this timeout, then the promise returned by the `waitForResponse` function will be rejected.
+`waitForResponseTimeout: number`: default timeout (in milliseconds) for `waitForResponse`/`waitForResponseToRoute` functions.
+If the wait is longer than this timeout, then the promise returned by the `waitForResponse`/`waitForResponseToRoute` function will be rejected.
 
 ### Environment variables
 

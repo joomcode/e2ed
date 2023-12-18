@@ -1,4 +1,10 @@
-import {waitForRequest, waitForResponse} from 'e2ed/actions';
+import {AddUser, GetUser} from 'autotests/routes/apiRoutes';
+import {
+  waitForRequest,
+  waitForRequestToRoute,
+  waitForResponse,
+  waitForResponseToRoute,
+} from 'e2ed/actions';
 
 // ok
 void waitForRequest(() => false);
@@ -41,3 +47,42 @@ void waitForRequest(({method, query, requestBody, requestHeaders, url}) => true)
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 void waitForResponse(({responseBody, responseHeaders, statusCode}) => true);
+
+// ok
+void waitForRequestToRoute(AddUser);
+
+// ok
+void waitForRequestToRoute(AddUser, ({delay}, {requestBody, url}) => {
+  if (delay !== undefined && delay > 0 && requestBody.job !== 'foo') {
+    return url.startsWith('https');
+  }
+
+  return false;
+}).then(
+  ({request, routeParams}) =>
+    request.requestBody.job === 'foo' && 'delay' in routeParams && routeParams.delay > 0,
+);
+
+// @ts-expect-error: waitForRequestToRoute does not accept routes without `getParamsFromUrl` method
+void waitForRequestToRoute(GetUser);
+
+// ok
+void waitForResponseToRoute(AddUser);
+
+// ok
+void waitForResponseToRoute(AddUser, ({delay}, {responseBody, request: {requestBody, url}}) => {
+  if (delay !== undefined && delay > 0 && requestBody.job !== 'foo' && responseBody.job !== 'bar') {
+    return url.startsWith('https');
+  }
+
+  return false;
+}).then(
+  ({response, routeParams}) =>
+    response.request.requestBody.job === 'foo' &&
+    response.responseBody.name === 'bar' &&
+    'delay' in routeParams &&
+    routeParams.delay > 0,
+);
+
+// @ts-expect-error: waitForResponseToRoute does not accept routes without `getParamsFromUrl` method
+void waitForResponseToRoute(GetUser);

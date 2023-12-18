@@ -1,1 +1,9 @@
-export {createTestCafe} from '../testcafe';
+export {
+  createTestCafe,
+  fixture,
+  RequestHook,
+  RequestLogger,
+  RequestMock,
+  Selector,
+  test,
+} from '../testcafe';

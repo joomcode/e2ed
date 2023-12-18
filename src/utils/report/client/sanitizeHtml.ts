@@ -26,7 +26,7 @@ export function createSafeHtmlWithoutSanitize(
     parts.push(stringPart, value);
   }
 
-  const lastStringPart = stringParts[stringParts.length - 1];
+  const lastStringPart = stringParts.at(-1);
 
   assertValueIsDefined(lastStringPart);
 
@@ -76,7 +76,7 @@ export function sanitizeHtml(
     parts.push(stringPart, safeValue);
   }
 
-  const lastStringPart = stringParts[stringParts.length - 1];
+  const lastStringPart = stringParts.at(-1);
 
   assertValueIsDefined(lastStringPart);
 

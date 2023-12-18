@@ -4,29 +4,27 @@ import {e2edEnvironment, RUN_LABEL_VARIABLE_NAME} from '../../constants/internal
 
 import {valueToString} from '../valueToString';
 
+import {getPrintedFields} from './getPrintedFields';
 import {getPrintedStackFrame} from './getPrintedStackFrame';
 import {getStackTrace} from './getStackTrace';
 
-import type {LogParams, RunLabel, StackFrame, UtcTimeInMs} from '../../types/internal';
-
-function toString(this: E2edError): string {
-  const printedParams = {
-    message: this.message,
-    // eslint-disable-next-line sort-keys
-    dateTimeInIso: new Date(this.utcTimeInMs).toISOString(),
-    params: this.params,
-    runLabel: this.runLabel,
-    stackTrace: this.stackTrace,
-  };
-  const printedString = valueToString(printedParams);
-
-  return `E2edError ${printedString}`;
-}
+import type {
+  E2edPrintedFields,
+  LogParams,
+  RunLabel,
+  StackFrame,
+  UtcTimeInMs,
+} from '../../types/internal';
 
 /**
  * Extended Error class for e2ed.
  */
 export class E2edError extends Error {
+  /**
+   * Cause of error, if any.
+   */
+  readonly cause: unknown;
+
   /**
    * Current runLabel at the time the error was created
    */
@@ -38,16 +36,6 @@ export class E2edError extends Error {
   readonly stackTrace: readonly string[];
 
   /**
-   * Custom JSON presentation of error.
-   */
-  readonly toJSON = toString;
-
-  /**
-   * Custom string presentation of error.
-   */
-  override readonly toString = toString;
-
-  /**
    * The time the error was generated.
    */
   readonly utcTimeInMs: UtcTimeInMs;
@@ -55,10 +43,30 @@ export class E2edError extends Error {
   /**
    * Custom presentation of error for nodejs `inspect`.
    */
-  readonly [inspect.custom] = toString;
+  [inspect.custom](): string {
+    return this.toString();
+  }
+
+  /**
+   * Custom JSON presentation of error.
+   */
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  toJSON(): E2edPrintedFields {
+    return getPrintedFields(this);
+  }
+
+  /**
+   * Custom string presentation of error.
+   */
+  override toString(): string {
+    const printedFields = getPrintedFields(this);
+    const printedString = valueToString(printedFields);
+
+    return `E2edError ${printedString}`;
+  }
 
   constructor(
-    message: string,
+    override readonly message: string,
     readonly params?: LogParams,
   ) {
     const runLabel = e2edEnvironment[RUN_LABEL_VARIABLE_NAME];
@@ -73,20 +81,8 @@ export class E2edError extends Error {
     // @ts-expect-error: Error constructor still doesn't support second argument
     super(...constructorArgs);
 
-    Object.defineProperty(this, 'message', {
-      configurable: true,
-      enumerable: true,
-      value: this.message,
-      writable: true,
-    });
-
     if (params?.cause) {
-      Object.defineProperty(this, 'cause', {
-        configurable: true,
-        enumerable: true,
-        value: params.cause,
-        writable: true,
-      });
+      this.cause = params.cause;
     }
 
     this.runLabel = runLabel;

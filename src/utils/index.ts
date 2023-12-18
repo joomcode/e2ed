@@ -33,7 +33,12 @@ export {getFullPackConfig as untypedGetFullPackConfig} from './getFullPackConfig
 export {getKeysCounter} from './getKeysCounter';
 export {log} from './log';
 export {parseMaybeEmptyValueAsJson} from './parseMaybeEmptyValueAsJson';
-export {getPromiseWithResolveAndReject, getTimeoutPromise, waitForAllProperties} from './promise';
+export {
+  addTimeoutToPromise,
+  getPromiseWithResolveAndReject,
+  getTimeoutPromise,
+  waitForAllProperties,
+} from './promise';
 export {getContentJsonHeaders, request} from './request';
 export {SetHeadersRequestHook} from './requestHooks';
 export {getRunLabelObject} from './runLabel';

@@ -1,15 +1,26 @@
 import {test} from 'autotests';
 import {createSelectorByCss} from 'autotests/selectors';
+import {getFullPackConfig} from 'autotests/utils';
 import {expect} from 'e2ed';
 import {assertFunctionThrows, getTimeoutPromise} from 'e2ed/utils';
 
 test('expect function works correctly', {meta: {testId: '16'}}, async () => {
+  const {assertionTimeout} = getFullPackConfig();
+
   await assertFunctionThrows(async () => {
     await expect(1, 'should throws').eql(2);
   }, 'throws an error when actual value do not fit expected value');
 
+  await expect(
+    getTimeoutPromise(assertionTimeout + 900).then(() => true),
+    'should not failed by timeout',
+  ).ok();
+
   await assertFunctionThrows(async () => {
-    await expect(getTimeoutPromise(5_100), 'should failed by timeout').ok();
+    await expect(
+      getTimeoutPromise(assertionTimeout + 1_100).then(() => true),
+      'should failed by timeout',
+    ).ok();
   }, 'throws an timeout error when actual value is a pending promise');
 
   await expect(Promise.resolve('foo'), 'awaits usual promises').eql('foo');

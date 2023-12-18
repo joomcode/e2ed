@@ -10,7 +10,7 @@ export function isArray<Type>(value: unknown): value is Type[] {
 /**
  * Returns `true`, if value is thenable (an object with a `then` method), and `false` otherwise.
  */
-export function isThenable(value: unknown): value is Thenable {
+export function isThenable<Type>(value: Type): value is Type & Thenable {
   return value instanceof Object && 'then' in value && typeof value.then === 'function';
 }
 

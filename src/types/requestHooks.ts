@@ -20,10 +20,10 @@ type MaybeWithContextKey = Partial<WithContextKey> | null | undefined;
  * {@link https://github.com/DevExpress/testcafe-hammerhead/blob/master/src/request-pipeline/context/index.ts}
  */
 type RequestHookContext = DeepReadonly<{
+  [REQUEST_HOOK_CONTEXT_ID_KEY]?: RequestHookContextId;
   destRes: {
     headers?: Headers;
   };
-  [REQUEST_HOOK_CONTEXT_ID_KEY]?: RequestHookContextId;
 }>;
 
 /**
@@ -71,8 +71,8 @@ export type RequestHookRequestEvent = DeepReadonly<{
 export type RequestHookConfigureResponseEvent = DeepReadonly<
   WithContextKey & {
     _modifyResponseFunctions: {
-      setHeader(name: string, value: string): Promise<void>;
       removeHeader(name: string): Promise<void>;
+      setHeader(name: string, value: string): Promise<void>;
     };
   }
 >;

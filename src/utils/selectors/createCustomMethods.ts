@@ -15,8 +15,9 @@ export const createCustomMethods = (
 ): SelectorCustomMethods => {
   const locatorIdAttributeName = getLocatorAttributeName('id');
 
-  /* eslint-disable sort-keys */
   return {
+    /* eslint-disable sort-keys */
+
     filterByLocatorId(locatorId) {
       return this.filter(`[${locatorIdAttributeName}="${locatorId}"]`);
     },
@@ -77,6 +78,7 @@ export const createCustomMethods = (
     getDescription(): string | undefined {
       return getDescriptionFromSelector(this as unknown as Selector);
     },
+
+    /* eslint-enable sort-keys */
   };
-  /* eslint-enable sort-keys */
 };

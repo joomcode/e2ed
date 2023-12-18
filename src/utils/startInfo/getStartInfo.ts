@@ -25,7 +25,7 @@ export const getStartInfo = (): StartInfo => {
   for (const name of Object.keys(e2edEnvironment).sort()) {
     const value = e2edEnvironment[name];
 
-    if (name.toUpperCase().startsWith('E2ED')) {
+    if (name.toUpperCase().includes('E2ED_')) {
       e2edEnvironmentVariables[name] = value;
     }
   }

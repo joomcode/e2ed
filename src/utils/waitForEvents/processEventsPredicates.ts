@@ -1,15 +1,15 @@
 import {processEventsPredicate} from './processEventsPredicate';
 
 import type {
-  Request,
   RequestOrResponsePredicateWithPromise,
+  RequestWithUtcTimeInMs,
   ResponseWithRequest,
   WaitForEventsState,
 } from '../../types/internal';
 
 type OptionsForRequest = Readonly<{
   eventType: 'Request';
-  requestOrResponse: Request;
+  requestOrResponse: RequestWithUtcTimeInMs;
   waitForEventsState: WaitForEventsState;
 }>;
 

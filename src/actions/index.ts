@@ -48,6 +48,8 @@ export {
   waitForAllRequestsComplete,
   waitForInterfaceStabilization,
   waitForRequest,
+  waitForRequestToRoute,
   waitForResponse,
+  waitForResponseToRoute,
   waitForTimeout,
 } from './waitFor';

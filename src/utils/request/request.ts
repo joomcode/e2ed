@@ -5,6 +5,7 @@ import {URL} from 'node:url';
 import {LogEventStatus, LogEventType} from '../../constants/internal';
 
 import {E2edError} from '../error';
+import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
 import {setReadonlyProperty} from '../setReadonlyProperty';
 import {wrapInTestRunTracker} from '../testRun';
@@ -21,7 +22,7 @@ const defaultIsNeedRetry = <SomeResponse extends Response>({statusCode}: SomeRes
   statusCode >= 400;
 
 /**
- * Send a request to the (JSON) API by Route, route parameters, headers,
+ * Send a request to the (JSON) API by `Route`, route parameters, headers,
  * post-data, timeout and number of retries.
  */
 export const request = async <
@@ -51,13 +52,15 @@ export const request = async <
   const url = route.getUrl();
 
   const urlObject = new URL(url);
+
+  const timeoutWithUnits = getDurationWithUnits(timeout);
   const logParams: LogParams = {
     cause: undefined,
     method,
     requestBody,
     requestHeaders,
     retry: undefined,
-    timeout,
+    timeoutWithUnits,
     url,
   };
 

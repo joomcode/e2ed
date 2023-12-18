@@ -1,8 +1,10 @@
 /* eslint-disable no-param-reassign */
 
+import {getReplacedFields} from './getReplacedFields';
+import {hasToJsonMethod} from './hasToJsonMethod';
+
 import type {AnyObject, FieldReplacer, PropertyKey} from '../types/internal';
 
-const maxKeysCount = 1_000;
 const maxPathLength = 500;
 
 /**
@@ -11,30 +13,25 @@ const maxPathLength = 500;
  */
 export const getReplacedObject = <Value extends object>(
   path: PropertyKey[],
-  value: Value,
+  originalValue: Value,
   replacer: FieldReplacer,
 ): Value => {
   const pathLength = path.length;
 
   if (pathLength > maxPathLength) {
-    return value;
+    return originalValue;
   }
+
+  const value = (
+    hasToJsonMethod(originalValue) ? originalValue.toJSON(path.at(-1)) : originalValue
+  ) as Value;
 
   const replacedObject = (Array.isArray(value) ? [] : {}) as Value;
 
-  const keys: PropertyKey[] =
-    value instanceof Error ? Object.getOwnPropertyNames(value) : Object.keys(value);
+  for (const field of getReplacedFields(value)) {
+    path[pathLength] = field;
 
-  keys.push(...Object.getOwnPropertySymbols(value));
-
-  if (keys.length > maxKeysCount) {
-    keys.length = maxKeysCount;
-  }
-
-  for (const key of keys) {
-    path[pathLength] = key;
-
-    const fieldValue = (value as AnyObject)[key];
+    const fieldValue = (value as AnyObject)[field];
     let newFieldValue = replacer(path, fieldValue, value);
 
     if (newFieldValue === undefined) {
@@ -49,7 +46,7 @@ export const getReplacedObject = <Value extends object>(
       newFieldValue = getReplacedObject(path, newFieldValue, replacer);
     }
 
-    (replacedObject as AnyObject)[key] = newFieldValue;
+    (replacedObject as AnyObject)[field] = newFieldValue;
   }
 
   path.length = pathLength;

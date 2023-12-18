@@ -3,7 +3,7 @@ import {URL} from 'node:url';
 
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 
-import type {Method, Request, RequestOptions, Url, UtcTimeInMs} from '../../types/internal';
+import type {Method, Request, RequestOptions, Url} from '../../types/internal';
 
 /**
  * Get request object from the original TestCafe request options object.
@@ -15,9 +15,8 @@ import type {Method, Request, RequestOptions, Url, UtcTimeInMs} from '../../type
 export const getRequestFromRequestOptions = (
   requestOptions: RequestOptions,
   isRequestBodyInJsonFormat?: boolean,
-): Required<Request> => {
+): Request => {
   const url = String(requestOptions.url) as Url;
-  const utcTimeInMs = Date.now() as UtcTimeInMs;
   const {search} = new URL(url);
 
   const method = (requestOptions.method ?? 'GET').toUpperCase() as Method;
@@ -40,5 +39,5 @@ export const getRequestFromRequestOptions = (
 
   const requestHeaders = requestOptions.headers ?? {};
 
-  return {method, query, requestBody, requestHeaders, url, utcTimeInMs};
+  return {method, query, requestBody, requestHeaders, url};
 };

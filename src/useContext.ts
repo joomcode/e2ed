@@ -2,10 +2,10 @@ import {testController} from './testController';
 
 type Context<Type> = {contexts: Record<number, Type>};
 
-type Get<Type> = () => Type | undefined;
-type GetWithDefaultValue<Type> = () => Type;
-type Set<Type> = (value: Type) => void;
-type Clear = () => void;
+type Get<Type> = (this: void) => Type | undefined;
+type GetWithDefaultValue<Type> = (this: void) => Type;
+type Set<Type> = (this: void, value: Type) => void;
+type Clear = (this: void) => void;
 
 type UseContext = (<Type>() => [get: Get<Type>, set: Set<Type>, clear: Clear]) &
   (<Type>(defaultValue: Type) => [get: GetWithDefaultValue<Type>, set: Set<Type>, clear: Clear]);
@@ -13,7 +13,7 @@ type UseContext = (<Type>() => [get: Get<Type>, set: Set<Type>, clear: Clear]) &
 let callCount = 0;
 
 /**
- * Creates functions for get, set and clear some typed value in test context.
+ * Creates functions for `get`, `set` and `clear` some typed value in test context.
  */
 export const useContext = (<Type>(defaultValue?: Type) => {
   callCount += 1;
@@ -34,7 +34,7 @@ export const useContext = (<Type>(defaultValue?: Type) => {
   };
 
   /**
-   * Clear value in test context (set value to undefined).
+   * Clear value in test context (set value to `undefined`).
    */
   const clear = (): void => set(undefined as unknown as Type);
 
@@ -52,7 +52,7 @@ export const useContext = (<Type>(defaultValue?: Type) => {
   }
 
   /**
-   * Get value from test context (or default value, if it is undefined).
+   * Get value from test context (or default value, if it is `undefined`).
    */
   const getWithDefaultValue = (): Type => {
     const {contexts}: Partial<Context<Type>> = testController.ctx;

@@ -1,6 +1,6 @@
+export {EndE2edReason, ExitCode} from './end';
 export {BAD_REQUEST_STATUS_CODE} from './http';
 export {LogEventStatus, LogEventType} from './log';
-export {EndE2edReason, ExitCode} from './report';
 export {
   INCLUDE_BODY_AND_HEADERS_IN_RESPONSE_EVENT,
   INCLUDE_HEADERS_IN_RESPONSE_EVENT,

@@ -16,10 +16,10 @@ import type {
 export type LogParams = Readonly<{
   cause: unknown;
   method: Method;
-  requestHeaders: Headers | undefined;
   requestBody: unknown;
+  requestHeaders: Headers | undefined;
   retry: string | undefined;
-  timeout: number;
+  timeoutWithUnits: string;
   url: Url;
 }>;
 

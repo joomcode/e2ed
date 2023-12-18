@@ -2,7 +2,8 @@ import type {RequestHookToWaitForEvents} from '../utils/requestHooks';
 
 import type {UtcTimeInMs} from './date';
 import type {MergeFunctions} from './fn';
-import type {Request, Response} from './http';
+import type {Request, RequestWithUtcTimeInMs, Response, ResponseWithRequest} from './http';
+import type {MaybePromise} from './promise';
 import type {RequestHookContextId} from './requestHooks';
 
 /**
@@ -35,15 +36,16 @@ export type AllRequestsCompletePredicateWithPromise = Readonly<{
  * Request predicate for `waitForRequest` function.
  */
 export type RequestPredicate<SomeRequest extends Request = Request> = (
-  request: SomeRequest,
-) => Promise<boolean> | boolean;
+  request: RequestWithUtcTimeInMs<SomeRequest>,
+) => MaybePromise<boolean>;
 
 /**
  * Response predicate for `waitForResponse` function.
  */
-export type ResponsePredicate<SomeResponse extends Response = Response> = (
-  request: SomeResponse,
-) => Promise<boolean> | boolean;
+export type ResponsePredicate<
+  SomeRequest extends Request = Request,
+  SomeResponse extends Response = Response,
+> = (response: ResponseWithRequest<SomeResponse, SomeRequest>) => MaybePromise<boolean>;
 
 /**
  * Request or response predicate with resolve and reject functions for both event handlers.
@@ -53,6 +55,7 @@ export type RequestOrResponsePredicateWithPromise = Readonly<{
   predicate: RequestOrResponsePredicate;
   reject: RequestPredicateWithPromise['reject'];
   resolve: RequestOrResponseResolve;
+  skipLogs: boolean;
   startTimeInMs: UtcTimeInMs;
 }>;
 
@@ -63,7 +66,8 @@ export type RequestOrResponsePredicateWithPromise = Readonly<{
 export type RequestPredicateWithPromise = Readonly<{
   predicate: RequestPredicate;
   reject: (error: unknown) => void;
-  resolve: (request: Request) => void;
+  resolve: (request: RequestWithUtcTimeInMs) => void;
+  skipLogs: boolean;
   startTimeInMs: UtcTimeInMs;
 }>;
 
@@ -74,7 +78,8 @@ export type RequestPredicateWithPromise = Readonly<{
 export type ResponsePredicateWithPromise = Readonly<{
   predicate: ResponsePredicate;
   reject: (error: unknown) => void;
-  resolve: (response: Response) => void;
+  resolve: (response: ResponseWithRequest) => void;
+  skipLogs: boolean;
   startTimeInMs: UtcTimeInMs;
 }>;
 
@@ -84,8 +89,8 @@ export type ResponsePredicateWithPromise = Readonly<{
  */
 export type WaitForEventsState = Readonly<{
   allRequestsCompletePredicates: Set<AllRequestsCompletePredicateWithPromise>;
+  hashOfNotCompleteRequests: Record<RequestHookContextId, RequestWithUtcTimeInMs>;
   hook: RequestHookToWaitForEvents;
-  hashOfNotCompleteRequests: Record<RequestHookContextId, Required<Request>>;
   requestPredicates: Set<RequestPredicateWithPromise>;
   responsePredicates: Set<ResponsePredicateWithPromise>;
 }>;

@@ -15,6 +15,6 @@ test(
 
     await assertFunctionThrows(async () => {
       await request(GetUsers, {maxRetriesCount: 1, timeout: 2_000});
-    }, '`request` function throws an error on timeout');
+    }, 'request function throws an error on timeout');
   },
 );

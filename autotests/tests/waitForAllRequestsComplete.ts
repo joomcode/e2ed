@@ -1,7 +1,7 @@
 import {test} from 'autotests';
-import {createClientFunction} from 'e2ed';
+import {getUsers} from 'autotests/entities';
 import {waitForAllRequestsComplete, waitForTimeout} from 'e2ed/actions';
-import {assertFunctionThrows, E2edError, log} from 'e2ed/utils';
+import {assertFunctionThrows, E2edError} from 'e2ed/utils';
 
 test(
   'waitForAllRequestsComplete works correct with timeout and predicate in base cases',
@@ -30,20 +30,6 @@ test(
     startRequestInMs = Date.now();
 
     let promise = waitForAllRequestsComplete(() => true, {timeout: 1000});
-
-    const clientGetUsers = createClientFunction(
-      (delay: number) =>
-        fetch(`https://reqres.in/api/users?delay=${delay}`, {method: 'GET'}).then((res) =>
-          res.json(),
-        ),
-      {name: 'getUsers', timeout: 6_000},
-    );
-
-    const getUsers = (delay: number): Promise<unknown> => {
-      log(`Send API request with delay = ${delay}000ms`);
-
-      return clientGetUsers(delay);
-    };
 
     void getUsers(2);
 

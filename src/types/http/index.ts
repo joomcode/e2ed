@@ -6,6 +6,7 @@ export type {
   Method,
   Query,
   Request,
+  RequestWithUtcTimeInMs,
   Response,
   ResponseWithRequest,
   Url,

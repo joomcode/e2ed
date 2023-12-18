@@ -30,7 +30,7 @@ export const assertFunctionThrows = <ReturnedValue extends AsyncVoid>(
         () => {},
       ) as ReturnedValue;
     }
-  } catch (error) {
+  } catch {
     shouldThrowInFinally = false;
   } finally {
     if (shouldThrowInFinally) {

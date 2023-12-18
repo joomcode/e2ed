@@ -5,14 +5,14 @@ import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
 
 import type {
-  Request,
   RequestOrResponsePredicateWithPromise,
+  RequestWithUtcTimeInMs,
   ResponseWithRequest,
 } from '../../types/internal';
 
 type Options = Readonly<{
   eventType: 'Request' | 'Response';
-  requestOrResponse: Request | ResponseWithRequest;
+  requestOrResponse: RequestWithUtcTimeInMs | ResponseWithRequest;
   requestOrResponsePredicateWithPromise: RequestOrResponsePredicateWithPromise;
 }>;
 
@@ -27,22 +27,25 @@ export const processEventsPredicate = async ({
   requestOrResponsePredicateWithPromise,
 }: Options): Promise<boolean> => {
   const eventTypeInLowerCase = eventType.toLowerCase();
-  const {predicate, reject, resolve, startTimeInMs} = requestOrResponsePredicateWithPromise;
+  const {predicate, reject, resolve, skipLogs, startTimeInMs} =
+    requestOrResponsePredicateWithPromise;
 
   try {
-    const isRequestMatched = await predicate(requestOrResponse);
+    const isRequestOrResponseMatched = await predicate(requestOrResponse);
 
-    if (isRequestMatched !== true) {
+    if (isRequestOrResponseMatched !== true) {
       return false;
     }
 
     const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
 
-    log(
-      `Have waited for ${eventTypeInLowerCase} for ${waitWithUnits}`,
-      {[eventTypeInLowerCase]: requestOrResponse, predicate},
-      LogEventType.InternalUtil,
-    );
+    if (skipLogs !== true) {
+      log(
+        `Have waited for ${eventTypeInLowerCase} for ${waitWithUnits}`,
+        {[eventTypeInLowerCase]: requestOrResponse, predicate},
+        LogEventType.InternalUtil,
+      );
+    }
 
     resolve(requestOrResponse);
   } catch (cause) {

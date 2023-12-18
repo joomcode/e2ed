@@ -57,6 +57,6 @@ export const getSetResponse =
     log(
       `A mock was applied to the API route "${route.constructor.name}"`,
       {apiMockFunction, request, response, route},
-      LogEventType.InternalCore,
+      LogEventType.InternalUtil,
     );
   };

@@ -221,16 +221,16 @@ export type OwnE2edConfig<
   }>;
 
   /**
-   * Default timeout (in milliseconds) for `waitForRequest` function.
+   * Default timeout (in milliseconds) for `waitForRequest`/`waitForRequestToRoute` functions.
    * If the wait is longer than this timeout, then the promise
-   * returned by the `waitForRequest` function will be rejected.
+   * returned by the `waitForRequest`/`waitForRequestToRoute` function will be rejected.
    */
   waitForRequestTimeout: number;
 
   /**
-   * Default timeout (in milliseconds) for `waitForResponse` function.
+   * Default timeout (in milliseconds) for `waitForResponse`/`waitForResponseToRoute` functions.
    * If the wait is longer than this timeout, then the promise
-   * returned by the `waitForResponse` function will be rejected.
+   * returned by the `waitForResponse`/`waitForResponseToRoute` function will be rejected.
    */
   waitForResponseTimeout: number;
 }>;

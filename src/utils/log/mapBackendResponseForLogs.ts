@@ -9,14 +9,14 @@ import type {ResponseWithRequest} from '../../types/internal';
  * Maps backend response for logging.
  * @internal
  */
-export const mapBackendResponseForLogs = (response: ResponseWithRequest): void => {
+export const mapBackendResponseForLogs = (responseWithRequest: ResponseWithRequest): void => {
   const {mapBackendResponseErrorToLog, mapBackendResponseToLog} = getFullPackConfig();
 
-  const errorPayload = mapBackendResponseErrorToLog(response);
-  const payload = mapBackendResponseToLog(response);
+  const errorPayload = mapBackendResponseErrorToLog(responseWithRequest);
+  const payload = mapBackendResponseToLog(responseWithRequest);
 
   if (errorPayload !== undefined) {
-    logBackendResponseError(response, errorPayload);
+    logBackendResponseError(responseWithRequest, errorPayload);
   }
 
   if (payload !== undefined) {

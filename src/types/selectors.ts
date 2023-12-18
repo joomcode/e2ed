@@ -83,6 +83,8 @@ export type Selector = ReplaceObjectSelectors<Inner.SelectorAPI> &
  * Custom methods that `e2ed` adds to selector.
  */
 export type SelectorCustomMethods = Readonly<{
+  /* eslint-disable typescript-sort-keys/interface */
+
   /** Creates a selector that filters a matching set by locatorId. */
   filterByLocatorId(this: Inner.Selector, locatorId: string): Inner.Selector;
   /** Finds all descendants of all nodes in the matching set and filters them by locatorId. */
@@ -132,6 +134,8 @@ export type SelectorCustomMethods = Readonly<{
 
   /** Get string description of selector if any. */
   getDescription(this: Inner.Selector): string | undefined;
+
+  /* eslint-enable typescript-sort-keys/interface */
 }>;
 
 /**

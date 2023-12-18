@@ -10,7 +10,7 @@ export const logFieldReplacer: FieldReplacer = (path, value) => {
     return getStringTrimmedToMaxLength(value, 500);
   }
 
-  const key = path[path.length - 1];
+  const key = path.at(-1);
 
   if (key === 'responseBody' && value && typeof value === 'object') {
     const {payload, ...responseBodyWithoutPayload} = value as {payload?: unknown};

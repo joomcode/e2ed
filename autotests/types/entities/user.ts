@@ -26,8 +26,8 @@ export type UserId = Brand<string, 'UserId'>;
  */
 export type ApiUserParams = Readonly<{
   device: Device;
-  name: string;
   email: Email;
+  name: string;
   password: Password;
 }>;
 

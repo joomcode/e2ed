@@ -11,7 +11,7 @@ export function assertValueIsDefined<Type>(
   payload?: LogParams,
 ): asserts value is Exclude<Type, undefined> {
   if (value === undefined) {
-    throw new E2edError('Asserted value is undefined', {check, payload});
+    throw new E2edError('Asserted value is not defined', {check, payload});
   }
 }
 

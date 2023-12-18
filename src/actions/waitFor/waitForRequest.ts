@@ -13,17 +13,18 @@ import type {
   Request,
   RequestPredicate,
   RequestPredicateWithPromise,
+  RequestWithUtcTimeInMs,
   UtcTimeInMs,
 } from '../../types/internal';
 
 /**
- * Wait for some request (from browser) by the request predicate.
+ * Waits for some request (from browser) filtered by the request predicate.
  * If the function runs longer than the specified timeout, it is rejected.
  */
 export const waitForRequest = <SomeRequest extends Request>(
   predicate: RequestPredicate<SomeRequest>,
-  {timeout}: {timeout?: number} = {},
-): Promise<SomeRequest> => {
+  {skipLogs = false, timeout}: {skipLogs?: boolean; timeout?: number} = {},
+): Promise<RequestWithUtcTimeInMs<SomeRequest>> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   setCustomInspectOnFunction(predicate);
@@ -32,12 +33,15 @@ export const waitForRequest = <SomeRequest extends Request>(
   const {waitForRequestTimeout} = getFullPackConfig();
   const rejectTimeout = timeout ?? waitForRequestTimeout;
   const {clearRejectTimeout, promiseWithTimeout, reject, resolve, setRejectTimeoutFunction} =
-    getPromiseWithResolveAndReject<SomeRequest, Request>(rejectTimeout);
+    getPromiseWithResolveAndReject<RequestWithUtcTimeInMs<SomeRequest>, RequestWithUtcTimeInMs>(
+      rejectTimeout,
+    );
 
   const requestPredicateWithPromise: RequestPredicateWithPromise = {
     predicate: predicate as RequestPredicate,
     reject,
     resolve,
+    skipLogs,
     startTimeInMs,
   };
   const testRunPromise = getTestRunPromise();
@@ -59,11 +63,13 @@ export const waitForRequest = <SomeRequest extends Request>(
 
   waitForEventsState.requestPredicates.add(requestPredicateWithPromise);
 
-  log(
-    `Set wait for request with timeout ${timeoutWithUnits}`,
-    {predicate},
-    LogEventType.InternalCore,
-  );
+  if (skipLogs !== true) {
+    log(
+      `Set wait for request with timeout ${timeoutWithUnits}`,
+      {predicate},
+      LogEventType.InternalCore,
+    );
+  }
 
   return promiseWithTimeout;
 };

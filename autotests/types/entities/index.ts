@@ -17,3 +17,4 @@ export type {
   UserParams,
   UserPhone,
 } from './user';
+export type {UserWorker} from './worker';

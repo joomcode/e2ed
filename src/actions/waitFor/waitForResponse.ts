@@ -10,20 +10,25 @@ import {getPromiseWithResolveAndReject} from '../../utils/promise';
 import {RequestHookToWaitForEvents} from '../../utils/requestHooks';
 
 import type {
+  Request,
   Response,
   ResponsePredicate,
   ResponsePredicateWithPromise,
+  ResponseWithRequest,
   UtcTimeInMs,
 } from '../../types/internal';
 
 /**
- * Wait for some response (from browser) by the response predicate.
+ * Waits for some response (from browser) filtered by the response predicate.
  * If the function runs longer than the specified timeout, it is rejected.
  */
-export const waitForResponse = <SomeResponse extends Response>(
-  predicate: ResponsePredicate<SomeResponse>,
-  {timeout}: {timeout?: number} = {},
-): Promise<SomeResponse> => {
+export const waitForResponse = <
+  SomeResponse extends Response = Response,
+  SomeRequest extends Request = Request,
+>(
+  predicate: ResponsePredicate<SomeRequest, SomeResponse>,
+  {skipLogs = false, timeout}: {skipLogs?: boolean; timeout?: number} = {},
+): Promise<ResponseWithRequest<SomeResponse, SomeRequest>> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   setCustomInspectOnFunction(predicate);
@@ -32,12 +37,16 @@ export const waitForResponse = <SomeResponse extends Response>(
   const {waitForResponseTimeout} = getFullPackConfig();
   const rejectTimeout = timeout ?? waitForResponseTimeout;
   const {clearRejectTimeout, promiseWithTimeout, reject, resolve, setRejectTimeoutFunction} =
-    getPromiseWithResolveAndReject<SomeResponse, Response>(rejectTimeout);
+    getPromiseWithResolveAndReject<
+      ResponseWithRequest<SomeResponse, SomeRequest>,
+      ResponseWithRequest
+    >(rejectTimeout);
 
   const responsePredicateWithPromise: ResponsePredicateWithPromise = {
     predicate: predicate as ResponsePredicate,
     reject,
     resolve,
+    skipLogs,
     startTimeInMs,
   };
   const testRunPromise = getTestRunPromise();
@@ -59,11 +68,13 @@ export const waitForResponse = <SomeResponse extends Response>(
 
   waitForEventsState.responsePredicates.add(responsePredicateWithPromise);
 
-  log(
-    `Set wait for response with timeout ${timeoutWithUnits}`,
-    {predicate},
-    LogEventType.InternalCore,
-  );
+  if (skipLogs !== true) {
+    log(
+      `Set wait for response with timeout ${timeoutWithUnits}`,
+      {predicate},
+      LogEventType.InternalCore,
+    );
+  }
 
   return promiseWithTimeout;
 };

@@ -1,5 +1,5 @@
 import {registerEndTestRunEvent} from '../events';
-import {generalLog} from '../generalLog';
+import {generalLog, writeLogsToFile} from '../generalLog';
 
 import type {EndTestRunEvent, UtcTimeInMs} from '../../types/internal';
 
@@ -17,6 +17,8 @@ export const afterTest = async (options: Options): Promise<void> => {
     await registerEndTestRunEvent(endTestRunEvent);
   } catch (error) {
     generalLog('Caught an error when register end test run event', {endTestRunEvent, error});
+
+    await writeLogsToFile();
 
     throw error;
   }

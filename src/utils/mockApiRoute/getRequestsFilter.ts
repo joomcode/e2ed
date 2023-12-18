@@ -1,4 +1,5 @@
-import {assertValueIsDefined, assertValueIsTrue} from '../asserts';
+import {assertValueIsDefined} from '../asserts';
+import {getRouteInstanceFromUrl} from '../getRouteInstanceFromUrl';
 
 import type {ApiMockState, RequestOptions, Url} from '../../types/internal';
 
@@ -17,27 +18,22 @@ export const getRequestsFilter =
     const url = requestOptions.url as Url;
 
     for (const [Route, apiMockFunction] of functionByRoute) {
-      try {
-        const routeParams = Route.getParamsFromUrl(url);
-        const route = new Route(routeParams);
+      const maybeMethod = requestOptions.method?.toUpperCase() ?? '';
+      const maypeRouteWithRouteParams = getRouteInstanceFromUrl(url, maybeMethod, Route);
 
-        assertValueIsTrue(route.isMatchUrl(url), 'route matches on url', {requestOptions, route});
-
-        const routeMethod = route.getMethod();
-
-        assertValueIsTrue(
-          routeMethod.toLowerCase() === requestOptions.method?.toLowerCase(),
-          'route method equals to request method',
-        );
-
-        // eslint-disable-next-line no-param-reassign
-        functionAndRouteByUrl[url] = {apiMockFunction, route};
-
-        return true;
-      } catch {
+      if (maypeRouteWithRouteParams === undefined) {
         // eslint-disable-next-line no-param-reassign
         functionAndRouteByUrl[url] = undefined;
+
+        continue;
       }
+
+      const {route} = maypeRouteWithRouteParams;
+
+      // eslint-disable-next-line no-param-reassign
+      functionAndRouteByUrl[url] = {apiMockFunction, route};
+
+      return true;
     }
 
     return false;
