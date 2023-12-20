@@ -38,6 +38,7 @@ const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
       options: {esModuleInterop: true, resolveJsonModule: true},
     },
   },
+  disableMultipleWindows: true,
   hostname: 'localhost',
   pageLoadTimeout: 0,
   reporter: [{name: 'for-e2ed'}],

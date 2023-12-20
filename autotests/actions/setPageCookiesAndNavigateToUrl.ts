@@ -1,6 +1,6 @@
 import {setHeadersAndNavigateToUrl} from 'e2ed/actions';
 import {LogEventType} from 'e2ed/constants';
-import {log, replaceSetCookie} from 'e2ed/utils';
+import {getHeaderValue, log, replaceSetCookie} from 'e2ed/utils';
 
 import type {Cookie, Headers, Url} from 'e2ed/types';
 
@@ -12,7 +12,7 @@ export const setPageCookiesAndNavigateToUrl = async (
   pageCookies: readonly Cookie[],
 ): Promise<void> => {
   const mapResponseHeaders = (headers: Headers): Headers => {
-    let setCookies = headers['set-cookie'];
+    let setCookies = getHeaderValue(headers, 'set-cookie');
 
     if (setCookies === undefined) {
       setCookies = [];

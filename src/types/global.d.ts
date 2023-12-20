@@ -79,9 +79,33 @@ declare module 'testcafe-hammerhead-up/lib/processing/encoding/charset' {
 declare module 'testcafe-hammerhead-up/lib/request-pipeline/request-hooks/events/factory' {
   type RequestHookClassWithContext = import('./requestHooks').RequestHookClassWithContext;
 
-  const RequestPipelineRequestHookEventFactory: RequestHookClassWithContext;
+  const RequestHookEventFactory: RequestHookClassWithContext;
 
-  export default RequestPipelineRequestHookEventFactory;
+  export default RequestHookEventFactory;
+}
+
+/**
+ * Internal TestCafe module with request-hooks frame navigated events factory class for native automation.
+ * @internal
+ */
+declare module 'testcafe-without-typecheck/lib/native-automation/request-hooks/event-factory/frame-navigated-event-based' {
+  type RequestHookClassWithContext = import('./requestHooks').RequestHookClassWithContext;
+
+  const RequestHookEventFactory: RequestHookClassWithContext;
+
+  export default RequestHookEventFactory;
+}
+
+/**
+ * Internal TestCafe module with request-hooks events factory class for native automation.
+ * @internal
+ */
+declare module 'testcafe-without-typecheck/lib/native-automation/request-hooks/event-factory/request-paused-event-based' {
+  type RequestHookClassWithContext = import('./requestHooks').RequestHookClassWithContext;
+
+  const RequestHookEventFactory: RequestHookClassWithContext;
+
+  export default RequestHookEventFactory;
 }
 
 /**

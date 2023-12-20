@@ -1,5 +1,6 @@
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 
+import {getHeaderValue} from './getHeaderValue';
 import {charsetPath, encodingPath} from './testCafeHammerheadUpPaths';
 
 import type {RequestHookEncoding, RequestHookResponseEvent, Response} from '../../types/internal';
@@ -16,18 +17,24 @@ const {decodeContent} = require<EncodingType>(encodingPath);
  * Get response object from the original TestCafe request context.
  * @internal
  */
-export const getResponseFromResponseEvent = async ({
-  body,
-  headers = {},
-  statusCode = 200,
-}: RequestHookResponseEvent): Promise<Response> => {
+export const getResponseFromResponseEvent = async (
+  {body, headers = {}, statusCode = 200}: RequestHookResponseEvent,
+  isDecodingNeeded: boolean,
+): Promise<Response> => {
   const charset = new Charset();
-  const encoding = (headers['content-encoding'] ?? 'identity') as RequestHookEncoding;
+  const encoding = (getHeaderValue(headers, 'content-encoding') ??
+    'identity') as RequestHookEncoding;
 
   let responseBody: unknown;
 
   if (body) {
-    const responseBodyAsString = await decodeContent(body, encoding, charset);
+    let responseBodyAsString: string;
+
+    if (isDecodingNeeded) {
+      responseBodyAsString = await decodeContent(body, encoding, charset);
+    } else {
+      responseBodyAsString = String(body);
+    }
 
     try {
       responseBody = parseMaybeEmptyValueAsJson(responseBodyAsString);

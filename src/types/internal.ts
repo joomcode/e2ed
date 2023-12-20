@@ -35,6 +35,7 @@ export type {SafeHtml} from './html';
 export type {
   Cookie,
   CookieHeaderString,
+  HeaderEntry,
   Headers,
   MapHeaders,
   MapOptions,
@@ -103,6 +104,7 @@ export type {
   TestRunButtonProps,
 } from './report';
 export type {
+  HeadersModifiers,
   RequestHookConfigureResponseEvent,
   RequestHookContextId,
   RequestHookRequestEvent,

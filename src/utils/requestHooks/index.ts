@@ -1,3 +1,6 @@
+export {getEquivalentHeadersNames} from './getEquivalentHeadersNames';
+export {getHeadersFromHeaderEntries} from './getHeadersFromHeaderEntries';
+export {getHeaderValue} from './getHeaderValue';
 /** @internal */
 export {getMainRequestOptions} from './getMainRequestOptions';
 /** @internal */

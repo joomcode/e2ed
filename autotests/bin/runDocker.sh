@@ -45,6 +45,7 @@ docker run \
        --env E2ED_ORIGIN=$E2ED_ORIGIN \
        --env E2ED_DEBUG=$E2ED_DEBUG \
        --env __INTERNAL_E2ED_PATH_TO_PACK=$1 \
+       --shm-size 512m \
        $DOCKER_IMAGE:$VERSION \
     & PID=$!
 

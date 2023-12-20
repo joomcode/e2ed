@@ -1,5 +1,6 @@
 export type {Cookie, CookieHeaderString, SameSite, SetCookieHeaderString} from './cookie';
 export type {
+  HeaderEntry,
   Headers,
   MapHeaders,
   MapOptions,

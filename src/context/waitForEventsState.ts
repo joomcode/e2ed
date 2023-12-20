@@ -30,7 +30,9 @@ export const getWaitForEventsState = (
 
   const waitForEventsState: WaitForEventsState = {
     allRequestsCompletePredicates: new Set<AllRequestsCompletePredicateWithPromise>(),
-    hashOfNotCompleteRequests: {},
+    hashOfNotCompleteRequests: Object.create(
+      null,
+    ) as WaitForEventsState['hashOfNotCompleteRequests'],
     hook: {} as RequestHookToWaitForEvents,
     requestPredicates: new Set<RequestPredicateWithPromise>(),
     responsePredicates: new Set<ResponsePredicateWithPromise>(),

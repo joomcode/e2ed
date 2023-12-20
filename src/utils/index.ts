@@ -40,7 +40,12 @@ export {
   waitForAllProperties,
 } from './promise';
 export {getContentJsonHeaders, request} from './request';
-export {SetHeadersRequestHook} from './requestHooks';
+export {
+  getEquivalentHeadersNames,
+  getHeadersFromHeaderEntries,
+  getHeaderValue,
+  SetHeadersRequestHook,
+} from './requestHooks';
 export {getRunLabelObject} from './runLabel';
 export {getDescriptionFromSelector} from './selectors';
 export {setReadonlyProperty} from './setReadonlyProperty';

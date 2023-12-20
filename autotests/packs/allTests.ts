@@ -23,7 +23,11 @@ import type {FilterTestsIntoPack, Pack} from 'autotests/types/packSpecific';
 const isLocalRun = runEnvironment === RunEnvironment.Local;
 
 const browser = isLocalRun ? 'chrome:headless' : 'chromium:headless';
-const browserFlags = ['--disable-dev-shm-usage', '--disable-web-security'];
+const browserFlags = [
+  '--disable-dev-shm-usage',
+  '--disable-web-security',
+  '--ignore-certificate-errors',
+];
 
 const filterTestsIntoPack: FilterTestsIntoPack = ({options}) => options.meta.testId !== '13';
 

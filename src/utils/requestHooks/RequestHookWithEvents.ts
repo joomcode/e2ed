@@ -1,4 +1,8 @@
 import {RequestHook} from 'testcafe-without-typecheck';
+// eslint-disable-next-line import/no-internal-modules
+import FrameNavigatedNativeAutomationEventFactory from 'testcafe-without-typecheck/lib/native-automation/request-hooks/event-factory/frame-navigated-event-based';
+// eslint-disable-next-line import/no-internal-modules
+import NativeAutomationEventFactory from 'testcafe-without-typecheck/lib/native-automation/request-hooks/event-factory/request-paused-event-based';
 
 import {REQUEST_HOOK_CONTEXT_KEY, RESOLVED_PROMISE} from '../../constants/internal';
 
@@ -15,14 +19,16 @@ import type {
   RequestHookResponseEvent,
 } from '../../types/internal';
 
-type RequestPipelineRequestHookEventFactoryType =
+type RequestHookEventFactoryType =
   typeof import('testcafe-hammerhead-up/lib/request-pipeline/request-hooks/events/factory').default;
 
-const RequestPipelineRequestHookEventFactory =
+const RequestHookEventFactory =
   // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
-  require<RequestPipelineRequestHookEventFactoryType>(eventsFactoryPath);
+  require<RequestHookEventFactoryType>(eventsFactoryPath);
 
-addContextToResultsOfClassCreateMethods(RequestPipelineRequestHookEventFactory);
+addContextToResultsOfClassCreateMethods(FrameNavigatedNativeAutomationEventFactory);
+addContextToResultsOfClassCreateMethods(NativeAutomationEventFactory);
+addContextToResultsOfClassCreateMethods(RequestHookEventFactory);
 
 /**
  * Get options for creating test run callback for request hook events.
@@ -89,9 +95,15 @@ abstract class RequestHookWithEvents extends RequestHook {
     await super._onConfigureResponse(event);
 
     const requestHookContext = event[REQUEST_HOOK_CONTEXT_KEY];
-    const {headers = {}} = requestHookContext.destRes;
 
-    setReadonlyProperty(requestHookContext.destRes, 'headers', headers);
+    // eslint-disable-next-line no-underscore-dangle
+    const {destRes} = requestHookContext._ctx ?? {};
+
+    if (destRes) {
+      const {headers = {}} = destRes;
+
+      setReadonlyProperty(destRes, 'headers', headers);
+    }
   }
 }
 
