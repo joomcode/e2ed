@@ -1,9 +1,9 @@
 import {LogEventType} from '../../constants/internal';
 import {getRunId} from '../../context/runId';
 
+import {getFullPackConfig} from '../config';
 // eslint-disable-next-line import/no-internal-modules
 import {registerLogEvent} from '../events/registerLogEvent';
-import {getFullPackConfig} from '../getFullPackConfig';
 
 import {logWithPreparedOptions} from './logWithPreparedOptions';
 

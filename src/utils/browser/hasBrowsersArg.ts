@@ -1,7 +1,7 @@
-import {AUTOTESTS_DIRECTORY_PATH} from '../constants/internal';
+import {AUTOTESTS_DIRECTORY_PATH} from '../../constants/internal';
 
 /**
- * Returns `true`, if current node args for TestCafe has browsers arg, and `false` otherwise.
+ * Returns `true`, if current node arguments for TestCafe has browsers arg, and `false` otherwise.
  * @internal
  */
 export const hasBrowsersArg = (): boolean => {

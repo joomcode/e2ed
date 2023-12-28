@@ -1,4 +1,4 @@
-import {getFullPackConfig} from '../getFullPackConfig';
+import {getFullPackConfig} from '../config';
 
 import type {TestStaticOptions} from '../../types/internal';
 

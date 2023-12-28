@@ -1,6 +1,6 @@
 /**
  * @file Full pack configuration (extended TestCafe configuration) for running tests.
- * Don't import this module. Instead, use `utils/getFullPackConfig`.
+ * Don't import this module. Instead, use `getFullPackConfig` from `utils/config`.
  */
 
 import {join} from 'node:path';
@@ -11,6 +11,9 @@ import {
   SCREENSHOTS_DIRECTORY_PATH,
 } from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
+import {getTestCafeBrowsersString} from './utils/browser';
+// eslint-disable-next-line import/no-internal-modules
+import {assertUserlandPack} from './utils/config/assertUserlandPack';
 import {getPathToPack} from './utils/environment';
 import {setCustomInspectOnFunction} from './utils/fn';
 
@@ -31,13 +34,11 @@ const absoluteCompiledUserlandPackPath = join(
 // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
 const userlandPack = require<{pack: UserlandPack}>(absoluteCompiledUserlandPackPath).pack;
 
+assertUserlandPack(userlandPack);
+
 const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
   color: true,
-  compilerOptions: {
-    typescript: {
-      options: {esModuleInterop: true, resolveJsonModule: true},
-    },
-  },
+  compilerOptions: {typescript: {options: {esModuleInterop: true, resolveJsonModule: true}}},
   disableMultipleWindows: true,
   hostname: 'localhost',
   pageLoadTimeout: 0,
@@ -55,7 +56,8 @@ const frozenPartOfTestCafeConfig: FrozenPartOfTestCafeConfig = {
 
 const fullPackConfig: FullPackConfig = {
   ...userlandPack,
-  browsers: userlandPack.browser,
+  browsers: getTestCafeBrowsersString(userlandPack),
+  disableNativeAutomation: !userlandPack.enableChromeDevToolsProtocol,
   src: userlandPack.testFileGlobs,
   ...frozenPartOfTestCafeConfig,
 };
@@ -64,6 +66,8 @@ const {
   doAfterPack,
   doBeforePack,
   filterTestsIntoPack,
+  mapBackendResponseErrorToLog,
+  mapBackendResponseToLog,
   mapLogPayloadInConsole,
   mapLogPayloadInLogFile,
   mapLogPayloadInReport,
@@ -78,6 +82,8 @@ for (const fn of doBeforePack) {
 }
 
 setCustomInspectOnFunction(filterTestsIntoPack);
+setCustomInspectOnFunction(mapBackendResponseErrorToLog);
+setCustomInspectOnFunction(mapBackendResponseToLog);
 setCustomInspectOnFunction(mapLogPayloadInConsole);
 setCustomInspectOnFunction(mapLogPayloadInLogFile);
 setCustomInspectOnFunction(mapLogPayloadInReport);

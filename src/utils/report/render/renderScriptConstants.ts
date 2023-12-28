@@ -1,4 +1,4 @@
-import {getFullPackConfig} from '../../getFullPackConfig';
+import {getFullPackConfig} from '../../config';
 
 import {createSafeHtmlWithoutSanitize} from '../client';
 

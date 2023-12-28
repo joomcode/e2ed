@@ -1,4 +1,4 @@
-import {getFullPackConfig} from '../utils/getFullPackConfig';
+import {getFullPackConfig} from '../utils/config';
 import {runTests} from '../utils/tests';
 
 import type {RunRetryOptions} from '../types/internal';

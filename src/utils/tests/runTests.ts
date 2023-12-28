@@ -3,6 +3,7 @@ import {join} from 'node:path';
 import {ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY, TESTCAFERC_PATH} from '../../constants/internal';
 import {createTestCafe} from '../../testcafe';
 
+import {getFullPackConfig} from '../config';
 import {setRunLabel} from '../environment';
 import {E2edError} from '../error';
 import {
@@ -11,7 +12,6 @@ import {
   setSuccessfulTotalInPreviousRetries,
   writeLogsToFile,
 } from '../generalLog';
-import {getFullPackConfig} from '../getFullPackConfig';
 import {getNotIncludedInPackTests} from '../notIncludedInPackTests';
 
 import type {Inner} from 'testcafe-without-typecheck';
@@ -37,8 +37,8 @@ export const runTests = async ({
 
     setSuccessfulTotalInPreviousRetries(successfulTotalInPreviousRetries);
 
-    const {browser} = getFullPackConfig();
-    const browsers = [browser];
+    const {browsers: browsersString} = getFullPackConfig();
+    const browsers = [browsersString];
 
     const notIncludedInPackTests = await getNotIncludedInPackTests();
     const notIncludedInPackTestsInAbsolutePaths = notIncludedInPackTests.map((testFilePath) =>

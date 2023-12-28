@@ -22,14 +22,18 @@ import type {FilterTestsIntoPack, Pack} from 'autotests/types/packSpecific';
 
 const isLocalRun = runEnvironment === RunEnvironment.Local;
 
-const browser = isLocalRun ? 'chrome:headless' : 'chromium:headless';
 const browserFlags = [
   '--disable-dev-shm-usage',
   '--disable-web-security',
   '--ignore-certificate-errors',
 ];
 
+const browser = isLocalRun ? 'chrome' : 'chromium';
+
 const filterTestsIntoPack: FilterTestsIntoPack = ({options}) => options.meta.testId !== '13';
+
+const overriddenUserAgent =
+  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.35 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.35';
 
 /**
  * Pack of tests or tasks (pack configuration object).
@@ -37,14 +41,18 @@ const filterTestsIntoPack: FilterTestsIntoPack = ({options}) => options.meta.tes
 export const pack: Pack = {
   ajaxRequestTimeout: 40_000,
   assertionTimeout: 5_000,
-  browser: [browser, ...browserFlags].join(' '),
+  browser,
+  browserFlags,
   browserInitTimeout: 60_000,
   concurrency: isLocalRun ? 1 : 2,
   customPackProperties: {internalPackRunId: 0, name: 'allTests'},
-  disableNativeAutomation: true,
   doAfterPack,
   doBeforePack,
   dockerImage: 'e2edhub/e2ed',
+  enableChromeDevToolsProtocol: true,
+  enableHeadlessMode: true,
+  enableMobileDeviceMode: false,
+  enableTouchEventEmulation: false,
   filterTestsIntoPack,
   liteReportFileName: 'lite-report.json',
   logFileName: 'pack-logs.log',
@@ -54,7 +62,8 @@ export const pack: Pack = {
   mapLogPayloadInLogFile,
   mapLogPayloadInReport,
   maxRetriesCountInDocker: 3,
-  packTimeout: 90 * 60_000,
+  overriddenUserAgent,
+  packTimeout: 5 * 60_000,
   pageRequestTimeout: 30_000,
   pageStabilizationInterval: 500,
   pathToScreenshotsDirectoryForReport: './screenshots',
@@ -68,6 +77,8 @@ export const pack: Pack = {
   testFileGlobs: ['./autotests/tests/**/*.ts', '!**/*.skip.ts'],
   testIdleTimeout: 20_000,
   testTimeout: 60_000,
+  viewportHeight: 800,
+  viewportWidth: 1280,
   waitForAllRequestsComplete: {
     maxIntervalBetweenRequestsInMs: 500,
     timeout: 30_000,

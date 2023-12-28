@@ -2,8 +2,8 @@ import {execFileSync} from 'node:child_process';
 
 import {EXEC_FILE_OPTIONS} from '../../constants/internal';
 
+import {getFullPackConfig} from '../config';
 import {generalLog} from '../generalLog';
-import {getFullPackConfig} from '../getFullPackConfig';
 
 const nodeProcessPidRegexp = /\b(?<pid>\d+)\/node\b/;
 

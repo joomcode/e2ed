@@ -4,9 +4,9 @@ import {setRunId} from '../../context/runId';
 import {setTestIdleTimeout} from '../../context/testIdleTimeout';
 import {setTestTimeout} from '../../context/testTimeout';
 
+import {getFullPackConfig} from '../config';
 import {getRunLabel} from '../environment';
 import {registerStartTestRunEvent} from '../events';
-import {getFullPackConfig} from '../getFullPackConfig';
 import {getUserlandHooks} from '../userland';
 
 import {getTestFnAndReject} from './getTestFnAndReject';

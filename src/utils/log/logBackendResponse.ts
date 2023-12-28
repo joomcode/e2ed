@@ -1,8 +1,8 @@
 import {LogEventType} from '../../constants/internal';
 import {getRunId} from '../../context/runId';
 
+import {getFullPackConfig} from '../config';
 import {getTestRunEvent} from '../events';
-import {getFullPackConfig} from '../getFullPackConfig';
 
 import {log} from './log';
 import {logWithPreparedOptions} from './logWithPreparedOptions';

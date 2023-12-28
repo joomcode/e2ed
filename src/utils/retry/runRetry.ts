@@ -3,10 +3,10 @@ import {join} from 'node:path';
 
 import {INSTALLED_E2ED_DIRECTORY_PATH} from '../../constants/internal';
 
+import {getFullPackConfig} from '../config';
 import {E2edError} from '../error';
 import {getLastLogEventTimeInMs, writeLogEventTime} from '../fs';
 import {getDurationWithUnits} from '../getDurationWithUnits';
-import {getFullPackConfig} from '../getFullPackConfig';
 import {setTestsSubprocess, testsSubprocess} from '../tests';
 
 import {killTestCafeProcessesOccupyingPorts} from './killTestCafeProcessesOccupyingPorts';

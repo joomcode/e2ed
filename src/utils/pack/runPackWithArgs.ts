@@ -1,10 +1,10 @@
 import {EndE2edReason, TESTCAFERC_PATH} from '../../constants/internal';
 
 import {assertValueIsDefined} from '../asserts';
+import {hasBrowsersArg} from '../browser';
+import {getFullPackConfig} from '../config';
 import {endE2ed} from '../end';
 import {setRunLabel} from '../environment';
-import {getFullPackConfig} from '../getFullPackConfig';
-import {hasBrowsersArg} from '../hasBrowsersArg';
 import {createRunLabel} from '../runLabel';
 
 import {getPackTimeoutPromise} from './packTimeout';
@@ -19,7 +19,7 @@ export const runPackWithArgs = async (): Promise<void> => {
 
   setRunLabel(runLabel);
 
-  if (browsers.length > 0 && hasBrowsersArg() === false) {
+  if (browsers.length > 0 && !hasBrowsersArg()) {
     process.argv.splice(2, 0, String(browsers));
   }
 
