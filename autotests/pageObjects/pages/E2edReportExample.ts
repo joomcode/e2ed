@@ -1,12 +1,12 @@
-import {setPageCookies} from 'autotests/context';
+import {setPageCookies, setPageRequestHeaders} from 'autotests/context';
 import {E2edReportExample as E2edReportExampleRoute} from 'autotests/routes/pageRoutes';
 import {locatorIdSelector} from 'autotests/selectors';
 import {Page} from 'e2ed';
 import {setReadonlyProperty} from 'e2ed/utils';
 
-import type {Cookie, Selector} from 'e2ed/types';
+import type {Cookie, Headers, Selector} from 'e2ed/types';
 
-type CustomPageParams = {pageCookies?: readonly Cookie[]} | undefined;
+type CustomPageParams = {pageCookies?: readonly Cookie[]; pageRequestHeaders?: Headers} | undefined;
 
 /**
  * The e2ed report example page.
@@ -17,12 +17,18 @@ export class E2edReportExample extends Page<CustomPageParams> {
    */
   readonly pageCookies!: readonly Cookie[];
 
+  /**
+   * Request headers that we add to page request.
+   */
+  readonly pageRequestHeaders: Headers | undefined;
+
   override readonly pageStabilizationInterval = 600;
 
   override init(this: E2edReportExample): void {
-    const {pageCookies = []} = this.pageParams ?? {};
+    const {pageCookies = [], pageRequestHeaders} = this.pageParams ?? {};
 
     setReadonlyProperty(this, 'pageCookies', pageCookies);
+    setReadonlyProperty(this, 'pageRequestHeaders', pageRequestHeaders);
   }
 
   getRoute(): E2edReportExampleRoute {
@@ -52,11 +58,15 @@ export class E2edReportExample extends Page<CustomPageParams> {
   readonly testRunButton: Selector = this.testRunsList.findByLocatorId('app-retries-retry-button');
 
   /**
-   * Set page cookies to context before navigate.
+   * Set page cookies and page request headers to context before navigate.
    */
   override beforeNavigateToPage(): void {
     if (this.pageCookies.length !== 0) {
       setPageCookies(this.pageCookies);
+    }
+
+    if (this.pageRequestHeaders !== undefined) {
+      setPageRequestHeaders(this.pageRequestHeaders);
     }
   }
 }

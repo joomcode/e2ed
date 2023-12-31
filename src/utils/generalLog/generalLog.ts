@@ -1,4 +1,4 @@
-import {getFullPackConfig} from '../getFullPackConfig';
+import {getFullPackConfig} from '../config';
 
 import {getLogMessageBody} from './getLogMessageBody';
 import {getLogPrefix} from './getLogPrefix';

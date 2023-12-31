@@ -1,6 +1,6 @@
 import {RunEnvironment} from '../../configurator';
 
-import {getFullPackConfig} from '../getFullPackConfig';
+import {getFullPackConfig} from '../config';
 import {getUnvisitedTestFilePaths} from '../getUnvisitedTestFilePaths';
 
 import type {FullTestRun, TestFilePath} from '../../types/internal';

@@ -1,5 +1,5 @@
+import {getFullPackConfig} from '../config';
 import {getExitCode} from '../exit';
-import {getFullPackConfig} from '../getFullPackConfig';
 
 import {assertThatTestNamesAndFilePathsAreUnique} from './assertThatTestNamesAndFilePathsAreUnique';
 import {getFailedTestsMainParams} from './getFailedTestsMainParams';

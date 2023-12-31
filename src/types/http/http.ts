@@ -7,6 +7,12 @@ import type {CookieHeaderString, SetCookieHeaderString} from './cookie';
 import type {StatusCode} from './statusCode';
 
 /**
+ * Header entry from CDP.
+ * {@link https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#type-HeaderEntry}
+ */
+export type HeaderEntry = Readonly<{name: string; value: string}>;
+
+/**
  * General type of arbitrary HTTP headers. All headers are in lower case.
  */
 export type Headers = Readonly<
@@ -20,7 +26,7 @@ export type Headers = Readonly<
  * Maps headers to new (overridden) headers.
  * All headers must be in lower case.
  */
-export type MapHeaders = (headers: Headers) => Headers;
+export type MapHeaders = (this: void, headers: Headers) => Headers;
 
 /**
  * Options for mappers of headers.

@@ -52,21 +52,24 @@ export const addContextToResultsOfClassCreateMethods = (
       const result = originalMethod.apply(this, args);
       const isResultAnObject = typeof result === 'object' && result !== null;
 
-      // eslint-disable-next-line no-underscore-dangle
-      const context = this._ctx;
-
       if (isResultAnObject && !(REQUEST_HOOK_CONTEXT_KEY in result)) {
-        if (context && !(REQUEST_HOOK_CONTEXT_ID_KEY in context)) {
-          requestHookContextCount += 1;
+        if (!(REQUEST_HOOK_CONTEXT_ID_KEY in this)) {
+          // eslint-disable-next-line no-underscore-dangle
+          const requestId = this._event?.requestId;
 
-          setReadonlyProperty(
-            context,
-            REQUEST_HOOK_CONTEXT_ID_KEY,
-            String(requestHookContextCount) as RequestHookContextId,
-          );
+          let requestHookContextId: RequestHookContextId | undefined;
+
+          if (requestId === undefined) {
+            requestHookContextCount += 1;
+            requestHookContextId = String(requestHookContextCount) as RequestHookContextId;
+          } else {
+            requestHookContextId = requestId as RequestHookContextId;
+          }
+
+          setReadonlyProperty(this, REQUEST_HOOK_CONTEXT_ID_KEY, requestHookContextId);
         }
 
-        setReadonlyProperty(result, REQUEST_HOOK_CONTEXT_KEY, context);
+        setReadonlyProperty(result, REQUEST_HOOK_CONTEXT_KEY, this);
       }
 
       return result;

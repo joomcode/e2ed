@@ -6,7 +6,7 @@ import type {Brand} from './brand';
 import type {Class} from './class';
 import type {DeepReadonly} from './deep';
 import type {Fn} from './fn';
-import type {Headers, StatusCode} from './http';
+import type {HeaderEntry, Headers, StatusCode} from './http';
 
 /**
  * Maybe object with request hook context key.
@@ -15,21 +15,32 @@ import type {Headers, StatusCode} from './http';
 type MaybeWithContextKey = Partial<WithContextKey> | null | undefined;
 
 /**
- * TestCafe internal request hook context (RequestPipelineContext).
- * Here we describe only the specific context fields used.
- * {@link https://github.com/DevExpress/testcafe-hammerhead/blob/master/src/request-pipeline/context/index.ts}
+ * TestCafe internal request hook context (BaseRequestHookEventFactory).
+ * Here we describe only the specific fields used.
+ * Only the version without native automation has field `_ctx`,
+ * and only the version with native automation (CPD) has field `_event`.
+ * {@link https://github.com/DevExpress/testcafe-hammerhead/blob/master/src/request-pipeline/request-hooks/events/factory/index.ts}
+ * {@link https://github.com/DevExpress/testcafe/blob/master/src/native-automation/request-hooks/event-factory/request-paused-event-based.ts}
+ * {@link https://github.com/DevExpress/testcafe/blob/master/src/native-automation/request-hooks/event-factory/frame-navigated-event-based.ts}
  */
-type RequestHookContext = DeepReadonly<{
+type RequestHookContext = Readonly<{
   [REQUEST_HOOK_CONTEXT_ID_KEY]?: RequestHookContextId;
-  destRes: {
-    headers?: Headers;
-  };
+  _ctx?: Readonly<{destRes?: Readonly<{headers?: Headers}>}>;
+  _event?: Readonly<{requestId: string; responseHeaders?: readonly HeaderEntry[]}>;
 }>;
 
 /**
  * Any object with request hook context key.
  */
 type WithContextKey = {readonly [REQUEST_HOOK_CONTEXT_KEY]: RequestHookContext};
+
+/**
+ * Headers modification functions.
+ */
+export type HeadersModifiers = Readonly<{
+  removeHeader(this: void, name: string): void;
+  setHeader(this: void, name: string, value: string): void;
+}>;
 
 /**
  * TestCafe charset class instance for encode/decode request/response body buffers.
@@ -44,7 +55,7 @@ export type RequestHookCharset = Brand<object, 'RequestHookCharset'>;
  */
 export type RequestHookClassWithContext = Class<
   unknown[],
-  Readonly<{_ctx: RequestHookContext} & Record<string, Fn<never[], MaybeWithContextKey>>>
+  RequestHookContext & Readonly<Record<string, Fn<never[], MaybeWithContextKey>>>
 >;
 
 /**
@@ -70,10 +81,7 @@ export type RequestHookRequestEvent = DeepReadonly<{
  */
 export type RequestHookConfigureResponseEvent = DeepReadonly<
   WithContextKey & {
-    _modifyResponseFunctions: {
-      removeHeader(name: string): Promise<void>;
-      setHeader(name: string, value: string): Promise<void>;
-    };
+    _modifyResponseFunctions: HeadersModifiers;
   }
 >;
 
@@ -83,6 +91,7 @@ export type RequestHookConfigureResponseEvent = DeepReadonly<
 export type RequestHookResponseEvent = Readonly<{
   body?: Buffer;
   headers?: Headers;
+  requestId?: string;
   statusCode?: StatusCode;
 }>;
 

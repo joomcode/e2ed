@@ -245,6 +245,12 @@ that exports the pack's config under the name `pack`.
 
 Here are the basic fields of the pack config.
 
+`browser: string`: browser name as a command to launch it
+(like `chrome`, `chromium`, `firefox`, `webkit`, etc).
+
+`browserFlags: string[]`: array of browser flags, like `--disable-dev-shm-usage`,
+with which the browser is launched to run tests.
+
 `concurrency: number`: the number of browser windows in which tests will run in parallel.
 
 `customPackProperties: CustomPackProperties`: a custom set of fields defined within the project.
@@ -264,6 +270,16 @@ Each function can thus access the results of the previous function.
 
 `dockerImage: string`: the name of the docker image where the tests will run.
 The image must be based on the e2ed base image.
+
+`enableChromeDevToolsProtocol: boolean`: enables [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/)
+for browser control in tests (instead of `testcafe-hammerhead`).
+
+`enableHeadlessMode: boolean`: enables headless mode (if browser supports such mode).
+
+`enableMobileDeviceMode: boolean`: enables Chromium [mobile device mode](https://developer.chrome.com/docs/devtools/device-mode).
+
+`enableTouchEventEmulation: boolean`: enables touch event emulation.
+If `true`, page fires `touch` events when test interact with the page (instead of `click` events).
 
 `filterTestsIntoPack: (testStaticOptions: TestStaticOptions<TestMeta>) => boolean`: this function
 filters tests (tasks) by their static options —
@@ -314,6 +330,9 @@ If the mapping returns `undefined`, the log entry is not skipped, but is printed
 `your-project/autotests/bin/runDocker.sh` (until the test passes).
 For example, if it is equal to three, the test will be run no more than three times.
 
+`overriddenUserAgent: string | null`: if not `null`, then this value will override the browser's user agent in tests.
+This override only works when `enableChromeDevToolsProtocol` is `true`.
+
 `packTimeout: number`: timeout (in millisecond) for the entire pack of tests (tasks).
 If the test pack takes longer than this timeout, the pack will fail with the appropriate error.
 
@@ -355,6 +374,10 @@ This parameter can be overridden in the test-specific options.
 `testTimeout: number`: timeout (in milliseconds) for each individual test run.
 If the test run takes longer than this timeout, the test fails and rerun on the next retry.
 This parameter can be overridden in the test-specific options.
+
+`viewportHeight: number`: height of viewport of page in pixels.
+
+`viewportWidth: number`: width of viewport of page in pixels.
 
 `waitForAllRequestsComplete.maxIntervalBetweenRequestsInMs: number`: default maximum interval
 (in milliseconds) between requests for `waitForAllRequestsComplete` function.

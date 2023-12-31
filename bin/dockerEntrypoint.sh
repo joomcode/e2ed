@@ -35,7 +35,7 @@ if [[ -z $E2ED_DEBUG ]]
 then
     /node_modules/e2ed/bin/runE2edInDockerEnvironment.js & PID=$!
 else
-    node --inspect-brk=0.0.0.0 /node_modules/e2ed/bin/runE2edInDockerEnvironment.js & PID=$!
+    node --inspect-brk=0.0.0.0:$E2ED_DEBUG /node_modules/e2ed/bin/runE2edInDockerEnvironment.js & PID=$!
 fi
 
 wait $PID

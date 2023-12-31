@@ -1,5 +1,6 @@
-import {assertValueIsUndefined} from '../asserts';
+import {assertValueIsDefined} from '../asserts';
 
+import {isExtensionOfBaseRequest} from './isExtensionOfBaseRequest';
 import {processAllRequestsCompletePredicates} from './processAllRequestsCompletePredicates';
 
 import type {
@@ -19,13 +20,24 @@ export const addNotCompleteRequest = async (
 ): Promise<void> => {
   const {hashOfNotCompleteRequests} = waitForEventsState;
 
-  assertValueIsUndefined(
-    hashOfNotCompleteRequests[requestHookContextId],
-    `request with id "${requestHookContextId}" was not added to hash`,
-    {request},
-  );
+  const previousRequestId = Object.keys(hashOfNotCompleteRequests).at(-1) as
+    | RequestHookContextId
+    | undefined;
 
   hashOfNotCompleteRequests[requestHookContextId] = request;
+
+  if (previousRequestId) {
+    const previousRequest = hashOfNotCompleteRequests[previousRequestId];
+
+    assertValueIsDefined(previousRequest, 'previousRequest is defined', {
+      hashOfNotCompleteRequests,
+    });
+
+    if (isExtensionOfBaseRequest(request, previousRequest)) {
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      delete hashOfNotCompleteRequests[previousRequestId];
+    }
+  }
 
   await processAllRequestsCompletePredicates(requestHookContextId, waitForEventsState);
 };

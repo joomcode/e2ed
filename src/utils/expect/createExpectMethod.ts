@@ -1,9 +1,9 @@
 import {LogEventStatus, LogEventType, RESOLVED_PROMISE} from '../../constants/internal';
 import {testController} from '../../testController';
 
+import {getFullPackConfig} from '../config';
 import {E2edError} from '../error';
 import {getDurationWithUnits} from '../getDurationWithUnits';
-import {getFullPackConfig} from '../getFullPackConfig';
 import {log} from '../log';
 import {addTimeoutToPromise} from '../promise';
 import {getDescriptionFromSelector} from '../selectors';

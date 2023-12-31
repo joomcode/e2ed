@@ -1,5 +1,6 @@
 export {
   assertFunctionThrows,
+  assertNumberIsPositiveInteger,
   assertValueHasProperty,
   assertValueIsDefined,
   assertValueIsFalse,
@@ -10,6 +11,7 @@ export {
   assertValueIsUndefined,
 } from './asserts';
 export {cloneWithoutUndefinedProperties} from './clone';
+export {getFullPackConfig as untypedGetFullPackConfig} from './config';
 export {
   assertStringIsSameSite,
   getCookieHeaderString,
@@ -29,7 +31,6 @@ export {E2edError, getStackTrace} from './error';
 export {getFunctionPresentationForLogs, setCustomInspectOnFunction} from './fn';
 export {writeFile} from './fs';
 export {removeStyleFromString} from './generalLog';
-export {getFullPackConfig as untypedGetFullPackConfig} from './getFullPackConfig';
 export {getKeysCounter} from './getKeysCounter';
 export {log} from './log';
 export {parseMaybeEmptyValueAsJson} from './parseMaybeEmptyValueAsJson';
@@ -40,7 +41,12 @@ export {
   waitForAllProperties,
 } from './promise';
 export {getContentJsonHeaders, request} from './request';
-export {SetHeadersRequestHook} from './requestHooks';
+export {
+  getEquivalentHeadersNames,
+  getHeadersFromHeaderEntries,
+  getHeaderValue,
+  SetHeadersRequestHook,
+} from './requestHooks';
 export {getRunLabelObject} from './runLabel';
 export {getDescriptionFromSelector} from './selectors';
 export {setReadonlyProperty} from './setReadonlyProperty';

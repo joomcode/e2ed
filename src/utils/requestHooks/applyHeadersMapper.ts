@@ -1,4 +1,5 @@
 import {getCopyOfHeaders} from './getCopyOfHeaders';
+import {getEquivalentHeadersNames} from './getEquivalentHeadersNames';
 
 import type {Headers, MapHeaders, Mutable} from '../../types/internal';
 
@@ -16,12 +17,16 @@ export const applyHeadersMapper = (headers: Headers, mapper?: MapHeaders): void 
 
   const mutableHeaders: Mutable<Headers> = headers;
 
-  for (const [key, value] of Object.entries(newHeaders)) {
+  for (const [name, value] of Object.entries(newHeaders)) {
     if (value === undefined) {
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-      delete mutableHeaders[key];
+      const equivalentNames = getEquivalentHeadersNames(mutableHeaders, name);
+
+      for (const currentName of equivalentNames) {
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+        delete mutableHeaders[currentName];
+      }
     } else {
-      mutableHeaders[key] = value as string[] | string | undefined;
+      mutableHeaders[name] = value as string[] | string | undefined;
     }
   }
 };

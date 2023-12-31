@@ -1,7 +1,7 @@
 import {EndE2edReason} from '../../constants/internal';
 
+import {getFullPackConfig} from '../config';
 import {endE2ed, endE2edReason} from '../end';
-import {getFullPackConfig} from '../getFullPackConfig';
 
 import {processRetry} from './processRetry';
 

@@ -2,8 +2,8 @@
 
 import {LogEventType} from '../../constants/internal';
 import {createClientFunction} from '../../createClientFunction';
+import {getFullPackConfig} from '../../utils/config';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
-import {getFullPackConfig} from '../../utils/getFullPackConfig';
 import {log} from '../../utils/log';
 
 import type {UtcTimeInMs} from '../../types/internal';

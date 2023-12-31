@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+
 import {
   INCLUDE_HEADERS_IN_RESPONSE_EVENT,
   LogEventType,
@@ -11,6 +13,8 @@ import {log} from '../log';
 import {setReadonlyProperty} from '../setReadonlyProperty';
 
 import {applyHeadersMapper} from './applyHeadersMapper';
+import {applyHeadersMapperByModifiers} from './applyHeadersMapperByModifiers';
+import {getHeadersFromHeaderEntries} from './getHeadersFromHeaderEntries';
 import {RequestHookWithEvents} from './RequestHookWithEvents';
 
 import type {
@@ -22,7 +26,7 @@ import type {
 } from '../../types/internal';
 
 /**
- * RequestHook that set mapped headers for request and response
+ * Request hook that set mapped headers for request and response
  * for concrete url.
  */
 export class SetHeadersRequestHook extends RequestHookWithEvents {
@@ -54,11 +58,27 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
     await super._onConfigureResponse(event);
 
     const requestHookContext = event[REQUEST_HOOK_CONTEXT_KEY];
-    const {headers} = requestHookContext.destRes;
 
-    assertValueIsDefined(headers, 'headers is defined', {requestHookConfigureResponseEvent: event});
+    let headers: Headers | undefined;
 
-    applyHeadersMapper(headers, this.options.mapResponseHeaders);
+    const {destRes} = requestHookContext._ctx ?? {};
+
+    if (destRes) {
+      ({headers} = destRes);
+
+      assertValueIsDefined(headers, 'headers is defined');
+
+      applyHeadersMapper(headers, this.options.mapResponseHeaders);
+    } else {
+      const {responseHeaders} = requestHookContext._event ?? {};
+      const headersModifiers = event._modifyResponseFunctions;
+
+      assertValueIsDefined(responseHeaders, 'responseHeaders is defined');
+
+      headers = getHeadersFromHeaderEntries(responseHeaders);
+
+      applyHeadersMapperByModifiers(headers, this.options.mapResponseHeaders, headersModifiers);
+    }
 
     log(`Map response headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
   }

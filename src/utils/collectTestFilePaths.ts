@@ -2,7 +2,7 @@ import {normalize} from 'node:path';
 
 import globby from 'globby';
 
-import {getFullPackConfig} from './getFullPackConfig';
+import {getFullPackConfig} from './config';
 
 import type {TestFilePath} from '../types/internal';
 

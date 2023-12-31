@@ -3,7 +3,7 @@ import {join} from 'node:path';
 
 import {REPORTS_DIRECTORY_PATH, RESOLVED_PROMISE} from '../../constants/internal';
 
-import {getFullPackConfig} from '../getFullPackConfig';
+import {getFullPackConfig} from '../config';
 
 /**
  * Array of pack logs. Logs are stored in this array for further saving in the pack logs file.

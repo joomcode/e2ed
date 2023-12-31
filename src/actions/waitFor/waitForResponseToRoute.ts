@@ -1,8 +1,8 @@
 import {LogEventType} from '../../constants/internal';
 import {assertValueIsDefined, assertValueIsUndefined} from '../../utils/asserts';
+import {getFullPackConfig} from '../../utils/config';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
-import {getFullPackConfig} from '../../utils/getFullPackConfig';
 import {getRouteInstanceFromUrl} from '../../utils/getRouteInstanceFromUrl';
 import {log} from '../../utils/log';
 

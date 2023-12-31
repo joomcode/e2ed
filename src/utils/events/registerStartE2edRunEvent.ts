@@ -1,11 +1,11 @@
 import {RunEnvironment} from '../../configurator';
 import {EVENTS_DIRECTORY_PATH, ExitCode, TMP_DIRECTORY_PATH} from '../../constants/internal';
 
+import {getFullPackConfig, updateConfig} from '../config';
 import {E2edError} from '../error';
 import {setGlobalExitCode} from '../exit';
 import {createDirectory, removeDirectory, writeStartInfo} from '../fs';
 import {generalLog, writeLogsToFile} from '../generalLog';
-import {getFullPackConfig, updateConfig} from '../getFullPackConfig';
 import {compilePack, setPackTimeout} from '../pack';
 import {getStartInfo} from '../startInfo';
 

@@ -20,6 +20,16 @@ export type OwnE2edConfig<
   TestMeta = TestMetaPlaceholder,
 > = Readonly<{
   /**
+   * Browser name as a command to launch it (like `chrome`, `chromium`, `firefox`, `webkit`, etc).
+   */
+  browser: string;
+
+  /**
+   * Array of browser flags, like `--disable-dev-shm-usage`, with which the browser is launched to run tests.
+   */
+  browserFlags: readonly string[];
+
+  /**
    * Custom pack properties for using in hooks, etc.
    */
   customPackProperties: CustomPackProperties;
@@ -40,6 +50,29 @@ export type OwnE2edConfig<
    * The image must be based on the e2ed base image.
    */
   dockerImage: string;
+
+  /**
+   * Enables Chrome DevTools Protocol for browser control in tests (instead of `testcafe-hammerhead`).
+   * {@link https://chromedevtools.github.io/devtools-protocol/}
+   */
+  enableChromeDevToolsProtocol: boolean;
+
+  /**
+   * Enables headless mode (if browser supports such mode).
+   */
+  enableHeadlessMode: boolean;
+
+  /**
+   * Enables Chromium mobile device mode.
+   * {@link https://developer.chrome.com/docs/devtools/device-mode}
+   */
+  enableMobileDeviceMode: boolean;
+
+  /**
+   * Enables touch event emulation.
+   * If `true`, page fires `touch` events when test interact with the page (instead of `click` events).
+   */
+  enableTouchEventEmulation: boolean;
 
   /**
    * This function filters tests (tasks) by their static options —
@@ -109,6 +142,12 @@ export type OwnE2edConfig<
    * For example, if it is equal to three, the test will be run no more than three times.
    */
   maxRetriesCountInDocker: number;
+
+  /**
+   * If not `null`, then this value will override the browser's user agent in tests.
+   * This override only works when `enableChromeDevToolsProtocol` is `true`.
+   */
+  overriddenUserAgent: string | null;
 
   /**
    * Timeout (in millisecond) for the entire pack of tests (tasks).
@@ -182,6 +221,16 @@ export type OwnE2edConfig<
    * This parameter can be overridden in the test-specific options.
    */
   testTimeout: number;
+
+  /**
+   * Height of viewport of page in pixels.
+   */
+  viewportHeight: number;
+
+  /**
+   * Width of viewport of page in pixels.
+   */
+  viewportWidth: number;
 
   /**
    * Group of settings for the `waitForAllRequestsComplete` function.

@@ -56,7 +56,6 @@ export function sanitizeHtml(
     String(value)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
 
@@ -93,5 +92,5 @@ export function sanitizeHtml(
  * @internal
  */
 export function sanitizeJson(json: string): string {
-  return json.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return json.replace(/</g, '&lt;');
 }

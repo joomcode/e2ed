@@ -1,5 +1,5 @@
+import {getFullPackConfig} from '../config';
 import {generalLog} from '../generalLog';
-import {getFullPackConfig} from '../getFullPackConfig';
 import {runArrayOfUserlandFunctions} from '../userland';
 
 import type {CustomReportPropertiesPlaceholder, LiteReport, Void} from '../../types/internal';

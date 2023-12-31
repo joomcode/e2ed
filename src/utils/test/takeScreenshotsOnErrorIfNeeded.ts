@@ -3,8 +3,8 @@ import {join} from 'node:path';
 // eslint-disable-next-line import/no-internal-modules
 import {takeScreenshot} from '../../actions/takeScreenshot';
 
+import {getFullPackConfig} from '../config';
 import {getRunLabel} from '../environment';
-import {getFullPackConfig} from '../getFullPackConfig';
 import {getRunLabelObject} from '../runLabel';
 
 import {getScreenshotFileNames} from './getScreenshotFileNames';

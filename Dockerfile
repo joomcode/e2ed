@@ -4,7 +4,9 @@ FROM alpine:3.19.0
 
 COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
-COPY --from=node /usr/local/include /usr/local/include
+COPY --from=node /usr/local/include/node/[^o]* /usr/local/include/node/
+COPY --from=node /usr/local/include/node/openssl/*[^s] /usr/local/include/node/openssl/
+COPY --from=node /usr/local/include/node/openssl/archs/linux-x86_64 /usr/local/include/node/openssl/archs/linux-x86_64
 COPY --from=node /usr/local/bin /usr/local/bin
 
 RUN apk --no-cache upgrade && \

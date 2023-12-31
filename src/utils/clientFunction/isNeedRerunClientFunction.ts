@@ -6,7 +6,7 @@ import type {ClientFunctionState, MaybeTestCafeError} from '../../types/internal
 const INTERRUPTED_BY_PAGE_UNLOAD_CODE = 'E49';
 
 /**
- * Return true if client function rerun is needed, false otherwise.
+ * Returns `true` if client function rerun is needed and `false` otherwise.
  * @internal
  */
 export const isNeedRerunClientFunction = <Args extends readonly unknown[], Result>(

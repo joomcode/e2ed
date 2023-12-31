@@ -2,7 +2,7 @@
 import {waitForAllRequestsComplete, waitForInterfaceStabilization} from './actions/waitFor';
 import {CREATE_PAGE_TOKEN} from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
-import {getFullPackConfig} from './utils/getFullPackConfig';
+import {getFullPackConfig} from './utils/config';
 
 import type {PageRoute} from './PageRoute';
 import type {AsyncVoid, PageClassTypeArgs, ParamsKeyType} from './types/internal';

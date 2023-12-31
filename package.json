@@ -29,12 +29,12 @@
     "get-modules-graph": "0.0.9",
     "globby": "11.1.0",
     "pngjs": "7.0.0",
-    "testcafe-without-typecheck": "3.4.0-rc.1"
+    "testcafe-without-typecheck": "3.5.0-rc.1"
   },
   "devDependencies": {
-    "@types/node": "20.10.5",
-    "@typescript-eslint/eslint-plugin": "6.14.0",
-    "@typescript-eslint/parser": "6.14.0",
+    "@types/node": "20.10.6",
+    "@typescript-eslint/eslint-plugin": "6.16.0",
+    "@typescript-eslint/parser": "6.16.0",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
     "assert-package-lock-is-consistent": "1.0.0",
     "eslint": "8.56.0",
@@ -45,7 +45,7 @@
     "eslint-plugin-typescript-sort-keys": "3.1.0",
     "husky": "8.0.3",
     "prettier": "3.1.1",
-    "testcafe": "3.4.0",
+    "testcafe": "3.5.0",
     "typescript": "5.3.3"
   },
   "peerDependencies": {
@@ -124,10 +124,10 @@
     "pretest:docker:copy": "rm -rf ./build/docker && mkdir --parents ./build/docker/node_modules/e2ed",
     "test:docker:copy": "cp -R ./build/autotests ./build/docker/autotests && rm -rf ./build/docker/autotests/reports",
     "posttest:docker:copy": "./bin/addPackageJsonToBuildDocker.sh",
-    "test:docker": "(cd ./build/docker && E2ED_ORIGIN=https://google.com ./autotests/bin/runDocker.sh ./autotests/packs/allTests.ts)",
+    "test:docker": "(cd ./build/docker && E2ED_ORIGIN=https://www.google.com ./autotests/bin/runDocker.sh ./autotests/packs/allTests.ts)",
     "test:dependencies": "node ./build/testDependencies.js",
     "test:esm": "node ./build/testEsmExports.mjs",
-    "test:local": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/localEntrypoint.js ./autotests/packs/allTests.ts)",
+    "test:local": "(cd ./build && E2ED_ORIGIN=https://www.google.com ./node_modules/e2ed/bin/localEntrypoint.js ./autotests/packs/allTests.ts)",
     "testcafe-hammerhead-up:publish": "./bin/forks/testcafe-hammerhead-up/publish.sh",
     "testcafe-hammerhead-up:clean": "./bin/forks/testcafe-hammerhead-up/clean.sh",
     "testcafe-hammerhead-up:test:install": "./bin/forks/testcafe-hammerhead-up/testInstall.sh",

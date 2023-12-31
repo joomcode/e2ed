@@ -15,10 +15,8 @@ import type {OwnE2edConfig} from './ownE2edConfig';
 type UserlandTestCafeConfig = Readonly<{
   ajaxRequestTimeout: number;
   assertionTimeout: number;
-  browser: string;
   browserInitTimeout: number;
   concurrency: number;
-  disableNativeAutomation: boolean;
   pageRequestTimeout: number;
   port1: number;
   port2: number;
@@ -36,6 +34,7 @@ export type FrozenPartOfTestCafeConfig = DeepReadonly<{
       options?: {esModuleInterop?: boolean; resolveJsonModule?: boolean};
     };
   };
+  disableMultipleWindows: boolean;
   hostname: string;
   pageLoadTimeout: number;
   reporter: readonly {name: string; output?: string}[];
@@ -66,7 +65,7 @@ export type FullPackConfigWithoutDoBeforePack<
       TestMeta
     >) &
   FrozenPartOfTestCafeConfig &
-  Readonly<{browsers: string; src: readonly string[]}>;
+  Readonly<{browsers: string; disableNativeAutomation: boolean; src: readonly string[]}>;
 
 /**
  * The complete userland pack config.

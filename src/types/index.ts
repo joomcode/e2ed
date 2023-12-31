@@ -11,6 +11,7 @@ export type {Fn, MergeFunctions} from './fn';
 export type {
   Cookie,
   CookieHeaderString,
+  HeaderEntry,
   Headers,
   MapHeaders,
   MapOptions,

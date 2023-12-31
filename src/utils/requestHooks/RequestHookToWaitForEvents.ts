@@ -10,6 +10,7 @@ import {getDurationWithUnits} from '../getDurationWithUnits';
 import {mapBackendResponseForLogs} from '../log';
 import {addNotCompleteRequest, completeRequest, processEventsPredicates} from '../waitForEvents';
 
+import {getHeaderValue} from './getHeaderValue';
 import {getRequestFromRequestOptions} from './getRequestFromRequestOptions';
 import {getResponseFromResponseEvent} from './getResponseFromResponseEvent';
 import {RequestHookWithEvents} from './RequestHookWithEvents';
@@ -27,7 +28,7 @@ import type {
 
 /**
  * `RequestHook` to wait for request/response events (`waitForAllRequestsComplete`,
- * `waitForRequest`/`waitForResponse`).
+ * `waitForRequest`/`waitForResponse`, `waitForRequestToRoute`/`waitForResponseToRoute`).
  * @internal
  */
 export class RequestHookToWaitForEvents extends RequestHookWithEvents {
@@ -77,15 +78,15 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
       return;
     }
 
-    const contentLength = String(headers['content-length']);
+    const contentLength = getHeaderValue(headers, 'content-length');
 
     if (contentLength !== '0' && body === undefined) {
       return;
     }
 
-    const requestHookContextId = (headers as Record<symbol, RequestHookContextId>)[
+    const requestHookContextId = ((headers as Record<symbol, RequestHookContextId>)[
       REQUEST_HOOK_CONTEXT_ID_KEY
-    ];
+    ] || event.requestId) as RequestHookContextId | undefined;
 
     assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {
       responseHeaders: headers,
@@ -99,7 +100,8 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
 
     completeRequest(requestHookContextId, this.waitForEventsState);
 
-    const response = await getResponseFromResponseEvent(event);
+    const isDecodingNeeded = requestHookContextId !== event.requestId;
+    const response = await getResponseFromResponseEvent(event, isDecodingNeeded);
     const completionTimeInMs = Date.now() as UtcTimeInMs;
     const duration = getDurationWithUnits(completionTimeInMs - request.utcTimeInMs);
 
@@ -126,15 +128,18 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
 
     const requestHookContext = event[REQUEST_HOOK_CONTEXT_KEY];
     const requestHookContextId = requestHookContext[REQUEST_HOOK_CONTEXT_ID_KEY];
-    const {headers} = requestHookContext.destRes;
 
-    assertValueIsDefined(headers, 'headers is defined', {requestHookContextId});
     assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {
-      responseHeaders: headers,
+      requestHookContext,
     });
 
-    (headers as {[REQUEST_HOOK_CONTEXT_ID_KEY]: RequestHookContextId})[
-      REQUEST_HOOK_CONTEXT_ID_KEY
-    ] = requestHookContextId;
+    // eslint-disable-next-line no-underscore-dangle
+    const headers = requestHookContext._ctx?.destRes?.headers;
+
+    if (headers) {
+      (headers as {[REQUEST_HOOK_CONTEXT_ID_KEY]: RequestHookContextId})[
+        REQUEST_HOOK_CONTEXT_ID_KEY
+      ] = requestHookContextId;
+    }
   }
 }

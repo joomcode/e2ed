@@ -1,7 +1,7 @@
 import {LogEventType} from '../constants/internal';
 import {createClientFunction} from '../createClientFunction';
 import {testController} from '../testController';
-import {getFullPackConfig} from '../utils/getFullPackConfig';
+import {getFullPackConfig} from '../utils/config';
 import {log} from '../utils/log';
 
 import type {Url, Void} from '../types/internal';
