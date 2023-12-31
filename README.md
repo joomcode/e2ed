@@ -331,6 +331,7 @@ If the mapping returns `undefined`, the log entry is not skipped, but is printed
 For example, if it is equal to three, the test will be run no more than three times.
 
 `overriddenUserAgent: string | null`: if not `null`, then this value will override the browser's user agent in tests.
+This override only works when `enableChromeDevToolsProtocol` is `true`.
 
 `packTimeout: number`: timeout (in millisecond) for the entire pack of tests (tasks).
 If the test pack takes longer than this timeout, the pack will fail with the appropriate error.

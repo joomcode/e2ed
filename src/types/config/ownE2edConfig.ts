@@ -145,6 +145,7 @@ export type OwnE2edConfig<
 
   /**
    * If not `null`, then this value will override the browser's user agent in tests.
+   * This override only works when `enableChromeDevToolsProtocol` is `true`.
    */
   overriddenUserAgent: string | null;
 

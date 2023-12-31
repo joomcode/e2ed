@@ -8,7 +8,9 @@ import {getPromiseWithResolveAndReject} from '../utils/promise';
 import type {Inner} from 'testcafe-without-typecheck';
 
 type TakeScreenshot = ((path?: string) => Promise<void>) &
-  ((options: Inner.TakeScreenshotOptions & Readonly<{timeout?: number}>) => Promise<void>);
+  ((
+    options: Omit<Inner.TakeScreenshotOptions, 'pathPattern'> & Readonly<{timeout?: number}>,
+  ) => Promise<void>);
 
 /**
  * Takes a screenshot of the tested page.
