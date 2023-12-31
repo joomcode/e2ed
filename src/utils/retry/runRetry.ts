@@ -9,10 +9,12 @@ import {getLastLogEventTimeInMs, writeLogEventTime} from '../fs';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {setTestsSubprocess, testsSubprocess} from '../tests';
 
+import {getTestsSubprocessForkOptions} from './getTestsSubprocessForkOptions';
 import {killTestCafeProcessesOccupyingPorts} from './killTestCafeProcessesOccupyingPorts';
 
 import type {RunRetryOptions} from '../../types/internal';
 
+const testsSubprocessForkOptions = getTestsSubprocessForkOptions();
 const pathToRunTestsSubprocess = join(
   INSTALLED_E2ED_DIRECTORY_PATH,
   'bin',
@@ -32,7 +34,7 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
     void writeLogEventTime('NaN');
 
     const {runLabel} = runRetryOptions;
-    const newTestsSubprocess = fork(pathToRunTestsSubprocess);
+    const newTestsSubprocess = fork(pathToRunTestsSubprocess, testsSubprocessForkOptions);
     let timeoutId: NodeJS.Timeout;
 
     setTestsSubprocess(newTestsSubprocess);

@@ -1,4 +1,4 @@
-import {assertValueIsDefined, assertValueIsFalse} from '../asserts';
+import {assertValueIsDefined} from '../asserts';
 
 import {isExtensionOfBaseRequest} from './isExtensionOfBaseRequest';
 import {processAllRequestsCompletePredicates} from './processAllRequestsCompletePredicates';
@@ -19,12 +19,6 @@ export const addNotCompleteRequest = async (
   waitForEventsState: WaitForEventsState,
 ): Promise<void> => {
   const {hashOfNotCompleteRequests} = waitForEventsState;
-
-  assertValueIsFalse(
-    requestHookContextId in hashOfNotCompleteRequests,
-    `request with id "${requestHookContextId}" was not added to hash`,
-    {request},
-  );
 
   const previousRequestId = Object.keys(hashOfNotCompleteRequests).at(-1) as
     | RequestHookContextId

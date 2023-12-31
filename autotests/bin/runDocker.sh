@@ -7,7 +7,7 @@ DEBUG_PORT="${E2ED_DOCKER_DEBUG_PORT:-9229}"
 DIR="${E2ED_WORKDIR:-$PWD}"
 DOCKER_IMAGE=$(grep -m1 dockerImage $DIR/$1 | sed -e "s/^[^'\"\`]*['\"\`]//" -e "s/['\"\`][^'\"\`]*$//")
 MOUNTDIR="${E2ED_MOUNTDIR:-$DIR}"
-PORT=$([[ -z $E2ED_DEBUG ]] && echo "" || echo "--publish $DEBUG_PORT:$DEBUG_PORT")
+WITH_DEBUG=$([[ -z $E2ED_DEBUG ]] && echo "" || echo "--env E2ED_DEBUG=$DEBUG_PORT --publish $DEBUG_PORT:$DEBUG_PORT --publish $((DEBUG_PORT + 1)):$((DEBUG_PORT + 1))")
 VERSION=$(grep -m1 \"e2ed\": $DIR/package.json | cut -d '"' -f 4)
 
 if [[ -z $DOCKER_IMAGE ]]
@@ -37,15 +37,14 @@ echo "Run docker image $DOCKER_IMAGE:$VERSION"
 trap "onExit" EXIT
 
 docker run \
-       --rm \
-       $PORT \
-       --label $CONTAINER_LABEL \
-       --workdir $DIR \
-       --volume $MOUNTDIR:$MOUNTDIR \
        --env E2ED_ORIGIN=$E2ED_ORIGIN \
-       --env E2ED_DEBUG=$E2ED_DEBUG \
        --env __INTERNAL_E2ED_PATH_TO_PACK=$1 \
+       --label $CONTAINER_LABEL \
+       --rm \
        --shm-size 512m \
+       --volume $MOUNTDIR:$MOUNTDIR \
+       --workdir $DIR \
+       $WITH_DEBUG \
        $DOCKER_IMAGE:$VERSION \
     & PID=$!
 

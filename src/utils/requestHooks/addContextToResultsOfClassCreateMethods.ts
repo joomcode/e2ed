@@ -1,6 +1,6 @@
 import {REQUEST_HOOK_CONTEXT_ID_KEY, REQUEST_HOOK_CONTEXT_KEY} from '../../constants/internal';
 
-import {assertValueIsDefined, assertValueIsFalse} from '../asserts';
+import {assertValueIsDefined} from '../asserts';
 import {setReadonlyProperty} from '../setReadonlyProperty';
 
 import type {Fn, RequestHookClassWithContext, RequestHookContextId} from '../../types/internal';
@@ -14,8 +14,6 @@ const IS_CONTEXT_ADDED_KEY = Symbol('e2ed:IS_CONTEXT_ADDED_KEY');
  * Count of all created request hook contexts.
  */
 let requestHookContextCount = 0;
-
-const requestHookContextIdHash: Record<RequestHookContextId, true> = {};
 
 /**
  * Adds request hook context to results of all class's methods, that starts with "create".
@@ -67,14 +65,6 @@ export const addContextToResultsOfClassCreateMethods = (
           } else {
             requestHookContextId = requestId as RequestHookContextId;
           }
-
-          assertValueIsFalse(
-            requestHookContextId in requestHookContextIdHash,
-            'requestHookContextId is unique',
-            {methodName, requestHookContextId, that: this},
-          );
-
-          requestHookContextIdHash[requestHookContextId] = true;
 
           setReadonlyProperty(this, REQUEST_HOOK_CONTEXT_ID_KEY, requestHookContextId);
         }
