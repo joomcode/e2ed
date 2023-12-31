@@ -1,5 +1,23 @@
 # Changelog
 
+## [v0.16.0](https://github.com/joomcode/e2ed/tree/v0.16.0) (2023-12-31)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.18...v0.16.0)
+
+- [Merge pull request #54 from joomcode/feat/support-cdp-aka-native-automation](https://github.com/joomcode/e2ed/commit/8c89972c659fd17e8b1148bcae5ecf6aa7165992) ([uid11](https://github.com/uid11))
+
+  feat: support CDP (aka native automation)
+
+- [fix: support debugging tests subprocess in docker](https://github.com/joomcode/e2ed/commit/fb0a4ed1cbf063cee56643f7afd7c67fcf84f285) ([uid11](https://github.com/uid11))
+
+  fix: do not fail parallel tests runs in docker
+
+  fix: reduce size of docker image (remove unnecessary openssl archs)
+
+- [chore: update TestCafe to 3.5.0, update devDependencies (`@types/node`, etc)](https://github.com/joomcode/e2ed/commit/8121348045547fcee2a4d3bc0cf390b06db03828) ([uid11](https://github.com/uid11))
+- [FI-1031 feat: add typed browser parameters to pack config](https://github.com/joomcode/e2ed/commit/ab3e25c43e1039d4b1e530f1902189e0c7ca7ee9) ([uid11](https://github.com/uid11))
+- [FI-943 feat: support CDP (aka native automation)](https://github.com/joomcode/e2ed/commit/5fd37e38a84836037a51bba5df6d5bae58c16a8c) ([uid11](https://github.com/uid11))
+
 ## [v0.15.18](https://github.com/joomcode/e2ed/tree/v0.15.18) (2023-12-18)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.17...v0.15.18)
