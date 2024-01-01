@@ -25,6 +25,7 @@ type RequestOrResponseResolve = MergeFunctions<
  * @internal
  */
 export type AllRequestsCompletePredicateWithPromise = Readonly<{
+  allRequestsCompleteTimeInMs: UtcTimeInMs;
   clearResolveTimeout: () => void;
   predicate: RequestPredicate;
   reject: (error: unknown) => void;
