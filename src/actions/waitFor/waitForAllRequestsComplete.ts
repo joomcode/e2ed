@@ -61,6 +61,7 @@ export const waitForAllRequestsComplete = async (
     getPromiseWithResolveAndReject<Void>(rejectTimeout);
 
   const allRequestsCompletePredicateWithPromise: AllRequestsCompletePredicateWithPromise = {
+    allRequestsCompleteTimeInMs: 0 as UtcTimeInMs,
     clearResolveTimeout: () => {},
     predicate,
     reject,
@@ -72,13 +73,16 @@ export const waitForAllRequestsComplete = async (
   void testRunPromise.then(clearRejectTimeout);
 
   setRejectTimeoutFunction(() => {
+    const timeSinceAllRequestsComplete = getDurationWithUnits(
+      Date.now() - allRequestsCompletePredicateWithPromise.allRequestsCompleteTimeInMs,
+    );
     const urlsOfNotCompleteRequests = getUrlsByRequestHookContextIds(
       requestHookContextIds,
       hashOfNotCompleteRequests,
     );
     const error = new E2edError(
       `waitForAllRequestsComplete promise rejected after ${rejectTimeoutWithUnits} timeout`,
-      {predicate, urlsOfNotCompleteRequests},
+      {predicate, timeSinceAllRequestsComplete, urlsOfNotCompleteRequests},
     );
 
     allRequestsCompletePredicates.delete(allRequestsCompletePredicateWithPromise);
@@ -89,6 +93,12 @@ export const waitForAllRequestsComplete = async (
   });
 
   const setResolveTimeout = (): void => {
+    setReadonlyProperty(
+      allRequestsCompletePredicateWithPromise,
+      'allRequestsCompleteTimeInMs',
+      Date.now() as UtcTimeInMs,
+    );
+
     allRequestsCompletePredicateWithPromise.clearResolveTimeout();
 
     const {clearRejectTimeout: clearResolveTimeout, promiseWithTimeout: resolvePromise} =
