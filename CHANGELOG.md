@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.16.1](https://github.com/joomcode/e2ed/tree/v0.16.1) (2024-01-01)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.0...v0.16.1)
+
+- [Merge pull request #55 from joomcode/fix/locators-on-report-example-page](https://github.com/joomcode/e2ed/commit/281dd454b10343512125db552798b9f3f835bf34) ([uid11](https://github.com/uid11))
+
+  fix: locators on e2ed report example page
+
+- [fix: locators on e2ed report example page](https://github.com/joomcode/e2ed/commit/8feb10c9a678028be3242aef29cb0ad439d216a9) ([uid11](https://github.com/uid11))
+
+  fix: add `timeSinceAllRequestsComplete` field to logs of `waitForAllRequestsComplete`
+
 ## [v0.16.0](https://github.com/joomcode/e2ed/tree/v0.16.0) (2023-12-31)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.15.18...v0.16.0)
