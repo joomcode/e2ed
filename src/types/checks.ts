@@ -8,9 +8,8 @@ export type Expect<T extends true> = T;
  * IsEqual<{foo: string}, {foo: string}> = true.
  * IsEqual<{readonly foo: string}, {foo: string}> = false.
  */
-export type IsEqual<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2
-  ? true
-  : false;
+export type IsEqual<X, Y> =
+  (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? true : false;
 
 /**
  * Returns `true` if key is readonly in object and `false` otherwise.

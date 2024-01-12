@@ -51,6 +51,7 @@ export const pack: Pack = {
   dockerImage: 'e2edhub/e2ed',
   enableChromeDevToolsProtocol: true,
   enableHeadlessMode: true,
+  enableLiveMode: false,
   enableMobileDeviceMode: false,
   enableTouchEventEmulation: false,
   filterTestsIntoPack,
@@ -77,8 +78,8 @@ export const pack: Pack = {
   testFileGlobs: ['./autotests/tests/**/*.ts', '!**/*.skip.ts'],
   testIdleTimeout: 20_000,
   testTimeout: 60_000,
-  viewportHeight: 800,
-  viewportWidth: 1280,
+  viewportHeight: 1080,
+  viewportWidth: 1920,
   waitForAllRequestsComplete: {
     maxIntervalBetweenRequestsInMs: 500,
     timeout: 30_000,

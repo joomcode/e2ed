@@ -7,6 +7,7 @@ export {
   assertValueIsNever,
   assertValueIsNotNull,
   assertValueIsNull,
+  assertValueIsString,
   assertValueIsTrue,
   assertValueIsUndefined,
 } from './asserts';

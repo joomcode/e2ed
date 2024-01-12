@@ -1,5 +1,6 @@
 import type {DeepReadonly} from './deep';
 import type {OriginalTestRunError} from './errors';
+import type {TestCafeBrowserConnection} from './testCafe';
 
 /**
  * Internal extend `TestController` type.
@@ -10,12 +11,9 @@ declare module 'testcafe-without-typecheck' {
     // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
     interface TestController {
       readonly testRun: DeepReadonly<{
+        browserConnection: TestCafeBrowserConnection;
         errs: readonly OriginalTestRunError[];
-        test: {
-          testFile: {
-            filename: string;
-          };
-        };
+        test: {testFile: {filename: string}};
       }>;
     }
   }

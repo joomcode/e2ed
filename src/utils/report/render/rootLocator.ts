@@ -7,7 +7,7 @@ import type {Void} from '../../../types/internal';
 import type {NavigationLocator} from './renderNavigation';
 import type {RetriesLocator} from './renderRetries';
 
-const isProduction = e2edEnvironment.E2ED_ORIGIN !== 'https://www.google.com';
+const isProduction = e2edEnvironment.E2ED_ORIGIN !== 'https://google.com';
 
 /**
  * `rootLocator` of `E2edReportExample` page.

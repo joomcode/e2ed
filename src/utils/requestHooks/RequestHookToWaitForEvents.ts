@@ -4,8 +4,10 @@ import {
   REQUEST_HOOK_CONTEXT_ID_KEY,
   REQUEST_HOOK_CONTEXT_KEY,
 } from '../../constants/internal';
+import {getCdpClient} from '../../context/cdpClient';
 
 import {assertValueIsDefined} from '../asserts';
+import {getFullPackConfig} from '../config';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {mapBackendResponseForLogs} from '../log';
 import {addNotCompleteRequest, completeRequest, processEventsPredicates} from '../waitForEvents';
@@ -13,6 +15,7 @@ import {addNotCompleteRequest, completeRequest, processEventsPredicates} from '.
 import {getHeaderValue} from './getHeaderValue';
 import {getRequestFromRequestOptions} from './getRequestFromRequestOptions';
 import {getResponseFromResponseEvent} from './getResponseFromResponseEvent';
+import {removeNotCompleteRequestsByUrl} from './removeNotCompleteRequestsByUrl';
 import {RequestHookWithEvents} from './RequestHookWithEvents';
 
 import type {
@@ -22,6 +25,7 @@ import type {
   RequestHookResponseEvent,
   RequestWithUtcTimeInMs,
   ResponseWithRequest,
+  Url,
   UtcTimeInMs,
   WaitForEventsState,
 } from '../../types/internal';
@@ -34,6 +38,18 @@ import type {
 export class RequestHookToWaitForEvents extends RequestHookWithEvents {
   constructor(private readonly waitForEventsState: WaitForEventsState) {
     super(ANY_URL_REGEXP, INCLUDE_BODY_AND_HEADERS_IN_RESPONSE_EVENT);
+
+    if (!getFullPackConfig().enableChromeDevToolsProtocol) {
+      return;
+    }
+
+    const cdpClient = getCdpClient();
+
+    cdpClient.on('Network.requestWillBeSent', ({redirectResponse}) => {
+      if (redirectResponse) {
+        removeNotCompleteRequestsByUrl(redirectResponse.url as Url, waitForEventsState);
+      }
+    });
   }
 
   /**
@@ -47,7 +63,9 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
     };
 
     const requestHookContext = event.requestOptions[REQUEST_HOOK_CONTEXT_KEY];
-    const requestHookContextId = requestHookContext[REQUEST_HOOK_CONTEXT_ID_KEY];
+    const requestHookContextId = (requestHookContext?.[REQUEST_HOOK_CONTEXT_ID_KEY] ||
+      // eslint-disable-next-line no-underscore-dangle
+      event._requestInfo?.requestId) as RequestHookContextId | undefined;
 
     assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {
       requestWithUtcTimeInMs,
@@ -127,16 +145,12 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
     await super._onConfigureResponse(event);
 
     const requestHookContext = event[REQUEST_HOOK_CONTEXT_KEY];
-    const requestHookContextId = requestHookContext[REQUEST_HOOK_CONTEXT_ID_KEY];
-
-    assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {
-      requestHookContext,
-    });
+    const requestHookContextId = requestHookContext?.[REQUEST_HOOK_CONTEXT_ID_KEY];
 
     // eslint-disable-next-line no-underscore-dangle
-    const headers = requestHookContext._ctx?.destRes?.headers;
+    const headers = requestHookContext?._ctx?.destRes?.headers;
 
-    if (headers) {
+    if (headers && requestHookContextId) {
       (headers as {[REQUEST_HOOK_CONTEXT_ID_KEY]: RequestHookContextId})[
         REQUEST_HOOK_CONTEXT_ID_KEY
       ] = requestHookContextId;

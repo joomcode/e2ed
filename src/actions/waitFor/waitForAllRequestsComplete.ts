@@ -43,12 +43,13 @@ export const waitForAllRequestsComplete = async (
   const {waitForAllRequestsComplete: defaultTimeouts} = getFullPackConfig();
   const resolveTimeout =
     maxIntervalBetweenRequestsInMs ?? defaultTimeouts.maxIntervalBetweenRequestsInMs;
+  const maxIntervalBetweenRequests = getDurationWithUnits(resolveTimeout);
   const rejectTimeout = timeout ?? defaultTimeouts.timeout;
   const rejectTimeoutWithUnits = getDurationWithUnits(rejectTimeout);
 
   log(
     `Set wait for all requests complete with timeout ${rejectTimeoutWithUnits}`,
-    {maxIntervalBetweenRequestsInMs: resolveTimeout, predicate},
+    {maxIntervalBetweenRequests, predicate},
     LogEventType.InternalCore,
   );
 
@@ -73,16 +74,22 @@ export const waitForAllRequestsComplete = async (
   void testRunPromise.then(clearRejectTimeout);
 
   setRejectTimeoutFunction(() => {
-    const timeSinceAllRequestsComplete = getDurationWithUnits(
-      Date.now() - allRequestsCompletePredicateWithPromise.allRequestsCompleteTimeInMs,
-    );
+    const {allRequestsCompleteTimeInMs} = allRequestsCompletePredicateWithPromise;
+    const logParamsAboutTime =
+      allRequestsCompleteTimeInMs === 0
+        ? {allRequestsHaveNeverBeenCompletedYet: true}
+        : {
+            timeSinceAllRequestsComplete: getDurationWithUnits(
+              Date.now() - allRequestsCompleteTimeInMs,
+            ),
+          };
     const urlsOfNotCompleteRequests = getUrlsByRequestHookContextIds(
       requestHookContextIds,
       hashOfNotCompleteRequests,
     );
     const error = new E2edError(
       `waitForAllRequestsComplete promise rejected after ${rejectTimeoutWithUnits} timeout`,
-      {predicate, timeSinceAllRequestsComplete, urlsOfNotCompleteRequests},
+      {...logParamsAboutTime, predicate, urlsOfNotCompleteRequests},
     );
 
     allRequestsCompletePredicates.delete(allRequestsCompletePredicateWithPromise);
@@ -119,7 +126,7 @@ export const waitForAllRequestsComplete = async (
 
       log(
         `Have waited for all requests complete for ${waitWithUnits}`,
-        {maxIntervalBetweenRequestsInMs: resolveTimeout, predicate, timeout: rejectTimeout},
+        {maxIntervalBetweenRequests, predicate, timeout: rejectTimeout},
         LogEventType.InternalUtil,
       );
 

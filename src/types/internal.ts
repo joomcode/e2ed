@@ -2,6 +2,8 @@
 
 export type {WithStabilizationInterval} from './actions';
 export type {Brand, IsBrand} from './brand';
+/** @internal */
+export type {CdpClient} from './cdp';
 export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';
 export type {ClientFunction} from './clientFunction';

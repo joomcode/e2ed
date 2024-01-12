@@ -10,9 +10,11 @@ import type {HeaderEntry, Headers, StatusCode} from './http';
 
 /**
  * Maybe object with request hook context key.
- * @internal
  */
-type MaybeWithContextKey = Partial<WithContextKey> | null | undefined;
+type MaybeWithContextKey =
+  | {readonly [REQUEST_HOOK_CONTEXT_KEY]?: RequestHookContext}
+  | null
+  | undefined;
 
 /**
  * TestCafe internal request hook context (BaseRequestHookEventFactory).
@@ -28,11 +30,6 @@ type RequestHookContext = Readonly<{
   _ctx?: Readonly<{destRes?: Readonly<{headers?: Headers}>}>;
   _event?: Readonly<{requestId: string; responseHeaders?: readonly HeaderEntry[]}>;
 }>;
-
-/**
- * Any object with request hook context key.
- */
-type WithContextKey = {readonly [REQUEST_HOOK_CONTEXT_KEY]: RequestHookContext};
 
 /**
  * Headers modification functions.
@@ -73,6 +70,7 @@ export type RequestHookEncoding = Brand<string, 'RequestHookEncoding'>;
  * TestCafe internal request event in RequestHook.
  */
 export type RequestHookRequestEvent = DeepReadonly<{
+  _requestInfo?: {requestId?: string};
   requestOptions: RequestOptions;
 }>;
 
@@ -80,7 +78,7 @@ export type RequestHookRequestEvent = DeepReadonly<{
  * TestCafe internal configure response event in RequestHook.
  */
 export type RequestHookConfigureResponseEvent = DeepReadonly<
-  WithContextKey & {
+  MaybeWithContextKey & {
     _modifyResponseFunctions: HeadersModifiers;
   }
 >;
@@ -98,4 +96,4 @@ export type RequestHookResponseEvent = Readonly<{
 /**
  * TestCafe internal request options with request hook context.
  */
-export type RequestOptions = WithContextKey & Inner.RequestOptions;
+export type RequestOptions = MaybeWithContextKey & Inner.RequestOptions;

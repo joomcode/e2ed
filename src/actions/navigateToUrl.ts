@@ -1,6 +1,6 @@
 import {LogEventType} from '../constants/internal';
+import {getCdpClient} from '../context/cdpClient';
 import {createClientFunction} from '../createClientFunction';
-import {testController} from '../testController';
 import {getFullPackConfig} from '../utils/config';
 import {log} from '../utils/log';
 
@@ -27,12 +27,14 @@ export const navigateToUrl = async (url: Url, options: Options = {}): Promise<vo
     log(`Will navigate to the url ${url}`, LogEventType.InternalAction);
   }
 
-  const {disableNativeAutomation} = getFullPackConfig();
+  const {enableChromeDevToolsProtocol} = getFullPackConfig();
 
-  if (disableNativeAutomation) {
-    await clientNavigateToUrl(url);
+  if (enableChromeDevToolsProtocol) {
+    const cdpClient = getCdpClient();
+
+    await cdpClient.Page.navigate({transitionType: 'address_bar', url});
   } else {
-    await testController.navigateTo(url);
+    await clientNavigateToUrl(url);
   }
 
   if (skipLogs !== true) {

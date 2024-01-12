@@ -63,6 +63,12 @@ export type OwnE2edConfig<
   enableHeadlessMode: boolean;
 
   /**
+   * Enables TestCafe live mode for test development (only for locally running).
+   * {@link https://testcafe.io/documentation/403842/guides/intermediate-guides/live-mode}
+   */
+  enableLiveMode: boolean;
+
+  /**
    * Enables Chromium mobile device mode.
    * {@link https://developer.chrome.com/docs/devtools/device-mode}
    */
