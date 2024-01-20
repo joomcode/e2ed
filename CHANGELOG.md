@@ -1,5 +1,32 @@
 # Changelog
 
+## [v0.16.2](https://github.com/joomcode/e2ed/tree/v0.16.2) (2024-01-20)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.1...v0.16.2)
+
+- [fix: do not wait YouTube on `Search` page](https://github.com/joomcode/e2ed/commit/b2965d500516a797284205775d2ffd3dab3a4a23) ([uid11](https://github.com/uid11))
+- [Merge pull request #56 from joomcode/fix/errors-with-status-301-on-cdp](https://github.com/joomcode/e2ed/commit/169e4ab23f0c021adea41bbe780b139496e105b9) ([uid11](https://github.com/uid11))
+
+  fix: errors with redirects on CDP mode
+
+- [fix: errors with redirects on CDP mode](https://github.com/joomcode/e2ed/commit/45e27f4d6c16976080482a00ca443ce2ff426e7d) ([uid11](https://github.com/uid11))
+
+  chore: add `devtools-protocol` package for CDP types
+
+  feat: add assert function `assertValueIsString`
+
+  feat: add util function `getCdpClientOfTestRun`
+
+  feat add `enableLiveMode` option to pack config
+
+  fix: incorrect `timeSinceAllRequestsComplete` in logs
+
+  chore: update devDependencies (`@types/node`, `prettier`, etc)
+
+  chore: save local reports to GitHub Action Artifacts
+
+- [fix: unskip `selectorCustomMethods` test](https://github.com/joomcode/e2ed/commit/44f2fc4c016909c0687ff362c4a9e72943fa1ca0) ([uid11](https://github.com/uid11))
+
 ## [v0.16.1](https://github.com/joomcode/e2ed/tree/v0.16.1) (2024-01-01)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.0...v0.16.1)
