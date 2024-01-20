@@ -1,6 +1,9 @@
+import {setCdpClient} from '../../context/cdpClient';
 import {createRunId} from '../../generators/internal';
 
 import {assertValueIsDefined} from '../asserts';
+import {getCdpClientOfTestRun} from '../cdp';
+import {getFullPackConfig} from '../config';
 import {addTestToNotIncludedInPackTests} from '../notIncludedInPackTests';
 
 import {afterErrorInTest} from './afterErrorInTest';
@@ -38,6 +41,12 @@ export const getRunTest = (test: Test): RunTest => {
         await addTestToNotIncludedInPackTests(testStaticOptions.filePath);
 
         return;
+      }
+
+      if (getFullPackConfig().enableChromeDevToolsProtocol) {
+        const cdpClient = getCdpClientOfTestRun(testController);
+
+        setCdpClient(cdpClient);
       }
 
       beforeTest({previousRunId, runId, testFn: test.testFn, testStaticOptions});

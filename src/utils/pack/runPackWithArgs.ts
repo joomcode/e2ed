@@ -14,7 +14,7 @@ import {getPackTimeoutPromise} from './packTimeout';
  * @internal
  */
 export const runPackWithArgs = async (): Promise<void> => {
-  const {browsers, concurrency} = getFullPackConfig();
+  const {browsers, concurrency, enableLiveMode} = getFullPackConfig();
   const runLabel = createRunLabel({concurrency, maxRetriesCount: 1, retryIndex: 1});
 
   setRunLabel(runLabel);
@@ -25,6 +25,10 @@ export const runPackWithArgs = async (): Promise<void> => {
 
   process.argv.push('--concurrency', String(concurrency));
   process.argv.push('--config-file', TESTCAFERC_PATH);
+
+  if (enableLiveMode) {
+    process.argv.push('--live');
+  }
 
   const packTimeoutPromise = getPackTimeoutPromise();
 

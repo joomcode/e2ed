@@ -61,7 +61,7 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
 
     let headers: Headers | undefined;
 
-    const {destRes} = requestHookContext._ctx ?? {};
+    const {destRes} = requestHookContext?._ctx ?? {};
 
     if (destRes) {
       ({headers} = destRes);
@@ -70,7 +70,7 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
 
       applyHeadersMapper(headers, this.options.mapResponseHeaders);
     } else {
-      const {responseHeaders} = requestHookContext._event ?? {};
+      const {responseHeaders} = requestHookContext?._event ?? {};
       const headersModifiers = event._modifyResponseFunctions;
 
       assertValueIsDefined(responseHeaders, 'responseHeaders is defined');

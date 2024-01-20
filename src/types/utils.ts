@@ -63,9 +63,8 @@ export type ObjectEntries<Type> = EntryPair<Type>[];
  * `OneOrTwoArgs<'foo', string>` = `[arg1: 'foo', arg2: string]`.
  * `OneOrTwoArgs<'foo', undefined | number>` = `[arg1: 'foo', arg2?: number]`.
  */
-export type OneOrTwoArgs<Arg1, Arg2> = IsIncludeUndefined<Arg2> extends true
-  ? [arg1: Arg1, arg2?: Arg2]
-  : [arg1: Arg1, arg2: Arg2];
+export type OneOrTwoArgs<Arg1, Arg2> =
+  IsIncludeUndefined<Arg2> extends true ? [arg1: Arg1, arg2?: Arg2] : [arg1: Arg1, arg2: Arg2];
 
 /**
  * The property value will be optional if its default value

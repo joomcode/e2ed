@@ -79,7 +79,8 @@ export class Main extends Page<CustomPageParams> {
         if (
           url.startsWith('https://adservice.google.com/') ||
           url.startsWith('https://id.google.com/verify/') ||
-          url.startsWith('https://play.google.com/')
+          url.startsWith('https://play.google.com/') ||
+          url.startsWith('https://www.youtube.com/')
         ) {
           return false;
         }

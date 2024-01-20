@@ -97,7 +97,7 @@ abstract class RequestHookWithEvents extends RequestHook {
     const requestHookContext = event[REQUEST_HOOK_CONTEXT_KEY];
 
     // eslint-disable-next-line no-underscore-dangle
-    const {destRes} = requestHookContext._ctx ?? {};
+    const {destRes} = requestHookContext?._ctx ?? {};
 
     if (destRes) {
       const {headers = {}} = destRes;

@@ -29,12 +29,16 @@ export const addContextToResultsOfClassCreateMethods = (
   // eslint-disable-next-line no-param-reassign
   (ClassWithContext as {[IS_CONTEXT_ADDED_KEY]?: true})[IS_CONTEXT_ADDED_KEY] = true;
 
+  const isCdpBased = ClassWithContext.name.includes('EventBased');
   const {prototype} = ClassWithContext;
   const prototypeKeys = Object.getOwnPropertyNames(prototype);
-  const methodNames = prototypeKeys.filter((key) => typeof prototype[key] === 'function');
-  const createMethodNames = methodNames.filter((methodName) => methodName.startsWith('create'));
+  const allMethodNames = prototypeKeys.filter((key) => typeof prototype[key] === 'function');
+  const createMethodNames = allMethodNames.filter((methodName) => methodName.startsWith('create'));
+  const methodNames = isCdpBased
+    ? createMethodNames.filter((methodName) => !methodName.includes('RequestOptions'))
+    : createMethodNames;
 
-  for (const methodName of createMethodNames) {
+  for (const methodName of methodNames) {
     const originalMethod = prototype[methodName];
 
     assertValueIsDefined(originalMethod, 'originalMethod is defined', {

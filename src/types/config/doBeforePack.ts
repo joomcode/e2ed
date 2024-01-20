@@ -27,14 +27,15 @@ type PackParameters<
 /**
  * Get pack type parameters from given Pack type (without extends of AnyPackParameters).
  */
-type UntypedGetPackParameters<Pack extends AnyPack> = Pack extends UserlandPack<
-  infer CustomPackProperties,
-  infer CustomReportProperties,
-  infer SkipTests,
-  infer TestMeta
->
-  ? PackParameters<CustomPackProperties, CustomReportProperties, SkipTests, TestMeta>
-  : never;
+type UntypedGetPackParameters<Pack extends AnyPack> =
+  Pack extends UserlandPack<
+    infer CustomPackProperties,
+    infer CustomReportProperties,
+    infer SkipTests,
+    infer TestMeta
+  >
+    ? PackParameters<CustomPackProperties, CustomReportProperties, SkipTests, TestMeta>
+    : never;
 
 /**
  * Separate property `doBeforePack` of userland pack config.

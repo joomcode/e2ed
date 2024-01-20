@@ -41,7 +41,7 @@ docker run \
        --env __INTERNAL_E2ED_PATH_TO_PACK=$1 \
        --label $CONTAINER_LABEL \
        --rm \
-       --shm-size 512m \
+       --shm-size=512m \
        --volume $MOUNTDIR:$MOUNTDIR \
        --workdir $DIR \
        $WITH_DEBUG \

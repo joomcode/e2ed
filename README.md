@@ -276,6 +276,9 @@ for browser control in tests (instead of `testcafe-hammerhead`).
 
 `enableHeadlessMode: boolean`: enables headless mode (if browser supports such mode).
 
+`enableLiveMode: boolean`: enables [TestCafe live mode](https://testcafe.io/documentation/403842/guides/intermediate-guides/live-mode)
+for test development (only for locally running).
+
 `enableMobileDeviceMode: boolean`: enables Chromium [mobile device mode](https://developer.chrome.com/docs/devtools/device-mode).
 
 `enableTouchEventEmulation: boolean`: enables touch event emulation.
