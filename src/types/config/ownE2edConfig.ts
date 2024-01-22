@@ -181,6 +181,13 @@ export type OwnE2edConfig<
   pathToScreenshotsDirectoryForReport: string | null;
 
   /**
+   * Path to TypeScript config file of the project from the root directory of the project.
+   * The project should have one common TypeScript config for both
+   * the application code and the autotest code.
+   */
+  pathToTsConfigOfProjectFromRoot: string;
+
+  /**
    * The name of the file under which, after running the tests,
    * the HTML report will be saved in the `autotests/reports` directory, for example, `report.html`.
    * Also this name is used as the title of the report page.

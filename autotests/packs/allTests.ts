@@ -68,6 +68,7 @@ export const pack: Pack = {
   pageRequestTimeout: 30_000,
   pageStabilizationInterval: 500,
   pathToScreenshotsDirectoryForReport: './screenshots',
+  pathToTsConfigOfProjectFromRoot: './tsconfig.json',
   port1: 1337,
   port2: 1338,
   reportFileName: 'report.html',

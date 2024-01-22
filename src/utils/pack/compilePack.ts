@@ -4,6 +4,7 @@ import {
   flattenDiagnosticMessageText,
   getLineAndCharacterOfPosition,
   getPreEmitDiagnostics,
+  JsxEmit,
   ModuleKind,
   ScriptTarget,
 } from 'typescript';
@@ -16,10 +17,13 @@ import {
 import {getPathToPack} from '../environment';
 import {generalLog} from '../generalLog';
 
+// jsx, lib, paths, target, types
+
 const compilerOptions: CompilerOptions = {
   allowSyntheticDefaultImports: true,
   declaration: false,
   esModuleInterop: true,
+  jsx: JsxEmit.React,
   module: ModuleKind.CommonJS,
   outDir: COMPILED_USERLAND_CONFIG_DIRECTORY,
   paths: {
@@ -32,6 +36,8 @@ const compilerOptions: CompilerOptions = {
   target: ScriptTarget.ESNext,
   types: ['node'],
 };
+
+const unusedTsExceptErrorMessage = "Unused '@ts-expect-error' directive.";
 
 /**
  * Compiles pack file before running tests (or tasks).
@@ -47,6 +53,11 @@ export const compilePack = (): void => {
 
   allDiagnostics.forEach((diagnostic) => {
     const message = flattenDiagnosticMessageText(diagnostic.messageText, '\n');
+
+    if (message === unusedTsExceptErrorMessage) {
+      return;
+    }
+
     const logData: {file?: string; message: string} = {message};
 
     if (diagnostic.file) {

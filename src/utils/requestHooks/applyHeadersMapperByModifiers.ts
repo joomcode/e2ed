@@ -20,10 +20,16 @@ export const applyHeadersMapperByModifiers = (
   const newHeaders = mapper(copyOfHeaders);
 
   for (const [name, value] of Object.entries(newHeaders)) {
+    const lowerCaseName = name.toLowerCase();
+
     if (value === undefined) {
-      removeHeader(name.toLowerCase());
+      removeHeader(lowerCaseName);
     } else {
-      setHeader(name.toLowerCase(), String(value));
+      const values = Array.isArray(value) ? value : [value];
+
+      for (const singleValue of values) {
+        setHeader(lowerCaseName, singleValue);
+      }
     }
   }
 };
