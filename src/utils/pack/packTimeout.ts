@@ -20,7 +20,7 @@ export const getPackTimeoutPromise = (): Promise<void> =>
   });
 
 /**
- * Set pack timeout from pack config field "packTimeout".
+ * Set pack timeout from pack config field `packTimeout`.
  * @internal
  */
 export const setPackTimeout = (): void => {

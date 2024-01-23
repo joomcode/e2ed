@@ -46,12 +46,6 @@ export type OwnE2edConfig<
   ) => MaybePromise<CustomReportProperties | Void>)[];
 
   /**
-   * The name of the docker image where the tests will run.
-   * The image must be based on the e2ed base image.
-   */
-  dockerImage: string;
-
-  /**
    * Enables Chrome DevTools Protocol for browser control in tests (instead of `testcafe-hammerhead`).
    * {@link https://chromedevtools.github.io/devtools-protocol/}
    */

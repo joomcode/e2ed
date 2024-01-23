@@ -8,5 +8,4 @@ import type {Pack} from 'autotests/types/pack';
 export const pack: Pack = {
   ...allTestsPack,
   browserInitTimeout: 40_000,
-  dockerImage: 'e2edhub/e2ed',
 };

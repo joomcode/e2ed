@@ -1,43 +1,22 @@
 import {
-  type CompilerOptions,
   createProgram,
   flattenDiagnosticMessageText,
   getLineAndCharacterOfPosition,
   getPreEmitDiagnostics,
-  ModuleKind,
-  ScriptTarget,
 } from 'typescript';
 
-import {
-  AUTOTESTS_DIRECTORY_PATH,
-  COMPILED_USERLAND_CONFIG_DIRECTORY,
-} from '../../constants/internal';
-
 import {getPathToPack} from '../environment';
-import {generalLog} from '../generalLog';
 
-const compilerOptions: CompilerOptions = {
-  allowSyntheticDefaultImports: true,
-  declaration: false,
-  esModuleInterop: true,
-  module: ModuleKind.CommonJS,
-  outDir: COMPILED_USERLAND_CONFIG_DIRECTORY,
-  paths: {
-    [AUTOTESTS_DIRECTORY_PATH]: [`./${AUTOTESTS_DIRECTORY_PATH}/index.ts`],
-    [`${AUTOTESTS_DIRECTORY_PATH}/*`]: [`./${AUTOTESTS_DIRECTORY_PATH}/*`],
-  },
-  resolveJsonModule: true,
-  rootDir: '.',
-  skipLibCheck: true,
-  target: ScriptTarget.ESNext,
-  types: ['node'],
-};
+import {getCompilerOptions} from './getCompilerOptions';
+
+const unusedTsExceptErrorMessage = "Unused '@ts-expect-error' directive.";
 
 /**
  * Compiles pack file before running tests (or tasks).
  * @internal
  */
-export const compilePack = (): void => {
+export const compilePack = (): readonly Readonly<Record<string, string>>[] => {
+  const {compilerOptions, parsingTsConfigError} = getCompilerOptions();
   const pathToPack = getPathToPack();
 
   const program = createProgram([pathToPack], compilerOptions);
@@ -45,8 +24,19 @@ export const compilePack = (): void => {
 
   const allDiagnostics = getPreEmitDiagnostics(program).concat(diagnostics);
 
+  const errors: Readonly<Record<string, string>>[] = [];
+
+  if (parsingTsConfigError !== undefined) {
+    errors.push(parsingTsConfigError);
+  }
+
   allDiagnostics.forEach((diagnostic) => {
     const message = flattenDiagnosticMessageText(diagnostic.messageText, '\n');
+
+    if (message === unusedTsExceptErrorMessage) {
+      return;
+    }
+
     const logData: {file?: string; message: string} = {message};
 
     if (diagnostic.file) {
@@ -58,6 +48,8 @@ export const compilePack = (): void => {
       logData.file = `${diagnostic.file.fileName} (${line + 1},${character + 1})`;
     }
 
-    generalLog(`Error on compiling pack ${pathToPack}`, logData);
+    errors.push(logData);
   });
+
+  return errors;
 };

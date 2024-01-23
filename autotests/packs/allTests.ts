@@ -48,7 +48,6 @@ export const pack: Pack = {
   customPackProperties: {internalPackRunId: 0, name: 'allTests'},
   doAfterPack,
   doBeforePack,
-  dockerImage: 'e2edhub/e2ed',
   enableChromeDevToolsProtocol: true,
   enableHeadlessMode: true,
   enableLiveMode: false,

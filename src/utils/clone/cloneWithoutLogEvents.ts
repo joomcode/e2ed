@@ -1,12 +1,12 @@
-type WithLogEvents = {logEvents: unknown};
+type WithLogEvents = Readonly<{logEvents: unknown}>;
 
 /**
- * Clone test run object without logEvents property (to reduce logs).
+ * Clone test run object without `logEvents` property (to reduce logs).
  * @internal
  */
-export const cloneWithoutLogEvents = <T extends WithLogEvents>(
-  withLogEvents: T,
-): Omit<T, 'logEvents'> => {
+export const cloneWithoutLogEvents = <Type extends WithLogEvents>(
+  withLogEvents: Type,
+): Omit<Type, 'logEvents'> => {
   const {logEvents, ...withoutLogEvents} = withLogEvents ?? {};
 
   void logEvents;
