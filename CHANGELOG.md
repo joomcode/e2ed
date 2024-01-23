@@ -1,5 +1,29 @@
 # Changelog
 
+## [v0.16.3](https://github.com/joomcode/e2ed/tree/v0.16.3) (2024-01-23)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.2...v0.16.3)
+
+- [Merge pull request #57 from joomcode/fix/multiheaders-mapping-for-cdp](https://github.com/joomcode/e2ed/commit/0acb037db0a519ba4f5210c1576fa4764bec282c) ([uid11](https://github.com/uid11))
+
+  fix: multiheaders mapping in CDP mode
+
+- [chore: update devDependencies (`@typescript-eslint/*`, etc)](https://github.com/joomcode/e2ed/commit/f7d16e013d8ff38f22cb7ca260427624b4388b77) ([uid11](https://github.com/uid11))
+
+  fix: remove `UnwrapPromise` type in favor of `Awaited`
+
+  fix: support `lib` field in TypeScript config for compiling pack config
+
+- [FI-1136 fix: use `E2ED_DOCKER_IMAGE` instead of `dockerImage` pack option](https://github.com/joomcode/e2ed/commit/41bb7c76d648d37d21f63c0998ad7c70742a8f44) ([uid11](https://github.com/uid11))
+
+  feat: support dotenv file `./autotests/.env`
+
+  fix: use `E2ED_PATH_TO_TS_CONFIG_OF_PROJECT_FROM_ROOT` environment variables
+
+- [FI-943 fix: mapping of headers with array values in CDP mode](https://github.com/joomcode/e2ed/commit/e67999207bcb657d62cbab6bfa0c9bccd6a31880) ([uid11](https://github.com/uid11))
+
+  feat: add `pathToTsConfigOfProjectFromRoot` option to pack config
+
 ## [v0.16.2](https://github.com/joomcode/e2ed/tree/v0.16.2) (2024-01-20)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.1...v0.16.2)
