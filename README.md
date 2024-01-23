@@ -268,9 +268,6 @@ The functions accept a start info object, and can return new full pack config,
 which in this case will be included in the start info object, and will be used for running pack.
 Each function can thus access the results of the previous function.
 
-`dockerImage: string`: the name of the docker image where the tests will run.
-The image must be based on the e2ed base image.
-
 `enableChromeDevToolsProtocol: boolean`: enables [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/)
 for browser control in tests (instead of `testcafe-hammerhead`).
 
@@ -404,6 +401,17 @@ If the wait is longer than this timeout, then the promise returned by the `waitF
 If the wait is longer than this timeout, then the promise returned by the `waitForResponse`/`waitForResponseToRoute` function will be rejected.
 
 ### Environment variables
+
+Required environment variables are defined in the `./autotests/.env` file (they cannot be deleted):
+
+`E2ED_DOCKER_IMAGE`: the name of the docker image where the tests will run.
+The image must be based on the e2ed base image.
+
+`E2ED_PATH_TO_TS_CONFIG_OF_PROJECT_FROM_ROOT`: the path to TypeScript config file of the project
+from the root directory of the project. The project should have one common TypeScript config
+for both the application code and the autotest code.
+
+You can pass the following optional environment variables to the `e2ed` process in any standard way:
 
 `E2ED_ORIGIN`: origin-part of the url (`protocol` + `host`) on which the tests will be run. For example, `https://google.com`.
 

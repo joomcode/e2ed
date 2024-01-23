@@ -1,41 +1,13 @@
 import {
-  type CompilerOptions,
   createProgram,
   flattenDiagnosticMessageText,
   getLineAndCharacterOfPosition,
   getPreEmitDiagnostics,
-  JsxEmit,
-  ModuleKind,
-  ScriptTarget,
 } from 'typescript';
 
-import {
-  AUTOTESTS_DIRECTORY_PATH,
-  COMPILED_USERLAND_CONFIG_DIRECTORY,
-} from '../../constants/internal';
-
 import {getPathToPack} from '../environment';
-import {generalLog} from '../generalLog';
 
-// jsx, lib, paths, target, types
-
-const compilerOptions: CompilerOptions = {
-  allowSyntheticDefaultImports: true,
-  declaration: false,
-  esModuleInterop: true,
-  jsx: JsxEmit.React,
-  module: ModuleKind.CommonJS,
-  outDir: COMPILED_USERLAND_CONFIG_DIRECTORY,
-  paths: {
-    [AUTOTESTS_DIRECTORY_PATH]: [`./${AUTOTESTS_DIRECTORY_PATH}/index.ts`],
-    [`${AUTOTESTS_DIRECTORY_PATH}/*`]: [`./${AUTOTESTS_DIRECTORY_PATH}/*`],
-  },
-  resolveJsonModule: true,
-  rootDir: '.',
-  skipLibCheck: true,
-  target: ScriptTarget.ESNext,
-  types: ['node'],
-};
+import {getCompilerOptions} from './getCompilerOptions';
 
 const unusedTsExceptErrorMessage = "Unused '@ts-expect-error' directive.";
 
@@ -43,13 +15,16 @@ const unusedTsExceptErrorMessage = "Unused '@ts-expect-error' directive.";
  * Compiles pack file before running tests (or tasks).
  * @internal
  */
-export const compilePack = (): void => {
+export const compilePack = (): readonly Readonly<Record<string, string>>[] => {
+  const compilerOptions = getCompilerOptions();
   const pathToPack = getPathToPack();
 
   const program = createProgram([pathToPack], compilerOptions);
   const {diagnostics} = program.emit();
 
   const allDiagnostics = getPreEmitDiagnostics(program).concat(diagnostics);
+
+  const errors: Readonly<Record<string, string>>[] = [];
 
   allDiagnostics.forEach((diagnostic) => {
     const message = flattenDiagnosticMessageText(diagnostic.messageText, '\n');
@@ -69,6 +44,8 @@ export const compilePack = (): void => {
       logData.file = `${diagnostic.file.fileName} (${line + 1},${character + 1})`;
     }
 
-    generalLog(`Error on compiling pack ${pathToPack}`, logData);
+    errors.push(logData);
   });
+
+  return errors;
 };

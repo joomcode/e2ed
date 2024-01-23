@@ -37,6 +37,12 @@ export const INSTALLED_E2ED_DIRECTORY_PATH = relative(
 export const AUTOTESTS_DIRECTORY_PATH = 'autotests' as DirectoryPathFromRoot;
 
 /**
+ * Relative (from root) path to `.env` file in directory with autotests.
+ * @internal
+ */
+export const DOT_ENV_PATH = join(AUTOTESTS_DIRECTORY_PATH, '.env') as FilePathFromRoot;
+
+/**
  * Relative (from root) path to reports directory.
  * @internal
  */
@@ -82,7 +88,7 @@ export const SCREENSHOTS_DIRECTORY_PATH = join(
 export const START_INFO_PATH = join(TMP_DIRECTORY_PATH, 'startInfo.json') as FilePathFromRoot;
 
 /**
- * Relative (from root) path to testcaferc file,
+ * Relative (from root) path to `testcaferc` file,
  * that plays the role of the internal TestCafe config.
  * @internal
  */

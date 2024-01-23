@@ -5,15 +5,16 @@ set +u
 CONTAINER_LABEL="e2ed"
 DEBUG_PORT="${E2ED_DOCKER_DEBUG_PORT:-9229}"
 DIR="${E2ED_WORKDIR:-$PWD}"
-DOCKER_IMAGE=$(grep -m1 dockerImage $DIR/$1 | sed -e "s/^[^'\"\`]*['\"\`]//" -e "s/['\"\`][^'\"\`]*$//")
 MOUNTDIR="${E2ED_MOUNTDIR:-$DIR}"
 WITH_DEBUG=$([[ -z $E2ED_DEBUG ]] && echo "" || echo "--env E2ED_DEBUG=$DEBUG_PORT --publish $DEBUG_PORT:$DEBUG_PORT --publish $((DEBUG_PORT + 1)):$((DEBUG_PORT + 1))")
 VERSION=$(grep -m1 \"e2ed\": $DIR/package.json | cut -d '"' -f 4)
 
-if [[ -z $DOCKER_IMAGE ]]
+source ./autotests/.env
+
+if [[ -z $E2ED_DOCKER_IMAGE ]]
 then
-    echo "Error: The pack config does not contain an explicit line with \"dockerImage\"."
-    echo "Add it so that the bash script can read the docker image."
+    echo "Error: The \"autotests/.env\" file does not contain E2ED_DOCKER_IMAGE variable."
+    echo "Add it so that \"runDocker.sh\" script can run the docker image."
     echo "Exit with code 9"
     exit 9
 fi
@@ -23,16 +24,16 @@ onExit() {
 
     if [[ -z $CONTAINER_ID ]]
     then
-        echo "Docker container from image $DOCKER_IMAGE:$VERSION already stopped"
+        echo "Docker container from image $E2ED_DOCKER_IMAGE:$VERSION already stopped"
     else
-        echo "Stop docker container from image $DOCKER_IMAGE:$VERSION"
+        echo "Stop docker container from image $E2ED_DOCKER_IMAGE:$VERSION"
         docker stop --time=60 $CONTAINER_ID
     fi
 
     exit
 }
 
-echo "Run docker image $DOCKER_IMAGE:$VERSION"
+echo "Run docker image $E2ED_DOCKER_IMAGE:$VERSION"
 
 trap "onExit" EXIT
 
@@ -45,7 +46,7 @@ docker run \
        --volume $MOUNTDIR:$MOUNTDIR \
        --workdir $DIR \
        $WITH_DEBUG \
-       $DOCKER_IMAGE:$VERSION \
+       $E2ED_DOCKER_IMAGE:$VERSION \
     & PID=$!
 
 wait $PID

@@ -46,12 +46,6 @@ export type OwnE2edConfig<
   ) => MaybePromise<CustomReportProperties | Void>)[];
 
   /**
-   * The name of the docker image where the tests will run.
-   * The image must be based on the e2ed base image.
-   */
-  dockerImage: string;
-
-  /**
    * Enables Chrome DevTools Protocol for browser control in tests (instead of `testcafe-hammerhead`).
    * {@link https://chromedevtools.github.io/devtools-protocol/}
    */
@@ -179,13 +173,6 @@ export type OwnE2edConfig<
    * If `null`, screenshots will not be displayed in the HTML report.
    */
   pathToScreenshotsDirectoryForReport: string | null;
-
-  /**
-   * Path to TypeScript config file of the project from the root directory of the project.
-   * The project should have one common TypeScript config for both
-   * the application code and the autotest code.
-   */
-  pathToTsConfigOfProjectFromRoot: string;
 
   /**
    * The name of the file under which, after running the tests,
