@@ -81,13 +81,7 @@ export type {
 } from './paths';
 /** @internal */
 export type {ImgData, PixelmatchOptions} from './pixelmatch';
-export type {
-  AsyncVoid,
-  MaybePromise,
-  ReExecutablePromise,
-  Thenable,
-  UnwrapPromise,
-} from './promise';
+export type {AsyncVoid, MaybePromise, ReExecutablePromise, Thenable} from './promise';
 export type {
   AnyObject,
   FieldReplacer,

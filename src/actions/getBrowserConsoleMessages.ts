@@ -2,9 +2,7 @@ import {LogEventStatus, LogEventType} from '../constants/internal';
 import {testController} from '../testController';
 import {log} from '../utils/log';
 
-import type {UnwrapPromise} from '../types/internal';
-
-type ConsoleMessages = UnwrapPromise<ReturnType<typeof testController.getBrowserConsoleMessages>>;
+type ConsoleMessages = Awaited<ReturnType<typeof testController.getBrowserConsoleMessages>>;
 
 type Options = Readonly<{
   showMessagesInLog?: boolean;

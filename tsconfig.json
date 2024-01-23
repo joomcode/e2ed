@@ -7,6 +7,7 @@
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
     "incremental": true,
+    "lib": ["ES2016", "ES2021.Promise", "ES2022.Error", "DOM", "DOM.Iterable"],
     "module": "CommonJS",
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,

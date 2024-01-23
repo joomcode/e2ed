@@ -1,9 +1,7 @@
-import type {UnwrapPromise} from '../../types/internal';
-
 type PromiseObject = Record<string, Promise<unknown>>;
 
 type Return<Value extends PromiseObject> = Promise<{
-  [Key in keyof Value]: UnwrapPromise<Value[Key]>;
+  [Key in keyof Value]: Awaited<Value[Key]>;
 }>;
 
 /**

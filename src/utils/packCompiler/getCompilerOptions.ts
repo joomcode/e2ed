@@ -29,11 +29,17 @@ const frozenCompilerOptions: CompilerOptions = {
   types: ['node'],
 };
 
+type Return = Readonly<{
+  compilerOptions: CompilerOptions;
+  parsingTsConfigError?: Readonly<Record<string, string>> | undefined;
+}>;
+
 /**
  * Get TypeScript compiler options for pack config compilation.
  * @internal
  */
-export const getCompilerOptions = (): CompilerOptions => {
+export const getCompilerOptions = (): Return => {
+  let parsingTsConfigError: Record<string, string> | undefined;
   let tsConfigOfProject: Readonly<{compilerOptions: CompilerOptions}> = {compilerOptions: {}};
 
   const pathToTsConfigOfProjectFromRoot =
@@ -52,12 +58,25 @@ export const getCompilerOptions = (): CompilerOptions => {
 
     // eslint-disable-next-line global-require, import/no-dynamic-require
     tsConfigOfProject = require<typeof tsConfigOfProject>(absoluteTsConfigPath);
-  } catch {}
+  } catch (error: unknown) {
+    parsingTsConfigError = {
+      error: String(error),
+      message: 'Caught an error on parsing TypeScript config of project',
+    };
+
+    if (error instanceof Error) {
+      Object.assign(parsingTsConfigError, {stack: error.stack});
+    }
+  }
 
   const compilerOptions: CompilerOptions = {...frozenCompilerOptions};
   const {jsx, lib, paths, target} = tsConfigOfProject.compilerOptions;
 
-  Object.assign(compilerOptions, cloneWithoutUndefinedProperties({jsx, lib, paths, target}));
+  Object.assign(compilerOptions, cloneWithoutUndefinedProperties({jsx, paths, target}));
 
-  return compilerOptions;
+  if (lib) {
+    compilerOptions.lib = lib.map((name) => `lib.${name.toLowerCase()}.d.ts`);
+  }
+
+  return {compilerOptions, parsingTsConfigError};
 };

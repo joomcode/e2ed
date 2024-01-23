@@ -21,11 +21,6 @@ import type {
  */
 export class E2edError extends Error {
   /**
-   * Cause of error, if any.
-   */
-  readonly cause: unknown;
-
-  /**
    * Current runLabel at the time the error was created
    */
   readonly runLabel: RunLabel | undefined;
@@ -78,7 +73,6 @@ export class E2edError extends Error {
       constructorArgs.push({cause: params.cause});
     }
 
-    // @ts-expect-error: Error constructor still doesn't support second argument
     super(...constructorArgs);
 
     if (params?.cause) {

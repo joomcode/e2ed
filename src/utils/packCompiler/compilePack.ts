@@ -16,7 +16,7 @@ const unusedTsExceptErrorMessage = "Unused '@ts-expect-error' directive.";
  * @internal
  */
 export const compilePack = (): readonly Readonly<Record<string, string>>[] => {
-  const compilerOptions = getCompilerOptions();
+  const {compilerOptions, parsingTsConfigError} = getCompilerOptions();
   const pathToPack = getPathToPack();
 
   const program = createProgram([pathToPack], compilerOptions);
@@ -25,6 +25,10 @@ export const compilePack = (): readonly Readonly<Record<string, string>>[] => {
   const allDiagnostics = getPreEmitDiagnostics(program).concat(diagnostics);
 
   const errors: Readonly<Record<string, string>>[] = [];
+
+  if (parsingTsConfigError !== undefined) {
+    errors.push(parsingTsConfigError);
+  }
 
   allDiagnostics.forEach((diagnostic) => {
     const message = flattenDiagnosticMessageText(diagnostic.messageText, '\n');
