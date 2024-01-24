@@ -1,5 +1,23 @@
 # Changelog
 
+## [v0.16.5](https://github.com/joomcode/e2ed/tree/v0.16.5) (2024-01-24)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.4...v0.16.5)
+
+- [Merge pull request #59 from joomcode/fix/headers-rewriting-on-cdp-mode](https://github.com/joomcode/e2ed/commit/20d26dc44cc2ae158c5640d7d6fcaa0851c09169) ([uid11](https://github.com/uid11))
+
+  fix: headers rewriting on CDP mode
+
+- [FI-943 fix: do not rewrite header values on CDP mode](https://github.com/joomcode/e2ed/commit/452747d19bb79d0eea41f5e47b7b0a483a33b5a6) ([uid11](https://github.com/uid11))
+
+  feat: add `assertValueIsBoolean` function to public API
+
+  chore: update `@types/node` to 20.11.6
+
+- [FI-1138 feat: add `configCompileTimeWithUnits` field to start info](https://github.com/joomcode/e2ed/commit/168944cdd11d37a67cdd65a3d1043f6130711739) ([uid11](https://github.com/uid11))
+
+  feat: add `afterPackExecutionTimeWithUnits`/`beforePackExecutionTimeWithUnits` fields
+
 ## [v0.16.4](https://github.com/joomcode/e2ed/tree/v0.16.4) (2024-01-24)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.3...v0.16.4)
