@@ -9,11 +9,11 @@ MOUNTDIR="${E2ED_MOUNTDIR:-$DIR}"
 WITH_DEBUG=$([[ -z $E2ED_DEBUG ]] && echo "" || echo "--env E2ED_DEBUG=$DEBUG_PORT --publish $DEBUG_PORT:$DEBUG_PORT --publish $((DEBUG_PORT + 1)):$((DEBUG_PORT + 1))")
 VERSION=$(grep -m1 \"e2ed\": $DIR/package.json | cut -d '"' -f 4)
 
-source ./autotests/.env
+source ./autotests/variables.env
 
 if [[ -z $E2ED_DOCKER_IMAGE ]]
 then
-    echo "Error: The \"autotests/.env\" file does not contain E2ED_DOCKER_IMAGE variable."
+    echo "Error: The \"autotests/variables.env\" file does not contain E2ED_DOCKER_IMAGE variable."
     echo "Add it so that \"runDocker.sh\" script can run the docker image."
     echo "Exit with code 9"
     exit 9

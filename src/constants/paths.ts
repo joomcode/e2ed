@@ -37,10 +37,10 @@ export const INSTALLED_E2ED_DIRECTORY_PATH = relative(
 export const AUTOTESTS_DIRECTORY_PATH = 'autotests' as DirectoryPathFromRoot;
 
 /**
- * Relative (from root) path to `.env` file in directory with autotests.
+ * Relative (from root) path to `variables.env` file in directory with autotests.
  * @internal
  */
-export const DOT_ENV_PATH = join(AUTOTESTS_DIRECTORY_PATH, '.env') as FilePathFromRoot;
+export const DOT_ENV_PATH = join(AUTOTESTS_DIRECTORY_PATH, 'variables.env') as FilePathFromRoot;
 
 /**
  * Relative (from root) path to reports directory.
