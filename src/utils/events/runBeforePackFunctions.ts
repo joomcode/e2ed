@@ -1,12 +1,8 @@
 import {generalLog} from '../generalLog';
+import {setReadonlyProperty} from '../setReadonlyProperty';
 import {runArrayOfUserlandFunctions} from '../userland';
 
-import type {
-  FullPackConfig,
-  FullPackConfigWithoutDoBeforePack,
-  StartInfo,
-  Void,
-} from '../../types/internal';
+import type {FullPackConfigWithoutDoBeforePack, StartInfo, Void} from '../../types/internal';
 
 /**
  * Runs functions from `doBeforePack` pack config field.
@@ -18,9 +14,11 @@ export const runBeforePackFunctions = async (startInfo: StartInfo): Promise<void
   const {fullPackConfig} = startInfo;
   const {doBeforePack: functions, ...fullPackConfigWithoutDoBeforePack} = fullPackConfig;
 
-  Object.assign<StartInfoWithoutDoBeforePack, Partial<StartInfoWithoutDoBeforePack>>(startInfo, {
-    fullPackConfig: fullPackConfigWithoutDoBeforePack,
-  });
+  setReadonlyProperty(
+    startInfo as StartInfoWithoutDoBeforePack,
+    'fullPackConfig',
+    fullPackConfigWithoutDoBeforePack,
+  );
 
   const args: [StartInfoWithoutDoBeforePack] = [startInfo];
 
@@ -29,9 +27,7 @@ export const runBeforePackFunctions = async (startInfo: StartInfo): Promise<void
       return;
     }
 
-    Object.assign<StartInfoWithoutDoBeforePack, Partial<StartInfoWithoutDoBeforePack>>(startInfo, {
-      fullPackConfig: result,
-    });
+    setReadonlyProperty(startInfo as StartInfoWithoutDoBeforePack, 'fullPackConfig', result);
   };
 
   const message =
@@ -41,10 +37,17 @@ export const runBeforePackFunctions = async (startInfo: StartInfo): Promise<void
 
   generalLog(message);
 
-  await runArrayOfUserlandFunctions(functions, () => args, processCurrentFunctionResult);
-
-  Object.assign<FullPackConfigWithoutDoBeforePack, Partial<FullPackConfig>>(
-    startInfo.fullPackConfig,
-    {doBeforePack: functions},
+  const beforePackExecutionTimeWithUnits = await runArrayOfUserlandFunctions(
+    functions,
+    () => args,
+    processCurrentFunctionResult,
   );
+
+  setReadonlyProperty(
+    startInfo,
+    'beforePackExecutionTimeWithUnits',
+    beforePackExecutionTimeWithUnits,
+  );
+
+  setReadonlyProperty(startInfo.fullPackConfig, 'doBeforePack', functions);
 };

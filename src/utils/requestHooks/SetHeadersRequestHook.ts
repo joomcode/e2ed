@@ -8,12 +8,12 @@ import {
 } from '../../constants/internal';
 import {testController} from '../../testController';
 
-import {assertValueIsDefined} from '../asserts';
+import {assertValueIsBoolean, assertValueIsDefined} from '../asserts';
 import {log} from '../log';
 import {setReadonlyProperty} from '../setReadonlyProperty';
 
 import {applyHeadersMapper} from './applyHeadersMapper';
-import {applyHeadersMapperByModifiers} from './applyHeadersMapperByModifiers';
+import {applyHeadersMapperOnCdpMode} from './applyHeadersMapperOnCdpMode';
 import {getHeadersFromHeaderEntries} from './getHeadersFromHeaderEntries';
 import {RequestHookWithEvents} from './RequestHookWithEvents';
 
@@ -38,6 +38,10 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
   }
 
   override onRequest(event: RequestHookRequestEvent): Promise<void> {
+    if (this.options.mapRequestHeaders === undefined) {
+      return RESOLVED_PROMISE;
+    }
+
     const {requestOptions} = event;
     const {headers = {}} = requestOptions;
 
@@ -57,6 +61,10 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
   override async _onConfigureResponse(event: RequestHookConfigureResponseEvent): Promise<void> {
     await super._onConfigureResponse(event);
 
+    if (this.options.mapResponseHeaders === undefined) {
+      return;
+    }
+
     const requestHookContext = event[REQUEST_HOOK_CONTEXT_KEY];
 
     let headers: Headers | undefined;
@@ -70,14 +78,27 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
 
       applyHeadersMapper(headers, this.options.mapResponseHeaders);
     } else {
-      const {responseHeaders} = requestHookContext?._event ?? {};
-      const headersModifiers = event._modifyResponseFunctions;
+      assertValueIsDefined(requestHookContext, 'requestHookContext is defined');
+
+      const {headersModified} = requestHookContext;
+
+      assertValueIsBoolean(headersModified, 'headersModified is boolean');
+
+      const {responseHeaders} = requestHookContext._event ?? {};
 
       assertValueIsDefined(responseHeaders, 'responseHeaders is defined');
 
       headers = getHeadersFromHeaderEntries(responseHeaders);
 
-      applyHeadersMapperByModifiers(headers, this.options.mapResponseHeaders, headersModifiers);
+      applyHeadersMapperOnCdpMode(
+        headers,
+        this.options.mapResponseHeaders,
+        responseHeaders as (typeof responseHeaders)[number][],
+      );
+
+      headers = getHeadersFromHeaderEntries(responseHeaders);
+
+      setReadonlyProperty(requestHookContext, 'headersModified', true);
     }
 
     log(`Map response headers for ${this.url}`, {headers}, LogEventType.InternalUtil);

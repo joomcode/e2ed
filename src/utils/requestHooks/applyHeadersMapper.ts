@@ -7,11 +7,7 @@ import type {Headers, MapHeaders, Mutable} from '../../types/internal';
  * Map exists headers to new headers and merge this new headers to exists headers.
  * @internal
  */
-export const applyHeadersMapper = (headers: Headers, mapper?: MapHeaders): void => {
-  if (mapper === undefined) {
-    return;
-  }
-
+export const applyHeadersMapper = (headers: Headers, mapper: MapHeaders): void => {
   const copyOfHeaders = getCopyOfHeaders(headers);
   const newHeaders = mapper(copyOfHeaders);
 

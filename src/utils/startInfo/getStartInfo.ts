@@ -14,12 +14,14 @@ import {getPackageInfo} from './getPackageInfo';
 
 import type {StartInfo} from '../../types/internal';
 
+type Options = Readonly<{configCompileTimeWithUnits: string}>;
+
 /**
  * Get complete start info (CLI params, e2ed environment variables
  * and full e2ed configuration) on start of tests run.
  * @internal
  */
-export const getStartInfo = (): StartInfo => {
+export const getStartInfo = ({configCompileTimeWithUnits}: Options): StartInfo => {
   const e2edEnvironmentVariables: Record<string, string | undefined> = {};
 
   for (const name of Object.keys(e2edEnvironment).sort()) {
@@ -39,6 +41,8 @@ export const getStartInfo = (): StartInfo => {
 
   return {
     absolutePathToProjectRootDirectory: ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
+    beforePackExecutionTimeWithUnits: '',
+    configCompileTimeWithUnits,
     'cwd()': process.cwd(),
     e2ed,
     e2edEnvironmentVariables,

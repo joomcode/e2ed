@@ -41,7 +41,7 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
     const {customReportProperties} = liteReport;
 
     if (customReportProperties !== undefined) {
-      Object.assign<ReportData, Partial<ReportData>>(reportData, {customReportProperties});
+      setReadonlyProperty(reportData, 'customReportProperties', customReportProperties);
     }
 
     const {liteReportFileName, reportFileName} = reportData;

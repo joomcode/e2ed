@@ -2,6 +2,7 @@ export {
   assertFunctionThrows,
   assertNumberIsPositiveInteger,
   assertValueHasProperty,
+  assertValueIsBoolean,
   assertValueIsDefined,
   assertValueIsFalse,
   assertValueIsNever,

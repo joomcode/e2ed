@@ -1,5 +1,6 @@
 import {getFullPackConfig} from '../config';
 import {generalLog} from '../generalLog';
+import {setReadonlyProperty} from '../setReadonlyProperty';
 import {runArrayOfUserlandFunctions} from '../userland';
 
 import type {CustomReportPropertiesPlaceholder, LiteReport, Void} from '../../types/internal';
@@ -17,7 +18,7 @@ export const runAfterPackFunctions = async (liteReport: LiteReport): Promise<voi
       return;
     }
 
-    Object.assign<LiteReport, Partial<LiteReport>>(liteReport, {customReportProperties: result});
+    setReadonlyProperty(liteReport, 'customReportProperties', result);
   };
 
   const message =
@@ -27,5 +28,15 @@ export const runAfterPackFunctions = async (liteReport: LiteReport): Promise<voi
 
   generalLog(message);
 
-  await runArrayOfUserlandFunctions(functions, () => args, processCurrentFunctionResult);
+  const afterPackExecutionTimeWithUnits = await runArrayOfUserlandFunctions(
+    functions,
+    () => args,
+    processCurrentFunctionResult,
+  );
+
+  setReadonlyProperty(
+    liteReport,
+    'afterPackExecutionTimeWithUnits',
+    afterPackExecutionTimeWithUnits,
+  );
 };

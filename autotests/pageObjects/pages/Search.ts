@@ -1,6 +1,7 @@
 import {MobilePage} from 'autotests/pageObjects';
 import {Search as SearchRoute} from 'autotests/routes/pageRoutes';
 import {waitForAllRequestsComplete, waitForInterfaceStabilization} from 'e2ed/actions';
+import {setReadonlyProperty} from 'e2ed/utils';
 
 import type {GetParamsType} from 'e2ed/types';
 
@@ -21,10 +22,10 @@ export class Search extends MobilePage<CustomPageParams> {
    */
   readonly searchQuery!: string;
 
-  override init(): void {
+  override init(this: Search): void {
     const searchQuery = this.pageParams.searchQuery ?? 'foo';
 
-    Object.assign<Search, Partial<Search>>(this, {searchQuery});
+    setReadonlyProperty(this, 'searchQuery', searchQuery);
   }
 
   getRoute(): SearchRoute {

@@ -6,8 +6,16 @@ import {
 } from 'typescript';
 
 import {getPathToPack} from '../environment';
+import {getDurationWithUnits} from '../getDurationWithUnits';
 
 import {getCompilerOptions} from './getCompilerOptions';
+
+import type {UtcTimeInMs} from '../../types/internal';
+
+type Result = Readonly<{
+  compileErrors: readonly Readonly<Record<string, string>>[];
+  configCompileTimeWithUnits: string;
+}>;
 
 const unusedTsExceptErrorMessage = "Unused '@ts-expect-error' directive.";
 
@@ -15,7 +23,9 @@ const unusedTsExceptErrorMessage = "Unused '@ts-expect-error' directive.";
  * Compiles pack file before running tests (or tasks).
  * @internal
  */
-export const compilePack = (): readonly Readonly<Record<string, string>>[] => {
+export const compilePack = (): Result => {
+  const startTimeInMs = Date.now() as UtcTimeInMs;
+
   const {compilerOptions, parsingTsConfigError} = getCompilerOptions();
   const pathToPack = getPathToPack();
 
@@ -24,10 +34,10 @@ export const compilePack = (): readonly Readonly<Record<string, string>>[] => {
 
   const allDiagnostics = getPreEmitDiagnostics(program).concat(diagnostics);
 
-  const errors: Readonly<Record<string, string>>[] = [];
+  const compileErrors: Readonly<Record<string, string>>[] = [];
 
   if (parsingTsConfigError !== undefined) {
-    errors.push(parsingTsConfigError);
+    compileErrors.push(parsingTsConfigError);
   }
 
   allDiagnostics.forEach((diagnostic) => {
@@ -48,8 +58,10 @@ export const compilePack = (): readonly Readonly<Record<string, string>>[] => {
       logData.file = `${diagnostic.file.fileName} (${line + 1},${character + 1})`;
     }
 
-    errors.push(logData);
+    compileErrors.push(logData);
   });
 
-  return errors;
+  const configCompileTimeWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
+
+  return {compileErrors, configCompileTimeWithUnits};
 };

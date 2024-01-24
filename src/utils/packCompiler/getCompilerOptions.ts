@@ -70,9 +70,9 @@ export const getCompilerOptions = (): Return => {
   }
 
   const compilerOptions: CompilerOptions = {...frozenCompilerOptions};
-  const {jsx, lib, paths, target} = tsConfigOfProject.compilerOptions;
+  const {baseUrl, jsx, lib, paths, target} = tsConfigOfProject.compilerOptions;
 
-  Object.assign(compilerOptions, cloneWithoutUndefinedProperties({jsx, paths, target}));
+  Object.assign(compilerOptions, cloneWithoutUndefinedProperties({baseUrl, jsx, paths, target}));
 
   if (lib) {
     compilerOptions.lib = lib.map((name) => `lib.${name.toLowerCase()}.d.ts`);
