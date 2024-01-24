@@ -33,8 +33,8 @@ export const renderJsonData = (reportData: ReportData): SafeHtml => {
   const fullTestRunsNotFromLastRetry: FullTestRun[] = [];
   const lastRetry = retries.at(-1);
 
-  for (let i = 0; i < retries.length - 1; i += 1) {
-    fullTestRunsNotFromLastRetry.push(...(retries[i]?.fullTestRuns ?? []));
+  for (let index = 0; index < retries.length - 1; index += 1) {
+    fullTestRunsNotFromLastRetry.push(...(retries[index]?.fullTestRuns ?? []));
   }
 
   const [lastRetryErrors, lastRetryRest] = filterErrors(lastRetry?.fullTestRuns ?? []);

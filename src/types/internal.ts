@@ -100,7 +100,6 @@ export type {
   TestRunButtonProps,
 } from './report';
 export type {
-  HeadersModifiers,
   RequestHookConfigureResponseEvent,
   RequestHookContextId,
   RequestHookRequestEvent,

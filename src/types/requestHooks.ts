@@ -29,14 +29,7 @@ type RequestHookContext = Readonly<{
   [REQUEST_HOOK_CONTEXT_ID_KEY]?: RequestHookContextId;
   _ctx?: Readonly<{destRes?: Readonly<{headers?: Headers}>}>;
   _event?: Readonly<{requestId: string; responseHeaders?: readonly HeaderEntry[]}>;
-}>;
-
-/**
- * Headers modification functions.
- */
-export type HeadersModifiers = Readonly<{
-  removeHeader(this: void, name: string): void;
-  setHeader(this: void, name: string, value: string): void;
+  headersModified?: boolean;
 }>;
 
 /**
@@ -77,11 +70,7 @@ export type RequestHookRequestEvent = DeepReadonly<{
 /**
  * TestCafe internal configure response event in RequestHook.
  */
-export type RequestHookConfigureResponseEvent = DeepReadonly<
-  MaybeWithContextKey & {
-    _modifyResponseFunctions: HeadersModifiers;
-  }
->;
+export type RequestHookConfigureResponseEvent = MaybeWithContextKey & {};
 
 /**
  * TestCafe internal response event in RequestHook.
