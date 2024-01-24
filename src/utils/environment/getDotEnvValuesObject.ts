@@ -5,7 +5,7 @@ import {DOT_ENV_PATH, READ_FILE_OPTIONS} from '../../constants/internal';
 import {E2edError} from '../error';
 
 /**
- * Get object with values from `.env` file in directory with autotests.
+ * Get object with values from `variables.env` file in directory with autotests.
  * {@link https://www.npmjs.com/package/dotenv}
  * @internal
  */
@@ -25,13 +25,13 @@ export const getDotEnvValuesObject = async (): Promise<Readonly<Record<string, s
     const indexOfEqualSign = trimmedLine.indexOf('=');
 
     if (indexOfEqualSign < 1) {
-      throw new E2edError('Incorrect name of environment variable in `.env`', {line});
+      throw new E2edError('Incorrect name of environment variable in `variables.env`', {line});
     }
 
     const name = trimmedLine.slice(0, indexOfEqualSign).trim();
 
     if (name in result) {
-      throw new E2edError(`Duplicate name "${name}" in \`.env\` file`, {
+      throw new E2edError(`Duplicate name "${name}" in \`variables.env\` file`, {
         firstValue: result[name],
         line,
       });

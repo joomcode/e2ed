@@ -402,7 +402,7 @@ If the wait is longer than this timeout, then the promise returned by the `waitF
 
 ### Environment variables
 
-Required environment variables are defined in the `./autotests/.env` file (they cannot be deleted):
+Required environment variables are defined in the `./autotests/variables.env` file (they cannot be deleted):
 
 `E2ED_DOCKER_IMAGE`: the name of the docker image where the tests will run.
 The image must be based on the e2ed base image.
