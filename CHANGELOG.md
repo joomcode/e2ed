@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.16.4](https://github.com/joomcode/e2ed/tree/v0.16.4) (2024-01-24)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.3...v0.16.4)
+
+- [Merge pull request #58 from joomcode/fix/rename-env-file](https://github.com/joomcode/e2ed/commit/902bf131f9eae280dfd98b1e73342274b7edf3c0) ([uid11](https://github.com/uid11))
+
+  fix: rename `.env` to `variables.env`
+
+- [FI-943 fix: rename `.env` to `variables.env`](https://github.com/joomcode/e2ed/commit/8c12f992ad1c5494887f41f02b6a125e5061e60c) ([uid11](https://github.com/uid11))
+
 ## [v0.16.3](https://github.com/joomcode/e2ed/tree/v0.16.3) (2024-01-23)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.2...v0.16.3)
