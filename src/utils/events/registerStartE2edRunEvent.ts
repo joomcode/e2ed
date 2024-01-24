@@ -27,9 +27,9 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
     errorSettingDotEnv = error;
   });
 
-  const compileErrors = compilePack();
+  const {compileErrors, configCompileTimeWithUnits} = compilePack();
 
-  const startInfo = getStartInfo();
+  const startInfo = getStartInfo({configCompileTimeWithUnits});
 
   try {
     await runBeforePackFunctions(startInfo);

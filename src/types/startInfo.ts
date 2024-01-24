@@ -16,6 +16,8 @@ export type PackageInfo = Readonly<{packagePath: AbsolutePathToDirectory; versio
  */
 export type StartInfo<FullPackConfigArg = FullPackConfig> = Readonly<{
   absolutePathToProjectRootDirectory: AbsolutePathToDirectory;
+  beforePackExecutionTimeWithUnits: string;
+  configCompileTimeWithUnits: string;
   'cwd()': string;
   e2ed: PackageInfo;
   e2edEnvironmentVariables: Readonly<Record<string, string | undefined>>;

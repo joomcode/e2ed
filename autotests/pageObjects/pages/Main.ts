@@ -5,6 +5,7 @@ import {createLocator, type Locator} from 'create-locator';
 import {Page} from 'e2ed';
 import {waitForAllRequestsComplete, waitForInterfaceStabilization} from 'e2ed/actions';
 import {getCssSelectorFromAttributesChain} from 'e2ed/createLocator';
+import {setReadonlyProperty} from 'e2ed/utils';
 
 import type {Language} from 'autotests/types';
 import type {GetParamsType, Selector} from 'e2ed/types';
@@ -32,10 +33,10 @@ export class Main extends Page<CustomPageParams> {
    */
   readonly language!: Language;
 
-  override init(): void {
+  override init(this: Main): void {
     const {language = 'de'} = this.pageParams ?? {};
 
-    Object.assign<Main, Partial<Main>>(this, {language});
+    setReadonlyProperty(this, 'language', language);
   }
 
   getRoute(): MainRoute {

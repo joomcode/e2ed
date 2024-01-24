@@ -41,6 +41,7 @@ export type LiteReport<
   SkipTests = SkipTestsPlaceholder,
   TestMeta = TestMetaPlaceholder,
 > = Readonly<{
+  afterPackExecutionTimeWithUnits: string;
   customReportProperties: CustomReportProperties | undefined;
   endE2edReason: EndE2edReason;
   endTimeInMs: UtcTimeInMs;

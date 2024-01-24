@@ -1,6 +1,7 @@
 import {E2edError} from '../error';
+import {getDurationWithUnits} from '../getDurationWithUnits';
 
-import type {Fn} from '../../types/internal';
+import type {Fn, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Run array of userland function (from `doBeforePack`/`doAfterPack`).
@@ -10,7 +11,8 @@ export const runArrayOfUserlandFunctions = async <Args extends readonly unknown[
   functions: readonly Fn<Args, Return>[],
   getCurrentFunctionArgs: () => Args,
   processCurrentFunctionResult: (result: Awaited<Return>) => void,
-): Promise<void> => {
+): Promise<string> => {
+  const startTimeInMs = Date.now() as UtcTimeInMs;
   let args: Args | undefined;
 
   for (const fn of functions) {
@@ -25,4 +27,8 @@ export const runArrayOfUserlandFunctions = async <Args extends readonly unknown[
       throw new E2edError('Caught an error on running userland function', {args, cause, fn});
     }
   }
+
+  const executionTimeWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
+
+  return executionTimeWithUnits;
 };
