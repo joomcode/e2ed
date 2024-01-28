@@ -4,14 +4,9 @@ import {createClientFunction} from '../createClientFunction';
 import {getFullPackConfig} from '../utils/config';
 import {log} from '../utils/log';
 
-import type {Url, Void} from '../types/internal';
+import type {ClientFunction, Url, Void} from '../types/internal';
 
-const clientNavigateToUrl = createClientFunction<[url: Url], Void>(
-  (url) => {
-    window.location.href = url;
-  },
-  {name: 'navigateToUrl'},
-);
+let clientNavigateToUrl: ClientFunction<[url: Url], Void> | undefined;
 
 type Options = Readonly<{
   skipLogs?: boolean;
@@ -21,6 +16,15 @@ type Options = Readonly<{
  * Navigate to the `url` (without waiting of interface stabilization).
  */
 export const navigateToUrl = async (url: Url, options: Options = {}): Promise<void> => {
+  if (clientNavigateToUrl === undefined) {
+    clientNavigateToUrl = createClientFunction<[url: Url], Void>(
+      (clientUrl) => {
+        window.location.href = clientUrl;
+      },
+      {name: 'navigateToUrl'},
+    );
+  }
+
   const {skipLogs = false} = options;
 
   if (skipLogs !== true) {

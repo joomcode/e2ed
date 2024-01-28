@@ -32,5 +32,4 @@ export type CreatePackSpecificTypes<
   MapLogPayloadInConsole: MapLogPayload;
   MapLogPayloadInLogFile: MapLogPayload;
   MapLogPayloadInReport: MapLogPayloadInReport;
-  NavigateTo: Hooks['navigateTo'];
 }>;

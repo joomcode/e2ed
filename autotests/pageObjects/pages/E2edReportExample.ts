@@ -1,10 +1,14 @@
+import {
+  setPageCookiesAndNavigateToUrl,
+  setPageRequestHeadersAndNavigateToUrl,
+} from 'autotests/actions';
 import {setPageCookies, setPageRequestHeaders} from 'autotests/context';
 import {E2edReportExample as E2edReportExampleRoute} from 'autotests/routes/pageRoutes';
 import {locatorIdSelector} from 'autotests/selectors';
 import {Page} from 'e2ed';
 import {setReadonlyProperty} from 'e2ed/utils';
 
-import type {Cookie, Headers, Selector} from 'e2ed/types';
+import type {Cookie, Headers, Selector, Url} from 'e2ed/types';
 
 type CustomPageParams = {pageCookies?: readonly Cookie[]; pageRequestHeaders?: Headers} | undefined;
 
@@ -68,5 +72,13 @@ export class E2edReportExample extends Page<CustomPageParams> {
     if (this.pageRequestHeaders !== undefined) {
       setPageRequestHeaders(this.pageRequestHeaders);
     }
+  }
+
+  override navigateToPage(url: Url): Promise<void> {
+    if (this.pageRequestHeaders) {
+      return setPageRequestHeadersAndNavigateToUrl(url, this.pageRequestHeaders);
+    }
+
+    return setPageCookiesAndNavigateToUrl(url, this.pageCookies);
   }
 }
