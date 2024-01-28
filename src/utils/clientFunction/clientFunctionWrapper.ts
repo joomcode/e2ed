@@ -7,7 +7,7 @@ declare const originalFn: (...args: unknown[]) => OriginalClientFunctionResult;
 declare const printedClientFunctionName: string;
 
 /**
- * This client function wraps all ClientFunction bodies and maps them errors to error messages.
+ * This client function wraps all `ClientFunction` bodies and maps them errors to error messages.
  * @internal
  */
 export const clientFunctionWrapper = <Args extends readonly unknown[], R>(
