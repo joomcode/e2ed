@@ -1,6 +1,6 @@
 FROM node:20.3.1-alpine AS node
 
-FROM alpine:3.19.0
+FROM alpine:3.19.1
 
 COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
