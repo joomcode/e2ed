@@ -1,7 +1,6 @@
 import {LogEventType} from '../../constants/internal';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
-import {getUserlandHooks} from '../../utils/userland';
 
 import {createPageInstance} from './createPageInstance';
 
@@ -33,9 +32,7 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
 
   await page.beforeNavigateToPage?.();
 
-  const {navigateTo} = getUserlandHooks();
-
-  await navigateTo(url);
+  await page.navigateToPage(url);
 
   log(
     `Navigation to the page "${PageClass.name}" completed`,

@@ -20,5 +20,4 @@ export type MapBackendResponseToLog = PackSpecificTypes['MapBackendResponseToLog
 export type MapLogPayloadInConsole = PackSpecificTypes['MapLogPayloadInConsole'];
 export type MapLogPayloadInLogFile = PackSpecificTypes['MapLogPayloadInLogFile'];
 export type MapLogPayloadInReport = PackSpecificTypes['MapLogPayloadInReport'];
-export type NavigateTo = PackSpecificTypes['NavigateTo'];
 export type {Pack};

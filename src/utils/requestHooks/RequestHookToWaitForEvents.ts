@@ -12,6 +12,7 @@ import {getDurationWithUnits} from '../getDurationWithUnits';
 import {mapBackendResponseForLogs} from '../log';
 import {addNotCompleteRequest, completeRequest, processEventsPredicates} from '../waitForEvents';
 
+import {addRedirectToWaitForEventsState} from './addRedirectToWaitForEventsState';
 import {getHeaderValue} from './getHeaderValue';
 import {getRequestFromRequestOptions} from './getRequestFromRequestOptions';
 import {getResponseFromResponseEvent} from './getResponseFromResponseEvent';
@@ -47,6 +48,7 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
 
     cdpClient.on('Network.requestWillBeSent', ({redirectResponse}) => {
       if (redirectResponse) {
+        addRedirectToWaitForEventsState(redirectResponse, waitForEventsState);
         removeNotCompleteRequestsByUrl(redirectResponse.url as Url, waitForEventsState);
       }
     });

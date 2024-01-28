@@ -6,6 +6,7 @@ import {
   REQUEST_HOOK_CONTEXT_KEY,
   RESOLVED_PROMISE,
 } from '../../constants/internal';
+import {getWaitForEventsState} from '../../context/waitForEventsState';
 import {testController} from '../../testController';
 
 import {assertValueIsBoolean, assertValueIsDefined} from '../asserts';
@@ -15,6 +16,7 @@ import {setReadonlyProperty} from '../setReadonlyProperty';
 import {applyHeadersMapper} from './applyHeadersMapper';
 import {applyHeadersMapperOnCdpMode} from './applyHeadersMapperOnCdpMode';
 import {getHeadersFromHeaderEntries} from './getHeadersFromHeaderEntries';
+import {RequestHookToWaitForEvents} from './RequestHookToWaitForEvents';
 import {RequestHookWithEvents} from './RequestHookWithEvents';
 
 import type {
@@ -34,7 +36,24 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
     private readonly url: Url,
     private readonly options: MapOptions,
   ) {
-    super([url], INCLUDE_HEADERS_IN_RESPONSE_EVENT);
+    const waitForEventsState = getWaitForEventsState(RequestHookToWaitForEvents);
+    let wasCalled = false;
+
+    const predicate = (request: Readonly<{url?: string}>): boolean => {
+      if (request.url === url) {
+        wasCalled = true;
+
+        return true;
+      }
+
+      if (wasCalled && url in waitForEventsState.redirects) {
+        return waitForEventsState.redirects[url] === request.url;
+      }
+
+      return false;
+    };
+
+    super(predicate, INCLUDE_HEADERS_IN_RESPONSE_EVENT);
   }
 
   override onRequest(event: RequestHookRequestEvent): Promise<void> {

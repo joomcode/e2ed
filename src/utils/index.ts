@@ -28,7 +28,7 @@ export {
   getHorizontalDistanceBetweenSelectors,
   getVerticalDistanceBetweenSelectors,
 } from './distanceBetweenSelectors';
-export {getDocumentCookie, getDocumentTitle, getDocumentUrl} from './document';
+export {getDocumentCookie, getDocumentTitle, getDocumentUrl, reloadDocument} from './document';
 export {E2edError, getStackTrace} from './error';
 export {getFunctionPresentationForLogs, setCustomInspectOnFunction} from './fn';
 export {writeFile} from './fs';

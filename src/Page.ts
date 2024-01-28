@@ -1,11 +1,14 @@
 // eslint-disable-next-line import/no-internal-modules
+import {navigateToUrl} from './actions/navigateToUrl';
+// eslint-disable-next-line import/no-internal-modules
 import {waitForAllRequestsComplete, waitForInterfaceStabilization} from './actions/waitFor';
 import {CREATE_PAGE_TOKEN} from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
 import {getFullPackConfig} from './utils/config';
+import {reloadDocument} from './utils/document';
 
 import type {PageRoute} from './PageRoute';
-import type {AsyncVoid, PageClassTypeArgs, ParamsKeyType} from './types/internal';
+import type {AsyncVoid, PageClassTypeArgs, ParamsKeyType, Url} from './types/internal';
 
 /**
  * Inner key for parameters type.
@@ -80,6 +83,21 @@ export abstract class Page<PageParams = undefined> {
   afterNavigateToPage?(): AsyncVoid;
 
   /**
+   * Optional hook that runs after reload to the page.
+   */
+  afterReloadPage?(): AsyncVoid;
+
+  /**
+   * Asserts that we are on the expected page by `isMatch` flage.
+   * `isMatch` equals `true`, if url matches the page with given parameters, and `false` otherwise.
+   */
+  assertPage(isMatch: boolean): AsyncVoid {
+    assertValueIsTrue(isMatch, `the document url matches the page "${this.constructor.name}"`, {
+      page: this,
+    });
+  }
+
+  /**
    * Optional hook that runs before asserts the page.
    */
   beforeAssertPage?(): AsyncVoid;
@@ -90,10 +108,32 @@ export abstract class Page<PageParams = undefined> {
   beforeNavigateToPage?(): AsyncVoid;
 
   /**
+   * Optional hook that runs before reload to the page.
+   */
+  beforeReloadPage?(): AsyncVoid;
+
+  /**
    * Get page route (for navigation to the page).
    */
   abstract getRoute(): PageRoute<unknown>;
 
+  /**
+   * Navigates to the page by url.
+   */
+  navigateToPage(url: Url): Promise<void> {
+    return navigateToUrl(url, {skipLogs: true});
+  }
+
+  /**
+   * Reloads the page.
+   */
+  reloadPage(): Promise<void> {
+    return reloadDocument();
+  }
+
+  /**
+   * Waits for page loaded.
+   */
   async waitForPageLoaded(): Promise<void> {
     await waitForAllRequestsComplete(() => true, {
       maxIntervalBetweenRequestsInMs: this.maxIntervalBetweenRequestsInMs,

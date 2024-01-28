@@ -1,5 +1,4 @@
 import {LogEventStatus, LogEventType} from '../../constants/internal';
-import {assertValueIsTrue} from '../../utils/asserts';
 import {getDocumentUrl} from '../../utils/document';
 import {log} from '../../utils/log';
 
@@ -27,13 +26,13 @@ export const assertPage = async <SomePageClass extends AnyPageClassType>(
   const isMatch = route.isMatchUrl(documentUrl);
 
   const logEventStatus = isMatch ? LogEventStatus.Passed : LogEventStatus.Failed;
-  const message = `the document url matches the specified page "${PageClass.name}"`;
+  const message = `the document url matches the page "${PageClass.name}"`;
   const {routeParams} = route;
   const payload = {documentUrl, isMatch, pageParams, routeParams};
 
   log(`Asserts that ${message}`, {...payload, logEventStatus}, LogEventType.InternalAction);
 
-  assertValueIsTrue(isMatch, message, payload);
+  await page.assertPage(isMatch);
 
   await page.afterAssertPage?.();
 

@@ -35,6 +35,5 @@ export type {
   GetMainTestRunParams,
   GetTestRunHash,
   IsTestSkipped,
-  NavigateTo,
 } from './packSpecific';
 export type {TestMeta} from './testMeta';

@@ -1,6 +1,5 @@
 import type {LogEventType} from '../../constants/internal';
 
-import type {Url} from '../http';
 import type {LogContext, LogPayload} from '../log';
 import type {IsTestSkippedResult} from '../skipTest';
 import type {RunHash, TestRun, TestStaticOptions} from '../testRun';
@@ -20,5 +19,4 @@ export type UserlandHooks<TestMeta = TestMetaPlaceholder> = {
   getMainTestRunParams(this: void, testRun: TestRun<TestMeta>): string;
   getTestRunHash(this: void, testRun: TestRun<TestMeta>): RunHash;
   isTestSkipped(this: void, testStaticOptions: TestStaticOptions<TestMeta>): IsTestSkippedResult;
-  navigateTo(this: void, url: Url): Promise<void>;
 };

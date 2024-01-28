@@ -5,6 +5,7 @@ import type {
   AllRequestsCompletePredicateWithPromise,
   RequestPredicateWithPromise,
   ResponsePredicateWithPromise,
+  Url,
   WaitForEventsState,
 } from '../types/internal';
 import type {RequestHookToWaitForEvents} from '../utils/requestHooks';
@@ -34,6 +35,7 @@ export const getWaitForEventsState = (
       null,
     ) as WaitForEventsState['hashOfNotCompleteRequests'],
     hook: {} as RequestHookToWaitForEvents,
+    redirects: Object.create(null) as Record<Url, Url>,
     requestPredicates: new Set<RequestPredicateWithPromise>(),
     responsePredicates: new Set<ResponsePredicateWithPromise>(),
   };
