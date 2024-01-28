@@ -1,5 +1,25 @@
 # Changelog
 
+## [v0.16.6](https://github.com/joomcode/e2ed/tree/v0.16.6) (2024-01-28)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.5...v0.16.6)
+
+- [Merge pull request #60 from joomcode/fix/mapping-headers-on-redirects-on-cdp-mode](https://github.com/joomcode/e2ed/commit/67d1a157e61383d0824fd208563ba16601ecefb4) ([uid11](https://github.com/uid11))
+
+  fix: mapping headers on redirects on CDP mode
+
+- [chore: update devDependencies (`husky` to 9.0.6, `@types/node`, etc)](https://github.com/joomcode/e2ed/commit/d1aa014ade458d46526c352941a5f8840a4c643f) ([uid11](https://github.com/uid11))
+
+  chore: update alpine to 3.19.1 (`chromium` to 121)
+
+- [FI-1133 fix: remove hook `navigateTo`](https://github.com/joomcode/e2ed/commit/3e64fcb803c27d36d37a72cf97055e49f009609e) ([uid11](https://github.com/uid11))
+
+  fix: add methods `assertPage`, `navigateToPage` and `reloadPage` to base `Page`
+
+  feat: add util `reloadDocument`
+
+- [FI-943 fix: map headers for redirected requests also](https://github.com/joomcode/e2ed/commit/192ce0ce61d29d0582ffee9d145d00f076bd973d) ([uid11](https://github.com/uid11))
+
 ## [v0.16.5](https://github.com/joomcode/e2ed/tree/v0.16.5) (2024-01-24)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.4...v0.16.5)
