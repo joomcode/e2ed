@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.16.7](https://github.com/joomcode/e2ed/tree/v0.16.7) (2024-02-06)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.6...v0.16.7)
+
+- [Merge pull request #61 from joomcode/fix/removing-not-complete-requests](https://github.com/joomcode/e2ed/commit/a6d7e7aa649aaf20e072e55970ece22fde3e0038) ([uid11](https://github.com/uid11))
+
+  feat: add resource usage to logs
+
+- [chore: update `devDependencies` (`@types/node`, `husky`, etc)](https://github.com/joomcode/e2ed/commit/5666140ee1e55347cb4eacf2e58d6852f434cb08) ([uid11](https://github.com/uid11))
+- [FI-1144 feat: add resource usage to logs](https://github.com/joomcode/e2ed/commit/096223b1ee6e653462e4bbba54d85dc23071e7e7) ([uid11](https://github.com/uid11))
+
+  fix: reading requests from `hashOfNotCompleteRequests`
+
 ## [v0.16.6](https://github.com/joomcode/e2ed/tree/v0.16.6) (2024-01-28)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.5...v0.16.6)
