@@ -52,7 +52,9 @@ rules:
         - node:http
         - node:https
         - node:module
+        - node:os
         - node:path
+        - node:perf_hooks
         - node:querystring
         - node:stream
         - node:url

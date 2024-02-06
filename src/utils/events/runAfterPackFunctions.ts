@@ -21,9 +21,10 @@ export const runAfterPackFunctions = async (liteReport: LiteReport): Promise<voi
     setReadonlyProperty(liteReport, 'customReportProperties', result);
   };
 
+  const functionNames = functions.map(({name}) => name || 'anonymous').join(', ');
   const message =
     functions.length > 0
-      ? `Will be run ${functions.length} after pack function${functions.length > 1 ? 's' : ''}`
+      ? `Will be run ${functions.length} after pack function${functions.length > 1 ? 's' : ''} (${functionNames})`
       : 'There are no after pack functions';
 
   generalLog(message);

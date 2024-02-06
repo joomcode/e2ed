@@ -70,6 +70,7 @@ export const pack: Pack = {
   port1: 1337,
   port2: 1338,
   reportFileName: 'report.html',
+  resourceUsageReadingInternal: 5_000,
   selectorTimeout: 10_000,
   skipTests,
   takeFullPageScreenshotOnError: false,

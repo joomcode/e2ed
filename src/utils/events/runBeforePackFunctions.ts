@@ -30,9 +30,10 @@ export const runBeforePackFunctions = async (startInfo: StartInfo): Promise<void
     setReadonlyProperty(startInfo as StartInfoWithoutDoBeforePack, 'fullPackConfig', result);
   };
 
+  const functionNames = functions.map(({name}) => name || 'anonymous').join(', ');
   const message =
     functions.length > 0
-      ? `Will be run ${functions.length} before pack function${functions.length > 1 ? 's' : ''}`
+      ? `Will be run ${functions.length} before pack function${functions.length > 1 ? 's' : ''} (${functionNames})`
       : 'There are no before pack functions';
 
   generalLog(message);

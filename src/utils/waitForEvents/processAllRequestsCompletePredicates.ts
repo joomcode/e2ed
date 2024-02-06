@@ -1,11 +1,9 @@
-import {assertValueIsDefined} from '../asserts';
-
 import {processAllRequestsCompletePredicate} from './processAllRequestsCompletePredicate';
 
 import type {RequestHookContextId, WaitForEventsState} from '../../types/internal';
 
 /**
- * Processes waitForAllRequestsComplete predicates for new request.
+ * Processes `waitForAllRequestsComplete` predicates for new request.
  * @internal
  */
 export const processAllRequestsCompletePredicates = async (
@@ -15,7 +13,9 @@ export const processAllRequestsCompletePredicates = async (
   const {allRequestsCompletePredicates, hashOfNotCompleteRequests} = waitForEventsState;
   const request = hashOfNotCompleteRequests[requestHookContextId];
 
-  assertValueIsDefined(request, 'request is defined', {hashOfNotCompleteRequests});
+  if (request === undefined) {
+    return;
+  }
 
   const promises = [...allRequestsCompletePredicates].map(
     async (allRequestsCompletePredicateWithPromise) => {

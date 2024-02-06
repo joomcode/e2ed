@@ -33,6 +33,12 @@ export const getSuccessfulTestRunCount = (): string => {
 };
 
 /**
+ * Get total number of tests successful in all previous retries.
+ * @internal
+ */
+export const getSuccessfulTotalInPreviousRetries = (): number => successfulTotalInPreviousRetries;
+
+/**
  * Set successful test runs total in previous retries
  * @internal
  */

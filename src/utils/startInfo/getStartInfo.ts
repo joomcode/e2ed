@@ -1,3 +1,5 @@
+import {availableParallelism, totalmem} from 'node:os';
+
 import {runEnvironment, startTimeInMs} from '../../configurator';
 import {
   ABSOLUTE_PATH_TO_INSTALLED_E2ED_DIRECTORY,
@@ -38,6 +40,7 @@ export const getStartInfo = ({configCompileTimeWithUnits}: Options): StartInfo =
     'testcafe-hammerhead-up',
     testCafeHammerheadUpPackagePath,
   );
+  const totalSystemMemoryInMb = Math.round(totalmem() / 1024 / 1024);
 
   return {
     absolutePathToProjectRootDirectory: ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
@@ -49,6 +52,7 @@ export const getStartInfo = ({configCompileTimeWithUnits}: Options): StartInfo =
     fullPackConfig: getFullPackConfig(),
     installedE2edDirectoryPath: INSTALLED_E2ED_DIRECTORY_PATH,
     nodeVersion: process.version,
+    numberOfAvailableCpus: availableParallelism(),
     pathToPack: getPathToPack(),
     'process.argv': [...process.argv],
     pwd: e2edEnvironment.PWD,
@@ -56,5 +60,6 @@ export const getStartInfo = ({configCompileTimeWithUnits}: Options): StartInfo =
     startTimeInMs,
     testCafeHammerheadUp,
     testCafeWithoutTypeCheck,
+    totalSystemMemoryInMb,
   };
 };

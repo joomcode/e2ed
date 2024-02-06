@@ -5,6 +5,7 @@ import {hasBrowsersArg} from '../browser';
 import {getFullPackConfig} from '../config';
 import {endE2ed} from '../end';
 import {setRunLabel} from '../environment';
+import {startResourceUsageReading} from '../resourceUsage';
 import {createRunLabel} from '../runLabel';
 
 import {getPackTimeoutPromise} from './packTimeout';
@@ -14,9 +15,10 @@ import {getPackTimeoutPromise} from './packTimeout';
  * @internal
  */
 export const runPackWithArgs = async (): Promise<void> => {
-  const {browsers, concurrency, enableLiveMode} = getFullPackConfig();
+  const {browsers, concurrency, enableLiveMode, resourceUsageReadingInternal} = getFullPackConfig();
   const runLabel = createRunLabel({concurrency, maxRetriesCount: 1, retryIndex: 1});
 
+  startResourceUsageReading(resourceUsageReadingInternal);
   setRunLabel(runLabel);
 
   if (browsers.length > 0 && !hasBrowsersArg()) {

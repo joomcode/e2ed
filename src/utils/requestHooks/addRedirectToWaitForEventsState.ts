@@ -1,3 +1,5 @@
+import {getHeaderValue} from './getHeaderValue';
+
 import type Protocol from 'devtools-protocol';
 
 import type {Url, WaitForEventsState} from '../../types/internal';
@@ -10,7 +12,7 @@ export const addRedirectToWaitForEventsState = (
   redirectResponse: Protocol.Network.Response,
   waitForEventsState: WaitForEventsState,
 ): void => {
-  const {location} = redirectResponse.headers;
+  const location = getHeaderValue(redirectResponse.headers, 'location');
 
   if (location !== undefined) {
     // eslint-disable-next-line no-param-reassign
