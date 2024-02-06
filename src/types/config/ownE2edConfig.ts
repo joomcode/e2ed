@@ -183,6 +183,12 @@ export type OwnE2edConfig<
   reportFileName: string | null;
 
   /**
+   * Interval (in milliseconds) for reading resource usage (CPU and memory).
+   * The read values are immediately printed in the logs.
+   */
+  resourceUsageReadingInternal: number;
+
+  /**
    * This setting allows you to describe a set of skipped tests in a custom form.
    * You can define the `SkipTests` type and `skipTests` processing rules
    * in the hook `autotests/hooks/isTestSkipped.ts`.

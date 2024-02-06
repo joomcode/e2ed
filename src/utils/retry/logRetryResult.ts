@@ -1,4 +1,9 @@
-import {failMessage, generalLog, okMessage} from '../generalLog';
+import {
+  failMessage,
+  generalLog,
+  getSuccessfulTotalInPreviousRetries,
+  okMessage,
+} from '../generalLog';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 
 import {getPrintedRetry} from './getPrintedRetry';
@@ -29,6 +34,7 @@ export const logRetryResult = ({
 
   const printedRetry = getPrintedRetry({maxRetriesCount, retryIndex});
   const stateMessage = retriesState.isLastRetrySuccessful ? okMessage : failMessage;
+  const successfulTotalInPreviousRetries = getSuccessfulTotalInPreviousRetries();
 
   const durationWithUnits = getDurationWithUnits(Date.now() - startLastRetryTimeInMs);
 
@@ -37,6 +43,6 @@ export const logRetryResult = ({
       newLength,
     )} with concurrency ${concurrency} ran in ${durationWithUnits} (${failedLength} failed, ${successfulLength} successful, ${
       newLength - unbrokenLength
-    } broken)`,
+    } broken). Total processed tests in all retries: ${newLength + successfulTotalInPreviousRetries}`,
   );
 };

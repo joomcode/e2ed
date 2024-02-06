@@ -13,6 +13,7 @@ import {
   writeLogsToFile,
 } from '../generalLog';
 import {getNotIncludedInPackTests} from '../notIncludedInPackTests';
+import {startResourceUsageReading} from '../resourceUsage';
 
 import type {Inner} from 'testcafe-without-typecheck';
 
@@ -37,8 +38,10 @@ export const runTests = async ({
 
     setSuccessfulTotalInPreviousRetries(successfulTotalInPreviousRetries);
 
-    const {browsers: browsersString} = getFullPackConfig();
+    const {browsers: browsersString, resourceUsageReadingInternal} = getFullPackConfig();
     const browsers = [browsersString];
+
+    startResourceUsageReading(resourceUsageReadingInternal);
 
     const notIncludedInPackTests = await getNotIncludedInPackTests();
     const notIncludedInPackTestsInAbsolutePaths = notIncludedInPackTests.map((testFilePath) =>

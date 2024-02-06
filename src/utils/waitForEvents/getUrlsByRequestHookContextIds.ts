@@ -1,5 +1,3 @@
-import {assertValueIsDefined} from '../asserts';
-
 import type {RequestHookContextId, Url, WaitForEventsState} from '../../types/internal';
 
 type HashOfNotCompleteRequests = WaitForEventsState['hashOfNotCompleteRequests'];
@@ -17,9 +15,9 @@ export const getUrlsByRequestHookContextIds = (
   for (const requestHookContextId of requestHookContextIds) {
     const request = hashOfNotCompleteRequests[requestHookContextId];
 
-    assertValueIsDefined(request, 'request is defined', {requestHookContextId});
-
-    urls.push(request.url);
+    if (request !== undefined) {
+      urls.push(request.url);
+    }
   }
 
   return urls;

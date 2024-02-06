@@ -14,4 +14,7 @@ export {removeStyleFromString} from './removeStyleFromString';
 /** @internal */
 export {truncateArrayForLogs} from './truncateArrayForLogs';
 /** @internal */
-export {setSuccessfulTotalInPreviousRetries} from './successfulTestRunCount';
+export {
+  getSuccessfulTotalInPreviousRetries,
+  setSuccessfulTotalInPreviousRetries,
+} from './successfulTestRunCount';
