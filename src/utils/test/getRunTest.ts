@@ -67,6 +67,8 @@ export const getRunTest = (test: Test): RunTest => {
       if (isTestIncludedInPack) {
         await afterTest({hasRunError, runId, unknownRunError});
       }
+
+      setTimeout(() => void testController.testRun.emit('done'), 300);
     }
   };
 };

@@ -9,7 +9,9 @@ set -eu
 
 ./bin/forks/testcafe-without-typecheck/transforms/setReadme.sh
 
+./bin/forks/testcafe-without-typecheck/transforms/disableDisconnectReject.sh
 ./bin/forks/testcafe-without-typecheck/transforms/disableTypeCheck.sh
+./bin/forks/testcafe-without-typecheck/transforms/enlargeDisconnectThreshold.sh
 ./bin/forks/testcafe-without-typecheck/transforms/exportRunTestCafePromiseFromCli.sh
 ./bin/forks/testcafe-without-typecheck/transforms/wrapGlobalTypes.sh
 

@@ -41,11 +41,12 @@ const logResourceUsage = (): void => {
     assertValueIsDefined(previousCore, 'previousCore is defined');
 
     const coreCpu = (
-      (core.times.user + core.times.sys - previousCore.times.user - previousCore.times.sys) /
-      (10 * intervalInMs)
-    ).toFixed(2);
+      (100 *
+        (core.times.user + core.times.sys - previousCore.times.user - previousCore.times.sys)) /
+      intervalInMs
+    ).toFixed();
 
-    coresCpu.push(coreCpu === '0.00' ? '0' : coreCpu);
+    coresCpu.push(coreCpu);
   }
 
   previousCores = cores;
@@ -69,6 +70,4 @@ export const startResourceUsageReading = (resourceUsageReadingInternal: number):
   timeoutInterval = setInterval(logResourceUsage, resourceUsageReadingInternal);
 
   timeoutInterval.unref();
-
-  logResourceUsage();
 };

@@ -29,10 +29,10 @@
     "get-modules-graph": "0.0.9",
     "globby": "11.1.0",
     "pngjs": "7.0.0",
-    "testcafe-without-typecheck": "3.5.0-rc.1"
+    "testcafe-without-typecheck": "3.5.0-rc.2"
   },
   "devDependencies": {
-    "@types/node": "20.11.6",
+    "@types/node": "20.11.16",
     "@typescript-eslint/eslint-plugin": "6.21.0",
     "@typescript-eslint/parser": "6.21.0",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
