@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.16.8](https://github.com/joomcode/e2ed/tree/v0.16.8) (2024-02-08)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.7...v0.16.8)
+
+- [Merge pull request #62 from joomcode/fix/ending-retries-with-browser-disconnect](https://github.com/joomcode/e2ed/commit/610c7c2af69bacf17c341efbcc230565f8d46dcc) ([uid11](https://github.com/uid11))
+
+  fix: do not reject retry if some browser disconnect
+
+- [FI-1142 fix: do not reject retry if some browser disconnect](https://github.com/joomcode/e2ed/commit/9ad8f87985821065b616fa8d1946daa91d84e644) ([uid11](https://github.com/uid11))
+
+  fix: correct CPU cores metrics in resource usage util
+
+  chore: update `@types/node` to 20.11.16
+
 ## [v0.16.7](https://github.com/joomcode/e2ed/tree/v0.16.7) (2024-02-06)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.6...v0.16.7)
