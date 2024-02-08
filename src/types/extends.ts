@@ -12,6 +12,7 @@ declare module 'testcafe-without-typecheck' {
     interface TestController {
       readonly testRun: DeepReadonly<{
         browserConnection: TestCafeBrowserConnection;
+        emit(this: void, eventName: string): Promise<void>;
         errs: readonly OriginalTestRunError[];
         test: {testFile: {filename: string}};
       }>;
