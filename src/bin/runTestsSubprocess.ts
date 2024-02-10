@@ -1,18 +1,20 @@
 import {getFullPackConfig} from '../utils/config';
-import {runTests} from '../utils/tests';
+import {exitFromTestsSubprocess, runTests} from '../utils/tests';
 
 import type {RunRetryOptions} from '../types/internal';
 
 const {testIdleTimeout} = getFullPackConfig();
 
-setInterval(() => process.send?.(null), testIdleTimeout);
+const testIdleTimeoutObject = setInterval(() => process.send?.(null), testIdleTimeout);
+
+testIdleTimeoutObject.unref();
 
 /**
- * Returns exit code 0, if all tests passed, and 1 otherwise.
+ * Returns exit code `0`, if all tests passed, and `1` otherwise.
  */
 process.on('message', (runRetryOptions: RunRetryOptions) => {
   void runTests(runRetryOptions).then(
-    () => process.exit(0),
-    () => process.exit(1),
+    () => exitFromTestsSubprocess(false),
+    () => exitFromTestsSubprocess(true),
   );
 });

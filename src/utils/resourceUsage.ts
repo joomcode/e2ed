@@ -4,7 +4,7 @@ import {assertValueIsDefined, assertValueIsTrue, assertValueIsUndefined} from '.
 import {generalLog} from './generalLog';
 
 const Mb = 1024 * 1024;
-const numberOfAvailableCpus = availableParallelism();
+const availableCpuCount = availableParallelism();
 
 let previousCores = cpus();
 let previousCpuUsage = process.cpuUsage();
@@ -17,7 +17,7 @@ const logResourceUsage = (): void => {
   const timeInMs = Date.now();
   const intervalInMs = timeInMs - previousTimeInMs;
 
-  const divisor = 10 * numberOfAvailableCpus * intervalInMs;
+  const divisor = 10 * availableCpuCount * intervalInMs;
 
   const cpu = (
     (cpuUsage.user + cpuUsage.system - previousCpuUsage.user - previousCpuUsage.system) /

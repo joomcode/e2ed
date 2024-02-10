@@ -22,16 +22,16 @@ export const getReportErrors = async (
       fullTestRuns,
       notIncludedInPackTests,
     );
-    const numberOfUnvisited = unvisitedTestFilePaths.length;
-    const thereAreManyUnvisitedFiles = numberOfUnvisited > 1;
+    const unvisitedCount = unvisitedTestFilePaths.length;
+    const thereAreManyUnvisitedFiles = unvisitedCount > 1;
     const wordFile = thereAreManyUnvisitedFiles ? 'files' : 'file';
     const wordGlob = testFileGlobs.length > 1 ? 'globs' : 'glob';
 
-    if (numberOfUnvisited !== 0) {
+    if (unvisitedCount !== 0) {
       errors.push(
         `Error: There ${
           thereAreManyUnvisitedFiles ? 'are' : 'is'
-        } ${numberOfUnvisited} test ${wordFile} found by the ${wordGlob} "${testFileGlobs.join(
+        } ${unvisitedCount} test ${wordFile} found by the ${wordGlob} "${testFileGlobs.join(
           ', ',
         )}" and not visited when running tests: ${unvisitedTestFilePaths.join(', ')}`,
       );

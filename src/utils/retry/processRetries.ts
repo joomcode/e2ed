@@ -2,6 +2,7 @@ import {EndE2edReason} from '../../constants/internal';
 
 import {getFullPackConfig} from '../config';
 import {endE2ed, endE2edReason} from '../end';
+import {setReadonlyProperty} from '../setReadonlyProperty';
 
 import {processRetry} from './processRetry';
 
@@ -22,14 +23,12 @@ export const processRetries = async (retriesState: RetriesState): Promise<void> 
     retriesState.isLastRetrySuccessful !== true &&
     retriesState.retryIndex <= maxRetriesCount &&
     endE2edReason === undefined;
-    // eslint-disable-next-line no-param-reassign
-    (retriesState as {retryIndex: number}).retryIndex += 1
+    setReadonlyProperty(retriesState, 'retryIndex', retriesState.retryIndex + 1)
   ) {
     await processRetry(retriesState);
   }
 
-  // eslint-disable-next-line no-param-reassign
-  (retriesState as {isRetriesCycleEnded: boolean}).isRetriesCycleEnded = true;
+  setReadonlyProperty(retriesState, 'isRetriesCycleEnded', true);
 
   endE2ed(EndE2edReason.RetriesCycleEnded);
 };

@@ -1,5 +1,6 @@
 import type {Inner} from 'testcafe-without-typecheck';
 
+import type {Brand} from './brand';
 import type {CdpClient} from './cdp';
 import type {DeepReadonly} from './deep';
 
@@ -8,9 +9,21 @@ import type {DeepReadonly} from './deep';
  * @internal
  */
 type TestCafeBrowserClient = DeepReadonly<{
-  _clientKey: string;
-  _clients: Record<string, {client: CdpClient; inactive: boolean}>;
+  _clientKey: TestCafeBrowserClientKey;
+  _clients: Record<TestCafeBrowserClientKey, {client: CdpClient; inactive: boolean}>;
 }>;
+
+/**
+ * Key of TestCafe browser client.
+ * @internal
+ */
+type TestCafeBrowserClientKey = Brand<string, 'TestCafeBrowserClientKey'>;
+
+/**
+ * Original instance of `TestCafe` (used directly to run tests through a JavaScript API).
+ * @internal
+ */
+export type TestCafeInstance = Inner.TestCafe;
 
 /**
  * Original selector from TestCafe.
@@ -22,9 +35,20 @@ export type TestCafeSelector = Inner.Selector;
  * @internal
  */
 export type TestCafeBrowserConnection = DeepReadonly<{
-  id: unknown;
-  provider: {plugin: {openedBrowsers: Record<string, {browserClient: TestCafeBrowserClient}>}};
-}>;
+  id: TestCafeBrowserConnectionId;
+  provider: {
+    plugin: {
+      openedBrowsers: Record<TestCafeBrowserConnectionId, {browserClient: TestCafeBrowserClient}>;
+    };
+  };
+}> &
+  NodeJS.EventEmitter;
+
+/**
+ * Id of TestCafe browser connection.
+ * @internal
+ */
+export type TestCafeBrowserConnectionId = Brand<string, 'TestCafeBrowserConnectionId'>;
 
 /**
  * Original `testController` from TestCafe.

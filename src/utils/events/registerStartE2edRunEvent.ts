@@ -56,8 +56,8 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
   }
 
   const {e2ed, runEnvironment} = startInfo;
-  const isDockerRun = runEnvironment === RunEnvironment.Docker;
-  const startMessage = `Run tests ${isDockerRun ? 'in docker' : 'local'} with e2ed@${e2ed.version}`;
+  const isLocalRun = runEnvironment === RunEnvironment.Docker;
+  const startMessage = `Run tests ${isLocalRun ? 'local' : 'in docker'} with e2ed@${e2ed.version}`;
 
   generalLog(startMessage, startInfo);
 

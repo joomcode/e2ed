@@ -8,7 +8,7 @@ import {getGlobalExitCode} from './globalExitCode';
  * Exit from e2ed process with correct exit code.
  * @internal
  */
-export const processExit = async (
+export const exitFromE2ed = async (
   exitCodeFromReport: ExitCode = ExitCode.NoReportData,
 ): Promise<void> => {
   const globalExitCode = getGlobalExitCode();

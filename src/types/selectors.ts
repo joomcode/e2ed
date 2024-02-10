@@ -1,8 +1,10 @@
-import type {Inner, Selector as TestCafeSelector} from 'testcafe-without-typecheck';
+import type {Inner} from 'testcafe-without-typecheck';
 
 import type {DESCRIPTION_KEY} from '../constants/internal';
 
-type ReplaceSelector<Type> = Type extends Inner.Selector ? Selector : Type;
+import type {TestCafeSelector} from './testCafe';
+
+type ReplaceSelector<Type> = Type extends TestCafeSelector ? Selector : Type;
 
 type ReplaceObjectSelectors<Obj extends object> = Readonly<{
   // check overloads, Selector methods has up to 4
@@ -60,7 +62,7 @@ export type GetLocatorAttributeNameFn = (this: void, parameter: string) => strin
 /**
  * Creates selector by locator and optional parameters.
  */
-export type CreateSelector = (this: void, ...args: Parameters<typeof TestCafeSelector>) => Selector;
+export type CreateSelector = (this: void, ...args: Parameters<Inner.SelectorFactory>) => Selector;
 
 /**
  * Type of `createSelectorByCss` function.
@@ -86,54 +88,74 @@ export type SelectorCustomMethods = Readonly<{
   /* eslint-disable typescript-sort-keys/interface */
 
   /** Creates a selector that filters a matching set by locatorId. */
-  filterByLocatorId(this: Inner.Selector, locatorId: string): Inner.Selector;
+  filterByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
   /** Finds all descendants of all nodes in the matching set and filters them by locatorId. */
-  findByLocatorId(this: Inner.Selector, locatorId: string): Inner.Selector;
+  findByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
   /** Finds all parents of all nodes in the matching set and filters them by locatorId. */
-  parentByLocatorId(this: Inner.Selector, locatorId: string): Inner.Selector;
+  parentByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
   /** Finds all child elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  childByLocatorId(this: Inner.Selector, locatorId: string): Inner.Selector;
+  childByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
   /** Finds all sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  siblingByLocatorId(this: Inner.Selector, locatorId: string): Inner.Selector;
+  siblingByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
   /** Finds all succeeding sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  nextSiblingByLocatorId(this: Inner.Selector, locatorId: string): Inner.Selector;
+  nextSiblingByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
   /** Finds all preceding sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  prevSiblingByLocatorId(this: Inner.Selector, locatorId: string): Inner.Selector;
+  prevSiblingByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
 
   /** Creates a selector that filters a matching set by locator parameter. */
-  filterByLocatorParameter(this: Inner.Selector, parameter: string, value: string): Inner.Selector;
+  filterByLocatorParameter(
+    this: TestCafeSelector,
+    parameter: string,
+    value: string,
+  ): TestCafeSelector;
   /** Finds all descendants of all nodes in the matching set and filters them by locator parameter. */
-  findByLocatorParameter(this: Inner.Selector, parameter: string, value: string): Inner.Selector;
+  findByLocatorParameter(
+    this: TestCafeSelector,
+    parameter: string,
+    value: string,
+  ): TestCafeSelector;
   /** Finds all parents of all nodes in the matching set and filters them by locator parameter. */
-  parentByLocatorParameter(this: Inner.Selector, parameter: string, value: string): Inner.Selector;
+  parentByLocatorParameter(
+    this: TestCafeSelector,
+    parameter: string,
+    value: string,
+  ): TestCafeSelector;
   /** Finds all child elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
-  childByLocatorParameter(this: Inner.Selector, parameter: string, value: string): Inner.Selector;
+  childByLocatorParameter(
+    this: TestCafeSelector,
+    parameter: string,
+    value: string,
+  ): TestCafeSelector;
   /** Finds all sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
-  siblingByLocatorParameter(this: Inner.Selector, parameter: string, value: string): Inner.Selector;
+  siblingByLocatorParameter(
+    this: TestCafeSelector,
+    parameter: string,
+    value: string,
+  ): TestCafeSelector;
   /** Finds all succeeding sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
   nextSiblingByLocatorParameter(
-    this: Inner.Selector,
+    this: TestCafeSelector,
     parameter: string,
     value: string,
-  ): Inner.Selector;
+  ): TestCafeSelector;
   /** Finds all preceding sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
   prevSiblingByLocatorParameter(
-    this: Inner.Selector,
+    this: TestCafeSelector,
     parameter: string,
     value: string,
-  ): Inner.Selector;
+  ): TestCafeSelector;
 
   /** Returns the value of the locator id. */
-  getLocatorId(this: Inner.Selector): Promise<string | null>;
+  getLocatorId(this: TestCafeSelector): Promise<string | null>;
   /** true if the element has the locator id. */
-  hasLocatorId(this: Inner.Selector): Promise<boolean>;
+  hasLocatorId(this: TestCafeSelector): Promise<boolean>;
   /** Returns the value of the locator parameter. */
-  getLocatorParameter(this: Inner.Selector, parameter: string): Promise<string | null>;
+  getLocatorParameter(this: TestCafeSelector, parameter: string): Promise<string | null>;
   /** true if the element has the locator parameter. */
-  hasLocatorParameter(this: Inner.Selector, parameter: string): Promise<boolean>;
+  hasLocatorParameter(this: TestCafeSelector, parameter: string): Promise<boolean>;
 
   /** Get string description of selector if any. */
-  getDescription(this: Inner.Selector): string | undefined;
+  getDescription(this: TestCafeSelector): string | undefined;
 
   /* eslint-enable typescript-sort-keys/interface */
 }>;

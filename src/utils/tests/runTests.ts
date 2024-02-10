@@ -6,16 +6,10 @@ import {createTestCafe} from '../../testcafe';
 import {getFullPackConfig} from '../config';
 import {setRunLabel} from '../environment';
 import {E2edError} from '../error';
-import {
-  generalLog,
-  readTestCafeWarnings,
-  setSuccessfulTotalInPreviousRetries,
-  writeLogsToFile,
-} from '../generalLog';
+import {generalLog, setSuccessfulTotalInPreviousRetries} from '../generalLog';
 import {getNotIncludedInPackTests} from '../notIncludedInPackTests';
 import {startResourceUsageReading} from '../resourceUsage';
-
-import type {Inner} from 'testcafe-without-typecheck';
+import {setTestCafeInstance} from '../testCafe';
 
 import type {RunRetryOptions} from '../../types/internal';
 
@@ -30,8 +24,6 @@ export const runTests = async ({
   successfulTestRunNamesHash,
 }: RunRetryOptions): Promise<void> => {
   setRunLabel(runLabel);
-
-  let maybeTestCafe: Inner.TestCafe | undefined;
 
   try {
     const successfulTotalInPreviousRetries = Object.keys(successfulTestRunNamesHash).length;
@@ -48,11 +40,11 @@ export const runTests = async ({
       join(ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY, testFilePath),
     );
 
-    const testCafe = await createTestCafe({browsers, configFile: TESTCAFERC_PATH});
+    const testCafeInstance = await createTestCafe({browsers, configFile: TESTCAFERC_PATH});
 
-    maybeTestCafe = testCafe;
+    setTestCafeInstance(testCafeInstance);
 
-    const runner = testCafe.createRunner();
+    const runner = testCafeInstance.createRunner();
 
     const failedTestsCount = await runner
       .browsers(browsers)
@@ -73,16 +65,5 @@ export const runTests = async ({
     generalLog(`Caught an error when running tests in retry with label "${runLabel}"`, {error});
 
     throw error;
-  } finally {
-    try {
-      await writeLogsToFile().finally(readTestCafeWarnings);
-    } catch (error) {
-      generalLog(
-        `Caught an error when writing logs to logs file in retry with label "${runLabel}"`,
-        {error},
-      );
-    }
-
-    await maybeTestCafe?.close();
   }
 };

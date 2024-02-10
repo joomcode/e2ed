@@ -1,8 +1,6 @@
-import {RunEnvironment, runEnvironment} from 'e2ed/configurator';
+import {isLocalRun} from 'e2ed/configurator';
 
 import type {MapLogPayloadInConsole} from 'autotests/types/packSpecific';
-
-const isLocalRun = runEnvironment === RunEnvironment.Local;
 
 /**
  * Maps log payload for logging in console to clarify, shorten or skip a console log entry.
