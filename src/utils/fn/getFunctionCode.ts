@@ -17,11 +17,11 @@ export const getFunctionCode = <Args extends readonly unknown[], R>(
   }
 
   const halfOfMaxLength = Math.floor(maxCodeLength / 2);
-  const numberOfCuttedSymbols = fullFunctionCode.length - 2 * halfOfMaxLength;
+  const cuttedSymbolsCount = fullFunctionCode.length - 2 * halfOfMaxLength;
 
   return [
     fullFunctionCode.slice(0, halfOfMaxLength),
-    `...(${numberOfCuttedSymbols} symbols)...`,
+    `...(${cuttedSymbolsCount} symbols)...`,
     fullFunctionCode.slice(-halfOfMaxLength),
   ].join('');
 };

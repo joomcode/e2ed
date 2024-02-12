@@ -1,4 +1,4 @@
-import {RunEnvironment, runEnvironment} from '../../configurator';
+import {isLocalRun} from '../../configurator';
 
 /**
  * Get prepared user agent string for using in TestCafe `browsers` string
@@ -8,7 +8,6 @@ import {RunEnvironment, runEnvironment} from '../../configurator';
 export const getPreparedUserAgentString = (userAgent: string): string => {
   const userAgentWithEscaping = userAgent.replace(/(?<!\\);/g, '\\;');
 
-  const isLocalRun = runEnvironment === RunEnvironment.Local;
   const preparedUserAgentString = isLocalRun ? `"${userAgentWithEscaping}"` : userAgentWithEscaping;
 
   return preparedUserAgentString;

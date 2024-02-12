@@ -1,5 +1,6 @@
 import {generalLog, writeLogsToFile} from '../generalLog';
 import {createRunLabel} from '../runLabel';
+import {setReadonlyProperty} from '../setReadonlyProperty';
 
 import {getPrintedRetry} from './getPrintedRetry';
 import {runRetry} from './runRetry';
@@ -14,14 +15,17 @@ import type {RetriesState, UtcTimeInMs} from '../../types/internal';
  */
 export const processRetry = async (retriesState: RetriesState): Promise<void> => {
   const {concurrency, maxRetriesCount, retryIndex, successfulTestRunNamesHash} = retriesState;
-  const runLabel = createRunLabel({concurrency, maxRetriesCount, retryIndex});
+  const runLabel = createRunLabel({
+    concurrency,
+    disconnectedBrowsersCount: 0,
+    maxRetriesCount,
+    retryIndex,
+  });
 
   const startLastRetryTimeInMs = Date.now() as UtcTimeInMs;
   const printedRetry = getPrintedRetry({maxRetriesCount, retryIndex});
 
-  // eslint-disable-next-line no-param-reassign
-  (retriesState as {startLastRetryTimeInMs: number}).startLastRetryTimeInMs =
-    startLastRetryTimeInMs;
+  setReadonlyProperty(retriesState, 'startLastRetryTimeInMs', startLastRetryTimeInMs);
 
   generalLog(`Run tests (${printedRetry}, concurrency ${concurrency})`, {
     retriesState: truncateRetriesStateForLogs(retriesState),
@@ -32,8 +36,7 @@ export const processRetry = async (retriesState: RetriesState): Promise<void> =>
 
     await runRetry({concurrency, runLabel, successfulTestRunNamesHash});
 
-    // eslint-disable-next-line no-param-reassign
-    (retriesState as {isLastRetrySuccessful: boolean}).isLastRetrySuccessful = true;
+    setReadonlyProperty(retriesState, 'isLastRetrySuccessful', true);
   } catch (error) {
     generalLog(`Caught an error on ${printedRetry}`, {
       error,

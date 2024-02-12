@@ -42,7 +42,7 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
     newTestsSubprocess.on('error', reject);
     newTestsSubprocess.on('exit', (exitCode) => {
       const error = new E2edError(
-        `Retry subprocess with label "${runLabel}" exit with non-zero exit code ${String(
+        `Tests subprocess with label "${runLabel}" exit with non-zero exit code ${String(
           exitCode,
         )}`,
       );
@@ -65,7 +65,7 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
       const timeoutWithUnits = getDurationWithUnits(interruptTimeout);
 
       const error = new E2edError(
-        `Retry subprocess with label "${runLabel}" did not respond within ${timeoutWithUnits} and was killed`,
+        `Tests subprocess with label "${runLabel}" did not respond within ${timeoutWithUnits} and was killed`,
         {reason},
       );
 

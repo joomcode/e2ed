@@ -6,7 +6,7 @@ import {cloneWithoutLogEvents} from '../clone';
 import type {TestRunEvent} from '../../types/internal';
 
 /**
- * Register start test run event (for report) before running test.
+ * Registers start test run event (for report) before running test.
  * @internal
  */
 export const registerStartTestRunEvent = (testRunEvent: TestRunEvent): void => {

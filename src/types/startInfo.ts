@@ -16,6 +16,7 @@ export type PackageInfo = Readonly<{packagePath: AbsolutePathToDirectory; versio
  */
 export type StartInfo<FullPackConfigArg = FullPackConfig> = Readonly<{
   absolutePathToProjectRootDirectory: AbsolutePathToDirectory;
+  availableCpuCount: number;
   beforePackExecutionTimeWithUnits: string;
   configCompileTimeWithUnits: string;
   'cwd()': string;
@@ -24,7 +25,6 @@ export type StartInfo<FullPackConfigArg = FullPackConfig> = Readonly<{
   fullPackConfig: FullPackConfigArg;
   installedE2edDirectoryPath: DirectoryPathFromRoot;
   nodeVersion: string;
-  numberOfAvailableCpus: number;
   pathToPack: FilePathFromRoot;
   'process.argv': readonly string[];
   pwd: string | undefined;

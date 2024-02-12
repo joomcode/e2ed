@@ -44,6 +44,7 @@ export const getStartInfo = ({configCompileTimeWithUnits}: Options): StartInfo =
 
   return {
     absolutePathToProjectRootDirectory: ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
+    availableCpuCount: availableParallelism(),
     beforePackExecutionTimeWithUnits: '',
     configCompileTimeWithUnits,
     'cwd()': process.cwd(),
@@ -52,7 +53,6 @@ export const getStartInfo = ({configCompileTimeWithUnits}: Options): StartInfo =
     fullPackConfig: getFullPackConfig(),
     installedE2edDirectoryPath: INSTALLED_E2ED_DIRECTORY_PATH,
     nodeVersion: process.version,
-    numberOfAvailableCpus: availableParallelism(),
     pathToPack: getPathToPack(),
     'process.argv': [...process.argv],
     pwd: e2edEnvironment.PWD,

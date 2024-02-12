@@ -12,9 +12,9 @@ export const getStringTrimmedToMaxLength = (
   }
 
   const halfOfLength = Math.floor(maxStringLength / 2);
-  const numberOfCuttedSymbols = text.length - 2 * halfOfLength;
+  const cuttedSymbolsCount = text.length - 2 * halfOfLength;
 
-  return `${text.slice(0, halfOfLength)}...(${numberOfCuttedSymbols} symbols)...${text.slice(
+  return `${text.slice(0, halfOfLength)}...(${cuttedSymbolsCount} symbols)...${text.slice(
     -halfOfLength,
   )}`;
 };

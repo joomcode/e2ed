@@ -1,9 +1,6 @@
-import {setCdpClient} from '../../context/cdpClient';
 import {createRunId} from '../../generators/internal';
 
 import {assertValueIsDefined} from '../asserts';
-import {getCdpClientOfTestRun} from '../cdp';
-import {getFullPackConfig} from '../config';
 import {addTestToNotIncludedInPackTests} from '../notIncludedInPackTests';
 
 import {afterErrorInTest} from './afterErrorInTest';
@@ -11,6 +8,7 @@ import {afterTest} from './afterTest';
 import {beforeTest} from './beforeTest';
 import {getIsTestIncludedInPack} from './getIsTestIncludedInPack';
 import {getTestStaticOptions} from './getTestStaticOptions';
+import {processTestController} from './processTestController';
 import {runTestFn} from './runTestFn';
 
 import type {RunId, Test, TestController, TestStaticOptions} from '../../types/internal';
@@ -43,11 +41,7 @@ export const getRunTest = (test: Test): RunTest => {
         return;
       }
 
-      if (getFullPackConfig().enableChromeDevToolsProtocol) {
-        const cdpClient = getCdpClientOfTestRun(testController);
-
-        setCdpClient(cdpClient);
-      }
+      processTestController(testController);
 
       beforeTest({previousRunId, runId, testFn: test.testFn, testStaticOptions});
 
@@ -65,10 +59,10 @@ export const getRunTest = (test: Test): RunTest => {
       throw error;
     } finally {
       if (isTestIncludedInPack) {
+        setTimeout(() => void testController.testRun.emit('done'), 300);
+
         await afterTest({hasRunError, runId, unknownRunError});
       }
-
-      setTimeout(() => void testController.testRun.emit('done'), 300);
     }
   };
 };

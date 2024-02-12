@@ -1,6 +1,6 @@
 import {ExitCode} from '../../constants/internal';
 
-import {processExit} from '../exit';
+import {exitFromE2ed} from '../exit';
 import {failMessage, generalLog, okMessage} from '../generalLog';
 import {collectReportData, getLiteReport, writeHtmlReport, writeLiteJsonReport} from '../report';
 import {setReadonlyProperty} from '../setReadonlyProperty';
@@ -11,7 +11,7 @@ import {runAfterPackFunctions} from './runAfterPackFunctions';
 import type {ReportData} from '../../types/internal';
 
 /**
- * Register end e2ed run event (for report) after closing of all tests.
+ * Registers end e2ed run event (for report) after closing of all tests.
  * @internal
  */
 export const registerEndE2edRunEvent = async (): Promise<void> => {
@@ -59,6 +59,6 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
       {error},
     );
   } finally {
-    await processExit(reportData?.exitCode);
+    await exitFromE2ed(reportData?.exitCode);
   }
 };

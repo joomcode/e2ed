@@ -3,6 +3,6 @@ export {getDurationWithUnits} from '../utils/getDurationWithUnits';
 export {getShallowCopyOfObjectForLogs, getStringTrimmedToMaxLength} from '../utils/valueToString';
 export {RunEnvironment, startTimeInMs} from './constants';
 export {replaceFields} from './replaceFields';
-export {runEnvironment} from './runEnvironment';
+export {isDockerRun, isLocalRun, runEnvironment} from './runEnvironment';
 /** @internal */
 export {setRunEnvironment} from './runEnvironment';

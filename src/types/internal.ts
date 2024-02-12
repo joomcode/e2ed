@@ -129,6 +129,12 @@ export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';
 export type {StringForLogs} from './string';
 export type {TestCafeSelector, TestController} from './testCafe';
+/** @internal */
+export type {
+  TestCafeBrowserConnection,
+  TestCafeBrowserConnectionId,
+  TestCafeInstance,
+} from './testCafe';
 export type {
   LiteTestRun,
   RejectTestRun,

@@ -10,11 +10,11 @@ export const getLinesArrayTrimmedToMaxLength = (lines: readonly string[]): reado
   }
 
   const halfOfLines = Math.floor(MAX_LINES_COUNT_IN_PRINTED_VALUE / 2);
-  const numberOfCuttedLines = lines.length - 2 * halfOfLines;
+  const cuttedLinesCount = lines.length - 2 * halfOfLines;
 
   return [
     ...lines.slice(0, halfOfLines),
-    `...(${numberOfCuttedLines} lines)...`,
+    `...(${cuttedLinesCount} lines)...`,
     ...lines.slice(-halfOfLines),
   ];
 };

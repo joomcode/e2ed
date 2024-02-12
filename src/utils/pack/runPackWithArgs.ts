@@ -16,7 +16,12 @@ import {getPackTimeoutPromise} from './packTimeout';
  */
 export const runPackWithArgs = async (): Promise<void> => {
   const {browsers, concurrency, enableLiveMode, resourceUsageReadingInternal} = getFullPackConfig();
-  const runLabel = createRunLabel({concurrency, maxRetriesCount: 1, retryIndex: 1});
+  const runLabel = createRunLabel({
+    concurrency,
+    disconnectedBrowsersCount: 0,
+    maxRetriesCount: 1,
+    retryIndex: 1,
+  });
 
   startResourceUsageReading(resourceUsageReadingInternal);
   setRunLabel(runLabel);
