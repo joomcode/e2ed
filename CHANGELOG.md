@@ -1,5 +1,26 @@
 # Changelog
 
+## [v0.16.9](https://github.com/joomcode/e2ed/tree/v0.16.9) (2024-02-12)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.8...v0.16.9)
+
+- [Merge pull request #63 from joomcode/fix/respect-number-of-disconnected-browsers](https://github.com/joomcode/e2ed/commit/4990386b729235a7a264433382b94d3354a36ae4) ([uid11](https://github.com/uid11))
+
+  feat: exit from tests process if browser disconnect threshold is exceeded
+
+- [chore: update `devDependencies` (`@types/node`, etc)](https://github.com/joomcode/e2ed/commit/bce9052f68dbae5ed473d6aa0b3c3866b50819f1) ([uid11](https://github.com/uid11))
+
+  chore: turn on rule `@typescript-eslint/explicit-module-boundary-types`
+
+- [FI-1154 fix: interrupt tests subprocess even if no tests have been run](https://github.com/joomcode/e2ed/commit/3b3c143f74299181fab93e7534355e064461be69) ([uid11](https://github.com/uid11))
+- [FI-678 feat: exit from tests process if browser disconnect threshold is exceeded](https://github.com/joomcode/e2ed/commit/5b6880c39c9aaadba2a195937b3c00ba16a3734b) ([uid11](https://github.com/uid11))
+
+  refactor: rename `processExit` util to `exitFromE2ed`
+
+  feat: add `exitFromTestsSubprocess` util
+
+  feat: add `isLocalRun`/`isDockerRun` flags to public API of configurator
+
 ## [v0.16.8](https://github.com/joomcode/e2ed/tree/v0.16.8) (2024-02-08)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.7...v0.16.8)
