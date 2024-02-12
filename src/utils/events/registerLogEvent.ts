@@ -6,7 +6,7 @@ type LogEventWithMaybeSkippedPayload = Omit<LogEvent, 'payload'> &
   Readonly<{payload: LogEvent['payload'] | 'skipLog'}>;
 
 /**
- * Register log event (for report).
+ * Registers log event (for report).
  * @internal
  */
 export const registerLogEvent = (runId: RunId, logEvent: LogEventWithMaybeSkippedPayload): void => {

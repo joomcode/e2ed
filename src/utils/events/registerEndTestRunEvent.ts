@@ -12,7 +12,7 @@ import {getTestRunEvent} from './getTestRunEvent';
 import type {EndTestRunEvent, FullTestRun, TestRun} from '../../types/internal';
 
 /**
- * Register end test run event (for report) after test closing.
+ * Registers end test run event (for report) after test closing.
  * @internal
  */
 export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent): Promise<void> => {

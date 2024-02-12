@@ -14,7 +14,7 @@ import {getStartInfo} from '../startInfo';
 import {runBeforePackFunctions} from './runBeforePackFunctions';
 
 /**
- * Register start e2ed run event (for report) before running any test.
+ * Registers start e2ed run event (for report) before running any test.
  * @internal
  */
 export const registerStartE2edRunEvent = async (): Promise<void> => {

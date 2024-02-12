@@ -20,6 +20,9 @@ export const disconnectedHandler = async (disconnectedBrowsersCount: number): Pr
   setRunLabel(runLabel);
 
   if (!(disconnectedBrowsersCount / concurrency < 0.4)) {
-    await exitFromTestsSubprocess(true);
+    await exitFromTestsSubprocess({
+      hasError: true,
+      reason: `${disconnectedBrowsersCount} out of ${concurrency} browsers are disconnected (40% or more)`,
+    });
   }
 };

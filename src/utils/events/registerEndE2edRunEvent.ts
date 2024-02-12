@@ -11,7 +11,7 @@ import {runAfterPackFunctions} from './runAfterPackFunctions';
 import type {ReportData} from '../../types/internal';
 
 /**
- * Register end e2ed run event (for report) after closing of all tests.
+ * Registers end e2ed run event (for report) after closing of all tests.
  * @internal
  */
 export const registerEndE2edRunEvent = async (): Promise<void> => {

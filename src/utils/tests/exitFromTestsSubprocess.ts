@@ -7,16 +7,25 @@ import {getDurationWithUnits} from '../getDurationWithUnits';
 import {addTimeoutToPromise} from '../promise';
 import {getMaybeTestCafeInstance} from '../testCafe';
 
+/**
+ * Timeout to close the TestCafe instance.
+ */
 const closingTestcafeInstanceTimeoutInMs = 20_000;
+
+type Options = Readonly<{hasError: boolean; reason: string}>;
 
 /**
  * Exit from current tests subprocess.
  * @internal
  */
-export const exitFromTestsSubprocess = async (hasError: boolean): Promise<void> => {
+export const exitFromTestsSubprocess = async ({hasError, reason}: Options): Promise<void> => {
   if (isLocalRun) {
     return;
   }
+
+  generalLog(
+    `Exit from tests subprocess${hasError ? ' with error' : ''} for the reason: ${reason}`,
+  );
 
   let hasClosingError = false;
 

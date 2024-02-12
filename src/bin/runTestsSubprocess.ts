@@ -14,7 +14,7 @@ testIdleTimeoutObject.unref();
  */
 process.on('message', (runRetryOptions: RunRetryOptions) => {
   void runTests(runRetryOptions).then(
-    () => exitFromTestsSubprocess(false),
-    () => exitFromTestsSubprocess(true),
+    () => exitFromTestsSubprocess({hasError: false, reason: 'Run of tests is correctly completed'}),
+    () => exitFromTestsSubprocess({hasError: true, reason: 'Run of tests completed with error'}),
   );
 });
