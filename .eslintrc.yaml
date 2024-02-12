@@ -158,6 +158,7 @@ rules:
   '@typescript-eslint/default-param-last': error
   '@typescript-eslint/explicit-function-return-type': [error, {allowExpressions: true}]
   '@typescript-eslint/explicit-member-accessibility': [error, {accessibility: no-public}]
+  '@typescript-eslint/explicit-module-boundary-types': error
   '@typescript-eslint/naming-convention':
     - error
     - {selector: default, format: [strictCamelCase, StrictPascalCase], leadingUnderscore: allow}
