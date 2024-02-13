@@ -1,5 +1,20 @@
 # Changelog
 
+## [v0.16.10](https://github.com/joomcode/e2ed/tree/v0.16.10) (2024-02-13)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.9...v0.16.10)
+
+- [Merge pull request #64 from joomcode/fix/exit-from-tests-subprocess](https://github.com/joomcode/e2ed/commit/2190dd69f5e6705d1be8a9f7190ad3aa3aa3fd9b) ([uid11](https://github.com/uid11))
+
+  fix: do not exit from tests subprocess prematurely
+
+- [chore: update `devDependencies` (`devtools-protocol`)](https://github.com/joomcode/e2ed/commit/58cd308ad556d22f74c9a61ca4ea5b7e1386e251) ([uid11](https://github.com/uid11))
+- [FI-678 fix: do not exit from tests subprocess prematurely](https://github.com/joomcode/e2ed/commit/16006a94fb6cb1d7c406e4b18012ce0ac5f252b0) ([uid11](https://github.com/uid11))
+
+  chore: turn on `@typescript-eslint/max-params` rule
+
+  chore: turn on `@typescript-eslint/member-ordering` rule
+
 ## [v0.16.9](https://github.com/joomcode/e2ed/tree/v0.16.9) (2024-02-12)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.8...v0.16.9)
