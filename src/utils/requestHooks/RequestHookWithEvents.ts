@@ -57,6 +57,24 @@ abstract class RequestHookWithEvents extends RequestHook {
   }
 
   /**
+   * Internal TestCafe response event handler.
+   */
+  override async _onConfigureResponse(event: RequestHookConfigureResponseEvent): Promise<void> {
+    await super._onConfigureResponse(event);
+
+    const requestHookContext = event[REQUEST_HOOK_CONTEXT_KEY];
+
+    // eslint-disable-next-line no-underscore-dangle
+    const {destRes} = requestHookContext?._ctx ?? {};
+
+    if (destRes) {
+      const {headers = {}} = destRes;
+
+      setReadonlyProperty(destRes, 'headers', headers);
+    }
+  }
+
+  /**
    * TestCafe request event handler.
    */
   override onRequest(event: RequestHookRequestEvent): Promise<void> {
@@ -86,24 +104,6 @@ abstract class RequestHookWithEvents extends RequestHook {
     this.onRequest = onRequest;
     this.onResponse = onResponse;
     this._onConfigureResponse = _onConfigureResponse;
-  }
-
-  /**
-   * Internal TestCafe response event handler.
-   */
-  override async _onConfigureResponse(event: RequestHookConfigureResponseEvent): Promise<void> {
-    await super._onConfigureResponse(event);
-
-    const requestHookContext = event[REQUEST_HOOK_CONTEXT_KEY];
-
-    // eslint-disable-next-line no-underscore-dangle
-    const {destRes} = requestHookContext?._ctx ?? {};
-
-    if (destRes) {
-      const {headers = {}} = destRes;
-
-      setReadonlyProperty(destRes, 'headers', headers);
-    }
   }
 }
 

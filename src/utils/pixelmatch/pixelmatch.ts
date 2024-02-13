@@ -23,7 +23,7 @@ export const pixelmatch = (
   width: number,
   height: number,
   originalOptions: Partial<PixelmatchOptions>,
-  // eslint-disable-next-line max-params
+  // eslint-disable-next-line @typescript-eslint/max-params
 ): number => {
   if (!isPixelData(img1) || !isPixelData(img2) || (output && !isPixelData(output))) {
     throw new Error('Image data: Uint8Array, Uint8ClampedArray or Buffer expected.');

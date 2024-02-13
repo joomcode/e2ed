@@ -9,7 +9,7 @@ import type {ImgData} from '../../types/internal';
  * Draw one gray pixel on image data.
  * @internal
  */
-// eslint-disable-next-line max-params
+// eslint-disable-next-line @typescript-eslint/max-params
 export const drawGrayPixel = (img: ImgData, i: number, alpha: number, output: ImgData): void => {
   const r = img[i + 0];
   const g = img[i + 1];

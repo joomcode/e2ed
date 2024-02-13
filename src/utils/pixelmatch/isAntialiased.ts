@@ -15,7 +15,7 @@ export const isAntialiased = (
   width: number,
   height: number,
   img2: ImgData,
-  // eslint-disable-next-line max-params
+  // eslint-disable-next-line @typescript-eslint/max-params
 ): boolean => {
   const x0 = Math.max(x1 - 1, 0);
   const y0 = Math.max(y1 - 1, 0);

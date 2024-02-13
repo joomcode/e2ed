@@ -5,7 +5,6 @@ extends:
   - airbnb-base
   - plugin:import/recommended
   - plugin:import/typescript
-  - plugin:typescript-sort-keys/recommended
   - plugin:@typescript-eslint/recommended
   - plugin:@typescript-eslint/recommended-requiring-type-checking
   - plugin:@typescript-eslint/strict
@@ -113,7 +112,7 @@ rules:
   max-depth: [error, {max: 3}]
   max-lines: [error, {max: 120, skipBlankLines: true, skipComments: true}]
   max-lines-per-function: [error, {IIFEs: true, max: 100, skipBlankLines: true, skipComments: true}]
-  max-params: [error, {max: 3}]
+  max-params: off
   max-statements: [error, {max: 25}]
   padding-line-between-statements:
     - error
@@ -151,6 +150,7 @@ rules:
         - ['^\.\./.*\u0000$']
         - ['^\..*\u0000$']
   sort-keys: [error, asc, {caseSensitive: true, natural: false}]
+  typescript-sort-keys/string-enum: error
   '@typescript-eslint/ban-types': [error, {extendDefaults: true, types: {'{}': false}}]
   '@typescript-eslint/consistent-type-definitions': [error, type]
   '@typescript-eslint/consistent-type-exports': error
@@ -159,6 +159,8 @@ rules:
   '@typescript-eslint/explicit-function-return-type': [error, {allowExpressions: true}]
   '@typescript-eslint/explicit-member-accessibility': [error, {accessibility: no-public}]
   '@typescript-eslint/explicit-module-boundary-types': error
+  '@typescript-eslint/max-params': [error, {max: 3}]
+  '@typescript-eslint/member-ordering': [error, {default: {order: alphabetically}}]
   '@typescript-eslint/naming-convention':
     - error
     - {selector: default, format: [strictCamelCase, StrictPascalCase], leadingUnderscore: allow}

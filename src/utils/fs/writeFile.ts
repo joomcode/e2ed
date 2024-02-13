@@ -9,7 +9,7 @@ import {sliceStringIntoChunks} from '../sliceStringIntoChunks';
 import type {FilePathFromRoot} from '../../types/internal';
 
 /**
- * Analogue of fs.writeFile, working on streams (to support large files).
+ * Analogue of `fs.writeFile`, working on streams (to support large files).
  */
 export const writeFile = (path: FilePathFromRoot, text: string): Promise<void> => {
   if (text.length < 2 * DEFAULT_FILE_CHUNK_LENGTH) {

@@ -55,6 +55,25 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
   }
 
   /**
+   * Set `requestHookContextId` to response headers object.
+   */
+  override async _onConfigureResponse(event: RequestHookConfigureResponseEvent): Promise<void> {
+    await super._onConfigureResponse(event);
+
+    const requestHookContext = event[REQUEST_HOOK_CONTEXT_KEY];
+    const requestHookContextId = requestHookContext?.[REQUEST_HOOK_CONTEXT_ID_KEY];
+
+    // eslint-disable-next-line no-underscore-dangle
+    const headers = requestHookContext?._ctx?.destRes?.headers;
+
+    if (headers && requestHookContextId) {
+      (headers as {[REQUEST_HOOK_CONTEXT_ID_KEY]: RequestHookContextId})[
+        REQUEST_HOOK_CONTEXT_ID_KEY
+      ] = requestHookContextId;
+    }
+  }
+
+  /**
    * Checks if the request matches any request predicate.
    */
   override async onRequest(event: RequestHookRequestEvent): Promise<void> {
@@ -89,7 +108,7 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
   }
 
   /**
-   * Checks if the response matches any request predicate.
+   * Checks if the response matches any response predicate.
    */
   override async onResponse(event: RequestHookResponseEvent): Promise<void> {
     const {body, headers} = event;
@@ -140,22 +159,6 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
         requestOrResponse: responseWithRequest,
         waitForEventsState: this.waitForEventsState,
       });
-    }
-  }
-
-  override async _onConfigureResponse(event: RequestHookConfigureResponseEvent): Promise<void> {
-    await super._onConfigureResponse(event);
-
-    const requestHookContext = event[REQUEST_HOOK_CONTEXT_KEY];
-    const requestHookContextId = requestHookContext?.[REQUEST_HOOK_CONTEXT_ID_KEY];
-
-    // eslint-disable-next-line no-underscore-dangle
-    const headers = requestHookContext?._ctx?.destRes?.headers;
-
-    if (headers && requestHookContextId) {
-      (headers as {[REQUEST_HOOK_CONTEXT_ID_KEY]: RequestHookContextId})[
-        REQUEST_HOOK_CONTEXT_ID_KEY
-      ] = requestHookContextId;
     }
   }
 }

@@ -5,5 +5,5 @@ import {exitFromTestsSubprocess} from './exitFromTestsSubprocess';
  * @internal
  */
 export const interruptByTimeout = (): void => {
-  void exitFromTestsSubprocess({hasError: true, reason: 'Run of tests interrupted by timeout'});
+  void exitFromTestsSubprocess({hasError: true, reason: 'run of tests interrupted by timeout'});
 };

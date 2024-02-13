@@ -28,11 +28,6 @@ export abstract class ApiRoute<
   SomeResponse extends Response = Response,
 > extends Route<Params> {
   /**
-   * Get HTTP method of API route.
-   */
-  abstract getMethod(): Method;
-
-  /**
    * Request type of API route.
    */
   declare readonly [REQUEST_KEY]: SomeRequest;
@@ -59,4 +54,9 @@ export abstract class ApiRoute<
   getOrigin(): Url {
     return 'http://localhost' as Url;
   }
+
+  /**
+   * Get HTTP method of API route.
+   */
+  abstract getMethod(): Method;
 }

@@ -11,8 +11,8 @@ export type ApiRouteClassType<
   SomeRequest extends Request,
   SomeResponse extends Response,
 > = {
-  new (...args: ZeroOrOneArg<RouteParams>): ApiRoute<RouteParams, SomeRequest, SomeResponse>;
   prototype: ApiRoute<RouteParams, SomeRequest, SomeResponse>;
+  new (...args: ZeroOrOneArg<RouteParams>): ApiRoute<RouteParams, SomeRequest, SomeResponse>;
 };
 
 /**

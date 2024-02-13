@@ -35,31 +35,6 @@ export class E2edError extends Error {
    */
   readonly utcTimeInMs: UtcTimeInMs;
 
-  /**
-   * Custom presentation of error for nodejs `inspect`.
-   */
-  [inspect.custom](): string {
-    return this.toString();
-  }
-
-  /**
-   * Custom JSON presentation of error.
-   */
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  toJSON(): E2edPrintedFields {
-    return getPrintedFields(this);
-  }
-
-  /**
-   * Custom string presentation of error.
-   */
-  override toString(): string {
-    const printedFields = getPrintedFields(this);
-    const printedString = valueToString(printedFields);
-
-    return `E2edError ${printedString}`;
-  }
-
   constructor(
     override readonly message: string,
     readonly params?: LogParams,
@@ -85,5 +60,30 @@ export class E2edError extends Error {
 
     this.stackTrace = framesStackTrace.map(getPrintedStackFrame);
     this.utcTimeInMs = utcTimeInMs;
+  }
+
+  /**
+   * Custom presentation of error for nodejs `inspect`.
+   */
+  [inspect.custom](): string {
+    return this.toString();
+  }
+
+  /**
+   * Custom JSON presentation of error.
+   */
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  toJSON(): E2edPrintedFields {
+    return getPrintedFields(this);
+  }
+
+  /**
+   * Custom string presentation of error.
+   */
+  override toString(): string {
+    const printedFields = getPrintedFields(this);
+    const printedString = valueToString(printedFields);
+
+    return `E2edError ${printedString}`;
   }
 }

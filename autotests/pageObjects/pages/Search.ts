@@ -22,16 +22,16 @@ export class Search extends MobilePage<CustomPageParams> {
    */
   readonly searchQuery!: string;
 
-  override init(this: Search): void {
-    const searchQuery = this.pageParams.searchQuery ?? 'foo';
-
-    setReadonlyProperty(this, 'searchQuery', searchQuery);
-  }
-
   getRoute(): SearchRoute {
     const {searchQuery} = this;
 
     return new SearchRoute({searchQuery});
+  }
+
+  override init(this: Search): void {
+    const searchQuery = this.pageParams.searchQuery ?? 'foo';
+
+    setReadonlyProperty(this, 'searchQuery', searchQuery);
   }
 
   override async waitForPageLoaded(): Promise<void> {

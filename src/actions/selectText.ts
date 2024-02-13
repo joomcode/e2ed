@@ -15,7 +15,7 @@ export const selectText = (
   startPos = 0,
   endPos?: number,
   options?: Options,
-  // eslint-disable-next-line max-params
+  // eslint-disable-next-line @typescript-eslint/max-params
 ): Promise<void> => {
   const description = getDescriptionFromSelector(selector);
 
