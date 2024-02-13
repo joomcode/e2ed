@@ -37,7 +37,7 @@
     "@typescript-eslint/parser": "6.21.0",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
     "assert-package-lock-is-consistent": "1.0.0",
-    "devtools-protocol": "0.0.1258865",
+    "devtools-protocol": "0.0.1259648",
     "eslint": "8.56.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "9.1.0",
