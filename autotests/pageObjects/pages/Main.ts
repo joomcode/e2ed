@@ -29,23 +29,6 @@ const mainPageLocator = createLocator<MainLocator, Selector>('google', {
  */
 export class Main extends Page<CustomPageParams> {
   /**
-   * Page language.
-   */
-  readonly language!: Language;
-
-  override init(this: Main): void {
-    const {language = 'de'} = this.pageParams ?? {};
-
-    setReadonlyProperty(this, 'language', language);
-  }
-
-  getRoute(): MainRoute {
-    const {language} = this;
-
-    return new MainRoute({language});
-  }
-
-  /**
    * Body selector.
    */
   readonly body = createSelectorByCss('body');
@@ -54,6 +37,11 @@ export class Main extends Page<CustomPageParams> {
    * Header selector.
    */
   readonly header = mainPageLocator.header();
+
+  /**
+   * Page language.
+   */
+  readonly language!: Language;
 
   /**
    * Search input.
@@ -65,6 +53,18 @@ export class Main extends Page<CustomPageParams> {
    */
   get searchQuery(): Promise<string> {
     return this.searchInput.value;
+  }
+
+  getRoute(): MainRoute {
+    const {language} = this;
+
+    return new MainRoute({language});
+  }
+
+  override init(this: Main): void {
+    const {language = 'de'} = this.pageParams ?? {};
+
+    setReadonlyProperty(this, 'language', language);
   }
 
   /**

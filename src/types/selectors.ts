@@ -85,22 +85,18 @@ export type Selector = ReplaceObjectSelectors<Inner.SelectorAPI> &
  * Custom methods that `e2ed` adds to selector.
  */
 export type SelectorCustomMethods = Readonly<{
-  /* eslint-disable typescript-sort-keys/interface */
+  /** Finds all child elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
+  childByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
+
+  /** Finds all child elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
+  childByLocatorParameter(
+    this: TestCafeSelector,
+    parameter: string,
+    value: string,
+  ): TestCafeSelector;
 
   /** Creates a selector that filters a matching set by locatorId. */
   filterByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
-  /** Finds all descendants of all nodes in the matching set and filters them by locatorId. */
-  findByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
-  /** Finds all parents of all nodes in the matching set and filters them by locatorId. */
-  parentByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
-  /** Finds all child elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  childByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
-  /** Finds all sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  siblingByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
-  /** Finds all succeeding sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  nextSiblingByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
-  /** Finds all preceding sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  prevSiblingByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
 
   /** Creates a selector that filters a matching set by locator parameter. */
   filterByLocatorParameter(
@@ -108,36 +104,55 @@ export type SelectorCustomMethods = Readonly<{
     parameter: string,
     value: string,
   ): TestCafeSelector;
+
+  /** Finds all descendants of all nodes in the matching set and filters them by locatorId. */
+  findByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
+
   /** Finds all descendants of all nodes in the matching set and filters them by locator parameter. */
   findByLocatorParameter(
     this: TestCafeSelector,
     parameter: string,
     value: string,
   ): TestCafeSelector;
-  /** Finds all parents of all nodes in the matching set and filters them by locator parameter. */
-  parentByLocatorParameter(
-    this: TestCafeSelector,
-    parameter: string,
-    value: string,
-  ): TestCafeSelector;
-  /** Finds all child elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
-  childByLocatorParameter(
-    this: TestCafeSelector,
-    parameter: string,
-    value: string,
-  ): TestCafeSelector;
-  /** Finds all sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
-  siblingByLocatorParameter(
-    this: TestCafeSelector,
-    parameter: string,
-    value: string,
-  ): TestCafeSelector;
+
+  /** Get string description of selector if any. */
+  getDescription(this: TestCafeSelector): string | undefined;
+
+  /** Returns the value of the locator id. */
+  getLocatorId(this: TestCafeSelector): Promise<string | null>;
+
+  /** Returns the value of the locator parameter. */
+  getLocatorParameter(this: TestCafeSelector, parameter: string): Promise<string | null>;
+
+  /** true if the element has the locator id. */
+  hasLocatorId(this: TestCafeSelector): Promise<boolean>;
+
+  /** true if the element has the locator parameter. */
+  hasLocatorParameter(this: TestCafeSelector, parameter: string): Promise<boolean>;
+
+  /** Finds all succeeding sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
+  nextSiblingByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
+
   /** Finds all succeeding sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
   nextSiblingByLocatorParameter(
     this: TestCafeSelector,
     parameter: string,
     value: string,
   ): TestCafeSelector;
+
+  /** Finds all parents of all nodes in the matching set and filters them by locatorId. */
+  parentByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
+
+  /** Finds all parents of all nodes in the matching set and filters them by locator parameter. */
+  parentByLocatorParameter(
+    this: TestCafeSelector,
+    parameter: string,
+    value: string,
+  ): TestCafeSelector;
+
+  /** Finds all preceding sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
+  prevSiblingByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
+
   /** Finds all preceding sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
   prevSiblingByLocatorParameter(
     this: TestCafeSelector,
@@ -145,19 +160,15 @@ export type SelectorCustomMethods = Readonly<{
     value: string,
   ): TestCafeSelector;
 
-  /** Returns the value of the locator id. */
-  getLocatorId(this: TestCafeSelector): Promise<string | null>;
-  /** true if the element has the locator id. */
-  hasLocatorId(this: TestCafeSelector): Promise<boolean>;
-  /** Returns the value of the locator parameter. */
-  getLocatorParameter(this: TestCafeSelector, parameter: string): Promise<string | null>;
-  /** true if the element has the locator parameter. */
-  hasLocatorParameter(this: TestCafeSelector, parameter: string): Promise<boolean>;
+  /** Finds all sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
+  siblingByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
 
-  /** Get string description of selector if any. */
-  getDescription(this: TestCafeSelector): string | undefined;
-
-  /* eslint-enable typescript-sort-keys/interface */
+  /** Finds all sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
+  siblingByLocatorParameter(
+    this: TestCafeSelector,
+    parameter: string,
+    value: string,
+  ): TestCafeSelector;
 }>;
 
 /**

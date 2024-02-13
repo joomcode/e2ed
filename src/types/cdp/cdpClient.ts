@@ -101,6 +101,15 @@ export type CdpClient = Readonly<{
   close: () => Promise<void>;
   host: string;
   local: boolean;
+  port: number;
+  protocol: Readonly<{
+    domains: readonly Domain[];
+    version: Readonly<{major: string; minor: string}>;
+  }>;
+  secure: boolean;
+  target: Target | string | ((targets: readonly Target[]) => Target | number) | undefined;
+  useHostName: boolean;
+  webSocketUrl: string;
   on(event: 'event', callback: (message: EventMessage) => void): void;
   on(event: 'disconnect' | 'ready', callback: () => void): void;
   // '<domain>.<method>' i.e. Network.requestWillBeSent
@@ -110,12 +119,6 @@ export type CdpClient = Readonly<{
   ): void;
   // '<domain>.<method>.<sessionId>' i.e. Network.requestWillBeSent.abc123
   on(event: string, callback: (params: object, sessionId?: string) => void): void;
-  port: number;
-  protocol: Readonly<{
-    domains: readonly Domain[];
-    version: Readonly<{major: string; minor: string}>;
-  }>;
-  secure: boolean;
   // client.send(method, [params], [sessionId], [callback])
   send<T extends keyof ProtocolMappingApi.Commands>(event: T, callback: SendCallback<T>): void;
   send<T extends keyof ProtocolMappingApi.Commands>(
@@ -134,9 +137,6 @@ export type CdpClient = Readonly<{
     params?: ProtocolMappingApi.Commands[T]['paramsType'][0],
     sessionId?: string,
   ): Promise<ProtocolMappingApi.Commands[T]['returnType']>;
-  target: Target | string | ((targets: readonly Target[]) => Target | number) | undefined;
-  useHostName: boolean;
-  webSocketUrl: string;
 }> &
   EventPromises<ProtocolMappingApi.Events> &
   EventCallbacks<ProtocolMappingApi.Events> &

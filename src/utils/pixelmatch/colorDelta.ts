@@ -15,7 +15,7 @@ export const colorDelta = (
   k: number,
   m: number,
   yOnly: boolean,
-  // eslint-disable-next-line max-params
+  // eslint-disable-next-line @typescript-eslint/max-params
 ): number => {
   let r1 = img1[k + 0];
   let g1 = img1[k + 1];

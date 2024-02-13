@@ -6,6 +6,6 @@ export type Class<
   Prototype extends object = object,
   Static extends object = object,
 > = {
-  new (...args: ConstructorArgs): Prototype;
   readonly prototype: Prototype;
+  new (...args: ConstructorArgs): Prototype;
 } & Static;

@@ -17,7 +17,7 @@ export const drag = async (
   dragOffsetX: number,
   dragOffsetY: number,
   {stabilizationInterval, ...options}: Options = {},
-  // eslint-disable-next-line max-params
+  // eslint-disable-next-line @typescript-eslint/max-params
 ): Promise<void> => {
   const description = getDescriptionFromSelector(selector);
 

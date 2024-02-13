@@ -1,3 +1,5 @@
+import {resetSubprocessInterruptTimeout} from '../tests';
+
 import {getTestRunEvent} from './getTestRunEvent';
 
 import type {LogEvent, RunId} from '../../types/internal';
@@ -16,5 +18,6 @@ export const registerLogEvent = (runId: RunId, logEvent: LogEventWithMaybeSkippe
     (runTestEvent.logEvents as LogEvent[]).push(logEvent as LogEvent);
   }
 
+  resetSubprocessInterruptTimeout();
   runTestEvent.onlog();
 };

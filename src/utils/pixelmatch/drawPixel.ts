@@ -10,7 +10,7 @@ export const drawPixel = (
   r: number,
   g: number,
   b: number,
-  // eslint-disable-next-line max-params
+  // eslint-disable-next-line @typescript-eslint/max-params
 ): void => {
   const output = originalOutput;
 

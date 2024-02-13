@@ -56,27 +56,9 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
     super(predicate, INCLUDE_HEADERS_IN_RESPONSE_EVENT);
   }
 
-  override onRequest(event: RequestHookRequestEvent): Promise<void> {
-    if (this.options.mapRequestHeaders === undefined) {
-      return RESOLVED_PROMISE;
-    }
-
-    const {requestOptions} = event;
-    const {headers = {}} = requestOptions;
-
-    applyHeadersMapper(headers as Headers, this.options.mapRequestHeaders);
-
-    setReadonlyProperty(requestOptions, 'headers', headers);
-
-    log(`Map request headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
-
-    return RESOLVED_PROMISE;
-  }
-
-  override async onResponse(): Promise<void> {
-    await testController.removeRequestHooks(this);
-  }
-
+  /**
+   * Maps response headers.
+   */
   override async _onConfigureResponse(event: RequestHookConfigureResponseEvent): Promise<void> {
     await super._onConfigureResponse(event);
 
@@ -121,5 +103,32 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
     }
 
     log(`Map response headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
+  }
+
+  /**
+   * Maps request headers.
+   */
+  override onRequest(event: RequestHookRequestEvent): Promise<void> {
+    if (this.options.mapRequestHeaders === undefined) {
+      return RESOLVED_PROMISE;
+    }
+
+    const {requestOptions} = event;
+    const {headers = {}} = requestOptions;
+
+    applyHeadersMapper(headers as Headers, this.options.mapRequestHeaders);
+
+    setReadonlyProperty(requestOptions, 'headers', headers);
+
+    log(`Map request headers for ${this.url}`, {headers}, LogEventType.InternalUtil);
+
+    return RESOLVED_PROMISE;
+  }
+
+  /**
+   * Removes request hook when request is completed.
+   */
+  override async onResponse(): Promise<void> {
+    await testController.removeRequestHooks(this);
   }
 }

@@ -19,24 +19,10 @@ declare const PARAMS_KEY: ParamsKeyType;
  * Abstract page with base methods.
  */
 export abstract class Page<PageParams = undefined> {
-  constructor(...args: PageClassTypeArgs<PageParams>) {
-    const [createPageToken, pageParams] = args;
-
-    assertValueIsTrue(createPageToken === CREATE_PAGE_TOKEN, 'createPageToken is correct', {
-      createPageToken,
-      pageParams,
-    });
-
-    this.pageParams = pageParams as PageParams;
-
-    const {
-      pageStabilizationInterval,
-      waitForAllRequestsComplete: {maxIntervalBetweenRequestsInMs},
-    } = getFullPackConfig();
-
-    this.maxIntervalBetweenRequestsInMs = maxIntervalBetweenRequestsInMs;
-    this.pageStabilizationInterval = pageStabilizationInterval;
-  }
+  /**
+   * Type of page parameters.
+   */
+  declare readonly [PARAMS_KEY]: PageParams;
 
   /**
    * Default maximum interval (in milliseconds) between requests.
@@ -61,16 +47,24 @@ export abstract class Page<PageParams = undefined> {
    */
   readonly pageStabilizationInterval: number;
 
-  /**
-   * Type of page parameters.
-   */
-  declare readonly [PARAMS_KEY]: PageParams;
+  constructor(...args: PageClassTypeArgs<PageParams>) {
+    const [createPageToken, pageParams] = args;
 
-  /**
-   * Optional initialization (asynchronous or synchronous) of the page after
-   * the synchronous constructor has run.
-   */
-  init?(): AsyncVoid;
+    assertValueIsTrue(createPageToken === CREATE_PAGE_TOKEN, 'createPageToken is correct', {
+      createPageToken,
+      pageParams,
+    });
+
+    this.pageParams = pageParams as PageParams;
+
+    const {
+      pageStabilizationInterval,
+      waitForAllRequestsComplete: {maxIntervalBetweenRequestsInMs},
+    } = getFullPackConfig();
+
+    this.maxIntervalBetweenRequestsInMs = maxIntervalBetweenRequestsInMs;
+    this.pageStabilizationInterval = pageStabilizationInterval;
+  }
 
   /**
    * Optional hook that runs after asserts the page.
@@ -113,9 +107,10 @@ export abstract class Page<PageParams = undefined> {
   beforeReloadPage?(): AsyncVoid;
 
   /**
-   * Get page route (for navigation to the page).
+   * Optional initialization (asynchronous or synchronous) of the page after
+   * the synchronous constructor has run.
    */
-  abstract getRoute(): PageRoute<unknown>;
+  init?(): AsyncVoid;
 
   /**
    * Navigates to the page by url.
@@ -141,4 +136,9 @@ export abstract class Page<PageParams = undefined> {
 
     await waitForInterfaceStabilization(this.pageStabilizationInterval);
   }
+
+  /**
+   * Get page route (for navigation to the page).
+   */
+  abstract getRoute(): PageRoute<unknown>;
 }
