@@ -1,9 +1,4 @@
-import {
-  failMessage,
-  generalLog,
-  getSuccessfulTotalInPreviousRetries,
-  okMessage,
-} from '../generalLog';
+import {failMessage, generalLog, okMessage} from '../generalLog';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 
 import {getPrintedRetry} from './getPrintedRetry';
@@ -16,6 +11,7 @@ type Options = Readonly<{
   newLength: number;
   retriesState: RetriesState;
   successfulLength: number;
+  successfulTotalInPreviousRetries: number;
   unbrokenLength: number;
 }>;
 
@@ -28,13 +24,13 @@ export const logRetryResult = ({
   newLength,
   retriesState,
   successfulLength,
+  successfulTotalInPreviousRetries,
   unbrokenLength,
 }: Options): void => {
   const {concurrency, maxRetriesCount, retryIndex, startLastRetryTimeInMs} = retriesState;
 
   const printedRetry = getPrintedRetry({maxRetriesCount, retryIndex});
   const stateMessage = retriesState.isLastRetrySuccessful ? okMessage : failMessage;
-  const successfulTotalInPreviousRetries = getSuccessfulTotalInPreviousRetries();
 
   const durationWithUnits = getDurationWithUnits(Date.now() - startLastRetryTimeInMs);
 

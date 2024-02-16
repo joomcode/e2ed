@@ -12,6 +12,8 @@ import {getMaybeTestCafeInstance} from '../testCafe';
  */
 const closingTestcafeInstanceTimeoutInMs = 20_000;
 
+let isExitAlreadyCalled = false;
+
 type Options = Readonly<{hasError: boolean; reason: string}>;
 
 /**
@@ -19,9 +21,11 @@ type Options = Readonly<{hasError: boolean; reason: string}>;
  * @internal
  */
 export const exitFromTestsSubprocess = async ({hasError, reason}: Options): Promise<void> => {
-  if (isLocalRun) {
+  if (isExitAlreadyCalled || isLocalRun) {
     return;
   }
+
+  isExitAlreadyCalled = true;
 
   generalLog(
     `Exit from tests subprocess${hasError ? ' with error' : ''} for the reason: ${reason}`,

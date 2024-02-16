@@ -8,7 +8,7 @@ import type {CloneWithoutUndefinedProperties, ObjectEntries} from '../../types/i
 export const cloneWithoutUndefinedProperties = <Type extends object>(
   x: Type,
 ): CloneWithoutUndefinedProperties<Type> => {
-  const result = {} as CloneWithoutUndefinedProperties<Type>;
+  const result = {} as unknown as CloneWithoutUndefinedProperties<Type>;
 
   for (const [key, value] of Object.entries(x) as ObjectEntries<Type>) {
     const descriptor = Object.getOwnPropertyDescriptor(x, key);

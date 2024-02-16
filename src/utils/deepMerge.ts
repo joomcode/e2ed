@@ -8,7 +8,7 @@ import type {DeepPartial, ObjectEntries, Values} from '../types/internal';
  * `y` overwrites `x`; `x` and `y` are immutable.
  */
 export const deepMerge = <Type extends object>(x: Type, y: DeepPartial<Type>): Type => {
-  const result = {} as Type;
+  const result = {} as unknown as Type;
 
   for (const key of Object.keys(x)) {
     const descriptor = Object.getOwnPropertyDescriptor(x, key);

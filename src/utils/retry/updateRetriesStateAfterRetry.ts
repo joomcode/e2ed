@@ -37,6 +37,7 @@ export const updateRetriesStateAfterRetry = async (retriesState: RetriesState): 
   );
 
   const printedRetry = getPrintedRetry({maxRetriesCount, retryIndex});
+  const successfulTotalInPreviousRetries = Object.keys(successfulTestRunNamesHash).length;
 
   for (const successfulNewFullTestRun of successfulNewFullTestRuns) {
     const {name} = successfulNewFullTestRun;
@@ -59,6 +60,7 @@ export const updateRetriesStateAfterRetry = async (retriesState: RetriesState): 
     newLength: newFullTestRuns.length,
     retriesState,
     successfulLength: successfulNewFullTestRuns.length,
+    successfulTotalInPreviousRetries,
     unbrokenLength: unbrokenNewFullTestRuns.length,
   });
 

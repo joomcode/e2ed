@@ -34,7 +34,7 @@ export const getWaitForEventsState = (
     hashOfNotCompleteRequests: Object.create(
       null,
     ) as WaitForEventsState['hashOfNotCompleteRequests'],
-    hook: {} as RequestHookToWaitForEvents,
+    hook: {} as unknown as RequestHookToWaitForEvents,
     redirects: Object.create(null) as Record<Url, Url>,
     requestPredicates: new Set<RequestPredicateWithPromise>(),
     responsePredicates: new Set<ResponsePredicateWithPromise>(),

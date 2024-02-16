@@ -29,5 +29,5 @@ export const setCustomInspectOnFunction = <Args extends readonly unknown[], Retu
 
   fn[inspect.custom] = getFunctionPresentationForThis;
 
-  (fn as unknown as {toJSON(): StringForLogs | string}).toJSON = getFunctionPresentationForThis;
+  (fn as unknown as {toJSON: () => StringForLogs | string}).toJSON = getFunctionPresentationForThis;
 };

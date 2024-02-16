@@ -22,11 +22,11 @@ export const processBrokenTestRuns = (testRunEvent: TestRunEvent): void => {
 
   assertTestRunEventIsPreviousOfTestRunEvent(previousTestRunEvent, testRunEvent);
 
-  const errorParamsForBrokenTest = {
+  const errorParamsForBrokenTest: MaybeWithIsTestRunBroken & Record<string, unknown> = {
     isTestRunBroken: true,
     previousTestRunEvent: cloneWithoutLogEvents(previousTestRunEvent),
     testRunEvent: cloneWithoutLogEvents(testRunEvent),
-  } as MaybeWithIsTestRunBroken;
+  };
 
   if (previousTestRunEvent.status !== TestRunStatus.Unknown) {
     if (previousTestRunEvent.status === TestRunStatus.Failed) {

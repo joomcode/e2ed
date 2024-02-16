@@ -9,7 +9,8 @@ type DataPropertyDescriptor<Value> = Readonly<
   GenericPropertyDescriptor;
 
 type AccessorPropertyDescriptor<Value> = Readonly<
-  {get?(): Value; set(value: Value): void} | {get(): Value; set?(value: Value): void}
+  | {get: () => Value; set?: (value: Value) => void}
+  | {get?: () => Value; set: (value: Value) => void}
 > &
   GenericPropertyDescriptor;
 
