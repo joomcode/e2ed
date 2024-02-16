@@ -1,5 +1,20 @@
 # Changelog
 
+## [v0.16.11](https://github.com/joomcode/e2ed/tree/v0.16.11) (2024-02-16)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.10...v0.16.11)
+
+- [Merge pull request #65 from joomcode/fix/double-exit-from-tests-subprocess](https://github.com/joomcode/e2ed/commit/a33f1a9ab635e5e80c7c6b0260b6355a3458e8f6) ([uid11](https://github.com/uid11))
+
+  fix: prevent double exit from tests subprocess
+
+- [chore: update `devDependencies` (`@types/node`, etc)](https://github.com/joomcode/e2ed/commit/8fb02ffd7101c037ce55f02676f705c4c23332a4) ([uid11](https://github.com/uid11))
+- [FI-1160 fix: prevent double exit from tests subprocess](https://github.com/joomcode/e2ed/commit/80e16fea3bcaa83dd32a5bcb946d3f0cddf21711) ([uid11](https://github.com/uid11))
+
+  fix: totale number of successful tests in previous retries
+
+  refactor: add more `@typescript-eslint/*` rules
+
 ## [v0.16.10](https://github.com/joomcode/e2ed/tree/v0.16.10) (2024-02-13)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.9...v0.16.10)
