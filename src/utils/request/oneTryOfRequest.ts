@@ -69,7 +69,7 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
             responseBody,
             responseHeaders: res.headers,
             statusCode,
-          } as SomeResponse;
+          } as unknown as SomeResponse;
 
           clearTimeout(endTimeout);
           resolve({fullLogParams, response});

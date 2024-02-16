@@ -18,7 +18,7 @@ type TakeScreenshot = ((path?: string) => Promise<void>) &
 export const takeScreenshot: TakeScreenshot = (pathOrOptions) => {
   const options = typeof pathOrOptions === 'string' ? {path: pathOrOptions} : pathOrOptions;
   const {
-    fullPage,
+    fullPage = false,
     path: pathToScreenshot,
     timeout = DEFAULT_TAKE_SCREENSHOT_TIMEOUT_IN_MS,
   } = options ?? {};
@@ -31,7 +31,10 @@ export const takeScreenshot: TakeScreenshot = (pathOrOptions) => {
     LogEventType.InternalAction,
   );
 
-  const takeScreenshotOptions = {fullPage, path: pathToScreenshot} as Inner.TakeScreenshotOptions;
+  const takeScreenshotOptions: Inner.TakeScreenshotOptions = {
+    fullPage,
+    path: pathToScreenshot as string,
+  };
   const takeScreenshotPromise = testController.takeScreenshot(takeScreenshotOptions);
 
   if (!(timeout > 0)) {

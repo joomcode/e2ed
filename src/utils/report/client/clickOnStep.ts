@@ -4,7 +4,8 @@
  * @internal
  */
 export function clickOnStep(element: HTMLElement): void {
-  const expanded = element.getAttribute('aria-expanded') === 'true';
+  const expanded = element.ariaExpanded === 'true';
 
-  element.setAttribute('aria-expanded', String(!expanded));
+  // eslint-disable-next-line no-param-reassign
+  element.ariaExpanded = String(!expanded);
 }

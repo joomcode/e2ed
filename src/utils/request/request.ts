@@ -38,7 +38,7 @@ export const request = async <
     requestBody,
     routeParams,
     timeout = 30_000,
-  }: Options<RouteParams, SomeRequest, SomeResponse> = {} as Options<
+  }: Options<RouteParams, SomeRequest, SomeResponse> = {} as unknown as Options<
     RouteParams,
     SomeRequest,
     SomeResponse

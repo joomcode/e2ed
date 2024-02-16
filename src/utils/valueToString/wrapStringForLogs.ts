@@ -36,7 +36,7 @@ export const wrapStringForLogs = (text: string, options?: Options): StringForLog
   const toString = options?.doNotWrapInBacktick ? String.prototype.toString : toMultipleString;
 
   result[inspect.custom as unknown as number] = toString as unknown as string;
-  (result as unknown as {toJSON(): string}).toJSON = toString;
+  (result as unknown as {toJSON: () => string}).toJSON = toString;
 
   return result;
 };

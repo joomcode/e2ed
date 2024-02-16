@@ -17,10 +17,11 @@ export function clickOnRetry(element: HTMLElement): void {
   );
 
   if (previousChosenRetryButton) {
-    previousChosenRetryButton.setAttribute('aria-selected', 'false');
+    previousChosenRetryButton.ariaSelected = 'false';
   }
 
-  element.setAttribute('aria-selected', 'true');
+  // eslint-disable-next-line no-param-reassign
+  element.ariaSelected = 'true';
 
   const leftSection = document.querySelector('.main__section._position_left');
 

@@ -86,89 +86,89 @@ export type Selector = ReplaceObjectSelectors<Inner.SelectorAPI> &
  */
 export type SelectorCustomMethods = Readonly<{
   /** Finds all child elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  childByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
+  childByLocatorId: (this: TestCafeSelector, locatorId: string) => TestCafeSelector;
 
   /** Finds all child elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
-  childByLocatorParameter(
+  childByLocatorParameter: (
     this: TestCafeSelector,
     parameter: string,
     value: string,
-  ): TestCafeSelector;
+  ) => TestCafeSelector;
 
   /** Creates a selector that filters a matching set by locatorId. */
-  filterByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
+  filterByLocatorId: (this: TestCafeSelector, locatorId: string) => TestCafeSelector;
 
   /** Creates a selector that filters a matching set by locator parameter. */
-  filterByLocatorParameter(
+  filterByLocatorParameter: (
     this: TestCafeSelector,
     parameter: string,
     value: string,
-  ): TestCafeSelector;
+  ) => TestCafeSelector;
 
   /** Finds all descendants of all nodes in the matching set and filters them by locatorId. */
-  findByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
+  findByLocatorId: (this: TestCafeSelector, locatorId: string) => TestCafeSelector;
 
   /** Finds all descendants of all nodes in the matching set and filters them by locator parameter. */
-  findByLocatorParameter(
+  findByLocatorParameter: (
     this: TestCafeSelector,
     parameter: string,
     value: string,
-  ): TestCafeSelector;
+  ) => TestCafeSelector;
 
   /** Get string description of selector if any. */
-  getDescription(this: TestCafeSelector): string | undefined;
+  getDescription: (this: TestCafeSelector) => string | undefined;
 
   /** Returns the value of the locator id. */
-  getLocatorId(this: TestCafeSelector): Promise<string | null>;
+  getLocatorId: (this: TestCafeSelector) => Promise<string | null>;
 
   /** Returns the value of the locator parameter. */
-  getLocatorParameter(this: TestCafeSelector, parameter: string): Promise<string | null>;
+  getLocatorParameter: (this: TestCafeSelector, parameter: string) => Promise<string | null>;
 
   /** true if the element has the locator id. */
-  hasLocatorId(this: TestCafeSelector): Promise<boolean>;
+  hasLocatorId: (this: TestCafeSelector) => Promise<boolean>;
 
   /** true if the element has the locator parameter. */
-  hasLocatorParameter(this: TestCafeSelector, parameter: string): Promise<boolean>;
+  hasLocatorParameter: (this: TestCafeSelector, parameter: string) => Promise<boolean>;
 
   /** Finds all succeeding sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  nextSiblingByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
+  nextSiblingByLocatorId: (this: TestCafeSelector, locatorId: string) => TestCafeSelector;
 
   /** Finds all succeeding sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
-  nextSiblingByLocatorParameter(
+  nextSiblingByLocatorParameter: (
     this: TestCafeSelector,
     parameter: string,
     value: string,
-  ): TestCafeSelector;
+  ) => TestCafeSelector;
 
   /** Finds all parents of all nodes in the matching set and filters them by locatorId. */
-  parentByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
+  parentByLocatorId: (this: TestCafeSelector, locatorId: string) => TestCafeSelector;
 
   /** Finds all parents of all nodes in the matching set and filters them by locator parameter. */
-  parentByLocatorParameter(
+  parentByLocatorParameter: (
     this: TestCafeSelector,
     parameter: string,
     value: string,
-  ): TestCafeSelector;
+  ) => TestCafeSelector;
 
   /** Finds all preceding sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  prevSiblingByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
+  prevSiblingByLocatorId: (this: TestCafeSelector, locatorId: string) => TestCafeSelector;
 
   /** Finds all preceding sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
-  prevSiblingByLocatorParameter(
+  prevSiblingByLocatorParameter: (
     this: TestCafeSelector,
     parameter: string,
     value: string,
-  ): TestCafeSelector;
+  ) => TestCafeSelector;
 
   /** Finds all sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  siblingByLocatorId(this: TestCafeSelector, locatorId: string): TestCafeSelector;
+  siblingByLocatorId: (this: TestCafeSelector, locatorId: string) => TestCafeSelector;
 
   /** Finds all sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
-  siblingByLocatorParameter(
+  siblingByLocatorParameter: (
     this: TestCafeSelector,
     parameter: string,
     value: string,
-  ): TestCafeSelector;
+  ) => TestCafeSelector;
 }>;
 
 /**

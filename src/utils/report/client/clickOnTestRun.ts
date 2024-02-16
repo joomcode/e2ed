@@ -15,10 +15,11 @@ export function clickOnTestRun(element: HTMLElement): void {
   const previousChosenTestRunButton = document.querySelector('.test-button[aria-selected="true"]');
 
   if (previousChosenTestRunButton) {
-    previousChosenTestRunButton.setAttribute('aria-selected', 'false');
+    previousChosenTestRunButton.ariaSelected = 'false';
   }
 
-  element.setAttribute('aria-selected', 'true');
+  // eslint-disable-next-line no-param-reassign
+  element.ariaSelected = 'true';
 
   chooseTestRun(runHash);
 }

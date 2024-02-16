@@ -7,7 +7,7 @@ type Return = Readonly<Record<PropertyKey, PrimitiveValue>>;
  * Property values that are objects are cast to a string.
  */
 export const getShallowCopyOfObjectForLogs = (value: object): Return => {
-  const copy = {} as Mutable<Return>;
+  const copy = {} as unknown as Mutable<Return>;
 
   for (const key of Reflect.ownKeys(value)) {
     const property = (value as Record<PropertyKey, PrimitiveValue | object>)[key];
