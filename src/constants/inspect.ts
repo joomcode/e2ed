@@ -1,3 +1,5 @@
+const averageLineLength = 100;
+
 /**
  * Default options for node util.inspect.
  * @internal
@@ -34,4 +36,5 @@ export const MAX_LINES_COUNT_IN_PRINTED_VALUE = 250;
  * Max string length in printed stringify values (in logs).
  * @internal
  */
-export const MAX_STRING_LENGTH_IN_PRINTED_VALUE = 100 * MAX_LINES_COUNT_IN_PRINTED_VALUE;
+export const MAX_STRING_LENGTH_IN_PRINTED_VALUE =
+  averageLineLength * MAX_LINES_COUNT_IN_PRINTED_VALUE;

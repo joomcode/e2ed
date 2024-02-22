@@ -34,6 +34,9 @@ const filterTestsIntoPack: FilterTestsIntoPack = ({options}) => options.meta.tes
 const overriddenUserAgent =
   'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.35 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.35';
 
+const packTimeoutInMinutes = 5;
+const msInMinute = 60_000;
+
 /**
  * Pack of tests or tasks (pack configuration object).
  */
@@ -62,7 +65,7 @@ export const pack: Pack = {
   mapLogPayloadInReport,
   maxRetriesCountInDocker: 3,
   overriddenUserAgent,
-  packTimeout: 5 * 60_000,
+  packTimeout: packTimeoutInMinutes * msInMinute,
   pageRequestTimeout: 30_000,
   pageStabilizationInterval: 500,
   pathToScreenshotsDirectoryForReport: './screenshots',

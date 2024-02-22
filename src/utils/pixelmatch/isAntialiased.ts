@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
+
 import {colorDelta} from './colorDelta';
 import {hasManySiblings} from './hasManySiblings';
 

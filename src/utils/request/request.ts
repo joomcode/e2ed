@@ -2,7 +2,7 @@ import {request as httpRequest} from 'node:http';
 import {request as httpsRequest} from 'node:https';
 import {URL} from 'node:url';
 
-import {LogEventStatus, LogEventType} from '../../constants/internal';
+import {BAD_REQUEST_STATUS_CODE, LogEventStatus, LogEventType} from '../../constants/internal';
 
 import {E2edError} from '../error';
 import {getDurationWithUnits} from '../getDurationWithUnits';
@@ -25,7 +25,7 @@ import type {
 import type {LogParams, Options} from './types';
 
 const defaultIsNeedRetry = <SomeResponse extends Response>({statusCode}: SomeResponse): boolean =>
-  statusCode >= 400;
+  statusCode >= BAD_REQUEST_STATUS_CODE;
 
 /**
  * Send a request to the (JSON) API by `Route`, route parameters, headers,

@@ -1,13 +1,15 @@
 import type {PixelmatchOptions} from '../types/internal';
 
+const maxColorValue = 255;
+
 /**
  * Pixelmatch default options.
  * @internal
  */
 export const DEFAULT_PIXELMATCH_OPTIONS: PixelmatchOptions = {
-  aaColor: [255, 255, 0], // color of anti-aliased pixels in diff output
+  aaColor: [maxColorValue, maxColorValue, 0], // color of anti-aliased pixels in diff output
   alpha: 0.1, // opacity of original image in diff output
-  diffColor: [255, 0, 0], // color of different pixels in diff output
+  diffColor: [maxColorValue, 0, 0], // color of different pixels in diff output
   /**
    * Whether to detect dark on light differences between img1 and img2 and
    * set an alternative color to differentiate between the two

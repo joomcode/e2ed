@@ -25,12 +25,13 @@ export function onFirstJsonReportDataLoad(): void {
   clickOnTestRun(buttonForFailedTestRun as HTMLElement);
 
   const buttonOfOpenStep = document.querySelector('.step-expanded[aria-expanded="true"]');
+  const scrollDelayInMs = 8;
 
   if (buttonOfOpenStep) {
     const {top} = buttonOfOpenStep.getBoundingClientRect();
 
     setTimeout(() => {
       e2edTestRunDetailsContainer.scrollTop = top;
-    }, 8);
+    }, scrollDelayInMs);
   }
 }

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
+
 import type {ImgData} from '../../types/internal';
 
 /**

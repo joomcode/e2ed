@@ -1,5 +1,7 @@
 import type {Cookie, SetCookieHeaderString} from '../../types/internal';
 
+const msInSecond = 1_000;
+
 /**
  * Get value of set-cookie (response) header string for single cookie by cookie parameters object.
  * @example
@@ -8,7 +10,7 @@ import type {Cookie, SetCookieHeaderString} from '../../types/internal';
 export const getSetCookieHeaderString = (cookie: Cookie): SetCookieHeaderString => {
   const {domain, expires, httpOnly, name, path, sameSite, secure, value} = cookie;
   const expiresDate = new Date(expires);
-  const maxAge = Math.round((expires - Date.now()) / 1000);
+  const maxAge = Math.round((expires - Date.now()) / msInSecond);
 
   const cookieStringParts = [
     `${name}=${value}`,

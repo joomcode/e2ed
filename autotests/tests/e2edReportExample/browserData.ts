@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-magic-numbers, no-console */
 
 import {test} from 'autotests';
 import {E2edReportExample} from 'autotests/pageObjects/pages';

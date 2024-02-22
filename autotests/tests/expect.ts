@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
+
 import {test} from 'autotests';
 import {createSelectorByCss} from 'autotests/selectors';
 import {getFullPackConfig} from 'autotests/utils';

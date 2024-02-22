@@ -1,4 +1,4 @@
-/* eslint-disable max-depth */
+/* eslint-disable @typescript-eslint/no-magic-numbers, max-depth */
 
 import {DEFAULT_PIXELMATCH_OPTIONS} from '../../constants/internal';
 

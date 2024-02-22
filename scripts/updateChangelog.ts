@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
+
 /**
  * @file Generates CHANGELOG.md with changes relative to the previous version.
  */

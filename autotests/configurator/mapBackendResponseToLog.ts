@@ -1,3 +1,5 @@
+import {BAD_REQUEST_STATUS_CODE} from 'e2ed/constants';
+
 import type {MapBackendResponseToLog} from 'autotests/configurator';
 
 /**
@@ -12,7 +14,7 @@ export const mapBackendResponseToLog: MapBackendResponseToLog = ({
   request,
   statusCode,
 }) => {
-  if (statusCode >= 400) {
+  if (statusCode >= BAD_REQUEST_STATUS_CODE) {
     return undefined;
   }
 

@@ -4,8 +4,10 @@ import {expect} from 'e2ed';
 import {navigateToPage} from 'e2ed/actions';
 import {getDocumentCookie} from 'e2ed/utils';
 
+const cookieTimeLifeInMs = 90_000;
+
 const cookie = {
-  expires: Date.now() + 90_000,
+  expires: Date.now() + cookieTimeLifeInMs,
   httpOnly: false,
   name: 'e2edFooCookie',
   path: '/',
