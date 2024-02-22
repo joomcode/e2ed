@@ -1,4 +1,4 @@
-import type {GetMainTestRunParams} from 'autotests/types';
+import type {GetMainTestRunParams} from 'autotests/configurator';
 
 /**
  * This hook is used to get main test run parameters for reporting.

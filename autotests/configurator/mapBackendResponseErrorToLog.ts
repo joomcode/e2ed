@@ -1,4 +1,4 @@
-import type {MapBackendResponseErrorToLog} from 'autotests/types/packSpecific';
+import type {MapBackendResponseErrorToLog} from 'autotests/configurator';
 
 /**
  * Maps responses with errors from the backend to "red" logs (as errors) during the test.

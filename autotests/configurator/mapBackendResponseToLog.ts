@@ -1,4 +1,4 @@
-import type {MapBackendResponseToLog} from 'autotests/types/packSpecific';
+import type {MapBackendResponseToLog} from 'autotests/configurator';
 
 /**
  * Maps responses from the backend to logs during the test.

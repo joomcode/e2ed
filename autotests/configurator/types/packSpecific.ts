@@ -1,5 +1,6 @@
-import type {Pack} from 'autotests/types/pack';
 import type {CreatePackSpecificTypes} from 'e2ed/types';
+
+import type {Pack} from './pack';
 
 /**
  * Pack-specific types of some project functions (of hooks and functions from pack config).

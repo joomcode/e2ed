@@ -30,10 +30,3 @@ export type {
   UserPhone,
   UserWorker,
 } from './entities';
-export type {
-  GetLogContext,
-  GetMainTestRunParams,
-  GetTestRunHash,
-  IsTestSkipped,
-} from './packSpecific';
-export type {TestMeta} from './testMeta';

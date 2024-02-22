@@ -1,4 +1,4 @@
-import type {DoAfterPack} from 'autotests/types/packSpecific';
+import type {DoAfterPack} from 'autotests/configurator';
 
 const setExternalPackRunId: DoAfterPack = ({endTimeInMs}) => ({externalPackRunId: endTimeInMs});
 

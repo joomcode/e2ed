@@ -1,8 +1,7 @@
 /**
  * @file Pack file (file with configuration of pack).
  * Do not import anything (from `utils`, etc) into this file other than
- * the types and values from `../configurator`, `e2ed/configurator`
- * (and types from `autotests/types/packSpecific`) or other packs
+ * the types and values from `../configurator`, `e2ed/configurator` or other packs
  * (because the pack is compiled separately from the tests themselves
  * and has separate TypeScript scope).
  */
@@ -20,7 +19,7 @@ import {
   skipTests,
 } from '../configurator';
 
-import type {FilterTestsIntoPack, Pack} from 'autotests/types/packSpecific';
+import type {FilterTestsIntoPack, Pack} from 'autotests/configurator';
 
 const browserFlags = [
   '--disable-dev-shm-usage',
