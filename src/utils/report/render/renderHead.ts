@@ -9,7 +9,7 @@ import {renderStyle} from './renderStyle';
 import type {SafeHtml} from '../../../types/internal';
 
 /**
- * Renders tag <head>.
+ * Renders tag `<head>`.
  * @internal
  */
 export const renderHead = (reportFileName: string): SafeHtml => {
@@ -32,12 +32,11 @@ export const renderHead = (reportFileName: string): SafeHtml => {
   <meta name="description" content="${reportFileName}" />
   <meta
     http-equiv="Content-Security-Policy"
-    content="default-src 'self'; img-src 'self' data:; script-src 'sha256-U2b0QBOORMKiqctoYx0EN8oqYd6jdSh6Tr6qnpVPa3M=' '${safeCspScriptHash}'; style-src '${safeCspStyleHash}';"
+    content="default-src 'self'; img-src 'self' data:; script-src '${safeCspScriptHash}'; style-src '${safeCspStyleHash}';"
   />
   <title>${reportFileName}</title>
   ${renderFavicon()}
   ${renderedStyle}
-  <script type="plain/text"></script>
   ${renderedScript}
 </head>`;
 };

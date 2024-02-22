@@ -1,3 +1,5 @@
+import {parse} from 'node:querystring';
+
 import {BAD_REQUEST_STATUS_CODE, LogEventType} from '../../constants/internal';
 import {getRandomId} from '../../generators/internal';
 
@@ -8,7 +10,14 @@ import {log} from '../log';
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 import {wrapInTestRunTracker} from '../testRun';
 
-import type {Response} from '../../types/internal';
+import type {
+  Request,
+  RequestWithUtcTimeInMs,
+  Response,
+  ResponseWithRequest,
+  Url,
+  UtcTimeInMs,
+} from '../../types/internal';
 
 import type {LogParams, OneTryOfRequestOptions} from './types';
 
@@ -16,17 +25,18 @@ import type {LogParams, OneTryOfRequestOptions} from './types';
  * One try of request.
  * @internal
  */
-export const oneTryOfRequest = <SomeResponse extends Response>({
+export const oneTryOfRequest = <SomeRequest extends Request, SomeResponse extends Response>({
   isResponseBodyInJsonFormat,
   libRequest,
   logParams,
   options,
+  requestBody,
   requestBodyAsString,
   timeout,
   urlObject,
 }: OneTryOfRequestOptions): Promise<{
   fullLogParams: LogParams;
-  response: SomeResponse;
+  response: ResponseWithRequest<SomeResponse, SomeRequest>;
 }> =>
   new Promise((resolve, reject) => {
     const fullOptions = {
@@ -44,6 +54,8 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
 
     let endTimeout: NodeJS.Timeout;
 
+    const utcTimeInMs = Date.now() as UtcTimeInMs;
+
     const req = libRequest(urlObject, fullOptionsWithHeaders, (res) => {
       // eslint-disable-next-line @typescript-eslint/unbound-method
       res.on = wrapInTestRunTracker(res.on);
@@ -57,19 +69,39 @@ export const oneTryOfRequest = <SomeResponse extends Response>({
       });
 
       res.on('end', () => {
+        const completionTimeInMs = Date.now() as UtcTimeInMs;
+
         const responseBodyAsString = chunks.join('');
-        const statusCode = res.statusCode ?? BAD_REQUEST_STATUS_CODE;
+        const statusCode = (res.statusCode ??
+          BAD_REQUEST_STATUS_CODE) as SomeResponse['statusCode'];
 
         try {
           const responseBody: SomeResponse['responseBody'] = isResponseBodyInJsonFormat
             ? parseMaybeEmptyValueAsJson(responseBodyAsString)
             : responseBodyAsString;
 
+          const request = {
+            method: options.method,
+            query: parse(urlObject.search ? urlObject.search.slice(1) : ''),
+            requestBody,
+            requestHeaders,
+            url: (res.url || urlObject.href) as Url,
+            utcTimeInMs,
+          } satisfies RequestWithUtcTimeInMs as unknown as RequestWithUtcTimeInMs<SomeRequest>;
+
+          const duration = getDurationWithUnits(completionTimeInMs - request.utcTimeInMs);
+
           const response = {
+            completionTimeInMs,
+            duration,
+            request,
             responseBody,
-            responseHeaders: res.headers,
+            responseHeaders: res.headers as SomeResponse['responseHeaders'],
             statusCode,
-          } as unknown as SomeResponse;
+          } satisfies ResponseWithRequest as unknown as ResponseWithRequest<
+            SomeResponse,
+            SomeRequest
+          >;
 
           clearTimeout(endTimeout);
           resolve({fullLogParams, response});

@@ -3,7 +3,7 @@ import {createHash} from 'node:crypto';
 const algorithm = 'sha256';
 
 /**
- * Get CSP sha256-hash for source file by source text.
+ * Get CSP `sha256`-hash for source file by source text.
  * @internal
  */
 export const getCspHash = (source: string): string => {

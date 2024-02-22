@@ -6,6 +6,7 @@ import type {
   OptionalIfValueIncludeDefault,
   Request,
   Response,
+  ResponseWithRequest,
   Url,
 } from '../../types/internal';
 
@@ -32,6 +33,7 @@ export type OneTryOfRequestOptions = Readonly<{
   libRequest: typeof httpRequest;
   logParams: LogParams;
   options: Readonly<{method: Method; requestHeaders: Headers}>;
+  requestBody: unknown;
   requestBodyAsString: string;
   timeout: number;
   urlObject: URL;
@@ -46,7 +48,9 @@ export type Options<
   SomeResponse extends Response,
 > = Readonly<
   {
-    isNeedRetry?: (response: SomeResponse) => Promise<boolean> | boolean;
+    isNeedRetry?: (
+      response: ResponseWithRequest<SomeResponse, SomeRequest>,
+    ) => Promise<boolean> | boolean;
     maxRetriesCount?: number;
     timeout?: number;
   } & OptionalIfValueIncludeDefault<'requestBody', SomeRequest['requestBody'], undefined> &

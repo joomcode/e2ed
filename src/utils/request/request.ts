@@ -14,7 +14,13 @@ import {getBodyAsString} from './getBodyAsString';
 import {getContentJsonHeaders} from './getContentJsonHeaders';
 import {oneTryOfRequest} from './oneTryOfRequest';
 
-import type {ApiRouteClassType, Request, Response, ZeroOrOneArg} from '../../types/internal';
+import type {
+  ApiRouteClassType,
+  Request,
+  Response,
+  ResponseWithRequest,
+  ZeroOrOneArg,
+} from '../../types/internal';
 
 import type {LogParams, Options} from './types';
 
@@ -43,7 +49,7 @@ export const request = async <
     SomeRequest,
     SomeResponse
   >,
-): Promise<SomeResponse> => {
+): Promise<ResponseWithRequest<SomeResponse, SomeRequest>> => {
   const route = new Route(...([routeParams] as ZeroOrOneArg<RouteParams>));
 
   const method = route.getMethod();
@@ -82,11 +88,12 @@ export const request = async <
     const retry = `${retryIndex}/${maxRetriesCount}`;
 
     try {
-      const {fullLogParams, response} = await oneTryOfRequest<SomeResponse>({
+      const {fullLogParams, response} = await oneTryOfRequest<SomeRequest, SomeResponse>({
         isResponseBodyInJsonFormat,
         libRequest,
         logParams: {...logParams, retry},
         options,
+        requestBody,
         requestBodyAsString,
         timeout,
         urlObject,
