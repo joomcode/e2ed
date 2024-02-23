@@ -48,7 +48,7 @@ export const addContextToResultsOfClassCreateMethods = (
 
     (prototype as Record<string, Fn<never[], unknown, InstanceType<RequestHookClassWithContext>>>)[
       methodName
-      // eslint-disable-next-line no-loop-func, no-restricted-syntax
+      // eslint-disable-next-line @typescript-eslint/no-loop-func, no-restricted-syntax
     ] = function createSomething(
       this: InstanceType<RequestHookClassWithContext>,
       ...args: never[]

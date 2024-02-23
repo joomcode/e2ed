@@ -19,6 +19,7 @@ import type {
   ExpectMethod,
 } from './types';
 
+const additionalAssertionTimeoutInMs = 1_000;
 let assertionTimeout: number | undefined;
 
 /**
@@ -33,7 +34,7 @@ export const createExpectMethod = (
   function method(...args: Parameters<ExpectMethod>) {
     assertionTimeout ??= getFullPackConfig().assertionTimeout;
 
-    const timeout = assertionTimeout + 1_000;
+    const timeout = assertionTimeout + additionalAssertionTimeoutInMs;
     const message = getAssertionMessage(...args);
 
     const timeoutWithUnits = getDurationWithUnits(timeout);

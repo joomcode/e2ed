@@ -8,7 +8,7 @@ import {createSafeHtmlWithoutSanitize} from '../client';
 import type {SafeHtml} from '../../../types/internal';
 
 /**
- * Renders tag <style> with all CSS styles.
+ * Renders tag `<style>` with all CSS styles.
  * @internal
  */
 export const renderStyle = (): SafeHtml => {

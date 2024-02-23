@@ -3,6 +3,9 @@ import {createRunLabel, getRunLabelObject} from '../runLabel';
 import {setReadonlyProperty} from '../setReadonlyProperty';
 import {exitFromTestsSubprocess} from '../tests';
 
+const disconnectedThresholdInPercent = 40;
+const maximumPercentage = 100;
+
 /**
  * Handler of `disconnected` browser event.
  * Called when the number of disconnected browsers changes.
@@ -19,10 +22,12 @@ export const disconnectedHandler = async (disconnectedBrowsersCount: number): Pr
 
   setRunLabel(runLabel);
 
-  if (!(disconnectedBrowsersCount / concurrency < 0.4)) {
+  if (
+    !(disconnectedBrowsersCount / concurrency < disconnectedThresholdInPercent / maximumPercentage)
+  ) {
     await exitFromTestsSubprocess({
       hasError: true,
-      reason: `${disconnectedBrowsersCount} out of ${concurrency} browsers are disconnected (40% or more)`,
+      reason: `${disconnectedBrowsersCount} out of ${concurrency} browsers are disconnected (${disconnectedThresholdInPercent}% or more)`,
     });
   }
 };

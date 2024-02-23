@@ -1,6 +1,6 @@
 import {getFullPackConfig} from '../utils/getFullPackConfig';
 
-import type {IsTestSkipped} from 'autotests/types';
+import type {IsTestSkipped} from 'autotests/configurator';
 
 /**
  * This hook is used to determine if a given test should be skipped.

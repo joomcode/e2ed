@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
+
 import {sanitizeHtml as clientSanitizeHtml} from '../sanitizeHtml';
 
 import type {SafeHtml, UtcTimeInMs} from '../../../../types/internal';

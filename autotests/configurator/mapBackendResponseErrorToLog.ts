@@ -1,4 +1,6 @@
-import type {MapBackendResponseErrorToLog} from 'autotests/types/packSpecific';
+import {BAD_REQUEST_STATUS_CODE} from 'e2ed/constants';
+
+import type {MapBackendResponseErrorToLog} from 'autotests/configurator';
 
 /**
  * Maps responses with errors from the backend to "red" logs (as errors) during the test.
@@ -16,7 +18,7 @@ export const mapBackendResponseErrorToLog: MapBackendResponseErrorToLog = ({
   responseHeaders,
   statusCode,
 }) => {
-  if (statusCode < 400) {
+  if (statusCode < BAD_REQUEST_STATUS_CODE) {
     return undefined;
   }
 

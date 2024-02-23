@@ -1,4 +1,4 @@
-import type {DoBeforePack} from 'autotests/types/packSpecific';
+import type {DoBeforePack} from 'autotests/configurator';
 
 const setInternalPackRunId: DoBeforePack = ({fullPackConfig, startTimeInMs}) => ({
   ...fullPackConfig,

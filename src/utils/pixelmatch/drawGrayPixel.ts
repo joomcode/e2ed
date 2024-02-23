@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
+
 import {assertValueIsDefined} from '../asserts';
 
 import {blend, rgb2y} from './colors';

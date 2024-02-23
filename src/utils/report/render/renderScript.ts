@@ -6,7 +6,7 @@ import {renderScriptFunctions} from './renderScriptFunctions';
 import type {SafeHtml} from '../../../types/internal';
 
 /**
- * Renders tag <script> with all report JavaScript code.
+ * Renders tag `<script>` with all report JavaScript code.
  * @internal
  */
 export const renderScript = (): SafeHtml => createSafeHtmlWithoutSanitize`

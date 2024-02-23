@@ -2,12 +2,14 @@ import {getShallowCopyOfObjectForLogs, getStringTrimmedToMaxLength} from 'e2ed/c
 
 import type {FieldReplacer} from 'e2ed/types';
 
+const maxStringLength = 500;
+
 /**
  * Field replacer for log payload.
  */
 export const logFieldReplacer: FieldReplacer = (path, value) => {
   if (typeof value === 'string') {
-    return getStringTrimmedToMaxLength(value, 500);
+    return getStringTrimmedToMaxLength(value, maxStringLength);
   }
 
   const key = path.at(-1);

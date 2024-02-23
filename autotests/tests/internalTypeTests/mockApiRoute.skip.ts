@@ -1,6 +1,7 @@
 import {CreateDevice, CreateProduct} from 'autotests/routes/apiRoutes';
 import {Main} from 'autotests/routes/pageRoutes';
 import {mockApiRoute, unmockApiRoute} from 'e2ed/actions';
+import {CREATED_STATUS_CODE, OK_STATUS_CODE} from 'e2ed/constants';
 
 import type {ApiCreateDeviceRequest, ApiCreateDeviceResponse, DeviceId} from 'autotests/types';
 
@@ -61,7 +62,7 @@ void mockApiRoute(
       referer: String(query),
       'x-request-id': 'Gd8obEgq81x',
     };
-    const statusCode = method === 'GET' ? 201 : 200;
+    const statusCode = method === 'GET' ? CREATED_STATUS_CODE : OK_STATUS_CODE;
 
     return {responseBody, responseHeaders, statusCode};
   },

@@ -12,13 +12,15 @@ import {
   waitForRequest,
   waitForResponse,
 } from 'e2ed/actions';
+import {OK_STATUS_CODE} from 'e2ed/constants';
 import {assertFunctionThrows, getDocumentUrl} from 'e2ed/utils';
 
+const testScrollValue = 200;
 const language = 'en';
 const searchQuery = 'foo';
 
 test('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}, async () => {
-  await scroll(0, 200);
+  await scroll(0, testScrollValue);
 
   assertFunctionThrows(() => {
     void window.document;
@@ -53,7 +55,7 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_00
 
   const requestsPromises = Promise.all([
     waitForRequest(({url}) => url.includes(searchQuery)),
-    waitForResponse(({statusCode}) => statusCode === 200),
+    waitForResponse(({statusCode}) => statusCode === OK_STATUS_CODE),
   ]);
 
   await pressKey('enter', {stabilizationInterval: 300});
@@ -64,7 +66,9 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_00
     searchQuery,
   );
 
-  await expect(successfulResponse.statusCode, 'successful response has statusCode = 200').eql(200);
+  await expect(successfulResponse.statusCode, 'successful response has statusCode = 200').eql(
+    OK_STATUS_CODE,
+  );
 
   const searchPage = await assertPage(Search, {searchQuery});
 

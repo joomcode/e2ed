@@ -8,6 +8,8 @@ import {RequestHookToWaitForEvents} from '../requestHooks';
 
 import type {RunId, TestController} from '../../types/internal';
 
+const delayForTestRunPromiseResolutionAfterTestTimeoutInMs = 100;
+
 /**
  * Runs test function with reject in test run event.
  * @internal
@@ -17,7 +19,9 @@ export const runTestFn = async (runId: RunId, testController: TestController): P
   const testTimeout = getTestTimeout();
 
   const {promiseWithTimeout: testRunPromise, resolve: resolveTestRunPromise} =
-    getPromiseWithResolveAndReject<undefined>(testTimeout + 100);
+    getPromiseWithResolveAndReject<undefined>(
+      testTimeout + delayForTestRunPromiseResolutionAfterTestTimeoutInMs,
+    );
 
   setTestRunPromise(testRunPromise);
 

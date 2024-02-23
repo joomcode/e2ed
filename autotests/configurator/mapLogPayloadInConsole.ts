@@ -1,6 +1,6 @@
 import {isLocalRun} from 'e2ed/configurator';
 
-import type {MapLogPayloadInConsole} from 'autotests/types/packSpecific';
+import type {MapLogPayloadInConsole} from 'autotests/configurator';
 
 /**
  * Maps log payload for logging in console to clarify, shorten or skip a console log entry.

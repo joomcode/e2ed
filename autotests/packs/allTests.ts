@@ -1,8 +1,7 @@
 /**
  * @file Pack file (file with configuration of pack).
  * Do not import anything (from `utils`, etc) into this file other than
- * the types and values from `../configurator`, `e2ed/configurator`
- * (and types from `autotests/types/packSpecific`) or other packs
+ * the types and values from `../configurator`, `e2ed/configurator` or other packs
  * (because the pack is compiled separately from the tests themselves
  * and has separate TypeScript scope).
  */
@@ -20,7 +19,7 @@ import {
   skipTests,
 } from '../configurator';
 
-import type {FilterTestsIntoPack, Pack} from 'autotests/types/packSpecific';
+import type {FilterTestsIntoPack, Pack} from 'autotests/configurator';
 
 const browserFlags = [
   '--disable-dev-shm-usage',
@@ -34,6 +33,9 @@ const filterTestsIntoPack: FilterTestsIntoPack = ({options}) => options.meta.tes
 
 const overriddenUserAgent =
   'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.35 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.35';
+
+const packTimeoutInMinutes = 5;
+const msInMinute = 60_000;
 
 /**
  * Pack of tests or tasks (pack configuration object).
@@ -63,7 +65,7 @@ export const pack: Pack = {
   mapLogPayloadInReport,
   maxRetriesCountInDocker: 3,
   overriddenUserAgent,
-  packTimeout: 5 * 60_000,
+  packTimeout: packTimeoutInMinutes * msInMinute,
   pageRequestTimeout: 30_000,
   pageStabilizationInterval: 500,
   pathToScreenshotsDirectoryForReport: './screenshots',

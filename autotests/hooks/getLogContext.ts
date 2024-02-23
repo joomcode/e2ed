@@ -1,6 +1,6 @@
 import {getMeta} from 'e2ed/context';
 
-import type {GetLogContext, TestMeta} from 'autotests/types';
+import type {GetLogContext, TestMeta} from 'autotests/configurator';
 
 /**
  * This hook is used inside the log function to get a snapshot

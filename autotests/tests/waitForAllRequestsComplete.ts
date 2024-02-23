@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
+
 import {test} from 'autotests';
 import {getUsers} from 'autotests/entities';
 import {waitForAllRequestsComplete, waitForTimeout} from 'e2ed/actions';

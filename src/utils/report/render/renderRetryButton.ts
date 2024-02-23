@@ -14,7 +14,7 @@ export type RetryButtonLocator = Locator<
 >;
 
 /**
- * Renders tag <button> with single retry button.
+ * Renders tag `<button>` with single retry button.
  * @internal
  */
 export const renderRetryButton = ({disabled, retry, selected, ...rest}: Props): SafeHtml => {

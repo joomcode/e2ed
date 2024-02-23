@@ -2,7 +2,7 @@ import {replaceFields} from 'e2ed/configurator';
 
 import {logFieldReplacer} from './logFieldReplacer';
 
-import type {MapLogPayloadInReport} from 'autotests/types/packSpecific';
+import type {MapLogPayloadInReport} from 'autotests/configurator';
 
 /**
  * Maps log payload for logging in HTML console to clarify, shorten or skip a console log entry.

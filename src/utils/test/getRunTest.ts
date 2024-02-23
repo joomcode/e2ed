@@ -15,6 +15,8 @@ import type {RunId, Test, TestController, TestStaticOptions} from '../../types/i
 
 type RunTest = (testController: TestController) => Promise<void>;
 
+const delayToCompleteTestRunAfterTestIsCompletedInMs = 300;
+
 /**
  * Get complete run test function by the complete test options.
  * @internal
@@ -59,7 +61,10 @@ export const getRunTest = (test: Test): RunTest => {
       throw error;
     } finally {
       if (isTestIncludedInPack) {
-        setTimeout(() => void testController.testRun.emit('done'), 300);
+        setTimeout(
+          () => void testController.testRun.emit('done'),
+          delayToCompleteTestRunAfterTestIsCompletedInMs,
+        );
 
         await afterTest({hasRunError, runId, unknownRunError});
       }

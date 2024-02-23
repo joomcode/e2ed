@@ -2,7 +2,7 @@ import {createTestFunction} from 'e2ed';
 
 import * as hooks from './hooks';
 
-import type {Pack} from 'autotests/types/packSpecific';
+import type {Pack} from 'autotests/configurator';
 
 /**
  * Test function that describes the test or the task

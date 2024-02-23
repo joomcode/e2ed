@@ -20,10 +20,13 @@ import {setCustomInspectOnFunction} from './utils/fn';
 import type {FrozenPartOfTestCafeConfig, FullPackConfig, UserlandPack} from './types/internal';
 
 const pathToPack = getPathToPack();
+const tsExtension = '.ts';
 
-assertValueIsTrue(pathToPack.endsWith('.ts'), 'pathToPack ends with ".ts"', {pathToPack});
+assertValueIsTrue(pathToPack.endsWith(tsExtension), `pathToPack ends with "${tsExtension}"`, {
+  pathToPack,
+});
 
-const pathFromCompiledConfigDirectoryToCompiledPack = `${pathToPack.slice(0, -3)}.js`;
+const pathFromCompiledConfigDirectoryToCompiledPack = `${pathToPack.slice(0, -tsExtension.length)}.js`;
 
 const absoluteCompiledUserlandPackPath = join(
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,

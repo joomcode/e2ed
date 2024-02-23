@@ -1,6 +1,6 @@
 import {pack as allTestsPack} from './allTests';
 
-import type {Pack} from 'autotests/types/pack';
+import type {Pack} from 'autotests/configurator';
 
 /**
  * Pack from .gitignore for local development.

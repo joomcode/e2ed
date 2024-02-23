@@ -1,4 +1,4 @@
-import type {GetTestRunHash} from 'autotests/types';
+import type {GetTestRunHash} from 'autotests/configurator';
 
 /**
  * This hook is used before runnig the test to get unique test run hash.

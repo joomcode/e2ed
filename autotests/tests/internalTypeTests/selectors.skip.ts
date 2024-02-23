@@ -34,7 +34,7 @@ locatorIdSelector('id').findByLocatorId('id').find('body').findByLocatorId('id')
 locatorIdSelector();
 
 // @ts-expect-error: wrong type of arguments
-locatorIdSelector(3);
+locatorIdSelector(3); // eslint-disable-line @typescript-eslint/no-magic-numbers
 
 // ok
 htmlElementSelector.filterByLocatorId('id') satisfies Selector;

@@ -17,6 +17,7 @@ const logResourceUsage = (): void => {
   const timeInMs = Date.now();
   const intervalInMs = timeInMs - previousTimeInMs;
 
+  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
   const divisor = 10 * availableCpuCount * intervalInMs;
 
   const cpu = (
@@ -41,7 +42,7 @@ const logResourceUsage = (): void => {
     assertValueIsDefined(previousCore, 'previousCore is defined');
 
     const coreCpu = (
-      (100 *
+      (100 * // eslint-disable-line @typescript-eslint/no-magic-numbers
         (core.times.user + core.times.sys - previousCore.times.user - previousCore.times.sys)) /
       intervalInMs
     ).toFixed();
