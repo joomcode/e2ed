@@ -1,5 +1,23 @@
 # Changelog
 
+## [v0.16.12](https://github.com/joomcode/e2ed/tree/v0.16.12) (2024-02-23)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.11...v0.16.12)
+
+- [Merge pull request #66 from joomcode/fix/use-response-with-request-everywhere](https://github.com/joomcode/e2ed/commit/fc6850d81c5258a412710477d4928478165bb9ea) ([uid11](https://github.com/uid11))
+
+  fix: return `ResponseWithRequest` from `request` utility
+
+- [chore: update `devDependencies` (`@types/node`, etc)](https://github.com/joomcode/e2ed/commit/f6506e25dc3db00eefcc8689ab5ac398ce1a770f) ([uid11](https://github.com/uid11))
+
+  chore: fix `npm audit` error and restore `npm audit` check
+
+- [chore: turn on `no-loop-func` and `no-magic-numbers` @typescript-eslint rules](https://github.com/joomcode/e2ed/commit/da0a9fbe55588d69e43ab0b3f74071ac7497b261) ([uid11](https://github.com/uid11))
+- [FI-1161 refactor: move all pack-specific types to `autotests/configurator`](https://github.com/joomcode/e2ed/commit/95f65b57ba977af31a59b9a12677b870b2902f7c) ([uid11](https://github.com/uid11))
+- [FI-1169 fix: return `ResponseWithRequest` from `request` utility](https://github.com/joomcode/e2ed/commit/b7cdbb1226890904d66c657dbfbf5b552b1907c8) ([uid11](https://github.com/uid11))
+
+  fix: remove unnecessary empty `<script>` from HTML report (fixed by Firefox)
+
 ## [v0.16.11](https://github.com/joomcode/e2ed/tree/v0.16.11) (2024-02-16)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.10...v0.16.11)
