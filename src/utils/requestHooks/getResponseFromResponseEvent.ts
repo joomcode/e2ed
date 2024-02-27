@@ -1,4 +1,5 @@
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
+import {setReadonlyProperty} from '../setReadonlyProperty';
 
 import {getHeaderValue} from './getHeaderValue';
 import {charsetPath, encodingPath} from './testCafeHammerheadUpPaths';
@@ -22,6 +23,9 @@ export const getResponseFromResponseEvent = async (
   isDecodingNeeded: boolean,
 ): Promise<Response> => {
   const charset = new Charset();
+
+  setReadonlyProperty(charset, 'charset', 'utf-8');
+
   const encoding = (getHeaderValue(headers, 'content-encoding') ??
     'identity') as RequestHookEncoding;
 

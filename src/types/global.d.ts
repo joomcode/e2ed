@@ -60,7 +60,7 @@ declare module 'testcafe-hammerhead-up/lib/processing/encoding' {
 }
 
 /**
- * Internal TestCafe module with Charset class, which is used to decode/encode response body buffers.
+ * Internal TestCafe module with `Charset` class, which is used to decode/encode response body buffers.
  * @internal
  */
 declare module 'testcafe-hammerhead-up/lib/processing/encoding/charset' {

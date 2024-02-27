@@ -1,7 +1,7 @@
 import {E2edError} from './error';
 
 import type {ApiRoute} from '../ApiRoute';
-import type {ApiRouteClassTypeWithGetParamsFromUrl, Url} from '../types/internal';
+import type {ApiRouteClassTypeWithGetParamsFromUrl, Method, Url} from '../types/internal';
 
 type Return<RouteParams> =
   | Readonly<{route: ApiRoute<RouteParams>; routeParams: RouteParams}>
@@ -22,8 +22,10 @@ export const getRouteInstanceFromUrl = <RouteParams>(
   let route: ApiRoute<RouteParams> | undefined;
   let routeParams: RouteParams | undefined;
 
+  const upperCaseMethod = method.toUpperCase();
+
   try {
-    routeParams = Route.getParamsFromUrl(url) as RouteParams;
+    routeParams = Route.getParamsFromUrl(url, upperCaseMethod as Method) as RouteParams;
     route = new Route(routeParams);
   } catch {
     return undefined;
@@ -38,7 +40,7 @@ export const getRouteInstanceFromUrl = <RouteParams>(
 
   const routeMethod = route.getMethod();
 
-  if (routeMethod.toUpperCase() !== method.toUpperCase()) {
+  if (routeMethod.toUpperCase() !== upperCaseMethod) {
     return undefined;
   }
 

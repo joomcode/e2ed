@@ -37,7 +37,7 @@ type RequestHookContext = Readonly<{
  * @internal
  */
 // eslint-disable-next-line import/no-unused-modules
-export type RequestHookCharset = Brand<object, 'RequestHookCharset'>;
+export type RequestHookCharset = Brand<object, 'RequestHookCharset'> & Readonly<{charset: string}>;
 
 /**
  * Any internal TestCafe request hook class with request hook context.

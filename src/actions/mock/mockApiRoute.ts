@@ -30,16 +30,17 @@ export const mockApiRoute = async <
 >(
   Route: ApiRouteClassTypeWithGetParamsFromUrl<RouteParams, SomeRequest, SomeResponse>,
   apiMockFunction: ApiMockFunction<RouteParams, SomeRequest, SomeResponse>,
+  {skipLogs = false}: {skipLogs?: boolean} = {},
 ): Promise<void> => {
   setCustomInspectOnFunction(apiMockFunction);
 
   const apiMockState = getApiMockState();
-  let {functionByRoute} = apiMockState;
+  let {optionsByRoute} = apiMockState;
 
-  if (functionByRoute === undefined) {
-    functionByRoute = new Map();
+  if (optionsByRoute === undefined) {
+    optionsByRoute = new Map();
 
-    setReadonlyProperty(apiMockState, 'functionByRoute', functionByRoute);
+    setReadonlyProperty(apiMockState, 'optionsByRoute', optionsByRoute);
 
     let requestMock = RequestMock();
 
@@ -56,7 +57,7 @@ export const mockApiRoute = async <
     setReadonlyProperty(apiMockState, 'apiMock', apiMock);
   }
 
-  if (functionByRoute.size === 0) {
+  if (optionsByRoute.size === 0) {
     const {apiMock} = apiMockState;
 
     assertValueIsDefined(apiMock, 'apiMock is defined', {apiMockState, routeName: Route.name});
@@ -64,7 +65,9 @@ export const mockApiRoute = async <
     await testController.addRequestHooks(apiMock);
   }
 
-  functionByRoute.set(Route, apiMockFunction as unknown as ApiMockFunction);
+  optionsByRoute.set(Route, {apiMockFunction: apiMockFunction as ApiMockFunction, skipLogs});
 
-  log(`Mock API for route "${Route.name}"`, {apiMockFunction}, LogEventType.InternalAction);
+  if (skipLogs !== true) {
+    log(`Mock API for route "${Route.name}"`, {apiMockFunction}, LogEventType.InternalAction);
+  }
 };

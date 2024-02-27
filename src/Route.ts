@@ -1,6 +1,6 @@
 import {SLASHES_AT_THE_END_REGEXP, SLASHES_AT_THE_START_REGEXP} from './constants/internal';
 
-import type {ParamsKeyType, Url, ZeroOrOneArg} from './types/internal';
+import type {Method, ParamsKeyType, Url, ZeroOrOneArg} from './types/internal';
 
 declare const PARAMS_KEY: ParamsKeyType;
 
@@ -26,7 +26,7 @@ export abstract class Route<RouteParams> {
    * Returns route params from the passed url.
    * @throws {Error} If the route does not match on the url.
    */
-  static getParamsFromUrl?(url: Url): unknown;
+  static getParamsFromUrl?(url: Url, method?: Method): unknown;
 
   /**
    * Returns the url of the route.

@@ -1,4 +1,4 @@
-import {LogEventType} from '../../constants/internal';
+import {LogEventType, OK_STATUS_CODE} from '../../constants/internal';
 
 import {assertValueIsDefined} from '../asserts';
 import {cloneWithoutUndefinedProperties} from '../clone';
@@ -11,25 +11,25 @@ import type {Inner} from 'testcafe-without-typecheck';
 import type {ApiMockState, RequestOptions, Url} from '../../types/internal';
 
 /**
- * Get setResponse function for API mocks by ApiMockState.
+ * Get `setResponse` function for API mocks by `ApiMockState`.
  * @internal
  */
 export const getSetResponse =
   ({
-    functionAndRouteByUrl,
+    optionsWithRouteByUrl,
   }: ApiMockState): ((
     requestOptions: RequestOptions,
     responseOptions: Inner.ResponseMock,
   ) => Promise<void>) =>
   async (requestOptions, responseOptions) => {
     const url = requestOptions.url as Url;
-    const functionAndRoute = functionAndRouteByUrl[url];
+    const optionsWithRoute = optionsWithRouteByUrl[url];
 
     const mainRequestOptions = getMainRequestOptions(requestOptions);
 
-    assertValueIsDefined(functionAndRoute, 'functionAndRoute is defined', {mainRequestOptions});
+    assertValueIsDefined(optionsWithRoute, 'optionsWithRoute is defined', {mainRequestOptions});
 
-    const {apiMockFunction, route} = functionAndRoute;
+    const {apiMockFunction, skipLogs, route} = optionsWithRoute;
     const isRequestBodyInJsonFormat = route.getIsRequestBodyInJsonFormat();
     const isResponseBodyInJsonFormat = route.getIsResponseBodyInJsonFormat();
 
@@ -37,7 +37,7 @@ export const getSetResponse =
 
     const response = await apiMockFunction(route.routeParams, request);
 
-    const {responseBody, responseHeaders, statusCode = 200} = response;
+    const {responseBody, responseHeaders, statusCode = OK_STATUS_CODE} = response;
 
     const responseBodyAsString = getBodyAsString(responseBody, isResponseBodyInJsonFormat);
 
@@ -54,9 +54,11 @@ export const getSetResponse =
       responseOptions.setBody(responseBodyAsString);
     }
 
-    log(
-      `A mock was applied to the API route "${route.constructor.name}"`,
-      {apiMockFunction, request, response, route},
-      LogEventType.InternalUtil,
-    );
+    if (skipLogs !== true) {
+      log(
+        `A mock was applied to the API route "${route.constructor.name}"`,
+        {apiMockFunction, request, response, route},
+        LogEventType.InternalUtil,
+      );
+    }
   };

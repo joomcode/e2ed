@@ -15,4 +15,5 @@ export type {
   MapLogPayloadInReport,
   Pack,
 } from './packSpecific';
+export type {SkipTests} from './skipTests';
 export type {TestMeta} from './testMeta';
