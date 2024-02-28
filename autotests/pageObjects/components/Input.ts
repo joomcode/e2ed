@@ -12,7 +12,13 @@ export class Input {
    */
   readonly input: Selector;
 
-  constructor(private readonly name: string) {
+  /**
+   * Name of input element.
+   */
+  private readonly name: string;
+
+  constructor(name: string) {
+    this.name = name;
     this.input = inputSelector(this.name);
   }
 

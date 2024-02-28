@@ -16,8 +16,8 @@ import {setReadonlyProperty} from '../setReadonlyProperty';
 import {applyHeadersMapper} from './applyHeadersMapper';
 import {applyHeadersMapperOnCdpMode} from './applyHeadersMapperOnCdpMode';
 import {getHeadersFromHeaderEntries} from './getHeadersFromHeaderEntries';
-import {RequestHookToWaitForEvents} from './RequestHookToWaitForEvents';
 import {RequestHookWithEvents} from './RequestHookWithEvents';
+import {RequestHookToWaitForEvents} from './waitForEvents';
 
 import type {
   Headers,
@@ -32,10 +32,17 @@ import type {
  * for concrete url.
  */
 export class SetHeadersRequestHook extends RequestHookWithEvents {
-  constructor(
-    private readonly url: Url,
-    private readonly options: MapOptions,
-  ) {
+  /**
+   * Options of hook.
+   */
+  private readonly options: MapOptions;
+
+  /**
+   * The url for which the hook is applied.
+   */
+  private readonly url: Url;
+
+  constructor(url: Url, options: MapOptions) {
     const waitForEventsState = getWaitForEventsState(RequestHookToWaitForEvents);
     let wasCalled = false;
 
@@ -54,6 +61,9 @@ export class SetHeadersRequestHook extends RequestHookWithEvents {
     };
 
     super(predicate, INCLUDE_HEADERS_IN_RESPONSE_EVENT);
+
+    this.url = url;
+    this.options = options;
   }
 
   /**

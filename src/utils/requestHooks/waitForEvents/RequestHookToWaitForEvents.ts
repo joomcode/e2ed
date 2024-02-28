@@ -3,21 +3,19 @@ import {
   INCLUDE_BODY_AND_HEADERS_IN_RESPONSE_EVENT,
   REQUEST_HOOK_CONTEXT_ID_KEY,
   REQUEST_HOOK_CONTEXT_KEY,
-} from '../../constants/internal';
-import {getCdpClient} from '../../context/cdpClient';
+} from '../../../constants/internal';
+import {getCdpClient} from '../../../context/cdpClient';
 
-import {assertValueIsDefined} from '../asserts';
-import {getFullPackConfig} from '../config';
-import {getDurationWithUnits} from '../getDurationWithUnits';
-import {mapBackendResponseForLogs} from '../log';
-import {addNotCompleteRequest, completeRequest, processEventsPredicates} from '../waitForEvents';
+import {assertValueIsDefined} from '../../asserts';
+import {getFullPackConfig} from '../../config';
+import {addNotCompleteRequest, processEventsPredicates} from '../../waitForEvents';
 
-import {addRedirectToWaitForEventsState} from './addRedirectToWaitForEventsState';
-import {getHeaderValue} from './getHeaderValue';
-import {getRequestFromRequestOptions} from './getRequestFromRequestOptions';
-import {getResponseFromResponseEvent} from './getResponseFromResponseEvent';
-import {removeNotCompleteRequestsByUrl} from './removeNotCompleteRequestsByUrl';
-import {RequestHookWithEvents} from './RequestHookWithEvents';
+import {addRedirectToWaitForEventsState} from '../addRedirectToWaitForEventsState';
+import {getRequestFromRequestOptions} from '../getRequestFromRequestOptions';
+import {removeNotCompleteRequestsByUrl} from '../removeNotCompleteRequestsByUrl';
+import {RequestHookWithEvents} from '../RequestHookWithEvents';
+
+import {onResponse} from './onResponse';
 
 import type {
   RequestHookConfigureResponseEvent,
@@ -25,11 +23,10 @@ import type {
   RequestHookRequestEvent,
   RequestHookResponseEvent,
   RequestWithUtcTimeInMs,
-  ResponseWithRequest,
   Url,
   UtcTimeInMs,
   WaitForEventsState,
-} from '../../types/internal';
+} from '../../../types/internal';
 
 /**
  * `RequestHook` to wait for request/response events (`waitForAllRequestsComplete`,
@@ -37,8 +34,15 @@ import type {
  * @internal
  */
 export class RequestHookToWaitForEvents extends RequestHookWithEvents {
-  constructor(private readonly waitForEventsState: WaitForEventsState) {
+  /**
+   * `WaitForEventsState` instance.
+   */
+  private readonly waitForEventsState: WaitForEventsState;
+
+  constructor(waitForEventsState: WaitForEventsState) {
     super(ANY_URL_REGEXP, INCLUDE_BODY_AND_HEADERS_IN_RESPONSE_EVENT);
+
+    this.waitForEventsState = waitForEventsState;
 
     if (!getFullPackConfig().enableChromeDevToolsProtocol) {
       return;
@@ -110,55 +114,7 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
   /**
    * Checks if the response matches any response predicate.
    */
-  override async onResponse(event: RequestHookResponseEvent): Promise<void> {
-    const {body, headers} = event;
-
-    if (headers === undefined) {
-      return;
-    }
-
-    const contentLength = getHeaderValue(headers, 'content-length');
-
-    if (contentLength !== '0' && body === undefined) {
-      return;
-    }
-
-    const requestHookContextId = ((headers as Record<symbol, RequestHookContextId>)[
-      REQUEST_HOOK_CONTEXT_ID_KEY
-    ] || event.requestId) as RequestHookContextId | undefined;
-
-    assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {
-      responseHeaders: headers,
-    });
-
-    const request = this.waitForEventsState.hashOfNotCompleteRequests[requestHookContextId];
-
-    if (request === undefined) {
-      return;
-    }
-
-    completeRequest(requestHookContextId, this.waitForEventsState);
-
-    const isDecodingNeeded = requestHookContextId !== event.requestId;
-    const response = await getResponseFromResponseEvent(event, isDecodingNeeded);
-    const completionTimeInMs = Date.now() as UtcTimeInMs;
-    const duration = getDurationWithUnits(completionTimeInMs - request.utcTimeInMs);
-
-    const responseWithRequest: ResponseWithRequest = {
-      completionTimeInMs,
-      duration,
-      request,
-      ...response,
-    };
-
-    mapBackendResponseForLogs(responseWithRequest);
-
-    if (this.waitForEventsState.responsePredicates.size > 0) {
-      await processEventsPredicates({
-        eventType: 'Response',
-        requestOrResponse: responseWithRequest,
-        waitForEventsState: this.waitForEventsState,
-      });
-    }
+  override onResponse(event: RequestHookResponseEvent): Promise<void> {
+    return onResponse(event, this.waitForEventsState);
   }
 }

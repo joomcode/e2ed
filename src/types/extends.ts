@@ -24,4 +24,5 @@ declare module 'testcafe-without-typecheck' {
  * We add this export so that the `d.ts`-module from this file does not remain empty
  * after build and was not removed (since TypeScript will leave a `reference` to it).
  */
+// eslint-disable-next-line @typescript-eslint/no-useless-empty-export
 export type {};
