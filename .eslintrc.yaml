@@ -109,6 +109,7 @@ rules:
     - ':not(MethodDefinition, Property) > FunctionExpression'
   no-shadow: off
   no-underscore-dangle: [error, {allow: [_onConfigureResponse]}]
+  no-unused-expressions: off
   no-useless-constructor: off
   no-use-before-define: off
   no-void: off
@@ -199,7 +200,12 @@ rules:
   '@typescript-eslint/no-namespace': [error, {allowDeclarations: true}]
   '@typescript-eslint/no-shadow': error
   '@typescript-eslint/no-unnecessary-boolean-literal-compare': off
+  '@typescript-eslint/no-unnecessary-qualifier': error
+  '@typescript-eslint/no-unsafe-unary-minus': error
   '@typescript-eslint/no-use-before-define': error
+  '@typescript-eslint/no-unused-expressions': error
+  '@typescript-eslint/no-useless-empty-export': error
+  '@typescript-eslint/parameter-properties': error
   '@typescript-eslint/quotes': [error, single, {avoidEscape: true}]
   '@typescript-eslint/sort-type-constituents': [error, {checkIntersections: false}]
 settings:

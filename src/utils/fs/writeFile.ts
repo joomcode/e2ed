@@ -2,7 +2,7 @@ import {createWriteStream} from 'node:fs';
 import {writeFile as nativeWriteFile} from 'node:fs/promises';
 import {Readable} from 'node:stream';
 
-import {DEFAULT_FILE_CHUNK_LENGTH} from '../../constants/internal';
+import {DEFAULT_FILE_CHUNK_LENGTH, READ_FILE_OPTIONS} from '../../constants/internal';
 
 import {sliceStringIntoChunks} from '../sliceStringIntoChunks';
 
@@ -18,7 +18,7 @@ export const writeFile = (path: FilePathFromRoot, text: string): Promise<void> =
 
   const sourceIterator = sliceStringIntoChunks(text, DEFAULT_FILE_CHUNK_LENGTH);
 
-  const sourceStream = Readable.from(sourceIterator);
+  const sourceStream = Readable.from(sourceIterator, READ_FILE_OPTIONS);
   const targetStream = createWriteStream(path);
 
   sourceStream.pipe(targetStream);

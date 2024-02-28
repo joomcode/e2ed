@@ -11,10 +11,20 @@ import type {AssertionFunctionKey} from './types';
 export class Expect {
   [key: string]: unknown;
 
-  constructor(
-    readonly actualValue: unknown,
-    readonly description: string, // eslint-disable-next-line no-empty-function
-  ) {}
+  /**
+   * Actual value of `expect`.
+   */
+  readonly actualValue: unknown;
+
+  /**
+   * Description of `expect`.
+   */
+  readonly description: string;
+
+  constructor(actualValue: unknown, description: string) {
+    this.actualValue = actualValue;
+    this.description = description;
+  }
 }
 
 for (const [key, getAssertionMessage] of Object.entries(assertionMessageGetters)) {

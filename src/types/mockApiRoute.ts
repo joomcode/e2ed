@@ -6,13 +6,15 @@ import type {Request, Response, Url} from './http';
 import type {ApiRouteClassTypeWithGetParamsFromUrl} from './routes';
 
 /**
- * Object with routeParams and apiMockFunction.
+ * Mock option with mocked route.
  * @internal
  */
-type MockFunctionAndRoute = Readonly<{
-  apiMockFunction: ApiMockFunction;
-  route: ApiRoute<unknown>;
-}>;
+type MockOptionsWithRoute = MockOptions & Readonly<{route: ApiRoute<unknown>}>;
+
+/**
+ * Mock option (`apiMockFunction` and `skipLogs`).
+ */
+type MockOptions = Readonly<{apiMockFunction: ApiMockFunction; skipLogs: boolean}>;
 
 /**
  * API mock function, that map request to mocked response.
@@ -32,6 +34,6 @@ export type ApiMockFunction<
  */
 export type ApiMockState = Readonly<{
   apiMock: Inner.RequestMock | undefined;
-  functionAndRouteByUrl: Record<Url, MockFunctionAndRoute | undefined>;
-  functionByRoute: Map<ApiRouteClassTypeWithGetParamsFromUrl, ApiMockFunction> | undefined;
+  optionsByRoute: Map<ApiRouteClassTypeWithGetParamsFromUrl, MockOptions> | undefined;
+  optionsWithRouteByUrl: Record<Url, MockOptionsWithRoute | undefined>;
 }>;

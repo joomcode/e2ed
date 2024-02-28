@@ -23,17 +23,22 @@ export const unmockApiRoute = async <
   Route: ApiRouteClassTypeWithGetParamsFromUrl<RouteParams, SomeRequest, SomeResponse>,
 ): Promise<void> => {
   const apiMockState = getApiMockState();
-  const {apiMock, functionByRoute} = apiMockState;
+  const {apiMock, optionsByRoute} = apiMockState;
   let apiMockFunction: ApiMockFunction | undefined;
   let routeWasMocked = false;
+  let skipLogs: boolean | undefined;
 
-  if (functionByRoute?.has(Route)) {
-    apiMockFunction = functionByRoute.get(Route);
+  if (optionsByRoute?.has(Route)) {
+    const options = optionsByRoute.get(Route);
+
+    apiMockFunction = options?.apiMockFunction;
+    skipLogs = options?.skipLogs;
+
     routeWasMocked = true;
-    functionByRoute.delete(Route);
+    optionsByRoute.delete(Route);
   }
 
-  if (functionByRoute?.size === 0) {
+  if (optionsByRoute?.size === 0) {
     assertValueIsDefined(apiMock, 'apiMock is defined', {routeName: Route.name, routeWasMocked});
 
     await testController.removeRequestHooks(apiMock);
@@ -43,9 +48,11 @@ export const unmockApiRoute = async <
     setCustomInspectOnFunction(apiMockFunction);
   }
 
-  log(
-    `Unmock API for route "${Route.name}"`,
-    {apiMockFunction, routeWasMocked},
-    LogEventType.InternalAction,
-  );
+  if (skipLogs !== true) {
+    log(
+      `Unmock API for route "${Route.name}"`,
+      {apiMockFunction, routeWasMocked},
+      LogEventType.InternalAction,
+    );
+  }
 };
