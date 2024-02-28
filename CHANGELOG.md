@@ -1,5 +1,28 @@
 # Changelog
 
+## [v0.16.13](https://github.com/joomcode/e2ed/tree/v0.16.13) (2024-02-28)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.12...v0.16.13)
+
+- [Merge pull request #67 from joomcode/fix/default-charset-encoding](https://github.com/joomcode/e2ed/commit/e9a9c68c94ce61f67e05caf3a44ff0dc23ff607a) ([uid11](https://github.com/uid11))
+
+  fix: default encoding in `Charset` TestCafe class
+
+- [chore: add more `@typescript-eslint/*` rules.](https://github.com/joomcode/e2ed/commit/3bf98835421976f898159c34dbb919e472bd3660) ([uid11](https://github.com/uid11))
+
+  chore: update `devDependencies` (`@types/node`, etc)
+
+- [chore: update `devDependencies` (`@typescript-eslint/*`)](https://github.com/joomcode/e2ed/commit/d763e6063f9883ae3152c99c758d5e0135b6ecb5) ([uid11](https://github.com/uid11))
+- [FI-1120 feat: add parameter `method` to `getParamsFromUrl` route method](https://github.com/joomcode/e2ed/commit/dea270b09ec3276e68c2fcdda8b840a252a712cc) ([uid11](https://github.com/uid11))
+
+  feat: add `skipLogs` parameter to `mockApiRoute` function
+
+  feat: add `INTERNAL_SERVER_ERROR` and `NOT_FOUND` HTTP status codes
+
+  fix: `utf-8` encoding in `writeFile` utility
+
+  fix: default encoding in `Charset` TestCafe class
+
 ## [v0.16.12](https://github.com/joomcode/e2ed/tree/v0.16.12) (2024-02-23)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.11...v0.16.12)
