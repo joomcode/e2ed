@@ -21,7 +21,7 @@ declare module 'bin-v8-flags-filter' {
   }>;
 
   /**
-   * Filters out nodejs cli options and runs node module on cliPath.
+   * Filters out `nodejs` cli options and runs node module on `cliPath`.
    */
   const v8FlagsFilter: (cliPath: string, options: Options) => void;
 

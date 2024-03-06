@@ -85,7 +85,7 @@ export class E2edError extends Error {
   }
 
   /**
-   * Custom presentation of error for nodejs `inspect`.
+   * Custom presentation of error for `nodejs` `inspect`.
    */
   [inspect.custom](): string {
     return this.toString();
