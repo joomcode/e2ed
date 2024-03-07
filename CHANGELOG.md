@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.16.14](https://github.com/joomcode/e2ed/tree/v0.16.14) (2024-03-07)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.13...v0.16.14)
+
+- [Merge pull request #68 from joomcode/fix/correct-exit-on-sigint](https://github.com/joomcode/e2ed/commit/458b35c0b1ba8a481a8f1a0f2ea3c0f26d48cb17) ([uid11](https://github.com/uid11))
+
+  fix: correct exit from docker after exit signals
+
+- [chore: update devDependencies (`typescript`, `@typescript-eslint/*`, etc)](https://github.com/joomcode/e2ed/commit/60441ddf29116c7b8e912709a98afb71d67410c0) ([uid11](https://github.com/uid11))
+- [chore: turn on more `@typescript-eslint` rules](https://github.com/joomcode/e2ed/commit/6f6fb998be18e26789e3c6fea6d66fca4685bd7c) ([uid11](https://github.com/uid11))
+- [FI-765 fix: writes HTML report after exit signals to `dockerEntrypoint.sh`](https://github.com/joomcode/e2ed/commit/d356502e494f3fee0137bdbbc3bedb9ab3003b00) ([uid11](https://github.com/uid11))
+
 ## [v0.16.13](https://github.com/joomcode/e2ed/tree/v0.16.13) (2024-02-28)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.12...v0.16.13)
