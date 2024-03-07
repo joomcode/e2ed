@@ -14,7 +14,9 @@ onExit() {
     if [[ $PID ]] && ps -p $PID > /dev/null
     then
         echo "$PID is running"
-        kill $PID
+        kill -USR1 $PID
+
+        sleep 16
     fi
 
     restoreE2edPackage;

@@ -26,6 +26,8 @@ onExit() {
     then
         echo "Docker container from image $E2ED_DOCKER_IMAGE:$VERSION already stopped"
     else
+        sleep 18
+
         echo "Stop docker container from image $E2ED_DOCKER_IMAGE:$VERSION"
         docker stop --time=60 $CONTAINER_ID
     fi

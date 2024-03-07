@@ -17,7 +17,7 @@ function toMultipleString(this: StringForLogs): string {
 
 /**
  * If the text consists of several lines, replaces the text with an object
- * with a more beautiful presentation through nodejs `inspect`.
+ * with a more beautiful presentation through `nodejs` `inspect`.
  * @internal
  */
 export const wrapStringForLogs = (text: string, options?: Options): StringForLogs | string => {

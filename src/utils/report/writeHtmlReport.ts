@@ -12,7 +12,7 @@ import {renderReportToHtml} from './render';
 import type {FilePathFromRoot, ReportData, UtcTimeInMs} from '../../types/internal';
 
 /**
- * Writes HTML report (report.html file) with test runs results.
+ * Writes HTML report (`report.html` file) with test runs results.
  * @internal
  */
 export const writeHtmlReport = async (reportData: ReportData): Promise<void> => {

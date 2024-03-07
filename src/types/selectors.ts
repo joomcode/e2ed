@@ -38,12 +38,8 @@ type ReplaceObjectSelectors<Obj extends object> = Readonly<{
             (...args: A2): ReplaceSelector<R2>;
             (...args: A1): ReplaceSelector<R1>;
           }
-        : Obj[Key] extends {
-              (...args: infer A1): infer R1;
-            }
-          ? {
-              (...args: A1): ReplaceSelector<R1>;
-            }
+        : Obj[Key] extends (...args: infer A1) => infer R1
+          ? (...args: A1) => ReplaceSelector<R1>
           : Obj[Key];
 }>;
 

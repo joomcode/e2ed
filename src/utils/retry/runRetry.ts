@@ -40,7 +40,8 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
     setTestsSubprocess(newTestsSubprocess);
 
     newTestsSubprocess.on('error', reject);
-    newTestsSubprocess.on('exit', (exitCode) => {
+
+    newTestsSubprocess.on('exit', (exitCode): void => {
       const error = new E2edError(
         `Tests subprocess with label "${runLabel}" exit with non-zero exit code ${String(
           exitCode,

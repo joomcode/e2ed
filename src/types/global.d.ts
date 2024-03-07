@@ -6,6 +6,7 @@
  */
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 interface NodeRequire {
+  // eslint-disable-next-line @typescript-eslint/prefer-function-type
   <ModuleExports = import('./utils').Any>(modulePath: string): ModuleExports;
 }
 
@@ -21,7 +22,7 @@ declare module 'bin-v8-flags-filter' {
   }>;
 
   /**
-   * Filters out nodejs cli options and runs node module on cliPath.
+   * Filters out `nodejs` cli options and runs node module on `cliPath`.
    */
   const v8FlagsFilter: (cliPath: string, options: Options) => void;
 

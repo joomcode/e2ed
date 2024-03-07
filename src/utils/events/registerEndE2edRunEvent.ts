@@ -10,11 +10,19 @@ import {runAfterPackFunctions} from './runAfterPackFunctions';
 
 import type {ReportData} from '../../types/internal';
 
+let isEndAlreadyCalled = false;
+
 /**
  * Registers end e2ed run event (for report) after closing of all tests.
  * @internal
  */
 export const registerEndE2edRunEvent = async (): Promise<void> => {
+  if (isEndAlreadyCalled) {
+    return;
+  }
+
+  isEndAlreadyCalled = true;
+
   generalLog('Starting to close e2ed...');
 
   let reportData: ReportData | undefined;

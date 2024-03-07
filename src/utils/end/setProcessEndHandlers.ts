@@ -5,7 +5,7 @@ import {generalLog} from '../generalLog';
 import {endE2ed} from './endE2ed';
 
 /**
- * nodejs e2ed process end hanlder.
+ * `nodejs` e2ed process end hanlder.
  * @internal
  */
 const endHandler = (signal: NodeJS.Signals): void => {
@@ -15,10 +15,12 @@ const endHandler = (signal: NodeJS.Signals): void => {
 };
 
 /**
- * Set nodejs e2ed process end hanlders (SIGINT, SIGTERM).
+ * Set `nodejs` e2ed process end hanlders (`SIGHUP`, `SIGINT`, `SIGTERM`, `SIGUSR1`).
  * @internal
  */
 export const setProcessEndHandlers = (): void => {
+  process.on('SIGHUP', endHandler);
   process.on('SIGINT', endHandler);
   process.on('SIGTERM', endHandler);
+  process.on('SIGUSR1', endHandler);
 };
