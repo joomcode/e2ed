@@ -13,15 +13,15 @@ export const enum LogEventStatus {
  * Type of `LogEvent`.
  */
 export const enum LogEventType {
-  Action,
-  Assert,
-  Entity,
-  Util,
-  InternalAction,
-  InternalAssert,
-  InternalCore,
-  InternalUtil,
-  Unspecified,
+  Action = 1,
+  Assert = 2,
+  Entity = 3,
+  Util = 4,
+  InternalAction = 5,
+  InternalAssert = 6,
+  InternalCore = 7,
+  InternalUtil = 8,
+  Unspecified = 9,
 }
 
 /**

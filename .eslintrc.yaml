@@ -130,6 +130,7 @@ rules:
     - {blankLine: always, prev: '*', next: return}
     - {blankLine: always, prev: throw, next: '*'}
     - {blankLine: always, prev: '*', next: throw}
+  prefer-destructuring: off
   simple-import-sort/exports: error
   simple-import-sort/imports:
     - error
@@ -206,7 +207,13 @@ rules:
   '@typescript-eslint/no-unused-expressions': error
   '@typescript-eslint/no-useless-empty-export': error
   '@typescript-eslint/parameter-properties': error
+  '@typescript-eslint/prefer-destructuring':
+    [error, {VariableDeclarator: {array: false, object: true}}]
+  '@typescript-eslint/prefer-enum-initializers': error
+  '@typescript-eslint/prefer-find': error
+  '@typescript-eslint/prefer-for-of': error
   '@typescript-eslint/quotes': [error, single, {avoidEscape: true}]
+  '@typescript-eslint/prefer-function-type': error
   '@typescript-eslint/sort-type-constituents': [error, {checkIntersections: false}]
 settings:
   import/extensions: [.ts]
