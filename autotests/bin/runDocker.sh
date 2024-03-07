@@ -35,7 +35,6 @@ onExit() {
     exit
 }
 
-
 echo "Run docker image $E2ED_DOCKER_IMAGE:$VERSION"
 
 trap "onExit" EXIT
