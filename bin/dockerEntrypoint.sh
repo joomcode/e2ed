@@ -2,7 +2,7 @@
 set -eo pipefail
 set +u
 
-restoreE2edPackage () {
+restoreE2edPackage() {
     if [[ -d "./node_modules/_e2ed" ]]
     then
         echo "Restore temporarily hiding locally installed e2ed package:"
@@ -13,7 +13,7 @@ restoreE2edPackage () {
 onExit() {
     if [[ $PID ]] && ps -p $PID > /dev/null
     then
-        echo "$PID is running"
+        echo "PID $PID is running"
         kill -USR1 $PID
 
         sleep 16

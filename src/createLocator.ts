@@ -16,10 +16,12 @@ export type {
   RootOptions,
 } from 'create-locator';
 export {
+  anyLocator,
   createLocator,
   getLocatorParameters,
   removeMarkFromProperties,
   setGlobalProductionMode,
 } from 'create-locator';
+export type {PARAMETERS} from 'create-locator/types';
 // eslint-disable-next-line import/no-internal-modules
 export {getCssSelectorFromAttributesChain} from 'create-locator/getCssSelectorFromAttributesChain';

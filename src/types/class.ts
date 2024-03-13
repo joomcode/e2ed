@@ -1,5 +1,5 @@
 /**
- * Generic class type by constructor arguments, prototype and static part.
+ * Generic class type by constructor arguments, prototype (instance) and static part.
  */
 export type Class<
   ConstructorArgs extends readonly unknown[] = readonly unknown[],
