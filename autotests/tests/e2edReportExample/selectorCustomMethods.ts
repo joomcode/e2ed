@@ -8,19 +8,41 @@ test('selector custom methods', {meta: {testId: '15'}}, async () => {
 
   await expect(reportPage.navigationRetries.exists, 'navigation retries exists').ok();
 
-  await expect(reportPage.navigationRetriesButton.exists, ' exists').ok();
+  await expect(reportPage.navigationRetriesButton.exists, 'navigation retries button exists').ok();
 
   await expect(
     reportPage.navigationRetriesButtonSelected.exists,
     'selected navigation retries button exists',
   ).ok();
 
-  const buttonsCount = await reportPage.navigationRetriesButton.count;
+  const testRunButtonsHash = await reportPage.getTestRunButtons();
+
+  const retriesButtonsCount = await reportPage.navigationRetriesButton.count;
+
+  const testRunButtonsCount = Object.keys(testRunButtonsHash).length;
+
+  await expect(reportPage.testRunButton.count, 'getTestRunButtons find all buttons').eql(
+    testRunButtonsCount,
+  );
+
+  let buttonsIndex = 0;
+
+  for (const testRunButton of Object.values(testRunButtonsHash)) {
+    const selector = reportPage.testRunButton.nth(buttonsIndex);
+    const mainParams = await selector.findByLocatorId(String(testRunButton.locator.parameters))
+      .textContent;
+
+    await expect(testRunButton.parameters.textContent, 'mainParams of test run button correct').eql(
+      mainParams,
+    );
+
+    buttonsIndex += 1;
+  }
 
   await expect(
     reportPage.navigationRetriesButtonSelected.getLocatorParameter('retry'),
     'last navigation retries button selected',
-  ).eql(String(buttonsCount));
+  ).eql(String(retriesButtonsCount));
 
   await expect(
     reportPage.navigationRetriesButtonSelected.hasLocatorParameter('disabled'),

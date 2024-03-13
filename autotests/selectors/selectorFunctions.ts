@@ -5,6 +5,15 @@ import {createSelectorFunctions} from 'e2ed/selectors';
  */
 export const {createSelector, createSelectorByCss, locatorIdSelector, htmlElementSelector} =
   createSelectorFunctions({
-    getLocatorAttributeName: (parameter) =>
-      parameter === 'id' ? 'data-testid' : `data-test-${parameter}`,
+    getLocatorAttributeName: (parameter) => {
+      if (parameter === 'id') {
+        return 'data-testid';
+      }
+
+      if (parameter === 'runhash') {
+        return 'data-runhash';
+      }
+
+      return `data-test-${parameter}`;
+    },
   });
