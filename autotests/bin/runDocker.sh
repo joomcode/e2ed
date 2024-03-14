@@ -41,6 +41,7 @@ trap "onExit" EXIT
 
 docker run \
        --env E2ED_ORIGIN=$E2ED_ORIGIN \
+       --env E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS=16 \
        --env __INTERNAL_E2ED_PATH_TO_PACK=$1 \
        --label $CONTAINER_LABEL \
        --rm \

@@ -405,7 +405,7 @@ If the wait is longer than this timeout, then the promise returned by the `waitF
 Required environment variables are defined in the `./autotests/variables.env` file (they cannot be deleted):
 
 `E2ED_DOCKER_IMAGE`: the name of the docker image where the tests will run.
-The image must be based on the e2ed base image.
+The image must be based on the `e2ed` base image.
 
 `E2ED_PATH_TO_TS_CONFIG_OF_PROJECT_FROM_ROOT`: the path to TypeScript config file of the project
 from the root directory of the project. The project should have one common TypeScript config
@@ -415,9 +415,15 @@ You can pass the following optional environment variables to the `e2ed` process 
 
 `E2ED_ORIGIN`: origin-part of the url (`protocol` + `host`) on which the tests will be run. For example, `https://google.com`.
 
-`E2ED_DEBUG`: run e2ed in `nodejs` debug mode (`--inspect-brk=0.0.0.0`) if this variable is not empty.
+`E2ED_DEBUG`: run `e2ed` in `nodejs` debug mode (`--inspect-brk=0.0.0.0`) if this variable is not empty.
 
-`E2ED_DOCKER_DEBUG_PORT`: debug port when run in docker (9229 by default).
+`E2ED_DOCKER_DEBUG_PORT`: debug port when run in docker (`9229` by default).
+
+`E2ED_TERMINATION_SIGNAL`: the termination signal received by the `e2ed` process (if any).
+Typically this value is `'SIGUSR1'`.
+
+`E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS`: default timeout for "graceful shutdown" of `e2ed` process (in seconds).
+If the variable is not set, the default value of `16` is used.
 
 ## License
 

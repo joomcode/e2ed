@@ -16,7 +16,7 @@ onExit() {
         echo "PID $PID is running"
         kill -USR1 $PID
 
-        sleep 16
+        sleep "${E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS:-16}"
     fi
 
     restoreE2edPackage;
