@@ -12,7 +12,7 @@ import {getCompilerOptions} from './getCompilerOptions';
 
 import type {UtcTimeInMs} from '../../types/internal';
 
-type Result = Readonly<{
+type Return = Readonly<{
   compileErrors: readonly Readonly<Record<string, string>>[];
   configCompileTimeWithUnits: string;
 }>;
@@ -23,7 +23,7 @@ const unusedTsExceptErrorMessage = "Unused '@ts-expect-error' directive.";
  * Compiles pack file before running tests (or tasks).
  * @internal
  */
-export const compilePack = (): Result => {
+export const compilePack = (): Return => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const {compilerOptions, parsingTsConfigError} = getCompilerOptions();

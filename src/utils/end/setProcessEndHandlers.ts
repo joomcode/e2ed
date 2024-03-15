@@ -18,6 +18,11 @@ const endHandler = (signal: NodeJS.Signals): void => {
   generalLog(message);
 
   endE2ed(EndE2edReason.ProcessEndSignal);
+
+  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+  const {registerEndE2edRunEvent} = require<typeof import('../events')>('../events');
+
+  void registerEndE2edRunEvent();
 };
 
 /**
