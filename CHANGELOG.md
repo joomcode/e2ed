@@ -1,5 +1,33 @@
 # Changelog
 
+## [v0.16.15](https://github.com/joomcode/e2ed/tree/v0.16.15) (2024-03-15)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.14...v0.16.15)
+
+- [Merge pull request #69 from joomcode/feat/add-createPageObjectsFromMultiLocator](https://github.com/joomcode/e2ed/commit/8a61c3e24b338fb37102fd71c98068c122a80d88) ([uid11](https://github.com/uid11))
+
+  feat: add `createPageObjectsFromMultiLocator` utility
+
+- [chore: update `create-locator` to 0.0.19](https://github.com/joomcode/e2ed/commit/70845cd170660ab9a50571fe052d0fd8ec86ebe7) ([uid11](https://github.com/uid11))
+
+  chore: update `devDependencies` (`@typescript-eslint/*`, `@types/node`, etc)
+
+- [chore: turn on more `@typescript-eslint/*` rules](https://github.com/joomcode/e2ed/commit/13edd8cf15065e84cbb12105210ca7c132268d9c) ([uid11](https://github.com/uid11))
+- [FI-765 fix: directly end `e2ed` on termination signals](https://github.com/joomcode/e2ed/commit/93a4101150e132f67849c05edb532f234bd94aee) ([uid11](https://github.com/uid11))
+
+  fix: add more temporary logs on termination signals
+
+- [FI-765 feat: add environment variable `E2ED_TERMINATION_SIGNAL`](https://github.com/joomcode/e2ed/commit/152c0aa2fec4390553e201e4000c46869beeca43) ([uid11](https://github.com/uid11))
+
+  feat: add environment variable `E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS`
+
+  refactor: move `onRequest` and `onConfigureResponse` methods to thier own modules
+
+- [FI-1010 fix: add runtime tests for `createPageObjectsFromMultiLocator` utility](https://github.com/joomcode/e2ed/commit/4ccef1c71e0e50e0acc2bd1a364e23091167a13c) ([uid11](https://github.com/uid11))
+- [FI-1010 feat: add `createPageObjectsFromMultiLocator` utility](https://github.com/joomcode/e2ed/commit/cc371fbe38e884c30404faebecc6ec460183a633) ([uid11](https://github.com/uid11))
+
+  tests: add tests of types of `createPageObjectsFromMultiLocator` utility
+
 ## [v0.16.14](https://github.com/joomcode/e2ed/tree/v0.16.14) (2024-03-07)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.13...v0.16.14)
