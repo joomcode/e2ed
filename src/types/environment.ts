@@ -17,6 +17,7 @@ export type E2edEnvironment = {
   ['E2ED_DEBUG']?: string;
   ['E2ED_ORIGIN']?: string;
   ['E2ED_PATH_TO_TS_CONFIG_OF_PROJECT_FROM_ROOT']?: string;
+  ['E2ED_TERMINATION_SIGNAL']?: NodeJS.Signals;
   [PATH_TO_PACK_VARIABLE_NAME]?: string;
   ['PWD']?: string;
   [RUN_ENVIRONMENT_VARIABLE_NAME]?: RunEnvironment;

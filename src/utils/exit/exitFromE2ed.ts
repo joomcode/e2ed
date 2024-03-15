@@ -13,7 +13,7 @@ export const exitFromE2ed = async (
 ): Promise<void> => {
   const globalExitCode = getGlobalExitCode();
 
-  const exitCode = globalExitCode === undefined ? exitCodeFromReport : globalExitCode;
+  const exitCode = globalExitCode ?? exitCodeFromReport;
 
   generalLog(`Exit from e2ed with code ${exitCode}`);
 

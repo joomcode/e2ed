@@ -39,7 +39,7 @@ export const onResponse = async (
 
   const requestHookContextId = ((headers as Record<symbol, RequestHookContextId>)[
     REQUEST_HOOK_CONTEXT_ID_KEY
-  ] || event.requestId) as RequestHookContextId | undefined;
+  ] ?? event.requestId) as RequestHookContextId | undefined;
 
   assertValueIsDefined(requestHookContextId, 'requestHookContextId is defined', {
     responseHeaders: headers,

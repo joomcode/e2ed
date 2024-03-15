@@ -5,6 +5,7 @@ set +u
 CONTAINER_LABEL="e2ed"
 DEBUG_PORT="${E2ED_DOCKER_DEBUG_PORT:-9229}"
 DIR="${E2ED_WORKDIR:-$PWD}"
+E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS=16
 MOUNTDIR="${E2ED_MOUNTDIR:-$DIR}"
 WITH_DEBUG=$([[ -z $E2ED_DEBUG ]] && echo "" || echo "--env E2ED_DEBUG=$DEBUG_PORT --publish $DEBUG_PORT:$DEBUG_PORT --publish $((DEBUG_PORT + 1)):$((DEBUG_PORT + 1))")
 VERSION=$(grep -m1 \"e2ed\": $DIR/package.json | cut -d '"' -f 4)
@@ -26,10 +27,16 @@ onExit() {
     then
         echo "Docker container from image $E2ED_DOCKER_IMAGE:$VERSION already stopped"
     else
-        sleep 18
+        echo "runDocker will sleep $(($E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS + 2)) for seconds"
+        sleep "$(($E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS + 2))"
 
-        echo "Stop docker container from image $E2ED_DOCKER_IMAGE:$VERSION"
-        docker stop --time=60 $CONTAINER_ID
+        CONTAINER_ID=$(docker ps --filter "label=$CONTAINER_LABEL" --format "{{.ID}}")
+
+        if [[ ! -z $CONTAINER_ID ]]
+        then
+            echo "Stop docker container from image $E2ED_DOCKER_IMAGE:$VERSION"
+            docker stop --time=60 $CONTAINER_ID
+        fi
     fi
 
     exit
@@ -41,6 +48,7 @@ trap "onExit" EXIT
 
 docker run \
        --env E2ED_ORIGIN=$E2ED_ORIGIN \
+       --env E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS=$E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS \
        --env __INTERNAL_E2ED_PATH_TO_PACK=$1 \
        --label $CONTAINER_LABEL \
        --rm \

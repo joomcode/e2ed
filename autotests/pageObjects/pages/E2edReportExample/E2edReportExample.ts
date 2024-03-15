@@ -4,9 +4,11 @@ import {
 } from 'autotests/actions';
 import {setPageCookies, setPageRequestHeaders} from 'autotests/context';
 import {E2edReportExample as E2edReportExampleRoute} from 'autotests/routes/pageRoutes';
-import {locatorIdSelector} from 'autotests/selectors';
+import {locatorIdSelector, rootLocator} from 'autotests/selectors';
 import {Page} from 'e2ed';
-import {setReadonlyProperty} from 'e2ed/utils';
+import {createPageObjectsFromMultiLocator, setReadonlyProperty} from 'e2ed/utils';
+
+import {TestRunButton} from './TestRunButton';
 
 import type {Cookie, Headers, Selector, Url} from 'e2ed/types';
 
@@ -73,6 +75,17 @@ export class E2edReportExample extends Page<CustomPageParams> {
 
   getRoute(): E2edReportExampleRoute {
     return new E2edReportExampleRoute();
+  }
+
+  /**
+   * Get `TestRunButton` hash (hashed by test `mainParams`).
+   */
+  getTestRunButtons(): Promise<Readonly<Record<string, TestRunButton>>> {
+    return createPageObjectsFromMultiLocator({
+      PageObjectClass: TestRunButton,
+      keyParameter: 'runhash',
+      locator: rootLocator.retries.retry.button,
+    });
   }
 
   override init(this: E2edReportExample): void {

@@ -62,7 +62,7 @@ export const createGetTrap = (customMethods: SelectorCustomMethods): Return => {
         } as typeof result;
     }
 
-    const description = target[DESCRIPTION_KEY] || '';
+    const description = target[DESCRIPTION_KEY] ?? '';
 
     result[DESCRIPTION_KEY] = `${description}.${property}`;
 

@@ -11,7 +11,7 @@ type Props = TestRunButtonProps & Readonly<{index: number}> & Mark<TestRunButton
 
 export type TestRunButtonLocator = Locator<
   {name: Void; order: Void; parameters: Void; time: Void},
-  {status: TestRunStatus}
+  {mainParams: string; runhash?: string; status: TestRunStatus}
 >;
 
 /**
@@ -36,7 +36,7 @@ export const renderTestRunButton = ({
   class="test-button test-button_status_${status}"
   data-runhash="${runHash}"
   role="tab"
-  ${renderAttributes(locator({status}))}
+  ${renderAttributes(locator({mainParams, status}))}
 >
   <span class="test-button__order" ${renderAttributes(locator.order())}>#${index + 1}</span>
   <span class="test-button__name" ${renderAttributes(

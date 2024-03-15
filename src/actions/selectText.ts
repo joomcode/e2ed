@@ -20,9 +20,7 @@ export const selectText = (
   const description = getDescriptionFromSelector(selector);
 
   log(
-    `Select text in input element, from ${startPos} to ${
-      endPos === undefined ? 'the end' : endPos
-    }`,
+    `Select text in input element, from ${startPos} to ${endPos ?? 'the end'}`,
     {description, options},
     LogEventType.InternalAction,
   );

@@ -9,7 +9,7 @@ import {getDurationWithUnits} from '../getDurationWithUnits';
 import type {FilePathFromRoot, LiteReport, UtcTimeInMs} from '../../types/internal';
 
 /**
- * Writes lite JSON report (lite-report.json file) with test runs results
+ * Writes lite JSON report (`lite-report.json` file) with test runs results
  * (and without test run logs).
  * @internal
  */

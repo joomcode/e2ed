@@ -1,14 +1,14 @@
 import {ExitCode} from '../../constants/internal';
 
 import {exitFromE2ed} from '../exit';
-import {failMessage, generalLog, okMessage} from '../generalLog';
-import {collectReportData, getLiteReport, writeHtmlReport, writeLiteJsonReport} from '../report';
+import {generalLog} from '../generalLog';
 import {setReadonlyProperty} from '../setReadonlyProperty';
 
-import {collectFullEventsData} from './collectFullEventsData';
+import {getReports} from './getReports';
 import {runAfterPackFunctions} from './runAfterPackFunctions';
+import {writeReports} from './writeReports';
 
-import type {ReportData} from '../../types/internal';
+import type {LiteReport, ReportData} from '../../types/internal';
 
 let isEndAlreadyCalled = false;
 
@@ -23,20 +23,18 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
 
   isEndAlreadyCalled = true;
 
-  generalLog('Starting to close e2ed...');
+  const message = 'Starting to close e2ed...';
+
+  // eslint-disable-next-line no-console
+  console.log(message);
+  generalLog(message);
 
   let reportData: ReportData | undefined;
 
   try {
-    const fullEventsData = await collectFullEventsData();
+    let liteReport: LiteReport | undefined;
 
-    reportData = await collectReportData(fullEventsData);
-
-    const stateMessage = reportData.exitCode === ExitCode.Passed ? okMessage : failMessage;
-
-    generalLog(`Results of pack: ${stateMessage} ${reportData.summaryPackResults}`);
-
-    const liteReport = getLiteReport(reportData);
+    ({liteReport, reportData} = await getReports());
 
     try {
       await runAfterPackFunctions(liteReport);
@@ -52,15 +50,7 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
       setReadonlyProperty(reportData, 'customReportProperties', customReportProperties);
     }
 
-    const {liteReportFileName, reportFileName} = reportData;
-
-    if (liteReportFileName !== null) {
-      await writeLiteJsonReport(liteReport);
-    }
-
-    if (reportFileName !== null) {
-      await writeHtmlReport(reportData);
-    }
+    await writeReports({liteReport, reportData});
   } catch (error) {
     generalLog(
       'Caught an error while collecting the report data or writing the HTML report and lite report',

@@ -18,11 +18,18 @@ export const endE2ed = (definedEndE2edReason: EndE2edReason): void => {
     return;
   }
 
-  generalLog(`End e2ed with reason "${definedEndE2edReason}"`);
+  const message = `End e2ed with reason "${definedEndE2edReason}"`;
+
+  // eslint-disable-next-line no-console
+  console.log(message);
+  generalLog(message);
 
   setEndE2edReason(definedEndE2edReason);
 
   if (testsSubprocess?.killed === false) {
+    // eslint-disable-next-line no-console
+    console.log('Kill tests subprocess');
+
     testsSubprocess.kill();
   }
 };

@@ -22,6 +22,7 @@ export {
   replaceSetCookie,
   trimSemicolonsAtTheEnd,
 } from './cookie';
+export {createPageObjectsFromMultiLocator} from './createPageObjectsFromMultiLocator';
 export {deepMerge} from './deepMerge';
 export {
   getDistanceBetweenSelectors,

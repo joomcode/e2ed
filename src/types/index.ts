@@ -1,4 +1,4 @@
-export type {ReportRootLocator} from '../utils/report';
+export type {ReportRootLocator, TestRunButtonLocator} from '../utils/report';
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';

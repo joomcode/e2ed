@@ -2,7 +2,7 @@
 set -eo pipefail
 set +u
 
-restoreE2edPackage () {
+restoreE2edPackage() {
     if [[ -d "./node_modules/_e2ed" ]]
     then
         echo "Restore temporarily hiding locally installed e2ed package:"
@@ -13,10 +13,11 @@ restoreE2edPackage () {
 onExit() {
     if [[ $PID ]] && ps -p $PID > /dev/null
     then
-        echo "$PID is running"
+        echo "PID $PID is running"
         kill -USR1 $PID
 
-        sleep 16
+        echo "dockerEntrypoint will sleep ${E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS:-16} for seconds"
+        sleep "${E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS:-16}"
     fi
 
     restoreE2edPackage;
