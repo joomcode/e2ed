@@ -80,6 +80,7 @@ export const pixelmatch = (
           }
         } else {
           if (output) {
+            // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
             drawPixel(output, pos, ...((delta < 0 && options.diffColorAlt) || options.diffColor));
           }
 

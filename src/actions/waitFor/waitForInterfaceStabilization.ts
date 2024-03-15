@@ -29,7 +29,7 @@ const clientWaitForInterfaceStabilization = createClientFunction(
 
     const keyOfIgnoredElements = Symbol.for('e2ed:PageElementsIgnoredOnInterfaceStabilization');
     const global = globalThis as {[keyOfIgnoredElements]?: readonly string[] | undefined};
-    const ignoredElementsSelectors = global[keyOfIgnoredElements] || [];
+    const ignoredElementsSelectors = global[keyOfIgnoredElements] ?? [];
 
     const CHECK_INTERVAL_IN_MS = 250;
     const COUNT_OF_POINTED_NODES = 8;

@@ -29,7 +29,7 @@ export const onRequest = async (
   };
 
   const requestHookContext = event.requestOptions[REQUEST_HOOK_CONTEXT_KEY];
-  const requestHookContextId = (requestHookContext?.[REQUEST_HOOK_CONTEXT_ID_KEY] ||
+  const requestHookContextId = (requestHookContext?.[REQUEST_HOOK_CONTEXT_ID_KEY] ??
     // eslint-disable-next-line no-underscore-dangle
     event._requestInfo?.requestId) as RequestHookContextId | undefined;
 

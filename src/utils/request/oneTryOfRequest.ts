@@ -85,7 +85,7 @@ export const oneTryOfRequest = <SomeRequest extends Request, SomeResponse extend
             query: parse(urlObject.search ? urlObject.search.slice(1) : ''),
             requestBody,
             requestHeaders,
-            url: (res.url || urlObject.href) as Url,
+            url: (res.url ?? urlObject.href) as Url,
             utcTimeInMs,
           } satisfies RequestWithUtcTimeInMs as unknown as RequestWithUtcTimeInMs<SomeRequest>;
 

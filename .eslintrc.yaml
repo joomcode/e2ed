@@ -212,8 +212,12 @@ rules:
   '@typescript-eslint/prefer-enum-initializers': error
   '@typescript-eslint/prefer-find': error
   '@typescript-eslint/prefer-for-of': error
-  '@typescript-eslint/quotes': [error, single, {avoidEscape: true}]
   '@typescript-eslint/prefer-function-type': error
+  '@typescript-eslint/prefer-namespace-keyword': error
+  '@typescript-eslint/prefer-nullish-coalescing': error
+  '@typescript-eslint/prefer-optional-chain': error
+  '@typescript-eslint/prefer-readonly': error
+  '@typescript-eslint/quotes': [error, single, {avoidEscape: true}]
   '@typescript-eslint/sort-type-constituents': [error, {checkIntersections: false}]
 settings:
   import/extensions: [.ts]
