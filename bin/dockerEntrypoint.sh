@@ -16,7 +16,7 @@ onExit() {
         echo "PID $PID is running"
         kill -USR1 $PID
 
-        echo "dockerEntrypoint will sleep ${E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS:-16} for seconds"
+        echo "dockerEntrypoint will sleep for ${E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS:-16} seconds"
         sleep "${E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS:-16}"
     fi
 

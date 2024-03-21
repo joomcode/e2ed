@@ -5,12 +5,14 @@ import type {Any, Class, Selector} from '../types/internal';
 
 type AnyLocator = ((parameters?: Attributes) => Selector) & {readonly [PARAMETERS]?: object};
 
+type Keys<SomeLocator extends AnyLocator> = keyof SomeLocator[typeof PARAMETERS] & string;
+
 type Options<
   SomeLocator extends AnyLocator,
   Instance extends Readonly<{locator: SomeLocator}>,
 > = Readonly<{
   PageObjectClass: Class<[Any], Instance>;
-  keyParameter: keyof SomeLocator[typeof PARAMETERS] & string;
+  keyParameter: Keys<SomeLocator>;
   locator: SomeLocator;
 }>;
 
@@ -24,7 +26,7 @@ export const createPageObjectsFromMultiLocator = async <
   keyParameter,
   locator,
   PageObjectClass,
-}: Options<SomeLocator, Instance>): Promise<Readonly<Record<string, Instance>>> => {
+}: Options<SomeLocator, Instance>): Promise<Readonly<Record<Keys<SomeLocator>, Instance>>> => {
   const logParams = {
     PageObjectClassName: PageObjectClass.name,
     keyParameter,
@@ -47,5 +49,5 @@ export const createPageObjectsFromMultiLocator = async <
     result[parameter] = new PageObjectClass(locatorWithParameter);
   }
 
-  return result;
+  return result as Record<Keys<SomeLocator>, Instance>;
 };

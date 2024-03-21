@@ -27,7 +27,7 @@ onExit() {
     then
         echo "Docker container from image $E2ED_DOCKER_IMAGE:$VERSION already stopped"
     else
-        echo "runDocker will sleep $(($E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS + 2)) for seconds"
+        echo "runDocker will sleep for $(($E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS + 2)) seconds"
         sleep "$(($E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS + 2))"
 
         CONTAINER_ID=$(docker ps --filter "label=$CONTAINER_LABEL" --format "{{.ID}}")
