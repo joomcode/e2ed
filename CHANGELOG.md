@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.16.16](https://github.com/joomcode/e2ed/tree/v0.16.16) (2024-03-28)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.15...v0.16.16)
+
+- [Merge pull request #70 from joomcode/fix/restore-errors-params](https://github.com/joomcode/e2ed/commit/80430966bc20e3203a383d8da494df7475e6956d) ([uid11](https://github.com/uid11))
+
+  fix: restore errors params
+
+- [chore: update `devDependencies` (`typescript`, `@types/node`, etc)](https://github.com/joomcode/e2ed/commit/5c70d6163042a0ee19c7e80d24e1f0db130b4f94) ([uid11](https://github.com/uid11))
+- [chore: turn on more `@typescript-eslint/*` rules](https://github.com/joomcode/e2ed/commit/c75d406163459e93efb62bcfb5c8ff70ae17f1a5) ([uid11](https://github.com/uid11))
+- [fix: restore field `params` in `E2edError`](https://github.com/joomcode/e2ed/commit/067db47fe4442ddad65310a4ad70aed6d6c2168b) ([uid11](https://github.com/uid11))
+
+  fix: case-sensitive of attributes names in custom selector methods
+
 ## [v0.16.15](https://github.com/joomcode/e2ed/tree/v0.16.15) (2024-03-15)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.14...v0.16.15)
