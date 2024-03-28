@@ -107,6 +107,7 @@ rules:
     - error
     - ExportAllDeclaration
     - ':not(MethodDefinition, Property) > FunctionExpression'
+  no-return-await: off
   no-shadow: off
   no-underscore-dangle: [error, {allow: [_onConfigureResponse]}]
   no-unused-expressions: off
@@ -218,6 +219,8 @@ rules:
   '@typescript-eslint/prefer-optional-chain': error
   '@typescript-eslint/prefer-readonly': error
   '@typescript-eslint/quotes': [error, single, {avoidEscape: true}]
+  '@typescript-eslint/require-array-sort-compare': error
+  '@typescript-eslint/return-await': [error, never]
   '@typescript-eslint/sort-type-constituents': [error, {checkIntersections: false}]
 settings:
   import/extensions: [.ts]

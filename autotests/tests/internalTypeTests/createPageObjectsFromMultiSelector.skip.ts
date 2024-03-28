@@ -47,7 +47,10 @@ void (async () => {
     locator: fooLocator,
   });
 
-  const foo = map['bar'];
+  const foo = map.parameter;
+
+  // @ts-expect-error: wrong parameter name
+  void map.bar;
 
   if (foo !== undefined) {
     foo.bar satisfies string;

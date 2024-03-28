@@ -23,13 +23,12 @@ export class E2edError extends Error {
   /**
    * Error message.
    */
-  // @ts-expect-error: initialized by `Object.defineProperty`
   override readonly message: string;
 
   /**
    * Optional params of error.
    */
-  readonly params?: LogParams;
+  readonly params: LogParams | undefined;
 
   /**
    * Current runLabel at the time the error was created
@@ -39,7 +38,6 @@ export class E2edError extends Error {
   /**
    * Current V8 stack trace (if available).
    */
-  // @ts-expect-error: initialized by `Object.defineProperty`
   readonly stackTrace: readonly string[];
 
   /**
@@ -59,12 +57,8 @@ export class E2edError extends Error {
 
     super(...constructorArgs);
 
-    Object.defineProperty(this, 'message', {
-      configurable: true,
-      enumerable: true,
-      value: message,
-      writable: true,
-    });
+    this.message = message;
+    this.params = params;
 
     if (params?.cause) {
       this.cause = params.cause;
@@ -74,13 +68,7 @@ export class E2edError extends Error {
 
     const framesStackTrace = getStackTrace() ?? ([] as readonly StackFrame[]);
 
-    Object.defineProperty(this, 'stackTrace', {
-      configurable: true,
-      enumerable: true,
-      value: framesStackTrace.map(getPrintedStackFrame),
-      writable: true,
-    });
-
+    this.stackTrace = framesStackTrace.map(getPrintedStackFrame);
     this.utcTimeInMs = utcTimeInMs;
   }
 
