@@ -4,9 +4,13 @@ import {createClientFunction} from '../createClientFunction';
 import {getFullPackConfig} from '../utils/config';
 import {log} from '../utils/log';
 
+import {waitForTimeout} from './waitFor';
+
 import type {ClientFunction, Url, Void} from '../types/internal';
 
 let clientNavigateToUrl: ClientFunction<[url: Url], Void> | undefined;
+
+const defaultCdpNavigationTimeoutInMs = 1_000;
 
 type Options = Readonly<{
   skipLogs?: boolean;
@@ -35,6 +39,8 @@ export const navigateToUrl = async (url: Url, options: Options = {}): Promise<vo
 
   if (enableChromeDevToolsProtocol) {
     const cdpClient = getCdpClient();
+
+    await waitForTimeout(defaultCdpNavigationTimeoutInMs);
 
     await cdpClient.Page.navigate({transitionType: 'address_bar', url});
   } else {
