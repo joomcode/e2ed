@@ -10,7 +10,7 @@ import type {ClientFunction, Url, Void} from '../types/internal';
 
 let clientNavigateToUrl: ClientFunction<[url: Url], Void> | undefined;
 
-const defaultCdpNavigationTimeoutInMs = 1_000;
+const defaultCdpNavigationTimeoutInMs = 2_000;
 
 type Options = Readonly<{
   skipLogs?: boolean;
