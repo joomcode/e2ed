@@ -23,7 +23,7 @@ export const setCustomInspectOnFunction = <Args extends readonly unknown[], Retu
     skipCheckInRuntime: true,
   });
 
-  if (fn[inspect.custom]) {
+  if (fn[inspect.custom] !== undefined) {
     return;
   }
 

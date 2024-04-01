@@ -43,6 +43,6 @@ export class AddUser extends ApiRoute<Params, ApiAddUserRequest, ApiAddUserRespo
   getPath(): string {
     const {delay} = this.routeParams;
 
-    return delay ? `${pathStart}?delay=${delay}` : pathStart;
+    return delay !== undefined ? `${pathStart}?delay=${delay}` : pathStart;
   }
 }

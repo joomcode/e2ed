@@ -14,7 +14,7 @@ const clientGetUsers = createClientFunction(
  */
 export const addUser = createClientFunction(
   (user: UserWorker, delay?: number) =>
-    fetch(`https://reqres.in/api/users${delay ? `?delay=${delay}` : ''}`, {
+    fetch(`https://reqres.in/api/users${delay !== undefined ? `?delay=${delay}` : ''}`, {
       body: JSON.stringify(user),
       headers: {'Content-Type': 'application/json; charset=UTF-8'},
       method: 'POST',

@@ -19,7 +19,7 @@ export const getSetCookieHeaderString = (cookie: Cookie): SetCookieHeaderString 
     `Expires=${expiresDate.toUTCString()}`,
   ];
 
-  if (domain) {
+  if (domain !== undefined) {
     cookieStringParts.push(`domain=${domain}`);
   }
 

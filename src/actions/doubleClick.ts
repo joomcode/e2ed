@@ -17,7 +17,7 @@ export const doubleClick = async (
   {stabilizationInterval, ...options}: Options = {},
 ): Promise<void> => {
   const description = getDescriptionFromSelector(selector);
-  const withDescription = description ? ` with description ${description}` : '';
+  const withDescription = description !== undefined ? ` with description ${description}` : '';
 
   log(
     `Double-click an element${withDescription}`,

@@ -19,7 +19,7 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
   const type =
     typeof maybePayload === 'number'
       ? (maybePayload as LogEventType)
-      : (maybeLogEventType as LogEventType) || LogEventType.Unspecified;
+      : (maybeLogEventType as LogEventType) ?? LogEventType.Unspecified;
 
   const {mapLogPayloadInReport} = getFullPackConfig();
   const payloadInReport = mapLogPayloadInReport(message, payload, type);

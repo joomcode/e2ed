@@ -12,7 +12,7 @@ export const cutVerboseLinesFromPrintedLines = (lines: string[], linesIndex: num
   );
   const stackFramesLine = lines[stackFramesLineIndex];
 
-  if (!stackFramesLine) {
+  if (stackFramesLine === undefined || stackFramesLine === '') {
     return lines.length;
   }
 

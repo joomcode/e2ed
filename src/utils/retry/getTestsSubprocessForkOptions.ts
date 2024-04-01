@@ -9,7 +9,7 @@ import type {ForkOptions} from 'node:child_process';
  * @internal
  */
 export const getTestsSubprocessForkOptions = (): ForkOptions | undefined => {
-  if (!e2edEnvironment.E2ED_DEBUG) {
+  if (e2edEnvironment.E2ED_DEBUG === undefined) {
     return undefined;
   }
 

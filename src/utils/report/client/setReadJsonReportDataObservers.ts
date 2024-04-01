@@ -18,7 +18,7 @@ export function setReadJsonReportDataObservers(): void {
 
   readJsonReportDataObservers.push(scriptsObserver);
 
-  if (document.body) {
+  if (document.body !== undefined) {
     scriptsObserver.observe(document.body, observeChildList);
   } else {
     const htmlObserver = new MutationObserver(() => {

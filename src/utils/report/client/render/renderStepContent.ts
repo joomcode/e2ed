@@ -21,11 +21,12 @@ export function renderStepContent({pathToScreenshotFromReportPage, payload}: Opt
 
   const payloadString = JSON.stringify(payload, null, 2);
   const code = sanitizeHtml`<code>${payloadString}</code>`;
-  const content = pathToScreenshotFromReportPage
-    ? sanitizeHtml`<pre>${code}</pre><img src="${pathToScreenshotFromReportPage}" alt="Screenshot from test">`
-    : code;
+  const content =
+    pathToScreenshotFromReportPage !== undefined
+      ? sanitizeHtml`<pre>${code}</pre><img src="${pathToScreenshotFromReportPage}" alt="Screenshot from test">`
+      : code;
 
-  const contentTag = pathToScreenshotFromReportPage ? 'div' : 'pre';
+  const contentTag = pathToScreenshotFromReportPage !== undefined ? 'div' : 'pre';
 
   return sanitizeHtml`<${contentTag} class="step-expanded-panel step__panel">${content}</${contentTag}>`;
 }

@@ -3,4 +3,4 @@
  * @internal
  */
 export const getPrintedRunLabel = (label: string | undefined): string =>
-  label ? `[${label}]` : '';
+  label !== undefined ? `[${label}]` : '';

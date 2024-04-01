@@ -222,6 +222,9 @@ rules:
   '@typescript-eslint/require-array-sort-compare': error
   '@typescript-eslint/return-await': [error, never]
   '@typescript-eslint/sort-type-constituents': [error, {checkIntersections: false}]
+  '@typescript-eslint/strict-boolean-expressions': [error, {allowNullableBoolean: true}]
+  '@typescript-eslint/switch-exhaustiveness-check':
+    [error, {allowDefaultCaseForExhaustiveSwitch: false, requireDefaultForNonUnion: true}]
 settings:
   import/extensions: [.ts]
   import/resolver: {node: {extensions: [.ts]}}

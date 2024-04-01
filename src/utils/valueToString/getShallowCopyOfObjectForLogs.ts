@@ -12,7 +12,7 @@ export const getShallowCopyOfObjectForLogs = (value: object): Return => {
   for (const key of Reflect.ownKeys(value)) {
     const property = (value as Record<PropertyKey, PrimitiveValue | object>)[key];
 
-    if (property && (typeof property === 'object' || typeof property === 'function')) {
+    if (property != null && (typeof property === 'object' || typeof property === 'function')) {
       try {
         copy[key] = String(property);
       } catch (error) {
