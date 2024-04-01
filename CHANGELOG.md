@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.16.18](https://github.com/joomcode/e2ed/tree/v0.16.18) (2024-04-01)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.17...v0.16.18)
+
+- [Merge pull request #72 from joomcode/fix/e2ed-debug](https://github.com/joomcode/e2ed/commit/8529cf715b988a2b7a365a9ed155ca006e812251) ([uid11](https://github.com/uid11))
+
+  fix: error with comparing `E2ED_DEBUG` with empty string
+
+- [FI-943 fix: error with comparing `E2ED_DEBUG` with empty string](https://github.com/joomcode/e2ed/commit/015212a51676252d1cfcbdb1615bbf714b070df9) ([uid11](https://github.com/uid11))
+
+  chore: turn on more `@typescript-eslint/*` rules
+
 ## [v0.16.17](https://github.com/joomcode/e2ed/tree/v0.16.17) (2024-04-01)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.16...v0.16.17)
