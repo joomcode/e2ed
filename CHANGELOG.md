@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.16.17](https://github.com/joomcode/e2ed/tree/v0.16.17) (2024-04-01)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.16...v0.16.17)
+
+- [Merge pull request #71 from joomcode/fix/cdp-errors](https://github.com/joomcode/e2ed/commit/c037f7ef1a36e3fd45d1451bb87add3b32004086) ([uid11](https://github.com/uid11))
+
+  fix: errors in CDP mode
+
+- [chore: update `devDependencies` (`@types/node`, etc)](https://github.com/joomcode/e2ed/commit/d76c30d2219e18e6edb1951a356f7f4ed293b05f) ([uid11](https://github.com/uid11))
+- [chore: turn on more `@typescript-eslint/*` rules](https://github.com/joomcode/e2ed/commit/b207ee7b32e31de193c8798dc85399f71f843646) ([uid11](https://github.com/uid11))
+- [FI-943 fix: some errors with request hooks on CDP mode](https://github.com/joomcode/e2ed/commit/a873f0cc1d2d6225b01b9d2fcd3579f61c15c035) ([uid11](https://github.com/uid11))
+
 ## [v0.16.16](https://github.com/joomcode/e2ed/tree/v0.16.16) (2024-03-28)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.15...v0.16.16)
