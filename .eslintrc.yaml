@@ -225,6 +225,7 @@ rules:
   '@typescript-eslint/strict-boolean-expressions': [error, {allowNullableBoolean: true}]
   '@typescript-eslint/switch-exhaustiveness-check':
     [error, {allowDefaultCaseForExhaustiveSwitch: false, requireDefaultForNonUnion: true}]
+  '@typescript-eslint/typedef': error
 settings:
   import/extensions: [.ts]
   import/resolver: {node: {extensions: [.ts]}}
