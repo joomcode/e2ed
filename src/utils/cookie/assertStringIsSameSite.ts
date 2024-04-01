@@ -14,7 +14,13 @@ export function assertStringIsSameSite(string: string): asserts string is SameSi
     case 'strict':
       return;
 
-    default:
-      assertValueIsNever(sameSite, 'sameSite is never');
+    // no default
   }
+
+  // @ts-expect-error: unreachable code
+  assertValueIsNever(
+    sameSite satisfies never,
+    'sameSite has invalid value in exhaustiveness check',
+    {sameSite},
+  );
 }

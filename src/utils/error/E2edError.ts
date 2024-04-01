@@ -51,7 +51,7 @@ export class E2edError extends Error {
 
     const constructorArgs: [message: string, options?: {cause: unknown}] = [message];
 
-    if (params?.cause) {
+    if (params?.cause !== undefined) {
       constructorArgs.push({cause: params.cause});
     }
 
@@ -60,7 +60,7 @@ export class E2edError extends Error {
     this.message = message;
     this.params = params;
 
-    if (params?.cause) {
+    if (params?.cause !== undefined) {
       this.cause = params.cause;
     }
 

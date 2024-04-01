@@ -31,7 +31,7 @@ export const generalLog = (
     ? getLogPrefix(testLogParams.prefixEnding, testLogParams.utcTimeInMs)
     : getLogPrefix();
 
-  if (logFileName) {
+  if (logFileName !== null) {
     const messageWithoutStyle = removeStyleFromString(message);
     const payloadInLogFile = mapLogPayloadInLogFile(
       messageWithoutStyle,

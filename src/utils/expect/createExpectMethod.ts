@@ -68,9 +68,10 @@ export const createExpectMethod = (
       const logMessage = `Assert: ${this.description}`;
       const logPayload = {
         assertionArguments: args,
-        description: this.actualValue
-          ? getDescriptionFromSelector(this.actualValue as Selector)
-          : undefined,
+        description:
+          this.actualValue != null
+            ? getDescriptionFromSelector(this.actualValue as Selector)
+            : undefined,
         error: maybeError,
         logEventStatus: maybeError ? LogEventStatus.Failed : LogEventStatus.Passed,
       };

@@ -12,6 +12,7 @@ export const mapLogPayloadInConsole: MapLogPayloadInConsole = (message, payload)
     return payload;
   }
 
+  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
   if (payload?.filePath && payload.successful) {
     return {filePath: payload.filePath, successful: payload.successful};
   }

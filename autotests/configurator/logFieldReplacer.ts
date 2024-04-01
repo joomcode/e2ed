@@ -14,10 +14,10 @@ export const logFieldReplacer: FieldReplacer = (path, value) => {
 
   const key = path.at(-1);
 
-  if (key === 'responseBody' && value && typeof value === 'object') {
+  if (key === 'responseBody' && value !== null && typeof value === 'object') {
     const {payload, ...responseBodyWithoutPayload} = value as {payload?: unknown};
 
-    if (payload && typeof payload === 'object') {
+    if (payload !== null && typeof payload === 'object') {
       const copyOfPayload = getShallowCopyOfObjectForLogs(payload);
       const copyOfResponseBody = getShallowCopyOfObjectForLogs(responseBodyWithoutPayload) as {
         payload?: unknown;

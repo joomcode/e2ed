@@ -10,7 +10,7 @@ export abstract class PageRoute<Params = undefined> extends Route<Params> {
   getOrigin(): Url {
     const {E2ED_ORIGIN} = process.env;
 
-    if (E2ED_ORIGIN) {
+    if (E2ED_ORIGIN !== undefined) {
       return E2ED_ORIGIN.replace(SLASHES_AT_THE_END_REGEXP, '') as Url;
     }
 

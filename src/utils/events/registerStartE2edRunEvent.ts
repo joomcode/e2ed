@@ -43,7 +43,7 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
 
   updateConfig(fullPackConfig, startInfo);
 
-  if (errorSettingDotEnv) {
+  if (errorSettingDotEnv !== undefined) {
     generalLog('Caught an error on setting environment variables from `variables.env` file', {
       errorSettingDotEnv,
     });

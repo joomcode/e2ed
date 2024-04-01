@@ -4,7 +4,7 @@ import v8FlagsFilter from 'bin-v8-flags-filter';
 
 import {e2edEnvironment, INSTALLED_E2ED_DIRECTORY_PATH} from '../constants/internal';
 
-if (e2edEnvironment.E2ED_DEBUG) {
+if (e2edEnvironment.E2ED_DEBUG !== undefined) {
   process.argv.push('--inspect-brk');
 }
 

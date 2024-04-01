@@ -21,7 +21,7 @@ export const clientFunctionWrapper = <Args extends readonly unknown[], R>(
   });
 
   const getErrorMessage = (message: string, error: unknown): string => {
-    const stack = error ? String((error as Error).stack ?? '') : '';
+    const stack = error != null ? String((error as Error).stack ?? '') : '';
 
     return `${message} on calling ${printedClientFunctionName}: ${String(error ?? '')}\n${stack}`;
   };
