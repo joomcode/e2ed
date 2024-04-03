@@ -87,11 +87,13 @@ export const request = async <
   for (let retryIndex = 1; retryIndex <= maxRetriesCount; retryIndex += 1) {
     const retry = `${retryIndex}/${maxRetriesCount}`;
 
+    setReadonlyProperty(logParams, 'retry', retry);
+
     try {
       const {fullLogParams, response} = await oneTryOfRequest<SomeRequest, SomeResponse>({
         isResponseBodyInJsonFormat,
         libRequest,
-        logParams: {...logParams, retry},
+        logParams,
         options,
         requestBody,
         requestBodyAsString,
@@ -114,12 +116,14 @@ export const request = async <
       if (needRetry === false) {
         return response;
       }
+
+      setReadonlyProperty(logParams, 'cause', 'isNeedRetry returns true');
     } catch (cause) {
       setReadonlyProperty(logParams, 'cause', cause);
 
       log(
         `An error was received during the request to ${url}`,
-        {...logParams, logEventStatus: LogEventStatus.Failed, retry},
+        {...logParams, logEventStatus: LogEventStatus.Failed},
         LogEventType.InternalUtil,
       );
     }
