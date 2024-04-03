@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.16.19](https://github.com/joomcode/e2ed/tree/v0.16.19) (2024-04-03)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.18...v0.16.19)
+
+- [Merge pull request #73 from joomcode/fix/disable-service-workers-on-cdp](https://github.com/joomcode/e2ed/commit/ab1ba9de58f9164d47e7b8eb65b788269a171545) ([uid11](https://github.com/uid11))
+
+  fix: disable service workers on CDP mode
+
+- [chore: update `devDependencies` (`@types/node`, etc)](https://github.com/joomcode/e2ed/commit/756d32f727dd382bc28f1eebc61c69cdabe492fd) ([uid11](https://github.com/uid11))
+- [FI-943 fix: disable Service Workers on CDP mode](https://github.com/joomcode/e2ed/commit/3d5a6c90f0fa01132e5a305b60289f7c72fa58d2) ([uid11](https://github.com/uid11))
+
+  fix: add `retry` field to error params in `request` util
+
 ## [v0.16.18](https://github.com/joomcode/e2ed/tree/v0.16.18) (2024-04-01)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.17...v0.16.18)
