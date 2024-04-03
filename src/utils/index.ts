@@ -49,7 +49,6 @@ export {
   getEquivalentHeadersNames,
   getHeadersFromHeaderEntries,
   getHeaderValue,
-  SetHeadersRequestHook,
 } from './requestHooks';
 export {getRunLabelObject} from './runLabel';
 export {getDescriptionFromSelector} from './selectors';

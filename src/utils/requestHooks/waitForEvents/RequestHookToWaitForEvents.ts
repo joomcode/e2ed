@@ -4,8 +4,6 @@ import {
 } from '../../../constants/internal';
 import {getCdpClient} from '../../../context/cdpClient';
 
-import {getFullPackConfig} from '../../config';
-
 import {addRedirectToWaitForEventsState} from '../addRedirectToWaitForEventsState';
 import {removeNotCompleteRequestsByUrl} from '../removeNotCompleteRequestsByUrl';
 import {RequestHookWithEvents} from '../RequestHookWithEvents';
@@ -38,11 +36,11 @@ export class RequestHookToWaitForEvents extends RequestHookWithEvents {
 
     this.waitForEventsState = waitForEventsState;
 
-    if (!getFullPackConfig().enableChromeDevToolsProtocol) {
+    const cdpClient = getCdpClient();
+
+    if (cdpClient === undefined) {
       return;
     }
-
-    const cdpClient = getCdpClient();
 
     cdpClient.on('Network.requestWillBeSent', ({redirectResponse}) => {
       if (redirectResponse) {

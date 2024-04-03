@@ -5,6 +5,7 @@ export {getHeaderValue} from './getHeaderValue';
 export {getMainRequestOptions} from './getMainRequestOptions';
 /** @internal */
 export {getRequestFromRequestOptions} from './getRequestFromRequestOptions';
-export {SetHeadersRequestHook} from './SetHeadersRequestHook';
+/** @internal */
+export {SetHeadersRequestHook} from './setHeaders';
 /** @internal */
 export {RequestHookToWaitForEvents} from './waitForEvents';

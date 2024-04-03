@@ -39,6 +39,7 @@ const getTestRunCallbackOptions = <Args extends readonly unknown[], Result, This
 
 /**
  * Abstract `RequestHook` class with request/response events.
+ * @internal
  */
 abstract class RequestHookWithEvents extends RequestHook {
   constructor(...args: unknown[]) {
@@ -112,4 +113,5 @@ RequestHookWithEvents.prototype.resetMethods = wrapInTestRunTracker(
   RequestHookWithEvents.prototype.resetMethods,
 );
 
+/** @internal */
 export {RequestHookWithEvents};

@@ -1,8 +1,6 @@
 import {getCdpClient} from '../../context/cdpClient';
 import {createClientFunction} from '../../createClientFunction';
 
-import {getFullPackConfig} from '../config';
-
 import type {ClientFunction} from '../../types/internal';
 
 let clientReloadDocument: ClientFunction | undefined;
@@ -11,11 +9,9 @@ let clientReloadDocument: ClientFunction | undefined;
  * Reloads current document.
  */
 export const reloadDocument = (): Promise<void> => {
-  const {enableChromeDevToolsProtocol} = getFullPackConfig();
+  const cdpClient = getCdpClient();
 
-  if (enableChromeDevToolsProtocol) {
-    const cdpClient = getCdpClient();
-
+  if (cdpClient !== undefined) {
     return cdpClient.Page.reload({});
   }
 
