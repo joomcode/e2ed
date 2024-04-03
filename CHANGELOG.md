@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.16.20](https://github.com/joomcode/e2ed/tree/v0.16.20) (2024-04-03)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.19...v0.16.20)
+
+- [Merge pull request #74 from joomcode/fix/cdp-in-reload-page-action](https://github.com/joomcode/e2ed/commit/814e2951328ae478b0974920987922fa4aa6ff3c) ([uid11](https://github.com/uid11))
+
+  fix: using CDP in `reloadPage` action
+
+- [FI-943 fix: use CDP only when `cdpClient` is defined](https://github.com/joomcode/e2ed/commit/5edd629b724af310ca19f6da24ecb5591bac8fd9) ([uid11](https://github.com/uid11))
+
+  fix: mark `RequestHookWithEvents` as internal class
+
+  refactor: split `SetHeadersRequestHook` into several modules
+
 ## [v0.16.19](https://github.com/joomcode/e2ed/tree/v0.16.19) (2024-04-03)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.18...v0.16.19)
