@@ -14,6 +14,8 @@ export const processTestController = (testController: TestController): void => {
   if (getFullPackConfig().enableChromeDevToolsProtocol) {
     const cdpClient = getCdpClientOfTestRun(testController);
 
+    void cdpClient.ServiceWorker.enable();
+
     setCdpClient(cdpClient);
   }
 

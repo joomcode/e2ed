@@ -1,16 +1,14 @@
+import {URL} from 'node:url';
+
 import {LogEventType} from '../constants/internal';
 import {getCdpClient} from '../context/cdpClient';
 import {createClientFunction} from '../createClientFunction';
 import {getFullPackConfig} from '../utils/config';
 import {log} from '../utils/log';
 
-import {waitForTimeout} from './waitFor';
-
 import type {ClientFunction, Url, Void} from '../types/internal';
 
 let clientNavigateToUrl: ClientFunction<[url: Url], Void> | undefined;
-
-const defaultCdpNavigationTimeoutInMs = 2_000;
 
 type Options = Readonly<{
   skipLogs?: boolean;
@@ -40,9 +38,12 @@ export const navigateToUrl = async (url: Url, options: Options = {}): Promise<vo
   if (enableChromeDevToolsProtocol) {
     const cdpClient = getCdpClient();
 
-    await waitForTimeout(defaultCdpNavigationTimeoutInMs);
+    const {origin} = new URL(url);
 
-    await cdpClient.Page.navigate({transitionType: 'address_bar', url});
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    await cdpClient.ServiceWorker.unregister({scopeURL: origin});
+
+    await cdpClient.Page.navigate({transitionType: 'typed', url});
   } else {
     await clientNavigateToUrl(url);
   }
