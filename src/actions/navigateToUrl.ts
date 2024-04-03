@@ -3,7 +3,6 @@ import {URL} from 'node:url';
 import {LogEventType} from '../constants/internal';
 import {getCdpClient} from '../context/cdpClient';
 import {createClientFunction} from '../createClientFunction';
-import {getFullPackConfig} from '../utils/config';
 import {log} from '../utils/log';
 
 import type {ClientFunction, Url, Void} from '../types/internal';
@@ -33,11 +32,9 @@ export const navigateToUrl = async (url: Url, options: Options = {}): Promise<vo
     log(`Will navigate to the url ${url}`, LogEventType.InternalAction);
   }
 
-  const {enableChromeDevToolsProtocol} = getFullPackConfig();
+  const cdpClient = getCdpClient();
 
-  if (enableChromeDevToolsProtocol) {
-    const cdpClient = getCdpClient();
-
+  if (cdpClient !== undefined) {
     const {origin} = new URL(url);
 
     // eslint-disable-next-line @typescript-eslint/naming-convention

@@ -15,12 +15,14 @@ export const reloadPage = async (page: InstanceType<AnyPageClassType>): Promise<
 
   const cdpClient = getCdpClient();
 
-  const url = await getDocumentUrl();
+  if (cdpClient !== undefined) {
+    const url = await getDocumentUrl();
 
-  const {origin} = new URL(url);
+    const {origin} = new URL(url);
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  await cdpClient.ServiceWorker.unregister({scopeURL: origin});
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    await cdpClient.ServiceWorker.unregister({scopeURL: origin});
+  }
 
   await page.beforeReloadPage?.();
 
