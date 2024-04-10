@@ -1,4 +1,4 @@
-import {createLocator, type Locator} from 'create-locator';
+import {createRootLocator, type Locator} from 'create-locator';
 
 import {e2edEnvironment} from '../../../constants/internal';
 
@@ -12,7 +12,7 @@ const isProduction = e2edEnvironment.E2ED_ORIGIN !== 'https://google.com';
 /**
  * `rootLocator` of `E2edReportExample` page.
  */
-export const rootLocator = createLocator<RootLocator>('app', {isProduction});
+export const rootLocator = createRootLocator<RootLocator>('app', {isProduction});
 
 /**
  * `RootLocator` of `E2edReportExample` page.

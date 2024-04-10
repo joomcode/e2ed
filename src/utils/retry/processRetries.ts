@@ -20,7 +20,7 @@ export const processRetries = async (retriesState: RetriesState): Promise<void> 
 
   for (
     ;
-    retriesState.isLastRetrySuccessful !== true &&
+    !retriesState.isLastRetrySuccessful &&
     retriesState.retryIndex <= maxRetriesCount &&
     endE2edReason === undefined;
     setReadonlyProperty(retriesState, 'retryIndex', retriesState.retryIndex + 1)
