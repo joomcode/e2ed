@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.16.21](https://github.com/joomcode/e2ed/tree/v0.16.21) (2024-04-10)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.20...v0.16.21)
+
+- [Merge pull request #75 from joomcode/fix/retries-in-cdp-mode](https://github.com/joomcode/e2ed/commit/0555eb61669e847047ed40fd7263921c7bcfe95e) ([uid11](https://github.com/uid11))
+
+  fix: logic of ending of retries in CDP mode
+
+- [chore: update `devDependencies` (`@types/node`, `typescript`, etc)](https://github.com/joomcode/e2ed/commit/10dd9fb2f9f5cb90155b7491a6991a8d83b7a1c2) ([uid11](https://github.com/uid11))
+
+  chore: update `create-locator` to version 0.0.20 with new API
+
+- [FI-1257 fix: `isLastRetrySuccessful` flag in CDP mode](https://github.com/joomcode/e2ed/commit/cce066f08e06d38f19186516f3adff7844871e3a) ([uid11](https://github.com/uid11))
+
 ## [v0.16.20](https://github.com/joomcode/e2ed/tree/v0.16.20) (2024-04-03)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.19...v0.16.20)
