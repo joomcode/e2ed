@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 
-import {type CreateLocator, createLocator, type Locator, type Node} from 'e2ed/createLocator';
+import {type CreateLocator, createRootLocator, type Locator, type Node} from 'e2ed/createLocator';
 import {createPageObjectsFromMultiLocator} from 'e2ed/utils';
 
 import type {IsEqual, Selector, Void} from 'e2ed/types';
@@ -9,7 +9,7 @@ type FooLocator = Locator<{qux: Void}, {parameter: 'baz'}>;
 
 type RootLocator = Locator<{foo: Node<{bar: FooLocator}>}>;
 
-const rootLocator = createLocator<RootLocator, Selector>('app', {
+const rootLocator = createRootLocator<RootLocator, Selector>('app', {
   mapAttributesChain: () => ({}) as unknown as Selector,
 });
 

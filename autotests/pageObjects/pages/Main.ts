@@ -1,7 +1,7 @@
 import {Input} from 'autotests/pageObjects/components';
 import {Main as MainRoute} from 'autotests/routes/pageRoutes';
 import {createSelectorByCss} from 'autotests/selectors';
-import {createLocator, type Locator} from 'create-locator';
+import {createRootLocator, type Locator} from 'create-locator';
 import {Page} from 'e2ed';
 import {waitForAllRequestsComplete, waitForInterfaceStabilization} from 'e2ed/actions';
 import {getCssSelectorFromAttributesChain} from 'e2ed/createLocator';
@@ -15,7 +15,7 @@ type CustomPageParams = Partial<RouteParams> | undefined;
 
 type MainLocator = Locator<{header: {}}>;
 
-const mainPageLocator = createLocator<MainLocator, Selector>('google', {
+const mainPageLocator = createRootLocator<MainLocator, Selector>('google', {
   mapAttributesChain: (attributesChain) => {
     const cssSelector = getCssSelectorFromAttributesChain(attributesChain);
 
