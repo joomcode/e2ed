@@ -34,6 +34,7 @@ export type ApiMockFunction<
  */
 export type ApiMockState = Readonly<{
   apiMock: Inner.RequestMock | undefined;
+  isMocksEnabled: boolean;
   optionsByRoute: Map<ApiRouteClassTypeWithGetParamsFromUrl, MockOptions> | undefined;
   optionsWithRouteByUrl: Record<Url, MockOptionsWithRoute | undefined>;
 }>;

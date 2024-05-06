@@ -2,8 +2,8 @@ import {LogEventType, OK_STATUS_CODE} from '../../constants/internal';
 
 import {assertValueIsDefined} from '../asserts';
 import {cloneWithoutUndefinedProperties} from '../clone';
+import {getBodyAsString, getContentJsonHeaders} from '../http';
 import {log} from '../log';
-import {getBodyAsString, getContentJsonHeaders} from '../request';
 import {getMainRequestOptions, getRequestFromRequestOptions} from '../requestHooks';
 
 import type {Inner} from 'testcafe-without-typecheck';

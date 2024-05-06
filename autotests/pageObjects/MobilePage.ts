@@ -1,8 +1,8 @@
 import {Page} from 'e2ed';
 
-import type {MobileDevice} from 'autotests/types';
+import type {MobileDeviceModel} from 'autotests/types';
 
-type PageParams<CustomPageParams> = CustomPageParams & Readonly<{mobileDevice?: MobileDevice}>;
+type PageParams<CustomPageParams> = CustomPageParams & Readonly<{mobileDevice?: MobileDeviceModel}>;
 
 /**
  * Abstract mobile page.
@@ -11,5 +11,5 @@ export abstract class MobilePage<CustomPageParams> extends Page<PageParams<Custo
   /**
    * Type of mobile device.
    */
-  abstract readonly mobileDevice: MobileDevice;
+  abstract readonly mobileDevice: MobileDeviceModel;
 }

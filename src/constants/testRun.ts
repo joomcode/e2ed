@@ -60,9 +60,9 @@ export const TEST_RUN_STATUS_SYMBOLS = {
   [TestRunStatus.Failed]: '×',
   [TestRunStatus.Unknown]: '?',
   [TestRunStatus.Passed]: '✓',
-  [TestRunStatus.Skipped]: '⊘',
+  [TestRunStatus.Skipped]: '−',
   [TestRunStatus.Manual]: '⚒',
-  [TestRunStatus.Broken]: '!',
+  [TestRunStatus.Broken]: '⊘',
 };
 
 /**

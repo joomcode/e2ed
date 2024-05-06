@@ -1,17 +1,9 @@
-import type {ApiDevice, ApiDeviceParams} from 'autotests/types';
-import type {Method, Query, Request, Response, Url} from 'e2ed/types';
+import type {ApiDeviceParams, ApiProduct} from 'autotests/types';
+import type {Query, Request, Response} from 'e2ed/types';
 
 type RequestBody = ApiDeviceParams;
 
-type ResponseBody = Readonly<{
-  id: number;
-  method: Method;
-  output: string;
-  payload: ApiDevice;
-  query: Query;
-  url: Url;
-}>;
-
+type ResponseBody = ApiProduct;
 /**
  * API request for create device endpoint.
  */

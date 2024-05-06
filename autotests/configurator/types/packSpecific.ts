@@ -14,6 +14,7 @@ export type GetLogContext = PackSpecificTypes['GetLogContext'];
 export type GetMainTestRunParams = PackSpecificTypes['GetMainTestRunParams'];
 export type GetTestRunHash = PackSpecificTypes['GetTestRunHash'];
 export type FilterTestsIntoPack = PackSpecificTypes['FilterTestsIntoPack'];
+export type FullMocks = PackSpecificTypes['FullMocks'];
 export type IsTestSkipped = PackSpecificTypes['IsTestSkipped'];
 export type LiteReport = PackSpecificTypes['LiteReport'];
 export type MapBackendResponseErrorToLog = PackSpecificTypes['MapBackendResponseErrorToLog'];

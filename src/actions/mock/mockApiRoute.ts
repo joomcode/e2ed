@@ -2,6 +2,7 @@ import {RequestMock} from 'testcafe-without-typecheck';
 
 import {LogEventType} from '../../constants/internal';
 import {getApiMockState} from '../../context/apiMockState';
+import {getFullMocksState} from '../../context/fullMocks';
 import {testController} from '../../testController';
 import {assertValueIsDefined} from '../../utils/asserts';
 import {setCustomInspectOnFunction} from '../../utils/fn';
@@ -35,6 +36,17 @@ export const mockApiRoute = async <
   setCustomInspectOnFunction(apiMockFunction);
 
   const apiMockState = getApiMockState();
+
+  if (!apiMockState.isMocksEnabled) {
+    return;
+  }
+
+  const fullMocksState = getFullMocksState();
+
+  if (fullMocksState?.appliedMocks !== undefined) {
+    setReadonlyProperty(apiMockState, 'isMocksEnabled', false);
+  }
+
   let {optionsByRoute} = apiMockState;
 
   if (optionsByRoute === undefined) {

@@ -1,4 +1,5 @@
 import type {AnyPack, AnyPackParameters, FullPackConfigByPack, GetPackParameters} from '../config';
+import type {FullMocksConfig} from '../fullMocks';
 import type {MapBackendResponseToLog, MapLogPayload, MapLogPayloadInReport} from '../log';
 import type {LiteReport} from '../report';
 
@@ -16,6 +17,7 @@ export type CreatePackSpecificTypes<
   DoAfterPack: FullPackConfigByPack<Pack>['doAfterPack'][number];
   DoBeforePack: FullPackConfigByPack<Pack>['doBeforePack'][number];
   FilterTestsIntoPack: Pack['filterTestsIntoPack'];
+  FullMocks: FullMocksConfig<PackParameters['TestMeta']>;
   GetFullPackConfig: () => FullPackConfigByPack<Pack>;
   GetLogContext: Hooks['getLogContext'];
   GetMainTestRunParams: Hooks['getMainTestRunParams'];

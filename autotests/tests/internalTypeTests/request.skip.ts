@@ -3,10 +3,10 @@ import {Main} from 'autotests/routes/pageRoutes';
 import {getRandomId} from 'e2ed/generators';
 import {request} from 'e2ed/utils';
 
-import type {ApiDevice, ApiDeviceParams, ApiUserParams, MobileDevice} from 'autotests/types';
+import type {ApiDevice, ApiDeviceParams, ApiUserParams, MobileDeviceModel} from 'autotests/types';
 
 declare const apiUserParams: ApiUserParams;
-declare const model: MobileDevice;
+declare const model: MobileDeviceModel;
 declare const apiDeviceParams: ApiDeviceParams;
 
 // @ts-expect-error: request require API route as first argument

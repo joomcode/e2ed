@@ -286,6 +286,8 @@ If `true`, page fires `touch` events when test interact with the page (instead o
 filters tests (tasks) by their static options —
 only those tests for which the function returned `true` get into the pack.
 
+`fullMocks: FullMocks | null`: functions that specify the "full mocks" functionality.
+
 `liteReportFileName: string | null`: the name of the file under which, after running the tests,
 the lite JSON report will be saved in the `autotests/reports` directory, for example, `lite-report.json`.
 If `null`, the lite report will not be saved.

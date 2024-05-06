@@ -20,7 +20,8 @@ export const runPackWithRetries = async (): Promise<void> => {
     maxRetriesCount: 1,
     retryIndex: 1,
     startLastRetryTimeInMs: 0 as UtcTimeInMs,
-    successfulTestRunNamesHash: {},
+    successfulTestRunNamesHash: Object.create(null) as {},
+    visitedTestNamesHash: Object.create(null) as {},
     visitedTestRunEventsFileName: [],
   };
 

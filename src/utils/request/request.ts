@@ -1,28 +1,21 @@
 import {request as httpRequest} from 'node:http';
 import {request as httpsRequest} from 'node:https';
-import {URL} from 'node:url';
 
 import {BAD_REQUEST_STATUS_CODE, LogEventStatus, LogEventType} from '../../constants/internal';
+import {getFullMocksState} from '../../context/fullMocks';
 
 import {E2edError} from '../error';
-import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
 import {setReadonlyProperty} from '../setReadonlyProperty';
 import {wrapInTestRunTracker} from '../testRun';
 
-import {getBodyAsString} from './getBodyAsString';
-import {getContentJsonHeaders} from './getContentJsonHeaders';
-import {oneTryOfRequest} from './oneTryOfRequest';
+import {getFullMocksResponse} from './getFullMocksResponse';
+import {getPreparedOptions} from './getPreparedOptions';
+import {getResponse} from './getResponse';
 
-import type {
-  ApiRouteClassType,
-  Request,
-  Response,
-  ResponseWithRequest,
-  ZeroOrOneArg,
-} from '../../types/internal';
+import type {ApiRouteClassType, Request, Response, ResponseWithRequest} from '../../types/internal';
 
-import type {LogParams, Options} from './types';
+import type {Options} from './types';
 
 const defaultIsNeedRetry = <SomeResponse extends Response>({statusCode}: SomeResponse): boolean =>
   statusCode >= BAD_REQUEST_STATUS_CODE;
@@ -44,45 +37,27 @@ export const request = async <
     requestBody,
     routeParams,
     timeout = 30_000,
-  }: Options<RouteParams, SomeRequest, SomeResponse> = {} as unknown as Options<
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  }: Options<RouteParams, SomeRequest, SomeResponse> = {} as Options<
     RouteParams,
     SomeRequest,
     SomeResponse
   >,
 ): Promise<ResponseWithRequest<SomeResponse, SomeRequest>> => {
-  const route = new Route(...([routeParams] as ZeroOrOneArg<RouteParams>));
+  const {isResponseBodyInJsonFormat, logParams, options, requestBodyAsString, url, urlObject} =
+    getPreparedOptions(Route, {requestBody, requestHeaders, routeParams, timeout});
 
-  const method = route.getMethod();
-  const isRequestBodyInJsonFormat = route.getIsRequestBodyInJsonFormat();
-  const isResponseBodyInJsonFormat = route.getIsResponseBodyInJsonFormat();
-  const url = route.getUrl();
+  const fullMocksState = getFullMocksState();
 
-  const urlObject = new URL(url);
+  if (fullMocksState?.appliedMocks !== undefined) {
+    const response = getFullMocksResponse(fullMocksState, logParams, urlObject);
 
-  const timeoutWithUnits = getDurationWithUnits(timeout);
-  const logParams: LogParams = {
-    cause: undefined,
-    method,
-    requestBody,
-    requestHeaders,
-    retry: undefined,
-    timeoutWithUnits,
-    url,
-  };
+    return response as ResponseWithRequest<SomeResponse, SomeRequest>;
+  }
 
-  const requestBodyAsString = getBodyAsString(requestBody, isRequestBodyInJsonFormat);
-  const options = {
-    method,
-    requestHeaders: {
-      ...getContentJsonHeaders(requestBodyAsString),
-      ...requestHeaders,
-    },
-  };
   const libRequest = wrapInTestRunTracker(
     urlObject.protocol === 'http:' ? httpRequest : httpsRequest,
   );
-
-  setReadonlyProperty(logParams, 'requestHeaders', requestHeaders);
 
   for (let retryIndex = 1; retryIndex <= maxRetriesCount; retryIndex += 1) {
     const retry = `${retryIndex}/${maxRetriesCount}`;
@@ -90,7 +65,8 @@ export const request = async <
     setReadonlyProperty(logParams, 'retry', retry);
 
     try {
-      const {fullLogParams, response} = await oneTryOfRequest<SomeRequest, SomeResponse>({
+      const response = await getResponse({
+        isNeedRetry,
         isResponseBodyInJsonFormat,
         libRequest,
         logParams,
@@ -98,22 +74,11 @@ export const request = async <
         requestBody,
         requestBodyAsString,
         timeout,
+        url,
         urlObject,
       });
-      const needRetry = await isNeedRetry(response);
 
-      log(
-        `Got a response to the request to ${url}`,
-        {
-          ...fullLogParams,
-          logEventStatus: needRetry ? LogEventStatus.Failed : LogEventStatus.Passed,
-          needRetry,
-          response,
-        },
-        LogEventType.InternalUtil,
-      );
-
-      if (needRetry === false) {
+      if (response !== undefined) {
         return response;
       }
 

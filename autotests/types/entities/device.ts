@@ -11,7 +11,7 @@ export type DeviceId = Brand<string, 'DeviceId'>;
 export type ApiDeviceParams = Readonly<{
   cookies: readonly string[];
   input: number;
-  model: MobileDevice;
+  model: MobileDeviceModel;
   version: string;
 }>;
 
@@ -33,4 +33,4 @@ export type ApiDevice = Device;
 /**
  * Mobile device type.
  */
-export type MobileDevice = 'iphone' | 'samsung';
+export type MobileDeviceModel = 'iphone' | 'samsung';

@@ -9,6 +9,13 @@ export type {BrowserJsError, E2edPrintedFields} from './errors';
 export type {LogEvent, Onlog, TestRunEvent} from './events';
 export type {Fn, MergeFunctions} from './fn';
 export type {
+  FullMocksConfig,
+  FullMocksResponse,
+  FullMocksTestId,
+  RequestKind,
+  TestFullMocks,
+} from './fullMocks';
+export type {
   Cookie,
   CookieHeaderString,
   HeaderEntry,
