@@ -4,8 +4,9 @@ export type {
   Device,
   DeviceId,
   DeviceParams,
-  MobileDevice,
+  MobileDeviceModel,
 } from './device';
+export type {ApiProduct, Product, ProductId} from './product';
 export type {
   ApiUser,
   ApiUserParams,

@@ -6,7 +6,7 @@ import type {FullPackConfig, StartInfo} from '../../types/internal';
  */
 export const updateConfig = (fullPackConfig: FullPackConfig, startInfo: StartInfo): void => {
   for (const field of Object.keys(fullPackConfig) as (keyof FullPackConfig)[]) {
-    if (field === 'doAfterPack' || field === 'doBeforePack') {
+    if (field === 'doAfterPack' || field === 'doBeforePack' || field === 'fullMocks') {
       continue;
     }
 

@@ -1,8 +1,8 @@
 /**
  * @file Pack file (file with configuration of pack).
  * Do not import anything (from `utils`, etc) into this file other than
- * the types and values from `../configurator`, `e2ed/configurator` or other packs
- * (because the pack is compiled separately from the tests themselves
+ * the types and values from `../configurator`, `e2ed/configurator`, `e2ed/constants`
+ * or other packs (because the pack is compiled separately from the tests themselves
  * and has separate TypeScript scope).
  */
 
@@ -11,6 +11,7 @@ import {isLocalRun} from 'e2ed/configurator';
 import {
   doAfterPack,
   doBeforePack,
+  fullMocks,
   mapBackendResponseErrorToLog,
   mapBackendResponseToLog,
   mapLogPayloadInConsole,
@@ -56,6 +57,7 @@ export const pack: Pack = {
   enableMobileDeviceMode: false,
   enableTouchEventEmulation: false,
   filterTestsIntoPack,
+  fullMocks,
   liteReportFileName: 'lite-report.json',
   logFileName: 'pack-logs.log',
   mapBackendResponseErrorToLog,

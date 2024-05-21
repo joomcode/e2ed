@@ -1,8 +1,12 @@
 import {ApiRoute} from 'autotests/routes';
 
-import type {ApiCreateDeviceRequest, ApiCreateDeviceResponse, MobileDevice} from 'autotests/types';
+import type {
+  ApiCreateDeviceRequest,
+  ApiCreateDeviceResponse,
+  MobileDeviceModel,
+} from 'autotests/types';
 
-type Params = Readonly<{model: MobileDevice}>;
+type Params = Readonly<{model: MobileDeviceModel}>;
 
 /**
  * Test API route for creating a device.

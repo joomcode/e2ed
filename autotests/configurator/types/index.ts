@@ -2,6 +2,7 @@ export type {
   DoAfterPack,
   DoBeforePack,
   FilterTestsIntoPack,
+  FullMocks,
   GetFullPackConfig,
   GetLogContext,
   GetMainTestRunParams,

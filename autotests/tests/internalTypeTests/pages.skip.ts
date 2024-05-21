@@ -6,7 +6,7 @@ import {Main, Search, Services} from 'autotests/pageObjects/pages';
 import {navigateToPage} from 'e2ed/actions';
 
 /**
- * PageParams = Readonly<{mobileDevice?: MobileDevice, query?: string}>
+ * PageParams = Readonly<{mobileDevice?: MobileDeviceModel, query?: string}>
  */
 
 // ok

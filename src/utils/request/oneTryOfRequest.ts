@@ -1,5 +1,3 @@
-import {parse} from 'node:querystring';
-
 import {BAD_REQUEST_STATUS_CODE, LogEventType} from '../../constants/internal';
 import {getRandomId} from '../../generators/internal';
 
@@ -9,6 +7,8 @@ import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 import {wrapInTestRunTracker} from '../testRun';
+
+import {getQuery} from './getQuery';
 
 import type {
   Request,
@@ -80,12 +80,14 @@ export const oneTryOfRequest = <SomeRequest extends Request, SomeResponse extend
             ? parseMaybeEmptyValueAsJson(responseBodyAsString)
             : responseBodyAsString;
 
+          const url = (res.url !== undefined && res.url !== '' ? res.url : urlObject.href) as Url;
+
           const request = {
             method: options.method,
-            query: parse(urlObject.search ? urlObject.search.slice(1) : ''),
+            query: getQuery(urlObject.search),
             requestBody,
             requestHeaders,
-            url: (res.url ?? urlObject.href) as Url,
+            url,
             utcTimeInMs,
           } satisfies RequestWithUtcTimeInMs as unknown as RequestWithUtcTimeInMs<SomeRequest>;
 

@@ -1,9 +1,10 @@
 import {test} from 'autotests';
+import {addProduct} from 'autotests/entities';
 import {CreateProduct as CreateProductRoute} from 'autotests/routes/apiRoutes';
-import {createClientFunction, expect} from 'e2ed';
+import {expect} from 'e2ed';
 import {mockApiRoute, unmockApiRoute} from 'e2ed/actions';
 
-import type {ApiCreateDeviceResponse, DeviceId} from 'autotests/types';
+import type {DeviceId, Product, ProductId} from 'autotests/types';
 import type {Url} from 'e2ed/types';
 
 test(
@@ -23,42 +24,45 @@ test(
       return {responseBody};
     });
 
-    const getMockedProduct = createClientFunction(
-      () =>
-        fetch('https://reqres.in/api/product/135865?size=13', {
-          body: JSON.stringify({cookies: [], input: 17, model: 'samsung', version: '12'}),
-          headers: {'Content-Type': 'application/json; charset=UTF-8'},
-          method: 'POST',
-        }).then((res) => res.json() as Promise<ApiCreateDeviceResponse['responseBody']>),
-      {name: 'getMockedProduct', timeout: 2_000},
-    );
+    const productId = 135865;
+    const product: Product = {
+      id: productId as ProductId,
+      input: 17,
+      model: 'samsung',
+      size: '13',
+      version: '12',
+    };
 
-    const mockedProduct = await getMockedProduct();
+    const mockedProduct = await addProduct(product);
 
-    const fetchUrl = 'https://reqres.in/api/product/135865?size=13' as Url;
+    const fetchUrl = `https://reqres.in/api/product/${productId}?size=${product.size}` as Url;
 
     const productRouteParams = CreateProductRoute.getParamsFromUrl(fetchUrl);
 
     const productRouteFromUrl = new CreateProductRoute(productRouteParams);
 
+    await expect(productRouteFromUrl.routeParams.id, 'route has correct params').eql(
+      productId as ProductId,
+    );
+
     await expect(mockedProduct, 'mocked API returns correct result').eql({
       id: productRouteFromUrl.routeParams.id,
       method: productRouteFromUrl.getMethod(),
-      output: '17',
+      output: String(product.input),
       payload: {
         cookies: [],
         id: String(productRouteFromUrl.routeParams.id) as DeviceId,
-        input: 17,
-        model: 'samsung',
-        version: '12',
+        input: product.input,
+        model: product.model,
+        version: product.version,
       },
-      query: {size: '13'},
+      query: {size: product.size},
       url: fetchUrl,
     });
 
     await unmockApiRoute(CreateProductRoute);
 
-    const newMockedProduct = (await getMockedProduct().catch(() => undefined)) ?? {createdAt: ''};
+    const newMockedProduct = await addProduct(product);
 
     await expect(
       'createdAt' in newMockedProduct,

@@ -17,6 +17,7 @@ type Return = Readonly<{
   configCompileTimeWithUnits: string;
 }>;
 
+const inNotUnderRootDir = "is not under 'rootDir'";
 const unusedTsExceptErrorMessage = "Unused '@ts-expect-error' directive.";
 
 /**
@@ -43,7 +44,7 @@ export const compilePack = (): Return => {
   allDiagnostics.forEach((diagnostic) => {
     const message = flattenDiagnosticMessageText(diagnostic.messageText, '\n');
 
-    if (message === unusedTsExceptErrorMessage) {
+    if (message === unusedTsExceptErrorMessage || message.includes(inNotUnderRootDir)) {
       return;
     }
 

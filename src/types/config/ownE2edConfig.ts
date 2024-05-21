@@ -1,3 +1,4 @@
+import type {FullMocksConfig} from '../fullMocks';
 import type {MapBackendResponseToLog, MapLogPayload, MapLogPayloadInReport} from '../log';
 import type {MaybePromise} from '../promise';
 import type {LiteReport} from '../report';
@@ -79,6 +80,11 @@ export type OwnE2edConfig<
    * only those tests for which the function returned `true` get into the pack.
    */
   filterTestsIntoPack: (this: void, testStaticOptions: TestStaticOptions<TestMeta>) => boolean;
+
+  /**
+   * Functions that specify the "full mocks" functionality.
+   */
+  fullMocks: FullMocksConfig<TestMeta> | null;
 
   /**
    * The name of the file under which, after running the tests,

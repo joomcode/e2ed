@@ -3,10 +3,10 @@ import {URL} from 'node:url';
 import {ApiRoute} from 'autotests/routes';
 import {assertValueIsTrue} from 'e2ed/utils';
 
-import type {ApiCreateProductRequest, ApiCreateProductResponse} from 'autotests/types';
+import type {ApiCreateProductRequest, ApiCreateProductResponse, ProductId} from 'autotests/types';
 import type {Url} from 'e2ed/types';
 
-type Params = Readonly<{id: number; size: number}>;
+type Params = Readonly<{id: ProductId; size: number}>;
 
 const pathStart = '/api/product/';
 
@@ -27,7 +27,7 @@ export class CreateProduct extends ApiRoute<
       {urlObject},
     );
 
-    const id = Number(urlObject.pathname.slice(pathStart.length));
+    const id = Number(urlObject.pathname.slice(pathStart.length)) as ProductId;
     const size = Number(urlObject.searchParams.get('size'));
 
     assertValueIsTrue(Number.isInteger(id), 'url has correct id', {id, size, urlObject});

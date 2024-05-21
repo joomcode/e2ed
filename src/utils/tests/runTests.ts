@@ -7,6 +7,7 @@ import {getFullPackConfig} from '../config';
 import {getRunLabel, setRunLabel} from '../environment';
 import {E2edError} from '../error';
 import {generalLog, setSuccessfulTotalInPreviousRetries} from '../generalLog';
+import {setVisitedTestNamesHash} from '../globalState';
 import {getNotIncludedInPackTests} from '../notIncludedInPackTests';
 import {startResourceUsageReading} from '../resourceUsage';
 import {setTestCafeInstance} from '../testCafe';
@@ -24,8 +25,10 @@ export const runTests = async ({
   concurrency,
   runLabel,
   successfulTestRunNamesHash,
+  visitedTestNamesHash,
 }: RunRetryOptions): Promise<void> => {
   setRunLabel(runLabel);
+  setVisitedTestNamesHash(visitedTestNamesHash);
 
   try {
     const successfulTotalInPreviousRetries = Object.keys(successfulTestRunNamesHash).length;

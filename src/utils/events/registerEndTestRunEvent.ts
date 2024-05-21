@@ -1,4 +1,5 @@
 import {TestRunStatus} from '../../constants/internal';
+import {getFullMocksState} from '../../context/fullMocks';
 
 import {cloneWithoutLogEvents} from '../clone';
 import {getRunErrorFromError} from '../error';
@@ -8,6 +9,7 @@ import {getUserlandHooks} from '../userland';
 
 import {calculateTestRunStatus} from './calculateTestRunStatus';
 import {getTestRunEvent} from './getTestRunEvent';
+import {writeFullMocks} from './writeFullMocks';
 
 import type {EndTestRunEvent, FullTestRun, TestRun} from '../../types/internal';
 
@@ -42,6 +44,20 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
   const {hasRunError, unknownRunError, utcTimeInMs: endTimeInMs} = endTestRunEvent;
 
   const status = calculateTestRunStatus({endTestRunEvent, testRunEvent});
+
+  if (status === TestRunStatus.Passed) {
+    const fullMocksState = getFullMocksState();
+
+    if (fullMocksState !== undefined && fullMocksState.appliedMocks === undefined) {
+      await writeFullMocks(fullMocksState).catch((error: unknown) => {
+        generalLog('Cannot write "full mocks" for test', {
+          endTestRunEvent,
+          error,
+          testRunEvent: cloneWithoutLogEvents(testRunEvent),
+        });
+      });
+    }
+  }
 
   (testRunEvent as {status: TestRunStatus}).status = status;
 

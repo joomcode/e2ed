@@ -1,4 +1,5 @@
 export {EndE2edReason, ExitCode} from './end';
+export {READ_FILE_OPTIONS} from './fs';
 export {
   BAD_REQUEST_STATUS_CODE,
   CREATED_STATUS_CODE,

@@ -36,6 +36,7 @@ export {writeFile} from './fs';
 export {removeStyleFromString} from './generalLog';
 export {getDurationWithUnits} from './getDurationWithUnits';
 export {getKeysCounter} from './getKeysCounter';
+export {getContentJsonHeaders} from './http';
 export {log} from './log';
 export {parseMaybeEmptyValueAsJson} from './parseMaybeEmptyValueAsJson';
 export {
@@ -44,7 +45,7 @@ export {
   getTimeoutPromise,
   waitForAllProperties,
 } from './promise';
-export {getContentJsonHeaders, request} from './request';
+export {request} from './request';
 export {
   getEquivalentHeadersNames,
   getHeadersFromHeaderEntries,

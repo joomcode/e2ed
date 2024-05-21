@@ -3,16 +3,22 @@ import {Main} from 'autotests/routes/pageRoutes';
 import {mockApiRoute, unmockApiRoute} from 'e2ed/actions';
 import {CREATED_STATUS_CODE, OK_STATUS_CODE} from 'e2ed/constants';
 
-import type {ApiCreateDeviceRequest, ApiCreateDeviceResponse, DeviceId} from 'autotests/types';
+import type {
+  ApiCreateDeviceRequest,
+  ApiCreateDeviceResponse,
+  DeviceId,
+  ProductId,
+} from 'autotests/types';
 
 const apiMockFunction = (
   routeParams: object,
   {method, query, requestBody, url}: ApiCreateDeviceRequest,
 ): Partial<ApiCreateDeviceResponse> => {
   const {input} = requestBody;
+  const productId = 12;
 
   const responseBody = {
-    id: 12,
+    id: productId as ProductId,
     method,
     output: String(input),
     payload: {id: '12' as DeviceId, ...requestBody},
@@ -49,9 +55,10 @@ void mockApiRoute(
     {method, requestBody, query, url}, // eslint-disable-next-line @typescript-eslint/require-await
   ) => {
     const {input} = requestBody;
+    const productId = 7;
 
     const responseBody = {
-      id: 7,
+      id: productId as ProductId,
       method,
       output: `${input}${routeParams.id}`,
       payload: {id: '7' as DeviceId, ...requestBody},

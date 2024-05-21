@@ -32,6 +32,15 @@ export type {LogEvent, Onlog, TestRunEvent} from './events';
 /** @internal */
 export type {EndTestRunEvent, FullEventsData} from './events';
 export type {Fn, MergeFunctions} from './fn';
+export type {
+  FullMocksConfig,
+  FullMocksResponse,
+  FullMocksTestId,
+  RequestKind,
+  TestFullMocks,
+} from './fullMocks';
+/** @internal */
+export type {FullMocksRouteParams, FullMocksState} from './fullMocks';
 /** @internal */
 export type {SafeHtml} from './html';
 export type {
@@ -109,7 +118,7 @@ export type {
 /** @internal */
 export type {RequestHookClassWithContext, RequestHookEncoding} from './requestHooks';
 /** @internal */
-export type {RetriesState, RunRetryOptions} from './retries';
+export type {RetriesState, RunRetryOptions, VisitedTestNamesHash} from './retries';
 export type {ApiRouteClassType, ApiRouteClassTypeWithGetParamsFromUrl} from './routes';
 export type {RunLabel, RunLabelObject} from './runLabel';
 /** @internal */
