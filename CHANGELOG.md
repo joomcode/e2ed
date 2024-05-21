@@ -1,5 +1,23 @@
 # Changelog
 
+## [v0.17.0](https://github.com/joomcode/e2ed/tree/v0.17.0) (2024-05-21)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.21...v0.17.0)
+
+- [Merge pull request #76 from joomcode/feat/add-full-mocks](https://github.com/joomcode/e2ed/commit/cdd103e26726f1f4b7db505bb70c8a51478c2c5d) ([uid11](https://github.com/uid11))
+
+  feat: add "full mocks" functionality
+
+- [fix: error with "fullMocks" field of config in docker mode](https://github.com/joomcode/e2ed/commit/21edbb7a0f59f799f0df66ab3e22669113f0c635) ([uid11](https://github.com/uid11))
+
+  chore: update devDependencies (`@types/node`, etc)
+
+- [FI-1236 feat: add "full mocks" functionality](https://github.com/joomcode/e2ed/commit/e26f88852ff0a7f874470ec09ea6f5a222d6ab83) ([uid11](https://github.com/uid11))
+
+  tests: add tests for "full mocks" functionality
+
+  fix: pack compilation errors `is not under 'rootDir'`
+
 ## [v0.16.21](https://github.com/joomcode/e2ed/tree/v0.16.21) (2024-04-10)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.20...v0.16.21)
