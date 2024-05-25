@@ -41,7 +41,7 @@ export const enableFullMocks = async (
 
   let testFullMocks: TestFullMocks | undefined;
 
-  if (shouldApplyMocks) {
+  if (shouldApplyMocks && !fullMocksConfig.writeOnly) {
     testFullMocks = await fullMocksConfig.readTestFullMocks(fullMocksState.testId);
   }
 
