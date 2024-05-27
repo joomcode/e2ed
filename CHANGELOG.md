@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.17.1](https://github.com/joomcode/e2ed/tree/v0.17.1) (2024-05-27)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.17.0...v0.17.1)
+
+- [Merge pull request #77 from joomcode/feature/add-writeOnly-for-fullMocks](https://github.com/joomcode/e2ed/commit/4ec8166323c8e35a17f95e02de4cae6d557f988a) ([uid11](https://github.com/uid11))
+
+  feat: add `writeOnly` flag to "full mocks" config
+
+- [chore: update `create-locator` and `devtools-protocol`](https://github.com/joomcode/e2ed/commit/56d2f47163e53425bd8fde761e5c5a4574f0620e) ([uid11](https://github.com/uid11))
+- [FI-1300 feat: add `writeOnly` flag to "full mocks" config](https://github.com/joomcode/e2ed/commit/ff4b7f35bcd103244e7103281bff8f4dcfa8c236) ([uid11](https://github.com/uid11))
+
 ## [v0.17.0](https://github.com/joomcode/e2ed/tree/v0.17.0) (2024-05-21)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.16.21...v0.17.0)
