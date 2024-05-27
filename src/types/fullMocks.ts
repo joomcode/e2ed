@@ -54,6 +54,11 @@ export type FullMocksConfig<TestMeta = TestMetaPlaceholder> = Readonly<{
   readTestFullMocks: (this: void, testId: FullMocksTestId) => Promise<TestFullMocks | undefined>;
 
   /**
+   * If `true`, then only writes mocks (but do not apply).
+   */
+  writeOnly: boolean;
+
+  /**
    * Writes full mocks of one test by `testId`.
    */
   writeTestFullMocks: (

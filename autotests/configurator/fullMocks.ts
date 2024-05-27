@@ -41,6 +41,7 @@ export const fullMocks: FullMocks = {
 
     return JSON.parse(testFullMocksJson) as TestFullMocks;
   },
+  writeOnly: false,
   writeTestFullMocks: async (testId, testFullMocks) => {
     const testFullMocksJson = JSON.stringify(testFullMocks);
 
