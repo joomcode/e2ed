@@ -1,6 +1,7 @@
-import {ExitCode} from '../../constants/internal';
+import {ExitCode, TMP_DIRECTORY_PATH} from '../../constants/internal';
 
 import {exitFromE2ed} from '../exit';
+import {removeDirectory} from '../fs';
 import {generalLog} from '../generalLog';
 import {setReadonlyProperty} from '../setReadonlyProperty';
 
@@ -25,9 +26,12 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
 
   const message = 'Starting to close e2ed...';
 
-  // eslint-disable-next-line no-console
-  console.log(message);
-  generalLog(message);
+  try {
+    generalLog(message);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(message);
+  }
 
   let reportData: ReportData | undefined;
 
@@ -35,6 +39,8 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
     let liteReport: LiteReport | undefined;
 
     ({liteReport, reportData} = await getReports());
+
+    await removeDirectory(TMP_DIRECTORY_PATH);
 
     try {
       await runAfterPackFunctions(liteReport);

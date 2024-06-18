@@ -10,7 +10,6 @@ import {
 
 import {getFullPackConfig} from '../config';
 import {getPathToPack} from '../environment';
-import {testCafeHammerheadUpPackagePath} from '../paths';
 
 import {getPackageInfo} from './getPackageInfo';
 
@@ -35,11 +34,6 @@ export const getStartInfo = ({configCompileTimeWithUnits}: Options): StartInfo =
   }
 
   const e2ed = getPackageInfo('e2ed', ABSOLUTE_PATH_TO_INSTALLED_E2ED_DIRECTORY);
-  const testCafeWithoutTypeCheck = getPackageInfo('testcafe-without-typecheck');
-  const testCafeHammerheadUp = getPackageInfo(
-    'testcafe-hammerhead-up',
-    testCafeHammerheadUpPackagePath,
-  );
   const totalSystemMemoryInMb = Math.round(totalmem() / 1024 / 1024);
 
   return {
@@ -58,8 +52,6 @@ export const getStartInfo = ({configCompileTimeWithUnits}: Options): StartInfo =
     pwd: e2edEnvironment.PWD,
     runEnvironment,
     startTimeInMs,
-    testCafeHammerheadUp,
-    testCafeWithoutTypeCheck,
     totalSystemMemoryInMb,
   };
 };

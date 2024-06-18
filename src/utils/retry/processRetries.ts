@@ -14,7 +14,8 @@ import type {RetriesState} from '../../types/internal';
  */
 export const processRetries = async (retriesState: RetriesState): Promise<void> => {
   const fullConfig = getFullPackConfig();
-  const {concurrency, maxRetriesCountInDocker: maxRetriesCount} = fullConfig;
+  const {concurrency} = fullConfig;
+  const maxRetriesCount = 1;
 
   Object.assign<RetriesState, Partial<RetriesState>>(retriesState, {concurrency, maxRetriesCount});
 

@@ -38,31 +38,11 @@ locatorIdSelector(3); // eslint-disable-line @typescript-eslint/no-magic-numbers
 
 // ok
 htmlElementSelector.filterByLocatorId('id') satisfies Selector;
-// ok
-htmlElementSelector.parentByLocatorId('id') satisfies Selector;
-// ok
-htmlElementSelector.childByLocatorId('id') satisfies Selector;
-// ok
-htmlElementSelector.siblingByLocatorId('id') satisfies Selector;
-// ok
-htmlElementSelector.nextSiblingByLocatorId('id') satisfies Selector;
-// ok
-htmlElementSelector.prevSiblingByLocatorId('id') satisfies Selector;
 
 // ok
 htmlElementSelector.filterByLocatorParameter('prop', 'value') satisfies Selector;
 // ok
 htmlElementSelector.findByLocatorParameter('prop', 'value') satisfies Selector;
-// ok
-htmlElementSelector.parentByLocatorParameter('prop', 'value') satisfies Selector;
-// ok
-htmlElementSelector.childByLocatorParameter('prop', 'value') satisfies Selector;
-// ok
-htmlElementSelector.siblingByLocatorParameter('prop', 'value') satisfies Selector;
-// ok
-htmlElementSelector.nextSiblingByLocatorParameter('prop', 'value') satisfies Selector;
-// ok
-htmlElementSelector.prevSiblingByLocatorParameter('prop', 'value') satisfies Selector;
 
 // ok
 void htmlElementSelector.getLocatorId();

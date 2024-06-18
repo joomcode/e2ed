@@ -1,5 +1,3 @@
-import type {Inner} from 'testcafe-without-typecheck';
-
 import type {REQUEST_HOOK_CONTEXT_ID_KEY, REQUEST_HOOK_CONTEXT_KEY} from '../constants/internal';
 
 import type {Brand} from './brand';
@@ -85,4 +83,4 @@ export type RequestHookResponseEvent = Readonly<{
 /**
  * TestCafe internal request options with request hook context.
  */
-export type RequestOptions = MaybeWithContextKey & Inner.RequestOptions;
+export type RequestOptions = MaybeWithContextKey;

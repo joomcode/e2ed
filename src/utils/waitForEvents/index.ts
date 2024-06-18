@@ -1,10 +1,6 @@
 /** @internal */
-export {addNotCompleteRequest} from './addNotCompleteRequest';
-/** @internal */
-export {completeRequest} from './completeRequest';
-/** @internal */
 export {getInitialIdsForAllRequestsCompletePredicate} from './getInitialIdsForAllRequestsCompletePredicate';
 /** @internal */
-export {getUrlsByRequestHookContextIds} from './getUrlsByRequestHookContextIds';
+export {getWaitForResponsePredicate} from './getWaitForResponsePredicate';
 /** @internal */
-export {processEventsPredicates} from './processEventsPredicates';
+export {getUrlsByRequestHookContextIds} from './getUrlsByRequestHookContextIds';

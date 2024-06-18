@@ -52,6 +52,24 @@ export const REPORTS_DIRECTORY_PATH = join(
 ) as DirectoryPathFromRoot;
 
 /**
+ * Relative (from root) path to reports directory.
+ * @internal
+ */
+export const INTERNAL_REPORTS_DIRECTORY_PATH = join(
+  REPORTS_DIRECTORY_PATH,
+  'internal',
+) as DirectoryPathFromRoot;
+
+/**
+ * Relative (from root) path to directory with tests itself.
+ * @internal
+ */
+export const TESTS_DIRECTORY_PATH = join(
+  AUTOTESTS_DIRECTORY_PATH,
+  'tests',
+) as DirectoryPathFromRoot;
+
+/**
  * Relative (from root) path to tmp directory.
  * @internal
  */
@@ -65,6 +83,13 @@ export const COMPILED_USERLAND_CONFIG_DIRECTORY = join(
   TMP_DIRECTORY_PATH,
   'config',
 ) as DirectoryPathFromRoot;
+
+/**
+ * Relative (from root) path to `config` file,
+ * that plays the role of the internal Playwright config.
+ * @internal
+ */
+export const CONFIG_PATH = join(INSTALLED_E2ED_DIRECTORY_PATH, 'config.js') as FilePathFromRoot;
 
 /**
  * Relative (from root) path to events directory.
@@ -86,13 +111,3 @@ export const SCREENSHOTS_DIRECTORY_PATH = join(
  * @internal
  */
 export const START_INFO_PATH = join(TMP_DIRECTORY_PATH, 'startInfo.json') as FilePathFromRoot;
-
-/**
- * Relative (from root) path to `testcaferc` file,
- * that plays the role of the internal TestCafe config.
- * @internal
- */
-export const TESTCAFERC_PATH = join(
-  INSTALLED_E2ED_DIRECTORY_PATH,
-  'testcaferc.js',
-) as FilePathFromRoot;

@@ -1,7 +1,7 @@
 import type {URL} from 'node:url';
 
 import type {Brand} from './brand';
-import type {Method, Request, Response, ResponseWithRequest, StatusCode} from './http';
+import type {Request, Response, ResponseWithRequest, StatusCode} from './http';
 import type {TestStaticOptions} from './testRun';
 import type {TestMetaPlaceholder} from './userland';
 
@@ -28,7 +28,7 @@ export type FullMocksConfig<TestMeta = TestMetaPlaceholder> = Readonly<{
   /**
    * Get `RequestKind` of request by `method` and `urlObject`.
    */
-  getRequestKind: (this: void, method: Method, urlObject: URL) => RequestKind;
+  getRequestKind: (this: void, urlObject: URL) => RequestKind;
 
   /**
    * Get `response` on `request` by `requestKind` and by test full mocks.
@@ -79,7 +79,6 @@ export type FullMocksResponse = Partial<Response> & Readonly<{statusCode: Status
  */
 export type FullMocksRouteParams = Readonly<{
   fullMocksState: FullMocksState;
-  method: Method;
   requestKind: RequestKind;
   urlObject: URL;
 }>;

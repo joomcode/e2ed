@@ -53,6 +53,7 @@ docker run \
        --label $CONTAINER_LABEL \
        --rm \
        --shm-size=512m \
+       --user $(id -u) \
        --volume $MOUNTDIR:$MOUNTDIR \
        --workdir $DIR \
        $WITH_DEBUG \

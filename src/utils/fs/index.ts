@@ -12,8 +12,6 @@ export {readEventsFromFiles} from './readEventsFromFiles';
 export {readStartInfo} from './readStartInfo';
 /** @internal */
 export {removeDirectory} from './removeDirectory';
-/** @internal */
-export {writeBrokenStatusToTestRunJsonFile} from './writeBrokenStatusToTestRunJsonFile';
 export {writeFile} from './writeFile';
 /** @internal */
 export {writeStartInfo} from './writeStartInfo';

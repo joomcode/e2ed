@@ -1,57 +1,32 @@
-import {DEFAULT_TAKE_SCREENSHOT_TIMEOUT_IN_MS, LogEventType} from '../constants/internal';
-import {testController} from '../testController';
-import {E2edError} from '../utils/error';
-import {getDurationWithUnits} from '../utils/getDurationWithUnits';
+import {join} from 'node:path';
+
+import {LogEventType, SCREENSHOTS_DIRECTORY_PATH} from '../constants/internal';
 import {log} from '../utils/log';
-import {getPromiseWithResolveAndReject} from '../utils/promise';
 import {getDescriptionFromSelector} from '../utils/selectors';
 
-import type {Selector, TestCafeSelector} from '../types/internal';
+import type {Locator} from '@playwright/test';
 
-type Options = Parameters<typeof testController.takeElementScreenshot>[2] &
-  Readonly<{timeout?: number}>;
+import type {Selector} from '../types/internal';
+
+type Options = Parameters<Locator['screenshot']>[0];
 
 /**
  * Takes a screenshot of the specified element.
  */
-export const takeElementScreenshot = (
+export const takeElementScreenshot = async (
   selector: Selector,
-  pathToScreenshot?: string,
-  {timeout = DEFAULT_TAKE_SCREENSHOT_TIMEOUT_IN_MS, ...options}: Options = {},
+  options: Options = {},
 ): Promise<void> => {
   const description = getDescriptionFromSelector(selector);
 
-  const timeoutWithUnits = getDurationWithUnits(timeout);
+  log('Take a screenshot of the element', {description, options}, LogEventType.InternalAction);
 
-  log(
-    'Take a screenshot of the element',
-    {description, options, pathToScreenshot, timeoutWithUnits},
-    LogEventType.InternalAction,
-  );
+  const {path} = options;
 
-  const takeElementScreenshotPromise = testController.takeElementScreenshot(
-    selector as unknown as TestCafeSelector,
-    pathToScreenshot,
-    options,
-  );
-
-  if (!(timeout > 0)) {
-    return takeElementScreenshotPromise;
+  if (path !== undefined) {
+    // eslint-disable-next-line no-param-reassign
+    options.path = join(SCREENSHOTS_DIRECTORY_PATH, path);
   }
 
-  const {clearRejectTimeout, promiseWithTimeout, reject, setRejectTimeoutFunction} =
-    getPromiseWithResolveAndReject(timeout);
-
-  setRejectTimeoutFunction(() => {
-    const error = new E2edError(
-      `takeElementScreenshot promise rejected after ${timeoutWithUnits} timeout`,
-      {description, options, pathToScreenshot},
-    );
-
-    reject(error);
-  });
-
-  const racePromise = Promise.race([takeElementScreenshotPromise, promiseWithTimeout]);
-
-  return racePromise.finally(clearRejectTimeout) as Promise<void>;
+  await selector.getPlaywrightLocator().screenshot(options);
 };

@@ -11,6 +11,8 @@ import {getScreenshotFileNames} from './getScreenshotFileNames';
 
 import type {TestStaticOptions} from '../../types/internal';
 
+const errorScreenshotTimeoutInMs = 2_000;
+
 /**
  * Takes page screenshot and full page screenshot, if needed.
  * @internal
@@ -40,10 +42,18 @@ export const takeScreenshotsOnErrorIfNeeded = async (
   const {fullPage, viewport} = await getScreenshotFileNames(retryDirectoryName, testStaticOptions);
 
   if (takeFullPageScreenshotOnError) {
-    await takeScreenshot({fullPage: true, path: join(retryDirectoryName, fullPage), timeout: 0});
+    await takeScreenshot({
+      fullPage: true,
+      path: join(retryDirectoryName, fullPage),
+      timeout: errorScreenshotTimeoutInMs,
+    });
   }
 
   if (takeViewportScreenshotOnError) {
-    await takeScreenshot({fullPage: false, path: join(retryDirectoryName, viewport), timeout: 0});
+    await takeScreenshot({
+      fullPage: false,
+      path: join(retryDirectoryName, viewport),
+      timeout: errorScreenshotTimeoutInMs,
+    });
   }
 };

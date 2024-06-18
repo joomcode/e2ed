@@ -1,4 +1,5 @@
 import {createRunId} from '../../generators/internal';
+import {pageStorage} from '../../useContext';
 
 import {assertValueIsDefined} from '../asserts';
 import {addTestToNotIncludedInPackTests} from '../notIncludedInPackTests';
@@ -8,66 +9,62 @@ import {afterTest} from './afterTest';
 import {beforeTest} from './beforeTest';
 import {getIsTestIncludedInPack} from './getIsTestIncludedInPack';
 import {getTestStaticOptions} from './getTestStaticOptions';
-import {processTestController} from './processTestController';
+import {preparePage} from './preparePage';
 import {runTestFn} from './runTestFn';
 
-import type {RunId, Test, TestController, TestStaticOptions} from '../../types/internal';
+import type {PlaywrightTestArgs, TestInfo} from '@playwright/test';
 
-type RunTest = (testController: TestController) => Promise<void>;
+import type {Test, TestStaticOptions} from '../../types/internal';
 
-const delayToCompleteTestRunAfterTestIsCompletedInMs = 300;
+type RunTest = (testController: PlaywrightTestArgs, testInfo: TestInfo) => Promise<void>;
 
 /**
  * Get complete run test function by the complete test options.
  * @internal
  */
-export const getRunTest = (test: Test): RunTest => {
-  let previousRunId: RunId | undefined;
+export const getRunTest =
+  (test: Test): RunTest =>
+  ({context, page, request}: PlaywrightTestArgs, testInfo: TestInfo): Promise<void> => {
+    const runTest = async (): Promise<void> => {
+      await preparePage(page);
 
-  return async (testController: TestController): Promise<void> => {
-    const runId = createRunId();
+      const retry = testInfo.retry + 1;
+      const runId = createRunId();
 
-    let hasRunError = false;
-    let isTestIncludedInPack = false;
-    let testStaticOptions: TestStaticOptions | undefined;
-    let unknownRunError: unknown;
+      let hasRunError = false;
+      let isTestIncludedInPack = false;
+      let testStaticOptions: TestStaticOptions | undefined;
+      let unknownRunError: unknown;
 
-    try {
-      testStaticOptions = getTestStaticOptions(test, testController);
+      try {
+        testStaticOptions = getTestStaticOptions(test, testInfo);
 
-      isTestIncludedInPack = getIsTestIncludedInPack(testStaticOptions);
+        isTestIncludedInPack = getIsTestIncludedInPack(testStaticOptions);
 
-      if (!isTestIncludedInPack) {
-        await addTestToNotIncludedInPackTests(testStaticOptions.filePath);
+        if (!isTestIncludedInPack) {
+          await addTestToNotIncludedInPackTests(testStaticOptions.filePath);
 
-        return;
+          return;
+        }
+
+        beforeTest({retry, runId, testFn: test.testFn, testStaticOptions});
+
+        await runTestFn(runId, {context, page, request}, testStaticOptions);
+      } catch (error) {
+        hasRunError = true;
+        unknownRunError = error;
+
+        assertValueIsDefined(testStaticOptions, 'testStaticOptions is defined', {error, runId});
+
+        await afterErrorInTest(testStaticOptions);
+
+        throw error;
+      } finally {
+        if (isTestIncludedInPack) {
+          await afterTest({hasRunError, runId, unknownRunError});
+        }
       }
+    };
 
-      processTestController(testController);
-
-      beforeTest({previousRunId, runId, testFn: test.testFn, testStaticOptions});
-
-      previousRunId = runId;
-
-      await runTestFn(runId, testController, testStaticOptions);
-    } catch (error) {
-      hasRunError = true;
-      unknownRunError = error;
-
-      assertValueIsDefined(testStaticOptions, 'testStaticOptions is defined', {error, runId});
-
-      await afterErrorInTest(testStaticOptions);
-
-      throw error;
-    } finally {
-      if (isTestIncludedInPack) {
-        setTimeout(
-          () => void testController.testRun.emit('done'),
-          delayToCompleteTestRunAfterTestIsCompletedInMs,
-        );
-
-        await afterTest({hasRunError, runId, unknownRunError});
-      }
-    }
+    return pageStorage.run(page, runTest);
   };
-};

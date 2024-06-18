@@ -1,7 +1,7 @@
 import {LogEventStatus, LogEventType} from '../../constants/internal';
 import {getFullMocksState} from '../../context/fullMocks';
 
-import {writeResposneToFullMocks} from '../fullMocks';
+import {writeResponseToFullMocks} from '../fullMocks';
 import {log} from '../log';
 
 import {oneTryOfRequest} from './oneTryOfRequest';
@@ -47,7 +47,7 @@ export const getResponse = async <SomeRequest extends Request, SomeResponse exte
     const fullMocksState = getFullMocksState();
 
     if (fullMocksState !== undefined) {
-      writeResposneToFullMocks(response);
+      writeResponseToFullMocks(response);
     }
 
     return response;

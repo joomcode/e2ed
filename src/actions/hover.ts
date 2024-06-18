@@ -1,30 +1,24 @@
 import {LogEventType} from '../constants/internal';
-import {testController} from '../testController';
 import {log} from '../utils/log';
 import {getDescriptionFromSelector} from '../utils/selectors';
 
-import {waitForInterfaceStabilization} from './waitFor';
+import type {Locator} from '@playwright/test';
 
-import type {Selector, TestCafeSelector, WithStabilizationInterval} from '../types/internal';
+import type {Selector} from '../types/internal';
 
-type Options = Parameters<typeof testController.hover>[1] & WithStabilizationInterval;
+type Options = Parameters<Locator['hover']>[0];
 
 /**
  * Hovers the mouse pointer over an element.
  */
-export const hover = async (
-  selector: Selector,
-  {stabilizationInterval, ...options}: Options = {},
-): Promise<void> => {
+export const hover = async (selector: Selector, options: Options = {}): Promise<void> => {
   const description = getDescriptionFromSelector(selector);
 
   log(
     'Hover the mouse pointer over an element',
-    {description, ...options, stabilizationInterval},
+    {description, ...options},
     LogEventType.InternalAction,
   );
 
-  await testController.hover(selector as unknown as TestCafeSelector, options);
-
-  await waitForInterfaceStabilization(stabilizationInterval);
+  await selector.getPlaywrightLocator().hover(options);
 };

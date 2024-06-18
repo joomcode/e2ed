@@ -28,11 +28,11 @@ onExit() {
 
 trap "onExit" EXIT
 
-if [[ -d "./node_modules/e2ed" ]]
-then
-    echo "Temporarily hide locally installed e2ed package:"
-    mv --verbose ./node_modules/e2ed ./node_modules/_e2ed
-fi
+#if [[ -d "./node_modules/e2ed" ]]
+#then
+#    echo "Temporarily hide locally installed e2ed package:"
+#    mv --verbose ./node_modules/e2ed ./node_modules/_e2ed
+#fi
 
 if [[ -z $E2ED_DEBUG ]]
 then

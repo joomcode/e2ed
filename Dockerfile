@@ -1,17 +1,4 @@
-FROM node:20.3.1-alpine AS node
-
-FROM alpine:3.19.1
-
-COPY --from=node /usr/lib /usr/lib
-COPY --from=node /usr/local/lib /usr/local/lib
-COPY --from=node /usr/local/include/node/[^o]* /usr/local/include/node/
-COPY --from=node /usr/local/include/node/openssl/*[^s] /usr/local/include/node/openssl/
-COPY --from=node /usr/local/include/node/openssl/archs/linux-x86_64 /usr/local/include/node/openssl/archs/linux-x86_64
-COPY --from=node /usr/local/bin /usr/local/bin
-
-RUN apk --no-cache upgrade && \
-  apk --no-cache add \
-  bash libevent chromium firefox xwininfo xvfb dbus eudev ttf-freefont fluxbox procps tzdata icu-data-full
+FROM mcr.microsoft.com/playwright:v1.45.1-noble
 
 COPY ./build/node_modules/e2ed /node_modules/e2ed
 
@@ -25,10 +12,8 @@ WORKDIR /
 
 COPY ./node_modules/@types/node /node_modules/@types/node
 
-RUN adduser -D user
+RUN adduser --system --group --no-create-home user
 
 USER user
-
-EXPOSE 1337 1338
 
 ENTRYPOINT ["/node_modules/e2ed/bin/dockerEntrypoint.sh"]

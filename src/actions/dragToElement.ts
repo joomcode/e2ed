@@ -1,18 +1,15 @@
 import {LogEventType} from '../constants/internal';
-import {testController} from '../testController';
 import {log} from '../utils/log';
 import {getDescriptionFromSelector} from '../utils/selectors';
 
-import {waitForInterfaceStabilization} from './waitFor';
+import type {Selector, WithStabilizationInterval} from '../types/internal';
 
-import type {Selector, TestCafeSelector, WithStabilizationInterval} from '../types/internal';
-
-type Options = Parameters<typeof testController.dragToElement>[2] & WithStabilizationInterval;
+type Options = WithStabilizationInterval;
 
 /**
  * Drags an element onto another one.
  */
-export const dragToElement = async (
+export const dragToElement = (
   selector: Selector,
   destinationSelector: Selector,
   {stabilizationInterval, ...options}: Options = {},
@@ -26,11 +23,6 @@ export const dragToElement = async (
     LogEventType.InternalAction,
   );
 
-  await testController.dragToElement(
-    selector as unknown as TestCafeSelector,
-    destinationSelector as unknown as TestCafeSelector,
-    options,
-  );
-
-  await waitForInterfaceStabilization(stabilizationInterval);
+  // TODO
+  return Promise.resolve();
 };

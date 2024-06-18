@@ -50,7 +50,7 @@ export const ORDER_OF_TEST_RUN_STATUSES_FOR_DISPLAY = [
  * Hash object with runId as keys and TestRunEvent as values.
  * @internal
  */
-export const RUN_IDS_HASH: Record<RunId, TestRunEvent> = {};
+export const RUN_IDS_HASH = Object.create(null) as Record<RunId, TestRunEvent>;
 
 /**
  * Emoji symbols of test run statuses for display in logs and in the report.

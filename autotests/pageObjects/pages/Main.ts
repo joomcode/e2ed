@@ -3,7 +3,6 @@ import {Main as MainRoute} from 'autotests/routes/pageRoutes';
 import {createSelectorByCss} from 'autotests/selectors';
 import {createRootLocator, type Locator} from 'create-locator';
 import {Page} from 'e2ed';
-import {waitForAllRequestsComplete, waitForInterfaceStabilization} from 'e2ed/actions';
 import {getCssSelectorFromAttributesChain} from 'e2ed/createLocator';
 import {setReadonlyProperty} from 'e2ed/utils';
 
@@ -72,25 +71,5 @@ export class Main extends Page<CustomPageParams> {
    */
   typeIntoSearchInput(text: string): Promise<void> {
     return this.searchInput.type(text);
-  }
-
-  override async waitForPageLoaded(): Promise<void> {
-    await waitForAllRequestsComplete(
-      ({url}) => {
-        if (
-          url.startsWith('https://adservice.google.com/') ||
-          url.startsWith('https://id.google.com/verify/') ||
-          url.startsWith('https://play.google.com/') ||
-          url.startsWith('https://www.youtube.com/')
-        ) {
-          return false;
-        }
-
-        return true;
-      },
-      {maxIntervalBetweenRequestsInMs: this.maxIntervalBetweenRequestsInMs},
-    );
-
-    await waitForInterfaceStabilization(this.pageStabilizationInterval);
   }
 }

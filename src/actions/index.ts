@@ -30,17 +30,14 @@ export {
 } from './pages';
 export {pressKey} from './pressKey';
 export {resizeWindow} from './resizeWindow';
-export {rightClick} from './rightClick';
 export {scroll} from './scroll';
-export {scrollBy} from './scrollBy';
 export {scrollIntoView} from './scrollIntoView';
 export {selectText} from './selectText';
 export {setCookies} from './setCookies';
 export {setFilesToUpload} from './setFilesToUpload';
 export {setHeadersAndNavigateToUrl} from './setHeadersAndNavigateToUrl';
-export {setNativeDialogHandler} from './setNativeDialogHandler';
-export {setPageElementsIgnoredOnInterfaceStabilization} from './setPageElementsIgnoredOnInterfaceStabilization';
 export {switchToIframe} from './switchToIframe';
+export {switchToMainWindow} from './switchToMainWindow';
 export {takeElementScreenshot} from './takeElementScreenshot';
 export {takeScreenshot} from './takeScreenshot';
 export {typeText} from './typeText';

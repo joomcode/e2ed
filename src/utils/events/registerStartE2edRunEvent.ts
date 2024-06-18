@@ -7,7 +7,6 @@ import {E2edError} from '../error';
 import {setGlobalExitCode} from '../exit';
 import {createDirectory, removeDirectory, writeStartInfo} from '../fs';
 import {generalLog, writeLogsToFile} from '../generalLog';
-import {setPackTimeout} from '../pack';
 import {compilePack} from '../packCompiler';
 import {getStartInfo} from '../startInfo';
 
@@ -17,6 +16,7 @@ import {runBeforePackFunctions} from './runBeforePackFunctions';
  * Registers start e2ed run event (for report) before running any test.
  * @internal
  */
+// eslint-disable-next-line max-statements
 export const registerStartE2edRunEvent = async (): Promise<void> => {
   await removeDirectory(TMP_DIRECTORY_PATH);
   await createDirectory(EVENTS_DIRECTORY_PATH);
@@ -27,7 +27,16 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
     errorSettingDotEnv = error;
   });
 
-  const {compileErrors, configCompileTimeWithUnits} = compilePack();
+  let compileErrors: readonly Readonly<Record<string, string>>[] = [];
+  let configCompileTimeWithUnits = '';
+
+  try {
+    ({compileErrors, configCompileTimeWithUnits} = compilePack());
+  } catch (cause) {
+    setGlobalExitCode(ExitCode.HasErrorsInCompilingConfig);
+
+    throw new E2edError('Caught an error on compiling config', {cause});
+  }
 
   const startInfo = getStartInfo({configCompileTimeWithUnits});
 
@@ -56,13 +65,11 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
   }
 
   const {e2ed, runEnvironment} = startInfo;
-  const isLocalRun = runEnvironment === RunEnvironment.Docker;
+  const isLocalRun = runEnvironment !== RunEnvironment.Docker;
   const startMessage = `Run tests ${isLocalRun ? 'local' : 'in docker'} with e2ed@${e2ed.version}`;
 
   generalLog(startMessage, startInfo);
 
   await writeStartInfo(startInfo);
   await writeLogsToFile();
-
-  setPackTimeout();
 };

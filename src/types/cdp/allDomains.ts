@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+
 import type ProtocolProxyApi from 'devtools-protocol/types/protocol-proxy-api';
 
 type DeprecatedDomains = Readonly<{
@@ -21,10 +23,8 @@ type ExperimentalDomains = Readonly<{
   /** @deprecated this API is experimental. */
   Cast: ProtocolProxyApi.CastApi;
   /** @deprecated this API is experimental. */
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   DOMSnapshot: ProtocolProxyApi.DOMSnapshotApi;
   /** @deprecated this API is experimental. */
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   DOMStorage: ProtocolProxyApi.DOMStorageApi;
   /** @deprecated this API is experimental. */
   Database: ProtocolProxyApi.DatabaseApi;
@@ -37,7 +37,6 @@ type ExperimentalDomains = Readonly<{
   /** @deprecated this API is experimental. */
   HeapProfiler: ProtocolProxyApi.HeapProfilerApi;
   /** @deprecated this API is experimental. */
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   IndexedDB: ProtocolProxyApi.IndexedDBApi;
   /** @deprecated this API is experimental. */
   Inspector: ProtocolProxyApi.InspectorApi;
@@ -67,15 +66,11 @@ type ExperimentalDomains = Readonly<{
 
 type StableDomains = Readonly<{
   Browser: ProtocolProxyApi.BrowserApi;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   CSS: ProtocolProxyApi.CSSApi;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   DOM: ProtocolProxyApi.DOMApi;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   DOMDebugger: ProtocolProxyApi.DOMDebuggerApi;
   Debugger: ProtocolProxyApi.DebuggerApi;
   Emulation: ProtocolProxyApi.EmulationApi;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   IO: ProtocolProxyApi.IOApi;
   Input: ProtocolProxyApi.InputApi;
   Log: ProtocolProxyApi.LogApi;

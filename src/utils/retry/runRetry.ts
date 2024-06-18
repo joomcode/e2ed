@@ -10,7 +10,6 @@ import {getDurationWithUnits} from '../getDurationWithUnits';
 import {setTestsSubprocess, testsSubprocess} from '../tests';
 
 import {getTestsSubprocessForkOptions} from './getTestsSubprocessForkOptions';
-import {killTestCafeProcessesOccupyingPorts} from './killTestCafeProcessesOccupyingPorts';
 
 import type {RunRetryOptions} from '../../types/internal';
 
@@ -93,4 +92,4 @@ export const runRetry = (runRetryOptions: RunRetryOptions): Promise<void> =>
     resetInterruptTimeout();
 
     newTestsSubprocess.on('message', resetInterruptTimeout);
-  }).finally(killTestCafeProcessesOccupyingPorts);
+  });

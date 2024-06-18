@@ -56,7 +56,7 @@ export const waitForRequestToRoute = async <
   let routeParams: RouteParams | undefined;
 
   const predicateForRequest: RequestPredicate<SomeRequest> = async (request) => {
-    const maypeRouteWithRouteParams = getRouteInstanceFromUrl(request.url, request.method, Route);
+    const maypeRouteWithRouteParams = getRouteInstanceFromUrl(request.url, Route);
 
     if (maypeRouteWithRouteParams === undefined) {
       return false;

@@ -1,5 +1,4 @@
 import {useContext} from '../useContext';
-import {setReadonlyProperty} from '../utils/setReadonlyProperty';
 
 import type {
   AllRequestsCompletePredicateWithPromise,
@@ -8,7 +7,6 @@ import type {
   Url,
   WaitForEventsState,
 } from '../types/internal';
-import type {RequestHookToWaitForEvents} from '../utils/requestHooks';
 
 /**
  * Raw get and set internal (maybe `undefined`) "wait for events" state.
@@ -20,9 +18,7 @@ const [getRawWaitForEventsState, setRawWaitForEventsState] = useContext<WaitForE
  * Get internal always defined "wait for events" state (for `waitForRequest`/`waitForResponse`).
  * @internal
  */
-export const getWaitForEventsState = (
-  RequestHookToWaitForEventsClass: typeof RequestHookToWaitForEvents,
-): WaitForEventsState => {
+export const getWaitForEventsState = (): WaitForEventsState => {
   const maybeWaitForEventsState = getRawWaitForEventsState();
 
   if (maybeWaitForEventsState !== undefined) {
@@ -34,15 +30,10 @@ export const getWaitForEventsState = (
     hashOfNotCompleteRequests: Object.create(
       null,
     ) as WaitForEventsState['hashOfNotCompleteRequests'],
-    hook: {} as unknown as RequestHookToWaitForEvents,
     redirects: Object.create(null) as Record<Url, Url>,
     requestPredicates: new Set<RequestPredicateWithPromise>(),
     responsePredicates: new Set<ResponsePredicateWithPromise>(),
   };
-
-  const hook = new RequestHookToWaitForEventsClass(waitForEventsState);
-
-  setReadonlyProperty(waitForEventsState, 'hook', hook);
 
   setRawWaitForEventsState(waitForEventsState);
 

@@ -1,7 +1,9 @@
+import {isDockerRun} from '../../configurator';
 import {TestRunStatus} from '../../constants/internal';
 
-import {assertValueIsFalse} from '../asserts';
+import {assertValueIsFalse, assertValueIsTrue} from '../asserts';
 import {cloneWithoutLogEvents} from '../clone';
+import {getFullPackConfig} from '../config';
 
 import type {EndTestRunEvent, MaybeWithIsTestRunBroken, TestRunEvent} from '../../types/internal';
 
@@ -16,20 +18,37 @@ type Options = Readonly<{
  */
 export const calculateTestRunStatus = ({endTestRunEvent, testRunEvent}: Options): TestRunStatus => {
   const {hasRunError, unknownRunError} = endTestRunEvent;
-  const {status: originalStatus} = testRunEvent;
+  const {retry, status: originalStatus} = testRunEvent;
 
   let status =
     originalStatus === TestRunStatus.Skipped ? TestRunStatus.Skipped : TestRunStatus.Passed;
 
   if (hasRunError) {
-    assertValueIsFalse(status === TestRunStatus.Skipped, `status is not ${TestRunStatus.Skipped}`, {
-      endTestRunEvent,
-      testRunEvent: cloneWithoutLogEvents(testRunEvent),
-    });
+    const logPayload = {endTestRunEvent, testRunEvent: cloneWithoutLogEvents(testRunEvent)};
+
+    assertValueIsFalse(
+      status === TestRunStatus.Skipped,
+      `status is not ${TestRunStatus.Skipped}`,
+      logPayload,
+    );
 
     const isTestRunBroken = Boolean((unknownRunError as MaybeWithIsTestRunBroken)?.isTestRunBroken);
 
     status = isTestRunBroken ? TestRunStatus.Broken : TestRunStatus.Failed;
+
+    if (isDockerRun) {
+      const {maxRetriesCountInDocker} = getFullPackConfig();
+
+      if (retry < maxRetriesCountInDocker) {
+        assertValueIsTrue(
+          status === TestRunStatus.Failed,
+          `status is ${TestRunStatus.Failed}`,
+          logPayload,
+        );
+
+        status = TestRunStatus.Broken;
+      }
+    }
   }
 
   return status;

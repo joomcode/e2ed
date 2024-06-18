@@ -11,12 +11,17 @@ export const CREATED_STATUS_CODE = 201;
 /**
  * `Internal Server Error` HTTP status code.
  */
-export const INTERNAL_SERVER_ERROR = 500;
+export const INTERNAL_SERVER_ERROR_STATUS_CODE = 500;
+
+/**
+ * `Multiple Choices` HTTP status code.
+ */
+export const MULTIPLE_CHOICES_STATUS_CODE = 300;
 
 /**
  * `Not Found` HTTP status code.
  */
-export const NOT_FOUND = 404;
+export const NOT_FOUND_STATUS_CODE = 404;
 
 /**
  * `OK` HTTP status code.

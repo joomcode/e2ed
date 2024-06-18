@@ -1,6 +1,6 @@
 import {LogEventType} from '../../constants/internal';
 import {getApiMockState} from '../../context/apiMockState';
-import {testController} from '../../testController';
+import {getPage} from '../../useContext';
 import {assertValueIsDefined} from '../../utils/asserts';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {log} from '../../utils/log';
@@ -23,7 +23,7 @@ export const unmockApiRoute = async <
   Route: ApiRouteClassTypeWithGetParamsFromUrl<RouteParams, SomeRequest, SomeResponse>,
 ): Promise<void> => {
   const apiMockState = getApiMockState();
-  const {apiMock, optionsByRoute} = apiMockState;
+  const {optionsByRoute, requestsFilter} = apiMockState;
   let apiMockFunction: ApiMockFunction | undefined;
   let routeWasMocked = false;
   let skipLogs: boolean | undefined;
@@ -39,9 +39,14 @@ export const unmockApiRoute = async <
   }
 
   if (optionsByRoute?.size === 0) {
-    assertValueIsDefined(apiMock, 'apiMock is defined', {routeName: Route.name, routeWasMocked});
+    assertValueIsDefined(requestsFilter, 'requestsFilter is defined', {
+      routeName: Route.name,
+      routeWasMocked,
+    });
 
-    await testController.removeRequestHooks(apiMock);
+    const page = getPage();
+
+    await page.unroute(requestsFilter);
   }
 
   if (apiMockFunction) {

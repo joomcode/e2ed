@@ -1,6 +1,5 @@
 import {LogEventType} from '../constants/internal';
-import {testController} from '../testController';
-import {getCookieOptionsFromPartialCookie} from '../utils/cookie';
+import {getPage} from '../useContext';
 import {log} from '../utils/log';
 
 import type {Cookie} from '../types/internal';
@@ -8,10 +7,12 @@ import type {Cookie} from '../types/internal';
 /**
  * Set cookies with the specified cookies parameters.
  */
-export const setCookies = (cookies: readonly Cookie[]): Promise<void> => {
+export const setCookies = async (cookies: readonly Cookie[]): Promise<void> => {
   log('Set cookies with the specified cookies parameters', {cookies}, LogEventType.InternalAction);
 
-  const cookiesOptions = cookies.map(getCookieOptionsFromPartialCookie);
+  const page = getPage();
 
-  return testController.setCookies(cookiesOptions);
+  const browserContext = page.context();
+
+  await browserContext.addCookies(cookies);
 };

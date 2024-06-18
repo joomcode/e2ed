@@ -1,31 +1,21 @@
 import {LogEventType} from '../constants/internal';
-import {testController} from '../testController';
 import {log} from '../utils/log';
 import {getDescriptionFromSelector} from '../utils/selectors';
 
-import {waitForInterfaceStabilization} from './waitFor';
+import type {Locator} from '@playwright/test';
 
-import type {Selector, TestCafeSelector, WithStabilizationInterval} from '../types/internal';
+import type {Selector} from '../types/internal';
 
-type Options = Parameters<typeof testController.click>[1] & WithStabilizationInterval;
+type Options = Parameters<Locator['click']>[0];
 
 /**
  * Clicks an element.
  */
-export const click = async (
-  selector: Selector,
-  {stabilizationInterval, ...options}: Options = {},
-): Promise<void> => {
+export const click = async (selector: Selector, options: Options = {}): Promise<void> => {
   const description = getDescriptionFromSelector(selector);
   const withDescription = description !== undefined ? ` with description ${description}` : '';
 
-  log(
-    `Click an element${withDescription}`,
-    {...options, stabilizationInterval},
-    LogEventType.InternalAction,
-  );
+  log(`Click an element${withDescription}`, options, LogEventType.InternalAction);
 
-  await testController.click(selector as unknown as TestCafeSelector, options);
-
-  await waitForInterfaceStabilization(stabilizationInterval);
+  await selector.getPlaywrightLocator().click(options);
 };

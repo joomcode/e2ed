@@ -1,16 +1,13 @@
-import {join} from 'node:path';
+import {fork} from 'node:child_process';
 
-import {ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY, TESTCAFERC_PATH} from '../../constants/internal';
-import {createTestCafe} from '../../testcafe';
+import {CONFIG_PATH, e2edEnvironment} from '../../constants/internal';
 
 import {getFullPackConfig} from '../config';
 import {getRunLabel, setRunLabel} from '../environment';
 import {E2edError} from '../error';
 import {generalLog, setSuccessfulTotalInPreviousRetries} from '../generalLog';
 import {setVisitedTestNamesHash} from '../globalState';
-import {getNotIncludedInPackTests} from '../notIncludedInPackTests';
 import {startResourceUsageReading} from '../resourceUsage';
-import {setTestCafeInstance} from '../testCafe';
 
 import {beforeRunFirstTest} from './beforeRunFirstTest';
 
@@ -22,7 +19,6 @@ import type {RunRetryOptions} from '../../types/internal';
  * @internal
  */
 export const runTests = async ({
-  concurrency,
   runLabel,
   successfulTestRunNamesHash,
   visitedTestNamesHash,
@@ -35,12 +31,7 @@ export const runTests = async ({
 
     setSuccessfulTotalInPreviousRetries(successfulTotalInPreviousRetries);
 
-    const {
-      browserInitTimeout,
-      browsers: browsersString,
-      resourceUsageReadingInternal,
-    } = getFullPackConfig();
-    const browsers = [browsersString];
+    const {browserInitTimeout, resourceUsageReadingInternal} = getFullPackConfig();
 
     startResourceUsageReading(resourceUsageReadingInternal);
 
@@ -56,42 +47,52 @@ export const runTests = async ({
 
     beforeRunFirstTestTimeoutId.unref();
 
-    const notIncludedInPackTests = await getNotIncludedInPackTests();
-    const notIncludedInPackTestsInAbsolutePaths = notIncludedInPackTests.map((testFilePath) =>
-      join(ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY, testFilePath),
-    );
+    // const notIncludedInPackTests = await getNotIncludedInPackTests();
+    // const notIncludedInPackTestsInAbsolutePaths = notIncludedInPackTests.map((testFilePath) =>
+    //  join(ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY, testFilePath),
+    // );
 
-    const testCafeInstance = await createTestCafe({browsers, configFile: TESTCAFERC_PATH});
+    await new Promise<void>((resolve, reject) => {
+      const playwrightArgs = ['test', '--config', CONFIG_PATH];
 
-    setTestCafeInstance(testCafeInstance);
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+      if (e2edEnvironment.E2ED_DEBUG) {
+        // playwrightArgs.unshift('--node-options=--inspect-brk');
+        playwrightArgs.push('--debug');
+      }
 
-    const runner = testCafeInstance.createRunner();
+      if (!beforeRunFirstTestWasCalled) {
+        beforeRunFirstTestWasCalled = true;
 
-    const failedTestsCount = await runner
-      .browsers(browsers)
-      .concurrency(concurrency)
-      .filter((testName: string, fixtureName: string, absoluteTestFilePath: string) => {
-        if (!beforeRunFirstTestWasCalled) {
-          beforeRunFirstTestWasCalled = true;
+        beforeRunFirstTest();
+      }
 
-          beforeRunFirstTest();
-        }
-
-        if (notIncludedInPackTestsInAbsolutePaths.includes(absoluteTestFilePath)) {
-          return false;
-        }
-
-        return !successfulTestRunNamesHash[testName];
-      })
-      .run();
-
-    if (failedTestsCount !== 0) {
-      const currentRunLabel = getRunLabel();
-
-      throw new E2edError(
-        `Got ${failedTestsCount} failed tests in retry with label "${currentRunLabel}"`,
+      const playwrightProcess = fork(
+        '/node_modules/e2ed/node_modules/@playwright/test/cli.js',
+        playwrightArgs,
       );
-    }
+
+      playwrightProcess.stdout?.on('data', (data) => {
+        const stringData = String(data).trim();
+
+        if (stringData !== '') {
+          generalLog(stringData);
+        }
+      });
+      playwrightProcess.stderr?.on('data', (data) => generalLog(`Error: ${String(data)}`));
+
+      playwrightProcess.on('error', reject);
+
+      playwrightProcess.on('exit', (exitCode): void => {
+        const error = new E2edError(
+          `Playwright process with label "${runLabel}" exit with non-zero exit code ${String(
+            exitCode,
+          )}`,
+        );
+
+        return exitCode === 0 ? resolve() : reject(error);
+      });
+    });
   } catch (error) {
     const currentRunLabel = getRunLabel();
 

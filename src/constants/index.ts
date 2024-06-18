@@ -1,10 +1,12 @@
 export {EndE2edReason, ExitCode} from './end';
+export {isDebug} from './environment';
 export {READ_FILE_OPTIONS} from './fs';
 export {
   BAD_REQUEST_STATUS_CODE,
   CREATED_STATUS_CODE,
-  INTERNAL_SERVER_ERROR,
-  NOT_FOUND,
+  INTERNAL_SERVER_ERROR_STATUS_CODE,
+  MULTIPLE_CHOICES_STATUS_CODE,
+  NOT_FOUND_STATUS_CODE,
   OK_STATUS_CODE,
 } from './http';
 export {LogEventStatus, LogEventType} from './log';

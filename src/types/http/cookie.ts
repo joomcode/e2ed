@@ -17,7 +17,7 @@ export type Cookie = Readonly<{
 /**
  * Cookie's sameSite property.
  */
-export type SameSite = 'lax' | 'none' | 'strict';
+export type SameSite = 'Lax' | 'None' | 'Strict';
 
 /**
  * Value of `cookie` (request) header for one or several cookies.
