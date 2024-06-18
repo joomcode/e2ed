@@ -1,4 +1,4 @@
-import {Selector as TestCafeSelector} from 'testcafe-without-typecheck';
+import {Selector as SelectorClass} from '../selectors';
 
 import type {Selector} from '../../types/internal';
 
@@ -7,10 +7,9 @@ import type {Selector} from '../../types/internal';
  * (all selector points are in the viewport), and `false` otherwise.
  */
 export const isSelectorEntirelyInViewport = async (selector: Selector): Promise<boolean> => {
-  const htmlElementSelector = TestCafeSelector('html');
+  const htmlElementSelector = new SelectorClass('html');
 
-  const clientHeight = await htmlElementSelector.clientHeight;
-  const clientWidth = await htmlElementSelector.clientWidth;
+  const {height: clientHeight, width: clientWidth} = await htmlElementSelector.boundingClientRect;
 
   const {bottom, left, right, top} = await selector.boundingClientRect;
 

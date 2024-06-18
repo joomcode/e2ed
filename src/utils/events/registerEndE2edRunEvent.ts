@@ -25,9 +25,12 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
 
   const message = 'Starting to close e2ed...';
 
-  // eslint-disable-next-line no-console
-  console.log(message);
-  generalLog(message);
+  try {
+    generalLog(message);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(message);
+  }
 
   let reportData: ReportData | undefined;
 

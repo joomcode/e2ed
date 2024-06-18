@@ -1,10 +1,8 @@
-import type {Inner} from 'testcafe-without-typecheck';
-
 import type {DESCRIPTION_KEY} from '../constants/internal';
+// eslint-disable-next-line import/no-internal-modules
+import type {Selector as SelectorClass} from '../utils/selectors/Selector';
 
-import type {TestCafeSelector} from './testCafe';
-
-type ReplaceSelector<Type> = Type extends TestCafeSelector ? Selector : Type;
+type ReplaceSelector<Type> = Type extends SelectorClass ? Selector : Type;
 
 type ReplaceObjectSelectors<Obj extends object> = Readonly<{
   // check overloads, Selector methods has up to 4
@@ -58,7 +56,7 @@ export type GetLocatorAttributeNameFn = (this: void, parameter: string) => strin
 /**
  * Creates selector by locator and optional parameters.
  */
-export type CreateSelector = (this: void, ...args: Parameters<Inner.SelectorFactory>) => Selector;
+export type CreateSelector = (this: void, cssString: string) => Selector;
 
 /**
  * Type of `createSelectorByCss` function.
@@ -73,7 +71,7 @@ export type LocatorIdSelector = (this: void, id: string) => Selector;
 /**
  * Selector type (which replaces the DOM element wrapper).
  */
-export type Selector = ReplaceObjectSelectors<Inner.SelectorAPI> &
+export type Selector = ReplaceObjectSelectors<SelectorClass> &
   ReplaceObjectSelectors<SelectorCustomMethods> &
   Readonly<{[DESCRIPTION_KEY]?: string}>;
 
@@ -81,90 +79,36 @@ export type Selector = ReplaceObjectSelectors<Inner.SelectorAPI> &
  * Custom methods that `e2ed` adds to selector.
  */
 export type SelectorCustomMethods = Readonly<{
-  /** Finds all child elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  childByLocatorId: (this: TestCafeSelector, locatorId: string) => TestCafeSelector;
-
-  /** Finds all child elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
-  childByLocatorParameter: (
-    this: TestCafeSelector,
-    parameter: string,
-    value: string,
-  ) => TestCafeSelector;
-
   /** Creates a selector that filters a matching set by locatorId. */
-  filterByLocatorId: (this: TestCafeSelector, locatorId: string) => TestCafeSelector;
+  filterByLocatorId: (this: SelectorClass, locatorId: string) => SelectorClass;
 
   /** Creates a selector that filters a matching set by locator parameter. */
   filterByLocatorParameter: (
-    this: TestCafeSelector,
+    this: SelectorClass,
     parameter: string,
     value: string,
-  ) => TestCafeSelector;
+  ) => SelectorClass;
 
   /** Finds all descendants of all nodes in the matching set and filters them by locatorId. */
-  findByLocatorId: (this: TestCafeSelector, locatorId: string) => TestCafeSelector;
+  findByLocatorId: (this: SelectorClass, locatorId: string) => SelectorClass;
 
   /** Finds all descendants of all nodes in the matching set and filters them by locator parameter. */
-  findByLocatorParameter: (
-    this: TestCafeSelector,
-    parameter: string,
-    value: string,
-  ) => TestCafeSelector;
+  findByLocatorParameter: (this: SelectorClass, parameter: string, value: string) => SelectorClass;
 
   /** Get string description of selector if any. */
-  getDescription: (this: TestCafeSelector) => string | undefined;
+  getDescription: (this: SelectorClass) => string | undefined;
 
   /** Returns the value of the locator id. */
-  getLocatorId: (this: TestCafeSelector) => Promise<string | null>;
+  getLocatorId: (this: SelectorClass) => Promise<string | null>;
 
   /** Returns the value of the locator parameter. */
-  getLocatorParameter: (this: TestCafeSelector, parameter: string) => Promise<string | null>;
+  getLocatorParameter: (this: SelectorClass, parameter: string) => Promise<string | null>;
 
   /** true if the element has the locator id. */
-  hasLocatorId: (this: TestCafeSelector) => Promise<boolean>;
+  hasLocatorId: (this: SelectorClass) => Promise<boolean>;
 
   /** true if the element has the locator parameter. */
-  hasLocatorParameter: (this: TestCafeSelector, parameter: string) => Promise<boolean>;
-
-  /** Finds all succeeding sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  nextSiblingByLocatorId: (this: TestCafeSelector, locatorId: string) => TestCafeSelector;
-
-  /** Finds all succeeding sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
-  nextSiblingByLocatorParameter: (
-    this: TestCafeSelector,
-    parameter: string,
-    value: string,
-  ) => TestCafeSelector;
-
-  /** Finds all parents of all nodes in the matching set and filters them by locatorId. */
-  parentByLocatorId: (this: TestCafeSelector, locatorId: string) => TestCafeSelector;
-
-  /** Finds all parents of all nodes in the matching set and filters them by locator parameter. */
-  parentByLocatorParameter: (
-    this: TestCafeSelector,
-    parameter: string,
-    value: string,
-  ) => TestCafeSelector;
-
-  /** Finds all preceding sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  prevSiblingByLocatorId: (this: TestCafeSelector, locatorId: string) => TestCafeSelector;
-
-  /** Finds all preceding sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
-  prevSiblingByLocatorParameter: (
-    this: TestCafeSelector,
-    parameter: string,
-    value: string,
-  ) => TestCafeSelector;
-
-  /** Finds all sibling elements (not nodes) of all nodes in the matching set and filters them by locatorId. */
-  siblingByLocatorId: (this: TestCafeSelector, locatorId: string) => TestCafeSelector;
-
-  /** Finds all sibling elements (not nodes) of all nodes in the matching set and filters them by locator parameter. */
-  siblingByLocatorParameter: (
-    this: TestCafeSelector,
-    parameter: string,
-    value: string,
-  ) => TestCafeSelector;
+  hasLocatorParameter: (this: SelectorClass, parameter: string) => Promise<boolean>;
 }>;
 
 /**
@@ -175,4 +119,14 @@ export type SelectorFunctions = Readonly<{
   createSelectorByCss: CreateSelectorByCss;
   htmlElementSelector: Selector;
   locatorIdSelector: LocatorIdSelector;
+}>;
+
+/**
+ * Data for retrying property of Selector.
+ * @internal
+ */
+export type SelectorPropertyRetryData = Readonly<{
+  args?: readonly string[];
+  property: string;
+  selector: Selector;
 }>;

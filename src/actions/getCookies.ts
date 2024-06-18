@@ -1,12 +1,5 @@
 import {LogEventType} from '../constants/internal';
-import {testController} from '../testController';
-import {
-  getCookieOptionsFromPartialCookie,
-  getPartialCookieFromCookieOptions,
-} from '../utils/cookie';
 import {log} from '../utils/log';
-
-import type {Inner} from 'testcafe-without-typecheck';
 
 import type {Cookie} from '../types/internal';
 
@@ -17,23 +10,22 @@ import type {Cookie} from '../types/internal';
 export const getCookies = async (
   cookiesParameters?: readonly Partial<Cookie>[],
 ): Promise<readonly Partial<Cookie>[]> => {
-  let cookiesOptions: Inner.CookieOptions[];
+  let cookiesOptions: Cookie[];
 
   if (cookiesParameters === undefined) {
     log('Returns all the cookies from all pages', LogEventType.InternalAction);
 
-    cookiesOptions = await testController.getCookies();
+    cookiesOptions = [];
   } else {
-    const cookiesOptionsParameters = cookiesParameters.map(getCookieOptionsFromPartialCookie);
-
     log(
       'Returns cookies with the specified cookies parameters',
       {cookiesParameters},
       LogEventType.InternalAction,
     );
 
-    cookiesOptions = await testController.getCookies(cookiesOptionsParameters);
+    cookiesOptions = [];
   }
 
-  return cookiesOptions.map(getPartialCookieFromCookieOptions);
+  // TODO
+  return Promise.resolve(cookiesOptions);
 };

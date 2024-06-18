@@ -1,5 +1,6 @@
 import {assertionMessageGetters} from './assertionMessageGetters';
 import {createExpectMethod} from './createExpectMethod';
+import {playwrightMethods} from './playwrightMethods';
 
 import type {AssertionFunctionKey} from './types';
 
@@ -27,6 +28,11 @@ export class Expect {
   }
 }
 
-for (const [key, getAssertionMessage] of Object.entries(assertionMessageGetters)) {
-  Expect.prototype[key] = createExpectMethod(key as AssertionFunctionKey, getAssertionMessage);
+const methods = [...Object.keys(assertionMessageGetters), ...playwrightMethods];
+
+for (const key of methods) {
+  Expect.prototype[key] = createExpectMethod(
+    key,
+    assertionMessageGetters[key as AssertionFunctionKey],
+  );
 }

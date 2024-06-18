@@ -1,3 +1,5 @@
+import type {Page} from '@playwright/test';
+
 import type {EndE2edReason, LogEventType, TestRunStatus} from '../constants/internal';
 
 import type {UtcTimeInMs} from './date';

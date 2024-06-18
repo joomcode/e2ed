@@ -25,7 +25,7 @@ const frozenCompilerOptions: CompilerOptions = {
   resolveJsonModule: true,
   rootDir: '.',
   skipLibCheck: true,
-  target: ScriptTarget.ESNext,
+  target: ScriptTarget.ES2023,
   types: ['node'],
 };
 
@@ -70,9 +70,9 @@ export const getCompilerOptions = (): Return => {
   }
 
   const compilerOptions: CompilerOptions = {...frozenCompilerOptions};
-  const {baseUrl, jsx, lib, paths, target} = tsConfigOfProject.compilerOptions;
+  const {baseUrl, jsx, lib, paths} = tsConfigOfProject.compilerOptions;
 
-  Object.assign(compilerOptions, cloneWithoutUndefinedProperties({baseUrl, jsx, paths, target}));
+  Object.assign(compilerOptions, cloneWithoutUndefinedProperties({baseUrl, jsx, paths}));
 
   if (lib) {
     compilerOptions.lib = lib.map((name) => `lib.${name.toLowerCase()}.d.ts`);

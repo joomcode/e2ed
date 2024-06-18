@@ -217,7 +217,7 @@ export type OwnE2edConfig<
    * An array of globs with pack test (task) files.
    * {@link https://www.npmjs.com/package/globby} is used for matching globs.
    */
-  testFileGlobs: readonly string[];
+  testFileGlobs: readonly (RegExp | string)[];
 
   /**
    * Timeout (in milliseconds) for each individual test step.

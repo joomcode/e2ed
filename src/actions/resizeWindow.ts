@@ -1,5 +1,4 @@
 import {LogEventType} from '../constants/internal';
-import {testController} from '../testController';
 import {log} from '../utils/log';
 
 /**
@@ -11,5 +10,6 @@ export const resizeWindow = (width: number, height: number): Promise<void> => {
     LogEventType.InternalAction,
   );
 
-  return testController.resizeWindow(width, height);
+  // TODO
+  return Promise.resolve();
 };

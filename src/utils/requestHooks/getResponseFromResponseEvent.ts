@@ -2,17 +2,10 @@ import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 import {setReadonlyProperty} from '../setReadonlyProperty';
 
 import {getHeaderValue} from './getHeaderValue';
-import {charsetPath, encodingPath} from './testCafeHammerheadUpPaths';
 
 import type {RequestHookEncoding, RequestHookResponseEvent, Response} from '../../types/internal';
 
-type CharsetType = typeof import('testcafe-hammerhead-up/lib/processing/encoding/charset').default;
-type EncodingType = typeof import('testcafe-hammerhead-up/lib/processing/encoding');
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
-const Charset = require<CharsetType>(charsetPath);
-// eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
-const {decodeContent} = require<EncodingType>(encodingPath);
+class Charset {}
 
 /**
  * Get response object from the original TestCafe request context.
@@ -35,7 +28,9 @@ export const getResponseFromResponseEvent = async (
     let responseBodyAsString: string;
 
     if (isDecodingNeeded) {
-      responseBodyAsString = await decodeContent(body, encoding, charset);
+      responseBodyAsString = String(body);
+      // TODO: decodecontent correctly
+      // responseBodyAsString = await decodeContent(body, encoding, charset);
     } else {
       responseBodyAsString = String(body);
     }

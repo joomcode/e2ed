@@ -7,14 +7,11 @@ import {
   getBrowserConsoleMessages,
   getBrowserJsErrors,
   navigateToPage,
-  setPageElementsIgnoredOnInterfaceStabilization,
   waitForInterfaceStabilization,
 } from 'e2ed/actions';
 
 test('correctly read data from browser', {meta: {testId: '14'}}, async () => {
   await navigateToPage(E2edReportExample);
-
-  await setPageElementsIgnoredOnInterfaceStabilization(['.retry']);
 
   await waitForInterfaceStabilization(100);
 

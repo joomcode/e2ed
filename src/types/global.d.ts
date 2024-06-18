@@ -86,6 +86,33 @@ declare module 'testcafe-hammerhead-up/lib/request-pipeline/request-hooks/events
 }
 
 /**
+ * Temporary TestCafe inner types.
+ */
+declare module 'testcafe-without-typecheck' {
+  export namespace Inner {
+    export type Assertion = object;
+    export type CookieOptions = object;
+    export type OffsetOptions = object;
+    export type RequestHook = object;
+    export type RequestLogger = object;
+    export type RequestMock = object;
+    export type RequestOptions = object;
+    export type ResponseMock = object;
+    export type ScrollPosition = object;
+    export type Selector = object;
+    export type SelectorAPI = object;
+    export type SelectorFactory = object;
+    export type TestCafe = object;
+  }
+
+  export const RequestHook: object;
+  export const RequestLogger: object;
+  export const RequestMock: object;
+
+  export const Selector: object;
+}
+
+/**
  * Internal TestCafe module with request-hooks frame navigated events factory class for native automation.
  * @internal
  */

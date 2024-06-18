@@ -40,13 +40,13 @@ export {
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
   AUTOTESTS_DIRECTORY_PATH,
   COMPILED_USERLAND_CONFIG_DIRECTORY,
+  CONFIG_PATH,
   DOT_ENV_PATH,
   EVENTS_DIRECTORY_PATH,
   INSTALLED_E2ED_DIRECTORY_PATH,
   REPORTS_DIRECTORY_PATH,
   SCREENSHOTS_DIRECTORY_PATH,
   START_INFO_PATH,
-  TESTCAFERC_PATH,
   TMP_DIRECTORY_PATH,
 } from './paths';
 /** @internal */
@@ -62,6 +62,8 @@ export {
 /** @internal */
 export {DEFAULT_TAKE_SCREENSHOT_TIMEOUT_IN_MS} from './screenshots';
 export {DESCRIPTION_KEY} from './selector';
+/** @internal */
+export {RETRY_KEY} from './selector';
 export {FAILED_TEST_RUN_STATUSES, TestRunStatus} from './testRun';
 /** @internal */
 export {

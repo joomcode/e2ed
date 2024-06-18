@@ -1,15 +1,13 @@
 import {DEFAULT_TAKE_SCREENSHOT_TIMEOUT_IN_MS, LogEventType} from '../constants/internal';
-import {testController} from '../testController';
 import {E2edError} from '../utils/error';
 import {getDurationWithUnits} from '../utils/getDurationWithUnits';
 import {log} from '../utils/log';
 import {getPromiseWithResolveAndReject} from '../utils/promise';
 import {getDescriptionFromSelector} from '../utils/selectors';
 
-import type {Selector, TestCafeSelector} from '../types/internal';
+import type {Selector} from '../types/internal';
 
-type Options = Parameters<typeof testController.takeElementScreenshot>[2] &
-  Readonly<{timeout?: number}>;
+type Options = Readonly<{timeout?: number}>;
 
 /**
  * Takes a screenshot of the specified element.
@@ -29,11 +27,8 @@ export const takeElementScreenshot = (
     LogEventType.InternalAction,
   );
 
-  const takeElementScreenshotPromise = testController.takeElementScreenshot(
-    selector as unknown as TestCafeSelector,
-    pathToScreenshot,
-    options,
-  );
+  // TODO
+  const takeElementScreenshotPromise = Promise.resolve();
 
   if (!(timeout > 0)) {
     return takeElementScreenshotPromise;

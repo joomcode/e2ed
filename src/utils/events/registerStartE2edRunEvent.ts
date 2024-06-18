@@ -27,7 +27,16 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
     errorSettingDotEnv = error;
   });
 
-  const {compileErrors, configCompileTimeWithUnits} = compilePack();
+  let compileErrors: readonly Readonly<Record<string, string>>[] = [];
+  let configCompileTimeWithUnits = '';
+
+  try {
+    ({compileErrors, configCompileTimeWithUnits} = compilePack());
+  } catch (cause) {
+    setGlobalExitCode(ExitCode.HasErrorsInCompilingConfig);
+
+    throw new E2edError('Caught an error on compiling config', {cause});
+  }
 
   const startInfo = getStartInfo({configCompileTimeWithUnits});
 

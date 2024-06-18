@@ -22,6 +22,7 @@ export const switchToIframe = async (
     LogEventType.InternalAction,
   );
 
+  // TODO: use frameLocator
   await testController.switchToIframe(iframeSelector as unknown as TestCafeSelector);
 
   await waitForInterfaceStabilization(stabilizationInterval);

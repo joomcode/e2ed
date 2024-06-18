@@ -1,5 +1,4 @@
 import {LogEventType} from '../constants/internal';
-import {testController} from '../testController';
 import {log} from '../utils/log';
 
 /**
@@ -8,5 +7,6 @@ import {log} from '../utils/log';
 export const debug = (): Promise<void> => {
   log('Start debug mode', LogEventType.InternalAction);
 
-  return testController.debug();
+  // TODO
+  return Promise.resolve();
 };

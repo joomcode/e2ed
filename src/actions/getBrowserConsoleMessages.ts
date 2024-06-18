@@ -1,8 +1,12 @@
 import {LogEventStatus, LogEventType} from '../constants/internal';
-import {testController} from '../testController';
 import {log} from '../utils/log';
 
-type ConsoleMessages = Awaited<ReturnType<typeof testController.getBrowserConsoleMessages>>;
+type ConsoleMessages = Readonly<{
+  error: readonly string[];
+  info: readonly string[];
+  log: readonly string[];
+  warn: readonly string[];
+}>;
 
 type Options = Readonly<{
   showMessagesInLog?: boolean;
@@ -17,10 +21,11 @@ export const getBrowserConsoleMessages = (options: Options = {}): Promise<Consol
   if (showMessagesInLog === false) {
     log('Get browser console messages', LogEventType.InternalAction);
 
-    return testController.getBrowserConsoleMessages();
+    // TODO
+    return Promise.resolve({error: [], info: [], log: [], warn: []});
   }
 
-  return testController.getBrowserConsoleMessages().then((messages) => {
+  return Promise.resolve({error: [], info: [], log: [], warn: []}).then((messages) => {
     const logEventStatus =
       messages.error.length > 0 ? LogEventStatus.Failed : LogEventStatus.Passed;
 

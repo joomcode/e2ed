@@ -7,3 +7,5 @@ export {getDescriptionFromSelector} from './getDescriptionFromSelector';
 export {htmlElementSelectorCreator} from './htmlElementSelectorCreator';
 /** @internal */
 export {locatorIdSelectorCreator} from './locatorIdSelectorCreator';
+/** @internal */
+export {Selector} from './Selector';

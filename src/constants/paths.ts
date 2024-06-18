@@ -67,6 +67,13 @@ export const COMPILED_USERLAND_CONFIG_DIRECTORY = join(
 ) as DirectoryPathFromRoot;
 
 /**
+ * Relative (from root) path to `config` file,
+ * that plays the role of the internal Playwright config.
+ * @internal
+ */
+export const CONFIG_PATH = join(INSTALLED_E2ED_DIRECTORY_PATH, 'config.js') as FilePathFromRoot;
+
+/**
  * Relative (from root) path to events directory.
  * @internal
  */
@@ -86,13 +93,3 @@ export const SCREENSHOTS_DIRECTORY_PATH = join(
  * @internal
  */
 export const START_INFO_PATH = join(TMP_DIRECTORY_PATH, 'startInfo.json') as FilePathFromRoot;
-
-/**
- * Relative (from root) path to `testcaferc` file,
- * that plays the role of the internal TestCafe config.
- * @internal
- */
-export const TESTCAFERC_PATH = join(
-  INSTALLED_E2ED_DIRECTORY_PATH,
-  'testcaferc.js',
-) as FilePathFromRoot;
