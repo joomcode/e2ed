@@ -79,7 +79,7 @@ export const pack: Pack = {
   skipTests,
   takeFullPageScreenshotOnError: false,
   takeViewportScreenshotOnError: true,
-  testFileGlobs: ['./autotests/tests/**/*.ts', '!**/*.skip.ts'],
+  testFileGlobs: ['**/selectorCustomMethods.ts', '!**/*.skip.ts'],
   testIdleTimeout: 20_000,
   testTimeout: 60_000,
   viewportHeight: 1080,

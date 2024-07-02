@@ -1,13 +1,12 @@
 import {LogEventType} from '../constants/internal';
-import {testController} from '../testController';
 import {log} from '../utils/log';
 import {getDescriptionFromSelector} from '../utils/selectors';
 
-import {waitForInterfaceStabilization} from './waitFor';
+import type {Locator} from '@playwright/test';
 
-import type {Selector, TestCafeSelector, WithStabilizationInterval} from '../types/internal';
+import type {Selector} from '../types/internal';
 
-type Options = Parameters<typeof testController.typeText>[2] & WithStabilizationInterval;
+type Options = Parameters<Locator['fill']>[1];
 
 /**
  * Types the specified text into an input element.
@@ -15,17 +14,15 @@ type Options = Parameters<typeof testController.typeText>[2] & WithStabilization
 export const typeText = async (
   selector: Selector,
   text: string,
-  {stabilizationInterval, ...options}: Options = {},
+  options: Options = {},
 ): Promise<void> => {
   const description = getDescriptionFromSelector(selector);
 
   log(
     `Type "${text}" into an input element`,
-    {description, ...options, stabilizationInterval},
+    {description, ...options},
     LogEventType.InternalAction,
   );
 
-  await testController.typeText(selector as unknown as TestCafeSelector, text, options);
-
-  await waitForInterfaceStabilization(stabilizationInterval);
+  await selector.getPlaywrightLocator().fill(text, options);
 };

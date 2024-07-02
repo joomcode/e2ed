@@ -1,6 +1,6 @@
 import {join} from 'node:path';
 
-import {ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY, TESTCAFERC_PATH} from '../../constants/internal';
+import {ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY, CONFIG_PATH} from '../../constants/internal';
 import {createTestCafe} from '../../testcafe';
 
 import {getFullPackConfig} from '../config';
@@ -61,7 +61,7 @@ export const runTests = async ({
       join(ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY, testFilePath),
     );
 
-    const testCafeInstance = await createTestCafe({browsers, configFile: TESTCAFERC_PATH});
+    const testCafeInstance = await createTestCafe({browsers, configFile: CONFIG_PATH});
 
     setTestCafeInstance(testCafeInstance);
 

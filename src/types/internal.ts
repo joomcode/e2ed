@@ -8,14 +8,9 @@ export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';
 export type {ClientFunction} from './clientFunction';
 /** @internal */
-export type {
-  ClientFunctionState,
-  ClientFunctionWrapperResult,
-  MaybeTestCafeError,
-} from './clientFunction';
+export type {ClientFunctionWrapperResult, MaybeTestCafeError} from './clientFunction';
 export type {
   AnyPack,
-  FrozenPartOfTestCafeConfig,
   FullPackConfig,
   FullPackConfigWithoutDoBeforePack,
   GetPackParameters,
@@ -90,7 +85,7 @@ export type {
 } from './paths';
 /** @internal */
 export type {ImgData, PixelmatchOptions} from './pixelmatch';
-export type {AsyncVoid, MaybePromise, ReExecutablePromise, Thenable} from './promise';
+export type {AsyncVoid, MaybePromise, Thenable} from './promise';
 export type {
   AnyObject,
   FieldReplacer,
@@ -133,6 +128,8 @@ export type {
   SelectorCustomMethods,
   SelectorFunctions,
 } from './selectors';
+/** @internal */
+export type {SelectorPropertyRetryData} from './selectors';
 export type {IsTestSkippedResult} from './skipTest';
 export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';

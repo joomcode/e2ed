@@ -1,16 +1,16 @@
 import {getRelativeTestFilePath} from '../getRelativeTestFilePath';
 
-import type {Test, TestController, TestStaticOptions} from '../../types/internal';
+import type {TestInfo} from '@playwright/test';
+
+import type {Test, TestStaticOptions} from '../../types/internal';
 
 /**
  * Get test static options from test and testController.
  * @internal
  */
-export const getTestStaticOptions = (
-  test: Test,
-  testController: TestController,
-): TestStaticOptions => {
-  const {filename: absoluteFilePath} = testController.testRun.test.testFile;
+export const getTestStaticOptions = (test: Test, testInfo: TestInfo): TestStaticOptions => {
+  // eslint-disable-next-line no-underscore-dangle
+  const absoluteFilePath = String((testInfo as {_requireFile?: string})._requireFile);
   const filePath = getRelativeTestFilePath(absoluteFilePath);
 
   return {

@@ -1,4 +1,5 @@
-import type {DeepReadonly} from '../deep';
+import type {PlaywrightTestConfig} from '@playwright/test';
+
 import type {
   CustomPackPropertiesPlaceholder,
   CustomReportPropertiesPlaceholder,
@@ -24,31 +25,6 @@ type UserlandTestCafeConfig = Readonly<{
 }>;
 
 /**
- * Frozen (readonly) part of TestCafe config.
- */
-export type FrozenPartOfTestCafeConfig = DeepReadonly<{
-  color: boolean;
-  compilerOptions: {
-    typescript?: {
-      customCompilerModulePath?: string;
-      options?: {esModuleInterop?: boolean; resolveJsonModule?: boolean};
-    };
-  };
-  disableMultipleWindows: boolean;
-  hostname: string;
-  pageLoadTimeout: number;
-  reporter: readonly {name: string; output?: string}[];
-  retryTestPages: boolean;
-  screenshots: {
-    path: string;
-    pathPattern: string;
-    takeOnFails: boolean;
-    thumbnails: boolean;
-  };
-  skipJsErrors: boolean;
-}>;
-
-/**
  * The complete pack configuration object without `doBeforePack` field.
  */
 export type FullPackConfigWithoutDoBeforePack<
@@ -64,8 +40,7 @@ export type FullPackConfigWithoutDoBeforePack<
       SkipTests,
       TestMeta
     >) &
-  FrozenPartOfTestCafeConfig &
-  Readonly<{browsers: string; disableNativeAutomation: boolean; src: readonly string[]}>;
+  PlaywrightTestConfig;
 
 /**
  * The complete userland pack config.

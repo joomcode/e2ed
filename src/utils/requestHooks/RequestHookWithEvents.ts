@@ -1,16 +1,5 @@
-import {RequestHook} from 'testcafe-without-typecheck';
-// eslint-disable-next-line import/no-internal-modules
-import FrameNavigatedNativeAutomationEventFactory from 'testcafe-without-typecheck/lib/native-automation/request-hooks/event-factory/frame-navigated-event-based';
-// eslint-disable-next-line import/no-internal-modules
-import NativeAutomationEventFactory from 'testcafe-without-typecheck/lib/native-automation/request-hooks/event-factory/request-paused-event-based';
-
-import {REQUEST_HOOK_CONTEXT_KEY, RESOLVED_PROMISE} from '../../constants/internal';
-
 import {setReadonlyProperty} from '../setReadonlyProperty';
 import {createTestRunCallback, wrapInTestRunTracker} from '../testRun';
-
-import {addContextToResultsOfClassCreateMethods} from './addContextToResultsOfClassCreateMethods';
-import {eventsFactoryPath} from './testCafeHammerheadUpPaths';
 
 import type {
   Fn,
@@ -19,16 +8,7 @@ import type {
   RequestHookResponseEvent,
 } from '../../types/internal';
 
-type RequestHookEventFactoryType =
-  typeof import('testcafe-hammerhead-up/lib/request-pipeline/request-hooks/events/factory').default;
-
-const RequestHookEventFactory =
-  // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
-  require<RequestHookEventFactoryType>(eventsFactoryPath);
-
-addContextToResultsOfClassCreateMethods(FrameNavigatedNativeAutomationEventFactory);
-addContextToResultsOfClassCreateMethods(NativeAutomationEventFactory);
-addContextToResultsOfClassCreateMethods(RequestHookEventFactory);
+class RequestHook {}
 
 /**
  * Get options for creating test run callback for request hook events.

@@ -1,4 +1,4 @@
-import type {ReExecutablePromise, Thenable} from '../types/internal';
+import type {Thenable} from '../types/internal';
 
 /**
  * Returns `true`, if value is array, and `false` otherwise.
@@ -12,13 +12,4 @@ export function isArray<Type>(value: unknown): value is Type[] {
  */
 export function isThenable<Type>(value: Type): value is Type & Thenable {
   return value instanceof Object && 'then' in value && typeof value.then === 'function';
-}
-
-/**
- * Returns `true`, if value is reexecutable promise, and `false` otherwise.
- */
-export function isReExecutablePromise<Type>(
-  promise: Promise<Type>,
-): promise is ReExecutablePromise<Type> {
-  return isThenable(promise) && '_taskPromise' in promise;
 }

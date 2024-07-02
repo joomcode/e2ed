@@ -1,12 +1,8 @@
 import {DESCRIPTION_KEY} from '../../constants/internal';
 
-import type {
-  Fn,
-  Selector,
-  SelectorCustomMethods,
-  TestCafeSelector,
-  Values,
-} from '../../types/internal';
+import {Selector as SelectorClass} from './Selector';
+
+import type {Fn, Selector, SelectorCustomMethods, Values} from '../../types/internal';
 
 type Return = Required<ProxyHandler<Selector>>['get'];
 
@@ -22,9 +18,7 @@ export const createGetTrap = (customMethods: SelectorCustomMethods): Return => {
         : undefined;
 
     let result = (
-      customMethod
-        ? customMethod.bind(target as unknown as TestCafeSelector)
-        : Reflect.get(target, property, receiver)
+      customMethod ? customMethod.bind(target) : Reflect.get(target, property, receiver)
     ) as Values<Selector> & {[DESCRIPTION_KEY]?: string};
 
     if (typeof property === 'symbol') {
@@ -53,8 +47,7 @@ export const createGetTrap = (customMethods: SelectorCustomMethods): Return => {
 
           (callResult as typeof result)[DESCRIPTION_KEY] = callDescription;
 
-          // callResult is Selector
-          if (Object.prototype.hasOwnProperty.call(callResult, 'getBoundingClientRectProperty')) {
+          if (callResult instanceof SelectorClass) {
             return new Proxy(callResult, {get});
           }
 

@@ -1,6 +1,10 @@
-import {testController} from './testController';
+import {getPage} from './page';
+
+import type {Page} from '@playwright/test';
 
 type Context<Type> = {contexts: Record<number, Type>};
+
+type PageWithCtx = Page & {ctx?: object};
 
 type Get<Type> = (this: void) => Type | undefined;
 type GetWithDefaultValue<Type> = (this: void) => Type;
@@ -24,11 +28,17 @@ export const useContext = (<Type>(defaultValue?: Type) => {
    * Set value to test context.
    */
   const set = (value: Type): void => {
-    if ((testController.ctx as Partial<Context<Type>>).contexts === undefined) {
-      (testController.ctx as Partial<Context<Type>>).contexts = {};
+    const page: PageWithCtx = getPage();
+
+    if (page.ctx === undefined) {
+      page.ctx = Object.create(null) as {};
     }
 
-    const {contexts} = testController.ctx as Context<Type>;
+    if ((page.ctx as Partial<Context<Type>>).contexts === undefined) {
+      (page.ctx as Partial<Context<Type>>).contexts = {};
+    }
+
+    const {contexts} = page.ctx as Context<Type>;
 
     contexts[contextIndex] = value;
   };
@@ -43,7 +53,13 @@ export const useContext = (<Type>(defaultValue?: Type) => {
      * Get value from test context.
      */
     const get = (): Type | undefined => {
-      const {contexts}: Partial<Context<Type>> = testController.ctx;
+      const page: PageWithCtx = getPage();
+
+      if (page.ctx === undefined) {
+        page.ctx = Object.create(null) as {};
+      }
+
+      const {contexts}: Partial<Context<Type>> = page.ctx;
 
       return contexts?.[contextIndex];
     };
@@ -55,7 +71,13 @@ export const useContext = (<Type>(defaultValue?: Type) => {
    * Get value from test context (or default value, if it is `undefined`).
    */
   const getWithDefaultValue = (): Type => {
-    const {contexts}: Partial<Context<Type>> = testController.ctx;
+    const page: PageWithCtx = getPage();
+
+    if (page.ctx === undefined) {
+      page.ctx = Object.create(null) as {};
+    }
+
+    const {contexts}: Partial<Context<Type>> = page.ctx;
 
     return contexts?.[contextIndex] ?? defaultValue;
   };

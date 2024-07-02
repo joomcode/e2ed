@@ -1,27 +1,18 @@
 import {LogEventType} from '../constants/internal';
-import {testController} from '../testController';
+import {getPage} from '../useContext';
 import {log} from '../utils/log';
 
-import {waitForInterfaceStabilization} from './waitFor';
+import type {Keyboard} from '@playwright/test';
 
-import type {WithStabilizationInterval} from '../types/internal';
-
-type Options = Parameters<typeof testController.pressKey>[1] & WithStabilizationInterval;
+type Options = Parameters<Keyboard['type']>[1];
 
 /**
  * Presses the specified keyboard keys.
  */
-export const pressKey = async (
-  keys: string,
-  {stabilizationInterval, ...options}: Options = {},
-): Promise<void> => {
-  log(
-    `Press keyboard keys: "${keys}"`,
-    {...options, stabilizationInterval},
-    LogEventType.InternalAction,
-  );
+export const pressKey = async (keys: string, options: Options = {}): Promise<void> => {
+  log(`Press keyboard keys: "${keys}"`, options, LogEventType.InternalAction);
 
-  await testController.pressKey(keys, options);
+  const page = getPage();
 
-  await waitForInterfaceStabilization(stabilizationInterval);
+  await page.keyboard.type(keys, options);
 };

@@ -1,5 +1,3 @@
-import {RequestMock} from 'testcafe-without-typecheck';
-
 import {LogEventType} from '../../constants/internal';
 import {getApiMockState} from '../../context/apiMockState';
 import {getFullMocksState} from '../../context/fullMocks';
@@ -17,6 +15,9 @@ import type {
   Request,
   Response,
 } from '../../types/internal';
+
+// TODO: mocks
+class RequestMock {}
 
 /**
  * Mock API for some API route.
@@ -56,12 +57,10 @@ export const mockApiRoute = async <
 
     let requestMock = RequestMock();
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     requestMock.onRequestTo = wrapInTestRunTracker(requestMock.onRequestTo);
 
     requestMock = requestMock.onRequestTo(getRequestsFilter(apiMockState));
 
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     requestMock.respond = wrapInTestRunTracker(requestMock.respond);
 
     const apiMock = requestMock.respond(getSetResponse(apiMockState));

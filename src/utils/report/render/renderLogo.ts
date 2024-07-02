@@ -17,5 +17,5 @@ export const renderLogo = (): SafeHtml => {
   const logoString = readFileSync(pathToLogo, READ_FILE_OPTIONS);
 
   return createSafeHtmlWithoutSanitize`
-<a class="logo" href="https://www.npmjs.com/package/e2ed" aria-label="e2ed package" rel="noopener noreferrer" target="_blank" title="e2ed package">${logoString}</a>`;
+<a class="logo" href="https://www.npmjs.com/package/e2ed" aria-label="e2ed package" rel="noreferrer" target="_blank" title="e2ed package">${logoString}</a>`;
 };
