@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.18.0](https://github.com/joomcode/e2ed/tree/v0.18.0) (2024-07-25)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.17.1...v0.18.0)
+
+- [Merge pull request #78 from joomcode/feat/use-playwright](https://github.com/joomcode/e2ed/commit/a04a7342ddb68cf4dcfcba55ddc4c3dad9f91450) ([uid11](https://github.com/uid11))
+
+  feat: replace TestCafe with Playwright
+
+- [FI-1237 feat: run tests via Playwright](https://github.com/joomcode/e2ed/commit/41d221f08759cb6ab47e77c5cdc0b6edb9445090) ([uid11](https://github.com/uid11))
+
 ## [v0.17.1](https://github.com/joomcode/e2ed/tree/v0.17.1) (2024-05-27)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.17.0...v0.17.1)
