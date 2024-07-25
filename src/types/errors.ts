@@ -1,14 +1,10 @@
-import type {Inner} from 'testcafe-without-typecheck';
-
 import type {LogParams} from './log';
 import type {RunLabel} from './runLabel';
 
 /**
  * Browser's JS-error from TestCafe.
  */
-export type BrowserJsError = Readonly<
-  Exclude<Parameters<Inner.SkipJsErrorsCallbackWithOptionsObject['fn']>[0], undefined>
->;
+export type BrowserJsError = Readonly<{message: string}>;
 
 /**
  * Printed fields of `E2edError` instances for `toJSON`, `toString` and `inspect.custom` methods.
@@ -28,9 +24,3 @@ export type E2edPrintedFields = Readonly<{
  * @internal
  */
 export type MaybeWithIsTestRunBroken = Readonly<{isTestRunBroken: unknown}> | undefined;
-
-/**
- * Original TestCafe test run error object.
- * @internal
- */
-export type OriginalTestRunError = Readonly<{errMsg: string}>;

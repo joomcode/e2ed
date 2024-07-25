@@ -12,7 +12,7 @@ export const getKeysCounter = (): ((key: string) => number) => {
       cache[key] = 0;
     }
 
-    cache[key] += 1;
+    (cache[key] as number) += 1;
 
     const count = cache[key];
 

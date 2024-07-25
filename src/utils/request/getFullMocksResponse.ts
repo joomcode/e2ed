@@ -32,7 +32,7 @@ export const getFullMocksResponse = (
 
   assertValueIsDefined(requestHeaders, 'requestHeaders is defined', logParams);
 
-  const requestKind = fullMocksConfig.getRequestKind(method, urlObject);
+  const requestKind = fullMocksConfig.getRequestKind(urlObject);
 
   const requestWithUtcTimeInMs: RequestWithUtcTimeInMs = {
     method,
@@ -47,10 +47,7 @@ export const getFullMocksResponse = (
     completionTimeInMs: requestWithUtcTimeInMs.utcTimeInMs,
     duration: '0ms',
     request: requestWithUtcTimeInMs,
-    ...getResponseFromFullMocks(
-      {fullMocksState, method, requestKind, urlObject},
-      requestWithUtcTimeInMs,
-    ),
+    ...getResponseFromFullMocks({fullMocksState, requestKind, urlObject}, requestWithUtcTimeInMs),
   };
 
   return response;

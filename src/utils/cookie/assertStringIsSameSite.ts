@@ -9,9 +9,9 @@ export function assertStringIsSameSite(string: string): asserts string is SameSi
   const sameSite = string as SameSite;
 
   switch (sameSite) {
-    case 'lax':
-    case 'none':
-    case 'strict':
+    case 'Lax':
+    case 'None':
+    case 'Strict':
       return;
 
     // no default

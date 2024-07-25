@@ -1,11 +1,12 @@
 import {LogEventType} from '../constants/internal';
-import {testController} from '../testController';
 import {log} from '../utils/log';
 import {getDescriptionFromSelector} from '../utils/selectors';
 
-import type {Selector, TestCafeSelector} from '../types/internal';
+import type {Locator} from '@playwright/test';
 
-type Options = Parameters<typeof testController.scrollIntoView>[1];
+import type {Selector} from '../types/internal';
+
+type Options = Parameters<Locator['scrollIntoViewIfNeeded']>[0];
 
 /**
  * Scrolls the specified element into view.
@@ -19,5 +20,5 @@ export const scrollIntoView = (selector: Selector, options?: Options): Promise<v
     LogEventType.InternalAction,
   );
 
-  return testController.scrollIntoView(selector as unknown as TestCafeSelector, options);
+  return selector.getPlaywrightLocator().scrollIntoViewIfNeeded(options);
 };

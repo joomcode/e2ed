@@ -27,42 +27,12 @@ export const createCustomMethods = (
     findByLocatorId(locatorId) {
       return this.find(`[${locatorIdAttributeName}="${locatorId}"]`);
     },
-    parentByLocatorId(locatorId) {
-      return this.parent(`[${locatorIdAttributeName}="${locatorId}"]`);
-    },
-    childByLocatorId(locatorId) {
-      return this.child(`[${locatorIdAttributeName}="${locatorId}"]`);
-    },
-    siblingByLocatorId(locatorId) {
-      return this.sibling(`[${locatorIdAttributeName}="${locatorId}"]`);
-    },
-    nextSiblingByLocatorId(locatorId) {
-      return this.nextSibling(`[${locatorIdAttributeName}="${locatorId}"]`);
-    },
-    prevSiblingByLocatorId(locatorId) {
-      return this.prevSibling(`[${locatorIdAttributeName}="${locatorId}"]`);
-    },
 
     filterByLocatorParameter(parameter, value) {
       return this.filter(`[${getName(parameter)}="${value}"]`);
     },
     findByLocatorParameter(parameter, value) {
       return this.find(`[${getName(parameter)}="${value}"]`);
-    },
-    parentByLocatorParameter(parameter, value) {
-      return this.parent(`[${getName(parameter)}="${value}"]`);
-    },
-    childByLocatorParameter(parameter, value) {
-      return this.child(`[${getName(parameter)}="${value}"]`);
-    },
-    siblingByLocatorParameter(parameter, value) {
-      return this.sibling(`[${getName(parameter)}="${value}"]`);
-    },
-    nextSiblingByLocatorParameter(parameter, value) {
-      return this.nextSibling(`[${getName(parameter)}="${value}"]`);
-    },
-    prevSiblingByLocatorParameter(parameter, value) {
-      return this.prevSibling(`[${getName(parameter)}="${value}"]`);
     },
 
     getLocatorId() {

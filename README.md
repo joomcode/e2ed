@@ -9,7 +9,7 @@
 [![Conventional Commits][conventional-commits-image]][conventional-commits-url]
 [![License MIT][license-image]][license-url]
 
-E2E testing framework over [TestCafe](https://testcafe.io/).
+E2E testing framework over [Playwright](https://playwright.dev/).
 
 `e2ed` is designed to quickly parallel run a large number of independent atomic tests
 (or others tasks) in an arbitrary browser inside a docker container.
@@ -125,7 +125,6 @@ E2ED_ORIGIN=https://google.com npm run e2ed:allTests
 ```
 
 Also, when running locally, you can pass additional
-[TestCafe-supported](https://testcafe.io/documentation/402639/reference/command-line-interface)
 command-line arguments, such as the path to a specific test file from a pack, to run just that test:
 
 ```sh
@@ -196,14 +195,8 @@ For example, you can use the `debug` action from `e2ed/actions` in the test code
 await debug();
 ```
 
-When calling the `debug` action, TestCafe will stop the test execution and enter
-the [debug-mode](https://testcafe.io/documentation/402639/reference/command-line-interface?search#-d---debug-mode).
-
-In this mode, using the buttons on the TestCafe panel built into the bottom of the page,
-you can proceed to the next action (an action is considered to be a call of `action` or
-a call of the `expect`), and between actions you can inspect the page using browser's DevTools
-by opening them as usual (before that, you need to unlock the page with tests using the button
-on the same panel — without this, the page will not respond to the keyboard and mouse).
+When calling the `debug` action, `e2ed` will stop the test execution and enter
+the debug-mode.
 
 After debugging is complete, remember to remove the call of the `debug` action.
 
@@ -227,12 +220,6 @@ E2ED_DEBUG=true npm run e2ed:allTests ./autotests/tests/main/exists.ts
 
 `E2ED_DEBUG` also works for run in docker, and allows you to connect a debugger
 to the `e2ed` running in docker container.
-
-Finally, TestCafe itself has flags `--debug-mode` and `--debug-on-fail` for
-[debug-mode](https://testcafe.io/documentation/402639/reference/command-line-interface?search#-d---debug-mode)
-and [debug-on-fail](https://testcafe.io/documentation/402639/reference/command-line-interface?search#--debug-on-fail)
-modes that call up the debug panel (either immediately when the test is run or when the test fails)
-and allow you to open browser's DevTools:
 
 ```sh
 npm run e2ed:allTests ./autotests/tests/main/exists.ts -- --debug-on-fail
@@ -274,8 +261,7 @@ In CDP mode, tests disable Service Workers (if they are used on the page).
 
 `enableHeadlessMode: boolean`: enables headless mode (if browser supports such mode).
 
-`enableLiveMode: boolean`: enables [TestCafe live mode](https://testcafe.io/documentation/403842/guides/intermediate-guides/live-mode)
-for test development (only for locally running).
+`enableLiveMode: boolean`: enables live mode for test development (only for locally running).
 
 `enableMobileDeviceMode: boolean`: enables Chromium [mobile device mode](https://developer.chrome.com/docs/devtools/device-mode).
 

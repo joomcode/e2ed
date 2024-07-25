@@ -16,7 +16,7 @@ let log: typeof logType | undefined;
 
 export const fullMocks: FullMocks = {
   filterTests: ({options: {meta}}) => meta.testId === '18',
-  getRequestKind: (method, {pathname}) => pathname as RequestKind,
+  getRequestKind: ({pathname}) => pathname as RequestKind,
   getResponseFromFullMocks: ({requestKind, responseWithRequest}) => {
     const response = responseWithRequest ?? {statusCode: BAD_REQUEST_STATUS_CODE};
 

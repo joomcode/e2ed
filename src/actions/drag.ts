@@ -1,18 +1,15 @@
 import {LogEventType} from '../constants/internal';
-import {testController} from '../testController';
 import {log} from '../utils/log';
 import {getDescriptionFromSelector} from '../utils/selectors';
 
-import {waitForInterfaceStabilization} from './waitFor';
+import type {Selector, WithStabilizationInterval} from '../types/internal';
 
-import type {Selector, TestCafeSelector, WithStabilizationInterval} from '../types/internal';
-
-type Options = Parameters<typeof testController.drag>[3] & WithStabilizationInterval;
+type Options = WithStabilizationInterval;
 
 /**
  * Drags an element by an offset.
  */
-export const drag = async (
+export const drag = (
   selector: Selector,
   dragOffsetX: number,
   dragOffsetY: number,
@@ -27,12 +24,6 @@ export const drag = async (
     LogEventType.InternalAction,
   );
 
-  await testController.drag(
-    selector as unknown as TestCafeSelector,
-    dragOffsetX,
-    dragOffsetY,
-    options,
-  );
-
-  await waitForInterfaceStabilization(stabilizationInterval);
+  // TODO
+  return Promise.resolve();
 };

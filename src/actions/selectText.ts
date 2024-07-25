@@ -1,11 +1,10 @@
 import {LogEventType} from '../constants/internal';
-import {testController} from '../testController';
 import {log} from '../utils/log';
 import {getDescriptionFromSelector} from '../utils/selectors';
 
-import type {Selector, TestCafeSelector} from '../types/internal';
+import type {Selector} from '../types/internal';
 
-type Options = Parameters<typeof testController.selectText>[3];
+type Options = {};
 
 /**
  * Selects text in input elements.
@@ -25,10 +24,6 @@ export const selectText = (
     LogEventType.InternalAction,
   );
 
-  return testController.selectText(
-    selector as unknown as TestCafeSelector,
-    startPos,
-    endPos,
-    options,
-  );
+  // TODO
+  return Promise.resolve();
 };

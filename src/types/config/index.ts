@@ -1,8 +1,4 @@
-export type {
-  FrozenPartOfTestCafeConfig,
-  FullPackConfigWithoutDoBeforePack,
-  UserlandPack,
-} from './config';
+export type {FullPackConfigWithoutDoBeforePack, UserlandPack} from './config';
 export type {
   AnyPack,
   AnyPackParameters,

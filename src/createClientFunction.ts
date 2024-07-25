@@ -1,9 +1,13 @@
-import {getClientFunctionWithTimeout, getPrintedClientFunctionName} from './utils/clientFunction';
+import {getTestIdleTimeout} from './context/testIdleTimeout';
+import {E2edError} from './utils/error';
 import {setCustomInspectOnFunction} from './utils/fn';
 import {generalLog} from './utils/generalLog';
+import {getDurationWithUnits} from './utils/getDurationWithUnits';
+import {addTimeoutToPromise} from './utils/promise';
 import {createTestRunCallback} from './utils/testRun';
+import {getPage} from './useContext';
 
-import type {ClientFunction, ClientFunctionState} from './types/internal';
+import type {ClientFunction} from './types/internal';
 
 type Options = Readonly<{name?: string; timeout?: number}>;
 
@@ -17,22 +21,42 @@ export const createClientFunction = <Args extends readonly unknown[], Result>(
   setCustomInspectOnFunction(originalFn);
 
   const name = nameFromOptions ?? originalFn.name;
-  const printedClientFunctionName = getPrintedClientFunctionName(name);
+  const printedClientFunctionName = `client function${name ? ` "${name}"` : ''}`;
 
-  const clientFunctionState: ClientFunctionState<Args, Result> = {
-    clientFunction: undefined,
-    name,
-    originalFn,
-    timeout,
+  const clientFunctionWithTimeout = (...args: Args): Promise<Result> => {
+    const page = getPage();
+
+    const clientFunctionTimeout = timeout ?? getTestIdleTimeout();
+
+    const timeoutWithUnits = getDurationWithUnits(clientFunctionTimeout);
+    const error = new E2edError(
+      `Client function "${name}" rejected after ${timeoutWithUnits} timeout`,
+    );
+
+    // eslint-disable-next-line @typescript-eslint/no-implied-eval, no-new-func
+    const func = new Function('args', `return (${originalFn.toString()})(...args)`) as (
+      args: readonly unknown[],
+    ) => Result;
+
+    return addTimeoutToPromise(
+      page.evaluate(func, args).catch(async (evaluateError: unknown) => {
+        const errorString = String(evaluateError);
+
+        if (errorString.includes('Execution context was destroyed')) {
+          await page.waitForLoadState();
+
+          return page.evaluate(func, args);
+        }
+
+        throw evaluateError;
+      }),
+      clientFunctionTimeout,
+      error,
+    );
   };
-
-  const clientFunctionWithTimeout = getClientFunctionWithTimeout(clientFunctionState);
 
   generalLog(`Create ${printedClientFunctionName}`, {originalFn});
 
-  /**
-   * TODO: support Smart Assertions.
-   */
   return (...args: Args) => {
     const clientFunctionWithTestRun = createTestRunCallback({
       targetFunction: clientFunctionWithTimeout,

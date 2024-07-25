@@ -1,9 +1,8 @@
 // eslint-disable-next-line import/no-internal-modules
 import {mockApiRoute} from '../../actions/mock';
-// eslint-disable-next-line import/no-internal-modules
-import {waitForResponse} from '../../actions/waitFor';
-import {LogEventStatus, LogEventType} from '../../constants/internal';
+import {LogEventType} from '../../constants/internal';
 import {setFullMocksState} from '../../context/fullMocks';
+import {getOnResponseCallbacks} from '../../context/onResponseCallbacks';
 
 import {log} from '../log';
 import {setReadonlyProperty} from '../setReadonlyProperty';
@@ -11,7 +10,7 @@ import {setReadonlyProperty} from '../setReadonlyProperty';
 import {FullMocksRoute} from './FullMocksRoute';
 import {getResponseFromFullMocks} from './getResponseFromFullMocks';
 import {getTestIdByTestFilePath} from './getTestIdByTestFilePath';
-import {writeResposneToFullMocks} from './writeResposneToFullMocks';
+import {writeResponseToFullMocks} from './writeResponseToFullMocks';
 
 import type {
   FullMocksConfig,
@@ -19,8 +18,6 @@ import type {
   TestFilePath,
   TestFullMocks,
 } from '../../types/internal';
-
-const maxTestRunDurationInMs = 3600_000;
 
 /**
  * Enables full mocks for concrete test.
@@ -61,19 +58,8 @@ export const enableFullMocks = async (
 
     await mockApiRoute(FullMocksRoute, getResponseFromFullMocks, {skipLogs: true});
   } else {
-    void waitForResponse(
-      (responseWithRequest) => {
-        writeResposneToFullMocks(responseWithRequest);
+    const onResponseCallbacks = getOnResponseCallbacks();
 
-        return false;
-      },
-      {skipLogs: true, timeout: maxTestRunDurationInMs},
-    ).catch((cause: unknown) => {
-      log(
-        'Caught an error in "waitForResponse" for full mocks',
-        {cause, fullMocksState, logEventStatus: LogEventStatus.Failed},
-        LogEventType.InternalUtil,
-      );
-    });
+    onResponseCallbacks.push(writeResponseToFullMocks);
   }
 };

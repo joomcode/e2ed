@@ -11,7 +11,7 @@ const cookie = {
   httpOnly: false,
   name: 'e2edFooCookie',
   path: '/',
-  sameSite: 'strict',
+  sameSite: 'Strict',
   secure: true,
   value: 'bar',
 } as const;

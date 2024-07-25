@@ -41,7 +41,7 @@ export type {
   PageClassTypeArgs,
 } from './pages';
 export type {FilePathFromRoot, TestFilePath} from './paths';
-export type {AsyncVoid, MaybePromise, ReExecutablePromise, Thenable} from './promise';
+export type {AsyncVoid, MaybePromise, Thenable} from './promise';
 export type {
   AnyObject,
   FieldReplacer,
@@ -68,7 +68,6 @@ export type {
 export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';
 export type {StringForLogs} from './string';
-export type {TestCafeSelector, TestController} from './testCafe';
 export type {MergeTuples, TupleRest} from './tuples';
 export type {
   CloneWithoutUndefinedProperties,

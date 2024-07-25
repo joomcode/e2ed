@@ -3,7 +3,7 @@ export {EXEC_FILE_OPTIONS} from './childProcess';
 /** @internal */
 export {ConsoleBackgroundColor} from './color';
 export {EndE2edReason, ExitCode} from './end';
-export {RunEnvironment} from './environment';
+export {isDebug, RunEnvironment} from './environment';
 /** @internal */
 export {
   e2edEnvironment,
@@ -18,8 +18,9 @@ export {AMOUNT_OF_PARALLEL_OPEN_FILES, DEFAULT_FILE_CHUNK_LENGTH} from './fs';
 export {
   BAD_REQUEST_STATUS_CODE,
   CREATED_STATUS_CODE,
-  INTERNAL_SERVER_ERROR,
-  NOT_FOUND,
+  INTERNAL_SERVER_ERROR_STATUS_CODE,
+  MULTIPLE_CHOICES_STATUS_CODE,
+  NOT_FOUND_STATUS_CODE,
   OK_STATUS_CODE,
 } from './http';
 /** @internal */
@@ -40,17 +41,17 @@ export {
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
   AUTOTESTS_DIRECTORY_PATH,
   COMPILED_USERLAND_CONFIG_DIRECTORY,
+  CONFIG_PATH,
   DOT_ENV_PATH,
   EVENTS_DIRECTORY_PATH,
   INSTALLED_E2ED_DIRECTORY_PATH,
+  INTERNAL_REPORTS_DIRECTORY_PATH,
   REPORTS_DIRECTORY_PATH,
   SCREENSHOTS_DIRECTORY_PATH,
   START_INFO_PATH,
-  TESTCAFERC_PATH,
+  TESTS_DIRECTORY_PATH,
   TMP_DIRECTORY_PATH,
 } from './paths';
-/** @internal */
-export {DEFAULT_PIXELMATCH_OPTIONS} from './pixelmatch';
 /** @internal */
 export {RESOLVED_PROMISE} from './promise';
 export {
@@ -59,9 +60,9 @@ export {
   REQUEST_HOOK_CONTEXT_ID_KEY,
   REQUEST_HOOK_CONTEXT_KEY,
 } from './requestHook';
-/** @internal */
-export {DEFAULT_TAKE_SCREENSHOT_TIMEOUT_IN_MS} from './screenshots';
 export {DESCRIPTION_KEY} from './selector';
+/** @internal */
+export {RETRY_KEY} from './selector';
 export {FAILED_TEST_RUN_STATUSES, TestRunStatus} from './testRun';
 /** @internal */
 export {

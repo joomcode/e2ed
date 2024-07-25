@@ -8,14 +8,9 @@ export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';
 export type {ClientFunction} from './clientFunction';
 /** @internal */
-export type {
-  ClientFunctionState,
-  ClientFunctionWrapperResult,
-  MaybeTestCafeError,
-} from './clientFunction';
+export type {ClientFunctionWrapperResult, MaybeTestCafeError} from './clientFunction';
 export type {
   AnyPack,
-  FrozenPartOfTestCafeConfig,
   FullPackConfig,
   FullPackConfigWithoutDoBeforePack,
   GetPackParameters,
@@ -76,6 +71,8 @@ export type {
 export type {ApiMockFunction} from './mockApiRoute';
 /** @internal */
 export type {ApiMockState} from './mockApiRoute';
+/** @internal */
+export type {NavigationDelay} from './navigation';
 export type {
   AnyPageClassType,
   NavigateToOrAssertPageArgs,
@@ -88,9 +85,7 @@ export type {
   FilePathFromRoot,
   TestFilePath,
 } from './paths';
-/** @internal */
-export type {ImgData, PixelmatchOptions} from './pixelmatch';
-export type {AsyncVoid, MaybePromise, ReExecutablePromise, Thenable} from './promise';
+export type {AsyncVoid, MaybePromise, Thenable} from './promise';
 export type {
   AnyObject,
   FieldReplacer,
@@ -133,17 +128,12 @@ export type {
   SelectorCustomMethods,
   SelectorFunctions,
 } from './selectors';
+/** @internal */
+export type {SelectorPropertyRetryData} from './selectors';
 export type {IsTestSkippedResult} from './skipTest';
 export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';
 export type {StringForLogs} from './string';
-export type {TestCafeSelector, TestController} from './testCafe';
-/** @internal */
-export type {
-  TestCafeBrowserConnection,
-  TestCafeBrowserConnectionId,
-  TestCafeInstance,
-} from './testCafe';
 export type {
   LiteTestRun,
   RejectTestRun,

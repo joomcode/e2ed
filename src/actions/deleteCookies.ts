@@ -1,6 +1,4 @@
 import {LogEventType} from '../constants/internal';
-import {testController} from '../testController';
-import {getCookieOptionsFromPartialCookie} from '../utils/cookie';
 import {log} from '../utils/log';
 
 import type {Cookie} from '../types/internal';
@@ -13,10 +11,8 @@ export const deleteCookies = (cookiesParameters?: Partial<Cookie>[]): Promise<vo
   if (cookiesParameters === undefined) {
     log('Deletes all the cookies from all pages', LogEventType.InternalAction);
 
-    return testController.deleteCookies();
+    return Promise.resolve();
   }
-
-  const cookiesOptions = cookiesParameters.map(getCookieOptionsFromPartialCookie);
 
   log(
     'Deletes cookies with the specified parameters',
@@ -24,5 +20,6 @@ export const deleteCookies = (cookiesParameters?: Partial<Cookie>[]): Promise<vo
     LogEventType.InternalAction,
   );
 
-  return testController.deleteCookies(cookiesOptions);
+  // TODO
+  return Promise.resolve();
 };

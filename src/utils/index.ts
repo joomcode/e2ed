@@ -56,6 +56,6 @@ export {getDescriptionFromSelector} from './selectors';
 export {setReadonlyProperty} from './setReadonlyProperty';
 export {getPackageInfo} from './startInfo';
 export {wrapInTestRunTracker} from './testRun';
-export {isArray, isReExecutablePromise, isThenable} from './typeGuards';
+export {isArray, isThenable} from './typeGuards';
 export {valueToString} from './valueToString';
 export {isSelectorEntirelyInViewport, isSelectorInViewport} from './viewport';

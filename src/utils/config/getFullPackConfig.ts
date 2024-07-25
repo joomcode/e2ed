@@ -20,7 +20,7 @@ export const getFullPackConfig = <
 >(): FullPackConfig<CustomPackProperties, CustomReportProperties, SkipTests, TestMeta> => {
   if (updatedConfig === undefined) {
     // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-    const {fullPackConfig} = require<typeof import('../../testcaferc')>('../../testcaferc');
+    const fullPackConfig = require<typeof import('../../config')>('../../config').default;
 
     updatedConfig = fullPackConfig;
 

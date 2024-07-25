@@ -52,8 +52,8 @@ export type Onlog = () => void;
 export type TestRunEvent<TestMeta = TestMetaPlaceholder> = Readonly<{
   logEvents: readonly LogEvent[];
   onlog: Onlog;
-  previousRunId: RunId | undefined;
   reject: RejectTestRun;
+  retry: number;
   runId: RunId;
   runLabel: RunLabel;
   status: TestRunStatus;

@@ -19,6 +19,7 @@ ignorePatterns: [bin/forks/*/package, build, local]
 rules:
   class-methods-use-this: off
   complexity: [error, {max: 10}]
+  consistent-return: off
   curly: [error, all]
   default-param-last: off
   dot-notation: off
@@ -45,6 +46,7 @@ rules:
   import/no-nodejs-modules:
     - error
     - allow:
+        - node:async_hooks
         - node:child_process
         - node:crypto
         - node:fs
@@ -85,13 +87,11 @@ rules:
         - src/*/index.ts
         - src/*/internal.ts
         - src/bin/*.ts
+        - src/config.ts
         - src/createLocator.ts
-        - src/esm/*.ts
         - src/getModulesGraph.ts
         - src/globby.ts
         - src/index.ts
-        - src/testcafe.ts
-        - src/types/extends.ts
       missingExports: true
       unusedExports: true
   import/no-useless-path-segments: [error, {commonjs: true, noUselessIndex: true}]
@@ -163,6 +163,7 @@ rules:
   '@typescript-eslint/class-literal-property-style': error
   '@typescript-eslint/consistent-generic-constructors': error
   '@typescript-eslint/consistent-indexed-object-style': error
+  '@typescript-eslint/consistent-return': error
   '@typescript-eslint/consistent-type-assertions':
     [error, {assertionStyle: as, objectLiteralTypeAssertions: never}]
   '@typescript-eslint/consistent-type-definitions': [error, type]

@@ -7,7 +7,6 @@ import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
 import {getPromiseWithResolveAndReject} from '../../utils/promise';
-import {RequestHookToWaitForEvents} from '../../utils/requestHooks';
 import {setReadonlyProperty} from '../../utils/setReadonlyProperty';
 import {
   getInitialIdsForAllRequestsCompletePredicate,
@@ -37,9 +36,7 @@ export const waitForAllRequestsComplete = async (
 
   setCustomInspectOnFunction(predicate);
 
-  const {allRequestsCompletePredicates, hashOfNotCompleteRequests} = getWaitForEventsState(
-    RequestHookToWaitForEvents,
-  );
+  const {allRequestsCompletePredicates, hashOfNotCompleteRequests} = getWaitForEventsState();
   const {waitForAllRequestsComplete: defaultTimeouts} = getFullPackConfig();
   const resolveTimeout =
     maxIntervalBetweenRequestsInMs ?? defaultTimeouts.maxIntervalBetweenRequestsInMs;

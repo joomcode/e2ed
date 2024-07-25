@@ -13,7 +13,7 @@ export const getUnvisitedTestFilePaths = async (
 ): Promise<readonly TestFilePath[]> => {
   const allTestFilePaths = await collectTestFilePaths();
 
-  const visitedTestFilePathsHash: Record<TestFilePath, true> = Object.create(null) as {};
+  const visitedTestFilePathsHash = Object.create(null) as Record<TestFilePath, true>;
 
   for (const {filePath} of fullTestRuns) {
     visitedTestFilePathsHash[filePath] = true;
@@ -32,7 +32,7 @@ export const getUnvisitedTestFilePaths = async (
   const unvisitedTestFilePaths: TestFilePath[] = [];
 
   for (const testFilePath of allTestFilePaths) {
-    if (!(testFilePath in visitedTestFilePathsHash)) {
+    if (!(testFilePath in visitedTestFilePathsHash) && !testFilePath.endsWith('.skip.ts')) {
       unvisitedTestFilePaths.push(testFilePath);
     }
   }

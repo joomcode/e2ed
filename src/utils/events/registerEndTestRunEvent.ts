@@ -1,10 +1,13 @@
-import {TestRunStatus} from '../../constants/internal';
+import {isDebug, TestRunStatus} from '../../constants/internal';
 import {getFullMocksState} from '../../context/fullMocks';
+import {getPage} from '../../useContext';
 
 import {cloneWithoutLogEvents} from '../clone';
 import {getRunErrorFromError} from '../error';
 import {writeTestRunToJsonFile} from '../fs';
 import {generalLog, logEndTestRunEvent, writeLogsToFile} from '../generalLog';
+import {getTimeoutPromise} from '../promise';
+import {setReadonlyProperty} from '../setReadonlyProperty';
 import {getUserlandHooks} from '../userland';
 
 import {calculateTestRunStatus} from './calculateTestRunStatus';
@@ -12,6 +15,8 @@ import {getTestRunEvent} from './getTestRunEvent';
 import {writeFullMocks} from './writeFullMocks';
 
 import type {EndTestRunEvent, FullTestRun, TestRun} from '../../types/internal';
+
+const delayForWritingFullMocksInMs = 100;
 
 /**
  * Registers end test run event (for report) after test closing.
@@ -23,13 +28,14 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
   const testRunEvent = getTestRunEvent(runId);
 
   const {
+    filePath,
     logEvents,
+    name,
+    options,
+    retry,
     runLabel,
     status: originalStatus,
     utcTimeInMs: startTimeInMs,
-    filePath,
-    name,
-    options,
   } = testRunEvent;
 
   if (originalStatus !== TestRunStatus.Unknown && originalStatus !== TestRunStatus.Skipped) {
@@ -49,6 +55,8 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
     const fullMocksState = getFullMocksState();
 
     if (fullMocksState !== undefined && fullMocksState.appliedMocks === undefined) {
+      await getTimeoutPromise(delayForWritingFullMocksInMs);
+
       await writeFullMocks(fullMocksState).catch((error: unknown) => {
         generalLog('Cannot write "full mocks" for test', {
           endTestRunEvent,
@@ -59,7 +67,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
     }
   }
 
-  (testRunEvent as {status: TestRunStatus}).status = status;
+  setReadonlyProperty(testRunEvent, 'status', status);
 
   const runError = hasRunError ? getRunErrorFromError(unknownRunError) : undefined;
 
@@ -69,6 +77,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
     logEvents,
     name,
     options,
+    retry,
     runError,
     runId,
     runLabel,
@@ -87,4 +96,8 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
 
   await writeTestRunToJsonFile(fullTestRun);
   await writeLogsToFile();
+
+  if (isDebug) {
+    await getPage().pause();
+  }
 };

@@ -1,11 +1,10 @@
-import {Selector as TestCafeSelector} from 'testcafe-without-typecheck';
-
 import {DESCRIPTION_KEY} from '../../constants/internal';
 
 import {setReadonlyProperty} from '../setReadonlyProperty';
 
 import {createCustomMethods} from './createCustomMethods';
 import {createGetTrap} from './createGetTrap';
+import {Selector as SelectorClass} from './Selector';
 
 import type {CreateSelector, GetLocatorAttributeNameFn, Selector} from '../../types/internal';
 
@@ -18,13 +17,10 @@ export const createSelectorCreator = (
 ): CreateSelector => {
   const customMethods = createCustomMethods(getLocatorAttributeName);
 
-  const createSelector: CreateSelector = (...args) => {
-    const locator = args[0];
-    const selector = TestCafeSelector(...args) as unknown as Selector;
+  const createSelector: CreateSelector = (locator) => {
+    const selector = new SelectorClass(locator) as unknown as Selector;
 
-    if (typeof locator === 'string') {
-      setReadonlyProperty(selector, DESCRIPTION_KEY, locator);
-    }
+    setReadonlyProperty(selector, DESCRIPTION_KEY, locator);
 
     return new Proxy(selector, {get: createGetTrap(customMethods)});
   };

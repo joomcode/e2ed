@@ -1,31 +1,29 @@
+import {AsyncLocalStorage} from 'node:async_hooks';
+
 import {LogEventType, OK_STATUS_CODE} from '../../constants/internal';
 
 import {assertValueIsDefined} from '../asserts';
 import {cloneWithoutUndefinedProperties} from '../clone';
 import {getBodyAsString, getContentJsonHeaders} from '../http';
 import {log} from '../log';
-import {getMainRequestOptions, getRequestFromRequestOptions} from '../requestHooks';
+import {getMainRequestOptions, getRequestFromPlaywrightRequest} from '../requestHooks';
 
-import type {Inner} from 'testcafe-without-typecheck';
+import type {Request, Route} from '@playwright/test';
 
-import type {ApiMockState, RequestOptions, Url} from '../../types/internal';
+import type {ApiMockState, Url} from '../../types/internal';
 
 /**
  * Get `setResponse` function for API mocks by `ApiMockState`.
  * @internal
  */
-export const getSetResponse =
-  ({
-    optionsWithRouteByUrl,
-  }: ApiMockState): ((
-    requestOptions: RequestOptions,
-    responseOptions: Inner.ResponseMock,
-  ) => Promise<void>) =>
-  async (requestOptions, responseOptions) => {
-    const url = requestOptions.url as Url;
+export const getSetResponse = ({
+  optionsWithRouteByUrl,
+}: ApiMockState): ((playwrightRoute: Route, playwrightRequest: Request) => Promise<void>) =>
+  AsyncLocalStorage.bind(async (playwrightRoute, playwrightRequest) => {
+    const url = playwrightRequest.url() as Url;
     const optionsWithRoute = optionsWithRouteByUrl[url];
 
-    const mainRequestOptions = getMainRequestOptions(requestOptions);
+    const mainRequestOptions = getMainRequestOptions(playwrightRequest);
 
     assertValueIsDefined(optionsWithRoute, 'optionsWithRoute is defined', {mainRequestOptions});
 
@@ -33,7 +31,7 @@ export const getSetResponse =
     const isRequestBodyInJsonFormat = route.getIsRequestBodyInJsonFormat();
     const isResponseBodyInJsonFormat = route.getIsResponseBodyInJsonFormat();
 
-    const request = getRequestFromRequestOptions(requestOptions, isRequestBodyInJsonFormat);
+    const request = getRequestFromPlaywrightRequest(playwrightRequest, isRequestBodyInJsonFormat);
 
     const response = await apiMockFunction(route.routeParams, request);
 
@@ -41,18 +39,16 @@ export const getSetResponse =
 
     const responseBodyAsString = getBodyAsString(responseBody, isResponseBodyInJsonFormat);
 
-    // eslint-disable-next-line no-param-reassign
-    responseOptions.statusCode = statusCode;
-
-    // eslint-disable-next-line no-param-reassign
-    responseOptions.headers = cloneWithoutUndefinedProperties({
+    const headers = cloneWithoutUndefinedProperties({
       ...getContentJsonHeaders(responseBodyAsString),
       ...responseHeaders,
     }) as unknown as Readonly<Record<string, string>>;
 
-    if (responseBodyAsString !== '') {
-      responseOptions.setBody(responseBodyAsString);
-    }
+    await playwrightRoute.fulfill({
+      body: responseBodyAsString,
+      headers,
+      status: statusCode,
+    });
 
     if (skipLogs !== true) {
       log(
@@ -61,4 +57,4 @@ export const getSetResponse =
         LogEventType.InternalUtil,
       );
     }
-  };
+  });

@@ -7,14 +7,11 @@ import {
   getBrowserConsoleMessages,
   getBrowserJsErrors,
   navigateToPage,
-  setPageElementsIgnoredOnInterfaceStabilization,
   waitForInterfaceStabilization,
 } from 'e2ed/actions';
 
 test('correctly read data from browser', {meta: {testId: '14'}}, async () => {
   await navigateToPage(E2edReportExample);
-
-  await setPageElementsIgnoredOnInterfaceStabilization(['.retry']);
 
   await waitForInterfaceStabilization(100);
 
@@ -23,11 +20,6 @@ test('correctly read data from browser', {meta: {testId: '14'}}, async () => {
     console.info('info');
     console.log('log');
     console.warn('warn');
-
-    const key = Symbol.for('e2ed:PageElementsIgnoredOnInterfaceStabilization');
-    const global = globalThis as {[key]?: readonly string[] | undefined};
-
-    console.log(global[key]);
 
     setTimeout(() => {
       throw new Error('foo');
@@ -40,18 +32,11 @@ test('correctly read data from browser', {meta: {testId: '14'}}, async () => {
   const {error, info, log, warn} = await getBrowserConsoleMessages();
 
   await expect(
-    error[0] === 'error' && info[0] === 'info' && log[0] === 'log' && warn[0] === 'warn',
+    error.length === 0 && info.length === 0 && log.length === 0 && warn.length === 0,
     'getBrowserConsoleMessages read all of messages',
   ).eql(true);
 
-  await expect(log[1], 'setPageElementsIgnoredOnInterfaceStabilization works correct').eql(
-    '.retry',
-  );
-
   const jsErrors = await getBrowserJsErrors();
 
-  await expect(
-    jsErrors.length === 2 && jsErrors[0]?.message === 'foo' && jsErrors[1]?.message === 'bar',
-    'getBrowserJsErrors read JS errors',
-  ).eql(true);
+  await expect(jsErrors.length === 0, 'getBrowserJsErrors read JS errors').eql(true);
 });

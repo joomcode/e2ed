@@ -6,7 +6,7 @@ import type {AbsolutePathToDirectory, PackageInfo} from '../../types/internal';
 
 /**
  * Get information about used installed npm package from dependencies by package name.
- * If the second argument packagePath is given, then we look for the package at this absolute path.
+ * If the second argument `packagePath` is given, then we look for the package at this absolute path.
  */
 export const getPackageInfo = (
   packageName: string,

@@ -1,25 +1,27 @@
+import {AsyncLocalStorage} from 'node:async_hooks';
+
 import {assertValueIsDefined} from '../asserts';
 import {getRouteInstanceFromUrl} from '../getRouteInstanceFromUrl';
 
-import type {ApiMockState, RequestOptions, Url} from '../../types/internal';
+import type {URL} from 'node:url';
+
+import type {ApiMockState, Url} from '../../types/internal';
 
 /**
  * Get `requestsFilter` function for API mocks by `ApiMockState`.
  * @internal
  */
-export const getRequestsFilter =
-  ({
-    optionsByRoute,
-    optionsWithRouteByUrl,
-  }: ApiMockState): ((requestOptions: RequestOptions) => boolean) =>
-  (requestOptions) => {
-    assertValueIsDefined(optionsByRoute, 'optionsByRoute is defined', {requestOptions});
+export const getRequestsFilter = ({
+  optionsByRoute,
+  optionsWithRouteByUrl,
+}: ApiMockState): ((urlObject: URL) => boolean) =>
+  AsyncLocalStorage.bind((urlObject) => {
+    assertValueIsDefined(optionsByRoute, 'optionsByRoute is defined', {urlObject});
 
-    const url = requestOptions.url as Url;
+    const url = urlObject.href as Url;
 
     for (const [Route, {apiMockFunction, skipLogs}] of optionsByRoute) {
-      const maybeMethod = requestOptions.method?.toUpperCase() ?? '';
-      const maypeRouteWithRouteParams = getRouteInstanceFromUrl(url, maybeMethod, Route);
+      const maypeRouteWithRouteParams = getRouteInstanceFromUrl(url, Route);
 
       if (maypeRouteWithRouteParams === undefined) {
         // eslint-disable-next-line no-param-reassign
@@ -37,4 +39,4 @@ export const getRequestsFilter =
     }
 
     return false;
-  };
+  });

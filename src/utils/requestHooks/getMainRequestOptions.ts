@@ -1,17 +1,21 @@
-import type {RequestOptions} from '../../types/internal';
+import type {Request} from '@playwright/test';
 
-type MainOptionsKeys = 'headers' | 'method' | 'url';
+import type {Headers, Method, Url} from '../../types/internal';
 
 type Return = Readonly<{
-  [Key in MainOptionsKeys]: RequestOptions[Key] | undefined;
+  headers: Headers;
+  method: Method;
+  url: Url;
 }>;
 
 /**
  * Get main request options for display in logs.
  * @internal
  */
-export const getMainRequestOptions = (requestOptions: RequestOptions): Return => {
-  const {headers, method, url} = requestOptions;
+export const getMainRequestOptions = (playwrightRequest: Request): Return => {
+  const headers = playwrightRequest.headers();
+  const method = playwrightRequest.method() as Method;
+  const url = playwrightRequest.url() as Url;
 
   return {headers, method, url};
 };

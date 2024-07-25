@@ -1,11 +1,10 @@
 // eslint-disable-next-line import/no-internal-modules
 import {navigateToUrl} from './actions/navigateToUrl';
-// eslint-disable-next-line import/no-internal-modules
-import {waitForAllRequestsComplete, waitForInterfaceStabilization} from './actions/waitFor';
 import {CREATE_PAGE_TOKEN} from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
 import {getFullPackConfig} from './utils/config';
 import {reloadDocument} from './utils/document';
+import {getPage} from './useContext';
 
 import type {PageRoute} from './PageRoute';
 import type {AsyncVoid, PageClassTypeArgs, ParamsKeyType, Url} from './types/internal';
@@ -127,14 +126,19 @@ export abstract class Page<PageParams = undefined> {
   }
 
   /**
+   * Waits for `DOMContentLoaded` event.
+   */
+  async waitForDomContentLoaded(): Promise<void> {
+    const playwrightPage = getPage();
+
+    await playwrightPage.waitForLoadState('domcontentloaded');
+  }
+
+  /**
    * Waits for page loaded.
    */
   async waitForPageLoaded(): Promise<void> {
-    await waitForAllRequestsComplete(() => true, {
-      maxIntervalBetweenRequestsInMs: this.maxIntervalBetweenRequestsInMs,
-    });
-
-    await waitForInterfaceStabilization(this.pageStabilizationInterval);
+    await this.waitForDomContentLoaded();
   }
 
   /**

@@ -21,7 +21,7 @@ export function parseMarkdownLinks(
 
   const htmlWithLinks = sanitizedHtml.replace(
     /\[(?<name>[^\]]+)\]\((?<href>[^)]+)\)/g,
-    '<a href="$<href>" rel="noopener noreferrer" target="_blank">$<name></a>',
+    '<a href="$<href>" rel="noreferrer" target="_blank">$<name></a>',
   );
 
   return createSafeHtmlWithoutSanitize`${htmlWithLinks}`;

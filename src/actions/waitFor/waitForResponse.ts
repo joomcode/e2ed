@@ -1,22 +1,17 @@
+import {AsyncLocalStorage} from 'node:async_hooks';
+
 import {LogEventType} from '../../constants/internal';
-import {getTestRunPromise} from '../../context/testRunPromise';
-import {getWaitForEventsState} from '../../context/waitForEventsState';
+import {getPage} from '../../useContext';
 import {getFullPackConfig} from '../../utils/config';
-import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
-import {getPromiseWithResolveAndReject} from '../../utils/promise';
-import {RequestHookToWaitForEvents} from '../../utils/requestHooks';
+import {getResponseFromPlaywrightResponse} from '../../utils/requestHooks';
+import {getWaitForResponsePredicate} from '../../utils/waitForEvents';
 
-import type {
-  Request,
-  Response,
-  ResponsePredicate,
-  ResponsePredicateWithPromise,
-  ResponseWithRequest,
-  UtcTimeInMs,
-} from '../../types/internal';
+import type {Request, Response, ResponsePredicate, ResponseWithRequest} from '../../types/internal';
+
+type Options = Readonly<{includeNavigationRequest?: boolean; skipLogs?: boolean; timeout?: number}>;
 
 /**
  * Waits for some response (from browser) filtered by the response predicate.
@@ -27,46 +22,34 @@ export const waitForResponse = <
   SomeRequest extends Request = Request,
 >(
   predicate: ResponsePredicate<SomeRequest, SomeResponse>,
-  {skipLogs = false, timeout}: {skipLogs?: boolean; timeout?: number} = {},
+  {includeNavigationRequest = false, skipLogs = false, timeout}: Options = {},
 ): Promise<ResponseWithRequest<SomeResponse, SomeRequest>> => {
-  const startTimeInMs = Date.now() as UtcTimeInMs;
-
   setCustomInspectOnFunction(predicate);
 
-  const waitForEventsState = getWaitForEventsState(RequestHookToWaitForEvents);
   const {waitForResponseTimeout} = getFullPackConfig();
   const rejectTimeout = timeout ?? waitForResponseTimeout;
-  const {clearRejectTimeout, promiseWithTimeout, reject, resolve, setRejectTimeoutFunction} =
-    getPromiseWithResolveAndReject<
-      ResponseWithRequest<SomeResponse, SomeRequest>,
-      ResponseWithRequest
-    >(rejectTimeout);
 
-  const responsePredicateWithPromise: ResponsePredicateWithPromise = {
-    predicate: predicate as ResponsePredicate,
-    reject,
-    resolve,
-    skipLogs,
-    startTimeInMs,
-  };
-  const testRunPromise = getTestRunPromise();
+  const page = getPage();
 
-  void testRunPromise.then(clearRejectTimeout);
-
-  const timeoutWithUnits = getDurationWithUnits(rejectTimeout);
-
-  setRejectTimeoutFunction(() => {
-    const error = new E2edError(
-      `waitForResponse promise rejected after ${timeoutWithUnits} timeout`,
-      {predicateCode: predicate.toString()},
+  const promise = page
+    .waitForResponse(
+      AsyncLocalStorage.bind(
+        getWaitForResponsePredicate(
+          predicate as ResponsePredicate,
+          includeNavigationRequest,
+          rejectTimeout,
+        ),
+      ),
+      {timeout: rejectTimeout},
+    )
+    .then(
+      (playwrightResponse) =>
+        getResponseFromPlaywrightResponse(playwrightResponse) as Promise<
+          ResponseWithRequest<SomeResponse, SomeRequest>
+        >,
     );
 
-    waitForEventsState.responsePredicates.delete(responsePredicateWithPromise);
-
-    reject(error);
-  });
-
-  waitForEventsState.responsePredicates.add(responsePredicateWithPromise);
+  const timeoutWithUnits = getDurationWithUnits(rejectTimeout);
 
   if (skipLogs !== true) {
     log(
@@ -76,5 +59,5 @@ export const waitForResponse = <
     );
   }
 
-  return promiseWithTimeout;
+  return promise;
 };

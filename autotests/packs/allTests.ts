@@ -30,7 +30,8 @@ const browserFlags = [
 
 const browser = isLocalRun ? 'chrome' : 'chromium';
 
-const filterTestsIntoPack: FilterTestsIntoPack = ({options}) => options.meta.testId !== '13';
+const filterTestsIntoPack: FilterTestsIntoPack = ({filePath, options}) =>
+  options.meta.testId !== '13' && !filePath.endsWith('.skip.ts');
 
 const overriddenUserAgent =
   'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.35 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.35';
@@ -79,7 +80,7 @@ export const pack: Pack = {
   skipTests,
   takeFullPageScreenshotOnError: false,
   takeViewportScreenshotOnError: true,
-  testFileGlobs: ['./autotests/tests/**/*.ts', '!**/*.skip.ts'],
+  testFileGlobs: ['**/autotests/tests/**/*.ts'],
   testIdleTimeout: 20_000,
   testTimeout: 60_000,
   viewportHeight: 1080,

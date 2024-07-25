@@ -1,5 +1,6 @@
 import {TestRunStatus} from '../../constants/internal';
 import {setMeta} from '../../context/meta';
+import {getOnResponseCallbacks} from '../../context/onResponseCallbacks';
 import {setRunId} from '../../context/runId';
 import {setTestIdleTimeout} from '../../context/testIdleTimeout';
 import {setTestTimeout} from '../../context/testTimeout';
@@ -7,10 +8,10 @@ import {setTestTimeout} from '../../context/testTimeout';
 import {getFullPackConfig} from '../config';
 import {getRunLabel} from '../environment';
 import {registerStartTestRunEvent} from '../events';
+import {mapBackendResponseForLogs} from '../log';
 import {getUserlandHooks} from '../userland';
 
 import {getTestFnAndReject} from './getTestFnAndReject';
-import {processBrokenTestRuns} from './processBrokenTestRuns';
 
 import type {
   RunId,
@@ -21,7 +22,7 @@ import type {
 } from '../../types/internal';
 
 type Options = Readonly<{
-  previousRunId: RunId | undefined;
+  retry: number;
   runId: RunId;
   testFn: TestFn;
   testStaticOptions: TestStaticOptions;
@@ -31,11 +32,15 @@ type Options = Readonly<{
  * Internal before test hook.
  * @internal
  */
-export const beforeTest = ({previousRunId, runId, testFn, testStaticOptions}: Options): void => {
+export const beforeTest = ({retry, runId, testFn, testStaticOptions}: Options): void => {
   const {options} = testStaticOptions;
 
   setRunId(runId);
   setMeta(options.meta);
+
+  const onResponseCallbacks = getOnResponseCallbacks();
+
+  onResponseCallbacks.push(mapBackendResponseForLogs);
 
   const {testIdleTimeout: testIdleTimeoutFromConfig, testTimeout: testTimeoutFromConfig} =
     getFullPackConfig();
@@ -68,8 +73,8 @@ export const beforeTest = ({previousRunId, runId, testFn, testStaticOptions}: Op
     ...testStaticOptions,
     logEvents: [],
     onlog,
-    previousRunId,
     reject,
+    retry,
     runId,
     runLabel,
     status: isSkipped ? TestRunStatus.Skipped : TestRunStatus.Unknown,
@@ -78,6 +83,4 @@ export const beforeTest = ({previousRunId, runId, testFn, testStaticOptions}: Op
   };
 
   registerStartTestRunEvent(testRunEvent);
-
-  processBrokenTestRuns(testRunEvent);
 };

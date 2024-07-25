@@ -1,4 +1,4 @@
-import type {Inner} from 'testcafe-without-typecheck';
+import type {URL} from 'node:url';
 
 import type {ApiRoute} from '../ApiRoute';
 
@@ -29,12 +29,12 @@ export type ApiMockFunction<
 ) => Partial<SomeResponse> | Promise<Partial<SomeResponse>>;
 
 /**
- * Internal state of mockApiRoute/unmockApiRoute.
+ * Internal state of `mockApiRoute`/`unmockApiRoute`.
  * @internal
  */
 export type ApiMockState = Readonly<{
-  apiMock: Inner.RequestMock | undefined;
   isMocksEnabled: boolean;
   optionsByRoute: Map<ApiRouteClassTypeWithGetParamsFromUrl, MockOptions> | undefined;
   optionsWithRouteByUrl: Record<Url, MockOptionsWithRoute | undefined>;
+  requestsFilter: ((urlObject: URL) => boolean) | undefined;
 }>;

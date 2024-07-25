@@ -1,21 +1,13 @@
 import {LogEventType} from '../../constants/internal';
-import {getTestRunPromise} from '../../context/testRunPromise';
-import {getWaitForEventsState} from '../../context/waitForEventsState';
+import {getPage} from '../../useContext';
 import {getFullPackConfig} from '../../utils/config';
 import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
-import {getPromiseWithResolveAndReject} from '../../utils/promise';
-import {RequestHookToWaitForEvents} from '../../utils/requestHooks';
+import {getRequestFromPlaywrightRequest} from '../../utils/requestHooks';
 
-import type {
-  Request,
-  RequestPredicate,
-  RequestPredicateWithPromise,
-  RequestWithUtcTimeInMs,
-  UtcTimeInMs,
-} from '../../types/internal';
+import type {Request, RequestPredicate, RequestWithUtcTimeInMs} from '../../types/internal';
 
 /**
  * Waits for some request (from browser) filtered by the request predicate.
@@ -25,43 +17,37 @@ export const waitForRequest = <SomeRequest extends Request>(
   predicate: RequestPredicate<SomeRequest>,
   {skipLogs = false, timeout}: {skipLogs?: boolean; timeout?: number} = {},
 ): Promise<RequestWithUtcTimeInMs<SomeRequest>> => {
-  const startTimeInMs = Date.now() as UtcTimeInMs;
-
   setCustomInspectOnFunction(predicate);
 
-  const waitForEventsState = getWaitForEventsState(RequestHookToWaitForEvents);
   const {waitForRequestTimeout} = getFullPackConfig();
   const rejectTimeout = timeout ?? waitForRequestTimeout;
-  const {clearRejectTimeout, promiseWithTimeout, reject, resolve, setRejectTimeoutFunction} =
-    getPromiseWithResolveAndReject<RequestWithUtcTimeInMs<SomeRequest>, RequestWithUtcTimeInMs>(
-      rejectTimeout,
+
+  const page = getPage();
+
+  const promise = page
+    .waitForRequest(
+      async (playwrightRequest) => {
+        try {
+          const request = getRequestFromPlaywrightRequest(playwrightRequest);
+
+          const result = await predicate(request as RequestWithUtcTimeInMs<SomeRequest>);
+
+          return result;
+        } catch (cause) {
+          throw new E2edError('waitForRequest predicate threw an exception', {
+            cause,
+            rejectTimeout,
+          });
+        }
+      },
+      {timeout: rejectTimeout},
+    )
+    .then(
+      (playwrightRequest) =>
+        getRequestFromPlaywrightRequest(playwrightRequest) as RequestWithUtcTimeInMs<SomeRequest>,
     );
-
-  const requestPredicateWithPromise: RequestPredicateWithPromise = {
-    predicate: predicate as RequestPredicate,
-    reject,
-    resolve,
-    skipLogs,
-    startTimeInMs,
-  };
-  const testRunPromise = getTestRunPromise();
-
-  void testRunPromise.then(clearRejectTimeout);
 
   const timeoutWithUnits = getDurationWithUnits(rejectTimeout);
-
-  setRejectTimeoutFunction(() => {
-    const error = new E2edError(
-      `waitForRequest promise rejected after ${timeoutWithUnits} timeout`,
-      {predicate},
-    );
-
-    waitForEventsState.requestPredicates.delete(requestPredicateWithPromise);
-
-    reject(error);
-  });
-
-  waitForEventsState.requestPredicates.add(requestPredicateWithPromise);
 
   if (skipLogs !== true) {
     log(
@@ -71,5 +57,5 @@ export const waitForRequest = <SomeRequest extends Request>(
     );
   }
 
-  return promiseWithTimeout;
+  return promise;
 };

@@ -1,3 +1,5 @@
+import {isDebug} from '../../constants/internal';
+
 import {assertValueIsDefined} from '../asserts';
 import {E2edError} from '../error';
 import {setCustomInspectOnFunction} from '../fn';
@@ -13,6 +15,8 @@ type Return<PromiseValue, ResolveValue, RejectValue> = Readonly<{
   resolve: (value: ResolveValue) => void;
   setRejectTimeoutFunction: (rejectTimeoutFunction: () => AsyncVoid) => void;
 }>;
+
+const maxTimeoutInMs = 3600_000;
 
 /**
  * Get typed promise with his resolve and reject functions,
@@ -56,7 +60,7 @@ export const getPromiseWithResolveAndReject = <
         generalLog('Reject timeout function rejected with error', {error, rejectTimeoutFunction});
       }
     }) as () => void,
-    timeoutInMs,
+    isDebug ? maxTimeoutInMs : timeoutInMs,
   );
 
   const clearRejectTimeout = (): void => {

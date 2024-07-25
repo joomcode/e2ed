@@ -30,7 +30,5 @@ export type StartInfo<FullPackConfigArg = FullPackConfig> = Readonly<{
   pwd: string | undefined;
   runEnvironment: RunEnvironment;
   startTimeInMs: UtcTimeInMs;
-  testCafeHammerheadUp: PackageInfo;
-  testCafeWithoutTypeCheck: PackageInfo;
   totalSystemMemoryInMb: number;
 }>;

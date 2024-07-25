@@ -50,17 +50,21 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_00
   await expect(mainPage.body.find('input').exists, 'page contains some input element').ok();
 
   await assertFunctionThrows(async () => {
-    await takeElementScreenshot(mainPage.body, 'screenshot.png', {timeout: 100});
+    await takeElementScreenshot(mainPage.body, {path: 'screenshot.png', timeout: 10});
   }, 'takeElementScreenshot throws an error on timeout end');
 
-  const requestsPromises = Promise.all([
-    waitForRequest(({url}) => url.includes(searchQuery)),
-    waitForResponse(({statusCode}) => statusCode === OK_STATUS_CODE),
+  const requestWithQueryPromise = waitForRequest(({url}) => url.includes(searchQuery));
+
+  const successfulResponsePromise = waitForResponse(
+    ({statusCode}) => statusCode === OK_STATUS_CODE,
+  );
+
+  await pressKey('Enter');
+
+  const [requestWithQuery, successfulResponse] = await Promise.all([
+    requestWithQueryPromise,
+    successfulResponsePromise,
   ]);
-
-  await pressKey('enter', {stabilizationInterval: 300});
-
-  const [requestWithQuery, successfulResponse] = await requestsPromises;
 
   await expect(requestWithQuery.url, 'request with query contains search query').contains(
     searchQuery,

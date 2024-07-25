@@ -1,14 +1,14 @@
 import {setTestRunPromise} from '../../context/testRunPromise';
 import {getTestTimeout} from '../../context/testTimeout';
-import {getWaitForEventsState} from '../../context/waitForEventsState';
 
 import {getFullPackConfig} from '../config';
 import {getTestRunEvent} from '../events';
 import {enableFullMocks, getShouldApplyMocks} from '../fullMocks';
 import {getPromiseWithResolveAndReject} from '../promise';
-import {RequestHookToWaitForEvents} from '../requestHooks';
 
-import type {RunId, TestController, TestStaticOptions} from '../../types/internal';
+import type {PlaywrightTestArgs} from '@playwright/test';
+
+import type {RunId, TestStaticOptions} from '../../types/internal';
 
 const delayForTestRunPromiseResolutionAfterTestTimeoutInMs = 100;
 
@@ -18,7 +18,7 @@ const delayForTestRunPromiseResolutionAfterTestTimeoutInMs = 100;
  */
 export const runTestFn = async (
   runId: RunId,
-  testController: TestController,
+  testController: PlaywrightTestArgs,
   testStaticOptions: TestStaticOptions,
 ): Promise<void> => {
   const testRunEvent = getTestRunEvent(runId);
@@ -31,9 +31,8 @@ export const runTestFn = async (
 
   setTestRunPromise(testRunPromise);
 
-  const waitForEventsState = getWaitForEventsState(RequestHookToWaitForEvents);
-
-  await testController.addRequestHooks(waitForEventsState.hook);
+  // TODO: support waitForEventsState
+  // const waitForEventsState = getWaitForEventsState();
 
   const {fullMocks} = getFullPackConfig();
 
@@ -43,5 +42,7 @@ export const runTestFn = async (
     await enableFullMocks(fullMocks, shouldApplyMocks, testStaticOptions.filePath);
   }
 
-  await testRunEvent.testFnWithReject().finally(() => resolveTestRunPromise(undefined));
+  await testRunEvent
+    .testFnWithReject(testController)
+    .finally(() => resolveTestRunPromise(undefined));
 };

@@ -1,5 +1,4 @@
-import {LogEventStatus, LogEventType, RESOLVED_PROMISE} from '../../constants/internal';
-import {testController} from '../../testController';
+import {LogEventStatus, LogEventType, RESOLVED_PROMISE, RETRY_KEY} from '../../constants/internal';
 
 import {getFullPackConfig} from '../config';
 import {E2edError} from '../error';
@@ -7,17 +6,18 @@ import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
 import {addTimeoutToPromise} from '../promise';
 import {getDescriptionFromSelector} from '../selectors';
-import {isReExecutablePromise, isThenable} from '../typeGuards';
+import {isThenable} from '../typeGuards';
 import {valueToString, wrapStringForLogs} from '../valueToString';
 
-import type {Selector} from '../../types/internal';
+import {additionalMatchers} from './additionalMatchers';
+import {applyAdditionalMatcher} from './applyAdditionalMatcher';
 
-import type {
-  AssertionFunction,
-  AssertionFunctionKey,
-  AssertionFunctionsRecord,
-  ExpectMethod,
-} from './types';
+import type {Fn, Selector, SelectorPropertyRetryData} from '../../types/internal';
+
+import type {Expect} from './Expect';
+import type {AssertionFunction, ExpectMethod} from './types';
+
+import {expect} from '@playwright/test';
 
 const additionalAssertionTimeoutInMs = 1_000;
 let assertionTimeout: number | undefined;
@@ -27,15 +27,15 @@ let assertionTimeout: number | undefined;
  * @internal
  */
 export const createExpectMethod = (
-  key: AssertionFunctionKey,
-  getAssertionMessage: AssertionFunction<string>,
+  key: string,
+  getAssertionMessage?: AssertionFunction<string>,
 ): ExpectMethod =>
   // eslint-disable-next-line no-restricted-syntax
   function method(...args: Parameters<ExpectMethod>) {
     assertionTimeout ??= getFullPackConfig().assertionTimeout;
 
     const timeout = assertionTimeout + additionalAssertionTimeoutInMs;
-    const message = getAssertionMessage(...args);
+    const message = getAssertionMessage === undefined ? key : getAssertionMessage(...args);
 
     const timeoutWithUnits = getDurationWithUnits(timeout);
     const error = new E2edError(
@@ -43,16 +43,38 @@ export const createExpectMethod = (
     );
 
     const runAssertion = (value: unknown): Promise<unknown> => {
-      const assertion = testController.expect(value) as AssertionFunctionsRecord<Promise<void>>;
+      const additionalMatcher = additionalMatchers[key as keyof typeof additionalMatchers];
 
-      return addTimeoutToPromise(assertion[key](...args), timeout, error);
+      if (additionalMatcher !== undefined) {
+        const ctx: Expect = {
+          actualValue: value,
+          description: this.description,
+        };
+
+        const selectorPropertyRetryData = (
+          this.actualValue as {[RETRY_KEY]?: SelectorPropertyRetryData}
+        )?.[RETRY_KEY];
+
+        return addTimeoutToPromise(
+          applyAdditionalMatcher(
+            additionalMatcher as Fn<unknown[], Promise<unknown>>,
+            ctx,
+            args,
+            selectorPropertyRetryData,
+          ),
+          timeout,
+          error,
+        );
+      }
+
+      const assertion = expect(value) as unknown as Record<string, Fn<unknown[], Promise<unknown>>>;
+
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      return addTimeoutToPromise(assertion[key]!(...args), timeout, error);
     };
 
     const assertionPromise = RESOLVED_PROMISE.then(() => {
-      if (
-        isThenable(this.actualValue) &&
-        !isReExecutablePromise<unknown>(this.actualValue as Promise<unknown>)
-      ) {
+      if (isThenable(this.actualValue)) {
         return addTimeoutToPromise(this.actualValue as Promise<unknown>, timeout, error).then(
           runAssertion,
         );

@@ -2,7 +2,7 @@
  * Reason of ending e2ed.
  */
 export const enum EndE2edReason {
-  LocalTestCafeRunEnded = 'localTestCafeRunEnded',
+  LocalRunEnded = 'localRunEnded',
   PackTimeoutExpired = 'packTimeoutExpired',
   ProcessEndSignal = 'processEndSignal',
   RetriesCycleEnded = 'retriesCycleEnded',
@@ -18,6 +18,7 @@ export const enum ExitCode {
   HasErrors = 2,
   NoRetries = 3,
   NoReportData = 4,
-  HasErrorsInDoAfterPackFunctions = 5,
-  HasErrorsInDoBeforePackFunctions = 6,
+  HasErrorsInCompilingConfig = 5,
+  HasErrorsInDoAfterPackFunctions = 6,
+  HasErrorsInDoBeforePackFunctions = 7,
 }

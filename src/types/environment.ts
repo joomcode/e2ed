@@ -20,6 +20,7 @@ export type E2edEnvironment = {
   ['E2ED_TERMINATION_SIGNAL']?: NodeJS.Signals;
   [PATH_TO_PACK_VARIABLE_NAME]?: string;
   ['PWD']?: string;
+  ['PWDEBUG']?: 'console';
   [RUN_ENVIRONMENT_VARIABLE_NAME]?: RunEnvironment;
   [RUN_LABEL_VARIABLE_NAME]?: RunLabel;
   [START_TIME_IN_MS_VARIABLE_NAME]?: string;

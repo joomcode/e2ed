@@ -1,3 +1,5 @@
+import type {PlaywrightTestArgs} from '@playwright/test';
+
 import type {TestRunStatus} from '../constants/internal';
 import type {E2edError} from '../utils/error';
 
@@ -33,7 +35,7 @@ export type RunId = Brand<string, 'RunId'>;
 /**
  * Test function itself.
  */
-export type TestFn = () => Promise<void>;
+export type TestFn = (testController: PlaywrightTestArgs) => Promise<void>;
 
 /**
  * Test options with userland metadata.
@@ -65,10 +67,7 @@ export type TestRun<TestMeta = TestMetaPlaceholder> = Readonly<{
   runError: RunError;
   startTimeInMs: UtcTimeInMs;
 }> &
-  Omit<
-    TestRunEvent<TestMeta>,
-    'onlog' | 'previousRunId' | 'reject' | 'testFnWithReject' | 'utcTimeInMs'
-  >;
+  Omit<TestRunEvent<TestMeta>, 'onlog' | 'reject' | 'testFnWithReject' | 'utcTimeInMs'>;
 
 /**
  * The complete test options, that is, all information about the test

@@ -1,18 +1,15 @@
 import {LogEventType} from '../constants/internal';
-import {testController} from '../testController';
 import {log} from '../utils/log';
 import {getDescriptionFromSelector} from '../utils/selectors';
 
-import {waitForInterfaceStabilization} from './waitFor';
-
-import type {Selector, TestCafeSelector, WithStabilizationInterval} from '../types/internal';
+import type {Selector, WithStabilizationInterval} from '../types/internal';
 
 type Options = Record<string, unknown> & WithStabilizationInterval;
 
 /**
  * Dispatches an event over a specified DOM element.
  */
-export const dispatchEvent = async (
+export const dispatchEvent = (
   selector: Selector,
   eventName: string,
   {stabilizationInterval, ...options}: Options = {},
@@ -25,7 +22,6 @@ export const dispatchEvent = async (
     LogEventType.InternalAction,
   );
 
-  await testController.dispatchEvent(selector as unknown as TestCafeSelector, eventName, options);
-
-  await waitForInterfaceStabilization(stabilizationInterval);
+  // TODO
+  return Promise.resolve();
 };

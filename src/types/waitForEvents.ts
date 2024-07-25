@@ -1,5 +1,3 @@
-import type {RequestHookToWaitForEvents} from '../utils/requestHooks';
-
 import type {UtcTimeInMs} from './date';
 import type {MergeFunctions} from './fn';
 import type {Request, RequestWithUtcTimeInMs, Response, ResponseWithRequest, Url} from './http';
@@ -91,7 +89,6 @@ export type ResponsePredicateWithPromise = Readonly<{
 export type WaitForEventsState = Readonly<{
   allRequestsCompletePredicates: Set<AllRequestsCompletePredicateWithPromise>;
   hashOfNotCompleteRequests: Record<RequestHookContextId, RequestWithUtcTimeInMs>;
-  hook: RequestHookToWaitForEvents;
   redirects: Record<Url, Url>;
   requestPredicates: Set<RequestPredicateWithPromise>;
   responsePredicates: Set<ResponsePredicateWithPromise>;
