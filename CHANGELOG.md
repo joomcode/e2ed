@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.18.1](https://github.com/joomcode/e2ed/tree/v0.18.1) (2024-07-27)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.0...v0.18.1)
+
+- [Merge pull request #79 from joomcode/fix/cookies-actions](https://github.com/joomcode/e2ed/commit/68c8abfd50a751ae660f8be8c8093731dbe73d98) ([uid11](https://github.com/uid11))
+
+  fix: `getCookies` action
+
+- [FI-1237 fix: `getCookies` action](https://github.com/joomcode/e2ed/commit/cd782ad2fc04386214c0be175d9a09a290f4e3ce) ([uid11](https://github.com/uid11))
+
+  fix: `pressKey` action
+
+  fix: add description to internal Playwright `expect` calls
+
 ## [v0.18.0](https://github.com/joomcode/e2ed/tree/v0.18.0) (2024-07-25)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.17.1...v0.18.0)
