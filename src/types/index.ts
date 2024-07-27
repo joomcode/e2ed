@@ -33,6 +33,7 @@ export type {
   StatusCode,
   Url,
 } from './http';
+export type {KeyboardPressKey} from './keyboard';
 export type {ApiMockFunction} from './mockApiRoute';
 export type {
   AnyPageClassType,

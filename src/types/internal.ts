@@ -58,6 +58,7 @@ export type {
   StatusCode,
   Url,
 } from './http';
+export type {KeyboardPressKey} from './keyboard';
 export type {
   Log,
   LogContext,

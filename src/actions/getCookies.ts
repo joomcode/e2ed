@@ -1,31 +1,40 @@
 import {LogEventType} from '../constants/internal';
+import {getPage} from '../useContext';
 import {log} from '../utils/log';
 
 import type {Cookie} from '../types/internal';
 
 /**
- * Returns cookies with the specified cookies parameters.
+ * Returns page's cookies with the specified cookies parameters.
  * If there are no cookies parameters, returns all the cookies.
  */
 export const getCookies = async (
-  cookiesParameters?: readonly Partial<Cookie>[],
-): Promise<readonly Partial<Cookie>[]> => {
-  let cookiesOptions: Cookie[];
+  cookiesParameters: Partial<Cookie> = {},
+): Promise<readonly Cookie[]> => {
+  const page = getPage();
+  const parameters = Object.keys(cookiesParameters);
 
-  if (cookiesParameters === undefined) {
+  const allCookies = await page.context().cookies(page.url());
+
+  if (parameters.length === 0) {
     log('Returns all the cookies from all pages', LogEventType.InternalAction);
 
-    cookiesOptions = [];
-  } else {
-    log(
-      'Returns cookies with the specified cookies parameters',
-      {cookiesParameters},
-      LogEventType.InternalAction,
-    );
-
-    cookiesOptions = [];
+    return allCookies;
   }
 
-  // TODO
-  return Promise.resolve(cookiesOptions);
+  log(
+    'Returns cookies with the specified cookies parameters',
+    {allCookies, cookiesParameters},
+    LogEventType.InternalAction,
+  );
+
+  return allCookies.filter((cookie) => {
+    for (const parameter of parameters as (keyof Cookie)[]) {
+      if (cookie[parameter] !== cookiesParameters[parameter]) {
+        return false;
+      }
+    }
+
+    return true;
+  });
 };

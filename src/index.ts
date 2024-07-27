@@ -5,7 +5,6 @@ export {ApiRoute} from './ApiRoute';
 export {Page} from './Page';
 export {PageRoute} from './PageRoute';
 export {Route} from './Route';
-export {testController} from './testController';
 export {useContext} from './useContext';
 
 /**
