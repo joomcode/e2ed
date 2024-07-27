@@ -9,70 +9,74 @@ import {expect} from '@playwright/test';
  */
 export const additionalMatchers: AdditionalMatchers<unknown> = {
   contains(this: Expect, expected) {
-    const {actualValue} = this;
+    const {actualValue, description} = this;
 
     if (typeof actualValue === 'string' || Array.isArray(actualValue)) {
-      return Promise.resolve(expect(actualValue).toContain(expected));
+      return Promise.resolve(expect(actualValue, description).toContain(expected));
     }
 
     return Promise.resolve(
-      expect(actualValue).toEqual(expect.objectContaining(expected as Record<string, unknown>)),
+      expect(actualValue, description).toEqual(
+        expect.objectContaining(expected as Record<string, unknown>),
+      ),
     );
   },
   eql(this: Expect, expected) {
-    const {actualValue} = this;
+    const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue).toEqual(expected));
+    return Promise.resolve(expect(actualValue, description).toEqual(expected));
   },
   gt(this: Expect, expected) {
-    const {actualValue} = this;
+    const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue).toBeGreaterThan(expected));
+    return Promise.resolve(expect(actualValue, description).toBeGreaterThan(expected));
   },
   gte(this: Expect, expected) {
-    const {actualValue} = this;
+    const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue).toBeGreaterThanOrEqual(expected));
+    return Promise.resolve(expect(actualValue, description).toBeGreaterThanOrEqual(expected));
   },
   lt(this: Expect, expected) {
-    const {actualValue} = this;
+    const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue).toBeLessThan(expected));
+    return Promise.resolve(expect(actualValue, description).toBeLessThan(expected));
   },
   lte(this: Expect, expected) {
-    const {actualValue} = this;
+    const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue).toBeLessThanOrEqual(expected));
+    return Promise.resolve(expect(actualValue, description).toBeLessThanOrEqual(expected));
   },
   match(this: Expect, expected) {
-    const {actualValue} = this;
+    const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue).toMatch(expected));
+    return Promise.resolve(expect(actualValue, description).toMatch(expected));
   },
   notContains(this: Expect, expected) {
-    const {actualValue} = this;
+    const {actualValue, description} = this;
 
     if (typeof actualValue === 'string' || Array.isArray(actualValue)) {
-      return Promise.resolve(expect(actualValue).not.toContain(expected));
+      return Promise.resolve(expect(actualValue, description).not.toContain(expected));
     }
 
     return Promise.resolve(
-      expect(actualValue).not.toEqual(expect.objectContaining(expected as Record<string, unknown>)),
+      expect(actualValue, description).not.toEqual(
+        expect.objectContaining(expected as Record<string, unknown>),
+      ),
     );
   },
   notEql(this: Expect, expected) {
-    const {actualValue} = this;
+    const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue).not.toEqual(expected));
+    return Promise.resolve(expect(actualValue, description).not.toEqual(expected));
   },
   notOk(this: Expect) {
-    const {actualValue} = this;
+    const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue).not.toBeTruthy());
+    return Promise.resolve(expect(actualValue, description).not.toBeTruthy());
   },
   ok(this: Expect) {
-    const {actualValue} = this;
+    const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue).toBeTruthy());
+    return Promise.resolve(expect(actualValue, description).toBeTruthy());
   },
 };
