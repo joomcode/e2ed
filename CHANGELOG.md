@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.18.2](https://github.com/joomcode/e2ed/tree/v0.18.2) (2024-07-28)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.1...v0.18.2)
+
+- [Merge pull request #80 from joomcode/fix/remove-jsx-from-tsconfig](https://github.com/joomcode/e2ed/commit/426a494aecd47de8eea4111bd3030611782f2324) ([uid11](https://github.com/uid11))
+
+  fix: remove `jsx` option from tsconfig for pack
+
+- [FI-1237 fix: remove `jsx` option from tsconfig for pack](https://github.com/joomcode/e2ed/commit/1af6a5242bab9c0a5e9a4e58ff072d8d4693d7df) ([uid11](https://github.com/uid11))
+
 ## [v0.18.1](https://github.com/joomcode/e2ed/tree/v0.18.1) (2024-07-27)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.0...v0.18.1)
