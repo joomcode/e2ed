@@ -32,12 +32,11 @@
   },
   "devDependencies": {
     "@playwright/browser-chromium": "1.45.3",
-    "@types/node": "20.14.12",
+    "@types/node": "22.0.0",
     "@typescript-eslint/eslint-plugin": "7.17.0",
     "@typescript-eslint/parser": "7.17.0",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
     "assert-package-lock-is-consistent": "1.0.0",
-    "devtools-protocol": "0.0.1330662",
     "eslint": "8.57.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "9.1.0",
