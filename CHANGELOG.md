@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.18.3](https://github.com/joomcode/e2ed/tree/v0.18.3) (2024-07-29)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.2...v0.18.3)
+
+- [FI-1237 fix: use one function for starting e2ed](https://github.com/joomcode/e2ed/commit/37a63ce6bf9ac67828866f4783a49373c4e2f18f) ([uid11](https://github.com/uid11))
+
 ## [v0.18.2](https://github.com/joomcode/e2ed/tree/v0.18.2) (2024-07-28)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.1...v0.18.2)
