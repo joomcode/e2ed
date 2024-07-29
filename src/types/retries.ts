@@ -23,7 +23,6 @@ export type RetriesState = Readonly<{
  * @internal
  */
 export type RunRetryOptions = Readonly<{
-  concurrency: number;
   runLabel: RunLabel;
   successfulTestRunNamesHash: VisitedTestNamesHash;
   visitedTestNamesHash: VisitedTestNamesHash;

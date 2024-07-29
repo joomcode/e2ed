@@ -1,7 +1,7 @@
 import {isLocalRun} from '../../configurator';
 
 import {getRunLabel} from '../environment';
-import {generalLog, readTestCafeWarnings, writeLogsToFile} from '../generalLog';
+import {generalLog, writeLogsToFile} from '../generalLog';
 
 let isExitAlreadyCalled = false;
 
@@ -23,7 +23,7 @@ export const exitFromTestsSubprocess = async ({hasError, reason}: Options): Prom
   );
 
   try {
-    await writeLogsToFile().finally(readTestCafeWarnings);
+    await writeLogsToFile();
   } catch (error) {
     const runLabel = getRunLabel();
 

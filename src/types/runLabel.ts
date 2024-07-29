@@ -12,7 +12,6 @@ export type RunLabel = Brand<string, 'RunLabel'>;
  */
 export type RunLabelObject = Readonly<{
   concurrency: number;
-  disconnectedBrowsersCount: number;
   maxRetriesCount: number;
   retryIndex: number;
 }>;
@@ -22,5 +21,5 @@ export type RunLabelObject = Readonly<{
  * @internal
  */
 export type RawRunLabelObject = {
-  [K in keyof RunLabelObject]: string;
+  [Key in keyof RunLabelObject]: string;
 };

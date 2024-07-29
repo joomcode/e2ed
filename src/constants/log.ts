@@ -38,9 +38,3 @@ export const MESSAGE_BACKGROUND_COLOR_BY_STATUS: Readonly<
   [TestRunStatus.Manual]: ConsoleBackgroundColor.YellowGreen,
   [TestRunStatus.Broken]: ConsoleBackgroundColor.Yellow,
 };
-
-/**
- * The symbolic key under which the global object can contain warnings from TestCafe.
- * @internal
- */
-export const TESTCAFE_WARNINGS_KEY = Symbol.for('testcafe-reporter-for-e2ed:testcafe-warnings');
