@@ -21,12 +21,7 @@ export const processRetry = async (retriesState: RetriesState): Promise<void> =>
     successfulTestRunNamesHash,
     visitedTestNamesHash,
   } = retriesState;
-  const runLabel = createRunLabel({
-    concurrency,
-    disconnectedBrowsersCount: 0,
-    maxRetriesCount,
-    retryIndex,
-  });
+  const runLabel = createRunLabel({concurrency, maxRetriesCount, retryIndex});
 
   const startLastRetryTimeInMs = Date.now() as UtcTimeInMs;
   const printedRetry = getPrintedRetry({maxRetriesCount, retryIndex});
@@ -40,7 +35,7 @@ export const processRetry = async (retriesState: RetriesState): Promise<void> =>
   try {
     await writeLogsToFile();
 
-    await runRetry({concurrency, runLabel, successfulTestRunNamesHash, visitedTestNamesHash});
+    await runRetry({runLabel, successfulTestRunNamesHash, visitedTestNamesHash});
 
     setReadonlyProperty(retriesState, 'isLastRetrySuccessful', true);
   } catch (error) {

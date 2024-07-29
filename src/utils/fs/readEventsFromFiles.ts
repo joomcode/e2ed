@@ -41,7 +41,7 @@ export const readEventsFromFiles = async (
     fileIndex < newEventFiles.length;
     fileIndex += AMOUNT_OF_PARALLEL_OPEN_FILES
   ) {
-    const readPromises: Promise<string>[] = [];
+    const readPromises: Promise<Readonly<{fileName: string; text: string}>>[] = [];
 
     for (
       let index = fileIndex;
@@ -57,17 +57,25 @@ export const readEventsFromFiles = async (
       });
 
       const filePath = join(EVENTS_DIRECTORY_PATH, fileName);
-      const promise = readFile(filePath, READ_FILE_OPTIONS);
+      const promise = readFile(filePath, READ_FILE_OPTIONS).then((text) => ({fileName, text}));
 
       readPromises.push(promise);
     }
 
-    const files = await Promise.all(readPromises);
+    const filesWithNames = await Promise.all(readPromises);
 
-    for (const file of files) {
-      const fullTestRun = JSON.parse(file) as FullTestRun;
+    for (const {fileName, text} of filesWithNames) {
+      try {
+        const fullTestRun = JSON.parse(text) as FullTestRun;
 
-      fullTestRuns.push(fullTestRun);
+        fullTestRuns.push(fullTestRun);
+      } catch (error) {
+        generalLog('Caught an error on parsing JSON of test run', {
+          error,
+          fileName,
+          textLenght: text.length,
+        });
+      }
     }
   }
 

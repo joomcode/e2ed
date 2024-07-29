@@ -5,33 +5,31 @@ import {CONFIG_PATH, e2edEnvironment} from '../../constants/internal';
 import {getFullPackConfig} from '../config';
 import {getRunLabel, setRunLabel} from '../environment';
 import {E2edError} from '../error';
-import {generalLog, setSuccessfulTotalInPreviousRetries} from '../generalLog';
+import {generalLog} from '../generalLog';
 import {setVisitedTestNamesHash} from '../globalState';
 import {startResourceUsageReading} from '../resourceUsage';
 
 import {beforeRunFirstTest} from './beforeRunFirstTest';
+import {stripExtraLogs} from './stripExtraLogs';
 
 import type {RunRetryOptions} from '../../types/internal';
 
+const playwrightCliPath = require.resolve('@playwright/test').replace('index.js', 'cli.js');
+
 /**
- * Runs tests (via TestCafe JavaScript API, for running one retry in docker).
+ * Runs tests via Playwright internal CLI module.
  * Rejects, if there are some failed tests.
  * @internal
  */
 export const runTests = async ({
   runLabel,
-  successfulTestRunNamesHash,
   visitedTestNamesHash,
 }: RunRetryOptions): Promise<void> => {
   setRunLabel(runLabel);
   setVisitedTestNamesHash(visitedTestNamesHash);
 
   try {
-    const successfulTotalInPreviousRetries = Object.keys(successfulTestRunNamesHash).length;
-
-    setSuccessfulTotalInPreviousRetries(successfulTotalInPreviousRetries);
-
-    const {browserInitTimeout, resourceUsageReadingInternal} = getFullPackConfig();
+    const {browserInitTimeout, enableLiveMode, resourceUsageReadingInternal} = getFullPackConfig();
 
     startResourceUsageReading(resourceUsageReadingInternal);
 
@@ -58,7 +56,12 @@ export const runTests = async ({
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (e2edEnvironment.E2ED_DEBUG) {
         // playwrightArgs.unshift('--node-options=--inspect-brk');
+        e2edEnvironment.PWDEBUG = 'console';
         playwrightArgs.push('--debug');
+      }
+
+      if (enableLiveMode) {
+        playwrightArgs.push('--ui');
       }
 
       if (!beforeRunFirstTestWasCalled) {
@@ -67,16 +70,18 @@ export const runTests = async ({
         beforeRunFirstTest();
       }
 
-      const playwrightProcess = fork(
-        '/node_modules/e2ed/node_modules/@playwright/test/cli.js',
-        playwrightArgs,
-      );
+      const playwrightProcess = fork(playwrightCliPath, playwrightArgs);
 
       playwrightProcess.stdout?.on('data', (data) => {
-        const stringData = String(data).trim();
+        const stringData = stripExtraLogs(String(data).trim());
 
         if (stringData !== '') {
-          generalLog(stringData);
+          if (stringData.startsWith('[e2ed]')) {
+            // eslint-disable-next-line no-console
+            console.log(stringData);
+          } else {
+            generalLog(stringData);
+          }
         }
       });
       playwrightProcess.stderr?.on('data', (data) => generalLog(`Error: ${String(data)}`));

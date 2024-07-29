@@ -92,7 +92,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
 
   const fullTestRun: FullTestRun = {mainParams, runHash, ...testRun};
 
-  logEndTestRunEvent(fullTestRun);
+  await logEndTestRunEvent(fullTestRun);
 
   await writeTestRunToJsonFile(fullTestRun);
   await writeLogsToFile();

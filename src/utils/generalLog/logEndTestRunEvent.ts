@@ -14,11 +14,11 @@ import type {FullTestRun} from '../../types/internal';
  * Logs an end of test run event.
  * @internal
  */
-export const logEndTestRunEvent = (fullTestRun: FullTestRun): void => {
+export const logEndTestRunEvent = async (fullTestRun: FullTestRun): Promise<void> => {
   const {filePath, mainParams, name, options, runError, runId, status} = fullTestRun;
 
   if (FAILED_TEST_RUN_STATUSES.includes(status) === false) {
-    addSuccessfulInCurrentRetry();
+    await addSuccessfulInCurrentRetry(filePath);
   }
 
   const messageBackgroundColor = MESSAGE_BACKGROUND_COLOR_BY_STATUS[status];
@@ -26,7 +26,7 @@ export const logEndTestRunEvent = (fullTestRun: FullTestRun): void => {
   const messageText = `${messageSymbol} ${status} ${mainParams} ${name}`;
 
   const message = getMessageWithBackgroundColor(messageText, messageBackgroundColor);
-  const successful = getSuccessfulTestRunCount();
+  const successful = await getSuccessfulTestRunCount();
 
   generalLog(message, {filePath, options, runError, runId, successful});
 };

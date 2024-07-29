@@ -1,49 +1,39 @@
-import {assertValueIsTrue} from '../asserts';
+import {appendFile, readFile} from 'node:fs/promises';
+import {join} from 'node:path';
+
+import {READ_FILE_OPTIONS, TMP_DIRECTORY_PATH} from '../../constants/internal';
+
+import type {FilePathFromRoot, TestFilePath} from '../../types/internal';
 
 /**
- * The number of tests successful in the current retry.
+ * Relative (from root) path to text file with list of not included in pack tests.
+ * For each not included in pack test in this file, a relative path
+ * to the file of this test is saved in a separate line.
  */
-let successfulInCurrentRetry = 0;
-
-/**
- * The total number of tests successful in all previous retries.
- */
-let successfulTotalInPreviousRetries = 0;
+const SUCCESSFUL_TESTS_PATH = join(TMP_DIRECTORY_PATH, 'successfulTests.txt') as FilePathFromRoot;
 
 /**
  * Adds one successful test run (in current retry).
  * @internal
  */
-export const addSuccessfulInCurrentRetry = (): void => {
-  successfulInCurrentRetry += 1;
+export const addSuccessfulInCurrentRetry = async (filePath: TestFilePath): Promise<void> => {
+  await appendFile(SUCCESSFUL_TESTS_PATH, `${filePath}\n`);
 };
 
 /**
  * Get the number of tests successful for printing (total and in the current retry).
  * @internal
  */
-export const getSuccessfulTestRunCount = (): string => {
-  if (successfulTotalInPreviousRetries === 0) {
-    return String(successfulInCurrentRetry);
+export const getSuccessfulTestRunCount = async (): Promise<number> => {
+  let successfulTestsFile = '';
+
+  try {
+    successfulTestsFile = await readFile(SUCCESSFUL_TESTS_PATH, READ_FILE_OPTIONS);
+  } catch {}
+
+  if (successfulTestsFile === '') {
+    return 0;
   }
 
-  const successfulTotal = successfulInCurrentRetry + successfulTotalInPreviousRetries;
-
-  return `${successfulInCurrentRetry} in the current retry, ${successfulTotal} in total`;
-};
-
-/**
- * Set successful test runs total in previous retries
- * @internal
- */
-export const setSuccessfulTotalInPreviousRetries = (
-  newSuccessfulTotalInPreviousRetries: number,
-): void => {
-  assertValueIsTrue(
-    successfulTotalInPreviousRetries === 0,
-    'successfulTotalInPreviousRetries is equal to 0',
-    {newSuccessfulTotalInPreviousRetries},
-  );
-
-  successfulTotalInPreviousRetries = newSuccessfulTotalInPreviousRetries;
+  return successfulTestsFile.split('\n').filter(Boolean).length;
 };
