@@ -49,7 +49,9 @@ export const getRunTest =
 
         beforeTest({retry, runId, testFn: test.testFn, testStaticOptions});
 
-        await runTestFn(runId, {context, page, request}, testStaticOptions);
+        const testController = {context, page, request};
+
+        await runTestFn({retry, runId, testController, testStaticOptions});
       } catch (error) {
         hasRunError = true;
         unknownRunError = error;

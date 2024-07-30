@@ -11,6 +11,8 @@ import {renderReportToHtml} from './render';
 
 import type {FilePathFromRoot, ReportData, UtcTimeInMs} from '../../types/internal';
 
+const bytesInMb = 1_048_576;
+
 /**
  * Writes HTML report (`report.html` file) with test runs results.
  * @internal
@@ -27,11 +29,13 @@ export const writeHtmlReport = async (reportData: ReportData): Promise<void> => 
 
   await writeFile(reportFilePath, String(reportHtml));
 
-  const reportFileSize = await getFileSize(reportFilePath);
+  const reportFileSizeInBytes = await getFileSize(reportFilePath);
+
+  const reportFileSizeInMb = (reportFileSizeInBytes / bytesInMb).toFixed(2);
 
   const durationWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
 
   generalLog(
-    `HTML report was written (${reportFileSize} bytes) to "${reportFilePath}" in ${durationWithUnits}`,
+    `HTML report was written (${reportFileSizeInMb} Mb) to "${reportFilePath}" in ${durationWithUnits}`,
   );
 };

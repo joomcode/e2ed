@@ -13,7 +13,7 @@ export const stripExtraLogs = (text: string): string => {
       const endIndex = line.lastIndexOf('›');
 
       if (startIndex >= 0) {
-        lines[index] = line.slice(0, startIndex) + line.slice(endIndex + 1);
+        lines[index] = line.slice(0, startIndex) + line.slice(endIndex);
       }
     }
   }

@@ -16,9 +16,8 @@ export const runPackWithArgs = async (): Promise<void> => {
   const runLabel = createRunLabel({concurrency, maxRetriesCount: 1, retryIndex: 1});
 
   const successfulTestRunNamesHash = Object.create(null) as VisitedTestNamesHash;
-  const visitedTestNamesHash = Object.create(null) as VisitedTestNamesHash;
 
-  await runTests({runLabel, successfulTestRunNamesHash, visitedTestNamesHash});
+  await runTests({runLabel, successfulTestRunNamesHash});
 
   endE2ed(EndE2edReason.LocalRunEnded);
 };

@@ -1,9 +1,11 @@
+import {execFile} from 'node:child_process';
 import {readdir, readFile} from 'node:fs/promises';
 import {join} from 'node:path';
 
 import {
   AMOUNT_OF_PARALLEL_OPEN_FILES,
   EVENTS_DIRECTORY_PATH,
+  INTERNAL_REPORTS_DIRECTORY_PATH,
   READ_FILE_OPTIONS,
 } from '../../constants/internal';
 
@@ -75,6 +77,10 @@ export const readEventsFromFiles = async (
           fileName,
           textLenght: text.length,
         });
+
+        const filePath = join(EVENTS_DIRECTORY_PATH, fileName);
+
+        execFile('cp', [filePath, INTERNAL_REPORTS_DIRECTORY_PATH]);
       }
     }
   }

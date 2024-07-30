@@ -3,7 +3,7 @@ import {getTestTimeout} from '../../context/testTimeout';
 
 import {getFullPackConfig} from '../config';
 import {getTestRunEvent} from '../events';
-import {enableFullMocks, getShouldApplyMocks} from '../fullMocks';
+import {enableFullMocks} from '../fullMocks';
 import {getPromiseWithResolveAndReject} from '../promise';
 
 import type {PlaywrightTestArgs} from '@playwright/test';
@@ -12,15 +12,23 @@ import type {RunId, TestStaticOptions} from '../../types/internal';
 
 const delayForTestRunPromiseResolutionAfterTestTimeoutInMs = 100;
 
+type Options = Readonly<{
+  retry: number;
+  runId: RunId;
+  testController: PlaywrightTestArgs;
+  testStaticOptions: TestStaticOptions;
+}>;
+
 /**
  * Runs test function with reject in test run event.
  * @internal
  */
-export const runTestFn = async (
-  runId: RunId,
-  testController: PlaywrightTestArgs,
-  testStaticOptions: TestStaticOptions,
-): Promise<void> => {
+export const runTestFn = async ({
+  runId,
+  retry,
+  testController,
+  testStaticOptions,
+}: Options): Promise<void> => {
   const testRunEvent = getTestRunEvent(runId);
   const testTimeout = getTestTimeout();
 
@@ -37,7 +45,7 @@ export const runTestFn = async (
   const {fullMocks} = getFullPackConfig();
 
   if (fullMocks?.filterTests(testStaticOptions)) {
-    const shouldApplyMocks = getShouldApplyMocks(testStaticOptions.name);
+    const shouldApplyMocks = retry === 1;
 
     await enableFullMocks(fullMocks, shouldApplyMocks, testStaticOptions.filePath);
   }

@@ -6,7 +6,6 @@ import {getFullPackConfig} from '../config';
 import {getRunLabel, setRunLabel} from '../environment';
 import {E2edError} from '../error';
 import {generalLog} from '../generalLog';
-import {setVisitedTestNamesHash} from '../globalState';
 import {startResourceUsageReading} from '../resourceUsage';
 
 import {beforeRunFirstTest} from './beforeRunFirstTest';
@@ -21,12 +20,8 @@ const playwrightCliPath = require.resolve('@playwright/test').replace('index.js'
  * Rejects, if there are some failed tests.
  * @internal
  */
-export const runTests = async ({
-  runLabel,
-  visitedTestNamesHash,
-}: RunRetryOptions): Promise<void> => {
+export const runTests = async ({runLabel}: RunRetryOptions): Promise<void> => {
   setRunLabel(runLabel);
-  setVisitedTestNamesHash(visitedTestNamesHash);
 
   try {
     const {browserInitTimeout, enableLiveMode, resourceUsageReadingInternal} = getFullPackConfig();
@@ -70,10 +65,10 @@ export const runTests = async ({
         beforeRunFirstTest();
       }
 
-      const playwrightProcess = fork(playwrightCliPath, playwrightArgs);
+      const playwrightProcess = fork(playwrightCliPath, playwrightArgs, {stdio: 'pipe'});
 
       playwrightProcess.stdout?.on('data', (data) => {
-        const stringData = stripExtraLogs(String(data).trim());
+        const stringData = stripExtraLogs(String(data).trim()).trim();
 
         if (stringData !== '') {
           if (stringData.startsWith('[e2ed]')) {
