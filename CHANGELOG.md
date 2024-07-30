@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.18.4](https://github.com/joomcode/e2ed/tree/v0.18.4) (2024-07-30)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.3...v0.18.4)
+
+- [Merge pull request #82 from joomcode/fix/state-of-full-mocks](https://github.com/joomcode/e2ed/commit/d18b79c3954ab7db6d682985f61034b30629047d) ([uid11](https://github.com/uid11))
+
+  fix: state of "full mocks" after first retry
+
+- [FI-1237 fix: state of "full mocks" after first retry](https://github.com/joomcode/e2ed/commit/a480d4ff3da5974a7d007161b2eb0008ed218ced) ([uid11](https://github.com/uid11))
+
+- [Merge pull request #81 from joomcode/fix/use-one-start-e2ed-function](https://github.com/joomcode/e2ed/commit/a366f22e16aa81d38a3ed3e7100299755526b7e1) ([uid11](https://github.com/uid11))
+
+  fix: use one function for starting e2ed
+
 ## [v0.18.3](https://github.com/joomcode/e2ed/tree/v0.18.3) (2024-07-29)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.2...v0.18.3)
