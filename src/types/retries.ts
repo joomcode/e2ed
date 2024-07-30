@@ -14,7 +14,6 @@ export type RetriesState = Readonly<{
   retryIndex: number;
   startLastRetryTimeInMs: UtcTimeInMs;
   successfulTestRunNamesHash: Record<string, true>;
-  visitedTestNamesHash: Record<string, true>;
   visitedTestRunEventsFileName: readonly string[];
 }>;
 
@@ -25,7 +24,6 @@ export type RetriesState = Readonly<{
 export type RunRetryOptions = Readonly<{
   runLabel: RunLabel;
   successfulTestRunNamesHash: VisitedTestNamesHash;
-  visitedTestNamesHash: VisitedTestNamesHash;
 }>;
 
 /**

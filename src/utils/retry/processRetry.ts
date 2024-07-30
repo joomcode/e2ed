@@ -14,13 +14,7 @@ import type {RetriesState, UtcTimeInMs} from '../../types/internal';
  * @internal
  */
 export const processRetry = async (retriesState: RetriesState): Promise<void> => {
-  const {
-    concurrency,
-    maxRetriesCount,
-    retryIndex,
-    successfulTestRunNamesHash,
-    visitedTestNamesHash,
-  } = retriesState;
+  const {concurrency, maxRetriesCount, retryIndex, successfulTestRunNamesHash} = retriesState;
   const runLabel = createRunLabel({concurrency, maxRetriesCount, retryIndex});
 
   const startLastRetryTimeInMs = Date.now() as UtcTimeInMs;
@@ -35,7 +29,7 @@ export const processRetry = async (retriesState: RetriesState): Promise<void> =>
   try {
     await writeLogsToFile();
 
-    await runRetry({runLabel, successfulTestRunNamesHash, visitedTestNamesHash});
+    await runRetry({runLabel, successfulTestRunNamesHash});
 
     setReadonlyProperty(retriesState, 'isLastRetrySuccessful', true);
   } catch (error) {

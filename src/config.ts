@@ -101,6 +101,8 @@ const playwrightConfig = defineConfig({
   testIgnore: '**/*.skip.ts',
   testMatch: userlandPack.testFileGlobs as (typeof userlandPack.testFileGlobs)[number][],
 
+  timeout: userlandPack.testTimeout,
+
   use: {
     actionTimeout: userlandPack.testIdleTimeout,
 

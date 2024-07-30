@@ -21,7 +21,6 @@ export const updateRetriesStateAfterRetry = async (retriesState: RetriesState): 
     maxRetriesCount,
     retryIndex,
     successfulTestRunNamesHash,
-    visitedTestNamesHash,
     visitedTestRunEventsFileName,
   } = retriesState;
   const {
@@ -44,7 +43,6 @@ export const updateRetriesStateAfterRetry = async (retriesState: RetriesState): 
     );
 
     successfulTestRunNamesHash[name] = true;
-    visitedTestNamesHash[name] = true;
   }
 
   for (const {runId} of newFullTestRuns) {
@@ -79,10 +77,6 @@ export const updateRetriesStateAfterRetry = async (retriesState: RetriesState): 
   });
 
   const failedTestNamesInLastRetry = failedNewFullTestRuns.map(({name}) => name);
-
-  for (const name of failedTestNamesInLastRetry) {
-    visitedTestNamesHash[name] = true;
-  }
 
   const retriesStateUpdate: Partial<Mutable<RetriesState>> = {
     concurrency: concurrencyForNextRetry,

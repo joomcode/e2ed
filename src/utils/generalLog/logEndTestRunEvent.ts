@@ -2,6 +2,7 @@ import {
   FAILED_TEST_RUN_STATUSES,
   MESSAGE_BACKGROUND_COLOR_BY_STATUS,
   TEST_RUN_STATUS_SYMBOLS,
+  TestRunStatus,
 } from '../../constants/internal';
 
 import {generalLog} from './generalLog';
@@ -17,7 +18,7 @@ import type {FullTestRun} from '../../types/internal';
 export const logEndTestRunEvent = async (fullTestRun: FullTestRun): Promise<void> => {
   const {filePath, mainParams, name, options, runError, runId, status} = fullTestRun;
 
-  if (FAILED_TEST_RUN_STATUSES.includes(status) === false) {
+  if (status !== TestRunStatus.Broken && !FAILED_TEST_RUN_STATUSES.includes(status)) {
     await addSuccessfulInCurrentRetry(filePath);
   }
 

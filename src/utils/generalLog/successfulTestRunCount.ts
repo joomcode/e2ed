@@ -6,9 +6,7 @@ import {READ_FILE_OPTIONS, TMP_DIRECTORY_PATH} from '../../constants/internal';
 import type {FilePathFromRoot, TestFilePath} from '../../types/internal';
 
 /**
- * Relative (from root) path to text file with list of not included in pack tests.
- * For each not included in pack test in this file, a relative path
- * to the file of this test is saved in a separate line.
+ * Relative (from root) path to text file with list of successful tests.
  */
 const SUCCESSFUL_TESTS_PATH = join(TMP_DIRECTORY_PATH, 'successfulTests.txt') as FilePathFromRoot;
 
