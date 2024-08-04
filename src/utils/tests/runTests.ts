@@ -24,7 +24,7 @@ export const runTests = async ({runLabel}: RunRetryOptions): Promise<void> => {
   setRunLabel(runLabel);
 
   try {
-    const {browserInitTimeout, enableLiveMode, resourceUsageReadingInternal} = getFullPackConfig();
+    const {enableLiveMode, testIdleTimeout, resourceUsageReadingInternal} = getFullPackConfig();
 
     startResourceUsageReading(resourceUsageReadingInternal);
 
@@ -36,7 +36,7 @@ export const runTests = async ({runLabel}: RunRetryOptions): Promise<void> => {
 
         beforeRunFirstTest();
       }
-    }, browserInitTimeout);
+    }, testIdleTimeout);
 
     beforeRunFirstTestTimeoutId.unref();
 

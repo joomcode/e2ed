@@ -6,7 +6,7 @@ import type {UserlandPack} from '../../types/internal';
  * Asserts that userland pack is correct.
  * @internal
  */
-// eslint-disable-next-line max-lines-per-function, max-statements
+// eslint-disable-next-line max-lines-per-function
 export const assertUserlandPack = (userlandPack: UserlandPack): void => {
   const logParams = {userlandPack};
 
@@ -25,12 +25,6 @@ export const assertUserlandPack = (userlandPack: UserlandPack): void => {
   assertNumberIsPositiveInteger(
     userlandPack.concurrency,
     'concurrency is positive integer',
-    logParams,
-  );
-
-  assertNumberIsPositiveInteger(
-    userlandPack.browserInitTimeout,
-    'browserInitTimeout is positive integer',
     logParams,
   );
 

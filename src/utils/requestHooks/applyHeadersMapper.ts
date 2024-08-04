@@ -1,17 +1,16 @@
-import {getCopyOfHeaders} from './getCopyOfHeaders';
 import {getEquivalentHeadersNames} from './getEquivalentHeadersNames';
 
-import type {Headers, MapHeaders, Mutable} from '../../types/internal';
+import type {MapHeaders, Mutable, StringHeaders} from '../../types/internal';
 
 /**
  * Map exists headers to new headers and merge this new headers to exists headers.
  * @internal
  */
-export const applyHeadersMapper = (headers: Headers, mapper: MapHeaders): void => {
-  const copyOfHeaders = getCopyOfHeaders(headers);
+export const applyHeadersMapper = (headers: StringHeaders, mapper: MapHeaders): void => {
+  const copyOfHeaders = {...headers};
   const newHeaders = mapper(copyOfHeaders);
 
-  const mutableHeaders: Mutable<Headers> = headers;
+  const mutableHeaders: Mutable<StringHeaders> = headers;
 
   for (const [name, value] of Object.entries(newHeaders)) {
     if (value === undefined) {
@@ -22,7 +21,7 @@ export const applyHeadersMapper = (headers: Headers, mapper: MapHeaders): void =
         delete mutableHeaders[currentName];
       }
     } else {
-      mutableHeaders[name] = value as string[] | string | undefined;
+      mutableHeaders[name] = value;
     }
   }
 };

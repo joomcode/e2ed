@@ -10,6 +10,7 @@ export type {
   RequestWithUtcTimeInMs,
   Response,
   ResponseWithRequest,
+  StringHeaders,
   Url,
 } from './http';
 export type {RequestKeyType, ResponseKeyType} from './internalKeys';

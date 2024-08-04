@@ -7,7 +7,7 @@ import {
 
 import {generalLog} from './generalLog';
 import {getMessageWithBackgroundColor} from './getMessageWithBackgroundColor';
-import {addSuccessfulInCurrentRetry, getSuccessfulTestRunCount} from './successfulTestRunCount';
+import {addSuccessfulInCurrentRetry, getSuccessfulTestRuns} from './successfulTestRunCount';
 
 import type {FullTestRun} from '../../types/internal';
 
@@ -27,7 +27,7 @@ export const logEndTestRunEvent = async (fullTestRun: FullTestRun): Promise<void
   const messageText = `${messageSymbol} ${status} ${mainParams} ${name}`;
 
   const message = getMessageWithBackgroundColor(messageText, messageBackgroundColor);
-  const successful = await getSuccessfulTestRunCount();
+  const successful = (await getSuccessfulTestRuns()).length;
 
   generalLog(message, {filePath, options, runError, runId, successful});
 };

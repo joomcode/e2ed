@@ -4,7 +4,6 @@ import {getIsPageNavigatingNow, setIsPageNavigatingNow} from '../../context/isPa
 import {getNavigationDelay} from '../../context/navigationDelay';
 import {getOnResponseCallbacks} from '../../context/onResponseCallbacks';
 
-import {assertValueIsNotNull} from '../asserts';
 import {getResponseFromPlaywrightResponse} from '../requestHooks';
 
 import type {Page} from '@playwright/test';
@@ -76,9 +75,17 @@ export const preparePage = async (page: Page): Promise<void> => {
         return;
       }
 
-      const playwrightResponse = await request.response();
+      const playwrightResponse = await request.response().catch((error) => {
+        if (String(error).includes('Target page, context or browser has been closed')) {
+          return null;
+        }
 
-      assertValueIsNotNull(playwrightResponse, 'response is not null', {url: request.url()});
+        throw error;
+      });
+
+      if (playwrightResponse === null) {
+        return;
+      }
 
       const responseWithRequest = await getResponseFromPlaywrightResponse(playwrightResponse);
 
