@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.18.5](https://github.com/joomcode/e2ed/tree/v0.18.5) (2024-08-05)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.4...v0.18.5)
+
+- [fix: security issues with API keys in logs](https://github.com/joomcode/e2ed/commit/5eed5d7c2f611f0e00c81f370ea1009b3a5b5a4e) ([uid11](https://github.com/uid11))
+- [Merge pull request #83 from joomcode/fix/headers-mapping](https://github.com/joomcode/e2ed/commit/b073b6a1528a7702241d42805c57e133ff36737a) ([uid11](https://github.com/uid11))
+
+  fix: mapping of `set-cookie` header and other headers
+
+- [FI-1237 fix: mapping of `set-cookie` header and other headers](https://github.com/joomcode/e2ed/commit/57334202f0bdc9cb887b4bd6e8cf24ba9e4a3862) ([uid11](https://github.com/uid11))
+
 ## [v0.18.4](https://github.com/joomcode/e2ed/tree/v0.18.4) (2024-07-30)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.3...v0.18.4)
