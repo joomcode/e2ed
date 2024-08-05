@@ -16,7 +16,6 @@ import type {OwnE2edConfig} from './ownE2edConfig';
 type UserlandTestCafeConfig = Readonly<{
   ajaxRequestTimeout: number;
   assertionTimeout: number;
-  browserInitTimeout: number;
   concurrency: number;
   pageRequestTimeout: number;
   port1: number;

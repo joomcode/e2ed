@@ -179,7 +179,7 @@ import type {Pack} from 'autotests/configurator';
  */
 export const pack: Pack = {
   ...allTestsPack,
-  browserInitTimeout: 40_000,
+  testIdleTimeout: 10_000,
 };
 ```
 

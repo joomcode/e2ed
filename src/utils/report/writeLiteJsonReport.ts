@@ -8,6 +8,8 @@ import {getDurationWithUnits} from '../getDurationWithUnits';
 
 import type {FilePathFromRoot, LiteReport, UtcTimeInMs} from '../../types/internal';
 
+const bytesInKb = 1_024;
+
 /**
  * Writes lite JSON report (`lite-report.json` file) with test runs results
  * (and without test run logs).
@@ -23,11 +25,13 @@ export const writeLiteJsonReport = async (liteReport: LiteReport): Promise<void>
 
   await writeFile(reportFilePath, reportJson);
 
-  const reportFileSize = await getFileSize(reportFilePath);
+  const reportFileSizeInBytes = await getFileSize(reportFilePath);
+
+  const reportFileSizeInKb = (reportFileSizeInBytes / bytesInKb).toFixed(2);
 
   const durationWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
 
   generalLog(
-    `Lite JSON report was written (${reportFileSize} bytes) to "${reportFilePath}" in ${durationWithUnits}`,
+    `Lite JSON report was written (${reportFileSizeInKb} bytes) to "${reportFilePath}" in ${durationWithUnits}`,
   );
 };

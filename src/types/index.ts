@@ -31,6 +31,7 @@ export type {
   SameSite,
   SetCookieHeaderString,
   StatusCode,
+  StringHeaders,
   Url,
 } from './http';
 export type {KeyboardPressKey} from './keyboard';

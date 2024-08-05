@@ -2,12 +2,11 @@ import {createRunId} from '../../generators/internal';
 import {pageStorage} from '../../useContext';
 
 import {assertValueIsDefined} from '../asserts';
-import {addTestToNotIncludedInPackTests} from '../notIncludedInPackTests';
 
 import {afterErrorInTest} from './afterErrorInTest';
 import {afterTest} from './afterTest';
 import {beforeTest} from './beforeTest';
-import {getIsTestIncludedInPack} from './getIsTestIncludedInPack';
+import {getShouldRunTest} from './getShouldRunTest';
 import {getTestStaticOptions} from './getTestStaticOptions';
 import {preparePage} from './preparePage';
 import {runTestFn} from './runTestFn';
@@ -32,18 +31,16 @@ export const getRunTest =
       const runId = createRunId();
 
       let hasRunError = false;
-      let isTestIncludedInPack = false;
+      let shouldRunTest = false;
       let testStaticOptions: TestStaticOptions | undefined;
       let unknownRunError: unknown;
 
       try {
         testStaticOptions = getTestStaticOptions(test, testInfo);
 
-        isTestIncludedInPack = getIsTestIncludedInPack(testStaticOptions);
+        shouldRunTest = await getShouldRunTest(testStaticOptions);
 
-        if (!isTestIncludedInPack) {
-          await addTestToNotIncludedInPackTests(testStaticOptions.filePath);
-
+        if (!shouldRunTest) {
           return;
         }
 
@@ -62,7 +59,7 @@ export const getRunTest =
 
         throw error;
       } finally {
-        if (isTestIncludedInPack) {
+        if (shouldRunTest) {
           await afterTest({hasRunError, runId, unknownRunError});
         }
       }

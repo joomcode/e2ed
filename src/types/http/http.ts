@@ -26,7 +26,7 @@ export type Headers = Readonly<
  * Maps headers to new (overridden) headers.
  * All headers must be in lower case.
  */
-export type MapHeaders = (this: void, headers: Headers) => Headers;
+export type MapHeaders = (this: void, headers: StringHeaders) => StringHeaders;
 
 /**
  * Options for mappers of headers.
@@ -116,6 +116,11 @@ export type ResponseWithRequest<
   request: RequestWithUtcTimeInMs<SomeRequest>;
 }> &
   SomeResponse;
+
+/**
+ * Headers as strings.
+ */
+export type StringHeaders = Readonly<Record<string, string>>;
 
 /**
  * Brand type for the full url string.

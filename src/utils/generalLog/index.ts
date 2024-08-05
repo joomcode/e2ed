@@ -10,4 +10,6 @@ export {writeLogsToFile} from './logFile';
 export {logStartE2edError} from './logStartE2edError';
 export {removeStyleFromString} from './removeStyleFromString';
 /** @internal */
+export {getSuccessfulTestRuns} from './successfulTestRunCount';
+/** @internal */
 export {truncateArrayForLogs} from './truncateArrayForLogs';

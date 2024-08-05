@@ -10,7 +10,6 @@ type MaybeUrlOrPath = Url | string | null | undefined;
 
 /**
  * Asserts that url or url path (which can be wrapped in a promise) match route.
- * TODO: support Smart Assertions.
  */
 export const assertUrlMatchRoute = async (
   maybeUrlOrPath: MaybeUrlOrPath | Promise<MaybeUrlOrPath>,

@@ -19,7 +19,7 @@ const testScrollValue = 200;
 const language = 'en';
 const searchQuery = 'foo';
 
-test('exists', {meta: {testId: '1'}, testIdleTimeout: 35_000, testTimeout: 90_000}, async () => {
+test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_000}, async () => {
   await scroll(0, testScrollValue);
 
   assertFunctionThrows(() => {

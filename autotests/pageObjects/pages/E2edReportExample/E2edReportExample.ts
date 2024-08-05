@@ -10,9 +10,11 @@ import {createPageObjectsFromMultiLocator, setReadonlyProperty} from 'e2ed/utils
 
 import {TestRunButton} from './TestRunButton';
 
-import type {Cookie, Headers, Selector, Url} from 'e2ed/types';
+import type {Cookie, Selector, StringHeaders, Url} from 'e2ed/types';
 
-type CustomPageParams = {pageCookies?: readonly Cookie[]; pageRequestHeaders?: Headers} | undefined;
+type CustomPageParams =
+  | {pageCookies?: readonly Cookie[]; pageRequestHeaders?: StringHeaders}
+  | undefined;
 
 /**
  * The e2ed report example page.
@@ -44,7 +46,7 @@ export class E2edReportExample extends Page<CustomPageParams> {
   /**
    * Request headers that we add to page request.
    */
-  readonly pageRequestHeaders: Headers | undefined;
+  readonly pageRequestHeaders: StringHeaders | undefined;
 
   override readonly pageStabilizationInterval = 600;
 

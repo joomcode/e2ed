@@ -3,6 +3,8 @@ import {join} from 'node:path';
 
 import {READ_FILE_OPTIONS, TMP_DIRECTORY_PATH} from '../../constants/internal';
 
+import {assertValueIsFalse} from '../asserts';
+
 import type {FilePathFromRoot, TestFilePath} from '../../types/internal';
 
 /**
@@ -11,27 +13,34 @@ import type {FilePathFromRoot, TestFilePath} from '../../types/internal';
 const SUCCESSFUL_TESTS_PATH = join(TMP_DIRECTORY_PATH, 'successfulTests.txt') as FilePathFromRoot;
 
 /**
- * Adds one successful test run (in current retry).
+ * Get array of successful tests.
  * @internal
  */
-export const addSuccessfulInCurrentRetry = async (filePath: TestFilePath): Promise<void> => {
-  await appendFile(SUCCESSFUL_TESTS_PATH, `${filePath}\n`);
-};
-
-/**
- * Get the number of tests successful for printing (total and in the current retry).
- * @internal
- */
-export const getSuccessfulTestRunCount = async (): Promise<number> => {
+export const getSuccessfulTestRuns = async (): Promise<readonly TestFilePath[]> => {
   let successfulTestsFile = '';
 
   try {
     successfulTestsFile = await readFile(SUCCESSFUL_TESTS_PATH, READ_FILE_OPTIONS);
   } catch {}
 
-  if (successfulTestsFile === '') {
-    return 0;
-  }
+  return successfulTestsFile
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean) as TestFilePath[];
+};
 
-  return successfulTestsFile.split('\n').filter(Boolean).length;
+/**
+ * Adds one successful test run (in current retry).
+ * @internal
+ */
+export const addSuccessfulInCurrentRetry = async (testFilePath: TestFilePath): Promise<void> => {
+  const successfulTestRuns = await getSuccessfulTestRuns();
+
+  assertValueIsFalse(
+    successfulTestRuns.includes(testFilePath),
+    'There is no duplicate test file path in successful test runs',
+    {successfulTestRuns, testFilePath},
+  );
+
+  await appendFile(SUCCESSFUL_TESTS_PATH, `${testFilePath}\n`);
 };
