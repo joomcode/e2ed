@@ -18,5 +18,9 @@ export const mapBackendResponseToLog: MapBackendResponseToLog = ({
     return undefined;
   }
 
+  if (request.url.includes('&key=')) {
+    return undefined;
+  }
+
   return {duration, statusCode, url: request.url};
 };
