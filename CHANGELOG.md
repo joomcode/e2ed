@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.18.6](https://github.com/joomcode/e2ed/tree/v0.18.6) (2024-08-06)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.5...v0.18.6)
+
+- [Merge pull request #84 from joomcode/fix/test-file-path-checks](https://github.com/joomcode/e2ed/commit/6b6d8865251b6dfdac9d5a84f516bea0193d71df) ([uid11](https://github.com/uid11))
+
+  fix: global status of e2ed run
+
+- [FI-1237 fix: global status of e2ed run](https://github.com/joomcode/e2ed/commit/bcd814c059900836fa4868316e7cb0a3940cbf17) ([uid11](https://github.com/uid11))
+
+  chore: update Playwright to 1.46.0
+
 ## [v0.18.5](https://github.com/joomcode/e2ed/tree/v0.18.5) (2024-08-05)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.4...v0.18.5)
