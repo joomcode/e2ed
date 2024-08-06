@@ -1,6 +1,7 @@
 import type {RunEnvironment} from '../configurator';
 import type {
   PATH_TO_PACK_VARIABLE_NAME,
+  PATH_TO_TEST_FILE_VARIABLE_NAME,
   RUN_ENVIRONMENT_VARIABLE_NAME,
   RUN_LABEL_VARIABLE_NAME,
   START_TIME_IN_MS_VARIABLE_NAME,
@@ -19,6 +20,7 @@ export type E2edEnvironment = {
   ['E2ED_PATH_TO_TS_CONFIG_OF_PROJECT_FROM_ROOT']?: string;
   ['E2ED_TERMINATION_SIGNAL']?: NodeJS.Signals;
   [PATH_TO_PACK_VARIABLE_NAME]?: string;
+  [PATH_TO_TEST_FILE_VARIABLE_NAME]?: string;
   ['PWD']?: string;
   ['PWDEBUG']?: 'console';
   [RUN_ENVIRONMENT_VARIABLE_NAME]?: RunEnvironment;

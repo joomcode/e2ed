@@ -12,12 +12,12 @@ export const setPageCookiesAndNavigateToUrl = async (
   pageCookies: readonly Cookie[],
 ): Promise<void> => {
   const mapResponseHeaders = (headers: StringHeaders): StringHeaders => {
-    let cookiesArray: SetCookieHeaderString[] = [];
     const setCookies = getHeaderValue(headers, 'set-cookie');
 
-    if (setCookies !== undefined) {
-      cookiesArray.push(setCookies as SetCookieHeaderString);
-    }
+    let cookiesArray = (setCookies ?? '')
+      .split('\n')
+      .map((line) => line.trim())
+      .filter(Boolean) as SetCookieHeaderString[];
 
     for (const cookie of pageCookies) {
       cookiesArray = replaceSetCookie(cookiesArray, cookie);

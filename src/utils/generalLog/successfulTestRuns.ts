@@ -13,10 +13,10 @@ import type {FilePathFromRoot, TestFilePath} from '../../types/internal';
 const SUCCESSFUL_TESTS_PATH = join(TMP_DIRECTORY_PATH, 'successfulTests.txt') as FilePathFromRoot;
 
 /**
- * Get array of successful tests.
+ * Get array of test file paths of successful tests.
  * @internal
  */
-export const getSuccessfulTestRuns = async (): Promise<readonly TestFilePath[]> => {
+export const getSuccessfulTestFilePaths = async (): Promise<readonly TestFilePath[]> => {
   let successfulTestsFile = '';
 
   try {
@@ -30,16 +30,16 @@ export const getSuccessfulTestRuns = async (): Promise<readonly TestFilePath[]> 
 };
 
 /**
- * Adds one successful test run (in current retry).
+ * Adds one successful test run.
  * @internal
  */
-export const addSuccessfulInCurrentRetry = async (testFilePath: TestFilePath): Promise<void> => {
-  const successfulTestRuns = await getSuccessfulTestRuns();
+export const addSuccessfulTestRun = async (testFilePath: TestFilePath): Promise<void> => {
+  const successfulTestFilePaths = await getSuccessfulTestFilePaths();
 
   assertValueIsFalse(
-    successfulTestRuns.includes(testFilePath),
+    successfulTestFilePaths.includes(testFilePath),
     'There is no duplicate test file path in successful test runs',
-    {successfulTestRuns, testFilePath},
+    {successfulTestFilePaths, testFilePath},
   );
 
   await appendFile(SUCCESSFUL_TESTS_PATH, `${testFilePath}\n`);

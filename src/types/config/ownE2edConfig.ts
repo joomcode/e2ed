@@ -1,3 +1,5 @@
+import type {PlaywrightTestConfig} from '@playwright/test';
+
 import type {FullMocksConfig} from '../fullMocks';
 import type {MapBackendResponseToLog, MapLogPayload, MapLogPayloadInReport} from '../log';
 import type {MaybePromise} from '../promise';
@@ -45,12 +47,6 @@ export type OwnE2edConfig<
     this: void,
     liteReport: LiteReport<CustomPackProperties, CustomReportProperties, SkipTests, TestMeta>,
   ) => MaybePromise<CustomReportProperties | Void>)[];
-
-  /**
-   * Enables Chrome DevTools Protocol for browser control in tests (instead of `testcafe-hammerhead`).
-   * {@link https://chromedevtools.github.io/devtools-protocol/}
-   */
-  enableChromeDevToolsProtocol: boolean;
 
   /**
    * Enables headless mode (if browser supports such mode).
@@ -150,8 +146,12 @@ export type OwnE2edConfig<
   maxRetriesCountInDocker: number;
 
   /**
+   * If not `null`, then this value will override fields of internal Playwright config.
+   */
+  overriddenConfigFields: PlaywrightTestConfig | null;
+
+  /**
    * If not `null`, then this value will override the browser's user agent in tests.
-   * This override only works when `enableChromeDevToolsProtocol` is `true`.
    */
   overriddenUserAgent: string | null;
 

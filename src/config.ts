@@ -9,8 +9,10 @@ import {
   ABSOLUTE_PATH_TO_INSTALLED_E2ED_DIRECTORY,
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
   COMPILED_USERLAND_CONFIG_DIRECTORY,
+  e2edEnvironment,
   INTERNAL_REPORTS_DIRECTORY_PATH,
   isDebug,
+  PATH_TO_TEST_FILE_VARIABLE_NAME,
   TESTS_DIRECTORY_PATH,
 } from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
@@ -21,7 +23,7 @@ import {setCustomInspectOnFunction} from './utils/fn';
 import {setReadonlyProperty} from './utils/setReadonlyProperty';
 import {isLocalRun} from './configurator';
 
-import type {FullPackConfig, UserlandPack} from './types/internal';
+import type {FullPackConfig, Mutable, UserlandPack} from './types/internal';
 
 import {defineConfig, devices} from '@playwright/test';
 
@@ -83,6 +85,13 @@ if (isDebug) {
   setReadonlyProperty(userlandPack, 'testTimeout', maxTimeoutInMs);
 }
 
+const pathToTestFile = e2edEnvironment[PATH_TO_TEST_FILE_VARIABLE_NAME];
+
+const testMatch =
+  pathToTestFile === undefined
+    ? (userlandPack.testFileGlobs as Mutable<typeof userlandPack.testFileGlobs>)
+    : join('**', pathToTestFile);
+
 const playwrightConfig = defineConfig({
   fullyParallel: true,
 
@@ -99,7 +108,7 @@ const playwrightConfig = defineConfig({
 
   testDir: join(relativePathFromInstalledE2edToRoot, TESTS_DIRECTORY_PATH),
   testIgnore: '**/*.skip.ts',
-  testMatch: userlandPack.testFileGlobs as (typeof userlandPack.testFileGlobs)[number][],
+  testMatch,
 
   timeout: userlandPack.testTimeout,
 
@@ -117,6 +126,8 @@ const playwrightConfig = defineConfig({
   },
 
   workers: userlandPack.concurrency,
+
+  ...userlandPack.overriddenConfigFields,
 });
 
 const config: FullPackConfig = Object.assign(playwrightConfig, userlandPack);

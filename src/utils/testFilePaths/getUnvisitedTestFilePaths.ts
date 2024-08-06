@@ -1,18 +1,16 @@
-import {assertValueIsFalse} from './asserts';
-import {collectTestFilePaths} from './collectTestFilePaths';
+import {assertValueIsFalse} from '../asserts';
 
-import type {FullTestRun, TestFilePath} from '../types/internal';
+import type {FullTestRun, TestFilePath} from '../../types/internal';
 
 /**
  * Get unvisited test file paths, that is, file paths to tests for which there was no test runs.
  * @internal
  */
-export const getUnvisitedTestFilePaths = async (
+export const getUnvisitedTestFilePaths = (
   fullTestRuns: readonly FullTestRun[],
+  allTestFilePaths: readonly TestFilePath[],
   notIncludedInPackTests: readonly TestFilePath[],
-): Promise<readonly TestFilePath[]> => {
-  const allTestFilePaths = await collectTestFilePaths();
-
+): readonly TestFilePath[] => {
   const visitedTestFilePathsHash = Object.create(null) as Record<TestFilePath, true>;
 
   for (const {filePath} of fullTestRuns) {
@@ -31,9 +29,9 @@ export const getUnvisitedTestFilePaths = async (
 
   const unvisitedTestFilePaths: TestFilePath[] = [];
 
-  for (const testFilePath of allTestFilePaths) {
-    if (!(testFilePath in visitedTestFilePathsHash) && !testFilePath.endsWith('.skip.ts')) {
-      unvisitedTestFilePaths.push(testFilePath);
+  for (const filePath of allTestFilePaths) {
+    if (!(filePath in visitedTestFilePathsHash)) {
+      unvisitedTestFilePaths.push(filePath);
     }
   }
 
