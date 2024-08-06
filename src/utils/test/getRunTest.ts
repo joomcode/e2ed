@@ -25,8 +25,6 @@ export const getRunTest =
   (test: Test): RunTest =>
   ({context, page, request}: PlaywrightTestArgs, testInfo: TestInfo): Promise<void> => {
     const runTest = async (): Promise<void> => {
-      await preparePage(page);
-
       const retry = testInfo.retry + 1;
       const runId = createRunId();
 
@@ -43,6 +41,8 @@ export const getRunTest =
         if (!shouldRunTest) {
           return;
         }
+
+        await preparePage(page);
 
         beforeTest({retry, runId, testFn: test.testFn, testStaticOptions});
 

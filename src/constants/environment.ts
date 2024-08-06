@@ -18,6 +18,12 @@ export const isDebug = Boolean(e2edEnvironment.E2ED_DEBUG);
 export const PATH_TO_PACK_VARIABLE_NAME = '__INTERNAL_E2ED_PATH_TO_PACK';
 
 /**
+ * Name of e2ed environment variable with path to one test file.
+ * @internal
+ */
+export const PATH_TO_TEST_FILE_VARIABLE_NAME = '__INTERNAL_E2ED_PATH_TO_TEST_FILE';
+
+/**
  * Name of e2ed environment variable with run environment.
  * @internal
  */

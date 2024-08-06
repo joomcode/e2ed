@@ -255,10 +255,6 @@ The functions accept a start info object, and can return new full pack config,
 which in this case will be included in the start info object, and will be used for running pack.
 Each function can thus access the results of the previous function.
 
-`enableChromeDevToolsProtocol: boolean`: enables [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/)
-for browser control in tests (instead of `testcafe-hammerhead`).
-In CDP mode, tests disable Service Workers (if they are used on the page).
-
 `enableHeadlessMode: boolean`: enables headless mode (if browser supports such mode).
 
 `enableLiveMode: boolean`: enables live mode for test development (only for locally running).
@@ -319,8 +315,10 @@ If the mapping returns `undefined`, the log entry is not skipped, but is printed
 `your-project/autotests/bin/runDocker.sh` (until the test passes).
 For example, if it is equal to three, the test will be run no more than three times.
 
+`overriddenConfigFields: PlaywrightTestConfig | null`: if not `null`, then this value will override
+fields of internal Playwright config.
+
 `overriddenUserAgent: string | null`: if not `null`, then this value will override the browser's user agent in tests.
-This override only works when `enableChromeDevToolsProtocol` is `true`.
 
 `packTimeout: number`: timeout (in millisecond) for the entire pack of tests (tasks).
 If the test pack takes longer than this timeout, the pack will fail with the appropriate error.

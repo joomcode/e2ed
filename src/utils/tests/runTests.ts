@@ -1,10 +1,13 @@
 import {fork} from 'node:child_process';
 
-import {CONFIG_PATH, e2edEnvironment} from '../../constants/internal';
+import {
+  CONFIG_PATH,
+  e2edEnvironment,
+  PATH_TO_TEST_FILE_VARIABLE_NAME,
+} from '../../constants/internal';
 
 import {getFullPackConfig} from '../config';
 import {getRunLabel, setRunLabel} from '../environment';
-import {E2edError} from '../error';
 import {generalLog} from '../generalLog';
 import {startResourceUsageReading} from '../resourceUsage';
 
@@ -40,13 +43,8 @@ export const runTests = async ({runLabel}: RunRetryOptions): Promise<void> => {
 
     beforeRunFirstTestTimeoutId.unref();
 
-    // const notIncludedInPackTests = await getNotIncludedInPackTests();
-    // const notIncludedInPackTestsInAbsolutePaths = notIncludedInPackTests.map((testFilePath) =>
-    //  join(ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY, testFilePath),
-    // );
-
     await new Promise<void>((resolve, reject) => {
-      const playwrightArgs = ['test', '--config', CONFIG_PATH];
+      const playwrightArgs = ['test', `--config=${CONFIG_PATH}`];
 
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (e2edEnvironment.E2ED_DEBUG) {
@@ -57,6 +55,12 @@ export const runTests = async ({runLabel}: RunRetryOptions): Promise<void> => {
 
       if (enableLiveMode) {
         playwrightArgs.push('--ui');
+      }
+
+      const pathToTestFile = process.argv[2];
+
+      if (pathToTestFile !== undefined) {
+        e2edEnvironment[PATH_TO_TEST_FILE_VARIABLE_NAME] = pathToTestFile;
       }
 
       if (!beforeRunFirstTestWasCalled) {
@@ -83,14 +87,14 @@ export const runTests = async ({runLabel}: RunRetryOptions): Promise<void> => {
 
       playwrightProcess.on('error', reject);
 
-      playwrightProcess.on('exit', (exitCode): void => {
-        const error = new E2edError(
-          `Playwright process with label "${runLabel}" exit with non-zero exit code ${String(
-            exitCode,
-          )}`,
+      playwrightProcess.on('exit', (exitCode, exitSignal): void => {
+        const signalMessage = exitSignal === null ? '' : ` and signal ${exitSignal}`;
+
+        generalLog(
+          `Playwright process with label "${runLabel}" exit with code ${String(exitCode)}${signalMessage}`,
         );
 
-        return exitCode === 0 ? resolve() : reject(error);
+        resolve();
       });
     });
   } catch (error) {

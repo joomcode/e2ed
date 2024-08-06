@@ -1,4 +1,4 @@
-import {getSuccessfulTestRuns} from '../generalLog';
+import {getSuccessfulTestFilePaths} from '../generalLog';
 import {addTestToNotIncludedInPackTests} from '../notIncludedInPackTests';
 
 import {getIsTestIncludedInPack} from './getIsTestIncludedInPack';
@@ -18,7 +18,7 @@ export const getShouldRunTest = async (testStaticOptions: TestStaticOptions): Pr
     return false;
   }
 
-  const successfulTestRuns = await getSuccessfulTestRuns();
+  const successfulTestFilePaths = await getSuccessfulTestFilePaths();
 
-  return !successfulTestRuns.includes(testStaticOptions.filePath);
+  return !successfulTestFilePaths.includes(testStaticOptions.filePath);
 };

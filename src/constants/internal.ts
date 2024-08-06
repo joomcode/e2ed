@@ -8,6 +8,7 @@ export {isDebug, RunEnvironment} from './environment';
 export {
   e2edEnvironment,
   PATH_TO_PACK_VARIABLE_NAME,
+  PATH_TO_TEST_FILE_VARIABLE_NAME,
   RUN_ENVIRONMENT_VARIABLE_NAME,
   RUN_LABEL_VARIABLE_NAME,
   START_TIME_IN_MS_VARIABLE_NAME,
