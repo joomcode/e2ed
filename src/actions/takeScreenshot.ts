@@ -12,16 +12,20 @@ type Options = Parameters<Page['screenshot']>[0];
  * Takes a screenshot of the tested page.
  */
 export const takeScreenshot = async (options: Options = {}): Promise<void> => {
-  log('Take a screenshot of the page', {...options}, LogEventType.InternalAction);
+  const {path: pathToScreenshot, ...optionsWithoutPath} = options;
+
+  log(
+    'Take a screenshot of the page',
+    {pathToScreenshot, ...optionsWithoutPath},
+    LogEventType.InternalAction,
+  );
+
+  if (pathToScreenshot !== undefined) {
+    // eslint-disable-next-line no-param-reassign
+    options.path = join(SCREENSHOTS_DIRECTORY_PATH, pathToScreenshot);
+  }
 
   const page = getPage();
-
-  const {path} = options;
-
-  if (path !== undefined) {
-    // eslint-disable-next-line no-param-reassign
-    options.path = join(SCREENSHOTS_DIRECTORY_PATH, path);
-  }
 
   await page.screenshot(options);
 };

@@ -1,10 +1,6 @@
 import {fork} from 'node:child_process';
 
-import {
-  CONFIG_PATH,
-  e2edEnvironment,
-  PATH_TO_TEST_FILE_VARIABLE_NAME,
-} from '../../constants/internal';
+import {CONFIG_PATH, e2edEnvironment} from '../../constants/internal';
 
 import {getFullPackConfig} from '../config';
 import {getRunLabel, setRunLabel} from '../environment';
@@ -55,12 +51,6 @@ export const runTests = async ({runLabel}: RunRetryOptions): Promise<void> => {
 
       if (enableLiveMode) {
         playwrightArgs.push('--ui');
-      }
-
-      const pathToTestFile = process.argv[2];
-
-      if (pathToTestFile !== undefined) {
-        e2edEnvironment[PATH_TO_TEST_FILE_VARIABLE_NAME] = pathToTestFile;
       }
 
       if (!beforeRunFirstTestWasCalled) {

@@ -2,6 +2,8 @@ import {normalize} from 'node:path';
 
 import globby from 'globby';
 
+import {TESTS_DIRECTORY_PATH} from '../../constants/internal';
+
 import {getFullPackConfig} from '../config';
 
 import type {TestFilePath} from '../../types/internal';
@@ -17,7 +19,10 @@ export const collectTestFilePaths = async (): Promise<readonly TestFilePath[]> =
   const rawTestFilesPaths = await globby(testFileGlobs);
   const testFilesPaths = rawTestFilesPaths
     .map(normalize as (path: string) => TestFilePath)
-    .filter((testFilePath) => !testFilePath.endsWith('.skip.ts'));
+    .filter(
+      (testFilePath) =>
+        testFilePath.startsWith(TESTS_DIRECTORY_PATH) && !testFilePath.endsWith('.skip.ts'),
+    );
 
   return testFilesPaths;
 };
