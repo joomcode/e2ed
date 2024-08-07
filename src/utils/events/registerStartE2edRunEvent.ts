@@ -1,5 +1,11 @@
 import {RunEnvironment} from '../../configurator';
-import {EVENTS_DIRECTORY_PATH, ExitCode, TMP_DIRECTORY_PATH} from '../../constants/internal';
+import {
+  e2edEnvironment,
+  EVENTS_DIRECTORY_PATH,
+  ExitCode,
+  PATH_TO_TEST_FILE_VARIABLE_NAME,
+  TMP_DIRECTORY_PATH,
+} from '../../constants/internal';
 
 import {getFullPackConfig, updateConfig} from '../config';
 import {getPathToPack, setDotEnvValuesToEnvironment} from '../environment';
@@ -26,6 +32,12 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
   await setDotEnvValuesToEnvironment().catch((error: unknown) => {
     errorSettingDotEnv = error;
   });
+
+  const pathToTestFile = process.argv[2];
+
+  if (pathToTestFile !== undefined) {
+    e2edEnvironment[PATH_TO_TEST_FILE_VARIABLE_NAME] = pathToTestFile;
+  }
 
   let compileErrors: readonly Readonly<Record<string, string>>[] = [];
   let configCompileTimeWithUnits = '';

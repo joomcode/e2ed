@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 20.10.0
+          node-version: 20.16.0
       - run: npm ci
       - run: npm run build
       - run: npm run build:docker
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 20.10.0
+          node-version: 20.16.0
       - run: npm ci
       - run: npm run build
       - run: npm run lint
@@ -34,7 +34,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 20.10.0
+          node-version: 20.16.0
       - run: npm ci
       - run: npm run build
       - run: npm run test:local

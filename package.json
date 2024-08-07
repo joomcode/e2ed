@@ -10,7 +10,7 @@
   "author": "uid11",
   "license": "MIT",
   "bin": {
-    "e2ed": "bin/localEntrypoint.js",
+    "e2ed": "bin/runE2edInLocalEnvironment.js",
     "e2ed-init": "bin/init.js"
   },
   "bugs": "https://github.com/joomcode/e2ed/issues",
@@ -25,7 +25,6 @@
   },
   "dependencies": {
     "@playwright/test": "1.46.0",
-    "bin-v8-flags-filter": "1.2.0",
     "create-locator": "0.0.23",
     "get-modules-graph": "0.0.9",
     "globby": "11.1.0"
@@ -92,7 +91,7 @@
     "postbuild:remove": "touch ./build/node_modules/e2ed/types/index.js",
     "build:copy": "npm run build:copy:bin && npm run build:copy:scripts && npm run build:copy:meta && npm run build:copy:example && npm run build:copy:tsconfig",
     "build:copy:bin": "cp ./bin/dockerEntrypoint.sh ./build/node_modules/e2ed/bin",
-    "postbuild:copy:bin": "npm run make:executable build/node_modules/e2ed/bin/init.js build/node_modules/e2ed/bin/localEntrypoint.js build/node_modules/e2ed/bin/runE2edInDockerEnvironment.js",
+    "postbuild:copy:bin": "npm run make:executable build/node_modules/e2ed/bin/init.js build/node_modules/e2ed/bin/runE2edInLocalEnvironment.js build/node_modules/e2ed/bin/runE2edInDockerEnvironment.js",
     "build:copy:scripts": "cp ./build/scripts/*.js ./build",
     "build:copy:meta": "cp -R ./LICENSE ./logo.svg ./README.md ./styles ./build/node_modules/e2ed",
     "postbuild:copy:meta": "node ./build/writePrunedPackageJson.js",
@@ -117,7 +116,7 @@
     "test:docker:copy": "cp -R ./build/autotests ./build/docker/autotests && cp ./build/tsconfig.json ./build/docker",
     "posttest:docker:copy": "rm -rf ./build/docker/autotests/reports && ./bin/addPackageJsonToBuildDocker.sh",
     "test:docker": "(cd ./build/docker && E2ED_ORIGIN=https://google.com ./autotests/bin/runDocker.sh ./autotests/packs/allTests.ts)",
-    "test:local": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/localEntrypoint.js ./autotests/packs/allTests.ts)"
+    "test:local": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/runE2edInLocalEnvironment.js ./autotests/packs/allTests.ts)"
   },
   "sideEffects": false,
   "types": "index.d.ts"

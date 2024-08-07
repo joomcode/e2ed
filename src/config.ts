@@ -51,6 +51,12 @@ const absoluteCompiledUserlandPackPath = join(
 // eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-dynamic-require
 const userlandPack = require<{pack: UserlandPack}>(absoluteCompiledUserlandPackPath).pack;
 
+const pathToTestFile = e2edEnvironment[PATH_TO_TEST_FILE_VARIABLE_NAME];
+
+if (pathToTestFile !== undefined) {
+  setReadonlyProperty(userlandPack, 'testFileGlobs', [join('**', pathToTestFile)]);
+}
+
 assertUserlandPack(userlandPack);
 
 const {
@@ -85,15 +91,12 @@ if (isDebug) {
   setReadonlyProperty(userlandPack, 'testTimeout', maxTimeoutInMs);
 }
 
-const pathToTestFile = e2edEnvironment[PATH_TO_TEST_FILE_VARIABLE_NAME];
-
-const testMatch =
-  pathToTestFile === undefined
-    ? (userlandPack.testFileGlobs as Mutable<typeof userlandPack.testFileGlobs>)
-    : join('**', pathToTestFile);
-
 const playwrightConfig = defineConfig({
+  expect: {timeout: userlandPack.assertionTimeout},
+
   fullyParallel: true,
+
+  globalTimeout: userlandPack.packTimeout,
 
   outputDir: join(relativePathFromInstalledE2edToRoot, INTERNAL_REPORTS_DIRECTORY_PATH),
 
@@ -107,10 +110,14 @@ const playwrightConfig = defineConfig({
   retries: isLocalRun ? 0 : userlandPack.maxRetriesCountInDocker - 1,
 
   testDir: join(relativePathFromInstalledE2edToRoot, TESTS_DIRECTORY_PATH),
-  testIgnore: '**/*.skip.ts',
-  testMatch,
+  testIgnore: ['**/node_modules/**', '**/*.skip.ts'],
+  testMatch: userlandPack.testFileGlobs as Mutable<typeof userlandPack.testFileGlobs>,
 
   timeout: userlandPack.testTimeout,
+
+  workers: userlandPack.concurrency,
+
+  ...userlandPack.overriddenConfigFields,
 
   use: {
     actionTimeout: userlandPack.testIdleTimeout,
@@ -122,12 +129,12 @@ const playwrightConfig = defineConfig({
 
     navigationTimeout: userlandPack.pageRequestTimeout,
 
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
+
+    viewport: {height: userlandPack.viewportHeight, width: userlandPack.viewportWidth},
+
+    ...userlandPack.overriddenConfigFields?.use,
   },
-
-  workers: userlandPack.concurrency,
-
-  ...userlandPack.overriddenConfigFields,
 });
 
 const config: FullPackConfig = Object.assign(playwrightConfig, userlandPack);

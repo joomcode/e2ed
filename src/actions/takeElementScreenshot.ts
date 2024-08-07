@@ -19,13 +19,17 @@ export const takeElementScreenshot = async (
 ): Promise<void> => {
   const description = getDescriptionFromSelector(selector);
 
-  log('Take a screenshot of the element', {description, options}, LogEventType.InternalAction);
+  const {path: pathToScreenshot, ...optionsWithoutPath} = options;
 
-  const {path} = options;
+  log(
+    'Take a screenshot of the element',
+    {description, pathToScreenshot, ...optionsWithoutPath},
+    LogEventType.InternalAction,
+  );
 
-  if (path !== undefined) {
+  if (pathToScreenshot !== undefined) {
     // eslint-disable-next-line no-param-reassign
-    options.path = join(SCREENSHOTS_DIRECTORY_PATH, path);
+    options.path = join(SCREENSHOTS_DIRECTORY_PATH, pathToScreenshot);
   }
 
   await selector.getPlaywrightLocator().screenshot(options);
