@@ -1,5 +1,27 @@
 # Changelog
 
+## [v0.18.7](https://github.com/joomcode/e2ed/tree/v0.18.7) (2024-08-07)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.6...v0.18.7)
+
+- [Merge pull request #85 from joomcode/fix/status-of-local-e2ed-run](https://github.com/joomcode/e2ed/commit/96683c88e32705d42d691c822bcc6c25ab434a08) ([uid11](https://github.com/uid11))
+
+  fix: status of local e2ed run
+
+- [FI-1237 fix: status of local e2ed run](https://github.com/joomcode/e2ed/commit/64df23553466b76ddfe78efbded8ebdaeee1dc51) ([uid11](https://github.com/uid11))
+
+  fix: remove `bin-v8-flags-filter` package
+
+  fix: respect `expect` and `global` timeouts in config
+
+  fix: error in internal `selectorCustomMethods` test
+
+  chore: update version of node in GitHub Actions
+
+  fix: add logs to `setHeadersAndNavigateToUrl` action
+
+  fix: urls of screenshots in HTML report
+
 ## [v0.18.6](https://github.com/joomcode/e2ed/tree/v0.18.6) (2024-08-06)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.5...v0.18.6)
