@@ -1,5 +1,5 @@
 import {LogEventType} from '../constants/internal';
-import {getPage} from '../useContext';
+import {getPlaywrightPage} from '../useContext';
 import {log} from '../utils/log';
 
 import type {Url} from '../types/internal';
@@ -18,7 +18,7 @@ export const navigateToUrl = async (url: Url, options: Options = {}): Promise<vo
     log(`Will navigate to the url ${url}`, LogEventType.InternalAction);
   }
 
-  const page = getPage();
+  const page = getPlaywrightPage();
 
   await page.goto(url);
 

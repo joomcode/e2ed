@@ -5,7 +5,7 @@ import {generalLog} from './utils/generalLog';
 import {getDurationWithUnits} from './utils/getDurationWithUnits';
 import {addTimeoutToPromise} from './utils/promise';
 import {createTestRunCallback} from './utils/testRun';
-import {getPage} from './useContext';
+import {getPlaywrightPage} from './useContext';
 
 import type {ClientFunction} from './types/internal';
 
@@ -24,7 +24,7 @@ export const createClientFunction = <Args extends readonly unknown[], Result>(
   const printedClientFunctionName = `client function${name ? ` "${name}"` : ''}`;
 
   const clientFunctionWithTimeout = (...args: Args): Promise<Result> => {
-    const page = getPage();
+    const page = getPlaywrightPage();
 
     const clientFunctionTimeout = timeout ?? getTestIdleTimeout();
 

@@ -25,7 +25,7 @@ export const getRunTest =
   (test: Test): RunTest =>
   ({context, page, request}: PlaywrightTestArgs, testInfo: TestInfo): Promise<void> => {
     const runTest = async (): Promise<void> => {
-      const retry = testInfo.retry + 1;
+      const retryIndex = testInfo.retry + 1;
       const runId = createRunId();
 
       let hasRunError = false;
@@ -44,11 +44,11 @@ export const getRunTest =
 
         await preparePage(page);
 
-        beforeTest({retry, runId, testFn: test.testFn, testStaticOptions});
+        beforeTest({retryIndex, runId, testFn: test.testFn, testStaticOptions});
 
         const testController = {context, page, request};
 
-        await runTestFn({retry, runId, testController, testStaticOptions});
+        await runTestFn({retryIndex, runId, testController, testStaticOptions});
       } catch (error) {
         hasRunError = true;
         unknownRunError = error;

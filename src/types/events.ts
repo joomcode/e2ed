@@ -53,7 +53,7 @@ export type TestRunEvent<TestMeta = TestMetaPlaceholder> = Readonly<{
   logEvents: readonly LogEvent[];
   onlog: Onlog;
   reject: RejectTestRun;
-  retry: number;
+  retryIndex: number;
   runId: RunId;
   runLabel: RunLabel;
   status: TestRunStatus;

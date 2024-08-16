@@ -1,3 +1,4 @@
+import {getFullPackConfig} from '../config';
 import {generalLog, writeLogsToFile} from '../generalLog';
 import {createRunLabel} from '../runLabel';
 import {setReadonlyProperty} from '../setReadonlyProperty';
@@ -14,11 +15,12 @@ import type {RetriesState, UtcTimeInMs} from '../../types/internal';
  * @internal
  */
 export const processRetry = async (retriesState: RetriesState): Promise<void> => {
-  const {concurrency, maxRetriesCount, retryIndex, successfulTestRunNamesHash} = retriesState;
-  const runLabel = createRunLabel({concurrency, maxRetriesCount, retryIndex});
+  const {maxRetriesCountInDocker} = getFullPackConfig();
+  const {concurrency, successfulTestRunNamesHash} = retriesState;
+  const runLabel = createRunLabel({concurrency, maxRetriesCount: maxRetriesCountInDocker});
 
   const startLastRetryTimeInMs = Date.now() as UtcTimeInMs;
-  const printedRetry = getPrintedRetry({maxRetriesCount, retryIndex});
+  const printedRetry = getPrintedRetry(maxRetriesCountInDocker);
 
   setReadonlyProperty(retriesState, 'startLastRetryTimeInMs', startLastRetryTimeInMs);
 
@@ -30,8 +32,6 @@ export const processRetry = async (retriesState: RetriesState): Promise<void> =>
     await writeLogsToFile();
 
     await runRetry({runLabel, successfulTestRunNamesHash});
-
-    setReadonlyProperty(retriesState, 'isLastRetrySuccessful', true);
   } catch (error) {
     generalLog(`Caught an error on ${printedRetry}`, {
       error,

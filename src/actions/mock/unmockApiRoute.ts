@@ -1,6 +1,6 @@
 import {LogEventType} from '../../constants/internal';
 import {getApiMockState} from '../../context/apiMockState';
-import {getPage} from '../../useContext';
+import {getPlaywrightPage} from '../../useContext';
 import {assertValueIsDefined} from '../../utils/asserts';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {log} from '../../utils/log';
@@ -44,7 +44,7 @@ export const unmockApiRoute = async <
       routeWasMocked,
     });
 
-    const page = getPage();
+    const page = getPlaywrightPage();
 
     await page.unroute(requestsFilter);
   }

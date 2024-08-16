@@ -103,7 +103,10 @@ const playwrightConfig = defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: {...devices['Desktop Chrome']},
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: {height: userlandPack.viewportHeight, width: userlandPack.viewportWidth},
+      },
     },
   ],
 

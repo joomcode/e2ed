@@ -1,4 +1,4 @@
-import {getMeta} from 'e2ed/context';
+import {getMeta, getRetryIndex} from 'e2ed/context';
 
 import type {GetLogContext, TestMeta} from 'autotests/configurator';
 
@@ -16,7 +16,8 @@ import type {GetLogContext, TestMeta} from 'autotests/configurator';
  */
 export const getLogContext: GetLogContext = () => {
   // As with all hooks, you can replace it with your own implementation.
+  const retryIndex = getRetryIndex();
   const {testId} = getMeta<TestMeta>();
 
-  return {testId};
+  return {retryIndex, testId};
 };

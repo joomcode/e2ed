@@ -4,7 +4,7 @@ import {CREATE_PAGE_TOKEN} from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
 import {getFullPackConfig} from './utils/config';
 import {reloadDocument} from './utils/document';
-import {getPage} from './useContext';
+import {getPlaywrightPage} from './useContext';
 
 import type {PageRoute} from './PageRoute';
 import type {AsyncVoid, PageClassTypeArgs, ParamsKeyType, Url} from './types/internal';
@@ -129,7 +129,7 @@ export abstract class Page<PageParams = undefined> {
    * Waits for `DOMContentLoaded` event.
    */
   async waitForDomContentLoaded(): Promise<void> {
-    const playwrightPage = getPage();
+    const playwrightPage = getPlaywrightPage();
 
     await playwrightPage.waitForLoadState('domcontentloaded');
   }

@@ -1,6 +1,6 @@
 import {isDebug, TestRunStatus} from '../../constants/internal';
 import {getFullMocksState} from '../../context/fullMocks';
-import {getPage} from '../../useContext';
+import {getPlaywrightPage} from '../../useContext';
 
 import {cloneWithoutLogEvents} from '../clone';
 import {getRunErrorFromError} from '../error';
@@ -32,7 +32,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
     logEvents,
     name,
     options,
-    retry,
+    retryIndex,
     runLabel,
     status: originalStatus,
     utcTimeInMs: startTimeInMs,
@@ -77,7 +77,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
     logEvents,
     name,
     options,
-    retry,
+    retryIndex,
     runError,
     runId,
     runLabel,
@@ -98,6 +98,6 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
   await writeLogsToFile();
 
   if (isDebug) {
-    await getPage().pause();
+    await getPlaywrightPage().pause();
   }
 };

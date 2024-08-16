@@ -13,7 +13,7 @@ import type {VisitedTestNamesHash} from '../../types/internal';
  */
 export const runPackWithArgs = async (): Promise<void> => {
   const {concurrency} = getFullPackConfig();
-  const runLabel = createRunLabel({concurrency, maxRetriesCount: 1, retryIndex: 1});
+  const runLabel = createRunLabel({concurrency, maxRetriesCount: 1});
 
   const successfulTestRunNamesHash = Object.create(null) as VisitedTestNamesHash;
 

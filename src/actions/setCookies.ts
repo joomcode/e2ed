@@ -1,5 +1,5 @@
 import {LogEventType} from '../constants/internal';
-import {getPage} from '../useContext';
+import {getPlaywrightPage} from '../useContext';
 import {log} from '../utils/log';
 
 import type {Cookie} from '../types/internal';
@@ -10,7 +10,7 @@ import type {Cookie} from '../types/internal';
 export const setCookies = async (cookies: readonly Cookie[]): Promise<void> => {
   log('Set cookies with the specified cookies parameters', {cookies}, LogEventType.InternalAction);
 
-  const page = getPage();
+  const page = getPlaywrightPage();
 
   const browserContext = page.context();
 

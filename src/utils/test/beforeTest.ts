@@ -1,6 +1,7 @@
 import {TestRunStatus} from '../../constants/internal';
 import {setMeta} from '../../context/meta';
 import {getOnResponseCallbacks} from '../../context/onResponseCallbacks';
+import {setRetryIndex} from '../../context/retryIndex';
 import {setRunId} from '../../context/runId';
 import {setTestIdleTimeout} from '../../context/testIdleTimeout';
 import {setTestTimeout} from '../../context/testTimeout';
@@ -22,7 +23,7 @@ import type {
 } from '../../types/internal';
 
 type Options = Readonly<{
-  retry: number;
+  retryIndex: number;
   runId: RunId;
   testFn: TestFn;
   testStaticOptions: TestStaticOptions;
@@ -32,11 +33,12 @@ type Options = Readonly<{
  * Internal before test hook.
  * @internal
  */
-export const beforeTest = ({retry, runId, testFn, testStaticOptions}: Options): void => {
+export const beforeTest = ({retryIndex, runId, testFn, testStaticOptions}: Options): void => {
   const {options} = testStaticOptions;
 
-  setRunId(runId);
   setMeta(options.meta);
+  setRetryIndex(retryIndex);
+  setRunId(runId);
 
   const onResponseCallbacks = getOnResponseCallbacks();
 
@@ -74,7 +76,7 @@ export const beforeTest = ({retry, runId, testFn, testStaticOptions}: Options): 
     logEvents: [],
     onlog,
     reject,
-    retry,
+    retryIndex,
     runId,
     runLabel,
     status: isSkipped ? TestRunStatus.Skipped : TestRunStatus.Unknown,

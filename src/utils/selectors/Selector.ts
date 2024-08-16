@@ -2,7 +2,7 @@
 
 import {RETRY_KEY} from '../../constants/internal';
 import {getFrameContext} from '../../context/frameContext';
-import {getPage} from '../../useContext';
+import {getPlaywrightPage} from '../../useContext';
 
 import type {Locator as PlaywrightLocator} from '@playwright/test';
 
@@ -177,13 +177,15 @@ export class Selector {
 
     switch (this.kind) {
       case 'css':
-        return (getFrameContext() ?? getPage()).locator(this.cssString);
+        return (getFrameContext() ?? getPlaywrightPage()).locator(this.cssString);
 
       case 'filter':
-        return selector.getPlaywrightLocator().and(getPage().locator(String(args[0])));
+        return selector.getPlaywrightLocator().and(getPlaywrightPage().locator(String(args[0])));
 
       case 'find':
-        return selector.getPlaywrightLocator().locator(getPage().locator(String(args[0])));
+        return selector
+          .getPlaywrightLocator()
+          .locator(getPlaywrightPage().locator(String(args[0])));
 
       case 'nth':
         return selector.getPlaywrightLocator().nth(Number(args[0]));

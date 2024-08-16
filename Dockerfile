@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.46.0-noble
+FROM mcr.microsoft.com/playwright:v1.46.1-noble
 
 COPY ./build/node_modules/e2ed /node_modules/e2ed
 
