@@ -1,5 +1,27 @@
 # Changelog
 
+## [v0.18.8](https://github.com/joomcode/e2ed/tree/v0.18.8) (2024-08-20)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.7...v0.18.8)
+
+- [Merge pull request #86 from joomcode/fix/after-playwright](https://github.com/joomcode/e2ed/commit/92ba0050e754ce6744f3aa9e325f23c4dca0a1c5) ([uid11](https://github.com/uid11))
+
+  fix: do not enable "full mocks" in skipped tests
+
+- [FI-1344 fix: do not enable "full mocks" in skipped tests](https://github.com/joomcode/e2ed/commit/15c29ed28e75a5dbd53ecbf57dbefecc5b9b069c) ([uid11](https://github.com/uid11))
+
+  chore: update Playwright to 1.46.1 and some devDependencies
+
+  fix: add function `getPlaywrightPage` to public API
+
+  fix: divide test runs into retries in HTML report
+
+  fix: remove `retryIndex` from run label
+
+  fix: remove unnecessary function `processRetries`
+
+  fix: log message after retries
+
 ## [v0.18.7](https://github.com/joomcode/e2ed/tree/v0.18.7) (2024-08-07)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.6...v0.18.7)
