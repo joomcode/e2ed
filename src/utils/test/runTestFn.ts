@@ -1,3 +1,4 @@
+import {TestRunStatus} from '../../constants/internal';
 import {setTestRunPromise} from '../../context/testRunPromise';
 import {getTestTimeout} from '../../context/testTimeout';
 
@@ -13,7 +14,7 @@ import type {RunId, TestStaticOptions} from '../../types/internal';
 const delayForTestRunPromiseResolutionAfterTestTimeoutInMs = 100;
 
 type Options = Readonly<{
-  retry: number;
+  retryIndex: number;
   runId: RunId;
   testController: PlaywrightTestArgs;
   testStaticOptions: TestStaticOptions;
@@ -24,12 +25,12 @@ type Options = Readonly<{
  * @internal
  */
 export const runTestFn = async ({
+  retryIndex,
   runId,
-  retry,
   testController,
   testStaticOptions,
 }: Options): Promise<void> => {
-  const testRunEvent = getTestRunEvent(runId);
+  const {status, testFnWithReject} = getTestRunEvent(runId);
   const testTimeout = getTestTimeout();
 
   const {promiseWithTimeout: testRunPromise, resolve: resolveTestRunPromise} =
@@ -39,18 +40,13 @@ export const runTestFn = async ({
 
   setTestRunPromise(testRunPromise);
 
-  // TODO: support waitForEventsState
-  // const waitForEventsState = getWaitForEventsState();
-
   const {fullMocks} = getFullPackConfig();
 
-  if (fullMocks?.filterTests(testStaticOptions)) {
-    const shouldApplyMocks = retry === 1;
+  if (status !== TestRunStatus.Skipped && fullMocks?.filterTests(testStaticOptions)) {
+    const shouldApplyMocks = retryIndex === 1;
 
     await enableFullMocks(fullMocks, shouldApplyMocks, testStaticOptions.filePath);
   }
 
-  await testRunEvent
-    .testFnWithReject(testController)
-    .finally(() => resolveTestRunPromise(undefined));
+  await testFnWithReject(testController).finally(() => resolveTestRunPromise(undefined));
 };

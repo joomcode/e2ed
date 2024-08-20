@@ -1,7 +1,7 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 
 import {LogEventType} from '../../constants/internal';
-import {getPage} from '../../useContext';
+import {getPlaywrightPage} from '../../useContext';
 import {getFullPackConfig} from '../../utils/config';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
@@ -29,7 +29,7 @@ export const waitForResponse = <
   const {waitForResponseTimeout} = getFullPackConfig();
   const rejectTimeout = timeout ?? waitForResponseTimeout;
 
-  const page = getPage();
+  const page = getPlaywrightPage();
 
   const promise = page
     .waitForResponse(

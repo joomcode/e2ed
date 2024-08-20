@@ -1,7 +1,7 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 
 import {LogEventType} from '../constants/internal';
-import {getPage} from '../useContext';
+import {getPlaywrightPage} from '../useContext';
 import {log} from '../utils/log';
 import {applyHeadersMapper} from '../utils/requestHooks';
 
@@ -15,7 +15,7 @@ import type {MapOptions, Url} from '../types/internal';
 export const setHeadersAndNavigateToUrl = async (url: Url, options: MapOptions): Promise<void> => {
   const {mapRequestHeaders, mapResponseHeaders} = options;
 
-  const page = getPage();
+  const page = getPlaywrightPage();
 
   await page.route(
     url,

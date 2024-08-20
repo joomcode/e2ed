@@ -1,5 +1,6 @@
 import {startTimeInMs} from '../../configurator';
 
+import {getFullPackConfig} from '../config';
 import {generalLog} from '../generalLog';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 
@@ -12,18 +13,14 @@ import type {RetriesState} from '../../types/internal';
  * @internal
  */
 export const afterRetries = (retriesState: RetriesState): void => {
-  const {
-    failedTestNamesInLastRetry,
-    isLastRetrySuccessful,
-    isRetriesCycleEnded,
-    successfulTestRunNamesHash,
-    retryIndex: retryIndexMaybePlusOne,
-  } = retriesState;
+  const {maxRetriesCountInDocker} = getFullPackConfig();
+  const {failedTestNamesInLastRetry, successfulTestRunNamesHash} = retriesState;
 
   const durationWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
   const durationString = `in ${durationWithUnits}`;
-  const retryIndex = isRetriesCycleEnded ? retryIndexMaybePlusOne - 1 : retryIndexMaybePlusOne;
-  const retryString = `${retryIndex} ${retryIndex === 1 ? 'retry' : 'retries'}`;
+  const retryString = `${maxRetriesCountInDocker} ${maxRetriesCountInDocker === 1 ? 'retry' : 'retries'}`;
+
+  const isLastRetrySuccessful = failedTestNamesInLastRetry.length === 0;
 
   if (isLastRetrySuccessful) {
     generalLog(

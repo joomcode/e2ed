@@ -2,10 +2,9 @@ import {join} from 'node:path';
 
 // eslint-disable-next-line import/no-internal-modules
 import {takeScreenshot} from '../../actions/takeScreenshot';
+import {getRetryIndex} from '../../context/retryIndex';
 
 import {getFullPackConfig} from '../config';
-import {getRunLabel} from '../environment';
-import {getRunLabelObject} from '../runLabel';
 
 import {getScreenshotFileNames} from './getScreenshotFileNames';
 
@@ -35,8 +34,7 @@ export const takeScreenshotsOnErrorIfNeeded = async (
     return;
   }
 
-  const runLabel = getRunLabel();
-  const {retryIndex} = getRunLabelObject(runLabel);
+  const retryIndex = getRetryIndex();
   const retryDirectoryName = `retry${retryIndex}`;
 
   const {fullPage, viewport} = await getScreenshotFileNames(retryDirectoryName, testStaticOptions);

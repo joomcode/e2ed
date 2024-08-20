@@ -5,7 +5,7 @@ export {ApiRoute} from './ApiRoute';
 export {Page} from './Page';
 export {PageRoute} from './PageRoute';
 export {Route} from './Route';
-export {useContext} from './useContext';
+export {getPlaywrightPage, useContext} from './useContext';
 
 /**
  * Public modules, dependent on internal utils.

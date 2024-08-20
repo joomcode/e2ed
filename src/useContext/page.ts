@@ -12,9 +12,8 @@ export const pageStorage = new AsyncLocalStorage<Page>();
 
 /**
  * Get `page` object from context of current test.
- * @internal
  */
-export const getPage = (): Page => {
+export const getPlaywrightPage = (): Page => {
   const maybePage = pageStorage.getStore();
 
   assertValueIsDefined(maybePage, 'maybePage is defined');

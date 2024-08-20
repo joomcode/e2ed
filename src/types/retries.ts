@@ -8,10 +8,6 @@ import type {RunLabel} from './runLabel';
 export type RetriesState = Readonly<{
   concurrency: number;
   failedTestNamesInLastRetry: readonly string[];
-  isLastRetrySuccessful: boolean;
-  isRetriesCycleEnded: boolean;
-  maxRetriesCount: number;
-  retryIndex: number;
   startLastRetryTimeInMs: UtcTimeInMs;
   successfulTestRunNamesHash: Record<string, true>;
   visitedTestRunEventsFileName: readonly string[];

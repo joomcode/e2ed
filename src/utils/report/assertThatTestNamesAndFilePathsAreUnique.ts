@@ -1,5 +1,3 @@
-import {getRunLabelObject} from '../runLabel';
-
 import {assertThatTestNamesAndFilePathsAreUniqueInOneRetry} from './assertThatTestNamesAndFilePathsAreUniqueInOneRetry';
 
 import type {FullTestRun} from '../../types/internal';
@@ -14,7 +12,7 @@ export const assertThatTestNamesAndFilePathsAreUnique = (
   const testRunsByRetryIndex: Record<string, FullTestRun[]> = {};
 
   for (const fullTestRun of fullTestRuns) {
-    const {retryIndex} = getRunLabelObject(fullTestRun.runLabel);
+    const {retryIndex} = fullTestRun;
 
     if (!(retryIndex in testRunsByRetryIndex)) {
       testRunsByRetryIndex[retryIndex] = [];

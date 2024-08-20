@@ -1,7 +1,7 @@
 import {LogEventType} from '../../constants/internal';
 import {getApiMockState} from '../../context/apiMockState';
 import {getFullMocksState} from '../../context/fullMocks';
-import {getPage} from '../../useContext';
+import {getPlaywrightPage} from '../../useContext';
 import {assertValueIsDefined} from '../../utils/asserts';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {log} from '../../utils/log';
@@ -64,7 +64,7 @@ export const mockApiRoute = async <
       routeName: Route.name,
     });
 
-    const page = getPage();
+    const page = getPlaywrightPage();
 
     const setResponse = getSetResponse(apiMockState);
 

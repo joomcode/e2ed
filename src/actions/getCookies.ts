@@ -1,5 +1,5 @@
 import {LogEventType} from '../constants/internal';
-import {getPage} from '../useContext';
+import {getPlaywrightPage} from '../useContext';
 import {log} from '../utils/log';
 
 import type {Cookie} from '../types/internal';
@@ -11,7 +11,7 @@ import type {Cookie} from '../types/internal';
 export const getCookies = async (
   cookiesParameters: Partial<Cookie> = {},
 ): Promise<readonly Cookie[]> => {
-  const page = getPage();
+  const page = getPlaywrightPage();
   const parameters = Object.keys(cookiesParameters);
 
   const allCookies = await page.context().cookies(page.url());

@@ -13,7 +13,6 @@ export type RunLabel = Brand<string, 'RunLabel'>;
 export type RunLabelObject = Readonly<{
   concurrency: number;
   maxRetriesCount: number;
-  retryIndex: number;
 }>;
 
 /**

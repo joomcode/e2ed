@@ -1,4 +1,5 @@
-import {failMessage, generalLog, okMessage} from '../generalLog';
+import {getFullPackConfig} from '../config';
+import {generalLog} from '../generalLog';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 
 import {getPrintedRetry} from './getPrintedRetry';
@@ -24,21 +25,16 @@ export const logRetryResult = ({
   newLength,
   retriesState,
   successfulLength,
-  successfulTotalInPreviousRetries,
   unbrokenLength,
 }: Options): void => {
-  const {concurrency, maxRetriesCount, retryIndex, startLastRetryTimeInMs} = retriesState;
+  const {maxRetriesCountInDocker} = getFullPackConfig();
+  const {concurrency, startLastRetryTimeInMs} = retriesState;
 
-  const printedRetry = getPrintedRetry({maxRetriesCount, retryIndex});
-  const stateMessage = retriesState.isLastRetrySuccessful ? okMessage : failMessage;
+  const printedRetry = getPrintedRetry(maxRetriesCountInDocker);
 
   const durationWithUnits = getDurationWithUnits(Date.now() - startLastRetryTimeInMs);
 
   generalLog(
-    `Results of ${printedRetry}: ${stateMessage} ${getPrintedTestsCount(
-      newLength,
-    )} with concurrency ${concurrency} ran in ${durationWithUnits} (${failedLength} failed, ${successfulLength} successful, ${
-      newLength - unbrokenLength
-    } broken). Total processed tests in all retries: ${newLength + successfulTotalInPreviousRetries}`,
+    `Results of ${printedRetry}: ${getPrintedTestsCount(newLength)} with concurrency ${concurrency} ran in ${durationWithUnits} (${failedLength} failed, ${successfulLength} successful, ${newLength - unbrokenLength} broken).`,
   );
 };

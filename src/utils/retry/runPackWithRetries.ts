@@ -1,8 +1,12 @@
+import {EndE2edReason} from '../../constants/internal';
+
+import {getFullPackConfig} from '../config';
+import {endE2ed} from '../end';
 import {generalLog} from '../generalLog';
+import {setReadonlyProperty} from '../setReadonlyProperty';
 
 import {afterRetries} from './afterRetries';
-import {getPrintedRetry} from './getPrintedRetry';
-import {processRetries} from './processRetries';
+import {processRetry} from './processRetry';
 import {truncateRetriesStateForLogs} from './truncateRetriesStateForLogs';
 
 import type {RetriesState, UtcTimeInMs} from '../../types/internal';
@@ -15,21 +19,21 @@ export const runPackWithRetries = async (): Promise<void> => {
   const retriesState: RetriesState = {
     concurrency: 1,
     failedTestNamesInLastRetry: [],
-    isLastRetrySuccessful: false,
-    isRetriesCycleEnded: false,
-    maxRetriesCount: 1,
-    retryIndex: 1,
     startLastRetryTimeInMs: 0 as UtcTimeInMs,
     successfulTestRunNamesHash: Object.create(null) as {},
     visitedTestRunEventsFileName: [],
   };
 
   try {
-    await processRetries(retriesState);
-  } catch (error) {
-    const printedRetry = getPrintedRetry(retriesState);
+    const {concurrency} = getFullPackConfig();
 
-    generalLog(`Caught unexpected error on ${printedRetry}`, {
+    setReadonlyProperty(retriesState, 'concurrency', concurrency);
+
+    await processRetry(retriesState);
+
+    endE2ed(EndE2edReason.RetriesCycleEnded);
+  } catch (error) {
+    generalLog('Caught unexpected error', {
       error,
       retriesState: truncateRetriesStateForLogs(retriesState),
     });

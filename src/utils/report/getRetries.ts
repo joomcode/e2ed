@@ -16,8 +16,8 @@ export const getRetries = (fullTestRuns: readonly FullTestRun[]): readonly Retry
   const fullTestRunsHash: Record<number, RawRetry> = Object.create(null) as {};
 
   for (const fullTestRun of fullTestRuns) {
-    const {runLabel} = fullTestRun;
-    const {concurrency, retryIndex} = getRunLabelObject(runLabel);
+    const {retryIndex, runLabel} = fullTestRun;
+    const {concurrency} = getRunLabelObject(runLabel);
 
     if (fullTestRunsHash[retryIndex] === undefined) {
       const rawRetry: RawRetry = {concurrency, retryFullTestRuns: []};

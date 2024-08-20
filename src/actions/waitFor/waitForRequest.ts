@@ -1,5 +1,5 @@
 import {LogEventType} from '../../constants/internal';
-import {getPage} from '../../useContext';
+import {getPlaywrightPage} from '../../useContext';
 import {getFullPackConfig} from '../../utils/config';
 import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
@@ -22,7 +22,7 @@ export const waitForRequest = <SomeRequest extends Request>(
   const {waitForRequestTimeout} = getFullPackConfig();
   const rejectTimeout = timeout ?? waitForRequestTimeout;
 
-  const page = getPage();
+  const page = getPlaywrightPage();
 
   const promise = page
     .waitForRequest(

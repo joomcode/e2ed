@@ -1,4 +1,4 @@
-import {getPage} from './page';
+import {getPlaywrightPage} from './page';
 
 import type {Page} from '@playwright/test';
 
@@ -28,7 +28,7 @@ export const useContext = (<Type>(defaultValue?: Type) => {
    * Set value to test context.
    */
   const set = (value: Type): void => {
-    const page: PageWithCtx = getPage();
+    const page: PageWithCtx = getPlaywrightPage();
 
     if (page.ctx === undefined) {
       page.ctx = Object.create(null) as {};
@@ -53,7 +53,7 @@ export const useContext = (<Type>(defaultValue?: Type) => {
      * Get value from test context.
      */
     const get = (): Type | undefined => {
-      const page: PageWithCtx = getPage();
+      const page: PageWithCtx = getPlaywrightPage();
 
       if (page.ctx === undefined) {
         page.ctx = Object.create(null) as {};
@@ -71,7 +71,7 @@ export const useContext = (<Type>(defaultValue?: Type) => {
    * Get value from test context (or default value, if it is `undefined`).
    */
   const getWithDefaultValue = (): Type => {
-    const page: PageWithCtx = getPage();
+    const page: PageWithCtx = getPlaywrightPage();
 
     if (page.ctx === undefined) {
       page.ctx = Object.create(null) as {};

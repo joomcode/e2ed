@@ -1,7 +1,7 @@
 import {join} from 'node:path';
 
 import {LogEventType, SCREENSHOTS_DIRECTORY_PATH} from '../constants/internal';
-import {getPage} from '../useContext';
+import {getPlaywrightPage} from '../useContext';
 import {log} from '../utils/log';
 
 import type {Page} from '@playwright/test';
@@ -25,7 +25,7 @@ export const takeScreenshot = async (options: Options = {}): Promise<void> => {
     options.path = join(SCREENSHOTS_DIRECTORY_PATH, pathToScreenshot);
   }
 
-  const page = getPage();
+  const page = getPlaywrightPage();
 
   await page.screenshot(options);
 };
