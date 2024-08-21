@@ -19,7 +19,7 @@ test('correctly read data from browser', {meta: {testId: '14'}}, async () => {
     console.error('error');
     console.info('info');
     console.log('log');
-    console.warn('warn');
+    console.warn('warning');
 
     setTimeout(() => {
       throw new Error('foo');
@@ -29,14 +29,23 @@ test('correctly read data from browser', {meta: {testId: '14'}}, async () => {
     }, 32);
   })();
 
-  const {error, info, log, warn} = await getBrowserConsoleMessages();
+  const consoleMessages = getBrowserConsoleMessages();
+  const columnNumber = 12;
+  const url = '';
 
-  await expect(
-    error.length === 0 && info.length === 0 && log.length === 0 && warn.length === 0,
-    'getBrowserConsoleMessages read all of messages',
-  ).eql(true);
+  await expect(consoleMessages, 'getBrowserConsoleMessages read all of messages').eql([
+    {args: ['error'], location: {columnNumber, lineNumber: 3, url}, text: 'error', type: 'error'},
+    {args: ['info'], location: {columnNumber, lineNumber: 4, url}, text: 'info', type: 'info'},
+    {args: ['log'], location: {columnNumber, lineNumber: 5, url}, text: 'log', type: 'log'},
+    {
+      args: ['warning'],
+      location: {columnNumber, lineNumber: 6, url},
+      text: 'warning',
+      type: 'warning',
+    },
+  ]);
 
-  const jsErrors = await getBrowserJsErrors();
+  const jsErrors = getBrowserJsErrors();
 
   await expect(jsErrors.length === 0, 'getBrowserJsErrors read JS errors').eql(true);
 });

@@ -56,7 +56,7 @@ test('selector custom methods', {meta: {testId: '15'}}, async () => {
     '[data-testid="app-navigation-retries"].findByLocatorId(app-navigation-retries-button).filterByLocatorParameter(selected, true)',
   );
 
-  await click(reportPage.navigationRetriesButton);
+  await click(reportPage.navigationRetriesButton.nth(0));
 
   await expect(
     reportPage.testRunButton.nth(2).getLocatorParameter('status'),

@@ -2,11 +2,6 @@ import type {LogParams} from './log';
 import type {RunLabel} from './runLabel';
 
 /**
- * Browser's JS-error from TestCafe.
- */
-export type BrowserJsError = Readonly<{message: string}>;
-
-/**
  * Printed fields of `E2edError` instances for `toJSON`, `toString` and `inspect.custom` methods.
  */
 export type E2edPrintedFields = Readonly<{

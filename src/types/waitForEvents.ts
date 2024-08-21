@@ -1,8 +1,8 @@
+import type {Brand} from './brand';
 import type {UtcTimeInMs} from './date';
 import type {MergeFunctions} from './fn';
 import type {Request, RequestWithUtcTimeInMs, Response, ResponseWithRequest, Url} from './http';
 import type {MaybePromise} from './promise';
-import type {RequestHookContextId} from './requestHooks';
 
 /**
  * Request or response predicate for both event handlers.
@@ -30,6 +30,12 @@ export type AllRequestsCompletePredicateWithPromise = Readonly<{
   requestHookContextIds: Set<RequestHookContextId>;
   setResolveTimeout: () => void;
 }>;
+
+/**
+ * Request hook context id.
+ * @internal
+ */
+export type RequestHookContextId = Brand<string, 'RequestHookContextId'>;
 
 /**
  * Request predicate for `waitForRequest` function.

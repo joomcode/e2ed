@@ -2,13 +2,17 @@ import {assertValueIsNotNull} from '../asserts';
 import {getFullPackConfig} from '../config';
 import {generalLog} from '../generalLog';
 
-import type {FullMocksState} from '../../types/internal';
+import type {FullMocksState, TestFilePath} from '../../types/internal';
 
 /**
  * Writes full mocks of one test.
  * @internal
  */
-export const writeFullMocks = async (fullMocksState: FullMocksState): Promise<void> => {
+export const writeFullMocks = async (
+  fullMocksState: FullMocksState,
+  name: string,
+  filePath: TestFilePath,
+): Promise<void> => {
   const {fullMocks: fullMocksConfig} = getFullPackConfig();
 
   assertValueIsNotNull(fullMocksConfig, 'fullMocksConfig is not null');
@@ -16,6 +20,8 @@ export const writeFullMocks = async (fullMocksState: FullMocksState): Promise<vo
   await fullMocksConfig.writeTestFullMocks(fullMocksState.testId, fullMocksState.testFullMocks);
 
   generalLog('Full mocks have been written', {
+    filePath,
+    name,
     requestKinds: Object.fromEntries(
       Object.entries(fullMocksState.testFullMocks).map(([key, value]) => [key, value.length]),
     ),

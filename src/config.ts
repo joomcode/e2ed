@@ -25,7 +25,7 @@ import {isLocalRun} from './configurator';
 
 import type {FullPackConfig, Mutable, UserlandPack} from './types/internal';
 
-import {defineConfig, devices} from '@playwright/test';
+import {defineConfig} from '@playwright/test';
 
 const maxTimeoutInMs = 3600_000;
 
@@ -102,9 +102,13 @@ const playwrightConfig = defineConfig({
 
   projects: [
     {
-      name: 'chromium',
+      name: userlandPack.browserName,
       use: {
-        ...devices['Desktop Chrome'],
+        browserName: userlandPack.browserName,
+        deviceScaleFactor: userlandPack.deviceScaleFactor,
+        hasTouch: userlandPack.enableTouchEventEmulation,
+        isMobile: userlandPack.enableMobileDeviceMode,
+        userAgent: userlandPack.userAgent,
         viewport: {height: userlandPack.viewportHeight, width: userlandPack.viewportWidth},
       },
     },
@@ -125,14 +129,24 @@ const playwrightConfig = defineConfig({
   use: {
     actionTimeout: userlandPack.testIdleTimeout,
 
+    browserName: userlandPack.browserName,
+
     // eslint-disable-next-line @typescript-eslint/naming-convention
     bypassCSP: true,
 
+    deviceScaleFactor: userlandPack.deviceScaleFactor,
+
+    hasTouch: userlandPack.enableTouchEventEmulation,
+
     headless: isLocalRun ? userlandPack.enableHeadlessMode : true,
+
+    isMobile: userlandPack.enableMobileDeviceMode,
 
     navigationTimeout: userlandPack.pageRequestTimeout,
 
     trace: 'retain-on-failure',
+
+    userAgent: userlandPack.userAgent,
 
     viewport: {height: userlandPack.viewportHeight, width: userlandPack.viewportWidth},
 

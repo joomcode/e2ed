@@ -3,9 +3,11 @@ export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';
 export type {ClientFunction} from './clientFunction';
+export type {BrowserName} from './config';
+export type {ConsoleMessage, ConsoleMessageType} from './console';
 export type {UtcTimeInMs} from './date';
 export type {DeepMutable, DeepPartial, DeepReadonly, DeepRequired} from './deep';
-export type {BrowserJsError, E2edPrintedFields} from './errors';
+export type {E2edPrintedFields} from './errors';
 export type {LogEvent, Onlog, TestRunEvent} from './events';
 export type {Fn, MergeFunctions} from './fn';
 export type {
@@ -52,11 +54,6 @@ export type {
   PropertyKey,
 } from './properties';
 export type {LiteReport, LiteRetry} from './report';
-export type {
-  RequestHookConfigureResponseEvent,
-  RequestHookRequestEvent,
-  RequestHookResponseEvent,
-} from './requestHooks';
 export type {ApiRouteClassType, ApiRouteClassTypeWithGetParamsFromUrl} from './routes';
 export type {
   CreateSelector,

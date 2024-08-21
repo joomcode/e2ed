@@ -7,7 +7,12 @@ import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
 import {getRequestFromPlaywrightRequest} from '../../utils/requestHooks';
 
-import type {Request, RequestPredicate, RequestWithUtcTimeInMs} from '../../types/internal';
+import type {
+  Request,
+  RequestPredicate,
+  RequestWithUtcTimeInMs,
+  UtcTimeInMs,
+} from '../../types/internal';
 
 /**
  * Waits for some request (from browser) filtered by the request predicate.
@@ -17,6 +22,8 @@ export const waitForRequest = <SomeRequest extends Request>(
   predicate: RequestPredicate<SomeRequest>,
   {skipLogs = false, timeout}: {skipLogs?: boolean; timeout?: number} = {},
 ): Promise<RequestWithUtcTimeInMs<SomeRequest>> => {
+  const startTimeInMs = Date.now() as UtcTimeInMs;
+
   setCustomInspectOnFunction(predicate);
 
   const {waitForRequestTimeout} = getFullPackConfig();
@@ -57,5 +64,17 @@ export const waitForRequest = <SomeRequest extends Request>(
     );
   }
 
-  return promise;
+  return skipLogs !== true
+    ? promise.then((request) => {
+        const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
+
+        log(
+          `Have waited for request for ${waitWithUnits}`,
+          {predicate, request, timeoutWithUnits},
+          LogEventType.InternalCore,
+        );
+
+        return request;
+      })
+    : promise;
 };

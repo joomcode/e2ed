@@ -28,11 +28,9 @@ const browserFlags = [
   '--ignore-certificate-errors',
 ];
 
-const browser = isLocalRun ? 'chrome' : 'chromium';
-
 const filterTestsIntoPack: FilterTestsIntoPack = ({options}) => options.meta.testId !== '13';
 
-const overriddenUserAgent =
+const userAgent =
   'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.35 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.35';
 
 const packTimeoutInMinutes = 5;
@@ -44,10 +42,11 @@ const msInMinute = 60_000;
 export const pack: Pack = {
   ajaxRequestTimeout: 40_000,
   assertionTimeout: 5_000,
-  browser,
   browserFlags,
+  browserName: 'chromium',
   concurrency: isLocalRun ? 1 : 2,
   customPackProperties: {internalPackRunId: 0, name: 'allTests'},
+  deviceScaleFactor: 1,
   doAfterPack,
   doBeforePack,
   enableHeadlessMode: true,
@@ -65,7 +64,6 @@ export const pack: Pack = {
   mapLogPayloadInReport,
   maxRetriesCountInDocker: 3,
   overriddenConfigFields: null,
-  overriddenUserAgent,
   packTimeout: packTimeoutInMinutes * msInMinute,
   pageRequestTimeout: 30_000,
   pageStabilizationInterval: 500,
@@ -81,6 +79,7 @@ export const pack: Pack = {
   testFileGlobs: ['**/autotests/tests/**/*.ts'],
   testIdleTimeout: 8_000,
   testTimeout: 60_000,
+  userAgent,
   viewportHeight: 1080,
   viewportWidth: 1920,
   waitForAllRequestsComplete: {

@@ -1,4 +1,4 @@
-export type {FullPackConfigWithoutDoBeforePack, UserlandPack} from './config';
+export type {BrowserName, FullPackConfigWithoutDoBeforePack, UserlandPack} from './config';
 export type {
   AnyPack,
   AnyPackParameters,

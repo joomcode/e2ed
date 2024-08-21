@@ -13,6 +13,8 @@ import type {
   TestMetaPlaceholder,
 } from '../userland';
 
+import type {BrowserName} from './config';
+
 /**
  * Own e2ed pack config properties without `doBeforepack` properties.
  */
@@ -23,19 +25,24 @@ export type OwnE2edConfig<
   TestMeta = TestMetaPlaceholder,
 > = Readonly<{
   /**
-   * Browser name as a command to launch it (like `chrome`, `chromium`, `firefox`, `webkit`, etc).
-   */
-  browser: string;
-
-  /**
    * Array of browser flags, like `--disable-dev-shm-usage`, with which the browser is launched to run tests.
    */
   browserFlags: readonly string[];
 
   /**
+   * Browser name (one of `chromium`, `firefox`, `webkit`).
+   */
+  browserName: BrowserName;
+
+  /**
    * Custom pack properties for using in hooks, etc.
    */
   customPackProperties: CustomPackProperties;
+
+  /**
+   * Device scale factor (aka `window.devicePixelRatio`);
+   */
+  deviceScaleFactor: number;
 
   /**
    * An array of functions that will be executed, in order, after the pack completes.
@@ -151,11 +158,6 @@ export type OwnE2edConfig<
   overriddenConfigFields: PlaywrightTestConfig | null;
 
   /**
-   * If not `null`, then this value will override the browser's user agent in tests.
-   */
-  overriddenUserAgent: string | null;
-
-  /**
    * Timeout (in millisecond) for the entire pack of tests (tasks).
    * If the test pack takes longer than this timeout, the pack will fail with the appropriate error.
    */
@@ -233,6 +235,11 @@ export type OwnE2edConfig<
    * This parameter can be overridden in the test-specific options.
    */
   testTimeout: number;
+
+  /**
+   * `userAgent` string of browser (device) in tests.
+   */
+  userAgent: string;
 
   /**
    * Height of viewport of page in pixels.
