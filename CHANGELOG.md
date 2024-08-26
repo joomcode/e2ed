@@ -1,5 +1,29 @@
 # Changelog
 
+## [v0.18.10](https://github.com/joomcode/e2ed/tree/v0.18.10) (2024-08-26)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.9...v0.18.10)
+
+- [Merge pull request #87 from joomcode/fix/mobile-emulation](https://github.com/joomcode/e2ed/commit/913dfecdb93369a2773d6d8856b58e65b2738a40) ([uid11](https://github.com/uid11))
+
+  fix: mobile emulation
+
+- [FI-1344 fix: add action `pause` instead of `debug`](https://github.com/joomcode/e2ed/commit/f15fb0b51b796a319050ca4acdf8dc6790ec0a10) ([uid11](https://github.com/uid11))
+
+  fix: `getBrowserConsoleMessages` action
+
+  fix: `getBrowserJsErrors` action
+
+  fix: clear page callbacks in the end ot the test
+
+  chore: update devDependencies (`@types/node`, `husky`)
+
+  fix: rename config property `browser` to `browserName`
+
+  fix: add config property `deviceScaleFactor`
+
+  fix: rename config property `overriddenUserAgent` to `userAgent`
+
 ## [v0.18.9](https://github.com/joomcode/e2ed/tree/v0.18.9) (2024-08-20)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.8...v0.18.9)
