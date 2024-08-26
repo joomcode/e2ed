@@ -9,7 +9,13 @@ import {log} from '../../utils/log';
 import {getResponseFromPlaywrightResponse} from '../../utils/requestHooks';
 import {getWaitForResponsePredicate} from '../../utils/waitForEvents';
 
-import type {Request, Response, ResponsePredicate, ResponseWithRequest} from '../../types/internal';
+import type {
+  Request,
+  Response,
+  ResponsePredicate,
+  ResponseWithRequest,
+  UtcTimeInMs,
+} from '../../types/internal';
 
 type Options = Readonly<{includeNavigationRequest?: boolean; skipLogs?: boolean; timeout?: number}>;
 
@@ -24,6 +30,8 @@ export const waitForResponse = <
   predicate: ResponsePredicate<SomeRequest, SomeResponse>,
   {includeNavigationRequest = false, skipLogs = false, timeout}: Options = {},
 ): Promise<ResponseWithRequest<SomeResponse, SomeRequest>> => {
+  const startTimeInMs = Date.now() as UtcTimeInMs;
+
   setCustomInspectOnFunction(predicate);
 
   const {waitForResponseTimeout} = getFullPackConfig();
@@ -59,5 +67,17 @@ export const waitForResponse = <
     );
   }
 
-  return promise;
+  return skipLogs !== true
+    ? promise.then((response) => {
+        const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
+
+        log(
+          `Have waited for response for ${waitWithUnits}`,
+          {predicate, response, timeoutWithUnits},
+          LogEventType.InternalCore,
+        );
+
+        return response;
+      })
+    : promise;
 };

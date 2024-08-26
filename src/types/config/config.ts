@@ -24,6 +24,11 @@ type UserlandTestCafeConfig = Readonly<{
 }>;
 
 /**
+ * Supported browsers.
+ */
+export type BrowserName = 'chromium' | 'firefox' | 'webkit';
+
+/**
  * The complete pack configuration object without `doBeforePack` field.
  */
 export type FullPackConfigWithoutDoBeforePack<

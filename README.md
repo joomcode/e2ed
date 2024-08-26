@@ -232,16 +232,17 @@ that exports the pack's config under the name `pack`.
 
 Here are the basic fields of the pack config.
 
-`browser: string`: browser name as a command to launch it
-(like `chrome`, `chromium`, `firefox`, `webkit`, etc).
-
 `browserFlags: string[]`: array of browser flags, like `--disable-dev-shm-usage`,
 with which the browser is launched to run tests.
+
+`browserName: BrowserName`: browser name (one of `chromium`, `firefox`, `webkit`).
 
 `concurrency: number`: the number of browser windows in which tests will run in parallel.
 
 `customPackProperties: CustomPackProperties`: a custom set of fields defined within the project.
 These fields allow, for example, to customize the behavior of hooks for different packs.
+
+`deviceScaleFactor: number`: device scale factor (aka `window.devicePixelRatio`).
 
 `doAfterPack: ((liteReport: LiteReport) => CustomReportProperties | undefined)[]`:
 an array of functions that will be executed, in order, after the pack completes.
@@ -318,8 +319,6 @@ For example, if it is equal to three, the test will be run no more than three ti
 `overriddenConfigFields: PlaywrightTestConfig | null`: if not `null`, then this value will override
 fields of internal Playwright config.
 
-`overriddenUserAgent: string | null`: if not `null`, then this value will override the browser's user agent in tests.
-
 `packTimeout: number`: timeout (in millisecond) for the entire pack of tests (tasks).
 If the test pack takes longer than this timeout, the pack will fail with the appropriate error.
 
@@ -361,6 +360,8 @@ This parameter can be overridden in the test-specific options.
 `testTimeout: number`: timeout (in milliseconds) for each individual test run.
 If the test run takes longer than this timeout, the test fails and rerun on the next retry.
 This parameter can be overridden in the test-specific options.
+
+`userAgent: string`: `userAgent` string of browser (device) in tests.
 
 `viewportHeight: number`: height of viewport of page in pixels.
 

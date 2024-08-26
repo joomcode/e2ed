@@ -8,7 +8,6 @@ export {
 } from './asserts';
 export {clearUpload} from './clearUpload';
 export {click} from './click';
-export {debug} from './debug';
 export {deleteCookies} from './deleteCookies';
 export {dispatchEvent} from './dispatchEvent';
 export {doubleClick} from './doubleClick';
@@ -28,6 +27,7 @@ export {
   navigateToPage,
   reloadPage,
 } from './pages';
+export {pause} from './pause';
 export {pressKey} from './pressKey';
 export {resizeWindow} from './resizeWindow';
 export {scroll} from './scroll';

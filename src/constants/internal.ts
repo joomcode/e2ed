@@ -55,12 +55,6 @@ export {
 } from './paths';
 /** @internal */
 export {RESOLVED_PROMISE} from './promise';
-export {
-  INCLUDE_BODY_AND_HEADERS_IN_RESPONSE_EVENT,
-  INCLUDE_HEADERS_IN_RESPONSE_EVENT,
-  REQUEST_HOOK_CONTEXT_ID_KEY,
-  REQUEST_HOOK_CONTEXT_KEY,
-} from './requestHook';
 export {DESCRIPTION_KEY} from './selector';
 /** @internal */
 export {RETRY_KEY} from './selector';

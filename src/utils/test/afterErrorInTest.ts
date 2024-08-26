@@ -18,9 +18,9 @@ const afterErrorInTestTimeoutInMs = 15_000;
 export const afterErrorInTest = (testStaticOptions: TestStaticOptions): Promise<void> =>
   addTimeoutToPromise(
     (async () => {
-      await getBrowserConsoleMessages({showMessagesInLog: true});
+      getBrowserConsoleMessages({showMessagesInLog: true});
 
-      await getBrowserJsErrors({showErrorsInLog: true});
+      getBrowserJsErrors({showErrorsInLog: true});
 
       await takeScreenshotsOnErrorIfNeeded(testStaticOptions);
     })(),

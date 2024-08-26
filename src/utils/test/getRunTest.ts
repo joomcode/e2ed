@@ -28,6 +28,7 @@ export const getRunTest =
       const retryIndex = testInfo.retry + 1;
       const runId = createRunId();
 
+      let clearPage: (() => Promise<void>) | undefined;
       let hasRunError = false;
       let shouldRunTest = false;
       let testStaticOptions: TestStaticOptions | undefined;
@@ -42,7 +43,7 @@ export const getRunTest =
           return;
         }
 
-        await preparePage(page);
+        clearPage = await preparePage(page);
 
         beforeTest({retryIndex, runId, testFn: test.testFn, testStaticOptions});
 
@@ -60,7 +61,7 @@ export const getRunTest =
         throw error;
       } finally {
         if (shouldRunTest) {
-          await afterTest({hasRunError, runId, unknownRunError});
+          await afterTest({clearPage, hasRunError, runId, unknownRunError});
         }
       }
     };

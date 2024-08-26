@@ -9,16 +9,18 @@ export type {ClientFunction} from './clientFunction';
 export type {ClientFunctionWrapperResult, MaybeTestCafeError} from './clientFunction';
 export type {
   AnyPack,
+  BrowserName,
   FullPackConfig,
   FullPackConfigWithoutDoBeforePack,
   GetPackParameters,
   UserlandPack,
 } from './config';
+export type {ConsoleMessage, ConsoleMessageType} from './console';
 export type {UtcTimeInMs} from './date';
 export type {DeepMutable, DeepPartial, DeepReadonly, DeepRequired} from './deep';
 /** @internal */
 export type {E2edEnvironment} from './environment';
-export type {BrowserJsError, E2edPrintedFields} from './errors';
+export type {E2edPrintedFields} from './errors';
 /** @internal */
 export type {MaybeWithIsTestRunBroken} from './errors';
 export type {LogEvent, Onlog, TestRunEvent} from './events';
@@ -103,15 +105,6 @@ export type {
   RetryProps,
   TestRunButtonProps,
 } from './report';
-export type {
-  RequestHookConfigureResponseEvent,
-  RequestHookContextId,
-  RequestHookRequestEvent,
-  RequestHookResponseEvent,
-  RequestOptions,
-} from './requestHooks';
-/** @internal */
-export type {RequestHookClassWithContext, RequestHookEncoding} from './requestHooks';
 /** @internal */
 export type {RetriesState, RunRetryOptions, VisitedTestNamesHash} from './retries';
 export type {ApiRouteClassType, ApiRouteClassTypeWithGetParamsFromUrl} from './routes';
@@ -180,6 +173,7 @@ export type {
 /** * @internal */
 export type {
   AllRequestsCompletePredicateWithPromise,
+  RequestHookContextId,
   RequestOrResponsePredicateWithPromise,
   RequestPredicateWithPromise,
   ResponsePredicateWithPromise,

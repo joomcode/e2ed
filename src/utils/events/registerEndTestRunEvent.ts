@@ -57,7 +57,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
     if (fullMocksState !== undefined && fullMocksState.appliedMocks === undefined) {
       await getTimeoutPromise(delayForWritingFullMocksInMs);
 
-      await writeFullMocks(fullMocksState).catch((error: unknown) => {
+      await writeFullMocks(fullMocksState, name, filePath).catch((error: unknown) => {
         generalLog('Cannot write "full mocks" for test', {
           endTestRunEvent,
           error,

@@ -1,36 +1,31 @@
 import {LogEventStatus, LogEventType} from '../constants/internal';
+import {getConsoleMessagesFromContext} from '../context/consoleMessages';
 import {log} from '../utils/log';
 
-type ConsoleMessages = Readonly<{
-  error: readonly string[];
-  info: readonly string[];
-  log: readonly string[];
-  warn: readonly string[];
-}>;
+import type {ConsoleMessage} from '../types/internal';
 
 type Options = Readonly<{
   showMessagesInLog?: boolean;
 }>;
 
+const logMessage = 'Get browser console messages';
+
 /**
  * Returns an object that contains messages output to the browser console.
  */
-export const getBrowserConsoleMessages = (options: Options = {}): Promise<ConsoleMessages> => {
+export const getBrowserConsoleMessages = (options: Options = {}): readonly ConsoleMessage[] => {
   const {showMessagesInLog = false} = options;
+  const consoleMessages = getConsoleMessagesFromContext();
 
   if (showMessagesInLog === false) {
-    log('Get browser console messages', LogEventType.InternalAction);
+    log(logMessage, LogEventType.InternalAction);
+  } else {
+    const logEventStatus = consoleMessages.some(({type}) => type === 'error')
+      ? LogEventStatus.Failed
+      : LogEventStatus.Passed;
 
-    // TODO
-    return Promise.resolve({error: [], info: [], log: [], warn: []});
+    log(logMessage, {consoleMessages, logEventStatus}, LogEventType.InternalAction);
   }
 
-  return Promise.resolve({error: [], info: [], log: [], warn: []}).then((messages) => {
-    const logEventStatus =
-      messages.error.length > 0 ? LogEventStatus.Failed : LogEventStatus.Passed;
-
-    log('Got browser console messages', {logEventStatus, messages}, LogEventType.InternalAction);
-
-    return messages;
-  });
+  return consoleMessages;
 };

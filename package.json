@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@playwright/browser-chromium": "1.46.1",
-    "@types/node": "22.4.1",
+    "@types/node": "22.5.0",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
@@ -42,7 +42,7 @@
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "eslint-plugin-typescript-sort-keys": "3.2.0",
-    "husky": "9.1.4",
+    "husky": "9.1.5",
     "prettier": "3.3.3",
     "typescript": "5.5.4"
   },

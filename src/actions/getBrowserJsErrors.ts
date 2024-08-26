@@ -1,7 +1,6 @@
 import {LogEventStatus, LogEventType} from '../constants/internal';
+import {getJsErrorsFromContext} from '../context/jsError';
 import {log} from '../utils/log';
-
-import type {BrowserJsError} from '../types/internal';
 
 type Options = Readonly<{
   showErrorsInLog?: boolean;
@@ -10,21 +9,17 @@ type Options = Readonly<{
 /**
  * Get browser JS errors.
  */
-export const getBrowserJsErrors = (options: Options = {}): Promise<readonly BrowserJsError[]> => {
+export const getBrowserJsErrors = (options: Options = {}): readonly Error[] => {
   const {showErrorsInLog = false} = options;
+  const jsErrors = getJsErrorsFromContext();
 
   if (showErrorsInLog === false) {
     log('Get browser JS errors', LogEventType.InternalAction);
-
-    return Promise.resolve([]);
-  }
-
-  // TODO
-  return Promise.resolve([]).then((jsErrors = []) => {
+  } else {
     const logEventStatus = jsErrors.length > 0 ? LogEventStatus.Failed : LogEventStatus.Passed;
 
     log('Got browser JS errors', {jsErrors, logEventStatus}, LogEventType.InternalAction);
+  }
 
-    return jsErrors;
-  });
+  return jsErrors;
 };
