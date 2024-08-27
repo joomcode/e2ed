@@ -7,7 +7,7 @@ export type {BrowserName} from './config';
 export type {ConsoleMessage, ConsoleMessageType} from './console';
 export type {UtcTimeInMs} from './date';
 export type {DeepMutable, DeepPartial, DeepReadonly, DeepRequired} from './deep';
-export type {E2edPrintedFields} from './errors';
+export type {E2edPrintedFields, JsError} from './errors';
 export type {LogEvent, Onlog, TestRunEvent} from './events';
 export type {Fn, MergeFunctions} from './fn';
 export type {

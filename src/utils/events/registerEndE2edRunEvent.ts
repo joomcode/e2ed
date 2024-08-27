@@ -28,7 +28,7 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
 
   try {
     generalLog(message);
-  } catch (error) {
+  } catch {
     // eslint-disable-next-line no-console
     console.log(message);
   }

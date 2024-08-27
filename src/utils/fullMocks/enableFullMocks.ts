@@ -52,6 +52,7 @@ export const enableFullMocks = async (
         requestKinds: Object.fromEntries(
           Object.entries(testFullMocks).map(([key, value]) => [key, value.length]),
         ),
+        testId: fullMocksState.testId,
       },
       LogEventType.InternalUtil,
     );

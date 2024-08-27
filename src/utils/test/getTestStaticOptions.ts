@@ -13,9 +13,5 @@ export const getTestStaticOptions = (test: Test, testInfo: TestInfo): TestStatic
   const absoluteFilePath = String((testInfo as {_requireFile?: string})._requireFile);
   const filePath = getRelativeTestFilePath(absoluteFilePath);
 
-  return {
-    filePath,
-    name: test.name,
-    options: test.options,
-  };
+  return {filePath, name: test.name, options: test.options};
 };

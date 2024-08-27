@@ -20,7 +20,7 @@ export type {UtcTimeInMs} from './date';
 export type {DeepMutable, DeepPartial, DeepReadonly, DeepRequired} from './deep';
 /** @internal */
 export type {E2edEnvironment} from './environment';
-export type {E2edPrintedFields} from './errors';
+export type {E2edPrintedFields, JsError} from './errors';
 /** @internal */
 export type {MaybeWithIsTestRunBroken} from './errors';
 export type {LogEvent, Onlog, TestRunEvent} from './events';

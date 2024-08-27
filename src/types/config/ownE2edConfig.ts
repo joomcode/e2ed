@@ -4,7 +4,7 @@ import type {FullMocksConfig} from '../fullMocks';
 import type {MapBackendResponseToLog, MapLogPayload, MapLogPayloadInReport} from '../log';
 import type {MaybePromise} from '../promise';
 import type {LiteReport} from '../report';
-import type {TestStaticOptions} from '../testRun';
+import type {TestOptions, TestStaticOptions} from '../testRun';
 import type {Void} from '../undefined';
 import type {
   CustomPackPropertiesPlaceholder,
@@ -56,15 +56,14 @@ export type OwnE2edConfig<
   ) => MaybePromise<CustomReportProperties | Void>)[];
 
   /**
+   * Enables Content-Security-Policy checks in browser.
+   */
+  enableCsp: boolean;
+
+  /**
    * Enables headless mode (if browser supports such mode).
    */
   enableHeadlessMode: boolean;
-
-  /**
-   * Enables TestCafe live mode for test development (only for locally running).
-   * {@link https://testcafe.io/documentation/403842/guides/intermediate-guides/live-mode}
-   */
-  enableLiveMode: boolean;
 
   /**
    * Enables Chromium mobile device mode.
@@ -88,6 +87,11 @@ export type OwnE2edConfig<
    * Functions that specify the "full mocks" functionality.
    */
   fullMocks: FullMocksConfig<TestMeta> | null;
+
+  /**
+   * Get prefix for test name in UI mode by test options.
+   */
+  getTestNamePrefixInUiMode: (this: void, testOptions: TestOptions<TestMeta>) => string;
 
   /**
    * The name of the file under which, after running the tests,

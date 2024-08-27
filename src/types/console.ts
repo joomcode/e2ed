@@ -5,6 +5,7 @@ import type {ConsoleMessage as PlaywrightConsoleMessage} from '@playwright/test'
  */
 export type ConsoleMessage = Readonly<{
   args: readonly unknown[];
+  dateTimeInIso: string;
   location: Readonly<PlaywrightConsoleMessage['location']>;
   text: string;
   type: ConsoleMessageType;

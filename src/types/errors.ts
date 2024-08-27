@@ -13,6 +13,14 @@ export type E2edPrintedFields = Readonly<{
 }>;
 
 /**
+ * JS error from browser.
+ */
+export type JsError = Readonly<{
+  dateTimeInIso: string;
+  error: Error;
+}>;
+
+/**
  * Maybe error params with optional field `isTestRunBroken` (or `undefined`).
  * The presence of such a field in a reject error results in
  * setting the test run status to a `broken`.

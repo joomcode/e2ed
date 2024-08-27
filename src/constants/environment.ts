@@ -7,7 +7,7 @@ import type {E2edEnvironment} from '../types/internal';
 export const e2edEnvironment = process.env as E2edEnvironment;
 
 /**
- * `true` if e2ed run in debug mode, `false` otherwise.
+ * `true` if e2ed run in debug mode, and `false` otherwise.
  */
 export const isDebug = Boolean(e2edEnvironment.E2ED_DEBUG);
 
@@ -48,3 +48,9 @@ export const RUN_LABEL_VARIABLE_NAME = '__INTERNAL_E2ED_RUN_LABEL';
  * @internal
  */
 export const START_TIME_IN_MS_VARIABLE_NAME = '__INTERNAL_E2ED_START_TIME_IN_MS';
+
+/**
+ * Name of e2ed environment variable for UI-mode flag.
+ * @internal
+ */
+export const UI_MODE_VARIABLE_NAME = '__INTERNAL_E2ED_UI_MODE';

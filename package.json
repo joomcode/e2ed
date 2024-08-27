@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@playwright/browser-chromium": "1.46.1",
-    "@types/node": "22.5.0",
+    "@types/node": "22.5.1",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
@@ -67,8 +67,9 @@
   "scripts": {
     "asserts": "assert-modules-support-case-insensitive-fs ./autotests ./src && assert-package-lock-is-consistent",
     "precheck:all": "npm run asserts && npm run clear:lint:cache && npm run build",
-    "check:all": "npm audit && npm run parallel check:branch lint test",
+    "check:all": "npm audit && npm run parallel check:branch check:playwright-version lint test",
     "check:branch": "node ./build/checkBranch.js",
+    "check:playwright-version": "./bin/checkPlaywrightBrowserChromiumVersion.sh",
     "clear:lint:cache": "rm -f ./build/tsconfig.tsbuildinfo ./node_modules/.cache/lint-*",
     "lint": "npm run parallel lint:es lint:prettier lint:types",
     "lint:es": "eslint --cache --cache-location=./node_modules/.cache/lint-es --cache-strategy=content --ext=.ts --max-warnings=0 --report-unused-disable-directives .",

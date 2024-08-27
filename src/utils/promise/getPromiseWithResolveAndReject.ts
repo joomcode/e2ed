@@ -5,6 +5,7 @@ import {E2edError} from '../error';
 import {setCustomInspectOnFunction} from '../fn';
 import {generalLog} from '../generalLog';
 import {getDurationWithUnits} from '../getDurationWithUnits';
+import {isUiMode} from '../uiMode';
 
 import type {AsyncVoid} from '../../types/internal';
 
@@ -60,7 +61,7 @@ export const getPromiseWithResolveAndReject = <
         generalLog('Reject timeout function rejected with error', {error, rejectTimeoutFunction});
       }
     }) as () => void,
-    isDebug ? maxTimeoutInMs : timeoutInMs,
+    isDebug || isUiMode ? maxTimeoutInMs : timeoutInMs,
   );
 
   const clearRejectTimeout = (): void => {

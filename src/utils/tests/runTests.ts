@@ -6,6 +6,7 @@ import {getFullPackConfig} from '../config';
 import {getRunLabel, setRunLabel} from '../environment';
 import {generalLog} from '../generalLog';
 import {startResourceUsageReading} from '../resourceUsage';
+import {isUiMode} from '../uiMode';
 
 import {beforeRunFirstTest} from './beforeRunFirstTest';
 import {stripExtraLogs} from './stripExtraLogs';
@@ -23,7 +24,7 @@ export const runTests = async ({runLabel}: RunRetryOptions): Promise<void> => {
   setRunLabel(runLabel);
 
   try {
-    const {enableLiveMode, testIdleTimeout, resourceUsageReadingInternal} = getFullPackConfig();
+    const {testIdleTimeout, resourceUsageReadingInternal} = getFullPackConfig();
 
     startResourceUsageReading(resourceUsageReadingInternal);
 
@@ -49,7 +50,7 @@ export const runTests = async ({runLabel}: RunRetryOptions): Promise<void> => {
         playwrightArgs.push('--debug');
       }
 
-      if (enableLiveMode) {
+      if (isUiMode) {
         playwrightArgs.push('--ui');
       }
 

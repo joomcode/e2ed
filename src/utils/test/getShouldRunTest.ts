@@ -1,5 +1,6 @@
 import {getSuccessfulTestFilePaths} from '../generalLog';
 import {addTestToNotIncludedInPackTests} from '../notIncludedInPackTests';
+import {isUiMode} from '../uiMode';
 
 import {getIsTestIncludedInPack} from './getIsTestIncludedInPack';
 
@@ -16,6 +17,10 @@ export const getShouldRunTest = async (testStaticOptions: TestStaticOptions): Pr
     await addTestToNotIncludedInPackTests(testStaticOptions.filePath);
 
     return false;
+  }
+
+  if (isUiMode) {
+    return true;
   }
 
   const successfulTestFilePaths = await getSuccessfulTestFilePaths();

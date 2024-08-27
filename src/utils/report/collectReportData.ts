@@ -1,5 +1,6 @@
 import {getFullPackConfig} from '../config';
 import {getExitCode} from '../exit';
+import {isUiMode} from '../uiMode';
 
 import {assertThatTestNamesAndFilePathsAreUnique} from './assertThatTestNamesAndFilePathsAreUnique';
 import {getFailedTestsMainParams} from './getFailedTestsMainParams';
@@ -25,7 +26,9 @@ export const collectReportData = async ({
 
   const errors = await getReportErrors(fullTestRuns, notIncludedInPackTests);
 
-  assertThatTestNamesAndFilePathsAreUnique(fullTestRuns);
+  if (!isUiMode) {
+    assertThatTestNamesAndFilePathsAreUnique(fullTestRuns);
+  }
 
   unificateRunHashes(fullTestRuns);
 

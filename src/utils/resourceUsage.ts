@@ -2,6 +2,7 @@ import {availableParallelism, cpus, freemem} from 'node:os';
 
 import {assertValueIsDefined, assertValueIsTrue, assertValueIsUndefined} from './asserts';
 import {generalLog} from './generalLog';
+import {isUiMode} from './uiMode';
 
 const Mb = 1024 * 1024;
 const availableCpuCount = availableParallelism();
@@ -67,6 +68,10 @@ export const startResourceUsageReading = (resourceUsageReadingInternal: number):
   assertValueIsUndefined(timeoutInterval, 'timeoutInterval in not defined', {
     resourceUsageReadingInternal,
   });
+
+  if (isUiMode) {
+    return;
+  }
 
   timeoutInterval = setInterval(logResourceUsage, resourceUsageReadingInternal);
 

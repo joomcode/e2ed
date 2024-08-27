@@ -21,11 +21,12 @@ import {assertUserlandPack} from './utils/config/assertUserlandPack';
 import {getPathToPack} from './utils/environment';
 import {setCustomInspectOnFunction} from './utils/fn';
 import {setReadonlyProperty} from './utils/setReadonlyProperty';
+import {isUiMode} from './utils/uiMode';
 import {isLocalRun} from './configurator';
 
 import type {FullPackConfig, Mutable, UserlandPack} from './types/internal';
 
-import {defineConfig} from '@playwright/test';
+import {defineConfig, type PlaywrightTestConfig} from '@playwright/test';
 
 const maxTimeoutInMs = 3600_000;
 
@@ -85,11 +86,28 @@ setCustomInspectOnFunction(mapLogPayloadInConsole);
 setCustomInspectOnFunction(mapLogPayloadInLogFile);
 setCustomInspectOnFunction(mapLogPayloadInReport);
 
-if (isDebug) {
+if (isDebug || isUiMode) {
   setReadonlyProperty(userlandPack, 'packTimeout', maxTimeoutInMs);
   setReadonlyProperty(userlandPack, 'testIdleTimeout', maxTimeoutInMs);
   setReadonlyProperty(userlandPack, 'testTimeout', maxTimeoutInMs);
 }
+
+const useOptions: PlaywrightTestConfig['use'] = {
+  actionTimeout: userlandPack.testIdleTimeout,
+  browserName: userlandPack.browserName,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  bypassCSP: !userlandPack.enableCsp,
+  deviceScaleFactor: userlandPack.deviceScaleFactor,
+  hasTouch: userlandPack.enableTouchEventEmulation,
+  headless: isLocalRun ? userlandPack.enableHeadlessMode : true,
+  isMobile: userlandPack.enableMobileDeviceMode,
+  launchOptions: {args: [...userlandPack.browserFlags]},
+  navigationTimeout: userlandPack.pageRequestTimeout,
+  trace: 'retain-on-failure',
+  userAgent: userlandPack.userAgent,
+  viewport: {height: userlandPack.viewportHeight, width: userlandPack.viewportWidth},
+  ...userlandPack.overriddenConfigFields?.use,
+};
 
 const playwrightConfig = defineConfig({
   expect: {timeout: userlandPack.assertionTimeout},
@@ -100,19 +118,7 @@ const playwrightConfig = defineConfig({
 
   outputDir: join(relativePathFromInstalledE2edToRoot, INTERNAL_REPORTS_DIRECTORY_PATH),
 
-  projects: [
-    {
-      name: userlandPack.browserName,
-      use: {
-        browserName: userlandPack.browserName,
-        deviceScaleFactor: userlandPack.deviceScaleFactor,
-        hasTouch: userlandPack.enableTouchEventEmulation,
-        isMobile: userlandPack.enableMobileDeviceMode,
-        userAgent: userlandPack.userAgent,
-        viewport: {height: userlandPack.viewportHeight, width: userlandPack.viewportWidth},
-      },
-    },
-  ],
+  projects: [{name: userlandPack.browserName, use: useOptions}],
 
   retries: isLocalRun ? 0 : userlandPack.maxRetriesCountInDocker - 1,
 
@@ -126,32 +132,7 @@ const playwrightConfig = defineConfig({
 
   ...userlandPack.overriddenConfigFields,
 
-  use: {
-    actionTimeout: userlandPack.testIdleTimeout,
-
-    browserName: userlandPack.browserName,
-
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    bypassCSP: true,
-
-    deviceScaleFactor: userlandPack.deviceScaleFactor,
-
-    hasTouch: userlandPack.enableTouchEventEmulation,
-
-    headless: isLocalRun ? userlandPack.enableHeadlessMode : true,
-
-    isMobile: userlandPack.enableMobileDeviceMode,
-
-    navigationTimeout: userlandPack.pageRequestTimeout,
-
-    trace: 'retain-on-failure',
-
-    userAgent: userlandPack.userAgent,
-
-    viewport: {height: userlandPack.viewportHeight, width: userlandPack.viewportWidth},
-
-    ...userlandPack.overriddenConfigFields?.use,
-  },
+  use: useOptions,
 });
 
 const config: FullPackConfig = Object.assign(playwrightConfig, userlandPack);

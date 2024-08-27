@@ -11,7 +11,7 @@ export const logStartE2edError = (error: unknown): void => {
 
   try {
     generalLog(message, {error});
-  } catch (cause) {
+  } catch {
     // eslint-disable-next-line no-console
     console.log(message, error);
   }
