@@ -13,8 +13,6 @@ import {
 test('correctly read data from browser', {meta: {testId: '14'}}, async () => {
   await navigateToPage(E2edReportExample);
 
-  await waitForInterfaceStabilization(100);
-
   await createClientFunction(() => {
     console.error('error');
     console.info('info');
@@ -23,17 +21,18 @@ test('correctly read data from browser', {meta: {testId: '14'}}, async () => {
 
     setTimeout(() => {
       throw new Error('foo');
-    }, 8);
-    setTimeout(() => {
-      throw new Error('bar');
-    }, 32);
+    }, 100);
   })();
 
   const consoleMessages = getBrowserConsoleMessages();
   const columnNumber = 12;
   const url = '';
 
-  await expect(consoleMessages, 'getBrowserConsoleMessages read all of messages').eql([
+  const consoleMessagesWithoutDate = consoleMessages.map(
+    ({dateTimeInIso: _, ...messageWithoutDate}) => messageWithoutDate,
+  );
+
+  await expect(consoleMessagesWithoutDate, 'getBrowserConsoleMessages read all of messages').eql([
     {args: ['error'], location: {columnNumber, lineNumber: 3, url}, text: 'error', type: 'error'},
     {args: ['info'], location: {columnNumber, lineNumber: 4, url}, text: 'info', type: 'info'},
     {args: ['log'], location: {columnNumber, lineNumber: 5, url}, text: 'log', type: 'log'},
@@ -47,5 +46,14 @@ test('correctly read data from browser', {meta: {testId: '14'}}, async () => {
 
   const jsErrors = getBrowserJsErrors();
 
-  await expect(jsErrors.length === 0, 'getBrowserJsErrors read JS errors').eql(true);
+  await expect(
+    jsErrors.length,
+    'getBrowserJsErrors read zero JS errors when there are no errors',
+  ).eql(0);
+
+  await waitForInterfaceStabilization(100);
+
+  await expect(jsErrors.length, 'getBrowserJsErrors read all JS errors').eql(1);
+
+  await expect(String(jsErrors[0]?.error), 'getBrowserJsErrors read all JS errors').contains('foo');
 });

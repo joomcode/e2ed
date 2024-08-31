@@ -256,9 +256,9 @@ The functions accept a start info object, and can return new full pack config,
 which in this case will be included in the start info object, and will be used for running pack.
 Each function can thus access the results of the previous function.
 
-`enableHeadlessMode: boolean`: enables headless mode (if browser supports such mode).
+`enableCsp: boolean`: enables Content-Security-Policy checks in browser.
 
-`enableLiveMode: boolean`: enables live mode for test development (only for locally running).
+`enableHeadlessMode: boolean`: enables headless mode (if browser supports such mode).
 
 `enableMobileDeviceMode: boolean`: enables Chromium [mobile device mode](https://developer.chrome.com/docs/devtools/device-mode).
 
@@ -270,6 +270,8 @@ filters tests (tasks) by their static options —
 only those tests for which the function returned `true` get into the pack.
 
 `fullMocks: FullMocks | null`: functions that specify the "full mocks" functionality.
+
+`getTestNamePrefixInUiMode: (testOptions: TestOptions<TestMeta>) => string`: get prefix for test name in UI mode by test options.
 
 `liteReportFileName: string | null`: the name of the file under which, after running the tests,
 the lite JSON report will be saved in the `autotests/reports` directory, for example, `lite-report.json`.

@@ -57,5 +57,6 @@ export {setReadonlyProperty} from './setReadonlyProperty';
 export {getPackageInfo} from './startInfo';
 export {wrapInTestRunTracker} from './testRun';
 export {isArray, isThenable} from './typeGuards';
+export {isUiMode} from './uiMode';
 export {valueToString} from './valueToString';
 export {isSelectorEntirelyInViewport, isSelectorInViewport} from './viewport';

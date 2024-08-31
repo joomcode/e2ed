@@ -8,7 +8,7 @@ import {mockApiRoute, navigateToPage, unmockApiRoute} from 'e2ed/actions';
 import type {DeviceId, Product, ProductId} from 'autotests/types';
 import type {Url} from 'e2ed/types';
 
-test('full mocks works correctly', {meta: {testId: '18'}}, async () => {
+test('full mocks works correctly', {enableCsp: false, meta: {testId: '18'}}, async () => {
   await navigateToPage(E2edReportExample);
 
   await mockApiRoute(CreateProductRoute, (routeParams, {method, query, requestBody, url}) => {

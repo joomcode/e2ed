@@ -12,6 +12,7 @@ export {
   RUN_ENVIRONMENT_VARIABLE_NAME,
   RUN_LABEL_VARIABLE_NAME,
   START_TIME_IN_MS_VARIABLE_NAME,
+  UI_MODE_VARIABLE_NAME,
 } from './environment';
 export {READ_FILE_OPTIONS} from './fs';
 /** @internal */

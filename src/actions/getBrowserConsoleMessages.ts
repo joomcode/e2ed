@@ -4,9 +4,7 @@ import {log} from '../utils/log';
 
 import type {ConsoleMessage} from '../types/internal';
 
-type Options = Readonly<{
-  showMessagesInLog?: boolean;
-}>;
+type Options = Readonly<{showMessagesInLog?: boolean}>;
 
 const logMessage = 'Get browser console messages';
 

@@ -15,7 +15,7 @@ export const getShallowCopyOfObjectForLogs = (value: object): Return => {
     if (property != null && (typeof property === 'object' || typeof property === 'function')) {
       try {
         copy[key] = String(property);
-      } catch (error) {
+      } catch {
         const keys = Object.keys(property).join(', ');
 
         copy[key] = keys === '' ? '[object without keys]' : `[object with keys: ${keys}]`;

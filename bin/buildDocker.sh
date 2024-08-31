@@ -1,6 +1,10 @@
 #!/usr/bin/env sh
 set -eu
 
-VERSION=`./bin/getVersion.sh`
+E2ED_VERSION=`./bin/getE2edVersion.sh`
+PLAYWRIGHT_VERSION=`./bin/getPlaywrightVersion.sh`
 
-docker build --tag e2edhub/e2ed:$VERSION --tag e2edhub/e2ed:latest .
+docker build \
+       --build-arg PLAYWRIGHT_VERSION=$PLAYWRIGHT_VERSION \
+       --tag e2edhub/e2ed:$E2ED_VERSION \
+       --tag e2edhub/e2ed:latest .

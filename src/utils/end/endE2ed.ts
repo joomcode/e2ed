@@ -17,7 +17,7 @@ export const endE2ed = (definedEndE2edReason: EndE2edReason): void => {
 
     try {
       generalLog(message);
-    } catch (error) {
+    } catch {
       console.log(message);
     }
 
@@ -28,7 +28,7 @@ export const endE2ed = (definedEndE2edReason: EndE2edReason): void => {
 
   try {
     generalLog(message);
-  } catch (error) {
+  } catch {
     console.log(message);
   }
 

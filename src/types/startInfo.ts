@@ -24,6 +24,8 @@ export type StartInfo<FullPackConfigArg = FullPackConfig> = Readonly<{
   e2edEnvironmentVariables: Readonly<Record<string, string | undefined>>;
   fullPackConfig: FullPackConfigArg;
   installedE2edDirectoryPath: DirectoryPathFromRoot;
+  isDebug: boolean;
+  isUiMode: boolean;
   nodeVersion: string;
   pathToPack: FilePathFromRoot;
   'process.argv': readonly string[];

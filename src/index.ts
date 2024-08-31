@@ -4,6 +4,7 @@
 export {ApiRoute} from './ApiRoute';
 export {Page} from './Page';
 export {PageRoute} from './PageRoute';
+export {devices} from './playwright';
 export {Route} from './Route';
 export {getPlaywrightPage, useContext} from './useContext';
 

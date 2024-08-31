@@ -28,7 +28,7 @@ export const getFullPackConfig = <
       const startInfo = readStartInfoSync();
 
       updateConfig(updatedConfig, startInfo);
-    } catch (error) {}
+    } catch {}
   }
 
   return updatedConfig as unknown as FullPackConfig<

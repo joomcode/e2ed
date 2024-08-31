@@ -4,6 +4,7 @@ import {join} from 'node:path';
 import {READ_FILE_OPTIONS, TMP_DIRECTORY_PATH} from '../../constants/internal';
 
 import {assertValueIsFalse} from '../asserts';
+import {isUiMode} from '../uiMode';
 
 import type {FilePathFromRoot, TestFilePath} from '../../types/internal';
 
@@ -35,6 +36,10 @@ export const getSuccessfulTestFilePaths = async (): Promise<readonly TestFilePat
  */
 export const addSuccessfulTestRun = async (testFilePath: TestFilePath): Promise<void> => {
   const successfulTestFilePaths = await getSuccessfulTestFilePaths();
+
+  if (isUiMode && successfulTestFilePaths.includes(testFilePath)) {
+    return;
+  }
 
   assertValueIsFalse(
     successfulTestFilePaths.includes(testFilePath),

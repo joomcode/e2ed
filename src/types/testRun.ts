@@ -41,6 +41,7 @@ export type TestFn = (testController: PlaywrightTestArgs) => Promise<void>;
  * Test options with userland metadata.
  */
 export type TestOptions<TestMeta = TestMetaPlaceholder> = DeepReadonly<{
+  enableCsp?: boolean;
   meta: TestMeta;
   takeFullPageScreenshotOnError?: boolean;
   takeViewportScreenshotOnError?: boolean;

@@ -2,14 +2,14 @@ import {LogEventStatus, LogEventType} from '../constants/internal';
 import {getJsErrorsFromContext} from '../context/jsError';
 import {log} from '../utils/log';
 
-type Options = Readonly<{
-  showErrorsInLog?: boolean;
-}>;
+import type {JsError} from '../types/internal';
+
+type Options = Readonly<{showErrorsInLog?: boolean}>;
 
 /**
  * Get browser JS errors.
  */
-export const getBrowserJsErrors = (options: Options = {}): readonly Error[] => {
+export const getBrowserJsErrors = (options: Options = {}): readonly JsError[] => {
   const {showErrorsInLog = false} = options;
   const jsErrors = getJsErrorsFromContext();
 

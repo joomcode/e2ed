@@ -1,4 +1,6 @@
-FROM mcr.microsoft.com/playwright:v1.46.1-noble
+ARG PLAYWRIGHT_VERSION
+
+FROM mcr.microsoft.com/playwright:v${PLAYWRIGHT_VERSION}-noble
 
 COPY ./build/node_modules/e2ed /node_modules/e2ed
 

@@ -6,10 +6,12 @@ import {
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
   e2edEnvironment,
   INSTALLED_E2ED_DIRECTORY_PATH,
+  isDebug,
 } from '../../constants/internal';
 
 import {getFullPackConfig} from '../config';
 import {getPathToPack} from '../environment';
+import {isUiMode} from '../uiMode';
 
 import {getPackageInfo} from './getPackageInfo';
 
@@ -46,6 +48,8 @@ export const getStartInfo = ({configCompileTimeWithUnits}: Options): StartInfo =
     e2edEnvironmentVariables,
     fullPackConfig: getFullPackConfig(),
     installedE2edDirectoryPath: INSTALLED_E2ED_DIRECTORY_PATH,
+    isDebug,
+    isUiMode,
     nodeVersion: process.version,
     pathToPack: getPathToPack(),
     'process.argv': [...process.argv],

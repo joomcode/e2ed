@@ -15,7 +15,7 @@ import type {
   Response as PlaywrightResponse,
 } from '@playwright/test';
 
-import type {ConsoleMessage, ConsoleMessageType} from '../../types/internal';
+import type {ConsoleMessage, ConsoleMessageType, JsError} from '../../types/internal';
 
 const afterNavigationRequestsDelayInMs = 300;
 
@@ -25,7 +25,7 @@ const afterNavigationRequestsDelayInMs = 300;
  */
 export const preparePage = async (page: Page): Promise<() => Promise<void>> => {
   const consoleMessages = getConsoleMessagesFromContext() as ConsoleMessage[];
-  const jsErrors = getJsErrorsFromContext() as Error[];
+  const jsErrors = getJsErrorsFromContext() as JsError[];
   const navigationDelay = getNavigationDelay();
 
   await page.route(
@@ -46,11 +46,12 @@ export const preparePage = async (page: Page): Promise<() => Promise<void>> => {
 
   const consoleListener = AsyncLocalStorage.bind(async (message: PlaywrightConsoleMessage) => {
     const args: unknown[] = [];
+    const dateTimeInIso = new Date().toISOString();
     const location = message.location();
     const text = message.text();
     const type = message.type() as ConsoleMessageType;
 
-    consoleMessages.push({args, location, text, type});
+    consoleMessages.push({args, dateTimeInIso, location, text, type});
 
     for (const jsHandle of message.args()) {
       args.push(await jsHandle.jsonValue().catch(() => 'Error with getting value of argument'));
@@ -58,7 +59,9 @@ export const preparePage = async (page: Page): Promise<() => Promise<void>> => {
   });
 
   const pageerrorListener = AsyncLocalStorage.bind((error: Error) => {
-    jsErrors.push(error);
+    const dateTimeInIso = new Date().toISOString();
+
+    jsErrors.push({dateTimeInIso, error});
   });
 
   const requestListener = AsyncLocalStorage.bind((newRequest: PlaywrightRequest) => {
@@ -127,6 +130,6 @@ export const preparePage = async (page: Page): Promise<() => Promise<void>> => {
     page.removeListener('response', responseListener);
     page.removeListener('requestfinished', requestfinishedListener);
 
-    await page.unrouteAll({behavior: 'ignoreErrors'});
+    await page.unrouteAll({behavior: 'ignoreErrors'}).catch(() => {});
   };
 };
