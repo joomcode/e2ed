@@ -1,5 +1,39 @@
 # Changelog
 
+## [v0.18.11](https://github.com/joomcode/e2ed/tree/v0.18.11) (2024-08-31)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.10...v0.18.11)
+
+- [Merge pull request #88 from joomcode/fix/playwright-config](https://github.com/joomcode/e2ed/commit/f5f08e740f87d4d5ce440f5abaf977318f31f43b) ([uid11](https://github.com/uid11))
+
+  feat: support UI mode
+
+- [FI-1345 refactor: Playwright config (`use` object)](https://github.com/joomcode/e2ed/commit/9d2a2e75d67cf0fbb26f5877275426b9e4233008) ([uid11](https://github.com/uid11))
+
+  refactor: reexport `devices` from `@playwright/test`
+
+  fix: add Playwright's browser version check
+
+  fix: add using Playwright version from `package.json`
+
+  feat: support UI mode flag
+
+  feat: add internal `isUiMode` flag
+
+  fix: remove text style from run errors in HTML report
+
+  feat: add `enableCsp` flag to pack config and to test options
+
+  fix: ingore timeouts in UI mode
+
+  fix: mix up of JS errors and browser console logs from other test runs
+
+  chore: update `@types/node` to 22.5.1
+
+  fix: add `dateTimeInIso` to browser JS errors and console logs
+
+  chore: clarify `@typescript-eslint/no-unused-vars` rule
+
 ## [v0.18.10](https://github.com/joomcode/e2ed/tree/v0.18.10) (2024-08-26)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.9...v0.18.10)
