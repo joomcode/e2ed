@@ -2,12 +2,14 @@ import {EndE2edReason} from '../../constants/internal';
 
 import {getFullPackConfig} from '../config';
 import {endE2ed} from '../end';
-import {generalLog} from '../generalLog';
+import {generalLog, writeLogsToFile} from '../generalLog';
+import {createRunLabel} from '../runLabel';
 import {setReadonlyProperty} from '../setReadonlyProperty';
 
 import {afterRetries} from './afterRetries';
-import {processRetry} from './processRetry';
+import {runRetry} from './runRetry';
 import {truncateRetriesStateForLogs} from './truncateRetriesStateForLogs';
+import {updateRetriesStateAfterRetry} from './updateRetriesStateAfterRetry';
 
 import type {RetriesState, UtcTimeInMs} from '../../types/internal';
 
@@ -25,19 +27,33 @@ export const runPackWithRetries = async (): Promise<void> => {
   };
 
   try {
-    const {concurrency} = getFullPackConfig();
+    const {concurrency, maxRetriesCountInDocker} = getFullPackConfig();
 
     setReadonlyProperty(retriesState, 'concurrency', concurrency);
 
-    await processRetry(retriesState);
+    const runLabel = createRunLabel({concurrency, maxRetriesCount: maxRetriesCountInDocker});
+
+    const startLastRetryTimeInMs = Date.now() as UtcTimeInMs;
+
+    setReadonlyProperty(retriesState, 'startLastRetryTimeInMs', startLastRetryTimeInMs);
+
+    generalLog(`Run tests (${runLabel}, concurrency ${concurrency})`, {
+      retriesState: truncateRetriesStateForLogs(retriesState),
+    });
+
+    await writeLogsToFile();
+
+    await runRetry({runLabel, successfulTestRunNamesHash: retriesState.successfulTestRunNamesHash});
 
     endE2ed(EndE2edReason.RetriesCycleEnded);
   } catch (error) {
-    generalLog('Caught unexpected error', {
+    generalLog('Caught an error on running testso', {
       error,
       retriesState: truncateRetriesStateForLogs(retriesState),
     });
   } finally {
+    await updateRetriesStateAfterRetry(retriesState).catch(() => {});
+
     afterRetries(retriesState);
   }
 };

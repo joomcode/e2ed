@@ -14,7 +14,6 @@ import type {OwnE2edConfig} from './ownE2edConfig';
  * Userland part of TestCafe config.
  */
 type UserlandTestCafeConfig = Readonly<{
-  ajaxRequestTimeout: number;
   assertionTimeout: number;
   concurrency: number;
   pageRequestTimeout: number;

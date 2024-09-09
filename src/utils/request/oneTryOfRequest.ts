@@ -6,7 +6,6 @@ import {E2edError} from '../error';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
-import {wrapInTestRunTracker} from '../testRun';
 
 import {getQuery} from './getQuery';
 
@@ -57,9 +56,6 @@ export const oneTryOfRequest = <SomeRequest extends Request, SomeResponse extend
     const utcTimeInMs = Date.now() as UtcTimeInMs;
 
     const req = libRequest(urlObject, fullOptionsWithHeaders, (res) => {
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      res.on = wrapInTestRunTracker(res.on);
-
       res.setEncoding('utf8');
 
       const chunks: string[] = [];
@@ -131,9 +127,6 @@ export const oneTryOfRequest = <SomeRequest extends Request, SomeResponse extend
         }),
       );
     }, timeout);
-
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    req.on = wrapInTestRunTracker(req.on);
 
     req.on('error', (cause) => {
       clearTimeout(endTimeout);

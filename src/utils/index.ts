@@ -55,7 +55,6 @@ export {getRunLabelObject} from './runLabel';
 export {getDescriptionFromSelector} from './selectors';
 export {setReadonlyProperty} from './setReadonlyProperty';
 export {getPackageInfo} from './startInfo';
-export {wrapInTestRunTracker} from './testRun';
 export {isArray, isThenable} from './typeGuards';
 export {isUiMode} from './uiMode';
 export {valueToString} from './valueToString';

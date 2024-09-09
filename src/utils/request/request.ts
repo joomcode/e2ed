@@ -7,7 +7,6 @@ import {getFullMocksState} from '../../context/fullMocks';
 import {E2edError} from '../error';
 import {log} from '../log';
 import {setReadonlyProperty} from '../setReadonlyProperty';
-import {wrapInTestRunTracker} from '../testRun';
 
 import {getFullMocksResponse} from './getFullMocksResponse';
 import {getPreparedOptions} from './getPreparedOptions';
@@ -55,9 +54,7 @@ export const request = async <
     return response as ResponseWithRequest<SomeResponse, SomeRequest>;
   }
 
-  const libRequest = wrapInTestRunTracker(
-    urlObject.protocol === 'http:' ? httpRequest : httpsRequest,
-  );
+  const libRequest = urlObject.protocol === 'http:' ? httpRequest : httpsRequest;
 
   for (let retryIndex = 1; retryIndex <= maxRetriesCount; retryIndex += 1) {
     const retry = `${retryIndex}/${maxRetriesCount}`;
