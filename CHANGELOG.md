@@ -1,5 +1,25 @@
 # Changelog
 
+## [v0.18.12](https://github.com/joomcode/e2ed/tree/v0.18.12) (2024-09-09)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.11...v0.18.12)
+
+- [Merge pull request #89 from joomcode/fix/ui-mode-stack-trace](https://github.com/joomcode/e2ed/commit/43f767fa21861a85e1e39e8d7bd07c24c5aea0e7) ([uid11](https://github.com/uid11))
+
+  fix: error in source code in UI mode
+
+- [FI-1345 fix: filter out error's stack trace in UI mode](https://github.com/joomcode/e2ed/commit/711396aeb2e78900b4e2a82fe86c40de76dfec99) ([uid11](https://github.com/uid11))
+
+  fix: remove unnecessary function `wrapInTestRunTracker`
+
+  fix: remove unnecessary pack config field `ajaxRequestTimeout`
+
+  chore: update devDependencies (`@types/node`, etc)
+
+  chore: update Playwright to 1.47.0
+
+  refactor: remove unnecessary function `processRetry`
+
 ## [v0.18.11](https://github.com/joomcode/e2ed/tree/v0.18.11) (2024-08-31)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.10...v0.18.11)
