@@ -40,7 +40,6 @@ const msInMinute = 60_000;
  * Pack of tests or tasks (pack configuration object).
  */
 export const pack: Pack = {
-  ajaxRequestTimeout: 40_000,
   assertionTimeout: 5_000,
   browserFlags,
   browserName: 'chromium',

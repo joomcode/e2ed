@@ -1,6 +1,6 @@
-import {e2edEnvironment, UI_MODE_VARIABLE_NAME} from '../constants/internal';
+import {e2edEnvironment, UI_MODE_VARIABLE_NAME} from '../../constants/internal';
 
-import {assertValueIsFalse} from './asserts';
+import {assertValueIsFalse} from '../asserts';
 
 /**
  * `true` if e2ed run in UI mode, and `false` otherwise.
