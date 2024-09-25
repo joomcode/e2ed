@@ -1,4 +1,6 @@
 /** @internal */
+export {attributesOptions} from './attributesOptions';
+/** @internal */
 export {EXEC_FILE_OPTIONS} from './childProcess';
 /** @internal */
 export {ConsoleBackgroundColor} from './color';

@@ -1,18 +1,13 @@
-import {createLocator, type Locator, type Mark} from 'create-locator';
-
 import {renderDuration, sanitizeHtml} from '../client';
 
+import {locator} from './locator';
 import {renderAttributes} from './renderAttributes';
 
-import type {TestRunStatus} from '../../../constants/internal';
-import type {SafeHtml, TestRunButtonProps, Void} from '../../../types/internal';
+import type {SafeHtml, TestRunButtonProps} from '../../../types/internal';
 
-type Props = TestRunButtonProps & Readonly<{index: number}> & Mark<TestRunButtonLocator>;
+type Props = TestRunButtonProps & Readonly<{index: number}>;
 
-export type TestRunButtonLocator = Locator<
-  {name: Void; order: Void; parameters: Void; time: Void},
-  {mainParams: string; runhash?: string; status: TestRunStatus}
->;
+const testId = 'TestRunButton';
 
 /**
  * Renders single test run button (in test runs list).
@@ -26,9 +21,7 @@ export const renderTestRunButton = ({
   runHash,
   startTimeInMs,
   status,
-  ...rest
 }: Props): SafeHtml => {
-  const locator = createLocator(rest);
   const durationInMs = endTimeInMs - startTimeInMs;
 
   return sanitizeHtml`<button
@@ -36,15 +29,15 @@ export const renderTestRunButton = ({
   class="test-button test-button_status_${status}"
   data-runhash="${runHash}"
   role="tab"
-  ${renderAttributes(locator({mainParams, status}))}
+  ${renderAttributes(locator(testId, {mainParams, status}))}
 >
-  <span class="test-button__order" ${renderAttributes(locator.order())}>#${index + 1}</span>
+  <span class="test-button__order" ${renderAttributes(locator(testId, 'order'))}>#${index + 1}</span>
   <span class="test-button__name" ${renderAttributes(
-    locator.name(),
+    locator(testId, 'name'),
   )}>${name}<span class="test-button__parameters" ${renderAttributes(
-    locator.parameters(),
+    locator(testId, 'parameters'),
   )}>${mainParams}</span></span>
-  <span class="test-button__time" ${renderAttributes(locator.time())}>${renderDuration(
+  <span class="test-button__time" ${renderAttributes(locator(testId, 'time'))}>${renderDuration(
     durationInMs,
   )}</span>
 </button>`;

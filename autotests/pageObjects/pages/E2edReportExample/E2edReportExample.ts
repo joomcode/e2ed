@@ -4,9 +4,9 @@ import {
 } from 'autotests/actions';
 import {setPageCookies, setPageRequestHeaders} from 'autotests/context';
 import {E2edReportExample as E2edReportExampleRoute} from 'autotests/routes/pageRoutes';
-import {locatorIdSelector, rootLocator} from 'autotests/selectors';
+import {locator} from 'autotests/selectors';
 import {Page} from 'e2ed';
-import {createPageObjectsFromMultiLocator, setReadonlyProperty} from 'e2ed/utils';
+import {setReadonlyProperty} from 'e2ed/utils';
 
 import {TestRunButton} from './TestRunButton';
 
@@ -23,14 +23,13 @@ export class E2edReportExample extends Page<CustomPageParams> {
   /**
    * Navigation bar with test retries.
    */
-  readonly navigationRetries: Selector = locatorIdSelector('app-navigation-retries');
+  readonly navigationRetries: Selector = locator('RetriesButtons');
 
   /**
    * Button tabs in navigation bar with test retries.
    */
-  readonly navigationRetriesButton: Selector = this.navigationRetries.findByLocatorId(
-    'app-navigation-retries-button',
-  );
+  readonly navigationRetriesButton: Selector =
+    this.navigationRetries.findByLocatorId('RetryButton');
 
   /**
    * Selected button tab in navigation bar with test retries.
@@ -53,13 +52,13 @@ export class E2edReportExample extends Page<CustomPageParams> {
   /**
    * Test run button.
    */
-  readonly testRunButton: Selector = this.testRunsList.findByLocatorId('app-retries-retry-button');
+  readonly testRunButton: Selector = this.testRunsList.findByLocatorId('TestRunButton');
 
   /**
    * List of test runs of retry.
    */
   get testRunsList(): Selector {
-    return locatorIdSelector('app-column1');
+    return locator('column1');
   }
 
   /**
@@ -82,12 +81,19 @@ export class E2edReportExample extends Page<CustomPageParams> {
   /**
    * Get `TestRunButton` hash (hashed by test `mainParams`).
    */
-  getTestRunButtons(): Promise<Readonly<Record<string, TestRunButton>>> {
-    return createPageObjectsFromMultiLocator({
-      PageObjectClass: TestRunButton,
-      keyParameter: 'runhash',
-      locator: rootLocator.retries.retry.button,
-    });
+  async getTestRunButtons(): Promise<readonly TestRunButton[]> {
+    const multiSelector = locator('TestRunButton');
+    const numberOfPageObjects = await multiSelector.count;
+
+    const buttons: TestRunButton[] = [];
+
+    for (let index = 0; index < numberOfPageObjects; index += 1) {
+      const selector = multiSelector.nth(index);
+
+      buttons.push(new TestRunButton(selector));
+    }
+
+    return buttons;
   }
 
   override init(this: E2edReportExample): void {

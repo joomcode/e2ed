@@ -5,13 +5,13 @@ import {getDurationWithUnits} from '../../getDurationWithUnits';
 import {sanitizeHtml} from '../client';
 import {getRetriesProps} from '../getRetriesProps';
 
+import {locator} from './locator';
 import {renderAttributes} from './renderAttributes';
 import {renderErrors} from './renderErrors';
 import {renderHead} from './renderHead';
 import {renderJsonData} from './renderJsonData';
 import {renderNavigation} from './renderNavigation';
 import {renderRetries} from './renderRetries';
-import {rootLocator} from './rootLocator';
 
 import type {ReportData, SafeHtml, UtcTimeInMs} from '../../../types/internal';
 
@@ -35,12 +35,12 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
 <html lang="en">
   ${renderHead(reportFileName)}
   <body>
-    ${renderNavigation({retries, ...rootLocator.navigation()})}
+    ${renderNavigation({retries})}
     <div class="main" role="tabpanel">
       <section class="main__section _position_left" aria-label="Retry ${maxRetry}" ${renderAttributes(
-        rootLocator.column1(),
+        locator('column1'),
       )}>
-        ${renderRetries({retries, ...rootLocator.retries()})}
+        ${renderRetries({retries})}
         ${renderErrors(reportData.errors)}
       </section>
       <div class="drag-container"></div>
@@ -48,7 +48,7 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
         aria-label="Tests results"
         class="main__section _position_right"
         id="e2edTestRunDetailsContainer"
-        ${renderAttributes(rootLocator.column2())}
+        ${renderAttributes(locator('column2'))}
       ><div class="test-details-empty"><p>No test selected</p></div></section>
     </div>
     ${renderJsonData(reportData)}

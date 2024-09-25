@@ -1,31 +1,23 @@
-import {createLocator, type Locator, type Mark} from 'create-locator';
-
 import {sanitizeHtml} from '../client';
 
+import {locator} from './locator';
 import {renderAttributes} from './renderAttributes';
 import {renderLogo} from './renderLogo';
-import {renderRetriesButtons, type RetriesButtonsLocator} from './renderRetriesButtons';
+import {renderRetriesButtons} from './renderRetriesButtons';
 
 import type {RetryProps, SafeHtml} from '../../../types/internal';
 
-type Props = Readonly<{retries: readonly RetryProps[]}> & Mark<NavigationLocator>;
-
-export type NavigationLocator = Locator<{
-  retries: RetriesButtonsLocator;
-}>;
+type Props = Readonly<{retries: readonly RetryProps[]}>;
 
 /**
  * Renders tag `<nav>`.
  * @internal
  */
-export const renderNavigation = ({retries, ...rest}: Props): SafeHtml => {
-  const locator = createLocator(rest);
-
-  return sanitizeHtml`
-<nav class="nav" ${renderAttributes(locator())}>
+export const renderNavigation = ({
+  retries,
+}: Props): SafeHtml => sanitizeHtml`<nav class="nav" ${renderAttributes(locator('Navigation'))}>
   <header class="header">
     ${renderLogo()}
   </header>
-${renderRetriesButtons({retries, ...locator.retries()})}
+${renderRetriesButtons({retries})}
 </nav>`;
-};

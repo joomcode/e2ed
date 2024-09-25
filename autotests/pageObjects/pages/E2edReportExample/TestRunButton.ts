@@ -1,22 +1,23 @@
-import type {CreateLocator} from 'e2ed/createLocator';
-import type {Selector, TestRunButtonLocator} from 'e2ed/types';
+import {locator} from 'autotests/selectors';
 
-type Locator = CreateLocator<TestRunButtonLocator, Selector>;
+import type {Selector} from 'e2ed/types';
+
+const testId = 'TestRunButton';
 
 /**
  * `TestRun` button.
  */
 export class TestRunButton {
-  readonly locator: Locator;
+  readonly selector: Selector;
 
-  constructor(locator: Locator) {
-    this.locator = locator;
+  constructor(selector: Selector) {
+    this.selector = selector;
   }
 
   /**
    * Element with `mainParams` of test.
    */
   get parameters(): Selector {
-    return this.locator.parameters();
+    return locator(testId, 'parameters');
   }
 }

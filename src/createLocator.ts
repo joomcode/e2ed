@@ -9,8 +9,6 @@ export type {
   LocatorOfElement,
   Mark,
   Node,
-  Options,
-  OptionsInTests,
   ParametersConstraint,
   PropertiesWithMarkConstraint,
   PropertiesWithMarkWithParametersConstraint,
@@ -21,13 +19,13 @@ export {
   anyLocator,
   createLocator,
   createRootLocator,
+  createSimpleLocator,
   getLocatorParameters,
   removeMarkFromProperties,
   setGlobalProductionMode,
-  setOptions,
 } from 'create-locator';
-export type {PARAMETERS} from 'create-locator/oldTypes';
 // eslint-disable-next-line import/no-internal-modules
-export {createSelectorFunctions} from 'create-locator/createSelectorFunctions';
+export {createTestUtils} from 'create-locator/createTestUtils';
+export type {PARAMETERS} from 'create-locator/oldTypes';
 // eslint-disable-next-line import/no-internal-modules
 export {getCssSelectorFromAttributesChain} from 'create-locator/getCssSelectorFromAttributesChain';

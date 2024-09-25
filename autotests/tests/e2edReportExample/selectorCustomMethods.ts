@@ -1,5 +1,6 @@
 import {test} from 'autotests';
 import {E2edReportExample} from 'autotests/pageObjects/pages';
+import {chain} from 'autotests/selectors';
 import {expect} from 'e2ed';
 import {click, navigateToPage} from 'e2ed/actions';
 
@@ -15,11 +16,11 @@ test('selector custom methods', {meta: {testId: '15'}}, async () => {
     'selected navigation retries button exists',
   ).ok();
 
-  const testRunButtonsHash = await reportPage.getTestRunButtons();
+  const testRunButtons = await reportPage.getTestRunButtons();
 
   const retriesButtonsCount = await reportPage.navigationRetriesButton.count;
 
-  const testRunButtonsCount = Object.keys(testRunButtonsHash).length;
+  const testRunButtonsCount = Object.keys(testRunButtons).length;
 
   await expect(reportPage.testRunButton.count, 'getTestRunButtons find all buttons').eql(
     testRunButtonsCount,
@@ -27,10 +28,9 @@ test('selector custom methods', {meta: {testId: '15'}}, async () => {
 
   let buttonsIndex = 0;
 
-  for (const testRunButton of Object.values(testRunButtonsHash)) {
+  for (const testRunButton of Object.values(testRunButtons)) {
     const selector = reportPage.testRunButton.nth(buttonsIndex);
-    const mainParams = await selector.findByLocatorId(String(testRunButton.locator.parameters))
-      .textContent;
+    const mainParams = await chain(selector, testRunButton.parameters).textContent;
 
     await expect(testRunButton.parameters.textContent, 'mainParams of test run button correct').eql(
       mainParams,
