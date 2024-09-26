@@ -1,31 +1,24 @@
-import {createLocator, type Locator, type Mark} from 'create-locator';
-
 import {renderDatesInterval, renderDuration, sanitizeHtml} from '../client';
 
+import {locator} from './locator';
 import {renderAttributes} from './renderAttributes';
 
-import type {RetryProps, SafeHtml, Void} from '../../../types/internal';
+import type {RetryProps, SafeHtml} from '../../../types/internal';
 
-type Props = RetryProps & Mark<RetryHeaderLocator>;
+type Props = RetryProps;
 
-export type RetryHeaderLocator = Locator<{date: Void; title: Void}>;
+const testId = 'RetryHeader';
 
 /**
  * Renders retry header.
  * @internal
  */
-export const renderRetryHeader = ({
-  endTimeInMs,
-  retryIndex,
-  startTimeInMs,
-  ...rest
-}: Props): SafeHtml => {
-  const locator = createLocator(rest);
+export const renderRetryHeader = ({endTimeInMs, retryIndex, startTimeInMs}: Props): SafeHtml => {
   const durationInMs = endTimeInMs - startTimeInMs;
 
   return sanitizeHtml`
-<h3 class="__title" ${renderAttributes(locator.title())}>Retry ${retryIndex}</h3>
-<p class="__date" ${renderAttributes(locator.date())}>
+<h3 class="__title" ${renderAttributes(locator(testId, 'title'))}>Retry ${retryIndex}</h3>
+<p class="__date" ${renderAttributes(locator(testId, 'date'))}>
   ${renderDatesInterval({endTimeInMs, startTimeInMs})}
   (${renderDuration(durationInMs)})
 </p>`;

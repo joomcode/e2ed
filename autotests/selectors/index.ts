@@ -1,5 +1,5 @@
 export {inputSelector} from './inputSelector';
-export {rootLocator} from './rootLocator';
+export {chain, locator} from './locator';
 export {
   createSelector,
   createSelectorByCss,
