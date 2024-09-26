@@ -1,5 +1,21 @@
 # Changelog
 
+## [v0.18.13](https://github.com/joomcode/e2ed/tree/v0.18.13) (2024-09-26)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.12...v0.18.13)
+
+- [Merge pull request #90 from joomcode/feat/support-new-create-locator](https://github.com/joomcode/e2ed/commit/d3b2b808a9b738e1e3ecdc72311bd9a9d400d8f1) ([uid11](https://github.com/uid11))
+
+  feat: support new `create-locator` API
+
+- [FI-1346 chore: update `create-locator` to 0.0.24](https://github.com/joomcode/e2ed/commit/99835714152d5e8d6f0a637ee6bec25e79c6f6fe) ([uid11](https://github.com/uid11))
+
+  chore: update devDependencies (TypeScript to 5.6, etc)
+
+  chore: update Playwright to 1.47.2
+
+  feat: replace old locator API to new one
+
 ## [v0.18.12](https://github.com/joomcode/e2ed/tree/v0.18.12) (2024-09-09)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.11...v0.18.12)
