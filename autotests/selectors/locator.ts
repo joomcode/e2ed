@@ -6,9 +6,13 @@ import {createSelectorByCss} from './selectorFunctions';
 /**
  * Test utils, that produce `Selector`.
  */
-export const {chain, locator} = createTestUtils({
+export const {
+  locator,
+  selector: cssSelector,
+  testId,
+} = createTestUtils({
   attributesOptions,
-  createLocatorByCssSelector: (cssSelector) =>
-    createSelectorByCss(cssSelector.replace('data-test-runhash', 'data-runhash')),
+  createLocatorByCssSelector: (selector) =>
+    createSelectorByCss(selector.replace('data-test-runhash', 'data-runhash')),
   supportWildcardsInCssSelectors: true,
 });

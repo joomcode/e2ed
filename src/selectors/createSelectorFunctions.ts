@@ -4,7 +4,6 @@ import {
   createSelectorByCssCreator,
   createSelectorCreator,
   htmlElementSelectorCreator,
-  locatorIdSelectorCreator,
 } from '../utils/selectors';
 
 import type {CreateSelectorFunctionsOptions, SelectorFunctions} from '../types/internal';
@@ -33,9 +32,5 @@ export const createSelectorFunctions = ({
      * Selector of page HTML element ("documentElement").
      */
     htmlElementSelector: htmlElementSelectorCreator(createSelector),
-    /**
-     * Selector of locator elements by locator id.
-     */
-    locatorIdSelector: locatorIdSelectorCreator(createSelector, getLocatorAttributeName),
   };
 };

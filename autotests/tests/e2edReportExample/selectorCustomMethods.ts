@@ -1,6 +1,6 @@
 import {test} from 'autotests';
 import {E2edReportExample} from 'autotests/pageObjects/pages';
-import {chain} from 'autotests/selectors';
+import {TestRunButton} from 'autotests/pageObjects/pages/E2edReportExample';
 import {expect} from 'e2ed';
 import {click, navigateToPage} from 'e2ed/actions';
 
@@ -30,7 +30,8 @@ test('selector custom methods', {meta: {testId: '15'}}, async () => {
 
   for (const testRunButton of Object.values(testRunButtons)) {
     const selector = reportPage.testRunButton.nth(buttonsIndex);
-    const mainParams = await chain(selector, testRunButton.parameters).textContent;
+
+    const mainParams = await selector.find(TestRunButton.parameters).textContent;
 
     await expect(testRunButton.parameters.textContent, 'mainParams of test run button correct').eql(
       mainParams,
@@ -53,7 +54,7 @@ test('selector custom methods', {meta: {testId: '15'}}, async () => {
     reportPage.navigationRetriesButtonSelected.getDescription(),
     'selector has apropriate description',
   ).eql(
-    '[data-testid="app-navigation-retries"].findByLocatorId(app-navigation-retries-button).filterByLocatorParameter(selected, true)',
+    '[data-testid="RetriesButtons"].findByLocatorId(RetryButton).filterByLocatorParameter(selected, true)',
   );
 
   await click(reportPage.navigationRetriesButton.nth(0));

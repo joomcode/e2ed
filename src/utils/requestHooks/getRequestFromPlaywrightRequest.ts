@@ -1,6 +1,9 @@
 import {parse} from 'node:querystring';
 import {URL} from 'node:url';
 
+import {LogEventType} from '../../constants/internal';
+
+import {log} from '../log';
 import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
 
 import type {Request as PlaywrightRequest} from '@playwright/test';
@@ -30,7 +33,13 @@ export const getRequestFromPlaywrightRequest = (
   const body = playwrightRequest.postData();
 
   if (isRequestBodyInJsonFormat === true) {
-    requestBody = parseMaybeEmptyValueAsJson(body);
+    try {
+      requestBody = parseMaybeEmptyValueAsJson(body);
+    } catch {
+      log('Request body is not in JSON format', {body, url}, LogEventType.InternalUtil);
+
+      requestBody = body;
+    }
   } else if (isRequestBodyInJsonFormat === false) {
     requestBody = body;
   } else {

@@ -28,9 +28,12 @@ export const assertPage = async <SomePageClass extends AnyPageClassType>(
   const logEventStatus = isMatch ? LogEventStatus.Passed : LogEventStatus.Failed;
   const message = `the document url matches the page "${PageClass.name}"`;
   const {routeParams} = route;
-  const payload = {documentUrl, isMatch, pageParams, routeParams};
 
-  log(`Asserts that ${message}`, {...payload, logEventStatus}, LogEventType.InternalAction);
+  log(
+    `Asserts that ${message}`,
+    {documentUrl, isMatch, logEventStatus, pageParams, routeParams},
+    LogEventType.InternalAction,
+  );
 
   await page.assertPage(isMatch);
 

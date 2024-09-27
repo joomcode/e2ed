@@ -116,7 +116,6 @@ export type {
   CreateSelectorByCss,
   CreateSelectorFunctionsOptions,
   GetLocatorAttributeNameFn,
-  LocatorIdSelector,
   Selector,
   SelectorCustomMethods,
   SelectorFunctions,
