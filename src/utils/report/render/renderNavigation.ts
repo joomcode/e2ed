@@ -1,7 +1,6 @@
 import {sanitizeHtml} from '../client';
 
 import {locator} from './locator';
-import {renderAttributes} from './renderAttributes';
 import {renderLogo} from './renderLogo';
 import {renderRetriesButtons} from './renderRetriesButtons';
 
@@ -15,7 +14,7 @@ type Props = Readonly<{retries: readonly RetryProps[]}>;
  */
 export const renderNavigation = ({
   retries,
-}: Props): SafeHtml => sanitizeHtml`<nav class="nav" ${renderAttributes(locator('Navigation'))}>
+}: Props): SafeHtml => sanitizeHtml`<nav class="nav" ${locator('Navigation')}>
   <header class="header">
     ${renderLogo()}
   </header>

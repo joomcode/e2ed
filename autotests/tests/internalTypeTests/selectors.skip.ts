@@ -2,7 +2,7 @@ import {
   createSelector,
   createSelectorByCss,
   htmlElementSelector,
-  locatorIdSelector,
+  locator,
 } from 'autotests/selectors';
 
 import type {Selector} from 'e2ed/types';
@@ -28,13 +28,10 @@ createSelectorByCss('id')
   .find('body')
   .findByLocatorId('id') satisfies Selector;
 // ok
-locatorIdSelector('id').findByLocatorId('id').find('body').findByLocatorId('id') satisfies Selector;
+locator('id').findByLocatorId('id').find('body').findByLocatorId('id') satisfies Selector;
 
 // @ts-expect-error: wrong number of arguments
-locatorIdSelector();
-
-// @ts-expect-error: wrong type of arguments
-locatorIdSelector(3); // eslint-disable-line @typescript-eslint/no-magic-numbers
+locator();
 
 // ok
 htmlElementSelector.filterByLocatorId('id') satisfies Selector;

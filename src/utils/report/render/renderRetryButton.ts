@@ -1,7 +1,6 @@
 import {sanitizeHtml} from '../client';
 
 import {locator} from './locator';
-import {renderAttributes} from './renderAttributes';
 
 import type {RetryButtonProps, SafeHtml} from '../../../types/internal';
 
@@ -20,5 +19,5 @@ aria-selected="${String(selected)}"
 class="nav-tabs__button"
 id="retry${retry}-nav"
 role="tab"
-${renderAttributes(locator('RetryButton', {disabled, retry, selected}))}
+${locator('RetryButton', {disabled, retry, selected})}
 ${disabled ? 'disabled' : ''}>Retry ${retry}</button>`;

@@ -64,11 +64,6 @@ export type CreateSelector = (this: void, cssString: string) => Selector;
 export type CreateSelectorByCss = (this: void, cssSelectorString: string) => Selector;
 
 /**
- * Type of `locatorIdSelector` function.
- */
-export type LocatorIdSelector = (this: void, id: string) => Selector;
-
-/**
  * Selector type (which replaces the DOM element wrapper).
  */
 export type Selector = ReplaceObjectSelectors<SelectorClass> &
@@ -118,7 +113,6 @@ export type SelectorFunctions = Readonly<{
   createSelector: CreateSelector;
   createSelectorByCss: CreateSelectorByCss;
   htmlElementSelector: Selector;
-  locatorIdSelector: LocatorIdSelector;
 }>;
 
 /**

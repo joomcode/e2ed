@@ -2,6 +2,8 @@ import {getFullPackConfig} from '../../config';
 
 import {createSafeHtmlWithoutSanitize} from '../client';
 
+import {createLocatorOptions} from './locator';
+
 import type {ReportClientState, SafeHtml} from '../../../types/internal';
 
 /**
@@ -19,6 +21,8 @@ export const renderScriptConstants = (): SafeHtml => {
   };
 
   return createSafeHtmlWithoutSanitize`
+const createLocatorOptions = ${JSON.stringify(createLocatorOptions)};
+var locator;
 const reportClientState = ${JSON.stringify(reportClientState)};
 `;
 };

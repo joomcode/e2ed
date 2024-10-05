@@ -59,7 +59,6 @@ export type {
   CreateSelectorByCss,
   CreateSelectorFunctionsOptions,
   GetLocatorAttributeNameFn,
-  LocatorIdSelector,
   Selector,
   SelectorFunctions,
 } from './selectors';

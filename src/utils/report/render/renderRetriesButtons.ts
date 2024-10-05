@@ -1,7 +1,6 @@
 import {createSafeHtmlWithoutSanitize} from '../client';
 
 import {locator} from './locator';
-import {renderAttributes} from './renderAttributes';
 import {renderRetryButton} from './renderRetryButton';
 
 import type {RetryProps, SafeHtml} from '../../../types/internal';
@@ -28,7 +27,5 @@ export const renderRetriesButtons = ({retries}: Props): SafeHtml => {
   }
 
   return createSafeHtmlWithoutSanitize`
-<div role="tablist" aria-label="Retries" class="nav-tabs" ${renderAttributes(
-    locator('RetriesButtons'),
-  )}>${buttons.join('')}</div>`;
+<div role="tablist" aria-label="Retries" class="nav-tabs" ${locator('RetriesButtons')}>${buttons.join('')}</div>`;
 };

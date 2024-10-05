@@ -1,7 +1,6 @@
 import {renderDuration, sanitizeHtml} from '../client';
 
 import {locator} from './locator';
-import {renderAttributes} from './renderAttributes';
 
 import type {SafeHtml, TestRunButtonProps} from '../../../types/internal';
 
@@ -29,16 +28,13 @@ export const renderTestRunButton = ({
   class="test-button test-button_status_${status}"
   data-runhash="${runHash}"
   role="tab"
-  ${renderAttributes(locator(testId, {mainParams, status}))}
+  ${locator(testId, {mainParams, status})}
 >
-  <span class="test-button__order" ${renderAttributes(locator(testId, 'order'))}>#${index + 1}</span>
-  <span class="test-button__name" ${renderAttributes(
-    locator(testId, 'name'),
-  )}>${name}<span class="test-button__parameters" ${renderAttributes(
-    locator(testId, 'parameters'),
+  <span class="test-button__order" ${locator(testId, 'order')}>#${index + 1}</span>
+  <span class="test-button__name" ${locator(testId, 'name')}>${name}<span class="test-button__parameters" ${locator(
+    testId,
+    'parameters',
   )}>${mainParams}</span></span>
-  <span class="test-button__time" ${renderAttributes(locator(testId, 'time'))}>${renderDuration(
-    durationInMs,
-  )}</span>
+  <span class="test-button__time" ${locator(testId, 'time')}>${renderDuration(durationInMs)}</span>
 </button>`;
 };

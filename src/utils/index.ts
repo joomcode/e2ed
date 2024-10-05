@@ -1,6 +1,7 @@
 export {
   assertFunctionThrows,
   assertNumberIsPositiveInteger,
+  assertType,
   assertValueHasProperty,
   assertValueIsBoolean,
   assertValueIsDefined,

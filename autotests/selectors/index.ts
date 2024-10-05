@@ -1,8 +1,3 @@
 export {inputSelector} from './inputSelector';
-export {chain, locator} from './locator';
-export {
-  createSelector,
-  createSelectorByCss,
-  htmlElementSelector,
-  locatorIdSelector,
-} from './selectorFunctions';
+export {cssSelector, locator, testId} from './locator';
+export {createSelector, createSelectorByCss, htmlElementSelector} from './selectorFunctions';

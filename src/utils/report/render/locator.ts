@@ -1,10 +1,22 @@
-import {createSimpleLocator} from 'create-locator';
+import {type CreateLocatorOptions, createSimpleLocator, type LocatorFunction} from 'create-locator';
 
 import {attributesOptions, e2edEnvironment} from '../../../constants/internal';
 
+import {renderAttributes} from '../client';
+
+import type {SafeHtml} from '../../../types/internal';
+
 const isProduction = e2edEnvironment.E2ED_ORIGIN !== 'https://google.com';
+
+const createLocatorOptions: CreateLocatorOptions = {attributesOptions, isProduction};
+
+const locatorAttributes = createSimpleLocator(createLocatorOptions);
+
+export {createLocatorOptions};
 
 /**
  * `locator` function.
+ * @internal
  */
-export const locator = createSimpleLocator({attributesOptions, isProduction});
+export const locator: LocatorFunction<SafeHtml> = (...args): SafeHtml =>
+  renderAttributes(locatorAttributes(...(args as [string])));

@@ -1,4 +1,5 @@
 import {LogEventType} from '../../constants/internal';
+import {getDocumentUrl} from '../../utils/document';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
 
@@ -41,6 +42,13 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
   );
 
   await page.waitForPageLoaded();
+
+  const documentUrl = await getDocumentUrl();
+  const isMatch = route.isMatchUrl(documentUrl);
+
+  await page.assertPage(isMatch);
+
+  await page.afterAssertPage?.();
 
   await page.afterNavigateToPage?.();
 

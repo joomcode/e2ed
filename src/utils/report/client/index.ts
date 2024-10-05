@@ -26,6 +26,7 @@ export {readJsonReportData} from './readJsonReportData';
 export {readPartOfJsonReportData} from './readPartOfJsonReportData';
 /** @internal */
 export {
+  renderAttributes,
   renderDatesInterval,
   renderDuration,
   renderStep,
