@@ -1,5 +1,29 @@
 # Changelog
 
+## [v0.18.14](https://github.com/joomcode/e2ed/tree/v0.18.14) (2024-10-05)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.13...v0.18.14)
+
+- [Merge pull request #91 from joomcode/fix/new-locators](https://github.com/joomcode/e2ed/commit/7e72fd0af1c9714fc1bfed5d41b1888a803bf8a0) ([uid11](https://github.com/uid11))
+
+  fix: using of new locators
+
+- [FI-1424 fix: sort tests by status in HTML report](https://github.com/joomcode/e2ed/commit/32b776d8f9b6a8a5d7a8662495a14d334021c048) ([uid11](https://github.com/uid11))
+
+  feat: add util `assertType`
+
+- [fix: add locators to client code of HTML report](https://github.com/joomcode/e2ed/commit/84f6438b08458aedb22aaaacc68977a5f2f50b10) ([uid11](https://github.com/uid11))
+- [FI-653 feat: assert page url at the end of `navigateToPage`](https://github.com/joomcode/e2ed/commit/c1528378f4d53a548fbc64b57306a3fdd35f00a8) ([uid11](https://github.com/uid11))
+- [fix: using of new locators](https://github.com/joomcode/e2ed/commit/42759561e141749567fb7c1d8b2409599b06599a) ([uid11](https://github.com/uid11))
+
+  tests: restore selectorCustomMethods test
+
+  fix: do not throw in `getRequestFromPlaywrightRequest` for invalid JSON
+
+  chore: update devDependencies (`eslint`, `@types/node`, etc)
+
+  chore: update `create-locator` to 0.0.25
+
 ## [v0.18.13](https://github.com/joomcode/e2ed/tree/v0.18.13) (2024-09-26)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.12...v0.18.13)
