@@ -1,3 +1,5 @@
+import {createSimpleLocator} from 'create-locator';
+
 import {getDurationWithUnits} from '../../getDurationWithUnits';
 
 import {
@@ -14,6 +16,7 @@ import {
   parseMarkdownLinks,
   readJsonReportData,
   readPartOfJsonReportData,
+  renderAttributes,
   renderDatesInterval,
   renderDuration,
   renderStep,
@@ -38,6 +41,7 @@ ${addOnClickOnClass.toString()}
 ${assertValueIsDefined.toString()}
 ${chooseTestRun.toString()}
 ${createSafeHtmlWithoutSanitize.toString()}
+var createSimpleLocator = ${createSimpleLocator.toString()};
 ${clickOnRetry.toString()}
 ${clickOnStep.toString()}
 ${clickOnTestRun.toString()}
@@ -45,6 +49,7 @@ ${onDomContentLoad.toString()}
 ${onFirstJsonReportDataLoad.toString()}
 ${getDurationWithUnits.toString()}
 ${parseMarkdownLinks.toString()}
+${renderAttributes.toString()}
 ${readJsonReportData.toString()}
 ${readPartOfJsonReportData.toString()}
 ${renderDatesInterval.toString()}

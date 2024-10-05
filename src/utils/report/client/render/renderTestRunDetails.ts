@@ -5,7 +5,11 @@ import {renderSteps as clientRenderSteps} from './renderSteps';
 import {renderTestRunDescription as clientRenderTestRunDescription} from './renderTestRunDescription';
 import {renderTestRunError as clientRenderTestRunError} from './renderTestRunError';
 
+import type {LocatorFunction} from 'create-locator';
+
 import type {FullTestRun, SafeHtml} from '../../../../types/internal';
+
+declare const locator: LocatorFunction<SafeHtml>;
 
 const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
 const renderSteps = clientRenderSteps;
@@ -29,7 +33,7 @@ export function renderTestRunDetails(fullTestRun: FullTestRun): SafeHtml {
 
   return sanitizeHtml`<article class="test-details">
   <p class="test-details__path">${filePath}</p>
-  <h2 class="test-details__title">
+  <h2 class="test-details__title" ${locator('test-details-title', {capitalizedStatus})}>
     <span class="color-cell color-cell_status_${status} test-details__status">${capitalizedStatus}</span>${name}
   </h2>
   <div role="tabpanel">

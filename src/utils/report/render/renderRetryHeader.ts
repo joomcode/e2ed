@@ -1,7 +1,6 @@
 import {renderDatesInterval, renderDuration, sanitizeHtml} from '../client';
 
 import {locator} from './locator';
-import {renderAttributes} from './renderAttributes';
 
 import type {RetryProps, SafeHtml} from '../../../types/internal';
 
@@ -17,8 +16,8 @@ export const renderRetryHeader = ({endTimeInMs, retryIndex, startTimeInMs}: Prop
   const durationInMs = endTimeInMs - startTimeInMs;
 
   return sanitizeHtml`
-<h3 class="__title" ${renderAttributes(locator(testId, 'title'))}>Retry ${retryIndex}</h3>
-<p class="__date" ${renderAttributes(locator(testId, 'date'))}>
+<h3 class="__title" ${locator(testId, 'title')}>Retry ${retryIndex}</h3>
+<p class="__date" ${locator(testId, 'date')}>
   ${renderDatesInterval({endTimeInMs, startTimeInMs})}
   (${renderDuration(durationInMs)})
 </p>`;

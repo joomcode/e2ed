@@ -1,4 +1,6 @@
 /** @internal */
+export {renderAttributes} from './renderAttributes';
+/** @internal */
 export {renderDatesInterval} from './renderDatesInterval';
 /** @internal */
 export {renderDuration} from './renderDuration';
