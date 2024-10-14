@@ -32,6 +32,7 @@ export {pressKey} from './pressKey';
 export {resizeWindow} from './resizeWindow';
 export {scroll} from './scroll';
 export {scrollIntoView} from './scrollIntoView';
+export {selectOption} from './selectOption';
 export {selectText} from './selectText';
 export {setCookies} from './setCookies';
 export {setFilesToUpload} from './setFilesToUpload';

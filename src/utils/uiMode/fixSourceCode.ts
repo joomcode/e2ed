@@ -66,7 +66,15 @@ if (isUiMode) {
 
   setReadonlyProperty(Error, 'prototype', OriginalError.prototype);
 
-  globalThis.Error.prototype.constructor = Error;
+  Object.assign(globalThis.Error.prototype, {
+    browserLogMessage() {
+      return '';
+    },
+    constructor: Error,
+    setMessage(this: {message: string}, message: string) {
+      this.message = message;
+    },
+  });
 
   // eslint-disable-next-line @typescript-eslint/unbound-method
   Error.captureStackTrace = OriginalError.captureStackTrace;

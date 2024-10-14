@@ -20,7 +20,7 @@ const assertExternalPackRunId: DoAfterPack = ({customReportProperties, endTimeIn
  * An array of functions that will be run after the pack.
  * This is an implementation for internal tests. You must remove it from your project.
  */
-export const doAfterPack = [
+export const doAfterPack: readonly DoAfterPack[] = [
   setExternalPackRunId,
   incrementExternalPackRunId,
   assertExternalPackRunId,

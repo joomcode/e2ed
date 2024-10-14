@@ -1,9 +1,20 @@
 import {useContext} from 'e2ed';
 
-import type {Headers} from 'e2ed/types';
+import type {ClearContext, GetContext, Headers, SetContext} from 'e2ed/types';
+
+const [get, set, clear] = useContext<Headers>();
 
 /**
- * Get, set and clear additional page request headers, that will be added when navigating to the page.
+ * Get additional page request headers, that will be added when navigating to the page.
  */
-export const [getPageRequestHeaders, setPageRequestHeaders, clearPageRequestHeaders] =
-  useContext<Headers>();
+export const getPageRequestHeaders: GetContext<Headers> = get;
+
+/**
+ * Set additional page request headers, that will be added when navigating to the page.
+ */
+export const setPageRequestHeaders: SetContext<Headers> = set;
+
+/**
+ * Clear additional page request headers, that will be added when navigating to the page.
+ */
+export const clearPageRequestHeaders: ClearContext = clear;

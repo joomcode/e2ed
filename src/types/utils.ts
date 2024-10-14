@@ -2,11 +2,6 @@ import type {IsBrand} from './brand';
 import type {IsIncludeUndefined} from './undefined';
 
 /**
- * Inner key for params type.
- */
-declare const PARAMS_KEY: unique symbol;
-
-/**
  * Entry pair that `Object.entries<Type>` returns.
  */
 type EntryPair<Type> = [key: keyof Type, value: Values<Type> | undefined];
@@ -20,8 +15,8 @@ export type Any = any;
 /**
  * Returns the type of instance params.
  */
-export type GetParamsType<Class> = Class extends {[PARAMS_KEY]: unknown}
-  ? Normalize<Class[ParamsKeyType]>
+export type GetParamsType<Class> = Class extends {['__PARAMS_KEY']: unknown}
+  ? Normalize<Class['__PARAMS_KEY']>
   : never;
 
 /**
@@ -79,11 +74,6 @@ export type OptionalIfValueIncludeDefault<
   Value,
   DefaultValue,
 > = DefaultValue extends Value ? {[K in Key]?: Value} : {[K in Key]: Value};
-
-/**
- * Type of inner key for params type.
- */
-export type ParamsKeyType = typeof PARAMS_KEY;
 
 /**
  * Takes a union, and returns the intersection of the elements of the union.

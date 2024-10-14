@@ -1,11 +1,12 @@
 import {createClientFunction} from 'e2ed';
 
 import type {ApiProduct, Product} from 'autotests/types';
+import type {ClientFunction} from 'e2ed/types';
 
 /**
  * Adds product.
  */
-export const addProduct = createClientFunction(
+export const addProduct: ClientFunction<[Product], Promise<ApiProduct>> = createClientFunction(
   (product: Product) =>
     fetch(`https://reqres.in/api/product/${product.id}?size=${product.size}`, {
       body: JSON.stringify({

@@ -26,7 +26,7 @@ const assertInternalPackRunId: DoBeforePack = ({fullPackConfig, startTimeInMs}) 
  * An array of functions that will be run before the pack.
  * This is an implementation for internal tests. You must remove it from your project.
  */
-export const doBeforePack = [
+export const doBeforePack: readonly DoBeforePack[] = [
   setInternalPackRunId,
   incrementInternalPackRunId,
   assertInternalPackRunId,

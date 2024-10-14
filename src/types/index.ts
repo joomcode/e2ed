@@ -1,3 +1,4 @@
+export type {ClearContext, GetContext, GetWithDefaultValueContext, SetContext} from '../useContext';
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';
@@ -56,11 +57,9 @@ export type {LiteReport, LiteRetry} from './report';
 export type {ApiRouteClassType, ApiRouteClassTypeWithGetParamsFromUrl} from './routes';
 export type {
   CreateSelector,
-  CreateSelectorByCss,
-  CreateSelectorFunctionsOptions,
+  CreateSelectorFunctionOptions,
   GetLocatorAttributeNameFn,
   Selector,
-  SelectorFunctions,
 } from './selectors';
 export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';

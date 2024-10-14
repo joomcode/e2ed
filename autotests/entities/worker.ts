@@ -2,6 +2,7 @@ import {createClientFunction} from 'e2ed';
 import {log} from 'e2ed/utils';
 
 import type {UserWorker} from 'autotests/types';
+import type {ClientFunction} from 'e2ed/types';
 
 const clientGetUsers = createClientFunction(
   (delay: number) =>
@@ -12,13 +13,13 @@ const clientGetUsers = createClientFunction(
 /**
  * Adds user-worker.
  */
-export const addUser = createClientFunction(
+export const addUser: ClientFunction<[UserWorker, number?], Promise<object>> = createClientFunction(
   (user: UserWorker, delay?: number) =>
     fetch(`https://reqres.in/api/users${delay !== undefined ? `?delay=${delay}` : ''}`, {
       body: JSON.stringify(user),
       headers: {'Content-Type': 'application/json; charset=UTF-8'},
       method: 'POST',
-    }).then((res) => res.json()),
+    }),
   {name: 'addUser', timeout: 3_000},
 );
 

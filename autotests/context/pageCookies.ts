@@ -1,8 +1,22 @@
 import {useContext} from 'e2ed';
 
-import type {Cookie} from 'e2ed/types';
+import type {ClearContext, Cookie, GetContext, SetContext} from 'e2ed/types';
+
+type Cookies = readonly Cookie[];
+
+const [get, set, clear] = useContext<Cookies>();
 
 /**
- * Get, set and clear page cookies, that will be added when navigating to the page.
+ * Get page cookies, that will be added when navigating to the page.
  */
-export const [getPageCookies, setPageCookies, clearPageCookies] = useContext<readonly Cookie[]>();
+export const getPageCookies: GetContext<Cookies> = get;
+
+/**
+ * Set page cookies, that will be added when navigating to the page.
+ */
+export const setPageCookies: SetContext<Cookies> = set;
+
+/**
+ * Clear page cookies, that will be added when navigating to the page.
+ */
+export const clearPageCookies: ClearContext = clear;

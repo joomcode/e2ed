@@ -26,7 +26,7 @@ function toJSON(this: object): string {
 export class Selector {
   readonly cssString: string;
 
-  private args?: readonly (number | string)[];
+  private args?: readonly (RegExp | number | string)[];
 
   private kind: 'css' | 'filter' | 'find' | 'nth' | 'parent' | 'withText';
 
@@ -194,7 +194,7 @@ export class Selector {
         return selector.getPlaywrightLocator().locator('xpath=..');
 
       case 'withText':
-        return selector.getPlaywrightLocator().filter({hasText: String(args[0])});
+        return selector.getPlaywrightLocator().filter({hasText: args[0] as RegExp | string});
 
       // no default
     }
@@ -240,10 +240,10 @@ export class Selector {
     return selector;
   }
 
-  withText(text: string): Selector {
+  withText(textOrRegExp: RegExp | string): Selector {
     const selector = new Selector(this.cssString);
 
-    selector.args = [text];
+    selector.args = [textOrRegExp];
     selector.kind = 'withText';
     selector.parentSelector = this;
 

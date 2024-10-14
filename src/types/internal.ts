@@ -48,10 +48,8 @@ export type {
   Method,
   Query,
   Request,
-  RequestKeyType,
   RequestWithUtcTimeInMs,
   Response,
-  ResponseKeyType,
   ResponseWithRequest,
   SameSite,
   SetCookieHeaderString,
@@ -113,12 +111,10 @@ export type {RunLabel, RunLabelObject} from './runLabel';
 export type {RawRunLabelObject} from './runLabel';
 export type {
   CreateSelector,
-  CreateSelectorByCss,
-  CreateSelectorFunctionsOptions,
+  CreateSelectorFunctionOptions,
   GetLocatorAttributeNameFn,
   Selector,
   SelectorCustomMethods,
-  SelectorFunctions,
 } from './selectors';
 /** @internal */
 export type {SelectorPropertyRetryData} from './selectors';
@@ -163,7 +159,6 @@ export type {
   Normalize,
   ObjectEntries,
   OptionalIfValueIncludeDefault,
-  ParamsKeyType,
   UnionToIntersection,
   UnwrapSet,
   Values,

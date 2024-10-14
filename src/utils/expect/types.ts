@@ -58,5 +58,5 @@ export type ExpectMethod = (this: Expect, ...args: readonly unknown[]) => Promis
 /**
  * All matchers.
  */
-// TODO: support LocatorAssertions, is Actual is a Selector
+// TODO: support LocatorAssertions, if Actual is a Selector
 export type Matchers<Actual> = AdditionalMatchers<Actual> & ReturnType<PlaywrightExpect>;

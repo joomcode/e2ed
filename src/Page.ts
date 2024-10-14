@@ -7,12 +7,7 @@ import {reloadDocument} from './utils/document';
 import {getPlaywrightPage} from './useContext';
 
 import type {PageRoute} from './PageRoute';
-import type {AsyncVoid, PageClassTypeArgs, ParamsKeyType, Url} from './types/internal';
-
-/**
- * Inner key for parameters type.
- */
-declare const PARAMS_KEY: ParamsKeyType;
+import type {AsyncVoid, PageClassTypeArgs, Url} from './types/internal';
 
 /**
  * Abstract page with base methods.
@@ -21,7 +16,8 @@ export abstract class Page<PageParams = undefined> {
   /**
    * Type of page parameters.
    */
-  declare readonly [PARAMS_KEY]: PageParams;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  declare readonly __PARAMS_KEY: PageParams;
 
   /**
    * Default maximum interval (in milliseconds) between requests.

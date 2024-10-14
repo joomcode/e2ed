@@ -1,9 +1,4 @@
-import {
-  createSelector,
-  createSelectorByCss,
-  htmlElementSelector,
-  locator,
-} from 'autotests/selectors';
+import {createSelector, htmlElementSelector, locator} from 'autotests/selectors';
 
 import type {Selector} from 'e2ed/types';
 
@@ -22,11 +17,7 @@ htmlElementSelector.find('body').findByLocatorId('id') satisfies Selector;
 
 // ok
 createSelector('id').findByLocatorId('id').find('body').findByLocatorId('id') satisfies Selector;
-// ok
-createSelectorByCss('id')
-  .findByLocatorId('id')
-  .find('body')
-  .findByLocatorId('id') satisfies Selector;
+
 // ok
 locator('id').findByLocatorId('id').find('body').findByLocatorId('id') satisfies Selector;
 
