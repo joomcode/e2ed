@@ -1,5 +1,27 @@
 # Changelog
 
+## [v0.18.15](https://github.com/joomcode/e2ed/tree/v0.18.15) (2024-10-17)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.14...v0.18.15)
+
+- [Merge pull request #92 from joomcode/fix/setmessage-error-in-ui-mode](https://github.com/joomcode/e2ed/commit/43ec29a938762223c7881c95a17b1c4c350d7349) ([uid11](https://github.com/uid11))
+
+  fix: `error.setMessage` method in UI-mode
+
+- [FI-1471 fix: `error.setMessage` method in UI-mode](https://github.com/joomcode/e2ed/commit/0868f8d8a58223ddbf05e19aed366d619669d6a8) ([uid11](https://github.com/uid11))
+
+  refactor: turn on `--isolatedDeclarations` TypeScript option
+
+  chore: update Playwright to 1.48.1
+
+  chore: update TypeScript to 5.6.3 and other `devDependencies`
+
+  fix: remove `createSelectorByCss` function and `htmlElementSelector` from API
+
+  fix: supports regexps in `withText` method of `Selector`
+
+  FI-1477 feat: add action `selectOption`
+
 ## [v0.18.14](https://github.com/joomcode/e2ed/tree/v0.18.14) (2024-10-05)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.13...v0.18.14)
