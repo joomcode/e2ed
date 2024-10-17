@@ -25,5 +25,6 @@ export type {
   MapLogPayloadInReport,
   Pack,
   SkipTests,
+  TestFunction,
   TestMeta,
 } from './types';

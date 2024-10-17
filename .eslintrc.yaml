@@ -187,7 +187,7 @@ rules:
     - {selector: [objectLiteralProperty, typeProperty], format: null, modifiers: [requiresQuotes]}
     - {selector: [classProperty, typeMethod], filter: '^toJSON$', format: null}
   '@typescript-eslint/no-import-type-side-effects': error
-  '@typescript-eslint/no-inferrable-types': error
+  '@typescript-eslint/no-inferrable-types': off
   '@typescript-eslint/no-invalid-void-type':
     [error, {allowInGenericTypeArguments: true, allowAsThisParameter: true}]
   '@typescript-eslint/no-loop-func': error

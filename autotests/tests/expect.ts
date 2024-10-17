@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
 import {test} from 'autotests';
-import {createSelectorByCss} from 'autotests/selectors';
+import {htmlElementSelector} from 'autotests/selectors';
 import {getFullPackConfig} from 'autotests/utils';
 import {expect} from 'e2ed';
 import {assertFunctionThrows, getTimeoutPromise} from 'e2ed/utils';
@@ -41,8 +41,6 @@ test('expect function works correctly', {meta: {testId: '16'}}, async () => {
   // eslint-disable-next-line @typescript-eslint/await-thenable
   await expect(1, 'should be an eslint error when we do not call the assertion method');
 
-  const htmlSelector = createSelectorByCss('html');
-
   // @ts-expect-error: expect function should not accept a selector as a actual value
-  await expect(htmlSelector, 'should be type error when actual value is a selector').ok();
+  await expect(htmlElementSelector, 'should be type error when actual value is a selector').ok();
 });

@@ -13,5 +13,4 @@ export type {
   StringHeaders,
   Url,
 } from './http';
-export type {RequestKeyType, ResponseKeyType} from './internalKeys';
 export type {StatusCode} from './statusCode';

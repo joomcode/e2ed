@@ -19,7 +19,7 @@ import type {
 /**
  * Extended Error class for e2ed.
  */
-export class E2edError extends Error {
+class E2edError extends Error {
   /**
    * Error message.
    */
@@ -73,13 +73,6 @@ export class E2edError extends Error {
   }
 
   /**
-   * Custom presentation of error for `nodejs` `inspect`.
-   */
-  [inspect.custom](): string {
-    return this.toString();
-  }
-
-  /**
    * Custom JSON presentation of error.
    */
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -97,3 +90,13 @@ export class E2edError extends Error {
     return `E2edError ${printedString}`;
   }
 }
+
+/**
+ * Custom presentation of error for `nodejs` `inspect`.
+ */
+// eslint-disable-next-line no-restricted-syntax
+E2edError.prototype[inspect.custom as unknown as 'toString'] = function custom(): string {
+  return this.toString();
+};
+
+export {E2edError};

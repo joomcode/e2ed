@@ -6,7 +6,7 @@ import {assertValueIsFalse} from '../asserts';
  * `true` if e2ed run in UI mode, and `false` otherwise.
  */
 // eslint-disable-next-line import/no-mutable-exports
-export let isUiMode = Boolean(e2edEnvironment[UI_MODE_VARIABLE_NAME]);
+export let isUiMode: boolean = Boolean(e2edEnvironment[UI_MODE_VARIABLE_NAME]);
 
 /**
  * Set current run environment before e2ed start.

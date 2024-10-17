@@ -5,7 +5,7 @@ import {MAX_STRING_LENGTH_IN_PRINTED_VALUE} from '../../constants/internal';
  */
 export const getStringTrimmedToMaxLength = (
   text: string,
-  maxStringLength = MAX_STRING_LENGTH_IN_PRINTED_VALUE,
+  maxStringLength: number = MAX_STRING_LENGTH_IN_PRINTED_VALUE,
 ): string => {
   if (text.length <= maxStringLength) {
     return text;

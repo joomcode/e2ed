@@ -1,23 +1,6 @@
 import {Route} from './Route';
 
-import type {
-  Method,
-  Request,
-  RequestKeyType,
-  Response,
-  ResponseKeyType,
-  Url,
-} from './types/internal';
-
-/**
- * Inner key for request type.
- */
-declare const REQUEST_KEY: RequestKeyType;
-
-/**
- * Inner key for response type.
- */
-declare const RESPONSE_KEY: ResponseKeyType;
+import type {Method, Request, Response, Url} from './types/internal';
 
 /**
  * Abstract route for API requests.
@@ -30,12 +13,14 @@ export abstract class ApiRoute<
   /**
    * Request type of API route.
    */
-  declare readonly [REQUEST_KEY]: SomeRequest;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  declare readonly __REQUEST_KEY: SomeRequest;
 
   /**
    * Response type of API route.
    */
-  declare readonly [RESPONSE_KEY]: SomeResponse;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  declare readonly __RESPONSE_KEY: SomeResponse;
 
   /**
    * Returns `true`, if the request body is in JSON format.

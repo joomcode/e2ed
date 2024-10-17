@@ -42,9 +42,9 @@ type ReplaceObjectSelectors<Obj extends object> = Readonly<{
 }>;
 
 /**
- * Options of `createSelectorFunctions` function.
+ * Options of `createSelectorFunction` function.
  */
-export type CreateSelectorFunctionsOptions = Readonly<{
+export type CreateSelectorFunctionOptions = Readonly<{
   getLocatorAttributeName: GetLocatorAttributeNameFn;
 }>;
 
@@ -57,11 +57,6 @@ export type GetLocatorAttributeNameFn = (this: void, parameter: string) => strin
  * Creates selector by locator and optional parameters.
  */
 export type CreateSelector = (this: void, cssString: string) => Selector;
-
-/**
- * Type of `createSelectorByCss` function.
- */
-export type CreateSelectorByCss = (this: void, cssSelectorString: string) => Selector;
 
 /**
  * Selector type (which replaces the DOM element wrapper).
@@ -104,15 +99,6 @@ export type SelectorCustomMethods = Readonly<{
 
   /** true if the element has the locator parameter. */
   hasLocatorParameter: (this: SelectorClass, parameter: string) => Promise<boolean>;
-}>;
-
-/**
- * Object with main functions for creating selectors and working with selectors.
- */
-export type SelectorFunctions = Readonly<{
-  createSelector: CreateSelector;
-  createSelectorByCss: CreateSelectorByCss;
-  htmlElementSelector: Selector;
 }>;
 
 /**

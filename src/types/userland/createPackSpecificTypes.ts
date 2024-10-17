@@ -2,6 +2,7 @@ import type {AnyPack, AnyPackParameters, FullPackConfigByPack, GetPackParameters
 import type {FullMocksConfig} from '../fullMocks';
 import type {MapBackendResponseToLog, MapLogPayload, MapLogPayloadInReport} from '../log';
 import type {LiteReport} from '../report';
+import type {TestFunction} from '../testRun';
 
 import type {UserlandHooks} from './userlandHooks';
 
@@ -34,4 +35,5 @@ export type CreatePackSpecificTypes<
   MapLogPayloadInConsole: MapLogPayload;
   MapLogPayloadInLogFile: MapLogPayload;
   MapLogPayloadInReport: MapLogPayloadInReport;
+  TestFunction: TestFunction<PackParameters['TestMeta']>;
 }>;

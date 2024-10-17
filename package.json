@@ -24,14 +24,14 @@
     "url": "git+https://github.com/joomcode/e2ed.git"
   },
   "dependencies": {
-    "@playwright/test": "1.47.2",
+    "@playwright/test": "1.48.1",
     "create-locator": "0.0.25",
     "get-modules-graph": "0.0.9",
     "globby": "11.1.0"
   },
   "devDependencies": {
-    "@playwright/browser-chromium": "1.47.2",
-    "@types/node": "22.7.4",
+    "@playwright/browser-chromium": "1.48.1",
+    "@types/node": "22.7.6",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
@@ -41,10 +41,10 @@
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
-    "eslint-plugin-typescript-sort-keys": "3.2.0",
+    "eslint-plugin-typescript-sort-keys": "3.3.0",
     "husky": "9.1.6",
     "prettier": "3.3.3",
-    "typescript": "5.6.2"
+    "typescript": "5.6.3"
   },
   "peerDependencies": {
     "@types/node": ">=20",

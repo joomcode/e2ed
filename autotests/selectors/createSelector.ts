@@ -1,9 +1,11 @@
-import {createSelectorFunctions} from 'e2ed/selectors';
+import {createSelectorFunction} from 'e2ed/selectors';
+
+import type {CreateSelector} from 'e2ed/types';
 
 /**
  * Main functions for creating selectors and working with selectors.
  */
-export const {createSelector, createSelectorByCss, htmlElementSelector} = createSelectorFunctions({
+export const createSelector: CreateSelector = createSelectorFunction({
   getLocatorAttributeName: (parameter) => {
     if (parameter === 'id') {
       return 'data-testid';

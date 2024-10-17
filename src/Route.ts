@@ -1,8 +1,6 @@
 import {SLASHES_AT_THE_END_REGEXP, SLASHES_AT_THE_START_REGEXP} from './constants/internal';
 
-import type {Method, ParamsKeyType, Url, ZeroOrOneArg} from './types/internal';
-
-declare const PARAMS_KEY: ParamsKeyType;
+import type {Method, Url, ZeroOrOneArg} from './types/internal';
 
 /**
  * Abstract route with base methods.
@@ -11,7 +9,8 @@ export abstract class Route<RouteParams> {
   /**
    * Type of route parameters.
    */
-  declare readonly [PARAMS_KEY]: RouteParams;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  declare readonly __PARAMS_KEY: RouteParams;
 
   /**
    * Immutable route parameters.

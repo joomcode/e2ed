@@ -2,14 +2,11 @@ import {getPlaywrightPage} from './page';
 
 import type {Page} from '@playwright/test';
 
+import type {Clear, Get, GetWithDefaultValue, Set} from './types';
+
 type Context<Type> = {contexts: Record<number, Type>};
 
 type PageWithCtx = Page & {ctx?: object};
-
-type Get<Type> = (this: void) => Type | undefined;
-type GetWithDefaultValue<Type> = (this: void) => Type;
-type Set<Type> = (this: void, value: Type) => void;
-type Clear = (this: void) => void;
 
 type UseContext = (<Type>() => [get: Get<Type>, set: Set<Type>, clear: Clear]) &
   (<Type>(defaultValue: Type) => [get: GetWithDefaultValue<Type>, set: Set<Type>, clear: Clear]);

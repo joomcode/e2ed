@@ -7,17 +7,18 @@ import {RunEnvironment} from './constants';
 /**
  * Run environment for current e2ed run.
  */
-export let runEnvironment = e2edEnvironment[RUN_ENVIRONMENT_VARIABLE_NAME] ?? RunEnvironment.Local;
+export let runEnvironment: RunEnvironment =
+  e2edEnvironment[RUN_ENVIRONMENT_VARIABLE_NAME] ?? RunEnvironment.Local;
 
 /**
  * `true`, if run e2ed in docker environment, and `false` otherwise.
  */
-export let isDockerRun = runEnvironment === RunEnvironment.Docker;
+export let isDockerRun: boolean = runEnvironment === RunEnvironment.Docker;
 
 /**
  * `true`, if run e2ed in local environment, and `false` otherwise.
  */
-export let isLocalRun = runEnvironment === RunEnvironment.Local;
+export let isLocalRun: boolean = runEnvironment === RunEnvironment.Local;
 
 /**
  * Set current run environment before e2ed start.

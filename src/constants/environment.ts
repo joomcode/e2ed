@@ -9,7 +9,7 @@ export const e2edEnvironment = process.env as E2edEnvironment;
 /**
  * `true` if e2ed run in debug mode, and `false` otherwise.
  */
-export const isDebug = Boolean(e2edEnvironment.E2ED_DEBUG);
+export const isDebug: boolean = Boolean(e2edEnvironment.E2ED_DEBUG);
 
 /**
  * Name of e2ed environment variable with path to pack.
