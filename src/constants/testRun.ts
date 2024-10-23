@@ -13,8 +13,8 @@ declare type TestRunTypesChecks = [
 
 /**
  * Main status of test run.
- * Failed if it have run error and passed if not.
- * Broken if the test failed and TestCafe restarted it themself.
+ * `Failed` if it have run error and passed if not.
+ * Probably should never be `Broken`.
  */
 export const enum TestRunStatus {
   Broken = 'broken',

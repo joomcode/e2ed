@@ -22,18 +22,29 @@ import type {
   UtcTimeInMs,
 } from '../../types/internal';
 
+import {test} from '@playwright/test';
+
 type Options = Readonly<{
+  beforeRetryTimeout: number | undefined;
   retryIndex: number;
   runId: RunId;
   testFn: TestFn;
   testStaticOptions: TestStaticOptions;
 }>;
 
+const additionalDurationToPlaywrightTestTimeoutInMs = 500;
+
 /**
  * Internal before test hook.
  * @internal
  */
-export const beforeTest = ({retryIndex, runId, testFn, testStaticOptions}: Options): void => {
+export const beforeTest = ({
+  beforeRetryTimeout,
+  retryIndex,
+  runId,
+  testFn,
+  testStaticOptions,
+}: Options): void => {
   const {options} = testStaticOptions;
 
   setMeta(options.meta);
@@ -48,6 +59,10 @@ export const beforeTest = ({retryIndex, runId, testFn, testStaticOptions}: Optio
     getFullPackConfig();
   const testIdleTimeout = options.testIdleTimeout ?? testIdleTimeoutFromConfig;
   const testTimeout = options.testTimeout ?? testTimeoutFromConfig;
+
+  test.setTimeout(
+    testTimeout + additionalDurationToPlaywrightTestTimeoutInMs + (beforeRetryTimeout ?? 0),
+  );
 
   setTestIdleTimeout(testIdleTimeout);
   setTestTimeout(testTimeout);

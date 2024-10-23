@@ -78,10 +78,11 @@ export const pack: Pack = {
   takeViewportScreenshotOnError: true,
   testFileGlobs: ['**/autotests/tests/**/*.ts'],
   testIdleTimeout: 8_000,
-  testTimeout: 60_000,
+  testTimeout: 15_000,
   userAgent,
   viewportHeight: 1080,
   viewportWidth: 1920,
+  waitBeforeRetry: () => 0,
   waitForAllRequestsComplete: {
     maxIntervalBetweenRequestsInMs: 500,
     timeout: 30_000,

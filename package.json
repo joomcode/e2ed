@@ -1,10 +1,10 @@
 {
   "name": "e2ed",
   "version": "0.18.15",
-  "description": "E2E testing framework over TestCafe",
+  "description": "E2E testing framework over Playwright",
   "keywords": [
     "E2E",
-    "TestCafe",
+    "Playwright",
     "testing"
   ],
   "author": "uid11",

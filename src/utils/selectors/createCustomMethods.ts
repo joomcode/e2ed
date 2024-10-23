@@ -7,7 +7,7 @@ import type {
 } from '../../types/internal';
 
 /**
- * Creates custom `e2ed` methods of selector (additional to selector's own methods from TestCafe).
+ * Creates custom `e2ed` methods of selector (additional to selector's own methods).
  * @internal
  */
 export const createCustomMethods = (

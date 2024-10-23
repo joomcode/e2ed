@@ -80,8 +80,9 @@ export abstract class Page<PageParams = undefined> {
    * Asserts that we are on the expected page by `isMatch` flage.
    * `isMatch` equals `true`, if url matches the page with given parameters, and `false` otherwise.
    */
-  assertPage(isMatch: boolean): AsyncVoid {
+  assertPage(isMatch: boolean, documentUrl: Url): AsyncVoid {
     assertValueIsTrue(isMatch, `the document url matches the page "${this.constructor.name}"`, {
+      documentUrl,
       page: this,
     });
   }

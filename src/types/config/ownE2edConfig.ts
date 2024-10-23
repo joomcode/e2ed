@@ -1,5 +1,7 @@
 import type {PlaywrightTestConfig} from '@playwright/test';
 
+import type {TestRunStatus} from '../../constants/internal';
+
 import type {FullMocksConfig} from '../fullMocks';
 import type {MapBackendResponseToLog, MapLogPayload, MapLogPayloadInReport} from '../log';
 import type {MaybePromise} from '../promise';
@@ -254,6 +256,19 @@ export type OwnE2edConfig<
    * Width of viewport of page in pixels.
    */
   viewportWidth: number;
+
+  /**
+   * Returns how many milliseconds `e2ed` should wait before running test (for retries).
+   */
+  waitBeforeRetry: (
+    this: void,
+    options: Readonly<{
+      previousError: string | undefined;
+      retryIndex: number;
+      status: TestRunStatus;
+      testStaticOptions: TestStaticOptions<TestMeta>;
+    }>,
+  ) => MaybePromise<number>;
 
   /**
    * Group of settings for the `waitForAllRequestsComplete` function.

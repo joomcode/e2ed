@@ -5,8 +5,6 @@ export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';
 export type {ClientFunction} from './clientFunction';
-/** @internal */
-export type {ClientFunctionWrapperResult, MaybeTestCafeError} from './clientFunction';
 export type {
   AnyPack,
   BrowserName,

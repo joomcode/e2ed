@@ -369,6 +369,9 @@ This parameter can be overridden in the test-specific options.
 
 `viewportWidth: number`: width of viewport of page in pixels.
 
+`waitBeforeRetry: (options: Options) => number`: returns how many milliseconds `e2ed`
+should wait before running test (for retries).
+
 `waitForAllRequestsComplete.maxIntervalBetweenRequestsInMs: number`: default maximum interval
 (in milliseconds) between requests for `waitForAllRequestsComplete` function.
 If there are no new requests for more than this interval, then the promise

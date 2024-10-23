@@ -1,10 +1,11 @@
-import {TestRunStatus} from '../../constants/internal';
+import {LogEventType, TestRunStatus} from '../../constants/internal';
 import {setTestRunPromise} from '../../context/testRunPromise';
 import {getTestTimeout} from '../../context/testTimeout';
 
 import {getFullPackConfig} from '../config';
 import {getTestRunEvent} from '../events';
 import {enableFullMocks} from '../fullMocks';
+import {log} from '../log';
 import {getPromiseWithResolveAndReject} from '../promise';
 
 import type {PlaywrightTestArgs} from '@playwright/test';
@@ -14,6 +15,7 @@ import type {RunId, TestStaticOptions} from '../../types/internal';
 const delayForTestRunPromiseResolutionAfterTestTimeoutInMs = 100;
 
 type Options = Readonly<{
+  beforeRetryTimeout: number | undefined;
   retryIndex: number;
   runId: RunId;
   testController: PlaywrightTestArgs;
@@ -25,6 +27,7 @@ type Options = Readonly<{
  * @internal
  */
 export const runTestFn = async ({
+  beforeRetryTimeout,
   retryIndex,
   runId,
   testController,
@@ -39,6 +42,10 @@ export const runTestFn = async ({
     );
 
   setTestRunPromise(testRunPromise);
+
+  if (beforeRetryTimeout !== undefined) {
+    log(`Waited for ${beforeRetryTimeout}ms before running this retry`, LogEventType.InternalUtil);
+  }
 
   const {fullMocks} = getFullPackConfig();
 

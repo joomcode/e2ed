@@ -34,7 +34,7 @@ export const assertPage = async <SomePageClass extends AnyPageClassType>(
     LogEventType.InternalAction,
   );
 
-  await page.assertPage(isMatch);
+  await page.assertPage(isMatch, documentUrl);
 
   await page.afterAssertPage?.();
 

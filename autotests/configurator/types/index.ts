@@ -16,6 +16,7 @@ export type {
   MapLogPayloadInReport,
   Pack,
   TestFunction,
+  WaitBeforeRetry,
 } from './packSpecific';
 export type {SkipTests} from './skipTests';
 export type {TestMeta} from './testMeta';

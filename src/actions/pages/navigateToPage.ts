@@ -46,7 +46,7 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
   const documentUrl = await getDocumentUrl();
   const isMatch = route.isMatchUrl(documentUrl);
 
-  await page.assertPage(isMatch);
+  await page.assertPage(isMatch, documentUrl);
 
   await page.afterAssertPage?.();
 

@@ -27,4 +27,5 @@ export type {
   SkipTests,
   TestFunction,
   TestMeta,
+  WaitBeforeRetry,
 } from './types';

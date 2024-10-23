@@ -1,17 +1,18 @@
 import {execFile} from 'node:child_process';
-import {readdir, readFile} from 'node:fs/promises';
+import {readdir} from 'node:fs/promises';
 import {join} from 'node:path';
 
 import {
   AMOUNT_OF_PARALLEL_OPEN_FILES,
   EVENTS_DIRECTORY_PATH,
   INTERNAL_REPORTS_DIRECTORY_PATH,
-  READ_FILE_OPTIONS,
 } from '../../constants/internal';
 
 import {assertValueIsDefined, assertValueIsTrue} from '../asserts';
 import {generalLog} from '../generalLog';
 import {getDurationWithUnits} from '../getDurationWithUnits';
+
+import {readEventFromFile} from './readEventFromFile';
 
 import type {FullTestRun, UtcTimeInMs} from '../../types/internal';
 
@@ -43,7 +44,7 @@ export const readEventsFromFiles = async (
     fileIndex < newEventFiles.length;
     fileIndex += AMOUNT_OF_PARALLEL_OPEN_FILES
   ) {
-    const readPromises: Promise<Readonly<{fileName: string; text: string}>>[] = [];
+    const readPromises: Promise<Readonly<{fileName: string; text: string}> | undefined>[] = [];
 
     for (
       let index = fileIndex;
@@ -58,13 +59,14 @@ export const readEventsFromFiles = async (
         newEventFilesLength: newEventFiles.length,
       });
 
-      const filePath = join(EVENTS_DIRECTORY_PATH, fileName);
-      const promise = readFile(filePath, READ_FILE_OPTIONS).then((text) => ({fileName, text}));
+      const promise = readEventFromFile(fileName).then((maybeText) =>
+        maybeText === undefined ? undefined : {fileName, text: maybeText},
+      );
 
       readPromises.push(promise);
     }
 
-    const filesWithNames = await Promise.all(readPromises);
+    const filesWithNames = (await Promise.all(readPromises)).filter((value) => value !== undefined);
 
     for (const {fileName, text} of filesWithNames) {
       try {
