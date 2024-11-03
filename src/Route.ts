@@ -25,7 +25,7 @@ export abstract class Route<RouteParams> {
    * Returns route params from the passed url.
    * @throws {Error} If the route does not match on the url.
    */
-  static getParamsFromUrl?(url: Url, method?: Method): unknown;
+  static getParamsFromUrlOrThrow?(url: Url, method?: Method): unknown;
 
   /**
    * Returns the url of the route.

@@ -14,7 +14,7 @@ import type {FullMocksRouteParams, Url} from '../../types/internal';
  * @internal
  */
 export class FullMocksRoute extends ApiRoute<FullMocksRouteParams> {
-  static override getParamsFromUrl(url: Url): FullMocksRouteParams {
+  static override getParamsFromUrlOrThrow(url: Url): FullMocksRouteParams {
     const {fullMocks: fullMocksConfig} = getFullPackConfig();
     const fullMocksState = getFullMocksState();
 

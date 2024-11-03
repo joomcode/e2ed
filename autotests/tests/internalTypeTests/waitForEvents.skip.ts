@@ -63,7 +63,7 @@ void waitForRequestToRoute(AddUser, ({delay}, {requestBody, url}) => {
     request.requestBody.job === 'foo' && 'delay' in routeParams && routeParams.delay > 0,
 );
 
-// @ts-expect-error: waitForRequestToRoute does not accept routes without `getParamsFromUrl` method
+// @ts-expect-error: waitForRequestToRoute does not accept routes without `getParamsFromUrlOrThrow` method
 void waitForRequestToRoute(GetUser);
 
 // ok
@@ -84,5 +84,5 @@ void waitForResponseToRoute(AddUser, ({delay}, {responseBody, request: {requestB
     routeParams.delay > 0,
 );
 
-// @ts-expect-error: waitForResponseToRoute does not accept routes without `getParamsFromUrl` method
+// @ts-expect-error: waitForResponseToRoute does not accept routes without `getParamsFromUrlOrThrow` method
 void waitForResponseToRoute(GetUser);

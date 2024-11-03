@@ -18,7 +18,7 @@ export class CreateProduct extends ApiRoute<
   ApiCreateProductRequest,
   ApiCreateProductResponse
 > {
-  static override getParamsFromUrl(url: Url): Params {
+  static override getParamsFromUrlOrThrow(url: Url): Params {
     const urlObject = new URL(url);
 
     assertValueIsTrue(

@@ -1,6 +1,7 @@
 import {LogEventType} from '../../constants/internal';
-import {assertValueIsDefined, assertValueIsUndefined} from '../../utils/asserts';
+import {assertValueIsTrue} from '../../utils/asserts';
 import {getFullPackConfig} from '../../utils/config';
+import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {getRouteInstanceFromUrl} from '../../utils/getRouteInstanceFromUrl';
@@ -53,7 +54,9 @@ export const waitForResponseToRoute = async <
     LogEventType.InternalAction,
   );
 
-  let routeParams: RouteParams | undefined;
+  const sentinelValue: unique symbol = Symbol('sentinel value');
+
+  let routeParams: RouteParams | typeof sentinelValue = sentinelValue;
 
   const predicateForResponse: ResponsePredicate<SomeRequest, SomeResponse> = async (response) => {
     const {request} = response;
@@ -71,7 +74,7 @@ export const waitForResponseToRoute = async <
       return false;
     }
 
-    assertValueIsUndefined(routeParams, 'routeParams is not defined');
+    assertValueIsTrue(routeParams === sentinelValue, 'routeParams was not setted');
 
     routeParams = currentRouteParams;
 
@@ -80,7 +83,9 @@ export const waitForResponseToRoute = async <
 
   const response = await waitForResponse(predicateForResponse, {skipLogs: true, timeout});
 
-  assertValueIsDefined(routeParams, 'routeParams is defined', {predicate, response});
+  if (routeParams === sentinelValue) {
+    throw new E2edError('routeParams is not setted', {predicate, response});
+  }
 
   const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
 

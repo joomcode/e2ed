@@ -10,7 +10,7 @@ const availableCpuCount = availableParallelism();
 let previousCores = cpus();
 let previousCpuUsage = process.cpuUsage();
 let previousTimeInMs = Date.now();
-let timeoutInterval: NodeJS.Timeout;
+let timeoutObject: NodeJS.Timeout;
 
 const logResourceUsage = (): void => {
   const cores = cpus();
@@ -65,7 +65,7 @@ const logResourceUsage = (): void => {
  * @internal
  */
 export const startResourceUsageReading = (resourceUsageReadingInternal: number): void => {
-  assertValueIsUndefined(timeoutInterval, 'timeoutInterval in not defined', {
+  assertValueIsUndefined(timeoutObject, 'timeoutObject in not defined', {
     resourceUsageReadingInternal,
   });
 
@@ -73,7 +73,7 @@ export const startResourceUsageReading = (resourceUsageReadingInternal: number):
     return;
   }
 
-  timeoutInterval = setInterval(logResourceUsage, resourceUsageReadingInternal);
+  timeoutObject = setInterval(logResourceUsage, resourceUsageReadingInternal);
 
-  timeoutInterval.unref();
+  timeoutObject.unref();
 };

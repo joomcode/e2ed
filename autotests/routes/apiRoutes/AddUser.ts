@@ -12,7 +12,7 @@ const pathStart = '/api/users';
  * Client API route for adding user-worker.
  */
 export class AddUser extends ApiRoute<Params, ApiAddUserRequest, ApiAddUserResponse> {
-  static override getParamsFromUrl(url: Url): Params {
+  static override getParamsFromUrlOrThrow(url: Url): Params {
     const urlObject = new URL(url);
 
     assertValueIsTrue(

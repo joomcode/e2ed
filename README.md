@@ -31,6 +31,13 @@ Install the latest version of `e2ed` in devDependencies with the exact version:
 npm install e2ed --save-dev --save-exact
 ```
 
+Install [Playwright](https://playwright.dev/) [browsers](https://playwright.dev/docs/browsers)
+(only `Chromium` for now):
+
+```sh
+npx e2ed-install-browsers
+```
+
 ### Initialize
 
 Initialize `e2ed` in the project; this will add an `autotests` directory
@@ -368,6 +375,9 @@ This parameter can be overridden in the test-specific options.
 `viewportHeight: number`: height of viewport of page in pixels.
 
 `viewportWidth: number`: width of viewport of page in pixels.
+
+`waitBeforeRetry: (options: Options) => number`: returns how many milliseconds `e2ed`
+should wait before running test (for retries).
 
 `waitForAllRequestsComplete.maxIntervalBetweenRequestsInMs: number`: default maximum interval
 (in milliseconds) between requests for `waitForAllRequestsComplete` function.

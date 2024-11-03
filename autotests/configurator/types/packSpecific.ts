@@ -23,4 +23,5 @@ export type MapLogPayloadInConsole = PackSpecificTypes['MapLogPayloadInConsole']
 export type MapLogPayloadInLogFile = PackSpecificTypes['MapLogPayloadInLogFile'];
 export type MapLogPayloadInReport = PackSpecificTypes['MapLogPayloadInReport'];
 export type TestFunction = PackSpecificTypes['TestFunction'];
+export type WaitBeforeRetry = PackSpecificTypes['WaitBeforeRetry'];
 export type {Pack};

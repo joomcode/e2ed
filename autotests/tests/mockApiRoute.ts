@@ -37,7 +37,7 @@ test(
 
     const fetchUrl = `https://reqres.in/api/product/${productId}?size=${product.size}` as Url;
 
-    const productRouteParams = CreateProductRoute.getParamsFromUrl(fetchUrl);
+    const productRouteParams = CreateProductRoute.getParamsFromUrlOrThrow(fetchUrl);
 
     const productRouteFromUrl = new CreateProductRoute(productRouteParams);
 

@@ -77,7 +77,7 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_00
   const searchPage = await assertPage(Search, {searchQuery});
 
   /**
-   * Do not use the following pageParams and url (by getParamsFromUrl) checks in your code.
+   * Do not use the following pageParams and url (by getParamsFromUrlOrThrow) checks in your code.
    * These are e2ed internal checks. Use `assertPage` instead.
    */
   await expect(searchPage.pageParams, 'pageParams is correct after assertPage').eql({
@@ -86,7 +86,7 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_00
 
   const url = await getDocumentUrl();
 
-  await expect(SearchRoute.getParamsFromUrl(url), 'page url has expected params').eql({
+  await expect(SearchRoute.getParamsFromUrlOrThrow(url), 'page url has expected params').eql({
     searchQuery,
   });
 

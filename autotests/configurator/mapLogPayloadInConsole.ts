@@ -19,7 +19,6 @@ export const mapLogPayloadInConsole: MapLogPayloadInConsole = (message, payload)
 
   if (
     message.startsWith('Caught an error when running tests in retry') ||
-    message.startsWith('Warning from TestCafe:') ||
     message.startsWith('Usage:')
   ) {
     return payload;

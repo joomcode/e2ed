@@ -170,7 +170,6 @@ export class Selector {
     return result;
   }
 
-  // eslint-disable-next-line @typescript-eslint/consistent-return
   getPlaywrightLocator(): PlaywrightLocator {
     const args = this.args!;
     const selector = this.parentSelector!;

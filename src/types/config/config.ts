@@ -11,18 +11,6 @@ import type {WithDoBeforePack} from './doBeforePack';
 import type {OwnE2edConfig} from './ownE2edConfig';
 
 /**
- * Userland part of TestCafe config.
- */
-type UserlandTestCafeConfig = Readonly<{
-  assertionTimeout: number;
-  concurrency: number;
-  pageRequestTimeout: number;
-  port1: number;
-  port2: number;
-  selectorTimeout: number;
-}>;
-
-/**
  * Supported browsers.
  */
 export type BrowserName = 'chromium' | 'firefox' | 'webkit';
@@ -69,5 +57,12 @@ export type UserlandPackWithoutDoBeforePack<
   CustomReportProperties = CustomReportPropertiesPlaceholder,
   SkipTests = SkipTestsPlaceholder,
   TestMeta = TestMetaPlaceholder,
-> = UserlandTestCafeConfig &
+> = Readonly<{
+  assertionTimeout: number;
+  concurrency: number;
+  pageRequestTimeout: number;
+  port1: number;
+  port2: number;
+  selectorTimeout: number;
+}> &
   OwnE2edConfig<CustomPackProperties, CustomReportProperties, SkipTests, TestMeta>;
