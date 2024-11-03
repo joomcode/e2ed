@@ -1,5 +1,36 @@
 # Changelog
 
+## [v0.18.16](https://github.com/joomcode/e2ed/tree/v0.18.16) (2024-11-03)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.15...v0.18.16)
+
+- [Merge pull request #93 from joomcode/feat/support-waitings-before-retries](https://github.com/joomcode/e2ed/commit/c68c9c423f6fb2cc59b5045894401f9367580e62) ([uid11](https://github.com/uid11))
+
+  feat: support waitings before retries
+
+- [chore: update Playwright to 1.48.2](https://github.com/joomcode/e2ed/commit/33278fa98750915a3cc2747fb53c60db96901b49) ([uid11](https://github.com/uid11))
+
+  chore: update `@types/node`
+
+- [FI-1506 feat: add bin-command `e2ed-install-browsers`](https://github.com/joomcode/e2ed/commit/058fb2a2b33e672a294e28077eda4c34fd1ec4a4) ([uid11](https://github.com/uid11))
+- [FI-1485 fix: `waitForRequestToRoute` when `routeParams` = `undefined`](https://github.com/joomcode/e2ed/commit/d15265ca49effbf1d1d895638dc85cbaefd3fe89) ([uid11](https://github.com/uid11))
+- [FI-1484 feat: rename `getParamsFromUrl` to `getParamsFromUrlOrThrow`](https://github.com/joomcode/e2ed/commit/1b32763ee8f13d8ba8d400b1545825d871ed3da2) ([uid11](https://github.com/uid11))
+
+  fix: test timeout and interrupt timeout during `waitBeforeRetry`
+
+- [FI-1498 feat: `pressKey` can receive selector](https://github.com/joomcode/e2ed/commit/0ae2c510e397f788530d3a49446e51a174550060) ([uid11](https://github.com/uid11))
+- [FI-1432 feat: support waitings before retries](https://github.com/joomcode/e2ed/commit/b042b435a99bf5b69a987cc8b922d6af3022b916) ([uid11](https://github.com/uid11))
+
+  fix: remove references on TestCafe
+
+  fix: set actual timeout of tests for Playwright engine
+
+  fix: turn off unnecessary rule `@typescript-eslint/consistent-return`
+
+  feat: add `documentUrl` argument to `assertPage` method of pages
+
+  fix: restore `fullMocks` fixture for internal test of "full mocks"
+
 ## [v0.18.15](https://github.com/joomcode/e2ed/tree/v0.18.15) (2024-10-17)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.14...v0.18.15)
