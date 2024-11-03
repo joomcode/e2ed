@@ -35,10 +35,10 @@ void mockApiRoute(Main, apiMockFunction);
 // @ts-expect-error: unmockApiRoute require API route as first argument
 void unmockApiRoute(Main);
 
-// @ts-expect-error: mockApiRoute require API route with static method getParamsFromUrl
+// @ts-expect-error: mockApiRoute require API route with static method getParamsFromUrlOrThrow
 void mockApiRoute(CreateDevice, apiMockFunction);
 
-// @ts-expect-error: unmockApiRoute require API route with static method getParamsFromUrl
+// @ts-expect-error: unmockApiRoute require API route with static method getParamsFromUrlOrThrow
 void unmockApiRoute(CreateDevice);
 
 // ok

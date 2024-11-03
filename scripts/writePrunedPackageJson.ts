@@ -1,5 +1,5 @@
 /**
- * @file Generates and writes pruned lightweight package.json for npm package.
+ * @file Generates and writes pruned lightweight `package.json` for npm package.
  */
 
 import {writeFileSync} from 'node:fs';

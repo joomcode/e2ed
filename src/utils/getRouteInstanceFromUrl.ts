@@ -9,9 +9,9 @@ type Return<RouteParams> =
 
 /**
  * Get route instance and route params from url and method by route class.
- * @throws {Error} If `url` accepted without errors by `getParamsFromUrl`,
+ * @throws {Error} If `url` accepted without errors by `getParamsFromUrlOrThrow`,
  * but not match by `isMatchUrl` method.
- * If `url` not accepted by `getParamsFromUrl`, returns `undefined`.
+ * If `url` not accepted by `getParamsFromUrlOrThrow`, returns `undefined`.
  * @internal
  */
 export const getRouteInstanceFromUrl = <RouteParams>(
@@ -22,7 +22,7 @@ export const getRouteInstanceFromUrl = <RouteParams>(
   let routeParams: RouteParams | undefined;
 
   try {
-    routeParams = Route.getParamsFromUrl(url) as RouteParams;
+    routeParams = Route.getParamsFromUrlOrThrow(url) as RouteParams;
     route = new Route(routeParams);
   } catch {
     return undefined;
@@ -30,7 +30,7 @@ export const getRouteInstanceFromUrl = <RouteParams>(
 
   if (route.isMatchUrl(url) !== true) {
     throw new E2edError(
-      `Inconsistency in "${Route.name}" route: isMatchUrl does not accept url accepted without errors by getParamsFromUrl`,
+      `Inconsistency in "${Route.name}" route: isMatchUrl does not accept url accepted without errors by getParamsFromUrlOrThrow`,
       {route, url},
     );
   }

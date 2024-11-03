@@ -32,7 +32,7 @@ type Options = Readonly<{
   testStaticOptions: TestStaticOptions;
 }>;
 
-const additionalDurationToPlaywrightTestTimeoutInMs = 500;
+const additionToPlaywrightTestTimeout = 500;
 
 /**
  * Internal before test hook.
@@ -60,9 +60,7 @@ export const beforeTest = ({
   const testIdleTimeout = options.testIdleTimeout ?? testIdleTimeoutFromConfig;
   const testTimeout = options.testTimeout ?? testTimeoutFromConfig;
 
-  test.setTimeout(
-    testTimeout + additionalDurationToPlaywrightTestTimeoutInMs + (beforeRetryTimeout ?? 0),
-  );
+  test.setTimeout(testTimeout + additionToPlaywrightTestTimeout + (beforeRetryTimeout ?? 0));
 
   setTestIdleTimeout(testIdleTimeout);
   setTestTimeout(testTimeout);

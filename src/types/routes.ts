@@ -16,7 +16,7 @@ export type ApiRouteClassType<
 };
 
 /**
- * API Route class with static method getParamsFromUrl.
+ * API Route class with static method getParamsFromUrlOrThrow.
  */
 export type ApiRouteClassTypeWithGetParamsFromUrl<
   RouteParams = Any,
@@ -24,5 +24,5 @@ export type ApiRouteClassTypeWithGetParamsFromUrl<
   SomeResponse extends Response = Response,
 > = ApiRouteClassType<RouteParams, SomeRequest, SomeResponse> &
   Readonly<{
-    getParamsFromUrl: Exclude<(typeof ApiRoute)['getParamsFromUrl'], undefined>;
+    getParamsFromUrlOrThrow: Exclude<(typeof ApiRoute)['getParamsFromUrlOrThrow'], undefined>;
   }>;

@@ -47,7 +47,7 @@ export const runPackWithRetries = async (): Promise<void> => {
 
     endE2ed(EndE2edReason.RetriesCycleEnded);
   } catch (error) {
-    generalLog('Caught an error on running testso', {
+    generalLog('Caught an error on running test', {
       error,
       retriesState: truncateRetriesStateForLogs(retriesState),
     });

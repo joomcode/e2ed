@@ -1,10 +1,15 @@
-import {assertValueIsTrue} from '../asserts';
 import {getFullPackConfig} from '../config';
-import {getTestRunEventFileName, readEventFromFile} from '../fs';
+import {getTestRunEventFileName, readEventFromFile, writeLogEventTime} from '../fs';
 import {generalLog} from '../generalLog';
 import {getTimeoutPromise} from '../promise';
 
+import {getPreviousRunId} from './getPreviousRunId';
+
 import type {FullTestRun, RunId, TestStaticOptions} from '../../types/internal';
+
+import {test} from '@playwright/test';
+
+const additionToTimeout = 500;
 
 /**
  * Waits before running test for some time from pack config (for retries).
@@ -14,29 +19,11 @@ export const waitBeforeRetry = async (
   runId: RunId,
   testStaticOptions: TestStaticOptions,
 ): Promise<number | undefined> => {
-  const indexOfRetryIndex = runId.lastIndexOf('-');
+  const {previousRunId, retryIndex} = getPreviousRunId(runId);
 
-  assertValueIsTrue(
-    indexOfRetryIndex > 0 && indexOfRetryIndex < runId.length - 1,
-    'runId has dash',
-    {runId, testStaticOptions},
-  );
-
-  const retryIndex = Number(runId.slice(indexOfRetryIndex + 1));
-
-  assertValueIsTrue(
-    Number.isInteger(retryIndex) && retryIndex > 0,
-    'retryIndex from runId is correct',
-    {runId, testStaticOptions},
-  );
-
-  const previousRetryIndex = retryIndex - 1;
-
-  if (previousRetryIndex < 1) {
+  if (previousRunId === undefined) {
     return;
   }
-
-  const previousRunId = `${runId.slice(0, indexOfRetryIndex)}-${previousRetryIndex}` as RunId;
 
   const fileName = getTestRunEventFileName(previousRunId);
   const fileText = await readEventFromFile(fileName);
@@ -55,7 +42,7 @@ export const waitBeforeRetry = async (
     const fullTestRun = JSON.parse(fileText) as FullTestRun;
 
     const {runError, status} = fullTestRun;
-    const {waitBeforeRetry: waitBeforeRetryFromConfig} = getFullPackConfig();
+    const {testIdleTimeout, waitBeforeRetry: waitBeforeRetryFromConfig} = getFullPackConfig();
 
     const previousError = runError === undefined ? undefined : String(runError);
 
@@ -70,7 +57,17 @@ export const waitBeforeRetry = async (
       return;
     }
 
+    test.setTimeout(timeoutInMs + additionToTimeout);
+
+    const timeoutObject = setInterval(() => {
+      void writeLogEventTime();
+    }, testIdleTimeout);
+
+    timeoutObject.unref();
+
     await getTimeoutPromise(timeoutInMs);
+
+    clearInterval(timeoutObject);
 
     return timeoutInMs;
   } catch (error) {
