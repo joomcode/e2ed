@@ -5,6 +5,7 @@ import {getTestTimeout} from '../../context/testTimeout';
 import {getFullPackConfig} from '../config';
 import {getTestRunEvent} from '../events';
 import {enableFullMocks} from '../fullMocks';
+import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
 import {getPromiseWithResolveAndReject} from '../promise';
 
@@ -44,7 +45,9 @@ export const runTestFn = async ({
   setTestRunPromise(testRunPromise);
 
   if (beforeRetryTimeout !== undefined) {
-    log(`Waited for ${beforeRetryTimeout}ms before running this retry`, LogEventType.InternalUtil);
+    const timeoutWithUnits = getDurationWithUnits(beforeRetryTimeout);
+
+    log(`Waited for ${timeoutWithUnits} before running this retry`, LogEventType.InternalUtil);
   }
 
   const {fullMocks} = getFullPackConfig();
