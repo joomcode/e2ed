@@ -31,6 +31,13 @@ Install the latest version of `e2ed` in devDependencies with the exact version:
 npm install e2ed --save-dev --save-exact
 ```
 
+Install [Playwright](https://playwright.dev/) [browsers](https://playwright.dev/docs/browsers)
+(only `Chromium` for now):
+
+```sh
+npx e2ed-install-browsers
+```
+
 ### Initialize
 
 Initialize `e2ed` in the project; this will add an `autotests` directory
