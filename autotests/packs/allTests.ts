@@ -67,7 +67,7 @@ export const pack: Pack = {
   maxRetriesCountInDocker: 3,
   overriddenConfigFields: null,
   packTimeout: packTimeoutInMinutes * msInMinute,
-  pageRequestTimeout: 30_000,
+  pageRequestTimeout: 7_000,
   pageStabilizationInterval: 500,
   pathToScreenshotsDirectoryForReport: './screenshots',
   port1: 1337,

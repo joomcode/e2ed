@@ -49,5 +49,6 @@ export {
   waitForRequestToRoute,
   waitForResponse,
   waitForResponseToRoute,
+  waitForStartOfPageLoad,
   waitForTimeout,
 } from './waitFor';
