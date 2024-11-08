@@ -1,5 +1,6 @@
 export {waitForAllRequestsComplete} from './waitForAllRequestsComplete';
 export {waitForInterfaceStabilization} from './waitForInterfaceStabilization';
+export {waitForNewTab} from './waitForNewTab';
 export {waitForRequest} from './waitForRequest';
 export {waitForRequestToRoute} from './waitForRequestToRoute';
 export {waitForResponse} from './waitForResponse';

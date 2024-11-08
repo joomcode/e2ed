@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
 
+export type {ClearContext, GetContext, GetWithDefaultValueContext, SetContext} from '../useContext';
 export type {WithStabilizationInterval} from './actions';
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual, IsReadonlyKey} from './checks';
@@ -120,6 +121,9 @@ export type {IsTestSkippedResult} from './skipTest';
 export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';
 export type {StringForLogs} from './string';
+export type {Tab} from './tab';
+/** @internal */
+export type {InternalTab} from './tab';
 export type {
   LiteTestRun,
   RejectTestRun,

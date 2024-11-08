@@ -38,13 +38,16 @@ export {setCookies} from './setCookies';
 export {setFilesToUpload} from './setFilesToUpload';
 export {setHeadersAndNavigateToUrl} from './setHeadersAndNavigateToUrl';
 export {switchToIframe} from './switchToIframe';
+export {switchToMainTab} from './switchToMainTab';
 export {switchToMainWindow} from './switchToMainWindow';
+export {switchToTab} from './switchToTab';
 export {takeElementScreenshot} from './takeElementScreenshot';
 export {takeScreenshot} from './takeScreenshot';
 export {typeText} from './typeText';
 export {
   waitForAllRequestsComplete,
   waitForInterfaceStabilization,
+  waitForNewTab,
   waitForRequest,
   waitForRequestToRoute,
   waitForResponse,
