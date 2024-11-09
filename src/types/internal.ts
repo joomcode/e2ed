@@ -137,7 +137,7 @@ export type {
   TestStaticOptions,
 } from './testRun';
 /** @internal */
-export type {FullTestRun, Test} from './testRun';
+export type {FullTestRun, RunTest, Test, TestUnit} from './testRun';
 export type {MergeTuples, TupleRest} from './tuples';
 export type {
   CloneWithoutUndefinedProperties,
