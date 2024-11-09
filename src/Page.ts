@@ -1,5 +1,7 @@
 // eslint-disable-next-line import/no-internal-modules
 import {navigateToUrl} from './actions/navigateToUrl';
+// eslint-disable-next-line import/no-internal-modules
+import {waitForStartOfPageLoad} from './actions/waitFor/waitForStartOfPageLoad';
 import {CREATE_PAGE_TOKEN} from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
 import {getFullPackConfig} from './utils/config';
@@ -118,8 +120,12 @@ export abstract class Page<PageParams = undefined> {
   /**
    * Reloads the page.
    */
-  reloadPage(): Promise<void> {
-    return reloadDocument();
+  async reloadPage(): Promise<void> {
+    const startOfPageLoad = waitForStartOfPageLoad();
+
+    await reloadDocument();
+
+    await startOfPageLoad;
   }
 
   /**

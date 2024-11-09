@@ -6,15 +6,18 @@ const [get, set, clear] = useContext<FrameLocator>();
 
 /**
  * Get frame context.
+ * @internal
  */
 export const getFrameContext: GetContext<FrameLocator> = get;
 
 /**
  * Set frame context.
+ * @internal
  */
 export const setFrameContext: SetContext<FrameLocator> = set;
 
 /**
  * Clear frame context.
+ * @internal
  */
 export const clearFrameContext: ClearContext = clear;

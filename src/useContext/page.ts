@@ -1,22 +1,20 @@
-import {AsyncLocalStorage} from 'node:async_hooks';
+import {getTab} from '../context/tab';
 
-import {assertValueIsDefined} from '../utils/asserts';
+import {getInternalPlaywrightPage} from './internalPage';
 
 import type {Page} from '@playwright/test';
 
-/**
- * Async local storage for `page` of current test.
- * @internal
- */
-export const pageStorage = new AsyncLocalStorage<Page>();
+import type {InternalTab} from '../types/internal';
 
 /**
  * Get `page` object from context of current test.
  */
 export const getPlaywrightPage = (): Page => {
-  const maybePage = pageStorage.getStore();
+  const tab = getTab();
 
-  assertValueIsDefined(maybePage, 'maybePage is defined');
+  if (tab !== undefined) {
+    return (tab as InternalTab).page;
+  }
 
-  return maybePage;
+  return getInternalPlaywrightPage();
 };

@@ -11,14 +11,18 @@ import {
   takeElementScreenshot,
   waitForRequest,
   waitForResponse,
+  waitForStartOfPageLoad,
 } from 'e2ed/actions';
 import {OK_STATUS_CODE} from 'e2ed/constants';
 import {assertFunctionThrows, getDocumentUrl} from 'e2ed/utils';
+
+import type {Url} from 'e2ed/types';
 
 const testScrollValue = 200;
 const language = 'en';
 const searchQuery = 'foo';
 
+// eslint-disable-next-line max-statements
 test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_000}, async () => {
   await scroll(0, testScrollValue);
 
@@ -35,7 +39,15 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_00
     'dynamic custom pack properties is correct',
   ).gt(0);
 
+  const urlObjectPromise = waitForStartOfPageLoad();
+
   const mainPage = await navigateToPage(Main, {language});
+
+  const urlObject = await urlObjectPromise;
+
+  await expect(getDocumentUrl(), 'waitForStartOfPageLoad returns correct url object').eql(
+    urlObject.href as Url,
+  );
 
   await expect(mainPage.pageParams, 'pageParams is correct after navigateToPage').eql({
     language,
@@ -52,6 +64,8 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_00
   await assertFunctionThrows(async () => {
     await takeElementScreenshot(mainPage.body, {path: 'screenshot.png', timeout: 10});
   }, 'takeElementScreenshot throws an error on timeout end');
+
+  const searchUrlObjectPromise = waitForStartOfPageLoad();
 
   const requestWithQueryPromise = waitForRequest(({url}) => url.includes(searchQuery));
 
@@ -76,6 +90,8 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_00
 
   const searchPage = await assertPage(Search, {searchQuery});
 
+  const searchUrlObject = await searchUrlObjectPromise;
+
   /**
    * Do not use the following pageParams and url (by getParamsFromUrlOrThrow) checks in your code.
    * These are e2ed internal checks. Use `assertPage` instead.
@@ -85,6 +101,10 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_00
   });
 
   const url = await getDocumentUrl();
+
+  await expect(url, 'waitForStartOfPageLoad returns correct url object').eql(
+    searchUrlObject.href as Url,
+  );
 
   await expect(SearchRoute.getParamsFromUrlOrThrow(url), 'page url has expected params').eql({
     searchQuery,
