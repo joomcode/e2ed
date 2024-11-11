@@ -13,7 +13,7 @@ import {preparePage} from './preparePage';
 import {runTestFn} from './runTestFn';
 import {waitBeforeRetry} from './waitBeforeRetry';
 
-import type {RunTest, Test, TestStaticOptions, TestUnit} from '../../types/internal';
+import type {RunTest, Test, TestStaticOptions, TestUnit, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Get complete run test function by the complete test options.
@@ -23,6 +23,7 @@ export const getRunTest =
   (test: Test): RunTest =>
   ({context, page, request}, testInfo): Promise<void> => {
     const runTest = async (): Promise<void> => {
+      const startTimeInMs = Date.now() as UtcTimeInMs;
       const retryIndex = testInfo.retry + 1;
       const runId = createRunId(test, retryIndex);
 
@@ -34,28 +35,24 @@ export const getRunTest =
 
       try {
         testStaticOptions = getTestStaticOptions(test, testInfo);
-
         shouldRunTest = await getShouldRunTest(testStaticOptions);
 
         if (!shouldRunTest) {
           return;
         }
 
-        const beforeRetryTimeout = await waitBeforeRetry(runId, testStaticOptions);
-
-        clearPage = await preparePage(page);
-
-        const testController = {context, page, request};
-
         const testUnit: TestUnit = {
-          beforeRetryTimeout,
+          beforeRetryTimeout: await waitBeforeRetry(runId, testStaticOptions),
           outputDirectoryName: getOutputDirectoryName(testInfo.outputDir),
           retryIndex,
           runId,
-          testController,
+          startTimeInMs,
+          testController: {context, page, request},
           testFn: test.testFn,
           testStaticOptions,
         };
+
+        clearPage = await preparePage(page);
 
         beforeTest(testUnit);
 

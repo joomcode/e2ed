@@ -25,10 +25,10 @@ const additionToPlaywrightTestTimeout = 500;
  * @internal
  */
 export const beforeTest = ({
-  beforeRetryTimeout,
   outputDirectoryName,
   retryIndex,
   runId,
+  startTimeInMs,
   testFn,
   testStaticOptions,
 }: TestUnit): void => {
@@ -47,7 +47,7 @@ export const beforeTest = ({
   const testIdleTimeout = options.testIdleTimeout ?? testIdleTimeoutFromConfig;
   const testTimeout = options.testTimeout ?? testTimeoutFromConfig;
 
-  test.setTimeout(testTimeout + additionToPlaywrightTestTimeout + (beforeRetryTimeout ?? 0));
+  test.setTimeout(testTimeout + additionToPlaywrightTestTimeout + (Date.now() - startTimeInMs));
 
   setTestIdleTimeout(testIdleTimeout);
   setTestTimeout(testTimeout);

@@ -9,7 +9,7 @@ import type {FullTestRun, RunId, TestStaticOptions} from '../../types/internal';
 
 import {test} from '@playwright/test';
 
-const additionToTimeout = 500;
+const additionToTimeout = 10_000;
 
 /**
  * Waits before running test for some time from pack config (for retries).

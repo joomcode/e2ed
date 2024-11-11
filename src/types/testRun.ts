@@ -124,6 +124,7 @@ export type TestUnit = Readonly<{
   outputDirectoryName: string;
   retryIndex: number;
   runId: RunId;
+  startTimeInMs: UtcTimeInMs;
   testController: PlaywrightTestArgs;
   testFn: TestFn;
   testStaticOptions: TestStaticOptions;
