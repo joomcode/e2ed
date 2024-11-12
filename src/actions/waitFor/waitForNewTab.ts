@@ -30,7 +30,7 @@ export const waitForNewTab = async (options?: Options): Promise<Tab> => {
   const url = page.url();
 
   log(
-    `Have waited for new tab for ${waitWithUnits} on ${url}`,
+    `Have waited for new tab for ${waitWithUnits} at ${url}`,
     {timeout},
     LogEventType.InternalCore,
   );

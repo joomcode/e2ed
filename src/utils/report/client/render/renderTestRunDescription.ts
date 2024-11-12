@@ -7,13 +7,15 @@ import {
 import {renderDatesInterval as clientRenderDatesInterval} from './renderDatesInterval';
 import {renderDuration as clientRenderDuration} from './renderDuration';
 
-import type {FullTestRun, SafeHtml} from '../../../../types/internal';
+import type {FullTestRun, ReportClientState, SafeHtml} from '../../../../types/internal';
 
 const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
 const parseMarkdownLinks = clientParseMarkdownLinks;
 const renderDatesInterval = clientRenderDatesInterval;
 const renderDuration = clientRenderDuration;
 const sanitizeHtml = clientSanitizeHtml;
+
+declare const reportClientState: ReportClientState;
 
 /**
  * Renders tag `<dl class="test-description">` with test run description.
@@ -22,7 +24,7 @@ const sanitizeHtml = clientSanitizeHtml;
  * @internal
  */
 export function renderTestRunDescription(fullTestRun: FullTestRun): SafeHtml {
-  const {endTimeInMs, startTimeInMs} = fullTestRun;
+  const {endTimeInMs, outputDirectoryName, runError, startTimeInMs} = fullTestRun;
   const durationInMs = endTimeInMs - startTimeInMs;
   const {meta} = fullTestRun.options;
   const metaHtmls: SafeHtml[] = [];
@@ -36,11 +38,27 @@ export function renderTestRunDescription(fullTestRun: FullTestRun): SafeHtml {
     metaHtmls.push(metaHtml);
   }
 
+  let traceHtml: SafeHtml = createSafeHtmlWithoutSanitize``;
+
+  if (runError !== undefined) {
+    const {internalDirectoryName} = reportClientState;
+    const traceLabel = 'Download trace';
+    const traceName = 'trace.zip';
+    const traceUrl = `./${internalDirectoryName}/${outputDirectoryName}/${traceName}`;
+
+    traceHtml = sanitizeHtml`
+<dt class="test-description__term">${traceLabel}</dt>
+<dd class="test-description__definition">
+  <a href="${traceUrl}" aria-label="${traceLabel}" download="${traceName}">${traceName}</a>
+</dd>`;
+  }
+
   const metaProperties = createSafeHtmlWithoutSanitize`${metaHtmls.join('')}`;
 
   return sanitizeHtml`
 <dl class="test-description test-description_type_meta">
   ${metaProperties}
+  ${traceHtml}
   <dt class="test-description__term">Date</dt>
   <dd class="test-description__definition">
     ${renderDatesInterval({endTimeInMs, startTimeInMs})}

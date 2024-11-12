@@ -52,12 +52,18 @@ export const REPORTS_DIRECTORY_PATH = join(
 ) as DirectoryPathFromRoot;
 
 /**
- * Relative (from root) path to reports directory.
+ * Name of internal directory with tests artifacts.
+ * @internal
+ */
+export const INTERNAL_DIRECTORY_NAME = 'internal';
+
+/**
+ * Relative (from root) path to internal directory with tests artifacts.
  * @internal
  */
 export const INTERNAL_REPORTS_DIRECTORY_PATH = join(
   REPORTS_DIRECTORY_PATH,
-  'internal',
+  INTERNAL_DIRECTORY_NAME,
 ) as DirectoryPathFromRoot;
 
 /**
