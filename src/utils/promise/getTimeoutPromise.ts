@@ -1,4 +1,4 @@
-import {e2edEnvironment} from '../../constants/internal';
+import {isDebug} from '../../constants/internal';
 
 const maxTimeoutInMs = 3600_000;
 
@@ -7,6 +7,5 @@ const maxTimeoutInMs = 3600_000;
  */
 export const getTimeoutPromise = (delayInMs: number): Promise<void> =>
   new Promise((resolve) => {
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    setTimeout(resolve, e2edEnvironment.E2ED_DEBUG ? maxTimeoutInMs : delayInMs);
+    setTimeout(resolve, isDebug ? maxTimeoutInMs : delayInMs);
   });

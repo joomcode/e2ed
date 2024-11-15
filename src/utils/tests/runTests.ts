@@ -1,6 +1,6 @@
 import {fork} from 'node:child_process';
 
-import {CONFIG_PATH, e2edEnvironment} from '../../constants/internal';
+import {CONFIG_PATH, e2edEnvironment, isDebug} from '../../constants/internal';
 
 import {getFullPackConfig} from '../config';
 import {getRunLabel, setRunLabel} from '../environment';
@@ -43,8 +43,7 @@ export const runTests = async ({runLabel}: RunRetryOptions): Promise<void> => {
     await new Promise<void>((resolve, reject) => {
       const playwrightArgs = ['test', `--config=${CONFIG_PATH}`];
 
-      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-      if (e2edEnvironment.E2ED_DEBUG) {
+      if (isDebug) {
         // playwrightArgs.unshift('--node-options=--inspect-brk');
         e2edEnvironment.PWDEBUG = 'console';
         playwrightArgs.push('--debug');

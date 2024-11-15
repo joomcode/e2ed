@@ -1,4 +1,4 @@
-import {e2edEnvironment} from '../../constants/internal';
+import {e2edEnvironment, isDebug} from '../../constants/internal';
 
 import {assertNumberIsPositiveInteger} from '../asserts';
 
@@ -9,8 +9,7 @@ import type {ForkOptions} from 'node:child_process';
  * @internal
  */
 export const getTestsSubprocessForkOptions = (): ForkOptions | undefined => {
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  if (!e2edEnvironment.E2ED_DEBUG) {
+  if (!isDebug) {
     return undefined;
   }
 
