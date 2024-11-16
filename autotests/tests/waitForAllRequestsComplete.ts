@@ -2,12 +2,13 @@
 
 import {test} from 'autotests';
 import {getUsers} from 'autotests/entities';
-import {waitForAllRequestsComplete} from 'e2ed/actions';
+import {waitForAllRequestsComplete, waitForTimeout} from 'e2ed/actions';
 import {assertFunctionThrows, E2edError} from 'e2ed/utils';
 
 test(
   'waitForAllRequestsComplete works correct with timeout and predicate in base cases',
   {meta: {testId: '9'}, testIdleTimeout: 6_000},
+  // eslint-disable-next-line complexity, max-statements
   async () => {
     let startRequestInMs = Date.now();
 
@@ -30,10 +31,7 @@ test(
 
     startRequestInMs = Date.now();
 
-    const promise = waitForAllRequestsComplete(() => true, {
-      maxIntervalBetweenRequestsInMs: 1500,
-      timeout: 1000,
-    });
+    let promise = waitForAllRequestsComplete(() => true, {timeout: 1000});
 
     void getUsers(2);
 
@@ -65,8 +63,6 @@ test(
         {waitedInMs},
       );
     }
-
-    /*
 
     promise = waitForAllRequestsComplete(() => true);
 
@@ -103,7 +99,5 @@ test(
         {waitedInMs},
       );
     }
-
-    */
   },
 );

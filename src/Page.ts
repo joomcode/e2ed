@@ -1,6 +1,7 @@
-// eslint-disable-next-line import/no-internal-modules
+/* eslint-disable import/no-internal-modules */
+
 import {navigateToUrl} from './actions/navigateToUrl';
-// eslint-disable-next-line import/no-internal-modules
+import {waitForAllRequestsComplete} from './actions/waitFor/waitForAllRequestsComplete';
 import {waitForStartOfPageLoad} from './actions/waitFor/waitForStartOfPageLoad';
 import {CREATE_PAGE_TOKEN} from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
@@ -142,6 +143,10 @@ export abstract class Page<PageParams = undefined> {
    */
   async waitForPageLoaded(): Promise<void> {
     await this.waitForDomContentLoaded();
+
+    await waitForAllRequestsComplete(() => true, {
+      maxIntervalBetweenRequestsInMs: this.maxIntervalBetweenRequestsInMs,
+    });
   }
 
   /**

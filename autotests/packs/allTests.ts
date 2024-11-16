@@ -87,12 +87,12 @@ export const pack: Pack = {
   waitBeforeRetry: () => waitBeforeRetryTimeout,
   waitForAllRequestsComplete: {
     maxIntervalBetweenRequestsInMs: 500,
-    timeout: 30_000,
+    timeout: 15_000,
   },
   waitForInterfaceStabilization: {
     stabilizationInterval: 500,
-    timeout: 30_000,
+    timeout: 15_000,
   },
-  waitForRequestTimeout: 30_000,
-  waitForResponseTimeout: 30_000,
+  waitForRequestTimeout: 15_000,
+  waitForResponseTimeout: 15_000,
 };
