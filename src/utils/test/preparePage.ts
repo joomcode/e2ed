@@ -5,8 +5,14 @@ import {getIsPageNavigatingNow, setIsPageNavigatingNow} from '../../context/isPa
 import {getJsErrorsFromContext} from '../../context/jsError';
 import {getNavigationDelay} from '../../context/navigationDelay';
 import {getOnResponseCallbacks} from '../../context/onResponseCallbacks';
+import {getWaitForEventsState} from '../../context/waitForEventsState';
 
-import {getResponseFromPlaywrightResponse} from '../requestHooks';
+import {
+  getRequestFromPlaywrightRequest,
+  getRequestHookContextId,
+  getResponseFromPlaywrightResponse,
+} from '../requestHooks';
+import {addNotCompleteRequest, completeRequest} from '../waitForEvents';
 
 import type {
   ConsoleMessage as PlaywrightConsoleMessage,
@@ -27,6 +33,7 @@ export const preparePage = async (page: Page): Promise<() => Promise<void>> => {
   const consoleMessages = getConsoleMessagesFromContext() as ConsoleMessage[];
   const jsErrors = getJsErrorsFromContext() as JsError[];
   const navigationDelay = getNavigationDelay();
+  const waitForEventsState = getWaitForEventsState();
 
   await page.route(
     () => navigationDelay.promise !== undefined,
@@ -64,7 +71,7 @@ export const preparePage = async (page: Page): Promise<() => Promise<void>> => {
     jsErrors.push({dateTimeInIso, error});
   });
 
-  const requestListener = AsyncLocalStorage.bind((newRequest: PlaywrightRequest) => {
+  const requestListener = AsyncLocalStorage.bind(async (newRequest: PlaywrightRequest) => {
     const isNavigationRequest = newRequest.isNavigationRequest();
     const isPageNavigatingNow = getIsPageNavigatingNow();
 
@@ -77,6 +84,11 @@ export const preparePage = async (page: Page): Promise<() => Promise<void>> => {
 
       setIsPageNavigatingNow(navigationRequestsCount > 0);
     }
+
+    const request = getRequestFromPlaywrightRequest(newRequest);
+    const requestHookContextId = getRequestHookContextId(newRequest);
+
+    await addNotCompleteRequest(request, requestHookContextId, waitForEventsState);
   });
 
   const responseListener = AsyncLocalStorage.bind((newResponse: PlaywrightResponse) => {
@@ -92,6 +104,10 @@ export const preparePage = async (page: Page): Promise<() => Promise<void>> => {
   });
 
   const requestfinishedListener = AsyncLocalStorage.bind(async (request: PlaywrightRequest) => {
+    const requestHookContextId = getRequestHookContextId(request);
+
+    completeRequest(requestHookContextId, waitForEventsState);
+
     const onResponseCallbacks = getOnResponseCallbacks();
 
     if (onResponseCallbacks.length === 0) {

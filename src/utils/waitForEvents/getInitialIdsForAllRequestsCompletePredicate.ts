@@ -11,7 +11,7 @@ import type {
 type HashOfNotCompleteRequests = WaitForEventsState['hashOfNotCompleteRequests'];
 
 /**
- * Get initial array of requestHookContextId for predicate of waitForAllRequestsComplete function.
+ * Get initial set of `requestHookContextId` for predicate of `waitForAllRequestsComplete` function.
  * @internal
  */
 export const getInitialIdsForAllRequestsCompletePredicate = async (

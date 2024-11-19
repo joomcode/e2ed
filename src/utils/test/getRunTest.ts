@@ -6,17 +6,14 @@ import {assertValueIsDefined} from '../asserts';
 import {afterErrorInTest} from './afterErrorInTest';
 import {afterTest} from './afterTest';
 import {beforeTest} from './beforeTest';
+import {getOutputDirectoryName} from './getOutputDirectoryName';
 import {getShouldRunTest} from './getShouldRunTest';
 import {getTestStaticOptions} from './getTestStaticOptions';
 import {preparePage} from './preparePage';
 import {runTestFn} from './runTestFn';
 import {waitBeforeRetry} from './waitBeforeRetry';
 
-import type {PlaywrightTestArgs, TestInfo} from '@playwright/test';
-
-import type {Test, TestStaticOptions} from '../../types/internal';
-
-type RunTest = (testController: PlaywrightTestArgs, testInfo: TestInfo) => Promise<void>;
+import type {RunTest, Test, TestStaticOptions, TestUnit, UtcTimeInMs} from '../../types/internal';
 
 /**
  * Get complete run test function by the complete test options.
@@ -24,8 +21,9 @@ type RunTest = (testController: PlaywrightTestArgs, testInfo: TestInfo) => Promi
  */
 export const getRunTest =
   (test: Test): RunTest =>
-  ({context, page, request}: PlaywrightTestArgs, testInfo: TestInfo): Promise<void> => {
+  ({context, page, request}, testInfo): Promise<void> => {
     const runTest = async (): Promise<void> => {
+      const startTimeInMs = Date.now() as UtcTimeInMs;
       const retryIndex = testInfo.retry + 1;
       const runId = createRunId(test, retryIndex);
 
@@ -37,22 +35,28 @@ export const getRunTest =
 
       try {
         testStaticOptions = getTestStaticOptions(test, testInfo);
-
         shouldRunTest = await getShouldRunTest(testStaticOptions);
 
         if (!shouldRunTest) {
           return;
         }
 
-        const beforeRetryTimeout = await waitBeforeRetry(runId, testStaticOptions);
+        const testUnit: TestUnit = {
+          beforeRetryTimeout: await waitBeforeRetry(runId, testStaticOptions),
+          outputDirectoryName: getOutputDirectoryName(testInfo.outputDir),
+          retryIndex,
+          runId,
+          startTimeInMs,
+          testController: {context, page, request},
+          testFn: test.testFn,
+          testStaticOptions,
+        };
 
         clearPage = await preparePage(page);
 
-        beforeTest({beforeRetryTimeout, retryIndex, runId, testFn: test.testFn, testStaticOptions});
+        beforeTest(testUnit);
 
-        const testController = {context, page, request};
-
-        await runTestFn({beforeRetryTimeout, retryIndex, runId, testController, testStaticOptions});
+        await runTestFn(testUnit);
       } catch (error) {
         hasRunError = true;
         unknownRunError = error;

@@ -16,12 +16,14 @@ export const applyAdditionalMatcher = (
   args: unknown[],
   selectorPropertyRetryData: SelectorPropertyRetryData | undefined,
   // eslint-disable-next-line @typescript-eslint/max-params
-): Promise<unknown> => {
+): Promise<Expect> => {
   if (selectorPropertyRetryData === undefined) {
-    return matcher.apply(ctx, args);
+    return matcher.apply(ctx, args).then(() => ctx);
   }
 
   const {assertionTimeout} = getFullPackConfig();
+
+  let context: Expect;
 
   return expect(() => {
     const {args: selectorArgs, property, selector} = selectorPropertyRetryData;
@@ -34,9 +36,11 @@ export const applyAdditionalMatcher = (
           );
 
     return actualValue.then((value) => {
-      const context: Expect = {actualValue: value, description: ctx.description};
+      context = {actualValue: value, description: ctx.description};
 
       return matcher.apply(context, args);
     });
-  }).toPass({timeout: assertionTimeout});
+  })
+    .toPass({timeout: assertionTimeout})
+    .then(() => context);
 };

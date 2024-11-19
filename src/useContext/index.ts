@@ -1,6 +1,6 @@
 export {getPlaywrightPage} from './page';
 /** @internal */
-export {pageStorage} from './page';
+export {pageStorage} from './internalPage';
 export type {
   Clear as ClearContext,
   Get as GetContext,

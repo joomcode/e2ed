@@ -1,4 +1,4 @@
-import type {PlaywrightTestArgs} from '@playwright/test';
+import type {PlaywrightTestArgs, TestInfo} from '@playwright/test';
 
 import type {TestRunStatus} from '../constants/internal';
 import type {E2edError} from '../utils/error';
@@ -10,6 +10,25 @@ import type {TestRunEvent} from './events';
 import type {TestFilePath} from './paths';
 import type {StringForLogs} from './string';
 import type {TestMetaPlaceholder} from './userland';
+
+/**
+ * Full test run object result of userland hooks (like mainParams and runHash).
+ * @internal
+ */
+export type FullTestRun = Readonly<{mainParams: string; runHash: RunHash}> & TestRun;
+
+/**
+ * Lite test run object with userland metadata.
+ */
+export type LiteTestRun<TestMeta = TestMetaPlaceholder> = Readonly<{
+  endTimeInMs: UtcTimeInMs;
+  mainParams: string;
+  runError: RunError;
+  runHash: RunHash;
+  startTimeInMs: UtcTimeInMs;
+  status: TestRunStatus;
+}> &
+  TestStaticOptions<TestMeta>;
 
 /**
  * Reject test run.
@@ -31,6 +50,16 @@ export type RunHash = Brand<string, 'RunHash'>;
  * Unique id of each test run.
  */
 export type RunId = Brand<string, 'RunId'>;
+
+/**
+ * Playwright's function for run test.
+ * @internal
+ */
+export type RunTest = (
+  this: void,
+  testController: PlaywrightTestArgs,
+  testInfo: TestInfo,
+) => Promise<void>;
 
 /**
  * Test function itself.
@@ -87,20 +116,16 @@ export type TestFunction<TestMeta = TestMetaPlaceholder> = (
 ) => void;
 
 /**
- * Lite test run object with userland metadata.
- */
-export type LiteTestRun<TestMeta = TestMetaPlaceholder> = Readonly<{
-  endTimeInMs: UtcTimeInMs;
-  mainParams: string;
-  runError: RunError;
-  runHash: RunHash;
-  startTimeInMs: UtcTimeInMs;
-  status: TestRunStatus;
-}> &
-  TestStaticOptions<TestMeta>;
-
-/**
- * Full test run object result of userland hooks (like mainParams and runHash).
+ * Test unit for run.
  * @internal
  */
-export type FullTestRun = Readonly<{mainParams: string; runHash: RunHash}> & TestRun;
+export type TestUnit = Readonly<{
+  beforeRetryTimeout: number | undefined;
+  outputDirectoryName: string;
+  retryIndex: number;
+  runId: RunId;
+  startTimeInMs: UtcTimeInMs;
+  testController: PlaywrightTestArgs;
+  testFn: TestFn;
+  testStaticOptions: TestStaticOptions;
+}>;

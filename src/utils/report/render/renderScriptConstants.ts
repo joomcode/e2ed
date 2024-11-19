@@ -1,3 +1,5 @@
+import {INTERNAL_DIRECTORY_NAME} from '../../../constants/internal';
+
 import {getFullPackConfig} from '../../config';
 
 import {createSafeHtmlWithoutSanitize} from '../client';
@@ -15,6 +17,7 @@ export const renderScriptConstants = (): SafeHtml => {
 
   const reportClientState: ReportClientState = {
     fullTestRuns: [],
+    internalDirectoryName: INTERNAL_DIRECTORY_NAME,
     lengthOfReadedJsonReportDataParts: 0,
     pathToScreenshotsDirectoryForReport,
     readJsonReportDataObservers: [],

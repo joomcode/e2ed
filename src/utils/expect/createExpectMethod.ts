@@ -20,7 +20,6 @@ import type {AssertionFunction, ExpectMethod} from './types';
 import {expect} from '@playwright/test';
 
 const additionalAssertionTimeoutInMs = 1_000;
-let assertionTimeout: number | undefined;
 
 /**
  * Creates method of `Expect` class.
@@ -32,7 +31,7 @@ export const createExpectMethod = (
 ): ExpectMethod =>
   // eslint-disable-next-line no-restricted-syntax
   function method(...args: Parameters<ExpectMethod>) {
-    assertionTimeout ??= getFullPackConfig().assertionTimeout;
+    const {assertionTimeout} = getFullPackConfig();
 
     const timeout = assertionTimeout + additionalAssertionTimeoutInMs;
     const message = getAssertionMessage === undefined ? key : getAssertionMessage(...args);
@@ -42,15 +41,11 @@ export const createExpectMethod = (
       `"${key}" assertion promise rejected after ${timeoutWithUnits} timeout`,
     );
 
-    const runAssertion = (value: unknown): Promise<unknown> => {
+    const runAssertion = (value: unknown): Promise<Expect> => {
       const additionalMatcher = additionalMatchers[key as keyof typeof additionalMatchers];
+      const ctx: Expect = {actualValue: value, description: this.description};
 
       if (additionalMatcher !== undefined) {
-        const ctx: Expect = {
-          actualValue: value,
-          description: this.description,
-        };
-
         const selectorPropertyRetryData = (
           this.actualValue as {[RETRY_KEY]?: SelectorPropertyRetryData}
         )?.[RETRY_KEY];
@@ -70,35 +65,33 @@ export const createExpectMethod = (
       const assertion = expect(value) as unknown as Record<string, Fn<unknown[], Promise<unknown>>>;
 
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      return addTimeoutToPromise(assertion[key]!(...args), timeout, error);
+      return addTimeoutToPromise(assertion[key]!(...args), timeout, error).then(() => ctx);
     };
 
-    const assertionPromise = RESOLVED_PROMISE.then(() => {
-      if (isThenable(this.actualValue)) {
-        return addTimeoutToPromise(this.actualValue as Promise<unknown>, timeout, error).then(
-          runAssertion,
-        );
-      }
+    const assertionPromise: Promise<Readonly<{maybeError?: Error; value?: unknown}>> =
+      RESOLVED_PROMISE.then(() => {
+        if (isThenable(this.actualValue)) {
+          return addTimeoutToPromise(this.actualValue as Promise<unknown>, timeout, error).then(
+            runAssertion,
+          );
+        }
 
-      return runAssertion(this.actualValue);
-    }).then(
-      () => undefined,
-      (assertionError: Error) => assertionError,
-    );
+        return runAssertion(this.actualValue);
+      }).then(
+        ({actualValue}) => ({value: actualValue}),
+        (maybeError: Error) => ({maybeError}),
+      );
 
-    return assertionPromise.then((maybeError) => {
+    return assertionPromise.then(({maybeError, value}) => {
       const logMessage = `Assert: ${this.description}`;
       const logPayload = {
         assertionArguments: args,
-        description:
-          this.actualValue != null
-            ? getDescriptionFromSelector(this.actualValue as Selector)
-            : undefined,
+        description: value != null ? getDescriptionFromSelector(value as Selector) : undefined,
         error: maybeError,
         logEventStatus: maybeError ? LogEventStatus.Failed : LogEventStatus.Passed,
       };
 
-      return addTimeoutToPromise(Promise.resolve(this.actualValue), timeout, error)
+      return addTimeoutToPromise(Promise.resolve(value), timeout, error)
         .then(
           (actualValue) =>
             log(

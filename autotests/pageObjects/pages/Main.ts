@@ -2,6 +2,7 @@ import {Input} from 'autotests/pageObjects/components';
 import {Main as MainRoute} from 'autotests/routes/pageRoutes';
 import {createSelector} from 'autotests/selectors';
 import {Page} from 'e2ed';
+import {waitForAllRequestsComplete} from 'e2ed/actions';
 import {setReadonlyProperty} from 'e2ed/utils';
 
 import type {Language} from 'autotests/types';
@@ -58,5 +59,21 @@ export class Main extends Page<CustomPageParams> {
    */
   typeIntoSearchInput(text: string): Promise<void> {
     return this.searchInput.type(text);
+  }
+
+  override async waitForPageLoaded(): Promise<void> {
+    await waitForAllRequestsComplete(
+      ({url}) => {
+        if (
+          url.startsWith('https://play.google.com/') ||
+          url.startsWith('https://www.youtube.com/embed/')
+        ) {
+          return false;
+        }
+
+        return true;
+      },
+      {maxIntervalBetweenRequestsInMs: this.maxIntervalBetweenRequestsInMs, timeout: 8_000},
+    );
   }
 }

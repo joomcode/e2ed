@@ -14,23 +14,9 @@ import {getUserlandHooks} from '../userland';
 
 import {getTestFnAndReject} from './getTestFnAndReject';
 
-import type {
-  RunId,
-  TestFn,
-  TestRunEvent,
-  TestStaticOptions,
-  UtcTimeInMs,
-} from '../../types/internal';
+import type {TestRunEvent, TestUnit, UtcTimeInMs} from '../../types/internal';
 
 import {test} from '@playwright/test';
-
-type Options = Readonly<{
-  beforeRetryTimeout: number | undefined;
-  retryIndex: number;
-  runId: RunId;
-  testFn: TestFn;
-  testStaticOptions: TestStaticOptions;
-}>;
 
 const additionToPlaywrightTestTimeout = 500;
 
@@ -39,12 +25,13 @@ const additionToPlaywrightTestTimeout = 500;
  * @internal
  */
 export const beforeTest = ({
-  beforeRetryTimeout,
+  outputDirectoryName,
   retryIndex,
   runId,
+  startTimeInMs,
   testFn,
   testStaticOptions,
-}: Options): void => {
+}: TestUnit): void => {
   const {options} = testStaticOptions;
 
   setMeta(options.meta);
@@ -60,7 +47,7 @@ export const beforeTest = ({
   const testIdleTimeout = options.testIdleTimeout ?? testIdleTimeoutFromConfig;
   const testTimeout = options.testTimeout ?? testTimeoutFromConfig;
 
-  test.setTimeout(testTimeout + additionToPlaywrightTestTimeout + (beforeRetryTimeout ?? 0));
+  test.setTimeout(testTimeout + additionToPlaywrightTestTimeout + (Date.now() - startTimeInMs));
 
   setTestIdleTimeout(testIdleTimeout);
   setTestTimeout(testTimeout);
@@ -88,6 +75,7 @@ export const beforeTest = ({
     ...testStaticOptions,
     logEvents: [],
     onlog,
+    outputDirectoryName,
     reject,
     retryIndex,
     runId,

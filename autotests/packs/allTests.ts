@@ -67,7 +67,7 @@ export const pack: Pack = {
   maxRetriesCountInDocker: 3,
   overriddenConfigFields: null,
   packTimeout: packTimeoutInMinutes * msInMinute,
-  pageRequestTimeout: 30_000,
+  pageRequestTimeout: 7_000,
   pageStabilizationInterval: 500,
   pathToScreenshotsDirectoryForReport: './screenshots',
   port1: 1337,
@@ -87,12 +87,12 @@ export const pack: Pack = {
   waitBeforeRetry: () => waitBeforeRetryTimeout,
   waitForAllRequestsComplete: {
     maxIntervalBetweenRequestsInMs: 500,
-    timeout: 30_000,
+    timeout: 15_000,
   },
   waitForInterfaceStabilization: {
     stabilizationInterval: 500,
-    timeout: 30_000,
+    timeout: 15_000,
   },
-  waitForRequestTimeout: 30_000,
-  waitForResponseTimeout: 30_000,
+  waitForRequestTimeout: 15_000,
+  waitForResponseTimeout: 15_000,
 };

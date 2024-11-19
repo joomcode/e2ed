@@ -9,19 +9,9 @@ import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
 import {getPromiseWithResolveAndReject} from '../promise';
 
-import type {PlaywrightTestArgs} from '@playwright/test';
-
-import type {RunId, TestStaticOptions} from '../../types/internal';
+import type {TestUnit} from '../../types/internal';
 
 const delayForTestRunPromiseResolutionAfterTestTimeoutInMs = 100;
-
-type Options = Readonly<{
-  beforeRetryTimeout: number | undefined;
-  retryIndex: number;
-  runId: RunId;
-  testController: PlaywrightTestArgs;
-  testStaticOptions: TestStaticOptions;
-}>;
 
 /**
  * Runs test function with reject in test run event.
@@ -33,7 +23,7 @@ export const runTestFn = async ({
   runId,
   testController,
   testStaticOptions,
-}: Options): Promise<void> => {
+}: TestUnit): Promise<void> => {
   const {status, testFnWithReject} = getTestRunEvent(runId);
   const testTimeout = getTestTimeout();
 
