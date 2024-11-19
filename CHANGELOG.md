@@ -1,5 +1,37 @@
 # Changelog
 
+## [v0.19.0](https://github.com/joomcode/e2ed/tree/v0.19.0) (2024-11-19)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.16...v0.19.0)
+
+- [Merge pull request #94 from joomcode/feat/support-for-multiple-windows](https://github.com/joomcode/e2ed/commit/06e36e4f6575764a9194a794dd3a8112c9ae6571) ([uid11](https://github.com/uid11))
+
+  feat: support multiple tabs
+
+- [FI-1434 fix: logs of actual values in `expect`'s assert functions](https://github.com/joomcode/e2ed/commit/457e51a83b2bcd3493b994a01ddd37561a2c1e22) ([uid11](https://github.com/uid11))
+
+  chore: updat Playwright to 1.49.0
+
+  chore: update devDependencies (`husky`, etc)
+
+- [FI-1512 fix: add tests for `waitForAllRequestsComplete`](https://github.com/joomcode/e2ed/commit/f7da93c3d839367c875b2aa85a7420f131f2dea8) ([uid11](https://github.com/uid11))
+- [FI-1512 feat: restore `waitForAllRequestsComplete` action](https://github.com/joomcode/e2ed/commit/6cac69fec661b5397969cd9956b963bf8a76a689) ([uid11](https://github.com/uid11))
+- [FI-1506 fix: bin command `e2ed-install-browsers`](https://github.com/joomcode/e2ed/commit/5b1c35b01f7e9209d31f4f63aa249da4a0d70cf5) ([uid11](https://github.com/uid11))
+- [FI-1434 feat: add links to `trace.zip` in HTML report](https://github.com/joomcode/e2ed/commit/aa1658a047a2f6ee002100ae2157fab630cb0275) ([uid11](https://github.com/uid11))
+- [FI-1432 fix: Playwright timeout for test with `waitBeforeRetry`](https://github.com/joomcode/e2ed/commit/a3276ca831cdd68178f0a4b578e803e30cb24dcc) ([uid11](https://github.com/uid11))
+- [FI-1434 feat: add links to `trace.zip` in HTML report](https://github.com/joomcode/e2ed/commit/da61cbacb23b6243462ea8bf2c91be28a97caa43) ([uid11](https://github.com/uid11))
+- [FI-1476 feat: add actions for switching tabs](https://github.com/joomcode/e2ed/commit/321866c7178fc37218201f3e1976e87fce968d0d) ([uid11](https://github.com/uid11))
+
+  tests: add tests for `waitForStartOfPageLoad` action
+
+  fix: `waitForStartOfPageLoad` first call
+
+  fix: add logs to `waitForStartOfPageLoad` actoin
+
+  fix: add logs to actions for switching tabs
+
+- [FI-1434 feat: add action `waitForStartOfPageLoad`](https://github.com/joomcode/e2ed/commit/90e2d7748e4bfd6c45cddc21fc09fc1ef01c9063) ([uid11](https://github.com/uid11))
+
 ## [v0.18.16](https://github.com/joomcode/e2ed/tree/v0.18.16) (2024-11-03)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.15...v0.18.16)
