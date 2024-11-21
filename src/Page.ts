@@ -10,7 +10,7 @@ import {reloadDocument} from './utils/document';
 import {getPlaywrightPage} from './useContext';
 
 import type {PageRoute} from './PageRoute';
-import type {AsyncVoid, PageClassTypeArgs, Url} from './types/internal';
+import type {AsyncVoid, NavigateToUrlOptions, PageClassTypeArgs, Url} from './types/internal';
 
 /**
  * Abstract page with base methods.
@@ -33,17 +33,15 @@ export abstract class Page<PageParams = undefined> {
   readonly maxIntervalBetweenRequestsInMs: number;
 
   /**
+   * Default timeout for navigation to url (`navigateToPage`, `navigateToUrl` actions) in milliseconds.
+   * The default value is taken from the corresponding field of the pack config.
+   */
+  readonly navigationTimeout: number;
+
+  /**
    * Immutable page parameters.
    */
   readonly pageParams: PageParams;
-
-  /**
-   * After navigating to the page, `e2ed` will wait until
-   * the page is stable for the specified time in millisecond,
-   * and only after that it will consider the page loaded.
-   * The default value is taken from the corresponding field of the pack config.
-   */
-  readonly pageStabilizationInterval: number;
 
   constructor(...args: PageClassTypeArgs<PageParams>) {
     const [createPageToken, pageParams] = args;
@@ -56,12 +54,12 @@ export abstract class Page<PageParams = undefined> {
     this.pageParams = pageParams as PageParams;
 
     const {
-      pageStabilizationInterval,
+      navigationTimeout,
       waitForAllRequestsComplete: {maxIntervalBetweenRequestsInMs},
     } = getFullPackConfig();
 
     this.maxIntervalBetweenRequestsInMs = maxIntervalBetweenRequestsInMs;
-    this.pageStabilizationInterval = pageStabilizationInterval;
+    this.navigationTimeout = navigationTimeout;
   }
 
   /**
@@ -114,8 +112,8 @@ export abstract class Page<PageParams = undefined> {
   /**
    * Navigates to the page by url.
    */
-  navigateToPage(url: Url): Promise<void> {
-    return navigateToUrl(url, {skipLogs: true});
+  navigateToPage(url: Url, options?: NavigateToUrlOptions): Promise<void> {
+    return navigateToUrl(url, {skipLogs: true, timeout: this.navigationTimeout, ...options});
   }
 
   /**

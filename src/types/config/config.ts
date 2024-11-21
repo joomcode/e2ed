@@ -60,7 +60,6 @@ export type UserlandPackWithoutDoBeforePack<
 > = Readonly<{
   assertionTimeout: number;
   concurrency: number;
-  pageRequestTimeout: number;
   port1: number;
   port2: number;
   selectorTimeout: number;

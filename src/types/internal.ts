@@ -70,6 +70,7 @@ export type {
 export type {ApiMockFunction} from './mockApiRoute';
 /** @internal */
 export type {ApiMockState} from './mockApiRoute';
+export type {NavigateToUrlOptions} from './navigation';
 /** @internal */
 export type {NavigationDelay} from './navigation';
 export type {

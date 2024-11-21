@@ -18,7 +18,7 @@ export const waitForStartOfPageLoad = async (options?: Options): Promise<URL> =>
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const page = getPlaywrightPage();
-  const timeout = options?.timeout ?? getFullPackConfig().pageRequestTimeout;
+  const timeout = options?.timeout ?? getFullPackConfig().navigationTimeout;
 
   let urlObject: URL | undefined;
   let wasCalled = false;

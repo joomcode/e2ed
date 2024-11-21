@@ -159,6 +159,11 @@ export type OwnE2edConfig<
   maxRetriesCountInDocker: number;
 
   /**
+   * Default timeout for navigation to url (`navigateToPage`, `navigateToUrl` actions) in milliseconds.
+   */
+  navigationTimeout: number;
+
+  /**
    * If not `null`, then this value will override fields of internal Playwright config.
    */
   overriddenConfigFields: PlaywrightTestConfig | null;
@@ -168,13 +173,6 @@ export type OwnE2edConfig<
    * If the test pack takes longer than this timeout, the pack will fail with the appropriate error.
    */
   packTimeout: number;
-
-  /**
-   * After navigating to the page, `e2ed` will wait until the page is stable
-   * for the specified time in millisecond, and only after that it will consider the page loaded.
-   * This parameter can be overridden on a specific page instance.
-   */
-  pageStabilizationInterval: number;
 
   /**
    * Path to the directory where screenshots will be stored for displaying them in the HTML report.

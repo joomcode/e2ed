@@ -38,6 +38,7 @@ export type {
 } from './http';
 export type {KeyboardPressKey} from './keyboard';
 export type {ApiMockFunction} from './mockApiRoute';
+export type {NavigateToUrlOptions} from './navigation';
 export type {
   AnyPageClassType,
   NavigateToOrAssertPageArgs,

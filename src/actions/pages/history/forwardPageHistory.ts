@@ -2,8 +2,6 @@ import {LogEventType} from '../../../constants/internal';
 import {createClientFunction} from '../../../createClientFunction';
 import {log} from '../../../utils/log';
 
-import {waitForInterfaceStabilization} from '../../waitFor';
-
 import type {AnyPageClassType} from '../../../types/internal';
 
 const forwardPageHistoryClient = createClientFunction(() => window.history.forward(), {
@@ -22,5 +20,5 @@ export const forwardPageHistory = async (page: InstanceType<AnyPageClassType>): 
 
   await forwardPageHistoryClient();
 
-  await waitForInterfaceStabilization(page.pageStabilizationInterval);
+  await page.waitForPageLoaded();
 };

@@ -2,16 +2,15 @@ import {LogEventType} from '../constants/internal';
 import {getPlaywrightPage} from '../useContext';
 import {log} from '../utils/log';
 
-import type {Page} from '@playwright/test';
-
-import type {Url} from '../types/internal';
-
-type Options = Readonly<{skipLogs?: boolean} & Parameters<Page['goto']>[1]>;
+import type {NavigateToUrlOptions, Url} from '../types/internal';
 
 /**
  * Navigate to the `url` (without waiting of interface stabilization).
  */
-export const navigateToUrl = async (url: Url, options: Options = {}): Promise<void> => {
+export const navigateToUrl = async (
+  url: Url,
+  options: NavigateToUrlOptions = {},
+): Promise<void> => {
   const {skipLogs = false} = options;
 
   if (skipLogs !== true) {
