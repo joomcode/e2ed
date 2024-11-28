@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.19.1](https://github.com/joomcode/e2ed/tree/v0.19.1) (2024-11-28)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.0...v0.19.1)
+
+- [Merge pull request #95 from joomcode/feat/add-mocks-for-web-sockets](https://github.com/joomcode/e2ed/commit/0f8b255c5f8c357a28171cfaa287d1801afff373) ([uid11](https://github.com/uid11))
+
+  feat: add mocks for web sockets
+
+- [chore: update `devDependencies` (TypeSript to 5.7, etc)](https://github.com/joomcode/e2ed/commit/549ae916d92925bd91199e654257d12cb99d6bd9) ([uid11](https://github.com/uid11))
+- [FI-1557 fix: skip duplicated requests for `waitForAllRequestsComplete`](https://github.com/joomcode/e2ed/commit/148447539dc6586b9b647230783613c06eddef06) ([uid11](https://github.com/uid11))
+- [FI-1534 feat: add `mockWebSocketRoute`/`unmockWebSocketRoute` actions](https://github.com/joomcode/e2ed/commit/28abc13d58e212e40dadd34d040a98f6b103bbc7) ([uid11](https://github.com/uid11))
+- [FI-1512 fix: add pack option and page property `navigationTimeout`](https://github.com/joomcode/e2ed/commit/c41b3483b94308131f3339f3897fc5ab439f0352) ([uid11](https://github.com/uid11))
+
 ## [v0.19.0](https://github.com/joomcode/e2ed/tree/v0.19.0) (2024-11-19)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.18.16...v0.19.0)
