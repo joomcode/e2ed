@@ -39,7 +39,7 @@ export {getDurationWithUnits} from './getDurationWithUnits';
 export {getKeysCounter} from './getKeysCounter';
 export {getContentJsonHeaders} from './http';
 export {log} from './log';
-export {parseMaybeEmptyValueAsJson} from './parseMaybeEmptyValueAsJson';
+export {parseMaybeEmptyValueAsJson, parseValueAsJsonIfNeeded} from './parse';
 export {
   addTimeoutToPromise,
   getPromiseWithResolveAndReject,

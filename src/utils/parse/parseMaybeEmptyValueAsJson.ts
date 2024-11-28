@@ -1,5 +1,5 @@
 /**
- * Parses maybe empty value (undefined, empty string or empty buffer) as JSON.
+ * Parses maybe empty value (`undefined`, empty string or empty buffer) as JSON.
  */
 export const parseMaybeEmptyValueAsJson = <Return>(value: unknown): Return | undefined => {
   // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions

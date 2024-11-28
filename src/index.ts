@@ -7,6 +7,7 @@ export {PageRoute} from './PageRoute';
 export {devices} from './playwright';
 export {Route} from './Route';
 export {getPlaywrightPage, useContext} from './useContext';
+export {WebSocketRoute} from './WebSocketRoute';
 
 /**
  * Public modules, dependent on internal utils.

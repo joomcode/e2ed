@@ -2,7 +2,7 @@
  * Get request or response body as string by original body.
  * @internal
  */
-export const getBodyAsString = (originalBody: unknown, bodyIsInJsonFormat: boolean): string => {
+export const getBodyAsString = (originalBody: unknown, isBodyInJsonFormat: boolean): string => {
   if (originalBody === undefined) {
     return '';
   }
@@ -11,5 +11,5 @@ export const getBodyAsString = (originalBody: unknown, bodyIsInJsonFormat: boole
     return originalBody;
   }
 
-  return bodyIsInJsonFormat ? JSON.stringify(originalBody) : String(originalBody);
+  return isBodyInJsonFormat ? JSON.stringify(originalBody) : String(originalBody);
 };
