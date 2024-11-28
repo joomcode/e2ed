@@ -1,3 +1,6 @@
+import {assertValueIsDefined} from '../asserts';
+
+import {isReRequest} from './isReRequest';
 import {processAllRequestsCompletePredicates} from './processAllRequestsCompletePredicates';
 
 import type {
@@ -18,6 +21,26 @@ export const addNotCompleteRequest = async (
   const {hashOfNotCompleteRequests} = waitForEventsState;
 
   hashOfNotCompleteRequests[requestHookContextId] = request;
+
+  for (const previousRequestId of Object.keys(
+    hashOfNotCompleteRequests,
+  ) as RequestHookContextId[]) {
+    if (previousRequestId === requestHookContextId) {
+      continue;
+    }
+
+    const previousRequest = hashOfNotCompleteRequests[previousRequestId];
+
+    assertValueIsDefined(previousRequest, 'previousRequest is defined', {
+      hashOfNotCompleteRequests,
+      url: request.url,
+    });
+
+    if (isReRequest(request, previousRequest)) {
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      delete hashOfNotCompleteRequests[previousRequestId];
+    }
+  }
 
   await processAllRequestsCompletePredicates(requestHookContextId, waitForEventsState);
 };
