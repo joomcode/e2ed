@@ -27,27 +27,19 @@ export const assertUserlandPack = (userlandPack: UserlandPack): void => {
     logParams,
   );
 
+  if (userlandPack.navigationTimeout !== 0) {
+    assertNumberIsPositiveInteger(
+      userlandPack.navigationTimeout,
+      'navigationTimeout is positive integer',
+      logParams,
+    );
+  }
+
   assertNumberIsPositiveInteger(
     userlandPack.packTimeout,
     'packTimeout is positive integer',
     logParams,
   );
-
-  if (userlandPack.pageRequestTimeout !== 0) {
-    assertNumberIsPositiveInteger(
-      userlandPack.pageRequestTimeout,
-      'pageRequestTimeout is positive integer',
-      logParams,
-    );
-  }
-
-  if (userlandPack.pageStabilizationInterval !== 0) {
-    assertNumberIsPositiveInteger(
-      userlandPack.pageStabilizationInterval,
-      'pageStabilizationInterval is positive integer',
-      logParams,
-    );
-  }
 
   assertNumberIsPositiveInteger(userlandPack.port1, 'port1 is positive integer', logParams);
   assertNumberIsPositiveInteger(userlandPack.port2, 'port2 is positive integer', logParams);

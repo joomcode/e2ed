@@ -19,7 +19,7 @@ import type {
  * Mock API for some API route.
  * Applicable only for routes with the `getParamsFromUrlOrThrow` method.
  * The mock is applied to a request that matches the route by url
- * (by methods `getParamsFromUrlOrThrow` and `isMatchUrl`) and by HTTP method (by `getMethod`).
+ * (by methods `getParamsFromUrlOrThrow` and `isMatchUrl`).
  */
 export const mockApiRoute = async <
   RouteParams,

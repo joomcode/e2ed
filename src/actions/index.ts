@@ -17,7 +17,7 @@ export {getBrowserConsoleMessages} from './getBrowserConsoleMessages';
 export {getBrowserJsErrors} from './getBrowserJsErrors';
 export {getCookies} from './getCookies';
 export {hover} from './hover';
-export {mockApiRoute, unmockApiRoute} from './mock';
+export {mockApiRoute, mockWebSocketRoute, unmockApiRoute, unmockWebSocketRoute} from './mock';
 export {navigateToUrl} from './navigateToUrl';
 export {
   assertPage,

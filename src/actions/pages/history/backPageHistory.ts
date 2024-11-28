@@ -2,8 +2,6 @@ import {LogEventType} from '../../../constants/internal';
 import {createClientFunction} from '../../../createClientFunction';
 import {log} from '../../../utils/log';
 
-import {waitForInterfaceStabilization} from '../../waitFor';
-
 import type {AnyPageClassType} from '../../../types/internal';
 
 const backPageHistoryClient = createClientFunction(() => window.history.back(), {
@@ -22,5 +20,5 @@ export const backPageHistory = async (page: InstanceType<AnyPageClassType>): Pro
 
   await backPageHistoryClient();
 
-  await waitForInterfaceStabilization(page.pageStabilizationInterval);
+  await page.waitForPageLoaded();
 };

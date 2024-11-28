@@ -7,12 +7,16 @@ import {applyHeadersMapper} from '../utils/requestHooks';
 
 import {navigateToUrl} from './navigateToUrl';
 
-import type {MapOptions, Url} from '../types/internal';
+import type {MapOptions, NavigateToUrlOptions, Url} from '../types/internal';
 
 /**
  * Navigate to the url and map custom response and request headers.
  */
-export const setHeadersAndNavigateToUrl = async (url: Url, options: MapOptions): Promise<void> => {
+export const setHeadersAndNavigateToUrl = async (
+  url: Url,
+  options: MapOptions,
+  navigateToUrlOptions?: NavigateToUrlOptions,
+): Promise<void> => {
   const {mapRequestHeaders, mapResponseHeaders} = options;
 
   const page = getPlaywrightPage();
@@ -52,5 +56,5 @@ export const setHeadersAndNavigateToUrl = async (url: Url, options: MapOptions):
     );
   }
 
-  await navigateToUrl(url, {skipLogs: true});
+  await navigateToUrl(url, {skipLogs: true, ...navigateToUrlOptions});
 };

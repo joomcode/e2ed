@@ -5,7 +5,7 @@ import {cloneWithoutUndefinedProperties} from '../clone';
 import {E2edError} from '../error';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
-import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
+import {parseMaybeEmptyValueAsJson} from '../parse';
 
 import {getQuery} from './getQuery';
 

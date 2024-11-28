@@ -1,10 +1,15 @@
 import {E2edError} from './error';
 
 import type {ApiRoute} from '../ApiRoute';
-import type {ApiRouteClassTypeWithGetParamsFromUrl, Url} from '../types/internal';
+import type {
+  ApiRouteClassTypeWithGetParamsFromUrl,
+  Url,
+  WebSocketRouteClassTypeWithGetParamsFromUrl,
+} from '../types/internal';
+import type {WebSocketRoute} from '../WebSocketRoute';
 
 type Return<RouteParams> =
-  | Readonly<{route: ApiRoute<RouteParams>; routeParams: RouteParams}>
+  | Readonly<{route: ApiRoute<RouteParams> | WebSocketRoute<RouteParams>; routeParams: RouteParams}>
   | undefined;
 
 /**
@@ -16,9 +21,11 @@ type Return<RouteParams> =
  */
 export const getRouteInstanceFromUrl = <RouteParams>(
   url: Url,
-  Route: ApiRouteClassTypeWithGetParamsFromUrl<RouteParams>,
+  Route:
+    | ApiRouteClassTypeWithGetParamsFromUrl<RouteParams>
+    | WebSocketRouteClassTypeWithGetParamsFromUrl<RouteParams>,
 ): Return<RouteParams> => {
-  let route: ApiRoute<RouteParams> | undefined;
+  let route: ApiRoute<RouteParams> | WebSocketRoute<RouteParams> | undefined;
   let routeParams: RouteParams | undefined;
 
   try {

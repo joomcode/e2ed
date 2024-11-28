@@ -38,6 +38,8 @@ export type {
 } from './http';
 export type {KeyboardPressKey} from './keyboard';
 export type {ApiMockFunction} from './mockApiRoute';
+export type {WebSocketMockFunction} from './mockWebSocketRoute';
+export type {NavigateToUrlOptions} from './navigation';
 export type {
   AnyPageClassType,
   NavigateToOrAssertPageArgs,
@@ -54,7 +56,12 @@ export type {
   PropertyKey,
 } from './properties';
 export type {LiteReport, LiteRetry} from './report';
-export type {ApiRouteClassType, ApiRouteClassTypeWithGetParamsFromUrl} from './routes';
+export type {
+  ApiRouteClassType,
+  ApiRouteClassTypeWithGetParamsFromUrl,
+  WebSocketRouteClassType,
+  WebSocketRouteClassTypeWithGetParamsFromUrl,
+} from './routes';
 export type {
   CreateSelector,
   CreateSelectorFunctionOptions,

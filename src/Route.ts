@@ -1,6 +1,6 @@
 import {SLASHES_AT_THE_END_REGEXP, SLASHES_AT_THE_START_REGEXP} from './constants/internal';
 
-import type {Method, Url, ZeroOrOneArg} from './types/internal';
+import type {Url, ZeroOrOneArg} from './types/internal';
 
 /**
  * Abstract route with base methods.
@@ -25,7 +25,7 @@ export abstract class Route<RouteParams> {
    * Returns route params from the passed url.
    * @throws {Error} If the route does not match on the url.
    */
-  static getParamsFromUrlOrThrow?(url: Url, method?: Method): unknown;
+  static getParamsFromUrlOrThrow?(url: Url): unknown;
 
   /**
    * Returns the url of the route.

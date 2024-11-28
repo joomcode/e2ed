@@ -2,8 +2,6 @@ import {LogEventType} from '../../../constants/internal';
 import {createClientFunction} from '../../../createClientFunction';
 import {log} from '../../../utils/log';
 
-import {waitForInterfaceStabilization} from '../../waitFor';
-
 import type {AnyPageClassType} from '../../../types/internal';
 
 const goPageHistoryClient = createClientFunction((delta: number) => window.history.go(delta), {
@@ -25,5 +23,5 @@ export const goPageHistory = async (
 
   await goPageHistoryClient(delta);
 
-  await waitForInterfaceStabilization(page.pageStabilizationInterval);
+  await page.waitForPageLoaded();
 };

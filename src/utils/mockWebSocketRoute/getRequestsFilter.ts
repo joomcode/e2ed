@@ -5,23 +5,22 @@ import {getRouteInstanceFromUrl} from '../getRouteInstanceFromUrl';
 
 import type {URL} from 'node:url';
 
-import type {ApiRoute} from '../../ApiRoute';
-import type {ApiMockState, Url} from '../../types/internal';
+import type {Url, WebSocketMockState} from '../../types/internal';
 
 /**
- * Get `requestsFilter` function for API mocks by `ApiMockState`.
+ * Get `requestsFilter` function for WebSocket mocks by `WebSocketMockState`.
  * @internal
  */
 export const getRequestsFilter = ({
   optionsByRoute,
   optionsWithRouteByUrl,
-}: ApiMockState): ((urlObject: URL) => boolean) =>
+}: WebSocketMockState): ((urlObject: URL) => boolean) =>
   AsyncLocalStorage.bind((urlObject) => {
     assertValueIsDefined(optionsByRoute, 'optionsByRoute is defined', {urlObject});
 
     const url = urlObject.href as Url;
 
-    for (const [Route, {apiMockFunction, skipLogs}] of optionsByRoute) {
+    for (const [Route, {skipLogs, webSocketMockFunction}] of optionsByRoute) {
       const maypeRouteWithRouteParams = getRouteInstanceFromUrl(url, Route);
 
       if (maypeRouteWithRouteParams === undefined) {
@@ -31,10 +30,10 @@ export const getRequestsFilter = ({
         continue;
       }
 
-      const {route} = maypeRouteWithRouteParams as {route: ApiRoute<unknown>};
+      const {route} = maypeRouteWithRouteParams;
 
       // eslint-disable-next-line no-param-reassign
-      optionsWithRouteByUrl[url] = {apiMockFunction, route, skipLogs};
+      optionsWithRouteByUrl[url] = {route, skipLogs, webSocketMockFunction};
 
       return true;
     }

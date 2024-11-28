@@ -325,15 +325,14 @@ If the mapping returns `undefined`, the log entry is not skipped, but is printed
 `your-project/autotests/bin/runDocker.sh` (until the test passes).
 For example, if it is equal to three, the test will be run no more than three times.
 
+`navigationTimeout: number`: default timeout for navigation to url
+(`navigateToPage`, `navigateToUrl` actions) in milliseconds.
+
 `overriddenConfigFields: PlaywrightTestConfig | null`: if not `null`, then this value will override
 fields of internal Playwright config.
 
 `packTimeout: number`: timeout (in millisecond) for the entire pack of tests (tasks).
 If the test pack takes longer than this timeout, the pack will fail with the appropriate error.
-
-`pageStabilizationInterval: number`: after navigating to the page, `e2ed` will wait until
-the page is stable for the specified time in millisecond, and only after that it will consider the page loaded.
-This parameter can be overridden on a specific page instance.
 
 `pathToScreenshotsDirectoryForReport: string | null`: path to the directory where screenshots
 will be stored for displaying them in the HTML report.

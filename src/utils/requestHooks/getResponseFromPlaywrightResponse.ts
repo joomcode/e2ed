@@ -1,7 +1,7 @@
 import {BAD_REQUEST_STATUS_CODE, MULTIPLE_CHOICES_STATUS_CODE} from '../../constants/internal';
 
 import {getDurationWithUnits} from '../getDurationWithUnits';
-import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
+import {parseMaybeEmptyValueAsJson} from '../parse';
 
 import {getRequestFromPlaywrightRequest} from './getRequestFromPlaywrightRequest';
 

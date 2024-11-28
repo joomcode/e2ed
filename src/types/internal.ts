@@ -70,6 +70,10 @@ export type {
 export type {ApiMockFunction} from './mockApiRoute';
 /** @internal */
 export type {ApiMockState} from './mockApiRoute';
+export type {WebSocketMockFunction} from './mockWebSocketRoute';
+/** @internal */
+export type {WebSocketMockState} from './mockWebSocketRoute';
+export type {NavigateToUrlOptions} from './navigation';
 /** @internal */
 export type {NavigationDelay} from './navigation';
 export type {
@@ -104,7 +108,12 @@ export type {
 } from './report';
 /** @internal */
 export type {RetriesState, RunRetryOptions, VisitedTestNamesHash} from './retries';
-export type {ApiRouteClassType, ApiRouteClassTypeWithGetParamsFromUrl} from './routes';
+export type {
+  ApiRouteClassType,
+  ApiRouteClassTypeWithGetParamsFromUrl,
+  WebSocketRouteClassType,
+  WebSocketRouteClassTypeWithGetParamsFromUrl,
+} from './routes';
 export type {RunLabel, RunLabelObject} from './runLabel';
 /** @internal */
 export type {RawRunLabelObject} from './runLabel';

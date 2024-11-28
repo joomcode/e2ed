@@ -17,7 +17,7 @@ export const waitForNewTab = async (options?: Options): Promise<Tab> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const context = getPlaywrightPage().context();
-  const timeout = options?.timeout ?? getFullPackConfig().pageRequestTimeout;
+  const timeout = options?.timeout ?? getFullPackConfig().navigationTimeout;
 
   const page = await context.waitForEvent('page', {timeout});
 

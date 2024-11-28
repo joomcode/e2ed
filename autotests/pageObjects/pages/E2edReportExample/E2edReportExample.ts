@@ -37,6 +37,8 @@ export class E2edReportExample extends Page<CustomPageParams> {
   readonly navigationRetriesButtonSelected: Selector =
     this.navigationRetriesButton.filterByLocatorParameter('selected', 'true');
 
+  override readonly navigationTimeout = 5_000;
+
   /**
    * Cookies that we set (additionally) on a page before navigating to it.
    */
@@ -46,8 +48,6 @@ export class E2edReportExample extends Page<CustomPageParams> {
    * Request headers that we add to page request.
    */
   readonly pageRequestHeaders: StringHeaders | undefined;
-
-  override readonly pageStabilizationInterval = 600;
 
   /**
    * Test run button.

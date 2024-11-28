@@ -102,7 +102,7 @@ const useOptions: PlaywrightTestConfig['use'] = {
   headless: isLocalRun ? userlandPack.enableHeadlessMode : true,
   isMobile: userlandPack.enableMobileDeviceMode,
   launchOptions: {args: [...userlandPack.browserFlags]},
-  navigationTimeout: userlandPack.pageRequestTimeout,
+  navigationTimeout: userlandPack.navigationTimeout,
   trace: 'retain-on-failure',
   userAgent: userlandPack.userAgent,
   viewport: {height: userlandPack.viewportHeight, width: userlandPack.viewportWidth},

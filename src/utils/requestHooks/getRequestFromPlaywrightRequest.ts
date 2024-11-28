@@ -1,10 +1,10 @@
 import {parse} from 'node:querystring';
 import {URL} from 'node:url';
 
-import {LogEventType} from '../../constants/internal';
+import {LogEventStatus, LogEventType} from '../../constants/internal';
 
 import {log} from '../log';
-import {parseMaybeEmptyValueAsJson} from '../parseMaybeEmptyValueAsJson';
+import {parseValueAsJsonIfNeeded} from '../parse';
 
 import type {Request as PlaywrightRequest} from '@playwright/test';
 
@@ -25,29 +25,20 @@ export const getRequestFromPlaywrightRequest = (
   const {search} = new URL(url);
 
   const method = playwrightRequest.method().toUpperCase() as Method;
-
   const query = parse(search ? search.slice(1) : '');
-
-  let requestBody: unknown;
-
   const body = playwrightRequest.postData();
 
-  if (isRequestBodyInJsonFormat === true) {
-    try {
-      requestBody = parseMaybeEmptyValueAsJson(body);
-    } catch {
-      log('Request body is not in JSON format', {body, url}, LogEventType.InternalUtil);
+  const {value: requestBody, hasParseError} = parseValueAsJsonIfNeeded(
+    body,
+    isRequestBodyInJsonFormat,
+  );
 
-      requestBody = body;
-    }
-  } else if (isRequestBodyInJsonFormat === false) {
-    requestBody = body;
-  } else {
-    try {
-      requestBody = parseMaybeEmptyValueAsJson(body);
-    } catch {
-      requestBody = body;
-    }
+  if (hasParseError) {
+    log(
+      'Request body is not in JSON format',
+      {body, logEventStatus: LogEventStatus.Failed, url},
+      LogEventType.InternalUtil,
+    );
   }
 
   const requestHeaders = playwrightRequest.headers();
