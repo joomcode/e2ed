@@ -13,23 +13,8 @@ export const isReRequest = (
     return false;
   }
 
-  const baseHeaders = baseRequest.requestHeaders;
-  const headers = reRequest.requestHeaders;
-
-  const headersNames = Object.keys(headers);
-  const baseHeadersNames = Object.keys(baseHeaders);
-
-  if (headersNames.length < baseHeadersNames.length) {
+  if (reRequest.method !== baseRequest.method) {
     return false;
-  }
-
-  for (const headerName of baseHeadersNames) {
-    if (
-      !(headerName in headers) ||
-      String(baseHeaders[headerName]) !== String(headers[headerName])
-    ) {
-      return false;
-    }
   }
 
   return true;

@@ -36,6 +36,9 @@ export abstract class ApiRoute<
     return true;
   }
 
+  /**
+   * Returns the origin of the route.
+   */
   getOrigin(): Url {
     return 'http://localhost' as Url;
   }

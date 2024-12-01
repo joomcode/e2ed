@@ -20,7 +20,7 @@ import type {
  * (by methods `getParamsFromUrlOrThrow` and `isMatchUrl`).
  */
 export const mockWebSocketRoute = async <RouteParams, SomeRequest, SomeResponse>(
-  Route: WebSocketRouteClassTypeWithGetParamsFromUrl<RouteParams>,
+  Route: WebSocketRouteClassTypeWithGetParamsFromUrl<RouteParams, SomeRequest, SomeResponse>,
   webSocketMockFunction: WebSocketMockFunction<RouteParams, SomeRequest, SomeResponse>,
   {skipLogs = false}: {skipLogs?: boolean} = {},
 ): Promise<void> => {

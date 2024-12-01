@@ -9,7 +9,7 @@ import type {Url} from 'e2ed/types';
 
 test(
   'mockApiRoute correctly intercepts requests, and unmockApiRoute cancels the interception',
-  {meta: {testId: '6'}, testIdleTimeout: 15_000},
+  {meta: {testId: '6'}, testIdleTimeout: 4_000},
   async () => {
     await mockApiRoute(CreateProductRoute, (routeParams, {method, query, requestBody, url}) => {
       const responseBody = {

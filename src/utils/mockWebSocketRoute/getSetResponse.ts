@@ -28,32 +28,34 @@ export const getSetResponse = ({
     const isRequestBodyInJsonFormat = route.getIsRequestBodyInJsonFormat();
     const isResponseBodyInJsonFormat = route.getIsResponseBodyInJsonFormat();
 
-    playwrightRoute.onMessage(async (message) => {
-      const {value: request, hasParseError} = parseValueAsJsonIfNeeded(
-        String(message),
-        isRequestBodyInJsonFormat,
-      );
-
-      if (hasParseError && skipLogs !== true) {
-        log(
-          'WebSocket message is not in JSON format',
-          {logEventStatus: LogEventStatus.Failed, message, url},
-          LogEventType.InternalUtil,
+    playwrightRoute.onMessage(
+      AsyncLocalStorage.bind(async (message) => {
+        const {value: request, hasParseError} = parseValueAsJsonIfNeeded(
+          String(message),
+          isRequestBodyInJsonFormat,
         );
-      }
 
-      const response = await webSocketMockFunction(route.routeParams, request);
+        if (hasParseError && skipLogs !== true) {
+          log(
+            'WebSocket message is not in JSON format',
+            {logEventStatus: LogEventStatus.Failed, message, url},
+            LogEventType.InternalUtil,
+          );
+        }
 
-      const responseAsString = getBodyAsString(response, isResponseBodyInJsonFormat);
+        const response = await webSocketMockFunction(route.routeParams, request);
 
-      playwrightRoute.send(responseAsString);
+        const responseAsString = getBodyAsString(response, isResponseBodyInJsonFormat);
 
-      if (skipLogs !== true) {
-        log(
-          `A mock was applied to the WebSocket route "${route.constructor.name}"`,
-          {request, response, route, webSocketMockFunction},
-          LogEventType.InternalUtil,
-        );
-      }
-    });
+        playwrightRoute.send(responseAsString);
+
+        if (skipLogs !== true) {
+          log(
+            `A mock was applied to the WebSocket route "${route.constructor.name}"`,
+            {request, response, route, webSocketMockFunction},
+            LogEventType.InternalUtil,
+          );
+        }
+      }),
+    );
   });
