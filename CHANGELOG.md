@@ -1,5 +1,25 @@
 # Changelog
 
+## [v0.19.2](https://github.com/joomcode/e2ed/tree/v0.19.2) (2024-12-02)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.1...v0.19.2)
+
+- [Merge pull request #96 from joomcode/fix/waitForAllRequestsComplete-rerequests](https://github.com/joomcode/e2ed/commit/60d338f30418b55a8f364ebeeae5e06d7e178b5f) ([uid11](https://github.com/uid11))
+
+  fix: ingore re-requests with the same urls
+
+- [FI-1557 fix: ingore all re-requests when `waitForAllRequestsComplete`](https://github.com/joomcode/e2ed/commit/18553b3f539aa362fa0d924fd821ba9518ee7aa5) ([uid11](https://github.com/uid11))
+
+  tests: add tests of types for `mockWebSocketRoute`
+
+  tests: add tests for `mockWebSocketRoute`
+
+  fix: protocol in `WebSocketRoute.getUrl` method
+
+  fix: types of request and response for `mockWebSocketRoute`
+
+  fix: context in `onMessage` handler for `mockWebSocketRoute`
+
 ## [v0.19.1](https://github.com/joomcode/e2ed/tree/v0.19.1) (2024-11-28)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.0...v0.19.1)
