@@ -1,5 +1,10 @@
 import {Route} from './Route';
 
+import type {Url} from './types/internal';
+
+const http = 'http:';
+const https = 'https:';
+
 /**
  * Abstract route for WebSocket "requests".
  */
@@ -32,5 +37,29 @@ export abstract class WebSocketRoute<
    */
   getIsResponseBodyInJsonFormat(): boolean {
     return true;
+  }
+
+  /**
+   * Returns the origin of the route.
+   */
+  getOrigin(): Url {
+    return 'http://localhost' as Url;
+  }
+
+  /**
+   * Returns the url of the route.
+   */
+  override getUrl(): Url {
+    const url = super.getUrl();
+
+    if (url.startsWith(https)) {
+      return `wss:${url.slice(https.length)}` as Url;
+    }
+
+    if (url.startsWith(http)) {
+      return `ws:${url.slice(http.length)}` as Url;
+    }
+
+    return url;
   }
 }

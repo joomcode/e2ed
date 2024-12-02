@@ -7,6 +7,9 @@ import type {Url} from './types/internal';
  * Abstract route for page.
  */
 export abstract class PageRoute<Params = undefined> extends Route<Params> {
+  /**
+   * Returns the origin of the route.
+   */
   getOrigin(): Url {
     const {E2ED_ORIGIN} = process.env;
 

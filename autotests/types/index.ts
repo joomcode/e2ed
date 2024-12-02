@@ -11,6 +11,10 @@ export type {
   ApiGetUsersResponse,
   ApiUserSignUpRequest,
   ApiUserSignUpResponse,
+  WebSocketBaseRequest,
+  WebSocketBaseResponse,
+  WebSocketScoreRequest,
+  WebSocketScoreResponse,
 } from './api';
 export type {
   ApiDevice,
