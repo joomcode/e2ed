@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.19.3](https://github.com/joomcode/e2ed/tree/v0.19.3) (2024-12-03)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.2...v0.19.3)
+
+- [Merge pull request #97 from joomcode/fix/get-params-in-rerequests](https://github.com/joomcode/e2ed/commit/7a25b0e74f1c5a0e6c3767434ea8999fec7e7ae3) ([uid11](https://github.com/uid11))
+
+  fix: ignore query parameters in re-requests
+
+- [fix: ignore query parameters in re-requests](https://github.com/joomcode/e2ed/commit/ce968e0bc47d9c6f631bc9d158f0ada0a117468b) ([uid11](https://github.com/uid11))
+
 ## [v0.19.2](https://github.com/joomcode/e2ed/tree/v0.19.2) (2024-12-02)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.1...v0.19.2)
