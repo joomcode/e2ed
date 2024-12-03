@@ -1,3 +1,5 @@
+import {URL} from 'node:url';
+
 import type {RequestWithUtcTimeInMs} from '../../types/internal';
 
 /**
@@ -9,11 +11,25 @@ export const isReRequest = (
   reRequest: RequestWithUtcTimeInMs,
   baseRequest: RequestWithUtcTimeInMs,
 ): boolean => {
-  if (reRequest.url !== baseRequest.url) {
+  if (reRequest.method !== baseRequest.method) {
     return false;
   }
 
-  if (reRequest.method !== baseRequest.method) {
+  const reRequestUrlObject = new URL(reRequest.url);
+  const baseRequestUrlObject = new URL(baseRequest.url);
+
+  if (reRequestUrlObject.origin !== baseRequestUrlObject.origin) {
+    return false;
+  }
+
+  if (reRequestUrlObject.search !== baseRequestUrlObject.search) {
+    return false;
+  }
+
+  const reRequestQueryKeys = [...reRequestUrlObject.searchParams.keys()].join('&');
+  const baseRequestQueryKeys = [...baseRequestUrlObject.searchParams.keys()].join('&');
+
+  if (reRequestQueryKeys !== baseRequestQueryKeys) {
     return false;
   }
 
