@@ -239,6 +239,9 @@ that exports the pack's config under the name `pack`.
 
 Here are the basic fields of the pack config.
 
+`addLogsWithTags: readonly LogTag[]`: array of additional log tags. Logs with a specific tag
+(in `logTag` field) will be added only if their tag is specified in this array.
+
 `browserFlags: string[]`: array of browser flags, like `--disable-dev-shm-usage`,
 with which the browser is launched to run tests.
 

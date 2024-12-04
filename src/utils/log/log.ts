@@ -21,7 +21,12 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
       ? (maybePayload as LogEventType)
       : ((maybeLogEventType as LogEventType) ?? LogEventType.Unspecified);
 
-  const {mapLogPayloadInReport} = getFullPackConfig();
+  const {addLogsWithTags, mapLogPayloadInReport} = getFullPackConfig();
+
+  if (payload && 'logTag' in payload && !addLogsWithTags.includes(payload.logTag)) {
+    return;
+  }
+
   const payloadInReport = mapLogPayloadInReport(message, payload, type);
 
   registerLogEvent(runId, {message, payload: payloadInReport, time, type});

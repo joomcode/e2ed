@@ -1,4 +1,5 @@
 import {assertValueIsDefined} from '../asserts';
+import {log} from '../log';
 
 import {isReRequest} from './isReRequest';
 import {processAllRequestsCompletePredicates} from './processAllRequestsCompletePredicates';
@@ -22,6 +23,11 @@ export const addNotCompleteRequest = async (
 
   hashOfNotCompleteRequests[requestHookContextId] = request;
 
+  log(`Add not complete request with url ${request.url}`, {
+    logTag: 'waitForAllRequestsComplete',
+    requestHookContextId,
+  });
+
   for (const previousRequestId of Object.keys(
     hashOfNotCompleteRequests,
   ) as RequestHookContextId[]) {
@@ -37,6 +43,11 @@ export const addNotCompleteRequest = async (
     });
 
     if (isReRequest(request, previousRequest)) {
+      log(`Remove duplicate request with url ${previousRequest.url}`, {
+        logTag: 'waitForAllRequestsComplete',
+        previousRequestId,
+      });
+
       // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete hashOfNotCompleteRequests[previousRequestId];
     }

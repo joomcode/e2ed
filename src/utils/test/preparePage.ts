@@ -1,7 +1,7 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 
 import {getConsoleMessagesFromContext} from '../../context/consoleMessages';
-import {getIsPageNavigatingNow, setIsPageNavigatingNow} from '../../context/isPageNavigatingNow';
+import {setIsPageNavigatingNow} from '../../context/isPageNavigatingNow';
 import {getJsErrorsFromContext} from '../../context/jsError';
 import {getNavigationDelay} from '../../context/navigationDelay';
 import {getOnResponseCallbacks} from '../../context/onResponseCallbacks';
@@ -49,7 +49,6 @@ export const preparePage = async (page: Page): Promise<() => Promise<void>> => {
   );
 
   let navigationRequestsCount = 0;
-  const skippedRequestUrls = Object.create(null) as Record<string, true>;
 
   const consoleListener = AsyncLocalStorage.bind(async (message: PlaywrightConsoleMessage) => {
     const args: unknown[] = [];
@@ -73,11 +72,6 @@ export const preparePage = async (page: Page): Promise<() => Promise<void>> => {
 
   const requestListener = AsyncLocalStorage.bind(async (newRequest: PlaywrightRequest) => {
     const isNavigationRequest = newRequest.isNavigationRequest();
-    const isPageNavigatingNow = getIsPageNavigatingNow();
-
-    if (isPageNavigatingNow) {
-      skippedRequestUrls[newRequest.url()] = true;
-    }
 
     if (isNavigationRequest) {
       navigationRequestsCount += 1;

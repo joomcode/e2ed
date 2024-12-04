@@ -62,6 +62,7 @@ export type {
   LogContext,
   LogParams,
   LogPayload,
+  LogTag,
   MapBackendResponseToLog,
   MapLogPayload,
   MapLogPayloadInReport,
