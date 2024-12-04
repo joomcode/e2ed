@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.19.4](https://github.com/joomcode/e2ed/tree/v0.19.4) (2024-12-04)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.3...v0.19.4)
+
+- [Merge pull request #98 from joomcode/fix/add-logs-to-rerequests](https://github.com/joomcode/e2ed/commit/692f380a1840ce63caf3d0d1ab7259c19b8721a0) ([uid11](https://github.com/uid11))
+
+  feat: add `addLogsWithTags` field to pack config
+
+- [FI-1569 feat: add `addLogsWithTags` field to pack config](https://github.com/joomcode/e2ed/commit/41ad5f771c144f0c075becb54bcadf7daa4f262b) ([uid11](https://github.com/uid11))
+
+  chore: update `prettier` to 3.4.2
+
 ## [v0.19.3](https://github.com/joomcode/e2ed/tree/v0.19.3) (2024-12-03)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.2...v0.19.3)

@@ -1,6 +1,6 @@
 {
   "name": "e2ed",
-  "version": "0.19.3",
+  "version": "0.19.4",
   "description": "E2E testing framework over Playwright",
   "keywords": [
     "E2E",
