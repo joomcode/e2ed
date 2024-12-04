@@ -42,6 +42,7 @@ const waitBeforeRetryTimeout = 1_000;
  * Pack of tests or tasks (pack configuration object).
  */
 export const pack: Pack = {
+  addLogsWithTags: [],
   assertionTimeout: 5_000,
   browserFlags,
   browserName: 'chromium',

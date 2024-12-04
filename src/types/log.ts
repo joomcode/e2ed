@@ -30,9 +30,15 @@ export type LogPayload = Readonly<{
   backendResponses?: readonly Payload[];
   filePath?: unknown;
   logEventStatus?: LogEventStatus;
+  logTag?: LogTag;
   successful?: unknown;
 }> &
   Payload;
+
+/**
+ * Type for `log` tags.
+ */
+export type LogTag = 'waitForAllRequestsComplete';
 
 /**
  * Maps responses from the backend to logs during the test.

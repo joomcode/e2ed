@@ -1,3 +1,5 @@
+import {log} from '../log';
+
 import type {RequestHookContextId, WaitForEventsState} from '../../types/internal';
 
 /**
@@ -9,6 +11,11 @@ export const completeRequest = (
   waitForEventsState: WaitForEventsState,
 ): void => {
   const {allRequestsCompletePredicates, hashOfNotCompleteRequests} = waitForEventsState;
+
+  log(`Complete request with url ${hashOfNotCompleteRequests[requestHookContextId]?.url}`, {
+    logTag: 'waitForAllRequestsComplete',
+    requestHookContextId,
+  });
 
   // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
   delete hashOfNotCompleteRequests[requestHookContextId];

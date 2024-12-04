@@ -3,7 +3,7 @@ import type {PlaywrightTestConfig} from '@playwright/test';
 import type {TestRunStatus} from '../../constants/internal';
 
 import type {FullMocksConfig} from '../fullMocks';
-import type {MapBackendResponseToLog, MapLogPayload, MapLogPayloadInReport} from '../log';
+import type {LogTag, MapBackendResponseToLog, MapLogPayload, MapLogPayloadInReport} from '../log';
 import type {MaybePromise} from '../promise';
 import type {LiteReport} from '../report';
 import type {TestOptions, TestStaticOptions} from '../testRun';
@@ -26,6 +26,12 @@ export type OwnE2edConfig<
   SkipTests = SkipTestsPlaceholder,
   TestMeta = TestMetaPlaceholder,
 > = Readonly<{
+  /**
+   * Array of additional log tags. Logs with a specific tag (in `logTag` field)
+   * will be added only if their tag is specified in this array.
+   */
+  addLogsWithTags: readonly LogTag[];
+
   /**
    * Array of browser flags, like `--disable-dev-shm-usage`, with which the browser is launched to run tests.
    */
