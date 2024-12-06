@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.19.5](https://github.com/joomcode/e2ed/tree/v0.19.5) (2024-12-06)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.4...v0.19.5)
+
+- [chore: update `node_modules/debug` to 4.4.0 to dedupe dependencies](https://github.com/joomcode/e2ed/commit/d18c932b46b82a8fe8d3e7423ab24310d56d9d3a) ([uid11](https://github.com/uid11))
+- [Merge pull request #99 from joomcode/fix/is-rerequest-respect-pathname](https://github.com/joomcode/e2ed/commit/1f19ff9bb2bf8e235202fd60b75a20ff7ea82a61) ([uid11](https://github.com/uid11))
+
+  fix: `isReRequest` respect `pathname`
+
+- [FI-1557 fix: `isReRequest` respect `pathname`](https://github.com/joomcode/e2ed/commit/a4715a95c230241145aedaedcecf40126c10a8a9) ([uid11](https://github.com/uid11))
+
 ## [v0.19.4](https://github.com/joomcode/e2ed/tree/v0.19.4) (2024-12-04)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.3...v0.19.4)
