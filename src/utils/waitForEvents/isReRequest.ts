@@ -22,7 +22,7 @@ export const isReRequest = (
     return false;
   }
 
-  if (reRequestUrlObject.search !== baseRequestUrlObject.search) {
+  if (reRequestUrlObject.pathname !== baseRequestUrlObject.pathname) {
     return false;
   }
 
