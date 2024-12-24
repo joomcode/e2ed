@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.19.6](https://github.com/joomcode/e2ed/tree/v0.19.6) (2024-12-24)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.5...v0.19.6)
+
+- [Merge pull request #100 from joomcode/chore/update-get-modules-graph](https://github.com/joomcode/e2ed/commit/15755da491f0137c40085457b2c62d9a53dfdb57) ([uid11](https://github.com/uid11))
+
+  chore: update `get-modules-graph` to 0.0.10
+
+- [FI-970 chore: update `get-modules-graph` to 0.0.10](https://github.com/joomcode/e2ed/commit/13153aca56410258e1ca5e1d6f0ebc4d92b74d06) ([uid11](https://github.com/uid11))
+
+  chore: update Playwright to 1.49.1
+
+  chore: update `@types/node`
+
 ## [v0.19.5](https://github.com/joomcode/e2ed/tree/v0.19.5) (2024-12-06)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.4...v0.19.5)
