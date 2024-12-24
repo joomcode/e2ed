@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.19.7](https://github.com/joomcode/e2ed/tree/v0.19.7) (2024-12-24)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.6...v0.19.7)
+
+- [Merge pull request #101 from joomcode/fix/get-modules-graph-cjs](https://github.com/joomcode/e2ed/commit/2e36016b46a4f0d85a7657383c552cb9c6d6bdad) ([uid11](https://github.com/uid11))
+
+  fix: circular dependency in `get-modules-graph` in CJS
+
+- [FI-970 fix: circular dependency in `get-modules-graph` in CJS](https://github.com/joomcode/e2ed/commit/fca5743f40c6e6be4757b9207a4d57adbb87f0d1) ([uid11](https://github.com/uid11))
+
 ## [v0.19.6](https://github.com/joomcode/e2ed/tree/v0.19.6) (2024-12-24)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.5...v0.19.6)
