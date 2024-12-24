@@ -27,7 +27,7 @@
   "dependencies": {
     "@playwright/test": "1.49.1",
     "create-locator": "0.0.25",
-    "get-modules-graph": "0.0.10",
+    "get-modules-graph": "0.0.11",
     "globby": "11.1.0"
   },
   "devDependencies": {
