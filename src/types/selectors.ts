@@ -1,4 +1,5 @@
 import type {DESCRIPTION_KEY} from '../constants/internal';
+import type {AttributesOptions} from '../createLocator';
 // eslint-disable-next-line import/no-internal-modules
 import type {Selector as SelectorClass} from '../utils/selectors/Selector';
 
@@ -44,14 +45,7 @@ type ReplaceObjectSelectors<Obj extends object> = Readonly<{
 /**
  * Options of `createSelectorFunction` function.
  */
-export type CreateSelectorFunctionOptions = Readonly<{
-  getLocatorAttributeName: GetLocatorAttributeNameFn;
-}>;
-
-/**
- * Type of `getLocatorAttributeName` function.
- */
-export type GetLocatorAttributeNameFn = (this: void, parameter: string) => string;
+export type CreateSelectorFunctionOptions = AttributesOptions;
 
 /**
  * Creates selector by locator and optional parameters.
@@ -69,9 +63,6 @@ export type Selector = ReplaceObjectSelectors<SelectorClass> &
  * Custom methods that `e2ed` adds to selector.
  */
 export type SelectorCustomMethods = Readonly<{
-  /** Creates a selector that filters a matching set by locatorId. */
-  filterByLocatorId: (this: SelectorClass, locatorId: string) => SelectorClass;
-
   /** Creates a selector that filters a matching set by locator parameter. */
   filterByLocatorParameter: (
     this: SelectorClass,
@@ -79,26 +70,29 @@ export type SelectorCustomMethods = Readonly<{
     value: string,
   ) => SelectorClass;
 
-  /** Finds all descendants of all nodes in the matching set and filters them by locatorId. */
-  findByLocatorId: (this: SelectorClass, locatorId: string) => SelectorClass;
+  /** Creates a selector that filters a matching set by testId. */
+  filterByTestId: (this: SelectorClass, testId: string) => SelectorClass;
 
   /** Finds all descendants of all nodes in the matching set and filters them by locator parameter. */
   findByLocatorParameter: (this: SelectorClass, parameter: string, value: string) => SelectorClass;
 
+  /** Finds all descendants of all nodes in the matching set and filters them by testId. */
+  findByTestId: (this: SelectorClass, testId: string) => SelectorClass;
+
   /** Get string description of selector if any. */
   getDescription: (this: SelectorClass) => string | undefined;
-
-  /** Returns the value of the locator id. */
-  getLocatorId: (this: SelectorClass) => Promise<string | null>;
 
   /** Returns the value of the locator parameter. */
   getLocatorParameter: (this: SelectorClass, parameter: string) => Promise<string | null>;
 
-  /** true if the element has the locator id. */
-  hasLocatorId: (this: SelectorClass) => Promise<boolean>;
+  /** Returns the value of the test id. */
+  getTestId: (this: SelectorClass) => Promise<string | null>;
 
   /** true if the element has the locator parameter. */
   hasLocatorParameter: (this: SelectorClass, parameter: string) => Promise<boolean>;
+
+  /** true if the element has the test id. */
+  hasTestId: (this: SelectorClass) => Promise<boolean>;
 }>;
 
 /**

@@ -15,7 +15,7 @@ parserOptions:
   sourceType: module
 plugins: [simple-import-sort, typescript-sort-keys]
 root: true
-ignorePatterns: [bin/forks/*/package, build, local]
+ignorePatterns: [build, local]
 rules:
   class-methods-use-this: off
   complexity: [error, {max: 10}]
@@ -74,7 +74,7 @@ rules:
   import/no-unassigned-import: error
   import/no-unresolved:
     - error
-    - {commonjs: true, ignore: [autotests, e2ed/testcafe]}
+    - {commonjs: true, ignore: [autotests]}
   import/no-unused-modules:
     - error
     - ignoreExports:
@@ -109,7 +109,7 @@ rules:
     - ':not(MethodDefinition, Property) > FunctionExpression'
   no-return-await: off
   no-shadow: off
-  no-underscore-dangle: [error, {allow: [_onConfigureResponse]}]
+  no-underscore-dangle: error
   no-unused-expressions: off
   no-useless-constructor: off
   no-use-before-define: off

@@ -54,7 +54,7 @@ test('selector custom methods', {meta: {testId: '15'}}, async () => {
     reportPage.navigationRetriesButtonSelected.getDescription(),
     'selector has apropriate description',
   ).eql(
-    '[data-testid="RetriesButtons"].findByLocatorId(RetryButton).filterByLocatorParameter(selected, true)',
+    '[data-testid="RetriesButtons"].findByTestId(RetryButton).filterByLocatorParameter(selected, true)',
   );
 
   await click(reportPage.navigationRetriesButton.nth(0));

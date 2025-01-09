@@ -1,5 +1,5 @@
 import {attributesOptions} from 'autotests/constants';
-import {createTestUtils} from 'e2ed/createLocator';
+import {createTestLocator} from 'e2ed/createLocator';
 
 import {createSelector} from './createSelector';
 
@@ -7,9 +7,10 @@ import type {LocatorFunction} from 'create-locator';
 import type {Selector} from 'e2ed/types';
 
 /**
- * Test utils, that produce `Selector`, CSS selector string and `testId` string.
+ * Locator kit with `locator` function, that produce `Selector`,
+ * and additional `getSelector` and `getTestId` functions.
  */
-const utils = createTestUtils({
+const locatorKit = createTestLocator({
   attributesOptions,
   createLocatorByCssSelector: (selector) =>
     createSelector(selector.replace('data-test-runhash', 'data-runhash')),
@@ -19,14 +20,14 @@ const utils = createTestUtils({
 /**
  * Locator, that produce `Selector`.
  */
-export const locator: LocatorFunction<Selector> = utils.locator;
+export const locator: LocatorFunction<Selector> = locatorKit.locator;
 
 /**
- * Locator, that produce CSS selector string.
+ * Get CSS selector string.
  */
-export const cssSelector: LocatorFunction<string> = utils.selector;
+export const getCssSelector: LocatorFunction<string> = locatorKit.getSelector;
 
 /**
- * Locator, that produce `testId` string.
+ * Get `testId` string.
  */
-export const testId: LocatorFunction<string> = utils.testId;
+export const getTestId: LocatorFunction<string> = locatorKit.getTestId;

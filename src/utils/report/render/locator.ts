@@ -10,7 +10,7 @@ const isProduction = e2edEnvironment.E2ED_ORIGIN !== 'https://google.com';
 
 const createLocatorOptions: CreateLocatorOptions = {attributesOptions, isProduction};
 
-const locatorAttributes = createSimpleLocator(createLocatorOptions);
+const {locator: locatorAttributes} = createSimpleLocator(createLocatorOptions);
 
 export {createLocatorOptions};
 

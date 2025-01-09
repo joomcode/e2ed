@@ -34,7 +34,7 @@ const setReadJsonReportDataObservers = clientSetReadJsonReportDataObservers;
  * @internal
  */
 export const initialScript = (): void => {
-  const locatorAttributes = createSimpleLocator(createLocatorOptions);
+  const {locator: locatorAttributes} = createSimpleLocator(createLocatorOptions);
 
   locator = (...args): SafeHtml => renderAttributes(locatorAttributes(...(args as [string])));
 
