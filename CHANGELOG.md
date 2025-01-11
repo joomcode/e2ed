@@ -1,5 +1,25 @@
 # Changelog
 
+## [v0.19.8](https://github.com/joomcode/e2ed/tree/v0.19.8) (2025-01-11)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.7...v0.19.8)
+
+- [Merge pull request #102 from joomcode/fix/use-testId-instead-of-locatorId](https://github.com/joomcode/e2ed/commit/c6f82ddaf47a401ac03b4f85dee1723dc3bfcdeb) ([uid11](https://github.com/uid11))
+
+  fix: rename `locatorId` to `testId` everywhere
+
+- [FI-1504 fix: rename `locatorId` to `testId` everywhere](https://github.com/joomcode/e2ed/commit/640e9a5e9d6d1329be4f3a737567ed01f21e8821) ([uid11](https://github.com/uid11))
+
+  fix: write `endTimeInMs` after pack hooks
+
+  fix: remove unnecessary options in ESLint config
+
+  chore: update `create-locator` to 0.0.27
+
+  chore: update `@types/node` and `typescript`
+
+  FI-1606 feat: use `attributesOptions` as selector's options
+
 ## [v0.19.7](https://github.com/joomcode/e2ed/tree/v0.19.7) (2024-12-24)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.6...v0.19.7)
