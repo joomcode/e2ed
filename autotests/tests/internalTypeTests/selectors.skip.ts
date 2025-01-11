@@ -3,29 +3,29 @@ import {createSelector, htmlElementSelector, locator} from 'autotests/selectors'
 import type {Selector} from 'e2ed/types';
 
 // @ts-expect-error: wrong number of arguments
-htmlElementSelector.findByLocatorId();
+htmlElementSelector.findByTestId();
 // @ts-expect-error: wrong type of arguments
-htmlElementSelector.findByLocatorId(0);
+htmlElementSelector.findByTestId(0);
 // ok
-htmlElementSelector.findByLocatorId('id') satisfies Selector;
+htmlElementSelector.findByTestId('id') satisfies Selector;
 // ok
-htmlElementSelector.findByLocatorId('id').findByLocatorId('id2') satisfies Selector;
+htmlElementSelector.findByTestId('id').findByTestId('id2') satisfies Selector;
 // ok
-htmlElementSelector.findByLocatorId('id').find('.test-children') satisfies Selector;
+htmlElementSelector.findByTestId('id').find('.test-children') satisfies Selector;
 // ok
-htmlElementSelector.find('body').findByLocatorId('id') satisfies Selector;
+htmlElementSelector.find('body').findByTestId('id') satisfies Selector;
 
 // ok
-createSelector('id').findByLocatorId('id').find('body').findByLocatorId('id') satisfies Selector;
+createSelector('id').findByTestId('id').find('body').findByTestId('id') satisfies Selector;
 
 // ok
-locator('id').findByLocatorId('id').find('body').findByLocatorId('id') satisfies Selector;
+locator('id').findByTestId('id').find('body').findByTestId('id') satisfies Selector;
 
 // @ts-expect-error: wrong number of arguments
 locator();
 
 // ok
-htmlElementSelector.filterByLocatorId('id') satisfies Selector;
+htmlElementSelector.filterByTestId('id') satisfies Selector;
 
 // ok
 htmlElementSelector.filterByLocatorParameter('prop', 'value') satisfies Selector;
@@ -33,16 +33,16 @@ htmlElementSelector.filterByLocatorParameter('prop', 'value') satisfies Selector
 htmlElementSelector.findByLocatorParameter('prop', 'value') satisfies Selector;
 
 // ok
-void htmlElementSelector.getLocatorId();
+void htmlElementSelector.getTestId();
 
 // @ts-expect-error: wrong number of arguments
-void htmlElementSelector.getLocatorId('id');
+void htmlElementSelector.getTestId('id');
 
 // @ts-expect-error: TODO: should be ok
-void htmlElementSelector.hasLocatorId() satisfies Promise<boolean>;
+void htmlElementSelector.hasTestId() satisfies Promise<boolean>;
 
 // @ts-expect-error: wrong number of arguments
-void htmlElementSelector.hasLocatorId('id');
+void htmlElementSelector.hasTestId('id');
 
 // @ts-expect-error: wrong number of arguments
 void htmlElementSelector.hasLocatorParameter();

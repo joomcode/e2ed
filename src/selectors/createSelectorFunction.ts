@@ -1,19 +1,25 @@
-import {setCustomInspectOnFunction} from '../utils/fn';
+import {DESCRIPTION_KEY} from '../constants/internal';
 import {generalLog} from '../utils/generalLog';
-import {createSelectorCreator} from '../utils/selectors';
+import {createCustomMethods, createGetTrap, Selector as SelectorClass} from '../utils/selectors';
+import {setReadonlyProperty} from '../utils/setReadonlyProperty';
 
-import type {CreateSelector, CreateSelectorFunctionOptions} from '../types/internal';
+import type {CreateSelector, CreateSelectorFunctionOptions, Selector} from '../types/internal';
 
 /**
  * Creates `createSelector` function.
  */
-export const createSelectorFunction = ({
-  getLocatorAttributeName,
-}: CreateSelectorFunctionOptions): CreateSelector => {
-  setCustomInspectOnFunction(getLocatorAttributeName);
-  generalLog('Create selector functions', {getLocatorAttributeName});
+export const createSelectorFunction = (
+  attributesOptions: CreateSelectorFunctionOptions,
+): CreateSelector => {
+  generalLog('Create selector function', {attributesOptions});
 
-  const createSelector = createSelectorCreator(getLocatorAttributeName);
+  const customMethods = createCustomMethods(attributesOptions);
 
-  return createSelector;
+  return (locator) => {
+    const selector = new SelectorClass(locator) as unknown as Selector;
+
+    setReadonlyProperty(selector, DESCRIPTION_KEY, locator);
+
+    return new Proxy(selector, {get: createGetTrap(customMethods)});
+  };
 };

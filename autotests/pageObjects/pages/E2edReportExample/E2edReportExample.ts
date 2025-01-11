@@ -28,8 +28,7 @@ export class E2edReportExample extends Page<CustomPageParams> {
   /**
    * Button tabs in navigation bar with test retries.
    */
-  readonly navigationRetriesButton: Selector =
-    this.navigationRetries.findByLocatorId('RetryButton');
+  readonly navigationRetriesButton: Selector = this.navigationRetries.findByTestId('RetryButton');
 
   /**
    * Selected button tab in navigation bar with test retries.
@@ -52,7 +51,7 @@ export class E2edReportExample extends Page<CustomPageParams> {
   /**
    * Test run button.
    */
-  readonly testRunButton: Selector = this.testRunsList.findByLocatorId('TestRunButton');
+  readonly testRunButton: Selector = this.testRunsList.findByTestId('TestRunButton');
 
   /**
    * List of test runs of retry.

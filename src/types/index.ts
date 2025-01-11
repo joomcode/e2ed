@@ -47,7 +47,12 @@ export type {
   PageClassType,
   PageClassTypeArgs,
 } from './pages';
-export type {FilePathFromRoot, TestFilePath} from './paths';
+export type {
+  AbsolutePathToDirectory,
+  DirectoryPathFromRoot,
+  FilePathFromRoot,
+  TestFilePath,
+} from './paths';
 export type {AsyncVoid, MaybePromise, Thenable} from './promise';
 export type {
   AnyObject,
@@ -63,12 +68,7 @@ export type {
   WebSocketRouteClassType,
   WebSocketRouteClassTypeWithGetParamsFromUrl,
 } from './routes';
-export type {
-  CreateSelector,
-  CreateSelectorFunctionOptions,
-  GetLocatorAttributeNameFn,
-  Selector,
-} from './selectors';
+export type {CreateSelector, CreateSelectorFunctionOptions, Selector} from './selectors';
 export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';
 export type {StringForLogs} from './string';

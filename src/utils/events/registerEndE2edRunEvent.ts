@@ -9,7 +9,7 @@ import {getReports} from './getReports';
 import {runAfterPackFunctions} from './runAfterPackFunctions';
 import {writeReports} from './writeReports';
 
-import type {LiteReport, ReportData} from '../../types/internal';
+import type {LiteReport, ReportData, UtcTimeInMs} from '../../types/internal';
 
 let isEndAlreadyCalled = false;
 
@@ -55,6 +55,11 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
     if (customReportProperties !== undefined) {
       setReadonlyProperty(reportData, 'customReportProperties', customReportProperties);
     }
+
+    const endTimeInMs = Date.now() as UtcTimeInMs;
+
+    setReadonlyProperty(liteReport, 'endTimeInMs', endTimeInMs);
+    setReadonlyProperty(reportData, 'endTimeInMs', endTimeInMs);
 
     await writeReports({liteReport, reportData});
   } catch (error) {

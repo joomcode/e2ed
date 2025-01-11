@@ -1,4 +1,4 @@
-import {cssSelector} from 'autotests/selectors';
+import {getCssSelector} from 'autotests/selectors';
 
 import type {Selector} from 'e2ed/types';
 
@@ -8,7 +8,7 @@ const testId = 'TestRunButton';
  * `TestRun` button.
  */
 export class TestRunButton {
-  static readonly parameters: string = cssSelector(testId, 'parameters');
+  static readonly parameters: string = getCssSelector(testId, 'parameters');
 
   readonly selector: Selector;
 

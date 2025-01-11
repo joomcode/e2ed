@@ -121,7 +121,6 @@ export type {RawRunLabelObject} from './runLabel';
 export type {
   CreateSelector,
   CreateSelectorFunctionOptions,
-  GetLocatorAttributeNameFn,
   Selector,
   SelectorCustomMethods,
 } from './selectors';

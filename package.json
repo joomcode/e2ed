@@ -26,13 +26,13 @@
   },
   "dependencies": {
     "@playwright/test": "1.49.1",
-    "create-locator": "0.0.25",
+    "create-locator": "0.0.27",
     "get-modules-graph": "0.0.11",
     "globby": "11.1.0"
   },
   "devDependencies": {
     "@playwright/browser-chromium": "1.49.1",
-    "@types/node": "22.10.2",
+    "@types/node": "22.10.5",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
@@ -45,7 +45,7 @@
     "eslint-plugin-typescript-sort-keys": "3.3.0",
     "husky": "9.1.7",
     "prettier": "3.4.2",
-    "typescript": "5.7.2"
+    "typescript": "5.7.3"
   },
   "peerDependencies": {
     "@types/node": ">=20",
