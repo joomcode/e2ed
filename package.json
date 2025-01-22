@@ -117,8 +117,8 @@
     "pretest:docker:copy": "rm -rf ./build/docker && mkdir --parents ./build/docker/node_modules/e2ed",
     "test:docker:copy": "cp -R ./build/autotests ./build/docker/autotests && cp ./build/tsconfig.json ./build/docker",
     "posttest:docker:copy": "rm -rf ./build/docker/autotests/reports && ./bin/addPackageJsonToBuildDocker.sh",
-    "test:docker": "(cd ./build/docker && E2ED_ORIGIN=https://google.com ./autotests/bin/runDocker.sh ./autotests/packs/allTests.ts)",
-    "test:local": "(cd ./build && E2ED_ORIGIN=https://google.com ./node_modules/e2ed/bin/localEntrypoint.sh ./autotests/packs/allTests.ts)"
+    "test:docker": "(cd ./build/docker && E2ED_ORIGIN=https://bing.com ./autotests/bin/runDocker.sh ./autotests/packs/allTests.ts)",
+    "test:local": "(cd ./build && E2ED_ORIGIN=https://bing.com ./node_modules/e2ed/bin/localEntrypoint.sh ./autotests/packs/allTests.ts)"
   },
   "sideEffects": false,
   "types": "index.d.ts"

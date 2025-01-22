@@ -1,6 +1,5 @@
 import {MobilePage} from 'autotests/pageObjects';
 import {Search as SearchRoute} from 'autotests/routes/pageRoutes';
-import {waitForAllRequestsComplete} from 'e2ed/actions';
 import {setReadonlyProperty} from 'e2ed/utils';
 
 import type {GetParamsType} from 'e2ed/types';
@@ -35,22 +34,6 @@ export class Search extends MobilePage<CustomPageParams> {
   }
 
   override async waitForPageLoaded(): Promise<void> {
-    await waitForAllRequestsComplete(
-      ({url}) => {
-        if (
-          url.startsWith('https://encrypted-tbn0.gstatic.com/') ||
-          url.startsWith('https://www.google.com/gen_204?') ||
-          url.startsWith('https://lh5.googleusercontent.com/') ||
-          url.startsWith('https://play.google.com/') ||
-          url.startsWith('https://www.googleadservices.com/') ||
-          url.startsWith('https://www.youtube.com/embed/')
-        ) {
-          return false;
-        }
-
-        return true;
-      },
-      {maxIntervalBetweenRequestsInMs: this.maxIntervalBetweenRequestsInMs, timeout: 8_000},
-    );
+    await this.waitForDomContentLoaded();
   }
 }

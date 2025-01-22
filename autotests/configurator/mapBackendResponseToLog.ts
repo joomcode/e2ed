@@ -18,9 +18,15 @@ export const mapBackendResponseToLog: MapBackendResponseToLog = ({
     return undefined;
   }
 
-  if (request.url.includes('&key=')) {
+  const {url} = request;
+
+  if (
+    url.startsWith('https://r.bing.com/rp/') ||
+    url.startsWith('https://www.bing.com/fd/') ||
+    url.includes('&key=')
+  ) {
     return undefined;
   }
 
-  return {duration, statusCode, url: request.url};
+  return {duration, statusCode, url};
 };
