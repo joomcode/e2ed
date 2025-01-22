@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.19.9](https://github.com/joomcode/e2ed/tree/v0.19.9) (2025-01-22)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.8...v0.19.9)
+
+- [Merge pull request #103 from joomcode/feat/restore-local-debug](https://github.com/joomcode/e2ed/commit/72226e4914bb62fb3bc5717db0e0df1afdd66173) ([uid11](https://github.com/uid11))
+
+  feat: restore nodejs process debug
+
+- [chore: update devDependencies (`@types/node` and `eslint-config-prettier`)](https://github.com/joomcode/e2ed/commit/83a131c290f77a8bc2be1e61b28ec0b541767aa5) ([uid11](https://github.com/uid11))
+- [fix: internal tests by replacing `google.com` to `bing.com`](https://github.com/joomcode/e2ed/commit/026825b7833eb8a428417b1120359508ff03afdf) ([uid11](https://github.com/uid11))
+- [FI-1616 fix: restore debug of main nodejs process by E2ED_DEBUG](https://github.com/joomcode/e2ed/commit/d34234f798b1c84682721f89bc66ea5abff0105f) ([uid11](https://github.com/uid11))
+
 ## [v0.19.8](https://github.com/joomcode/e2ed/tree/v0.19.8) (2025-01-11)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.7...v0.19.8)
