@@ -1,5 +1,6 @@
 import {fork} from 'node:child_process';
 
+import {isLocalRun} from '../../configurator';
 import {CONFIG_PATH, e2edEnvironment, isDebug} from '../../constants/internal';
 
 import {getFullPackConfig} from '../config';
@@ -43,8 +44,7 @@ export const runTests = async ({runLabel}: RunRetryOptions): Promise<void> => {
     await new Promise<void>((resolve, reject) => {
       const playwrightArgs = ['test', `--config=${CONFIG_PATH}`];
 
-      if (isDebug) {
-        // playwrightArgs.unshift('--node-options=--inspect-brk');
+      if (isDebug && isLocalRun) {
         e2edEnvironment.PWDEBUG = 'console';
         playwrightArgs.push('--debug');
       }
@@ -59,7 +59,10 @@ export const runTests = async ({runLabel}: RunRetryOptions): Promise<void> => {
         beforeRunFirstTest();
       }
 
-      const playwrightProcess = fork(playwrightCliPath, playwrightArgs, {stdio: 'pipe'});
+      const playwrightProcess = fork(playwrightCliPath, playwrightArgs, {
+        execArgv: [],
+        stdio: 'pipe',
+      });
 
       playwrightProcess.stdout?.on('data', (data) => {
         const stringData = stripExtraLogs(String(data).trim()).trim();

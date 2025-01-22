@@ -23,7 +23,7 @@ export class Main extends Page<CustomPageParams> {
   /**
    * Header selector.
    */
-  readonly header: Selector = createSelector('[role=navigation]');
+  readonly header: Selector = createSelector('header');
 
   /**
    * Page language.
@@ -62,12 +62,11 @@ export class Main extends Page<CustomPageParams> {
   }
 
   override async waitForPageLoaded(): Promise<void> {
+    await this.waitForDomContentLoaded();
+
     await waitForAllRequestsComplete(
       ({url}) => {
-        if (
-          url.startsWith('https://play.google.com/') ||
-          url.startsWith('https://www.youtube.com/embed/')
-        ) {
+        if (url.startsWith('https://www.bing.com/th?id=')) {
           return false;
         }
 

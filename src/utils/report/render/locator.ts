@@ -6,7 +6,7 @@ import {renderAttributes} from '../client';
 
 import type {SafeHtml} from '../../../types/internal';
 
-const isProduction = e2edEnvironment.E2ED_ORIGIN !== 'https://google.com';
+const isProduction = e2edEnvironment.E2ED_ORIGIN !== 'https://bing.com';
 
 const createLocatorOptions: CreateLocatorOptions = {attributesOptions, isProduction};
 

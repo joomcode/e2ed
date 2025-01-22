@@ -18,8 +18,8 @@ After the run, a detailed HTML report and a summary lite report in JSON format a
 
 ## Adding e2ed to a project
 
-Prerequisites: [node](https://nodejs.org/en/) >=16,
-[TypeScript](https://www.typescriptlang.org/) >=4.8.
+Prerequisites: [node](https://nodejs.org/en/) >=20,
+[TypeScript](https://www.typescriptlang.org/) >=5.
 
 All commands below are run from the root directory of the project.
 
@@ -87,10 +87,10 @@ to correct the path to `autotests` directory accordingly:
   },
 ```
 
-After that you can run pack with tests in the project locally (sample tests are run on `google.com`):
+After that you can run pack with tests in the project locally (sample tests are run on `bing.com`):
 
 ```sh
-E2ED_ORIGIN=https://google.com npx e2ed ./autotests/packs/allTests.ts
+E2ED_ORIGIN=https://bing.com npx e2ed ./autotests/packs/allTests.ts
 ```
 
 Now you can edit tests, pageObject-s and other files in the `autotests` directory as you need.
@@ -109,10 +109,10 @@ Packs are usually stored in the `autotests/packs` directory.
 
 ### Run local
 
-To run pack with tests locally for `https://google.com`:
+To run pack with tests locally for `https://bing.com`:
 
 ```sh
-E2ED_ORIGIN=https://google.com npx e2ed ./autotests/packs/allTests.ts
+E2ED_ORIGIN=https://bing.com npx e2ed ./autotests/packs/allTests.ts
 ```
 
 For convenience, you can add a command to run concrete pack in the `scripts` field
@@ -128,14 +128,14 @@ of the `package.json`:
 After that, you can run the pack like this:
 
 ```sh
-E2ED_ORIGIN=https://google.com npm run e2ed:allTests
+E2ED_ORIGIN=https://bing.com npm run e2ed:allTests
 ```
 
 Also, when running locally, you can pass additional
 command-line arguments, such as the path to a specific test file from a pack, to run just that test:
 
 ```sh
-E2ED_ORIGIN=https://google.com npm run e2ed:allTests ./autotests/tests/main/exists.ts
+E2ED_ORIGIN=https://bing.com npm run e2ed:allTests ./autotests/tests/main/exists.ts
 ```
 
 ### Run in docker
@@ -146,10 +146,10 @@ You can download the latest `e2ed` docker image from https://hub.docker.com/r/e2
 docker pull e2edhub/e2ed
 ```
 
-And run tests for `https://google.com` in docker container:
+And run tests for `https://bing.com` in docker container:
 
 ```sh
-E2ED_ORIGIN=https://google.com ./autotests/bin/runDocker.sh ./autotests/packs/allTests.ts
+E2ED_ORIGIN=https://bing.com ./autotests/bin/runDocker.sh ./autotests/packs/allTests.ts
 ```
 
 For convenience, you can add a command to run concrete pack in docker in the `scripts` field
@@ -165,7 +165,7 @@ of the `package.json`:
 After that, you can run the pack in docker like this:
 
 ```sh
-E2ED_ORIGIN=https://google.com npm run e2ed:docker:allTests
+E2ED_ORIGIN=https://bing.com npm run e2ed:docker:allTests
 ```
 
 ### Personal local pack for development
@@ -415,7 +415,7 @@ for both the application code and the autotest code.
 
 You can pass the following optional environment variables to the `e2ed` process in any standard way:
 
-`E2ED_ORIGIN`: origin-part of the url (`protocol` + `host`) on which the tests will be run. For example, `https://google.com`.
+`E2ED_ORIGIN`: origin-part of the url (`protocol` + `host`) on which the tests will be run. For example, `https://bing.com`.
 
 `E2ED_DEBUG`: run `e2ed` in `nodejs` debug mode (`--inspect-brk=0.0.0.0`) if this variable is not empty.
 
