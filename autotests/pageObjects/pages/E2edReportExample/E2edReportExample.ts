@@ -109,4 +109,8 @@ export class E2edReportExample extends Page<CustomPageParams> {
 
     return setPageCookiesAndNavigateToUrl(url, this.pageCookies);
   }
+
+  override async waitForPageLoaded(): Promise<void> {
+    await this.waitForDomContentLoaded();
+  }
 }

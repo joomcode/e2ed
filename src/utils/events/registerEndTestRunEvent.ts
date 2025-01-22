@@ -1,3 +1,4 @@
+import {isLocalRun} from '../../configurator';
 import {isDebug, TestRunStatus} from '../../constants/internal';
 import {getFullMocksState} from '../../context/fullMocks';
 import {getPlaywrightPage} from '../../useContext';
@@ -99,7 +100,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
   await writeTestRunToJsonFile(fullTestRun);
   await writeLogsToFile();
 
-  if (isDebug) {
+  if (isDebug && isLocalRun) {
     await getPlaywrightPage().pause();
   }
 };

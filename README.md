@@ -18,8 +18,8 @@ After the run, a detailed HTML report and a summary lite report in JSON format a
 
 ## Adding e2ed to a project
 
-Prerequisites: [node](https://nodejs.org/en/) >=16,
-[TypeScript](https://www.typescriptlang.org/) >=4.8.
+Prerequisites: [node](https://nodejs.org/en/) >=20,
+[TypeScript](https://www.typescriptlang.org/) >=5.
 
 All commands below are run from the root directory of the project.
 
