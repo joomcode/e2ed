@@ -4,20 +4,31 @@ import {getFullPackConfig} from '../../utils/config';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
 
-import type {InternalTab, Tab, UtcTimeInMs} from '../../types/internal';
+import type {AsyncVoid, InternalTab, Tab, UtcTimeInMs} from '../../types/internal';
 
 type Options = Readonly<{
   timeout?: number;
 }>;
 
+type WaitForNewTab = ((prepare: () => AsyncVoid, options?: Options) => Promise<Tab>) &
+  ((options?: Options) => Promise<Tab>);
+
 /**
  * Waits for opening of new tab and returns this tab.
  */
-export const waitForNewTab = async (options?: Options): Promise<Tab> => {
+export const waitForNewTab = (async (
+  prepareOrOptions: Options | (() => AsyncVoid),
+  options?: Options,
+): Promise<Tab> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const context = getPlaywrightPage().context();
-  const timeout = options?.timeout ?? getFullPackConfig().navigationTimeout;
+  const prepare = typeof prepareOrOptions === 'function' ? prepareOrOptions : undefined;
+  const finalOptions = typeof prepareOrOptions === 'function' ? options : prepareOrOptions;
+
+  const timeout = finalOptions?.timeout ?? getFullPackConfig().navigationTimeout;
+
+  await prepare?.();
 
   const page = await context.waitForEvent('page', {timeout});
 
@@ -36,4 +47,4 @@ export const waitForNewTab = async (options?: Options): Promise<Tab> => {
   );
 
   return newTab as Tab;
-};
+}) as WaitForNewTab;

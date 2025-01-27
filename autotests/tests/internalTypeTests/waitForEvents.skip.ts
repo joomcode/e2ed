@@ -1,5 +1,6 @@
 import {AddUser, GetUser} from 'autotests/routes/apiRoutes';
 import {
+  waitForNewTab,
   waitForRequest,
   waitForRequestToRoute,
   waitForResponse,
@@ -86,3 +87,21 @@ void waitForResponseToRoute(AddUser, ({delay}, {responseBody, request: {requestB
 
 // @ts-expect-error: waitForResponseToRoute does not accept routes without `getParamsFromUrlOrThrow` method
 void waitForResponseToRoute(GetUser);
+
+// ok
+void waitForNewTab();
+
+// ok
+void waitForNewTab({timeout: 2_000});
+
+// ok
+void waitForNewTab(() => Promise.resolve());
+
+// ok
+void waitForNewTab(() => {});
+
+// ok
+void waitForNewTab(() => Promise.resolve(), {timeout: 1_000});
+
+// @ts-expect-error: waitForNewTab does not accept options as first argument
+void waitForNewTab({timeout: 1_000}, () => {});
