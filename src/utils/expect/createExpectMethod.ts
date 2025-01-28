@@ -90,6 +90,8 @@ export const createExpectMethod = (
         selector: selectorPropertyRetryData
           ? getDescriptionFromSelector(selectorPropertyRetryData.selector)
           : undefined,
+        selectorProperty: selectorPropertyRetryData?.property,
+        selectorPropertyArgs: selectorPropertyRetryData?.args,
       };
 
       return addTimeoutToPromise(Promise.resolve(value), timeout, error)
