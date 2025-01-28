@@ -12,7 +12,7 @@ import {valueToString, wrapStringForLogs} from '../valueToString';
 import {additionalMatchers} from './additionalMatchers';
 import {applyAdditionalMatcher} from './applyAdditionalMatcher';
 
-import type {Fn, Selector, SelectorPropertyRetryData} from '../../types/internal';
+import type {Fn, SelectorPropertyRetryData} from '../../types/internal';
 
 import type {Expect} from './Expect';
 import type {AssertionFunction, ExpectMethod} from './types';
@@ -36,6 +36,9 @@ export const createExpectMethod = (
     const timeout = assertionTimeout + additionalAssertionTimeoutInMs;
     const message = getAssertionMessage === undefined ? key : getAssertionMessage(...args);
 
+    const selectorPropertyRetryData = (
+      this.actualValue as {[RETRY_KEY]?: SelectorPropertyRetryData}
+    )?.[RETRY_KEY];
     const timeoutWithUnits = getDurationWithUnits(timeout);
     const error = new E2edError(
       `"${key}" assertion promise rejected after ${timeoutWithUnits} timeout`,
@@ -46,10 +49,6 @@ export const createExpectMethod = (
       const ctx: Expect = {actualValue: value, description: this.description};
 
       if (additionalMatcher !== undefined) {
-        const selectorPropertyRetryData = (
-          this.actualValue as {[RETRY_KEY]?: SelectorPropertyRetryData}
-        )?.[RETRY_KEY];
-
         return addTimeoutToPromise(
           applyAdditionalMatcher(
             additionalMatcher as Fn<unknown[], Promise<unknown>>,
@@ -86,9 +85,11 @@ export const createExpectMethod = (
       const logMessage = `Assert: ${this.description}`;
       const logPayload = {
         assertionArguments: args,
-        description: value != null ? getDescriptionFromSelector(value as Selector) : undefined,
         error: maybeError,
         logEventStatus: maybeError ? LogEventStatus.Failed : LogEventStatus.Passed,
+        selector: selectorPropertyRetryData
+          ? getDescriptionFromSelector(selectorPropertyRetryData.selector)
+          : undefined,
       };
 
       return addTimeoutToPromise(Promise.resolve(value), timeout, error)

@@ -1,5 +1,4 @@
 .idea
-bin/forks/*/package
 build
 local
 node_modules

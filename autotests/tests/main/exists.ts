@@ -43,6 +43,8 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_00
 
   const mainPage = await navigateToPage(Main, {language});
 
+  await expect(mainPage.header.textContent, 'header text is ok').ok();
+
   const urlObject = await urlObjectPromise;
 
   await expect(getDocumentUrl(), 'waitForStartOfPageLoad returns correct url object').eql(
