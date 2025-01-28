@@ -28,9 +28,11 @@ export const waitForNewTab = (async (
 
   const timeout = finalOptions?.timeout ?? getFullPackConfig().navigationTimeout;
 
+  const pagePromise = context.waitForEvent('page', {timeout});
+
   await prepare?.();
 
-  const page = await context.waitForEvent('page', {timeout});
+  const page = await pagePromise;
 
   const newTab: InternalTab = {page};
 
