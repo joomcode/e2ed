@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.19.11](https://github.com/joomcode/e2ed/tree/v0.19.11) (2025-01-28)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.10...v0.19.11)
+
+- [Merge pull request #105 from joomcode/fix/waitForNewTab-prepare-step](https://github.com/joomcode/e2ed/commit/32c3a357e04b50ed8d21fefbc17fe10cc14292a6) ([uid11](https://github.com/uid11))
+
+  fix: prepare step in `waitForNewTab` action
+
+- [FI-1638 fix: prepare step in `waitForNewTab` action](https://github.com/joomcode/e2ed/commit/28a95bb46ef71253f8f2cdca6e78f92541b06983) ([uid11](https://github.com/uid11))
+
 ## [v0.19.10](https://github.com/joomcode/e2ed/tree/v0.19.10) (2025-01-28)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.9...v0.19.10)
