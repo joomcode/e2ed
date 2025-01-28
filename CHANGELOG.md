@@ -1,5 +1,20 @@
 # Changelog
 
+## [v0.19.10](https://github.com/joomcode/e2ed/tree/v0.19.10) (2025-01-28)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.9...v0.19.10)
+
+- [Merge pull request #104 from joomcode/feat/add-prepare-step-to-waitForNewTab](https://github.com/joomcode/e2ed/commit/c03bbd791cc85eb52fc1863547f554b94f65c9d7) ([uid11](https://github.com/uid11))
+
+  feat: add preparation step to `waitForNewTab` action
+
+- [chore: update Playwright to 1.50.0](https://github.com/joomcode/e2ed/commit/706fe90620ec33cd9863be4a2c9ef59886dd543e) ([uid11](https://github.com/uid11))
+
+  chore: update devDependencies (`@types/node`)
+
+- [FI-1638 feat: add optional prepare step to `waitForNewTab` action](https://github.com/joomcode/e2ed/commit/de555e1813ae37d9a76467b62f88f0ee43974c2e) ([uid11](https://github.com/uid11))
+- [FI-1647 fix: selector description in `except`'s methods](https://github.com/joomcode/e2ed/commit/1c34f86157aca4ec1f047b49f4afb20eb7c7f075) ([uid11](https://github.com/uid11))
+
 ## [v0.19.9](https://github.com/joomcode/e2ed/tree/v0.19.9) (2025-01-22)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.8...v0.19.9)
