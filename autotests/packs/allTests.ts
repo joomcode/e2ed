@@ -17,6 +17,7 @@ import {
   mapLogPayloadInConsole,
   mapLogPayloadInLogFile,
   mapLogPayloadInReport,
+  matchScreenshot,
   skipTests,
 } from '../configurator';
 
@@ -65,6 +66,7 @@ export const pack: Pack = {
   mapLogPayloadInConsole,
   mapLogPayloadInLogFile,
   mapLogPayloadInReport,
+  matchScreenshot,
   maxRetriesCountInDocker: 3,
   navigationTimeout: 6_000,
   overriddenConfigFields: null,
@@ -78,7 +80,7 @@ export const pack: Pack = {
   skipTests,
   takeFullPageScreenshotOnError: false,
   takeViewportScreenshotOnError: true,
-  testFileGlobs: ['**/autotests/tests/**/*.ts'],
+  testFileGlobs: ['**/autotests/tests/main/*.ts'],
   testIdleTimeout: 8_000,
   testTimeout: 15_000,
   userAgent,

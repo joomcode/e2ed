@@ -16,7 +16,7 @@ type ResponseFromFullMocksOptions = Readonly<{
 }>;
 
 /**
- * Functions that specify the "full mocks" functionality.
+ * Functions that describe the "full mocks" functionality.
  */
 export type FullMocksConfig<TestMeta = TestMetaPlaceholder> = Readonly<{
   /**

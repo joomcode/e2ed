@@ -38,6 +38,7 @@ export type {
 } from './http';
 export type {KeyboardPressKey} from './keyboard';
 export type {Log, LogContext, LogParams, LogPayload, LogTag} from './log';
+export type {MatchScreenshotConfig} from './matchScreenshot';
 export type {ApiMockFunction} from './mockApiRoute';
 export type {WebSocketMockFunction} from './mockWebSocketRoute';
 export type {NavigateToUrlOptions} from './navigation';

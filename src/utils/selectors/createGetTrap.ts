@@ -23,7 +23,7 @@ export const createGetTrap = (customMethods: SelectorCustomMethods): Return => {
         : Reflect.get(target, property, receiver)
     ) as Values<Selector> & {[DESCRIPTION_KEY]?: string};
 
-    if (typeof property === 'symbol') {
+    if (typeof property === 'symbol' || property === 'toString') {
       return result;
     }
 

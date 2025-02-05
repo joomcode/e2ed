@@ -1,6 +1,7 @@
 import type {AnyPack, AnyPackParameters, FullPackConfigByPack, GetPackParameters} from '../config';
 import type {FullMocksConfig} from '../fullMocks';
 import type {MapBackendResponseToLog, MapLogPayload, MapLogPayloadInReport} from '../log';
+import type {MatchScreenshotConfig} from '../matchScreenshot';
 import type {LiteReport} from '../report';
 import type {TestFunction} from '../testRun';
 
@@ -35,6 +36,7 @@ export type CreatePackSpecificTypes<
   MapLogPayloadInConsole: MapLogPayload;
   MapLogPayloadInLogFile: MapLogPayload;
   MapLogPayloadInReport: MapLogPayloadInReport;
+  MatchScreenshot: MatchScreenshotConfig;
   TestFunction: TestFunction<PackParameters['TestMeta']>;
   WaitBeforeRetry: FullPackConfigByPack<Pack>['waitBeforeRetry'];
 }>;

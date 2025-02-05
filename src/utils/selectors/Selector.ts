@@ -1,12 +1,16 @@
 /* eslint-disable max-lines, @typescript-eslint/naming-convention, @typescript-eslint/no-non-null-assertion */
 
+import {inspect} from 'node:util';
+
 import {RETRY_KEY} from '../../constants/internal';
 import {getFrameContext} from '../../context/frameContext';
 import {getPlaywrightPage} from '../../useContext';
 
+import {getDescriptionFromSelector} from './getDescriptionFromSelector';
+
 import type {Locator as PlaywrightLocator} from '@playwright/test';
 
-import type {SelectorPropertyRetryData} from '../../types/internal';
+import type {Selector as SelectorType, SelectorPropertyRetryData} from '../../types/internal';
 
 const setRetryData = (
   promise: Promise<unknown>,
@@ -23,7 +27,7 @@ function toJSON(this: object): string {
 /**
  * Selector.
  */
-export class Selector {
+class Selector {
   readonly cssString: string;
 
   private args?: readonly (RegExp | number | string)[];
@@ -239,6 +243,16 @@ export class Selector {
     return selector;
   }
 
+  /**
+   * Custom string presentation of selector.
+   */
+  toString(this: SelectorType): string {
+    const description = getDescriptionFromSelector(this);
+    const forText = description === undefined ? '' : ` for ${description}`;
+
+    return `Selector${forText}`;
+  }
+
   withText(textOrRegExp: RegExp | string): Selector {
     const selector = new Selector(this.cssString);
 
@@ -249,3 +263,13 @@ export class Selector {
     return selector;
   }
 }
+
+/**
+ * Custom presentation of selector for `nodejs` `inspect`.
+ */
+// eslint-disable-next-line no-restricted-syntax
+Selector.prototype[inspect.custom as unknown as 'toString'] = function custom(): string {
+  return this.toString();
+};
+
+export {Selector};

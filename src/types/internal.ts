@@ -68,6 +68,7 @@ export type {
   MapLogPayloadInReport,
   Payload,
 } from './log';
+export type {MatchScreenshotConfig} from './matchScreenshot';
 export type {ApiMockFunction} from './mockApiRoute';
 /** @internal */
 export type {ApiMockState} from './mockApiRoute';

@@ -15,10 +15,10 @@ export const createSelectorFunction = (
 
   const customMethods = createCustomMethods(attributesOptions);
 
-  return (locator) => {
-    const selector = new SelectorClass(locator) as unknown as Selector;
+  return (cssString) => {
+    const selector = new SelectorClass(cssString) as unknown as Selector;
 
-    setReadonlyProperty(selector, DESCRIPTION_KEY, locator);
+    setReadonlyProperty(selector, DESCRIPTION_KEY, cssString);
 
     return new Proxy(selector, {get: createGetTrap(customMethods)});
   };

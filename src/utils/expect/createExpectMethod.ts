@@ -12,7 +12,7 @@ import {valueToString, wrapStringForLogs} from '../valueToString';
 import {additionalMatchers} from './additionalMatchers';
 import {applyAdditionalMatcher} from './applyAdditionalMatcher';
 
-import type {Fn, SelectorPropertyRetryData} from '../../types/internal';
+import type {Fn, Selector, SelectorPropertyRetryData} from '../../types/internal';
 
 import type {Expect} from './Expect';
 import type {AssertionFunction, ExpectMethod} from './types';
@@ -89,7 +89,7 @@ export const createExpectMethod = (
         logEventStatus: maybeError ? LogEventStatus.Failed : LogEventStatus.Passed,
         selector: selectorPropertyRetryData
           ? getDescriptionFromSelector(selectorPropertyRetryData.selector)
-          : undefined,
+          : getDescriptionFromSelector(this.actualValue as Selector),
         selectorProperty: selectorPropertyRetryData?.property,
         selectorPropertyArgs: selectorPropertyRetryData?.args,
       };

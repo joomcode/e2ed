@@ -5,7 +5,7 @@ import {playwrightMethods} from './playwrightMethods';
 import type {AssertionFunctionKey} from './types';
 
 /**
- * `testController.expect` wrapper with logs.
+ * Wrapper of playwright's `expect` with logs.
  * @internal
  */
 // eslint-disable-next-line import/exports-last

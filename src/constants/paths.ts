@@ -104,6 +104,16 @@ export const CONFIG_PATH = join(INSTALLED_E2ED_DIRECTORY_PATH, 'config.js') as F
 export const EVENTS_DIRECTORY_PATH = join(TMP_DIRECTORY_PATH, 'events') as DirectoryPathFromRoot;
 
 /**
+ * Relative (from root) path to temporary directory with expected screenshots
+ * (for `toMatchScreenshot` assert).
+ * @internal
+ */
+export const EXPECTED_SCREENSHOTS_DIRECTORY_PATH = join(
+  TMP_DIRECTORY_PATH,
+  'expectedScreenshots',
+) as DirectoryPathFromRoot;
+
+/**
  * Relative (from root) path to directory with tests screenshots.
  * @internal
  */

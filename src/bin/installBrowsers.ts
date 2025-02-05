@@ -9,7 +9,10 @@ const chromiumPackage = `@playwright/browser-chromium@${playwrightVersion}`;
 
 console.log(`Install ${chromiumPackage}`);
 
-const installation = spawn('npm', ['install', '--global', chromiumPackage], {stdio: 'inherit'});
+const installation = spawn('npm', ['install', '--global', chromiumPackage], {
+  shell: true,
+  stdio: 'inherit',
+});
 
 installation.on('close', (code) => {
   if (code === 0) {

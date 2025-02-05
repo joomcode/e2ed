@@ -1,8 +1,6 @@
-import {createHash} from 'node:crypto';
+import {getHash} from './getHash';
 
 import type {RunId, Test} from '../types/internal';
-
-const runIdBaseLength = 10;
 
 /**
  * Creates new RunId for TestRun.
@@ -11,11 +9,8 @@ const runIdBaseLength = 10;
 export const createRunId = (test: Test, retryIndex: number): RunId => {
   const data = {...test, testFn: test.testFn.toString()};
   const text = JSON.stringify(data);
-  const hash = createHash('sha1');
 
-  hash.update(text);
-
-  const base = hash.digest('base64url').slice(0, runIdBaseLength);
+  const base = getHash(text);
 
   return `${base}-${retryIndex}` as RunId;
 };

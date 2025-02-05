@@ -5,7 +5,7 @@ import type {TestInfo} from '@playwright/test';
 import type {Test, TestStaticOptions} from '../../types/internal';
 
 /**
- * Get test static options from test and testController.
+ * Get test static options from test and `TestInfo`.
  * @internal
  */
 export const getTestStaticOptions = (test: Test, testInfo: TestInfo): TestStaticOptions => {

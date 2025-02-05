@@ -15,6 +15,9 @@ export const createCustomMethods = ({
   const getParameterAttribute = (parameter: string): string => parameterAttributePrefix + parameter;
 
   return {
+    // @ts-expect-error: __proto__ is not typed in TS
+    __proto__: null, // eslint-disable-line @typescript-eslint/naming-convention
+
     filterByLocatorParameter(parameter, value) {
       return this.filter(getAttributeCssSelector(getParameterAttribute(parameter), value));
     },

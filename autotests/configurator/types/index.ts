@@ -14,6 +14,7 @@ export type {
   MapLogPayloadInConsole,
   MapLogPayloadInLogFile,
   MapLogPayloadInReport,
+  MatchScreenshot,
   Pack,
   TestFunction,
   WaitBeforeRetry,

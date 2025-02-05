@@ -1,5 +1,9 @@
+import {randomUUID} from 'node:crypto';
+
+import type {Selector} from '../../types/internal';
+
 import type {Expect} from './Expect';
-import type {AdditionalMatchers} from './types';
+import type {NonSelectorAdditionalMatchers, SelectorMatchers} from './types';
 
 import {expect} from '@playwright/test';
 
@@ -7,7 +11,7 @@ import {expect} from '@playwright/test';
  * Addition matchers.
  * @internal
  */
-export const additionalMatchers: AdditionalMatchers<unknown> = {
+export const additionalMatchers: NonSelectorAdditionalMatchers<unknown> & SelectorMatchers = {
   contains(this: Expect, expected) {
     const {actualValue, description} = this;
 
@@ -78,5 +82,15 @@ export const additionalMatchers: AdditionalMatchers<unknown> = {
     const {actualValue, description} = this;
 
     return Promise.resolve(expect(actualValue, description).toBeTruthy());
+  },
+
+  async toMatchScreenshot(this: Expect, screenshotId) {
+    const {actualValue, description} = this;
+
+    const playwrightLocator = (actualValue as Selector).getPlaywrightLocator();
+
+    const assertId = randomUUID();
+
+    await expect(playwrightLocator, description).toHaveScreenshot(`${assertId}.png`);
   },
 };
