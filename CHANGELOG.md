@@ -1,5 +1,20 @@
 # Changelog
 
+## [v0.19.12](https://github.com/joomcode/e2ed/tree/v0.19.12) (2025-02-05)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.11...v0.19.12)
+
+- [Merge pull request #106 from joomcode/feat/add-selector-property-to-expect-logs](https://github.com/joomcode/e2ed/commit/4347ba5519b03e10f2f0b3323fa505be0931630e) ([uid11](https://github.com/uid11))
+
+  feat: add selector property to expect logs
+
+- [chore: update Playwright to 1.50.1](https://github.com/joomcode/e2ed/commit/9b9d70cec1415e018e177d38146215c0d870b014) ([uid11](https://github.com/uid11))
+
+  chore: update devDependencies (`@types/node`)
+
+- [FI-1666 fix: do not use `bash` and `sh` in bin commands](https://github.com/joomcode/e2ed/commit/b2e8cf5b3306428e929ab99770f963ed0fba484a) ([uid11](https://github.com/uid11))
+- [FI-1647 feat: add selector property and args to `expect` logs](https://github.com/joomcode/e2ed/commit/f233ec07b3a50082ddd7122fadb121e979f2bf96) ([uid11](https://github.com/uid11))
+
 ## [v0.19.11](https://github.com/joomcode/e2ed/tree/v0.19.11) (2025-01-28)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.10...v0.19.11)
