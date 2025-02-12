@@ -1,5 +1,3 @@
-import {Selector as SelectorClass} from '../selectors';
-
 import type {Selector} from '../../types/internal';
 
 /**
@@ -7,7 +5,7 @@ import type {Selector} from '../../types/internal';
  * (all selector points are in the viewport), and `false` otherwise.
  */
 export const isSelectorEntirelyInViewport = async (selector: Selector): Promise<boolean> => {
-  const htmlElementSelector = new SelectorClass('html');
+  const htmlElementSelector = selector.createSelector('html');
 
   const {height: clientHeight, width: clientWidth} = await htmlElementSelector.boundingClientRect;
 

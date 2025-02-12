@@ -6,11 +6,12 @@ import {RETRY_KEY} from '../../constants/internal';
 import {getFrameContext} from '../../context/frameContext';
 import {getPlaywrightPage} from '../../useContext';
 
-import {getDescriptionFromSelector} from './getDescriptionFromSelector';
+import {getAttributeCssSelector} from './getAttributeCssSelector';
 
 import type {Locator as PlaywrightLocator} from '@playwright/test';
 
-import type {Selector as SelectorType, SelectorPropertyRetryData} from '../../types/internal';
+import type {AttributesOptions} from '../../createLocator';
+import type {SelectorPropertyRetryData} from '../../types/internal';
 
 const setRetryData = (
   promise: Promise<unknown>,
@@ -24,21 +25,52 @@ function toJSON(this: object): string {
   return JSON.stringify(this);
 }
 
+type Args = readonly (RegExp | number | string)[];
+
+type Kind = 'css' | 'filter' | 'find' | 'nth' | 'parent' | 'withText';
+
+type Options = Readonly<{
+  args?: Args | undefined;
+  cssString: string;
+  kind?: Kind;
+  parentSelector?: Selector;
+}> &
+  Omit<AttributesOptions, 'testIdSeparator'>;
+
 /**
  * Selector.
  */
 class Selector {
-  readonly cssString: string;
+  readonly description: string;
 
-  private args?: readonly (RegExp | number | string)[];
+  private readonly args: Args | undefined;
 
-  private kind: 'css' | 'filter' | 'find' | 'nth' | 'parent' | 'withText';
+  private readonly cssString: string;
 
-  private parentSelector?: Selector;
+  private readonly kind: 'css' | 'filter' | 'find' | 'nth' | 'parent' | 'withText';
 
-  constructor(cssString: string) {
+  private readonly parameterAttributePrefix: string;
+
+  private readonly parentSelector: Selector | undefined;
+
+  private readonly testIdAttribute: string;
+
+  protected constructor({
+    args,
+    cssString,
+    kind = 'css',
+    parameterAttributePrefix,
+    parentSelector,
+    testIdAttribute,
+  }: Options) {
+    this.args = args;
     this.cssString = cssString;
-    this.kind = 'css';
+    this.description =
+      kind === 'css' ? cssString : `${parentSelector!.description}.${kind}(${args?.join(', ')})`;
+    this.kind = kind;
+    this.parameterAttributePrefix = parameterAttributePrefix;
+    this.parentSelector = parentSelector;
+    this.testIdAttribute = testIdAttribute;
   }
 
   get boundingClientRect(): Promise<DOMRectReadOnly> {
@@ -146,24 +178,42 @@ class Selector {
     return result;
   }
 
+  static create({
+    cssString,
+    parameterAttributePrefix,
+    testIdAttribute,
+  }: Pick<Options, 'cssString' | 'parameterAttributePrefix' | 'testIdAttribute'>): Selector {
+    return new Selector({cssString, parameterAttributePrefix, testIdAttribute});
+  }
+
+  createSelector(cssString: string): Selector {
+    const {parameterAttributePrefix, testIdAttribute} = this;
+
+    return new Selector({cssString, parameterAttributePrefix, testIdAttribute});
+  }
+
   filter(cssSelectorString: string): Selector {
-    const selector = new Selector(this.cssString);
+    return this.createChildSelector('filter', [cssSelectorString]);
+  }
 
-    selector.args = [cssSelectorString];
-    selector.kind = 'filter';
-    selector.parentSelector = this;
+  filterByLocatorParameter(parameter: string, value: string): Selector {
+    return this.filter(getAttributeCssSelector(this.getParameterAttribute(parameter), value));
+  }
 
-    return selector;
+  filterByTestId(testId: string): Selector {
+    return this.filter(getAttributeCssSelector(this.testIdAttribute, testId));
   }
 
   find(cssSelectorString: string): Selector {
-    const selector = new Selector(this.cssString);
+    return this.createChildSelector('find', [cssSelectorString]);
+  }
 
-    selector.args = [cssSelectorString];
-    selector.kind = 'find';
-    selector.parentSelector = this;
+  findByLocatorParameter(parameter: string, value: string): Selector {
+    return this.find(getAttributeCssSelector(this.getParameterAttribute(parameter), value));
+  }
 
-    return selector;
+  findByTestId(testId: string): Selector {
+    return this.find(getAttributeCssSelector(this.testIdAttribute, testId));
   }
 
   getAttribute(attributeName: string): Promise<string | null> {
@@ -172,6 +222,10 @@ class Selector {
     setRetryData(result, {args: [attributeName], property: 'getAttribute', selector: this});
 
     return result;
+  }
+
+  getLocatorParameter(parameter: string): Promise<string | null> {
+    return this.getAttribute(this.getParameterAttribute(parameter));
   }
 
   getPlaywrightLocator(): PlaywrightLocator {
@@ -214,6 +268,10 @@ class Selector {
     return result;
   }
 
+  getTestId(): Promise<string | null> {
+    return this.getAttribute(this.testIdAttribute);
+  }
+
   hasAttribute(attributeName: string): Promise<boolean> {
     const result = this.getPlaywrightLocator()
       .getAttribute(attributeName)
@@ -224,52 +282,59 @@ class Selector {
     return result;
   }
 
+  hasLocatorParameter(parameter: string): Promise<boolean> {
+    return this.hasAttribute(this.getParameterAttribute(parameter));
+  }
+
+  hasTestId(): Promise<boolean> {
+    return this.hasAttribute(this.testIdAttribute);
+  }
+
   nth(index: number): Selector {
-    const selector = new Selector(this.cssString);
-
-    selector.args = [index];
-    selector.kind = 'nth';
-    selector.parentSelector = this;
-
-    return selector;
+    return this.createChildSelector('nth', [index]);
   }
 
   parent(): Selector {
-    const selector = new Selector(this.cssString);
+    return this.createChildSelector('parent');
+  }
 
-    selector.kind = 'parent';
-    selector.parentSelector = this;
-
-    return selector;
+  toJSON(): {description: string} {
+    return {description: this.description};
   }
 
   /**
    * Custom string presentation of selector.
    */
-  toString(this: SelectorType): string {
-    const description = getDescriptionFromSelector(this);
-    const forText = description === undefined ? '' : ` for ${description}`;
-
-    return `Selector${forText}`;
+  toString(): string {
+    return `Selector for ${this.description}`;
   }
 
   withText(textOrRegExp: RegExp | string): Selector {
-    const selector = new Selector(this.cssString);
+    return this.createChildSelector('withText', [textOrRegExp]);
+  }
 
-    selector.args = [textOrRegExp];
-    selector.kind = 'withText';
-    selector.parentSelector = this;
+  private createChildSelector(kind: Kind, args?: Args): Selector {
+    const {cssString, parameterAttributePrefix, testIdAttribute} = this;
 
-    return selector;
+    return new Selector({
+      args,
+      cssString,
+      kind,
+      parameterAttributePrefix,
+      parentSelector: this,
+      testIdAttribute,
+    });
+  }
+
+  private getParameterAttribute(parameter: string): string {
+    return this.parameterAttributePrefix + parameter;
   }
 }
 
 /**
  * Custom presentation of selector for `nodejs` `inspect`.
  */
-// eslint-disable-next-line no-restricted-syntax
-Selector.prototype[inspect.custom as unknown as 'toString'] = function custom(): string {
-  return this.toString();
-};
+// eslint-disable-next-line @typescript-eslint/unbound-method
+Selector.prototype[inspect.custom as unknown as 'toString'] = Selector.prototype.toString;
 
 export {Selector};

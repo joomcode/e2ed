@@ -53,7 +53,6 @@ export {
   getHeaderValue,
 } from './requestHooks';
 export {getRunLabelObject} from './runLabel';
-export {getDescriptionFromSelector} from './selectors';
 export {setReadonlyProperty} from './setReadonlyProperty';
 export {getPackageInfo} from './startInfo';
 export {isArray, isThenable} from './typeGuards';

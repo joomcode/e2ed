@@ -67,6 +67,13 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_00
     await takeElementScreenshot(mainPage.body, {path: 'noScreenshot.png', timeout: 10});
   }, 'takeElementScreenshot throws an error on timeout end');
 
+  await expect(mainPage.body.description, 'selector description is correct').eql('body');
+
+  await expect(
+    mainPage.body.find('input').description,
+    'description of selector method is correct',
+  ).eql('body.find(input)');
+
   await takeElementScreenshot(mainPage.searchInput.input, {path: 'screenshot.png'});
 
   const searchUrlObjectPromise = waitForStartOfPageLoad();

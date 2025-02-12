@@ -94,9 +94,7 @@ class E2edError extends Error {
 /**
  * Custom presentation of error for `nodejs` `inspect`.
  */
-// eslint-disable-next-line no-restricted-syntax
-E2edError.prototype[inspect.custom as unknown as 'toString'] = function custom(): string {
-  return this.toString();
-};
+// eslint-disable-next-line @typescript-eslint/unbound-method
+E2edError.prototype[inspect.custom as unknown as 'toString'] = E2edError.prototype.toString;
 
 export {E2edError};

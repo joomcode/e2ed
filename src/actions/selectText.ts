@@ -1,6 +1,5 @@
 import {LogEventType} from '../constants/internal';
 import {log} from '../utils/log';
-import {getDescriptionFromSelector} from '../utils/selectors';
 
 import type {Selector} from '../types/internal';
 
@@ -16,11 +15,9 @@ export const selectText = (
   options?: Options,
   // eslint-disable-next-line @typescript-eslint/max-params
 ): Promise<void> => {
-  const description = getDescriptionFromSelector(selector);
-
   log(
     `Select text in input element, from ${startPos} to ${endPos ?? 'the end'}`,
-    {description, options},
+    {options, selector},
     LogEventType.InternalAction,
   );
 

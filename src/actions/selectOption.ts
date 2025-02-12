@@ -1,6 +1,5 @@
 import {LogEventType} from '../constants/internal';
 import {log} from '../utils/log';
-import {getDescriptionFromSelector} from '../utils/selectors';
 
 import type {Locator} from '@playwright/test';
 
@@ -16,11 +15,8 @@ export const selectOption = async (
   value: string | readonly string[],
   options: Options = {},
 ): Promise<void> => {
-  const description = getDescriptionFromSelector(selector);
-  const withDescription = description !== undefined ? ` with description ${description}` : '';
-
   log(
-    `Select an option with value "${String(value)}" in <select> element${withDescription}`,
+    `Select an option with value "${String(value)}" in <select> element ${selector.description}`,
     options,
     LogEventType.InternalAction,
   );

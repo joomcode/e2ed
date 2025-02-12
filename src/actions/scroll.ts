@@ -2,9 +2,7 @@
 
 import {LogEventType} from '../constants/internal';
 import {log} from '../utils/log';
-import {getDescriptionFromSelector, Selector as SelectorClass} from '../utils/selectors';
-
-import type {Selector} from '../types/internal';
+import {Selector} from '../utils/selectors';
 
 type Scroll = ((posX: number, posY: number) => Promise<void>) &
   ((position: ScrollPosition) => Promise<void>) &
@@ -26,19 +24,24 @@ type ScrollPosition =
  * Scrolls the document (or element) to the specified absolute position.
  */
 export const scroll = ((...args) => {
-  const description = getDescriptionFromSelector(args[0] as Selector);
   const printedArgs = [...args] as (number | string)[];
 
-  if (typeof args[0] === 'object') {
+  if (args[0] instanceof Selector) {
     printedArgs.shift();
   }
 
   const selector =
-    typeof args[0] === 'object' ? args[0] : (new SelectorClass('html') as unknown as Selector);
+    args[0] instanceof Selector
+      ? args[0]
+      : Selector.create({
+          cssString: 'html',
+          parameterAttributePrefix: 'data-test-',
+          testIdAttribute: 'data-testid',
+        });
 
   log(
     'Scroll the document (or element) to the specified position',
-    {args: printedArgs, description},
+    {args: printedArgs, selector},
     LogEventType.InternalAction,
   );
 

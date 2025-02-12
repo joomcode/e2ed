@@ -5,14 +5,14 @@ import {E2edError} from '../error';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
 import {addTimeoutToPromise} from '../promise';
-import {getDescriptionFromSelector} from '../selectors';
+import {Selector} from '../selectors';
 import {isThenable} from '../typeGuards';
 import {valueToString, wrapStringForLogs} from '../valueToString';
 
 import {additionalMatchers} from './additionalMatchers';
 import {applyAdditionalMatcher} from './applyAdditionalMatcher';
 
-import type {Fn, Selector, SelectorPropertyRetryData} from '../../types/internal';
+import type {Fn, SelectorPropertyRetryData} from '../../types/internal';
 
 import type {Expect} from './Expect';
 import type {AssertionFunction, ExpectMethod} from './types';
@@ -87,9 +87,9 @@ export const createExpectMethod = (
         assertionArguments: args,
         error: maybeError,
         logEventStatus: maybeError ? LogEventStatus.Failed : LogEventStatus.Passed,
-        selector: selectorPropertyRetryData
-          ? getDescriptionFromSelector(selectorPropertyRetryData.selector)
-          : getDescriptionFromSelector(this.actualValue as Selector),
+        selector:
+          selectorPropertyRetryData?.selector.description ??
+          (this.actualValue instanceof Selector ? this.actualValue.description : undefined),
         selectorProperty: selectorPropertyRetryData?.property,
         selectorPropertyArgs: selectorPropertyRetryData?.args,
       };

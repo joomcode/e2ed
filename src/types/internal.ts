@@ -119,12 +119,7 @@ export type {
 export type {RunLabel, RunLabelObject} from './runLabel';
 /** @internal */
 export type {RawRunLabelObject} from './runLabel';
-export type {
-  CreateSelector,
-  CreateSelectorFunctionOptions,
-  Selector,
-  SelectorCustomMethods,
-} from './selectors';
+export type {CreateSelector, CreateSelectorFunctionOptions, Selector} from './selectors';
 /** @internal */
 export type {SelectorPropertyRetryData} from './selectors';
 export type {IsTestSkippedResult} from './skipTest';

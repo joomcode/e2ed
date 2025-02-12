@@ -60,7 +60,6 @@ export {
 } from './paths';
 /** @internal */
 export {RESOLVED_PROMISE} from './promise';
-export {DESCRIPTION_KEY} from './selector';
 /** @internal */
 export {RETRY_KEY} from './selector';
 export {FAILED_TEST_RUN_STATUSES, TestRunStatus} from './testRun';

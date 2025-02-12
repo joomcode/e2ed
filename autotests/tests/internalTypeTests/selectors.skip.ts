@@ -56,4 +56,4 @@ void htmlElementSelector.getLocatorParameter('prop') satisfies Promise<string | 
 void htmlElementSelector.hasLocatorParameter('prop') satisfies Promise<boolean>;
 
 // ok
-htmlElementSelector.getDescription() satisfies string | undefined;
+htmlElementSelector.description satisfies string | undefined;

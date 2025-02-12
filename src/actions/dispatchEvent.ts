@@ -1,6 +1,5 @@
 import {LogEventType} from '../constants/internal';
 import {log} from '../utils/log';
-import {getDescriptionFromSelector} from '../utils/selectors';
 
 import type {Selector, WithStabilizationInterval} from '../types/internal';
 
@@ -14,11 +13,9 @@ export const dispatchEvent = (
   eventName: string,
   {stabilizationInterval, ...options}: Options = {},
 ): Promise<void> => {
-  const description = getDescriptionFromSelector(selector);
-
   log(
     'Dispatches an event over a specified element',
-    {description, ...options, stabilizationInterval},
+    {...options, selector, stabilizationInterval},
     LogEventType.InternalAction,
   );
 
