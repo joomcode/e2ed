@@ -42,7 +42,7 @@ export const request = async <
     SomeRequest,
     SomeResponse
   >,
-): Promise<ResponseWithRequest<SomeResponse, SomeRequest>> => {
+): Promise<ResponseWithRequest<SomeRequest, SomeResponse>> => {
   const {isResponseBodyInJsonFormat, logParams, options, requestBodyAsString, url, urlObject} =
     getPreparedOptions(Route, {requestBody, requestHeaders, routeParams, timeout});
 
@@ -51,7 +51,7 @@ export const request = async <
   if (fullMocksState?.appliedMocks !== undefined) {
     const response = getFullMocksResponse(fullMocksState, logParams, urlObject);
 
-    return response as ResponseWithRequest<SomeResponse, SomeRequest>;
+    return response as ResponseWithRequest<SomeRequest, SomeResponse>;
   }
 
   const libRequest = urlObject.protocol === 'http:' ? httpRequest : httpsRequest;

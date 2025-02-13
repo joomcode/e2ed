@@ -14,6 +14,38 @@ void waitForRequest(() => false);
 void waitForResponse(() => false);
 
 // ok
+void waitForRequest(
+  () => false,
+  () => {},
+);
+
+// ok
+void waitForRequest(
+  () => true,
+  () => Promise.resolve(),
+  {timeout: 5_000},
+);
+
+// ok
+void waitForRequest(() => true, undefined, {timeout: 5_000});
+
+// ok
+void waitForResponse(
+  () => false,
+  () => {},
+);
+
+// ok
+void waitForResponse(
+  () => true,
+  () => Promise.resolve(),
+  {timeout: 5_000},
+);
+
+// ok
+void waitForResponse(() => true, undefined, {});
+
+// ok
 void waitForRequest(() => false, {});
 
 // ok
@@ -53,12 +85,20 @@ void waitForResponse(({responseBody, responseHeaders, statusCode}) => true);
 void waitForRequestToRoute(AddUser);
 
 // ok
-void waitForRequestToRoute(AddUser, ({delay}, {requestBody, url}) => {
-  if (delay !== undefined && delay > 0 && requestBody.job !== 'foo') {
-    return url.startsWith('https');
-  }
+void waitForRequestToRoute(AddUser, () => Promise.resolve());
 
-  return false;
+// ok
+void waitForRequestToRoute(AddUser, () => {}, {skipLogs: true});
+
+// ok
+void waitForRequestToRoute(AddUser, {
+  predicate: ({delay}, {requestBody, url}) => {
+    if (delay !== undefined && delay > 0 && requestBody.job !== 'foo') {
+      return url.startsWith('https');
+    }
+
+    return false;
+  },
 }).then(
   ({request, routeParams}) =>
     request.requestBody.job === 'foo' && 'delay' in routeParams && routeParams.delay > 0,
@@ -71,12 +111,25 @@ void waitForRequestToRoute(GetUser);
 void waitForResponseToRoute(AddUser);
 
 // ok
-void waitForResponseToRoute(AddUser, ({delay}, {responseBody, request: {requestBody, url}}) => {
-  if (delay !== undefined && delay > 0 && requestBody.job !== 'foo' && responseBody.job !== 'bar') {
-    return url.startsWith('https');
-  }
+void waitForResponseToRoute(AddUser, () => Promise.resolve());
 
-  return false;
+// ok
+void waitForResponseToRoute(AddUser, () => {}, {skipLogs: true});
+
+// ok
+void waitForResponseToRoute(AddUser, {
+  predicate: ({delay}, {responseBody, request: {requestBody, url}}) => {
+    if (
+      delay !== undefined &&
+      delay > 0 &&
+      requestBody.job !== 'foo' &&
+      responseBody.job !== 'bar'
+    ) {
+      return url.startsWith('https');
+    }
+
+    return false;
+  },
 }).then(
   ({response, routeParams}) =>
     response.request.requestBody.job === 'foo' &&
@@ -92,7 +145,7 @@ void waitForResponseToRoute(GetUser);
 void waitForNewTab();
 
 // ok
-void waitForNewTab({timeout: 2_000});
+void waitForNewTab({skipLogs: false, timeout: 2_000});
 
 // ok
 void waitForNewTab(() => Promise.resolve());

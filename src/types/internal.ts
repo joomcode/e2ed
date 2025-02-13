@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 
 export type {ClearContext, GetContext, GetWithDefaultValueContext, SetContext} from '../useContext';
-export type {WithStabilizationInterval} from './actions';
+export type {Trigger, WithStabilizationInterval} from './actions';
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';
