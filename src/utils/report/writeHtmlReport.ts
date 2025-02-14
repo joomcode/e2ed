@@ -36,6 +36,6 @@ export const writeHtmlReport = async (reportData: ReportData): Promise<void> => 
   const durationWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
 
   generalLog(
-    `HTML report was written (${reportFileSizeInMb} Mb) to "${reportFilePath}" in ${durationWithUnits}`,
+    `HTML report was written (${reportFileSizeInMb} MB) to "${reportFilePath}" in ${durationWithUnits}`,
   );
 };

@@ -1,7 +1,8 @@
 import {readFile} from 'node:fs/promises';
 
 import {READ_FILE_OPTIONS} from '../../constants/internal';
-import {getHash} from '../../generators/internal';
+
+import {getHash} from '../getHash';
 
 import type {FullMocksTestId, TestFilePath} from '../../types/internal';
 

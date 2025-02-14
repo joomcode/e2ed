@@ -1,4 +1,4 @@
-import {getHash} from './getHash';
+import {getHash} from '../utils/getHash';
 
 import type {RunId, Test} from '../types/internal';
 

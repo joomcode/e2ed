@@ -18,7 +18,7 @@ export {
 } from './environment';
 export {READ_FILE_OPTIONS} from './fs';
 /** @internal */
-export {AMOUNT_OF_PARALLEL_OPEN_FILES, DEFAULT_FILE_CHUNK_LENGTH} from './fs';
+export {AMOUNT_OF_PARALLEL_OPEN_FILES} from './fs';
 export {
   BAD_REQUEST_STATUS_CODE,
   CREATED_STATUS_CODE,

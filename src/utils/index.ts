@@ -36,6 +36,7 @@ export {getFunctionPresentationForLogs, setCustomInspectOnFunction} from './fn';
 export {writeFile} from './fs';
 export {removeStyleFromString} from './generalLog';
 export {getDurationWithUnits} from './getDurationWithUnits';
+export {getHash} from './getHash';
 export {getKeysCounter} from './getKeysCounter';
 export {getContentJsonHeaders} from './http';
 export {log} from './log';

@@ -12,7 +12,7 @@ import {valueToString, wrapStringForLogs} from '../valueToString';
 import {additionalMatchers} from './additionalMatchers';
 import {applyAdditionalMatcher} from './applyAdditionalMatcher';
 
-import type {Fn, SelectorPropertyRetryData} from '../../types/internal';
+import type {Fn, Payload, SelectorPropertyRetryData} from '../../types/internal';
 
 import type {Expect} from './Expect';
 import type {AssertionFunction, ExpectMethod} from './types';
@@ -67,21 +67,22 @@ export const createExpectMethod = (
       return addTimeoutToPromise(assertion[key]!(...args), timeout, error).then(() => ctx);
     };
 
-    const assertionPromise: Promise<Readonly<{maybeError?: Error; value?: unknown}>> =
-      RESOLVED_PROMISE.then(() => {
-        if (isThenable(this.actualValue)) {
-          return addTimeoutToPromise(this.actualValue as Promise<unknown>, timeout, error).then(
-            runAssertion,
-          );
-        }
+    const assertionPromise: Promise<
+      Readonly<{additionalLogFields?: Payload | undefined; maybeError?: Error; value?: unknown}>
+    > = RESOLVED_PROMISE.then(() => {
+      if (isThenable(this.actualValue)) {
+        return addTimeoutToPromise(this.actualValue as Promise<unknown>, timeout, error).then(
+          runAssertion,
+        );
+      }
 
-        return runAssertion(this.actualValue);
-      }).then(
-        ({actualValue}) => ({value: actualValue}),
-        (maybeError: Error) => ({maybeError}),
-      );
+      return runAssertion(this.actualValue);
+    }).then(
+      ({actualValue, additionalLogFields}) => ({additionalLogFields, value: actualValue}),
+      (maybeError: Error) => ({maybeError}),
+    );
 
-    return assertionPromise.then(({maybeError, value}) => {
+    return assertionPromise.then(({additionalLogFields, maybeError, value}) => {
       const logMessage = `Assert: ${this.description}`;
       const logPayload = {
         assertionArguments: args,
@@ -92,6 +93,7 @@ export const createExpectMethod = (
           (this.actualValue instanceof Selector ? this.actualValue.description : undefined),
         selectorProperty: selectorPropertyRetryData?.property,
         selectorPropertyArgs: selectorPropertyRetryData?.args,
+        ...additionalLogFields,
       };
 
       return addTimeoutToPromise(Promise.resolve(value), timeout, error)
