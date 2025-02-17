@@ -2,7 +2,6 @@ import {LogEventType} from '../constants/internal';
 import {getPlaywrightPage} from '../useContext';
 import {E2edError} from '../utils/error';
 import {log} from '../utils/log';
-import {getDescriptionFromSelector} from '../utils/selectors';
 
 import type {KeyboardPressKey, Selector} from '../types/internal';
 
@@ -56,10 +55,7 @@ export const pressKey: PressKey = async (
     options = maybeOptions ?? {};
   }
 
-  const withDescription =
-    selector !== undefined
-      ? ` on element with description ${getDescriptionFromSelector(selector)}`
-      : '';
+  const withDescription = selector !== undefined ? ` on element ${selector.description}` : '';
 
   log(`Press keyboard key${withDescription}: "${key}"`, options, LogEventType.InternalAction);
 

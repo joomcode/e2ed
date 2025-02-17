@@ -1,5 +1,15 @@
+import {randomUUID} from 'node:crypto';
+import {join} from 'node:path';
+
+import {EXPECTED_SCREENSHOTS_DIRECTORY_PATH} from '../../constants/internal';
+
+import {getFullPackConfig} from '../config';
+import {writeFile} from '../fs';
+
+import type {FilePathFromRoot, Selector} from '../../types/internal';
+
 import type {Expect} from './Expect';
-import type {AdditionalMatchers} from './types';
+import type {NonSelectorAdditionalMatchers, SelectorMatchers} from './types';
 
 import {expect} from '@playwright/test';
 
@@ -7,7 +17,7 @@ import {expect} from '@playwright/test';
  * Addition matchers.
  * @internal
  */
-export const additionalMatchers: AdditionalMatchers<unknown> = {
+export const additionalMatchers: NonSelectorAdditionalMatchers<unknown> & SelectorMatchers = {
   contains(this: Expect, expected) {
     const {actualValue, description} = this;
 
@@ -78,5 +88,32 @@ export const additionalMatchers: AdditionalMatchers<unknown> = {
     const {actualValue, description} = this;
 
     return Promise.resolve(expect(actualValue, description).toBeTruthy());
+  },
+
+  async toMatchScreenshot(this: Expect, screenshotId) {
+    const {actualValue, description} = this;
+    const {getScreenshotIdUrl, readScreenshot, writeScreenshot} =
+      getFullPackConfig().matchScreenshot;
+
+    const screenshotFileName = `${randomUUID()}.png`;
+    const screenshotPath = join(
+      EXPECTED_SCREENSHOTS_DIRECTORY_PATH,
+      screenshotFileName,
+    ) as FilePathFromRoot;
+    const playwrightLocator = (actualValue as Selector).getPlaywrightLocator();
+
+    let screenshotNotFoundById = false;
+
+    if (screenshotId) {
+      const screenshot = await readScreenshot(screenshotId);
+
+      if (screenshot === undefined) {
+        screenshotNotFoundById = true;
+      } else {
+        await writeFile(screenshotPath, screenshot);
+      }
+    }
+
+    await expect(playwrightLocator, description).toHaveScreenshot(screenshotFileName);
   },
 };

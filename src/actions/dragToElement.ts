@@ -1,6 +1,5 @@
 import {LogEventType} from '../constants/internal';
 import {log} from '../utils/log';
-import {getDescriptionFromSelector} from '../utils/selectors';
 
 import type {Selector, WithStabilizationInterval} from '../types/internal';
 
@@ -14,12 +13,9 @@ export const dragToElement = (
   destinationSelector: Selector,
   {stabilizationInterval, ...options}: Options = {},
 ): Promise<void> => {
-  const description = getDescriptionFromSelector(selector);
-  const destinationDescription = getDescriptionFromSelector(destinationSelector);
-
   log(
     'Drag an element onto another one',
-    {description, destinationDescription, ...options, stabilizationInterval},
+    {destinationSelector, ...options, selector, stabilizationInterval},
     LogEventType.InternalAction,
   );
 

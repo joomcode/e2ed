@@ -14,8 +14,19 @@ import type {
   Response,
   ResponsePredicate,
   ResponseWithRequest,
+  Trigger,
   UtcTimeInMs,
 } from '../../types/internal';
+
+type Action = (<SomeRequest extends Request = Request, SomeResponse extends Response = Response>(
+  predicate: ResponsePredicate<SomeRequest, SomeResponse>,
+  trigger: Trigger | undefined,
+  options?: Options,
+) => Promise<ResponseWithRequest<SomeRequest, SomeResponse>>) &
+  (<SomeRequest extends Request = Request, SomeResponse extends Response = Response>(
+    predicate: ResponsePredicate<SomeRequest, SomeResponse>,
+    options?: Options,
+  ) => Promise<ResponseWithRequest<SomeRequest, SomeResponse>>);
 
 type Options = Readonly<{includeNavigationRequest?: boolean; skipLogs?: boolean; timeout?: number}>;
 
@@ -23,19 +34,26 @@ type Options = Readonly<{includeNavigationRequest?: boolean; skipLogs?: boolean;
  * Waits for some response (from browser) filtered by the response predicate.
  * If the function runs longer than the specified timeout, it is rejected.
  */
-export const waitForResponse = <
-  SomeResponse extends Response = Response,
+export const waitForResponse = (async <
   SomeRequest extends Request = Request,
+  SomeResponse extends Response = Response,
 >(
   predicate: ResponsePredicate<SomeRequest, SomeResponse>,
-  {includeNavigationRequest = false, skipLogs = false, timeout}: Options = {},
-): Promise<ResponseWithRequest<SomeResponse, SomeRequest>> => {
+  triggerOrOptions?: Options | Trigger,
+  options?: Options,
+): Promise<ResponseWithRequest<SomeRequest, SomeResponse>> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   setCustomInspectOnFunction(predicate);
 
-  const {waitForResponseTimeout} = getFullPackConfig();
-  const rejectTimeout = timeout ?? waitForResponseTimeout;
+  const trigger = typeof triggerOrOptions === 'function' ? triggerOrOptions : undefined;
+  const finalOptions = typeof triggerOrOptions === 'function' ? options : triggerOrOptions;
+
+  const timeout = finalOptions?.timeout ?? getFullPackConfig().waitForResponseTimeout;
+
+  if (trigger !== undefined) {
+    setCustomInspectOnFunction(trigger);
+  }
 
   const page = getPlaywrightPage();
 
@@ -44,40 +62,42 @@ export const waitForResponse = <
       AsyncLocalStorage.bind(
         getWaitForResponsePredicate(
           predicate as ResponsePredicate,
-          includeNavigationRequest,
-          rejectTimeout,
+          finalOptions?.includeNavigationRequest ?? false,
+          timeout,
         ),
       ),
-      {timeout: rejectTimeout},
+      {timeout},
     )
     .then(
       (playwrightResponse) =>
         getResponseFromPlaywrightResponse(playwrightResponse) as Promise<
-          ResponseWithRequest<SomeResponse, SomeRequest>
+          ResponseWithRequest<SomeRequest, SomeResponse>
         >,
     );
 
-  const timeoutWithUnits = getDurationWithUnits(rejectTimeout);
+  const timeoutWithUnits = getDurationWithUnits(timeout);
 
-  if (skipLogs !== true) {
+  if (finalOptions?.skipLogs !== true) {
     log(
       `Set wait for response with timeout ${timeoutWithUnits}`,
-      {predicate},
+      {predicate, trigger},
       LogEventType.InternalCore,
     );
   }
 
-  return skipLogs !== true
-    ? promise.then((response) => {
-        const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
+  await trigger?.();
 
-        log(
-          `Have waited for response for ${waitWithUnits}`,
-          {predicate, response, timeoutWithUnits},
-          LogEventType.InternalCore,
-        );
+  const response = await promise;
 
-        return response;
-      })
-    : promise;
-};
+  if (finalOptions?.skipLogs !== true) {
+    const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
+
+    log(
+      `Have waited for response for ${waitWithUnits}`,
+      {predicate, response, timeoutWithUnits, trigger},
+      LogEventType.InternalCore,
+    );
+  }
+
+  return response;
+}) as Action;

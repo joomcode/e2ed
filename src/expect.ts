@@ -1,13 +1,20 @@
-import {Expect, type Matchers} from './utils/expect';
+import {Expect, type NonSelectorMatchers, type SelectorMatchers} from './utils/expect';
 
 import type {IsEqual, Selector} from './types/internal';
 
-/**
- * Wraps a value or promised value to assertion for further checks.
- */
-export const expect = <Actual>(
+type ExpectFunction = SelectorExpect & NotSelectorExpect;
+
+type NotSelectorExpect = <Actual>(
   actual: IsEqual<Actual, Selector> extends true
     ? 'You should call some property or method on the selector'
     : Actual | Promise<Actual>,
   description: string,
-): Matchers<Actual> => new Expect(actual, description) as unknown as Matchers<Actual>;
+) => NonSelectorMatchers<Actual>;
+
+type SelectorExpect = (actual: Selector, description: string) => SelectorMatchers;
+
+/**
+ * Wraps a value or promised value to assertion for further checks.
+ */
+export const expect = ((actual: unknown, description: string) =>
+  new Expect(actual, description)) as unknown as ExpectFunction;

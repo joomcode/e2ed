@@ -1,11 +1,10 @@
-import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 
 import {READ_FILE_OPTIONS} from '../../constants/internal';
 
-import type {FullMocksTestId, TestFilePath} from '../../types/internal';
+import {getHash} from '../getHash';
 
-const fullMocksTestIdLength = 10;
+import type {FullMocksTestId, TestFilePath} from '../../types/internal';
 
 /**
  * Get `testId` by `testFilePath`.
@@ -15,11 +14,7 @@ export const getTestIdByTestFilePath = async (
   testFilePath: TestFilePath,
 ): Promise<FullMocksTestId> => {
   const testFileContent = await readFile(testFilePath, READ_FILE_OPTIONS);
-  const hash = createHash('sha1');
-
-  hash.update(testFileContent);
-
-  const testId = hash.digest('base64url').slice(0, fullMocksTestIdLength) as FullMocksTestId;
+  const testId = getHash(testFileContent) as FullMocksTestId;
 
   return testId;
 };

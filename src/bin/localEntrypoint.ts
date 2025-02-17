@@ -11,4 +11,10 @@ const entrypoitFilePath = join(
 
 const execArgv = isDebug ? ['--inspect-brk'] : [];
 
-fork(entrypoitFilePath, process.argv.slice(2), {execArgv, stdio: 'inherit'});
+const e2edProcess = fork(entrypoitFilePath, process.argv.slice(2), {execArgv, stdio: 'inherit'});
+
+e2edProcess.on('exit', (code) => {
+  process.on('exit', () => {
+    process.exit(code);
+  });
+});

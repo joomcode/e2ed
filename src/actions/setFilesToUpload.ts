@@ -1,6 +1,5 @@
 import {LogEventType} from '../constants/internal';
 import {log} from '../utils/log';
-import {getDescriptionFromSelector} from '../utils/selectors';
 
 import type {Locator} from '@playwright/test';
 
@@ -18,11 +17,10 @@ export const setFilesToUpload = async (
   options: Options = {},
 ): Promise<void> => {
   const hasManyFiles = Array.isArray(files) && files.length > 0;
-  const description = getDescriptionFromSelector(selector);
 
   log(
     `Populate file upload input with file${hasManyFiles ? 's' : ''} "${String(files)}"`,
-    {description, options},
+    {options, selector},
     LogEventType.InternalAction,
   );
 

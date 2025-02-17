@@ -35,7 +35,7 @@ export const oneTryOfRequest = <SomeRequest extends Request, SomeResponse extend
   urlObject,
 }: OneTryOfRequestOptions): Promise<{
   fullLogParams: LogParams;
-  response: ResponseWithRequest<SomeResponse, SomeRequest>;
+  response: ResponseWithRequest<SomeRequest, SomeResponse>;
 }> =>
   new Promise((resolve, reject) => {
     const fullOptions = {
@@ -97,8 +97,8 @@ export const oneTryOfRequest = <SomeRequest extends Request, SomeResponse extend
             responseHeaders: res.headers as SomeResponse['responseHeaders'],
             statusCode,
           } satisfies ResponseWithRequest as unknown as ResponseWithRequest<
-            SomeResponse,
-            SomeRequest
+            SomeRequest,
+            SomeResponse
           >;
 
           clearTimeout(endTimeout);

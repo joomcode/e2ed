@@ -49,7 +49,7 @@ export type Options<
 > = Readonly<
   {
     isNeedRetry?: (
-      response: ResponseWithRequest<SomeResponse, SomeRequest>,
+      response: ResponseWithRequest<SomeRequest, SomeResponse>,
     ) => Promise<boolean> | boolean;
     maxRetriesCount?: number;
     timeout?: number;

@@ -42,5 +42,5 @@ test('expect function works correctly', {meta: {testId: '16'}}, async () => {
   await expect(1, 'should be an eslint error when we do not call the assertion method');
 
   // @ts-expect-error: expect function should not accept a selector as a actual value
-  await expect(htmlElementSelector, 'should be type error when actual value is a selector').ok();
+  await expect(htmlElementSelector, 'should be type error when actual value is a selector').ok(); // eslint-disable-line @typescript-eslint/no-unsafe-call
 });

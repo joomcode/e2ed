@@ -10,6 +10,7 @@ import {
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
   COMPILED_USERLAND_CONFIG_DIRECTORY,
   e2edEnvironment,
+  EXPECTED_SCREENSHOTS_DIRECTORY_PATH,
   INTERNAL_REPORTS_DIRECTORY_PATH,
   isDebug,
   PATH_TO_TEST_FILE_VARIABLE_NAME,
@@ -121,6 +122,8 @@ const playwrightConfig = defineConfig({
   projects: [{name: userlandPack.browserName, use: useOptions}],
 
   retries: isLocalRun ? 0 : userlandPack.maxRetriesCountInDocker - 1,
+
+  snapshotPathTemplate: `${ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY}/${EXPECTED_SCREENSHOTS_DIRECTORY_PATH}/{arg}.png`,
 
   testDir: join(relativePathFromInstalledE2edToRoot, TESTS_DIRECTORY_PATH),
   testIgnore: ['**/node_modules/**', '**/*.skip.ts'],

@@ -2,10 +2,12 @@ import {assertionMessageGetters} from './assertionMessageGetters';
 import {createExpectMethod} from './createExpectMethod';
 import {playwrightMethods} from './playwrightMethods';
 
+import type {Payload} from '../../types/internal';
+
 import type {AssertionFunctionKey} from './types';
 
 /**
- * `testController.expect` wrapper with logs.
+ * Wrapper of playwright's `expect` with logs.
  * @internal
  */
 // eslint-disable-next-line import/exports-last
@@ -16,6 +18,11 @@ export class Expect {
    * Actual value of `expect`.
    */
   readonly actualValue: unknown;
+
+  /**
+   * Optional additional fields that will be added to the assert logs.
+   */
+  readonly additionalLogFields?: Payload;
 
   /**
    * Description of `expect`.

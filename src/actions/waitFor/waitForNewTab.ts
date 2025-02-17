@@ -1,36 +1,48 @@
 import {LogEventType} from '../../constants/internal';
 import {getPlaywrightPage} from '../../useContext';
 import {getFullPackConfig} from '../../utils/config';
+import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
 
-import type {AsyncVoid, InternalTab, Tab, UtcTimeInMs} from '../../types/internal';
+import type {InternalTab, Tab, Trigger, UtcTimeInMs} from '../../types/internal';
 
-type Options = Readonly<{
-  timeout?: number;
-}>;
+type Options = Readonly<{skipLogs?: boolean; timeout?: number}>;
 
-type WaitForNewTab = ((prepare: () => AsyncVoid, options?: Options) => Promise<Tab>) &
+type WaitForNewTab = ((trigger: Trigger, options?: Options) => Promise<Tab>) &
   ((options?: Options) => Promise<Tab>);
 
 /**
  * Waits for opening of new tab and returns this tab.
  */
 export const waitForNewTab = (async (
-  prepareOrOptions: Options | (() => AsyncVoid),
+  triggerOrOptions?: Options | Trigger,
   options?: Options,
 ): Promise<Tab> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const context = getPlaywrightPage().context();
-  const prepare = typeof prepareOrOptions === 'function' ? prepareOrOptions : undefined;
-  const finalOptions = typeof prepareOrOptions === 'function' ? options : prepareOrOptions;
+  const trigger = typeof triggerOrOptions === 'function' ? triggerOrOptions : undefined;
+  const finalOptions = typeof triggerOrOptions === 'function' ? options : triggerOrOptions;
 
   const timeout = finalOptions?.timeout ?? getFullPackConfig().navigationTimeout;
+  const timeoutWithUnits = getDurationWithUnits(timeout);
+
+  if (trigger !== undefined) {
+    setCustomInspectOnFunction(trigger);
+  }
 
   const pagePromise = context.waitForEvent('page', {timeout});
 
-  await prepare?.();
+  if (finalOptions?.skipLogs !== true) {
+    log(
+      `Set wait for new tab with timeout ${timeoutWithUnits}`,
+      {trigger},
+      LogEventType.InternalCore,
+    );
+  }
+
+  await trigger?.();
 
   const page = await pagePromise;
 
@@ -42,11 +54,13 @@ export const waitForNewTab = (async (
 
   const url = page.url();
 
-  log(
-    `Have waited for new tab for ${waitWithUnits} at ${url}`,
-    {timeout},
-    LogEventType.InternalCore,
-  );
+  if (finalOptions?.skipLogs !== true) {
+    log(
+      `Have waited for new tab for ${waitWithUnits} at ${url}`,
+      {timeoutWithUnits, trigger},
+      LogEventType.InternalCore,
+    );
+  }
 
   return newTab as Tab;
 }) as WaitForNewTab;

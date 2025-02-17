@@ -6,12 +6,11 @@ const headerName = 'x-custom-header';
 const pageRequestHeaders = {[headerName]: 'foo'};
 
 test('set page request headers correctly', {meta: {testId: '17'}}, async () => {
-  const promise = waitForResponse(
+  await waitForResponse(
     ({request}) => request.requestHeaders[headerName] === pageRequestHeaders[headerName],
+    async () => {
+      await navigateToPage(E2edReportExample, {pageRequestHeaders});
+    },
     {includeNavigationRequest: true},
   );
-
-  await navigateToPage(E2edReportExample, {pageRequestHeaders});
-
-  await promise;
 });

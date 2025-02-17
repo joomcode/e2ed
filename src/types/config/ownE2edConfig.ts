@@ -4,6 +4,7 @@ import type {TestRunStatus} from '../../constants/internal';
 
 import type {FullMocksConfig} from '../fullMocks';
 import type {LogTag, MapBackendResponseToLog, MapLogPayload, MapLogPayloadInReport} from '../log';
+import type {MatchScreenshotConfig} from '../matchScreenshot';
 import type {MaybePromise} from '../promise';
 import type {LiteReport} from '../report';
 import type {TestOptions, TestStaticOptions} from '../testRun';
@@ -156,6 +157,11 @@ export type OwnE2edConfig<
    * If the mapping returns `undefined`, the log entry is not skipped, but is printed with an empty payload.
    */
   mapLogPayloadInReport: MapLogPayloadInReport;
+
+  /**
+   * Functions that describe the `toMatchScreenshot` assert (in `expect`).
+   */
+  matchScreenshot: MatchScreenshotConfig;
 
   /**
    * The maximum number of retries to run a test with the command
