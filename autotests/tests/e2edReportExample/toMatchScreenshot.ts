@@ -9,5 +9,5 @@ test('correctly check screenshots via toMatchScreenshot', {meta: {testId: '20'}}
   await expect(
     reportPage.navigationRetries,
     'toMatchScreenshot check screenshot',
-  ).toMatchScreenshot('');
+  ).toMatchScreenshot('gm0J3tp6oL', {mask: []});
 });

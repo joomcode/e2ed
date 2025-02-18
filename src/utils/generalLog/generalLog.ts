@@ -1,9 +1,9 @@
 import {getFullPackConfig} from '../config';
+import {removeStyleFromString} from '../valueToString';
 
 import {getLogMessageBody} from './getLogMessageBody';
 import {getLogPrefix} from './getLogPrefix';
 import {addLogToLogFile} from './logFile';
-import {removeStyleFromString} from './removeStyleFromString';
 
 import type {LogEventType} from '../../constants/internal';
 import type {LogContext, LogPayload, UtcTimeInMs} from '../../types/internal';

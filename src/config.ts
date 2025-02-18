@@ -111,7 +111,12 @@ const useOptions: PlaywrightTestConfig['use'] = {
 };
 
 const playwrightConfig = defineConfig({
-  expect: {timeout: userlandPack.assertionTimeout},
+  expect: {
+    timeout: userlandPack.assertionTimeout,
+    toHaveScreenshot: {
+      pathTemplate: `${ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY}/${EXPECTED_SCREENSHOTS_DIRECTORY_PATH}/{arg}.png`,
+    },
+  },
 
   fullyParallel: true,
 
@@ -122,8 +127,6 @@ const playwrightConfig = defineConfig({
   projects: [{name: userlandPack.browserName, use: useOptions}],
 
   retries: isLocalRun ? 0 : userlandPack.maxRetriesCountInDocker - 1,
-
-  snapshotPathTemplate: `${ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY}/${EXPECTED_SCREENSHOTS_DIRECTORY_PATH}/{arg}.png`,
 
   testDir: join(relativePathFromInstalledE2edToRoot, TESTS_DIRECTORY_PATH),
   testIgnore: ['**/node_modules/**', '**/*.skip.ts'],

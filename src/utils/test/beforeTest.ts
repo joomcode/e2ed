@@ -1,6 +1,7 @@
 import {TestRunStatus} from '../../constants/internal';
 import {setMeta} from '../../context/meta';
 import {getOnResponseCallbacks} from '../../context/onResponseCallbacks';
+import {setOutputDirectoryName} from '../../context/outputDirectoryName';
 import {setRetryIndex} from '../../context/retryIndex';
 import {setRunId} from '../../context/runId';
 import {setTestIdleTimeout} from '../../context/testIdleTimeout';
@@ -35,6 +36,7 @@ export const beforeTest = ({
   const {options} = testStaticOptions;
 
   setMeta(options.meta);
+  setOutputDirectoryName(outputDirectoryName);
   setRetryIndex(retryIndex);
   setRunId(runId);
 

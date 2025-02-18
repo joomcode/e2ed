@@ -2,7 +2,7 @@ import {inspect} from 'node:util';
 
 import {e2edEnvironment, RUN_LABEL_VARIABLE_NAME} from '../../constants/internal';
 
-import {valueToString} from '../valueToString';
+import {removeStyleFromString, valueToString} from '../valueToString';
 
 import {getPrintedFields} from './getPrintedFields';
 import {getPrintedStackFrame} from './getPrintedStackFrame';
@@ -45,7 +45,8 @@ class E2edError extends Error {
    */
   readonly utcTimeInMs: UtcTimeInMs;
 
-  constructor(message: string, params?: LogParams) {
+  constructor(rawMessage: string, params?: LogParams) {
+    const message = removeStyleFromString(rawMessage);
     const runLabel = e2edEnvironment[RUN_LABEL_VARIABLE_NAME];
     const utcTimeInMs = Date.now() as UtcTimeInMs;
 

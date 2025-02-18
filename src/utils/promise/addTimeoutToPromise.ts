@@ -7,7 +7,7 @@ import {getPromiseWithResolveAndReject} from './getPromiseWithResolveAndReject';
 export const addTimeoutToPromise = <Value>(
   promise: Promise<Value>,
   timeout: number,
-  timeoutError: unknown = undefined,
+  timeoutError: Error | undefined = undefined,
 ): Promise<Value> => {
   const {clearRejectTimeout, promiseWithTimeout, reject, setRejectTimeoutFunction} =
     getPromiseWithResolveAndReject<Value>(timeout);

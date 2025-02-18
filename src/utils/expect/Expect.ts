@@ -29,6 +29,11 @@ export class Expect {
    */
   readonly description: string;
 
+  /**
+   * Optional error of assert method.
+   */
+  readonly error?: Error;
+
   constructor(actualValue: unknown, description: string) {
     this.actualValue = actualValue;
     this.description = description;
