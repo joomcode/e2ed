@@ -98,6 +98,7 @@ export const createExpectMethod = (
       const logMessage = `Assert: ${this.description}`;
       const logPayload = {
         assertionArguments: args,
+        ...additionalLogFields,
         error,
         logEventStatus: error ? LogEventStatus.Failed : LogEventStatus.Passed,
         selector:
@@ -109,7 +110,6 @@ export const createExpectMethod = (
               selectorPropertyArgs: selectorPropertyRetryData.args,
             }
           : undefined),
-        ...additionalLogFields,
       };
 
       return addTimeoutToPromise(Promise.resolve(actualValue), timeout, timeoutError)

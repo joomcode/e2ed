@@ -1,6 +1,6 @@
 import type {Expect as PlaywrightExpect} from '@playwright/test';
 
-import type {Selector} from '../../types/internal';
+import type {ToMatchScreenshotOptions} from '../../types/internal';
 
 import type {Expect} from './Expect';
 
@@ -9,19 +9,6 @@ type ElementOf<Type> = Type extends (infer Element)[] ? Element : never;
 type EnsureString<Type> = Type extends string ? string : never;
 
 type Extend<Type, Extended> = Type extends Extended ? Extended : never;
-
-type ToMatchScreenshotOptions = Readonly<{
-  animations?: 'allow' | 'disabled';
-  caret?: 'hide' | 'initial';
-  mask?: readonly Selector[];
-  maskColor?: string;
-  maxDiffPixelRatio?: number;
-  maxDiffPixels?: number;
-  omitBackground?: boolean;
-  scale?: 'css' | 'device';
-  threshold?: number;
-  timeout?: number;
-}>;
 
 /**
  * All assertion functions keys (names of assertion functions, like `eql`, `match`, etc).
@@ -81,6 +68,9 @@ export type NonSelectorMatchers<Actual> = NonSelectorAdditionalMatchers<Actual> 
  * TODO: support LocatorAssertions
  */
 export type SelectorMatchers = Readonly<{
+  /**
+   * Checks that the selector screenshot matches the one specified by `expectedScreenshotId`.
+   */
   toMatchScreenshot: (
     expectedScreenshotId: string,
     options?: ToMatchScreenshotOptions,

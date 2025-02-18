@@ -36,7 +36,7 @@ export type CreatePackSpecificTypes<
   MapLogPayloadInConsole: MapLogPayload;
   MapLogPayloadInLogFile: MapLogPayload;
   MapLogPayloadInReport: MapLogPayloadInReport;
-  MatchScreenshot: MatchScreenshotConfig;
+  MatchScreenshot: MatchScreenshotConfig<PackParameters['TestMeta']>;
   TestFunction: TestFunction<PackParameters['TestMeta']>;
   WaitBeforeRetry: FullPackConfigByPack<Pack>['waitBeforeRetry'];
 }>;

@@ -7,7 +7,7 @@ import type {RunHash, TestRun, TestStaticOptions} from '../testRun';
 import type {TestMetaPlaceholder} from './placeholders';
 
 /**
- * Hooks type that the e2ed/hooks userland module must correspond to.
+ * Hooks type that the `e2ed/hooks` userland module must correspond to.
  */
 export type UserlandHooks<TestMeta = TestMetaPlaceholder> = {
   getLogContext: (

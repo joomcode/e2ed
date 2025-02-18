@@ -5,6 +5,7 @@ import {setOutputDirectoryName} from '../../context/outputDirectoryName';
 import {setRetryIndex} from '../../context/retryIndex';
 import {setRunId} from '../../context/runId';
 import {setTestIdleTimeout} from '../../context/testIdleTimeout';
+import {setTestStaticOptions} from '../../context/testStaticOptions';
 import {setTestTimeout} from '../../context/testTimeout';
 
 import {getFullPackConfig} from '../config';
@@ -39,6 +40,7 @@ export const beforeTest = ({
   setOutputDirectoryName(outputDirectoryName);
   setRetryIndex(retryIndex);
   setRunId(runId);
+  setTestStaticOptions(testStaticOptions);
 
   const onResponseCallbacks = getOnResponseCallbacks();
 

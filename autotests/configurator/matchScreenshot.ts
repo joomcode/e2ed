@@ -14,7 +14,7 @@ const getPath = (screenshotId: string) =>
  * Functions that describe the `toMatchScreenshot` assert (in `expect`).
  */
 export const matchScreenshot: MatchScreenshot = {
-  getScreenshotIdUrl: (screenshotId) => {
+  getScreenshotUrlById: (screenshotId) => {
     const path = getPath(screenshotId);
 
     if (isLocalRun) {
@@ -29,7 +29,7 @@ export const matchScreenshot: MatchScreenshot = {
 
     return readFile(screenshotPath);
   },
-  writeScreenshot: async (screenshot) => {
+  writeScreenshot: async (screenshot, _meta) => {
     const screenshotId = getHash(screenshot);
     const path = getPath(screenshotId);
     const screenshotPath = join(...path) as FilePathFromRoot;

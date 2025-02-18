@@ -161,7 +161,7 @@ export type OwnE2edConfig<
   /**
    * Functions that describe the `toMatchScreenshot` assert (in `expect`).
    */
-  matchScreenshot: MatchScreenshotConfig;
+  matchScreenshot: MatchScreenshotConfig<TestMeta>;
 
   /**
    * The maximum number of retries to run a test with the command

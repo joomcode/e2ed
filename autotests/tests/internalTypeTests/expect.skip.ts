@@ -20,6 +20,9 @@ void expect(htmlElementSelector.textContent, '').eql('some text');
 // ok
 void expect(htmlElementSelector, '').toMatchScreenshot('some id');
 
+// ok
+void expect(htmlElementSelector, '').toMatchScreenshot('some id', {scale: 'css', timeout: 1_000});
+
 // @ts-expect-error: toMatchScreenshot is acceptable only for selectors
 void expect(htmlElementSelector.textContent, '').toMatchScreenshot('some id');
 
