@@ -10,6 +10,7 @@ import {
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
   COMPILED_USERLAND_CONFIG_DIRECTORY,
   e2edEnvironment,
+  EXPECTED_SCREENSHOTS_DIRECTORY_PATH,
   INTERNAL_REPORTS_DIRECTORY_PATH,
   isDebug,
   PATH_TO_TEST_FILE_VARIABLE_NAME,
@@ -110,7 +111,12 @@ const useOptions: PlaywrightTestConfig['use'] = {
 };
 
 const playwrightConfig = defineConfig({
-  expect: {timeout: userlandPack.assertionTimeout},
+  expect: {
+    timeout: userlandPack.assertionTimeout,
+    toHaveScreenshot: {
+      pathTemplate: `${ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY}/${EXPECTED_SCREENSHOTS_DIRECTORY_PATH}/{arg}.png`,
+    },
+  },
 
   fullyParallel: true,
 

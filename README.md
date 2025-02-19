@@ -324,6 +324,8 @@ shorten or skip a report step.
 If the mapping returns `null`, the step is skipped.
 If the mapping returns `undefined`, the log entry is not skipped, but is printed with an empty payload.
 
+`matchScreenshot: MatchScreenshot`: functions that describe the `toMatchScreenshot` assert (in `expect`).
+
 `maxRetriesCountInDocker: number`: the maximum number of retries to run a test with the command
 `your-project/autotests/bin/runDocker.sh` (until the test passes).
 For example, if it is equal to three, the test will be run no more than three times.

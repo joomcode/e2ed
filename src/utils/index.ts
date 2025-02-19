@@ -34,8 +34,8 @@ export {getDocumentCookie, getDocumentTitle, getDocumentUrl, reloadDocument} fro
 export {E2edError, getStackTrace} from './error';
 export {getFunctionPresentationForLogs, setCustomInspectOnFunction} from './fn';
 export {writeFile} from './fs';
-export {removeStyleFromString} from './generalLog';
 export {getDurationWithUnits} from './getDurationWithUnits';
+export {getHash} from './getHash';
 export {getKeysCounter} from './getKeysCounter';
 export {getContentJsonHeaders} from './http';
 export {log} from './log';
@@ -53,10 +53,9 @@ export {
   getHeaderValue,
 } from './requestHooks';
 export {getRunLabelObject} from './runLabel';
-export {getDescriptionFromSelector} from './selectors';
 export {setReadonlyProperty} from './setReadonlyProperty';
 export {getPackageInfo} from './startInfo';
 export {isArray, isThenable} from './typeGuards';
 export {isUiMode} from './uiMode';
-export {valueToString} from './valueToString';
+export {removeStyleFromString, valueToString} from './valueToString';
 export {isSelectorEntirelyInViewport, isSelectorInViewport} from './viewport';

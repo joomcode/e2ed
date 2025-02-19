@@ -108,8 +108,8 @@ export type Response<
  * Completed HTTP response with mandatory request.
  */
 export type ResponseWithRequest<
-  SomeResponse extends Response = Response,
   SomeRequest extends Request = Request,
+  SomeResponse extends Response = Response,
 > = Readonly<{
   completionTimeInMs: UtcTimeInMs;
   duration: string;

@@ -14,6 +14,9 @@ const getTestFullMocksPath = (testId: FullMocksTestId): FilePathFromRoot =>
 
 let log: typeof logType | undefined;
 
+/**
+ * Functions that describe the "full mocks" functionality.
+ */
 export const fullMocks: FullMocks = {
   filterTests: ({options: {meta}}) => meta.testId === '18',
   getRequestKind: ({pathname}) => pathname as RequestKind,

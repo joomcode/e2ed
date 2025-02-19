@@ -12,7 +12,7 @@ import type {OneTryOfRequestOptions} from './types';
 
 type Options<SomeRequest extends Request, SomeResponse extends Response> = Readonly<{
   isNeedRetry: (
-    response: ResponseWithRequest<SomeResponse, SomeRequest>,
+    response: ResponseWithRequest<SomeRequest, SomeResponse>,
   ) => Promise<boolean> | boolean;
   url: Url;
 }> &
@@ -24,7 +24,7 @@ type Options<SomeRequest extends Request, SomeResponse extends Response> = Reado
  */
 export const getResponse = async <SomeRequest extends Request, SomeResponse extends Response>(
   options: Options<SomeRequest, SomeResponse>,
-): Promise<ResponseWithRequest<SomeResponse, SomeRequest> | undefined> => {
+): Promise<ResponseWithRequest<SomeRequest, SomeResponse> | undefined> => {
   const {isNeedRetry, url, ...oneTryOfRequestOptions} = options;
 
   const {fullLogParams, response} = await oneTryOfRequest<SomeRequest, SomeResponse>(

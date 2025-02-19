@@ -17,6 +17,7 @@ import {
   mapLogPayloadInConsole,
   mapLogPayloadInLogFile,
   mapLogPayloadInReport,
+  matchScreenshot,
   skipTests,
 } from '../configurator';
 
@@ -65,6 +66,7 @@ export const pack: Pack = {
   mapLogPayloadInConsole,
   mapLogPayloadInLogFile,
   mapLogPayloadInReport,
+  matchScreenshot,
   maxRetriesCountInDocker: 3,
   navigationTimeout: 6_000,
   overriddenConfigFields: null,

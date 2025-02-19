@@ -1,3 +1,3 @@
 /** @internal */
 export {Expect} from './Expect';
-export type {Matchers} from './types';
+export type {NonSelectorMatchers, SelectorMatchers} from './types';

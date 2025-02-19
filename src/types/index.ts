@@ -1,4 +1,5 @@
 export type {ClearContext, GetContext, GetWithDefaultValueContext, SetContext} from '../useContext';
+export type {Trigger} from './actions';
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';
@@ -38,6 +39,11 @@ export type {
 } from './http';
 export type {KeyboardPressKey} from './keyboard';
 export type {Log, LogContext, LogParams, LogPayload, LogTag} from './log';
+export type {
+  MatchScreenshotConfig,
+  ScreenshotMeta,
+  ToMatchScreenshotOptions,
+} from './matchScreenshot';
 export type {ApiMockFunction} from './mockApiRoute';
 export type {WebSocketMockFunction} from './mockWebSocketRoute';
 export type {NavigateToUrlOptions} from './navigation';

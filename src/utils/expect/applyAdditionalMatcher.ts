@@ -40,7 +40,7 @@ export const applyAdditionalMatcher = (
 
       return matcher.apply(context, args);
     });
-  })
+  }, ctx.description)
     .toPass({timeout: assertionTimeout})
     .then(() => context);
 };

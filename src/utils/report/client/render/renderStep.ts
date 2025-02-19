@@ -29,7 +29,7 @@ export function renderStep({logEvent, nextLogEventTime}: Options): SafeHtml {
   const isPayloadEmpty = !payload || Object.keys(payload).length === 0;
   const status = payload?.logEventStatus ?? LogEventStatus.Passed;
 
-  let pathToScreenshotFromReportPage: string | undefined;
+  let pathToScreenshotOfPage: string | undefined;
 
   if (type === LogEventType.InternalAction && typeof payload?.['pathToScreenshot'] === 'string') {
     const {pathToScreenshot} = payload;
@@ -38,16 +38,17 @@ export function renderStep({logEvent, nextLogEventTime}: Options): SafeHtml {
     if (pathToScreenshotsDirectoryForReport !== null) {
       const pathToDirectoryWithoutSlashes = pathToScreenshotsDirectoryForReport.replace(/\/+$/, '');
 
-      pathToScreenshotFromReportPage = `${pathToDirectoryWithoutSlashes}/${pathToScreenshot}`;
+      pathToScreenshotOfPage = `${pathToDirectoryWithoutSlashes}/${pathToScreenshot}`;
     }
   }
 
   const content = renderStepContent({
-    pathToScreenshotFromReportPage,
+    pathToScreenshotOfPage,
     payload: isPayloadEmpty ? undefined : payload,
+    type,
   });
   const maybeEmptyClass = isPayloadEmpty ? 'step-expanded_is-empty' : '';
-  const isErrorScreenshot = pathToScreenshotFromReportPage !== undefined;
+  const isErrorScreenshot = pathToScreenshotOfPage !== undefined;
 
   return sanitizeHtml`
 <button aria-expanded="${isErrorScreenshot}" class="step-expanded step-expanded_status_${status} ${maybeEmptyClass}">

@@ -51,10 +51,10 @@ test('selector custom methods', {meta: {testId: '15'}}, async () => {
   ).ok();
 
   await expect(
-    reportPage.navigationRetriesButtonSelected.getDescription(),
+    reportPage.navigationRetriesButtonSelected.description,
     'selector has apropriate description',
   ).eql(
-    '[data-testid="RetriesButtons"].findByTestId(RetryButton).filterByLocatorParameter(selected, true)',
+    '[data-testid="RetriesButtons"].find([data-testid="RetryButton"]).filter([data-test-selected="true"])',
   );
 
   await click(reportPage.navigationRetriesButton.nth(0));

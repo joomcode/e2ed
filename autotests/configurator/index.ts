@@ -6,6 +6,7 @@ export {mapBackendResponseToLog} from './mapBackendResponseToLog';
 export {mapLogPayloadInConsole} from './mapLogPayloadInConsole';
 export {mapLogPayloadInLogFile} from './mapLogPayloadInLogFile';
 export {mapLogPayloadInReport} from './mapLogPayloadInReport';
+export {matchScreenshot} from './matchScreenshot';
 export {skipTests} from './skipTests';
 export type {
   DoAfterPack,
@@ -23,6 +24,7 @@ export type {
   MapLogPayloadInConsole,
   MapLogPayloadInLogFile,
   MapLogPayloadInReport,
+  MatchScreenshot,
   Pack,
   SkipTests,
   TestFunction,

@@ -8,7 +8,6 @@ export {failMessage, okMessage} from './messages';
 export {writeLogsToFile} from './logFile';
 /** @internal */
 export {logStartE2edError} from './logStartE2edError';
-export {removeStyleFromString} from './removeStyleFromString';
 /** @internal */
 export {getSuccessfulTestFilePaths} from './successfulTestRuns';
 /** @internal */

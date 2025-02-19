@@ -2,7 +2,7 @@ import {mkdir} from 'node:fs/promises';
 
 import type {DirectoryPathFromRoot} from '../../types/internal';
 
-const options = {recursive: true};
+const options = {recursive: true} as const;
 
 /**
  * Creates directory by path.

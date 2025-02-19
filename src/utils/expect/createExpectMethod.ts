@@ -5,7 +5,8 @@ import {E2edError} from '../error';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
 import {addTimeoutToPromise} from '../promise';
-import {getDescriptionFromSelector} from '../selectors';
+import {Selector} from '../selectors';
+import {setReadonlyProperty} from '../setReadonlyProperty';
 import {isThenable} from '../typeGuards';
 import {valueToString, wrapStringForLogs} from '../valueToString';
 
@@ -40,7 +41,7 @@ export const createExpectMethod = (
       this.actualValue as {[RETRY_KEY]?: SelectorPropertyRetryData}
     )?.[RETRY_KEY];
     const timeoutWithUnits = getDurationWithUnits(timeout);
-    const error = new E2edError(
+    const timeoutError = new E2edError(
       `"${key}" assertion promise rejected after ${timeoutWithUnits} timeout`,
     );
 
@@ -57,51 +58,68 @@ export const createExpectMethod = (
             selectorPropertyRetryData,
           ),
           timeout,
-          error,
-        );
+          timeoutError,
+        ).catch((assertError: Error) => {
+          setReadonlyProperty(ctx, 'error', assertError);
+
+          return ctx;
+        });
       }
 
-      const assertion = expect(value) as unknown as Record<string, Fn<unknown[], Promise<unknown>>>;
+      const assertion = expect(value, ctx.description) as unknown as Record<
+        string,
+        Fn<unknown[], Promise<unknown>>
+      >;
 
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      return addTimeoutToPromise(assertion[key]!(...args), timeout, error).then(() => ctx);
+      return addTimeoutToPromise(assertion[key]!(...args), timeout, timeoutError).then(
+        () => ctx,
+        (assertError: Error) => {
+          setReadonlyProperty(ctx, 'error', assertError);
+
+          return ctx;
+        },
+      );
     };
 
-    const assertionPromise: Promise<Readonly<{maybeError?: Error; value?: unknown}>> =
-      RESOLVED_PROMISE.then(() => {
-        if (isThenable(this.actualValue)) {
-          return addTimeoutToPromise(this.actualValue as Promise<unknown>, timeout, error).then(
-            runAssertion,
-          );
-        }
+    const assertionPromise: Promise<Expect> = RESOLVED_PROMISE.then(() => {
+      if (isThenable(this.actualValue)) {
+        return addTimeoutToPromise(
+          this.actualValue as Promise<unknown>,
+          timeout,
+          timeoutError,
+        ).then(runAssertion);
+      }
 
-        return runAssertion(this.actualValue);
-      }).then(
-        ({actualValue}) => ({value: actualValue}),
-        (maybeError: Error) => ({maybeError}),
-      );
+      return runAssertion(this.actualValue);
+    });
 
-    return assertionPromise.then(({maybeError, value}) => {
+    return assertionPromise.then(({actualValue, additionalLogFields, error}) => {
       const logMessage = `Assert: ${this.description}`;
       const logPayload = {
         assertionArguments: args,
-        error: maybeError,
-        logEventStatus: maybeError ? LogEventStatus.Failed : LogEventStatus.Passed,
-        selector: selectorPropertyRetryData
-          ? getDescriptionFromSelector(selectorPropertyRetryData.selector)
-          : undefined,
-        selectorProperty: selectorPropertyRetryData?.property,
-        selectorPropertyArgs: selectorPropertyRetryData?.args,
+        ...additionalLogFields,
+        error,
+        logEventStatus: error ? LogEventStatus.Failed : LogEventStatus.Passed,
+        selector:
+          selectorPropertyRetryData?.selector.description ??
+          (this.actualValue instanceof Selector ? this.actualValue.description : undefined),
+        ...(selectorPropertyRetryData
+          ? {
+              selectorProperty: selectorPropertyRetryData.property,
+              selectorPropertyArgs: selectorPropertyRetryData.args,
+            }
+          : undefined),
       };
 
-      return addTimeoutToPromise(Promise.resolve(value), timeout, error)
+      return addTimeoutToPromise(Promise.resolve(actualValue), timeout, timeoutError)
         .then(
-          (actualValue) =>
+          (value) =>
             log(
               logMessage,
               {
-                actualValue,
-                assertion: wrapStringForLogs(`value ${valueToString(actualValue)} ${message}`),
+                actualValue: value,
+                assertion: wrapStringForLogs(`value ${valueToString(value)} ${message}`),
                 ...logPayload,
               },
               LogEventType.InternalAssert,
@@ -111,8 +129,8 @@ export const createExpectMethod = (
           },
         )
         .then(() => {
-          if (maybeError) {
-            throw maybeError;
+          if (error) {
+            throw error;
           }
         });
     });

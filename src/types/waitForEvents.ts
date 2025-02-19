@@ -50,7 +50,7 @@ export type RequestPredicate<SomeRequest extends Request = Request> = (
 export type ResponsePredicate<
   SomeRequest extends Request = Request,
   SomeResponse extends Response = Response,
-> = (response: ResponseWithRequest<SomeResponse, SomeRequest>) => MaybePromise<boolean>;
+> = (response: ResponseWithRequest<SomeRequest, SomeResponse>) => MaybePromise<boolean>;
 
 /**
  * Request or response predicate with resolve and reject functions for both event handlers.

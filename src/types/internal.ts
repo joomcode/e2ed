@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 
 export type {ClearContext, GetContext, GetWithDefaultValueContext, SetContext} from '../useContext';
-export type {WithStabilizationInterval} from './actions';
+export type {Trigger, WithStabilizationInterval} from './actions';
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';
@@ -68,6 +68,11 @@ export type {
   MapLogPayloadInReport,
   Payload,
 } from './log';
+export type {
+  MatchScreenshotConfig,
+  ScreenshotMeta,
+  ToMatchScreenshotOptions,
+} from './matchScreenshot';
 export type {ApiMockFunction} from './mockApiRoute';
 /** @internal */
 export type {ApiMockState} from './mockApiRoute';
@@ -118,12 +123,7 @@ export type {
 export type {RunLabel, RunLabelObject} from './runLabel';
 /** @internal */
 export type {RawRunLabelObject} from './runLabel';
-export type {
-  CreateSelector,
-  CreateSelectorFunctionOptions,
-  Selector,
-  SelectorCustomMethods,
-} from './selectors';
+export type {CreateSelector, CreateSelectorFunctionOptions, Selector} from './selectors';
 /** @internal */
 export type {SelectorPropertyRetryData} from './selectors';
 export type {IsTestSkippedResult} from './skipTest';

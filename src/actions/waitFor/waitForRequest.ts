@@ -11,23 +11,43 @@ import type {
   Request,
   RequestPredicate,
   RequestWithUtcTimeInMs,
+  Trigger,
   UtcTimeInMs,
 } from '../../types/internal';
+
+type Action = (<SomeRequest extends Request>(
+  predicate: RequestPredicate<SomeRequest>,
+  trigger: Trigger | undefined,
+  options?: Options,
+) => Promise<RequestWithUtcTimeInMs<SomeRequest>>) &
+  (<SomeRequest extends Request>(
+    predicate: RequestPredicate<SomeRequest>,
+    options?: Options,
+  ) => Promise<RequestWithUtcTimeInMs<SomeRequest>>);
+
+type Options = Readonly<{skipLogs?: boolean; timeout?: number}>;
 
 /**
  * Waits for some request (from browser) filtered by the request predicate.
  * If the function runs longer than the specified timeout, it is rejected.
  */
-export const waitForRequest = <SomeRequest extends Request>(
+export const waitForRequest = (async <SomeRequest extends Request>(
   predicate: RequestPredicate<SomeRequest>,
-  {skipLogs = false, timeout}: {skipLogs?: boolean; timeout?: number} = {},
+  triggerOrOptions?: Options | Trigger,
+  options?: Options,
 ): Promise<RequestWithUtcTimeInMs<SomeRequest>> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   setCustomInspectOnFunction(predicate);
 
-  const {waitForRequestTimeout} = getFullPackConfig();
-  const rejectTimeout = timeout ?? waitForRequestTimeout;
+  const trigger = typeof triggerOrOptions === 'function' ? triggerOrOptions : undefined;
+  const finalOptions = typeof triggerOrOptions === 'function' ? options : triggerOrOptions;
+
+  const timeout = finalOptions?.timeout ?? getFullPackConfig().waitForRequestTimeout;
+
+  if (trigger !== undefined) {
+    setCustomInspectOnFunction(trigger);
+  }
 
   const page = getPlaywrightPage();
 
@@ -43,38 +63,41 @@ export const waitForRequest = <SomeRequest extends Request>(
         } catch (cause) {
           throw new E2edError('waitForRequest predicate threw an exception', {
             cause,
-            rejectTimeout,
+            timeout,
+            trigger,
           });
         }
       },
-      {timeout: rejectTimeout},
+      {timeout},
     )
     .then(
       (playwrightRequest) =>
         getRequestFromPlaywrightRequest(playwrightRequest) as RequestWithUtcTimeInMs<SomeRequest>,
     );
 
-  const timeoutWithUnits = getDurationWithUnits(rejectTimeout);
+  const timeoutWithUnits = getDurationWithUnits(timeout);
 
-  if (skipLogs !== true) {
+  if (finalOptions?.skipLogs !== true) {
     log(
       `Set wait for request with timeout ${timeoutWithUnits}`,
-      {predicate},
+      {predicate, trigger},
       LogEventType.InternalCore,
     );
   }
 
-  return skipLogs !== true
-    ? promise.then((request) => {
-        const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
+  await trigger?.();
 
-        log(
-          `Have waited for request for ${waitWithUnits}`,
-          {predicate, request, timeoutWithUnits},
-          LogEventType.InternalCore,
-        );
+  const request = await promise;
 
-        return request;
-      })
-    : promise;
-};
+  if (finalOptions?.skipLogs !== true) {
+    const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
+
+    log(
+      `Have waited for request for ${waitWithUnits}`,
+      {predicate, request, timeoutWithUnits, trigger},
+      LogEventType.InternalCore,
+    );
+  }
+
+  return request;
+}) as Action;
