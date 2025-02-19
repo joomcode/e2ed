@@ -1,5 +1,25 @@
 # Changelog
 
+## [v0.20.0](https://github.com/joomcode/e2ed/tree/v0.20.0) (2025-02-19)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.12...v0.20.0)
+
+- [Merge pull request #107 from joomcode/feat/add-toMatchScreenshot-assert](https://github.com/joomcode/e2ed/commit/81dd15f7b71be9ebcfdb4a5299b5fbce43ffd3a7) ([uid11](https://github.com/uid11))
+
+  feat: add to match screenshot assert
+
+- [FI-1437 feat: add screenshot metadata to expected screenshots](https://github.com/joomcode/e2ed/commit/42e78cfc054b2f857d2ba2ef2852daacb1216aa0) ([uid11](https://github.com/uid11))
+
+  feat: add screenshots from `toMatchScreenshot` to HTML report
+
+  chore: update devDependencies (`@types/node`, `prettier`)
+
+- [FI-1696 fix: `actualValue` in failed `expect` asserts](https://github.com/joomcode/e2ed/commit/919ea4bd0731f7cac88a57743f29a0dfff095e3c) ([uid11](https://github.com/uid11))
+- [FI-1437 feat: read/write expected screenshots](https://github.com/joomcode/e2ed/commit/5e101658d9e1a86cac59866195e0849b9224f3c2) ([uid11](https://github.com/uid11))
+- [FI-1679 feat: support argument `trigger` in `waitForRequest`/`waitForResponse`](https://github.com/joomcode/e2ed/commit/55873026f0846b73852c484c3c42f1d756acba12) ([uid11](https://github.com/uid11))
+- [FI-1541 fix: remove Proxy wrapper on Selector](https://github.com/joomcode/e2ed/commit/d3e04ca9e4a3bde4a2cc4d3dd9f0b8e79d2b7a6e) ([uid11](https://github.com/uid11))
+- [FI-1437 feat: add assert matcher `toMatchScreenshot` to `expect`](https://github.com/joomcode/e2ed/commit/5b4e204bda6c6f0aeeff60a98694505ab7b910e0) ([uid11](https://github.com/uid11))
+
 ## [v0.19.12](https://github.com/joomcode/e2ed/tree/v0.19.12) (2025-02-05)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.11...v0.19.12)
