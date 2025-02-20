@@ -2,6 +2,7 @@ import {randomUUID} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {join} from 'node:path';
 
+import {isLocalRun} from '../../configurator';
 import {
   EXPECTED_SCREENSHOTS_DIRECTORY_PATH,
   INTERNAL_REPORTS_DIRECTORY_PATH,
@@ -78,8 +79,23 @@ export const toMatchScreenshot = async (
 
     if (expectedScreenshot !== undefined) {
       expectedScreenshotFound = true;
-      await writeFile(screenshotPath, expectedScreenshot);
+
+      if (!isLocalRun) {
+        await writeFile(screenshotPath, expectedScreenshot);
+      }
     }
+  }
+
+  const message = expectedScreenshotId
+    ? `Cannot read expected screenshot ${expectedScreenshotId}`
+    : 'Expected screenshot not specified';
+
+  if (isLocalRun) {
+    if (expectedScreenshotFound) {
+      return;
+    }
+
+    throw new E2edError(message);
   }
 
   const {mask = [], ...restOptions} = options;
@@ -102,7 +118,7 @@ export const toMatchScreenshot = async (
       ...restOptions,
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
 
     const output = join(INTERNAL_REPORTS_DIRECTORY_PATH, getOutputDirectoryName());
     const actualScreenshotPath = join(output, `${assertId}-actual.png`) as FilePathFromRoot;
@@ -120,7 +136,7 @@ export const toMatchScreenshot = async (
     additionalLogFields.diffScreenshotId = diffScreenshotId;
     additionalLogFields.diffScreenshotUrl = getScreenshotUrlById(diffScreenshotId);
 
-    throw new E2edError(message);
+    throw new E2edError(errorMessage);
   }
 
   if (expectedScreenshotFound) {
@@ -132,10 +148,6 @@ export const toMatchScreenshot = async (
 
   additionalLogFields.actualScreenshotId = actualScreenshotId;
   additionalLogFields.actualScreenshotUrl = getScreenshotUrlById(actualScreenshotId);
-
-  const message = expectedScreenshotId
-    ? `Cannot read expected screenshot ${expectedScreenshotId}`
-    : 'Expected screenshot not specified';
 
   throw new E2edError(message);
 };
