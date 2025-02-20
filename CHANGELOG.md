@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.20.1](https://github.com/joomcode/e2ed/tree/v0.20.1) (2025-02-20)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.0...v0.20.1)
+
+- [Merge pull request #108 from joomcode/fix/local-runs-for-toMatchScreenshot](https://github.com/joomcode/e2ed/commit/8341e6a0dc0c45269d4c0cbf8d67703a8fe61c1c) ([uid11](https://github.com/uid11))
+
+  fix: support `toMatchScreenshot` in local runs
+
+- [FI-1437 fix: support `toMatchScreenshot` in local runs](https://github.com/joomcode/e2ed/commit/42ef3dff253e4342122815a9838ab739553c6b84) ([uid11](https://github.com/uid11))
+
+  fix: remove text style from error messages in HTML report
+
 ## [v0.20.0](https://github.com/joomcode/e2ed/tree/v0.20.0) (2025-02-19)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.19.12...v0.20.0)
