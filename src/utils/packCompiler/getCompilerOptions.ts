@@ -25,7 +25,7 @@ const frozenCompilerOptions: CompilerOptions = {
   resolveJsonModule: true,
   rootDir: '.',
   skipLibCheck: true,
-  target: ScriptTarget.ES2023,
+  target: ScriptTarget.ES2024,
   types: ['node'],
 };
 
