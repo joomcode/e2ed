@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.20.2](https://github.com/joomcode/e2ed/tree/v0.20.2) (2025-02-24)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.1...v0.20.2)
+
+- [fix: renew expected screenshot for internal test of `toMatchScreenshot`](https://github.com/joomcode/e2ed/commit/3c3f002c34d7e2fe670e745b7e5c8ad41aaad552) ([uid11](https://github.com/uid11))
+- [fix: tests in internal tests pack could failed on first retry](https://github.com/joomcode/e2ed/commit/2cf407e2207651bee66cb96fb4f777343bf3d247) ([uid11](https://github.com/uid11))
+- [Merge pull request #109 from joomcode/fix/screenshot-metadata](https://github.com/joomcode/e2ed/commit/9cd24093618b2a1e633631e43e937a7ea65e11f1) ([uid11](https://github.com/uid11))
+
+  fix: add more fields to screenshot metadata
+
+- [chore: update devDependencies (`@types/node`, `prettier`)](https://github.com/joomcode/e2ed/commit/ade7d907c2e68e49aa408d761783ed7af171db9c) ([uid11](https://github.com/uid11))
+- [FI-1437 fix: add more fields to screenshot metadata](https://github.com/joomcode/e2ed/commit/666caf1855262ce75f203688be855d530e5a3f92) ([uid11](https://github.com/uid11))
+
 ## [v0.20.1](https://github.com/joomcode/e2ed/tree/v0.20.1) (2025-02-20)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.0...v0.20.1)
