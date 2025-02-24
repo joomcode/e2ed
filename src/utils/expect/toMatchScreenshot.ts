@@ -8,21 +8,15 @@ import {
   INTERNAL_REPORTS_DIRECTORY_PATH,
 } from '../../constants/internal';
 import {getOutputDirectoryName} from '../../context/outputDirectoryName';
-import {getTestStaticOptions} from '../../context/testStaticOptions';
 
 import {getFullPackConfig} from '../config';
-import {getPathToPack, getRunLabel} from '../environment';
 import {E2edError} from '../error';
 import {writeFile} from '../fs';
 import {setReadonlyProperty} from '../setReadonlyProperty';
 
-import type {
-  FilePathFromRoot,
-  ScreenshotMeta,
-  Selector,
-  ToMatchScreenshotOptions,
-  Url,
-} from '../../types/internal';
+import {getScreenshotMeta} from './getScreenshotMeta';
+
+import type {FilePathFromRoot, Selector, ToMatchScreenshotOptions, Url} from '../../types/internal';
 
 import type {Expect} from './Expect';
 
@@ -70,12 +64,14 @@ export const toMatchScreenshot = async (
 
   setReadonlyProperty(context, 'additionalLogFields', additionalLogFields);
 
+  const meta = getScreenshotMeta({actualValue, description, expectedScreenshotId, options});
+
   let expectedScreenshotFound = false;
 
   if (expectedScreenshotId) {
     additionalLogFields.expectedScreenshotUrl = getScreenshotUrlById(expectedScreenshotId);
 
-    const expectedScreenshot = await readScreenshot(expectedScreenshotId);
+    const expectedScreenshot = await readScreenshot(expectedScreenshotId, meta);
 
     if (expectedScreenshot !== undefined) {
       expectedScreenshotFound = true;
@@ -99,16 +95,6 @@ export const toMatchScreenshot = async (
   }
 
   const {mask = [], ...restOptions} = options;
-  const meta: ScreenshotMeta = {
-    description,
-    isDiff: false,
-    options,
-    pathToPack: getPathToPack(),
-    runLabel: getRunLabel(),
-    selector: actualValue.description,
-    testStaticOptions: getTestStaticOptions(),
-    writeTimeInMs: Date.now(),
-  };
 
   try {
     const playwrightLocator = actualValue.getPlaywrightLocator();
@@ -131,7 +117,10 @@ export const toMatchScreenshot = async (
     additionalLogFields.actualScreenshotUrl = getScreenshotUrlById(actualScreenshotId);
 
     const diffScreenshot = await readFile(diffScreenshotPath);
-    const diffScreenshotId = await writeScreenshot(diffScreenshot, {...meta, isDiff: true});
+    const diffScreenshotId = await writeScreenshot(diffScreenshot, {
+      ...meta,
+      actual: actualScreenshotId,
+    });
 
     additionalLogFields.diffScreenshotId = diffScreenshotId;
     additionalLogFields.diffScreenshotUrl = getScreenshotUrlById(diffScreenshotId);

@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-control-regex
-const stylesRegexp = /\x1B\[[\d;]+m/gi;
+const stylesRegexp = /(\\x1B\[)|(\x1B\[)|(\\u001b\[)[\d;]+m/gi;
 
 /**
  * Removes console (terminal) styles from a string (like `\x1B[3m...`).

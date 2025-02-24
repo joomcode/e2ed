@@ -16,7 +16,11 @@ export type MatchScreenshotConfig<TestMeta = TestMetaPlaceholder> = Readonly<{
   /**
    * Reads screenshot by `screenshotId`.
    */
-  readScreenshot: (this: void, screenshotId: string) => Promise<Uint8Array | undefined>;
+  readScreenshot: (
+    this: void,
+    screenshotId: string,
+    meta: ScreenshotMeta<TestMeta>,
+  ) => Promise<Uint8Array | undefined>;
 
   /**
    * Writes screenshot by `screenshotId` and optional context info.
@@ -32,14 +36,16 @@ export type MatchScreenshotConfig<TestMeta = TestMetaPlaceholder> = Readonly<{
  * General screenshot metadata (like test name, assert description, etc.).
  */
 export type ScreenshotMeta<TestMeta = TestMetaPlaceholder> = Readonly<{
+  actual: string | undefined;
   description: string;
-  isDiff: boolean;
+  expected: string | undefined;
   options: ToMatchScreenshotOptions;
+  pageUrl: Url;
   pathToPack: string;
   runLabel: RunLabel;
   selector: string;
   testStaticOptions: TestStaticOptions<TestMeta>;
-  writeTimeInMs: number;
+  timeInMs: number;
 }>;
 
 /**

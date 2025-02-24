@@ -23,7 +23,7 @@ export const matchScreenshot: MatchScreenshot = {
 
     return `https://joomcode.github.io/e2ed/${path.slice(-2).join('/')}` as Url;
   },
-  readScreenshot: (screenshotId) => {
+  readScreenshot: (screenshotId, _meta) => {
     const path = getPath(screenshotId);
     const screenshotPath = join(...path) as FilePathFromRoot;
 
