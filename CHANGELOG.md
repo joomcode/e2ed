@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.20.3](https://github.com/joomcode/e2ed/tree/v0.20.3) (2025-02-26)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.2...v0.20.3)
+
+- [Merge pull request #110 from joomcode/fix/support-custom-csp-hosts-in-html-report](https://github.com/joomcode/e2ed/commit/dea7172f74567748cb1cf8922f7284f28dfbbba3) ([uid11](https://github.com/uid11))
+
+  fix: support custom CSP hosts for images in HTML report
+
+- [FI-1712 fix: print absolute paths to HTML report and lite report in docker](https://github.com/joomcode/e2ed/commit/dc618af42192b684628dfe0eafafd214e28c2060) ([uid11](https://github.com/uid11))
+- [FI-1437 fix: support custom CSP hosts for images in HTML report](https://github.com/joomcode/e2ed/commit/1dd84f20f71bf07bb2e4e55161bac1f7c7d51314) ([uid11](https://github.com/uid11))
+
 ## [v0.20.2](https://github.com/joomcode/e2ed/tree/v0.20.2) (2025-02-24)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.1...v0.20.2)
