@@ -1,6 +1,9 @@
 import {join} from 'node:path';
 
-import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
+import {
+  ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
+  REPORTS_DIRECTORY_PATH,
+} from '../../constants/internal';
 
 import {assertValueIsNotNull} from '../asserts';
 import {getFileSize, writeFile} from '../fs';
@@ -25,7 +28,11 @@ export const writeHtmlReport = async (reportData: ReportData): Promise<void> => 
 
   assertValueIsNotNull(reportFileName, 'reportFileName is not null');
 
-  const reportFilePath = join(REPORTS_DIRECTORY_PATH, reportFileName) as FilePathFromRoot;
+  const reportFilePath = join(
+    ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
+    REPORTS_DIRECTORY_PATH,
+    reportFileName,
+  ) as FilePathFromRoot;
 
   await writeFile(reportFilePath, String(reportHtml));
 
