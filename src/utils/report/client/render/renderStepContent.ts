@@ -32,7 +32,7 @@ export function renderStepContent({pathToScreenshotOfPage, payload, type}: Optio
 
   if (pathToScreenshotOfPage !== undefined) {
     images.push(
-      sanitizeHtml`<img src="${pathToScreenshotOfPage}" alt="Screenshot of page" title="Screenshot of page">`,
+      sanitizeHtml`<img src="${pathToScreenshotOfPage}" alt="Screenshot of page" title="Screenshot of page" />`,
     );
   }
 
@@ -40,16 +40,16 @@ export function renderStepContent({pathToScreenshotOfPage, payload, type}: Optio
     const {actualScreenshotUrl, diffScreenshotUrl, expectedScreenshotUrl} = payload;
 
     if (typeof actualScreenshotUrl === 'string') {
-      images.push(sanitizeHtml`<img src="${actualScreenshotUrl}" alt="Actual" title="Actual">`);
+      images.push(sanitizeHtml`<img src="${actualScreenshotUrl}" alt="Actual" title="Actual" />`);
     }
 
     if (typeof diffScreenshotUrl === 'string') {
-      images.push(sanitizeHtml`<img src="${diffScreenshotUrl}" alt="Diff" title="Diff">`);
+      images.push(sanitizeHtml`<img src="${diffScreenshotUrl}" alt="Diff" title="Diff" />`);
     }
 
     if (typeof expectedScreenshotUrl === 'string') {
       images.push(
-        sanitizeHtml`<img src="${expectedScreenshotUrl}" alt="Expected" title="Expected">`,
+        sanitizeHtml`<img src="${expectedScreenshotUrl}" alt="Expected" title="Expected" />`,
       );
     }
   }

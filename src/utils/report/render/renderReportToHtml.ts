@@ -3,6 +3,7 @@ import {generalLog} from '../../generalLog';
 import {getDurationWithUnits} from '../../getDurationWithUnits';
 
 import {sanitizeHtml} from '../client';
+import {getImgCspHosts} from '../getImgCspHosts';
 import {getRetriesProps} from '../getRetriesProps';
 
 import {locator} from './locator';
@@ -26,13 +27,14 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
 
   assertValueIsNotNull(reportFileName, 'reportFileName is not null');
 
+  const imgCspHosts = getImgCspHosts(reportData);
   const retries = getRetriesProps(reportData);
   const retryNumbers = retries.map(({retryIndex}) => retryIndex);
   const maxRetry = Math.max(...retryNumbers);
 
   const safeHtml = sanitizeHtml`<!DOCTYPE html>
 <html lang="en">
-  ${renderHead(reportFileName)}
+  ${renderHead(reportFileName, imgCspHosts)}
   <body>
     ${renderNavigation({retries})}
     <div class="main" role="tabpanel">

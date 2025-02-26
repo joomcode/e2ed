@@ -1,6 +1,9 @@
 import {join} from 'node:path';
 
-import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
+import {
+  ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
+  REPORTS_DIRECTORY_PATH,
+} from '../../constants/internal';
 
 import {getFileSize, writeFile} from '../fs';
 import {generalLog} from '../generalLog';
@@ -21,7 +24,11 @@ export const writeLiteJsonReport = async (liteReport: LiteReport): Promise<void>
   const {liteReportFileName} = liteReport;
   const reportJson = JSON.stringify(liteReport);
 
-  const reportFilePath = join(REPORTS_DIRECTORY_PATH, liteReportFileName) as FilePathFromRoot;
+  const reportFilePath = join(
+    ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
+    REPORTS_DIRECTORY_PATH,
+    liteReportFileName,
+  ) as FilePathFromRoot;
 
   await writeFile(reportFilePath, reportJson);
 
