@@ -80,7 +80,7 @@
     "lint:types:build": "if [ -f ./build/tsconfig.json ]; then tsc --noEmit --project ./build; else echo 'No build directory'; fi",
     "make:executable": "./bin/makeExecutable.sh",
     "parallel": "./bin/runParallel.sh",
-    "test": "npm run parallel test:docker test:local",
+    "test": "npm run test:docker && npm run test:local",
     "build:clear": "rm -rf ./build",
     "prebuild": "npm run build:clear",
     "build": "tsc; echo 'Compilation completed'",
