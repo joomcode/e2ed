@@ -1,5 +1,21 @@
 # Changelog
 
+## [v0.20.4](https://github.com/joomcode/e2ed/tree/v0.20.4) (2025-03-04)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.3...v0.20.4)
+
+- [fix: run internal tests sequentially](https://github.com/joomcode/e2ed/commit/45165109d0d8563a07623c43682714fa4fa77aa3) ([uid11](https://github.com/uid11))
+- [Merge pull request #111 from joomcode/fix/color-in-errors-from-playwright](https://github.com/joomcode/e2ed/commit/15e76ecce0a7f685ef8f150d4470a941921a0502) ([uid11](https://github.com/uid11))
+
+  fix: show failed assert in HTML reports for all asserts
+
+- [chore: update `devDependencies` (`prettier`, `typescript`, etc.)](https://github.com/joomcode/e2ed/commit/171b7327bca22df15f7d2a2c426a973c7b5139ab) ([uid11](https://github.com/uid11))
+- [FI-1716 fix: show failed assert in HTML reports for all asserts](https://github.com/joomcode/e2ed/commit/c36ea2e95d68b2c829ed573a9822c5d8edbd1ec1) ([uid11](https://github.com/uid11))
+
+  fix: show link to logs file in the end of tests run
+
+  fix: remove style symbols from Playwright error messages
+
 ## [v0.20.3](https://github.com/joomcode/e2ed/tree/v0.20.3) (2025-02-26)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.2...v0.20.3)
