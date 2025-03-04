@@ -39,6 +39,6 @@ export const writeLiteJsonReport = async (liteReport: LiteReport): Promise<void>
   const durationWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
 
   generalLog(
-    `Lite JSON report was written (${reportFileSizeInKb} KB) to "${reportFilePath}" in ${durationWithUnits}`,
+    `Lite JSON report was written (${reportFileSizeInKb} KB) to "file://${reportFilePath}" in ${durationWithUnits}`,
   );
 };

@@ -1,4 +1,4 @@
-<img alt="e2ed logo" src="https://raw.github.com/joomcode/e2ed/main/logo.svg?sanitize=true">
+![e2ed logo](https://raw.githubusercontent.com/joomcode/e2ed/main/logo.svg)
 
 # e2ed
 

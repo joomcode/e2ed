@@ -9,12 +9,11 @@ import {assertValueIsNotNull} from '../asserts';
 import {getFileSize, writeFile} from '../fs';
 import {generalLog} from '../generalLog';
 import {getDurationWithUnits} from '../getDurationWithUnits';
+import {getFileSizeInMb} from '../getFileSizeInMb';
 
 import {renderReportToHtml} from './render';
 
 import type {FilePathFromRoot, ReportData, UtcTimeInMs} from '../../types/internal';
-
-const bytesInMb = 1_048_576;
 
 /**
  * Writes HTML report (`report.html` file) with test runs results.
@@ -38,11 +37,11 @@ export const writeHtmlReport = async (reportData: ReportData): Promise<void> => 
 
   const reportFileSizeInBytes = await getFileSize(reportFilePath);
 
-  const reportFileSizeInMb = (reportFileSizeInBytes / bytesInMb).toFixed(2);
+  const reportFileSizeInMb = getFileSizeInMb(reportFileSizeInBytes);
 
   const durationWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
 
   generalLog(
-    `HTML report was written (${reportFileSizeInMb} MB) to "${reportFilePath}" in ${durationWithUnits}`,
+    `HTML report was written (${reportFileSizeInMb}) to "file://${reportFilePath}" in ${durationWithUnits}`,
   );
 };
