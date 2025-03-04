@@ -8,6 +8,7 @@
     "exactOptionalPropertyTypes": true,
     "incremental": true,
     "isolatedDeclarations": true,
+    "libReplacement": false,
     "module": "CommonJS",
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,

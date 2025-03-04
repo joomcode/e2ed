@@ -18,7 +18,7 @@ export const writeFile = async (
   if (data instanceof Buffer) {
     buffer = data;
   } else {
-    buffer = Buffer.from(data);
+    buffer = Buffer.from(data as string);
   }
 
   const directoryPath = dirname(path) as DirectoryPathFromRoot;
