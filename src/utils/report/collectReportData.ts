@@ -22,7 +22,7 @@ export const collectReportData = async ({
   notIncludedInPackTests,
   startInfo,
 }: FullEventsData): Promise<ReportData> => {
-  const {liteReportFileName, reportFileName} = getFullPackConfig();
+  const {liteReportFileName, logFileName, reportFileName} = getFullPackConfig();
 
   const errors = await getReportErrors(fullTestRuns, notIncludedInPackTests);
 
@@ -47,6 +47,7 @@ export const collectReportData = async ({
     failedTestsMainParams,
     fullTestRuns,
     liteReportFileName,
+    logFileName,
     notIncludedInPackTests,
     reportFileName,
     retries,

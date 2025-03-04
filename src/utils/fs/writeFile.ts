@@ -13,11 +13,19 @@ export const writeFile = async (
   path: FilePathFromRoot,
   data: Uint8Array | string,
 ): Promise<void> => {
+  let buffer: Buffer;
+
+  if (data instanceof Buffer) {
+    buffer = data;
+  } else {
+    buffer = Buffer.from(data as string);
+  }
+
   const directoryPath = dirname(path) as DirectoryPathFromRoot;
 
   await createDirectory(directoryPath);
 
-  const sourceStream = Readable.from(data);
+  const sourceStream = Readable.from(buffer);
   const targetStream = createWriteStream(path);
 
   sourceStream.pipe(targetStream);

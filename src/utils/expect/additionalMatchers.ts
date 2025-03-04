@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/require-await */
+
 import {toMatchScreenshot} from './toMatchScreenshot';
 
 import type {Expect} from './Expect';
@@ -23,63 +25,61 @@ export const additionalMatchers: NonSelectorAdditionalMatchers<unknown> & Select
       ),
     );
   },
-  eql(this: Expect, expected) {
+  async eql(this: Expect, expected) {
     const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue, description).toEqual(expected));
+    return expect(actualValue, description).toEqual(expected);
   },
-  gt(this: Expect, expected) {
+  async gt(this: Expect, expected) {
     const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue, description).toBeGreaterThan(expected));
+    return expect(actualValue, description).toBeGreaterThan(expected);
   },
-  gte(this: Expect, expected) {
+  async gte(this: Expect, expected) {
     const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue, description).toBeGreaterThanOrEqual(expected));
+    return expect(actualValue, description).toBeGreaterThanOrEqual(expected);
   },
-  lt(this: Expect, expected) {
+  async lt(this: Expect, expected) {
     const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue, description).toBeLessThan(expected));
+    return expect(actualValue, description).toBeLessThan(expected);
   },
-  lte(this: Expect, expected) {
+  async lte(this: Expect, expected) {
     const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue, description).toBeLessThanOrEqual(expected));
+    return expect(actualValue, description).toBeLessThanOrEqual(expected);
   },
-  match(this: Expect, expected) {
+  async match(this: Expect, expected) {
     const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue, description).toMatch(expected));
+    return expect(actualValue, description).toMatch(expected);
   },
-  notContains(this: Expect, expected) {
+  async notContains(this: Expect, expected) {
     const {actualValue, description} = this;
 
     if (typeof actualValue === 'string' || Array.isArray(actualValue)) {
-      return Promise.resolve(expect(actualValue, description).not.toContain(expected));
+      return expect(actualValue, description).not.toContain(expected);
     }
 
-    return Promise.resolve(
-      expect(actualValue, description).not.toEqual(
-        expect.objectContaining(expected as Record<string, unknown>),
-      ),
+    return expect(actualValue, description).not.toEqual(
+      expect.objectContaining(expected as Record<string, unknown>),
     );
   },
-  notEql(this: Expect, expected) {
+  async notEql(this: Expect, expected) {
     const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue, description).not.toEqual(expected));
+    return expect(actualValue, description).not.toEqual(expected);
   },
-  notOk(this: Expect) {
+  async notOk(this: Expect) {
     const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue, description).not.toBeTruthy());
+    return expect(actualValue, description).not.toBeTruthy();
   },
-  ok(this: Expect) {
+  async ok(this: Expect) {
     const {actualValue, description} = this;
 
-    return Promise.resolve(expect(actualValue, description).toBeTruthy());
+    return expect(actualValue, description).toBeTruthy();
   },
 
   toMatchScreenshot(this: Expect, expectedScreenshotId, options = {}) {

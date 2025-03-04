@@ -1,5 +1,7 @@
 import {writeHtmlReport, writeLiteJsonReport} from '../report';
 
+import {showLogAboutLogFile} from './showLogAboutLogFile';
+
 import type {LiteReport, ReportData} from '../../types/internal';
 
 type Options = Readonly<{liteReport: LiteReport; reportData: ReportData}>;
@@ -9,7 +11,11 @@ type Options = Readonly<{liteReport: LiteReport; reportData: ReportData}>;
  * @internal
  */
 export const writeReports = async ({liteReport, reportData}: Options): Promise<void> => {
-  const {liteReportFileName, reportFileName} = reportData;
+  const {liteReportFileName, logFileName, reportFileName} = reportData;
+
+  if (logFileName !== null) {
+    await showLogAboutLogFile(logFileName);
+  }
 
   if (liteReportFileName !== null) {
     await writeLiteJsonReport(liteReport);

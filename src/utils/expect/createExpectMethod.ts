@@ -8,7 +8,7 @@ import {addTimeoutToPromise} from '../promise';
 import {Selector} from '../selectors';
 import {setReadonlyProperty} from '../setReadonlyProperty';
 import {isThenable} from '../typeGuards';
-import {valueToString, wrapStringForLogs} from '../valueToString';
+import {removeStyleFromString, valueToString, wrapStringForLogs} from '../valueToString';
 
 import {additionalMatchers} from './additionalMatchers';
 import {applyAdditionalMatcher} from './applyAdditionalMatcher';
@@ -99,7 +99,7 @@ export const createExpectMethod = (
       const logPayload = {
         assertionArguments: args,
         ...additionalLogFields,
-        error,
+        error: error?.message === undefined ? undefined : removeStyleFromString(error.message),
         logEventStatus: error ? LogEventStatus.Failed : LogEventStatus.Passed,
         selector:
           selectorPropertyRetryData?.selector.description ??

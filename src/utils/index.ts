@@ -35,6 +35,7 @@ export {E2edError, getStackTrace} from './error';
 export {getFunctionPresentationForLogs, setCustomInspectOnFunction} from './fn';
 export {writeFile} from './fs';
 export {getDurationWithUnits} from './getDurationWithUnits';
+export {getFileSizeInMb} from './getFileSizeInMb';
 export {getHash} from './getHash';
 export {getKeysCounter} from './getKeysCounter';
 export {getContentJsonHeaders} from './http';
