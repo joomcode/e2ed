@@ -1,4 +1,4 @@
-import type {IsReadonlyKey} from '../types/internal';
+import type {IsReadonlyKey} from '../../types/internal';
 
 /**
  * Set value to readonly property of some object.
@@ -7,7 +7,9 @@ export const setReadonlyProperty = <SomeObject extends object, Property extends 
   someObject: SomeObject,
   property: IsReadonlyKey<SomeObject, Property> extends true ? Property : never,
   value: SomeObject[Property],
-): void => {
+): SomeObject[Property] => {
   // eslint-disable-next-line no-param-reassign
   someObject[property as Property] = value;
+
+  return value;
 };

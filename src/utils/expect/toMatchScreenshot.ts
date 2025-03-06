@@ -12,7 +12,7 @@ import {getOutputDirectoryName} from '../../context/outputDirectoryName';
 import {getFullPackConfig} from '../config';
 import {E2edError} from '../error';
 import {writeFile} from '../fs';
-import {setReadonlyProperty} from '../setReadonlyProperty';
+import {setReadonlyProperty} from '../object';
 
 import {getScreenshotMeta} from './getScreenshotMeta';
 

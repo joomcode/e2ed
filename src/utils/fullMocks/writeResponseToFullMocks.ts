@@ -2,8 +2,8 @@ import {getFullMocksState} from '../../context/fullMocks';
 
 import {assertValueIsDefined, assertValueIsNotNull} from '../asserts';
 import {getFullPackConfig} from '../config';
-import {getHeaderValue} from '../requestHooks';
-import {setReadonlyProperty} from '../setReadonlyProperty';
+import {getHeaderValue} from '../headers';
+import {setReadonlyProperty} from '../object';
 
 import type {Mutable, ResponseWithRequest} from '../../types/internal';
 

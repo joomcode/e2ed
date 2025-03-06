@@ -4,9 +4,9 @@ import {getFullPackConfig} from '../config';
 import {E2edError} from '../error';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {log} from '../log';
+import {setReadonlyProperty} from '../object';
 import {addTimeoutToPromise} from '../promise';
 import {Selector} from '../selectors';
-import {setReadonlyProperty} from '../setReadonlyProperty';
 import {isThenable} from '../typeGuards';
 import {removeStyleFromString, valueToString, wrapStringForLogs} from '../valueToString';
 

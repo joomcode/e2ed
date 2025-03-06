@@ -1,5 +1,6 @@
 import type {EndE2edReason, ExitCode, TestRunStatus} from '../constants/internal';
 
+import type {ApiStatistics} from './apiStatistics';
 import type {FullPackConfig} from './config';
 import type {UtcTimeInMs} from './date';
 import type {TestFilePath} from './paths';
@@ -17,6 +18,7 @@ import type {
  * @internal
  */
 export type ReportData = Readonly<{
+  apiStatistics: ApiStatistics;
   customReportProperties: CustomReportPropertiesPlaceholder | undefined;
   endE2edReason: EndE2edReason;
   endTimeInMs: UtcTimeInMs;
@@ -43,6 +45,7 @@ export type LiteReport<
   TestMeta = TestMetaPlaceholder,
 > = Readonly<{
   afterPackExecutionTimeWithUnits: string;
+  apiStatistics: ApiStatistics;
   customReportProperties: CustomReportProperties | undefined;
   endE2edReason: EndE2edReason;
   endTimeInMs: UtcTimeInMs;

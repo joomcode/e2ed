@@ -1,7 +1,8 @@
-import {assertValueIsDefined} from './asserts';
+import {assertValueIsDefined} from '../asserts';
+
 import {isObjectAndNotAnArray} from './isObjectAndNotAnArray';
 
-import type {DeepPartial, ObjectEntries, Values} from '../types/internal';
+import type {DeepPartial, ObjectEntries, Values} from '../../types/internal';
 
 /**
  * Deep merge two objects (arrays does not merge).

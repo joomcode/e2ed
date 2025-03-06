@@ -7,6 +7,8 @@ export {getTestRunEventFileName} from './getTestRunEventFileName';
 /** @internal */
 export {getLastLogEventTimeInMs, writeLogEventTime} from './logIsoString';
 /** @internal */
+export {readApiStatistics} from './readApiStatistics';
+/** @internal */
 export {readEventFromFile} from './readEventFromFile';
 /** @internal */
 export {readEventsFromFiles} from './readEventsFromFiles';
@@ -14,6 +16,8 @@ export {readEventsFromFiles} from './readEventsFromFiles';
 export {readStartInfo} from './readStartInfo';
 /** @internal */
 export {removeDirectory} from './removeDirectory';
+/** @internal */
+export {writeApiStatistics} from './writeApiStatistics';
 export {writeFile} from './writeFile';
 /** @internal */
 export {writeStartInfo} from './writeStartInfo';

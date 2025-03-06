@@ -1,5 +1,5 @@
 /**
- * Get Content-Length and Content-Type headers for JSON body.
+ * Get `Content-Length` and `Content-Type` headers for JSON body.
  */
 export const getContentJsonHeaders = (
   bodyAsString: string | undefined,

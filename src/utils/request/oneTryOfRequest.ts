@@ -1,6 +1,7 @@
 import {BAD_REQUEST_STATUS_CODE, LogEventType} from '../../constants/internal';
 import {getRandomId} from '../../generators/internal';
 
+import {addResponseToApiStatistics} from '../apiStatistics';
 import {cloneWithoutUndefinedProperties} from '../clone';
 import {E2edError} from '../error';
 import {getDurationWithUnits} from '../getDurationWithUnits';
@@ -100,6 +101,8 @@ export const oneTryOfRequest = <SomeRequest extends Request, SomeResponse extend
             SomeRequest,
             SomeResponse
           >;
+
+          addResponseToApiStatistics(response);
 
           clearTimeout(endTimeout);
           resolve({fullLogParams, response});

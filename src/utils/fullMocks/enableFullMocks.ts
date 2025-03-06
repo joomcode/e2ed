@@ -5,7 +5,7 @@ import {setFullMocksState} from '../../context/fullMocks';
 import {getOnResponseCallbacks} from '../../context/onResponseCallbacks';
 
 import {log} from '../log';
-import {setReadonlyProperty} from '../setReadonlyProperty';
+import {setReadonlyProperty} from '../object';
 
 import {FullMocksRoute} from './FullMocksRoute';
 import {getResponseFromFullMocks} from './getResponseFromFullMocks';

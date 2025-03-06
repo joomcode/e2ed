@@ -1,23 +1,20 @@
 import {isLocalRun} from '../../configurator';
 import {isDebug, TestRunStatus} from '../../constants/internal';
-import {getFullMocksState} from '../../context/fullMocks';
+import {getApiStatistics} from '../../context/apiStatistics';
 import {getPlaywrightPage} from '../../useContext';
 
 import {cloneWithoutLogEvents} from '../clone';
 import {getRunErrorFromError} from '../error';
-import {writeTestRunToJsonFile} from '../fs';
+import {writeApiStatistics, writeTestRunToJsonFile} from '../fs';
 import {generalLog, logEndTestRunEvent, writeLogsToFile} from '../generalLog';
-import {getTimeoutPromise} from '../promise';
-import {setReadonlyProperty} from '../setReadonlyProperty';
+import {setReadonlyProperty} from '../object';
 import {getUserlandHooks} from '../userland';
 
 import {calculateTestRunStatus} from './calculateTestRunStatus';
 import {getTestRunEvent} from './getTestRunEvent';
-import {writeFullMocks} from './writeFullMocks';
+import {writeFullMocksIfNeeded} from './writeFullMocksIfNeeded';
 
 import type {EndTestRunEvent, FullTestRun, TestRun} from '../../types/internal';
-
-const delayForWritingFullMocksInMs = 100;
 
 /**
  * Registers end test run event (for report) after test closing.
@@ -53,21 +50,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
 
   const status = calculateTestRunStatus({endTestRunEvent, testRunEvent});
 
-  if (status === TestRunStatus.Passed) {
-    const fullMocksState = getFullMocksState();
-
-    if (fullMocksState !== undefined && fullMocksState.appliedMocks === undefined) {
-      await getTimeoutPromise(delayForWritingFullMocksInMs);
-
-      await writeFullMocks(fullMocksState, name, filePath).catch((error: unknown) => {
-        generalLog('Cannot write "full mocks" for test', {
-          endTestRunEvent,
-          error,
-          testRunEvent: cloneWithoutLogEvents(testRunEvent),
-        });
-      });
-    }
-  }
+  await writeFullMocksIfNeeded(status, testRunEvent);
 
   setReadonlyProperty(testRunEvent, 'status', status);
 
@@ -97,6 +80,9 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
 
   await logEndTestRunEvent(fullTestRun);
 
+  const apiStatistics = getApiStatistics();
+
+  await writeApiStatistics(apiStatistics);
   await writeTestRunToJsonFile(fullTestRun);
   await writeLogsToFile();
 

@@ -18,7 +18,7 @@ export function addOnClickOnClass(className: string, onclick: (event: HTMLElemen
       let currentElement = event.target as HTMLElement | null;
 
       while (currentElement) {
-        for (const currentClass of Object.keys(clickListeners as object)) {
+        for (const currentClass of Object.keys(clickListeners as {})) {
           if (currentElement.classList?.contains(currentClass)) {
             const listener = clickListeners?.[currentClass];
 

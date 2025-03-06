@@ -6,8 +6,8 @@ import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
+import {setReadonlyProperty} from '../../utils/object';
 import {getPromiseWithResolveAndReject} from '../../utils/promise';
-import {setReadonlyProperty} from '../../utils/setReadonlyProperty';
 import {
   getInitialIdsForAllRequestsCompletePredicate,
   getUrlsByRequestHookContextIds,

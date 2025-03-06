@@ -3,8 +3,8 @@ import {EndE2edReason} from '../../constants/internal';
 import {getFullPackConfig} from '../config';
 import {endE2ed} from '../end';
 import {generalLog, writeLogsToFile} from '../generalLog';
+import {setReadonlyProperty} from '../object';
 import {createRunLabel} from '../runLabel';
-import {setReadonlyProperty} from '../setReadonlyProperty';
 
 import {afterRetries} from './afterRetries';
 import {runRetry} from './runRetry';

@@ -8,6 +8,7 @@ import {setTestIdleTimeout} from '../../context/testIdleTimeout';
 import {setTestStaticOptions} from '../../context/testStaticOptions';
 import {setTestTimeout} from '../../context/testTimeout';
 
+import {addResponseToApiStatistics} from '../apiStatistics';
 import {getFullPackConfig} from '../config';
 import {getRunLabel} from '../environment';
 import {registerStartTestRunEvent} from '../events';
@@ -44,6 +45,7 @@ export const beforeTest = ({
 
   const onResponseCallbacks = getOnResponseCallbacks();
 
+  onResponseCallbacks.push(addResponseToApiStatistics);
   onResponseCallbacks.push(mapBackendResponseForLogs);
 
   const {testIdleTimeout: testIdleTimeoutFromConfig, testTimeout: testTimeoutFromConfig} =

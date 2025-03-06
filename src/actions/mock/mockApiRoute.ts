@@ -6,7 +6,7 @@ import {assertValueIsDefined} from '../../utils/asserts';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {log} from '../../utils/log';
 import {getRequestsFilter, getSetResponse} from '../../utils/mockApiRoute';
-import {setReadonlyProperty} from '../../utils/setReadonlyProperty';
+import {setReadonlyProperty} from '../../utils/object';
 
 import type {
   ApiMockFunction,

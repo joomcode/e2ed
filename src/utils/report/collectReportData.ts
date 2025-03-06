@@ -7,6 +7,7 @@ import {getFailedTestsMainParams} from './getFailedTestsMainParams';
 import {getReportErrors} from './getReportErrors';
 import {getRetries} from './getRetries';
 import {getSummaryPackResults} from './getSummaryPackResults';
+import {getTotalApiStatistics} from './getTotalApiStatistics';
 import {unificateRunHashes} from './unificateRunHashes';
 
 import type {FullEventsData, ReportData} from '../../types/internal';
@@ -16,6 +17,7 @@ import type {FullEventsData, ReportData} from '../../types/internal';
  * @internal
  */
 export const collectReportData = async ({
+  apiStatisticsOfTests,
   endE2edReason,
   endTimeInMs,
   fullTestRuns,
@@ -32,6 +34,7 @@ export const collectReportData = async ({
 
   unificateRunHashes(fullTestRuns);
 
+  const apiStatistics = getTotalApiStatistics(apiStatisticsOfTests);
   const retries = getRetries(fullTestRuns);
   const exitCode = getExitCode(errors.length > 0, retries);
 
@@ -39,6 +42,7 @@ export const collectReportData = async ({
   const summaryPackResults = getSummaryPackResults(fullTestRuns, retries.at(-1));
 
   return {
+    apiStatistics,
     customReportProperties: undefined,
     endE2edReason,
     endTimeInMs,

@@ -6,7 +6,7 @@ import {EVENTS_DIRECTORY_PATH, READ_FILE_OPTIONS} from '../../constants/internal
 import {generalLog} from '../generalLog';
 
 /**
- * Read event object with test run from temporary directory.
+ * Reads event object with test run from temporary directory.
  * @internal
  */
 export const readEventFromFile = (fileName: string): Promise<string | undefined> => {

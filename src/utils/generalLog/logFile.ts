@@ -1,7 +1,7 @@
 import {appendFile} from 'node:fs/promises';
 import {join} from 'node:path';
 
-import {REPORTS_DIRECTORY_PATH, RESOLVED_PROMISE} from '../../constants/internal';
+import {REPORTS_DIRECTORY_PATH} from '../../constants/internal';
 
 import {getFullPackConfig} from '../config';
 
@@ -23,15 +23,15 @@ export const addLogToLogFile = (logMessage: string): void => {
  * Writes pack logs to logs file (if the pack config requires it and there are unwritten logs).
  * @internal
  */
-export const writeLogsToFile = (): Promise<void> => {
+export const writeLogsToFile = async (): Promise<void> => {
   if (logs.length === 0) {
-    return RESOLVED_PROMISE;
+    return;
   }
 
   const {logFileName} = getFullPackConfig();
 
   if (logFileName === null) {
-    return RESOLVED_PROMISE;
+    return;
   }
 
   const logsFilePath = join(REPORTS_DIRECTORY_PATH, logFileName);
@@ -39,5 +39,5 @@ export const writeLogsToFile = (): Promise<void> => {
 
   logs.length = 0;
 
-  return appendFile(logsFilePath, logsText);
+  await appendFile(logsFilePath, logsText);
 };

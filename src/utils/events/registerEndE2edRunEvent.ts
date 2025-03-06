@@ -3,7 +3,7 @@ import {ExitCode, TMP_DIRECTORY_PATH} from '../../constants/internal';
 import {exitFromE2ed} from '../exit';
 import {removeDirectory} from '../fs';
 import {generalLog} from '../generalLog';
-import {setReadonlyProperty} from '../setReadonlyProperty';
+import {setReadonlyProperty} from '../object';
 
 import {getReports} from './getReports';
 import {runAfterPackFunctions} from './runAfterPackFunctions';
