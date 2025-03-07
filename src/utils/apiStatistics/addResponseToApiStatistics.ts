@@ -26,6 +26,7 @@ export const addResponseToApiStatistics = (responseWithRequest: ResponseWithRequ
   const urlWithoutQuery = `${origin}${pathname}` as Url;
 
   const additionalApiStatistics: ApiStatistics = {
+    pages: {},
     requests: {[urlWithoutQuery]: {[method]: {[statusCode]: {count: 1, duration, size}}}},
   };
 

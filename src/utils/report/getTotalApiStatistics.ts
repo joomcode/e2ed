@@ -9,7 +9,10 @@ import type {ApiStatistics} from '../../types/internal';
 export const getTotalApiStatistics = (
   apiStatisticsOfTests: readonly ApiStatistics[],
 ): ApiStatistics => {
-  const totalApiStatistics: ApiStatistics = {requests: Object.create(null) as {}};
+  const totalApiStatistics: ApiStatistics = {
+    pages: Object.create(null) as {},
+    requests: Object.create(null) as {},
+  };
 
   for (const apiStatistics of apiStatisticsOfTests) {
     addApiStatistics(totalApiStatistics, apiStatistics);

@@ -19,7 +19,10 @@ export const getApiStatistics = (): ApiStatistics => {
     return maybeApiStatistics;
   }
 
-  const apiStatistics: ApiStatistics = {requests: Object.create(null) as {}};
+  const apiStatistics: ApiStatistics = {
+    pages: Object.create(null) as {},
+    requests: Object.create(null) as {},
+  };
 
   setRawApiStatistics(apiStatistics);
 
