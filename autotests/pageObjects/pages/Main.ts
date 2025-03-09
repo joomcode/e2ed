@@ -66,7 +66,10 @@ export class Main extends Page<CustomPageParams> {
 
     await waitForAllRequestsComplete(
       ({url}) => {
-        if (url.startsWith('https://www.bing.com/th?id=')) {
+        if (
+          url.startsWith('https://img-s-msn-com.akamaized.net/') ||
+          url.startsWith('https://www.bing.com/th?id=')
+        ) {
           return false;
         }
 
