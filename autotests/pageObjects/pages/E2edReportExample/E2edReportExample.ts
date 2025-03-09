@@ -4,7 +4,7 @@ import {
 } from 'autotests/actions';
 import {setPageCookies, setPageRequestHeaders} from 'autotests/context';
 import {E2edReportExample as E2edReportExampleRoute} from 'autotests/routes/pageRoutes';
-import {locator} from 'autotests/selectors';
+import {createSelector, locator} from 'autotests/selectors';
 import {Page} from 'e2ed';
 import {setReadonlyProperty} from 'e2ed/utils';
 
@@ -21,6 +21,11 @@ type CustomPageParams =
  */
 export class E2edReportExample extends Page<CustomPageParams> {
   /**
+   * Page header.
+   */
+  readonly header: Selector = createSelector('.header');
+
+  /**
    * Navigation bar with test retries.
    */
   readonly navigationRetries: Selector = locator('RetriesButtons');
@@ -36,6 +41,9 @@ export class E2edReportExample extends Page<CustomPageParams> {
   readonly navigationRetriesButtonSelected: Selector =
     this.navigationRetriesButton.filterByLocatorParameter('selected', 'true');
 
+  /**
+   * Page navigation timeout.
+   */
   override readonly navigationTimeout = 5_000;
 
   /**

@@ -15,7 +15,7 @@ type Props = Readonly<{retries: readonly RetryProps[]}>;
 export const renderNavigation = ({
   retries,
 }: Props): SafeHtml => sanitizeHtml`<nav class="nav" ${locator('Navigation')}>
-  <header class="header">
+  <header class="header" ${locator('header')}>
     ${renderLogo()}
   </header>
 ${renderRetriesButtons({retries})}
