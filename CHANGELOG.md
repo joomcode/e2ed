@@ -1,5 +1,26 @@
 # Changelog
 
+## [v0.20.5](https://github.com/joomcode/e2ed/tree/v0.20.5) (2025-03-09)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.4...v0.20.5)
+
+- [fix: use stable element in example of `toMatchScreenshot` assertions](https://github.com/joomcode/e2ed/commit/7d83a8682a322cfcf2aad4b3daf63f1decd34d38) ([uid11](https://github.com/uid11))
+- [fix: do not wait requests to https://img-s-msn-com.akamaized.net](https://github.com/joomcode/e2ed/commit/825fee529ba493935a686985d3a289c28760d0d4) ([uid11](https://github.com/uid11))
+- [Merge pull request #112 from joomcode/feat/collect-api-statistics](https://github.com/joomcode/e2ed/commit/29337ae7f3513296fc0598fafee1e3f04f270020) ([uid11](https://github.com/uid11))
+
+  feat: collect API statistics for requests
+
+- [chore: update nodejs to 22.14.0 in CI](https://github.com/joomcode/e2ed/commit/fccc317701348f6c842d5a882a9b2ace10190a9c) ([uid11](https://github.com/uid11))
+- [chore: update Playwright to 1.51.0](https://github.com/joomcode/e2ed/commit/06bd7102612d8c7b49d366b3374d9da202c7de99) ([uid11](https://github.com/uid11))
+
+  chore: update `devDependencies` (`@types/node`)
+
+- [FI-1720 fix: show original error from Playwright in `toMatchScreenshot`](https://github.com/joomcode/e2ed/commit/d100e9fd438de2a1a4961b180913c2a55ce55a17) ([uid11](https://github.com/uid11))
+- [FI-1635 feat: collect API statistics for pages](https://github.com/joomcode/e2ed/commit/f421e6103027415ae37acbd7f8ee83e3e38d2291) ([uid11](https://github.com/uid11))
+- [FI-1635 feat: collect API statistics for requests](https://github.com/joomcode/e2ed/commit/05d37af0e5475d60d29287db93d1be10566962ab) ([uid11](https://github.com/uid11))
+
+  refactor: add typed `getKeys` instead of `Object.keys`
+
 ## [v0.20.4](https://github.com/joomcode/e2ed/tree/v0.20.4) (2025-03-04)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.3...v0.20.4)
