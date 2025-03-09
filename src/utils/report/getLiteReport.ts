@@ -10,6 +10,7 @@ import type {LiteReport, ReportData} from '../../types/internal';
  */
 export const getLiteReport = (reportData: ReportData): LiteReport => {
   const {
+    apiStatistics,
     endE2edReason,
     endTimeInMs,
     errors,
@@ -27,6 +28,7 @@ export const getLiteReport = (reportData: ReportData): LiteReport => {
 
   return {
     afterPackExecutionTimeWithUnits: '',
+    apiStatistics,
     customReportProperties: undefined,
     endE2edReason,
     endTimeInMs,

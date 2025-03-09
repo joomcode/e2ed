@@ -24,7 +24,6 @@ export {
   trimSemicolonsAtTheEnd,
 } from './cookie';
 export {createPageObjectsFromMultiLocator} from './createPageObjectsFromMultiLocator';
-export {deepMerge} from './deepMerge';
 export {
   getDistanceBetweenSelectors,
   getHorizontalDistanceBetweenSelectors,
@@ -38,8 +37,10 @@ export {getDurationWithUnits} from './getDurationWithUnits';
 export {getFileSizeInMb} from './getFileSizeInMb';
 export {getHash} from './getHash';
 export {getKeysCounter} from './getKeysCounter';
+export {getEquivalentHeadersNames, getHeadersFromHeaderEntries, getHeaderValue} from './headers';
 export {getContentJsonHeaders} from './http';
 export {log} from './log';
+export {deepMerge, getKeys, setReadonlyProperty} from './object';
 export {parseMaybeEmptyValueAsJson, parseValueAsJsonIfNeeded} from './parse';
 export {
   addTimeoutToPromise,
@@ -48,13 +49,7 @@ export {
   waitForAllProperties,
 } from './promise';
 export {request} from './request';
-export {
-  getEquivalentHeadersNames,
-  getHeadersFromHeaderEntries,
-  getHeaderValue,
-} from './requestHooks';
 export {getRunLabelObject} from './runLabel';
-export {setReadonlyProperty} from './setReadonlyProperty';
 export {getPackageInfo} from './startInfo';
 export {isArray, isThenable} from './typeGuards';
 export {isUiMode} from './uiMode';

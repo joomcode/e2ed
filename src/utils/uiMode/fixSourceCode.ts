@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unused-modules
 import {sep} from 'node:path';
 
-import {setReadonlyProperty} from '../setReadonlyProperty';
+import {setReadonlyProperty} from '../object';
 
 import {isUiMode} from './uiMode';
 

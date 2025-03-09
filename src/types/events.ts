@@ -1,5 +1,6 @@
 import type {EndE2edReason, LogEventType, TestRunStatus} from '../constants/internal';
 
+import type {ApiStatistics} from './apiStatistics';
 import type {UtcTimeInMs} from './date';
 import type {LogPayload} from './log';
 import type {TestFilePath} from './paths';
@@ -34,6 +35,7 @@ export type EndTestRunEvent = Readonly<{
  * @internal
  */
 export type FullEventsData = Readonly<{
+  apiStatisticsOfTests: readonly ApiStatistics[];
   endE2edReason: EndE2edReason;
   endTimeInMs: UtcTimeInMs;
   fullTestRuns: readonly FullTestRun[];

@@ -2,7 +2,7 @@ import {URL} from 'node:url';
 
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {getBodyAsString, getContentJsonHeaders} from '../http';
-import {setReadonlyProperty} from '../setReadonlyProperty';
+import {setReadonlyProperty} from '../object';
 
 import type {
   ApiRouteClassType,

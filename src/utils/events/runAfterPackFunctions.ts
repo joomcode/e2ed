@@ -1,6 +1,6 @@
 import {getFullPackConfig} from '../config';
 import {generalLog} from '../generalLog';
-import {setReadonlyProperty} from '../setReadonlyProperty';
+import {setReadonlyProperty} from '../object';
 import {runArrayOfUserlandFunctions} from '../userland';
 
 import type {CustomReportPropertiesPlaceholder, LiteReport, Void} from '../../types/internal';

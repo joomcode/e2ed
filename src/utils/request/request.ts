@@ -6,7 +6,7 @@ import {getFullMocksState} from '../../context/fullMocks';
 
 import {E2edError} from '../error';
 import {log} from '../log';
-import {setReadonlyProperty} from '../setReadonlyProperty';
+import {setReadonlyProperty} from '../object';
 
 import {getFullMocksResponse} from './getFullMocksResponse';
 import {getPreparedOptions} from './getPreparedOptions';

@@ -5,7 +5,7 @@ import {READ_FILE_OPTIONS, START_INFO_PATH} from '../../constants/internal';
 import type {StartInfo} from '../../types/internal';
 
 /**
- * Read start info from tmp directory.
+ * Reads `StartInfo` from temporary directory.
  * @internal
  */
 export const readStartInfo = async (): Promise<StartInfo> => {

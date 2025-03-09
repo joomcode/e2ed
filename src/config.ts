@@ -21,7 +21,7 @@ import {assertValueIsTrue} from './utils/asserts';
 import {assertUserlandPack} from './utils/config/assertUserlandPack';
 import {getPathToPack} from './utils/environment';
 import {setCustomInspectOnFunction} from './utils/fn';
-import {setReadonlyProperty} from './utils/setReadonlyProperty';
+import {setReadonlyProperty} from './utils/object';
 import {isUiMode} from './utils/uiMode';
 import {isLocalRun} from './configurator';
 

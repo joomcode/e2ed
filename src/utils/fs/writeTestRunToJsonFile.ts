@@ -11,7 +11,7 @@ import {writeFile} from './writeFile';
 import type {FilePathFromRoot, FullTestRun} from '../../types/internal';
 
 /**
- * Write completed (full) test run object to temporary JSON file.
+ * Writes completed (full) test run object to temporary JSON file.
  * @internal
  */
 export const writeTestRunToJsonFile = async (fullTestRun: FullTestRun): Promise<void> => {

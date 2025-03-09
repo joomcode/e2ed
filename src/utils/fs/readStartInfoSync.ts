@@ -5,7 +5,7 @@ import {READ_FILE_OPTIONS, START_INFO_PATH} from '../../constants/internal';
 import type {StartInfo} from '../../types/internal';
 
 /**
- * Read start info from tmp directory in sync manner.
+ * Reads start info from temporary directory in sync manner.
  * @internal
  */
 export const readStartInfoSync = (): StartInfo => {

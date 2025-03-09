@@ -76,10 +76,19 @@ export const TESTS_DIRECTORY_PATH = join(
 ) as DirectoryPathFromRoot;
 
 /**
- * Relative (from root) path to tmp directory.
+ * Relative (from root) path to temporary directory.
  * @internal
  */
 export const TMP_DIRECTORY_PATH = join(REPORTS_DIRECTORY_PATH, 'tmp') as DirectoryPathFromRoot;
+
+/**
+ * Relative (from root) path to file with total API statistics of run.
+ * @internal
+ */
+export const API_STATISTICS_PATH = join(
+  TMP_DIRECTORY_PATH,
+  'apiStatistics.txt',
+) as FilePathFromRoot;
 
 /**
  * Relative (from root) path to directory with compiled pack configuration files.

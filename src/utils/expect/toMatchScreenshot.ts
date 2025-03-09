@@ -12,7 +12,7 @@ import {getOutputDirectoryName} from '../../context/outputDirectoryName';
 import {getFullPackConfig} from '../config';
 import {E2edError} from '../error';
 import {writeFile} from '../fs';
-import {setReadonlyProperty} from '../setReadonlyProperty';
+import {setReadonlyProperty} from '../object';
 
 import {getScreenshotMeta} from './getScreenshotMeta';
 
@@ -35,7 +35,7 @@ type AdditionalLogFields = {
  * Checks that the selector screenshot matches the one specified by `expectedScreenshotId`.
  * @internal
  */
-// eslint-disable-next-line max-statements
+// eslint-disable-next-line complexity, max-statements
 export const toMatchScreenshot = async (
   context: Expect,
   expectedScreenshotId: string,
@@ -106,24 +106,28 @@ export const toMatchScreenshot = async (
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
 
-    const output = join(INTERNAL_REPORTS_DIRECTORY_PATH, getOutputDirectoryName());
-    const actualScreenshotPath = join(output, `${assertId}-actual.png`) as FilePathFromRoot;
-    const diffScreenshotPath = join(output, `${assertId}-diff.png`) as FilePathFromRoot;
+    try {
+      const output = join(INTERNAL_REPORTS_DIRECTORY_PATH, getOutputDirectoryName());
+      const actualScreenshotPath = join(output, `${assertId}-actual.png`) as FilePathFromRoot;
+      const diffScreenshotPath = join(output, `${assertId}-diff.png`) as FilePathFromRoot;
 
-    const actualScreenshot = await readFile(actualScreenshotPath);
-    const actualScreenshotId = await writeScreenshot(actualScreenshot, meta);
+      const actualScreenshot = await readFile(actualScreenshotPath);
+      const actualScreenshotId = await writeScreenshot(actualScreenshot, meta);
 
-    additionalLogFields.actualScreenshotId = actualScreenshotId;
-    additionalLogFields.actualScreenshotUrl = getScreenshotUrlById(actualScreenshotId);
+      additionalLogFields.actualScreenshotId = actualScreenshotId;
+      additionalLogFields.actualScreenshotUrl = getScreenshotUrlById(actualScreenshotId);
 
-    const diffScreenshot = await readFile(diffScreenshotPath);
-    const diffScreenshotId = await writeScreenshot(diffScreenshot, {
-      ...meta,
-      actual: actualScreenshotId,
-    });
+      const diffScreenshot = await readFile(diffScreenshotPath);
+      const diffScreenshotId = await writeScreenshot(diffScreenshot, {
+        ...meta,
+        actual: actualScreenshotId,
+      });
 
-    additionalLogFields.diffScreenshotId = diffScreenshotId;
-    additionalLogFields.diffScreenshotUrl = getScreenshotUrlById(diffScreenshotId);
+      additionalLogFields.diffScreenshotId = diffScreenshotId;
+      additionalLogFields.diffScreenshotUrl = getScreenshotUrlById(diffScreenshotId);
+    } catch (secondError) {
+      throw new E2edError(errorMessage, {secondError});
+    }
 
     throw new E2edError(errorMessage);
   }
@@ -132,11 +136,15 @@ export const toMatchScreenshot = async (
     return;
   }
 
-  const actualScreenshot = await readFile(screenshotPath);
-  const actualScreenshotId = await writeScreenshot(actualScreenshot, meta);
+  try {
+    const actualScreenshot = await readFile(screenshotPath);
+    const actualScreenshotId = await writeScreenshot(actualScreenshot, meta);
 
-  additionalLogFields.actualScreenshotId = actualScreenshotId;
-  additionalLogFields.actualScreenshotUrl = getScreenshotUrlById(actualScreenshotId);
+    additionalLogFields.actualScreenshotId = actualScreenshotId;
+    additionalLogFields.actualScreenshotUrl = getScreenshotUrlById(actualScreenshotId);
+  } catch (secondError) {
+    throw new E2edError(message, {secondError});
+  }
 
   throw new E2edError(message);
 };

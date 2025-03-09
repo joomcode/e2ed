@@ -1,3 +1,5 @@
+import {getKeys} from '../object';
+
 import type {FullPackConfig, StartInfo} from '../../types/internal';
 
 const skippedFields: readonly (keyof FullPackConfig)[] = [
@@ -12,7 +14,7 @@ const skippedFields: readonly (keyof FullPackConfig)[] = [
  * @internal
  */
 export const updateConfig = (fullPackConfig: FullPackConfig, startInfo: StartInfo): void => {
-  for (const field of Object.keys(fullPackConfig) as (keyof FullPackConfig)[]) {
+  for (const field of getKeys(fullPackConfig)) {
     if (skippedFields.includes(field)) {
       continue;
     }

@@ -2,8 +2,8 @@ import {AsyncLocalStorage} from 'node:async_hooks';
 
 import {LogEventType} from '../constants/internal';
 import {getPlaywrightPage} from '../useContext';
+import {applyHeadersMapper} from '../utils/headers';
 import {log} from '../utils/log';
-import {applyHeadersMapper} from '../utils/requestHooks';
 
 import {navigateToUrl} from './navigateToUrl';
 

@@ -17,7 +17,7 @@ import {readEventFromFile} from './readEventFromFile';
 import type {FullTestRun, UtcTimeInMs} from '../../types/internal';
 
 /**
- * Read events objects from temporary directory, with skipping specified events.
+ * Reads events objects from temporary directory, with skipping specified events.
  * @internal
  */
 export const readEventsFromFiles = async (

@@ -1,11 +1,17 @@
 import {LogEventType} from '../../constants/internal';
+import {addPageToApiStatistics} from '../../utils/apiStatistics';
 import {getDocumentUrl} from '../../utils/document';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
 
 import {createPageInstance} from './createPageInstance';
 
-import type {AnyPageClassType, NavigateToOrAssertPageArgs, UtcTimeInMs} from '../../types/internal';
+import type {
+  AnyPageClassType,
+  NavigateToOrAssertPageArgs,
+  PageName,
+  UtcTimeInMs,
+} from '../../types/internal';
 
 /**
  * Navigates to the page by page class and page params.
@@ -24,9 +30,10 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
   const url = route.getUrl();
   const startNavigateTimeInMs = Date.now() as UtcTimeInMs;
   const pageInstanceCreatedInMs = startNavigateTimeInMs - startTimeInMs;
+  const pageName = PageClass.name as PageName;
 
   log(
-    `Will navigate to the page "${PageClass.name}"`,
+    `Will navigate to the page "${pageName}"`,
     {pageInstanceCreatedInMs, pageParams, routeParams, url},
     LogEventType.InternalAction,
   );
@@ -36,7 +43,7 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
   await page.navigateToPage(url);
 
   log(
-    `Navigation to the page "${PageClass.name}" completed`,
+    `Navigation to the page "${pageName}" completed`,
     {pageParams, routeParams, url},
     LogEventType.InternalAction,
   );
@@ -52,13 +59,12 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
 
   await page.afterNavigateToPage?.();
 
-  const durationWithUnits = getDurationWithUnits(Date.now() - startNavigateTimeInMs);
+  const duration = Date.now() - startNavigateTimeInMs;
+  const durationWithUnits = getDurationWithUnits(duration);
 
-  log(
-    `Page "${PageClass.name}" loaded in ${durationWithUnits}`,
-    {url},
-    LogEventType.InternalAction,
-  );
+  log(`Page "${pageName}" loaded in ${durationWithUnits}`, {url}, LogEventType.InternalAction);
+
+  addPageToApiStatistics({duration, pageName, url});
 
   return page;
 };

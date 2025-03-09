@@ -3,9 +3,9 @@ import {getNavigationDelay} from '../../context/navigationDelay';
 
 import {getFullPackConfig} from '../config';
 import {E2edError} from '../error';
+import {setReadonlyProperty} from '../object';
 import {getPromiseWithResolveAndReject, getTimeoutPromise} from '../promise';
 import {getResponseFromPlaywrightResponse} from '../requestHooks';
-import {setReadonlyProperty} from '../setReadonlyProperty';
 
 import type {Response as PlaywrightResponse} from '@playwright/test';
 
@@ -36,7 +36,7 @@ export const getWaitForResponsePredicate = (
     if (navigationDelay.promise === undefined) {
       const {promiseWithTimeout, resolve} = getPromiseWithResolveAndReject<Void>(testIdleTimeout);
 
-      setReadonlyProperty(navigationDelay as NavigationDelay, 'promise', promiseWithTimeout);
+      void setReadonlyProperty(navigationDelay as NavigationDelay, 'promise', promiseWithTimeout);
       setReadonlyProperty(navigationDelay as NavigationDelay, 'resolve', resolve);
     }
 
@@ -56,7 +56,7 @@ export const getWaitForResponsePredicate = (
       if (navigationDelay.reasonsCount <= 0) {
         const {resolve} = navigationDelay;
 
-        setReadonlyProperty(navigationDelay, 'promise', undefined);
+        void setReadonlyProperty(navigationDelay, 'promise', undefined);
         setReadonlyProperty(navigationDelay, 'resolve', undefined);
 
         resolve?.();
