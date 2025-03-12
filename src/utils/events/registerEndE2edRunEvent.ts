@@ -17,6 +17,7 @@ let isEndAlreadyCalled = false;
  * Registers end e2ed run event (for report) after closing of all tests.
  * @internal
  */
+// eslint-disable-next-line max-statements
 export const registerEndE2edRunEvent = async (): Promise<void> => {
   if (isEndAlreadyCalled) {
     return;
@@ -47,6 +48,7 @@ export const registerEndE2edRunEvent = async (): Promise<void> => {
     } catch (error) {
       generalLog('Caught an error on run "after pack" functions', {error});
 
+      setReadonlyProperty(liteReport, 'exitCode', ExitCode.HasErrorsInDoAfterPackFunctions);
       setReadonlyProperty(reportData, 'exitCode', ExitCode.HasErrorsInDoAfterPackFunctions);
     }
 

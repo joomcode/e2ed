@@ -14,28 +14,6 @@ import type {
 } from './userland';
 
 /**
- * The complete report data (for printing report).
- * @internal
- */
-export type ReportData = Readonly<{
-  apiStatistics: ApiStatistics;
-  customReportProperties: CustomReportPropertiesPlaceholder | undefined;
-  endE2edReason: EndE2edReason;
-  endTimeInMs: UtcTimeInMs;
-  errors: readonly string[];
-  exitCode: ExitCode;
-  failedTestsMainParams: readonly string[];
-  fullTestRuns: readonly FullTestRun[];
-  liteReportFileName: string | null;
-  logFileName: string | null;
-  notIncludedInPackTests: readonly TestFilePath[];
-  reportFileName: string | null;
-  retries: readonly Retry[];
-  startInfo: StartInfo;
-  summaryPackResults: string;
-}>;
-
-/**
  * The lite report data (for printing lite JSON report) with userland meta.
  */
 export type LiteReport<
@@ -61,28 +39,48 @@ export type LiteReport<
 }>;
 
 /**
- * RetryButton component props.
- * @internal
+ * Lite retry object with all his lite test runs.
  */
-export type RetryButtonProps = Readonly<{
-  disabled: boolean;
-  retry: number;
-  selected: boolean;
+export type LiteRetry<TestMeta = TestMetaPlaceholder> = Readonly<{
+  brokenLiteTestRuns: readonly LiteTestRun<TestMeta>[];
+  concurrency: number;
+  endTimeInMs: UtcTimeInMs;
+  /**
+   * Test runs of all statuses except broken.
+   */
+  liteTestRuns: readonly LiteTestRun<TestMeta>[];
+  retryIndex: number;
+  startTimeInMs: UtcTimeInMs;
 }>;
 
 /**
- * TestRunButton component props.
+ * The complete report data (for printing report).
  * @internal
  */
-export type TestRunButtonProps = Readonly<{
+export type ReportData = Readonly<{
+  apiStatistics: ApiStatistics;
+  customReportProperties: CustomReportPropertiesPlaceholder | undefined;
+  endE2edReason: EndE2edReason;
   endTimeInMs: UtcTimeInMs;
-  filePath: TestFilePath;
-  mainParams: string;
-  name: string;
-  runHash: RunHash;
-  runId: RunId;
-  startTimeInMs: UtcTimeInMs;
-  status: TestRunStatus;
+  errors: readonly string[];
+  exitCode: ExitCode;
+  failedTestsMainParams: readonly string[];
+  fullTestRuns: readonly FullTestRun[];
+  liteReportFileName: string | null;
+  logFileName: string | null;
+  notIncludedInPackTests: readonly TestFilePath[];
+  reportFileName: string | null;
+  retries: readonly Retry[];
+  startInfo: StartInfo;
+  summaryPackResults: string;
+}>;
+
+/**
+ * The general report data that needed on client for rendering parts of HTML report.
+ * @internal
+ */
+export type ReportClientData = Readonly<{
+  apiStatistics: ApiStatistics;
 }>;
 
 /**
@@ -96,6 +94,7 @@ export type ReportClientState = {
   lengthOfReadedJsonReportDataParts: number;
   readonly pathToScreenshotsDirectoryForReport: string | null;
   readonly readJsonReportDataObservers: MutationObserver[];
+  reportClientData?: ReportClientData;
   testRunDetailsElementsByHash?: Record<RunHash, HTMLElement>;
 };
 
@@ -112,18 +111,13 @@ export type Retry = Readonly<{
 }>;
 
 /**
- * Lite retry object with all his lite test runs.
+ * RetryButton component props.
+ * @internal
  */
-export type LiteRetry<TestMeta = TestMetaPlaceholder> = Readonly<{
-  brokenLiteTestRuns: readonly LiteTestRun<TestMeta>[];
-  concurrency: number;
-  endTimeInMs: UtcTimeInMs;
-  /**
-   * Test runs of all statuses except broken.
-   */
-  liteTestRuns: readonly LiteTestRun<TestMeta>[];
-  retryIndex: number;
-  startTimeInMs: UtcTimeInMs;
+export type RetryButtonProps = Readonly<{
+  disabled: boolean;
+  retry: number;
+  selected: boolean;
 }>;
 
 /**
@@ -136,4 +130,25 @@ export type RetryProps = Readonly<{
   retryIndex: number;
   startTimeInMs: UtcTimeInMs;
   testRunButtons: readonly TestRunButtonProps[];
+}>;
+
+/**
+ * JSON data in `<script>` tags with JSON presentation of report data.
+ * @internal
+ */
+export type ScriptJsonData = ReportClientData | readonly FullTestRun[];
+
+/**
+ * TestRunButton component props.
+ * @internal
+ */
+export type TestRunButtonProps = Readonly<{
+  endTimeInMs: UtcTimeInMs;
+  filePath: TestFilePath;
+  mainParams: string;
+  name: string;
+  runHash: RunHash;
+  runId: RunId;
+  startTimeInMs: UtcTimeInMs;
+  status: TestRunStatus;
 }>;

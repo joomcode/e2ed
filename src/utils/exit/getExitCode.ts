@@ -2,6 +2,8 @@ import {ExitCode, FAILED_TEST_RUN_STATUSES} from '../../constants/internal';
 
 import {assertValueIsDefined} from '../asserts';
 
+import {getGlobalExitCode} from './globalExitCode';
+
 import type {Retry} from '../../types/internal';
 
 /**
@@ -9,6 +11,12 @@ import type {Retry} from '../../types/internal';
  * @internal
  */
 export const getExitCode = (hasError: boolean, retries: readonly Retry[]): ExitCode => {
+  const globalExitCode = getGlobalExitCode();
+
+  if (globalExitCode !== undefined) {
+    return globalExitCode;
+  }
+
   if (hasError) {
     return ExitCode.HasErrors;
   }

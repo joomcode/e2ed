@@ -2,7 +2,13 @@ import {FAILED_TEST_RUN_STATUSES} from '../../../constants/internal';
 
 import {createSafeHtmlWithoutSanitize, sanitizeJson} from '../client';
 
-import type {FullTestRun, ReportData, SafeHtml} from '../../../types/internal';
+import type {
+  FullTestRun,
+  ReportClientData,
+  ReportData,
+  SafeHtml,
+  ScriptJsonData,
+} from '../../../types/internal';
 
 type FullTestRuns = readonly FullTestRun[];
 
@@ -22,13 +28,14 @@ const filterErrors = (fullTestRuns: FullTestRuns): [errors: FullTestRuns, rest: 
 };
 
 /**
- * Renders script tags with JSON presentation of report data.
+ * Renders `<script>` tags with JSON presentation of report data.
  * In first tag renders the errors of the last retry, then the entire last retry,
- * then all the remaining errors, then all the remaining data.
+ * then all the remaining errors, tnen general client data, and then all the remaining data.
  * @internal
  */
 export const renderJsonData = (reportData: ReportData): SafeHtml => {
-  const {retries} = reportData;
+  const {apiStatistics, retries} = reportData;
+  const reportClientData: ReportClientData = {apiStatistics};
 
   const fullTestRunsNotFromLastRetry: FullTestRun[] = [];
   const lastRetry = retries.at(-1);
@@ -40,9 +47,13 @@ export const renderJsonData = (reportData: ReportData): SafeHtml => {
   const [lastRetryErrors, lastRetryRest] = filterErrors(lastRetry?.fullTestRuns ?? []);
   const [restErrors, rest] = filterErrors(fullTestRunsNotFromLastRetry);
 
-  const parts: readonly FullTestRuns[] = [lastRetryErrors, lastRetryRest, restErrors, rest].filter(
-    (part) => part.length > 0,
-  );
+  const parts: readonly ScriptJsonData[] = [
+    lastRetryErrors,
+    lastRetryRest,
+    restErrors,
+    reportClientData,
+    rest,
+  ].filter((part) => !('length' in part) || part.length > 0);
 
   const scripts = parts.map((fullTestRuns) => {
     const json = JSON.stringify(fullTestRuns);
