@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.20.6](https://github.com/joomcode/e2ed/tree/v0.20.6) (2025-03-12)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.5...v0.20.6)
+
+- [Merge pull request #113 from joomcode/fix/merge-urls-in-api-statistics](https://github.com/joomcode/e2ed/commit/4b8bb99b2c800ad17850cfba380c0c77d0c6b86b) ([uid11](https://github.com/uid11))
+
+  fix: merge urls for API statistics
+
+- [FI-1721 fix: save reports after errors in `doBeforePack`/`doAfterPack`](https://github.com/joomcode/e2ed/commit/6f6c8e0c72df36c2345524459413eeb614283189) ([uid11](https://github.com/uid11))
+- [FI-1635 fix: merge API requests by replacing `id` to asterisks](https://github.com/joomcode/e2ed/commit/35443ed964e517af3d969916d204d5bb37012716) ([uid11](https://github.com/uid11))
+
 ## [v0.20.5](https://github.com/joomcode/e2ed/tree/v0.20.5) (2025-03-09)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.4...v0.20.5)
