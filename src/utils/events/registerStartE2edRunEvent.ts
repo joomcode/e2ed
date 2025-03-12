@@ -53,35 +53,37 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
   const startInfo = getStartInfo({configCompileTimeWithUnits});
 
   try {
-    await runBeforePackFunctions(startInfo);
-  } catch (cause) {
-    setGlobalExitCode(ExitCode.HasErrorsInDoBeforePackFunctions);
+    try {
+      await runBeforePackFunctions(startInfo);
+    } catch (cause) {
+      setGlobalExitCode(ExitCode.HasErrorsInDoBeforePackFunctions);
 
-    throw new E2edError('Caught an error on running "before pack" functions', {cause});
+      throw new E2edError('Caught an error on running "before pack" functions', {cause});
+    }
+
+    const fullPackConfig = getFullPackConfig();
+
+    updateConfig(fullPackConfig, startInfo);
+
+    if (errorSettingDotEnv !== undefined) {
+      generalLog('Caught an error on setting environment variables from `variables.env` file', {
+        errorSettingDotEnv,
+      });
+    }
+
+    if (compileErrors.length !== 0) {
+      const pathToPack = getPathToPack();
+
+      generalLog(`Caught errors on compiling pack ${pathToPack}`, {compileErrors});
+    }
+
+    const {e2ed, runEnvironment} = startInfo;
+    const isLocalRun = runEnvironment !== RunEnvironment.Docker;
+    const startMessage = `Run tests ${isLocalRun ? 'local' : 'in docker'} with e2ed@${e2ed.version}`;
+
+    generalLog(startMessage, startInfo);
+  } finally {
+    await writeStartInfo(startInfo);
+    await writeLogsToFile();
   }
-
-  const fullPackConfig = getFullPackConfig();
-
-  updateConfig(fullPackConfig, startInfo);
-
-  if (errorSettingDotEnv !== undefined) {
-    generalLog('Caught an error on setting environment variables from `variables.env` file', {
-      errorSettingDotEnv,
-    });
-  }
-
-  if (compileErrors.length !== 0) {
-    const pathToPack = getPathToPack();
-
-    generalLog(`Caught errors on compiling pack ${pathToPack}`, {compileErrors});
-  }
-
-  const {e2ed, runEnvironment} = startInfo;
-  const isLocalRun = runEnvironment !== RunEnvironment.Docker;
-  const startMessage = `Run tests ${isLocalRun ? 'local' : 'in docker'} with e2ed@${e2ed.version}`;
-
-  generalLog(startMessage, startInfo);
-
-  await writeStartInfo(startInfo);
-  await writeLogsToFile();
 };
