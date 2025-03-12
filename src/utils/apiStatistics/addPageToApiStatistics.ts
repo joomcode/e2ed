@@ -1,8 +1,7 @@
-import {URL} from 'node:url';
-
 import {getApiStatistics} from '../../context/apiStatistics';
 
 import {addApiStatistics} from './addApiStatistics';
+import {getUrlTemplate} from './getUrlTemplate';
 
 import type {ApiStatistics, PageName, Url} from '../../types/internal';
 
@@ -18,11 +17,10 @@ type Options = Readonly<{
  */
 export const addPageToApiStatistics = ({duration, pageName, url}: Options): void => {
   const apiStatistics = getApiStatistics();
-  const {origin, pathname} = new URL(url);
-  const urlWithoutQuery = `${origin}${pathname}` as Url;
+  const urlTemplate = getUrlTemplate(url);
 
   const additionalApiStatistics: ApiStatistics = {
-    pages: {[pageName]: {[urlWithoutQuery]: {count: 1, duration}}},
+    pages: {[pageName]: {[urlTemplate]: {count: 1, duration}}},
     requests: {},
   };
 

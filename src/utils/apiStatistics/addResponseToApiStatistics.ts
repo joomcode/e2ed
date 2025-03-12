@@ -1,12 +1,11 @@
-import {URL} from 'node:url';
-
 import {getApiStatistics} from '../../context/apiStatistics';
 
 import {getHeaderValue} from '../headers';
 
 import {addApiStatistics} from './addApiStatistics';
+import {getUrlTemplate} from './getUrlTemplate';
 
-import type {ApiStatistics, ResponseWithRequest, Url} from '../../types/internal';
+import type {ApiStatistics, ResponseWithRequest} from '../../types/internal';
 
 /**
  * Add single `ResponseWithRequest` to API statistics.
@@ -21,13 +20,11 @@ export const addResponseToApiStatistics = (responseWithRequest: ResponseWithRequ
   } = responseWithRequest;
 
   const size = Number(getHeaderValue(responseWithRequest.responseHeaders, 'content-length')) || 0;
-
-  const {origin, pathname} = new URL(url);
-  const urlWithoutQuery = `${origin}${pathname}` as Url;
+  const urlTemplate = getUrlTemplate(url);
 
   const additionalApiStatistics: ApiStatistics = {
     pages: {},
-    requests: {[urlWithoutQuery]: {[method]: {[statusCode]: {count: 1, duration, size}}}},
+    requests: {[urlTemplate]: {[method]: {[statusCode]: {count: 1, duration, size}}}},
   };
 
   addApiStatistics(apiStatistics, additionalApiStatistics);

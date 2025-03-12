@@ -112,11 +112,13 @@ export type {
 export type {LiteReport, LiteRetry} from './report';
 /** @internal */
 export type {
+  ReportClientData,
   ReportClientState,
   ReportData,
   Retry,
   RetryButtonProps,
   RetryProps,
+  ScriptJsonData,
   TestRunButtonProps,
 } from './report';
 /** @internal */
