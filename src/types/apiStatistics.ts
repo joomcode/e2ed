@@ -7,6 +7,7 @@ import type {Method, StatusCode, Url} from './http';
 export type ApiStatistics = Readonly<{
   pages: Readonly<Record<PageName, Readonly<Record<Url, PageStatistics>>>>;
   requests: Readonly<Record<Url, Readonly<Partial<Record<Method, RequestStatistics>>>>>;
+  resources: Readonly<Record<Url, RequestStatistics>>;
 }>;
 
 /**

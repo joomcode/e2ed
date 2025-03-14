@@ -1,10 +1,12 @@
 import {assertValueIsDefined} from '../asserts';
 import {getKeys, setReadonlyProperty} from '../object';
 
-import type {ApiStatistics, RequestStatistics, StatisticsUnit} from '../../types/internal';
+import {addRequestStatistics} from './addRequestStatistics';
+
+import type {ApiStatistics, RequestStatistics} from '../../types/internal';
 
 /**
- * Add additional requests to total API statistics requests.
+ * Adds additional requests to total API statistics requests.
  * @internal
  */
 export const addRequests = (
@@ -32,23 +34,7 @@ export const addRequests = (
         setReadonlyProperty(targetByMethod, method, targetByStatusCode);
       }
 
-      for (const statusCode of getKeys(sourceByStatusCode)) {
-        const sourceUnit: StatisticsUnit | undefined = sourceByStatusCode[statusCode];
-
-        assertValueIsDefined(sourceUnit, 'sourceUnit is defined', {method, statusCode, url});
-
-        let targetUnit = targetByStatusCode[statusCode];
-
-        // eslint-disable-next-line max-depth
-        if (targetUnit === undefined) {
-          targetUnit = {count: 0, duration: 0, size: 0};
-          setReadonlyProperty(targetByStatusCode, statusCode, targetUnit);
-        }
-
-        setReadonlyProperty(targetUnit, 'count', targetUnit.count + sourceUnit.count);
-        setReadonlyProperty(targetUnit, 'duration', targetUnit.duration + sourceUnit.duration);
-        setReadonlyProperty(targetUnit, 'size', targetUnit.size + sourceUnit.size);
-      }
+      addRequestStatistics(targetByStatusCode, sourceByStatusCode);
     }
   }
 };

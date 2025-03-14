@@ -2,6 +2,7 @@ import {getBorderCount} from './getBorderCount';
 
 const maxBorderCountOfNonIdentifier = 6;
 const minIdentifierLength = 6;
+const minProportionOfLetters = 0.4;
 const maxIdentifierLengthForMaxBorder = 12;
 
 /**
@@ -13,7 +14,11 @@ export const isIdentifier = (value: string): boolean => {
     return false;
   }
 
-  const borderCount = getBorderCount(value);
+  const {borderCount, letterCount} = getBorderCount(value);
+
+  if (letterCount / value.length < minProportionOfLetters) {
+    return true;
+  }
 
   if (borderCount > maxBorderCountOfNonIdentifier) {
     return true;
@@ -30,10 +35,6 @@ export const isIdentifier = (value: string): boolean => {
     borderCount === maxBorderCountOfNonIdentifier - 1 &&
     value.length <= maxIdentifierLengthForMaxBorder - 2
   ) {
-    return true;
-  }
-
-  if (/^[0-9]+$/.test(value)) {
     return true;
   }
 
