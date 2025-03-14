@@ -9,6 +9,8 @@ export type {
   RequestStatistics,
   StatisticsUnit,
 } from './apiStatistics';
+/** @internal */
+export type {ApiStatisticsReportHash} from './apiStatistics';
 export type {Brand, IsBrand} from './brand';
 export type {Expect, IsEqual, IsReadonlyKey} from './checks';
 export type {Class} from './class';

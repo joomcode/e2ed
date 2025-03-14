@@ -28,7 +28,8 @@
     "@playwright/test": "1.51.0",
     "create-locator": "0.0.27",
     "get-modules-graph": "0.0.11",
-    "globby": "11.1.0"
+    "globby": "11.1.0",
+    "sort-json-keys": "1.0.3"
   },
   "devDependencies": {
     "@playwright/browser-chromium": "1.51.0",

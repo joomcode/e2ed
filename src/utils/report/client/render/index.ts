@@ -1,4 +1,8 @@
 /** @internal */
+export {renderApiStatistics} from './renderApiStatistics';
+/** @internal */
+export {renderApiStatisticsItem} from './renderApiStatisticsItem';
+/** @internal */
 export {renderAttributes} from './renderAttributes';
 /** @internal */
 export {renderDatesInterval} from './renderDatesInterval';

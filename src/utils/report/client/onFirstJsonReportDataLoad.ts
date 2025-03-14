@@ -2,7 +2,7 @@ import {clickOnTestRun as clientClickOnTestRun} from './clickOnTestRun';
 
 const clickOnTestRun = clientClickOnTestRun;
 
-declare const e2edTestRunDetailsContainer: HTMLElement;
+declare const e2edRightColumnContainer: HTMLElement;
 
 /**
  * Handler of loading first part of JSON report data for report page.
@@ -31,7 +31,7 @@ export function onFirstJsonReportDataLoad(): void {
     const {top} = buttonOfOpenStep.getBoundingClientRect();
 
     setTimeout(() => {
-      e2edTestRunDetailsContainer.scrollTop = top;
+      e2edRightColumnContainer.scrollTop = top;
     }, scrollDelayInMs);
   }
 }

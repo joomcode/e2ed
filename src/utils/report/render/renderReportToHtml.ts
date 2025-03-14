@@ -46,7 +46,7 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
       <section
         aria-label="Tests results"
         class="main__section _position_right"
-        id="e2edTestRunDetailsContainer"
+        id="e2edRightColumnContainer"
         ${locator('column2')}
       ><div class="test-details-empty"><p>No test selected</p></div></section>
     </div>

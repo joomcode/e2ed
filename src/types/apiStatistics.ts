@@ -11,6 +11,12 @@ export type ApiStatistics = Readonly<{
 }>;
 
 /**
+ * Hash string of menu buttons for showing parts of `ApiStatistics` in HTML report.
+ * @internal
+ */
+export type ApiStatisticsReportHash = `api-statistics-${keyof ApiStatistics}`;
+
+/**
  * Page name (as name of page class).
  */
 export type PageName = Brand<string, 'PageName'>;

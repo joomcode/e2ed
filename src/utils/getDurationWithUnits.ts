@@ -8,8 +8,9 @@ export function getDurationWithUnits(durationInMs: number): string {
   const msInSecond = 1_000;
   const timeMultiplicator = 60;
 
-  const remainderInMs = durationInMs % msInSecond;
-  const durationInSeconds = Math.round((durationInMs - remainderInMs) / msInSecond);
+  const roundedDuration = Math.round(durationInMs);
+  const remainderInMs = roundedDuration % msInSecond;
+  const durationInSeconds = Math.round((roundedDuration - remainderInMs) / msInSecond);
   const remainderInSeconds = durationInSeconds % timeMultiplicator;
   const durationInMinutes = Math.round(
     (durationInSeconds - remainderInSeconds) / timeMultiplicator,

@@ -1,3 +1,5 @@
+import {sortJsonKeys} from 'sort-json-keys';
+
 import {addApiStatistics} from '../apiStatistics';
 
 import type {ApiStatistics} from '../../types/internal';
@@ -19,5 +21,5 @@ export const getTotalApiStatistics = (
     addApiStatistics(totalApiStatistics, apiStatistics);
   }
 
-  return totalApiStatistics;
+  return sortJsonKeys(totalApiStatistics);
 };
