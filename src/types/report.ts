@@ -116,6 +116,7 @@ export type Retry = Readonly<{
  */
 export type RetryButtonProps = Readonly<{
   disabled: boolean;
+  name: string;
   retry: number;
   selected: boolean;
 }>;
