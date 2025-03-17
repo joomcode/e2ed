@@ -29,11 +29,11 @@ const renderAttributes = clientRenderAttributes;
 const setReadJsonReportDataObservers = clientSetReadJsonReportDataObservers;
 
 /**
- * Initial report page script.
+ * Initial HTML report page script.
  * This client function should not use scope variables (except global functions).
  * @internal
  */
-export const initialScript = (): void => {
+export function initialScript(): void {
   const {locator: locatorAttributes} = createSimpleLocator(createLocatorOptions);
 
   locator = (...args): SafeHtml => renderAttributes(locatorAttributes(...(args as [string])));
@@ -47,4 +47,4 @@ export const initialScript = (): void => {
   setReadJsonReportDataObservers();
 
   addDomContentLoadedHandler(onDomContentLoad);
-};
+}

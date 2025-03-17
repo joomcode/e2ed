@@ -1,32 +1,41 @@
 import {assertValueIsDefined as clientAssertValueIsDefined} from './assertValueIsDefined';
-import {renderTestRunDetails as clientRenderTestRunDetails} from './render';
+import {
+  renderApiStatistics as clientRenderApiStatistics,
+  renderTestRunDetails as clientRenderTestRunDetails,
+} from './render';
 
-import type {ReportClientState, RunHash} from '../../../types/internal';
+import type {
+  ApiStatisticsReportHash,
+  ReportClientState,
+  RunHash,
+  SafeHtml,
+} from '../../../types/internal';
 
 const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
+const renderApiStatistics = clientRenderApiStatistics;
 const renderTestRunDetails = clientRenderTestRunDetails;
 
-declare const e2edTestRunDetailsContainer: HTMLElement;
+declare const e2edRightColumnContainer: HTMLElement;
 declare const reportClientState: ReportClientState;
 
 /**
- * Chooses TestRun (render chosen TestRun in right panel).
+ * Chooses `TestRun` (render chosen `TestRun` in right panel).
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
+// eslint-disable-next-line max-statements
 export function chooseTestRun(runHash: RunHash): void {
   const previousHash = window.location.hash as RunHash;
 
   window.location.hash = runHash;
 
   if (reportClientState.testRunDetailsElementsByHash === undefined) {
-    reportClientState.testRunDetailsElementsByHash = {};
+    reportClientState.testRunDetailsElementsByHash = Object.create(null) as {};
   }
 
   const {testRunDetailsElementsByHash} = reportClientState;
 
-  const previousTestRunDetailsElement =
-    e2edTestRunDetailsContainer.firstElementChild as HTMLElement;
+  const previousTestRunDetailsElement = e2edRightColumnContainer.firstElementChild as HTMLElement;
 
   if (!(previousHash in testRunDetailsElementsByHash)) {
     testRunDetailsElementsByHash[previousHash] = previousTestRunDetailsElement;
@@ -42,23 +51,48 @@ export function chooseTestRun(runHash: RunHash): void {
     return;
   }
 
-  const {fullTestRuns} = reportClientState;
-  const fullTestRun = fullTestRuns.find((testRun) => testRun.runHash === runHash);
+  const pagesHash: ApiStatisticsReportHash = 'api-statistics-pages';
+  const requestsHash: ApiStatisticsReportHash = 'api-statistics-requests';
+  const resourcesHash: ApiStatisticsReportHash = 'api-statistics-resources';
 
-  if (fullTestRun === undefined) {
-    // eslint-disable-next-line no-console
-    console.error(
-      `Cannot find test run with hash ${runHash} in JSON report data. Probably JSON report data for this test run not yet loaded. Please try click again later`,
-    );
+  let rightColumnHtml: SafeHtml | undefined;
 
-    return;
+  const hash = String(runHash);
+
+  if (hash === pagesHash || hash === requestsHash || hash === resourcesHash) {
+    const {reportClientData} = reportClientState;
+
+    if (reportClientData === undefined) {
+      // eslint-disable-next-line no-console
+      console.error(
+        `Cannot find report client data in JSON report data (tried to click "${runHash}"). Probably JSON report data not yet completely loaded. Please try click again later`,
+      );
+
+      return;
+    }
+
+    const {apiStatistics} = reportClientData;
+
+    rightColumnHtml = renderApiStatistics({apiStatistics, hash});
+  } else {
+    const {fullTestRuns} = reportClientState;
+    const fullTestRun = fullTestRuns.find((testRun) => testRun.runHash === runHash);
+
+    if (fullTestRun === undefined) {
+      // eslint-disable-next-line no-console
+      console.error(
+        `Cannot find test run with hash ${runHash} in JSON report data. Probably JSON report data for this test run not yet loaded. Please try click again later`,
+      );
+
+      return;
+    }
+
+    rightColumnHtml = renderTestRunDetails(fullTestRun);
   }
 
-  const testRunDetailsHtml = renderTestRunDetails(fullTestRun);
+  e2edRightColumnContainer.innerHTML = String(rightColumnHtml);
 
-  e2edTestRunDetailsContainer.innerHTML = String(testRunDetailsHtml);
-
-  const nextTestRunDetailsElement = e2edTestRunDetailsContainer.firstElementChild as HTMLElement;
+  const nextTestRunDetailsElement = e2edRightColumnContainer.firstElementChild as HTMLElement;
 
   testRunDetailsElementsByHash[runHash] = nextTestRunDetailsElement;
 }

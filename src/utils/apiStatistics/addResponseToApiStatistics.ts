@@ -5,10 +5,10 @@ import {getHeaderValue} from '../headers';
 import {addApiStatistics} from './addApiStatistics';
 import {getUrlTemplate} from './getUrlTemplate';
 
-import type {ApiStatistics, ResponseWithRequest} from '../../types/internal';
+import type {ApiStatistics, RequestStatistics, ResponseWithRequest} from '../../types/internal';
 
 /**
- * Add single `ResponseWithRequest` to API statistics.
+ * Adds single `ResponseWithRequest` to API statistics.
  * @internal
  */
 export const addResponseToApiStatistics = (responseWithRequest: ResponseWithRequest): void => {
@@ -19,13 +19,14 @@ export const addResponseToApiStatistics = (responseWithRequest: ResponseWithRequ
     statusCode,
   } = responseWithRequest;
 
+  const {hasExtension, urlTemplate} = getUrlTemplate(url);
+  const isResource = hasExtension && method === 'GET';
   const size = Number(getHeaderValue(responseWithRequest.responseHeaders, 'content-length')) || 0;
-  const urlTemplate = getUrlTemplate(url);
+  const requestStatistics: RequestStatistics = {[statusCode]: {count: 1, duration, size}};
 
-  const additionalApiStatistics: ApiStatistics = {
-    pages: {},
-    requests: {[urlTemplate]: {[method]: {[statusCode]: {count: 1, duration, size}}}},
-  };
+  const additionalApiStatistics: ApiStatistics = isResource
+    ? {pages: {}, requests: {}, resources: {[urlTemplate]: requestStatistics}}
+    : {pages: {}, requests: {[urlTemplate]: {[method]: requestStatistics}}, resources: {}};
 
   addApiStatistics(apiStatistics, additionalApiStatistics);
 };

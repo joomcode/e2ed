@@ -26,6 +26,5 @@ export const renderScriptConstants = (): SafeHtml => {
   return createSafeHtmlWithoutSanitize`
 const createLocatorOptions = ${JSON.stringify(createLocatorOptions)};
 var locator;
-const reportClientState = ${JSON.stringify(reportClientState)};
-`;
+const reportClientState = ${JSON.stringify(reportClientState)};`;
 };

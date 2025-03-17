@@ -4,7 +4,7 @@ import {getKeys, setReadonlyProperty} from '../object';
 import type {ApiStatistics, PageStatistics} from '../../types/internal';
 
 /**
- * Add additional pages to total API statistics pages.
+ * Adds additional pages to total API statistics pages.
  * @internal
  */
 export const addPages = (

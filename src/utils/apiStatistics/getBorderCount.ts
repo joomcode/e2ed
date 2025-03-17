@@ -9,13 +9,19 @@ const zCodePoint = 122;
 const ZCodePoint = 90;
 const zeroCodePoint = 48;
 
+type Return = Readonly<{
+  borderCount: number;
+  letterCount: number;
+}>;
+
 /**
  * Returns count of border (letter or non-letter) inside string.
  * @internal
  */
 // eslint-disable-next-line complexity
-export const getBorderCount = (value: string): number => {
+export const getBorderCount = (value: string): Return => {
   let borderCount = -1;
+  let letterCount = 0;
   let mode: '.' | '0' | 'A' | 'a' | undefined;
 
   for (const char of value) {
@@ -37,6 +43,7 @@ export const getBorderCount = (value: string): number => {
           borderCount += 1;
         }
 
+        letterCount += 1;
         mode = 'A';
         break;
 
@@ -45,6 +52,7 @@ export const getBorderCount = (value: string): number => {
           borderCount += 1;
         }
 
+        letterCount += 1;
         mode = 'a';
         break;
 
@@ -57,5 +65,5 @@ export const getBorderCount = (value: string): number => {
     }
   }
 
-  return borderCount;
+  return {borderCount, letterCount};
 };

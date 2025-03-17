@@ -22,6 +22,7 @@ export const getApiStatistics = (): ApiStatistics => {
   const apiStatistics: ApiStatistics = {
     pages: Object.create(null) as {},
     requests: Object.create(null) as {},
+    resources: Object.create(null) as {},
   };
 
   setRawApiStatistics(apiStatistics);
