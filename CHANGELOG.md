@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.20.7](https://github.com/joomcode/e2ed/tree/v0.20.7) (2025-03-17)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.6...v0.20.7)
+
+- [Merge pull request #114 from joomcode/fix/add-resources-to-api-statistics](https://github.com/joomcode/e2ed/commit/da6d4f8c9552b5ecdf0739abd493353d51123d3f) ([uid11](https://github.com/uid11))
+
+  feat: add API statistics to HTML report
+
+- [FI-1635 feat: add API statistics to HTML report](https://github.com/joomcode/e2ed/commit/8b2619853c9a823519b69dfa6704207fb9d4b58a) ([uid11](https://github.com/uid11))
+- [FI-1635 fix: add separate `resources` group to API statistics](https://github.com/joomcode/e2ed/commit/40d72e72ac85cd99fa42005aba864c8e57160ee3) ([uid11](https://github.com/uid11))
+
 ## [v0.20.6](https://github.com/joomcode/e2ed/tree/v0.20.6) (2025-03-12)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.5...v0.20.6)
