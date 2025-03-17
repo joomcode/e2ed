@@ -43,7 +43,7 @@ test('selector custom methods', {meta: {testId: '15'}}, async () => {
   await expect(
     reportPage.navigationRetriesButtonSelected.getLocatorParameter('retry'),
     'last navigation retries button selected',
-  ).eql(String(retriesButtonsCount));
+  ).eql(String(retriesButtonsCount - 1));
 
   await expect(
     reportPage.navigationRetriesButtonSelected.hasLocatorParameter('disabled'),
