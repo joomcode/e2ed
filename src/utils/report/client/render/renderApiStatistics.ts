@@ -64,7 +64,15 @@ export function renderApiStatistics({apiStatistics, hash}: Options): SafeHtml {
 
     for (const [url, byStatusCode] of Object.entries(apiStatistics.resources)) {
       for (const [statusCode, {count, duration, size}] of Object.entries(byStatusCode)) {
-        items.push(renderApiStatisticsItem({count, duration, name: `${url} ${statusCode}`, size}));
+        items.push(
+          renderApiStatisticsItem({
+            count,
+            duration,
+            isUrl: true,
+            name: `${url} ${statusCode}`,
+            size,
+          }),
+        );
       }
     }
   }

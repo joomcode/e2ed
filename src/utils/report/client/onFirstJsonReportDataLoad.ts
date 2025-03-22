@@ -1,8 +1,10 @@
 import {clickOnTestRun as clientClickOnTestRun} from './clickOnTestRun';
 
+import type {ReportClientState} from '../../../types/internal';
+
 const clickOnTestRun = clientClickOnTestRun;
 
-declare const e2edRightColumnContainer: HTMLElement;
+declare const reportClientState: ReportClientState;
 
 /**
  * Handler of loading first part of JSON report data for report page.
@@ -25,6 +27,7 @@ export function onFirstJsonReportDataLoad(): void {
   clickOnTestRun(buttonForFailedTestRun as HTMLElement);
 
   const buttonOfOpenStep = document.querySelector('.step-expanded[aria-expanded="true"]');
+  const {e2edRightColumnContainer} = reportClientState;
   const scrollDelayInMs = 8;
 
   if (buttonOfOpenStep) {

@@ -15,7 +15,6 @@ const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValu
 const renderApiStatistics = clientRenderApiStatistics;
 const renderTestRunDetails = clientRenderTestRunDetails;
 
-declare const e2edRightColumnContainer: HTMLElement;
 declare const reportClientState: ReportClientState;
 
 /**
@@ -25,6 +24,7 @@ declare const reportClientState: ReportClientState;
  */
 // eslint-disable-next-line max-statements
 export function chooseTestRun(runHash: RunHash): void {
+  const {e2edRightColumnContainer} = reportClientState;
   const previousHash = window.location.hash as RunHash;
 
   window.location.hash = runHash;

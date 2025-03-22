@@ -13,18 +13,23 @@ import type {ReportClientState, SafeHtml} from '../../../types/internal';
  * @internal
  */
 export const renderScriptConstants = (): SafeHtml => {
+  const e2edRightColumnContainer = {} as unknown as HTMLElement;
+  const jsxRuntime = {} as unknown as JSX.Runtime;
+  const locator = {} as unknown as ReportClientState['locator'];
   const {pathToScreenshotsDirectoryForReport} = getFullPackConfig();
 
   const reportClientState: ReportClientState = {
+    createLocatorOptions,
+    e2edRightColumnContainer,
     fullTestRuns: [],
     internalDirectoryName: INTERNAL_DIRECTORY_NAME,
+    jsxRuntime,
     lengthOfReadedJsonReportDataParts: 0,
+    locator,
     pathToScreenshotsDirectoryForReport,
     readJsonReportDataObservers: [],
   };
 
   return createSafeHtmlWithoutSanitize`
-const createLocatorOptions = ${JSON.stringify(createLocatorOptions)};
-var locator;
 const reportClientState = ${JSON.stringify(reportClientState)};`;
 };

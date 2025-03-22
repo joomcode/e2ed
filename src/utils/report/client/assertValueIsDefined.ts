@@ -3,7 +3,7 @@
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function assertValueIsDefined<T>(value: T): asserts value is Exclude<T, undefined> {
+export function assertValueIsDefined<Type>(value: Type): asserts value is Exclude<Type, undefined> {
   if (value === undefined) {
     throw new TypeError('Asserted value is not defined');
   }

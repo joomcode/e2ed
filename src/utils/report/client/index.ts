@@ -13,6 +13,8 @@ export {clickOnStep} from './clickOnStep';
 /** @internal */
 export {clickOnTestRun} from './clickOnTestRun';
 /** @internal */
+export {createJsxRuntime} from './createJsxRuntime';
+/** @internal */
 export {onDomContentLoad} from './onDomContentLoad';
 /** @internal */
 export {onFirstJsonReportDataLoad} from './onFirstJsonReportDataLoad';

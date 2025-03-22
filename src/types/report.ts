@@ -1,8 +1,11 @@
+import type {CreateLocatorOptions, LocatorFunction} from 'create-locator';
+
 import type {EndE2edReason, ExitCode, TestRunStatus} from '../constants/internal';
 
 import type {ApiStatistics} from './apiStatistics';
 import type {FullPackConfig} from './config';
 import type {UtcTimeInMs} from './date';
+import type {SafeHtml} from './html';
 import type {TestFilePath} from './paths';
 import type {StartInfo} from './startInfo';
 import type {FullTestRun, LiteTestRun, RunHash, RunId} from './testRun';
@@ -89,9 +92,13 @@ export type ReportClientData = Readonly<{
  */
 export type ReportClientState = {
   clickListeners?: Record<string, (event: HTMLElement) => void>;
+  readonly createLocatorOptions: CreateLocatorOptions;
+  readonly e2edRightColumnContainer: HTMLElement;
   readonly fullTestRuns: readonly FullTestRun[];
   readonly internalDirectoryName: string;
+  readonly jsxRuntime: JSX.Runtime;
   lengthOfReadedJsonReportDataParts: number;
+  readonly locator: LocatorFunction<SafeHtml>;
   readonly pathToScreenshotsDirectoryForReport: string | null;
   readonly readJsonReportDataObservers: MutationObserver[];
   reportClientData?: ReportClientData;

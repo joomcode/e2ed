@@ -27,9 +27,10 @@ export const getUrlTemplate = (url: Url): Return => {
   const extension = extname(pathname).slice(1);
 
   if (
-    extension.length >= minExtensionLength &&
-    extension.length <= maxExtensionLength &&
-    /^[a-z]+$/.test(extension)
+    (extension.length >= minExtensionLength &&
+      extension.length <= maxExtensionLength &&
+      /^[a-z]+$/.test(extension)) ||
+    extension === 'woff2'
   ) {
     return {hasExtension: true, urlTemplate: `${origin}${pathname}` as Url};
   }

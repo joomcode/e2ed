@@ -5,11 +5,9 @@ import {renderSteps as clientRenderSteps} from './renderSteps';
 import {renderTestRunDescription as clientRenderTestRunDescription} from './renderTestRunDescription';
 import {renderTestRunError as clientRenderTestRunError} from './renderTestRunError';
 
-import type {LocatorFunction} from 'create-locator';
+import type {FullTestRun, ReportClientState, SafeHtml} from '../../../../types/internal';
 
-import type {FullTestRun, SafeHtml} from '../../../../types/internal';
-
-declare const locator: LocatorFunction<SafeHtml>;
+declare const reportClientState: ReportClientState;
 
 const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
 const renderSteps = clientRenderSteps;
@@ -24,6 +22,7 @@ const sanitizeHtml = clientSanitizeHtml;
  */
 export function renderTestRunDetails(fullTestRun: FullTestRun): SafeHtml {
   const {endTimeInMs, filePath, logEvents, name, runError, status} = fullTestRun;
+  const {locator} = reportClientState;
 
   const firstStatusString = status[0];
 
