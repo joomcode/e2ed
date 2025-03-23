@@ -2,7 +2,12 @@ import {createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize} fr
 
 import {renderApiStatisticsItem as clientRenderApiStatisticsItem} from './renderApiStatisticsItem';
 
-import type {ApiStatistics, ApiStatisticsReportHash, SafeHtml} from '../../../../types/internal';
+import type {
+  ApiStatistics,
+  ApiStatisticsReportHash,
+  ObjectEntries,
+  SafeHtml,
+} from '../../../../types/internal';
 
 const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
 const renderApiStatisticsItem = clientRenderApiStatisticsItem;
@@ -62,15 +67,17 @@ export function renderApiStatistics({apiStatistics, hash}: Options): SafeHtml {
   } else {
     header = 'Resources';
 
-    for (const [url, byStatusCode] of Object.entries(apiStatistics.resources)) {
+    for (const [url, byStatusCode] of Object.entries(apiStatistics.resources) as ObjectEntries<
+      typeof apiStatistics.resources
+    >) {
       for (const [statusCode, {count, duration, size}] of Object.entries(byStatusCode)) {
         items.push(
           renderApiStatisticsItem({
             count,
             duration,
-            isUrl: true,
             name: `${url} ${statusCode}`,
             size,
+            url,
           }),
         );
       }

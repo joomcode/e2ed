@@ -12,9 +12,8 @@ import type {ReportClientState, SafeHtml} from '../../../types/internal';
  * Renders JS constants for report page.
  * @internal
  */
-export const renderScriptConstants = (): SafeHtml => {
+export const renderScriptGlobals = (): SafeHtml => {
   const e2edRightColumnContainer = {} as unknown as HTMLElement;
-  const jsxRuntime = {} as unknown as JSX.Runtime;
   const locator = {} as unknown as ReportClientState['locator'];
   const {pathToScreenshotsDirectoryForReport} = getFullPackConfig();
 
@@ -23,7 +22,6 @@ export const renderScriptConstants = (): SafeHtml => {
     e2edRightColumnContainer,
     fullTestRuns: [],
     internalDirectoryName: INTERNAL_DIRECTORY_NAME,
-    jsxRuntime,
     lengthOfReadedJsonReportDataParts: 0,
     locator,
     pathToScreenshotsDirectoryForReport,
@@ -31,5 +29,6 @@ export const renderScriptConstants = (): SafeHtml => {
   };
 
   return createSafeHtmlWithoutSanitize`
+var jsx;
 const reportClientState = ${JSON.stringify(reportClientState)};`;
 };

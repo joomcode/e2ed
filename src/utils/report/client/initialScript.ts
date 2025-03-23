@@ -16,6 +16,8 @@ import {setReadJsonReportDataObservers as clientSetReadJsonReportDataObservers} 
 
 import type {ReportClientState, SafeHtml} from '../../../types/internal';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+declare let jsx: JSX.Runtime;
 declare const reportClientState: ReportClientState;
 
 const addDomContentLoadedHandler = clientAddDomContentLoadedHandler;
@@ -36,7 +38,8 @@ const setReadJsonReportDataObservers = clientSetReadJsonReportDataObservers;
  * @internal
  */
 export function initialScript(): void {
-  const jsxRuntime = createJsxRuntime();
+  jsx = createJsxRuntime();
+
   const e2edRightColumnContainer = document.getElementById('e2edRightColumnContainer') ?? undefined;
 
   assertValueIsDefined(e2edRightColumnContainer);
@@ -47,7 +50,6 @@ export function initialScript(): void {
 
   Object.assign<ReportClientState, Partial<ReportClientState>>(reportClientState, {
     e2edRightColumnContainer,
-    jsxRuntime,
     locator,
   });
 

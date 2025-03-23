@@ -4,7 +4,7 @@ import type {IsIncludeUndefined} from './undefined';
 /**
  * Entry pair that `Object.entries<Type>` returns.
  */
-type EntryPair<Type> = [key: keyof Type, value: Values<Type> | undefined];
+type EntryPair<Type> = [key: keyof Type, value: Values<Type>];
 
 /**
  * Alias for type any (to suppress the @typescript-eslint/no-explicit-any rule).

@@ -42,6 +42,30 @@ export function createSafeHtmlWithoutSanitize(
 }
 
 /**
+ * Returns `true`, if value is `SafeHtml`, and `false` otherwise.
+ * This base client function should not use scope variables (except other base functions).
+ * @internal
+ */
+export function isSafeHtml(value: unknown): value is SafeHtml {
+  const key = Symbol.for('e2ed:SafeHtml:key');
+
+  return typeof value === 'object' && value !== null && key in value;
+}
+
+/**
+ * Sanitizes arbitrary value.
+ * This base client function should not use scope variables (except other base functions).
+ * @internal
+ */
+export function sanitizeValue(value: unknown): string {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+/**
  * Sanitizes HTML code (simple protection against XSS attacks).
  * This base client function should not use scope variables (except other base functions).
  * @internal
@@ -50,15 +74,6 @@ export function sanitizeHtml(
   stringParts: readonly string[],
   ...values: readonly unknown[]
 ): SafeHtml {
-  const key = Symbol.for('e2ed:SafeHtml:key');
-
-  const sanitizeValue = (value: unknown): string =>
-    String(value)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-
   const parts: string[] = [];
 
   for (let index = 0; index < values.length; index += 1) {
@@ -67,10 +82,7 @@ export function sanitizeHtml(
     assertValueIsDefined(stringPart);
 
     const value = values[index];
-
-    const valueIsSafeHtml = typeof value === 'object' && value !== null && key in value;
-
-    const safeValue = valueIsSafeHtml ? String(value) : sanitizeValue(value);
+    const safeValue = isSafeHtml(value) ? String(value) : sanitizeValue(value);
 
     parts.push(stringPart, safeValue);
   }
@@ -87,7 +99,7 @@ export function sanitizeHtml(
 }
 
 /**
- * Sanitize JSON string (simple protection against XSS attacks).
+ * Sanitizes JSON string (simple protection against XSS attacks).
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
