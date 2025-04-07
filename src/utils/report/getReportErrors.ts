@@ -1,4 +1,5 @@
 import {getFullPackConfig} from '../config';
+import {readGlobalErrors} from '../fs';
 import {
   collectTestFilePaths,
   getUnsuccessfulTestFilePaths,
@@ -16,7 +17,7 @@ export const getReportErrors = async (
   notIncludedInPackTests: readonly TestFilePath[],
 ): Promise<readonly string[]> => {
   const {testFileGlobs} = getFullPackConfig();
-  const errors: string[] = [];
+  const errors = (await readGlobalErrors()) as string[];
 
   const allTestFilePaths = await collectTestFilePaths();
   const unsuccessfulTestFilePaths = await getUnsuccessfulTestFilePaths(

@@ -245,7 +245,9 @@ class Selector {
           .locator(getPlaywrightPage().locator(String(args[0])));
 
       case 'nth':
-        return selector.getPlaywrightLocator().nth(Number(args[0]));
+        return args[0] === -1
+          ? selector.getPlaywrightLocator().last()
+          : selector.getPlaywrightLocator().nth(Number(args[0]));
 
       case 'parent':
         return selector.getPlaywrightLocator().locator('xpath=..');

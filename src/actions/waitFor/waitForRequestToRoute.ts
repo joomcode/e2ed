@@ -53,13 +53,14 @@ export const waitForRequestToRoute = (async <
   SomeResponse extends Response,
 >(
   Route: ApiRouteClassTypeWithGetParamsFromUrl<RouteParams, SomeRequest, SomeResponse>,
-  triggerOrOptions?: Options<RouteParams, SomeRequest> | Trigger,
+  triggerOrOptions?: Options<RouteParams, SomeRequest> | Trigger | undefined,
   options?: Options<RouteParams, SomeRequest>,
 ): Return<RouteParams, SomeRequest> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const trigger = typeof triggerOrOptions === 'function' ? triggerOrOptions : undefined;
-  const finalOptions = typeof triggerOrOptions === 'function' ? options : triggerOrOptions;
+  const finalOptions =
+    typeof triggerOrOptions === 'function' ? options : (triggerOrOptions ?? options);
 
   const {predicate = () => true} = finalOptions ?? {};
   const timeout = finalOptions?.timeout ?? getFullPackConfig().waitForRequestTimeout;

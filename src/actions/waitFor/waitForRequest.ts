@@ -1,4 +1,5 @@
 import {LogEventType} from '../../constants/internal';
+import {getTestRunPromise} from '../../context/testRunPromise';
 import {getPlaywrightPage} from '../../useContext';
 import {getFullPackConfig} from '../../utils/config';
 import {E2edError} from '../../utils/error';
@@ -33,7 +34,7 @@ type Options = Readonly<{skipLogs?: boolean; timeout?: number}>;
  */
 export const waitForRequest = (async <SomeRequest extends Request>(
   predicate: RequestPredicate<SomeRequest>,
-  triggerOrOptions?: Options | Trigger,
+  triggerOrOptions?: Options | Trigger | undefined,
   options?: Options,
 ): Promise<RequestWithUtcTimeInMs<SomeRequest>> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
@@ -41,7 +42,8 @@ export const waitForRequest = (async <SomeRequest extends Request>(
   setCustomInspectOnFunction(predicate);
 
   const trigger = typeof triggerOrOptions === 'function' ? triggerOrOptions : undefined;
-  const finalOptions = typeof triggerOrOptions === 'function' ? options : triggerOrOptions;
+  const finalOptions =
+    typeof triggerOrOptions === 'function' ? options : (triggerOrOptions ?? options);
 
   const timeout = finalOptions?.timeout ?? getFullPackConfig().waitForRequestTimeout;
 
@@ -50,6 +52,13 @@ export const waitForRequest = (async <SomeRequest extends Request>(
   }
 
   const page = getPlaywrightPage();
+  const testRunPromise = getTestRunPromise();
+
+  let isTestRunCompleted = false;
+
+  void testRunPromise.then(() => {
+    isTestRunCompleted = true;
+  });
 
   const promise = page
     .waitForRequest(
@@ -73,7 +82,14 @@ export const waitForRequest = (async <SomeRequest extends Request>(
     .then(
       (playwrightRequest) =>
         getRequestFromPlaywrightRequest(playwrightRequest) as RequestWithUtcTimeInMs<SomeRequest>,
-    );
+    )
+    .catch((error: unknown) => {
+      if (isTestRunCompleted) {
+        return new Promise<RequestWithUtcTimeInMs<SomeRequest>>(() => {});
+      }
+
+      throw error;
+    });
 
   const timeoutWithUnits = getDurationWithUnits(timeout);
 
