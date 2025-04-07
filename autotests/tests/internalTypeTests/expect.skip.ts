@@ -28,3 +28,9 @@ void expect(htmlElementSelector.textContent, '').toMatchScreenshot('some id');
 
 // @ts-expect-error: eql is acceptable only for non-selectors
 void expect(htmlElementSelector, '').eql(htmlElementSelector);
+
+// ok
+void (expect('foo', 'foo is correct').toBe('foo') satisfies Promise<void>);
+
+// ok
+void (expect('foo', 'foo is correct').toBeDefined() satisfies Promise<void>);
