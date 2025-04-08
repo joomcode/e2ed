@@ -1,5 +1,33 @@
 # Changelog
 
+## [v0.20.8](https://github.com/joomcode/e2ed/tree/v0.20.8) (2025-04-08)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.7...v0.20.8)
+
+- [Merge pull request #115 from joomcode/feat/renew-html-report-base](https://github.com/joomcode/e2ed/commit/542dece9b6866542d80f38cdff1d240c35052442) ([uid11](https://github.com/uid11))
+
+  feat: handle uncaughtException/unhandledRejection global errors
+
+- [chore: update `devDependencies` (TypeScript to 5.8.3, etc)](https://github.com/joomcode/e2ed/commit/4088b4f974b648f3ca22191a3a8ae6b557b4d9c4) ([uid11](https://github.com/uid11))
+
+  chore: update Playwright to 1.51.1
+
+- [FI-1742 fix: restart of tests in UI-mode](https://github.com/joomcode/e2ed/commit/792008ee80b81d9fea0bbbc2cc852c58e33459fa) ([uid11](https://github.com/uid11))
+- [FI-1741 fix: separate `e2ed` debug and `nodejs` debug](https://github.com/joomcode/e2ed/commit/db9989c1c1b50cb4ce6724b8cf869c40641119ac) ([uid11](https://github.com/uid11))
+
+  fix: `testTimeout` and `testIdleTimeout` in debug mode
+
+- [FI-1743 fix: all `expect` methods should return `Promise<void>`](https://github.com/joomcode/e2ed/commit/870aecd159968f6e375ce355fcb58171028b6a28) ([uid11](https://github.com/uid11))
+- [PRO-9847 fix: options of `waitForRequest`/`waitForResponse` actions](https://github.com/joomcode/e2ed/commit/7849902c04813464dc76f3b674bd9418d5bd9fba) ([uid11](https://github.com/uid11))
+
+  fix: skip `waitForRequest`/`waitForResponse` errors after end of test
+
+  fix: handle `uncaughtException`/`unhandledRejection` global errors
+
+- [FI-1727 fix: render JSX to `SafeHtml`](https://github.com/joomcode/e2ed/commit/57865f1709b6ab28b9c3128ec983e7f29c66fdc1) ([uid11](https://github.com/uid11))
+- [FI-1727 feat: support JSX rendering for HTML report](https://github.com/joomcode/e2ed/commit/84f1c0cd3171f411211d610a337c90661380939e) ([uid11](https://github.com/uid11))
+- [fix: selector test after adding `Meta` in HTML report](https://github.com/joomcode/e2ed/commit/16601a8ddf4a499b7ab5b89ab097a9d6a0e1bf6c) ([uid11](https://github.com/uid11))
+
 ## [v0.20.7](https://github.com/joomcode/e2ed/tree/v0.20.7) (2025-03-17)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.6...v0.20.7)
