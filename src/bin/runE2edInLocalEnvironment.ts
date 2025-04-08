@@ -4,6 +4,7 @@ import {setProcessEndHandlers} from '../utils/end';
 import {setPathToPack} from '../utils/environment';
 import {registerEndE2edRunEvent, registerStartE2edRunEvent} from '../utils/events';
 import {logStartE2edError} from '../utils/generalLog';
+import {getGlobalErrorHandler} from '../utils/getGlobalErrorHandler';
 import {runPackWithArgs} from '../utils/pack';
 import {setUiMode} from '../utils/uiMode';
 
@@ -20,6 +21,9 @@ if (uiFlagIndex !== -1) {
 const [pathToPack] = process.argv.splice(2, 1);
 
 assertValueIsDefined(pathToPack, 'pathToPack is defined', {argv: process.argv});
+
+process.on('uncaughtException', getGlobalErrorHandler('E2edUncaughtException'));
+process.on('unhandledRejection', getGlobalErrorHandler('E2edUnhandledRejection'));
 
 setPathToPack(pathToPack as FilePathFromRoot);
 setProcessEndHandlers();

@@ -1,6 +1,6 @@
 import type {Expect as PlaywrightExpect} from '@playwright/test';
 
-import type {ToMatchScreenshotOptions} from '../../types/internal';
+import type {Fn, ToMatchScreenshotOptions} from '../../types/internal';
 
 import type {Expect} from './Expect';
 
@@ -9,6 +9,8 @@ type ElementOf<Type> = Type extends (infer Element)[] ? Element : never;
 type EnsureString<Type> = Type extends string ? string : never;
 
 type Extend<Type, Extended> = Type extends Extended ? Extended : never;
+
+type PlaywrightMatchers = ReturnType<PlaywrightExpect>;
 
 /**
  * All assertion functions keys (names of assertion functions, like `eql`, `match`, etc).
@@ -60,8 +62,13 @@ export type NonSelectorAdditionalMatchers<Actual> = Readonly<{
 /**
  * All matchers.
  */
-export type NonSelectorMatchers<Actual> = NonSelectorAdditionalMatchers<Actual> &
-  ReturnType<PlaywrightExpect>;
+export type NonSelectorMatchers<Actual> = NonSelectorAdditionalMatchers<Actual> & {
+  readonly [Key in keyof PlaywrightMatchers]: Fn<
+    PlaywrightMatchers[Key] extends (...args: infer Args) => unknown ? Args : never,
+    Promise<void>,
+    void
+  >;
+};
 
 /**
  * Matchers for selector.

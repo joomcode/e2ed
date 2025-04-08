@@ -4,8 +4,10 @@ export {attributesOptions} from './attributesOptions';
 export {EXEC_FILE_OPTIONS} from './childProcess';
 /** @internal */
 export {ConsoleBackgroundColor} from './color';
+/** @internal */
+export {MAX_TIMEOUT_IN_MS} from './debug';
 export {EndE2edReason, ExitCode} from './end';
-export {isDebug, RunEnvironment} from './environment';
+export {DEBUG_PORT, IS_DEBUG, RunEnvironment} from './environment';
 /** @internal */
 export {
   e2edEnvironment,
@@ -50,6 +52,7 @@ export {
   DOT_ENV_PATH,
   EVENTS_DIRECTORY_PATH,
   EXPECTED_SCREENSHOTS_DIRECTORY_PATH,
+  GLOBAL_ERRORS_PATH,
   INSTALLED_E2ED_DIRECTORY_PATH,
   INTERNAL_DIRECTORY_NAME,
   INTERNAL_REPORTS_DIRECTORY_PATH,

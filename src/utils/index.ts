@@ -40,7 +40,7 @@ export {getKeysCounter} from './getKeysCounter';
 export {getEquivalentHeadersNames, getHeadersFromHeaderEntries, getHeaderValue} from './headers';
 export {getContentJsonHeaders} from './http';
 export {log} from './log';
-export {deepMerge, getKeys, setReadonlyProperty} from './object';
+export {deepMerge, getEntries, getKeys, setReadonlyProperty} from './object';
 export {parseMaybeEmptyValueAsJson, parseValueAsJsonIfNeeded} from './parse';
 export {
   addTimeoutToPromise,

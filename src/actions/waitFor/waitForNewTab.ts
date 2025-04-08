@@ -9,21 +9,22 @@ import type {InternalTab, Tab, Trigger, UtcTimeInMs} from '../../types/internal'
 
 type Options = Readonly<{skipLogs?: boolean; timeout?: number}>;
 
-type WaitForNewTab = ((trigger: Trigger, options?: Options) => Promise<Tab>) &
+type WaitForNewTab = ((trigger: Trigger | undefined, options?: Options) => Promise<Tab>) &
   ((options?: Options) => Promise<Tab>);
 
 /**
  * Waits for opening of new tab and returns this tab.
  */
 export const waitForNewTab = (async (
-  triggerOrOptions?: Options | Trigger,
+  triggerOrOptions?: Options | Trigger | undefined,
   options?: Options,
 ): Promise<Tab> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const context = getPlaywrightPage().context();
   const trigger = typeof triggerOrOptions === 'function' ? triggerOrOptions : undefined;
-  const finalOptions = typeof triggerOrOptions === 'function' ? options : triggerOrOptions;
+  const finalOptions =
+    typeof triggerOrOptions === 'function' ? options : (triggerOrOptions ?? options);
 
   const timeout = finalOptions?.timeout ?? getFullPackConfig().navigationTimeout;
   const timeoutWithUnits = getDurationWithUnits(timeout);

@@ -41,6 +41,12 @@ export {
   renderTestRunError,
 } from './render';
 /** @internal */
-export {createSafeHtmlWithoutSanitize, sanitizeHtml, sanitizeJson} from './sanitizeHtml';
+export {
+  createSafeHtmlWithoutSanitize,
+  isSafeHtml,
+  sanitizeHtml,
+  sanitizeJson,
+  sanitizeValue,
+} from './sanitizeHtml';
 /** @internal */
 export {setReadJsonReportDataObservers} from './setReadJsonReportDataObservers';

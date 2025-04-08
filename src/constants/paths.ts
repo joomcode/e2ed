@@ -123,6 +123,12 @@ export const EXPECTED_SCREENSHOTS_DIRECTORY_PATH = join(
 ) as DirectoryPathFromRoot;
 
 /**
+ * Relative (from root) path to file with global errors of run.
+ * @internal
+ */
+export const GLOBAL_ERRORS_PATH = join(TMP_DIRECTORY_PATH, 'globalErrors.txt') as FilePathFromRoot;
+
+/**
  * Relative (from root) path to directory with tests screenshots.
  * @internal
  */

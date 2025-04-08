@@ -1,7 +1,7 @@
 import {fork} from 'node:child_process';
 import {join} from 'node:path';
 
-import {INSTALLED_E2ED_DIRECTORY_PATH, isDebug} from '../constants/internal';
+import {DEBUG_PORT, INSTALLED_E2ED_DIRECTORY_PATH} from '../constants/internal';
 
 const entrypoitFilePath = join(
   INSTALLED_E2ED_DIRECTORY_PATH,
@@ -9,7 +9,7 @@ const entrypoitFilePath = join(
   'runE2edInLocalEnvironment.js',
 );
 
-const execArgv = isDebug ? ['--inspect-brk'] : [];
+const execArgv = DEBUG_PORT !== undefined ? [`--inspect-brk=${DEBUG_PORT}`] : [];
 
 const e2edProcess = fork(entrypoitFilePath, process.argv.slice(2), {execArgv, stdio: 'inherit'});
 

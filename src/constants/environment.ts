@@ -7,9 +7,16 @@ import type {E2edEnvironment} from '../types/internal';
 export const e2edEnvironment = process.env as E2edEnvironment;
 
 /**
+ * Debug port (for `--inspect-brk`) or `undefined`.
+ */
+export const DEBUG_PORT: number | undefined = e2edEnvironment.E2ED_DEBUG?.startsWith('inspect-brk:')
+  ? Number(e2edEnvironment.E2ED_DEBUG.slice('inspect-brk:'.length)) || undefined
+  : undefined;
+
+/**
  * `true` if e2ed run in debug mode, and `false` otherwise.
  */
-export const isDebug: boolean = Boolean(e2edEnvironment.E2ED_DEBUG);
+export const IS_DEBUG: boolean = Boolean(e2edEnvironment.E2ED_DEBUG);
 
 /**
  * Name of e2ed environment variable with path to pack.

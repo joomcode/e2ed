@@ -1,6 +1,7 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 
 import {LogEventType} from '../../constants/internal';
+import {getTestRunPromise} from '../../context/testRunPromise';
 import {getPlaywrightPage} from '../../useContext';
 import {getFullPackConfig} from '../../utils/config';
 import {setCustomInspectOnFunction} from '../../utils/fn';
@@ -39,7 +40,7 @@ export const waitForResponse = (async <
   SomeResponse extends Response = Response,
 >(
   predicate: ResponsePredicate<SomeRequest, SomeResponse>,
-  triggerOrOptions?: Options | Trigger,
+  triggerOrOptions?: Options | Trigger | undefined,
   options?: Options,
 ): Promise<ResponseWithRequest<SomeRequest, SomeResponse>> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
@@ -47,7 +48,8 @@ export const waitForResponse = (async <
   setCustomInspectOnFunction(predicate);
 
   const trigger = typeof triggerOrOptions === 'function' ? triggerOrOptions : undefined;
-  const finalOptions = typeof triggerOrOptions === 'function' ? options : triggerOrOptions;
+  const finalOptions =
+    typeof triggerOrOptions === 'function' ? options : (triggerOrOptions ?? options);
 
   const timeout = finalOptions?.timeout ?? getFullPackConfig().waitForResponseTimeout;
 
@@ -56,6 +58,13 @@ export const waitForResponse = (async <
   }
 
   const page = getPlaywrightPage();
+  const testRunPromise = getTestRunPromise();
+
+  let isTestRunCompleted = false;
+
+  void testRunPromise.then(() => {
+    isTestRunCompleted = true;
+  });
 
   const promise = page
     .waitForResponse(
@@ -73,7 +82,14 @@ export const waitForResponse = (async <
         getResponseFromPlaywrightResponse(playwrightResponse) as Promise<
           ResponseWithRequest<SomeRequest, SomeResponse>
         >,
-    );
+    )
+    .catch((error: unknown) => {
+      if (isTestRunCompleted) {
+        return new Promise<ResponseWithRequest<SomeRequest, SomeResponse>>(() => {});
+      }
+
+      throw error;
+    });
 
   const timeoutWithUnits = getDurationWithUnits(timeout);
 

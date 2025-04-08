@@ -196,41 +196,43 @@ The `npx e2ed-init` command is already creating such a file as an example.
 
 For debugging tests, the local run of the pack is intended.
 
-For example, you can use the `debug` action from `e2ed/actions` in the test code:
+For example, you can use the `pause` action from `e2ed/actions` in the test code:
 
 ```ts
-await debug();
+await pause();
 ```
 
-When calling the `debug` action, `e2ed` will stop the test execution and enter
+When calling the `pause` action, `e2ed` will stop the test execution and enter
 the debug-mode.
 
-After debugging is complete, remember to remove the call of the `debug` action.
+After debugging is complete, remember to remove the call of the `pause` action.
 
-In addition, when run pack locally tests can be debugged using the usual `nodejs` debugging flags
-(`--inspect-brk`, `--inspect`), as `nodejs` application (for brevity, we omit the setting of
-environment variables before commands):
+[pause](https://playwright.dev/docs/api/class-page#page-pause) is a function of the `Playwright` itself.
 
-```sh
-npm run e2ed:allTests ./autotests/tests/main/exists.ts -- --inspect-brk
-```
-
-You can use the `debugger` instruction to stop execution at the desired line.
-
-Or you can set any non-empty value to the `E2ED_DEBUG` environment variable,
-which will also run `e2ed` in `nodejs` debug mode
-(this is equivalentto passing the `--inspect-brk` flag):
+In addition, you can set any non-empty value to the `E2ED_DEBUG` environment variable,
+which will also run `e2ed` in debug mode. If this variable has the form `inspect-brk:9229`,
+then additionally `nodejs` debugging is started on port `9229` (via `--inspect-brk=9229`):
 
 ```sh
 E2ED_DEBUG=true npm run e2ed:allTests ./autotests/tests/main/exists.ts
 ```
 
+```sh
+E2ED_DEBUG=inspect-brk:8230 npm run e2ed:allTests ./autotests/tests/main/exists.ts
+```
+
 `E2ED_DEBUG` also works for run in docker, and allows you to connect a debugger
 to the `e2ed` running in docker container.
 
+When developing a test, you can run it in [UI-mode](https://playwright.dev/docs/test-ui-mode)
+by passing the `--ui` parameter (for local run only):
+
 ```sh
-npm run e2ed:allTests ./autotests/tests/main/exists.ts -- --debug-on-fail
+npm run e2ed:allTests ./autotests/tests/main/exists.ts -- --ui
 ```
+
+As a result, `Playwright` will launch its [UI-mode](https://playwright.dev/docs/test-ui-mode),
+allowing you to quickly rerun tests and see errors.
 
 ### Basic fields of pack config
 
@@ -334,7 +336,7 @@ For example, if it is equal to three, the test will be run no more than three ti
 (`navigateToPage`, `navigateToUrl` actions) in milliseconds.
 
 `overriddenConfigFields: PlaywrightTestConfig | null`: if not `null`, then this value will override
-fields of internal Playwright config.
+fields of internal `Playwright` config.
 
 `packTimeout: number`: timeout (in millisecond) for the entire pack of tests (tasks).
 If the test pack takes longer than this timeout, the pack will fail with the appropriate error.
@@ -419,9 +421,8 @@ You can pass the following optional environment variables to the `e2ed` process 
 
 `E2ED_ORIGIN`: origin-part of the url (`protocol` + `host`) on which the tests will be run. For example, `https://bing.com`.
 
-`E2ED_DEBUG`: run `e2ed` in `nodejs` debug mode (`--inspect-brk=0.0.0.0`) if this variable is not empty.
-
-`E2ED_DOCKER_DEBUG_PORT`: debug port when run in docker (`9229` by default).
+`E2ED_DEBUG`: run `e2ed` in debug mode if this variable is not empty. If this variable has the form `inspect-brk:9229`,
+then `nodejs` debugging is started on port `9229` (via `--inspect-brk=9229`).
 
 `E2ED_TERMINATION_SIGNAL`: the termination signal received by the `e2ed` process (if any).
 Typically this value is `'SIGUSR1'`.

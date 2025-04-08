@@ -1,5 +1,5 @@
 export {EndE2edReason, ExitCode} from './end';
-export {isDebug} from './environment';
+export {DEBUG_PORT, IS_DEBUG} from './environment';
 export {READ_FILE_OPTIONS} from './fs';
 export {
   BAD_REQUEST_STATUS_CODE,

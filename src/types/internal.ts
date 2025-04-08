@@ -30,7 +30,7 @@ export type {DeepMutable, DeepPartial, DeepReadonly, DeepRequired} from './deep'
 export type {E2edEnvironment} from './environment';
 export type {E2edPrintedFields, JsError} from './errors';
 /** @internal */
-export type {MaybeWithIsTestRunBroken} from './errors';
+export type {GlobalErrorType, MaybeWithIsTestRunBroken} from './errors';
 export type {LogEvent, Onlog, TestRunEvent} from './events';
 /** @internal */
 export type {EndTestRunEvent, FullEventsData} from './events';

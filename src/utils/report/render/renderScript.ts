@@ -1,7 +1,7 @@
 import {createSafeHtmlWithoutSanitize, initialScript} from '../client';
 
-import {renderScriptConstants} from './renderScriptConstants';
 import {renderScriptFunctions} from './renderScriptFunctions';
+import {renderScriptGlobals} from './renderScriptGlobals';
 
 import type {SafeHtml} from '../../../types/internal';
 
@@ -11,7 +11,7 @@ import type {SafeHtml} from '../../../types/internal';
  */
 export const renderScript = (): SafeHtml => createSafeHtmlWithoutSanitize`
 <script async type="module">
-${renderScriptConstants()};
+${renderScriptGlobals()};
 ${renderScriptFunctions()};
 ${initialScript.name}();
 </script>`;

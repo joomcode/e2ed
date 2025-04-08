@@ -96,7 +96,6 @@ export type ReportClientState = {
   readonly e2edRightColumnContainer: HTMLElement;
   readonly fullTestRuns: readonly FullTestRun[];
   readonly internalDirectoryName: string;
-  readonly jsxRuntime: JSX.Runtime;
   lengthOfReadedJsonReportDataParts: number;
   readonly locator: LocatorFunction<SafeHtml>;
   readonly pathToScreenshotsDirectoryForReport: string | null;

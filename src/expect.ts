@@ -5,13 +5,14 @@ import type {IsEqual, Selector} from './types/internal';
 type ExpectFunction = SelectorExpect & NotSelectorExpect;
 
 type NotSelectorExpect = <Actual>(
+  this: void,
   actual: IsEqual<Actual, Selector> extends true
     ? 'You should call some property or method on the selector'
     : Actual | Promise<Actual>,
   description: string,
 ) => NonSelectorMatchers<Actual>;
 
-type SelectorExpect = (actual: Selector, description: string) => SelectorMatchers;
+type SelectorExpect = (this: void, actual: Selector, description: string) => SelectorMatchers;
 
 /**
  * Wraps a value or promised value to assertion for further checks.

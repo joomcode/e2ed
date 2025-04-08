@@ -13,12 +13,16 @@ export {readEventFromFile} from './readEventFromFile';
 /** @internal */
 export {readEventsFromFiles} from './readEventsFromFiles';
 /** @internal */
+export {readGlobalErrors} from './readGlobalErrors';
+/** @internal */
 export {readStartInfo} from './readStartInfo';
 /** @internal */
 export {removeDirectory} from './removeDirectory';
 /** @internal */
 export {writeApiStatistics} from './writeApiStatistics';
 export {writeFile} from './writeFile';
+/** @internal */
+export {writeGlobalError} from './writeGlobalError';
 /** @internal */
 export {writeStartInfo} from './writeStartInfo';
 /** @internal */

@@ -13,6 +13,13 @@ export type E2edPrintedFields = Readonly<{
 }>;
 
 /**
+ * Global error type.
+ * @internal
+ */
+export type GlobalErrorType =
+  `${'E2ed' | 'Subprocess' | 'Test'}${'UncaughtException' | 'UnhandledRejection'}`;
+
+/**
  * JS error from browser.
  */
 export type JsError = Readonly<{
