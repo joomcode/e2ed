@@ -4,8 +4,10 @@ export {attributesOptions} from './attributesOptions';
 export {EXEC_FILE_OPTIONS} from './childProcess';
 /** @internal */
 export {ConsoleBackgroundColor} from './color';
+/** @internal */
+export {MAX_TIMEOUT_IN_MS} from './debug';
 export {EndE2edReason, ExitCode} from './end';
-export {isDebug, RunEnvironment} from './environment';
+export {DEBUG_PORT, IS_DEBUG, RunEnvironment} from './environment';
 /** @internal */
 export {
   e2edEnvironment,

@@ -18,11 +18,13 @@ onExit() {
 
 trap "onExit" EXIT
 
-if [[ -z $E2ED_DEBUG ]]
+DEBUG_PORT=$([[ $E2ED_DEBUG == inspect-brk:* ]] && echo "${E2ED_DEBUG#inspect-brk:}" || echo "")
+
+if [[ -z $DEBUG_PORT ]]
 then
     /node_modules/e2ed/bin/runE2edInDockerEnvironment.js & PID=$!
 else
-    node --inspect-brk=0.0.0.0:$E2ED_DEBUG /node_modules/e2ed/bin/runE2edInDockerEnvironment.js & PID=$!
+    node --inspect-brk=0.0.0.0:$DEBUG_PORT /node_modules/e2ed/bin/runE2edInDockerEnvironment.js & PID=$!
 fi
 
 wait $PID

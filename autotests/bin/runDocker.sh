@@ -3,11 +3,11 @@ set -eo pipefail
 set +u
 
 CONTAINER_LABEL="e2ed"
-DEBUG_PORT="${E2ED_DOCKER_DEBUG_PORT:-9229}"
+DEBUG_PORT=$([[ $E2ED_DEBUG == inspect-brk:* ]] && echo "${E2ED_DEBUG#inspect-brk:}" || echo "")
 DIR="${E2ED_WORKDIR:-$PWD}"
 E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS=16
 MOUNTDIR="${E2ED_MOUNTDIR:-$DIR}"
-WITH_DEBUG=$([[ -z $E2ED_DEBUG ]] && echo "" || echo "--env E2ED_DEBUG=$DEBUG_PORT --publish $DEBUG_PORT:$DEBUG_PORT --publish $((DEBUG_PORT + 1)):$((DEBUG_PORT + 1))")
+WITH_DEBUG=$([[ -z $DEBUG_PORT ]] && echo "" || echo "--publish $DEBUG_PORT:$DEBUG_PORT --publish $((DEBUG_PORT + 1)):$((DEBUG_PORT + 1))")
 VERSION=$(grep -m1 \"e2ed\": $DIR/package.json | cut -d '"' -f 4)
 
 source ./autotests/variables.env
@@ -47,6 +47,7 @@ echo "Run docker image $E2ED_DOCKER_IMAGE:$VERSION"
 trap "onExit" EXIT
 
 docker run \
+       --env E2ED_DEBUG=$E2ED_DEBUG \
        --env E2ED_ORIGIN=$E2ED_ORIGIN \
        --env E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS=$E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS \
        --env __INTERNAL_E2ED_PATH_TO_PACK=$1 \

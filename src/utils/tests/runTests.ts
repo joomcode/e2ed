@@ -1,7 +1,7 @@
 import {fork} from 'node:child_process';
 
 import {isLocalRun} from '../../configurator';
-import {CONFIG_PATH, e2edEnvironment, isDebug} from '../../constants/internal';
+import {CONFIG_PATH, e2edEnvironment, IS_DEBUG} from '../../constants/internal';
 
 import {getFullPackConfig} from '../config';
 import {getRunLabel, setRunLabel} from '../environment';
@@ -44,7 +44,7 @@ export const runTests = async ({runLabel}: RunRetryOptions): Promise<void> => {
     await new Promise<void>((resolve, reject) => {
       const playwrightArgs = ['test', `--config=${CONFIG_PATH}`];
 
-      if (isDebug && isLocalRun) {
+      if (IS_DEBUG && isLocalRun) {
         e2edEnvironment.PWDEBUG = 'console';
         playwrightArgs.push('--debug');
       }

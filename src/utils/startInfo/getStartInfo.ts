@@ -6,7 +6,7 @@ import {
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
   e2edEnvironment,
   INSTALLED_E2ED_DIRECTORY_PATH,
-  isDebug,
+  IS_DEBUG,
 } from '../../constants/internal';
 
 import {getFullPackConfig} from '../config';
@@ -48,7 +48,7 @@ export const getStartInfo = ({configCompileTimeWithUnits}: Options): StartInfo =
     e2edEnvironmentVariables,
     fullPackConfig: getFullPackConfig(),
     installedE2edDirectoryPath: INSTALLED_E2ED_DIRECTORY_PATH,
-    isDebug,
+    isDebug: IS_DEBUG,
     isUiMode,
     nodeVersion: process.version,
     pathToPack: getPathToPack(),

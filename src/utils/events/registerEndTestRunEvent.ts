@@ -1,5 +1,5 @@
 import {isLocalRun} from '../../configurator';
-import {isDebug, TestRunStatus} from '../../constants/internal';
+import {IS_DEBUG, TestRunStatus} from '../../constants/internal';
 import {getApiStatistics} from '../../context/apiStatistics';
 import {getPlaywrightPage} from '../../useContext';
 
@@ -86,7 +86,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
   await writeTestRunToJsonFile(fullTestRun);
   await writeLogsToFile();
 
-  if (isDebug && isLocalRun) {
+  if (IS_DEBUG && isLocalRun) {
     await getPlaywrightPage().pause();
   }
 };

@@ -12,7 +12,8 @@ import {
   e2edEnvironment,
   EXPECTED_SCREENSHOTS_DIRECTORY_PATH,
   INTERNAL_REPORTS_DIRECTORY_PATH,
-  isDebug,
+  IS_DEBUG,
+  MAX_TIMEOUT_IN_MS,
   PATH_TO_TEST_FILE_VARIABLE_NAME,
   TESTS_DIRECTORY_PATH,
 } from './constants/internal';
@@ -28,8 +29,6 @@ import {isLocalRun} from './configurator';
 import type {FullPackConfig, Mutable, UserlandPack} from './types/internal';
 
 import {defineConfig, type PlaywrightTestConfig} from '@playwright/test';
-
-const maxTimeoutInMs = 3600_000;
 
 const pathToPack = getPathToPack();
 const relativePathFromInstalledE2edToRoot = relative(
@@ -87,10 +86,10 @@ setCustomInspectOnFunction(mapLogPayloadInConsole);
 setCustomInspectOnFunction(mapLogPayloadInLogFile);
 setCustomInspectOnFunction(mapLogPayloadInReport);
 
-if (isDebug || isUiMode) {
-  setReadonlyProperty(userlandPack, 'packTimeout', maxTimeoutInMs);
-  setReadonlyProperty(userlandPack, 'testIdleTimeout', maxTimeoutInMs);
-  setReadonlyProperty(userlandPack, 'testTimeout', maxTimeoutInMs);
+if (IS_DEBUG || isUiMode) {
+  setReadonlyProperty(userlandPack, 'packTimeout', MAX_TIMEOUT_IN_MS);
+  setReadonlyProperty(userlandPack, 'testIdleTimeout', MAX_TIMEOUT_IN_MS);
+  setReadonlyProperty(userlandPack, 'testTimeout', MAX_TIMEOUT_IN_MS);
 }
 
 const useOptions: PlaywrightTestConfig['use'] = {

@@ -1,4 +1,4 @@
-import {TestRunStatus} from '../../constants/internal';
+import {IS_DEBUG, MAX_TIMEOUT_IN_MS, TestRunStatus} from '../../constants/internal';
 import {setMeta} from '../../context/meta';
 import {getOnResponseCallbacks} from '../../context/onResponseCallbacks';
 import {setOutputDirectoryName} from '../../context/outputDirectoryName';
@@ -13,6 +13,7 @@ import {getFullPackConfig} from '../config';
 import {getRunLabel} from '../environment';
 import {registerStartTestRunEvent} from '../events';
 import {mapBackendResponseForLogs} from '../log';
+import {isUiMode} from '../uiMode';
 import {getUserlandHooks} from '../userland';
 
 import {getTestFnAndReject} from './getTestFnAndReject';
@@ -50,8 +51,12 @@ export const beforeTest = ({
 
   const {testIdleTimeout: testIdleTimeoutFromConfig, testTimeout: testTimeoutFromConfig} =
     getFullPackConfig();
-  const testIdleTimeout = options.testIdleTimeout ?? testIdleTimeoutFromConfig;
-  const testTimeout = options.testTimeout ?? testTimeoutFromConfig;
+  const testIdleTimeout =
+    IS_DEBUG || isUiMode
+      ? MAX_TIMEOUT_IN_MS
+      : (options.testIdleTimeout ?? testIdleTimeoutFromConfig);
+  const testTimeout =
+    IS_DEBUG || isUiMode ? MAX_TIMEOUT_IN_MS : (options.testTimeout ?? testTimeoutFromConfig);
 
   test.setTimeout(testTimeout + additionToPlaywrightTestTimeout + (Date.now() - startTimeInMs));
 
