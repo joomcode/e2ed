@@ -1,4 +1,3 @@
-import {createRunId} from '../../generators/internal';
 import {pageStorage} from '../../useContext';
 
 import {assertValueIsDefined} from '../asserts';
@@ -6,6 +5,7 @@ import {assertValueIsDefined} from '../asserts';
 import {afterErrorInTest} from './afterErrorInTest';
 import {afterTest} from './afterTest';
 import {beforeTest} from './beforeTest';
+import {createRunId} from './createRunId';
 import {getOutputDirectoryName} from './getOutputDirectoryName';
 import {getShouldRunTest} from './getShouldRunTest';
 import {getTestStaticOptions} from './getTestStaticOptions';
