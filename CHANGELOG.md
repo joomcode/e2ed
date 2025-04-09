@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.20.9](https://github.com/joomcode/e2ed/tree/v0.20.9) (2025-04-09)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.8...v0.20.9)
+
+- [Merge pull request #116 from joomcode/fix/test-unhandledRejections](https://github.com/joomcode/e2ed/commit/1087bc72034df42c3e564999b80e712b70e8cf76) ([uid11](https://github.com/uid11))
+
+  fix: do not fail run if caught `unhandledRejection` in test
+
+- [PRO-9847 fix: use `navigationTimeout` in `setHeadersAndNavigateToUrl`](https://github.com/joomcode/e2ed/commit/f0935e1e046d2daaa90db35060caf6b7c8b0955d) ([uid11](https://github.com/uid11))
+
+  fix: timeout errors in `waitForRequest`/`waitForResponse`
+
+  fix: do not fail run if caught `unhandledRejection` in test
+
 ## [v0.20.8](https://github.com/joomcode/e2ed/tree/v0.20.8) (2025-04-08)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.7...v0.20.8)
