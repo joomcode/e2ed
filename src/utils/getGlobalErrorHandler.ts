@@ -1,3 +1,6 @@
+import {getMeta} from '../context/meta';
+import {getRunId} from '../context/runId';
+
 import {E2edError} from './error';
 import {writeGlobalError} from './fs';
 import {generalLog} from './generalLog';
@@ -12,6 +15,15 @@ export const getGlobalErrorHandler =
   (type: GlobalErrorType) =>
   (cause: unknown): void => {
     const message = `Caught ${type}`;
+
+    if (type.startsWith('Test')) {
+      const meta = getMeta();
+      const runId = getRunId();
+
+      generalLog(message, {cause, meta, runId});
+
+      return;
+    }
 
     generalLog(message, {cause});
 

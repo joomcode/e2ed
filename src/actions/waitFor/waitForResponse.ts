@@ -1,12 +1,14 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 
-import {LogEventType} from '../../constants/internal';
+import {LogEventType, MAX_TIMEOUT_IN_MS} from '../../constants/internal';
 import {getTestRunPromise} from '../../context/testRunPromise';
 import {getPlaywrightPage} from '../../useContext';
 import {getFullPackConfig} from '../../utils/config';
+import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
+import {addTimeoutToPromise} from '../../utils/promise';
 import {getResponseFromPlaywrightResponse} from '../../utils/requestHooks';
 import {getWaitForResponsePredicate} from '../../utils/waitForEvents';
 
@@ -66,8 +68,10 @@ export const waitForResponse = (async <
     isTestRunCompleted = true;
   });
 
-  const promise = page
-    .waitForResponse(
+  const timeoutWithUnits = getDurationWithUnits(timeout);
+
+  const promise = addTimeoutToPromise(
+    page.waitForResponse(
       AsyncLocalStorage.bind(
         getWaitForResponsePredicate(
           predicate as ResponsePredicate,
@@ -75,8 +79,11 @@ export const waitForResponse = (async <
           timeout,
         ),
       ),
-      {timeout},
-    )
+      {timeout: MAX_TIMEOUT_IN_MS},
+    ),
+    timeout,
+    new E2edError(`waitForResponse promise rejected after ${timeoutWithUnits} timeout`),
+  )
     .then(
       (playwrightResponse) =>
         getResponseFromPlaywrightResponse(playwrightResponse) as Promise<
@@ -90,8 +97,6 @@ export const waitForResponse = (async <
 
       throw error;
     });
-
-  const timeoutWithUnits = getDurationWithUnits(timeout);
 
   if (finalOptions?.skipLogs !== true) {
     log(

@@ -2,6 +2,7 @@ import {AsyncLocalStorage} from 'node:async_hooks';
 
 import {LogEventType} from '../constants/internal';
 import {getPlaywrightPage} from '../useContext';
+import {getFullPackConfig} from '../utils/config';
 import {applyHeadersMapper} from '../utils/headers';
 import {log} from '../utils/log';
 
@@ -28,7 +29,9 @@ export const setHeadersAndNavigateToUrl = async (
         return route.fallback();
       }
 
-      const response = await route.fetch();
+      const {navigationTimeout} = getFullPackConfig();
+
+      const response = await route.fetch({timeout: navigationTimeout});
       const headers = response.headers();
 
       applyHeadersMapper(headers, mapResponseHeaders);
