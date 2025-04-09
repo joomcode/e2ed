@@ -1,4 +1,4 @@
-import {LogEventType} from '../../constants/internal';
+import {LogEventType, MAX_TIMEOUT_IN_MS} from '../../constants/internal';
 import {getTestRunPromise} from '../../context/testRunPromise';
 import {getPlaywrightPage} from '../../useContext';
 import {getFullPackConfig} from '../../utils/config';
@@ -6,6 +6,7 @@ import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
+import {addTimeoutToPromise} from '../../utils/promise';
 import {getRequestFromPlaywrightRequest} from '../../utils/requestHooks';
 
 import type {
@@ -60,8 +61,10 @@ export const waitForRequest = (async <SomeRequest extends Request>(
     isTestRunCompleted = true;
   });
 
-  const promise = page
-    .waitForRequest(
+  const timeoutWithUnits = getDurationWithUnits(timeout);
+
+  const promise = addTimeoutToPromise(
+    page.waitForRequest(
       async (playwrightRequest) => {
         try {
           const request = getRequestFromPlaywrightRequest(playwrightRequest);
@@ -77,8 +80,11 @@ export const waitForRequest = (async <SomeRequest extends Request>(
           });
         }
       },
-      {timeout},
-    )
+      {timeout: MAX_TIMEOUT_IN_MS},
+    ),
+    timeout,
+    new E2edError(`waitForRequest promise rejected after ${timeoutWithUnits} timeout`),
+  )
     .then(
       (playwrightRequest) =>
         getRequestFromPlaywrightRequest(playwrightRequest) as RequestWithUtcTimeInMs<SomeRequest>,
@@ -90,8 +96,6 @@ export const waitForRequest = (async <SomeRequest extends Request>(
 
       throw error;
     });
-
-  const timeoutWithUnits = getDurationWithUnits(timeout);
 
   if (finalOptions?.skipLogs !== true) {
     log(

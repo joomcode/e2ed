@@ -11,7 +11,7 @@ type Options = Readonly<{
 }>;
 
 /**
- * Calculate final test run status by start test run event and end test run event.
+ * Calculates final test run status by start test run event and end test run event.
  * @internal
  */
 export const calculateTestRunStatus = ({endTestRunEvent, testRunEvent}: Options): TestRunStatus => {
