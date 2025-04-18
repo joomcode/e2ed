@@ -9,12 +9,12 @@ test(
   async () => {
     const {
       responseBody: {data},
-    } = await request(GetUsers);
+    } = await request(GetUsers, {routeParams: {delay: 3}});
 
     await expect(data.length, 'request returns some users').gt(0);
 
     await assertFunctionThrows(async () => {
-      await request(GetUsers, {maxRetriesCount: 1, timeout: 2_000});
+      await request(GetUsers, {maxRetriesCount: 1, routeParams: {delay: 3}, timeout: 2_000});
     }, 'request function throws an error on timeout');
   },
 );

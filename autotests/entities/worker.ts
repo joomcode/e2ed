@@ -26,7 +26,7 @@ export const addUser: ClientFunction<[UserWorker, number?], Promise<object>> = c
 /**
  * Get list of user-workers.
  */
-export const getUsers = (delay: number): Promise<unknown> => {
+export const getUsers = (delay: number = 0): Promise<unknown> => {
   log(`Send API request with delay = ${delay}s`);
 
   return clientGetUsers(delay);
