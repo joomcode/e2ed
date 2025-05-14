@@ -18,7 +18,7 @@ test('support switching of pages and tabs', {meta: {testId: '21'}}, async () => 
     if (numberOfSentRequests < maxNumberOfRequests) {
       numberOfSentRequests += 1;
 
-      void getUsers();
+      void getUsers({retries: 1});
     }
   }, 1_000);
 

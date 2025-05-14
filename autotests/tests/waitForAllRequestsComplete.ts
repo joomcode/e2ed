@@ -33,7 +33,7 @@ test(
 
     let promise = waitForAllRequestsComplete(() => true, {timeout: 1000});
 
-    void getUsers(2);
+    void getUsers({delay: 2});
 
     await assertFunctionThrows(
       () => promise,
@@ -46,7 +46,7 @@ test(
       throw new E2edError('waitForAllRequestsComplete did not wait for timeout', {waitedInMs});
     }
 
-    void getUsers(2);
+    void getUsers({delay: 2});
 
     startRequestInMs = Date.now();
 
@@ -66,9 +66,9 @@ test(
 
     promise = waitForAllRequestsComplete(() => true);
 
-    await getUsers(1);
+    await getUsers({delay: 1});
     await waitForTimeout(400);
-    await getUsers(1);
+    await getUsers({delay: 1});
 
     startRequestInMs = Date.now();
 
@@ -85,7 +85,7 @@ test(
 
     promise = waitForAllRequestsComplete(() => true, {maxIntervalBetweenRequestsInMs: 300});
 
-    await getUsers(1);
+    await getUsers({delay: 1});
 
     startRequestInMs = Date.now();
 

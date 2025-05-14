@@ -4,11 +4,10 @@ import {log} from 'e2ed/utils';
 import type {UserWorker} from 'autotests/types';
 import type {ClientFunction} from 'e2ed/types';
 
-const clientGetUsers = createClientFunction(
-  (delay: number) =>
-    fetch(`https://reqres.in/api/users?delay=${delay}`, {method: 'GET'}).then((res) => res.json()),
-  {name: 'getUsers', timeout: 6_000},
-);
+type GetUsersOptions = Readonly<{delay?: number; retries?: number}> | undefined;
+
+let clientGetUsers: ClientFunction<[number], unknown> | undefined;
+let clientGetUsersRetries: number | undefined;
 
 /**
  * Adds user-worker.
@@ -26,8 +25,20 @@ export const addUser: ClientFunction<[UserWorker, number?], Promise<object>> = c
 /**
  * Get list of user-workers.
  */
-export const getUsers = (delay: number = 0): Promise<unknown> => {
+export const getUsers = ({delay = 0, retries = 0}: GetUsersOptions = {}): Promise<unknown> => {
   log(`Send API request with delay = ${delay}s`);
+
+  if (clientGetUsers === undefined || clientGetUsersRetries !== retries) {
+    clientGetUsersRetries = retries;
+
+    clientGetUsers = createClientFunction(
+      (clientDelay: number) =>
+        fetch(`https://reqres.in/api/users?delay=${clientDelay}`, {method: 'GET'}).then(
+          (res) => res.json() as unknown,
+        ),
+      {name: 'getUsers', retries, timeout: 6_000},
+    );
+  }
 
   return clientGetUsers(delay);
 };

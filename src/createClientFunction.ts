@@ -9,14 +9,14 @@ import {getPlaywrightPage} from './useContext';
 
 import type {ClientFunction} from './types/internal';
 
-type Options = Readonly<{name?: string; timeout?: number}>;
+type Options = Readonly<{name?: string; retries?: number; timeout?: number}>;
 
 /**
  * Creates a client function.
  */
 export const createClientFunction = <Args extends readonly unknown[], Result>(
   originalFn: (...args: Args) => Result,
-  {name: nameFromOptions, timeout}: Options = {},
+  {name: nameFromOptions, retries = 0, timeout}: Options = {},
 ): ClientFunction<Args, Result> => {
   setCustomInspectOnFunction(originalFn);
 
@@ -46,6 +46,18 @@ export const createClientFunction = <Args extends readonly unknown[], Result>(
           await page.waitForLoadState();
 
           return page.evaluate(func, args);
+        }
+
+        if (retries > 0) {
+          let retryIndex = 1;
+
+          while (retryIndex <= retries) {
+            retryIndex += 1;
+
+            try {
+              return page.evaluate(func, args);
+            } catch {}
+          }
         }
 
         throw evaluateError;
