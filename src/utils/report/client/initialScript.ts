@@ -5,7 +5,6 @@ import {
 
 import {addDomContentLoadedHandler as clientAddDomContentLoadedHandler} from './addDomContentLoadedHandler';
 import {addOnClickOnClass as clientAddOnClickOnClass} from './addOnClickOnClass';
-import {assertValueIsDefined as clientAssertValueIsDefined} from './assertValueIsDefined';
 import {clickOnRetry as clientClickOnRetry} from './clickOnRetry';
 import {clickOnStep as clientClickOnStep} from './clickOnStep';
 import {clickOnTestRun as clientClickOnTestRun} from './clickOnTestRun';
@@ -22,7 +21,6 @@ declare const reportClientState: ReportClientState;
 
 const addDomContentLoadedHandler = clientAddDomContentLoadedHandler;
 const addOnClickOnClass = clientAddOnClickOnClass;
-const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
 const clickOnRetry = clientClickOnRetry;
 const clickOnStep = clientClickOnStep;
 const clickOnTestRun = clientClickOnTestRun;
@@ -40,18 +38,11 @@ const setReadJsonReportDataObservers = clientSetReadJsonReportDataObservers;
 export function initialScript(): void {
   jsx = createJsxRuntime();
 
-  const e2edRightColumnContainer = document.getElementById('e2edRightColumnContainer') ?? undefined;
-
-  assertValueIsDefined(e2edRightColumnContainer);
-
   const {locator: locatorAttributes} = createSimpleLocator(reportClientState.createLocatorOptions);
   const locator: LocatorFunction<SafeHtml> = (...args) =>
     renderAttributes(locatorAttributes(...(args as [string])));
 
-  Object.assign<ReportClientState, Partial<ReportClientState>>(reportClientState, {
-    e2edRightColumnContainer,
-    locator,
-  });
+  Object.assign<ReportClientState, Partial<ReportClientState>>(reportClientState, {locator});
 
   addOnClickOnClass('nav-tabs__button', clickOnRetry);
   addOnClickOnClass('step-expanded', clickOnStep);

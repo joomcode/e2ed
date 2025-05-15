@@ -93,7 +93,7 @@ export type ReportClientData = Readonly<{
 export type ReportClientState = {
   clickListeners?: Record<string, (event: HTMLElement) => void>;
   readonly createLocatorOptions: CreateLocatorOptions;
-  readonly e2edRightColumnContainer: HTMLElement;
+  readonly e2edRightColumnContainer: HTMLElement | undefined;
   readonly fullTestRuns: readonly FullTestRun[];
   readonly internalDirectoryName: string;
   lengthOfReadedJsonReportDataParts: number;

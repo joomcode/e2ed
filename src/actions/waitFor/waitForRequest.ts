@@ -8,6 +8,7 @@ import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
+import {pageWaitForRequest} from '../../utils/playwrightPage';
 import {addTimeoutToPromise} from '../../utils/promise';
 import {getRequestFromPlaywrightRequest} from '../../utils/requestHooks';
 
@@ -68,7 +69,8 @@ export const waitForRequest = (async <SomeRequest extends Request>(
   const timeoutWithUnits = getDurationWithUnits(timeout);
 
   const promise = addTimeoutToPromise(
-    page.waitForRequest(
+    pageWaitForRequest(
+      page,
       AsyncLocalStorage.bind(async (playwrightRequest: PlaywrightRequest) => {
         try {
           const request = getRequestFromPlaywrightRequest(playwrightRequest);

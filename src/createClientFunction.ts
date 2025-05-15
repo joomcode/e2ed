@@ -11,6 +11,8 @@ import type {ClientFunction} from './types/internal';
 
 type Options = Readonly<{name?: string; retries?: number; timeout?: number}>;
 
+const skipErrorMessage = 'Execution context was destroyed';
+
 /**
  * Creates a client function.
  */
@@ -42,10 +44,16 @@ export const createClientFunction = <Args extends readonly unknown[], Result>(
       page.evaluate(func, args).catch(async (evaluateError: unknown) => {
         const errorString = String(evaluateError);
 
-        if (errorString.includes('Execution context was destroyed')) {
+        if (errorString.includes(skipErrorMessage)) {
           await page.waitForLoadState();
 
-          return page.evaluate(func, args);
+          return page.evaluate(func, args).catch((suberror: unknown) => {
+            if (String(suberror).includes(skipErrorMessage)) {
+              return new Promise(() => {});
+            }
+
+            throw suberror;
+          });
         }
 
         if (retries > 0) {
@@ -55,7 +63,13 @@ export const createClientFunction = <Args extends readonly unknown[], Result>(
             retryIndex += 1;
 
             try {
-              return page.evaluate(func, args);
+              return page.evaluate(func, args).catch((suberror: unknown) => {
+                if (String(suberror).includes(skipErrorMessage)) {
+                  return new Promise(() => {});
+                }
+
+                throw suberror;
+              });
             } catch {}
           }
         }

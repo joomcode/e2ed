@@ -9,7 +9,10 @@ test(
   async () => {
     const {
       responseBody: {data},
-    } = await request(GetUsers, {routeParams: {delay: 3}});
+    } = await request(GetUsers, {
+      requestHeaders: {'x-api-key': 'reqres-free-v1'},
+      routeParams: {delay: 3},
+    });
 
     await expect(data.length, 'request returns some users').gt(0);
 

@@ -8,6 +8,7 @@ import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
+import {pageWaitForResponse} from '../../utils/playwrightPage';
 import {addTimeoutToPromise} from '../../utils/promise';
 import {getResponseFromPlaywrightResponse} from '../../utils/requestHooks';
 import {getWaitForResponsePredicate} from '../../utils/waitForEvents';
@@ -71,7 +72,8 @@ export const waitForResponse = (async <
   const timeoutWithUnits = getDurationWithUnits(timeout);
 
   const promise = addTimeoutToPromise(
-    page.waitForResponse(
+    pageWaitForResponse(
+      page,
       AsyncLocalStorage.bind(
         getWaitForResponsePredicate(
           predicate as ResponsePredicate,

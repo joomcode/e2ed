@@ -27,14 +27,15 @@ export function onFirstJsonReportDataLoad(): void {
   clickOnTestRun(buttonForFailedTestRun as HTMLElement);
 
   const buttonOfOpenStep = document.querySelector('.step-expanded[aria-expanded="true"]');
-  const {e2edRightColumnContainer} = reportClientState;
   const scrollDelayInMs = 8;
 
   if (buttonOfOpenStep) {
     const {top} = buttonOfOpenStep.getBoundingClientRect();
 
     setTimeout(() => {
-      e2edRightColumnContainer.scrollTop = top;
+      if (reportClientState.e2edRightColumnContainer !== undefined) {
+        reportClientState.e2edRightColumnContainer.scrollTop = top;
+      }
     }, scrollDelayInMs);
   }
 }

@@ -1,6 +1,7 @@
 import {LogEventType} from '../constants/internal';
 import {setTab} from '../context/tab';
 import {log} from '../utils/log';
+import {switchPlaywrightPage} from '../utils/playwrightPage';
 
 import type {InternalTab, Tab} from '../types/internal';
 
@@ -14,4 +15,6 @@ export const switchToTab = (tab: Tab): void => {
   log(`Switch page context to the specified tab at ${url}`, LogEventType.InternalAction);
 
   setTab(tab);
+
+  switchPlaywrightPage(page);
 };

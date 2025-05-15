@@ -25,6 +25,16 @@ declare const reportClientState: ReportClientState;
 // eslint-disable-next-line max-statements
 export function chooseTestRun(runHash: RunHash): void {
   const {e2edRightColumnContainer} = reportClientState;
+
+  if (e2edRightColumnContainer === undefined) {
+    // eslint-disable-next-line no-console
+    console.error(
+      'Cannot find right column container (id="e2edRightColumnContainer"). Probably page not yet completely loaded. Please try click again later',
+    );
+
+    return;
+  }
+
   const previousHash = window.location.hash as RunHash;
 
   window.location.hash = runHash;

@@ -16,7 +16,10 @@ export const addUser: ClientFunction<[UserWorker, number?], Promise<object>> = c
   (user: UserWorker, delay?: number) =>
     fetch(`https://reqres.in/api/users${delay !== undefined ? `?delay=${delay}` : ''}`, {
       body: JSON.stringify(user),
-      headers: {'Content-Type': 'application/json; charset=UTF-8'},
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        ...(delay !== undefined && delay > 0 ? {'x-api-key': 'reqres-free-v1'} : undefined),
+      },
       method: 'POST',
     }),
   {name: 'addUser', timeout: 3_000},

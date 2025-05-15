@@ -15,7 +15,7 @@ export const addProduct: ClientFunction<[Product], Promise<ApiProduct>> = create
         model: product.model,
         version: product.version,
       }),
-      headers: {'Content-Type': 'application/json; charset=UTF-8'},
+      headers: {'Content-Type': 'application/json; charset=UTF-8', 'x-api-key': 'reqres-free-v1'},
       method: 'POST',
     }).then((res) => res.json() as Promise<ApiProduct>),
   {name: 'addProduct', timeout: 2_000},

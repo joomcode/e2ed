@@ -1,5 +1,6 @@
 import {E2edError} from './error';
 import {writeGlobalError} from './fs';
+import {writeLogsToFile} from './generalLog';
 
 import type {GlobalErrorType} from '../types/internal';
 
@@ -12,5 +13,6 @@ export const getGlobalErrorHandler =
   (cause: unknown): void => {
     const error = new E2edError(`Caught ${type}`, {cause});
 
-    void writeGlobalError(error.toString());
+    void writeGlobalError(error.toString()).catch(() => {});
+    void writeLogsToFile().catch(() => {});
   };
