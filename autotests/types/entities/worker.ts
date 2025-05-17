@@ -1,4 +1,4 @@
 /**
  * User-worker.
  */
-export type UserWorker = Readonly<{job: string; name: string}>;
+export type UserWorker = Readonly<{firstName: string; lastName: string}>;

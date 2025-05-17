@@ -16,6 +16,7 @@ export const createDevice = async ({
     cookies,
     input: 7,
     model,
+    title: model,
     version,
   });
 

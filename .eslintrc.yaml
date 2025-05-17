@@ -193,7 +193,7 @@ rules:
   '@typescript-eslint/no-loop-func': error
   '@typescript-eslint/no-magic-numbers':
     - error
-    - ignore: [-2, -1, 0, 1, 2, 1024]
+    - ignore: [-2, -1, 0, 1, 2, 1000, 1024]
       ignoreArrayIndexes: true
       ignoreDefaultValues: true
       ignoreEnums: true

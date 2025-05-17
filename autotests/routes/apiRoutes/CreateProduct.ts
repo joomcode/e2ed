@@ -8,7 +8,7 @@ import type {Url} from 'e2ed/types';
 
 type Params = Readonly<{id: ProductId; size: number}>;
 
-const pathStart = '/api/product/';
+const pathStart = '/products/add';
 
 /**
  * Test API route for creating a product.
@@ -27,7 +27,7 @@ export class CreateProduct extends ApiRoute<
       {urlObject},
     );
 
-    const id = Number(urlObject.pathname.slice(pathStart.length)) as ProductId;
+    const id = Number(urlObject.searchParams.get('id')) as ProductId;
     const size = Number(urlObject.searchParams.get('size'));
 
     assertValueIsTrue(Number.isInteger(id), 'url has correct id', {id, size, urlObject});
@@ -43,6 +43,6 @@ export class CreateProduct extends ApiRoute<
   getPath(): string {
     const {id, size} = this.routeParams;
 
-    return `${pathStart}${id}?size=${size}`;
+    return `${pathStart}?id=${id}&size=${size}`;
   }
 }
