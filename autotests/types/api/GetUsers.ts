@@ -3,7 +3,7 @@ import type {Request, Response} from 'e2ed/types';
 type RequestBody = undefined;
 
 type ResponseBody = Readonly<{
-  data: readonly object[];
+  users: readonly object[];
 }>;
 
 /**

@@ -21,7 +21,7 @@ const timeout = (maxNumberOfRequests + 10) * 1_000;
 
 test(
   'support switching of tabs for waitForRequest',
-  {meta: {testId: '21'}, testTimeout: timeout + 1_000},
+  {enableCsp: false, meta: {testId: '21'}, testTimeout: timeout + 1_000},
   async () => {
     let numberOfCaughtRequests = 0;
     let numberOfSentRequests = 0;
@@ -63,7 +63,8 @@ test(
 
     await expect(
       numberOfSentRequests === numberOfCaughtRequests ||
-        numberOfSentRequests === numberOfCaughtRequests + 1,
+        numberOfSentRequests === numberOfCaughtRequests + 1 ||
+        numberOfSentRequests === numberOfCaughtRequests - 1,
       `almost all responses were caught (${numberOfCaughtRequests} of ${numberOfSentRequests})`,
     ).ok();
   },

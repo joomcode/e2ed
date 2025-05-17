@@ -1,3 +1,5 @@
+import {TEST_ENDED_ERROR_MESSAGE} from '../../constants/internal';
+
 import type {Page, Response} from '@playwright/test';
 
 import type {MaybePromise} from '../../types/internal';
@@ -51,7 +53,7 @@ export const pageWaitForResponse = (
         }
       },
       (error) => {
-        if (!isDisabled) {
+        if (!isDisabled && !String(error).includes(TEST_ENDED_ERROR_MESSAGE)) {
           reject(error);
         }
       },

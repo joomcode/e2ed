@@ -12,16 +12,24 @@ let clientGetUsersRetries: number | undefined;
 /**
  * Adds user-worker.
  */
-export const addUser: ClientFunction<[UserWorker, number?], Promise<object>> = createClientFunction(
-  (user: UserWorker, delay?: number) =>
-    fetch(`https://reqres.in/api/users${delay !== undefined ? `?delay=${delay}` : ''}`, {
+export const addUser: ClientFunction<
+  [Readonly<{delay?: number; user: UserWorker}>],
+  Promise<object>
+> = createClientFunction(
+  ({delay, user}) =>
+    fetch(`https://dummyjson.com/users/add${delay !== undefined ? `?delay=${delay}` : ''}`, {
       body: JSON.stringify(user),
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        ...(delay !== undefined && delay > 0 ? {'x-api-key': 'reqres-free-v1'} : undefined),
-      },
+      headers: {'Content-Type': 'application/json; charset=UTF-8'},
       method: 'POST',
-    }),
+    })
+      .then((res) => res.json())
+      .then((result: UserWorker) => {
+        // eslint-disable-next-line no-console
+        console.log('addUser return', result);
+
+        return result;
+      }),
+
   {name: 'addUser', timeout: 3_000},
 );
 
@@ -36,7 +44,7 @@ export const getUsers = ({delay = 0, retries = 0}: GetUsersOptions = {}): Promis
 
     clientGetUsers = createClientFunction(
       (clientDelay: number) =>
-        fetch(`https://reqres.in/api/users?delay=${clientDelay}`, {method: 'GET'}).then(
+        fetch(`https://dummyjson.com/users?delay=${clientDelay}`, {method: 'GET'}).then(
           (res) => res.json() as unknown,
         ),
       {name: 'getUsers', retries, timeout: 6_000},

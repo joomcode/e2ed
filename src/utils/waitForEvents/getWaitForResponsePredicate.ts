@@ -2,7 +2,6 @@ import {getIsPageNavigatingNow} from '../../context/isPageNavigatingNow';
 import {getNavigationDelay} from '../../context/navigationDelay';
 
 import {getFullPackConfig} from '../config';
-import {E2edError} from '../error';
 import {setReadonlyProperty} from '../object';
 import {getPromiseWithResolveAndReject, getTimeoutPromise} from '../promise';
 import {getResponseFromPlaywrightResponse} from '../requestHooks';
@@ -21,7 +20,6 @@ const navigationDelayAfterLastEventInMs = 300;
 export const getWaitForResponsePredicate = (
   predicate: ResponsePredicate,
   includeNavigationRequest: boolean,
-  rejectTimeout: number,
 ): ((playwrightResponse: PlaywrightResponse) => Promise<boolean>) => {
   const {testIdleTimeout} = getFullPackConfig();
   const navigationDelay = getNavigationDelay();
@@ -74,12 +72,6 @@ export const getWaitForResponsePredicate = (
       return false;
     }
 
-    try {
-      const result = await predicate(response);
-
-      return result;
-    } catch (cause) {
-      throw new E2edError('waitForResponse predicate threw an exception', {cause, rejectTimeout});
-    }
+    return predicate(response);
   };
 };

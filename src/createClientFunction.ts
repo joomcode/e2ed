@@ -1,3 +1,4 @@
+import {TEST_ENDED_ERROR_MESSAGE} from './constants/internal';
 import {getTestIdleTimeout} from './context/testIdleTimeout';
 import {E2edError} from './utils/error';
 import {setCustomInspectOnFunction} from './utils/fn';
@@ -11,7 +12,8 @@ import type {ClientFunction} from './types/internal';
 
 type Options = Readonly<{name?: string; retries?: number; timeout?: number}>;
 
-const skipErrorMessage = 'Execution context was destroyed';
+const contextErrorMessage = 'Execution context was destroyed';
+const targetErrorMessage = 'Target page, context or browser has been closed';
 
 /**
  * Creates a client function.
@@ -44,11 +46,21 @@ export const createClientFunction = <Args extends readonly unknown[], Result>(
       page.evaluate(func, args).catch(async (evaluateError: unknown) => {
         const errorString = String(evaluateError);
 
-        if (errorString.includes(skipErrorMessage)) {
+        if (
+          errorString.includes(contextErrorMessage) ||
+          errorString.includes(targetErrorMessage) ||
+          errorString.includes(TEST_ENDED_ERROR_MESSAGE)
+        ) {
           await page.waitForLoadState();
 
           return page.evaluate(func, args).catch((suberror: unknown) => {
-            if (String(suberror).includes(skipErrorMessage)) {
+            const suberrorString = String(suberror);
+
+            if (
+              suberrorString.includes(contextErrorMessage) ||
+              suberrorString.includes(targetErrorMessage) ||
+              suberrorString.includes(TEST_ENDED_ERROR_MESSAGE)
+            ) {
               return new Promise(() => {});
             }
 
@@ -64,7 +76,13 @@ export const createClientFunction = <Args extends readonly unknown[], Result>(
 
             try {
               return page.evaluate(func, args).catch((suberror: unknown) => {
-                if (String(suberror).includes(skipErrorMessage)) {
+                const suberrorString = String(suberror);
+
+                if (
+                  suberrorString.includes(contextErrorMessage) ||
+                  suberrorString.includes(targetErrorMessage) ||
+                  suberrorString.includes(TEST_ENDED_ERROR_MESSAGE)
+                ) {
                   return new Promise(() => {});
                 }
 

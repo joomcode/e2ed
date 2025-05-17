@@ -35,7 +35,7 @@ test('full mocks works correctly', {enableCsp: false, meta: {testId: '18'}}, asy
 
   const mockedProduct = await addProduct(product);
 
-  const fetchUrl = `https://reqres.in/api/product/${productId}?size=${product.size}` as Url;
+  const fetchUrl = `https://dummyjson.com/products/add?id=${productId}&size=${product.size}` as Url;
 
   await expect(mockedProduct, 'mocked API returns correct result').eql({
     id: productId,
@@ -46,9 +46,10 @@ test('full mocks works correctly', {enableCsp: false, meta: {testId: '18'}}, asy
       id: String(productId) as DeviceId,
       input: product.input,
       model: product.model,
+      title: product.model,
       version: product.version,
     },
-    query: {size: product.size},
+    query: {id: String(productId), size: product.size},
     url: fetchUrl,
   });
 
@@ -56,5 +57,8 @@ test('full mocks works correctly', {enableCsp: false, meta: {testId: '18'}}, asy
 
   const newMockedProduct = await addProduct(product);
 
-  await expect('createdAt' in newMockedProduct, 'API mock on CreateProductRoute was umocked').ok();
+  await expect(
+    'title' in newMockedProduct && newMockedProduct.title === product.model,
+    'API mock on CreateProductRoute was umocked',
+  ).ok();
 });

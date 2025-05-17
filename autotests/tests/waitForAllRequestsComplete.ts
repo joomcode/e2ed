@@ -33,7 +33,7 @@ test(
 
     let promise = waitForAllRequestsComplete(() => true, {timeout: 1000});
 
-    void getUsers({delay: 2});
+    void getUsers({delay: 2_000});
 
     await assertFunctionThrows(
       () => promise,
@@ -46,12 +46,12 @@ test(
       throw new E2edError('waitForAllRequestsComplete did not wait for timeout', {waitedInMs});
     }
 
-    void getUsers({delay: 2});
+    void getUsers({delay: 2_000});
 
     startRequestInMs = Date.now();
 
     await waitForAllRequestsComplete(
-      ({url}) => !url.includes('https://reqres.in/api/users?delay='),
+      ({url}) => !url.includes('https://dummyjson.com/users?delay='),
       {timeout: 1000},
     );
 
@@ -66,9 +66,9 @@ test(
 
     promise = waitForAllRequestsComplete(() => true);
 
-    await getUsers({delay: 1});
+    await getUsers({delay: 1_000});
     await waitForTimeout(400);
-    await getUsers({delay: 1});
+    await getUsers({delay: 1_000});
 
     startRequestInMs = Date.now();
 
@@ -85,7 +85,7 @@ test(
 
     promise = waitForAllRequestsComplete(() => true, {maxIntervalBetweenRequestsInMs: 300});
 
-    await getUsers({delay: 1});
+    await getUsers({delay: 1_000});
 
     startRequestInMs = Date.now();
 

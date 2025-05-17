@@ -68,6 +68,9 @@ export const waitForRequest = (async <SomeRequest extends Request>(
 
   const timeoutWithUnits = getDurationWithUnits(timeout);
 
+  let finalError: unknown;
+  let hasError = false;
+
   const promise = addTimeoutToPromise(
     pageWaitForRequest(
       page,
@@ -79,11 +82,16 @@ export const waitForRequest = (async <SomeRequest extends Request>(
 
           return result;
         } catch (cause) {
-          throw new E2edError('waitForRequest predicate threw an exception', {
-            cause,
-            timeout,
-            trigger,
-          });
+          if (!isTestRunCompleted) {
+            finalError = new E2edError('waitForRequest predicate threw an exception', {
+              cause,
+              timeout,
+              trigger,
+            });
+            hasError = true;
+          }
+
+          return true;
         }
       }),
       {timeout: MAX_TIMEOUT_IN_MS},
@@ -116,6 +124,10 @@ export const waitForRequest = (async <SomeRequest extends Request>(
   await trigger?.();
 
   const request = await promise;
+
+  if (hasError) {
+    throw finalError;
+  }
 
   if (finalOptions?.skipLogs !== true) {
     const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);

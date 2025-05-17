@@ -35,7 +35,8 @@ test(
 
     const mockedProduct = await addProduct(product);
 
-    const fetchUrl = `https://reqres.in/api/product/${productId}?size=${product.size}` as Url;
+    const fetchUrl =
+      `https://dummyjson.com/products/add?id=${productId}&size=${product.size}` as Url;
 
     const productRouteParams = CreateProductRoute.getParamsFromUrlOrThrow(fetchUrl);
 
@@ -54,9 +55,10 @@ test(
         id: String(productRouteFromUrl.routeParams.id) as DeviceId,
         input: product.input,
         model: product.model,
+        title: product.model,
         version: product.version,
       },
-      query: {size: product.size},
+      query: {id: String(productId), size: product.size},
       url: fetchUrl,
     });
 
@@ -65,7 +67,7 @@ test(
     const newMockedProduct = await addProduct(product);
 
     await expect(
-      'createdAt' in newMockedProduct,
+      'title' in newMockedProduct && newMockedProduct.title === product.model,
       'API mock on CreateProductRoute was umocked',
     ).ok();
   },
