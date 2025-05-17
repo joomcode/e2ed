@@ -1,3 +1,5 @@
+import {AsyncLocalStorage} from 'node:async_hooks';
+
 import {LogEventType, MAX_TIMEOUT_IN_MS} from '../../constants/internal';
 import {getTestRunPromise} from '../../context/testRunPromise';
 import {getPlaywrightPage} from '../../useContext';
@@ -6,8 +8,11 @@ import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
+import {pageWaitForRequest} from '../../utils/playwrightPage';
 import {addTimeoutToPromise} from '../../utils/promise';
 import {getRequestFromPlaywrightRequest} from '../../utils/requestHooks';
+
+import type {Request as PlaywrightRequest} from '@playwright/test';
 
 import type {
   Request,
@@ -64,8 +69,9 @@ export const waitForRequest = (async <SomeRequest extends Request>(
   const timeoutWithUnits = getDurationWithUnits(timeout);
 
   const promise = addTimeoutToPromise(
-    page.waitForRequest(
-      async (playwrightRequest) => {
+    pageWaitForRequest(
+      page,
+      AsyncLocalStorage.bind(async (playwrightRequest: PlaywrightRequest) => {
         try {
           const request = getRequestFromPlaywrightRequest(playwrightRequest);
 
@@ -79,15 +85,17 @@ export const waitForRequest = (async <SomeRequest extends Request>(
             trigger,
           });
         }
-      },
+      }),
       {timeout: MAX_TIMEOUT_IN_MS},
     ),
     timeout,
     new E2edError(`waitForRequest promise rejected after ${timeoutWithUnits} timeout`),
   )
     .then(
-      (playwrightRequest) =>
-        getRequestFromPlaywrightRequest(playwrightRequest) as RequestWithUtcTimeInMs<SomeRequest>,
+      AsyncLocalStorage.bind(
+        (playwrightRequest: PlaywrightRequest) =>
+          getRequestFromPlaywrightRequest(playwrightRequest) as RequestWithUtcTimeInMs<SomeRequest>,
+      ),
     )
     .catch((error: unknown) => {
       if (isTestRunCompleted) {

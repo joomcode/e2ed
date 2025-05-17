@@ -4,7 +4,7 @@ import {
 } from 'autotests/actions';
 import {setPageCookies, setPageRequestHeaders} from 'autotests/context';
 import {E2edReportExample as E2edReportExampleRoute} from 'autotests/routes/pageRoutes';
-import {createSelector, locator} from 'autotests/selectors';
+import {locator} from 'autotests/selectors';
 import {Page} from 'e2ed';
 import {setReadonlyProperty} from 'e2ed/utils';
 
@@ -23,7 +23,7 @@ export class E2edReportExample extends Page<CustomPageParams> {
   /**
    * Page header.
    */
-  readonly header: Selector = createSelector('.header');
+  readonly header: Selector = locator('header');
 
   /**
    * Navigation bar with test retries.

@@ -1,9 +1,6 @@
-import {getMeta} from '../context/meta';
-import {getRunId} from '../context/runId';
-
 import {E2edError} from './error';
 import {writeGlobalError} from './fs';
-import {generalLog} from './generalLog';
+import {writeLogsToFile} from './generalLog';
 
 import type {GlobalErrorType} from '../types/internal';
 
@@ -14,20 +11,8 @@ import type {GlobalErrorType} from '../types/internal';
 export const getGlobalErrorHandler =
   (type: GlobalErrorType) =>
   (cause: unknown): void => {
-    const message = `Caught ${type}`;
+    const error = new E2edError(`Caught ${type}`, {cause});
 
-    if (type.startsWith('Test')) {
-      const meta = getMeta();
-      const runId = getRunId();
-
-      generalLog(message, {cause, meta, runId});
-
-      return;
-    }
-
-    generalLog(message, {cause});
-
-    const error = new E2edError(message, {cause});
-
-    void writeGlobalError(error.toString());
+    void writeGlobalError(error.toString()).catch(() => {});
+    void writeLogsToFile().catch(() => {});
   };

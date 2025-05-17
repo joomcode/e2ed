@@ -52,7 +52,7 @@ export const pack: Pack = {
   deviceScaleFactor: 1,
   doAfterPack,
   doBeforePack,
-  enableCsp: true,
+  enableCsp: false,
   enableHeadlessMode: true,
   enableMobileDeviceMode: false,
   enableTouchEventEmulation: false,
