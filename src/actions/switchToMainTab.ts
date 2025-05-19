@@ -7,7 +7,7 @@ import {switchPlaywrightPage} from '../utils/playwrightPage';
 /**
  * Switches page context to the specified tab.
  */
-export const switchToMainTab = (): void => {
+export const switchToMainTab = async (): Promise<void> => {
   clearTab();
 
   const page = getPlaywrightPage();
@@ -15,5 +15,5 @@ export const switchToMainTab = (): void => {
 
   log(`Switch page context to the main tab at ${url}`, LogEventType.InternalAction);
 
-  switchPlaywrightPage(page);
+  await switchPlaywrightPage(page);
 };

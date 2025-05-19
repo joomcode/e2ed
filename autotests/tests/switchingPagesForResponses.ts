@@ -57,7 +57,7 @@ test(
       await click(reportPage.header);
     });
 
-    switchToTab(npmPageTab);
+    await switchToTab(npmPageTab);
 
     await waitForTimeout(maxNumberOfRequests * 333 + 1_000);
 

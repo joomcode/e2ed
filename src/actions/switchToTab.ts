@@ -8,7 +8,7 @@ import type {InternalTab, Tab} from '../types/internal';
 /**
  * Switches page context to the specified tab.
  */
-export const switchToTab = (tab: Tab): void => {
+export const switchToTab = async (tab: Tab): Promise<void> => {
   const {page} = tab as InternalTab;
   const url = page.url();
 
@@ -16,5 +16,5 @@ export const switchToTab = (tab: Tab): void => {
 
   setTab(tab);
 
-  switchPlaywrightPage(page);
+  await switchPlaywrightPage(page);
 };

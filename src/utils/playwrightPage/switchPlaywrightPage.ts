@@ -1,3 +1,7 @@
+import {getClearPage} from '../../context/clearPage';
+
+import {preparePage} from '../test';
+
 import {pageWaitForRequest, waitForRequestCalls} from './waitForRequest';
 import {pageWaitForResponse, waitForResponseCalls} from './waitForResponse';
 
@@ -8,7 +12,13 @@ import type {Page} from '@playwright/test';
  * Removes all event handlers from the old page and moves them to the new one.
  * @internal
  */
-export const switchPlaywrightPage = (newPage: Page): void => {
+export const switchPlaywrightPage = async (newPage: Page): Promise<void> => {
+  const clearPage = getClearPage();
+
+  await clearPage?.();
+
+  await preparePage(newPage);
+
   const oldRequestCalls = [...waitForRequestCalls];
 
   waitForRequestCalls.length = 0;

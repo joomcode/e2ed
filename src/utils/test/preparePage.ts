@@ -1,5 +1,6 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 
+import {setClearPage} from '../../context/clearPage';
 import {getConsoleMessagesFromContext} from '../../context/consoleMessages';
 import {setIsPageNavigatingNow} from '../../context/isPageNavigatingNow';
 import {getJsErrorsFromContext} from '../../context/jsError';
@@ -29,7 +30,7 @@ const afterNavigationRequestsDelayInMs = 300;
  * Prepares page before test.
  * @internal
  */
-export const preparePage = async (page: Page): Promise<() => Promise<void>> => {
+export const preparePage = async (page: Page): Promise<void> => {
   const consoleMessages = getConsoleMessagesFromContext() as ConsoleMessage[];
   const jsErrors = getJsErrorsFromContext() as JsError[];
   const navigationDelay = getNavigationDelay();
@@ -133,7 +134,7 @@ export const preparePage = async (page: Page): Promise<() => Promise<void>> => {
   page.on('response', responseListener);
   page.on('requestfinished', requestfinishedListener);
 
-  return async () => {
+  const clearPage = async (): Promise<void> => {
     page.removeListener('console', consoleListener);
     page.removeListener('pageerror', pageerrorListener);
     page.removeListener('request', requestListener);
@@ -142,4 +143,6 @@ export const preparePage = async (page: Page): Promise<() => Promise<void>> => {
 
     await page.unrouteAll({behavior: 'ignoreErrors'}).catch(() => {});
   };
+
+  setClearPage(clearPage);
 };

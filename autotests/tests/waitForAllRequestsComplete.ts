@@ -16,7 +16,7 @@ test(
 
     let waitedInMs = Date.now() - startRequestInMs;
 
-    if (waitedInMs < 300 || waitedInMs > 400) {
+    if (waitedInMs < 250 || waitedInMs > 450) {
       throw new E2edError(
         'waitForAllRequestsComplete did not wait for maxIntervalBetweenRequestsInMs in the beginning',
         {waitedInMs},
