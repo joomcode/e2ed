@@ -9,6 +9,7 @@ const getStackTraceBody = function getStackTrace(): readonly StackFrame[] | unde
 
   Error.stackTraceLimit = 5000;
 
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   const originalPrepareStackTrace = Error.prepareStackTrace;
 
   // eslint-disable-next-line no-restricted-syntax

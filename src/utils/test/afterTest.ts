@@ -1,21 +1,23 @@
+import {getClearPage} from '../../context/clearPage';
+
 import {registerEndTestRunEvent} from '../events';
 import {generalLog, writeLogsToFile} from '../generalLog';
 
 import type {EndTestRunEvent, UtcTimeInMs} from '../../types/internal';
 
-type Options = Readonly<{clearPage: (() => Promise<void>) | undefined}> &
-  Omit<EndTestRunEvent, 'utcTimeInMs'>;
+type Options = Omit<EndTestRunEvent, 'utcTimeInMs'>;
 
 /**
  * Internal after test hook.
  * @internal
  */
 export const afterTest = async (options: Options): Promise<void> => {
-  const {clearPage, ...optionsWithoutClearPage} = options;
   const utcTimeInMs = Date.now() as UtcTimeInMs;
-  const endTestRunEvent: EndTestRunEvent = {...optionsWithoutClearPage, utcTimeInMs};
+  const endTestRunEvent: EndTestRunEvent = {...options, utcTimeInMs};
 
   try {
+    const clearPage = getClearPage();
+
     await clearPage?.();
 
     await registerEndTestRunEvent(endTestRunEvent);

@@ -1,4 +1,7 @@
+/* eslint-disable max-lines */
+
 import {test} from 'autotests';
+import {getPageCookies} from 'autotests/context';
 import {addUser} from 'autotests/entities';
 import {AddUser} from 'autotests/routes/apiRoutes';
 import {expect} from 'e2ed';
@@ -7,16 +10,23 @@ import {assertFunctionThrows} from 'e2ed/utils';
 
 import type {ApiAddUserRequest, ApiAddUserResponse, UserWorker} from 'autotests/types';
 
-const worker: UserWorker = {job: 'leader', name: 'John'};
+const worker: UserWorker = {firstName: 'John', lastName: 'Doe'};
 
 test(
   'waitForResponse/waitForResponseToRoute gets correct response body and rejects on timeout',
   {meta: {testId: '3'}, testIdleTimeout: 3_000},
+  // eslint-disable-next-line max-lines-per-function
   async () => {
     let response = await waitForResponse<ApiAddUserRequest, ApiAddUserResponse>(
-      ({responseBody}) => responseBody.name === 'John',
+      ({responseBody}) => {
+        getPageCookies();
+
+        return responseBody.firstName === worker.firstName;
+      },
       async () => {
-        await addUser(worker);
+        getPageCookies();
+
+        await addUser({user: worker});
       },
     );
 
@@ -27,9 +37,9 @@ test(
     }, 'waitForResponse throws an error on timeout');
 
     response = await waitForResponse<ApiAddUserRequest, ApiAddUserResponse>(
-      ({request}) => request.url === 'https://reqres.in/api/users',
+      ({request}) => request.url === 'https://dummyjson.com/users/add',
       async () => {
-        await addUser(worker);
+        await addUser({user: worker});
       },
     );
 
@@ -41,17 +51,32 @@ test(
           throw new Error('foo');
         },
         () => {
-          void addUser(worker);
+          void addUser({user: worker});
         },
-      ).catch((error: Error & {cause?: {message?: string}}) => {
-        if (error.cause?.message === 'foo') {
+      ).catch((error: Error) => {
+        if (error.cause instanceof Error && error.cause.message === 'foo') {
           throw error;
         }
       });
     }, 'waitForResponse throws an error from predicate');
 
+    await assertFunctionThrows(async () => {
+      await waitForResponse(
+        () => true,
+        async () => {
+          await Promise.resolve();
+
+          throw new Error('foo');
+        },
+      ).catch((error: unknown) => {
+        if (error instanceof Error && error.message === 'foo') {
+          throw error;
+        }
+      });
+    }, 'waitForResponse throws an error from trigger');
+
     let {response: routeResponse, routeParams} = await waitForResponseToRoute(AddUser, async () => {
-      await addUser(worker, 1);
+      await addUser({delay: 1_000, user: worker});
     });
 
     await expect(
@@ -59,52 +84,78 @@ test(
       'request from waitForResponseToRoute has correct body',
     ).eql(worker);
 
-    await expect(routeParams, 'routeParams from waitForResponseToRoute is correct').eql({delay: 1});
+    await expect(routeParams, 'routeParams from waitForResponseToRoute is correct').eql({
+      delay: 1_000,
+    });
 
     ({response: routeResponse, routeParams} = await waitForResponseToRoute(
       AddUser,
       async () => {
-        await addUser(worker, 1);
+        await addUser({delay: 1_000, user: worker});
       },
       {
         predicate: ({delay}, {request, responseBody}) =>
-          delay === 1 &&
-          request.requestBody.job === worker.job &&
-          responseBody.name === worker.name,
+          delay === 1_000 &&
+          request.requestBody.firstName === worker.firstName &&
+          responseBody.lastName === worker.lastName,
       },
     ));
 
     await expect(
       routeParams,
       'routeParams from waitForRequestToRoute with predicate is correct',
-    ).eql({delay: 1});
+    ).eql({delay: 1_000});
 
     await assertFunctionThrows(async () => {
       await waitForResponseToRoute(
         AddUser,
         async () => {
-          await addUser(worker);
+          await addUser({user: worker});
         },
-        {predicate: ({delay}) => delay === 1, timeout: 2_000},
+        {predicate: ({delay}) => delay === 1_000, timeout: 2_000},
       );
     }, 'waitForResponseToRoute throws an error on timeout');
 
+    void addUser({user: worker});
+
+    await assertFunctionThrows(async () => {
+      await waitForResponseToRoute(AddUser, {
+        predicate: () => {
+          throw new Error('foo');
+        },
+      }).catch((error: Error) => {
+        if (error.cause instanceof Error && error.cause.message === 'foo') {
+          throw error;
+        }
+      });
+    }, 'waitForResponseToRoute throws an error from predicate');
+
+    await assertFunctionThrows(async () => {
+      await waitForResponseToRoute(AddUser, () => {
+        throw new Error('foo');
+      }).catch((error: unknown) => {
+        if (error instanceof Error && error.message === 'foo') {
+          throw error;
+        }
+      });
+    }, 'waitForResponseToRoute throws an error from trigger');
+
     await assertFunctionThrows(async () => {
       await waitForResponseToRoute(
         AddUser,
         async () => {
-          await addUser(worker);
+          await addUser({user: worker});
         },
         {
           predicate: () => {
             throw new Error('foo');
           },
         },
-      ).catch((error: Error & {cause?: {message?: string}}) => {
-        if (error.cause?.message === 'foo') {
+      ).catch((error: Error) => {
+        if (error.cause instanceof Error && error.cause.message === 'foo') {
           throw error;
         }
       });
-    }, 'waitForResponseToRoute throws an error from predicate');
+    }, 'waitForResponseToRoute throws an error from predicate with trigger');
   },
 );

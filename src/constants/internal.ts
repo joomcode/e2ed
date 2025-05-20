@@ -63,6 +63,8 @@ export {
   TMP_DIRECTORY_PATH,
 } from './paths';
 /** @internal */
+export {TEST_ENDED_ERROR_MESSAGE} from './playwright';
+/** @internal */
 export {RESOLVED_PROMISE} from './promise';
 /** @internal */
 export {RETRY_KEY} from './selector';

@@ -18,7 +18,7 @@ After the run, a detailed HTML report and a summary lite report in JSON format a
 
 ## Adding e2ed to a project
 
-Prerequisites: [node](https://nodejs.org/en/) >=20,
+Prerequisites: [node](https://nodejs.org/en/) >=22,
 [TypeScript](https://www.typescriptlang.org/) >=5.
 
 All commands below are run from the root directory of the project.
@@ -365,7 +365,7 @@ You can define the `SkipTests` type and `skipTests` processing rules in the hook
 at the time of the test error, for display in the HTML report.
 
 `testFileGlobs: readonly string[]`: an array of globs with pack test (task) files.
-https://www.npmjs.com/package/globby is used for matching globs.
+`fs.glob` from `nodejs` is used for matching globs.
 
 `testIdleTimeout: number`: timeout (in milliseconds) for each individual test step.
 If the test step (interval between two `log` function calls) takes longer than this timeout,

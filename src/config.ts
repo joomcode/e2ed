@@ -20,8 +20,12 @@ import {
 import {assertValueIsTrue} from './utils/asserts';
 // eslint-disable-next-line import/no-internal-modules
 import {assertUserlandPack} from './utils/config/assertUserlandPack';
+// eslint-disable-next-line import/no-internal-modules
+import {updateConfig} from './utils/config/updateConfig';
 import {getPathToPack} from './utils/environment';
 import {setCustomInspectOnFunction} from './utils/fn';
+// eslint-disable-next-line import/no-internal-modules
+import {readStartInfoSync} from './utils/fs/readStartInfoSync';
 import {setReadonlyProperty} from './utils/object';
 import {isUiMode} from './utils/uiMode';
 import {isLocalRun} from './configurator';
@@ -116,31 +120,27 @@ const playwrightConfig = defineConfig({
       pathTemplate: `${ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY}/${EXPECTED_SCREENSHOTS_DIRECTORY_PATH}/{arg}.png`,
     },
   },
-
   fullyParallel: true,
-
   globalTimeout: userlandPack.packTimeout,
-
   outputDir: join(relativePathFromInstalledE2edToRoot, INTERNAL_REPORTS_DIRECTORY_PATH),
-
   projects: [{name: userlandPack.browserName, use: useOptions}],
-
   retries: isLocalRun ? 0 : userlandPack.maxRetriesCountInDocker - 1,
-
   testDir: join(relativePathFromInstalledE2edToRoot, TESTS_DIRECTORY_PATH),
   testIgnore: ['**/node_modules/**', '**/*.skip.ts'],
   testMatch: userlandPack.testFileGlobs as Mutable<typeof userlandPack.testFileGlobs>,
-
   timeout: userlandPack.testTimeout,
-
   workers: userlandPack.concurrency,
-
   ...userlandPack.overriddenConfigFields,
-
   use: useOptions,
 });
 
 const config: FullPackConfig = Object.assign(playwrightConfig, userlandPack);
+
+try {
+  const startInfo = readStartInfoSync();
+
+  updateConfig(config, startInfo);
+} catch {}
 
 // eslint-disable-next-line import/no-default-export
 export default config;

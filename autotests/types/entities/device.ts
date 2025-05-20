@@ -12,6 +12,7 @@ export type ApiDeviceParams = Readonly<{
   cookies: readonly string[];
   input: number;
   model: MobileDeviceModel;
+  title: string;
   version: string;
 }>;
 

@@ -8,9 +8,12 @@ import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {log} from '../../utils/log';
+import {pageWaitForResponse} from '../../utils/playwrightPage';
 import {addTimeoutToPromise} from '../../utils/promise';
 import {getResponseFromPlaywrightResponse} from '../../utils/requestHooks';
 import {getWaitForResponsePredicate} from '../../utils/waitForEvents';
+
+import type {Response as PlaywrightResponse} from '@playwright/test';
 
 import type {
   Request,
@@ -37,6 +40,7 @@ type Options = Readonly<{includeNavigationRequest?: boolean; skipLogs?: boolean;
  * Waits for some response (from browser) filtered by the response predicate.
  * If the function runs longer than the specified timeout, it is rejected.
  */
+// eslint-disable-next-line max-statements
 export const waitForResponse = (async <
   SomeRequest extends Request = Request,
   SomeResponse extends Response = Response,
@@ -70,15 +74,35 @@ export const waitForResponse = (async <
 
   const timeoutWithUnits = getDurationWithUnits(timeout);
 
+  const finalPredicate = getWaitForResponsePredicate(
+    predicate as ResponsePredicate,
+    finalOptions?.includeNavigationRequest ?? false,
+  );
+
+  let finalError: unknown;
+  let hasError = false;
+
   const promise = addTimeoutToPromise(
-    page.waitForResponse(
-      AsyncLocalStorage.bind(
-        getWaitForResponsePredicate(
-          predicate as ResponsePredicate,
-          finalOptions?.includeNavigationRequest ?? false,
-          timeout,
-        ),
-      ),
+    pageWaitForResponse(
+      page,
+      AsyncLocalStorage.bind(async (playwrightResponse: PlaywrightResponse) => {
+        try {
+          const result = await finalPredicate(playwrightResponse);
+
+          return result;
+        } catch (cause) {
+          if (!isTestRunCompleted) {
+            finalError = new E2edError('waitForResponse predicate threw an exception', {
+              cause,
+              timeout,
+              trigger,
+            });
+            hasError = true;
+          }
+
+          return true;
+        }
+      }),
       {timeout: MAX_TIMEOUT_IN_MS},
     ),
     timeout,
@@ -109,6 +133,10 @@ export const waitForResponse = (async <
   await trigger?.();
 
   const response = await promise;
+
+  if (hasError) {
+    throw finalError;
+  }
 
   if (finalOptions?.skipLogs !== true) {
     const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);

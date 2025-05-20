@@ -12,18 +12,10 @@ import {getFullPackConfig} from '../config';
 const logs: string[] = [];
 
 /**
- * Adds log message to pack logs (for later saving to the pack logs file).
- * @internal
- */
-export const addLogToLogFile = (logMessage: string): void => {
-  logs.push(logMessage);
-};
-
-/**
  * Writes pack logs to logs file (if the pack config requires it and there are unwritten logs).
  * @internal
  */
-export const writeLogsToFile = async (): Promise<void> => {
+const writeLogsToFile = async (): Promise<void> => {
   if (logs.length === 0) {
     return;
   }
@@ -41,3 +33,24 @@ export const writeLogsToFile = async (): Promise<void> => {
 
   await appendFile(logsFilePath, logsText);
 };
+
+const baseWritingInternal = 4_000;
+const deltaWritingInterval = 4_000;
+
+setInterval(
+  () => {
+    void writeLogsToFile();
+  },
+  baseWritingInternal + Math.random() * deltaWritingInterval,
+);
+
+/**
+ * Adds log message to pack logs (for later saving to the pack logs file).
+ * @internal
+ */
+export const addLogToLogFile = (logMessage: string): void => {
+  logs.push(logMessage);
+};
+
+/** @internal */
+export {writeLogsToFile};

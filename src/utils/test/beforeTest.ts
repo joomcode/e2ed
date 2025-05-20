@@ -12,6 +12,7 @@ import {addResponseToApiStatistics} from '../apiStatistics';
 import {getFullPackConfig} from '../config';
 import {getRunLabel} from '../environment';
 import {registerStartTestRunEvent} from '../events';
+import {writeLogEventTime} from '../fs';
 import {mapBackendResponseForLogs} from '../log';
 import {isUiMode} from '../uiMode';
 import {getUserlandHooks} from '../userland';
@@ -97,4 +98,6 @@ export const beforeTest = ({
   };
 
   registerStartTestRunEvent(testRunEvent);
+
+  void writeLogEventTime().catch(() => {});
 };

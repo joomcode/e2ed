@@ -6,7 +6,7 @@ import type {Url} from 'e2ed/types';
 
 type Params = Readonly<{delay?: number}>;
 
-const pathStart = '/api/users';
+const pathStart = '/users/add';
 
 /**
  * Client API route for adding user-worker.
@@ -37,7 +37,7 @@ export class AddUser extends ApiRoute<Params, ApiAddUserRequest, ApiAddUserRespo
   }
 
   override getOrigin(): Url {
-    return 'https://reqres.in' as Url;
+    return 'https://dummyjson.com' as Url;
   }
 
   getPath(): string {

@@ -93,7 +93,7 @@ void waitForRequestToRoute(AddUser, () => {}, {skipLogs: true});
 // ok
 void waitForRequestToRoute(AddUser, {
   predicate: ({delay}, {requestBody, url}) => {
-    if (delay !== undefined && delay > 0 && requestBody.job !== 'foo') {
+    if (delay !== undefined && delay > 0 && requestBody.firstName !== 'foo') {
       return url.startsWith('https');
     }
 
@@ -101,7 +101,7 @@ void waitForRequestToRoute(AddUser, {
   },
 }).then(
   ({request, routeParams}) =>
-    request.requestBody.job === 'foo' && 'delay' in routeParams && routeParams.delay > 0,
+    request.requestBody.lastName === 'foo' && 'delay' in routeParams && routeParams.delay > 0,
 );
 
 // @ts-expect-error: waitForRequestToRoute does not accept routes without `getParamsFromUrlOrThrow` method
@@ -122,8 +122,8 @@ void waitForResponseToRoute(AddUser, {
     if (
       delay !== undefined &&
       delay > 0 &&
-      requestBody.job !== 'foo' &&
-      responseBody.job !== 'bar'
+      requestBody.firstName !== 'foo' &&
+      responseBody.firstName !== 'bar'
     ) {
       return url.startsWith('https');
     }
@@ -132,8 +132,8 @@ void waitForResponseToRoute(AddUser, {
   },
 }).then(
   ({response, routeParams}) =>
-    response.request.requestBody.job === 'foo' &&
-    response.responseBody.name === 'bar' &&
+    response.request.requestBody.firstName === 'foo' &&
+    response.responseBody.lastName === 'bar' &&
     'delay' in routeParams &&
     routeParams.delay > 0,
 );

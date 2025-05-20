@@ -1,6 +1,5 @@
+import {glob} from 'node:fs/promises';
 import {normalize} from 'node:path';
-
-import globby from 'globby';
 
 import {TESTS_DIRECTORY_PATH} from '../../constants/internal';
 
@@ -15,8 +14,12 @@ import type {TestFilePath} from '../../types/internal';
  */
 export const collectTestFilePaths = async (): Promise<readonly TestFilePath[]> => {
   const {testFileGlobs} = getFullPackConfig();
+  const rawTestFilesPaths: string[] = [];
 
-  const rawTestFilesPaths = await globby(testFileGlobs);
+  for await (const directory of glob(testFileGlobs as string[])) {
+    rawTestFilesPaths.push(directory);
+  }
+
   const testFilesPaths = rawTestFilesPaths
     .map(normalize as (path: string) => TestFilePath)
     .filter(

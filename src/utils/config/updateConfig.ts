@@ -14,7 +14,7 @@ const skippedFields: readonly (keyof FullPackConfig)[] = [
  * @internal
  */
 export const updateConfig = (fullPackConfig: FullPackConfig, startInfo: StartInfo): void => {
-  for (const field of getKeys(fullPackConfig)) {
+  for (const field of new Set([...getKeys(fullPackConfig), ...getKeys(startInfo.fullPackConfig)])) {
     if (skippedFields.includes(field)) {
       continue;
     }
@@ -26,4 +26,9 @@ export const updateConfig = (fullPackConfig: FullPackConfig, startInfo: StartInf
     // @ts-expect-error: full pack config have different types of field values
     fullPackConfig[field] = startInfo.fullPackConfig[field]; // eslint-disable-line no-param-reassign
   }
+
+  Object.assign(fullPackConfig, {
+    ...fullPackConfig.overriddenConfigFields,
+    use: {...fullPackConfig.use, ...fullPackConfig.overriddenConfigFields?.use},
+  });
 };

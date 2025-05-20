@@ -7,8 +7,6 @@ import type {TestFunction} from './types/internal';
 
 import {test as playwrightTest} from '@playwright/test';
 
-process.removeAllListeners('unhandledRejection');
-
 process.on('uncaughtException', getGlobalErrorHandler('TestUncaughtException'));
 process.on('unhandledRejection', getGlobalErrorHandler('TestUnhandledRejection'));
 

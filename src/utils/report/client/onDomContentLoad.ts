@@ -12,6 +12,19 @@ const readJsonReportData = clientReadJsonReportData;
  * @internal
  */
 export function onDomContentLoad(): void {
+  const e2edRightColumnContainer = document.getElementById('e2edRightColumnContainer') ?? undefined;
+
+  if (e2edRightColumnContainer === undefined) {
+    // eslint-disable-next-line no-console
+    console.error(
+      'Cannot find right column container (id="e2edRightColumnContainer") after DOMContentLoaded.',
+    );
+  } else {
+    Object.assign<ReportClientState, Partial<ReportClientState>>(reportClientState, {
+      e2edRightColumnContainer,
+    });
+  }
+
   readJsonReportData(true);
 
   for (const observer of reportClientState.readJsonReportDataObservers) {
