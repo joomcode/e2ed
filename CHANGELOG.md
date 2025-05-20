@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.20.11](https://github.com/joomcode/e2ed/tree/v0.20.11) (2025-05-20)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.10...v0.20.11)
+
+- [Merge pull request #118 from joomcode/feat/add-step-function](https://github.com/joomcode/e2ed/commit/18f4acfdbed5e6692bca116f3c45c5b2a4fc2c33) ([uid11](https://github.com/uid11))
+
+  feat: add function `step` to public API
+
+- [PRO-10777 feat: add function `step` to public API](https://github.com/joomcode/e2ed/commit/d95d5030134df14a16b9723093fa71d9652d81f0) ([uid11](https://github.com/uid11))
+
 ## [v0.20.10](https://github.com/joomcode/e2ed/tree/v0.20.10) (2025-05-20)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.9...v0.20.10)
