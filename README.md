@@ -365,7 +365,7 @@ You can define the `SkipTests` type and `skipTests` processing rules in the hook
 at the time of the test error, for display in the HTML report.
 
 `testFileGlobs: readonly string[]`: an array of globs with pack test (task) files.
-https://www.npmjs.com/package/globby is used for matching globs.
+`fs.glob` from `nodejs` is used for matching globs.
 
 `testIdleTimeout: number`: timeout (in milliseconds) for each individual test step.
 If the test step (interval between two `log` function calls) takes longer than this timeout,

@@ -28,7 +28,6 @@
     "@playwright/test": "1.51.1",
     "create-locator": "0.0.27",
     "get-modules-graph": "0.0.11",
-    "globby": "11.1.0",
     "sort-json-keys": "1.0.3"
   },
   "devDependencies": {
@@ -61,7 +60,6 @@
     "./createLocator": "./createLocator.js",
     "./generators": "./generators/index.js",
     "./getModulesGraph": "./getModulesGraph.js",
-    "./globby": "./globby.js",
     "./selectors": "./selectors/index.js",
     "./types": "./types/index.js",
     "./utils": "./utils/index.js"

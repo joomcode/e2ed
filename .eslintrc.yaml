@@ -90,7 +90,6 @@ rules:
         - src/config.ts
         - src/createLocator.ts
         - src/getModulesGraph.ts
-        - src/globby.ts
         - src/index.ts
       missingExports: true
       unusedExports: true

@@ -233,7 +233,7 @@ export type OwnE2edConfig<
 
   /**
    * An array of globs with pack test (task) files.
-   * {@link https://www.npmjs.com/package/globby} is used for matching globs.
+   * `fs.glob` from `nodejs` is used for matching globs.
    */
   testFileGlobs: readonly string[];
 
