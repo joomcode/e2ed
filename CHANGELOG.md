@@ -1,5 +1,21 @@
 # Changelog
 
+## [v0.20.10](https://github.com/joomcode/e2ed/tree/v0.20.10) (2025-05-20)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.9...v0.20.10)
+
+- [Merge pull request #117 from joomcode/fix/waitForRequest-context](https://github.com/joomcode/e2ed/commit/f0c991c61dcd53cb9e3411d6c2f84613bca40ca8) ([uid11](https://github.com/uid11))
+
+  feat: support switching tabs in all network actions
+
+- [chore: update Playwright to 1.52.0, update `devDependencies`](https://github.com/joomcode/e2ed/commit/1cf42b84264531113eef938d5ad50f4cc7c273fd) ([uid11](https://github.com/uid11))
+- [PRO-11028 feat: replace `globby` with `glob` from `node:fs/promises`](https://github.com/joomcode/e2ed/commit/45eb771c1045520beccad6a5780557fdaaedf475) ([uid11](https://github.com/uid11))
+- [E2E-275 fix: renew last log event time on start of each test](https://github.com/joomcode/e2ed/commit/995e4358360b21998c58c55a6b6b813106d9e726) ([uid11](https://github.com/uid11))
+- [PRO-10170 fix: replace `reqres.in` with `dummyjson.com`](https://github.com/joomcode/e2ed/commit/08f3af53a10c13841ab4a205ac54367c31e254ca) ([uid11](https://github.com/uid11))
+- [PRO-10170 fix: add `switchPlaywrightPage` internal switcher](https://github.com/joomcode/e2ed/commit/6692550230801a3aff6f9062aace4bad782e8399) ([uid11](https://github.com/uid11))
+- [PRO-10170 fix: `getGlobalErrorHandler` (don't use test context)](https://github.com/joomcode/e2ed/commit/f015362d9fe9efb7038a07d15b7bc4c077052e27) ([uid11](https://github.com/uid11))
+- [PRO-10170 feat: supporting switching of tabs in network actions](https://github.com/joomcode/e2ed/commit/615dd6c20166e589f0ff6f95143d290576b5102b) ([uid11](https://github.com/uid11))
+
 ## [v0.20.9](https://github.com/joomcode/e2ed/tree/v0.20.9) (2025-04-09)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.8...v0.20.9)
