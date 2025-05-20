@@ -78,6 +78,7 @@ if (isUiMode) {
 
   // eslint-disable-next-line @typescript-eslint/unbound-method
   Error.captureStackTrace = OriginalError.captureStackTrace;
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   Error.prepareStackTrace = OriginalError.prepareStackTrace;
   Error.stackTraceLimit = OriginalError.stackTraceLimit;
   Error.toString = () => originalErrorString;
