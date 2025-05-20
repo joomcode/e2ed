@@ -1,8 +1,9 @@
 import {test} from 'autotests';
+import {getPageCookies} from 'autotests/context';
 import {Main, Search} from 'autotests/pageObjects/pages';
 import {Search as SearchRoute} from 'autotests/routes/pageRoutes';
 import {getFullPackConfig} from 'autotests/utils';
-import {expect} from 'e2ed';
+import {expect, step} from 'e2ed';
 import {
   assertPage,
   navigateToPage,
@@ -39,6 +40,8 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_00
     'dynamic custom pack properties is correct',
   ).gt(0);
 
+  await step('Some step');
+
   const urlObjectPromise = waitForStartOfPageLoad();
 
   const mainPage = await navigateToPage(Main, {language});
@@ -56,6 +59,10 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_00
   });
 
   await expect(mainPage.searchQuery, 'search query on page is empty').eql('');
+
+  await step('Another step', () => {
+    getPageCookies();
+  });
 
   await mainPage.typeIntoSearchInput(searchQuery);
 

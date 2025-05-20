@@ -15,3 +15,4 @@ export {WebSocketRoute} from './WebSocketRoute';
 export {createClientFunction} from './createClientFunction';
 export {createTestFunction} from './createTestFunction';
 export {expect} from './expect';
+export {step} from './step';
