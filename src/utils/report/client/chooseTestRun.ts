@@ -1,18 +1,11 @@
 import {assertValueIsDefined as clientAssertValueIsDefined} from './assertValueIsDefined';
-import {
-  renderApiStatistics as clientRenderApiStatistics,
-  renderTestRunDetails as clientRenderTestRunDetails,
-} from './render';
+import {maybeRenderApiStatistics as clientMaybeRenderApiStatistics} from './maybeRenderApiStatistics';
+import {renderTestRunDetails as clientRenderTestRunDetails} from './render';
 
-import type {
-  ApiStatisticsReportHash,
-  ReportClientState,
-  RunHash,
-  SafeHtml,
-} from '../../../types/internal';
+import type {ReportClientState, RunHash, SafeHtml} from '../../../types/internal';
 
 const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
-const renderApiStatistics = clientRenderApiStatistics;
+const maybeRenderApiStatistics = clientMaybeRenderApiStatistics;
 const renderTestRunDetails = clientRenderTestRunDetails;
 
 declare const reportClientState: ReportClientState;
@@ -35,7 +28,7 @@ export function chooseTestRun(runHash: RunHash): void {
     return;
   }
 
-  const previousHash = window.location.hash as RunHash;
+  const previousHash = window.location.hash.replaceAll('#', '') as RunHash;
 
   window.location.hash = runHash;
 
@@ -47,7 +40,10 @@ export function chooseTestRun(runHash: RunHash): void {
 
   const previousTestRunDetailsElement = e2edRightColumnContainer.firstElementChild as HTMLElement;
 
-  if (!(previousHash in testRunDetailsElementsByHash)) {
+  if (
+    !(previousHash in testRunDetailsElementsByHash) &&
+    !previousTestRunDetailsElement.classList.contains('test-details-empty')
+  ) {
     testRunDetailsElementsByHash[previousHash] = previousTestRunDetailsElement;
   }
 
@@ -61,30 +57,9 @@ export function chooseTestRun(runHash: RunHash): void {
     return;
   }
 
-  const pagesHash: ApiStatisticsReportHash = 'api-statistics-pages';
-  const requestsHash: ApiStatisticsReportHash = 'api-statistics-requests';
-  const resourcesHash: ApiStatisticsReportHash = 'api-statistics-resources';
+  let rightColumnHtml: SafeHtml | undefined = maybeRenderApiStatistics(runHash);
 
-  let rightColumnHtml: SafeHtml | undefined;
-
-  const hash = String(runHash);
-
-  if (hash === pagesHash || hash === requestsHash || hash === resourcesHash) {
-    const {reportClientData} = reportClientState;
-
-    if (reportClientData === undefined) {
-      // eslint-disable-next-line no-console
-      console.error(
-        `Cannot find report client data in JSON report data (tried to click "${runHash}"). Probably JSON report data not yet completely loaded. Please try click again later`,
-      );
-
-      return;
-    }
-
-    const {apiStatistics} = reportClientData;
-
-    rightColumnHtml = renderApiStatistics({apiStatistics, hash});
-  } else {
+  if (rightColumnHtml === undefined) {
     const {fullTestRuns} = reportClientState;
     const fullTestRun = fullTestRuns.find((testRun) => testRun.runHash === runHash);
 
