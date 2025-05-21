@@ -15,11 +15,13 @@ export {clickOnTestRun} from './clickOnTestRun';
 /** @internal */
 export {createJsxRuntime} from './createJsxRuntime';
 /** @internal */
+export {initialScript} from './initialScript';
+/** @internal */
+export {maybeRenderApiStatistics} from './maybeRenderApiStatistics';
+/** @internal */
 export {onDomContentLoad} from './onDomContentLoad';
 /** @internal */
 export {onFirstJsonReportDataLoad} from './onFirstJsonReportDataLoad';
-/** @internal */
-export {initialScript} from './initialScript';
 /** @internal */
 export {parseMarkdownLinks} from './parseMarkdownLinks';
 /** @internal */

@@ -92,7 +92,11 @@ export const createExpectMethod = (
       }
 
       return runAssertion(this.actualValue);
-    });
+    }).catch((error: Error) => ({
+      actualValue: this.actualValue,
+      description: this.description,
+      error,
+    }));
 
     return assertionPromise.then(({actualValue, additionalLogFields, error}) => {
       const logMessage = `Assert: ${this.description}`;

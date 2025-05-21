@@ -14,7 +14,7 @@ import {calculateTestRunStatus} from './calculateTestRunStatus';
 import {getTestRunEvent} from './getTestRunEvent';
 import {writeFullMocksIfNeeded} from './writeFullMocksIfNeeded';
 
-import type {EndTestRunEvent, FullTestRun, TestRun} from '../../types/internal';
+import type {EndTestRunEvent, FullTestRun, RunHash, TestRun} from '../../types/internal';
 
 /**
  * Registers end test run event (for report) after test closing.
@@ -74,7 +74,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
   const {getMainTestRunParams, getTestRunHash} = getUserlandHooks();
 
   const mainParams = getMainTestRunParams(testRun);
-  const runHash = getTestRunHash(testRun);
+  const runHash = getTestRunHash(testRun).replaceAll('#', '') as RunHash;
 
   const fullTestRun: FullTestRun = {mainParams, runHash, ...testRun};
 
