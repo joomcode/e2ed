@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.20.12](https://github.com/joomcode/e2ed/tree/v0.20.12) (2025-05-21)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.11...v0.20.12)
+
+- [Merge pull request #119 from joomcode/fix/runhash-report-error](https://github.com/joomcode/e2ed/commit/44fcee28cb51532b57cd0cdfdb344b062d3c8efe) ([uid11](https://github.com/uid11))
+
+  PRO-10170 fix: error with rendering tests with initial `runHash`
+
+- [chore: update `devDependencies` (`types/node`)](https://github.com/joomcode/e2ed/commit/31696fa953fb9828b2e6a8831b05dc490d570024) ([uid11](https://github.com/uid11))
+- [PRO-10170 fix: error with rendering tests with initial `runHash`](https://github.com/joomcode/e2ed/commit/46df772c3ce7b8f0fb3b9f44ced949b820f5500a) ([uid11](https://github.com/uid11))
+
+  fix: catch errors from original `actualValue` in `expect`
+
 ## [v0.20.11](https://github.com/joomcode/e2ed/tree/v0.20.11) (2025-05-20)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.10...v0.20.11)
