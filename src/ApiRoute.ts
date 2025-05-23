@@ -13,14 +13,12 @@ export abstract class ApiRoute<
   /**
    * Request type of API route.
    */
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  declare readonly __REQUEST_KEY: SomeRequest;
+  declare readonly Request: SomeRequest;
 
   /**
    * Response type of API route.
    */
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  declare readonly __RESPONSE_KEY: SomeResponse;
+  declare readonly Response: SomeResponse;
 
   /**
    * Returns `true`, if the request body is in JSON format.

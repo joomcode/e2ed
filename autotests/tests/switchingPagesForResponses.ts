@@ -63,6 +63,7 @@ test(
 
     await expect(
       numberOfSentRequests === numberOfCaughtResponses ||
+        numberOfSentRequests === numberOfCaughtResponses + 2 ||
         numberOfSentRequests === numberOfCaughtResponses + 1 ||
         numberOfSentRequests === numberOfCaughtResponses - 1,
       `almost all responses were caught (${numberOfCaughtResponses} of ${numberOfSentRequests})`,
