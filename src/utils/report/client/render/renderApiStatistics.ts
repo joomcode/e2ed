@@ -34,11 +34,11 @@ export function renderApiStatistics({apiStatistics, hash}: Options): SafeHtml {
       let pageDuration = 0;
       const pageItems: SafeHtml[] = [];
 
-      for (const [url, {count, duration}] of Object.entries(byUrl)) {
+      for (const [url, {count, duration}] of Object.entries(byUrl) as ObjectEntries<typeof byUrl>) {
         pageCount += count;
         pageDuration += duration;
 
-        pageItems.push(renderApiStatisticsItem({count, duration, name: url}));
+        pageItems.push(renderApiStatisticsItem({count, duration, name: url, url}));
       }
 
       items.push(

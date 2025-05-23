@@ -1,5 +1,6 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 
+import {TARGET_CLOSED_ERROR_MESSAGE} from '../../constants/internal';
 import {setClearPage} from '../../context/clearPage';
 import {getConsoleMessagesFromContext} from '../../context/consoleMessages';
 import {setIsPageNavigatingNow} from '../../context/isPageNavigatingNow';
@@ -110,7 +111,7 @@ export const preparePage = async (page: Page): Promise<void> => {
     }
 
     const playwrightResponse = await request.response().catch((error) => {
-      if (String(error).includes('Target page, context or browser has been closed')) {
+      if (String(error).includes(TARGET_CLOSED_ERROR_MESSAGE)) {
         return null;
       }
 

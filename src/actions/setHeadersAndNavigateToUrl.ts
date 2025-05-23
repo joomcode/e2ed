@@ -29,9 +29,9 @@ export const setHeadersAndNavigateToUrl = async (
         return route.fallback();
       }
 
-      const {navigationTimeout} = getFullPackConfig();
+      const timeout = navigateToUrlOptions?.timeout ?? getFullPackConfig().navigationTimeout;
 
-      const response = await route.fetch({timeout: navigationTimeout});
+      const response = await route.fetch({timeout});
       const headers = response.headers();
 
       applyHeadersMapper(headers, mapResponseHeaders);

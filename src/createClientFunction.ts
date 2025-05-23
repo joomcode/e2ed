@@ -1,4 +1,4 @@
-import {TEST_ENDED_ERROR_MESSAGE} from './constants/internal';
+import {TARGET_CLOSED_ERROR_MESSAGE, TEST_ENDED_ERROR_MESSAGE} from './constants/internal';
 import {getTestIdleTimeout} from './context/testIdleTimeout';
 import {E2edError} from './utils/error';
 import {setCustomInspectOnFunction} from './utils/fn';
@@ -13,7 +13,6 @@ import type {ClientFunction} from './types/internal';
 type Options = Readonly<{name?: string; retries?: number; timeout?: number}>;
 
 const contextErrorMessage = 'Execution context was destroyed';
-const targetErrorMessage = 'Target page, context or browser has been closed';
 
 /**
  * Creates a client function.
@@ -48,7 +47,7 @@ export const createClientFunction = <Args extends readonly unknown[], Result>(
 
         if (
           errorString.includes(contextErrorMessage) ||
-          errorString.includes(targetErrorMessage) ||
+          errorString.includes(TARGET_CLOSED_ERROR_MESSAGE) ||
           errorString.includes(TEST_ENDED_ERROR_MESSAGE)
         ) {
           await page.waitForLoadState();
@@ -58,7 +57,7 @@ export const createClientFunction = <Args extends readonly unknown[], Result>(
 
             if (
               suberrorString.includes(contextErrorMessage) ||
-              suberrorString.includes(targetErrorMessage) ||
+              suberrorString.includes(TARGET_CLOSED_ERROR_MESSAGE) ||
               suberrorString.includes(TEST_ENDED_ERROR_MESSAGE)
             ) {
               return new Promise(() => {});
@@ -80,7 +79,7 @@ export const createClientFunction = <Args extends readonly unknown[], Result>(
 
                 if (
                   suberrorString.includes(contextErrorMessage) ||
-                  suberrorString.includes(targetErrorMessage) ||
+                  suberrorString.includes(TARGET_CLOSED_ERROR_MESSAGE) ||
                   suberrorString.includes(TEST_ENDED_ERROR_MESSAGE)
                 ) {
                   return new Promise(() => {});
