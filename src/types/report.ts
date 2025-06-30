@@ -39,6 +39,7 @@ export type LiteReport<
     FullPackConfig<CustomPackProperties, CustomReportProperties, SkipTests, TestMeta>
   >;
   summaryPackResults: string;
+  warnings: readonly string[];
 }>;
 
 /**
@@ -76,6 +77,7 @@ export type ReportData = Readonly<{
   retries: readonly Retry[];
   startInfo: StartInfo;
   summaryPackResults: string;
+  warnings: readonly string[];
 }>;
 
 /**

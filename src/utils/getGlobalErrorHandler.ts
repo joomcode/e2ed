@@ -1,7 +1,7 @@
 import {TARGET_CLOSED_ERROR_MESSAGE, TEST_ENDED_ERROR_MESSAGE} from '../constants/internal';
 
 import {E2edError} from './error';
-import {writeGlobalError} from './fs';
+import {writeGlobalError, writeGlobalWarning} from './fs';
 import {writeLogsToFile} from './generalLog';
 
 import type {GlobalErrorType} from '../types/internal';
@@ -24,7 +24,12 @@ export const getGlobalErrorHandler =
         return;
       }
 
-      void writeGlobalError(errorString).catch(() => {});
+      if (type === 'TestUnhandledRejection') {
+        void writeGlobalWarning(errorString).catch(() => {});
+      } else {
+        void writeGlobalError(errorString).catch(() => {});
+      }
+
       void writeLogsToFile().catch(() => {});
     } catch {}
   };

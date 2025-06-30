@@ -1,5 +1,5 @@
 import {getFullPackConfig} from '../config';
-import {readGlobalErrors} from '../fs';
+import {readGlobalErrors, readGlobalWarnings} from '../fs';
 import {
   collectTestFilePaths,
   getUnsuccessfulTestFilePaths,
@@ -8,16 +8,22 @@ import {
 
 import type {FullTestRun, TestFilePath} from '../../types/internal';
 
+type Return = Readonly<{
+  errors: readonly string[];
+  warnings: readonly string[];
+}>;
+
 /**
- * Get all report errors. General report status is failed if there is any error.
+ * Get all report errors and warnings. General report status is failed if there is any error.
  * @internal
  */
 export const getReportErrors = async (
   fullTestRuns: readonly FullTestRun[],
   notIncludedInPackTests: readonly TestFilePath[],
-): Promise<readonly string[]> => {
+): Promise<Return> => {
   const {testFileGlobs} = getFullPackConfig();
   const errors = (await readGlobalErrors()) as string[];
+  const warnings = await readGlobalWarnings();
 
   const allTestFilePaths = await collectTestFilePaths();
   const unsuccessfulTestFilePaths = await getUnsuccessfulTestFilePaths(
@@ -55,5 +61,5 @@ export const getReportErrors = async (
     );
   }
 
-  return errors;
+  return {errors, warnings};
 };

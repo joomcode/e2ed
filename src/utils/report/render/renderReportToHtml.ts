@@ -12,6 +12,7 @@ import {renderHead} from './renderHead';
 import {renderJsonData} from './renderJsonData';
 import {renderNavigation} from './renderNavigation';
 import {renderRetries} from './renderRetries';
+import {renderWarnings} from './renderWarnings';
 
 import type {ReportData, SafeHtml, UtcTimeInMs} from '../../../types/internal';
 
@@ -41,6 +42,7 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
       <section class="main__section _position_left" aria-label="Retry ${maxRetry}" ${locator('column1')}>
         ${renderRetries({retries})}
         ${renderErrors(reportData.errors)}
+        ${renderWarnings(reportData.warnings)}
       </section>
       <div class="drag-container"></div>
       <section
