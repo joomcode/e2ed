@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-unused-modules
 import type {SafeHtml} from './html';
+import type {Any, ZeroOrOneArg} from './utils';
 
 /**
  * Extends global namespaces.
@@ -19,9 +20,9 @@ declare global {
      * JSX functional component.
      * @internal
      */
-    type Component<Props extends Properties = Properties> = (
+    type Component<Props extends object | undefined = Properties | undefined> = (
       this: void,
-      properties?: Props,
+      ...args: ZeroOrOneArg<Props>
     ) => Element;
 
     /**
@@ -38,7 +39,7 @@ declare global {
 
     type ElementChildrenAttribute = {children: {}};
 
-    type ElementType = Component | HtmlTag;
+    type ElementType = Component<Any> | HtmlTag;
 
     /**
      * Creates fragment (`<>...</>`).

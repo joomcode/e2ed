@@ -26,7 +26,7 @@ export const collectReportData = async ({
 }: FullEventsData): Promise<ReportData> => {
   const {liteReportFileName, logFileName, reportFileName} = getFullPackConfig();
 
-  const errors = await getReportErrors(fullTestRuns, notIncludedInPackTests);
+  const {errors, warnings} = await getReportErrors(fullTestRuns, notIncludedInPackTests);
 
   if (!isUiMode) {
     assertThatTestNamesAndFilePathsAreUnique(fullTestRuns);
@@ -57,5 +57,6 @@ export const collectReportData = async ({
     retries,
     startInfo,
     summaryPackResults,
+    warnings,
   };
 };

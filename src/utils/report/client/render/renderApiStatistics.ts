@@ -1,6 +1,6 @@
 import {createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize} from '../sanitizeHtml';
 
-import {renderApiStatisticsItem as clientRenderApiStatisticsItem} from './renderApiStatisticsItem';
+import {ApiStatisticsItem as clientApiStatisticsItem} from './ApiStatisticsItem';
 
 import type {
   ApiStatistics,
@@ -10,7 +10,7 @@ import type {
 } from '../../../../types/internal';
 
 const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
-const renderApiStatisticsItem = clientRenderApiStatisticsItem;
+const ApiStatisticsItem = clientApiStatisticsItem;
 
 type Options = Readonly<{
   apiStatistics: ApiStatistics;
@@ -34,15 +34,15 @@ export function renderApiStatistics({apiStatistics, hash}: Options): SafeHtml {
       let pageDuration = 0;
       const pageItems: SafeHtml[] = [];
 
-      for (const [url, {count, duration}] of Object.entries(byUrl)) {
+      for (const [url, {count, duration}] of Object.entries(byUrl) as ObjectEntries<typeof byUrl>) {
         pageCount += count;
         pageDuration += duration;
 
-        pageItems.push(renderApiStatisticsItem({count, duration, name: url}));
+        pageItems.push(ApiStatisticsItem({count, duration, name: url, url}));
       }
 
       items.push(
-        renderApiStatisticsItem({count: pageCount, duration: pageDuration, isHeader: true, name}),
+        ApiStatisticsItem({count: pageCount, duration: pageDuration, isHeader: true, name}),
       );
       items.push(...pageItems);
     }
@@ -54,7 +54,7 @@ export function renderApiStatistics({apiStatistics, hash}: Options): SafeHtml {
         // eslint-disable-next-line max-depth
         for (const [statusCode, {count, duration, size}] of Object.entries(byStatusCode)) {
           items.push(
-            renderApiStatisticsItem({
+            ApiStatisticsItem({
               count,
               duration,
               name: `${method} ${url} ${statusCode}`,
@@ -72,7 +72,7 @@ export function renderApiStatistics({apiStatistics, hash}: Options): SafeHtml {
     >) {
       for (const [statusCode, {count, duration, size}] of Object.entries(byStatusCode)) {
         items.push(
-          renderApiStatisticsItem({
+          ApiStatisticsItem({
             count,
             duration,
             name: `${url} ${statusCode}`,

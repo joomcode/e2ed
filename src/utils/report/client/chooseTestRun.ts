@@ -38,7 +38,12 @@ export function chooseTestRun(runHash: RunHash): void {
 
   const {testRunDetailsElementsByHash} = reportClientState;
 
-  const previousTestRunDetailsElement = e2edRightColumnContainer.firstElementChild as HTMLElement;
+  const previousTestRunDetailsElement =
+    e2edRightColumnContainer.firstElementChild as HTMLElement | null;
+
+  if (!previousTestRunDetailsElement) {
+    return;
+  }
 
   if (
     !(previousHash in testRunDetailsElementsByHash) &&

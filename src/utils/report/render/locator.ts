@@ -10,7 +10,7 @@ const isProduction = e2edEnvironment.E2ED_ORIGIN !== 'https://bing.com';
 
 const createLocatorOptions: CreateLocatorOptions = {attributesOptions, isProduction};
 
-const {locator: locatorAttributes} = createSimpleLocator(createLocatorOptions);
+export const locator: LocatorFunction = createSimpleLocator(createLocatorOptions).locator;
 
 export {createLocatorOptions};
 
@@ -18,5 +18,5 @@ export {createLocatorOptions};
  * `locator` function.
  * @internal
  */
-export const locator: LocatorFunction<SafeHtml> = (...args): SafeHtml =>
-  renderAttributes(locatorAttributes(...(args as [string])));
+export const locatorAttributes: LocatorFunction<SafeHtml> = (...args): SafeHtml =>
+  renderAttributes(locator(...(args as [string])));

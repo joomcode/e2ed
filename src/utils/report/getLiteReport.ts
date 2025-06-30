@@ -20,6 +20,7 @@ export const getLiteReport = (reportData: ReportData): LiteReport => {
     retries,
     startInfo,
     summaryPackResults,
+    warnings,
   } = reportData;
 
   assertValueIsNotNull(liteReportFileName, 'liteReportFileName is not null');
@@ -39,5 +40,6 @@ export const getLiteReport = (reportData: ReportData): LiteReport => {
     retries: liteRetries,
     startInfo,
     summaryPackResults,
+    warnings,
   };
 };

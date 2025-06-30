@@ -53,6 +53,7 @@ export {
   EVENTS_DIRECTORY_PATH,
   EXPECTED_SCREENSHOTS_DIRECTORY_PATH,
   GLOBAL_ERRORS_PATH,
+  GLOBAL_WARNINGS_PATH,
   INSTALLED_E2ED_DIRECTORY_PATH,
   INTERNAL_DIRECTORY_NAME,
   INTERNAL_REPORTS_DIRECTORY_PATH,
@@ -63,7 +64,7 @@ export {
   TMP_DIRECTORY_PATH,
 } from './paths';
 /** @internal */
-export {TEST_ENDED_ERROR_MESSAGE} from './playwright';
+export {TARGET_CLOSED_ERROR_MESSAGE, TEST_ENDED_ERROR_MESSAGE} from './playwright';
 /** @internal */
 export {RESOLVED_PROMISE} from './promise';
 /** @internal */
