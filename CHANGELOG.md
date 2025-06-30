@@ -1,5 +1,22 @@
 # Changelog
 
+## [v0.20.13](https://github.com/joomcode/e2ed/tree/v0.20.13) (2025-06-30)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.12...v0.20.13)
+
+- [Merge pull request #120 from joomcode/feat/selector-find-accept-selectors](https://github.com/joomcode/e2ed/commit/39625c42a5c7b053ba936b2d727c9dbe6128a06b) ([uid11](https://github.com/uid11))
+
+  feat: add global warnings for TestUnhandledRejection instead of errors
+
+- [PRO-11212 chore: update Playwright to 1.53.2](https://github.com/joomcode/e2ed/commit/cd9c8343e9a98bf4ca2897474cbe5fd31348732a) ([uid11](https://github.com/uid11))
+- [feat: use aka JSX components for rendering HTML report](https://github.com/joomcode/e2ed/commit/cf16e9ae72b4bd4f7576091a1fa7d50a239df00a) ([uid11](https://github.com/uid11))
+- [PRO-11212 chore: update Playwright to 1.53.1](https://github.com/joomcode/e2ed/commit/fe5e1038f42687e61edfd48f1b6c5ed54816c257) ([uid11](https://github.com/uid11))
+- [chore: update `devDependencies` (`@types/node`, `prettier`, etc)](https://github.com/joomcode/e2ed/commit/2d7b772a0bb73709cb7da53965451b13231cdfbf) ([uid11](https://github.com/uid11))
+- [PRO-11324 fix: add global warnings for TestUnhandledRejection](https://github.com/joomcode/e2ed/commit/831ca03cf25f98da268a4e8b0e646a199239d802) ([uid11](https://github.com/uid11))
+- [fix: skip `TestUnhandledRejection` errors with `TARGET_CLOSED_ERROR_MESSAGE`](https://github.com/joomcode/e2ed/commit/853f98c3b476a0b124902783069318e2d5679ae7) ([uid11](https://github.com/uid11))
+
+  fix: don't catch timeout errors in `expect` matchers
+
 ## [v0.20.12](https://github.com/joomcode/e2ed/tree/v0.20.12) (2025-05-21)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.11...v0.20.12)
