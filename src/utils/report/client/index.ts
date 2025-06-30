@@ -30,8 +30,8 @@ export {readJsonReportData} from './readJsonReportData';
 export {readPartOfJsonReportData} from './readPartOfJsonReportData';
 /** @internal */
 export {
+  ApiStatisticsItem,
   renderApiStatistics,
-  renderApiStatisticsItem,
   renderAttributes,
   renderDatesInterval,
   renderDuration,

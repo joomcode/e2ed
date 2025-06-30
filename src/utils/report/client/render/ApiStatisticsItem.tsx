@@ -6,7 +6,7 @@ const renderDuration = clientRenderDuration;
 
 declare const jsx: JSX.Runtime;
 
-type Options = Readonly<{
+type Props = Readonly<{
   count: number;
   duration: number;
   isHeader?: boolean;
@@ -20,14 +20,14 @@ type Options = Readonly<{
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function renderApiStatisticsItem({
+export const ApiStatisticsItem: JSX.Component<Props> = ({
   count,
   duration,
   isHeader,
   name,
   size,
   url,
-}: Options): SafeHtml {
+}) => {
   const bytesInKiB = 1_024;
   const durationHtml = renderDuration(duration / count);
   const countHtml = `${count}x`;
@@ -56,4 +56,4 @@ export function renderApiStatisticsItem({
       </span>
     </span>
   );
-}
+};

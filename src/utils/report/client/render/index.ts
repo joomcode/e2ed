@@ -1,7 +1,7 @@
 /** @internal */
-export {renderApiStatistics} from './renderApiStatistics';
+export {ApiStatisticsItem} from './ApiStatisticsItem';
 /** @internal */
-export {renderApiStatisticsItem} from './renderApiStatisticsItem';
+export {renderApiStatistics} from './renderApiStatistics';
 /** @internal */
 export {renderAttributes} from './renderAttributes';
 /** @internal */

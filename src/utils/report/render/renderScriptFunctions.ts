@@ -11,7 +11,7 @@ import type {SafeHtml} from '../../../types/internal';
  * @internal
  */
 export const renderScriptFunctions = (): SafeHtml => {
-  const functions = Object.values(clientFunctions).map((fn) => String(fn));
+  const functions = Object.values(clientFunctions).map((fn) => `var ${fn.name} = ${String(fn)};`);
 
   functions.push(`var createSimpleLocator = ${createSimpleLocator.toString()};`);
   functions.push(String(getDurationWithUnits));
