@@ -25,13 +25,13 @@
     "url": "git+https://github.com/joomcode/e2ed.git"
   },
   "dependencies": {
-    "@playwright/test": "1.52.0",
+    "@playwright/test": "1.53.1",
     "create-locator": "0.0.27",
     "get-modules-graph": "0.0.11",
     "sort-json-keys": "1.0.3"
   },
   "devDependencies": {
-    "@playwright/browser-chromium": "1.52.0",
+    "@playwright/browser-chromium": "1.53.1",
     "@types/node": "24.0.7",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
