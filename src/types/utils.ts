@@ -78,7 +78,7 @@ export type OptionalIfValueIncludeDefault<
 /**
  * Takes a union, and returns the intersection of the elements of the union.
  * `UnionToIntersection<((x: string) => number) | ((x: number) => string)>` =
- *  `((x: string) => number) & ((x: number) => string)`
+ *  `((x: string) => number) & ((x: number) => string)`.
  */
 export type UnionToIntersection<Union> = (
   Union extends unknown ? (arg: Union) => void : never

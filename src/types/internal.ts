@@ -88,7 +88,7 @@ export type {ApiMockState} from './mockApiRoute';
 export type {WebSocketMockFunction} from './mockWebSocketRoute';
 /** @internal */
 export type {WebSocketMockState} from './mockWebSocketRoute';
-export type {NavigateToUrlOptions} from './navigation';
+export type {NavigateToUrlOptions, NavigationReturn} from './navigation';
 /** @internal */
 export type {NavigationDelay} from './navigation';
 export type {

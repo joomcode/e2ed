@@ -1,5 +1,7 @@
 import type {Page} from '@playwright/test';
 
+import type {StatusCode} from './http';
+
 /**
  * Options for `navigateToUrl` action.
  */
@@ -13,3 +15,8 @@ export type NavigationDelay = Readonly<
   | {promise: Promise<void>; reasonsCount: number; resolve: () => void}
   | {promise: undefined; reasonsCount: number; resolve: undefined}
 >;
+
+/**
+ * The object returned by navigation functions.
+ */
+export type NavigationReturn = Readonly<{statusCode: StatusCode | undefined}>;

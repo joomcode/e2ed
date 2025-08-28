@@ -53,7 +53,7 @@ export type {
 } from './matchScreenshot';
 export type {ApiMockFunction} from './mockApiRoute';
 export type {WebSocketMockFunction} from './mockWebSocketRoute';
-export type {NavigateToUrlOptions} from './navigation';
+export type {NavigateToUrlOptions, NavigationReturn} from './navigation';
 export type {
   AnyPageClassType,
   NavigateToOrAssertPageArgs,
@@ -105,5 +105,6 @@ export type {
   UnionToIntersection,
   UnwrapSet,
   Values,
+  ZeroOrOneArg,
 } from './utils';
 export type {RequestPredicate, ResponsePredicate} from './waitForEvents';

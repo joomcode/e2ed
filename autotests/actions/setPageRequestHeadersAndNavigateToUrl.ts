@@ -2,15 +2,15 @@ import {setHeadersAndNavigateToUrl} from 'e2ed/actions';
 import {LogEventType} from 'e2ed/constants';
 import {log} from 'e2ed/utils';
 
-import type {StringHeaders, Url} from 'e2ed/types';
+import type {NavigationReturn, StringHeaders, Url} from 'e2ed/types';
 
 /**
  * Navigate to the url and set additional page request headers.
  */
-export const setPageRequestHeadersAndNavigateToUrl = async (
+export const setPageRequestHeadersAndNavigateToUrl = (
   url: Url,
   pageRequestHeaders: StringHeaders,
-): Promise<void> => {
+): Promise<NavigationReturn> => {
   const mapRequestHeaders = (): StringHeaders => pageRequestHeaders;
 
   log(
@@ -19,5 +19,5 @@ export const setPageRequestHeadersAndNavigateToUrl = async (
     LogEventType.Action,
   );
 
-  await setHeadersAndNavigateToUrl(url, {mapRequestHeaders});
+  return setHeadersAndNavigateToUrl(url, {mapRequestHeaders});
 };

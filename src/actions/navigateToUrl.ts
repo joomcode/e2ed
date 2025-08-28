@@ -2,7 +2,7 @@ import {LogEventType} from '../constants/internal';
 import {getPlaywrightPage} from '../useContext';
 import {log} from '../utils/log';
 
-import type {NavigateToUrlOptions, Url} from '../types/internal';
+import type {NavigateToUrlOptions, NavigationReturn, StatusCode, Url} from '../types/internal';
 
 /**
  * Navigate to the `url` (without waiting of interface stabilization).
@@ -10,7 +10,7 @@ import type {NavigateToUrlOptions, Url} from '../types/internal';
 export const navigateToUrl = async (
   url: Url,
   options: NavigateToUrlOptions = {},
-): Promise<void> => {
+): Promise<NavigationReturn> => {
   const {skipLogs = false} = options;
 
   if (skipLogs !== true) {
@@ -19,9 +19,16 @@ export const navigateToUrl = async (
 
   const page = getPlaywrightPage();
 
-  await page.goto(url, options);
+  const maybeResponse = await page.goto(url, options);
+  let statusCode: StatusCode | undefined;
+
+  if (maybeResponse !== null) {
+    statusCode = maybeResponse.status() as StatusCode;
+  }
 
   if (skipLogs !== true) {
     log(`Navigation to the url ${url} completed`, options, LogEventType.InternalAction);
   }
+
+  return {statusCode};
 };
