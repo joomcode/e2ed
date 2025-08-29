@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.20.14](https://github.com/joomcode/e2ed/tree/v0.20.14) (2025-08-29)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.13...v0.20.14)
+
+- [Merge pull request #121 from joomcode/feat/add-status-code-to-page](https://github.com/joomcode/e2ed/commit/bb7ffa632381c838c8e9f339da8a603706711f96) ([uid11](https://github.com/uid11))
+
+  feat: add `statusCode` property on pages
+
+- [PRO-13077 feat: add `statusCode` property on pages](https://github.com/joomcode/e2ed/commit/9c1c50c9ea88d44111776c912188044c1b9d77a1) ([uid11](https://github.com/uid11))
+
+  chore: update Playwright to 1.55.0
+
+  chore: update devDependencies (TypeScript to 5.9.2)
+
 ## [v0.20.13](https://github.com/joomcode/e2ed/tree/v0.20.13) (2025-06-30)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.12...v0.20.13)
