@@ -10,7 +10,7 @@ import {setReadonlyProperty} from 'e2ed/utils';
 
 import {TestRunButton} from './TestRunButton';
 
-import type {Cookie, Selector, StringHeaders, Url} from 'e2ed/types';
+import type {Cookie, NavigationReturn, Selector, StringHeaders, Url} from 'e2ed/types';
 
 type CustomPageParams =
   | {pageCookies?: readonly Cookie[]; pageRequestHeaders?: StringHeaders}
@@ -110,7 +110,7 @@ export class E2edReportExample extends Page<CustomPageParams> {
     setReadonlyProperty(this, 'pageRequestHeaders', pageRequestHeaders);
   }
 
-  override navigateToPage(url: Url): Promise<void> {
+  override navigateToPage(url: Url): Promise<NavigationReturn> {
     if (this.pageRequestHeaders) {
       return setPageRequestHeadersAndNavigateToUrl(url, this.pageRequestHeaders);
     }

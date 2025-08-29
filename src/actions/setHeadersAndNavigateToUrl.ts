@@ -8,7 +8,7 @@ import {log} from '../utils/log';
 
 import {navigateToUrl} from './navigateToUrl';
 
-import type {MapOptions, NavigateToUrlOptions, Url} from '../types/internal';
+import type {MapOptions, NavigateToUrlOptions, NavigationReturn, Url} from '../types/internal';
 
 /**
  * Navigate to the url and map custom response and request headers.
@@ -17,7 +17,7 @@ export const setHeadersAndNavigateToUrl = async (
   url: Url,
   options: MapOptions,
   navigateToUrlOptions?: NavigateToUrlOptions,
-): Promise<void> => {
+): Promise<NavigationReturn> => {
   const {mapRequestHeaders, mapResponseHeaders} = options;
 
   const page = getPlaywrightPage();
@@ -59,5 +59,5 @@ export const setHeadersAndNavigateToUrl = async (
     );
   }
 
-  await navigateToUrl(url, {skipLogs: true, ...navigateToUrlOptions});
+  return navigateToUrl(url, {skipLogs: true, ...navigateToUrlOptions});
 };

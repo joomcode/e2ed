@@ -7,10 +7,18 @@ import {CREATE_PAGE_TOKEN} from './constants/internal';
 import {assertValueIsTrue} from './utils/asserts';
 import {getFullPackConfig} from './utils/config';
 import {reloadDocument} from './utils/document';
+import {setReadonlyProperty} from './utils/object';
 import {getPlaywrightPage} from './useContext';
 
 import type {PageRoute} from './PageRoute';
-import type {AsyncVoid, NavigateToUrlOptions, PageClassTypeArgs, Url} from './types/internal';
+import type {
+  AsyncVoid,
+  NavigateToUrlOptions,
+  NavigationReturn,
+  PageClassTypeArgs,
+  StatusCode,
+  Url,
+} from './types/internal';
 
 /**
  * Abstract page with base methods.
@@ -42,6 +50,11 @@ export abstract class Page<PageParams = undefined> {
    * Immutable page parameters.
    */
   readonly pageParams: PageParams;
+
+  /**
+   * Status code of page, if any.
+   */
+  readonly statusCode: StatusCode | undefined;
 
   constructor(...args: PageClassTypeArgs<PageParams>) {
     const [createPageToken, pageParams] = args;
@@ -112,8 +125,21 @@ export abstract class Page<PageParams = undefined> {
   /**
    * Navigates to the page by url.
    */
-  navigateToPage(url: Url, options?: NavigateToUrlOptions): Promise<void> {
-    return navigateToUrl(url, {skipLogs: true, timeout: this.navigationTimeout, ...options});
+  async navigateToPage(
+    this: Page,
+    url: Url,
+    options?: NavigateToUrlOptions,
+  ): Promise<NavigationReturn> {
+    const navigationReturn = await navigateToUrl(url, {
+      skipLogs: true,
+      timeout: this.navigationTimeout,
+      ...options,
+    });
+    const {statusCode} = navigationReturn;
+
+    setReadonlyProperty(this, 'statusCode', statusCode);
+
+    return navigationReturn;
   }
 
   /**
