@@ -2,7 +2,7 @@ import {type CreateLocatorOptions, createSimpleLocator, type LocatorFunction} fr
 
 import {attributesOptions, e2edEnvironment} from '../../../constants/internal';
 
-import {renderAttributes} from '../client';
+import {renderAttributes} from './renderAttributes';
 
 import type {SafeHtml} from '../../../types/internal';
 

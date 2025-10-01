@@ -1,19 +1,17 @@
 import {LogEventStatus, LogEventType} from '../../../../constants/internal';
 
-import {sanitizeHtml as clientSanitizeHtml} from '../sanitizeHtml';
+import {Duration as clientDuration} from './Duration';
+import {StepContent as clientStepContent} from './StepContent';
 
-import {renderDuration as clientRenderDuration} from './renderDuration';
-import {renderStepContent as clientRenderStepContent} from './renderStepContent';
+import type {LogEvent, ReportClientState, UtcTimeInMs} from '../../../../types/internal';
 
-import type {LogEvent, ReportClientState, SafeHtml, UtcTimeInMs} from '../../../../types/internal';
+const Duration = clientDuration;
+const StepContent = clientStepContent;
 
-const renderDuration = clientRenderDuration;
-const renderStepContent = clientRenderStepContent;
-const sanitizeHtml = clientSanitizeHtml;
-
+declare const jsx: JSX.Runtime;
 declare const reportClientState: ReportClientState;
 
-type Options = Readonly<{
+type Props = Readonly<{
   logEvent: LogEvent;
   nextLogEventTime: UtcTimeInMs;
 }>;
@@ -23,9 +21,8 @@ type Options = Readonly<{
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function renderStep({logEvent, nextLogEventTime}: Options): SafeHtml {
+export const Step: JSX.Component<Props> = ({logEvent, nextLogEventTime}) => {
   const {message, payload, time, type} = logEvent;
-  const durationInMs = nextLogEventTime - time;
   const isPayloadEmpty = !payload || Object.keys(payload).length === 0;
   const status = payload?.logEventStatus ?? LogEventStatus.Passed;
 
@@ -42,19 +39,25 @@ export function renderStep({logEvent, nextLogEventTime}: Options): SafeHtml {
     }
   }
 
-  const content = renderStepContent({
-    pathToScreenshotOfPage,
-    payload: isPayloadEmpty ? undefined : payload,
-    type,
-  });
   const maybeEmptyClass = isPayloadEmpty ? 'step-expanded_is-empty' : '';
   const isErrorScreenshot = pathToScreenshotOfPage !== undefined;
 
-  return sanitizeHtml`
-<button aria-expanded="${isErrorScreenshot}" class="step-expanded step-expanded_status_${status} ${maybeEmptyClass}">
-  <span class="step-expanded__name">${message}</span>
-  <span class="step-expanded__time">${renderDuration(durationInMs)}</span>
-</button>
-${content}
-`;
-}
+  return (
+    <>
+      <button
+        aria-expanded={isErrorScreenshot}
+        class={`step-expanded step-expanded_status_${status} ${maybeEmptyClass}`}
+      >
+        <span class="step-expanded__name">{message}</span>
+        <span class="step-expanded__time">
+          <Duration durationInMs={nextLogEventTime - time} />
+        </span>
+      </button>
+      <StepContent
+        pathToScreenshotOfPage={pathToScreenshotOfPage}
+        payload={isPayloadEmpty ? undefined : payload}
+        type={type}
+      />
+    </>
+  );
+};

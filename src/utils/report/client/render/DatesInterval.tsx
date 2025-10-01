@@ -1,22 +1,20 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 
-import {sanitizeHtml as clientSanitizeHtml} from '../sanitizeHtml';
+import type {UtcTimeInMs} from '../../../../types/internal';
 
-import type {SafeHtml, UtcTimeInMs} from '../../../../types/internal';
-
-type Options = Readonly<{
+type Props = Readonly<{
   endTimeInMs: UtcTimeInMs;
   startTimeInMs: UtcTimeInMs;
 }>;
 
-const sanitizeHtml = clientSanitizeHtml;
+declare const jsx: JSX.Runtime;
 
 /**
  * Renders the interval between two dates.
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function renderDatesInterval({endTimeInMs, startTimeInMs}: Options): SafeHtml {
+export const DatesInterval: JSX.Component<Props> = ({endTimeInMs, startTimeInMs}) => {
   const startDate = new Date(startTimeInMs);
   const endDate = new Date(endTimeInMs);
 
@@ -28,6 +26,12 @@ export function renderDatesInterval({endTimeInMs, startTimeInMs}: Options): Safe
   const startTime = startDateTime.slice(11, 19);
   const endTime = endDateTime.slice(11, 19);
 
-  return sanitizeHtml`<time datetime="${startDateTime}">${date} ${startTime}</time> –
-<time datetime="${endDateTime}">${endTime}</time> UTC`;
-}
+  return (
+    <>
+      <time dateTime={startDateTime}>
+        {date} {startTime}
+      </time>{' '}
+      – <time dateTime={endDateTime}>{endTime}</time> UTC
+    </>
+  );
+};

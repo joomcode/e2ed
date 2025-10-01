@@ -1,3 +1,5 @@
+import {createSafeHtmlWithoutSanitize} from '../client';
+
 declare const jsx: JSX.Runtime;
 
 type Props = Readonly<{warnings: readonly string[]}>;
@@ -13,5 +15,5 @@ export const Warnings: JSX.Component<Props> = ({warnings}) => {
 
   const renderedWarnings = warnings.map((warning) => <div class="__error">{warning}</div>);
 
-  return <div class="warnings">{renderedWarnings.join('')}</div>;
+  return <div class="warnings">{createSafeHtmlWithoutSanitize`${renderedWarnings.join('')}`}</div>;
 };

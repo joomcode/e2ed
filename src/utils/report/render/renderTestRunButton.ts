@@ -1,4 +1,4 @@
-import {renderDuration, sanitizeHtml} from '../client';
+import {Duration, sanitizeHtml} from '../client';
 
 import {locatorAttributes} from './locator';
 
@@ -35,6 +35,6 @@ export const renderTestRunButton = ({
     testId,
     'parameters',
   )}>${mainParams}</span></span>
-  <span class="test-button__time" ${locatorAttributes(testId, 'time')}>${renderDuration(durationInMs)}</span>
+  <span class="test-button__time" ${locatorAttributes(testId, 'time')}>${Duration({durationInMs})}</span>
 </button>`;
 };

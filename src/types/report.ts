@@ -5,7 +5,6 @@ import type {EndE2edReason, ExitCode, TestRunStatus} from '../constants/internal
 import type {ApiStatistics} from './apiStatistics';
 import type {FullPackConfig} from './config';
 import type {UtcTimeInMs} from './date';
-import type {SafeHtml} from './html';
 import type {TestFilePath} from './paths';
 import type {StartInfo} from './startInfo';
 import type {FullTestRun, LiteTestRun, RunHash, RunId} from './testRun';
@@ -99,7 +98,7 @@ export type ReportClientState = {
   readonly fullTestRuns: readonly FullTestRun[];
   readonly internalDirectoryName: string;
   lengthOfReadedJsonReportDataParts: number;
-  readonly locator: LocatorFunction<SafeHtml>;
+  readonly locator: LocatorFunction;
   readonly pathToScreenshotsDirectoryForReport: string | null;
   readonly readJsonReportDataObservers: MutationObserver[];
   reportClientData?: ReportClientData;

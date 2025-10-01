@@ -1,13 +1,16 @@
 import {assertValueIsDefined as clientAssertValueIsDefined} from './assertValueIsDefined';
-import {maybeRenderApiStatistics as clientMaybeRenderApiStatistics} from './maybeRenderApiStatistics';
-import {renderTestRunDetails as clientRenderTestRunDetails} from './render';
+import {
+  MaybeApiStatistics as clientMaybeApiStatistics,
+  TestRunDetails as clientTestRunDetails,
+} from './render';
 
-import type {ReportClientState, RunHash, SafeHtml} from '../../../types/internal';
+import type {ReportClientState, RunHash} from '../../../types/internal';
 
 const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
-const maybeRenderApiStatistics = clientMaybeRenderApiStatistics;
-const renderTestRunDetails = clientRenderTestRunDetails;
+const MaybeApiStatistics = clientMaybeApiStatistics;
+const TestRunDetails = clientTestRunDetails;
 
+declare const jsx: JSX.Runtime;
 declare const reportClientState: ReportClientState;
 
 /**
@@ -62,9 +65,9 @@ export function chooseTestRun(runHash: RunHash): void {
     return;
   }
 
-  let rightColumnHtml: SafeHtml | undefined = maybeRenderApiStatistics(runHash);
+  let rightColumnHtml = <MaybeApiStatistics runHash={runHash} />;
 
-  if (rightColumnHtml === undefined) {
+  if (rightColumnHtml.length === 0) {
     const {fullTestRuns} = reportClientState;
     const fullTestRun = fullTestRuns.find((testRun) => testRun.runHash === runHash);
 
@@ -77,7 +80,7 @@ export function chooseTestRun(runHash: RunHash): void {
       return;
     }
 
-    rightColumnHtml = renderTestRunDetails(fullTestRun);
+    rightColumnHtml = <TestRunDetails fullTestRun={fullTestRun} />;
   }
 
   e2edRightColumnContainer.innerHTML = String(rightColumnHtml);

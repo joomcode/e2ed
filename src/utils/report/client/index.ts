@@ -17,8 +17,6 @@ export {createJsxRuntime} from './createJsxRuntime';
 /** @internal */
 export {initialScript} from './initialScript';
 /** @internal */
-export {maybeRenderApiStatistics} from './maybeRenderApiStatistics';
-/** @internal */
 export {onDomContentLoad} from './onDomContentLoad';
 /** @internal */
 export {onFirstJsonReportDataLoad} from './onFirstJsonReportDataLoad';
@@ -30,17 +28,17 @@ export {readJsonReportData} from './readJsonReportData';
 export {readPartOfJsonReportData} from './readPartOfJsonReportData';
 /** @internal */
 export {
+  ApiStatistics,
   ApiStatisticsItem,
-  renderApiStatistics,
-  renderAttributes,
-  renderDatesInterval,
-  renderDuration,
-  renderStep,
-  renderStepContent,
-  renderSteps,
-  renderTestRunDescription,
-  renderTestRunDetails,
-  renderTestRunError,
+  DatesInterval,
+  Duration,
+  MaybeApiStatistics,
+  Step,
+  StepContent,
+  Steps,
+  TestRunDescription,
+  TestRunDetails,
+  TestRunError,
 } from './render';
 /** @internal */
 export {

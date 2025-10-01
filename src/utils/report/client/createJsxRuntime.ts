@@ -38,7 +38,7 @@ export function createJsxRuntime(): JSX.Runtime {
     }
 
     const attributesParts: readonly SafeHtml[] = Object.entries(properties).map(
-      ([key, value]) => sanitizeHtml`${key}="${value}"`,
+      ([key, value]) => sanitizeHtml`${key.toLowerCase()}="${value}"`,
     );
     const attributesHtml = createSafeHtmlWithoutSanitize`${attributesParts.join('')}`;
 

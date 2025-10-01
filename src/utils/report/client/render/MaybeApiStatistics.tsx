@@ -1,15 +1,13 @@
-import {renderApiStatistics as clientRenderApiStatistics} from './render';
+import {ApiStatistics as clientApiStatistics} from './ApiStatistics';
 
-import type {
-  ApiStatisticsReportHash,
-  ReportClientState,
-  RunHash,
-  SafeHtml,
-} from '../../../types/internal';
+import type {ApiStatisticsReportHash, ReportClientState, RunHash} from '../../../../types/internal';
 
-const renderApiStatistics = clientRenderApiStatistics;
+const ApiStatistics = clientApiStatistics;
 
+declare const jsx: JSX.Runtime;
 declare const reportClientState: ReportClientState;
+
+type Props = Readonly<{runHash: RunHash}>;
 
 /**
  * Renders `ApiStatistics` by `runHash`, if this is a one of kind of `ApiStatistics` hash
@@ -17,7 +15,7 @@ declare const reportClientState: ReportClientState;
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function maybeRenderApiStatistics(runHash: RunHash): SafeHtml | undefined {
+export const MaybeApiStatistics: JSX.Component<Props> = ({runHash}) => {
   const hash = String(runHash);
 
   const pagesHash: ApiStatisticsReportHash = 'api-statistics-pages';
@@ -25,7 +23,7 @@ export function maybeRenderApiStatistics(runHash: RunHash): SafeHtml | undefined
   const resourcesHash: ApiStatisticsReportHash = 'api-statistics-resources';
 
   if (hash !== pagesHash && hash !== requestsHash && hash !== resourcesHash) {
-    return;
+    return <></>;
   }
 
   const {reportClientData} = reportClientState;
@@ -36,10 +34,10 @@ export function maybeRenderApiStatistics(runHash: RunHash): SafeHtml | undefined
       `Cannot find report client data in JSON report data (tried to click "${hash}"). Probably JSON report data not yet completely loaded. Please try click again later`,
     );
 
-    return;
+    return <></>;
   }
 
   const {apiStatistics} = reportClientData;
 
-  return renderApiStatistics({apiStatistics, hash});
-}
+  return <ApiStatistics apiStatistics={apiStatistics} hash={hash} />;
+};

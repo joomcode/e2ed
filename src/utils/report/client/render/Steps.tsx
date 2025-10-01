@@ -1,15 +1,17 @@
 import {assertValueIsDefined as clientAssertValueIsDefined} from '../assertValueIsDefined';
 import {createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize} from '../sanitizeHtml';
 
-import {renderStep as clientRenderStep} from './renderStep';
+import {Step as clientStep} from './Step';
 
 import type {LogEvent, SafeHtml, UtcTimeInMs} from '../../../../types/internal';
 
 const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
 const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
-const renderStep = clientRenderStep;
+const Step = clientStep;
 
-type Options = Readonly<{
+declare const jsx: JSX.Runtime;
+
+type Props = Readonly<{
   endTimeInMs: UtcTimeInMs;
   logEvents: readonly LogEvent[];
 }>;
@@ -19,7 +21,7 @@ type Options = Readonly<{
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function renderSteps({endTimeInMs, logEvents}: Options): SafeHtml {
+export const Steps: JSX.Component<Props> = ({endTimeInMs, logEvents}) => {
   const stepHtmls: SafeHtml[] = [];
 
   for (let index = 0; index < logEvents.length; index += 1) {
@@ -29,10 +31,10 @@ export function renderSteps({endTimeInMs, logEvents}: Options): SafeHtml {
 
     const nextLogEvent = logEvents[index + 1];
     const nextLogEventTime = nextLogEvent?.time ?? endTimeInMs;
-    const stepHtml = renderStep({logEvent, nextLogEventTime});
+    const stepHtml = <Step logEvent={logEvent} nextLogEventTime={nextLogEventTime} />;
 
     stepHtmls.push(stepHtml);
   }
 
   return createSafeHtmlWithoutSanitize`${stepHtmls.join('')}`;
-}
+};

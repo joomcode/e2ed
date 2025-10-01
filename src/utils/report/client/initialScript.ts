@@ -1,7 +1,4 @@
-import {
-  createSimpleLocator as clientCreateSimpleLocator,
-  type LocatorFunction,
-} from 'create-locator';
+import {createSimpleLocator as clientCreateSimpleLocator} from 'create-locator';
 
 import {addDomContentLoadedHandler as clientAddDomContentLoadedHandler} from './addDomContentLoadedHandler';
 import {addOnClickOnClass as clientAddOnClickOnClass} from './addOnClickOnClass';
@@ -10,10 +7,9 @@ import {clickOnStep as clientClickOnStep} from './clickOnStep';
 import {clickOnTestRun as clientClickOnTestRun} from './clickOnTestRun';
 import {createJsxRuntime as clientCreateJsxRuntime} from './createJsxRuntime';
 import {onDomContentLoad as clientOnDomContentLoad} from './onDomContentLoad';
-import {renderAttributes as clientRenderAttributes} from './render';
 import {setReadJsonReportDataObservers as clientSetReadJsonReportDataObservers} from './setReadJsonReportDataObservers';
 
-import type {ReportClientState, SafeHtml} from '../../../types/internal';
+import type {ReportClientState} from '../../../types/internal';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 declare let jsx: JSX.Runtime;
@@ -27,7 +23,6 @@ const clickOnTestRun = clientClickOnTestRun;
 const createJsxRuntime = clientCreateJsxRuntime;
 const createSimpleLocator = clientCreateSimpleLocator;
 const onDomContentLoad = clientOnDomContentLoad;
-const renderAttributes = clientRenderAttributes;
 const setReadJsonReportDataObservers = clientSetReadJsonReportDataObservers;
 
 /**
@@ -38,9 +33,7 @@ const setReadJsonReportDataObservers = clientSetReadJsonReportDataObservers;
 export function initialScript(): void {
   jsx = createJsxRuntime();
 
-  const {locator: locatorAttributes} = createSimpleLocator(reportClientState.createLocatorOptions);
-  const locator: LocatorFunction<SafeHtml> = (...args) =>
-    renderAttributes(locatorAttributes(...(args as [string])));
+  const {locator} = createSimpleLocator(reportClientState.createLocatorOptions);
 
   Object.assign<ReportClientState, Partial<ReportClientState>>(reportClientState, {locator});
 

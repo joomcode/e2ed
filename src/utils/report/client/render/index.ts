@@ -1,22 +1,22 @@
 /** @internal */
+export {ApiStatistics} from './ApiStatistics';
+/** @internal */
 export {ApiStatisticsItem} from './ApiStatisticsItem';
 /** @internal */
-export {renderApiStatistics} from './renderApiStatistics';
+export {DatesInterval} from './DatesInterval';
 /** @internal */
-export {renderAttributes} from './renderAttributes';
+export {Duration} from './Duration';
 /** @internal */
-export {renderDatesInterval} from './renderDatesInterval';
+export {MaybeApiStatistics} from './MaybeApiStatistics';
 /** @internal */
-export {renderDuration} from './renderDuration';
+export {Step} from './Step';
 /** @internal */
-export {renderStep} from './renderStep';
+export {StepContent} from './StepContent';
 /** @internal */
-export {renderStepContent} from './renderStepContent';
+export {Steps} from './Steps';
 /** @internal */
-export {renderSteps} from './renderSteps';
+export {TestRunDescription} from './TestRunDescription';
 /** @internal */
-export {renderTestRunDescription} from './renderTestRunDescription';
+export {TestRunDetails} from './TestRunDetails';
 /** @internal */
-export {renderTestRunDetails} from './renderTestRunDetails';
-/** @internal */
-export {renderTestRunError} from './renderTestRunError';
+export {TestRunError} from './TestRunError';

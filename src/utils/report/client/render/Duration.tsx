@@ -2,18 +2,20 @@ import {getDurationWithUnits as clientGetDurationWithUnits} from '../../../getDu
 
 import {createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize} from '../sanitizeHtml';
 
-import type {SafeHtml} from '../../../../types/internal';
-
 const getDurationWithUnits = clientGetDurationWithUnits;
 const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
+
+declare const jsx: JSX.Runtime;
+
+type Props = Readonly<{durationInMs: number}>;
 
 /**
  * Renders the duration of time interval in hours, minutes, seconds and milliseconds.
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function renderDuration(durationInMs: number): SafeHtml {
+export const Duration: JSX.Component<Props> = ({durationInMs}) => {
   const durationWithUnits = getDurationWithUnits(durationInMs);
 
   return createSafeHtmlWithoutSanitize`${durationWithUnits}`;
-}
+};

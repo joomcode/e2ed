@@ -1,8 +1,8 @@
-import {createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize} from '../sanitizeHtml';
+import {createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize} from '../client';
 
 import type {Attributes} from 'create-locator';
 
-import type {SafeHtml} from '../../../../types/internal';
+import type {SafeHtml} from '../../../types/internal';
 
 const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
 

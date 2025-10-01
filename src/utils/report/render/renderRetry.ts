@@ -2,8 +2,8 @@ import {createSafeHtmlWithoutSanitize} from '../client';
 
 import {compareByStatuses} from './compareByStatuses';
 import {locatorAttributes} from './locator';
-import {renderRetryHeader} from './renderRetryHeader';
 import {renderTestRunButton} from './renderTestRunButton';
+import {RetryHeader} from './RetryHeader';
 
 import type {RetryProps, SafeHtml} from '../../../types/internal';
 
@@ -24,7 +24,7 @@ export const renderRetry = ({retry}: Props): SafeHtml => {
 <article class="retry" id="retry${retry.retryIndex}" ${
     retry.hidden ? 'hidden' : ''
   } ${locatorAttributes('Retry', {index: retry.retryIndex})}>
-  ${renderRetryHeader({...retry})}
+  ${RetryHeader({...retry})}
   ${buttons.join('')}
 </article>`;
 };

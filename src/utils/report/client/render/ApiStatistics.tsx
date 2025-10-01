@@ -3,7 +3,7 @@ import {createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize} fr
 import {ApiStatisticsItem as clientApiStatisticsItem} from './ApiStatisticsItem';
 
 import type {
-  ApiStatistics,
+  ApiStatistics as ApiStatisticsType,
   ApiStatisticsReportHash,
   ObjectEntries,
   SafeHtml,
@@ -12,8 +12,10 @@ import type {
 const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
 const ApiStatisticsItem = clientApiStatisticsItem;
 
-type Options = Readonly<{
-  apiStatistics: ApiStatistics;
+declare const jsx: JSX.Runtime;
+
+type Props = Readonly<{
+  apiStatistics: ApiStatisticsType;
   hash: ApiStatisticsReportHash;
 }>;
 
@@ -22,7 +24,7 @@ type Options = Readonly<{
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function renderApiStatistics({apiStatistics, hash}: Options): SafeHtml {
+export const ApiStatistics: JSX.Component<Props> = ({apiStatistics, hash}) => {
   let header: string | undefined;
   const items: SafeHtml[] = [];
 
@@ -38,11 +40,13 @@ export function renderApiStatistics({apiStatistics, hash}: Options): SafeHtml {
         pageCount += count;
         pageDuration += duration;
 
-        pageItems.push(ApiStatisticsItem({count, duration, name: url, url}));
+        pageItems.push(
+          <ApiStatisticsItem count={count} duration={duration} name={url} url={url} />,
+        );
       }
 
       items.push(
-        ApiStatisticsItem({count: pageCount, duration: pageDuration, isHeader: true, name}),
+        <ApiStatisticsItem count={pageCount} duration={pageDuration} isHeader={true} name={name} />,
       );
       items.push(...pageItems);
     }
@@ -54,12 +58,12 @@ export function renderApiStatistics({apiStatistics, hash}: Options): SafeHtml {
         // eslint-disable-next-line max-depth
         for (const [statusCode, {count, duration, size}] of Object.entries(byStatusCode)) {
           items.push(
-            ApiStatisticsItem({
-              count,
-              duration,
-              name: `${method} ${url} ${statusCode}`,
-              size,
-            }),
+            <ApiStatisticsItem
+              count={count}
+              duration={duration}
+              name={`${method} ${url} ${statusCode}`}
+              size={size}
+            />,
           );
         }
       }
@@ -72,23 +76,25 @@ export function renderApiStatistics({apiStatistics, hash}: Options): SafeHtml {
     >) {
       for (const [statusCode, {count, duration, size}] of Object.entries(byStatusCode)) {
         items.push(
-          ApiStatisticsItem({
-            count,
-            duration,
-            name: `${url} ${statusCode}`,
-            size,
-            url,
-          }),
+          <ApiStatisticsItem
+            count={count}
+            duration={duration}
+            name={`${url} ${statusCode}`}
+            size={size}
+            url={url}
+          />,
         );
       }
     }
   }
 
-  return createSafeHtmlWithoutSanitize`<article class="test-details">
-  <p class="test-details__path"></p>
-  <h2 class="test-details__title">${header}</h2>
-  <div role="tabpanel">
-    <article class="overview">${items.join('')}</article>
-  </div>
-</article>`;
-}
+  return (
+    <article class="test-details">
+      <p class="test-details__path"></p>
+      <h2 class="test-details__title">{header}</h2>
+      <div role="tabpanel">
+        <article class="overview">{createSafeHtmlWithoutSanitize`${items.join('')}`}</article>
+      </div>
+    </article>
+  );
+};
