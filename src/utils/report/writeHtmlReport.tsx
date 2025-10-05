@@ -11,9 +11,11 @@ import {generalLog} from '../generalLog';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {getFileSizeInMb} from '../getFileSizeInMb';
 
-import {renderReportToHtml} from './render';
+import {HtmlReport} from './render';
 
 import type {FilePathFromRoot, ReportData, UtcTimeInMs} from '../../types/internal';
+
+declare const jsx: JSX.Runtime;
 
 /**
  * Writes HTML report (`report.html` file) with test runs results.
@@ -22,7 +24,7 @@ import type {FilePathFromRoot, ReportData, UtcTimeInMs} from '../../types/intern
 export const writeHtmlReport = async (reportData: ReportData): Promise<void> => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
-  const reportHtml = renderReportToHtml(reportData);
+  const reportHtml = <HtmlReport reportData={reportData} />;
   const {reportFileName} = reportData;
 
   assertValueIsNotNull(reportFileName, 'reportFileName is not null');

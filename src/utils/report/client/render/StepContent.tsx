@@ -1,16 +1,18 @@
 import {LogEventType} from '../../../../constants/internal';
 
-import {createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize} from '../sanitizeHtml';
+import {List as clientList} from './List';
+import {Screenshot as clientScreenshot} from './Screenshot';
 
 import type {LogPayload, SafeHtml} from '../../../../types/internal';
 
-const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
+const List = clientList;
+const Screenshot = clientScreenshot;
 
 declare const jsx: JSX.Runtime;
 
 type Props = Readonly<{
   pathToScreenshotOfPage: string | undefined;
-  payload: LogPayload | undefined;
+  payload: LogPayload;
   type: LogEventType;
 }>;
 
@@ -20,46 +22,38 @@ type Props = Readonly<{
  * @internal
  */
 export const StepContent: JSX.Component<Props> = ({pathToScreenshotOfPage, payload, type}) => {
-  if (payload === undefined) {
-    return <></>;
-  }
-
   const payloadString = JSON.stringify(payload, null, 2);
-  const code = <code>{payloadString}</code>;
-  const images: SafeHtml[] = [];
+  const screenshots: SafeHtml[] = [];
 
   if (pathToScreenshotOfPage !== undefined) {
-    images.push(
-      <img src={pathToScreenshotOfPage} alt="Screenshot of page" title="Screenshot of page" />,
-    );
+    screenshots.push(<Screenshot name="Screenshot of page" open src={pathToScreenshotOfPage} />);
   }
 
   if (type === LogEventType.InternalAssert) {
     const {actualScreenshotUrl, diffScreenshotUrl, expectedScreenshotUrl} = payload;
 
     if (typeof actualScreenshotUrl === 'string') {
-      images.push(<img src={actualScreenshotUrl} alt="Actual" title="Actual" />);
+      screenshots.push(<Screenshot name="Actual" src={actualScreenshotUrl} />);
     }
 
     if (typeof diffScreenshotUrl === 'string') {
-      images.push(<img src={diffScreenshotUrl} alt="Diff" title="Diff" />);
+      screenshots.push(<Screenshot name="Diff" src={diffScreenshotUrl} />);
     }
 
     if (typeof expectedScreenshotUrl === 'string') {
-      images.push(<img src={expectedScreenshotUrl} alt="Expected" title="Expected" />);
+      screenshots.push(<Screenshot name="Expected" src={expectedScreenshotUrl} />);
     }
   }
 
-  const imagesHtml = createSafeHtmlWithoutSanitize`${images.join('')}`;
-
-  if (images.length > 0) {
-    return (
-      <div class="step-expanded-panel step__panel">
-        <pre>{code}</pre>
-        {imagesHtml}
-      </div>
-    );
-  }
-
-  return <pre class="step-expanded-panel step__panel">{code}</pre>;
+  return (
+    <>
+      <details class="step-attachment">
+        <summary class="step-attachment__title">Details</summary>
+        <pre class="step__code">
+          <code>{payloadString}</code>
+        </pre>
+      </details>
+      <List elements={screenshots} />
+    </>
+  );
 };

@@ -19,12 +19,12 @@ export const RetryHeader: JSX.Component<Props> = ({endTimeInMs, retryIndex, star
 
   return (
     <>
-      <h3 class="__title" {...locator(testId, 'title')}>
+      <h3 class="retry__title" {...locator(testId, 'title')}>
         Retry {retryIndex}
       </h3>
-      <p class="__date" {...locator(testId, 'date')}>
-        <DatesInterval endTimeInMs={endTimeInMs} startTimeInMs={startTimeInMs} />(
-        <Duration durationInMs={durationInMs} />
+      <p class="retry__date" {...locator(testId, 'date')}>
+        <DatesInterval endTimeInMs={endTimeInMs} startTimeInMs={startTimeInMs} /> (
+        <Duration durationInMs={durationInMs} />)
       </p>
     </>
   );

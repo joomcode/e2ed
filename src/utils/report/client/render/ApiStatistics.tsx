@@ -1,6 +1,5 @@
-import {createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize} from '../sanitizeHtml';
-
 import {ApiStatisticsItem as clientApiStatisticsItem} from './ApiStatisticsItem';
+import {List as clientList} from './List';
 
 import type {
   ApiStatistics as ApiStatisticsType,
@@ -9,8 +8,8 @@ import type {
   SafeHtml,
 } from '../../../../types/internal';
 
-const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
 const ApiStatisticsItem = clientApiStatisticsItem;
+const List = clientList;
 
 declare const jsx: JSX.Runtime;
 
@@ -92,9 +91,7 @@ export const ApiStatistics: JSX.Component<Props> = ({apiStatistics, hash}) => {
     <article class="test-details">
       <p class="test-details__path"></p>
       <h2 class="test-details__title">{header}</h2>
-      <div role="tabpanel">
-        <article class="overview">{createSafeHtmlWithoutSanitize`${items.join('')}`}</article>
-      </div>
+      <List elements={items} />
     </article>
   );
 };

@@ -6,25 +6,28 @@ import {createJsxRuntime, sanitizeHtml} from '../client';
 import {getImgCspHosts} from '../getImgCspHosts';
 import {getRetriesProps} from '../getRetriesProps';
 
+import {DragContainer} from './DragContainer';
+import {Errors} from './Errors';
+import {Head} from './Head';
+import {JsonData} from './JsonData';
 import {locator} from './locator';
-import {renderErrors} from './renderErrors';
-import {renderHead} from './renderHead';
-import {renderJsonData} from './renderJsonData';
-import {renderNavigation} from './renderNavigation';
-import {renderRetries} from './renderRetries';
+import {Navigation} from './Navigation';
+import {Retries} from './Retries';
 import {Warnings} from './Warnings';
 
-import type {ReportData, SafeHtml, UtcTimeInMs} from '../../../types/internal';
+import type {ReportData, UtcTimeInMs} from '../../../types/internal';
 
 declare const jsx: JSX.Runtime;
 
 Object.assign(globalThis, {jsx: createJsxRuntime()});
 
+type Props = Readonly<{reportData: ReportData}>;
+
 /**
  * Renders report data to HTML report page.
  * @internal
  */
-export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
+export const HtmlReport: JSX.Component<Props> = ({reportData}) => {
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const {length} = reportData.fullTestRuns;
@@ -39,32 +42,28 @@ export const renderReportToHtml = (reportData: ReportData): SafeHtml => {
 
   const page = (
     <html lang="en">
-      {renderHead(reportFileName, imgCspHosts)}
+      <Head imgCspHosts={imgCspHosts} reportFileName={reportFileName} />
       <body>
-        {renderNavigation({retries})}
-        <div class="main" role="tabpanel">
-          <section
-            class="main__section _position_left"
-            aria-label={`Retry ${maxRetry}`}
-            {...locator('column1')}
-          >
-            {renderRetries({retries})}
-            {renderErrors(reportData.errors)}
+        <Navigation retries={retries} />
+        <div class="main">
+          <section class="column-2" aria-label={`Retry ${maxRetry}`} {...locator('column-2')}>
+            <Retries retries={retries} />
+            <Errors errors={reportData.errors} />
             <Warnings warnings={reportData.warnings} />
           </section>
-          <div class="drag-container"></div>
+          <DragContainer />
           <section
-            aria-label="Tests results"
-            class="main__section _position_right"
+            class="column-3"
             id="e2edRightColumnContainer"
-            {...locator('column2')}
+            aria-label="Tests results"
+            {...locator('column-3')}
           >
             <div class="test-details-empty">
               <p>No test selected</p>
             </div>
           </section>
         </div>
-        {renderJsonData(reportData)}
+        <JsonData reportData={reportData} />
       </body>
     </html>
   );

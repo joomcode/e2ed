@@ -2,7 +2,7 @@
  * Get the duration of time interval in hours, minutes, seconds and milliseconds.
  * `getDurationWithUnits(1213)` = `'1s 213ms'`.
  * Should be a pure function without dependencies in the form of a function declaration,
- * because it is used in the JS code of HTML report.
+ * because it is used in the JS client code of HTML report.
  */
 export function getDurationWithUnits(durationInMs: number): string {
   const msInSecond = 1_000;

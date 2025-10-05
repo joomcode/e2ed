@@ -12,14 +12,14 @@ const chooseTestRun = clientChooseTestRun;
 export function clickOnTestRun(element: HTMLElement): void {
   const runHash = (element.dataset as {runhash: RunHash}).runhash;
 
-  const previousChosenTestRunButton = document.querySelector('.test-button[aria-selected="true"]');
+  const previousChosenTestRunButton = document.querySelector('.test-link[aria-current="true"]');
 
   if (previousChosenTestRunButton) {
-    previousChosenTestRunButton.ariaSelected = 'false';
+    previousChosenTestRunButton.ariaCurrent = null;
   }
 
   // eslint-disable-next-line no-param-reassign
-  element.ariaSelected = 'true';
+  element.ariaCurrent = 'true';
 
   chooseTestRun(runHash);
 }

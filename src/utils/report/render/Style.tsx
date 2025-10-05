@@ -3,18 +3,22 @@ import {join} from 'node:path';
 
 import {INSTALLED_E2ED_DIRECTORY_PATH, READ_FILE_OPTIONS} from '../../../constants/internal';
 
-import {createSafeHtmlWithoutSanitize} from '../client';
+import {SafeHtml} from '../client';
 
-import type {SafeHtml} from '../../../types/internal';
+declare const jsx: JSX.Runtime;
 
 /**
  * Renders tag `<style>` with all CSS styles.
  * @internal
  */
-export const renderStyle = (): SafeHtml => {
+export const Style: JSX.Component = () => {
   const pathToCss = join(INSTALLED_E2ED_DIRECTORY_PATH, 'styles', 'report.css');
 
   const cssString = readFileSync(pathToCss, READ_FILE_OPTIONS);
 
-  return createSafeHtmlWithoutSanitize`<style>${cssString}</style>`;
+  return (
+    <style>
+      <SafeHtml withoutSanitize={cssString} />
+    </style>
+  );
 };

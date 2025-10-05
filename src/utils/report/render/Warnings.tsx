@@ -1,4 +1,4 @@
-import {createSafeHtmlWithoutSanitize} from '../client';
+import {List} from '../client';
 
 declare const jsx: JSX.Runtime;
 
@@ -15,5 +15,9 @@ export const Warnings: JSX.Component<Props> = ({warnings}) => {
 
   const renderedWarnings = warnings.map((warning) => <div class="__error">{warning}</div>);
 
-  return <div class="warnings">{createSafeHtmlWithoutSanitize`${renderedWarnings.join('')}`}</div>;
+  return (
+    <div class="warnings">
+      <List elements={renderedWarnings} />
+    </div>
+  );
 };

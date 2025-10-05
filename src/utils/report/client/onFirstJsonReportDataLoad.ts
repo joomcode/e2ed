@@ -17,7 +17,7 @@ export function onFirstJsonReportDataLoad(): void {
   }
 
   const buttonForFailedTestRun = document.querySelector(
-    '.retry:not([hidden]) .test-button_status_failed',
+    '.retry:not([hidden]) .test-link[data-status="failed"]',
   );
 
   if (!buttonForFailedTestRun) {

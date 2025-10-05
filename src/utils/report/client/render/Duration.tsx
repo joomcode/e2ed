@@ -1,9 +1,9 @@
 import {getDurationWithUnits as clientGetDurationWithUnits} from '../../../getDurationWithUnits';
 
-import {createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize} from '../sanitizeHtml';
+import {SafeHtml as clientSafeHtml} from './SafeHtml';
 
 const getDurationWithUnits = clientGetDurationWithUnits;
-const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
+const SafeHtml = clientSafeHtml;
 
 declare const jsx: JSX.Runtime;
 
@@ -17,5 +17,5 @@ type Props = Readonly<{durationInMs: number}>;
 export const Duration: JSX.Component<Props> = ({durationInMs}) => {
   const durationWithUnits = getDurationWithUnits(durationInMs);
 
-  return createSafeHtmlWithoutSanitize`${durationWithUnits}`;
+  return <SafeHtml withoutSanitize={durationWithUnits} />;
 };

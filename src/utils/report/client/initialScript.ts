@@ -37,9 +37,9 @@ export function initialScript(): void {
 
   Object.assign<ReportClientState, Partial<ReportClientState>>(reportClientState, {locator});
 
-  addOnClickOnClass('nav-tabs__button', clickOnRetry);
+  addOnClickOnClass('retry-link', clickOnRetry);
   addOnClickOnClass('step-expanded', clickOnStep);
-  addOnClickOnClass('test-button', clickOnTestRun);
+  addOnClickOnClass('test-link', clickOnTestRun);
 
   setReadJsonReportDataObservers();
 

@@ -35,19 +35,15 @@ export const TestRunDetails: JSX.Component<Props> = ({fullTestRun}) => {
     <article class="test-details">
       <p class="test-details__path">{filePath}</p>
       <h2 class="test-details__title" {...locator('test-details-title', {capitalizedStatus})}>
-        <span class={`color-cell color-cell_status_${status} test-details__status`}>
+        <span class="color-cell" data-status={status}>
           {capitalizedStatus}
         </span>
         {name}
       </h2>
-      <div role="tabpanel">
-        <TestRunDescription fullTestRun={fullTestRun} />
-        <article class="overview">
-          <h3 class="overview__title">Execution</h3>
-          <Steps endTimeInMs={endTimeInMs} logEvents={logEvents} />
-          <TestRunError runError={runError} />
-        </article>
-      </div>
+      <TestRunError runError={runError} />
+      <TestRunDescription fullTestRun={fullTestRun} />
+      <h4 class="test-details__retry-title">Execution</h4>
+      <Steps endTimeInMs={endTimeInMs} logEvents={logEvents} />
     </article>
   );
 };

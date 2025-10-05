@@ -7,7 +7,13 @@ export {DatesInterval} from './DatesInterval';
 /** @internal */
 export {Duration} from './Duration';
 /** @internal */
+export {List} from './List';
+/** @internal */
 export {MaybeApiStatistics} from './MaybeApiStatistics';
+/** @internal */
+export {SafeHtml} from './SafeHtml';
+/** @internal */
+export {Screenshot} from './Screenshot';
 /** @internal */
 export {Step} from './Step';
 /** @internal */

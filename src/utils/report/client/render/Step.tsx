@@ -23,7 +23,9 @@ type Props = Readonly<{
  */
 export const Step: JSX.Component<Props> = ({logEvent, nextLogEventTime}) => {
   const {message, payload, time, type} = logEvent;
+  const date = new Date(time).toISOString();
   const isPayloadEmpty = !payload || Object.keys(payload).length === 0;
+  const popoverId = Math.random().toString(16).slice(2);
   const status = payload?.logEventStatus ?? LogEventStatus.Passed;
 
   let pathToScreenshotOfPage: string | undefined;
@@ -39,25 +41,32 @@ export const Step: JSX.Component<Props> = ({logEvent, nextLogEventTime}) => {
     }
   }
 
-  const maybeEmptyClass = isPayloadEmpty ? 'step-expanded_is-empty' : '';
-  const isErrorScreenshot = pathToScreenshotOfPage !== undefined;
-
-  return (
-    <>
-      <button
-        aria-expanded={isErrorScreenshot}
-        class={`step-expanded step-expanded_status_${status} ${maybeEmptyClass}`}
-      >
-        <span class="step-expanded__name">{message}</span>
-        <span class="step-expanded__time">
+  const content = isPayloadEmpty ? (
+    <div class="step__head">
+      <span class="step__name">{message}</span>
+      <span class="step__duration">
+        <Duration durationInMs={nextLogEventTime - time} />
+      </span>
+    </div>
+  ) : (
+    <details class="step__details">
+      <summary class="step__head">
+        <span class="step__name">{message}</span>
+        <span class="step__duration">
           <Duration durationInMs={nextLogEventTime - time} />
         </span>
-      </button>
-      <StepContent
-        pathToScreenshotOfPage={pathToScreenshotOfPage}
-        payload={isPayloadEmpty ? undefined : payload}
-        type={type}
-      />
-    </>
+      </summary>
+      <StepContent pathToScreenshotOfPage={pathToScreenshotOfPage} payload={payload} type={type} />
+    </details>
+  );
+
+  return (
+    <li class="step" data-status={status}>
+      <button class="step__popover-button" popovertarget={popoverId} title={date}></button>
+      <div id={popoverId} popover="auto">
+        {date}
+      </div>
+      {content}
+    </li>
   );
 };

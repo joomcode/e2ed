@@ -65,7 +65,7 @@ export class E2edReportExample extends Page<CustomPageParams> {
    * List of test runs of retry.
    */
   get testRunsList(): Selector {
-    return locator('column1');
+    return locator('column-2');
   }
 
   /**

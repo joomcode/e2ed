@@ -1,15 +1,15 @@
 import {parseMarkdownLinks as clientParseMarkdownLinks} from '../parseMarkdownLinks';
-import {createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize} from '../sanitizeHtml';
 
 import {DatesInterval as clientDatesInterval} from './DatesInterval';
 import {Duration as clientDuration} from './Duration';
+import {List as clientList} from './List';
 
 import type {FullTestRun, ReportClientState, SafeHtml} from '../../../../types/internal';
 
-const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
 const parseMarkdownLinks = clientParseMarkdownLinks;
 const DatesInterval = clientDatesInterval;
 const Duration = clientDuration;
+const List = clientList;
 
 declare const jsx: JSX.Runtime;
 declare const reportClientState: ReportClientState;
@@ -51,7 +51,7 @@ export const TestRunDescription: JSX.Component<Props> = ({fullTestRun}) => {
       <>
         <dt class="test-description__term">{traceLabel}</dt>
         <dd class="test-description__definition">
-          <a href={traceUrl} aria-label={traceLabel} download={traceName}>
+          <a href={traceUrl} download={traceName} aria-label={traceLabel}>
             {traceName}
           </a>
         </dd>
@@ -59,11 +59,9 @@ export const TestRunDescription: JSX.Component<Props> = ({fullTestRun}) => {
     );
   }
 
-  const metaProperties = createSafeHtmlWithoutSanitize`${metaHtmls.join('')}`;
-
   return (
-    <dl class="test-description test-description_type_meta">
-      {metaProperties}
+    <dl class="test-description" aria-label="Test meta data">
+      <List elements={metaHtmls} />
       {traceHtml}
       <dt class="test-description__term">Date</dt>
       <dd class="test-description__definition">

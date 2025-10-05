@@ -1,12 +1,12 @@
 import {assertValueIsDefined as clientAssertValueIsDefined} from '../assertValueIsDefined';
-import {createSafeHtmlWithoutSanitize as clientCreateSafeHtmlWithoutSanitize} from '../sanitizeHtml';
 
+import {List as clientList} from './List';
 import {Step as clientStep} from './Step';
 
 import type {LogEvent, SafeHtml, UtcTimeInMs} from '../../../../types/internal';
 
 const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
-const createSafeHtmlWithoutSanitize = clientCreateSafeHtmlWithoutSanitize;
+const List = clientList;
 const Step = clientStep;
 
 declare const jsx: JSX.Runtime;
@@ -36,5 +36,9 @@ export const Steps: JSX.Component<Props> = ({endTimeInMs, logEvents}) => {
     stepHtmls.push(stepHtml);
   }
 
-  return createSafeHtmlWithoutSanitize`${stepHtmls.join('')}`;
+  return (
+    <ol class="steps-group">
+      <List elements={stepHtmls} />
+    </ol>
+  );
 };

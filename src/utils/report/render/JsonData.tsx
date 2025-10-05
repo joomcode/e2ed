@@ -1,14 +1,15 @@
 import {FAILED_TEST_RUN_STATUSES} from '../../../constants/internal';
 
-import {createSafeHtmlWithoutSanitize, sanitizeJson} from '../client';
+import {List, SafeHtml, sanitizeJson} from '../client';
 
 import type {
   FullTestRun,
   ReportClientData,
   ReportData,
-  SafeHtml,
   ScriptJsonData,
 } from '../../../types/internal';
+
+declare const jsx: JSX.Runtime;
 
 type FullTestRuns = readonly FullTestRun[];
 
@@ -27,13 +28,15 @@ const filterErrors = (fullTestRuns: FullTestRuns): [errors: FullTestRuns, rest: 
   return [errors, rest];
 };
 
+type Props = Readonly<{reportData: ReportData}>;
+
 /**
  * Renders `<script>` tags with JSON presentation of report data.
  * In first tag renders the errors of the last retry, then the entire last retry,
  * then all the remaining errors, tnen general client data, and then all the remaining data.
  * @internal
  */
-export const renderJsonData = (reportData: ReportData): SafeHtml => {
+export const JsonData: JSX.Component<Props> = ({reportData}) => {
   const {apiStatistics, retries} = reportData;
   const reportClientData: ReportClientData = {apiStatistics};
 
@@ -59,8 +62,12 @@ export const renderJsonData = (reportData: ReportData): SafeHtml => {
     const json = JSON.stringify(fullTestRuns);
     const sanitizedJson = sanitizeJson(json);
 
-    return createSafeHtmlWithoutSanitize`<script class="e2edJsonReportData" type="plain/text">${sanitizedJson}</script>`;
+    return (
+      <script class="e2edJsonReportData" type="application/json">
+        <SafeHtml withoutSanitize={sanitizedJson} />
+      </script>
+    );
   });
 
-  return createSafeHtmlWithoutSanitize`${scripts.join('')}`;
+  return <List elements={scripts} />;
 };

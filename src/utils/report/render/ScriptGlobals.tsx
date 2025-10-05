@@ -2,17 +2,19 @@ import {INTERNAL_DIRECTORY_NAME} from '../../../constants/internal';
 
 import {getFullPackConfig} from '../../config';
 
-import {createSafeHtmlWithoutSanitize} from '../client';
+import {SafeHtml} from '../client';
 
 import {createLocatorOptions} from './locator';
 
-import type {ReportClientState, SafeHtml} from '../../../types/internal';
+import type {ReportClientState} from '../../../types/internal';
+
+declare const jsx: JSX.Runtime;
 
 /**
  * Renders JS constants for report page.
  * @internal
  */
-export const renderScriptGlobals = (): SafeHtml => {
+export const ScriptGlobals: JSX.Component = () => {
   const e2edRightColumnContainer = {} as unknown as HTMLElement;
   const locator = {} as unknown as ReportClientState['locator'];
   const {pathToScreenshotsDirectoryForReport} = getFullPackConfig();
@@ -28,7 +30,7 @@ export const renderScriptGlobals = (): SafeHtml => {
     readJsonReportDataObservers: [],
   };
 
-  return createSafeHtmlWithoutSanitize`
-var jsx;
-const reportClientState = ${JSON.stringify(reportClientState)};`;
+  const code = `var jsx; const reportClientState = ${JSON.stringify(reportClientState)};`;
+
+  return <SafeHtml withoutSanitize={code} />;
 };

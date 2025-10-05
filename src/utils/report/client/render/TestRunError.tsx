@@ -9,7 +9,7 @@ declare const jsx: JSX.Runtime;
 type Props = Readonly<{runError: RunError}>;
 
 /**
- * Renders `TestRun` error as simple message.
+ * Renders `TestRun` error as a simple message.
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
@@ -24,10 +24,12 @@ export const TestRunError: JSX.Component<Props> = ({runError}) => {
   const runErrorWithoutStyle = String(runError).replace(stylesRegexp, '');
 
   return (
-    <div class="status-detail status-detail_status_failed">
-      <div class="status-detail__content">
-        <code class="status-detail__button-text">{runErrorWithoutStyle}</code>
+    <section class="test-error" aria-label="Test error">
+      <div class="test-error__content">
+        <pre>
+          <code>{runErrorWithoutStyle}</code>
+        </pre>
       </div>
-    </div>
+    </section>
   );
 };
