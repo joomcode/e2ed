@@ -1,4 +1,5 @@
 import {assertValueIsDefined as clientAssertValueIsDefined} from '../assertValueIsDefined';
+import {groupLogEvents as clientGroupLogEvents} from '../groupLogEvents';
 
 import {Steps as clientSteps} from './Steps';
 import {TestRunDescription as clientTestRunDescription} from './TestRunDescription';
@@ -10,6 +11,7 @@ declare const jsx: JSX.Runtime;
 declare const reportClientState: ReportClientState;
 
 const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
+const groupLogEvents = clientGroupLogEvents;
 const Steps = clientSteps;
 const TestRunDescription = clientTestRunDescription;
 const TestRunError = clientTestRunError;
@@ -30,6 +32,7 @@ export const TestRunDetails: JSX.Component<Props> = ({fullTestRun}) => {
   assertValueIsDefined(firstStatusString);
 
   const capitalizedStatus = `${firstStatusString.toUpperCase()}${status.slice(1)}`;
+  const logEventsWithChildren = groupLogEvents(logEvents);
 
   return (
     <article class="test-details">
@@ -40,10 +43,10 @@ export const TestRunDetails: JSX.Component<Props> = ({fullTestRun}) => {
         </span>
         {name}
       </h2>
-      <TestRunError runError={runError} />
       <TestRunDescription fullTestRun={fullTestRun} />
+      <TestRunError runError={runError} />
       <h4 class="test-details__retry-title">Execution</h4>
-      <Steps endTimeInMs={endTimeInMs} logEvents={logEvents} />
+      <Steps endTimeInMs={endTimeInMs} isRoot logEvents={logEventsWithChildren} />
     </article>
   );
 };

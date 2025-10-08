@@ -1,13 +1,17 @@
 declare const jsx: JSX.Runtime;
 
-type Props = Readonly<{name: string; open?: boolean; src: string}>;
+type Props = Readonly<{
+  name: string;
+  open?: boolean;
+  url: string;
+}>;
 
 /**
  * Renders screenshot of test in HTML report.
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export const Screenshot: JSX.Component<Props> = ({name, open = false, src}) => (
+export const Screenshot: JSX.Component<Props> = ({name, open = false, url}) => (
   <details class="step-attachment" open={open}>
     <summary class="step-attachment__title">{name}</summary>
     <button
@@ -16,7 +20,7 @@ export const Screenshot: JSX.Component<Props> = ({name, open = false, src}) => (
       aria-haspopup="dialog"
       aria-label="Open full size screenshot"
     >
-      <img src={src} alt={name} title={name} />
+      <img src={url} alt={name} title={name} />
     </button>
   </details>
 );

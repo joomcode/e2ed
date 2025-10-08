@@ -47,12 +47,15 @@ export const ApiStatisticsItem: JSX.Component<Props> = ({
   }
 
   return (
-    <span class="step-expanded step-expanded_is-empty">
-      <span class="step-expanded__name">{nameHtml}</span>
-      <span class="step-expanded__time">
-        {countHtml} / {sizeHtml}
-        <Duration durationInMs={duration / count} />
-      </span>
-    </span>
+    <li class="step" data-status="passed">
+      <button class="step__popover-button" title={name}></button>
+      <div class="step__head">
+        <span class="step__name">{nameHtml}</span>
+        <span class="step__duration">
+          {countHtml} / {sizeHtml}
+          <Duration durationInMs={duration / count} />
+        </span>
+      </div>
+    </li>
   );
 };

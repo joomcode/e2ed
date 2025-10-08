@@ -12,7 +12,7 @@ declare const jsx: JSX.Runtime;
 
 type Props = Readonly<{
   pathToScreenshotOfPage: string | undefined;
-  payload: LogPayload;
+  payload: LogPayload | undefined;
   type: LogEventType;
 }>;
 
@@ -22,32 +22,36 @@ type Props = Readonly<{
  * @internal
  */
 export const StepContent: JSX.Component<Props> = ({pathToScreenshotOfPage, payload, type}) => {
+  if (payload === undefined) {
+    return <></>;
+  }
+
   const payloadString = JSON.stringify(payload, null, 2);
   const screenshots: SafeHtml[] = [];
 
   if (pathToScreenshotOfPage !== undefined) {
-    screenshots.push(<Screenshot name="Screenshot of page" open src={pathToScreenshotOfPage} />);
+    screenshots.push(<Screenshot name="Screenshot of page" open url={pathToScreenshotOfPage} />);
   }
 
   if (type === LogEventType.InternalAssert) {
     const {actualScreenshotUrl, diffScreenshotUrl, expectedScreenshotUrl} = payload;
 
     if (typeof actualScreenshotUrl === 'string') {
-      screenshots.push(<Screenshot name="Actual" src={actualScreenshotUrl} />);
+      screenshots.push(<Screenshot name="Actual" url={actualScreenshotUrl} />);
     }
 
     if (typeof diffScreenshotUrl === 'string') {
-      screenshots.push(<Screenshot name="Diff" src={diffScreenshotUrl} />);
+      screenshots.push(<Screenshot name="Diff" url={diffScreenshotUrl} />);
     }
 
     if (typeof expectedScreenshotUrl === 'string') {
-      screenshots.push(<Screenshot name="Expected" src={expectedScreenshotUrl} />);
+      screenshots.push(<Screenshot name="Expected" url={expectedScreenshotUrl} />);
     }
   }
 
   return (
     <>
-      <details class="step-attachment">
+      <details class="step-attachment" open>
         <summary class="step-attachment__title">Details</summary>
         <pre class="step__code">
           <code>{payloadString}</code>

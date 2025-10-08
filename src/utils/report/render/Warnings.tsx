@@ -13,7 +13,7 @@ export const Warnings: JSX.Component<Props> = ({warnings}) => {
     return <></>;
   }
 
-  const renderedWarnings = warnings.map((warning) => <div class="__error">{warning}</div>);
+  const renderedWarnings = warnings.map((warning) => <div class="warnings__error">{warning}</div>);
 
   return (
     <div class="warnings">

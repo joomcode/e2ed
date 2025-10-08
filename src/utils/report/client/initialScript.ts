@@ -3,6 +3,7 @@ import {createSimpleLocator as clientCreateSimpleLocator} from 'create-locator';
 import {addDomContentLoadedHandler as clientAddDomContentLoadedHandler} from './addDomContentLoadedHandler';
 import {addOnClickOnClass as clientAddOnClickOnClass} from './addOnClickOnClass';
 import {clickOnRetry as clientClickOnRetry} from './clickOnRetry';
+import {clickOnScreenshot as clientClickOnScreenshot} from './clickOnScreenshot';
 import {clickOnStep as clientClickOnStep} from './clickOnStep';
 import {clickOnTestRun as clientClickOnTestRun} from './clickOnTestRun';
 import {createJsxRuntime as clientCreateJsxRuntime} from './createJsxRuntime';
@@ -18,6 +19,7 @@ declare const reportClientState: ReportClientState;
 const addDomContentLoadedHandler = clientAddDomContentLoadedHandler;
 const addOnClickOnClass = clientAddOnClickOnClass;
 const clickOnRetry = clientClickOnRetry;
+const clickOnScreenshot = clientClickOnScreenshot;
 const clickOnStep = clientClickOnStep;
 const clickOnTestRun = clientClickOnTestRun;
 const createJsxRuntime = clientCreateJsxRuntime;
@@ -30,7 +32,7 @@ const setReadJsonReportDataObservers = clientSetReadJsonReportDataObservers;
  * This client function should not use scope variables (except global functions).
  * @internal
  */
-export function initialScript(): void {
+export const initialScript = (): void => {
   jsx = createJsxRuntime();
 
   const {locator} = createSimpleLocator(reportClientState.createLocatorOptions);
@@ -39,9 +41,10 @@ export function initialScript(): void {
 
   addOnClickOnClass('retry-link', clickOnRetry);
   addOnClickOnClass('step-expanded', clickOnStep);
+  addOnClickOnClass('step__screenshot-button', clickOnScreenshot);
   addOnClickOnClass('test-link', clickOnTestRun);
 
   setReadJsonReportDataObservers();
 
   addDomContentLoadedHandler(onDomContentLoad);
-}
+};

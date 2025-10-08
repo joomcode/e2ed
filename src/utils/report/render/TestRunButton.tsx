@@ -32,9 +32,11 @@ export const TestRunButton: JSX.Component<Props> = ({
       data-status={status}
       {...locator(testId, {mainParams, status})}
     >
+      {/*
       <span class="test-link__order" {...locator(testId, 'order')}>
         #{index + 1}
       </span>
+      */}
       <span class="test-link__name" {...locator(testId, 'name')}>
         <span class="test-link__main-params" {...locator(testId, 'parameters')}>
           {mainParams}

@@ -13,7 +13,7 @@ export const Errors: JSX.Component<Props> = ({errors}) => {
     return <></>;
   }
 
-  const renderedErrors = errors.map((error) => <div class="__error">{error}</div>);
+  const renderedErrors = errors.map((error) => <div class="errors__error">{error}</div>);
 
   return (
     <div class="errors">

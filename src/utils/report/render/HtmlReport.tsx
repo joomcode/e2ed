@@ -13,6 +13,7 @@ import {JsonData} from './JsonData';
 import {locator} from './locator';
 import {Navigation} from './Navigation';
 import {Retries} from './Retries';
+import {ScreenshotDialog} from './ScreenshotDialog';
 import {Warnings} from './Warnings';
 
 import type {ReportData, UtcTimeInMs} from '../../../types/internal';
@@ -58,11 +59,10 @@ export const HtmlReport: JSX.Component<Props> = ({reportData}) => {
             aria-label="Tests results"
             {...locator('column-3')}
           >
-            <div class="test-details-empty">
-              <p>No test selected</p>
-            </div>
+            <p class="empty-state">No test selected</p>
           </section>
         </div>
+        <ScreenshotDialog />
         <JsonData reportData={reportData} />
       </body>
     </html>

@@ -1,9 +1,11 @@
+import {LogEventType} from '../../../../constants/internal';
+
 import {assertValueIsDefined as clientAssertValueIsDefined} from '../assertValueIsDefined';
 
 import {List as clientList} from './List';
 import {Step as clientStep} from './Step';
 
-import type {LogEvent, SafeHtml, UtcTimeInMs} from '../../../../types/internal';
+import type {LogEventWithChildren, SafeHtml, UtcTimeInMs} from '../../../../types/internal';
 
 const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
 const List = clientList;
@@ -13,7 +15,8 @@ declare const jsx: JSX.Runtime;
 
 type Props = Readonly<{
   endTimeInMs: UtcTimeInMs;
-  logEvents: readonly LogEvent[];
+  isRoot?: boolean;
+  logEvents: readonly LogEventWithChildren[];
 }>;
 
 /**
@@ -21,7 +24,11 @@ type Props = Readonly<{
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export const Steps: JSX.Component<Props> = ({endTimeInMs, logEvents}) => {
+export const Steps: JSX.Component<Props> = ({endTimeInMs, isRoot = false, logEvents}) => {
+  if (logEvents.length === 0) {
+    return <></>;
+  }
+
   const stepHtmls: SafeHtml[] = [];
 
   for (let index = 0; index < logEvents.length; index += 1) {
@@ -34,6 +41,18 @@ export const Steps: JSX.Component<Props> = ({endTimeInMs, logEvents}) => {
     const stepHtml = <Step logEvent={logEvent} nextLogEventTime={nextLogEventTime} />;
 
     stepHtmls.push(stepHtml);
+  }
+
+  if (isRoot) {
+    const endLogEvent: LogEventWithChildren = {
+      children: [],
+      message: '',
+      payload: undefined,
+      time: endTimeInMs,
+      type: LogEventType.InternalUtil,
+    };
+
+    stepHtmls.push(<Step isEnd logEvent={endLogEvent} nextLogEventTime={endTimeInMs} />);
   }
 
   return (

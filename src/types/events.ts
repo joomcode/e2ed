@@ -20,6 +20,11 @@ export type LogEvent = Readonly<{
 }>;
 
 /**
+ * Log event with children (for groupping of `TestRun` steps).
+ */
+export type LogEventWithChildren = LogEvent & Readonly<{children: readonly LogEventWithChildren[]}>;
+
+/**
  * EndTestRun event (on closing test).
  * @internal
  */

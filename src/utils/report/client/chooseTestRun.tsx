@@ -50,7 +50,7 @@ export function chooseTestRun(runHash: RunHash): void {
 
   if (
     !(previousHash in testRunDetailsElementsByHash) &&
-    !previousTestRunDetailsElement.classList.contains('test-details-empty')
+    !previousTestRunDetailsElement.classList.contains('empty-state')
   ) {
     testRunDetailsElementsByHash[previousHash] = previousTestRunDetailsElement;
   }

@@ -4,7 +4,7 @@
  * Should be a pure function without dependencies in the form of a function declaration,
  * because it is used in the JS client code of HTML report.
  */
-export function getDurationWithUnits(durationInMs: number): string {
+export const getDurationWithUnits = (durationInMs: number): string => {
   const msInSecond = 1_000;
   const timeMultiplicator = 60;
 
@@ -37,4 +37,4 @@ export function getDurationWithUnits(durationInMs: number): string {
   }
 
   return parts.slice(0, 2).join(' ') || '0ms';
-}
+};

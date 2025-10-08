@@ -2,17 +2,24 @@ import {LogEventStatus, LogEventType} from '../../../../constants/internal';
 
 import {Duration as clientDuration} from './Duration';
 import {StepContent as clientStepContent} from './StepContent';
+import {Steps as clientSteps} from './Steps';
 
-import type {LogEvent, ReportClientState, UtcTimeInMs} from '../../../../types/internal';
+import type {
+  LogEventWithChildren,
+  ReportClientState,
+  UtcTimeInMs,
+} from '../../../../types/internal';
 
 const Duration = clientDuration;
 const StepContent = clientStepContent;
+const Steps = clientSteps;
 
 declare const jsx: JSX.Runtime;
 declare const reportClientState: ReportClientState;
 
 type Props = Readonly<{
-  logEvent: LogEvent;
+  isEnd?: boolean;
+  logEvent: LogEventWithChildren;
   nextLogEventTime: UtcTimeInMs;
 }>;
 
@@ -21,8 +28,8 @@ type Props = Readonly<{
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export const Step: JSX.Component<Props> = ({logEvent, nextLogEventTime}) => {
-  const {message, payload, time, type} = logEvent;
+export const Step: JSX.Component<Props> = ({isEnd = false, logEvent, nextLogEventTime}) => {
+  const {children, message, payload, time, type} = logEvent;
   const date = new Date(time).toISOString();
   const isPayloadEmpty = !payload || Object.keys(payload).length === 0;
   const popoverId = Math.random().toString(16).slice(2);
@@ -41,24 +48,34 @@ export const Step: JSX.Component<Props> = ({logEvent, nextLogEventTime}) => {
     }
   }
 
-  const content = isPayloadEmpty ? (
-    <div class="step__head">
-      <span class="step__name">{message}</span>
-      <span class="step__duration">
-        <Duration durationInMs={nextLogEventTime - time} />
-      </span>
-    </div>
-  ) : (
-    <details class="step__details">
-      <summary class="step__head">
-        <span class="step__name">{message}</span>
-        <span class="step__duration">
-          <Duration durationInMs={nextLogEventTime - time} />
-        </span>
-      </summary>
-      <StepContent pathToScreenshotOfPage={pathToScreenshotOfPage} payload={payload} type={type} />
-    </details>
-  );
+  let content = <></>;
+
+  if (!isEnd) {
+    content =
+      isPayloadEmpty && children.length === 0 ? (
+        <div class="step__head">
+          <span class="step__name">{message}</span>
+          <span class="step__duration">
+            <Duration durationInMs={nextLogEventTime - time} />
+          </span>
+        </div>
+      ) : (
+        <details class="step__details">
+          <summary class="step__head">
+            <span class="step__name">{message}</span>
+            <span class="step__duration">
+              <Duration durationInMs={nextLogEventTime - time} />
+            </span>
+          </summary>
+          <StepContent
+            pathToScreenshotOfPage={pathToScreenshotOfPage}
+            payload={payload}
+            type={type}
+          />
+          <Steps endTimeInMs={nextLogEventTime} logEvents={children} />
+        </details>
+      );
+  }
 
   return (
     <li class="step" data-status={status}>

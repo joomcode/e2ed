@@ -16,7 +16,7 @@ type Props = Readonly<{retries: readonly RetryProps[]}>;
 export const Retries: JSX.Component<Props> = ({retries}) => {
   const retriesHtml = retries.map((retry) => <Retry retry={retry} />);
 
-  retriesHtml.push(<Metadata />);
+  retriesHtml.push(<Metadata menuIndex={retries.length + 1} />);
 
   return <List elements={retriesHtml} />;
 };

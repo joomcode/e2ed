@@ -23,7 +23,12 @@ export const Retry: JSX.Component<Props> = ({retry}) => {
   ));
 
   return (
-    <article class="retry" hidden={retry.hidden} {...locator('Retry', {index: retry.retryIndex})}>
+    <article
+      class="retry"
+      id={`retry${retry.retryIndex}`}
+      hidden={retry.hidden}
+      {...locator('Retry', {index: retry.retryIndex})}
+    >
       <RetryHeader {...retry} />
       <div class="tests-group">
         <List elements={buttons} />

@@ -3,8 +3,8 @@
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function clickOnRetry(element: HTMLElement): void {
-  const chosenRetryId = element.getAttribute('aria-controls');
+export const clickOnRetry = (element: HTMLElement): void => {
+  const chosenRetryId = element.dataset['retry'];
   const retry = Number(chosenRetryId?.match(/\d+/)?.[0]);
   const allRetryElements: NodeListOf<HTMLElement> = document.querySelectorAll('.retry');
 
@@ -26,4 +26,4 @@ export function clickOnRetry(element: HTMLElement): void {
   if (leftSection) {
     leftSection.ariaLabel = `Retry ${retry}`;
   }
-}
+};

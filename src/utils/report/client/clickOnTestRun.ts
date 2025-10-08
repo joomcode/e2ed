@@ -9,7 +9,7 @@ const chooseTestRun = clientChooseTestRun;
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function clickOnTestRun(element: HTMLElement): void {
+export const clickOnTestRun = (element: HTMLElement): void => {
   const runHash = (element.dataset as {runhash: RunHash}).runhash;
 
   const previousChosenTestRunButton = document.querySelector('.test-link[aria-current="true"]');
@@ -22,4 +22,4 @@ export function clickOnTestRun(element: HTMLElement): void {
   element.ariaCurrent = 'true';
 
   chooseTestRun(runHash);
-}
+};

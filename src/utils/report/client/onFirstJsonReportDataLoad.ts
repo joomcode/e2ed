@@ -11,7 +11,7 @@ declare const reportClientState: ReportClientState;
  * This client function should not use scope variables (except global functions).
  * @internal
  */
-export function onFirstJsonReportDataLoad(): void {
+export const onFirstJsonReportDataLoad = (): void => {
   if (window.location.hash !== '') {
     return;
   }
@@ -38,4 +38,4 @@ export function onFirstJsonReportDataLoad(): void {
       }
     }, scrollDelayInMs);
   }
-}
+};

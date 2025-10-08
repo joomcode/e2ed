@@ -15,6 +15,7 @@ export const RetryButton: JSX.Component<Props> = ({disabled, name, retry, select
     class="retry-link"
     disabled={disabled}
     aria-current={selected ? true : undefined}
+    data-retry={`retry${retry}`}
     {...locator('RetryButton', {disabled, retry, selected})}
   >
     {name}

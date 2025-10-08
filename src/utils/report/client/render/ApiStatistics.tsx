@@ -91,7 +91,9 @@ export const ApiStatistics: JSX.Component<Props> = ({apiStatistics, hash}) => {
     <article class="test-details">
       <p class="test-details__path"></p>
       <h2 class="test-details__title">{header}</h2>
-      <List elements={items} />
+      <ol class="steps-group">
+        <List elements={items} />
+      </ol>
     </article>
   );
 };

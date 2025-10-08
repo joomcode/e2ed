@@ -80,7 +80,7 @@ export const pack: Pack = {
   skipTests,
   takeFullPageScreenshotOnError: false,
   takeViewportScreenshotOnError: true,
-  testFileGlobs: ['**/autotests/tests/**/exists.ts'],
+  testFileGlobs: ['**/autotests/tests/**/*.ts'],
   testIdleTimeout: 8_000,
   testTimeout: 15_000,
   userAgent,

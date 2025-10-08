@@ -14,7 +14,7 @@ export const ScriptFunctions: JSX.Component = () => {
   const functions = Object.values(clientFunctions).map((fn) => `var ${fn.name} = ${String(fn)};`);
 
   functions.push(`var createSimpleLocator = ${createSimpleLocator.toString()};`);
-  functions.push(String(getDurationWithUnits));
+  functions.push(`var getDurationWithUnits = ${getDurationWithUnits.toString()};`);
 
   return <clientFunctions.List separator={'\n'} withoutSanitize={functions} />;
 };

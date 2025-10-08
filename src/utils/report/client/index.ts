@@ -9,11 +9,15 @@ export {chooseTestRun} from './chooseTestRun';
 /** @internal */
 export {clickOnRetry} from './clickOnRetry';
 /** @internal */
+export {clickOnScreenshot} from './clickOnScreenshot';
+/** @internal */
 export {clickOnStep} from './clickOnStep';
 /** @internal */
 export {clickOnTestRun} from './clickOnTestRun';
 /** @internal */
 export {createJsxRuntime} from './createJsxRuntime';
+/** @internal */
+export {groupLogEvents} from './groupLogEvents';
 /** @internal */
 export {initialScript} from './initialScript';
 /** @internal */
