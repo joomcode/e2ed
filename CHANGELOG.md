@@ -1,5 +1,22 @@
 # Changelog
 
+## [v0.21.0](https://github.com/joomcode/e2ed/tree/v0.21.0) (2025-10-09)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.14...v0.21.0)
+
+- [Merge pull request #122 from joomcode/feat/update-html-report-layout](https://github.com/joomcode/e2ed/commit/3b9f7996649243e4224cd27abaa2f1b25612bb94) ([uid11](https://github.com/uid11))
+
+  feat: full update of HTML report layout
+
+- [PRO-13138 feat: group steps in HTML report](https://github.com/joomcode/e2ed/commit/4d18bdf39e06400ac4a9e545d21498e1b03c1829) ([uid11](https://github.com/uid11))
+
+  chore: update Playwright to 1.56
+
+  chore: update TypeScript to 5.9.3
+
+- [PRO-12619 feat: switch to new layout](https://github.com/joomcode/e2ed/commit/48a5777752253a37f8a694e8da919c775a7e097f) ([uid11](https://github.com/uid11))
+- [PRO-12619 feat: full update of HTML report layout](https://github.com/joomcode/e2ed/commit/6a057e28287bac4901695871aa674523ca60fcc8) ([uid11](https://github.com/uid11))
+
 ## [v0.20.14](https://github.com/joomcode/e2ed/tree/v0.20.14) (2025-08-29)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.13...v0.20.14)
