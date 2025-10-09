@@ -4,7 +4,7 @@ import {assertValueIsDefined, assertValueIsNotNull} from '../../utils/asserts';
 import {log} from '../../utils/log';
 
 import type {Route} from '../../Route';
-import type {Url} from '../../types/internal';
+import type {MaybePromise, Url} from '../../types/internal';
 
 type MaybeUrlOrPath = Url | string | null | undefined;
 
@@ -12,7 +12,7 @@ type MaybeUrlOrPath = Url | string | null | undefined;
  * Asserts that url or url path (which can be wrapped in a promise) match route.
  */
 export const assertUrlMatchRoute = async (
-  maybeUrlOrPath: MaybeUrlOrPath | Promise<MaybeUrlOrPath>,
+  maybeUrlOrPath: MaybePromise<MaybeUrlOrPath>,
   route: Route<unknown>,
 ): Promise<void> => {
   const {routeParams} = route;

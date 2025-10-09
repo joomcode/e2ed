@@ -59,11 +59,11 @@ export const preparePage = async (page: Page): Promise<void> => {
     const text = message.text();
     const type = message.type() as ConsoleMessageType;
 
-    consoleMessages.push({args, dateTimeInIso, location, text, type});
-
     for (const jsHandle of message.args()) {
       args.push(await jsHandle.jsonValue().catch(() => 'Error with getting value of argument'));
     }
+
+    consoleMessages.push({args, dateTimeInIso, location, text, type});
   });
 
   const pageerrorListener = AsyncLocalStorage.bind((error: Error) => {

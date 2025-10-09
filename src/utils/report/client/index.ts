@@ -9,15 +9,17 @@ export {chooseTestRun} from './chooseTestRun';
 /** @internal */
 export {clickOnRetry} from './clickOnRetry';
 /** @internal */
+export {clickOnScreenshot} from './clickOnScreenshot';
+/** @internal */
 export {clickOnStep} from './clickOnStep';
 /** @internal */
 export {clickOnTestRun} from './clickOnTestRun';
 /** @internal */
 export {createJsxRuntime} from './createJsxRuntime';
 /** @internal */
-export {initialScript} from './initialScript';
+export {groupLogEvents} from './groupLogEvents';
 /** @internal */
-export {maybeRenderApiStatistics} from './maybeRenderApiStatistics';
+export {initialScript} from './initialScript';
 /** @internal */
 export {onDomContentLoad} from './onDomContentLoad';
 /** @internal */
@@ -30,17 +32,20 @@ export {readJsonReportData} from './readJsonReportData';
 export {readPartOfJsonReportData} from './readPartOfJsonReportData';
 /** @internal */
 export {
+  ApiStatistics,
   ApiStatisticsItem,
-  renderApiStatistics,
-  renderAttributes,
-  renderDatesInterval,
-  renderDuration,
-  renderStep,
-  renderStepContent,
-  renderSteps,
-  renderTestRunDescription,
-  renderTestRunDetails,
-  renderTestRunError,
+  DatesInterval,
+  Duration,
+  List,
+  MaybeApiStatistics,
+  SafeHtml,
+  Screenshot,
+  Step,
+  StepContent,
+  Steps,
+  TestRunDescription,
+  TestRunDetails,
+  TestRunError,
 } from './render';
 /** @internal */
 export {

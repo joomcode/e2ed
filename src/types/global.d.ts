@@ -58,6 +58,10 @@ declare global {
           class?: string;
         }
       >;
+    } & {
+      button: {popovertarget?: string};
+      input: {popovertarget?: string};
+      meta: {charset?: string};
     };
 
     /**

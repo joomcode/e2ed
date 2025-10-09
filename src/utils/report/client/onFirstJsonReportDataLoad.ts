@@ -11,13 +11,13 @@ declare const reportClientState: ReportClientState;
  * This client function should not use scope variables (except global functions).
  * @internal
  */
-export function onFirstJsonReportDataLoad(): void {
+export const onFirstJsonReportDataLoad = (): void => {
   if (window.location.hash !== '') {
     return;
   }
 
   const buttonForFailedTestRun = document.querySelector(
-    '.retry:not([hidden]) .test-button_status_failed',
+    '.retry:not([hidden]) .test-link[data-status="failed"]',
   );
 
   if (!buttonForFailedTestRun) {
@@ -38,4 +38,4 @@ export function onFirstJsonReportDataLoad(): void {
       }
     }, scrollDelayInMs);
   }
-}
+};

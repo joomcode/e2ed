@@ -104,5 +104,5 @@ export function sanitizeHtml(
  * @internal
  */
 export function sanitizeJson(json: string): string {
-  return json.replace(/</g, '&lt;');
+  return json.replace(/</g, '\\u003c');
 }

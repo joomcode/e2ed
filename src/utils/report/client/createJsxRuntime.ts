@@ -33,16 +33,57 @@ export function createJsxRuntime(): JSX.Runtime {
     );
     const childrenHtml = createSafeHtmlWithoutSanitize`${childrenParts.join('')}`;
 
-    if (properties == null) {
-      return sanitizeHtml`<${type}>${childrenHtml}</${type}>`;
+    const isVoidElement = [
+      'area',
+      'base',
+      'br',
+      'col',
+      'embed',
+      'hr',
+      'img',
+      'input',
+      'link',
+      'meta',
+      'source',
+      'track',
+      'wbr',
+    ].includes(type);
+
+    let closePart = createSafeHtmlWithoutSanitize``;
+
+    if (isVoidElement) {
+      if (childrenHtml.length > 0) {
+        // eslint-disable-next-line no-console
+        console.error(`Element <${type}> is void element, but has children`, childrenHtml);
+
+        closePart = childrenHtml;
+      }
+    } else {
+      closePart = sanitizeHtml`${childrenHtml}</${type}>`;
     }
 
-    const attributesParts: readonly SafeHtml[] = Object.entries(properties).map(
-      ([key, value]) => sanitizeHtml`${key}="${value}"`,
-    );
-    const attributesHtml = createSafeHtmlWithoutSanitize`${attributesParts.join('')}`;
+    if (properties == null) {
+      return sanitizeHtml`<${type}>${closePart}`;
+    }
 
-    return sanitizeHtml`<${type} ${attributesHtml}>${childrenHtml}</${type}>`;
+    const attributesParts: readonly SafeHtml[] = Object.entries(properties)
+      .filter(([key, value]) => {
+        if (value == null) {
+          return false;
+        }
+
+        if (value !== false) {
+          return true;
+        }
+
+        const lowerCaseKey = key.toLocaleLowerCase();
+
+        return lowerCaseKey.startsWith('aria-') || lowerCaseKey.startsWith('data-');
+      })
+      .map(([key, value]) => sanitizeHtml`${key.toLowerCase()}="${value}"`);
+    const attributesHtml = createSafeHtmlWithoutSanitize`${attributesParts.join(' ')}`;
+
+    return sanitizeHtml`<${type} ${attributesHtml}>${closePart}`;
   };
 
   const Fragment: JSX.Fragment = (properties) => {

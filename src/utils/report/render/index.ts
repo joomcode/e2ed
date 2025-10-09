@@ -1,2 +1,2 @@
 /** @internal */
-export {renderReportToHtml} from './renderReportToHtml';
+export {HtmlReport} from './HtmlReport';

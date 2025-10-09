@@ -1,8 +1,8 @@
-import {renderDuration as clientRenderDuration} from './renderDuration';
+import {Duration as clientDuration} from './Duration';
 
 import type {SafeHtml, Url} from '../../../../types/internal';
 
-const renderDuration = clientRenderDuration;
+const Duration = clientDuration;
 
 declare const jsx: JSX.Runtime;
 
@@ -29,7 +29,6 @@ export const ApiStatisticsItem: JSX.Component<Props> = ({
   url,
 }) => {
   const bytesInKiB = 1_024;
-  const durationHtml = renderDuration(duration / count);
   const countHtml = `${count}x`;
   const sizeHtml = size === undefined ? '' : `${(size / count / bytesInKiB).toFixed(2)} KiB / `;
 
@@ -48,12 +47,15 @@ export const ApiStatisticsItem: JSX.Component<Props> = ({
   }
 
   return (
-    <span class="step-expanded step-expanded_is-empty">
-      <span class="step-expanded__name">{nameHtml}</span>
-      <span class="step-expanded__time">
-        {countHtml} / {sizeHtml}
-        {durationHtml}
-      </span>
-    </span>
+    <li class="step" data-status="passed">
+      <button class="step__popover-button" title={name}></button>
+      <div class="step__head">
+        <span class="step__name">{nameHtml}</span>
+        <span class="step__duration">
+          {countHtml} / {sizeHtml}
+          <Duration durationInMs={duration / count} />
+        </span>
+      </div>
+    </li>
   );
 };

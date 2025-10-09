@@ -3,8 +3,8 @@
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function clickOnRetry(element: HTMLElement): void {
-  const chosenRetryId = element.getAttribute('aria-controls');
+export const clickOnRetry = (element: HTMLElement): void => {
+  const chosenRetryId = element.dataset['retry'];
   const retry = Number(chosenRetryId?.match(/\d+/)?.[0]);
   const allRetryElements: NodeListOf<HTMLElement> = document.querySelectorAll('.retry');
 
@@ -12,20 +12,18 @@ export function clickOnRetry(element: HTMLElement): void {
     retryElement.hidden = retryElement.id !== chosenRetryId;
   }
 
-  const previousChosenRetryButton = document.querySelector(
-    '.nav-tabs__button[aria-selected="true"]',
-  );
+  const previousChosenRetryButton = document.querySelector('.retry-link[aria-current="true"]');
 
   if (previousChosenRetryButton) {
-    previousChosenRetryButton.ariaSelected = 'false';
+    previousChosenRetryButton.ariaCurrent = null;
   }
 
   // eslint-disable-next-line no-param-reassign
-  element.ariaSelected = 'true';
+  element.ariaCurrent = 'true';
 
-  const leftSection = document.querySelector('.main__section._position_left');
+  const leftSection = document.querySelector('.column-2');
 
   if (leftSection) {
     leftSection.ariaLabel = `Retry ${retry}`;
   }
-}
+};

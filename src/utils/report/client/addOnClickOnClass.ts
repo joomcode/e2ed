@@ -7,7 +7,10 @@ declare const reportClientState: ReportClientState;
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function addOnClickOnClass(className: string, onclick: (event: HTMLElement) => void): void {
+export const addOnClickOnClass = (
+  className: string,
+  onclick: (element: HTMLElement) => void,
+): void => {
   let {clickListeners} = reportClientState;
 
   if (!clickListeners) {
@@ -34,4 +37,4 @@ export function addOnClickOnClass(className: string, onclick: (event: HTMLElemen
   }
 
   clickListeners[className] = onclick;
-}
+};
