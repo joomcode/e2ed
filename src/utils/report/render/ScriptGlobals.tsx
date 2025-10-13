@@ -15,13 +15,12 @@ declare const jsx: JSX.Runtime;
  * @internal
  */
 export const ScriptGlobals: JSX.Component = () => {
-  const e2edRightColumnContainer = {} as unknown as HTMLElement;
   const locator = {} as unknown as ReportClientState['locator'];
   const {pathToScreenshotsDirectoryForReport} = getFullPackConfig();
 
   const reportClientState: ReportClientState = {
     createLocatorOptions,
-    e2edRightColumnContainer,
+    e2edRightColumnContainer: undefined,
     fullTestRuns: [],
     internalDirectoryName: INTERNAL_DIRECTORY_NAME,
     lengthOfReadedJsonReportDataParts: 0,
@@ -30,7 +29,9 @@ export const ScriptGlobals: JSX.Component = () => {
     readJsonReportDataObservers: [],
   };
 
-  const code = `var jsx; const reportClientState = ${JSON.stringify(reportClientState)};`;
+  const code = `var jsx;
+const reportClientState = ${JSON.stringify(reportClientState)};
+`;
 
   return <SafeHtml withoutSanitize={code} />;
 };

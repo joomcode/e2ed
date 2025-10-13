@@ -15,7 +15,7 @@ const sanitizeHtml = clientSanitizeHtml;
  * This client function should not use scope variables (except global functions).
  * @internal
  */
-export function createJsxRuntime(): JSX.Runtime {
+export const createJsxRuntime = (): JSX.Runtime => {
   const maxDepth = 8;
 
   const createElement: JSX.CreateElement = (type, properties, ...children) => {
@@ -104,4 +104,4 @@ export function createJsxRuntime(): JSX.Runtime {
   };
 
   return {Fragment, createElement};
-}
+};

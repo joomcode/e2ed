@@ -15,7 +15,7 @@ declare const reportClientState: ReportClientState;
  * This client function should not use scope variables (except global functions).
  * @internal
  */
-export function readJsonReportData(areAllScriptsLoaded = false): void {
+export const readJsonReportData = (areAllScriptsLoaded = false): void => {
   const {lengthOfReadedJsonReportDataParts} = reportClientState;
   const scripts = document.querySelectorAll('body > script.e2edJsonReportData');
   const {length} = scripts;
@@ -40,4 +40,4 @@ export function readJsonReportData(areAllScriptsLoaded = false): void {
   }
 
   reportClientState.lengthOfReadedJsonReportDataParts = newLength;
-}
+};

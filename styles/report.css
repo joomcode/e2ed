@@ -997,7 +997,7 @@ a:visited {
 
   position: relative;
   overflow: hidden;
-  contain: layout paint;
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   margin-left: calc(var(--horizontal-line-to-icon-width) + var(--test-link-half-icon-width));
@@ -1064,7 +1064,6 @@ a:visited {
   text-decoration: none;
 }
 .test-link {
-  container-type: inline-size;
   margin-bottom: 1px;
   text-align: left;
 }

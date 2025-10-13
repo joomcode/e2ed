@@ -13,6 +13,6 @@ export const Script: JSX.Component = () => (
   <script async type="module">
     <ScriptGlobals />
     <ScriptFunctions />
-    {initialScript.name}();
+    {initialScript.name}(); //# sourceURL=fullScript.js
   </script>
 );

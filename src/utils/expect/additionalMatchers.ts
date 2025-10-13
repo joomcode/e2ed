@@ -12,17 +12,15 @@ import {expect} from '@playwright/test';
  * @internal
  */
 export const additionalMatchers: NonSelectorAdditionalMatchers<unknown> & SelectorMatchers = {
-  contains(this: Expect, expected) {
+  async contains(this: Expect, expected) {
     const {actualValue, description} = this;
 
     if (typeof actualValue === 'string' || Array.isArray(actualValue)) {
-      return Promise.resolve(expect(actualValue, description).toContain(expected));
+      return expect(actualValue, description).toContain(expected);
     }
 
-    return Promise.resolve(
-      expect(actualValue, description).toEqual(
-        expect.objectContaining(expected as Record<string, unknown>),
-      ),
+    return expect(actualValue, description).toEqual(
+      expect.objectContaining(expected as Record<string, unknown>),
     );
   },
   async eql(this: Expect, expected) {
