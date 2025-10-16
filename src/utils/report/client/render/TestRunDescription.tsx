@@ -31,7 +31,7 @@ export const TestRunDescription: JSX.Component<Props> = ({fullTestRun}) => {
     const valueWithLinks = parseMarkdownLinks`${value}`;
     const metaHtml = (
       <>
-        <dt class="test-description__term">{key}</dt>
+        <dt class="test-description__term">{key}</dt>{' '}
         <dd class="test-description__definition">{valueWithLinks}</dd>
       </>
     );
@@ -49,7 +49,7 @@ export const TestRunDescription: JSX.Component<Props> = ({fullTestRun}) => {
 
     traceHtml = (
       <>
-        <dt class="test-description__term">{traceLabel}</dt>
+        <dt class="test-description__term">{traceLabel}</dt>{' '}
         <dd class="test-description__definition">
           <a href={traceUrl} download={traceName} aria-label={traceLabel}>
             {traceName}
@@ -63,11 +63,11 @@ export const TestRunDescription: JSX.Component<Props> = ({fullTestRun}) => {
     <dl class="test-description" aria-label="Test meta data">
       <List elements={metaHtmls} />
       {traceHtml}
-      <dt class="test-description__term">Date</dt>
+      <dt class="test-description__term">Date</dt>{' '}
       <dd class="test-description__definition">
         <DatesInterval endTimeInMs={endTimeInMs} startTimeInMs={startTimeInMs} />
       </dd>
-      <dt class="test-description__term">Duration</dt>
+      <dt class="test-description__term">Duration</dt>{' '}
       <dd class="test-description__definition">
         <Duration durationInMs={endTimeInMs - startTimeInMs} />
       </dd>

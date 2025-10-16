@@ -20,7 +20,7 @@ import type {FilePathFromRoot, Selector, ToMatchScreenshotOptions, Url} from '..
 
 import type {Expect} from './Expect';
 
-import {expect} from '@playwright/test';
+import {expect as playwrightExpect} from '@playwright/test';
 
 type AdditionalLogFields = {
   actualScreenshotId: string | undefined;
@@ -99,7 +99,7 @@ export const toMatchScreenshot = async (
   try {
     const playwrightLocator = actualValue.getPlaywrightLocator();
 
-    await expect(playwrightLocator, description).toHaveScreenshot(screenshotFileName, {
+    await playwrightExpect(playwrightLocator, description).toHaveScreenshot(screenshotFileName, {
       mask: mask.map((selector) => selector.getPlaywrightLocator()),
       ...restOptions,
     });

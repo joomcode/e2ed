@@ -1,4 +1,4 @@
-import {LogEventType} from '../../../constants/internal';
+import {LogEventStatus, LogEventType} from '../../../constants/internal';
 
 import type {LogEvent, LogEventWithChildren} from '../../../types/internal';
 
@@ -16,14 +16,18 @@ export const groupLogEvents = (logEvents: readonly LogEvent[]): readonly LogEven
     LogEventType.InternalAssert,
   ];
 
+  const isTopLevelEvent = (logEvent: LogEvent): boolean =>
+    topLevelTypes.includes(logEvent.type) ||
+    logEvent.payload?.logEventStatus === LogEventStatus.Failed;
+
   const result: LogEventWithChildren[] = [];
 
   for (const logEvent of logEvents) {
     const last = result.at(-1);
     const newEvent: LogEventWithChildren = {children: [], ...logEvent};
 
-    if (topLevelTypes.includes(logEvent.type)) {
-      if (last && !topLevelTypes.includes(last.type)) {
+    if (isTopLevelEvent(logEvent)) {
+      if (last && !isTopLevelEvent(last)) {
         const firstTopLevel: LogEventWithChildren = {
           children: [...result],
           message: 'Initialization',
@@ -38,7 +42,7 @@ export const groupLogEvents = (logEvents: readonly LogEvent[]): readonly LogEven
       }
 
       result.push(newEvent);
-    } else if (last && topLevelTypes.includes(last.type)) {
+    } else if (last && isTopLevelEvent(last)) {
       (last.children as LogEventWithChildren[]).push(newEvent);
     } else {
       result.push(newEvent);
