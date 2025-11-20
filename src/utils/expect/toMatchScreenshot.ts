@@ -6,6 +6,7 @@ import {isLocalRun} from '../../configurator';
 import {
   EXPECTED_SCREENSHOTS_DIRECTORY_PATH,
   INTERNAL_REPORTS_DIRECTORY_PATH,
+  SCREENSHOT_NOT_SPECIFIED_ERROR_MESSAGE,
 } from '../../constants/internal';
 import {getOutputDirectoryName} from '../../context/outputDirectoryName';
 
@@ -84,7 +85,7 @@ export const toMatchScreenshot = async (
 
   const message = expectedScreenshotId
     ? `Cannot read expected screenshot ${expectedScreenshotId}`
-    : 'Expected screenshot not specified';
+    : SCREENSHOT_NOT_SPECIFIED_ERROR_MESSAGE;
 
   if (isLocalRun) {
     if (expectedScreenshotFound) {

@@ -90,10 +90,10 @@ class Selector {
     return result;
   }
 
-  get checked(): Promise<boolean | undefined> {
+  get checked(): Promise<boolean | null> {
     const result = this.getPlaywrightLocator()
       .isChecked()
-      .catch(() => undefined);
+      .catch(() => null);
 
     setRetryData(result, {property: 'checked', selector: this});
 
@@ -160,10 +160,10 @@ class Selector {
     return result;
   }
 
-  get value(): Promise<string | undefined> {
+  get value(): Promise<string | null> {
     const result = this.getPlaywrightLocator()
       .inputValue()
-      .catch(() => undefined);
+      .catch(() => null);
 
     setRetryData(result, {property: 'value', selector: this});
 
