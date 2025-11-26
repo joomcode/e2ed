@@ -23,7 +23,7 @@ type Return = Readonly<{onlog: Onlog; reject: RejectTestRun; testFnWithReject: T
 
 /**
  * Get test function with execution timeout, idle timeout, reject and onlog functions,
- * by isSkipped flag, test function, runId, test execution timeout and test idle timeouts.
+ * by `isSkipped` flag, test function, runId, test execution timeout and test idle timeouts.
  * @internal
  */
 export const getTestFnAndReject = ({

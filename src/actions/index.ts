@@ -6,6 +6,7 @@ export {
   assertSelectorInViewport,
   assertUrlMatchRoute,
 } from './asserts';
+export {blur} from './blur';
 export {clearUpload} from './clearUpload';
 export {click} from './click';
 export {deleteCookies} from './deleteCookies';
@@ -13,6 +14,7 @@ export {dispatchEvent} from './dispatchEvent';
 export {doubleClick} from './doubleClick';
 export {drag} from './drag';
 export {dragToElement} from './dragToElement';
+export {focus} from './focus';
 export {getBrowserConsoleMessages} from './getBrowserConsoleMessages';
 export {getBrowserJsErrors} from './getBrowserJsErrors';
 export {getCookies} from './getCookies';
