@@ -69,14 +69,19 @@ export type TestFn = (testController: PlaywrightTestArgs) => Promise<void>;
 /**
  * Test options with userland metadata.
  */
-export type TestOptions<TestMeta = TestMetaPlaceholder> = DeepReadonly<{
-  enableCsp?: boolean;
-  meta: TestMeta;
-  takeFullPageScreenshotOnError?: boolean;
-  takeViewportScreenshotOnError?: boolean;
-  testIdleTimeout?: number;
-  testTimeout?: number;
-}>;
+export type TestOptions<TestMeta = TestMetaPlaceholder> = DeepReadonly<
+  {
+    enableCsp?: boolean;
+    meta: TestMeta;
+    takeFullPageScreenshotOnError?: boolean;
+    takeViewportScreenshotOnError?: boolean;
+    testIdleTimeout?: number;
+    testTimeout?: number;
+  } & (
+    | {viewportHeight: number; viewportWidth: number}
+    | {viewportHeight?: undefined; viewportWidth?: undefined}
+  )
+>;
 
 /**
  * The complete static test options, that is, the options
