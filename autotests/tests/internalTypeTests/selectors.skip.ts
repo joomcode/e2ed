@@ -4,8 +4,18 @@ import type {Selector} from 'e2ed/types';
 
 // @ts-expect-error: wrong number of arguments
 htmlElementSelector.findByTestId();
-// @ts-expect-error: wrong type of arguments
-htmlElementSelector.findByTestId(0);
+// ok
+htmlElementSelector.filterByTestId(0);
+// ok
+htmlElementSelector.findByTestId(true);
+// ok
+htmlElementSelector.filterByTestId(undefined);
+// ok
+htmlElementSelector.filterByTestId(null);
+// ok
+htmlElementSelector.findByTestId(1, 2, 2);
+// ok
+htmlElementSelector.filterByTestId('foo', 'bar', 'baz');
 // ok
 htmlElementSelector.findByTestId('id') satisfies Selector;
 // ok

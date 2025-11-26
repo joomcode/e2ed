@@ -37,6 +37,7 @@ export const scroll = ((...args) => {
           cssString: 'html',
           parameterAttributePrefix: 'data-test-',
           testIdAttribute: 'data-testid',
+          testIdSeparator: '-',
         });
 
   log(

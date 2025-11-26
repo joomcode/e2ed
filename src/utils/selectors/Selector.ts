@@ -4,13 +4,18 @@ import {inspect} from 'node:util';
 
 import {RETRY_KEY} from '../../constants/internal';
 import {getFrameContext} from '../../context/frameContext';
+import {
+  type AttributesOptions,
+  createTestLocator,
+  type LocatorFunction,
+  type Stringifiable,
+} from '../../createLocator';
 import {getPlaywrightPage} from '../../useContext';
 
 import {getAttributeCssSelector} from './getAttributeCssSelector';
 
 import type {Locator as PlaywrightLocator} from '@playwright/test';
 
-import type {AttributesOptions} from '../../createLocator';
 import type {SelectorPropertyRetryData} from '../../types/internal';
 
 const setRetryData = (
@@ -35,7 +40,7 @@ type Options = Readonly<{
   kind?: Kind;
   parentSelector?: Selector;
 }> &
-  Omit<AttributesOptions, 'testIdSeparator'>;
+  AttributesOptions;
 
 /**
  * Selector.
@@ -49,11 +54,15 @@ class Selector {
 
   private readonly kind: 'css' | 'filter' | 'find' | 'nth' | 'parent' | 'withText';
 
+  private readonly locator: LocatorFunction<string>;
+
   private readonly parameterAttributePrefix: string;
 
   private readonly parentSelector: Selector | undefined;
 
   private readonly testIdAttribute: string;
+
+  private readonly testIdSeparator: string;
 
   protected constructor({
     args,
@@ -62,15 +71,22 @@ class Selector {
     parameterAttributePrefix,
     parentSelector,
     testIdAttribute,
+    testIdSeparator,
   }: Options) {
     this.args = args;
     this.cssString = cssString;
     this.description =
       kind === 'css' ? cssString : `${parentSelector!.description}.${kind}(${args?.join(', ')})`;
     this.kind = kind;
+    this.locator = createTestLocator({
+      attributesOptions: {parameterAttributePrefix, testIdAttribute, testIdSeparator},
+      createLocatorByCssSelector: (selector) => selector,
+      supportWildcardsInCssSelectors: true,
+    }).locator;
     this.parameterAttributePrefix = parameterAttributePrefix;
     this.parentSelector = parentSelector;
     this.testIdAttribute = testIdAttribute;
+    this.testIdSeparator = testIdSeparator;
   }
 
   get boundingClientRect(): Promise<DOMRectReadOnly> {
@@ -182,14 +198,15 @@ class Selector {
     cssString,
     parameterAttributePrefix,
     testIdAttribute,
-  }: Pick<Options, 'cssString' | 'parameterAttributePrefix' | 'testIdAttribute'>): Selector {
-    return new Selector({cssString, parameterAttributePrefix, testIdAttribute});
+    testIdSeparator,
+  }: Pick<Options, keyof AttributesOptions | 'cssString'>): Selector {
+    return new Selector({cssString, parameterAttributePrefix, testIdAttribute, testIdSeparator});
   }
 
   createSelector(cssString: string): Selector {
-    const {parameterAttributePrefix, testIdAttribute} = this;
+    const {parameterAttributePrefix, testIdAttribute, testIdSeparator} = this;
 
-    return new Selector({cssString, parameterAttributePrefix, testIdAttribute});
+    return new Selector({cssString, parameterAttributePrefix, testIdAttribute, testIdSeparator});
   }
 
   filter(cssSelectorString: string): Selector {
@@ -200,8 +217,8 @@ class Selector {
     return this.filter(getAttributeCssSelector(this.getParameterAttribute(parameter), value));
   }
 
-  filterByTestId(testId: string): Selector {
-    return this.filter(getAttributeCssSelector(this.testIdAttribute, testId));
+  filterByTestId(...args: readonly [Stringifiable, ...Stringifiable[]]): Selector {
+    return this.filter(this.locator(...(args as [Stringifiable])));
   }
 
   find(cssSelectorString: string): Selector {
@@ -212,8 +229,8 @@ class Selector {
     return this.find(getAttributeCssSelector(this.getParameterAttribute(parameter), value));
   }
 
-  findByTestId(testId: string): Selector {
-    return this.find(getAttributeCssSelector(this.testIdAttribute, testId));
+  findByTestId(...args: readonly [Stringifiable, ...Stringifiable[]]): Selector {
+    return this.find(this.locator(...(args as [Stringifiable])));
   }
 
   getAttribute(attributeName: string): Promise<string | null> {
@@ -316,7 +333,7 @@ class Selector {
   }
 
   private createChildSelector(kind: Kind, args?: Args): Selector {
-    const {cssString, parameterAttributePrefix, testIdAttribute} = this;
+    const {cssString, parameterAttributePrefix, testIdAttribute, testIdSeparator} = this;
 
     return new Selector({
       args,
@@ -325,6 +342,7 @@ class Selector {
       parameterAttributePrefix,
       parentSelector: this,
       testIdAttribute,
+      testIdSeparator,
     });
   }
 
