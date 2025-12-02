@@ -6,7 +6,6 @@ import {E2edReportExample} from 'autotests/pageObjects/pages';
 import {GetUsers} from 'autotests/routes/apiRoutes';
 import {expect} from 'e2ed';
 import {
-  click,
   navigateToPage,
   switchToTab,
   waitForNewTab,
@@ -54,7 +53,7 @@ test(
     await waitForTimeout(maxNumberOfRequests * 333);
 
     const npmPageTab = await waitForNewTab(async () => {
-      await click(reportPage.header);
+      await reportPage.clickLogo();
     });
 
     await switchToTab(npmPageTab);

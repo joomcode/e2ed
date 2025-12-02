@@ -6,6 +6,7 @@ import {setPageCookies, setPageRequestHeaders} from 'autotests/context';
 import {E2edReportExample as E2edReportExampleRoute} from 'autotests/routes/pageRoutes';
 import {locator} from 'autotests/selectors';
 import {Page} from 'e2ed';
+import {click} from 'e2ed/actions';
 import {setReadonlyProperty} from 'e2ed/utils';
 
 import {TestRunButton} from './TestRunButton';
@@ -65,7 +66,7 @@ export class E2edReportExample extends Page<CustomPageParams> {
    * List of test runs of retry.
    */
   get testRunsList(): Selector {
-    return locator('column1');
+    return locator('column-2');
   }
 
   /**
@@ -79,6 +80,10 @@ export class E2edReportExample extends Page<CustomPageParams> {
     if (this.pageRequestHeaders !== undefined) {
       setPageRequestHeaders(this.pageRequestHeaders);
     }
+  }
+
+  async clickLogo(): Promise<void> {
+    await click(this.header, {position: {x: 30, y: 30}});
   }
 
   getRoute(): E2edReportExampleRoute {
