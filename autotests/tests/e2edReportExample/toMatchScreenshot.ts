@@ -6,8 +6,8 @@ import {navigateToPage} from 'e2ed/actions';
 test('correctly check screenshots via toMatchScreenshot', {meta: {testId: '20'}}, async () => {
   const reportPage = await navigateToPage(E2edReportExample);
 
-  await expect(reportPage.header, 'toMatchScreenshot check screenshot').toMatchScreenshot(
-    'Nzq9MAYNp1',
+  await expect(reportPage.header.find('a'), 'toMatchScreenshot check screenshot').toMatchScreenshot(
+    'pwoZRA8i7O',
     {mask: []},
   );
 });
