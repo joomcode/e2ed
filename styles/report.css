@@ -82,7 +82,6 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: auto;
   min-height: 100vh;
   font-family: system-ui;
   font-size: var(--font-size);
@@ -121,6 +120,7 @@ a:visited {
 .errors,
 .warnings {
   padding: 2px var(--retry-padding);
+  overflow-wrap: break-word;
 }
 .errors__error {
   margin: 4px 0;
@@ -146,7 +146,6 @@ a:visited {
 .column-1 {
   grid-area: column-1;
   width: 100vw;
-  overflow: hidden;
 }
 .header,
 .column-1 {
@@ -176,6 +175,9 @@ a:visited {
   background: var(--item-bg-color);
 }
 .main {
+  overflow: hidden;
+  contain: layout;
+  container-type: inline-size;
   grid-area: main;
   min-width: 0;
   display: flex;
@@ -553,7 +555,7 @@ a:visited {
   color: var(--subtitle-color);
 }
 .test-description__term::after {
-  content: ':\00a0';
+  content: ':';
 }
 .test-description__definition {
   margin: 0;
@@ -997,7 +999,7 @@ a:visited {
 
   position: relative;
   overflow: hidden;
-  contain: layout paint;
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   margin-left: calc(var(--horizontal-line-to-icon-width) + var(--test-link-half-icon-width));
@@ -1064,7 +1066,6 @@ a:visited {
   text-decoration: none;
 }
 .test-link {
-  container-type: inline-size;
   margin-bottom: 1px;
   text-align: left;
 }
@@ -1073,9 +1074,13 @@ a:visited {
 }
 .test-link[aria-current='true'] {
   --box-shadow-width: 1px;
+  --box-shadow-color: var(--passed-color);
 
-  box-shadow: 0 0 0 var(--box-shadow-width) var(--drag-container-bg-color) inset;
+  box-shadow: 0 0 0 var(--box-shadow-width) var(--box-shadow-color) inset;
   cursor: default;
+}
+.test-link[aria-current='true'][data-status='failed'] {
+  --box-shadow-color: var(--failed-color);
 }
 .test-link[data-status='failed'],
 .test-link[data-status='unknown'],
@@ -1207,7 +1212,7 @@ a:visited {
   overflow: hidden;
   border-radius: var(--main-radius);
   background: var(--secondary-bg-color);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgb(0, 0, 0, 0.3);
 }
 .screenshot-dialog[open] {
   display: flex;
@@ -1227,7 +1232,7 @@ a:visited {
   text-overflow: ellipsis;
 }
 .screenshot-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb(0, 0, 0, 0.5);
 }
 .screenshot-dialog__main {
   padding: var(--padding);
@@ -1349,10 +1354,6 @@ button:focus-visible,
   outline-color: var(--accent-color);
   outline-offset: -2px;
 }
-.main {
-  contain: layout;
-  container-type: inline-size;
-}
 @container (min-width: 350px) {
   .test-link__name,
   .step__name {
@@ -1362,17 +1363,20 @@ button:focus-visible,
 }
 
 @media (min-width: 390px) {
+  body {
+    height: 100vh;
+  }
   .main {
     flex-direction: row;
   }
   .column-2 {
+    overflow-y: auto;
     width: calc(40% - var(--drag-container-width));
   }
   .column-3 {
-    max-height: 100vh;
+    overflow-y: auto;
     will-change: transform;
     flex: 1 0 180px;
-    overflow-y: scroll;
   }
   .drag-container {
     position: relative;

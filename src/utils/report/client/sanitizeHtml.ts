@@ -70,10 +70,10 @@ export function sanitizeValue(value: unknown): string {
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function sanitizeHtml(
+export const sanitizeHtml = (
   stringParts: readonly string[],
   ...values: readonly unknown[]
-): SafeHtml {
+): SafeHtml => {
   const parts: string[] = [];
 
   for (let index = 0; index < values.length; index += 1) {
@@ -96,13 +96,11 @@ export function sanitizeHtml(
   const html = parts.join('');
 
   return createSafeHtmlWithoutSanitize`${html}`;
-}
+};
 
 /**
  * Sanitizes JSON string (simple protection against XSS attacks).
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export function sanitizeJson(json: string): string {
-  return json.replace(/</g, '\\u003c');
-}
+export const sanitizeJson = (json: string): string => json.replace(/</g, '\\u003c');

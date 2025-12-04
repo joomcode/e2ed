@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import {assertValueIsDefined as clientAssertValueIsDefined} from './assertValueIsDefined';
 import {
   MaybeApiStatistics as clientMaybeApiStatistics,
@@ -19,11 +21,10 @@ declare const reportClientState: ReportClientState;
  * @internal
  */
 // eslint-disable-next-line max-statements
-export function chooseTestRun(runHash: RunHash): void {
+export const chooseTestRun = (runHash: RunHash): void => {
   const {e2edRightColumnContainer} = reportClientState;
 
-  if (e2edRightColumnContainer === undefined) {
-    // eslint-disable-next-line no-console
+  if (!e2edRightColumnContainer) {
     console.error(
       'Cannot find right column container (id="e2edRightColumnContainer"). Probably page not yet completely loaded. Please try click again later',
     );
@@ -45,6 +46,10 @@ export function chooseTestRun(runHash: RunHash): void {
     e2edRightColumnContainer.firstElementChild as HTMLElement | null;
 
   if (!previousTestRunDetailsElement) {
+    console.error(
+      'Cannot find first child element in right column container (id="e2edRightColumnContainer"). Probably page not yet completely loaded. Please try click again later',
+    );
+
     return;
   }
 
@@ -72,7 +77,6 @@ export function chooseTestRun(runHash: RunHash): void {
     const fullTestRun = fullTestRuns.find((testRun) => testRun.runHash === runHash);
 
     if (fullTestRun === undefined) {
-      // eslint-disable-next-line no-console
       console.error(
         `Cannot find test run with hash ${runHash} in JSON report data. Probably JSON report data for this test run not yet loaded. Please try click again later`,
       );
@@ -88,4 +92,4 @@ export function chooseTestRun(runHash: RunHash): void {
   const nextTestRunDetailsElement = e2edRightColumnContainer.firstElementChild as HTMLElement;
 
   testRunDetailsElementsByHash[runHash] = nextTestRunDetailsElement;
-}
+};

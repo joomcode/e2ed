@@ -1,7 +1,7 @@
 /**
  * This type checks that the type `true` is passed to it.
  */
-export type Expect<T extends true> = T;
+export type Expect<Type extends true> = Type;
 
 /**
  * Returns `true` if types are exactly equal and `false` otherwise.
@@ -9,7 +9,7 @@ export type Expect<T extends true> = T;
  * IsEqual<{readonly foo: string}, {foo: string}> = false.
  */
 export type IsEqual<X, Y> =
-  (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? true : false;
+  (<Type>() => Type extends X ? 1 : 2) extends <Type>() => Type extends Y ? 1 : 2 ? true : false;
 
 /**
  * Returns `true` if key is readonly in object and `false` otherwise.

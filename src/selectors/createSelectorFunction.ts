@@ -11,7 +11,5 @@ export const createSelectorFunction = (
 ): CreateSelector => {
   generalLog('Create selector function', {attributesOptions});
 
-  const {parameterAttributePrefix, testIdAttribute} = attributesOptions;
-
-  return (cssString) => Selector.create({cssString, parameterAttributePrefix, testIdAttribute});
+  return (cssString) => Selector.create({cssString, ...attributesOptions});
 };

@@ -13,10 +13,10 @@ const sanitizeHtml = clientSanitizeHtml;
  * This client function should not use scope variables (except global functions).
  * @internal
  */
-export function parseMarkdownLinks(
+export const parseMarkdownLinks = (
   stringParts: readonly string[],
   ...values: readonly unknown[]
-): SafeHtml {
+): SafeHtml => {
   const sanitizedHtml = sanitizeHtml(stringParts, ...values);
 
   const htmlWithLinks = sanitizedHtml.replace(
@@ -25,4 +25,4 @@ export function parseMarkdownLinks(
   );
 
   return createSafeHtmlWithoutSanitize`${htmlWithLinks}`;
-}
+};

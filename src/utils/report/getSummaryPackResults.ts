@@ -16,9 +16,11 @@ const MAX_FAILED_TESTS_COUNT = 8;
  */
 export const getSummaryPackResults = (
   fullTestRuns: readonly FullTestRun[],
-  lastRetry: Retry | undefined,
+  retries: readonly Retry[],
 ): string => {
-  const allFailedTestsMainParams = getFailedTestsMainParams(lastRetry);
+  const lastRetry = retries.at(-1);
+
+  const allFailedTestsMainParams = getFailedTestsMainParams(retries);
   const failedTestsMainParams = allFailedTestsMainParams.slice(0, MAX_FAILED_TESTS_COUNT);
 
   if (allFailedTestsMainParams.length > MAX_FAILED_TESTS_COUNT) {
@@ -34,7 +36,10 @@ export const getSummaryPackResults = (
       ? fullTestRuns
       : lastRetry?.fullTestRuns;
 
-    const count = source?.filter((fullTestRun) => fullTestRun.status === status)?.length ?? 0;
+    const count =
+      status === TestRunStatus.Failed
+        ? allFailedTestsMainParams.length
+        : (source?.filter((fullTestRun) => fullTestRun.status === status)?.length ?? 0);
 
     if (count > 0) {
       countsOfStatuses.push(`${count} ${status}`);

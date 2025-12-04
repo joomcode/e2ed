@@ -4,7 +4,7 @@ import type {Fn, Selector, SelectorPropertyRetryData} from '../../types/internal
 
 import type {Expect} from './Expect';
 
-import {expect} from '@playwright/test';
+import {expect as playwrightExpect} from '@playwright/test';
 
 /**
  * Apply additional matcher (with retrying, if needed).
@@ -25,7 +25,7 @@ export const applyAdditionalMatcher = (
 
   let context: Expect;
 
-  return expect(() => {
+  return playwrightExpect(() => {
     const {args: selectorArgs, property, selector} = selectorPropertyRetryData;
 
     const actualValue =

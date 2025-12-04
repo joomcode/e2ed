@@ -5,6 +5,8 @@ import {INSTALLED_E2ED_DIRECTORY_PATH, READ_FILE_OPTIONS} from '../../../constan
 
 import {SafeHtml} from '../client';
 
+import {locator} from './locator';
+
 declare const jsx: JSX.Runtime;
 
 /**
@@ -24,6 +26,7 @@ export const Logo: JSX.Component = () => {
       target="_blank"
       title="e2ed package"
       aria-label="e2ed package"
+      {...locator('logo')}
     >
       <SafeHtml withoutSanitize={logoString} />
     </a>

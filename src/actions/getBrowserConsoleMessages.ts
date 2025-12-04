@@ -4,7 +4,7 @@ import {log} from '../utils/log';
 
 import type {ConsoleMessage} from '../types/internal';
 
-type Options = Readonly<{showMessagesInLog?: boolean}>;
+type Options = Readonly<{showMessagesInLog?: boolean; skipLogs?: boolean}>;
 
 const logMessage = 'Get browser console messages';
 
@@ -12,8 +12,12 @@ const logMessage = 'Get browser console messages';
  * Returns an object that contains messages output to the browser console.
  */
 export const getBrowserConsoleMessages = (options: Options = {}): readonly ConsoleMessage[] => {
-  const {showMessagesInLog = false} = options;
+  const {skipLogs = false, showMessagesInLog = false} = options;
   const consoleMessages = getConsoleMessagesFromContext();
+
+  if (skipLogs) {
+    return consoleMessages;
+  }
 
   if (showMessagesInLog === false) {
     log(logMessage, LogEventType.InternalAction);

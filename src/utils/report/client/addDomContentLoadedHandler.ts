@@ -4,7 +4,7 @@
  * This client function should not use scope variables (except global functions).
  * @internal
  */
-export function addDomContentLoadedHandler(handler: () => void): void {
+export const addDomContentLoadedHandler = (handler: () => void): void => {
   if (document.readyState !== 'loading') {
     handler();
 
@@ -12,4 +12,4 @@ export function addDomContentLoadedHandler(handler: () => void): void {
   }
 
   document.addEventListener('DOMContentLoaded', handler);
-}
+};

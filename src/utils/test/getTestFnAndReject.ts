@@ -8,9 +8,12 @@ import {getPromiseWithResolveAndReject} from '../promise';
 
 import type {Onlog, RejectTestRun, RunId, TestFn, Void} from '../../types/internal';
 
+import {test as playwrightTest} from '@playwright/test';
+
 type Options = Readonly<{
   isSkipped: boolean;
   runId: RunId;
+  skipReason: string | undefined;
   testFn: TestFn;
   testIdleTimeout: number;
   testTimeout: number;
@@ -18,26 +21,31 @@ type Options = Readonly<{
 
 type Return = Readonly<{onlog: Onlog; reject: RejectTestRun; testFnWithReject: TestFn}>;
 
-const skippedTestFnAndReject: Return = {
-  onlog: () => undefined,
-  reject: () => undefined,
-  testFnWithReject: () => RESOLVED_PROMISE,
-};
-
 /**
  * Get test function with execution timeout, idle timeout, reject and onlog functions,
- * by isSkipped flag, test function, runId, test execution timeout and test idle timeouts.
+ * by `isSkipped` flag, test function, runId, test execution timeout and test idle timeouts.
  * @internal
  */
 export const getTestFnAndReject = ({
   isSkipped,
   runId,
+  skipReason,
   testFn,
   testIdleTimeout,
   testTimeout,
 }: Options): Return => {
   if (isSkipped) {
-    return skippedTestFnAndReject;
+    return {
+      onlog: () => undefined,
+      reject: () => undefined,
+      testFnWithReject: () => {
+        try {
+          playwrightTest.skip(true, skipReason);
+        } catch {}
+
+        return RESOLVED_PROMISE;
+      },
+    };
   }
 
   const {

@@ -18,7 +18,7 @@ import type {Fn, SelectorPropertyRetryData} from '../../types/internal';
 import type {Expect} from './Expect';
 import type {AssertionFunction, ExpectMethod} from './types';
 
-import {expect} from '@playwright/test';
+import {expect as playwrightExpect} from '@playwright/test';
 
 const additionalAssertionTimeoutInMs = 1_000;
 
@@ -66,7 +66,7 @@ export const createExpectMethod = (
         });
       }
 
-      const assertion = expect(value, ctx.description) as unknown as Record<
+      const assertion = playwrightExpect(value, ctx.description) as unknown as Record<
         string,
         Fn<unknown[], Promise<unknown>>
       >;

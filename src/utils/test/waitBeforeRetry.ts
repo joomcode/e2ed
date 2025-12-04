@@ -7,7 +7,7 @@ import {getPreviousRunId} from './getPreviousRunId';
 
 import type {FullTestRun, RunId, TestStaticOptions} from '../../types/internal';
 
-import {test} from '@playwright/test';
+import {test as playwrightTest} from '@playwright/test';
 
 const additionToTimeout = 10_000;
 
@@ -57,7 +57,7 @@ export const waitBeforeRetry = async (
       return;
     }
 
-    test.setTimeout(timeoutInMs + additionToTimeout);
+    playwrightTest.setTimeout(timeoutInMs + additionToTimeout);
 
     const timeoutObject = setInterval(() => {
       void writeLogEventTime();

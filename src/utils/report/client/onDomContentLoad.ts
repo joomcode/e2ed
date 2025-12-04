@@ -11,10 +11,10 @@ const readJsonReportData = clientReadJsonReportData;
  * This client function should not use scope variables (except global functions).
  * @internal
  */
-export function onDomContentLoad(): void {
+export const onDomContentLoad = (): void => {
   const e2edRightColumnContainer = document.getElementById('e2edRightColumnContainer') ?? undefined;
 
-  if (e2edRightColumnContainer === undefined) {
+  if (!e2edRightColumnContainer) {
     // eslint-disable-next-line no-console
     console.error(
       'Cannot find right column container (id="e2edRightColumnContainer") after DOMContentLoaded.',
@@ -32,4 +32,4 @@ export function onDomContentLoad(): void {
   }
 
   reportClientState.readJsonReportDataObservers.length = 0;
-}
+};

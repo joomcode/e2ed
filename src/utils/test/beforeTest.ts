@@ -21,7 +21,7 @@ import {getTestFnAndReject} from './getTestFnAndReject';
 
 import type {TestRunEvent, TestUnit, UtcTimeInMs} from '../../types/internal';
 
-import {test} from '@playwright/test';
+import {test as playwrightTest} from '@playwright/test';
 
 const additionToPlaywrightTestTimeout = 500;
 
@@ -59,7 +59,9 @@ export const beforeTest = ({
   const testTimeout =
     IS_DEBUG || isUiMode ? MAX_TIMEOUT_IN_MS : (options.testTimeout ?? testTimeoutFromConfig);
 
-  test.setTimeout(testTimeout + additionToPlaywrightTestTimeout + (Date.now() - startTimeInMs));
+  playwrightTest.setTimeout(
+    testTimeout + additionToPlaywrightTestTimeout + (Date.now() - startTimeInMs),
+  );
 
   setTestIdleTimeout(testIdleTimeout);
   setTestTimeout(testTimeout);
@@ -75,6 +77,7 @@ export const beforeTest = ({
   const {onlog, reject, testFnWithReject} = getTestFnAndReject({
     isSkipped,
     runId,
+    skipReason,
     testFn,
     testIdleTimeout,
     testTimeout,

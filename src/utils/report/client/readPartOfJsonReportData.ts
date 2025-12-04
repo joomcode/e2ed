@@ -13,7 +13,7 @@ type Options = Readonly<{
  * This client function should not use scope variables (except global functions).
  * @internal
  */
-export function readPartOfJsonReportData({scriptToRead, shouldLogError}: Options): boolean {
+export const readPartOfJsonReportData = ({scriptToRead, shouldLogError}: Options): boolean => {
   try {
     const data = JSON.parse(scriptToRead?.textContent ?? '') as ScriptJsonData;
 
@@ -32,4 +32,4 @@ export function readPartOfJsonReportData({scriptToRead, shouldLogError}: Options
   }
 
   return true;
-}
+};

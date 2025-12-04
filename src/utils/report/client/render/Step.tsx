@@ -21,6 +21,7 @@ type Props = Readonly<{
   isEnd?: boolean;
   logEvent: LogEventWithChildren;
   nextLogEventTime: UtcTimeInMs;
+  open?: boolean;
 }>;
 
 /**
@@ -28,7 +29,7 @@ type Props = Readonly<{
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export const Step: JSX.Component<Props> = ({isEnd = false, logEvent, nextLogEventTime}) => {
+export const Step: JSX.Component<Props> = ({isEnd = false, logEvent, nextLogEventTime, open}) => {
   const {children, message, payload, time, type} = logEvent;
   const date = new Date(time).toISOString();
   const isPayloadEmpty = !payload || Object.keys(payload).length === 0;
@@ -49,6 +50,7 @@ export const Step: JSX.Component<Props> = ({isEnd = false, logEvent, nextLogEven
   }
 
   let content = <></>;
+  const isErrorScreenshot = pathToScreenshotOfPage !== undefined;
 
   if (!isEnd) {
     content =
@@ -60,7 +62,7 @@ export const Step: JSX.Component<Props> = ({isEnd = false, logEvent, nextLogEven
           </span>
         </div>
       ) : (
-        <details class="step__details">
+        <details class="step__details" open={open ?? isErrorScreenshot}>
           <summary class="step__head">
             <span class="step__name">{message}</span>
             <span class="step__duration">

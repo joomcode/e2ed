@@ -11,7 +11,7 @@ const readJsonReportData = clientReadJsonReportData;
  * This client function should not use scope variables (except global functions).
  * @internal
  */
-export function setReadJsonReportDataObservers(): void {
+export const setReadJsonReportDataObservers = (): void => {
   const observeChildList = {childList: true};
   const {readJsonReportDataObservers} = reportClientState;
   const scriptsObserver = new MutationObserver(() => readJsonReportData());
@@ -35,4 +35,4 @@ export function setReadJsonReportDataObservers(): void {
 
     htmlObserver.observe(document.documentElement, observeChildList);
   }
-}
+};
