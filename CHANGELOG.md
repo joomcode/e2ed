@@ -1,5 +1,31 @@
 # Changelog
 
+## [v0.21.1](https://github.com/joomcode/e2ed/tree/v0.21.1) (2025-12-04)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.21.0...v0.21.1)
+
+- [fix: internal test on `toMatchScreenshot` after update HTML report layout](https://github.com/joomcode/e2ed/commit/146b295a8305dae5f882b0bd63ea5155bc38a6ab) ([uid11](https://github.com/uid11))
+- [Merge pull request #123 from joomcode/feat/improve-html-report](https://github.com/joomcode/e2ed/commit/37b8679bb966ebd1a8edd49372f60de9b3c90ae9) ([uid11](https://github.com/uid11))
+
+  fix: some errors in new HTLM report
+
+- [chore: update prettier to 3.7.4](https://github.com/joomcode/e2ed/commit/fa8876bb827619a3f5b5c4938d8ff41b0644721f) ([uid11](https://github.com/uid11))
+- [fix: internal tests after updating HTML report](https://github.com/joomcode/e2ed/commit/5677b44c1a54eb31d6bbb0e871eeeb68c278a3e1) ([uid11](https://github.com/uid11))
+- [chore: update Playwright to 1.57.0](https://github.com/joomcode/e2ed/commit/daff8faf77aba848e7f1b10c65d5acae3eece13e) ([uid11](https://github.com/uid11))
+- [PRO-15160 feat: add test options `viewportHeight` and `viewportWidth`](https://github.com/joomcode/e2ed/commit/bc4a6a685b55f35c9a1fdfa00cc37d56e08acbe2) ([uid11](https://github.com/uid11))
+
+  fix: action `resizeWindow`
+
+- [PRO-15771 feat: support `testId` parts in `filterByTestId` and `findByTestId`](https://github.com/joomcode/e2ed/commit/66ede52cd22b1c18c8cdd6351afa6b4fad7f0cad) ([uid11](https://github.com/uid11))
+- [PRO-13986 feat: add actions `focus` and `blur` for selectors](https://github.com/joomcode/e2ed/commit/a315d56b3fbf0c7160097b394e0560250a6d2b5a) ([uid11](https://github.com/uid11))
+- [PRO-15775 fix: show failed screenshot tests in summary pack results](https://github.com/joomcode/e2ed/commit/96d5ef305e2837cb082e70e8ab3d991d61c3352c) ([uid11](https://github.com/uid11))
+- [PRO-14812 fix: really skip skipped tests in Playwright](https://github.com/joomcode/e2ed/commit/4fcba65f7e07ec0dbdb7db63456c71a0bf41b2dd) ([uid11](https://github.com/uid11))
+- [PRO-14710 fix: layout of tests in HTML report for Safari](https://github.com/joomcode/e2ed/commit/ee8b0d931b6ae1ee320ce8dcc19b8564161ebd44) ([uid11](https://github.com/uid11))
+
+  fix: autoopen first failed test
+
+  fix: autoopen end screenshot of failed test
+
 ## [v0.21.0](https://github.com/joomcode/e2ed/tree/v0.21.0) (2025-10-09)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.20.14...v0.21.0)
