@@ -5,7 +5,7 @@ import {assertValueIsDefined as clientAssertValueIsDefined} from '../assertValue
 import {List as clientList} from './List';
 import {Step as clientStep} from './Step';
 
-import type {LogEventWithChildren, SafeHtml, UtcTimeInMs} from '../../../../types/internal';
+import type {LogEvent, SafeHtml, UtcTimeInMs} from '../../../../types/internal';
 
 const assertValueIsDefined: typeof clientAssertValueIsDefined = clientAssertValueIsDefined;
 const List = clientList;
@@ -16,7 +16,7 @@ declare const jsx: JSX.Runtime;
 type Props = Readonly<{
   endTimeInMs: UtcTimeInMs;
   isRoot?: boolean;
-  logEvents: readonly LogEventWithChildren[];
+  logEvents: readonly LogEvent[] | undefined;
 }>;
 
 /**
@@ -25,14 +25,14 @@ type Props = Readonly<{
  * @internal
  */
 export const Steps: JSX.Component<Props> = ({endTimeInMs, isRoot = false, logEvents}) => {
-  if (logEvents.length === 0) {
+  if (logEvents === undefined || logEvents.length === 0) {
     return <></>;
   }
 
   const stepHtmls: SafeHtml[] = [];
 
   for (let index = 0; index < logEvents.length; index += 1) {
-    const logEvent = logEvents[index];
+    const logEvent: LogEvent | undefined = logEvents[index];
 
     assertValueIsDefined(logEvent);
 
@@ -44,8 +44,9 @@ export const Steps: JSX.Component<Props> = ({endTimeInMs, isRoot = false, logEve
   }
 
   if (isRoot) {
-    const endLogEvent: LogEventWithChildren = {
+    const endLogEvent: LogEvent = {
       children: [],
+      endTime: undefined,
       message: '',
       payload: undefined,
       time: endTimeInMs,

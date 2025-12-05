@@ -1,4 +1,5 @@
 import {getFullPackConfig} from './utils/config';
+import {generalLog} from './utils/generalLog';
 import {getGlobalErrorHandler} from './utils/getGlobalErrorHandler';
 import {getRunTest} from './utils/test';
 import {isUiMode} from './utils/uiMode';
@@ -22,9 +23,17 @@ export const test: TestFunction = (name, options, testFn) => {
   if (isUiMode) {
     const {getTestNamePrefixInUiMode} = getFullPackConfig();
 
-    const prefix = getTestNamePrefixInUiMode(options);
+    try {
+      const prefix = getTestNamePrefixInUiMode(options);
 
-    playwrightTestName = `${prefix} ${name}`;
+      playwrightTestName = `${prefix} ${name}`;
+    } catch (error) {
+      generalLog('Caught an error on run "getTestNamePrefixInUiMode" function', {
+        error,
+        name,
+        options,
+      });
+    }
   }
 
   if (options.enableCsp !== undefined) {

@@ -29,7 +29,14 @@ export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: un
 
   const payloadInReport = mapLogPayloadInReport(message, payload, type);
 
-  registerLogEvent(runId, {message, payload: payloadInReport, time, type});
+  registerLogEvent(runId, {
+    children: undefined,
+    endTime: undefined,
+    message,
+    payload: payloadInReport,
+    time,
+    type,
+  });
 
   logWithPreparedOptions(message, {payload, runId, type, utcTimeInMs: time});
 };

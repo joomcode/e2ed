@@ -1,13 +1,13 @@
-import {LogEventStatus, LogEventType} from '../../../constants/internal';
+import {LogEventStatus, LogEventType} from 'e2ed/constants';
 
-import type {LogEvent, LogEventWithChildren} from '../../../types/internal';
+import type {LogEvent} from 'e2ed/types';
 
 /**
- * Group log events to log events with children (for groupping of `TestRun` steps).
+ * Regroup log events (for groupping of `TestRun` steps).
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */
-export const groupLogEvents = (logEvents: readonly LogEvent[]): readonly LogEventWithChildren[] => {
+export const regroupSteps = (logEvents: readonly LogEvent[]): readonly LogEvent[] => {
   const topLevelTypes: readonly LogEventType[] = [
     LogEventType.Action,
     LogEventType.Assert,
@@ -20,16 +20,17 @@ export const groupLogEvents = (logEvents: readonly LogEvent[]): readonly LogEven
     topLevelTypes.includes(logEvent.type) ||
     logEvent.payload?.logEventStatus === LogEventStatus.Failed;
 
-  const result: LogEventWithChildren[] = [];
+  const result: LogEvent[] = [];
 
   for (const logEvent of logEvents) {
     const last = result.at(-1);
-    const newEvent: LogEventWithChildren = {children: [], ...logEvent};
+    const newEvent: LogEvent = {...logEvent};
 
     if (isTopLevelEvent(logEvent)) {
       if (last && !isTopLevelEvent(last)) {
-        const firstTopLevel: LogEventWithChildren = {
+        const firstTopLevel: LogEvent = {
           children: [...result],
+          endTime: undefined,
           message: 'Initialization',
           payload: undefined,
           time: last.time,
@@ -43,7 +44,7 @@ export const groupLogEvents = (logEvents: readonly LogEvent[]): readonly LogEven
 
       result.push(newEvent);
     } else if (last && isTopLevelEvent(last)) {
-      (last.children as LogEventWithChildren[]).push(newEvent);
+      (last.children as LogEvent[]).push(newEvent);
     } else {
       result.push(newEvent);
     }

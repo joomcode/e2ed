@@ -4,11 +4,7 @@ import {Duration as clientDuration} from './Duration';
 import {StepContent as clientStepContent} from './StepContent';
 import {Steps as clientSteps} from './Steps';
 
-import type {
-  LogEventWithChildren,
-  ReportClientState,
-  UtcTimeInMs,
-} from '../../../../types/internal';
+import type {LogEvent, ReportClientState, UtcTimeInMs} from '../../../../types/internal';
 
 const Duration = clientDuration;
 const StepContent = clientStepContent;
@@ -19,7 +15,7 @@ declare const reportClientState: ReportClientState;
 
 type Props = Readonly<{
   isEnd?: boolean;
-  logEvent: LogEventWithChildren;
+  logEvent: LogEvent;
   nextLogEventTime: UtcTimeInMs;
   open?: boolean;
 }>;
@@ -32,8 +28,9 @@ type Props = Readonly<{
 export const Step: JSX.Component<Props> = ({isEnd = false, logEvent, nextLogEventTime, open}) => {
   const {children, message, payload, time, type} = logEvent;
   const date = new Date(time).toISOString();
+  const baseRadix = 16;
   const isPayloadEmpty = !payload || Object.keys(payload).length === 0;
-  const popoverId = Math.random().toString(16).slice(2);
+  const popoverId = Math.random().toString(baseRadix).slice(2);
   const status = payload?.logEventStatus ?? LogEventStatus.Passed;
 
   let pathToScreenshotOfPage: string | undefined;
@@ -54,7 +51,7 @@ export const Step: JSX.Component<Props> = ({isEnd = false, logEvent, nextLogEven
 
   if (!isEnd) {
     content =
-      isPayloadEmpty && children.length === 0 ? (
+      isPayloadEmpty && (children === undefined || children.length === 0) ? (
         <div class="step__head">
           <span class="step__name">{message}</span>
           <span class="step__duration">

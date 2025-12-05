@@ -11,6 +11,7 @@ import {setReadonlyProperty} from '../object';
 import {getUserlandHooks} from '../userland';
 
 import {calculateTestRunStatus} from './calculateTestRunStatus';
+import {getRegroupedSteps} from './getRegroupedSteps';
 import {getTestRunEvent} from './getTestRunEvent';
 import {writeFullMocksIfNeeded} from './writeFullMocksIfNeeded';
 
@@ -22,12 +23,10 @@ import type {EndTestRunEvent, FullTestRun, RunHash, TestRun} from '../../types/i
  */
 export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent): Promise<void> => {
   const {runId} = endTestRunEvent;
-
   const testRunEvent = getTestRunEvent(runId);
 
   const {
     filePath,
-    logEvents,
     name,
     options,
     outputDirectoryName,
@@ -59,7 +58,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
   const testRun: TestRun = {
     endTimeInMs,
     filePath,
-    logEvents,
+    logEvents: getRegroupedSteps(testRunEvent),
     name,
     options,
     outputDirectoryName,
