@@ -7,6 +7,7 @@ export {mapLogPayloadInConsole} from './mapLogPayloadInConsole';
 export {mapLogPayloadInLogFile} from './mapLogPayloadInLogFile';
 export {mapLogPayloadInReport} from './mapLogPayloadInReport';
 export {matchScreenshot} from './matchScreenshot';
+export {regroupSteps} from './regroupSteps';
 export {skipTests} from './skipTests';
 export type {
   DoAfterPack,

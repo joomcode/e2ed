@@ -2,6 +2,7 @@ import type {PlaywrightTestConfig} from '@playwright/test';
 
 import type {TestRunStatus} from '../../constants/internal';
 
+import type {LogEvent} from '../events';
 import type {FullMocksConfig} from '../fullMocks';
 import type {LogTag, MapBackendResponseToLog, MapLogPayload, MapLogPayloadInReport} from '../log';
 import type {MatchScreenshotConfig} from '../matchScreenshot';
@@ -197,6 +198,15 @@ export type OwnE2edConfig<
    * If `null`, screenshots will not be displayed in the HTML report.
    */
   pathToScreenshotsDirectoryForReport: string | null;
+
+  /**
+   * Regroup tree of test steps in the HTML report.
+   * A function that regroups the tree of test steps in the report.
+   * This way, you can leave only the important test steps (actions, checks) at the top level,
+   * while hiding minor technical steps at deeper levels of the tree
+   * (they will be visible in the report if you explicitly expand them).
+   */
+  regroupSteps: (this: void, steps: readonly LogEvent[]) => readonly LogEvent[];
 
   /**
    * The name of the file under which, after running the tests,

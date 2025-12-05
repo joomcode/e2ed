@@ -350,6 +350,12 @@ should be copied to this directory after the pack is completed,
 and then screenshots from this directory will be displayed in the HTML report.
 If `null`, screenshots will not be displayed in the HTML report.
 
+`regroupSteps: (steps: readonly LogEvent[]) => readonly LogEvent[]`: a function that regroups the tree of test steps
+in the HTML report.
+This way, you can leave only the important test steps (actions, checks) at the top level,
+while hiding minor technical steps at deeper levels of the tree
+(they will be visible in the report if you explicitly expand them).
+
 `reportFileName: string | null`: the name of the file under which, after running the tests,
 the HTML report will be saved in the `autotests/reports` directory, for example, `report.html`.
 Also this name is used as the title of the report page.

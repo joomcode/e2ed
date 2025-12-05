@@ -1,72 +1,39 @@
 import {LogEventType} from '../../constants/internal';
 import {getRunId} from '../../context/runId';
+import {getStepsStack} from '../../context/stepsStack';
 
-import {getFullPackConfig} from '../config';
 import {getTestRunEvent} from '../events';
 
+import {addBackendResponseToLogEvent} from './addBackendResponseToLogEvent';
 import {log} from './log';
-import {logWithPreparedOptions} from './logWithPreparedOptions';
 
-import type {Mutable, Payload} from '../../types/internal';
-
-const messageOfSingleResponse = 'Got a backend response to log';
+import type {LogEvent, Payload} from '../../types/internal';
 
 /**
  * Logs backend response to last log event.
  * @internal
  */
 export const logBackendResponse = (payload: Payload): void => {
-  const runId = getRunId();
-  const {logEvents} = getTestRunEvent(runId);
+  const stepsStack = getStepsStack();
+  const runningStep = stepsStack.at(-1);
 
-  const lastLogEvent = logEvents[logEvents.length - 1];
+  let lastLogEvent: LogEvent | undefined;
+
+  if (runningStep !== undefined) {
+    if (runningStep.children !== undefined && runningStep.children.length > 0) {
+      lastLogEvent = runningStep.children.at(-1);
+    } else {
+      lastLogEvent = runningStep;
+    }
+  } else {
+    const runId = getRunId();
+    const {logEvents} = getTestRunEvent(runId);
+
+    lastLogEvent = logEvents.at(-1);
+  }
 
   if (lastLogEvent !== undefined) {
-    logWithPreparedOptions(messageOfSingleResponse, {
-      payload,
-      type: LogEventType.InternalUtil,
-    });
-
-    const {mapLogPayloadInReport} = getFullPackConfig();
-
-    const payloadInReport = mapLogPayloadInReport(
-      messageOfSingleResponse,
-      {backendResponses: [payload]},
-      LogEventType.InternalUtil,
-    );
-
-    if (payloadInReport === 'skipLog' || payloadInReport === undefined) {
-      return;
-    }
-
-    if (lastLogEvent.payload === undefined) {
-      (lastLogEvent as Mutable<typeof lastLogEvent>).payload = payloadInReport;
-
-      return;
-    }
-
-    const backendResponsesFromPayload = payloadInReport.backendResponses;
-
-    if (!(backendResponsesFromPayload instanceof Array)) {
-      return;
-    }
-
-    const {backendResponses} = lastLogEvent.payload;
-
-    if (backendResponses === undefined) {
-      (lastLogEvent.payload as Mutable<typeof lastLogEvent.payload>).backendResponses =
-        backendResponsesFromPayload;
-
-      return;
-    }
-
-    const responseFromPayload = backendResponsesFromPayload[0];
-
-    if (responseFromPayload === undefined) {
-      return;
-    }
-
-    (backendResponses as Payload[]).push(responseFromPayload);
+    addBackendResponseToLogEvent(payload, lastLogEvent);
 
     return;
   }

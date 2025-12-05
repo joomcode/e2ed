@@ -67,6 +67,7 @@ export class Main extends Page<CustomPageParams> {
     await waitForAllRequestsComplete(
       ({url}) => {
         if (
+          url.startsWith('https://assets.msn.com/') ||
           url.startsWith('https://browser.events.data.msn.com/') ||
           url.startsWith('https://img-s-msn-com.akamaized.net/') ||
           url.startsWith('https://rewards.bing.com/widget/') ||

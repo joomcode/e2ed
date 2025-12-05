@@ -25,7 +25,7 @@ test(
 
     await assertFunctionThrows(async () => {
       await waitForAllRequestsComplete(() => true, {timeout: 100});
-    }, 'Catch error from waitForAllRequestsComplete for {timeout: 100}');
+    }, 'Caught an error from waitForAllRequestsComplete for {timeout: 100}');
 
     await waitForAllRequestsComplete(() => true, {timeout: 1000});
 
@@ -37,7 +37,7 @@ test(
 
     await assertFunctionThrows(
       () => promise,
-      'Catch error from waitForAllRequestsComplete for {timeout: 1000}',
+      'Caught an error from waitForAllRequestsComplete for {timeout: 1000}',
     );
 
     waitedInMs = Date.now() - startRequestInMs;
