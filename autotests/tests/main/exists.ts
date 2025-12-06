@@ -19,12 +19,12 @@ import {assertFunctionThrows, getDocumentUrl} from 'e2ed/utils';
 
 import type {Url} from 'e2ed/types';
 
-const testScrollValue = 200;
-const language = 'en';
-const searchQuery = 'foo';
-
 // eslint-disable-next-line max-statements
 test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_000}, async () => {
+  const language = 'en';
+  const searchQuery = 'foo';
+  const testScrollValue = 200;
+
   await scroll(0, testScrollValue);
 
   assertFunctionThrows(() => {
@@ -63,6 +63,8 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_00
   await step('Another step', () => {
     getPageCookies();
   });
+
+  await step('Third step', (): undefined => {});
 
   await mainPage.typeIntoSearchInput(searchQuery);
 
