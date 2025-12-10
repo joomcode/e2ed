@@ -68,6 +68,8 @@ export class Main extends Page<CustomPageParams> {
       ({url}) => {
         if (
           url.startsWith('https://assets.msn.com/') ||
+          url.startsWith('https://www.bing.com/ipv6test/') ||
+          url.startsWith('https://www2.bing.com/ipv6test/') ||
           url.startsWith('https://browser.events.data.msn.com/') ||
           url.startsWith('https://img-s-msn-com.akamaized.net/') ||
           url.startsWith('https://rewards.bing.com/widget/') ||
