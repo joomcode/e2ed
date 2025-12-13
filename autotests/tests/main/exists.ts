@@ -19,12 +19,12 @@ import {assertFunctionThrows, getDocumentUrl} from 'e2ed/utils';
 
 import type {Url} from 'e2ed/types';
 
-const testScrollValue = 200;
-const language = 'en';
-const searchQuery = 'foo';
-
 // eslint-disable-next-line max-statements
 test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_000}, async () => {
+  const language = 'en';
+  const searchQuery = 'foo';
+  const testScrollValue = 200;
+
   await scroll(0, testScrollValue);
 
   assertFunctionThrows(() => {
@@ -39,8 +39,6 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_00
     customPackProperties.internalPackRunId,
     'dynamic custom pack properties is correct',
   ).gt(0);
-
-  await step('Some step');
 
   const urlObjectPromise = waitForStartOfPageLoad();
 
@@ -60,7 +58,7 @@ test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 15_00
 
   await expect(mainPage.searchQuery, 'search query on page is empty').eql('');
 
-  await step('Another step', () => {
+  await step('Some step', () => {
     getPageCookies();
   });
 

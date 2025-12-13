@@ -27,6 +27,11 @@ export class E2edReportExample extends Page<CustomPageParams> {
   readonly header: Selector = locator('header');
 
   /**
+   * Logo of `e2ed` in page header.
+   */
+  readonly logo: Selector = locator('logo');
+
+  /**
    * Navigation bar with test retries.
    */
   readonly navigationRetries: Selector = locator('RetriesButtons');
@@ -83,7 +88,7 @@ export class E2edReportExample extends Page<CustomPageParams> {
   }
 
   async clickLogo(): Promise<void> {
-    await click(this.header, {position: {x: 30, y: 30}});
+    await click(this.logo);
   }
 
   getRoute(): E2edReportExampleRoute {

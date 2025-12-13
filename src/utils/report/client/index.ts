@@ -17,8 +17,6 @@ export {clickOnTestRun} from './clickOnTestRun';
 /** @internal */
 export {createJsxRuntime} from './createJsxRuntime';
 /** @internal */
-export {groupLogEvents} from './groupLogEvents';
-/** @internal */
 export {initialScript} from './initialScript';
 /** @internal */
 export {onDomContentLoad} from './onDomContentLoad';

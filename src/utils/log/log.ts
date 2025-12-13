@@ -1,35 +1,11 @@
-import {LogEventType} from '../../constants/internal';
-import {getRunId} from '../../context/runId';
+import {logAndGetLogEvent} from './logAndGetLogEvent';
 
-import {getFullPackConfig} from '../config';
-// eslint-disable-next-line import/no-internal-modules
-import {registerLogEvent} from '../events/registerLogEvent';
-
-import {logWithPreparedOptions} from './logWithPreparedOptions';
-
-import type {Log, LogPayload, UtcTimeInMs} from '../../types/internal';
+import type {LogEventType} from '../../constants/internal';
+import type {Log, LogPayload} from '../../types/internal';
 
 /**
- * Logs every actions and API requests in e2ed tests.
+ * Logs message with payload.
  */
 export const log: Log = (message, maybePayload?: unknown, maybeLogEventType?: unknown) => {
-  const time = Date.now() as UtcTimeInMs;
-  const runId = getRunId();
-  const payload = typeof maybePayload === 'object' ? (maybePayload as LogPayload) : undefined;
-  const type =
-    typeof maybePayload === 'number'
-      ? (maybePayload as LogEventType)
-      : ((maybeLogEventType as LogEventType) ?? LogEventType.Unspecified);
-
-  const {addLogsWithTags, mapLogPayloadInReport} = getFullPackConfig();
-
-  if (payload && 'logTag' in payload && !addLogsWithTags.includes(payload.logTag)) {
-    return;
-  }
-
-  const payloadInReport = mapLogPayloadInReport(message, payload, type);
-
-  registerLogEvent(runId, {message, payload: payloadInReport, time, type});
-
-  logWithPreparedOptions(message, {payload, runId, type, utcTimeInMs: time});
+  logAndGetLogEvent(message, maybePayload as LogPayload, maybeLogEventType as LogEventType);
 };

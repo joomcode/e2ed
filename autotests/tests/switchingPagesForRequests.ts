@@ -52,9 +52,12 @@ test(
 
     await waitForTimeout(maxNumberOfRequests * 333);
 
-    const npmPageTab = await waitForNewTab(async () => {
-      await reportPage.clickLogo();
-    });
+    const npmPageTab = await waitForNewTab(
+      async () => {
+        await reportPage.clickLogo();
+      },
+      {timeout: 10_000},
+    );
 
     await switchToTab(npmPageTab);
 

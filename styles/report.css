@@ -1436,11 +1436,8 @@ button:focus-visible,
     padding-bottom: 25px;
     width: 120px;
     max-height: 100vh;
-    overflow-y: scroll;
-  }
-  .retry-links,
-  .test-details {
-    margin-bottom: var(--header-height);
+    overflow-y: auto;
+    scrollbar-gutter: stable;
   }
   .retry-links {
     max-width: 100%;

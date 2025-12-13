@@ -5,13 +5,13 @@ import type {ResponseWithRequest} from './http';
 /**
  * Type for `log` function in test context.
  */
-export type Log = ((
+export type Log<Return = void> = ((
   this: void,
   message: string,
   payload?: LogPayload,
   logEventType?: LogEventType,
-) => void) &
-  ((message: string, logEventType: LogEventType) => void);
+) => Return) &
+  ((message: string, logEventType: LogEventType) => Return);
 
 /**
  * Context of log event.
@@ -28,6 +28,7 @@ export type LogParams = Payload & Readonly<{cause?: unknown}>;
  */
 export type LogPayload = Readonly<{
   backendResponses?: readonly Payload[];
+  error?: unknown;
   filePath?: unknown;
   logEventStatus?: LogEventStatus;
   logTag?: LogTag;
