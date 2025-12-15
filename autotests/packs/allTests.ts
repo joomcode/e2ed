@@ -18,6 +18,7 @@ import {
   mapLogPayloadInLogFile,
   mapLogPayloadInReport,
   matchScreenshot,
+  regroupSteps,
   skipTests,
 } from '../configurator';
 
@@ -74,6 +75,7 @@ export const pack: Pack = {
   pathToScreenshotsDirectoryForReport: './screenshots',
   port1: 1337,
   port2: 1338,
+  regroupSteps,
   reportFileName: 'report.html',
   resourceUsageReadingInternal: 5_000,
   selectorTimeout: 10_000,

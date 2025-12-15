@@ -13,16 +13,13 @@ import type {TestMetaPlaceholder} from './userland';
  * Log event (on log call).
  */
 export type LogEvent = Readonly<{
+  children: readonly LogEvent[] | undefined;
+  endTime: UtcTimeInMs | undefined;
   message: string;
   payload: LogPayload | undefined;
   time: UtcTimeInMs;
   type: LogEventType;
 }>;
-
-/**
- * Log event with children (for groupping of `TestRun` steps).
- */
-export type LogEventWithChildren = LogEvent & Readonly<{children: readonly LogEventWithChildren[]}>;
 
 /**
  * EndTestRun event (on closing test).

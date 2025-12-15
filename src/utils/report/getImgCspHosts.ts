@@ -2,6 +2,8 @@ import {URL} from 'node:url';
 
 import {LogEventType} from '../../constants/internal';
 
+import {flatLogEvents} from '../flatLogEvents';
+
 import type {ReportData} from '../../types/internal';
 
 /**
@@ -24,7 +26,7 @@ export const getImgCspHosts = (reportData: ReportData): string => {
 
   for (const {fullTestRuns} of retries) {
     for (const {logEvents} of fullTestRuns) {
-      for (const {payload, type} of logEvents) {
+      for (const {payload, type} of flatLogEvents(logEvents)) {
         // eslint-disable-next-line max-depth
         if (type !== LogEventType.InternalAssert || payload === undefined) {
           continue;

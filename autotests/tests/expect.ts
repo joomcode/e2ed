@@ -6,7 +6,7 @@ import {getFullPackConfig} from 'autotests/utils';
 import {expect} from 'e2ed';
 import {assertFunctionThrows, getTimeoutPromise} from 'e2ed/utils';
 
-test('expect function works correctly', {meta: {testId: '16'}}, async () => {
+test('expect(...) function works correctly', {meta: {testId: '16'}}, async () => {
   const {assertionTimeout} = getFullPackConfig();
 
   await assertFunctionThrows(async () => {
