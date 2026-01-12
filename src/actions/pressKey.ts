@@ -1,7 +1,8 @@
 import {LogEventType} from '../constants/internal';
+import {step} from '../step';
 import {getPlaywrightPage} from '../useContext';
+import {assertValueIsDefined} from '../utils/asserts';
 import {E2edError} from '../utils/error';
-import {log} from '../utils/log';
 
 import type {KeyboardPressKey, Selector} from '../types/internal';
 
@@ -23,47 +24,58 @@ export const pressKey: PressKey = async (
   keyOrOptions?: KeyboardPressKey | Options,
   maybeOptions?: Options,
 ): Promise<void> => {
-  let key: KeyboardPressKey;
+  let error: E2edError | undefined;
+  let key: KeyboardPressKey | undefined;
   let selector: Selector | undefined;
-  let options: Options;
+  let options: Options | undefined;
 
   if (typeof keyOrSelector === 'string') {
     key = keyOrSelector;
 
     if (typeof keyOrOptions === 'string') {
-      throw new E2edError('keyOrOptions is string', {
+      error = new E2edError('keyOrOptions is string', {
         keyOrOptions,
         keyOrSelector,
         maybeOptions,
       });
+    } else {
+      options = keyOrOptions ?? {};
     }
-
-    options = keyOrOptions ?? {};
   } else {
     selector = keyOrSelector;
 
     if (typeof keyOrOptions !== 'string') {
-      throw new E2edError('keyOrOptions is not string', {
+      error = new E2edError('keyOrOptions is not string', {
         keyOrOptions,
         keyOrSelector,
         maybeOptions,
       });
+    } else {
+      key = keyOrOptions;
+
+      options = maybeOptions ?? {};
     }
-
-    key = keyOrOptions;
-
-    options = maybeOptions ?? {};
   }
 
   const withDescription = selector !== undefined ? ` on element ${selector.description}` : '';
 
-  log(`Press keyboard key${withDescription}: "${key}"`, options, LogEventType.InternalAction);
+  await step(
+    `Press keyboard key${withDescription}: "${key}"`,
+    async () => {
+      if (error !== undefined) {
+        throw error;
+      }
 
-  const page = getPlaywrightPage();
+      assertValueIsDefined(key, 'key is defined', options);
 
-  if (selector !== undefined) {
-    await selector.getPlaywrightLocator().press(key, options);
-  } else {
-    await page.keyboard.press(key, options);
-  }
+      const page = getPlaywrightPage();
+
+      if (selector !== undefined) {
+        await selector.getPlaywrightLocator().press(key, options);
+      } else {
+        await page.keyboard.press(key, options);
+      }
+    },
+    {payload: {key, ...options}, type: LogEventType.InternalAction},
+  );
 };

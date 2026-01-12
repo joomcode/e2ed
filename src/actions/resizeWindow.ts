@@ -1,17 +1,17 @@
 import {LogEventType} from '../constants/internal';
+import {step} from '../step';
 import {getPlaywrightPage} from '../useContext';
-import {log} from '../utils/log';
 
 /**
  * Set the browser window size.
  */
-export const resizeWindow = async (width: number, height: number): Promise<void> => {
-  log(
+export const resizeWindow = (width: number, height: number): Promise<void> =>
+  step(
     `Set the browser window size to width ${width} and height ${height}`,
-    LogEventType.InternalAction,
+    async () => {
+      const page = getPlaywrightPage();
+
+      await page.setViewportSize({height, width});
+    },
+    {type: LogEventType.InternalAction},
   );
-
-  const page = getPlaywrightPage();
-
-  await page.setViewportSize({height, width});
-};

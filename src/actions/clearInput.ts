@@ -5,16 +5,16 @@ import type {Locator} from '@playwright/test';
 
 import type {Selector} from '../types/internal';
 
-type Options = Parameters<Locator['hover']>[0];
+type Options = Parameters<Locator['clear']>[0];
 
 /**
- * Hovers the mouse pointer over an element.
+ * Clears the input field (of any type).
  */
-export const hover = (selector: Selector, options: Options = {}): Promise<void> =>
+export const clearInput = (selector: Selector, options: Options = {}): Promise<void> =>
   step(
-    'Hover the mouse pointer over an element',
+    'Clear input field',
     async () => {
-      await selector.getPlaywrightLocator().hover(options);
+      await selector.getPlaywrightLocator().clear(options);
     },
     {payload: {...options, selector}, type: LogEventType.InternalAction},
   );

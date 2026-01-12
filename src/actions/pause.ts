@@ -1,14 +1,17 @@
 import {LogEventType} from '../constants/internal';
+import {step} from '../step';
 import {getPlaywrightPage} from '../useContext';
-import {log} from '../utils/log';
 
 /**
  * Pauses the test and switches to the step-by-step execution mode.
  */
-export const pause = (): Promise<void> => {
-  log('Pause', LogEventType.InternalAction);
+export const pause = (): Promise<void> =>
+  step(
+    'Pause',
+    async () => {
+      const page = getPlaywrightPage();
 
-  const page = getPlaywrightPage();
-
-  return page.pause();
-};
+      await page.pause();
+    },
+    {type: LogEventType.InternalAction},
+  );

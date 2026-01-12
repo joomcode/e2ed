@@ -1,6 +1,6 @@
 import {LogEventType} from '../constants/internal';
+import {step} from '../step';
 import {getPlaywrightPage} from '../useContext';
-import {log} from '../utils/log';
 
 import type {NavigateToUrlOptions, NavigationReturn, StatusCode, Url} from '../types/internal';
 
@@ -12,23 +12,23 @@ export const navigateToUrl = async (
   options: NavigateToUrlOptions = {},
 ): Promise<NavigationReturn> => {
   const {skipLogs = false} = options;
-
-  if (skipLogs !== true) {
-    log(`Will navigate to the url ${url}`, options, LogEventType.InternalAction);
-  }
-
-  const page = getPlaywrightPage();
-
-  const maybeResponse = await page.goto(url, options);
   let statusCode: StatusCode | undefined;
 
-  if (maybeResponse !== null) {
-    statusCode = maybeResponse.status() as StatusCode;
-  }
+  await step(
+    `Navigate to ${url}`,
+    async () => {
+      const page = getPlaywrightPage();
 
-  if (skipLogs !== true) {
-    log(`Navigation to the url ${url} completed`, options, LogEventType.InternalAction);
-  }
+      const maybeResponse = await page.goto(url, options);
+
+      if (maybeResponse !== null) {
+        statusCode = maybeResponse.status() as StatusCode;
+      }
+
+      return {statusCode};
+    },
+    {payload: options, skipLogs, type: LogEventType.InternalAction},
+  );
 
   return {statusCode};
 };

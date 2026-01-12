@@ -1,5 +1,5 @@
 import {LogEventType} from '../constants/internal';
-import {log} from '../utils/log';
+import {step} from '../step';
 
 import type {Locator} from '@playwright/test';
 
@@ -10,8 +10,11 @@ type Options = Parameters<Locator['scrollIntoViewIfNeeded']>[0];
 /**
  * Scrolls the specified element into view.
  */
-export const scrollIntoView = (selector: Selector, options?: Options): Promise<void> => {
-  log('Scroll the specified element into view', {options, selector}, LogEventType.InternalAction);
-
-  return selector.getPlaywrightLocator().scrollIntoViewIfNeeded(options);
-};
+export const scrollIntoView = (selector: Selector, options?: Options): Promise<void> =>
+  step(
+    'Scroll the specified element into view',
+    async () => {
+      await selector.getPlaywrightLocator().scrollIntoViewIfNeeded(options);
+    },
+    {payload: {...options, selector}, type: LogEventType.InternalAction},
+  );
