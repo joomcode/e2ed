@@ -1,5 +1,5 @@
 import {LogEventType} from '../constants/internal';
-import {log} from '../utils/log';
+import {step} from '../step';
 
 import type {Locator} from '@playwright/test';
 
@@ -10,8 +10,11 @@ type Options = Parameters<Locator['click']>[0];
 /**
  * Clicks an element.
  */
-export const click = async (selector: Selector, options: Options = {}): Promise<void> => {
-  log(`Click an element ${selector.description}`, options, LogEventType.InternalAction);
-
-  await selector.getPlaywrightLocator().click(options);
-};
+export const click = (selector: Selector, options: Options = {}): Promise<void> =>
+  step(
+    `Click an element ${selector.description}`,
+    async () => {
+      await selector.getPlaywrightLocator().click(options);
+    },
+    {payload: {...options, selector}, type: LogEventType.InternalAction},
+  );

@@ -1,9 +1,15 @@
 import {LogEventType} from '../constants/internal';
-import {log} from '../utils/log';
+import {step} from '../step';
+
+import {waitForInterfaceStabilization} from './waitFor';
+
+import type {Locator} from '@playwright/test';
 
 import type {Selector, WithStabilizationInterval} from '../types/internal';
 
-type Options = Record<string, unknown> & WithStabilizationInterval;
+type Options = Parameters<Locator['dispatchEvent']>[2] &
+  WithStabilizationInterval &
+  Readonly<{eventInit?: Parameters<Locator['dispatchEvent']>[1]}>;
 
 /**
  * Dispatches an event over a specified DOM element.
@@ -11,14 +17,19 @@ type Options = Record<string, unknown> & WithStabilizationInterval;
 export const dispatchEvent = (
   selector: Selector,
   eventName: string,
-  {stabilizationInterval, ...options}: Options = {},
-): Promise<void> => {
-  log(
-    'Dispatches an event over a specified element',
-    {...options, selector, stabilizationInterval},
-    LogEventType.InternalAction,
-  );
+  {eventInit, stabilizationInterval, ...options}: Options = {},
+): Promise<void> =>
+  step(
+    `Dispatches an event "${eventName}" over a specified element`,
+    async () => {
+      await selector.getPlaywrightLocator().dispatchEvent(eventName, eventInit, options);
 
-  // TODO
-  return Promise.resolve();
-};
+      if (stabilizationInterval !== undefined && stabilizationInterval > 0) {
+        await waitForInterfaceStabilization(stabilizationInterval);
+      }
+    },
+    {
+      payload: {eventInit, ...options, selector, stabilizationInterval},
+      type: LogEventType.InternalAction,
+    },
+  );

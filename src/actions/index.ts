@@ -7,13 +7,12 @@ export {
   assertUrlMatchRoute,
 } from './asserts';
 export {blur} from './blur';
-export {clearUpload} from './clearUpload';
+export {clearCookies} from './clearCookies';
+export {clearInput} from './clearInput';
 export {click} from './click';
-export {deleteCookies} from './deleteCookies';
 export {dispatchEvent} from './dispatchEvent';
 export {doubleClick} from './doubleClick';
-export {drag} from './drag';
-export {dragToElement} from './dragToElement';
+export {dragTo} from './dragTo';
 export {focus} from './focus';
 export {getBrowserConsoleMessages} from './getBrowserConsoleMessages';
 export {getBrowserJsErrors} from './getBrowserJsErrors';

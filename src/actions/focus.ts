@@ -1,5 +1,5 @@
 import {LogEventType} from '../constants/internal';
-import {log} from '../utils/log';
+import {step} from '../step';
 
 import type {Locator} from '@playwright/test';
 
@@ -10,8 +10,11 @@ type Options = Parameters<Locator['focus']>[0];
 /**
  * Focuses an element.
  */
-export const focus = async (selector: Selector, options: Options = {}): Promise<void> => {
-  log('Focus an element', {...options, selector}, LogEventType.InternalAction);
-
-  await selector.getPlaywrightLocator().focus(options);
-};
+export const focus = (selector: Selector, options: Options = {}): Promise<void> =>
+  step(
+    'Focus an element',
+    async () => {
+      await selector.getPlaywrightLocator().focus(options);
+    },
+    {payload: {...options, selector}, type: LogEventType.InternalAction},
+  );

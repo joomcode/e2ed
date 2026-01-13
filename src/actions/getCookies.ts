@@ -1,6 +1,7 @@
 import {LogEventType} from '../constants/internal';
+import {step} from '../step';
 import {getPlaywrightPage} from '../useContext';
-import {log} from '../utils/log';
+import {assertValueIsDefined} from '../utils/asserts';
 
 import type {Cookie} from '../types/internal';
 
@@ -11,30 +12,43 @@ import type {Cookie} from '../types/internal';
 export const getCookies = async (
   cookiesParameters: Partial<Cookie> = {},
 ): Promise<readonly Cookie[]> => {
-  const page = getPlaywrightPage();
   const parameters = Object.keys(cookiesParameters);
 
-  const allCookies = await page.context().cookies(page.url());
+  const logMessage =
+    parameters.length === 0
+      ? 'Returns all the cookies from current page'
+      : 'Returns cookies with the specified cookies parameters from current page';
 
-  if (parameters.length === 0) {
-    log('Returns all the cookies from all pages', LogEventType.InternalAction);
+  let cookies: readonly Cookie[] | undefined;
 
-    return allCookies;
-  }
+  await step(
+    logMessage,
+    async () => {
+      const page = getPlaywrightPage();
+      const allCookies = await page.context().cookies(page.url());
 
-  log(
-    'Returns cookies with the specified cookies parameters',
-    {allCookies, cookiesParameters},
-    LogEventType.InternalAction,
+      if (parameters.length === 0) {
+        cookies = allCookies;
+
+        return {allCookies};
+      }
+
+      cookies = allCookies.filter((cookie) => {
+        for (const parameter of parameters as (keyof Cookie)[]) {
+          if (cookie[parameter] !== cookiesParameters[parameter]) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+
+      return {allCookies};
+    },
+    {payload: {cookiesParameters}, type: LogEventType.InternalAction},
   );
 
-  return allCookies.filter((cookie) => {
-    for (const parameter of parameters as (keyof Cookie)[]) {
-      if (cookie[parameter] !== cookiesParameters[parameter]) {
-        return false;
-      }
-    }
+  assertValueIsDefined(cookies, 'cookies is defined', {cookiesParameters});
 
-    return true;
-  });
+  return cookies;
 };
