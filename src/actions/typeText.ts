@@ -1,5 +1,5 @@
 import {LogEventType} from '../constants/internal';
-import {log} from '../utils/log';
+import {step} from '../step';
 
 import type {Locator} from '@playwright/test';
 
@@ -10,12 +10,11 @@ type Options = Parameters<Locator['fill']>[1];
 /**
  * Types the specified text into an input element.
  */
-export const typeText = async (
-  selector: Selector,
-  text: string,
-  options: Options = {},
-): Promise<void> => {
-  log(`Type "${text}" into an input element`, {...options, selector}, LogEventType.InternalAction);
-
-  await selector.getPlaywrightLocator().fill(text, options);
-};
+export const typeText = (selector: Selector, text: string, options: Options = {}): Promise<void> =>
+  step(
+    `Type "${text}" into an input element`,
+    async () => {
+      await selector.getPlaywrightLocator().fill(text, options);
+    },
+    {payload: {...options, selector}, type: LogEventType.InternalAction},
+  );

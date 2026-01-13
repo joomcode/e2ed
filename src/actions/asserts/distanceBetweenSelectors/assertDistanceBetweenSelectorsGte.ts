@@ -1,7 +1,7 @@
 import {LogEventType} from '../../../constants/internal';
 import {expect} from '../../../expect';
+import {step} from '../../../step';
 import {getDistanceBetweenSelectors} from '../../../utils/distanceBetweenSelectors';
-import {log} from '../../../utils/log';
 
 import type {Selector} from '../../../types/internal';
 
@@ -14,11 +14,18 @@ export const assertDistanceBetweenSelectorsGte = async (
   selectorB: Selector,
   minDistance: number,
 ): Promise<void> => {
-  const distance = await getDistanceBetweenSelectors(selectorA, selectorB);
-  const message = `distance between selectors is greater than or equal to ${minDistance}`;
+  const message = `distance between selectors is greater than or equal to ${minDistance}px`;
 
-  log(`Asserts that ${message}`, {distance, minDistance}, LogEventType.InternalAssert);
+  await step(
+    `Asserts that ${message}`,
+    async () => {
+      const distance = await getDistanceBetweenSelectors(selectorA, selectorB);
 
-  // TODO: support Smart Assertions
-  await expect(distance, message).gte(minDistance);
+      // TODO: support Smart Assertions
+      await expect(distance, message).gte(minDistance);
+
+      return {distance};
+    },
+    {payload: {minDistance}, type: LogEventType.InternalAction},
+  );
 };

@@ -5,7 +5,7 @@ import {getPlaywrightPage} from '../useContext';
 import type {NavigateToUrlOptions, NavigationReturn, StatusCode, Url} from '../types/internal';
 
 /**
- * Navigate to the `url` (without waiting of interface stabilization).
+ * Navigates to the `url` (without waiting of interface stabilization).
  */
 export const navigateToUrl = async (
   url: Url,

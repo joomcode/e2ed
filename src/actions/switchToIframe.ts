@@ -1,20 +1,19 @@
 import {LogEventType} from '../constants/internal';
 import {setFrameContext} from '../context/frameContext';
-import {log} from '../utils/log';
+import {step} from '../step';
 
 import type {Selector} from '../types/internal';
 
 /**
  * Switches browsing context to the specified iframe (by iframe selector).
  */
-export const switchToIframe = (iframeSelector: Selector): void => {
-  log(
+export const switchToIframe = (iframeSelector: Selector): Promise<void> =>
+  step(
     'Switch browsing context to the specified iframe',
-    {iframeSelector},
-    LogEventType.InternalAction,
+    () => {
+      const frameContext = iframeSelector.getPlaywrightLocator().contentFrame();
+
+      setFrameContext(frameContext);
+    },
+    {payload: {iframeSelector}, type: LogEventType.InternalAction},
   );
-
-  const frameContext = iframeSelector.getPlaywrightLocator().contentFrame();
-
-  setFrameContext(frameContext);
-};

@@ -18,5 +18,6 @@ export const assertionMessageGetters: AssertionFunctionsRecord<string> = {
   notEql: (unexpected) => `is not deeply equal to ${valueToString(unexpected)}`,
   notOk: () => 'is falsy',
   ok: () => 'is truthy',
+  toBeInViewport: () => 'element intersects viewport',
   toMatchScreenshot: (expected) => `matches the expected screenshot ${valueToString(expected)}`,
 };

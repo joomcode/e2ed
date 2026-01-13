@@ -1,12 +1,15 @@
 import {LogEventType} from '../constants/internal';
 import {clearFrameContext} from '../context/frameContext';
-import {log} from '../utils/log';
+import {step} from '../step';
 
 /**
  * Switches browsing context to the main window.
  */
-export const switchToMainWindow = (): void => {
-  log('Switch browsing context to the main window', LogEventType.InternalAction);
-
-  clearFrameContext();
-};
+export const switchToMainWindow = (): Promise<void> =>
+  step(
+    'Switch browsing context to the main window',
+    () => {
+      clearFrameContext();
+    },
+    {type: LogEventType.InternalAction},
+  );

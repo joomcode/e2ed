@@ -1,7 +1,7 @@
 import {join} from 'node:path';
 
 import {LogEventType, SCREENSHOTS_DIRECTORY_PATH} from '../constants/internal';
-import {log} from '../utils/log';
+import {step} from '../step';
 
 import type {Locator} from '@playwright/test';
 
@@ -18,16 +18,19 @@ export const takeElementScreenshot = async (
 ): Promise<void> => {
   const {path: pathToScreenshot, ...optionsWithoutPath} = options;
 
-  log(
+  await step(
     'Take a screenshot of the element',
-    {pathToScreenshot, ...optionsWithoutPath, selector},
-    LogEventType.InternalAction,
+    async () => {
+      if (pathToScreenshot !== undefined) {
+        // eslint-disable-next-line no-param-reassign
+        options.path = join(SCREENSHOTS_DIRECTORY_PATH, pathToScreenshot);
+      }
+
+      await selector.getPlaywrightLocator().screenshot(options);
+    },
+    {
+      payload: {pathToScreenshot, ...optionsWithoutPath, selector},
+      type: LogEventType.InternalAction,
+    },
   );
-
-  if (pathToScreenshot !== undefined) {
-    // eslint-disable-next-line no-param-reassign
-    options.path = join(SCREENSHOTS_DIRECTORY_PATH, pathToScreenshot);
-  }
-
-  await selector.getPlaywrightLocator().screenshot(options);
 };

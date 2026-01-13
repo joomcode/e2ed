@@ -2,6 +2,8 @@
 
 import {toMatchScreenshot} from './toMatchScreenshot';
 
+import type {Selector} from '../../types/internal';
+
 import type {Expect} from './Expect';
 import type {NonSelectorAdditionalMatchers, SelectorMatchers} from './types';
 
@@ -78,6 +80,13 @@ export const additionalMatchers: NonSelectorAdditionalMatchers<unknown> & Select
     const {actualValue, description} = this;
 
     return playwrightExpect(actualValue, description).toBeTruthy();
+  },
+
+  async toBeInViewport(this: Expect, options = {}) {
+    const {actualValue, description} = this;
+    const selector = actualValue as Selector;
+
+    return playwrightExpect(selector.getPlaywrightLocator(), description).toBeInViewport(options);
   },
 
   toMatchScreenshot(this: Expect, expectedScreenshotId, options = {}) {

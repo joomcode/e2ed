@@ -34,6 +34,7 @@ export type MapHeaders = (this: void, headers: StringHeaders) => StringHeaders;
 export type MapOptions = Readonly<{
   mapRequestHeaders?: MapHeaders;
   mapResponseHeaders?: MapHeaders;
+  skipLogs?: boolean;
 }>;
 
 /**

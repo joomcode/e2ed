@@ -186,6 +186,7 @@ export type {
   Values,
   ZeroOrOneArg,
 } from './utils';
+export type {ToBeInViewportOptions} from './viewport';
 /** * @internal */
 export type {
   AllRequestsCompletePredicateWithPromise,

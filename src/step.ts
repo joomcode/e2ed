@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import {LogEventStatus, LogEventType} from './constants/internal';
 import {getStepsStack} from './context/stepsStack';
 import {getFullPackConfig} from './utils/config';
@@ -31,7 +33,7 @@ type Options = Readonly<{
 /**
  * Declares a test step (could calls Playwright's `test.step` function inside).
  */
-// eslint-disable-next-line complexity, max-statements
+// eslint-disable-next-line complexity, max-statements, max-lines-per-function
 export const step = async (
   name: string,
   body?: () => MaybePromise<LogPayload | Void>,
@@ -92,16 +94,26 @@ export const step = async (
   } catch (error) {
     stepError = error;
 
-    if (error !== null && (typeof error === 'object' || typeof error === 'function')) {
-      if (!('fromStep' in error)) {
+    if (
+      !(stepError instanceof E2edError) &&
+      Object.getOwnPropertySymbols(stepError ?? {}).length > 0
+    ) {
+      stepError = new E2edError('Caught an error in step', {
+        cause: String(stepError),
+        ...errorProperties,
+      });
+    }
+
+    if (stepError !== null && (typeof stepError === 'object' || typeof stepError === 'function')) {
+      if (!('fromStep' in stepError)) {
         Object.assign(
-          error,
+          stepError,
           errorProperties,
-          'message' in error ? {originalMessage: error.message} : undefined,
+          'message' in stepError ? {originalMessage: stepError.message} : undefined,
         );
       }
     } else {
-      stepError = new E2edError('Caught an error in step', {cause: error, ...errorProperties});
+      stepError = new E2edError('Caught an error in step', {cause: stepError, ...errorProperties});
     }
 
     if (logEvent !== undefined) {

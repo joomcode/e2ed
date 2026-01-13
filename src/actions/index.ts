@@ -2,8 +2,6 @@ export {
   assertDistanceBetweenSelectorsGte,
   assertDistanceBetweenSelectorsLte,
   assertNumbersAreApproximatelyEqual,
-  assertSelectorEntirelyInViewport,
-  assertSelectorInViewport,
   assertUrlMatchRoute,
 } from './asserts';
 export {blur} from './blur';

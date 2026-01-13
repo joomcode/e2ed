@@ -1,5 +1,5 @@
 import {LogEventType} from '../constants/internal';
-import {log} from '../utils/log';
+import {step} from '../step';
 
 import type {Locator} from '@playwright/test';
 
@@ -18,11 +18,11 @@ export const setFilesToUpload = async (
 ): Promise<void> => {
   const hasManyFiles = Array.isArray(files) && files.length > 0;
 
-  log(
+  await step(
     `Populate file upload input with file${hasManyFiles ? 's' : ''} "${String(files)}"`,
-    {options, selector},
-    LogEventType.InternalAction,
+    async () => {
+      await selector.getPlaywrightLocator().setInputFiles(files, options);
+    },
+    {payload: {...options, selector}, type: LogEventType.InternalAction},
   );
-
-  await selector.getPlaywrightLocator().setInputFiles(files, options);
 };

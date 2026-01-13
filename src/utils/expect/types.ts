@@ -1,6 +1,6 @@
 import type {Expect as PlaywrightExpect} from '@playwright/test';
 
-import type {Fn, ToMatchScreenshotOptions} from '../../types/internal';
+import type {Fn, ToBeInViewportOptions, ToMatchScreenshotOptions} from '../../types/internal';
 
 import type {Expect} from './Expect';
 
@@ -75,6 +75,11 @@ export type NonSelectorMatchers<Actual> = NonSelectorAdditionalMatchers<Actual> 
  * TODO: support LocatorAssertions
  */
 export type SelectorMatchers = Readonly<{
+  /**
+   * Ensures that selector element intersects viewport, according to the intersection observer API.
+   */
+  toBeInViewport: (options?: ToBeInViewportOptions) => Promise<void>;
+
   /**
    * Checks that the selector screenshot matches the one specified by `expectedScreenshotId`.
    */

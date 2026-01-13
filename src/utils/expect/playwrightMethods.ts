@@ -56,7 +56,6 @@ export const playwrightMethods = [
   'toBeEnabled',
   'toBeFocused',
   'toBeHidden',
-  'toBeInViewport',
   'toBeOK',
   'toBeVisible',
   'toContainText',

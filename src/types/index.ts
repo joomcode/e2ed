@@ -107,4 +107,5 @@ export type {
   Values,
   ZeroOrOneArg,
 } from './utils';
+export type {ToBeInViewportOptions} from './viewport';
 export type {RequestPredicate, ResponsePredicate} from './waitForEvents';

@@ -4,4 +4,3 @@ export {
   assertDistanceBetweenSelectorsGte,
   assertDistanceBetweenSelectorsLte,
 } from './distanceBetweenSelectors';
-export {assertSelectorEntirelyInViewport, assertSelectorInViewport} from './viewport';
