@@ -1,5 +1,28 @@
 # Changelog
 
+## [v0.21.2](https://github.com/joomcode/e2ed/tree/v0.21.2) (2026-01-15)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.21.1...v0.21.2)
+
+- [fix: temporary skip switching pages tests](https://github.com/joomcode/e2ed/commit/6021bf9badcac3ce92d824dd49cdb84f4faf23b5) ([uid11](https://github.com/uid11))
+- [fix: correct work with actions without `await`](https://github.com/joomcode/e2ed/commit/3c2f076764a04c4d465cf17903b3a9a209ddb7c8) ([uid11](https://github.com/uid11))
+
+  chore: update `prettier` to 3.8.0
+
+- [fix: add `expect` method `toBeInViewport` instead of separate asserts](https://github.com/joomcode/e2ed/commit/0c50fe8f6b7c3adc20c21c66a334a15dd00c054f) ([uid11](https://github.com/uid11))
+- [Merge pull request #125 from joomcode/feat/support-steps-in-actions](https://github.com/joomcode/e2ed/commit/72b7b394289085dc955f200621aa19f9e83f1e9e) ([uid11](https://github.com/uid11))
+
+  feat: support steps in actions (for groupping steps)
+
+- [PRO-16178 feat: support steps in actions (for groupping steps)](https://github.com/joomcode/e2ed/commit/ba860e4ed6f2e778374d8c0ddd4d758836a98859) ([uid11](https://github.com/uid11))
+- [Merge pull request #124 from joomcode/feat/add-logs-with-children](https://github.com/joomcode/e2ed/commit/e8e72d924150feefcc382dfdcf7c86ca51127657) ([uid11](https://github.com/uid11))
+
+  feat: add functionality of `regroupSteps` in HTML reports
+
+- [fix: security issue with permissions in GitHub Actions](https://github.com/joomcode/e2ed/commit/386e0c52d3375226c08d57e14bb68670f4e21d9a) ([uid11](https://github.com/uid11))
+- [fix: locator for `logo` on HTML report page in internal autotests](https://github.com/joomcode/e2ed/commit/1b324b5e16d87bebdf281d15a4ec6ee3a959825d) ([uid11](https://github.com/uid11))
+- [PRO-15806 feat: add functionality of `regroupSteps` in HTML reports](https://github.com/joomcode/e2ed/commit/69d51907b7bd9e41e4d09ddba48ff26b7acf66e2) ([uid11](https://github.com/uid11))
+
 ## [v0.21.1](https://github.com/joomcode/e2ed/tree/v0.21.1) (2025-12-04)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.21.0...v0.21.1)
