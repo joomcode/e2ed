@@ -1,10 +1,9 @@
 import {LogEventType} from '../../constants/internal';
+import {step} from '../../step';
 import {addPageToApiStatistics} from '../../utils/apiStatistics';
+import {assertValueIsDefined} from '../../utils/asserts';
 import {getDocumentUrl} from '../../utils/document';
-import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
-import {log} from '../../utils/log';
-
-import {createPageInstance} from './createPageInstance';
+import {createPageInstance} from '../../utils/pageObjects';
 
 import type {
   AnyPageClassType,
@@ -20,51 +19,47 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
   ...args: NavigateToOrAssertPageArgs<SomePageClass>
 ): Promise<InstanceType<SomePageClass>> => {
   const [PageClass, pageParams] = args;
+  let page: InstanceType<SomePageClass> | undefined;
 
-  const startTimeInMs = Date.now() as UtcTimeInMs;
+  await step(
+    `Navigate to the page "${PageClass.name}"`,
+    async () => {
+      const startTimeInMs = Date.now() as UtcTimeInMs;
 
-  const page = await createPageInstance(PageClass, pageParams);
+      page = await createPageInstance(PageClass, pageParams);
 
-  const route = page.getRoute();
-  const {routeParams} = route;
-  const url = route.getUrl();
-  const startNavigateTimeInMs = Date.now() as UtcTimeInMs;
-  const pageInstanceCreatedInMs = startNavigateTimeInMs - startTimeInMs;
-  const pageName = PageClass.name as PageName;
+      const route = page.getRoute();
+      const {routeParams} = route;
+      const url = route.getUrl();
+      const startNavigateTimeInMs = Date.now() as UtcTimeInMs;
+      const pageInstanceCreatedInMs = startNavigateTimeInMs - startTimeInMs;
+      const pageName = PageClass.name as PageName;
 
-  log(
-    `Will navigate to the page "${pageName}"`,
-    {pageInstanceCreatedInMs, pageParams, routeParams, url},
-    LogEventType.InternalAction,
+      await page.beforeNavigateToPage?.();
+
+      await page.navigateToPage(url);
+
+      await page.waitForPageLoaded();
+
+      const documentUrl = await getDocumentUrl();
+      const isMatch = route.isMatchUrl(documentUrl);
+
+      await page.assertPage(isMatch, documentUrl);
+
+      await page.afterAssertPage?.();
+
+      await page.afterNavigateToPage?.();
+
+      const duration = Date.now() - startNavigateTimeInMs;
+
+      addPageToApiStatistics({duration, pageName, url});
+
+      return {documentUrl, isMatch, pageInstanceCreatedInMs, routeParams, url};
+    },
+    {payload: {pageParams}, type: LogEventType.InternalAction},
   );
 
-  await page.beforeNavigateToPage?.();
-
-  await page.navigateToPage(url);
-
-  log(
-    `Navigation to the page "${pageName}" completed`,
-    {pageParams, routeParams, url},
-    LogEventType.InternalAction,
-  );
-
-  await page.waitForPageLoaded();
-
-  const documentUrl = await getDocumentUrl();
-  const isMatch = route.isMatchUrl(documentUrl);
-
-  await page.assertPage(isMatch, documentUrl);
-
-  await page.afterAssertPage?.();
-
-  await page.afterNavigateToPage?.();
-
-  const duration = Date.now() - startNavigateTimeInMs;
-  const durationWithUnits = getDurationWithUnits(duration);
-
-  log(`Page "${pageName}" loaded in ${durationWithUnits}`, {url}, LogEventType.InternalAction);
-
-  addPageToApiStatistics({duration, pageName, url});
+  assertValueIsDefined(page, 'page is defined', {name: PageClass.name, pageParams});
 
   return page;
 };

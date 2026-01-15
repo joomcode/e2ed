@@ -39,7 +39,7 @@ export {
 } from './inspect';
 export {LogEventStatus, LogEventType} from './log';
 /** @internal */
-export {MESSAGE_BACKGROUND_COLOR_BY_STATUS} from './log';
+export {ADDITIONAL_STEP_TIMEOUT, MESSAGE_BACKGROUND_COLOR_BY_STATUS} from './log';
 /** @internal */
 export {SCREENSHOT_NOT_SPECIFIED_ERROR_MESSAGE} from './matchScreenshot';
 export {CREATE_PAGE_TOKEN} from './pages';

@@ -5,7 +5,7 @@ import {log} from 'e2ed/utils';
 import type {NavigationReturn, StringHeaders, Url} from 'e2ed/types';
 
 /**
- * Navigate to the url and set additional page request headers.
+ * Navigates to the url and set additional page request headers.
  */
 export const setPageRequestHeadersAndNavigateToUrl = (
   url: Url,

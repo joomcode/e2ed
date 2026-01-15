@@ -1,7 +1,7 @@
-import {assertValueIsFalse, assertValueIsNotNull} from './asserts';
+import {assertValueIsFalse, assertValueIsNotNull} from '../asserts';
 
-import type {Attributes, PARAMETERS} from '../createLocator';
-import type {Any, Class, Selector} from '../types/internal';
+import type {Attributes, PARAMETERS} from '../../createLocator';
+import type {Any, Class, Selector} from '../../types/internal';
 
 type AnyLocator = ((parameters?: Attributes) => Selector) & {readonly [PARAMETERS]?: object};
 

@@ -1,7 +1,7 @@
 import {getIsPageNavigatingNow} from '../../context/isPageNavigatingNow';
 import {getNavigationDelay} from '../../context/navigationDelay';
+import {getTestIdleTimeout} from '../../context/testIdleTimeout';
 
-import {getFullPackConfig} from '../config';
 import {setReadonlyProperty} from '../object';
 import {getPromiseWithResolveAndReject, getTimeoutPromise} from '../promise';
 import {getResponseFromPlaywrightResponse} from '../requestHooks';
@@ -21,7 +21,7 @@ export const getWaitForResponsePredicate = (
   predicate: ResponsePredicate,
   includeNavigationRequest: boolean,
 ): ((playwrightResponse: PlaywrightResponse) => Promise<boolean>) => {
-  const {testIdleTimeout} = getFullPackConfig();
+  const testIdleTimeout = getTestIdleTimeout();
   const navigationDelay = getNavigationDelay();
 
   return async (playwrightResponse: PlaywrightResponse) => {

@@ -1,6 +1,6 @@
 import {LogEventType} from '../../../constants/internal';
 import {createClientFunction} from '../../../createClientFunction';
-import {log} from '../../../utils/log';
+import {step} from '../../../step';
 
 import type {AnyPageClassType} from '../../../types/internal';
 
@@ -11,14 +11,13 @@ const backPageHistoryClient = createClientFunction(() => window.history.back(), 
 /**
  * Go back in browser page history.
  */
-export const backPageHistory = async (page: InstanceType<AnyPageClassType>): Promise<void> => {
-  log(
+export const backPageHistory = (page: InstanceType<AnyPageClassType>): Promise<void> =>
+  step(
     `Go back in browser history from page "${page.constructor.name}"`,
-    undefined,
-    LogEventType.InternalAction,
+    async () => {
+      await backPageHistoryClient();
+
+      await page.waitForPageLoaded();
+    },
+    {type: LogEventType.InternalAction},
   );
-
-  await backPageHistoryClient();
-
-  await page.waitForPageLoaded();
-};

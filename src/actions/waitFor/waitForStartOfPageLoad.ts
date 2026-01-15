@@ -1,13 +1,11 @@
-import {LogEventType} from '../../constants/internal';
+import {ADDITIONAL_STEP_TIMEOUT, LogEventType} from '../../constants/internal';
+import {step} from '../../step';
 import {getPlaywrightPage} from '../../useContext';
 import {assertValueIsDefined} from '../../utils/asserts';
 import {getFullPackConfig} from '../../utils/config';
-import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
-import {log} from '../../utils/log';
-
-import type {UtcTimeInMs} from '../../types/internal';
 
 type Options = Readonly<{
+  skipLogs?: boolean;
   timeout?: number;
 }>;
 
@@ -15,39 +13,45 @@ type Options = Readonly<{
  * Waits for start of page load (when change the url or reload page).
  */
 export const waitForStartOfPageLoad = async (options?: Options): Promise<URL> => {
-  const startTimeInMs = Date.now() as UtcTimeInMs;
-
-  const page = getPlaywrightPage();
   const timeout = options?.timeout ?? getFullPackConfig().navigationTimeout;
 
   let urlObject: URL | undefined;
-  let wasCalled = false;
 
-  await page.waitForURL(
-    (url) => {
-      if (wasCalled === false) {
-        wasCalled = true;
+  await step(
+    'Wait for start of page load',
+    async () => {
+      const page = getPlaywrightPage();
 
-        return false;
-      }
+      let wasCalled = false;
 
-      urlObject = url;
+      await page.waitForURL(
+        (url) => {
+          if (wasCalled === false) {
+            wasCalled = true;
 
-      return true;
+            return false;
+          }
+
+          urlObject = url;
+
+          return true;
+        },
+        {timeout, waitUntil: 'commit'},
+      );
+
+      assertValueIsDefined(urlObject, 'urlObject is defined', {timeout});
+
+      return {url: urlObject.href};
     },
-    {timeout, waitUntil: 'commit'},
+    {
+      payload: {options},
+      skipLogs: options?.skipLogs ?? false,
+      timeout: timeout + ADDITIONAL_STEP_TIMEOUT,
+      type: LogEventType.InternalCore,
+    },
   );
 
-  assertValueIsDefined(urlObject, 'urlObject is defined', {timeout});
-
-  const waitInMs = Date.now() - startTimeInMs;
-
-  const waitWithUnits = getDurationWithUnits(waitInMs);
-
-  log(
-    `Have waited for start of page load for ${waitWithUnits} at ${urlObject.href}`,
-    LogEventType.InternalAction,
-  );
+  assertValueIsDefined(urlObject, 'urlObject is defined', {options});
 
   return urlObject;
 };

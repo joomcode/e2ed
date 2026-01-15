@@ -2,6 +2,12 @@ import {ConsoleBackgroundColor} from './color';
 import {TestRunStatus} from './testRun';
 
 /**
+ * Additional timeout for steps inside actions.
+ * @internal
+ */
+export const ADDITIONAL_STEP_TIMEOUT = 1_000;
+
+/**
  * Status of `LogEvent`.
  */
 export const enum LogEventStatus {

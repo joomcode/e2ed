@@ -26,6 +26,6 @@ export const assertDistanceBetweenSelectorsLte = async (
 
       return {distance};
     },
-    {payload: {maxDistance}, type: LogEventType.InternalAction},
+    {payload: {maxDistance}, type: LogEventType.InternalAssert},
   );
 };

@@ -1,6 +1,6 @@
 import {LogEventType} from '../../../constants/internal';
 import {createClientFunction} from '../../../createClientFunction';
-import {log} from '../../../utils/log';
+import {step} from '../../../step';
 
 import type {AnyPageClassType} from '../../../types/internal';
 
@@ -11,14 +11,13 @@ const forwardPageHistoryClient = createClientFunction(() => window.history.forwa
 /**
  * Go forward in browser page history.
  */
-export const forwardPageHistory = async (page: InstanceType<AnyPageClassType>): Promise<void> => {
-  log(
+export const forwardPageHistory = (page: InstanceType<AnyPageClassType>): Promise<void> =>
+  step(
     `Go forward in browser history from page "${page.constructor.name}"`,
-    undefined,
-    LogEventType.InternalAction,
+    async () => {
+      await forwardPageHistoryClient();
+
+      await page.waitForPageLoaded();
+    },
+    {type: LogEventType.InternalAction},
   );
-
-  await forwardPageHistoryClient();
-
-  await page.waitForPageLoaded();
-};

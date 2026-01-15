@@ -1,12 +1,17 @@
 /* eslint-disable no-labels */
 
-import {LogEventType} from '../../constants/internal';
+import {ADDITIONAL_STEP_TIMEOUT, LogEventType} from '../../constants/internal';
 import {createClientFunction} from '../../createClientFunction';
+import {step} from '../../step';
 import {getFullPackConfig} from '../../utils/config';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
-import {log} from '../../utils/log';
 
 import type {UtcTimeInMs} from '../../types/internal';
+
+type Options = Readonly<{
+  skipLogs?: boolean;
+  timeout?: number;
+}>;
 
 /**
  * This function in a universal way waits for the end of the movements and redrawing
@@ -122,7 +127,7 @@ const clientWaitForInterfaceStabilization = createClientFunction(
  */
 export const waitForInterfaceStabilization = async (
   stabilizationInterval?: number,
-  timeout?: number,
+  {skipLogs = false, timeout}: Options = {},
 ): Promise<void> => {
   if (stabilizationInterval === undefined || timeout === undefined) {
     const {waitForInterfaceStabilization: config} = getFullPackConfig();
@@ -135,28 +140,28 @@ export const waitForInterfaceStabilization = async (
     timeout ??= timeoutFromConfig;
   }
 
-  if (!(stabilizationInterval > 0) || !(timeout > 0)) {
-    return;
-  }
-
-  const startTimeInMs = Date.now() as UtcTimeInMs;
-
-  const maybeErrorReason = await clientWaitForInterfaceStabilization(
-    stabilizationInterval,
-    timeout,
-  );
-
-  const waitInMs = Date.now() - startTimeInMs;
-
-  const startDateTimeInIso = new Date(startTimeInMs).toISOString();
-
   const stabilizationIntervalWithUnits = getDurationWithUnits(stabilizationInterval);
   const timeoutWithUnits = getDurationWithUnits(timeout);
-  const waitWithUnits = getDurationWithUnits(waitInMs);
 
-  log(
-    `Have waited for interface stabilization for ${waitWithUnits} with stabilization interval ${stabilizationIntervalWithUnits}`,
-    {error: maybeErrorReason, startDateTimeInIso, timeout: timeoutWithUnits},
-    LogEventType.InternalCore,
+  await step(
+    `Wait for interface stabilization with stabilization interval ${stabilizationIntervalWithUnits}`,
+    async () => {
+      if (!(stabilizationInterval > 0) || !(timeout > 0)) {
+        return;
+      }
+
+      const maybeErrorReason = await clientWaitForInterfaceStabilization(
+        stabilizationInterval,
+        timeout,
+      );
+
+      return {error: maybeErrorReason};
+    },
+    {
+      payload: {stabilizationInterval, timeoutWithUnits},
+      skipLogs,
+      timeout: timeout + ADDITIONAL_STEP_TIMEOUT,
+      type: LogEventType.InternalCore,
+    },
   );
 };

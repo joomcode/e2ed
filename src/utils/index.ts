@@ -23,7 +23,6 @@ export {
   replaceSetCookie,
   trimSemicolonsAtTheEnd,
 } from './cookie';
-export {createPageObjectsFromMultiLocator} from './createPageObjectsFromMultiLocator';
 export {
   getDistanceBetweenSelectors,
   getHorizontalDistanceBetweenSelectors,
@@ -41,6 +40,7 @@ export {getEquivalentHeadersNames, getHeadersFromHeaderEntries, getHeaderValue} 
 export {getContentJsonHeaders} from './http';
 export {log} from './log';
 export {deepMerge, getEntries, getKeys, setReadonlyProperty} from './object';
+export {createPageObjectsFromMultiLocator} from './pageObjects';
 export {parseMaybeEmptyValueAsJson, parseValueAsJsonIfNeeded} from './parse';
 export {
   addTimeoutToPromise,

@@ -1,13 +1,14 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 
-import {LogEventType, MAX_TIMEOUT_IN_MS} from '../../constants/internal';
+import {ADDITIONAL_STEP_TIMEOUT, LogEventType, MAX_TIMEOUT_IN_MS} from '../../constants/internal';
 import {getTestRunPromise} from '../../context/testRunPromise';
+import {step} from '../../step';
 import {getPlaywrightPage} from '../../useContext';
+import {assertValueIsDefined} from '../../utils/asserts';
 import {getFullPackConfig} from '../../utils/config';
 import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
-import {log} from '../../utils/log';
 import {pageWaitForResponse} from '../../utils/playwrightPage';
 import {addTimeoutToPromise} from '../../utils/promise';
 import {getResponseFromPlaywrightResponse} from '../../utils/requestHooks';
@@ -21,7 +22,6 @@ import type {
   ResponsePredicate,
   ResponseWithRequest,
   Trigger,
-  UtcTimeInMs,
 } from '../../types/internal';
 
 type Action = (<SomeRequest extends Request = Request, SomeResponse extends Response = Response>(
@@ -40,7 +40,6 @@ type Options = Readonly<{includeNavigationRequest?: boolean; skipLogs?: boolean;
  * Waits for some response (from browser) filtered by the response predicate.
  * If the function runs longer than the specified timeout, it is rejected.
  */
-// eslint-disable-next-line max-statements
 export const waitForResponse = (async <
   SomeRequest extends Request = Request,
   SomeResponse extends Response = Response,
@@ -49,8 +48,6 @@ export const waitForResponse = (async <
   triggerOrOptions?: Options | Trigger | undefined,
   options?: Options,
 ): Promise<ResponseWithRequest<SomeRequest, SomeResponse>> => {
-  const startTimeInMs = Date.now() as UtcTimeInMs;
-
   setCustomInspectOnFunction(predicate);
 
   const trigger = typeof triggerOrOptions === 'function' ? triggerOrOptions : undefined;
@@ -58,95 +55,93 @@ export const waitForResponse = (async <
     typeof triggerOrOptions === 'function' ? options : (triggerOrOptions ?? options);
 
   const timeout = finalOptions?.timeout ?? getFullPackConfig().waitForResponseTimeout;
+  const timeoutWithUnits = getDurationWithUnits(timeout);
 
   if (trigger !== undefined) {
     setCustomInspectOnFunction(trigger);
   }
 
-  const page = getPlaywrightPage();
-  const testRunPromise = getTestRunPromise();
+  let response: ResponseWithRequest<SomeRequest, SomeResponse> | undefined;
 
-  let isTestRunCompleted = false;
+  await step(
+    `Wait for response with timeout ${timeoutWithUnits}`,
+    async () => {
+      const page = getPlaywrightPage();
+      const testRunPromise = getTestRunPromise();
 
-  void testRunPromise.then(() => {
-    isTestRunCompleted = true;
-  });
+      let isTestRunCompleted = false;
 
-  const timeoutWithUnits = getDurationWithUnits(timeout);
+      void testRunPromise.then(() => {
+        isTestRunCompleted = true;
+      });
 
-  const finalPredicate = getWaitForResponsePredicate(
-    predicate as ResponsePredicate,
-    finalOptions?.includeNavigationRequest ?? false,
-  );
+      const finalPredicate = getWaitForResponsePredicate(
+        predicate as ResponsePredicate,
+        finalOptions?.includeNavigationRequest ?? false,
+      );
 
-  let finalError: unknown;
-  let hasError = false;
+      let finalError: unknown;
+      let hasError = false;
 
-  const promise = addTimeoutToPromise(
-    pageWaitForResponse(
-      page,
-      AsyncLocalStorage.bind(async (playwrightResponse: PlaywrightResponse) => {
-        try {
-          const result = await finalPredicate(playwrightResponse);
+      const promise = addTimeoutToPromise(
+        pageWaitForResponse(
+          page,
+          AsyncLocalStorage.bind(async (playwrightResponse: PlaywrightResponse) => {
+            try {
+              const result = await finalPredicate(playwrightResponse);
 
-          return result;
-        } catch (cause) {
-          if (!isTestRunCompleted) {
-            finalError = new E2edError('waitForResponse predicate threw an exception', {
-              cause,
-              timeout,
-              trigger,
-            });
-            hasError = true;
+              return result;
+            } catch (cause) {
+              if (!isTestRunCompleted) {
+                finalError = new E2edError('waitForResponse predicate threw an exception', {
+                  cause,
+                  timeout,
+                  trigger,
+                });
+                hasError = true;
+              }
+
+              return true;
+            }
+          }),
+          {timeout: MAX_TIMEOUT_IN_MS},
+        ),
+        timeout,
+        new E2edError(`waitForResponse promise rejected after ${timeoutWithUnits} timeout`),
+      )
+        .then(
+          (playwrightResponse) =>
+            getResponseFromPlaywrightResponse(playwrightResponse) as Promise<
+              ResponseWithRequest<SomeRequest, SomeResponse>
+            >,
+        )
+        .catch((error: unknown) => {
+          if (isTestRunCompleted) {
+            return new Promise<ResponseWithRequest<SomeRequest, SomeResponse>>(() => {});
           }
 
-          return true;
-        }
-      }),
-      {timeout: MAX_TIMEOUT_IN_MS},
-    ),
-    timeout,
-    new E2edError(`waitForResponse promise rejected after ${timeoutWithUnits} timeout`),
-  )
-    .then(
-      (playwrightResponse) =>
-        getResponseFromPlaywrightResponse(playwrightResponse) as Promise<
-          ResponseWithRequest<SomeRequest, SomeResponse>
-        >,
-    )
-    .catch((error: unknown) => {
-      if (isTestRunCompleted) {
-        return new Promise<ResponseWithRequest<SomeRequest, SomeResponse>>(() => {});
+          throw error;
+        });
+
+      await trigger?.();
+
+      response = await promise;
+
+      if (hasError) {
+        throw finalError;
       }
 
-      throw error;
-    });
+      return {response};
+    },
+    {
+      payload: {predicate, timeoutWithUnits, trigger},
+      skipLogs: finalOptions?.skipLogs ?? false,
+      timeout: timeout + ADDITIONAL_STEP_TIMEOUT,
+      type: LogEventType.InternalCore,
+    },
+  );
 
-  if (finalOptions?.skipLogs !== true) {
-    log(
-      `Set wait for response with timeout ${timeoutWithUnits}`,
-      {predicate, trigger},
-      LogEventType.InternalCore,
-    );
-  }
-
-  await trigger?.();
-
-  const response = await promise;
-
-  if (hasError) {
-    throw finalError;
-  }
-
-  if (finalOptions?.skipLogs !== true) {
-    const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
-
-    log(
-      `Have waited for response for ${waitWithUnits}`,
-      {predicate, response, timeoutWithUnits, trigger},
-      LogEventType.InternalCore,
-    );
-  }
+  assertValueIsDefined(response, 'response is defined', {predicate, trigger});
 
   return response;
 }) as Action;

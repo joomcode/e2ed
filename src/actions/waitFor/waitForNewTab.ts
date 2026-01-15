@@ -1,13 +1,17 @@
-import {LogEventType} from '../../constants/internal';
+import {ADDITIONAL_STEP_TIMEOUT, LogEventType} from '../../constants/internal';
+import {step} from '../../step';
 import {getPlaywrightPage} from '../../useContext';
+import {assertValueIsDefined} from '../../utils/asserts';
 import {getFullPackConfig} from '../../utils/config';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
-import {log} from '../../utils/log';
 
-import type {InternalTab, Tab, Trigger, UtcTimeInMs} from '../../types/internal';
+import type {InternalTab, Tab, Trigger} from '../../types/internal';
 
-type Options = Readonly<{skipLogs?: boolean; timeout?: number}>;
+type Options = Readonly<{
+  skipLogs?: boolean;
+  timeout?: number;
+}>;
 
 type WaitForNewTab = ((trigger: Trigger | undefined, options?: Options) => Promise<Tab>) &
   ((options?: Options) => Promise<Tab>);
@@ -19,9 +23,6 @@ export const waitForNewTab = (async (
   triggerOrOptions?: Options | Trigger | undefined,
   options?: Options,
 ): Promise<Tab> => {
-  const startTimeInMs = Date.now() as UtcTimeInMs;
-
-  const context = getPlaywrightPage().context();
   const trigger = typeof triggerOrOptions === 'function' ? triggerOrOptions : undefined;
   const finalOptions =
     typeof triggerOrOptions === 'function' ? options : (triggerOrOptions ?? options);
@@ -33,35 +34,33 @@ export const waitForNewTab = (async (
     setCustomInspectOnFunction(trigger);
   }
 
-  const pagePromise = context.waitForEvent('page', {timeout});
+  let newTab: InternalTab | undefined;
 
-  if (finalOptions?.skipLogs !== true) {
-    log(
-      `Set wait for new tab with timeout ${timeoutWithUnits}`,
-      {trigger},
-      LogEventType.InternalCore,
-    );
-  }
+  await step(
+    `Wait for new tab with timeout ${timeoutWithUnits}`,
+    async () => {
+      const context = getPlaywrightPage().context();
+      const pagePromise = context.waitForEvent('page', {timeout});
 
-  await trigger?.();
+      await trigger?.();
 
-  const page = await pagePromise;
+      const page = await pagePromise;
 
-  const newTab: InternalTab = {page};
+      newTab = {page};
 
-  const waitInMs = Date.now() - startTimeInMs;
+      const url = page.url();
 
-  const waitWithUnits = getDurationWithUnits(waitInMs);
+      return {url};
+    },
+    {
+      payload: {timeoutWithUnits, trigger},
+      skipLogs: finalOptions?.skipLogs ?? false,
+      timeout: timeout + ADDITIONAL_STEP_TIMEOUT,
+      type: LogEventType.InternalCore,
+    },
+  );
 
-  const url = page.url();
+  assertValueIsDefined(newTab, 'newTab is defined', {trigger});
 
-  if (finalOptions?.skipLogs !== true) {
-    log(
-      `Have waited for new tab for ${waitWithUnits} at ${url}`,
-      {timeoutWithUnits, trigger},
-      LogEventType.InternalCore,
-    );
-  }
-
-  return newTab as Tab;
+  return newTab satisfies InternalTab as Tab;
 }) as WaitForNewTab;

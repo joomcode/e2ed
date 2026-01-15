@@ -26,6 +26,6 @@ export const assertDistanceBetweenSelectorsGte = async (
 
       return {distance};
     },
-    {payload: {minDistance}, type: LogEventType.InternalAction},
+    {payload: {minDistance}, type: LogEventType.InternalAssert},
   );
 };

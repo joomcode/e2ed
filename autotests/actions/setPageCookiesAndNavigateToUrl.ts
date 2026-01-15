@@ -5,7 +5,7 @@ import {getHeaderValue, log, replaceSetCookie} from 'e2ed/utils';
 import type {Cookie, NavigationReturn, SetCookieHeaderString, StringHeaders, Url} from 'e2ed/types';
 
 /**
- * Navigate to the url and set custom page cookies.
+ * Navigates to the url and set custom page cookies.
  */
 export const setPageCookiesAndNavigateToUrl = (
   url: Url,

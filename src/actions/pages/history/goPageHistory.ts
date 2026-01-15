@@ -1,6 +1,6 @@
 import {LogEventType} from '../../../constants/internal';
 import {createClientFunction} from '../../../createClientFunction';
-import {log} from '../../../utils/log';
+import {step} from '../../../step';
 
 import type {AnyPageClassType} from '../../../types/internal';
 
@@ -11,17 +11,13 @@ const goPageHistoryClient = createClientFunction((delta: number) => window.histo
 /**
  * Go delta steps in browser page history.
  */
-export const goPageHistory = async (
-  page: InstanceType<AnyPageClassType>,
-  delta: number,
-): Promise<void> => {
-  log(
+export const goPageHistory = (page: InstanceType<AnyPageClassType>, delta: number): Promise<void> =>
+  step(
     `Go ${delta} steps in browser history from page "${page.constructor.name}"`,
-    undefined,
-    LogEventType.InternalAction,
+    async () => {
+      await goPageHistoryClient(delta);
+
+      await page.waitForPageLoaded();
+    },
+    {type: LogEventType.InternalAction},
   );
-
-  await goPageHistoryClient(delta);
-
-  await page.waitForPageLoaded();
-};

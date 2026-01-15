@@ -1,13 +1,14 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 
-import {LogEventType, MAX_TIMEOUT_IN_MS} from '../../constants/internal';
+import {ADDITIONAL_STEP_TIMEOUT, LogEventType, MAX_TIMEOUT_IN_MS} from '../../constants/internal';
 import {getTestRunPromise} from '../../context/testRunPromise';
+import {step} from '../../step';
 import {getPlaywrightPage} from '../../useContext';
+import {assertValueIsDefined} from '../../utils/asserts';
 import {getFullPackConfig} from '../../utils/config';
 import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
-import {log} from '../../utils/log';
 import {pageWaitForRequest} from '../../utils/playwrightPage';
 import {addTimeoutToPromise} from '../../utils/promise';
 import {getRequestFromPlaywrightRequest} from '../../utils/requestHooks';
@@ -19,7 +20,6 @@ import type {
   RequestPredicate,
   RequestWithUtcTimeInMs,
   Trigger,
-  UtcTimeInMs,
 } from '../../types/internal';
 
 type Action = (<SomeRequest extends Request>(
@@ -32,7 +32,10 @@ type Action = (<SomeRequest extends Request>(
     options?: Options,
   ) => Promise<RequestWithUtcTimeInMs<SomeRequest>>);
 
-type Options = Readonly<{skipLogs?: boolean; timeout?: number}>;
+type Options = Readonly<{
+  skipLogs?: boolean;
+  timeout?: number;
+}>;
 
 /**
  * Waits for some request (from browser) filtered by the request predicate.
@@ -43,8 +46,6 @@ export const waitForRequest = (async <SomeRequest extends Request>(
   triggerOrOptions?: Options | Trigger | undefined,
   options?: Options,
 ): Promise<RequestWithUtcTimeInMs<SomeRequest>> => {
-  const startTimeInMs = Date.now() as UtcTimeInMs;
-
   setCustomInspectOnFunction(predicate);
 
   const trigger = typeof triggerOrOptions === 'function' ? triggerOrOptions : undefined;
@@ -52,92 +53,92 @@ export const waitForRequest = (async <SomeRequest extends Request>(
     typeof triggerOrOptions === 'function' ? options : (triggerOrOptions ?? options);
 
   const timeout = finalOptions?.timeout ?? getFullPackConfig().waitForRequestTimeout;
+  const timeoutWithUnits = getDurationWithUnits(timeout);
 
   if (trigger !== undefined) {
     setCustomInspectOnFunction(trigger);
   }
 
-  const page = getPlaywrightPage();
-  const testRunPromise = getTestRunPromise();
+  let request: RequestWithUtcTimeInMs<SomeRequest> | undefined;
 
-  let isTestRunCompleted = false;
+  await step(
+    `Wait for request with timeout ${timeoutWithUnits}`,
+    async () => {
+      const page = getPlaywrightPage();
+      const testRunPromise = getTestRunPromise();
 
-  void testRunPromise.then(() => {
-    isTestRunCompleted = true;
-  });
+      let isTestRunCompleted = false;
 
-  const timeoutWithUnits = getDurationWithUnits(timeout);
+      void testRunPromise.then(() => {
+        isTestRunCompleted = true;
+      });
 
-  let finalError: unknown;
-  let hasError = false;
+      let finalError: unknown;
+      let hasError = false;
 
-  const promise = addTimeoutToPromise(
-    pageWaitForRequest(
-      page,
-      AsyncLocalStorage.bind(async (playwrightRequest: PlaywrightRequest) => {
-        try {
-          const request = getRequestFromPlaywrightRequest(playwrightRequest);
+      const promise = addTimeoutToPromise(
+        pageWaitForRequest(
+          page,
+          AsyncLocalStorage.bind(async (playwrightRequest: PlaywrightRequest) => {
+            try {
+              const requestObject = getRequestFromPlaywrightRequest(playwrightRequest);
 
-          const result = await predicate(request as RequestWithUtcTimeInMs<SomeRequest>);
+              const result = await predicate(requestObject as RequestWithUtcTimeInMs<SomeRequest>);
 
-          return result;
-        } catch (cause) {
-          if (!isTestRunCompleted) {
-            finalError = new E2edError('waitForRequest predicate threw an exception', {
-              cause,
-              timeout,
-              trigger,
-            });
-            hasError = true;
+              return result;
+            } catch (cause) {
+              if (!isTestRunCompleted) {
+                finalError = new E2edError('waitForRequest predicate threw an exception', {
+                  cause,
+                  timeout,
+                  trigger,
+                });
+                hasError = true;
+              }
+
+              return true;
+            }
+          }),
+          {timeout: MAX_TIMEOUT_IN_MS},
+        ),
+        timeout,
+        new E2edError(`waitForRequest promise rejected after ${timeoutWithUnits} timeout`),
+      )
+        .then(
+          AsyncLocalStorage.bind(
+            (playwrightRequest: PlaywrightRequest) =>
+              getRequestFromPlaywrightRequest(
+                playwrightRequest,
+              ) as RequestWithUtcTimeInMs<SomeRequest>,
+          ),
+        )
+        .catch((error: unknown) => {
+          if (isTestRunCompleted) {
+            return new Promise<RequestWithUtcTimeInMs<SomeRequest>>(() => {});
           }
 
-          return true;
-        }
-      }),
-      {timeout: MAX_TIMEOUT_IN_MS},
-    ),
-    timeout,
-    new E2edError(`waitForRequest promise rejected after ${timeoutWithUnits} timeout`),
-  )
-    .then(
-      AsyncLocalStorage.bind(
-        (playwrightRequest: PlaywrightRequest) =>
-          getRequestFromPlaywrightRequest(playwrightRequest) as RequestWithUtcTimeInMs<SomeRequest>,
-      ),
-    )
-    .catch((error: unknown) => {
-      if (isTestRunCompleted) {
-        return new Promise<RequestWithUtcTimeInMs<SomeRequest>>(() => {});
+          throw error;
+        });
+
+      await trigger?.();
+
+      request = await promise;
+
+      if (hasError) {
+        throw finalError;
       }
 
-      throw error;
-    });
+      return {request};
+    },
+    {
+      payload: {predicate, timeoutWithUnits, trigger},
+      skipLogs: finalOptions?.skipLogs ?? false,
+      timeout: timeout + ADDITIONAL_STEP_TIMEOUT,
+      type: LogEventType.InternalCore,
+    },
+  );
 
-  if (finalOptions?.skipLogs !== true) {
-    log(
-      `Set wait for request with timeout ${timeoutWithUnits}`,
-      {predicate, trigger},
-      LogEventType.InternalCore,
-    );
-  }
-
-  await trigger?.();
-
-  const request = await promise;
-
-  if (hasError) {
-    throw finalError;
-  }
-
-  if (finalOptions?.skipLogs !== true) {
-    const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
-
-    log(
-      `Have waited for request for ${waitWithUnits}`,
-      {predicate, request, timeoutWithUnits, trigger},
-      LogEventType.InternalCore,
-    );
-  }
+  assertValueIsDefined(request, 'request is defined', {predicate, trigger});
 
   return request;
 }) as Action;

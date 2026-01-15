@@ -1,6 +1,6 @@
 import {LogEventType} from '../../constants/internal';
 import {expect} from '../../expect';
-import {log} from '../../utils/log';
+import {step} from '../../step';
 
 /**
  * Checks if two numbers are approximately equal with specified EPS.
@@ -14,12 +14,12 @@ export const assertNumbersAreApproximatelyEqual = async (
   const result = diff < eps;
   const message = `two numbers are approximately equal with ${eps} precision`;
 
-  log(
+  await step(
     `Asserts that ${message}`,
-    {diff, eps, firstNumber, secondNumber},
-    LogEventType.InternalAssert,
+    async () => {
+      // TODO: support Smart Assertions
+      await expect(result, message).ok();
+    },
+    {payload: {diff, eps, firstNumber, secondNumber}, type: LogEventType.InternalAssert},
   );
-
-  // TODO: support Smart Assertions
-  await expect(result, message).ok();
 };

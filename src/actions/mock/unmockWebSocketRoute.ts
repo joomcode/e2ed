@@ -1,9 +1,9 @@
 import {LogEventType} from '../../constants/internal';
 import {getWebSocketMockState} from '../../context/webSocketMockState';
+import {step} from '../../step';
 import {getPlaywrightPage} from '../../useContext';
 import {assertValueIsDefined} from '../../utils/asserts';
 import {setCustomInspectOnFunction} from '../../utils/fn';
-import {log} from '../../utils/log';
 
 import type {
   WebSocketMockFunction,
@@ -32,26 +32,28 @@ export const unmockWebSocketRoute = async <RouteParams, SomeRequest, SomeRespons
     optionsByRoute.delete(Route);
   }
 
-  if (optionsByRoute?.size === 0) {
-    assertValueIsDefined(requestsFilter, 'requestsFilter is defined', {
-      routeName: Route.name,
-      routeWasMocked,
-    });
-
-    const page = getPlaywrightPage();
-
-    await page.unroute(requestsFilter);
-  }
-
   if (webSocketMockFunction) {
     setCustomInspectOnFunction(webSocketMockFunction);
   }
 
-  if (skipLogs !== true) {
-    log(
-      `Unmock WebSocket for route "${Route.name}"`,
-      {routeWasMocked, webSocketMockFunction},
-      LogEventType.InternalAction,
-    );
-  }
+  await step(
+    `Unmock WebSocket for route "${Route.name}"`,
+    async () => {
+      if (optionsByRoute?.size === 0) {
+        assertValueIsDefined(requestsFilter, 'requestsFilter is defined', {
+          routeName: Route.name,
+          routeWasMocked,
+        });
+
+        const page = getPlaywrightPage();
+
+        await page.unroute(requestsFilter);
+      }
+    },
+    {
+      payload: {routeWasMocked, webSocketMockFunction},
+      skipLogs: skipLogs ?? false,
+      type: LogEventType.InternalAction,
+    },
+  );
 };

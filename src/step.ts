@@ -2,7 +2,7 @@
 
 import {LogEventStatus, LogEventType} from './constants/internal';
 import {getStepsStack} from './context/stepsStack';
-import {getFullPackConfig} from './utils/config';
+import {getTestIdleTimeout} from './context/testIdleTimeout';
 import {E2edError} from './utils/error';
 import {setCustomInspectOnFunction} from './utils/fn';
 import {generalLog} from './utils/generalLog';
@@ -45,7 +45,7 @@ export const step = async (
 
   let logEvent: LogEvent | undefined;
   const stepsStack = getStepsStack();
-  const timeout: number = options?.timeout ?? getFullPackConfig().testIdleTimeout;
+  const timeout: number = options?.timeout ?? getTestIdleTimeout();
 
   if (options?.skipLogs !== true) {
     logEvent = logAndGetLogEvent(
@@ -59,7 +59,7 @@ export const step = async (
     (stepsStack as Mutable<typeof stepsStack>).push(logEvent);
   }
 
-  const errorProperties = {fromStep: name, stepBody: body, stepOptions: options};
+  const errorProperties = {stepBody: body, stepName: name, stepOptions: options};
   let payload = undefined as LogPayload | Void;
   let stepError: unknown;
 
@@ -105,7 +105,7 @@ export const step = async (
     }
 
     if (stepError !== null && (typeof stepError === 'object' || typeof stepError === 'function')) {
-      if (!('fromStep' in stepError)) {
+      if (!('stepName' in stepError)) {
         Object.assign(
           stepError,
           errorProperties,
@@ -139,12 +139,11 @@ export const step = async (
         setReadonlyProperty(logEvent, 'payload', {...logEvent.payload, ...payload});
       }
 
-      if (stepsStack.at(-1) === logEvent) {
-        (stepsStack as Mutable<typeof stepsStack>).pop();
-      } else {
+      const logEventIndex = stepsStack.findIndex((event) => event === logEvent);
+
+      if (logEventIndex === -1) {
         // eslint-disable-next-line no-unsafe-finally
-        throw new E2edError('Running step is not equal to last step in test steps stack', {
-          lastStep: stepsStack.at(-1),
+        throw new E2edError('Cannot find running step in test steps stack', {
           runningStep: logEvent,
           stepBody: body,
           stepError,
@@ -152,7 +151,13 @@ export const step = async (
         });
       }
 
-      generalLog(`Step "${name}" completed`, {body, step: logEvent, stepError});
+      (stepsStack as Mutable<typeof stepsStack>).splice(logEventIndex, 1);
+
+      generalLog(`Step "${name}" completed`, {
+        body,
+        step: {...logEvent, children: logEvent.children?.map(({message}) => message)},
+        stepError,
+      });
     }
   }
 };

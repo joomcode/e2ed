@@ -1,10 +1,10 @@
 import {LogEventType} from '../../constants/internal';
 import {getFullMocksState} from '../../context/fullMocks';
 import {getWebSocketMockState} from '../../context/webSocketMockState';
+import {step} from '../../step';
 import {getPlaywrightPage} from '../../useContext';
 import {assertValueIsDefined} from '../../utils/asserts';
 import {setCustomInspectOnFunction} from '../../utils/fn';
-import {log} from '../../utils/log';
 import {getRequestsFilter, getSetResponse} from '../../utils/mockWebSocketRoute';
 import {setReadonlyProperty} from '../../utils/object';
 
@@ -26,55 +26,53 @@ export const mockWebSocketRoute = async <RouteParams, SomeRequest, SomeResponse>
 ): Promise<void> => {
   setCustomInspectOnFunction(webSocketMockFunction);
 
-  const webSocketMockState = getWebSocketMockState();
+  await step(
+    `Mock WebSocket for route "${Route.name}"`,
+    async () => {
+      const webSocketMockState = getWebSocketMockState();
 
-  if (!webSocketMockState.isMocksEnabled) {
-    return;
-  }
+      if (!webSocketMockState.isMocksEnabled) {
+        return;
+      }
 
-  const fullMocksState = getFullMocksState();
+      const fullMocksState = getFullMocksState();
 
-  if (fullMocksState?.appliedMocks !== undefined) {
-    setReadonlyProperty(webSocketMockState, 'isMocksEnabled', false);
-  }
+      if (fullMocksState?.appliedMocks !== undefined) {
+        setReadonlyProperty(webSocketMockState, 'isMocksEnabled', false);
+      }
 
-  let {optionsByRoute} = webSocketMockState;
+      let {optionsByRoute} = webSocketMockState;
 
-  if (optionsByRoute === undefined) {
-    optionsByRoute = new Map();
+      if (optionsByRoute === undefined) {
+        optionsByRoute = new Map();
 
-    setReadonlyProperty(webSocketMockState, 'optionsByRoute', optionsByRoute);
+        setReadonlyProperty(webSocketMockState, 'optionsByRoute', optionsByRoute);
 
-    const requestsFilter = getRequestsFilter(webSocketMockState);
+        const requestsFilter = getRequestsFilter(webSocketMockState);
 
-    setReadonlyProperty(webSocketMockState, 'requestsFilter', requestsFilter);
-  }
+        setReadonlyProperty(webSocketMockState, 'requestsFilter', requestsFilter);
+      }
 
-  if (optionsByRoute.size === 0) {
-    const {requestsFilter} = webSocketMockState;
+      if (optionsByRoute.size === 0) {
+        const {requestsFilter} = webSocketMockState;
 
-    assertValueIsDefined(requestsFilter, 'requestsFilter is defined', {
-      routeName: Route.name,
-      webSocketMockState,
-    });
+        assertValueIsDefined(requestsFilter, 'requestsFilter is defined', {
+          routeName: Route.name,
+          webSocketMockState,
+        });
 
-    const page = getPlaywrightPage();
+        const page = getPlaywrightPage();
 
-    const setResponse = getSetResponse(webSocketMockState);
+        const setResponse = getSetResponse(webSocketMockState);
 
-    await page.routeWebSocket(requestsFilter, setResponse);
-  }
+        await page.routeWebSocket(requestsFilter, setResponse);
+      }
 
-  optionsByRoute.set(Route, {
-    skipLogs,
-    webSocketMockFunction: webSocketMockFunction as WebSocketMockFunction,
-  });
-
-  if (skipLogs !== true) {
-    log(
-      `Mock WebSocket for route "${Route.name}"`,
-      {webSocketMockFunction},
-      LogEventType.InternalAction,
-    );
-  }
+      optionsByRoute.set(Route, {
+        skipLogs,
+        webSocketMockFunction: webSocketMockFunction as WebSocketMockFunction,
+      });
+    },
+    {payload: {webSocketMockFunction}, skipLogs, type: LogEventType.InternalAction},
+  );
 };

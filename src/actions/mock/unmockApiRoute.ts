@@ -1,9 +1,9 @@
 import {LogEventType} from '../../constants/internal';
 import {getApiMockState} from '../../context/apiMockState';
+import {step} from '../../step';
 import {getPlaywrightPage} from '../../useContext';
 import {assertValueIsDefined} from '../../utils/asserts';
 import {setCustomInspectOnFunction} from '../../utils/fn';
-import {log} from '../../utils/log';
 
 import type {
   ApiMockFunction,
@@ -38,26 +38,28 @@ export const unmockApiRoute = async <
     optionsByRoute.delete(Route);
   }
 
-  if (optionsByRoute?.size === 0) {
-    assertValueIsDefined(requestsFilter, 'requestsFilter is defined', {
-      routeName: Route.name,
-      routeWasMocked,
-    });
-
-    const page = getPlaywrightPage();
-
-    await page.unroute(requestsFilter);
-  }
-
   if (apiMockFunction) {
     setCustomInspectOnFunction(apiMockFunction);
   }
 
-  if (skipLogs !== true) {
-    log(
-      `Unmock API for route "${Route.name}"`,
-      {apiMockFunction, routeWasMocked},
-      LogEventType.InternalAction,
-    );
-  }
+  await step(
+    `Unmock API for route "${Route.name}"`,
+    async () => {
+      if (optionsByRoute?.size === 0) {
+        assertValueIsDefined(requestsFilter, 'requestsFilter is defined', {
+          routeName: Route.name,
+          routeWasMocked,
+        });
+
+        const page = getPlaywrightPage();
+
+        await page.unroute(requestsFilter);
+      }
+    },
+    {
+      payload: {apiMockFunction, routeWasMocked},
+      skipLogs: skipLogs ?? false,
+      type: LogEventType.InternalAction,
+    },
+  );
 };

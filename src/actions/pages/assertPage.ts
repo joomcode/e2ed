@@ -1,8 +1,8 @@
 import {LogEventStatus, LogEventType} from '../../constants/internal';
+import {step} from '../../step';
+import {assertValueIsDefined} from '../../utils/asserts';
 import {getDocumentUrl} from '../../utils/document';
-import {log} from '../../utils/log';
-
-import {createPageInstance} from './createPageInstance';
+import {createPageInstance} from '../../utils/pageObjects';
 
 import type {AnyPageClassType, NavigateToOrAssertPageArgs} from '../../types/internal';
 
@@ -13,30 +13,35 @@ export const assertPage = async <SomePageClass extends AnyPageClassType>(
   ...args: NavigateToOrAssertPageArgs<SomePageClass>
 ): Promise<InstanceType<SomePageClass>> => {
   const [PageClass, pageParams] = args;
+  let page: InstanceType<SomePageClass> | undefined;
 
-  const page = await createPageInstance(PageClass, pageParams);
-
-  const route = page.getRoute();
-
-  await page.beforeAssertPage?.();
-
-  await page.waitForPageLoaded();
-
-  const documentUrl = await getDocumentUrl();
-  const isMatch = route.isMatchUrl(documentUrl);
-
-  const logEventStatus = isMatch ? LogEventStatus.Passed : LogEventStatus.Failed;
-  const {routeParams} = route;
-
-  log(
+  await step(
     `Asserts that the document url matches the page "${PageClass.name}"`,
-    {documentUrl, isMatch, logEventStatus, pageParams, routeParams},
-    LogEventType.InternalAction,
+    async () => {
+      page = await createPageInstance(PageClass, pageParams);
+
+      const route = page.getRoute();
+
+      await page.beforeAssertPage?.();
+
+      await page.waitForPageLoaded();
+
+      const documentUrl = await getDocumentUrl();
+      const isMatch = route.isMatchUrl(documentUrl);
+
+      const logEventStatus = isMatch ? LogEventStatus.Passed : LogEventStatus.Failed;
+      const {routeParams} = route;
+
+      await page.assertPage(isMatch, documentUrl);
+
+      await page.afterAssertPage?.();
+
+      return {documentUrl, isMatch, logEventStatus, routeParams};
+    },
+    {payload: {pageParams}, type: LogEventType.InternalAction},
   );
 
-  await page.assertPage(isMatch, documentUrl);
-
-  await page.afterAssertPage?.();
+  assertValueIsDefined(page, 'page is defined', {name: PageClass.name, pageParams});
 
   return page;
 };

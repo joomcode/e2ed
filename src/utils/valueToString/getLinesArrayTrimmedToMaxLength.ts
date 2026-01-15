@@ -1,11 +1,13 @@
 import {MAX_LINES_COUNT_IN_PRINTED_VALUE} from '../../constants/internal';
 
+const additionalLinesForRepeatedTrimmerRuns = 4;
+
 /**
  * Get lines array trimmed to max lines count in printed value.
  * @internal
  */
 export const getLinesArrayTrimmedToMaxLength = (lines: readonly string[]): readonly string[] => {
-  if (lines.length <= MAX_LINES_COUNT_IN_PRINTED_VALUE) {
+  if (lines.length <= MAX_LINES_COUNT_IN_PRINTED_VALUE + additionalLinesForRepeatedTrimmerRuns) {
     return lines;
   }
 

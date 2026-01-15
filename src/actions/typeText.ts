@@ -16,5 +16,5 @@ export const typeText = (selector: Selector, text: string, options: Options = {}
     async () => {
       await selector.getPlaywrightLocator().fill(text, options);
     },
-    {payload: {...options, selector}, type: LogEventType.InternalAction},
+    {payload: {...options, selector, text}, type: LogEventType.InternalAction},
   );

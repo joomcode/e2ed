@@ -1,11 +1,11 @@
-import {LogEventType} from '../../constants/internal';
-import {assertValueIsTrue} from '../../utils/asserts';
+import {ADDITIONAL_STEP_TIMEOUT, LogEventType} from '../../constants/internal';
+import {step} from '../../step';
+import {assertValueIsDefined, assertValueIsTrue} from '../../utils/asserts';
 import {getFullPackConfig} from '../../utils/config';
 import {E2edError} from '../../utils/error';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
 import {getRouteInstanceFromUrl} from '../../utils/getRouteInstanceFromUrl';
-import {log} from '../../utils/log';
 
 import {waitForResponse} from './waitForResponse';
 
@@ -17,7 +17,6 @@ import type {
   ResponsePredicate,
   ResponseWithRequest,
   Trigger,
-  UtcTimeInMs,
 } from '../../types/internal';
 
 type Action = (<RouteParams, SomeRequest extends Request, SomeResponse extends Response>(
@@ -56,8 +55,6 @@ export const waitForResponseToRoute = (async <
   triggerOrOptions?: Options<RouteParams, SomeRequest, SomeResponse> | Trigger | undefined,
   options?: Options<RouteParams, SomeRequest, SomeResponse>,
 ): Return<RouteParams, SomeRequest, SomeResponse> => {
-  const startTimeInMs = Date.now() as UtcTimeInMs;
-
   const trigger = typeof triggerOrOptions === 'function' ? triggerOrOptions : undefined;
   const finalOptions =
     typeof triggerOrOptions === 'function' ? options : (triggerOrOptions ?? options);
@@ -73,56 +70,59 @@ export const waitForResponseToRoute = (async <
     setCustomInspectOnFunction(trigger);
   }
 
-  if (finalOptions?.skipLogs !== true) {
-    log(
-      `Set wait for response to route "${Route.name}" with timeout ${timeoutWithUnits}`,
-      {predicate, trigger},
-      LogEventType.InternalAction,
-    );
-  }
-
   const sentinelValue: unique symbol = Symbol('sentinel value');
 
+  let response: ResponseWithRequest<SomeRequest, SomeResponse> | undefined;
   let routeParams: RouteParams | typeof sentinelValue = sentinelValue;
 
-  const predicateForResponse: ResponsePredicate<SomeRequest, SomeResponse> = async (response) => {
-    const {request} = response;
-    const maypeRouteWithRouteParams = getRouteInstanceFromUrl(request.url, Route);
+  await step(
+    `Wait for response to route "${Route.name}" with timeout ${timeoutWithUnits}`,
+    async () => {
+      const predicateForResponse: ResponsePredicate<SomeRequest, SomeResponse> = async (
+        responseObject,
+      ) => {
+        const {request} = responseObject;
+        const maypeRouteWithRouteParams = getRouteInstanceFromUrl(request.url, Route);
 
-    if (maypeRouteWithRouteParams === undefined) {
-      return false;
-    }
+        if (maypeRouteWithRouteParams === undefined) {
+          return false;
+        }
 
-    const {routeParams: currentRouteParams} = maypeRouteWithRouteParams;
+        const {routeParams: currentRouteParams} = maypeRouteWithRouteParams;
 
-    const isRequestMatched = await predicate(currentRouteParams, response);
+        const isRequestMatched = await predicate(currentRouteParams, responseObject);
 
-    if (isRequestMatched !== true) {
-      return false;
-    }
+        if (isRequestMatched !== true) {
+          return false;
+        }
 
-    assertValueIsTrue(routeParams === sentinelValue, 'routeParams was not setted');
+        assertValueIsTrue(routeParams === sentinelValue, 'routeParams was not setted');
 
-    routeParams = currentRouteParams;
+        routeParams = currentRouteParams;
 
-    return true;
-  };
+        return true;
+      };
 
-  const response = await waitForResponse(predicateForResponse, trigger, {skipLogs: true, timeout});
+      response = await waitForResponse(predicateForResponse, trigger, {
+        skipLogs: true,
+        timeout,
+      });
 
-  if (routeParams === sentinelValue) {
-    throw new E2edError('routeParams is not setted', {predicate, response});
-  }
+      if (routeParams === sentinelValue) {
+        throw new E2edError('routeParams is not setted', {predicate, response});
+      }
 
-  const waitWithUnits = getDurationWithUnits(Date.now() - startTimeInMs);
+      return {response, routeParams: routeParams satisfies RouteParams};
+    },
+    {
+      payload: {predicate, timeoutWithUnits, trigger},
+      skipLogs: finalOptions?.skipLogs ?? false,
+      timeout: timeout + ADDITIONAL_STEP_TIMEOUT,
+      type: LogEventType.InternalAction,
+    },
+  );
 
-  if (finalOptions?.skipLogs !== true) {
-    log(
-      `Have waited for response to route "${Route.name}" for ${waitWithUnits}`,
-      {predicate, response, routeParams, timeoutWithUnits, trigger},
-      LogEventType.InternalCore,
-    );
-  }
+  assertValueIsDefined(response, 'response is defined', {predicate, trigger});
 
-  return {response, routeParams};
+  return {response, routeParams: routeParams as RouteParams};
 }) as Action;
