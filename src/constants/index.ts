@@ -9,6 +9,6 @@ export {
   NOT_FOUND_STATUS_CODE,
   OK_STATUS_CODE,
 } from './http';
-export {LogEventStatus, LogEventType} from './log';
+export {BACKEND_RESPONSES_LOG_MESSAGE, LogEventStatus, LogEventType} from './log';
 export {FAILED_TEST_RUN_STATUSES, TestRunStatus} from './testRun';
 export {ANY_URL_REGEXP, SLASHES_AT_THE_END_REGEXP, SLASHES_AT_THE_START_REGEXP} from './url';

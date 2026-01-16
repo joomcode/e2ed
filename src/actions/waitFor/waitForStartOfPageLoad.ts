@@ -1,4 +1,5 @@
 import {ADDITIONAL_STEP_TIMEOUT, LogEventType} from '../../constants/internal';
+import {getTestRunPromise} from '../../context/testRunPromise';
 import {step} from '../../step';
 import {getPlaywrightPage} from '../../useContext';
 import {assertValueIsDefined} from '../../utils/asserts';
@@ -24,7 +25,7 @@ export const waitForStartOfPageLoad = async (options?: Options): Promise<URL> =>
 
       let wasCalled = false;
 
-      await page.waitForURL(
+      const promise = page.waitForURL(
         (url) => {
           if (wasCalled === false) {
             wasCalled = true;
@@ -39,9 +40,11 @@ export const waitForStartOfPageLoad = async (options?: Options): Promise<URL> =>
         {timeout, waitUntil: 'commit'},
       );
 
-      assertValueIsDefined(urlObject, 'urlObject is defined', {timeout});
+      const testRunPromise = getTestRunPromise();
 
-      return {url: urlObject.href};
+      await Promise.race([promise, testRunPromise]);
+
+      return {url: urlObject?.href};
     },
     {
       payload: {options},

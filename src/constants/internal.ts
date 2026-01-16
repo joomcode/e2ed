@@ -37,7 +37,7 @@ export {
   MAX_LINES_COUNT_IN_PRINTED_VALUE,
   MAX_STRING_LENGTH_IN_PRINTED_VALUE,
 } from './inspect';
-export {LogEventStatus, LogEventType} from './log';
+export {BACKEND_RESPONSES_LOG_MESSAGE, LogEventStatus, LogEventType} from './log';
 /** @internal */
 export {ADDITIONAL_STEP_TIMEOUT, MESSAGE_BACKGROUND_COLOR_BY_STATUS} from './log';
 /** @internal */

@@ -25,6 +25,11 @@ import type {
  */
 export abstract class Page<PageParams = undefined> {
   /**
+   * Default timeout for navigation to url (`navigateToPage`, `navigateToUrl` actions) in milliseconds.
+   */
+  static readonly navigationTimeout: number = 8_000;
+
+  /**
    * Type of page parameters.
    */
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -39,12 +44,6 @@ export abstract class Page<PageParams = undefined> {
    * The default value is taken from the corresponding field of the pack config.
    */
   readonly maxIntervalBetweenRequestsInMs: number;
-
-  /**
-   * Default timeout for navigation to url (`navigateToPage`, `navigateToUrl` actions) in milliseconds.
-   * The default value is taken from the corresponding field of the pack config.
-   */
-  readonly navigationTimeout: number;
 
   /**
    * Immutable page parameters.
@@ -67,12 +66,10 @@ export abstract class Page<PageParams = undefined> {
     this.pageParams = pageParams as PageParams;
 
     const {
-      navigationTimeout,
       waitForAllRequestsComplete: {maxIntervalBetweenRequestsInMs},
     } = getFullPackConfig();
 
     this.maxIntervalBetweenRequestsInMs = maxIntervalBetweenRequestsInMs;
-    this.navigationTimeout = navigationTimeout;
   }
 
   /**
@@ -132,7 +129,7 @@ export abstract class Page<PageParams = undefined> {
   ): Promise<NavigationReturn> {
     const navigationReturn = await navigateToUrl(url, {
       skipLogs: true,
-      timeout: this.navigationTimeout,
+      timeout: (this.constructor as typeof Page).navigationTimeout,
       ...options,
     });
     const {statusCode} = navigationReturn;

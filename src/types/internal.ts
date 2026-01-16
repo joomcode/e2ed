@@ -140,6 +140,9 @@ export type {SelectorPropertyRetryData} from './selectors';
 export type {IsTestSkippedResult} from './skipTest';
 export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';
+export type {StepBody, StepOptions} from './step';
+/** @internal */
+export type {StepErrorProperties} from './step';
 export type {StringForLogs} from './string';
 export type {Tab} from './tab';
 /** @internal */

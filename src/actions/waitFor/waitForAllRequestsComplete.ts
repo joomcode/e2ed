@@ -134,7 +134,7 @@ export const waitForAllRequestsComplete = async (
         allRequestsCompletePredicateWithPromise.setResolveTimeout();
       }
 
-      await promiseWithTimeout;
+      await Promise.race([promiseWithTimeout, testRunPromise]);
     },
     {
       payload: {maxIntervalBetweenRequests, predicate},

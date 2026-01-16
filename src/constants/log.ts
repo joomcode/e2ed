@@ -8,6 +8,11 @@ import {TestRunStatus} from './testRun';
 export const ADDITIONAL_STEP_TIMEOUT = 1_000;
 
 /**
+ * Message of log for backend responses.
+ */
+export const BACKEND_RESPONSES_LOG_MESSAGE = 'Got a backend responses to log';
+
+/**
  * Status of `LogEvent`.
  */
 export const enum LogEventStatus {

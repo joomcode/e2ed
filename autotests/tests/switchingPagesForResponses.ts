@@ -9,9 +9,10 @@ import {
   navigateToPage,
   switchToTab,
   waitForNewTab,
-  waitForRequestToRoute,
+  waitForResponseToRoute,
   waitForTimeout,
 } from 'e2ed/actions';
+import {LogEventType} from 'e2ed/constants';
 import {log} from 'e2ed/utils';
 
 const maxNumberOfRequests = 15;
@@ -19,27 +20,31 @@ const maxNumberOfRequests = 15;
 const timeout = (maxNumberOfRequests + 10) * 1_000;
 
 test(
-  'support switching of tabs for waitForRequest',
-  {enableCsp: false, meta: {testId: '21'}, testTimeout: timeout + 1_000},
+  'support switching of tabs for waitForResponse',
+  {enableCsp: false, meta: {testId: '22'}, testTimeout: timeout + 1_000},
   async () => {
-    let numberOfCaughtRequests = 0;
+    let numberOfCaughtResponses = 0;
     let numberOfSentRequests = 0;
 
     setInterval(() => {
       if (numberOfSentRequests < maxNumberOfRequests) {
         numberOfSentRequests += 1;
 
-        log(`Sent request number ${numberOfSentRequests}`);
+        log(`Sent request number ${numberOfSentRequests}`, LogEventType.Assert);
 
         void getUsers({retries: 1});
       }
     }, 1_000);
 
-    void waitForRequestToRoute(GetUsers, {
-      predicate: (routeParams, request) => {
-        numberOfCaughtRequests += 1;
+    void waitForResponseToRoute(GetUsers, {
+      predicate: (routeParams, response) => {
+        numberOfCaughtResponses += 1;
 
-        log(`Caught request number ${numberOfCaughtRequests}`, {request, routeParams});
+        log(
+          `Caught response number ${numberOfCaughtResponses}`,
+          {response, routeParams},
+          LogEventType.Assert,
+        );
 
         return false;
       },
@@ -64,10 +69,11 @@ test(
     await waitForTimeout(maxNumberOfRequests * 333 + 1_000);
 
     await expect(
-      numberOfSentRequests === numberOfCaughtRequests ||
-        numberOfSentRequests === numberOfCaughtRequests + 1 ||
-        numberOfSentRequests === numberOfCaughtRequests - 1,
-      `almost all responses were caught (${numberOfCaughtRequests} of ${numberOfSentRequests})`,
+      numberOfSentRequests === numberOfCaughtResponses ||
+        numberOfSentRequests === numberOfCaughtResponses + 2 ||
+        numberOfSentRequests === numberOfCaughtResponses + 1 ||
+        numberOfSentRequests === numberOfCaughtResponses - 1,
+      `almost all responses were caught (${numberOfCaughtResponses} of ${numberOfSentRequests})`,
     ).ok();
   },
 );

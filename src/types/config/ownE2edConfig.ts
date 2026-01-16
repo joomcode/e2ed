@@ -172,7 +172,7 @@ export type OwnE2edConfig<
   maxRetriesCountInDocker: number;
 
   /**
-   * Default timeout for navigation to url (`navigateToPage`, `navigateToUrl` actions) in milliseconds.
+   * Default timeout for navigation to url (`navigateToUrl`, `setHeadersAndNavigateToUrl` actions) in milliseconds.
    */
   navigationTimeout: number;
 

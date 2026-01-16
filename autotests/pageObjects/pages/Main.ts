@@ -16,6 +16,11 @@ type CustomPageParams = Partial<RouteParams> | undefined;
  */
 export class Main extends Page<CustomPageParams> {
   /**
+   * Page navigation timeout.
+   */
+  static override readonly navigationTimeout = 12_000;
+
+  /**
    * Body selector.
    */
   readonly body: Selector = createSelector('body');

@@ -1,6 +1,5 @@
-import {getStepsStack} from '../../context/stepsStack';
-
 import {setReadonlyProperty} from '../object';
+import {getTopStep} from '../step';
 
 import {getTestRunEvent} from './getTestRunEvent';
 
@@ -23,14 +22,13 @@ export const registerLogEvent = (
   if (logEventWithMaybeSkippedPayload.payload !== 'skipLog') {
     logEvent = logEventWithMaybeSkippedPayload as LogEvent;
 
-    const stepsStack = getStepsStack();
-    const runningStep = stepsStack.at(-1);
+    const topStep = getTopStep();
 
-    if (runningStep !== undefined) {
-      if (runningStep.children !== undefined) {
-        (runningStep.children as Mutable<typeof runningStep.children>).push(logEvent);
+    if (topStep !== undefined) {
+      if (topStep.children !== undefined) {
+        (topStep.children as Mutable<typeof topStep.children>).push(logEvent);
       } else {
-        setReadonlyProperty(runningStep, 'children', [logEvent]);
+        setReadonlyProperty(topStep, 'children', [logEvent]);
       }
     } else {
       (runTestEvent.logEvents as Mutable<typeof runTestEvent.logEvents>).push(logEvent);
