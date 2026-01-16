@@ -1,4 +1,4 @@
-import {LogEventType} from '../constants/internal';
+import {ADDITIONAL_STEP_TIMEOUT, LogEventType} from '../constants/internal';
 import {step} from '../step';
 import {getPlaywrightPage} from '../useContext';
 
@@ -11,7 +11,7 @@ export const navigateToUrl = async (
   url: Url,
   options: NavigateToUrlOptions = {},
 ): Promise<NavigationReturn> => {
-  const {skipLogs = false} = options;
+  const {skipLogs = false, timeout} = options;
   let statusCode: StatusCode | undefined;
 
   await step(
@@ -27,7 +27,12 @@ export const navigateToUrl = async (
 
       return {statusCode};
     },
-    {payload: options, skipLogs, type: LogEventType.InternalAction},
+    {
+      payload: options,
+      skipLogs,
+      ...(timeout !== undefined ? {timeout: timeout + ADDITIONAL_STEP_TIMEOUT} : undefined),
+      type: LogEventType.InternalAction,
+    },
   );
 
   return {statusCode};

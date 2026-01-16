@@ -1,6 +1,6 @@
 import {AsyncLocalStorage} from 'node:async_hooks';
 
-import {LogEventType} from '../constants/internal';
+import {ADDITIONAL_STEP_TIMEOUT, LogEventType} from '../constants/internal';
 import {step} from '../step';
 import {getPlaywrightPage} from '../useContext';
 import {assertValueIsDefined} from '../utils/asserts';
@@ -26,6 +26,7 @@ export const setHeadersAndNavigateToUrl = async (
   navigateToUrlOptions?: NavigateToUrlOptions,
 ): Promise<NavigationReturn> => {
   let navigationReturn: NavigationReturn | undefined;
+  const timeout = navigateToUrlOptions?.timeout ?? getFullPackConfig().navigationTimeout;
 
   await step(
     `Navigate to ${url} and map headers`,
@@ -41,8 +42,6 @@ export const setHeadersAndNavigateToUrl = async (
           if (mapResponseHeaders === undefined) {
             return route.fallback();
           }
-
-          const timeout = navigateToUrlOptions?.timeout ?? getFullPackConfig().navigationTimeout;
 
           const response = await route.fetch({timeout});
           const headers = response.headers();
@@ -76,7 +75,11 @@ export const setHeadersAndNavigateToUrl = async (
 
       return {requestHeaders, responseHeaders};
     },
-    {skipLogs, type: LogEventType.InternalAction},
+    {
+      skipLogs,
+      timeout: timeout + ADDITIONAL_STEP_TIMEOUT,
+      type: LogEventType.InternalAction,
+    },
   );
 
   assertValueIsDefined(navigationReturn, 'navigationReturn is defined', {

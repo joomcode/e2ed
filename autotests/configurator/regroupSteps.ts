@@ -4,7 +4,7 @@ import {setReadonlyProperty} from 'e2ed/utils';
 import type {LogEvent, Mutable} from 'e2ed/types';
 
 /**
- * Regroup log events (for groupping of `TestRun` steps).
+ * Regroup log events (for grouping of `TestRun` steps).
  * This base client function should not use scope variables (except other base functions).
  * @internal
  */

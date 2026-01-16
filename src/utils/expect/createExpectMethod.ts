@@ -1,24 +1,22 @@
-import {LogEventStatus, LogEventType, RESOLVED_PROMISE, RETRY_KEY} from '../../constants/internal';
+import {LogEventStatus, LogEventType, RETRY_KEY} from '../../constants/internal';
 
+import {assertValueIsDefined} from '../asserts';
 import {getFullPackConfig} from '../config';
 import {E2edError} from '../error';
 import {getDurationWithUnits} from '../getDurationWithUnits';
-import {log} from '../log';
+import {logAndGetLogEvent} from '../log';
 import {setReadonlyProperty} from '../object';
 import {addTimeoutToPromise} from '../promise';
 import {Selector} from '../selectors';
 import {isThenable} from '../typeGuards';
 import {removeStyleFromString, valueToString, wrapStringForLogs} from '../valueToString';
 
-import {additionalMatchers} from './additionalMatchers';
-import {applyAdditionalMatcher} from './applyAdditionalMatcher';
+import {getAssertionPromise} from './getAssertionPromise';
 
-import type {Fn, SelectorPropertyRetryData} from '../../types/internal';
+import type {SelectorPropertyRetryData, UtcTimeInMs} from '../../types/internal';
 
-import type {Expect} from './Expect';
+import type {additionalMatchers} from './additionalMatchers';
 import type {AssertionFunction, ExpectMethod} from './types';
-
-import {expect as playwrightExpect} from '@playwright/test';
 
 const additionalAssertionTimeoutInMs = 1_000;
 
@@ -40,67 +38,14 @@ export const createExpectMethod = (
     const selectorPropertyRetryData = (
       this.actualValue as {[RETRY_KEY]?: SelectorPropertyRetryData}
     )?.[RETRY_KEY];
-    const timeoutWithUnits = getDurationWithUnits(timeout);
-    const timeoutError = new E2edError(
-      `"${key}" assertion promise rejected after ${timeoutWithUnits} timeout`,
-    );
 
-    const runAssertion = (value: unknown): Promise<Expect> => {
-      const additionalMatcher = additionalMatchers[key as keyof typeof additionalMatchers];
-      const ctx: Expect = {actualValue: value, description: this.description};
-
-      if (additionalMatcher !== undefined) {
-        return addTimeoutToPromise(
-          applyAdditionalMatcher(
-            additionalMatcher as Fn<unknown[], Promise<unknown>>,
-            ctx,
-            args,
-            selectorPropertyRetryData,
-          ),
-          timeout,
-          timeoutError,
-        ).catch((assertError: Error) => {
-          setReadonlyProperty(ctx, 'error', assertError);
-
-          return ctx;
-        });
-      }
-
-      const assertion = playwrightExpect(value, ctx.description) as unknown as Record<
-        string,
-        Fn<unknown[], Promise<unknown>>
-      >;
-
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      return addTimeoutToPromise(assertion[key]!(...args), timeout, timeoutError).then(
-        () => ctx,
-        (assertError: Error) => {
-          setReadonlyProperty(ctx, 'error', assertError);
-
-          return ctx;
-        },
-      );
-    };
-
-    const assertionPromise: Promise<Expect> = RESOLVED_PROMISE.then(() => {
-      if (isThenable(this.actualValue)) {
-        return addTimeoutToPromise(
-          this.actualValue as Promise<unknown>,
-          timeout,
-          timeoutError,
-        ).then(runAssertion);
-      }
-
-      return runAssertion(this.actualValue);
-    });
-
-    return assertionPromise.then(({actualValue, additionalLogFields, error}) => {
-      const logMessage = `Assert: ${this.description}`;
-      const logPayload = {
+    const printedValue = isThenable(this.actualValue) ? '<Thenable>' : this.actualValue;
+    const logEvent = logAndGetLogEvent(
+      `Assert: ${this.description}`,
+      {
+        actualValue: printedValue,
+        assertion: wrapStringForLogs(`value ${valueToString(printedValue)} ${message}`),
         assertionArguments: args,
-        ...additionalLogFields,
-        error: error?.message === undefined ? undefined : removeStyleFromString(error.message),
-        logEventStatus: error ? LogEventStatus.Failed : LogEventStatus.Passed,
         selector:
           selectorPropertyRetryData?.selector.description ??
           (this.actualValue instanceof Selector ? this.actualValue.description : undefined),
@@ -110,22 +55,50 @@ export const createExpectMethod = (
               selectorPropertyArgs: selectorPropertyRetryData.args,
             }
           : undefined),
-      };
+      },
+      LogEventType.InternalAssert,
+    );
+
+    assertValueIsDefined(logEvent, 'logEvent is defined', {args, message, ...this});
+
+    const {payload} = logEvent;
+
+    assertValueIsDefined(payload, 'payload is defined', {args, message, ...this});
+
+    const timeoutError = new E2edError(
+      `"${key}" assertion promise rejected after ${getDurationWithUnits(timeout)} timeout`,
+    );
+
+    const assertionPromise = getAssertionPromise({
+      args,
+      context: this,
+      key: key as keyof typeof additionalMatchers,
+      selectorPropertyRetryData,
+      timeout,
+      timeoutError,
+    });
+
+    return assertionPromise.then(({actualValue, additionalLogFields, error}) => {
+      Object.assign(payload, {
+        ...additionalLogFields,
+        error: error?.message === undefined ? undefined : removeStyleFromString(error.message),
+        logEventStatus: error ? LogEventStatus.Failed : LogEventStatus.Passed,
+      });
 
       return addTimeoutToPromise(Promise.resolve(actualValue), timeout, timeoutError)
         .then(
-          (value) =>
-            log(
-              logMessage,
-              {
-                actualValue: value,
-                assertion: wrapStringForLogs(`value ${valueToString(value)} ${message}`),
-                ...logPayload,
-              },
-              LogEventType.InternalAssert,
-            ),
+          (value) => {
+            Object.assign(payload, {
+              actualValue: value,
+              assertion: wrapStringForLogs(`value ${valueToString(value)} ${message}`),
+            });
+
+            setReadonlyProperty(logEvent, 'endTime', Date.now() as UtcTimeInMs);
+          },
           (actualValueResolveError: Error) => {
-            log(logMessage, {actualValueResolveError, ...logPayload}, LogEventType.InternalAssert);
+            Object.assign(payload, {actualValueResolveError});
+
+            setReadonlyProperty(logEvent, 'endTime', Date.now() as UtcTimeInMs);
           },
         )
         .then(() => {
