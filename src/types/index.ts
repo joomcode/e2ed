@@ -84,6 +84,7 @@ export type {
 export type {CreateSelector, CreateSelectorFunctionOptions, Selector} from './selectors';
 export type {StackFrame} from './stackTrace';
 export type {PackageInfo, StartInfo} from './startInfo';
+export type {StepBody, StepOptions} from './step';
 export type {StringForLogs} from './string';
 export type {Tab} from './tab';
 export type {MergeTuples, TupleRest} from './tuples';

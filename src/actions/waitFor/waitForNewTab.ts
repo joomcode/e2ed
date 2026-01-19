@@ -1,10 +1,13 @@
 import {ADDITIONAL_STEP_TIMEOUT, LogEventType} from '../../constants/internal';
+import {getTestRunPromise} from '../../context/testRunPromise';
 import {step} from '../../step';
 import {getPlaywrightPage} from '../../useContext';
 import {assertValueIsDefined} from '../../utils/asserts';
 import {getFullPackConfig} from '../../utils/config';
 import {setCustomInspectOnFunction} from '../../utils/fn';
 import {getDurationWithUnits} from '../../utils/getDurationWithUnits';
+
+import type {Page} from '@playwright/test';
 
 import type {InternalTab, Tab, Trigger} from '../../types/internal';
 
@@ -44,11 +47,13 @@ export const waitForNewTab = (async (
 
       await trigger?.();
 
-      const page = await pagePromise;
+      const testRunPromise = getTestRunPromise();
 
-      newTab = {page};
+      const page = await Promise.race([pagePromise, testRunPromise]);
 
-      const url = page.url();
+      newTab = {page: page ?? ({} as unknown as Page)};
+
+      const url = page?.url();
 
       return {url};
     },

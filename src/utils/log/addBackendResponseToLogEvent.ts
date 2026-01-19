@@ -3,9 +3,10 @@ import {LogEventType} from '../../constants/internal';
 import {getFullPackConfig} from '../config';
 import {setReadonlyProperty} from '../object';
 
+import {getBackendResponsesLogEvent} from './getBackendResponsesLogEvent';
 import {logWithPreparedOptions} from './logWithPreparedOptions';
 
-import type {LogEvent, Payload} from '../../types/internal';
+import type {LogEvent, Mutable, Payload} from '../../types/internal';
 
 const messageOfSingleResponse = 'Got a backend response to log';
 
@@ -31,8 +32,10 @@ export const addBackendResponseToLogEvent = (payload: Payload, logEvent: LogEven
     return;
   }
 
-  if (logEvent.payload === undefined) {
-    setReadonlyProperty(logEvent, 'payload', payloadInReport);
+  const backendResponsesLogEvent = getBackendResponsesLogEvent(logEvent);
+
+  if (backendResponsesLogEvent.payload === undefined) {
+    setReadonlyProperty(backendResponsesLogEvent, 'payload', payloadInReport);
 
     return;
   }
@@ -43,10 +46,14 @@ export const addBackendResponseToLogEvent = (payload: Payload, logEvent: LogEven
     return;
   }
 
-  const {backendResponses} = logEvent.payload;
+  const {backendResponses} = backendResponsesLogEvent.payload;
 
   if (backendResponses === undefined) {
-    setReadonlyProperty(logEvent.payload, 'backendResponses', backendResponsesFromPayload);
+    setReadonlyProperty(
+      backendResponsesLogEvent.payload,
+      'backendResponses',
+      backendResponsesFromPayload,
+    );
 
     return;
   }
@@ -57,5 +64,5 @@ export const addBackendResponseToLogEvent = (payload: Payload, logEvent: LogEven
     return;
   }
 
-  (backendResponses as Payload[]).push(responseFromPayload);
+  (backendResponses as Mutable<typeof backendResponses>).push(responseFromPayload);
 };

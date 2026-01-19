@@ -22,6 +22,11 @@ type CustomPageParams =
  */
 export class E2edReportExample extends Page<CustomPageParams> {
   /**
+   * Page navigation timeout.
+   */
+  static override readonly navigationTimeout = 5_000;
+
+  /**
    * Page header.
    */
   readonly header: Selector = locator('header');
@@ -46,11 +51,6 @@ export class E2edReportExample extends Page<CustomPageParams> {
    */
   readonly navigationRetriesButtonSelected: Selector =
     this.navigationRetriesButton.filterByLocatorParameter('selected', 'true');
-
-  /**
-   * Page navigation timeout.
-   */
-  override readonly navigationTimeout = 5_000;
 
   /**
    * Cookies that we set (additionally) on a page before navigating to it.

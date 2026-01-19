@@ -333,7 +333,7 @@ If the mapping returns `undefined`, the log entry is not skipped, but is printed
 For example, if it is equal to three, the test will be run no more than three times.
 
 `navigationTimeout: number`: default timeout for navigation to url
-(`navigateToPage`, `navigateToUrl` actions) in milliseconds.
+(`navigateToUrl`, `setHeadersAndNavigateToUrl` actions) in milliseconds.
 
 `overriddenConfigFields: PlaywrightTestConfig | null`: if not `null`, then this value will override
 fields of internal `Playwright` config.

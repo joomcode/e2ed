@@ -77,7 +77,6 @@ export const beforeTest = ({
   const {onlog, reject, testFnWithReject} = getTestFnAndReject({
     isSkipped,
     runId,
-    skipReason,
     testFn,
     testIdleTimeout,
     testTimeout,

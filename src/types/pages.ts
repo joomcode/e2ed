@@ -12,7 +12,11 @@ export type PageClassTypeArgs<PageParams> = OneOrTwoArgs<typeof CREATE_PAGE_TOKE
 /**
  * Page class type by page parameters type.
  */
-export type PageClassType<PageParams> = Class<PageClassTypeArgs<PageParams>, Page<PageParams>>;
+export type PageClassType<PageParams> = Class<
+  PageClassTypeArgs<PageParams>,
+  Page<PageParams>,
+  Readonly<{navigationTimeout: number}>
+>;
 
 /**
  * Base page class type for any page.

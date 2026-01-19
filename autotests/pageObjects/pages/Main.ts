@@ -16,6 +16,11 @@ type CustomPageParams = Partial<RouteParams> | undefined;
  */
 export class Main extends Page<CustomPageParams> {
   /**
+   * Page navigation timeout.
+   */
+  static override readonly navigationTimeout = 12_000;
+
+  /**
    * Body selector.
    */
   readonly body: Selector = createSelector('body');
@@ -65,6 +70,7 @@ export class Main extends Page<CustomPageParams> {
     await this.waitForDomContentLoaded();
 
     await waitForAllRequestsComplete(
+      // eslint-disable-next-line complexity
       ({url}) => {
         if (
           url.startsWith('https://assets.msn.com/') ||
@@ -72,7 +78,9 @@ export class Main extends Page<CustomPageParams> {
           url.startsWith('https://www2.bing.com/ipv6test/') ||
           url.startsWith('https://browser.events.data.msn.com/') ||
           url.startsWith('https://img-s-msn-com.akamaized.net/') ||
+          url.startsWith('https://login.microsoftonline.com/') ||
           url.startsWith('https://rewards.bing.com/widget/') ||
+          url.startsWith('https://scripts.clarity.ms/') ||
           url.startsWith('https://th.bing.com/th?id=') ||
           url.startsWith('https://www.bing.com/th?id=')
         ) {
@@ -81,7 +89,10 @@ export class Main extends Page<CustomPageParams> {
 
         return true;
       },
-      {maxIntervalBetweenRequestsInMs: this.maxIntervalBetweenRequestsInMs, timeout: 8_000},
+      {
+        maxIntervalBetweenRequestsInMs: this.maxIntervalBetweenRequestsInMs,
+        timeout: Main.navigationTimeout,
+      },
     );
   }
 }

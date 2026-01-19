@@ -12,9 +12,9 @@
 - [fix: add `expect` method `toBeInViewport` instead of separate asserts](https://github.com/joomcode/e2ed/commit/0c50fe8f6b7c3adc20c21c66a334a15dd00c054f) ([uid11](https://github.com/uid11))
 - [Merge pull request #125 from joomcode/feat/support-steps-in-actions](https://github.com/joomcode/e2ed/commit/72b7b394289085dc955f200621aa19f9e83f1e9e) ([uid11](https://github.com/uid11))
 
-  feat: support steps in actions (for groupping steps)
+  feat: support steps in actions (for grouping steps)
 
-- [PRO-16178 feat: support steps in actions (for groupping steps)](https://github.com/joomcode/e2ed/commit/ba860e4ed6f2e778374d8c0ddd4d758836a98859) ([uid11](https://github.com/uid11))
+- [PRO-16178 feat: support steps in actions (for grouping steps)](https://github.com/joomcode/e2ed/commit/ba860e4ed6f2e778374d8c0ddd4d758836a98859) ([uid11](https://github.com/uid11))
 - [Merge pull request #124 from joomcode/feat/add-logs-with-children](https://github.com/joomcode/e2ed/commit/e8e72d924150feefcc382dfdcf7c86ca51127657) ([uid11](https://github.com/uid11))
 
   feat: add functionality of `regroupSteps` in HTML reports

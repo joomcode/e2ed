@@ -1,8 +1,8 @@
-import {LogEventType} from '../../constants/internal';
+import {BACKEND_RESPONSES_LOG_MESSAGE, LogEventType} from '../../constants/internal';
 import {getRunId} from '../../context/runId';
-import {getStepsStack} from '../../context/stepsStack';
 
 import {getTestRunEvent} from '../events';
+import {getTopStep} from '../step';
 
 import {addBackendResponseToLogEvent} from './addBackendResponseToLogEvent';
 import {log} from './log';
@@ -14,16 +14,15 @@ import type {LogEvent, Payload} from '../../types/internal';
  * @internal
  */
 export const logBackendResponse = (payload: Payload): void => {
-  const stepsStack = getStepsStack();
-  const runningStep = stepsStack.at(-1);
+  const topStep = getTopStep();
 
   let lastLogEvent: LogEvent | undefined;
 
-  if (runningStep !== undefined) {
-    if (runningStep.children !== undefined && runningStep.children.length > 0) {
-      lastLogEvent = runningStep.children.at(-1);
+  if (topStep !== undefined) {
+    if (topStep.children !== undefined && topStep.children.length > 0) {
+      lastLogEvent = topStep.children.at(-1);
     } else {
-      lastLogEvent = runningStep;
+      lastLogEvent = topStep;
     }
   } else {
     const runId = getRunId();
@@ -38,5 +37,5 @@ export const logBackendResponse = (payload: Payload): void => {
     return;
   }
 
-  log('Got a backend responses to log', {backendResponses: [payload]}, LogEventType.InternalUtil);
+  log(BACKEND_RESPONSES_LOG_MESSAGE, {backendResponses: [payload]}, LogEventType.InternalUtil);
 };

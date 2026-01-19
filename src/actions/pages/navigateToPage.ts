@@ -1,4 +1,4 @@
-import {LogEventType} from '../../constants/internal';
+import {ADDITIONAL_STEP_TIMEOUT, LogEventType} from '../../constants/internal';
 import {step} from '../../step';
 import {addPageToApiStatistics} from '../../utils/apiStatistics';
 import {assertValueIsDefined} from '../../utils/asserts';
@@ -56,7 +56,11 @@ export const navigateToPage = async <SomePageClass extends AnyPageClassType>(
 
       return {documentUrl, isMatch, pageInstanceCreatedInMs, routeParams, url};
     },
-    {payload: {pageParams}, type: LogEventType.InternalAction},
+    {
+      payload: {pageParams},
+      timeout: PageClass.navigationTimeout + ADDITIONAL_STEP_TIMEOUT,
+      type: LogEventType.InternalAction,
+    },
   );
 
   assertValueIsDefined(page, 'page is defined', {name: PageClass.name, pageParams});
