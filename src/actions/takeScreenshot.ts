@@ -1,8 +1,13 @@
 import {join} from 'node:path';
 
-import {LogEventType, SCREENSHOTS_DIRECTORY_PATH} from '../constants/internal';
+import {
+  ADDITIONAL_STEP_TIMEOUT,
+  LogEventType,
+  SCREENSHOTS_DIRECTORY_PATH,
+} from '../constants/internal';
 import {step} from '../step';
 import {getPlaywrightPage} from '../useContext';
+import {getDimensionsString, getPngDimensions} from '../utils/screenshot';
 
 import type {Page} from '@playwright/test';
 
@@ -13,6 +18,7 @@ type Options = Parameters<Page['screenshot']>[0];
  */
 export const takeScreenshot = async (options: Options = {}): Promise<void> => {
   const {path: pathToScreenshot, ...optionsWithoutPath} = options;
+  const {timeout} = options;
 
   await step(
     'Take a screenshot of the page',
@@ -24,8 +30,15 @@ export const takeScreenshot = async (options: Options = {}): Promise<void> => {
 
       const page = getPlaywrightPage();
 
-      await page.screenshot(options);
+      const screenshot = await page.screenshot(options);
+      const dimensions = getDimensionsString(getPngDimensions(screenshot));
+
+      return {dimensions};
     },
-    {payload: {pathToScreenshot, ...optionsWithoutPath}, type: LogEventType.InternalAction},
+    {
+      payload: {pathToScreenshot, ...optionsWithoutPath},
+      ...(timeout !== undefined ? {timeout: timeout + ADDITIONAL_STEP_TIMEOUT} : undefined),
+      type: LogEventType.InternalAction,
+    },
   );
 };

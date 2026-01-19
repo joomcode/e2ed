@@ -47,6 +47,8 @@ export type {
 export type {KeyboardPressKey} from './keyboard';
 export type {Log, LogContext, LogParams, LogPayload, LogTag} from './log';
 export type {
+  Dimensions,
+  DimensionsString,
   MatchScreenshotConfig,
   ScreenshotMeta,
   ToMatchScreenshotOptions,

@@ -17,13 +17,14 @@ type Options = Readonly<{
  */
 // eslint-disable-next-line complexity
 export const processStepError = ({error, errorProperties, logEvent}: Options): unknown => {
+  const message = `Caught an error in step "${errorProperties.stepName}"`;
   let stepError: unknown = error;
 
   if (
     !(stepError instanceof E2edError) &&
     Object.getOwnPropertySymbols(stepError ?? {}).length > 0
   ) {
-    stepError = new E2edError('Caught an error in step', {
+    stepError = new E2edError(message, {
       cause: String(stepError),
       ...errorProperties,
     });
@@ -38,7 +39,7 @@ export const processStepError = ({error, errorProperties, logEvent}: Options): u
       );
     }
   } else {
-    stepError = new E2edError('Caught an error in step', {cause: stepError, ...errorProperties});
+    stepError = new E2edError(message, {cause: stepError, ...errorProperties});
   }
 
   if (logEvent !== undefined) {

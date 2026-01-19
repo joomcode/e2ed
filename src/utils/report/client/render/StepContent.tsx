@@ -1,10 +1,13 @@
 import {LogEventType} from '../../../../constants/internal';
 
+import {isScreenshotLog as clientIsScreenshotLog} from '../isScreenshotLog';
+
 import {List as clientList} from './List';
 import {Screenshot as clientScreenshot} from './Screenshot';
 
-import type {LogPayload, SafeHtml} from '../../../../types/internal';
+import type {DimensionsString, LogPayload, SafeHtml} from '../../../../types/internal';
 
+const isScreenshotLog = clientIsScreenshotLog;
 const List = clientList;
 const Screenshot = clientScreenshot;
 
@@ -30,22 +33,35 @@ export const StepContent: JSX.Component<Props> = ({pathToScreenshotOfPage, paylo
   const screenshots: SafeHtml[] = [];
 
   if (pathToScreenshotOfPage !== undefined) {
-    screenshots.push(<Screenshot name="Screenshot of page" open url={pathToScreenshotOfPage} />);
+    screenshots.push(
+      <Screenshot
+        dimensions={
+          'dimensions' in payload ? (payload['dimensions'] as DimensionsString) : undefined
+        }
+        name="Screenshot of page"
+        open
+        url={pathToScreenshotOfPage}
+      />,
+    );
   }
 
   if (type === LogEventType.InternalAssert) {
-    const {actualScreenshotUrl, diffScreenshotUrl, expectedScreenshotUrl} = payload;
+    const {actual, diff, expected} = payload;
 
-    if (typeof actualScreenshotUrl === 'string') {
-      screenshots.push(<Screenshot name="Actual" url={actualScreenshotUrl} />);
+    if (isScreenshotLog(actual)) {
+      screenshots.push(
+        <Screenshot dimensions={actual.dimensions} name="Actual" url={actual.url} />,
+      );
     }
 
-    if (typeof diffScreenshotUrl === 'string') {
-      screenshots.push(<Screenshot name="Diff" url={diffScreenshotUrl} />);
+    if (isScreenshotLog(diff)) {
+      screenshots.push(<Screenshot dimensions={diff.dimensions} name="Diff" url={diff.url} />);
     }
 
-    if (typeof expectedScreenshotUrl === 'string') {
-      screenshots.push(<Screenshot name="Expected" url={expectedScreenshotUrl} />);
+    if (isScreenshotLog(expected)) {
+      screenshots.push(
+        <Screenshot dimensions={expected.dimensions} name="Expected" url={expected.url} />,
+      );
     }
   }
 

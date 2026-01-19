@@ -50,6 +50,7 @@ export {
 } from './promise';
 export {request} from './request';
 export {getRunLabelObject} from './runLabel';
+export {getDimensionsString, getPngDimensions} from './screenshot';
 export {getPackageInfo} from './startInfo';
 export {isArray, isThenable} from './typeGuards';
 export {isUiMode} from './uiMode';

@@ -5,8 +5,6 @@ import type {LogEvent, Mutable} from 'e2ed/types';
 
 /**
  * Regroup log events (for grouping of `TestRun` steps).
- * This base client function should not use scope variables (except other base functions).
- * @internal
  */
 export const regroupSteps = (logEvents: readonly LogEvent[]): readonly LogEvent[] => {
   const topLevelTypes: readonly LogEventType[] = [

@@ -19,6 +19,8 @@ export {createJsxRuntime} from './createJsxRuntime';
 /** @internal */
 export {initialScript} from './initialScript';
 /** @internal */
+export {isScreenshotLog} from './isScreenshotLog';
+/** @internal */
 export {onDomContentLoad} from './onDomContentLoad';
 /** @internal */
 export {onFirstJsonReportDataLoad} from './onFirstJsonReportDataLoad';
