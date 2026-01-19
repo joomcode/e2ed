@@ -1,5 +1,20 @@
 # Changelog
 
+## [v0.21.3](https://github.com/joomcode/e2ed/tree/v0.21.3) (2026-01-19)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.21.2...v0.21.3)
+
+- [Merge pull request #126 from joomcode/fix/use-lexical-call-stack-for-steps](https://github.com/joomcode/e2ed/commit/10bf5a49d27e8b43b12222301f675c9d7fd99a7e) ([uid11](https://github.com/uid11))
+
+  fix: use lexical call stack for steps
+
+- [PRO-14812 fix: skipped tests should be failed in Playwright](https://github.com/joomcode/e2ed/commit/eadbfc4b8cee5a7c51a2a1ed08f208120d4c5ba2) ([uid11](https://github.com/uid11))
+- [PRO-16178 fix: use lexical steps stack via `AsyncLocalStorage`](https://github.com/joomcode/e2ed/commit/835a6908a261315914020da5cbeae194649b57b7) ([uid11](https://github.com/uid11))
+
+  fix: use separate log event for backend responses
+
+- [PRO-16178 fix: support `expect` methods in grouping steps](https://github.com/joomcode/e2ed/commit/001c5ce6d7c474ee40da391cedad270c2cc8f670) ([uid11](https://github.com/uid11))
+
 ## [v0.21.2](https://github.com/joomcode/e2ed/tree/v0.21.2) (2026-01-15)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.21.1...v0.21.2)
