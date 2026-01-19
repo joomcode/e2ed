@@ -8,12 +8,9 @@ import {getPromiseWithResolveAndReject} from '../promise';
 
 import type {Onlog, RejectTestRun, RunId, TestFn, Void} from '../../types/internal';
 
-import {test as playwrightTest} from '@playwright/test';
-
 type Options = Readonly<{
   isSkipped: boolean;
   runId: RunId;
-  skipReason: string | undefined;
   testFn: TestFn;
   testIdleTimeout: number;
   testTimeout: number;
@@ -29,7 +26,6 @@ type Return = Readonly<{onlog: Onlog; reject: RejectTestRun; testFnWithReject: T
 export const getTestFnAndReject = ({
   isSkipped,
   runId,
-  skipReason,
   testFn,
   testIdleTimeout,
   testTimeout,
@@ -38,13 +34,7 @@ export const getTestFnAndReject = ({
     return {
       onlog: () => undefined,
       reject: () => undefined,
-      testFnWithReject: () => {
-        try {
-          playwrightTest.skip(true, skipReason);
-        } catch {}
-
-        return RESOLVED_PROMISE;
-      },
+      testFnWithReject: () => RESOLVED_PROMISE,
     };
   }
 
