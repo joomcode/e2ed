@@ -1,4 +1,4 @@
-import {LogEventType} from '../../constants/internal';
+import {ADDITIONAL_STEP_TIMEOUT, LogEventType} from '../../constants/internal';
 import {step} from '../../step';
 
 import type {AnyPageClassType} from '../../types/internal';
@@ -18,5 +18,8 @@ export const reloadPage = (page: InstanceType<AnyPageClassType>): Promise<void> 
 
       await page.afterReloadPage?.();
     },
-    {type: LogEventType.InternalAction},
+    {
+      timeout: (page.constructor as AnyPageClassType).navigationTimeout + ADDITIONAL_STEP_TIMEOUT,
+      type: LogEventType.InternalAction,
+    },
   );

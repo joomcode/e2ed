@@ -4,12 +4,17 @@ import {log} from 'e2ed/utils';
 
 import type {NavigationReturn, StringHeaders, Url} from 'e2ed/types';
 
+type Options = Readonly<{
+  pageRequestHeaders: StringHeaders;
+  timeout?: number;
+}>;
+
 /**
  * Navigates to the url and set additional page request headers.
  */
 export const setPageRequestHeadersAndNavigateToUrl = (
   url: Url,
-  pageRequestHeaders: StringHeaders,
+  {pageRequestHeaders, timeout}: Options,
 ): Promise<NavigationReturn> => {
   const mapRequestHeaders = (): StringHeaders => pageRequestHeaders;
 
@@ -19,5 +24,9 @@ export const setPageRequestHeadersAndNavigateToUrl = (
     LogEventType.Action,
   );
 
-  return setHeadersAndNavigateToUrl(url, {mapRequestHeaders});
+  return setHeadersAndNavigateToUrl(
+    url,
+    {mapRequestHeaders},
+    timeout !== undefined ? {timeout} : undefined,
+  );
 };

@@ -122,10 +122,16 @@ export class E2edReportExample extends Page<CustomPageParams> {
 
   override navigateToPage(url: Url): Promise<NavigationReturn> {
     if (this.pageRequestHeaders) {
-      return setPageRequestHeadersAndNavigateToUrl(url, this.pageRequestHeaders);
+      return setPageRequestHeadersAndNavigateToUrl(url, {
+        pageRequestHeaders: this.pageRequestHeaders,
+        timeout: E2edReportExample.navigationTimeout,
+      });
     }
 
-    return setPageCookiesAndNavigateToUrl(url, this.pageCookies);
+    return setPageCookiesAndNavigateToUrl(url, {
+      pageCookies: this.pageCookies,
+      timeout: E2edReportExample.navigationTimeout,
+    });
   }
 
   override async waitForPageLoaded(): Promise<void> {

@@ -167,6 +167,7 @@ export abstract class Page<PageParams = undefined> {
 
     await waitForAllRequestsComplete(() => true, {
       maxIntervalBetweenRequestsInMs: this.maxIntervalBetweenRequestsInMs,
+      timeout: (this.constructor as typeof Page).navigationTimeout,
     });
   }
 

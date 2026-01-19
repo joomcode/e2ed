@@ -20,7 +20,7 @@ import {assertFunctionThrows, getDocumentUrl} from 'e2ed/utils';
 import type {Url} from 'e2ed/types';
 
 // eslint-disable-next-line max-statements
-test('exists', {meta: {testId: '1'}, testIdleTimeout: 10_000, testTimeout: 20_000}, async () => {
+test('exists', {meta: {testId: '1'}, testIdleTimeout: 12_000, testTimeout: 20_000}, async () => {
   const language = 'en';
   const searchQuery = 'foo';
   const testScrollValue = 200;

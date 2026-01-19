@@ -4,12 +4,17 @@ import {getHeaderValue, log, replaceSetCookie} from 'e2ed/utils';
 
 import type {Cookie, NavigationReturn, SetCookieHeaderString, StringHeaders, Url} from 'e2ed/types';
 
+type Options = Readonly<{
+  pageCookies: readonly Cookie[];
+  timeout?: number;
+}>;
+
 /**
  * Navigates to the url and set custom page cookies.
  */
 export const setPageCookiesAndNavigateToUrl = (
   url: Url,
-  pageCookies: readonly Cookie[],
+  {pageCookies, timeout}: Options,
 ): Promise<NavigationReturn> => {
   const mapResponseHeaders = (headers: StringHeaders): StringHeaders => {
     const setCookies = getHeaderValue(headers, 'set-cookie');
@@ -28,5 +33,9 @@ export const setPageCookiesAndNavigateToUrl = (
 
   log(`Navigate to ${url} and set page cookie`, {pageCookies, url}, LogEventType.Action);
 
-  return setHeadersAndNavigateToUrl(url, {mapResponseHeaders});
+  return setHeadersAndNavigateToUrl(
+    url,
+    {mapResponseHeaders},
+    timeout !== undefined ? {timeout} : undefined,
+  );
 };
