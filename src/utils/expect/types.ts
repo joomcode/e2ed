@@ -1,6 +1,13 @@
 import type {Expect as PlaywrightExpect} from '@playwright/test';
 
-import type {Fn, ToBeInViewportOptions, ToMatchScreenshotOptions} from '../../types/internal';
+import type {
+  DimensionsString,
+  Fn,
+  ScreenshotLogFields,
+  ToBeInViewportOptions,
+  ToMatchScreenshotOptions,
+  Url,
+} from '../../types/internal';
 
 import type {Expect} from './Expect';
 
@@ -11,6 +18,22 @@ type EnsureString<Type> = Type extends string ? string : never;
 type Extend<Type, Extended> = Type extends Extended ? Extended : never;
 
 type PlaywrightMatchers = ReturnType<PlaywrightExpect>;
+
+/**
+ * Additional log fields for `toMatchScreenshot` assertion.
+ * @internal
+ */
+export type AdditionalLogFields = {
+  actual: ScreenshotLogFields | undefined;
+  diff: ScreenshotLogFields | undefined;
+  expected:
+    | ScreenshotLogFields
+    | {
+        dimensions: DimensionsString | undefined;
+        readonly screenshotId: string;
+        url: Url | undefined;
+      };
+};
 
 /**
  * All assertion functions keys (names of assertion functions, like `eql`, `match`, etc).

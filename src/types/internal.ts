@@ -78,10 +78,14 @@ export type {
   Payload,
 } from './log';
 export type {
+  Dimensions,
+  DimensionsString,
   MatchScreenshotConfig,
   ScreenshotMeta,
   ToMatchScreenshotOptions,
 } from './matchScreenshot';
+/** @internal */
+export type {ScreenshotLogFields} from './matchScreenshot';
 export type {ApiMockFunction} from './mockApiRoute';
 /** @internal */
 export type {ApiMockState} from './mockApiRoute';

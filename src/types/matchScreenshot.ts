@@ -1,8 +1,22 @@
+import type {Brand} from './brand';
 import type {Url} from './http';
 import type {RunLabel} from './runLabel';
 import type {Selector} from './selectors';
 import type {TestStaticOptions} from './testRun';
 import type {TestMetaPlaceholder} from './userland';
+
+/**
+ * Dimensions of screenshot image.
+ */
+export type Dimensions = Readonly<{
+  height: number;
+  width: number;
+}>;
+
+/**
+ * String with dimensions of screenshot, like `320x108`.
+ */
+export type DimensionsString = Brand<string, 'DimensionsString'>;
 
 /**
  * Functions that describe the `toMatchScreenshot` assert (in `expect`).
@@ -31,6 +45,16 @@ export type MatchScreenshotConfig<TestMeta = TestMetaPlaceholder> = Readonly<{
     meta: ScreenshotMeta<TestMeta>,
   ) => Promise<string>;
 }>;
+
+/**
+ * Log fields for single screenshot.
+ * @internal
+ */
+export type ScreenshotLogFields = {
+  dimensions: DimensionsString;
+  readonly screenshotId: string;
+  url: Url;
+};
 
 /**
  * General screenshot metadata (like test name, assert description, etc.).

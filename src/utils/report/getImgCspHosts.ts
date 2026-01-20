@@ -1,8 +1,12 @@
+/* eslint-disable max-depth */
+
 import {URL} from 'node:url';
 
 import {LogEventType} from '../../constants/internal';
 
 import {flatLogEvents} from '../flatLogEvents';
+
+import {isScreenshotLog} from './client';
 
 import type {ReportData} from '../../types/internal';
 
@@ -27,16 +31,23 @@ export const getImgCspHosts = (reportData: ReportData): string => {
   for (const {fullTestRuns} of retries) {
     for (const {logEvents} of fullTestRuns) {
       for (const {payload, type} of flatLogEvents(logEvents)) {
-        // eslint-disable-next-line max-depth
         if (type !== LogEventType.InternalAssert || payload === undefined) {
           continue;
         }
 
-        const {actualScreenshotUrl, diffScreenshotUrl, expectedScreenshotUrl} = payload;
+        const {actual, diff, expected} = payload;
 
-        processMaybeUrl(actualScreenshotUrl);
-        processMaybeUrl(diffScreenshotUrl);
-        processMaybeUrl(expectedScreenshotUrl);
+        if (isScreenshotLog(actual)) {
+          processMaybeUrl(actual.url);
+        }
+
+        if (isScreenshotLog(diff)) {
+          processMaybeUrl(diff.url);
+        }
+
+        if (isScreenshotLog(expected)) {
+          processMaybeUrl(expected.url);
+        }
       }
     }
   }
