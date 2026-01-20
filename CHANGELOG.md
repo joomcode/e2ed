@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.21.4](https://github.com/joomcode/e2ed/tree/v0.21.4) (2026-01-20)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.21.3...v0.21.4)
+
+- [Merge pull request #127 from joomcode/fix/reload-page-timeout](https://github.com/joomcode/e2ed/commit/62163fd0cb80e59714785e0af6e237ff031a0602) ([uid11](https://github.com/uid11))
+
+  fix: reload page timeout
+
+- [PRO-17102 feat: add screenshot dimensions to HTML report and logs](https://github.com/joomcode/e2ed/commit/7f6fca6c16c4ec6079fab8c066cbbbbfdf2d7e5a) ([uid11](https://github.com/uid11))
+- [PRO-17116 fix: use `navigationTimeout` for `reloadPage` action](https://github.com/joomcode/e2ed/commit/6b639184087ec8fa11ad72b51c27b4d0a4e91f52) ([uid11](https://github.com/uid11))
+
 ## [v0.21.3](https://github.com/joomcode/e2ed/tree/v0.21.3) (2026-01-19)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.21.2...v0.21.3)
