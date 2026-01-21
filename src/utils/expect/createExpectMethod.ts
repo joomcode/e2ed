@@ -3,6 +3,7 @@ import {LogEventStatus, LogEventType, RETRY_KEY} from '../../constants/internal'
 import {assertValueIsDefined} from '../asserts';
 import {getFullPackConfig} from '../config';
 import {E2edError} from '../error';
+import {generalLog} from '../generalLog';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {logAndGetLogEvent} from '../log';
 import {setReadonlyProperty} from '../object';
@@ -33,7 +34,8 @@ export const createExpectMethod = (
     const {assertionTimeout} = getFullPackConfig();
 
     const timeout = assertionTimeout + additionalAssertionTimeoutInMs;
-    const message = getAssertionMessage === undefined ? key : getAssertionMessage(...args);
+    const assertionMessage = getAssertionMessage === undefined ? key : getAssertionMessage(...args);
+    const message = `Assert: ${this.description}`;
 
     const selectorPropertyRetryData = (
       this.actualValue as {[RETRY_KEY]?: SelectorPropertyRetryData}
@@ -41,10 +43,10 @@ export const createExpectMethod = (
 
     const printedValue = isThenable(this.actualValue) ? '<Thenable>' : this.actualValue;
     const logEvent = logAndGetLogEvent(
-      `Assert: ${this.description}`,
+      message,
       {
         actualValue: printedValue,
-        assertion: wrapStringForLogs(`value ${valueToString(printedValue)} ${message}`),
+        assertion: wrapStringForLogs(`value ${valueToString(printedValue)} ${assertionMessage}`),
         assertionArguments: args,
         selector:
           selectorPropertyRetryData?.selector.description ??
@@ -79,29 +81,36 @@ export const createExpectMethod = (
     });
 
     return assertionPromise.then(({actualValue, additionalLogFields, error}) => {
-      Object.assign(payload, {
+      const additionalPayload = {
         ...additionalLogFields,
         error: error?.message === undefined ? undefined : removeStyleFromString(error.message),
         logEventStatus: error ? LogEventStatus.Failed : LogEventStatus.Passed,
-      });
+      };
+
+      Object.assign(payload, additionalPayload);
 
       return addTimeoutToPromise(Promise.resolve(actualValue), timeout, timeoutError)
         .then(
           (value) => {
-            Object.assign(payload, {
-              actualValue: value,
-              assertion: wrapStringForLogs(`value ${valueToString(value)} ${message}`),
-            });
+            Object.assign(
+              payload,
+              Object.assign(additionalPayload, {
+                actualValue: value,
+                assertion: wrapStringForLogs(`value ${valueToString(value)} ${assertionMessage}`),
+              }),
+            );
 
             setReadonlyProperty(logEvent, 'endTime', Date.now() as UtcTimeInMs);
           },
           (actualValueResolveError: Error) => {
-            Object.assign(payload, {actualValueResolveError});
+            Object.assign(payload, Object.assign(additionalPayload, {actualValueResolveError}));
 
             setReadonlyProperty(logEvent, 'endTime', Date.now() as UtcTimeInMs);
           },
         )
         .then(() => {
+          generalLog(`Assert "${this.description}" completed`, additionalPayload);
+
           if (error) {
             throw error;
           }
