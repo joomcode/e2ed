@@ -325,7 +325,7 @@ class Selector {
    * Custom string presentation of selector.
    */
   toString(): string {
-    return `Selector for ${this.description}`;
+    return `<Selector for ${this.description}>`;
   }
 
   withText(textOrRegExp: RegExp | string): Selector {
