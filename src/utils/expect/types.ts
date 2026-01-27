@@ -33,6 +33,7 @@ export type AdditionalLogFields = {
         readonly screenshotId: string;
         url: Url | undefined;
       };
+  isLocalRun: string | undefined;
 };
 
 /**

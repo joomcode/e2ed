@@ -3,4 +3,4 @@
  * @internal
  */
 export const SCREENSHOT_NOT_SPECIFIED_ERROR_MESSAGE =
-  'Expected screenshot not specified. If the actual screenshot is correct, specify screenshot from actualScreenshotId field';
+  'Expected screenshot not specified. If the actual screenshot exists and is correct, specify screenshot from actualScreenshotId field';

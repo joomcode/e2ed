@@ -14,4 +14,5 @@ export const getEmptyAdditionalLogFields = ({
   actual: undefined,
   diff: undefined,
   expected: {dimensions: undefined, screenshotId: expectedScreenshotId, url: undefined},
+  isLocalRun: undefined,
 });

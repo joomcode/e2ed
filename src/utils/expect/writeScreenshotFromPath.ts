@@ -11,7 +11,7 @@ type Options = Readonly<{
   additionalLogFields: AdditionalLogFields;
   meta: ScreenshotMeta;
   path: FilePathFromRoot;
-  type: Exclude<keyof AdditionalLogFields, 'expected'>;
+  type: Exclude<keyof AdditionalLogFields, 'expected' | 'isLocalRun'>;
 }>;
 
 /**

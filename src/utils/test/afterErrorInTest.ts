@@ -9,7 +9,7 @@ import {takeScreenshotsOnErrorIfNeeded} from './takeScreenshotsOnErrorIfNeeded';
 
 import type {TestStaticOptions} from '../../types/internal';
 
-const afterErrorInTestTimeoutInMs = 15_000;
+const afterErrorInTestTimeoutInMs = 8_000;
 
 /**
  * Internal "after error in test" hook.

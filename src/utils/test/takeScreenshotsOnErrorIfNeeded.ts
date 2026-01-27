@@ -5,6 +5,7 @@ import {takeScreenshot} from '../../actions/takeScreenshot';
 import {getRetryIndex} from '../../context/retryIndex';
 
 import {getFullPackConfig} from '../config';
+import {addTimeoutToPromise} from '../promise';
 
 import {getScreenshotFileNames} from './getScreenshotFileNames';
 
@@ -40,18 +41,24 @@ export const takeScreenshotsOnErrorIfNeeded = async (
   const {fullPage, viewport} = await getScreenshotFileNames(retryDirectoryName, testStaticOptions);
 
   if (takeFullPageScreenshotOnError) {
-    await takeScreenshot({
-      fullPage: true,
-      path: join(retryDirectoryName, fullPage),
-      timeout: errorScreenshotTimeoutInMs,
-    });
+    await addTimeoutToPromise(
+      takeScreenshot({
+        fullPage: true,
+        path: join(retryDirectoryName, fullPage),
+        timeout: errorScreenshotTimeoutInMs,
+      }),
+      errorScreenshotTimeoutInMs,
+    );
   }
 
   if (takeViewportScreenshotOnError) {
-    await takeScreenshot({
-      fullPage: false,
-      path: join(retryDirectoryName, viewport),
-      timeout: errorScreenshotTimeoutInMs,
-    });
+    await addTimeoutToPromise(
+      takeScreenshot({
+        fullPage: false,
+        path: join(retryDirectoryName, viewport),
+        timeout: errorScreenshotTimeoutInMs,
+      }),
+      errorScreenshotTimeoutInMs,
+    );
   }
 };
