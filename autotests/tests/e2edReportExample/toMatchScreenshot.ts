@@ -13,7 +13,8 @@ test('correctly check screenshots via toMatchScreenshot', {meta: {testId: '20'}}
 
   await click(reportPage.navigationRetriesButton.nth(0));
 
-  await expect(reportPage.retryTitle.nth(0), 'toMatchScreenshot respect options').toMatchScreenshot(
-    'q3QRewTUo2',
-  );
+  await expect(
+    reportPage.retryTitle.nth(0),
+    'toMatchScreenshot respect Playwright options',
+  ).toMatchScreenshot('q3QRewTUo2', {omitBackground: true});
 });
