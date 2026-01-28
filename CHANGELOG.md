@@ -1,5 +1,24 @@
 # Changelog
 
+## [v0.21.5](https://github.com/joomcode/e2ed/tree/v0.21.5) (2026-01-28)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.21.4...v0.21.5)
+
+- [Merge pull request #129 from joomcode/fix/show-local-run-warning-in-to-match-screenshot](https://github.com/joomcode/e2ed/commit/15b6b68eebced7d8b9744d33404f359e80dd1d75) ([uid11](https://github.com/uid11))
+
+  fix: add warning message for local runs in `toMatchScreenshot`
+
+- [chore: update Playwright to 1.58.0](https://github.com/joomcode/e2ed/commit/aad7f263ae404cc017f59db2fc2015a64827777a) ([uid11](https://github.com/uid11))
+
+  chore: update devDependencies (`@types/node`, `prettier`)
+
+- [PRO-17257 fix: add warning message for local runs in `toMatchScreenshot`](https://github.com/joomcode/e2ed/commit/582b425310b4b37be8b4fdeaccc747f6fcf8e003) ([uid11](https://github.com/uid11))
+- [Merge pull request #128 from joomcode/fix/log-messages-from-expect-methods](https://github.com/joomcode/e2ed/commit/c94567902c77d9ee65e7488eb5eabfca6eb39fa8) ([uid11](https://github.com/uid11))
+
+  fix: console/file log messages from `expect` methods
+
+- [PRO-12276 fix: console/file log messages from `expect` methods](https://github.com/joomcode/e2ed/commit/8551bb9862cefa19a2e80c21ee1fa4e062ad0891) ([uid11](https://github.com/uid11))
+
 ## [v0.21.4](https://github.com/joomcode/e2ed/tree/v0.21.4) (2026-01-20)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.21.3...v0.21.4)
