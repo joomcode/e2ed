@@ -5,6 +5,7 @@ import {step} from '../step';
 import {getPlaywrightPage} from '../useContext';
 import {assertValueIsDefined} from '../utils/asserts';
 import {getFullPackConfig} from '../utils/config';
+import {generalLog} from '../utils/generalLog';
 import {applyHeadersMapper} from '../utils/headers';
 
 import {navigateToUrl} from './navigateToUrl';
@@ -43,14 +44,22 @@ export const setHeadersAndNavigateToUrl = async (
             return route.fallback();
           }
 
-          const response = await route.fetch({timeout});
-          const headers = response.headers();
+          try {
+            const response = await route.fetch({timeout});
+            const headers = response.headers();
 
-          applyHeadersMapper(headers, mapResponseHeaders);
+            applyHeadersMapper(headers, mapResponseHeaders);
 
-          responseHeaders = headers;
+            responseHeaders = headers;
 
-          return route.fulfill({headers, response});
+            return route.fulfill({headers, response});
+          } catch (error) {
+            generalLog(`Caught an error when fetching route by url "${url}"`, {
+              error: String(error),
+            });
+
+            return route.fallback();
+          }
         }),
         {times: 1},
       );

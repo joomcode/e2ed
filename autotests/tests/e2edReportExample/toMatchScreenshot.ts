@@ -1,7 +1,7 @@
 import {test} from 'autotests';
 import {E2edReportExample} from 'autotests/pageObjects/pages';
 import {expect} from 'e2ed';
-import {navigateToPage} from 'e2ed/actions';
+import {click, navigateToPage} from 'e2ed/actions';
 
 test('correctly check screenshots via toMatchScreenshot', {meta: {testId: '20'}}, async () => {
   const reportPage = await navigateToPage(E2edReportExample);
@@ -10,4 +10,11 @@ test('correctly check screenshots via toMatchScreenshot', {meta: {testId: '20'}}
     'pwoZRA8i7O',
     {mask: []},
   );
+
+  await click(reportPage.navigationRetriesButton.nth(0));
+
+  await expect(
+    reportPage.retryTitle.nth(0),
+    'toMatchScreenshot respect Playwright options',
+  ).toMatchScreenshot('q3QRewTUo2', {omitBackground: true});
 });

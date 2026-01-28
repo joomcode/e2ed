@@ -78,6 +78,9 @@ export const toMatchScreenshot = async (
 
   if (isLocalRun) {
     if (expectedScreenshotFound) {
+      additionalLogFields.isLocalRun =
+        'The assertion completed successfully without comparing screenshots because this is a local run (screenshots are taken only when run in docker)';
+
       return;
     }
 

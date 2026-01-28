@@ -63,6 +63,11 @@ export class E2edReportExample extends Page<CustomPageParams> {
   readonly pageRequestHeaders: StringHeaders | undefined;
 
   /**
+   * Title of retry.
+   */
+  readonly retryTitle: Selector = locator('RetryHeader', 'title');
+
+  /**
    * Test run button.
    */
   readonly testRunButton: Selector = this.testRunsList.findByTestId('TestRunButton');
