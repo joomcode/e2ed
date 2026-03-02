@@ -8,6 +8,7 @@ import {join, relative} from 'node:path';
 import {
   ABSOLUTE_PATH_TO_INSTALLED_E2ED_DIRECTORY,
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
+  AFTER_ERROR_IN_TEST_TIMEOUT_IN_MS,
   COMPILED_USERLAND_CONFIG_DIRECTORY,
   e2edEnvironment,
   EXPECTED_SCREENSHOTS_DIRECTORY_PATH,
@@ -128,7 +129,7 @@ const playwrightConfig = defineConfig({
   testDir: join(relativePathFromInstalledE2edToRoot, TESTS_DIRECTORY_PATH),
   testIgnore: ['**/node_modules/**', '**/*.skip.ts'],
   testMatch: userlandPack.testFileGlobs as Mutable<typeof userlandPack.testFileGlobs>,
-  timeout: userlandPack.testTimeout,
+  timeout: userlandPack.testTimeout + AFTER_ERROR_IN_TEST_TIMEOUT_IN_MS,
   workers: userlandPack.concurrency,
   ...userlandPack.overriddenConfigFields,
   use: useOptions,

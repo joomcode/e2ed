@@ -34,7 +34,7 @@ export const step = async (
   const errorProperties: StepErrorProperties = {
     stepBody: body,
     stepName: name,
-    stepOptions: options,
+    stepOptions: {...options, payload: {...options.payload}},
   };
   let isTestRunCompleted = false;
   let payload = undefined as LogPayload | Void;
