@@ -18,6 +18,8 @@ export {
   START_TIME_IN_MS_VARIABLE_NAME,
   UI_MODE_VARIABLE_NAME,
 } from './environment';
+/** @internal */
+export {AFTER_ERROR_IN_TEST_TIMEOUT_IN_MS} from './error';
 export {READ_FILE_OPTIONS} from './fs';
 /** @internal */
 export {AMOUNT_OF_PARALLEL_OPEN_FILES} from './fs';

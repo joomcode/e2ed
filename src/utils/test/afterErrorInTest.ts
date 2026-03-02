@@ -2,14 +2,13 @@
 import {getBrowserConsoleMessages} from '../../actions/getBrowserConsoleMessages';
 // eslint-disable-next-line import/no-internal-modules
 import {getBrowserJsErrors} from '../../actions/getBrowserJsErrors';
+import {AFTER_ERROR_IN_TEST_TIMEOUT_IN_MS} from '../../constants/internal';
 
 import {addTimeoutToPromise} from '../promise';
 
 import {takeScreenshotsOnErrorIfNeeded} from './takeScreenshotsOnErrorIfNeeded';
 
 import type {TestStaticOptions} from '../../types/internal';
-
-const afterErrorInTestTimeoutInMs = 8_000;
 
 /**
  * Internal "after error in test" hook.
@@ -24,5 +23,5 @@ export const afterErrorInTest = (testStaticOptions: TestStaticOptions): Promise<
 
       await takeScreenshotsOnErrorIfNeeded(testStaticOptions);
     })(),
-    afterErrorInTestTimeoutInMs,
+    AFTER_ERROR_IN_TEST_TIMEOUT_IN_MS,
   );
