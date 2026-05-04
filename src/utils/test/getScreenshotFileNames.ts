@@ -23,7 +23,7 @@ export const getScreenshotFileNames = async (
   const directoryPath = join(SCREENSHOTS_DIRECTORY_PATH, directoryName);
   const alreadyExistingScreenshots = await readdir(directoryPath).catch((): string[] => []);
 
-  const fileNamePrefix = `${testStaticOptions.name}.`.replace(/"/g, '');
+  const fileNamePrefix = `${testStaticOptions.name}.`.replace(/[^a-zA-Z0-9\-._~]/g, '_');
 
   const currentFullPageScreenshotsIndex = Math.max(
     0,
