@@ -68,7 +68,11 @@ export {
   TMP_DIRECTORY_PATH,
 } from './paths';
 /** @internal */
-export {TARGET_CLOSED_ERROR_MESSAGE, TEST_ENDED_ERROR_MESSAGE} from './playwright';
+export {
+  OBJECT_NOT_BOUND_ERROR_REGEXP,
+  TARGET_CLOSED_ERROR_MESSAGE,
+  TEST_ENDED_ERROR_MESSAGE,
+} from './playwright';
 /** @internal */
 export {RESOLVED_PROMISE} from './promise';
 /** @internal */

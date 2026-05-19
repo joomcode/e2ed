@@ -35,7 +35,7 @@ export const endE2ed = (definedEndE2edReason: EndE2edReason): void => {
   setEndE2edReason(definedEndE2edReason);
 
   if (testsSubprocess?.killed === false) {
-    console.log('Kill tests subprocess');
+    console.log(`Kill tests subprocess (reason: ${definedEndE2edReason})`);
 
     testsSubprocess.kill();
   }
