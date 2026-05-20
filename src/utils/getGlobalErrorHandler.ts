@@ -1,4 +1,8 @@
-import {TARGET_CLOSED_ERROR_MESSAGE, TEST_ENDED_ERROR_MESSAGE} from '../constants/internal';
+import {
+  OBJECT_NOT_BOUND_ERROR_REGEXP,
+  TARGET_CLOSED_ERROR_MESSAGE,
+  TEST_ENDED_ERROR_MESSAGE,
+} from '../constants/internal';
 
 import {E2edError} from './error';
 import {writeGlobalError, writeGlobalWarning} from './fs';
@@ -24,7 +28,7 @@ export const getGlobalErrorHandler =
         return;
       }
 
-      if (type === 'TestUnhandledRejection') {
+      if (type === 'TestUnhandledRejection' || OBJECT_NOT_BOUND_ERROR_REGEXP.test(errorString)) {
         void writeGlobalWarning(errorString).catch(() => {});
       } else {
         void writeGlobalError(errorString).catch(() => {});
