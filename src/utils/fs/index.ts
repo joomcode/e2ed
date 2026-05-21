@@ -9,6 +9,8 @@ export {getLastLogEventTimeInMs, writeLogEventTime} from './logIsoString';
 /** @internal */
 export {readApiStatistics} from './readApiStatistics';
 /** @internal */
+export {readCompletedTestRuns} from './readCompletedTestRuns';
+/** @internal */
 export {readEventFromFile} from './readEventFromFile';
 /** @internal */
 export {readEventsFromFiles} from './readEventsFromFiles';
@@ -17,16 +19,22 @@ export {readGlobalErrors} from './readGlobalErrors';
 /** @internal */
 export {readGlobalWarnings} from './readGlobalWarnings';
 /** @internal */
+export {readNotIncludedInPackTests} from './readNotIncludedInPackTests';
+/** @internal */
 export {readStartInfo} from './readStartInfo';
 /** @internal */
 export {removeDirectory} from './removeDirectory';
 /** @internal */
 export {writeApiStatistics} from './writeApiStatistics';
+/** @internal */
+export {writeCompletedTestRun} from './writeCompletedTestRun';
 export {writeFile} from './writeFile';
 /** @internal */
 export {writeGlobalError} from './writeGlobalError';
 /** @internal */
 export {writeGlobalWarning} from './writeGlobalWarning';
+/** @internal */
+export {writeNotIncludedInPackTest} from './writeNotIncludedInPackTest';
 /** @internal */
 export {writeStartInfo} from './writeStartInfo';
 /** @internal */

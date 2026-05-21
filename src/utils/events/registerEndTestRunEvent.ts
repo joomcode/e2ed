@@ -5,14 +5,15 @@ import {getPlaywrightPage} from '../../useContext';
 
 import {cloneWithoutLogEvents} from '../clone';
 import {getRunErrorFromError} from '../error';
-import {writeApiStatistics, writeTestRunToJsonFile} from '../fs';
-import {generalLog, logEndTestRunEvent, writeLogsToFile} from '../generalLog';
+import {writeApiStatistics, writeCompletedTestRun, writeTestRunToJsonFile} from '../fs';
+import {generalLog, writeLogsToFile} from '../generalLog';
 import {setReadonlyProperty} from '../object';
 import {getUserlandHooks} from '../userland';
 
 import {calculateTestRunStatus} from './calculateTestRunStatus';
 import {getRegroupedSteps} from './getRegroupedSteps';
 import {getTestRunEvent} from './getTestRunEvent';
+import {logEndTestRunEvent} from './logEndTestRunEvent';
 import {writeFullMocksIfNeeded} from './writeFullMocksIfNeeded';
 
 import type {EndTestRunEvent, FullTestRun, RunHash, TestRun} from '../../types/internal';
@@ -77,6 +78,7 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
 
   const fullTestRun: FullTestRun = {mainParams, runHash, ...testRun};
 
+  await writeCompletedTestRun({filePath, name, options, status});
   await logEndTestRunEvent(fullTestRun);
 
   const apiStatistics = getApiStatistics();

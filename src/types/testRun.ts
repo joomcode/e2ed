@@ -12,6 +12,15 @@ import type {StringForLogs} from './string';
 import type {TestMetaPlaceholder} from './userland';
 
 /**
+ * Completed test run object used by internal runtime mechanics.
+ * @internal
+ */
+export type CompletedTestRun<TestMeta = TestMetaPlaceholder> = Readonly<{
+  status: TestRunStatus | 'started';
+}> &
+  TestStaticOptions<TestMeta>;
+
+/**
  * Full test run object result of userland hooks (like mainParams and runHash).
  * @internal
  */

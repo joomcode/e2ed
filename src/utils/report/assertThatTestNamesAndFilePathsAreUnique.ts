@@ -6,9 +6,9 @@ import type {FullTestRun} from '../../types/internal';
  * Asserts that test names and file paths are unique (except of names internally retried runs).
  * @internal
  */
-export const assertThatTestNamesAndFilePathsAreUnique = (
+export const assertThatTestNamesAndFilePathsAreUnique = async (
   fullTestRuns: readonly FullTestRun[],
-): void => {
+): Promise<void> => {
   const testRunsByRetryIndex: Record<string, FullTestRun[]> = {};
 
   for (const fullTestRun of fullTestRuns) {
@@ -22,6 +22,6 @@ export const assertThatTestNamesAndFilePathsAreUnique = (
   }
 
   for (const testRunsInOneRetry of Object.values(testRunsByRetryIndex)) {
-    assertThatTestNamesAndFilePathsAreUniqueInOneRetry(testRunsInOneRetry);
+    await assertThatTestNamesAndFilePathsAreUniqueInOneRetry(testRunsInOneRetry);
   }
 };

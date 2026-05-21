@@ -3,7 +3,7 @@ import {readFile} from 'node:fs/promises';
 import {GLOBAL_WARNINGS_PATH, READ_FILE_OPTIONS} from '../../constants/internal';
 
 /**
- * Reads global warnings of run from directory.
+ * Reads global warnings of run from temporary directory.
  * @internal
  */
 export const readGlobalWarnings = async (): Promise<readonly string[]> => {
