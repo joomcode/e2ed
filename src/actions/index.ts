@@ -7,6 +7,7 @@ export {
 export {blur} from './blur';
 export {check} from './check';
 export {clearCookies} from './clearCookies';
+export {clearHover} from './clearHover';
 export {clearInput} from './clearInput';
 export {click} from './click';
 export {dispatchEvent} from './dispatchEvent';
