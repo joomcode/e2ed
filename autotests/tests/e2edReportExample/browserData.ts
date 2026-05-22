@@ -28,7 +28,8 @@ test(
     })();
 
     const consoleMessages = getBrowserConsoleMessages();
-    const columnNumber = 12;
+    const column = 12;
+    const columnNumber = column;
     const url = '';
 
     const consoleMessagesWithoutDate = consoleMessages.map(
@@ -36,12 +37,27 @@ test(
     );
 
     await expect(consoleMessagesWithoutDate, 'getBrowserConsoleMessages read all of messages').eql([
-      {args: ['error'], location: {columnNumber, lineNumber: 3, url}, text: 'error', type: 'error'},
-      {args: ['info'], location: {columnNumber, lineNumber: 4, url}, text: 'info', type: 'info'},
-      {args: ['log'], location: {columnNumber, lineNumber: 5, url}, text: 'log', type: 'log'},
+      {
+        args: ['error'],
+        location: {column, columnNumber, line: 3, lineNumber: 3, url},
+        text: 'error',
+        type: 'error',
+      },
+      {
+        args: ['info'],
+        location: {column, columnNumber, line: 4, lineNumber: 4, url},
+        text: 'info',
+        type: 'info',
+      },
+      {
+        args: ['log'],
+        location: {column, columnNumber, line: 5, lineNumber: 5, url},
+        text: 'log',
+        type: 'log',
+      },
       {
         args: ['warning'],
-        location: {columnNumber, lineNumber: 6, url},
+        location: {column, columnNumber, line: 6, lineNumber: 6, url},
         text: 'warning',
         type: 'warning',
       },
