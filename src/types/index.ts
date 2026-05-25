@@ -45,7 +45,7 @@ export type {
   Url,
 } from './http';
 export type {KeyboardPressKey} from './keyboard';
-export type {Log, LogContext, LogParams, LogPayload, LogTag} from './log';
+export type {Log, LogContext, LogParams, LogPayload, LogTag, ValueToStringOptions} from './log';
 export type {
   Dimensions,
   DimensionsString,

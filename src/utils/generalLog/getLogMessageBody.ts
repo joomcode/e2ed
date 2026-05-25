@@ -1,8 +1,8 @@
-import {CONSOLE_INSPECT_OPTIONS} from '../../constants/internal';
+import {CONSOLE_INSPECT_OPTIONS, DEFAULT_INSPECT_OPTIONS} from '../../constants/internal';
 
 import {valueToString} from '../valueToString';
 
-import type {LogContext, LogPayload} from '../../types/internal';
+import type {LogContext, LogPayload, ValueToStringOptions} from '../../types/internal';
 
 /**
  * Get body of log message by context, isLogInConsole flag and log payload.
@@ -20,5 +20,15 @@ export const getLogMessageBody = (
     return '';
   }
 
-  return ` ${valueToString(printedPayload, isLogInConsole ? CONSOLE_INSPECT_OPTIONS : undefined)}`;
+  const maxLines = payload == null ? undefined : payload.maxLinesCountInPrintedValue;
+
+  let options: ValueToStringOptions = isLogInConsole
+    ? CONSOLE_INSPECT_OPTIONS
+    : DEFAULT_INSPECT_OPTIONS;
+
+  if (maxLines !== undefined) {
+    options = {...options, maxLines};
+  }
+
+  return ` ${valueToString(printedPayload, options)}`;
 };
