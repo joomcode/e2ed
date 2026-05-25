@@ -3,7 +3,7 @@ import {readFile} from 'node:fs/promises';
 import {GLOBAL_ERRORS_PATH, READ_FILE_OPTIONS} from '../../constants/internal';
 
 /**
- * Reads global errors of run from directory.
+ * Reads global errors of run from temporary directory.
  * @internal
  */
 export const readGlobalErrors = async (): Promise<readonly string[]> => {

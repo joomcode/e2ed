@@ -1,5 +1,5 @@
 import {assertValueIsFalse, assertValueIsTrue} from '../asserts';
-import {getSuccessfulTestFilePaths} from '../generalLog';
+import {getSuccessfulTestFilePaths} from '../completedTestRuns';
 
 import type {TestFilePath} from '../../types/internal';
 

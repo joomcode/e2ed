@@ -1,8 +1,12 @@
 import {EndE2edReason} from '../../constants/internal';
 
 import {endE2edReason as maybeEndE2edReason} from '../end';
-import {readApiStatistics, readEventsFromFiles, readStartInfo} from '../fs';
-import {getNotIncludedInPackTests} from '../notIncludedInPackTests';
+import {
+  readApiStatistics,
+  readEventsFromFiles,
+  readNotIncludedInPackTests,
+  readStartInfo,
+} from '../fs';
 
 import type {FullEventsData, UtcTimeInMs} from '../../types/internal';
 
@@ -15,7 +19,7 @@ export const collectFullEventsData = async (): Promise<FullEventsData> => {
   const endE2edReason = maybeEndE2edReason ?? EndE2edReason.Unknown;
   const endTimeInMs = Date.now() as UtcTimeInMs;
   const fullTestRuns = await readEventsFromFiles([]);
-  const notIncludedInPackTests = await getNotIncludedInPackTests();
+  const notIncludedInPackTests = await readNotIncludedInPackTests();
   const startInfo = await readStartInfo();
 
   return {

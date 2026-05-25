@@ -100,6 +100,15 @@ export const COMPILED_USERLAND_CONFIG_DIRECTORY = join(
 ) as DirectoryPathFromRoot;
 
 /**
+ * Relative (from root) path to file with already completed test runs.
+ * @internal
+ */
+export const COMPLETED_TEST_RUNS_PATH = join(
+  TMP_DIRECTORY_PATH,
+  'completedTestRuns.txt',
+) as FilePathFromRoot;
+
+/**
  * Relative (from root) path to `config` file,
  * that plays the role of the internal Playwright config.
  * @internal
@@ -135,6 +144,17 @@ export const GLOBAL_ERRORS_PATH = join(TMP_DIRECTORY_PATH, 'globalErrors.txt') a
 export const GLOBAL_WARNINGS_PATH = join(
   TMP_DIRECTORY_PATH,
   'globalWarnings.txt',
+) as FilePathFromRoot;
+
+/**
+ * Relative (from root) path to text file with list of not included in pack tests.
+ * For each not included in pack test in this file, a relative path
+ * to the file of this test is saved in a separate line.
+ * @internal
+ */
+export const NOT_INCLUDED_IN_PACK_TESTS_PATH = join(
+  TMP_DIRECTORY_PATH,
+  'notIncludedInPackTests.txt',
 ) as FilePathFromRoot;
 
 /**
