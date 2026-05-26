@@ -8,11 +8,11 @@ jobs:
   build-docker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           cache: npm
-          node-version: 22.14.0
+          node-version: 24.14.0
       - run: npm ci --force
       - run: npm run build
       - run: npm run build:docker
@@ -20,11 +20,11 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           cache: npm
-          node-version: 22.14.0
+          node-version: 24.14.0
       - run: npm ci --force
       - run: npm run build
       - run: npm run lint
@@ -32,15 +32,15 @@ jobs:
   test-local:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           cache: npm
-          node-version: 22.14.0
+          node-version: 24.14.0
       - run: npm ci --force
       - run: npm run build
       - run: npm run test:local
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         if: ${{ always() }}
         with:
           name: reports
