@@ -4,7 +4,7 @@ import {setCustomInspectOnFunction} from './utils/fn';
 import {generalLog} from './utils/generalLog';
 import {logAndGetLogEvent} from './utils/log';
 import {setReadonlyProperty} from './utils/object';
-import {processStepError, runStepBody} from './utils/step';
+import {processStepError, runStepBody, updateStepPayload} from './utils/step';
 
 import type {
   LogEvent,
@@ -87,7 +87,7 @@ export const step = async (
       setReadonlyProperty(logEvent, 'endTime', endTime);
 
       if (payload !== undefined) {
-        setReadonlyProperty(logEvent, 'payload', {...logEvent.payload, ...payload});
+        updateStepPayload(logEvent, payload);
       }
 
       generalLog(`Step "${name}" completed`, {
