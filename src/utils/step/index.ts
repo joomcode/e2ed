@@ -4,3 +4,5 @@ export {getTopStep} from './getTopStep';
 export {processStepError} from './processStepError';
 /** @internal */
 export {runStepBody} from './runStepBody';
+/** @internal */
+export {updateStepPayload} from './updateStepPayload';
