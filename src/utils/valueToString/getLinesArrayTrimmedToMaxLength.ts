@@ -1,4 +1,4 @@
-import {MAX_LINES_COUNT_IN_PRINTED_VALUE} from '../../constants/internal';
+import {DEFAULT_MAX_LINES_COUNT_IN_PRINTED_VALUE} from '../../constants/internal';
 
 const additionalLinesForRepeatedTrimmerRuns = 4;
 
@@ -6,12 +6,15 @@ const additionalLinesForRepeatedTrimmerRuns = 4;
  * Get lines array trimmed to max lines count in printed value.
  * @internal
  */
-export const getLinesArrayTrimmedToMaxLength = (lines: readonly string[]): readonly string[] => {
-  if (lines.length <= MAX_LINES_COUNT_IN_PRINTED_VALUE + additionalLinesForRepeatedTrimmerRuns) {
+export const getLinesArrayTrimmedToMaxLength = (
+  lines: readonly string[],
+  maxLines = DEFAULT_MAX_LINES_COUNT_IN_PRINTED_VALUE,
+): readonly string[] => {
+  if (lines.length <= maxLines + additionalLinesForRepeatedTrimmerRuns) {
     return lines;
   }
 
-  const halfOfLines = Math.floor(MAX_LINES_COUNT_IN_PRINTED_VALUE / 2);
+  const halfOfLines = Math.floor(maxLines / 2);
   const cuttedLinesCount = lines.length - 2 * halfOfLines;
 
   return [

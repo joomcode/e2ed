@@ -1,3 +1,5 @@
+import type {InspectOptions} from 'node:util';
+
 import type {LogEventStatus, LogEventType} from '../constants/internal';
 
 import type {ResponseWithRequest} from './http';
@@ -32,6 +34,7 @@ export type LogPayload = Readonly<{
   filePath?: unknown;
   logEventStatus?: LogEventStatus;
   logTag?: LogTag;
+  maxLinesCountInPrintedValue?: number;
   successful?: unknown;
 }> &
   Payload;
@@ -77,3 +80,8 @@ export type MapLogPayloadInReport = (
  * Object with some payload.
  */
 export type Payload = Readonly<Record<string, unknown>>;
+
+/**
+ * Options of `valueToString` function.
+ */
+export type ValueToStringOptions = Readonly<InspectOptions & {maxLines?: number}>;

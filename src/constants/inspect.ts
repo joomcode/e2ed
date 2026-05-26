@@ -6,10 +6,17 @@ const averageLineLength = 100;
  */
 export const DEFAULT_INSPECT_OPTIONS = {
   colors: false,
-  depth: 16,
-  numericSeparator: true,
+  depth: 12,
+  getters: false,
+  numericSeparator: false,
   showHidden: true,
 } as const;
+
+/**
+ * Default max number of lines in printed stringify values (in logs).
+ * @internal
+ */
+export const DEFAULT_MAX_LINES_COUNT_IN_PRINTED_VALUE = 300;
 
 /**
  * Inspect options for output to console.
@@ -27,14 +34,8 @@ export const CONSOLE_INSPECT_OPTIONS = {
 export const MAX_ELEMENTS_COUNT_IN_PRINTED_ARRAY = 8;
 
 /**
- * Max number of lines in printed stringify values (in logs).
- * @internal
- */
-export const MAX_LINES_COUNT_IN_PRINTED_VALUE = 300;
-
-/**
  * Max string length in printed stringify values (in logs).
  * @internal
  */
 export const MAX_STRING_LENGTH_IN_PRINTED_VALUE =
-  averageLineLength * MAX_LINES_COUNT_IN_PRINTED_VALUE;
+  averageLineLength * DEFAULT_MAX_LINES_COUNT_IN_PRINTED_VALUE;

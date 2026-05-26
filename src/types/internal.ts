@@ -76,6 +76,7 @@ export type {
   MapLogPayload,
   MapLogPayloadInReport,
   Payload,
+  ValueToStringOptions,
 } from './log';
 export type {
   Dimensions,
