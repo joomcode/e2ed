@@ -1,5 +1,56 @@
 # Changelog
 
+## [v0.21.7](https://github.com/joomcode/e2ed/tree/v0.21.7) (2026-05-27)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.21.6...v0.21.7)
+
+- [chore: update `package-lock.json` up to `package.json`](https://github.com/joomcode/e2ed/commit/00cdb7edc97191cfb4effa913d162b79c206f5d5) ([uid11](https://github.com/uid11))
+- [Merge pull request #142 from joomcode/chore/update-node-in-github-actions](https://github.com/joomcode/e2ed/commit/c8a2f2a0dad5d983f0822ddd417eb3e47204a246) ([uid11](https://github.com/uid11))
+
+  chore: update node to 24.14.0 in GitHub Actions
+
+- [chore: update node to 24.14.0 in GitHub Actions](https://github.com/joomcode/e2ed/commit/ba969f7513a172c67fed6dc58471918889f8b083) ([uid11](https://github.com/uid11))
+- [Merge pull request #141 from joomcode/fix/map-additional-payload-in-steps](https://github.com/joomcode/e2ed/commit/1d0d438249b9c9bab0f563aba305d031ff4515a2) ([uid11](https://github.com/uid11))
+
+  fix: map additional payload in step via mapLogPayloadInReport
+
+- [PRO-18147 fix: map additional payload in `step` via `mapLogPayloadInReport`](https://github.com/joomcode/e2ed/commit/bd1aefa87333971dbb4929ab98f512639e75aeaa) ([uid11](https://github.com/uid11))
+- [Merge pull request #140 from joomcode/fix/customize-number-of-lines-displayed-in-logs](https://github.com/joomcode/e2ed/commit/ade8ef2bac07765a4973aec4b07bc6083b2a6a7e) ([uid11](https://github.com/uid11))
+
+  feat: customize number of lines displayed in logs
+
+- [PRO-18147 fix: customize number of lines displayed in report and file logs](https://github.com/joomcode/e2ed/commit/aa8c2e7759a44c84b37b192ac545244f1ca1cd16) ([uid11](https://github.com/uid11))
+- [Merge pull request #138 from joomcode/feat/add-clearHover-action](https://github.com/joomcode/e2ed/commit/e22de31f60711b01a8184ac20e5f44b2888cb876) ([uid11](https://github.com/uid11))
+
+  feat: add `clearHover` action
+
+- [PRO-18741 feat: add `clearHover` action](https://github.com/joomcode/e2ed/commit/969b984b4fde548271cf4353f382983f25c3dc1f) ([uid11](https://github.com/uid11))
+- [Merge pull request #137 from joomcode/fix/duplicate-test-file-path](https://github.com/joomcode/e2ed/commit/349cbda6a1435838c9fb34dc8a841efcb7060883) ([uid11](https://github.com/uid11))
+
+  fix: show global error on duplicate test file paths
+
+- [PRO-20047 fix: show global error on duplicate test file paths](https://github.com/joomcode/e2ed/commit/5d5d63509cf2d5557b109b74c29414698e628b62) ([uid11](https://github.com/uid11))
+- [Merge pull request #139 from joomcode/chore/update-playwright-to-1-60](https://github.com/joomcode/e2ed/commit/db52305e26f56809a48e17140709e616c29e0844) ([uid11](https://github.com/uid11))
+
+  chore: update Playwright to 1.60.0 and TypeScript to 6.0.3
+
+- [PRO-19540 chore: update Playwright to 1.60.0 and TypeScript to 6.0.3](https://github.com/joomcode/e2ed/commit/9262cc1c6cf78012586c0df29326081fd0cba82b) ([uid11](https://github.com/uid11))
+- [Merge pull request #136 from joomcode/fix/object-with-guid-was-not-bound](https://github.com/joomcode/e2ed/commit/1b7ec18b5a5728dcb3c902f10f43062deeb7d118) ([uid11](https://github.com/uid11))
+
+  fix: do not fail run with Playwright OBJECT_NOT_BOUND error
+
+- [PRO-20007 fix: do not fail run with Playwright OBJECT_NOT_BOUND error](https://github.com/joomcode/e2ed/commit/ed43761e88c0ceb74549edd9b0e801d67c8f4d7d) ([uid11](https://github.com/uid11))
+- [Merge pull request #135 from joomcode/fix/screenshot-filenames](https://github.com/joomcode/e2ed/commit/ea23c2a24818e69c19140265c2695c869b636a00) ([uid11](https://github.com/uid11))
+
+  fix: encoding screenshot filenames
+
+- [PRO-19539 fix: encoding screenshot filenames](https://github.com/joomcode/e2ed/commit/93d9a6354609687e154ffb6b193d6ceb762ec6cf) ([uid11](https://github.com/uid11))
+- [Merge pull request #134 from joomcode/fix/converting-circular-structure-error-in-steps](https://github.com/joomcode/e2ed/commit/3346c932316d59312b62541d9503c54ca8366c48) ([uid11](https://github.com/uid11))
+
+  fix: circular structure error in step error
+
+- [SUPPORT-5994 fix: circular structure error in step error](https://github.com/joomcode/e2ed/commit/ffc0ee5e82a28cff7f703c1dd50b612a39d1aa37) ([uid11](https://github.com/uid11))
+
 ## [v0.21.6](https://github.com/joomcode/e2ed/tree/v0.21.6) (2026-02-26)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.21.5...v0.21.6)
