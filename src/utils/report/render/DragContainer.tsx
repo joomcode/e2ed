@@ -11,8 +11,8 @@ export const DragContainer: JSX.Component = () => (
     tabIndex={0}
     aria-label="separator"
     aria-orientation="vertical"
-    aria-valuemax=""
-    aria-valuemin="180"
-    aria-valuenow=""
+    aria-valuemax="180"
+    aria-valuemin="0"
+    aria-valuenow="90"
   ></div>
 );

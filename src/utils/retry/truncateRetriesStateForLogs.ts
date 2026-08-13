@@ -3,9 +3,7 @@ import {truncateArrayForLogs} from '../generalLog';
 import type {RetriesState} from '../../types/internal';
 
 type TruncatedFields =
-  | 'failedTestNamesInLastRetry'
-  | 'successfulTestRunNamesHash'
-  | 'visitedTestRunEventsFileName';
+  'failedTestNamesInLastRetry' | 'successfulTestRunNamesHash' | 'visitedTestRunEventsFileName';
 
 type Return = Readonly<{
   [Key in keyof RetriesState]: Key extends TruncatedFields ? object : RetriesState[Key];

@@ -38,9 +38,7 @@ export type PrimitiveValue = bigint | boolean | number | string | symbol | null 
  * Property descriptor.
  */
 export type PropertyDescriptor<Value = unknown> =
-  | AccessorPropertyDescriptor<Value>
-  | DataPropertyDescriptor<Value>
-  | GenericPropertyDescriptor;
+  AccessorPropertyDescriptor<Value> | DataPropertyDescriptor<Value> | GenericPropertyDescriptor;
 
 /**
  * Property key.

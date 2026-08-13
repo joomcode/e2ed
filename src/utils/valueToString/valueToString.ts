@@ -36,7 +36,7 @@ export const valueToString = (
     return getStringTrimmedToMaxLength(valueAsString);
   }
 
-  for (let linesIndex = 0; linesIndex < lines.length; ) {
+  for (let linesIndex = 0; linesIndex < lines.length;) {
     linesIndex = cutVerboseLinesFromPrintedLines(lines, linesIndex);
   }
 

@@ -25,14 +25,14 @@
     "url": "git+https://github.com/joomcode/e2ed.git"
   },
   "dependencies": {
-    "@playwright/test": "1.60.0",
+    "@playwright/test": "1.62.1",
     "create-locator": "0.0.27",
     "get-modules-graph": "0.0.11",
     "sort-json-keys": "1.0.3"
   },
   "devDependencies": {
-    "@playwright/browser-chromium": "1.60.0",
-    "@types/node": "25.9.1",
+    "@playwright/browser-chromium": "1.62.1",
+    "@types/node": "26.2.0",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "assert-modules-support-case-insensitive-fs": "1.0.1",
@@ -41,10 +41,10 @@
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-import": "2.32.0",
-    "eslint-plugin-simple-import-sort": "13.0.0",
+    "eslint-plugin-simple-import-sort": "14.0.0",
     "eslint-plugin-typescript-sort-keys": "3.3.0",
     "husky": "9.1.7",
-    "prettier": "3.8.3",
+    "prettier": "3.9.6",
     "typescript": "6.0.3"
   },
   "peerDependencies": {
@@ -74,6 +74,7 @@
     "lint": "npm run parallel lint:es lint:prettier lint:types",
     "lint:es": "eslint --cache --cache-location=./node_modules/.cache/lint-es --cache-strategy=content --ext=.ts --max-warnings=0 --report-unused-disable-directives .",
     "lint:prettier": "prettier --cache --cache-location=./node_modules/.cache/lint-prettier --cache-strategy=content --check --ignore-path=.gitignore . !autotests/fixtures/fullMocks !docs/index.html",
+    "lint:prettier:fix": "prettier --cache --cache-location=./node_modules/.cache/lint-prettier --cache-strategy=content --write --ignore-path=.gitignore . !autotests/fixtures/fullMocks !docs/index.html",
     "lint:types": "npm run parallel lint:types:base lint:types:build",
     "lint:types:base": "tsc --noEmit",
     "lint:types:build": "if [ -f ./build/tsconfig.json ]; then tsc --noEmit --project ./build; else echo 'No build directory'; fi",
