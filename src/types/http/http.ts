@@ -41,15 +41,7 @@ export type MapOptions = Readonly<{
  * HTTP method.
  */
 export type Method =
-  | 'CONNECT'
-  | 'DELETE'
-  | 'GET'
-  | 'HEAD'
-  | 'OPTIONS'
-  | 'PATCH'
-  | 'POST'
-  | 'PUT'
-  | 'TRACE';
+  'CONNECT' | 'DELETE' | 'GET' | 'HEAD' | 'OPTIONS' | 'PATCH' | 'POST' | 'PUT' | 'TRACE';
 
 /**
  * Object with query (search) part of the url, or query string itself.

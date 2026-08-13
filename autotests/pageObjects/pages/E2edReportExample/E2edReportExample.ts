@@ -14,8 +14,7 @@ import {TestRunButton} from './TestRunButton';
 import type {Cookie, NavigationReturn, Selector, StringHeaders, Url} from 'e2ed/types';
 
 type CustomPageParams =
-  | {pageCookies?: readonly Cookie[]; pageRequestHeaders?: StringHeaders}
-  | undefined;
+  {pageCookies?: readonly Cookie[]; pageRequestHeaders?: StringHeaders} | undefined;
 
 /**
  * The e2ed report example page.

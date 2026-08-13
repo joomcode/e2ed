@@ -21,7 +21,7 @@ import type {RunTest, Test, TestStaticOptions, TestUnit, UtcTimeInMs} from '../.
  */
 export const getRunTest =
   (test: Test): RunTest =>
-  ({context, page, request}, testInfo): Promise<void> => {
+  ({context, mount, page, request}, testInfo): Promise<void> => {
     const runTest = async (): Promise<void> => {
       const startTimeInMs = Date.now() as UtcTimeInMs;
       const retryIndex = testInfo.retry + 1;
@@ -46,7 +46,7 @@ export const getRunTest =
           retryIndex,
           runId,
           startTimeInMs,
-          testController: {context, page, request},
+          testController: {context, mount, page, request},
           testFn: test.testFn,
           testStaticOptions,
         };
