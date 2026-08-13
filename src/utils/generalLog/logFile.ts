@@ -37,12 +37,14 @@ const writeLogsToFile = async (): Promise<void> => {
 const baseWritingInternal = 4_000;
 const deltaWritingInterval = 4_000;
 
-setInterval(
+const timeoutObject = setInterval(
   () => {
     void writeLogsToFile();
   },
   baseWritingInternal + Math.random() * deltaWritingInterval,
 );
+
+timeoutObject.unref();
 
 /**
  * Adds log message to pack logs (for later saving to the pack logs file).

@@ -14,8 +14,6 @@ import type {
   Void,
 } from '../../types/internal';
 
-import {test as playwrightTest} from '@playwright/test';
-
 type Options = Readonly<{
   body: StepBody | undefined;
   errorProperties: StepErrorProperties;
@@ -69,6 +67,9 @@ export const runStepBody = async ({
     });
 
   if (stepOptions?.runPlaywrightStep === true) {
+    // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+    const playwrightTest = (require('@playwright/test') as typeof import('@playwright/test')).test;
+
     await playwrightTest.step(name, () => runBodyWithTimeout());
   } else {
     await runBodyWithTimeout();

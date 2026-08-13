@@ -5,6 +5,8 @@
 import {test} from 'autotests';
 import {E2edError} from 'e2ed/utils';
 
-test('not in allTests pack', {meta: {testId: '13'}}, () => {
+test('not in allTests pack', {meta: {testId: '13'}}, async () => {
+  await Promise.resolve();
+
   throw new E2edError('Test filtered from the pack "allTests" was running');
 });

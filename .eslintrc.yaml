@@ -88,8 +88,6 @@ rules:
         - src/*/internal.ts
         - src/bin/*.ts
         - src/config.ts
-        - src/createLocator.ts
-        - src/getModulesGraph.ts
         - src/index.ts
       missingExports: true
       unusedExports: true

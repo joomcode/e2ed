@@ -4,8 +4,11 @@
  * @file Tests of TypeScript types for routes.
  */
 
+import {test} from 'autotests';
 import {CreateDevice, UserSignUp} from 'autotests/routes/apiRoutes';
 import {Search} from 'autotests/routes/pageRoutes';
+
+test('Skipped test', {meta: {testId: '32'}}, async () => {});
 
 /**
  * RouteParams = Readonly<{model: MobileDevice}>

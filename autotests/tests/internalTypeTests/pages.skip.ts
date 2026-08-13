@@ -2,8 +2,11 @@
  * @file Tests of TypeScript types for pages.
  */
 
+import {test} from 'autotests';
 import {Main, Search, Services} from 'autotests/pageObjects/pages';
 import {navigateToPage} from 'e2ed/actions';
+
+test('Skipped test', {meta: {testId: '30'}}, async () => {});
 
 /**
  * PageParams = Readonly<{mobileDevice?: MobileDeviceModel, query?: string}>

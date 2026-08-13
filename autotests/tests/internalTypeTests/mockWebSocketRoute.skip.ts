@@ -1,3 +1,4 @@
+import {test} from 'autotests';
 import {Main} from 'autotests/routes/pageRoutes';
 import {Base, Score} from 'autotests/routes/webSocketRoutes';
 import {mockWebSocketRoute, unmockWebSocketRoute} from 'e2ed/actions';
@@ -17,6 +18,8 @@ const webSocketMockFunction = (
 
   return {score: size > 2 ? size : 2};
 };
+
+test('Skipped test', {meta: {testId: '29'}}, async () => {});
 
 // @ts-expect-error: mockWebSocketRoute require WebSocket route as first argument
 void mockWebSocketRoute(Main, anyMockFunction);

@@ -1,3 +1,4 @@
+import {test} from 'autotests';
 import {AddUser, GetUser} from 'autotests/routes/apiRoutes';
 import {
   waitForNewTab,
@@ -6,6 +7,8 @@ import {
   waitForResponse,
   waitForResponseToRoute,
 } from 'e2ed/actions';
+
+test('Skipped test', {meta: {testId: '34'}}, async () => {});
 
 // ok
 void waitForRequest(() => false);

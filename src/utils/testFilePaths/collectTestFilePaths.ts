@@ -16,8 +16,8 @@ export const collectTestFilePaths = async (): Promise<readonly TestFilePath[]> =
   const {testFileGlobs} = getFullPackConfig();
   const rawTestFilesPaths: string[] = [];
 
-  for await (const directory of glob(testFileGlobs as string[])) {
-    rawTestFilesPaths.push(directory);
+  for await (const path of glob(testFileGlobs)) {
+    rawTestFilesPaths.push(path);
   }
 
   const testFilesPaths = rawTestFilesPaths

@@ -14,6 +14,7 @@ export {readCompletedTestRuns} from './readCompletedTestRuns';
 export {readEventFromFile} from './readEventFromFile';
 /** @internal */
 export {readEventsFromFiles} from './readEventsFromFiles';
+export {readFilesByGlobs} from './readFilesByGlobs';
 /** @internal */
 export {readGlobalErrors} from './readGlobalErrors';
 /** @internal */
