@@ -31,7 +31,7 @@
     "skipLibCheck": false,
     "strict": true,
     "stripInternal": true,
-    "target": "ES2024",
+    "target": "ES2025",
     "types": ["node"],
     "useDefineForClassFields": true
   },

@@ -8,6 +8,7 @@ import {
 
 import {assertValueIsDefined} from '../asserts';
 import {cloneWithoutUndefinedProperties} from '../clone';
+import {requireTypescript} from '../require';
 import {getProjectSettings} from '../userland';
 
 import type {CompilerOptions} from 'typescript';
@@ -22,8 +23,7 @@ type Return = Readonly<{
  * @internal
  */
 export const getCompilerOptions = (): Return => {
-  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-  const typescript = require('typescript') as typeof import('typescript');
+  const typescript = requireTypescript();
 
   const {ModuleKind, ScriptTarget} = typescript;
 

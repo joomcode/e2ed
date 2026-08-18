@@ -1,4 +1,4 @@
-import {LogEventStatus, LogEventType} from 'e2ed/constants';
+import {LOG_EVENT_STEP_TYPES, LogEventStatus, LogEventType} from 'e2ed/constants';
 import {setReadonlyProperty} from 'e2ed/utils';
 
 import type {LogEvent, Mutable} from 'e2ed/types';
@@ -8,6 +8,7 @@ import type {LogEvent, Mutable} from 'e2ed/types';
  */
 export const regroupSteps = (logEvents: readonly LogEvent[]): readonly LogEvent[] => {
   const topLevelTypes: readonly LogEventType[] = [
+    ...LOG_EVENT_STEP_TYPES,
     LogEventType.Action,
     LogEventType.Assert,
     LogEventType.Entity,

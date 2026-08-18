@@ -9,7 +9,6 @@ import {
 } from '../../constants/internal';
 
 import {assertValueIsDefined, assertValueIsTrue} from '../asserts';
-import {generalLog} from '../generalLog';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 
 import {readEventFromFile} from './readEventFromFile';
@@ -34,6 +33,9 @@ export const readEventsFromFiles = async (
       {allEventFiles, skippedEventFiles},
     );
   }
+
+  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+  const {generalLog} = require<typeof import('../generalLog')>('../generalLog');
 
   const newEventFiles = allEventFiles.filter((fileName) => !skippedEventFiles.includes(fileName));
 

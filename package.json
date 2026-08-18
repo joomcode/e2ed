@@ -16,7 +16,7 @@
   },
   "bugs": "https://github.com/joomcode/e2ed/issues",
   "engines": {
-    "node": ">=22.14.0"
+    "node": ">=24.14.0"
   },
   "packageManager": "npm@11",
   "homepage": "https://github.com/joomcode/e2ed#readme",

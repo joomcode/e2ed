@@ -98,3 +98,57 @@ export const step = async (
     }
   }
 };
+
+/**
+ * Given step.
+ */
+export const Given = (
+  name: string,
+  body?: StepBody,
+  options: Omit<StepOptions, 'type'> = {},
+): Promise<void> => step(name, body, {...options, type: LogEventType.Given});
+
+/**
+ * When step.
+ */
+export const When = (
+  name: string,
+  body?: StepBody,
+  options: Omit<StepOptions, 'type'> = {},
+): Promise<void> => step(name, body, {...options, type: LogEventType.When});
+
+/**
+ * Then step.
+ */
+export const Then = (
+  name: string,
+  body?: StepBody,
+  options: Omit<StepOptions, 'type'> = {},
+): Promise<void> => step(name, body, {...options, type: LogEventType.Then});
+
+/**
+ * And step.
+ */
+export const And = (
+  name: string,
+  body?: StepBody,
+  options: Omit<StepOptions, 'type'> = {},
+): Promise<void> => step(name, body, {...options, type: LogEventType.And});
+
+/**
+ * But step.
+ */
+export const But = (
+  name: string,
+  body?: StepBody,
+  options: Omit<StepOptions, 'type'> = {},
+): Promise<void> => step(name, body, {...options, type: LogEventType.But});
+
+/**
+ * Star step.
+ */
+export const Star = (
+  name: string,
+  body?: StepBody,
+  options: Omit<StepOptions, 'type'> = {},
+): Promise<void> => step(name, body, {...options, type: LogEventType.Star});

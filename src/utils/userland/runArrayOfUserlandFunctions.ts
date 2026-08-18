@@ -1,4 +1,3 @@
-import {E2edError} from '../error';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 
 import type {Fn, UtcTimeInMs} from '../../types/internal';
@@ -24,6 +23,9 @@ export const runArrayOfUserlandFunctions = async <Args extends readonly unknown[
 
       processCurrentFunctionResult(result);
     } catch (cause) {
+      // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+      const {E2edError} = require<typeof import('../error')>('../error');
+
       throw new E2edError('Caught an error on running userland function', {args, cause, fn});
     }
   }

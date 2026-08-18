@@ -1,5 +1,6 @@
 import {getPathToPack} from '../environment';
 import {getDurationWithUnits} from '../getDurationWithUnits';
+import {requireTypescript} from '../require';
 
 import {getCompilerOptions} from './getCompilerOptions';
 
@@ -18,8 +19,7 @@ const unusedTsExceptErrorMessage = "Unused '@ts-expect-error' directive.";
  * @internal
  */
 export const compilePack = (): Return => {
-  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-  const typescript = require('typescript') as typeof import('typescript');
+  const typescript = requireTypescript();
 
   const {
     createProgram,

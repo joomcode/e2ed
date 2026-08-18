@@ -33,7 +33,32 @@ export const enum LogEventType {
   InternalCore = 7,
   InternalUtil = 8,
   Unspecified = 9,
+  Given = 10,
+  When = 11,
+  Then = 12,
+  And = 13,
+  But = 14,
+  Star = 15,
 }
+
+/**
+ * `LogEvent` types of steps.
+ */
+export const LOG_EVENT_STEP_TYPES: [
+  LogEventType.Given,
+  LogEventType.When,
+  LogEventType.Then,
+  LogEventType.And,
+  LogEventType.But,
+  LogEventType.Star,
+] = [
+  LogEventType.Given,
+  LogEventType.When,
+  LogEventType.Then,
+  LogEventType.And,
+  LogEventType.But,
+  LogEventType.Star,
+] as const;
 
 /**
  * Background color of log message by test run status.

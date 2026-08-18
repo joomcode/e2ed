@@ -43,6 +43,7 @@ export {log} from './log';
 export {deepMerge, getEntries, getKeys, setReadonlyProperty} from './object';
 export {createPageObjectsFromMultiLocator} from './pageObjects';
 export {
+  getCodeReport,
   getLinesIndexes,
   parseMaybeEmptyValueAsJson,
   parseTest,

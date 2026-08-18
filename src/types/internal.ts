@@ -16,6 +16,19 @@ export type {Expect, IsArray, IsEqual, IsReadonlyKey, IsUnion} from './checks';
 export type {Class} from './class';
 export type {ClientFunction} from './clientFunction';
 export type {
+  CodeReport,
+  FeatureReport,
+  ParseError,
+  ScenarioReport,
+  SourceIterable,
+  SourcePath,
+  StepTokens,
+  TestIdentifierField,
+  TestReport,
+} from './codeReport';
+/** @internal */
+export type {StepWithReference} from './codeReport';
+export type {
   AnyPack,
   BrowserName,
   FullPackConfig,
@@ -35,6 +48,7 @@ export type {LogEvent, Onlog, TestRunEvent} from './events';
 /** @internal */
 export type {EndTestRunEvent, FullEventsData} from './events';
 export type {Fn, MergeFunctions} from './fn';
+export type {SourceFile} from './fs';
 export type {
   FullMocksConfig,
   FullMocksResponse,
