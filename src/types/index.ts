@@ -8,7 +8,7 @@ export type {
   StatisticsUnit,
 } from './apiStatistics';
 export type {Brand, IsBrand} from './brand';
-export type {Expect, IsEqual, IsReadonlyKey} from './checks';
+export type {Expect, IsArray, IsEqual, IsReadonlyKey, IsUnion} from './checks';
 export type {Class} from './class';
 export type {ClientFunction} from './clientFunction';
 export type {BrowserName} from './config';
@@ -69,6 +69,7 @@ export type {
   FilePathFromRoot,
   TestFilePath,
 } from './paths';
+export type {ProjectSettings} from './projectSettings';
 export type {AsyncVoid, MaybePromise, Thenable} from './promise';
 export type {
   AnyObject,
@@ -97,13 +98,13 @@ export type {
   IsIncludeUndefined,
   Void,
 } from './undefined';
-export type {CreatePackSpecificTypes} from './userland';
+export type {CreatePackSpecificTypes, GetTestIdentifierKey} from './userland';
 export type {
   Any,
   GetParamsType,
-  IsArray,
   Mutable,
   Normalize,
+  Not,
   ObjectEntries,
   OptionalIfValueIncludeDefault,
   UnionToIntersection,

@@ -18,7 +18,6 @@ export type E2edEnvironment = {
   [key: string]: string | undefined;
   ['E2ED_DEBUG']?: string;
   ['E2ED_ORIGIN']?: string;
-  ['E2ED_PATH_TO_TS_CONFIG_OF_PROJECT_FROM_ROOT']?: string;
   ['E2ED_TERMINATION_SIGNAL']?: NodeJS.Signals;
   [PATH_TO_PACK_VARIABLE_NAME]?: string;
   [PATH_TO_TEST_FILE_VARIABLE_NAME]?: string;

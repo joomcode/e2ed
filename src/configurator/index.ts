@@ -2,6 +2,7 @@ export type {UserlandPack as PackConfig} from '../types/internal';
 export {getDurationWithUnits} from '../utils/getDurationWithUnits';
 export {getShallowCopyOfObjectForLogs, getStringTrimmedToMaxLength} from '../utils/valueToString';
 export {RunEnvironment, startTimeInMs} from './constants';
+export {getTestIdentifierKey} from './getTestIdentifierKey';
 export {replaceFields} from './replaceFields';
 export {isDockerRun, isLocalRun, runEnvironment} from './runEnvironment';
 /** @internal */

@@ -20,16 +20,6 @@ export type GetParamsType<Class> = Class extends {['__PARAMS_KEY']: unknown}
   : never;
 
 /**
- * Returns `true` if type is an array (or tuple) of given element's type, and `false` otherwise.
- * `IsArray<[]>` = `true`.
- * `IsArray<[true, false]>` = `true`.
- * `IsArray<readonly [1, 2], number>` = `true`.
- * `IsArray<[1, 2], string>` = `false`.
- * `IsArray<string[], string>` = `true`.
- */
-export type IsArray<Type, Element = unknown> = Type extends readonly Element[] ? true : false;
-
-/**
  * Returns a copy of the object type with mutable properties.
  * `Mutable<{readonly foo: string}>` = `{foo: string}`.
  */
@@ -46,6 +36,11 @@ export type Normalize<Type> = keyof Type extends never
   : IsBrand<Type> extends true
     ? Type
     : {[Key in keyof Type]: Normalize<Type[Key]>};
+
+/**
+ * Returns `true` if type is `false`, and `false` otherwise.
+ */
+export type Not<Type extends boolean> = Type extends true ? false : true;
 
 /**
  * List of pairs that `Object.entries<Type>` returns.

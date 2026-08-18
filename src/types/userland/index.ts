@@ -1,4 +1,5 @@
 export type {CreatePackSpecificTypes} from './createPackSpecificTypes';
+export type {GetTestIdentifierKey} from './GetTestIdentifierKey';
 export type {
   CustomPackPropertiesPlaceholder,
   CustomReportPropertiesPlaceholder,

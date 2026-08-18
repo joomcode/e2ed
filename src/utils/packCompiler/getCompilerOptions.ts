@@ -4,11 +4,11 @@ import {
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
   AUTOTESTS_DIRECTORY_PATH,
   COMPILED_USERLAND_CONFIG_DIRECTORY,
-  e2edEnvironment,
 } from '../../constants/internal';
 
 import {assertValueIsDefined} from '../asserts';
 import {cloneWithoutUndefinedProperties} from '../clone';
+import {getProjectSettings} from '../userland';
 
 import type {CompilerOptions} from 'typescript';
 
@@ -47,18 +47,14 @@ export const getCompilerOptions = (): Return => {
   let parsingTsConfigError: Record<string, string> | undefined;
   let tsConfigOfProject: Readonly<{compilerOptions: CompilerOptions}> = {compilerOptions: {}};
 
-  const pathToTsConfigOfProjectFromRoot =
-    e2edEnvironment.E2ED_PATH_TO_TS_CONFIG_OF_PROJECT_FROM_ROOT;
+  const {pathToTsConfigFromRoot} = getProjectSettings();
 
   try {
-    assertValueIsDefined(
-      pathToTsConfigOfProjectFromRoot,
-      'pathToTsConfigOfProjectFromRoot is defined',
-    );
+    assertValueIsDefined(pathToTsConfigFromRoot, 'pathToTsConfigFromRoot is defined');
 
     const absoluteTsConfigPath = join(
       ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
-      pathToTsConfigOfProjectFromRoot,
+      pathToTsConfigFromRoot,
     );
 
     // eslint-disable-next-line global-require, import/no-dynamic-require
