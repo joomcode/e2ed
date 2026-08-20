@@ -1,6 +1,9 @@
+import {test} from 'autotests';
 import {createSelector, htmlElementSelector, locator} from 'autotests/selectors';
 
 import type {Selector} from 'e2ed/types';
+
+test('Skipped test', {meta: {testId: '33'}}, async () => {});
 
 // @ts-expect-error: wrong number of arguments
 htmlElementSelector.findByTestId();

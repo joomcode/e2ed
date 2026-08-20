@@ -1,3 +1,4 @@
+import {test} from 'autotests';
 import {CreateDevice, UserSignUp} from 'autotests/routes/apiRoutes';
 import {Main} from 'autotests/routes/pageRoutes';
 import {getRandomId} from 'e2ed/generators';
@@ -8,6 +9,8 @@ import type {ApiDevice, ApiDeviceParams, ApiUserParams, MobileDeviceModel} from 
 declare const apiUserParams: ApiUserParams;
 declare const model: MobileDeviceModel;
 declare const apiDeviceParams: ApiDeviceParams;
+
+test('Skipped test', {meta: {testId: '31'}}, async () => {});
 
 // @ts-expect-error: request require API route as first argument
 void request(Main, {requestBody: apiUserParams});

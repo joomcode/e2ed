@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
+import {test} from 'autotests';
 import {htmlElementSelector} from 'autotests/selectors';
 import {expect} from 'e2ed';
+
+test('Skipped test', {meta: {testId: '27'}}, async () => {});
 
 const someNumber = 3;
 

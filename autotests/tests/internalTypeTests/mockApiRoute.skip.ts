@@ -1,3 +1,4 @@
+import {test} from 'autotests';
 import {CreateDevice, CreateProduct} from 'autotests/routes/apiRoutes';
 import {Main} from 'autotests/routes/pageRoutes';
 import {mockApiRoute, unmockApiRoute} from 'e2ed/actions';
@@ -28,6 +29,8 @@ const apiMockFunction = (
 
   return {responseBody};
 };
+
+test('Skipped test', {meta: {testId: '28'}}, async () => {});
 
 // @ts-expect-error: mockApiRoute require API route as first argument
 void mockApiRoute(Main, apiMockFunction);

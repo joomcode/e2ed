@@ -1,5 +1,6 @@
 /* eslint-disable max-classes-per-file */
 
+import {test} from 'autotests';
 import {type CreateLocator, createRootLocator, type Locator, type Node} from 'e2ed/createLocator';
 import {createPageObjectsFromMultiLocator} from 'e2ed/utils';
 
@@ -18,6 +19,8 @@ const fooLocator = rootLocator.foo.bar;
 type BarMappedLocator = CreateLocator<Locator<{qux: Void}>, Selector>;
 
 true satisfies IsEqual<typeof fooLocator, CreateLocator<FooLocator, Selector>>;
+
+test('Skipped test', {meta: {testId: '26'}}, async () => {});
 
 class Foo {
   readonly bar: string;

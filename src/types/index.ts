@@ -62,6 +62,7 @@ export type {
   PageClassType,
   PageClassTypeArgs,
 } from './pages';
+export type {LineColumn, ParsedStep, ParsedTest} from './parseTest';
 export type {
   AbsolutePathToDirectory,
   DirectoryPathFromRoot,

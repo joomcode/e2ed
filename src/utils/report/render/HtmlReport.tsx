@@ -2,7 +2,7 @@ import {assertValueIsNotNull} from '../../asserts';
 import {generalLog} from '../../generalLog';
 import {getDurationWithUnits} from '../../getDurationWithUnits';
 
-import {createJsxRuntime, sanitizeHtml} from '../client';
+import {sanitizeHtml} from '../client';
 import {getImgCspHosts} from '../getImgCspHosts';
 import {getRetriesProps} from '../getRetriesProps';
 
@@ -19,8 +19,6 @@ import {Warnings} from './Warnings';
 import type {ReportData, UtcTimeInMs} from '../../../types/internal';
 
 declare const jsx: JSX.Runtime;
-
-Object.assign(globalThis, {jsx: createJsxRuntime()});
 
 type Props = Readonly<{reportData: ReportData}>;
 

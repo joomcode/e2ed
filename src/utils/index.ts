@@ -31,7 +31,7 @@ export {
 export {getDocumentCookie, getDocumentTitle, getDocumentUrl, reloadDocument} from './document';
 export {E2edError, getStackTrace} from './error';
 export {getFunctionPresentationForLogs, setCustomInspectOnFunction} from './fn';
-export {writeFile} from './fs';
+export {readFilesByGlobs, writeFile} from './fs';
 export {getDurationWithUnits} from './getDurationWithUnits';
 export {getFileSizeInMb} from './getFileSizeInMb';
 export {getHash} from './getHash';
@@ -42,7 +42,13 @@ export {getCheckedInputValue, getInputByValue} from './input';
 export {log} from './log';
 export {deepMerge, getEntries, getKeys, setReadonlyProperty} from './object';
 export {createPageObjectsFromMultiLocator} from './pageObjects';
-export {parseMaybeEmptyValueAsJson, parseValueAsJsonIfNeeded} from './parse';
+export {
+  getLinesIndexes,
+  parseMaybeEmptyValueAsJson,
+  parseTest,
+  ParseTestError,
+  parseValueAsJsonIfNeeded,
+} from './parse';
 export {
   addTimeoutToPromise,
   getPromiseWithResolveAndReject,

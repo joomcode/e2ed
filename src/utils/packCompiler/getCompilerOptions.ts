@@ -1,7 +1,5 @@
 import {join} from 'node:path';
 
-import {type CompilerOptions, ModuleKind, ScriptTarget} from 'typescript';
-
 import {
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
   AUTOTESTS_DIRECTORY_PATH,
@@ -12,22 +10,7 @@ import {
 import {assertValueIsDefined} from '../asserts';
 import {cloneWithoutUndefinedProperties} from '../clone';
 
-const frozenCompilerOptions: CompilerOptions = {
-  allowSyntheticDefaultImports: true,
-  declaration: false,
-  esModuleInterop: true,
-  module: ModuleKind.CommonJS,
-  outDir: COMPILED_USERLAND_CONFIG_DIRECTORY,
-  paths: {
-    [AUTOTESTS_DIRECTORY_PATH]: [`./${AUTOTESTS_DIRECTORY_PATH}/index.ts`],
-    [`${AUTOTESTS_DIRECTORY_PATH}/*`]: [`./${AUTOTESTS_DIRECTORY_PATH}/*`],
-  },
-  resolveJsonModule: true,
-  rootDir: '.',
-  skipLibCheck: true,
-  target: ScriptTarget.ES2024,
-  types: ['node'],
-};
+import type {CompilerOptions} from 'typescript';
 
 type Return = Readonly<{
   compilerOptions: CompilerOptions;
@@ -39,6 +22,28 @@ type Return = Readonly<{
  * @internal
  */
 export const getCompilerOptions = (): Return => {
+  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+  const typescript = require('typescript') as typeof import('typescript');
+
+  const {ModuleKind, ScriptTarget} = typescript;
+
+  const frozenCompilerOptions: CompilerOptions = {
+    allowSyntheticDefaultImports: true,
+    declaration: false,
+    esModuleInterop: true,
+    module: ModuleKind.CommonJS,
+    outDir: COMPILED_USERLAND_CONFIG_DIRECTORY,
+    paths: {
+      [AUTOTESTS_DIRECTORY_PATH]: [`./${AUTOTESTS_DIRECTORY_PATH}/index.ts`],
+      [`${AUTOTESTS_DIRECTORY_PATH}/*`]: [`./${AUTOTESTS_DIRECTORY_PATH}/*`],
+    },
+    resolveJsonModule: true,
+    rootDir: '.',
+    skipLibCheck: true,
+    target: ScriptTarget.ES2024,
+    types: ['node'],
+  };
+
   let parsingTsConfigError: Record<string, string> | undefined;
   let tsConfigOfProject: Readonly<{compilerOptions: CompilerOptions}> = {compilerOptions: {}};
 

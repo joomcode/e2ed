@@ -1,10 +1,3 @@
-import {
-  createProgram,
-  flattenDiagnosticMessageText,
-  getLineAndCharacterOfPosition,
-  getPreEmitDiagnostics,
-} from 'typescript';
-
 import {getPathToPack} from '../environment';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 
@@ -25,6 +18,16 @@ const unusedTsExceptErrorMessage = "Unused '@ts-expect-error' directive.";
  * @internal
  */
 export const compilePack = (): Return => {
+  // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+  const typescript = require('typescript') as typeof import('typescript');
+
+  const {
+    createProgram,
+    flattenDiagnosticMessageText,
+    getLineAndCharacterOfPosition,
+    getPreEmitDiagnostics,
+  } = typescript;
+
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const {compilerOptions, parsingTsConfigError} = getCompilerOptions();

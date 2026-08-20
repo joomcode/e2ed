@@ -11,6 +11,7 @@ import {generalLog} from '../generalLog';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {getFileSizeInMb} from '../getFileSizeInMb';
 
+import {createJsxRuntime} from './client';
 import {HtmlReport} from './render';
 
 import type {FilePathFromRoot, ReportData, UtcTimeInMs} from '../../types/internal';
@@ -22,6 +23,10 @@ declare const jsx: JSX.Runtime;
  * @internal
  */
 export const writeHtmlReport = async (reportData: ReportData): Promise<void> => {
+  if (typeof jsx === 'undefined') {
+    Object.assign(globalThis, {jsx: createJsxRuntime()});
+  }
+
   const startTimeInMs = Date.now() as UtcTimeInMs;
 
   const reportHtml = <HtmlReport reportData={reportData} />;

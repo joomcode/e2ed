@@ -102,6 +102,9 @@ export type {
   PageClassType,
   PageClassTypeArgs,
 } from './pages';
+export type {LineColumn, ParsedStep, ParsedTest} from './parseTest';
+/** @internal */
+export type {ParseTestContext} from './parseTest';
 export type {
   AbsolutePathToDirectory,
   DirectoryPathFromRoot,
