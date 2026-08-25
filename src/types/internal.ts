@@ -12,9 +12,22 @@ export type {
 /** @internal */
 export type {ApiStatisticsReportHash} from './apiStatistics';
 export type {Brand, IsBrand} from './brand';
-export type {Expect, IsEqual, IsReadonlyKey} from './checks';
+export type {Expect, IsArray, IsEqual, IsReadonlyKey, IsUnion} from './checks';
 export type {Class} from './class';
 export type {ClientFunction} from './clientFunction';
+export type {
+  CodeReport,
+  FeatureReport,
+  ParseError,
+  ScenarioReport,
+  SourceIterable,
+  SourcePath,
+  StepTokens,
+  TestIdentifierField,
+  TestReport,
+} from './codeReport';
+/** @internal */
+export type {StepWithReference} from './codeReport';
 export type {
   AnyPack,
   BrowserName,
@@ -35,6 +48,7 @@ export type {LogEvent, Onlog, TestRunEvent} from './events';
 /** @internal */
 export type {EndTestRunEvent, FullEventsData} from './events';
 export type {Fn, MergeFunctions} from './fn';
+export type {SourceFile} from './fs';
 export type {
   FullMocksConfig,
   FullMocksResponse,
@@ -111,6 +125,7 @@ export type {
   FilePathFromRoot,
   TestFilePath,
 } from './paths';
+export type {ProjectSettings} from './projectSettings';
 export type {AsyncVoid, MaybePromise, Thenable} from './promise';
 export type {
   AnyObject,
@@ -180,6 +195,7 @@ export type {
   CreatePackSpecificTypes,
   CustomPackPropertiesPlaceholder,
   CustomReportPropertiesPlaceholder,
+  GetTestIdentifierKey,
   SkipTestsPlaceholder,
   TestMetaPlaceholder,
   UserlandHooks,
@@ -187,9 +203,9 @@ export type {
 export type {
   Any,
   GetParamsType,
-  IsArray,
   Mutable,
   Normalize,
+  Not,
   ObjectEntries,
   OptionalIfValueIncludeDefault,
   UnionToIntersection,

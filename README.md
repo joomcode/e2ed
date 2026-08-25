@@ -269,6 +269,7 @@ which in this case will be included in the start info object, and will be used f
 Each function can thus access the results of the previous function.
 
 `enableCsp: boolean`: enables Content-Security-Policy checks in browser.
+This parameter can be overridden in the test-specific options.
 
 `enableHeadlessMode: boolean`: enables headless mode (if browser supports such mode).
 
@@ -366,9 +367,11 @@ You can define the `SkipTests` type and `skipTests` processing rules in the hook
 
 `takeFullPageScreenshotOnError: boolean`: if `true`, then takes a screenshot of the full page
 (not just the viewport) at the time of the test error, for display in the HTML report.
+This parameter can be overridden in the test-specific options.
 
 `takeViewportScreenshotOnError: boolean`: if `true`, then takes a screenshot of the page viewport
 at the time of the test error, for display in the HTML report.
+This parameter can be overridden in the test-specific options.
 
 `testFileGlobs: readonly string[]`: an array of globs with pack test (task) files.
 `fs.glob` from `nodejs` is used for matching globs.
@@ -383,10 +386,13 @@ If the test run takes longer than this timeout, the test fails and rerun on the 
 This parameter can be overridden in the test-specific options.
 
 `userAgent: string`: `userAgent` string of browser (device) in tests.
+This parameter can be overridden in the test-specific options.
 
 `viewportHeight: number`: height of viewport of page in pixels.
+This parameter can be overridden in the test-specific options.
 
 `viewportWidth: number`: width of viewport of page in pixels.
+This parameter can be overridden in the test-specific options.
 
 `waitBeforeRetry: (options: Options) => number`: returns how many milliseconds `e2ed`
 should wait before running test (for retries).
@@ -412,16 +418,24 @@ If the wait is longer than this timeout, then the promise returned by the `waitF
 `waitForResponseTimeout: number`: default timeout (in milliseconds) for `waitForResponse`/`waitForResponseToRoute` functions.
 If the wait is longer than this timeout, then the promise returned by the `waitForResponse`/`waitForResponseToRoute` function will be rejected.
 
-### Environment variables
+### Project settings
 
-Required environment variables are defined in the `./autotests/variables.env` file (they cannot be deleted):
+General static project settings are stored in file `./autotests/projectSettings.json`. They apply to all project packs.
 
-`E2ED_DOCKER_IMAGE`: the name of the docker image where the tests will run.
+`allTestFileGlobs: string`: an array of globs covering all project test files across all packs
+(used to generate a code report).
+
+`dockerImage: string | null`: the name of the docker image where the tests will run.
 The image must be based on the `e2ed` base image.
 
-`E2ED_PATH_TO_TS_CONFIG_OF_PROJECT_FROM_ROOT`: the path to TypeScript config file of the project
+`pathToTsConfigFromRoot: string`: the path to TypeScript config file of the project
 from the root directory of the project. The project should have one common TypeScript config
 for both the application code and the autotest code.
+
+`testIdentifierKey: Record<string, string>`: an object with a single field that serves as the test identifier key in the test `meta`.
+If the project does not use such a key, leave the object empty.
+
+### Environment variables
 
 You can pass the following optional environment variables to the `e2ed` process in any standard way:
 

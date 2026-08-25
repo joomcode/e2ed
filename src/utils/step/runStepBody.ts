@@ -4,6 +4,7 @@ import {getTestIdleTimeout} from '../../context/testIdleTimeout';
 import {E2edError} from '../error';
 import {getDurationWithUnits} from '../getDurationWithUnits';
 import {addTimeoutToPromise} from '../promise';
+import {requirePlaywright} from '../require';
 
 import type {
   LogEvent,
@@ -67,8 +68,7 @@ export const runStepBody = async ({
     });
 
   if (stepOptions?.runPlaywrightStep === true) {
-    // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-    const playwrightTest = (require('@playwright/test') as typeof import('@playwright/test')).test;
+    const {test: playwrightTest} = requirePlaywright();
 
     await playwrightTest.step(name, () => runBodyWithTimeout());
   } else {

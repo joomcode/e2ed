@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 export type {ClearContext, GetContext, GetWithDefaultValueContext, SetContext} from '../useContext';
 export type {Trigger} from './actions';
 export type {
@@ -8,9 +10,19 @@ export type {
   StatisticsUnit,
 } from './apiStatistics';
 export type {Brand, IsBrand} from './brand';
-export type {Expect, IsEqual, IsReadonlyKey} from './checks';
+export type {Expect, IsArray, IsEqual, IsReadonlyKey, IsUnion} from './checks';
 export type {Class} from './class';
 export type {ClientFunction} from './clientFunction';
+export type {
+  CodeReport,
+  FeatureReport,
+  ParseError,
+  ScenarioReport,
+  SourceIterable,
+  SourcePath,
+  StepTokens,
+  TestReport,
+} from './codeReport';
 export type {BrowserName} from './config';
 export type {ConsoleMessage, ConsoleMessageType} from './console';
 export type {UtcTimeInMs} from './date';
@@ -18,6 +30,7 @@ export type {DeepMutable, DeepPartial, DeepReadonly, DeepRequired} from './deep'
 export type {E2edPrintedFields, JsError} from './errors';
 export type {LogEvent, Onlog, TestRunEvent} from './events';
 export type {Fn, MergeFunctions} from './fn';
+export type {SourceFile} from './fs';
 export type {
   FullMocksConfig,
   FullMocksResponse,
@@ -69,6 +82,7 @@ export type {
   FilePathFromRoot,
   TestFilePath,
 } from './paths';
+export type {ProjectSettings} from './projectSettings';
 export type {AsyncVoid, MaybePromise, Thenable} from './promise';
 export type {
   AnyObject,
@@ -97,13 +111,13 @@ export type {
   IsIncludeUndefined,
   Void,
 } from './undefined';
-export type {CreatePackSpecificTypes} from './userland';
+export type {CreatePackSpecificTypes, GetTestIdentifierKey} from './userland';
 export type {
   Any,
   GetParamsType,
-  IsArray,
   Mutable,
   Normalize,
+  Not,
   ObjectEntries,
   OptionalIfValueIncludeDefault,
   UnionToIntersection,

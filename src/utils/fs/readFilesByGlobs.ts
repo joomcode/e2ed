@@ -1,9 +1,9 @@
 import {glob, readFile} from 'node:fs/promises';
 import {normalize} from 'node:path';
 
-const POOL_UPDATED = Symbol('poolUpdated');
+import type {SourceFile} from '../../types/internal';
 
-type File = Readonly<{path: string; source: string}>;
+const POOL_UPDATED = Symbol('poolUpdated');
 
 type ReadResult = Readonly<
   {key: number; path: string} & ({error: unknown; ok: false} | {ok: true; text: string})
@@ -15,7 +15,7 @@ type ReadResult = Readonly<
 export async function* readFilesByGlobs(
   patterns: readonly string[],
   filterByPath: (path: string) => boolean = () => true,
-): AsyncGenerator<File> {
+): AsyncGenerator<SourceFile> {
   const readsInFlight = new Map<number, Promise<ReadResult>>();
   const seenPaths = new Set<string>();
   let nextKey = 0;

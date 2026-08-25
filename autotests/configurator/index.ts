@@ -9,6 +9,7 @@ export {mapLogPayloadInReport} from './mapLogPayloadInReport';
 export {matchScreenshot} from './matchScreenshot';
 export {regroupSteps} from './regroupSteps';
 export {skipTests} from './skipTests';
+export {testIdentifierKey} from './testIdentifierKey';
 export type {
   DoAfterPack,
   DoBeforePack,

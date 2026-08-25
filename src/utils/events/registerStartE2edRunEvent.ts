@@ -8,7 +8,7 @@ import {
 } from '../../constants/internal';
 
 import {getFullPackConfig, updateConfig} from '../config';
-import {getPathToPack, setDotEnvValuesToEnvironment} from '../environment';
+import {getPathToPack} from '../environment';
 import {E2edError} from '../error';
 import {setGlobalExitCode} from '../exit';
 import {createDirectory, removeDirectory, writeStartInfo} from '../fs';
@@ -26,12 +26,6 @@ import {runBeforePackFunctions} from './runBeforePackFunctions';
 export const registerStartE2edRunEvent = async (): Promise<void> => {
   await removeDirectory(TMP_DIRECTORY_PATH);
   await createDirectory(EVENTS_DIRECTORY_PATH);
-
-  let errorSettingDotEnv: unknown;
-
-  await setDotEnvValuesToEnvironment().catch((error: unknown) => {
-    errorSettingDotEnv = error;
-  });
 
   const pathToTestFile = process.argv[2];
 
@@ -64,12 +58,6 @@ export const registerStartE2edRunEvent = async (): Promise<void> => {
     const fullPackConfig = getFullPackConfig();
 
     updateConfig(fullPackConfig, startInfo);
-
-    if (errorSettingDotEnv !== undefined) {
-      generalLog('Caught an error on setting environment variables from `variables.env` file', {
-        errorSettingDotEnv,
-      });
-    }
 
     if (compileErrors.length !== 0) {
       const pathToPack = getPathToPack();

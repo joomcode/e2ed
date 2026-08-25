@@ -1,3 +1,5 @@
+import {requirePlaywright} from '../require';
+
 import type {Selector} from '../../types/internal';
 
 /**
@@ -6,9 +8,7 @@ import type {Selector} from '../../types/internal';
  */
 export const isSelectorEntirelyInViewport = async (selector: Selector): Promise<boolean> => {
   try {
-    // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
-    const playwrightExpect = (require('@playwright/test') as typeof import('@playwright/test'))
-      .expect;
+    const {expect: playwrightExpect} = requirePlaywright();
 
     await playwrightExpect(selector.getPlaywrightLocator()).toBeInViewport({
       ratio: 1,

@@ -1,0 +1,7 @@
+{
+  "allFeatureFileGlobs": ["autotests/specs/**/*.feature"],
+  "allTestFileGlobs": ["autotests/tests/**/*.ts"],
+  "dockerImage": "e2edhub/e2ed",
+  "pathToTsConfigFromRoot": "./tsconfig.json",
+  "testIdentifierKey": {"testId": "key of the test identifier in test meta"}
+}

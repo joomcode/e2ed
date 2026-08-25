@@ -43,6 +43,7 @@ export {log} from './log';
 export {deepMerge, getEntries, getKeys, setReadonlyProperty} from './object';
 export {createPageObjectsFromMultiLocator} from './pageObjects';
 export {
+  getCodeReport,
   getLinesIndexes,
   parseMaybeEmptyValueAsJson,
   parseTest,
@@ -61,5 +62,6 @@ export {getDimensionsString, getPngDimensions} from './screenshot';
 export {getPackageInfo} from './startInfo';
 export {isArray, isThenable} from './typeGuards';
 export {isUiMode} from './uiMode';
+export {getProjectSettings} from './userland';
 export {removeStyleFromString, valueToString} from './valueToString';
 export {isSelectorEntirelyInViewport, isSelectorInViewport} from './viewport';

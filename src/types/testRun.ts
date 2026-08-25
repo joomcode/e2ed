@@ -86,6 +86,7 @@ export type TestOptions<TestMeta = TestMetaPlaceholder> = DeepReadonly<
     takeViewportScreenshotOnError?: boolean;
     testIdleTimeout?: number;
     testTimeout?: number;
+    userAgent?: string;
   } & (
     | {viewportHeight: number; viewportWidth: number}
     | {viewportHeight?: undefined; viewportWidth?: undefined}

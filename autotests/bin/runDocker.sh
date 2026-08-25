@@ -5,16 +5,15 @@ set +u
 CONTAINER_LABEL="e2ed"
 DEBUG_PORT=$([[ $E2ED_DEBUG == inspect-brk:* ]] && echo "${E2ED_DEBUG#inspect-brk:}" || echo "")
 DIR="${E2ED_WORKDIR:-$PWD}"
+E2ED_DOCKER_IMAGE=$(grep -m1 \"dockerImage\": $DIR/autotests/projectSettings.json | cut -d '"' -f 4)
 E2ED_TIMEOUT_FOR_GRACEFUL_SHUTDOWN_IN_SECONDS=16
 MOUNTDIR="${E2ED_MOUNTDIR:-$DIR}"
 WITH_DEBUG=$([[ -z $DEBUG_PORT ]] && echo "" || echo "--publish $DEBUG_PORT:$DEBUG_PORT --publish $((DEBUG_PORT + 1)):$((DEBUG_PORT + 1))")
 VERSION=$(grep -m1 \"e2ed\": $DIR/package.json | cut -d '"' -f 4)
 
-source ./autotests/variables.env
-
 if [[ -z $E2ED_DOCKER_IMAGE ]]
 then
-    echo "Error: The \"autotests/variables.env\" file does not contain E2ED_DOCKER_IMAGE variable."
+    echo "Error: The \"autotests/projectSettings.json\" file does not contain dockerImage variable."
     echo "Add it so that \"runDocker.sh\" script can run the docker image."
     echo "Exit with code 9"
     exit 9

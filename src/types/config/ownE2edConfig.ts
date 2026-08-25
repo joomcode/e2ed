@@ -67,6 +67,7 @@ export type OwnE2edConfig<
 
   /**
    * Enables Content-Security-Policy checks in browser.
+   * This parameter can be overridden in the test-specific options.
    */
   enableCsp: boolean;
 
@@ -232,12 +233,14 @@ export type OwnE2edConfig<
   /**
    * If `true`, then takes a screenshot of the full page (not just the viewport)
    * at the time of the test error, for display in the HTML report.
+   * This parameter can be overridden in the test-specific options.
    */
   takeFullPageScreenshotOnError: boolean;
 
   /**
    * If `true`, then takes a screenshot of the page viewport
    * at the time of the test error, for display in the HTML report.
+   * This parameter can be overridden in the test-specific options.
    */
   takeViewportScreenshotOnError: boolean;
 
@@ -264,16 +267,19 @@ export type OwnE2edConfig<
 
   /**
    * `userAgent` string of browser (device) in tests.
+   * This parameter can be overridden in the test-specific options.
    */
   userAgent: string;
 
   /**
    * Height of viewport of page in pixels.
+   * This parameter can be overridden in the test-specific options.
    */
   viewportHeight: number;
 
   /**
    * Width of viewport of page in pixels.
+   * This parameter can be overridden in the test-specific options.
    */
   viewportWidth: number;
 

@@ -9,7 +9,7 @@ const Given: (definition: string) => Promise<void> = async () => {};
 
 const When: (definition?: string) => Promise<void> = async () => {};
 
-const testsPattern = '**/autotests/tests/**/*.ts';
+const testsPattern = 'autotests/tests/**/*.ts';
 
 // eslint-disable-next-line complexity, max-lines-per-function, max-statements
 test('parseTest(...) function works correctly', {meta: {testId: '25'}}, async () => {
@@ -59,7 +59,7 @@ test('parseTest(...) function works correctly', {meta: {testId: '25'}}, async ()
       await expect(
         parsedTest.steps[0]?.kind === 'Given' &&
           parsedTest.steps[0]?.definition === 'First Given' &&
-          parsedTest.steps[0]?.column === 1 &&
+          parsedTest.steps[0]?.column === 3 &&
           parsedTest.steps[0]?.line === 16,
         'First step is correct',
       ).ok();
@@ -67,7 +67,7 @@ test('parseTest(...) function works correctly', {meta: {testId: '25'}}, async ()
       await expect(
         parsedTest.steps[1]?.kind === 'When' &&
           parsedTest.steps[1]?.definition === 'First When' &&
-          parsedTest.steps[1]?.column === 1 &&
+          parsedTest.steps[1]?.column === 3 &&
           parsedTest.steps[1]?.line === 17,
         'Second step is correct',
       ).ok();
@@ -75,7 +75,7 @@ test('parseTest(...) function works correctly', {meta: {testId: '25'}}, async ()
       await expect(
         parsedTest.steps[2]?.kind === 'When' &&
           parsedTest.steps[2]?.definition === undefined &&
-          parsedTest.steps[2]?.column === 1 &&
+          parsedTest.steps[2]?.column === 5 &&
           parsedTest.steps[2]?.line === 40,
         'Third step is correct',
       ).ok();
@@ -184,6 +184,28 @@ test('parseTest(...) function works correctly', {meta: {testId: '25'}}, async ()
     ).ok();
   }
 
+  await expect(
+    parseTest(
+      "test('Foo', {meta: {testId: '2'}, testIdleTimeout: 3_000, userAgent}, async () => {});",
+    ).options,
+    'Shorthand property with unknown identifier in options is supported',
+  ).eql({meta: {testId: '2'}, testIdleTimeout: 3_000, userAgent: '<unknown>'});
+
+  await expect(
+    parseTest("test('Foo', {foo, bar: baz, qux}, async () => {});").options,
+    'Several shorthand properties in options are supported',
+  ).eql({bar: '<unknown>', foo: '<unknown>', qux: '<unknown>'});
+
+  await expect(
+    parseTest("test('Foo', {desc: 'my Language here', lang: Language}, async () => {});").options,
+    'Identifier words inside string values of options are not corrupted',
+  ).eql({desc: 'my Language here', lang: '<unknown>'});
+
+  await expect(
+    parseTest("test('Foo', {meta: {testId: $testIdVar}}, async () => {});").options,
+    'Unknown identifiers with `$` in options are supported',
+  ).eql({meta: {testId: '<unknown>'}});
+
   const crlfParsedTest = parseTest(
     [
       "test('Crlf', {meta: {testId: '25'}}, async () => {",
@@ -202,7 +224,7 @@ test('parseTest(...) function works correctly', {meta: {testId: '25'}}, async ()
     crlfParsedTest.steps[0]?.kind === 'Given' &&
       crlfParsedTest.steps[0]?.definition === 'a' &&
       crlfParsedTest.steps[0]?.line === 2 &&
-      crlfParsedTest.steps[0]?.column === 1,
+      crlfParsedTest.steps[0]?.column === 3,
     'CRLF: first step has exact position',
   ).ok();
 
@@ -210,7 +232,7 @@ test('parseTest(...) function works correctly', {meta: {testId: '25'}}, async ()
     crlfParsedTest.steps[1]?.kind === 'When' &&
       crlfParsedTest.steps[1]?.definition === 'b' &&
       crlfParsedTest.steps[1]?.line === 3 &&
-      crlfParsedTest.steps[1]?.column === 1,
+      crlfParsedTest.steps[1]?.column === 3,
     'CRLF: second step has exact position',
   ).ok();
 

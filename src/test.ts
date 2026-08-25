@@ -41,10 +41,12 @@ export const test: TestFunction = (name, options, testFn) => {
     playwrightTest.use({bypassCSP: !options.enableCsp});
   }
 
+  if (options.userAgent !== undefined) {
+    playwrightTest.use({userAgent: options.userAgent});
+  }
+
   if (options.viewportHeight !== undefined && options.viewportWidth !== undefined) {
-    playwrightTest.use({
-      viewport: {height: options.viewportHeight, width: options.viewportWidth},
-    });
+    playwrightTest.use({viewport: {height: options.viewportHeight, width: options.viewportWidth}});
   }
 
   playwrightTest(playwrightTestName, runTest);

@@ -47,7 +47,7 @@ export const getUsers = ({delay = 0, retries = 0}: GetUsersOptions = {}): Promis
         fetch(`https://dummyjson.com/users?delay=${clientDelay}`, {method: 'GET'}).then(
           (res) => res.json() as unknown,
         ),
-      {name: 'getUsers', retries, timeout: 6_000},
+      {name: 'getUsers', retries, timeout: 30_000},
     );
   }
 

@@ -1,4 +1,5 @@
 import {getLineColumnByIndex} from './getLineColumnByIndex';
+import {parseSpace} from './parseSpace';
 import {throwError} from './throwError';
 
 import type {OnParse} from 'parse-statements';
@@ -16,7 +17,8 @@ export const getOnStepParse =
       throwError(context, `Step "${kind}" precedes the test function`, start, end);
     }
 
-    const lineColumn = getLineColumnByIndex(context, start);
+    const nonSpaceStart = parseSpace(start, source);
+    const lineColumn = getLineColumnByIndex(context, nonSpaceStart === -1 ? start : nonSpaceStart);
 
     const step: Mutable<ParsedStep> = {
       definition: undefined,
