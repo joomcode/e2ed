@@ -184,6 +184,28 @@ test('parseTest(...) function works correctly', {meta: {testId: '25'}}, async ()
     ).ok();
   }
 
+  await expect(
+    parseTest(
+      "test('Foo', {meta: {testId: '2'}, testIdleTimeout: 3_000, userAgent}, async () => {});",
+    ).options,
+    'Shorthand property with unknown identifier in options is supported',
+  ).eql({meta: {testId: '2'}, testIdleTimeout: 3_000, userAgent: '<unknown>'});
+
+  await expect(
+    parseTest("test('Foo', {foo, bar: baz, qux}, async () => {});").options,
+    'Several shorthand properties in options are supported',
+  ).eql({bar: '<unknown>', foo: '<unknown>', qux: '<unknown>'});
+
+  await expect(
+    parseTest("test('Foo', {desc: 'my Language here', lang: Language}, async () => {});").options,
+    'Identifier words inside string values of options are not corrupted',
+  ).eql({desc: 'my Language here', lang: '<unknown>'});
+
+  await expect(
+    parseTest("test('Foo', {meta: {testId: $testIdVar}}, async () => {});").options,
+    'Unknown identifiers with `$` in options are supported',
+  ).eql({meta: {testId: '<unknown>'}});
+
   const crlfParsedTest = parseTest(
     [
       "test('Crlf', {meta: {testId: '25'}}, async () => {",

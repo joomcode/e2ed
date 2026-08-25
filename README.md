@@ -269,6 +269,7 @@ which in this case will be included in the start info object, and will be used f
 Each function can thus access the results of the previous function.
 
 `enableCsp: boolean`: enables Content-Security-Policy checks in browser.
+This parameter can be overridden in the test-specific options.
 
 `enableHeadlessMode: boolean`: enables headless mode (if browser supports such mode).
 
@@ -366,9 +367,11 @@ You can define the `SkipTests` type and `skipTests` processing rules in the hook
 
 `takeFullPageScreenshotOnError: boolean`: if `true`, then takes a screenshot of the full page
 (not just the viewport) at the time of the test error, for display in the HTML report.
+This parameter can be overridden in the test-specific options.
 
 `takeViewportScreenshotOnError: boolean`: if `true`, then takes a screenshot of the page viewport
 at the time of the test error, for display in the HTML report.
+This parameter can be overridden in the test-specific options.
 
 `testFileGlobs: readonly string[]`: an array of globs with pack test (task) files.
 `fs.glob` from `nodejs` is used for matching globs.
@@ -383,10 +386,13 @@ If the test run takes longer than this timeout, the test fails and rerun on the 
 This parameter can be overridden in the test-specific options.
 
 `userAgent: string`: `userAgent` string of browser (device) in tests.
+This parameter can be overridden in the test-specific options.
 
 `viewportHeight: number`: height of viewport of page in pixels.
+This parameter can be overridden in the test-specific options.
 
 `viewportWidth: number`: width of viewport of page in pixels.
+This parameter can be overridden in the test-specific options.
 
 `waitBeforeRetry: (options: Options) => number`: returns how many milliseconds `e2ed`
 should wait before running test (for retries).

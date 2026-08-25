@@ -12,9 +12,12 @@ import type {ApiAddUserRequest, UserWorker} from 'autotests/types';
 
 const worker: UserWorker = {firstName: 'John', lastName: 'Doe'};
 
+const userAgent =
+  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36';
+
 test(
   'waitForRequest/waitForRequestToRoute gets correct request body and rejects on timeout',
-  {meta: {testId: '2'}, testIdleTimeout: 3_000},
+  {meta: {testId: '2'}, testIdleTimeout: 3_000, userAgent},
   // eslint-disable-next-line max-lines-per-function
   async () => {
     const request = await waitForRequest(
@@ -31,6 +34,10 @@ test(
     );
 
     await expect(request.requestBody, 'request has correct body').eql(worker);
+
+    await expect(request.requestHeaders['user-agent'], 'request has correct user agent').eql(
+      userAgent,
+    );
 
     await assertFunctionThrows(async () => {
       await waitForRequest(() => false, {timeout: 100});
