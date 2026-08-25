@@ -1,5 +1,45 @@
 # Changelog
 
+## [v0.22.0](https://github.com/joomcode/e2ed/tree/v0.22.0) (2026-08-25)
+
+[Full Changelog](https://github.com/joomcode/e2ed/compare/v0.21.8...v0.22.0)
+
+- [Merge pull request #145 from joomcode/feat/add-project-settings](https://github.com/joomcode/e2ed/commit/1ff8802799395bb8db7e28fb284d11e2bd44be0c) ([uid11](https://github.com/uid11))
+
+  feat: add project settings, `getCodeReport` function and Gherkin step functions
+
+- [PRO-22254 feat: add `userAgent` option to test options](https://github.com/joomcode/e2ed/commit/c149ac33d4108e42acf5f1d7a1f5d3fb2bc46903) ([uid11](https://github.com/uid11))
+- [PRO-21866 feat: add `getCodeReport` function](https://github.com/joomcode/e2ed/commit/738ba5a01dc93a7d6b63e059c995ec0fc53b5ccd) ([uid11](https://github.com/uid11))
+
+  feat: add Gherkin step functions
+
+  refactor: add `requireTypescript` and `requirePlaywright` functions
+
+  chore: update GitHub Actions for nodejs@24
+
+  test: add tests on `getCodeReport`
+
+- [feat: add project setting in JSON instead of variable.env](https://github.com/joomcode/e2ed/commit/b5387efdcc295f0e03d799bb670c71bbee2d5fa8) ([uid11](https://github.com/uid11))
+- [Merge pull request #144 from joomcode/feat/add-test-and-gherkin-parsers](https://github.com/joomcode/e2ed/commit/4bab1bf5d15a57864842e563c18958e841dc1240) ([uid11](https://github.com/uid11))
+
+  feat: add gherkin and test parsers
+
+- [feat: add gherkin and test parsers](https://github.com/joomcode/e2ed/commit/9762159294c96c910163a65832480e70dbc3bf5d) ([uid11](https://github.com/uid11))
+
+  fix: prepare e2ed/utils for importing in CI/precommit scripts
+
+  feat: add `readFilesByGlobs` fs-utility
+
+  test: add tests on `parseTest` function
+
+- [Merge pull request #143 from joomcode/feat/update-playwright-to-1-61](https://github.com/joomcode/e2ed/commit/ba1732be767811c4c8a589af02ba3d443fe648cc) ([uid11](https://github.com/uid11))
+
+  chore: update Playwright to 1.62.1
+
+- [chore: update Playwright to 1.62.1](https://github.com/joomcode/e2ed/commit/4a37c8a4f1b93139ef736c51391a3e40982dadde) ([uid11](https://github.com/uid11))
+
+  chore: update devDependencies (prettier, @types/node, etc)
+
 ## [v0.21.8](https://github.com/joomcode/e2ed/tree/v0.21.8) (2026-05-27)
 
 [Full Changelog](https://github.com/joomcode/e2ed/compare/v0.21.7...v0.21.8)
