@@ -454,7 +454,7 @@ If the variable is not set, the default value of `16` is used.
 
 [MIT][license-url]
 
-[code-of-conduct-image]: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg 'Contributor Covenant Code of Conduct'
+[code-of-conduct-image]: https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg 'Contributor Covenant Code of Conduct'
 [code-of-conduct-url]: CODE_OF_CONDUCT.md
 [conventional-commits-image]: https://img.shields.io/badge/Conventional_Commits-1.0.0-yellow.svg 'The Conventional Commits specification'
 [conventional-commits-url]: https://www.conventionalcommits.org/en/v1.0.0/

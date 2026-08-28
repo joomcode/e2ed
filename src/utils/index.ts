@@ -13,7 +13,7 @@ export {
   assertValueIsTrue,
   assertValueIsUndefined,
 } from './asserts';
-export {cloneWithoutUndefinedProperties} from './clone';
+export {cloneWithoutUndefinedProperties, cloneWithSortedFields} from './clone';
 export {getFullPackConfig as untypedGetFullPackConfig} from './config';
 export {
   assertStringIsSameSite,
@@ -45,6 +45,8 @@ export {createPageObjectsFromMultiLocator} from './pageObjects';
 export {
   getCodeReport,
   getLinesIndexes,
+  getScenarioReference,
+  getTestReference,
   parseMaybeEmptyValueAsJson,
   parseTest,
   ParseTestError,

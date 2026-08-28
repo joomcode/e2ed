@@ -104,7 +104,7 @@ export const step = async (
  */
 export const Given = (
   name: string,
-  body?: StepBody,
+  body: StepBody,
   options: Omit<StepOptions, 'type'> = {},
 ): Promise<void> => step(name, body, {...options, type: LogEventType.Given});
 
@@ -113,7 +113,7 @@ export const Given = (
  */
 export const When = (
   name: string,
-  body?: StepBody,
+  body: StepBody,
   options: Omit<StepOptions, 'type'> = {},
 ): Promise<void> => step(name, body, {...options, type: LogEventType.When});
 
@@ -122,7 +122,7 @@ export const When = (
  */
 export const Then = (
   name: string,
-  body?: StepBody,
+  body: StepBody,
   options: Omit<StepOptions, 'type'> = {},
 ): Promise<void> => step(name, body, {...options, type: LogEventType.Then});
 
@@ -131,7 +131,7 @@ export const Then = (
  */
 export const And = (
   name: string,
-  body?: StepBody,
+  body: StepBody,
   options: Omit<StepOptions, 'type'> = {},
 ): Promise<void> => step(name, body, {...options, type: LogEventType.And});
 
@@ -140,7 +140,7 @@ export const And = (
  */
 export const But = (
   name: string,
-  body?: StepBody,
+  body: StepBody,
   options: Omit<StepOptions, 'type'> = {},
 ): Promise<void> => step(name, body, {...options, type: LogEventType.But});
 
@@ -149,6 +149,6 @@ export const But = (
  */
 export const Star = (
   name: string,
-  body?: StepBody,
+  body: StepBody,
   options: Omit<StepOptions, 'type'> = {},
 ): Promise<void> => step(name, body, {...options, type: LogEventType.Star});

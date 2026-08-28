@@ -8,8 +8,9 @@ import type {ScenarioReport, StepWithReference} from '../../../types/internal';
  */
 export const getScenarioStepsWithReference = (
   scenario: ScenarioReport,
+  testIdentifierKey: string,
 ): readonly StepWithReference[] => {
-  const scenarioReference = getScenarioReference(scenario);
+  const scenarioReference = getScenarioReference(scenario, testIdentifierKey);
   const steps: StepWithReference[] = [];
   const stepsHash: Record<string, number> = Object.create(null) as {};
 

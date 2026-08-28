@@ -17,6 +17,7 @@ export type CodeReport<
   invalidTests: Readonly<Record<SourcePath, ParseError>>;
   scenarios: Readonly<Record<SourcePath, ScenarioReport<TestIdentifierKey, TestIdentifierValue>>>;
   scenariosByTestIdentifier: Readonly<Record<TestIdentifierValue, SourcePath>>;
+  testIdentifierKey: string;
   tests: Readonly<Record<SourcePath, TestReport<TestIdentifierKey, TestIdentifierValue>>>;
   testsByTestIdentifier: Readonly<Record<TestIdentifierValue, SourcePath>>;
 }>;
@@ -51,6 +52,7 @@ export type ScenarioReport<
     duplicatesByTestIdentifier: readonly SourcePath[];
     errors: readonly string[];
     featurePath: SourcePath;
+    indexInFeature: number;
     name: string;
     path: SourcePath;
   } & (

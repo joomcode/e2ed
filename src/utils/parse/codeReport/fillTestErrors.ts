@@ -10,11 +10,15 @@ import type {ScenarioReport, TestReport} from '../../../types/internal';
  * Fills test errors (compares tests steps with scenario steps).
  * @internal
  */
-export const fillTestErrors = (scenario: ScenarioReport, test: TestReport): void => {
+export const fillTestErrors = (
+  scenario: ScenarioReport,
+  test: TestReport,
+  testIdentifierKey: string,
+): void => {
   let scenarioHasError = false;
   const errors = test.errors as string[];
-  const scenarioReference = getScenarioReference(scenario);
-  const testReference = getTestReference(test);
+  const scenarioReference = getScenarioReference(scenario, testIdentifierKey);
+  const testReference = getTestReference(test, testIdentifierKey);
 
   if (scenario.steps.length === 0) {
     scenarioHasError = true;
@@ -42,7 +46,7 @@ export const fillTestErrors = (scenario: ScenarioReport, test: TestReport): void
     return;
   }
 
-  const scenarioSteps = getScenarioStepsWithReference(scenario);
+  const scenarioSteps = getScenarioStepsWithReference(scenario, testIdentifierKey);
   const testSteps = getTestStepsWithReference(test);
 
   const comparisonErrors = getStepComparisonErrors({

@@ -47,6 +47,7 @@ export const processScenarios = ({
       duplicatesByTestIdentifier: [],
       errors,
       featurePath,
+      indexInFeature: index,
       name: scenario.Scenario,
       path,
       testIdentifier: undefined as string | undefined,
