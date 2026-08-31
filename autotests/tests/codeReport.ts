@@ -2,7 +2,7 @@
 
 import {test} from 'autotests';
 import {expect} from 'e2ed';
-import {assertValueIsDefined} from 'e2ed/utils';
+import {assertValueIsDefined, readFilesByGlobs} from 'e2ed/utils';
 import {getCodeReport} from 'e2ed/utils/parse';
 
 import type {
@@ -65,7 +65,7 @@ async function* toAsyncIterable(files: readonly SourceFile[]): AsyncGenerator<So
   }
 }
 
-// eslint-disable-next-line max-lines-per-function, max-statements
+// eslint-disable-next-line complexity, max-lines-per-function, max-statements
 test('getCodeReport(...) function works correctly', {meta: {testId: '36'}}, async () => {
   const projectFeaturePath = 'autotests/specs/codeReport.feature' as SourcePath;
   const selfTestPath = 'autotests/tests/codeReport.ts' as SourcePath;
@@ -73,6 +73,11 @@ test('getCodeReport(...) function works correctly', {meta: {testId: '36'}}, asyn
   const projectReport = await getCodeReport<'testId'>();
 
   await expect(projectReport.durationInMs, 'Code report has non-negative duration').gte(0);
+
+  await expect(
+    projectReport.testIdentifierKey,
+    'Report contains test identifier key from project settings',
+  ).eql('testId');
 
   await expect(Object.keys(projectReport.invalidFeatures), 'Project has no invalid features').eql(
     [],
@@ -204,7 +209,7 @@ test('getCodeReport(...) function works correctly', {meta: {testId: '36'}}, asyn
   await expect(selfTest.featurePath, 'Linked test points to feature file').eql(projectFeaturePath);
 
   await expect(selfTest.errors, 'Linked scenario without steps produces error on test').eql([
-    `The scenario "Scenario without steps linked to test" in ${projectFeaturePath}:29:3 has no steps.`,
+    `The scenario "Scenario without steps linked to test" (testId=36) in ${projectFeaturePath}:29:3 has no steps.`,
   ]);
 
   await expect(projectReport.testsByTestIdentifier['36'], 'This test is present in tests map').eql(
@@ -315,13 +320,13 @@ test('getCodeReport(...) function works correctly', {meta: {testId: '36'}}, asyn
   await expect(badScenario.errors, 'Scenario itself has no comparison errors').eql([]);
 
   await expect(badTest.errors, 'Missing, extra and reordered steps produce exact errors').eql([
-    'Step "Then c" in f.feature:7:5 (in scenario "Bad scenario" in f.feature:4:3) is missing from test "Bad" in t.ts:1:1.',
-    'The test "Bad" in t.ts:1:1 has an extra step "Then d" in t.ts:4:3 that is absent from scenario "Bad scenario" in f.feature:4:3.',
+    'Step "Then c" in f.feature:7:5 (in scenario "Bad scenario" (testId=101) in f.feature:4:3) is missing from test "Bad" (testId=101) in t.ts:1:1.',
+    'The test "Bad" (testId=101) in t.ts:1:1 has an extra step "Then d" in t.ts:4:3 that is absent from scenario "Bad scenario" (testId=101) in f.feature:4:3.',
     [
       'The following steps appear in a different order in the scenario and the test.',
       'In the scenario the order is:',
-      '"Given a" in f.feature:5:5 (in scenario "Bad scenario" in f.feature:4:3),',
-      '"When b" in f.feature:6:5 (in scenario "Bad scenario" in f.feature:4:3).',
+      '"Given a" in f.feature:5:5 (in scenario "Bad scenario" (testId=101) in f.feature:4:3),',
+      '"When b" in f.feature:6:5 (in scenario "Bad scenario" (testId=101) in f.feature:4:3).',
       'In the test the order is:',
       '"When b" in t.ts:2:3,',
       '"Given a" in t.ts:3:3.',
@@ -366,9 +371,9 @@ test('getCodeReport(...) function works correctly', {meta: {testId: '36'}}, asyn
     [
       'The following steps appear in a different order in the scenario and the test.',
       'In the scenario the order is:',
-      '"Given A" in order.feature:5:5 (in scenario "Order scenario" in order.feature:4:3),',
-      '"Then C" in order.feature:7:5 (in scenario "Order scenario" in order.feature:4:3),',
-      '"And D" in order.feature:8:5 (in scenario "Order scenario" in order.feature:4:3).',
+      '"Given A" in order.feature:5:5 (in scenario "Order scenario" (testId=106) in order.feature:4:3),',
+      '"Then C" in order.feature:7:5 (in scenario "Order scenario" (testId=106) in order.feature:4:3),',
+      '"And D" in order.feature:8:5 (in scenario "Order scenario" (testId=106) in order.feature:4:3).',
       'In the test the order is:',
       '"Then C" in order.ts:2:3,',
       '"And D" in order.ts:4:3,',
@@ -516,7 +521,7 @@ test('getCodeReport(...) function works correctly', {meta: {testId: '36'}}, asyn
     tripleTest.errors,
     'Third duplicate of the step is reported as extra with (occurrence 3) count',
   ).eql([
-    'The test "T" in triple.ts:1:1 has an extra step "Then c" (occurrence 3) in triple.ts:4:3 that is absent from scenario "S" in triple.feature:4:3.',
+    'The test "T" (testId=107) in triple.ts:1:1 has an extra step "Then c" (occurrence 3) in triple.ts:4:3 that is absent from scenario "S" (testId=107) in triple.feature:4:3.',
   ]);
 
   const emptyStepReport = await getCodeReport({
@@ -559,9 +564,9 @@ test('getCodeReport(...) function works correctly', {meta: {testId: '36'}}, asyn
     emptyStepTest.errors,
     'Test steps without definition produce own errors and are excluded from comparison',
   ).eql([
-    'Step in empty.ts:3:3 (in test "T" in empty.ts:1:1) has no definition.',
-    'Step in empty.ts:4:3 (in test "T" in empty.ts:1:1) has no definition.',
-    'Step "Then b" in empty.feature:6:5 (in scenario "S" in empty.feature:4:3) is missing from test "T" in empty.ts:1:1.',
+    'Step in empty.ts:3:3 (in test "T" (testId=104) in empty.ts:1:1) has no definition.',
+    'Step in empty.ts:4:3 (in test "T" (testId=104) in empty.ts:1:1) has no definition.',
+    'Step "Then b" in empty.feature:6:5 (in scenario "S" (testId=104) in empty.feature:4:3) is missing from test "T" (testId=104) in empty.ts:1:1.',
   ]);
 
   await expect(
@@ -782,6 +787,11 @@ test('getCodeReport(...) function works correctly', {meta: {testId: '36'}}, asyn
   const caseTest = getTestReport(caseReport, 'case.ts');
 
   await expect(
+    caseReport.testIdentifierKey,
+    'Custom key: report contains test identifier key from options',
+  ).eql('caseId');
+
+  await expect(
     caseTest.testIdentifier,
     'Custom key: test identifier is read from caseId meta property',
   ).eql('9');
@@ -910,6 +920,23 @@ test('getCodeReport(...) function works correctly', {meta: {testId: '36'}}, asyn
     ).ok();
   }
 
+  const unreachablePaths: string[] = [];
+
+  try {
+    for await (const {path} of readFilesByGlobs([null as unknown as string])) {
+      unreachablePaths.push(path);
+    }
+
+    throw new Error('Unreachable');
+  } catch (error) {
+    await expect(
+      error instanceof TypeError && error.message.includes('patterns'),
+      'readFilesByGlobs throws glob error for invalid pattern',
+    ).ok();
+  }
+
+  await expect(unreachablePaths, 'Invalid pattern yields no files').eql([]);
+
   const emptyReport = await getCodeReport({features: [], tests: []});
 
   await expect(Object.keys(emptyReport.features), 'Empty report has no features').eql([]);
@@ -936,4 +963,190 @@ test('getCodeReport(...) function works correctly', {meta: {testId: '36'}}, asyn
   ).eql([]);
 
   await expect(emptyReport.durationInMs, 'Empty report has non-negative duration').gte(0);
+
+  const orderFeatureFiles: readonly SourceFile[] = [
+    {
+      path: 'orderB.feature',
+      source: [
+        'Feature: OrderB',
+        '',
+        '  @testId-202',
+        '  Scenario: B first',
+        '    Given b',
+        '',
+        '  @testId-203',
+        '  Scenario: B second',
+        '    Given b',
+        '',
+      ].join('\n'),
+    },
+    {
+      path: 'orderA.feature',
+      source: [
+        'Feature: OrderA',
+        '',
+        '  @testId-201',
+        '  Scenario: A only',
+        '    Given a',
+        '',
+      ].join('\n'),
+    },
+  ];
+  const orderTestFiles: readonly SourceFile[] = [
+    {path: 'orderB.ts', source: "test('B', {meta: {testId: '202'}}, async () => {});"},
+    {path: 'orderA.ts', source: "test('A', {meta: {testId: '201'}}, async () => {});"},
+  ];
+
+  const forwardReport = await getCodeReport({features: orderFeatureFiles, tests: orderTestFiles});
+  const reversedReport = await getCodeReport({
+    features: [...orderFeatureFiles].reverse(),
+    tests: [...orderTestFiles].reverse(),
+  });
+
+  await expect(Object.keys(forwardReport.features), 'Features are sorted by path').eql([
+    'orderA.feature',
+    'orderB.feature',
+  ]);
+
+  await expect(Object.keys(forwardReport.tests), 'Tests are sorted by path').eql([
+    'orderA.ts',
+    'orderB.ts',
+  ]);
+
+  await expect(
+    Object.keys(forwardReport.scenarios),
+    'Scenarios are sorted by feature path and by index inside feature',
+  ).eql(['orderA.feature/[0]', 'orderB.feature/[0]', 'orderB.feature/[1]']);
+
+  await expect(
+    getScenario(forwardReport, 'orderB.feature/[1]').indexInFeature,
+    'Scenario has index inside feature',
+  ).eql(1);
+
+  for (const reportKey of [
+    'features',
+    'invalidFeatures',
+    'invalidTests',
+    'scenarios',
+    'scenariosByTestIdentifier',
+    'tests',
+    'testsByTestIdentifier',
+  ] as const) {
+    await expect(
+      Object.keys(reversedReport[reportKey]),
+      `Keys order of ${reportKey} does not depend on the order of source files`,
+    ).eql(Object.keys(forwardReport[reportKey]));
+  }
+
+  await expect(
+    reversedReport.scenarios,
+    'Scenarios content does not depend on the order of source files',
+  ).eql(forwardReport.scenarios);
+
+  await expect(
+    reversedReport.tests,
+    'Tests content does not depend on the order of source files',
+  ).eql(forwardReport.tests);
+
+  const manyScenariosLines = ['Feature: Many'];
+  const expectedManyScenariosPaths: string[] = [];
+
+  for (let scenarioIndex = 0; scenarioIndex <= 10; scenarioIndex += 1) {
+    manyScenariosLines.push('', `  Scenario: S${scenarioIndex}`, '    Given g');
+    expectedManyScenariosPaths.push(`many.feature/[${scenarioIndex}]`);
+  }
+
+  manyScenariosLines.push('');
+
+  const manyScenariosReport = await getCodeReport({
+    features: [{path: 'many.feature', source: manyScenariosLines.join('\n')}],
+    tests: [],
+  });
+
+  await expect(
+    Object.keys(manyScenariosReport.scenarios),
+    'Scenarios are sorted numerically by index inside feature, not alphabetically by path',
+  ).eql(expectedManyScenariosPaths);
+
+  const duplicatesOrderTestFiles: readonly SourceFile[] = [
+    {path: 'dupOrderZ.ts', source: "test('Z', {meta: {testId: '44'}}, async () => {});"},
+    {path: 'dupOrderX.ts', source: "test('X', {meta: {testId: '44'}}, async () => {});"},
+    {path: 'dupOrderY.ts', source: "test('Y', {meta: {testId: '44'}}, async () => {});"},
+  ];
+
+  const duplicatesOrderFeatureFiles: readonly SourceFile[] = [
+    {
+      path: 'dupOrderD.feature',
+      source: ['Feature: D', '', '  @testId-45', '  Scenario: D only', '    Given g', ''].join(
+        '\n',
+      ),
+    },
+    {
+      path: 'dupOrderC.feature',
+      source: [
+        'Feature: C',
+        '',
+        '  @testId-45',
+        '  Scenario: C first',
+        '    Given g',
+        '',
+        '  @testId-45',
+        '  Scenario: C second',
+        '    Given g',
+        '',
+      ].join('\n'),
+    },
+  ];
+
+  const duplicatesOrderReports: readonly (readonly [label: string, codeReport: CodeReport])[] = [
+    [
+      'forward',
+      await getCodeReport({features: duplicatesOrderFeatureFiles, tests: duplicatesOrderTestFiles}),
+    ],
+    [
+      'reversed',
+      await getCodeReport({
+        features: [...duplicatesOrderFeatureFiles].reverse(),
+        tests: [...duplicatesOrderTestFiles].reverse(),
+      }),
+    ],
+  ];
+
+  for (const [label, duplicatesOrderReport] of duplicatesOrderReports) {
+    await expect(
+      getTestReport(duplicatesOrderReport, 'dupOrderX.ts').duplicatesByTestIdentifier.map(String),
+      `Duplicates of the first test are sorted by path (${label} order)`,
+    ).eql(['dupOrderY.ts', 'dupOrderZ.ts']);
+
+    await expect(
+      getTestReport(duplicatesOrderReport, 'dupOrderY.ts').duplicatesByTestIdentifier.map(String),
+      `Duplicates of the middle test are sorted by path (${label} order)`,
+    ).eql(['dupOrderX.ts', 'dupOrderZ.ts']);
+
+    await expect(
+      getTestReport(duplicatesOrderReport, 'dupOrderZ.ts').duplicatesByTestIdentifier.map(String),
+      `Duplicates of the last test are sorted by path (${label} order)`,
+    ).eql(['dupOrderX.ts', 'dupOrderY.ts']);
+
+    await expect(
+      getScenario(duplicatesOrderReport, 'dupOrderC.feature/[0]').duplicatesByTestIdentifier.map(
+        String,
+      ),
+      `Duplicates of the first scenario are sorted by feature path and index (${label} order)`,
+    ).eql(['dupOrderC.feature/[1]', 'dupOrderD.feature/[0]']);
+
+    await expect(
+      getScenario(duplicatesOrderReport, 'dupOrderC.feature/[1]').duplicatesByTestIdentifier.map(
+        String,
+      ),
+      `Duplicates of the second scenario are sorted by feature path and index (${label} order)`,
+    ).eql(['dupOrderC.feature/[0]', 'dupOrderD.feature/[0]']);
+
+    await expect(
+      getScenario(duplicatesOrderReport, 'dupOrderD.feature/[0]').duplicatesByTestIdentifier.map(
+        String,
+      ),
+      `Duplicates of the scenario from another feature are sorted (${label} order)`,
+    ).eql(['dupOrderC.feature/[0]', 'dupOrderC.feature/[1]']);
+  }
 });

@@ -56,6 +56,7 @@ export const getCodeReport = async <
     invalidTests: Object.create(null) as {},
     scenarios: Object.create(null) as {},
     scenariosByTestIdentifier: Object.create(null) as CodeReport['scenariosByTestIdentifier'],
+    testIdentifierKey,
     tests: Object.create(null) as {},
     testsByTestIdentifier: Object.create(null) as CodeReport['testsByTestIdentifier'],
   };

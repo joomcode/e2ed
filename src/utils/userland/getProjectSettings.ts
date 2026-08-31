@@ -3,7 +3,8 @@ import {join} from 'node:path';
 import {
   ABSOLUTE_PATH_TO_PROJECT_ROOT_DIRECTORY,
   PROJECT_SETTINGS_PATH,
-} from '../../constants/internal';
+  // eslint-disable-next-line import/no-internal-modules, import/no-restricted-paths
+} from '../../constants/paths';
 
 import type {ProjectSettings} from '../../types/internal';
 

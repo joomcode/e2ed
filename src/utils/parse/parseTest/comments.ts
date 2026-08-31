@@ -48,7 +48,7 @@ const onSinglelineCommentError: OnCommentError<ParseTestContext> = (context, _so
   throwError(context, 'Cannot find end of single line comment', start);
 
 /**
- * Statements of ECMAScript comments.
+ * Statements of ECMAScript comments and string literals.
  * @internal
  */
 export const comments: readonly Comment<ParseTestContext>[] = [

@@ -39,7 +39,7 @@ export const fillLinks = (codeReport: CodeReport): void => {
       setReadonlyProperty(test, 'featurePath', scenario.featurePath);
       setReadonlyProperty(test, 'scenarioPath', scenarioPath);
 
-      fillTestErrors(scenario, test);
+      fillTestErrors(scenario, test, codeReport.testIdentifierKey);
     }
   }
 };
