@@ -15,7 +15,6 @@ type Options = Readonly<{
  * Processes `step` error.
  * @internal
  */
-// eslint-disable-next-line complexity
 export const processStepError = ({error, errorProperties, logEvent}: Options): unknown => {
   const message = `Caught an error in step "${errorProperties.stepName}"`;
   let stepError: unknown = error;

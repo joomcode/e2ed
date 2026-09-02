@@ -70,7 +70,6 @@ export class Main extends Page<CustomPageParams> {
     await this.waitForDomContentLoaded();
 
     await waitForAllRequestsComplete(
-      // eslint-disable-next-line complexity
       ({url}) => {
         if (
           url.startsWith('https://assets.msn.com/') ||

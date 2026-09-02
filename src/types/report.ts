@@ -1,6 +1,11 @@
 import type {CreateLocatorOptions, LocatorFunction} from 'create-locator';
 
-import type {EndE2edReason, ExitCode, TestRunStatus} from '../constants/internal';
+import type {
+  EndE2edReason,
+  ExitCode,
+  JSON_REPORT_DATA_CLASS,
+  TestRunStatus,
+} from '../constants/internal';
 
 import type {ApiStatistics} from './apiStatistics';
 import type {FullPackConfig} from './config';
@@ -14,6 +19,21 @@ import type {
   SkipTestsPlaceholder,
   TestMetaPlaceholder,
 } from './userland';
+
+/**
+ * JSON data in `<script>` tags with JSON presentation of report data
+ * (full content of one tag, or a fragment of test runs array when reading report by chunks).
+ */
+export type HtmlReportJsonData = ReportClientData | readonly FullTestRun[];
+
+/**
+ * JSON data in `<script>` tags with optional error, if any.
+ * @internal
+ */
+export type HtmlReportJsonDataWithError = Readonly<{
+  error: string | undefined;
+  jsonData: readonly HtmlReportJsonData[];
+}>;
 
 /**
  * The lite report data (for printing lite JSON report) with userland meta.
@@ -81,7 +101,6 @@ export type ReportData = Readonly<{
 
 /**
  * The general report data that needed on client for rendering parts of HTML report.
- * @internal
  */
 export type ReportClientData = Readonly<{
   apiStatistics: ApiStatistics;
@@ -97,6 +116,7 @@ export type ReportClientState = {
   readonly e2edRightColumnContainer: HTMLElement | undefined;
   readonly fullTestRuns: readonly FullTestRun[];
   readonly internalDirectoryName: string;
+  readonly jsonReportDataClass: typeof JSON_REPORT_DATA_CLASS;
   lengthOfReadedJsonReportDataParts: number;
   readonly locator: LocatorFunction;
   readonly pathToScreenshotsDirectoryForReport: string | null;
@@ -139,12 +159,6 @@ export type RetryProps = Readonly<{
   startTimeInMs: UtcTimeInMs;
   testRunButtons: readonly TestRunButtonProps[];
 }>;
-
-/**
- * JSON data in `<script>` tags with JSON presentation of report data.
- * @internal
- */
-export type ScriptJsonData = ReportClientData | readonly FullTestRun[];
 
 /**
  * TestRunButton component props.

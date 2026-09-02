@@ -1,4 +1,6 @@
+import {getFullStepDefinition} from './getFullStepDefinition';
 import {getScenarioReference} from './getScenarioReference';
+import {getStepReference} from './getStepReference';
 
 import type {ScenarioReport, StepWithReference} from '../../../types/internal';
 
@@ -15,17 +17,20 @@ export const getScenarioStepsWithReference = (
   const stepsHash: Record<string, number> = Object.create(null) as {};
 
   for (const step of scenario.steps) {
-    const fullDefinition = `${step.kind} ${step.definition}`;
+    const fullDefinition = getFullStepDefinition(step);
 
     stepsHash[fullDefinition] =
       stepsHash[fullDefinition] === undefined ? 1 : stepsHash[fullDefinition] + 1;
 
     const count = stepsHash[fullDefinition];
-    const reference = `in ${scenario.featurePath}:${step.lineNumber + 1}:${step.column + 1} (in ${scenarioReference})`;
+    const reference = getStepReference(
+      {column: step.column + 1, line: step.lineNumber + 1},
+      scenario.featurePath,
+    );
 
     steps.push({
-      key: count === 1 ? `"${fullDefinition}"` : `"${fullDefinition}" (occurrence ${count})`,
-      reference,
+      key: getFullStepDefinition(step, count),
+      reference: `${reference} (in ${scenarioReference})`,
     });
   }
 

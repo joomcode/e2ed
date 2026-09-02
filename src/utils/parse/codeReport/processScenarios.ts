@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-internal-modules
 import {setReadonlyProperty} from '../../object/setReadonlyProperty';
 
-import {assertValueIsDefined} from './assertValueIsDefined';
+import {assertValueIsDefined} from '../assertValueIsDefined';
 
 import type {Scenario} from 'parse-gherkin';
 

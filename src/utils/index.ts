@@ -44,13 +44,16 @@ export {deepMerge, getEntries, getKeys, setReadonlyProperty} from './object';
 export {createPageObjectsFromMultiLocator} from './pageObjects';
 export {
   getCodeReport,
+  getFullStepDefinition,
   getLinesIndexes,
   getScenarioReference,
+  getStepReference,
   getTestReference,
   parseMaybeEmptyValueAsJson,
   parseTest,
   ParseTestError,
   parseValueAsJsonIfNeeded,
+  readJsonDataFromHtmlReport,
 } from './parse';
 export {
   addTimeoutToPromise,
