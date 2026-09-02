@@ -134,16 +134,14 @@ export type {
   PropertyDescriptor,
   PropertyKey,
 } from './properties';
-export type {LiteReport, LiteRetry} from './report';
+export type {HtmlReportJsonData, LiteReport, LiteRetry, ReportClientData} from './report';
 /** @internal */
 export type {
-  ReportClientData,
   ReportClientState,
   ReportData,
   Retry,
   RetryButtonProps,
   RetryProps,
-  ScriptJsonData,
   TestRunButtonProps,
 } from './report';
 /** @internal */
@@ -171,6 +169,7 @@ export type {Tab} from './tab';
 /** @internal */
 export type {InternalTab} from './tab';
 export type {
+  FullTestRun,
   LiteTestRun,
   RejectTestRun,
   RunError,
@@ -183,7 +182,7 @@ export type {
   TestStaticOptions,
 } from './testRun';
 /** @internal */
-export type {CompletedTestRun, FullTestRun, RunTest, Test, TestUnit} from './testRun';
+export type {CompletedTestRun, RunTest, Test, TestUnit} from './testRun';
 export type {MergeTuples, TupleRest} from './tuples';
 export type {
   CloneWithoutUndefinedProperties,

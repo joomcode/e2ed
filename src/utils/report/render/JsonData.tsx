@@ -4,9 +4,9 @@ import {List, SafeHtml, sanitizeJson} from '../client';
 
 import type {
   FullTestRun,
+  HtmlReportJsonData,
   ReportClientData,
   ReportData,
-  ScriptJsonData,
 } from '../../../types/internal';
 
 declare const jsx: JSX.Runtime;
@@ -50,7 +50,7 @@ export const JsonData: JSX.Component<Props> = ({reportData}) => {
   const [lastRetryErrors, lastRetryRest] = filterErrors(lastRetry?.fullTestRuns ?? []);
   const [restErrors, rest] = filterErrors(fullTestRunsNotFromLastRetry);
 
-  const parts: readonly ScriptJsonData[] = [
+  const parts: readonly HtmlReportJsonData[] = [
     lastRetryErrors,
     lastRetryRest,
     restErrors,
@@ -58,8 +58,8 @@ export const JsonData: JSX.Component<Props> = ({reportData}) => {
     rest,
   ].filter((part) => !('length' in part) || part.length > 0);
 
-  const scripts = parts.map((fullTestRuns) => {
-    const json = JSON.stringify(fullTestRuns);
+  const scripts = parts.map((htmlReportJsonData) => {
+    const json = JSON.stringify(htmlReportJsonData);
     const sanitizedJson = sanitizeJson(json);
 
     return (

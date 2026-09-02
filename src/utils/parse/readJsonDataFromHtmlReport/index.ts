@@ -1,0 +1,1 @@
+export {readJsonDataFromHtmlReport} from './readJsonDataFromHtmlReport';
