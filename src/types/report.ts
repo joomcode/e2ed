@@ -16,6 +16,11 @@ import type {
 } from './userland';
 
 /**
+ * JSON data in `<script>` tags with JSON presentation of report data.
+ */
+export type HtmlReportJsonData = ReportClientData | readonly FullTestRun[];
+
+/**
  * The lite report data (for printing lite JSON report) with userland meta.
  */
 export type LiteReport<
@@ -81,7 +86,6 @@ export type ReportData = Readonly<{
 
 /**
  * The general report data that needed on client for rendering parts of HTML report.
- * @internal
  */
 export type ReportClientData = Readonly<{
   apiStatistics: ApiStatistics;
@@ -139,12 +143,6 @@ export type RetryProps = Readonly<{
   startTimeInMs: UtcTimeInMs;
   testRunButtons: readonly TestRunButtonProps[];
 }>;
-
-/**
- * JSON data in `<script>` tags with JSON presentation of report data.
- * @internal
- */
-export type ScriptJsonData = ReportClientData | readonly FullTestRun[];
 
 /**
  * TestRunButton component props.

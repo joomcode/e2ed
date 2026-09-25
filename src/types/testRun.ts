@@ -22,7 +22,6 @@ export type CompletedTestRun<TestMeta = TestMetaPlaceholder> = Readonly<{
 
 /**
  * Full test run object result of userland hooks (like mainParams and runHash).
- * @internal
  */
 export type FullTestRun = Readonly<{mainParams: string; runHash: RunHash}> & TestRun;
 

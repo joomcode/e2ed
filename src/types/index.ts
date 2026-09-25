@@ -91,7 +91,7 @@ export type {
   PropertyDescriptor,
   PropertyKey,
 } from './properties';
-export type {LiteReport, LiteRetry} from './report';
+export type {HtmlReportJsonData, LiteReport, LiteRetry, ReportClientData} from './report';
 export type {
   ApiRouteClassType,
   ApiRouteClassTypeWithGetParamsFromUrl,
@@ -104,6 +104,19 @@ export type {PackageInfo, StartInfo} from './startInfo';
 export type {StepBody, StepOptions} from './step';
 export type {StringForLogs} from './string';
 export type {Tab} from './tab';
+export type {
+  FullTestRun,
+  LiteTestRun,
+  RejectTestRun,
+  RunError,
+  RunHash,
+  RunId,
+  TestFn,
+  TestFunction,
+  TestOptions,
+  TestRun,
+  TestStaticOptions,
+} from './testRun';
 export type {MergeTuples, TupleRest} from './tuples';
 export type {
   CloneWithoutUndefinedProperties,

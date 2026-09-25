@@ -1,4 +1,4 @@
-import type {FullTestRun, ReportClientState, ScriptJsonData} from '../../../types/internal';
+import type {FullTestRun, HtmlReportJsonData, ReportClientState} from '../../../types/internal';
 
 declare const reportClientState: ReportClientState;
 
@@ -15,7 +15,7 @@ type Options = Readonly<{
  */
 export const readPartOfJsonReportData = ({scriptToRead, shouldLogError}: Options): boolean => {
   try {
-    const data = JSON.parse(scriptToRead?.textContent ?? '') as ScriptJsonData;
+    const data = JSON.parse(scriptToRead?.textContent ?? '') as HtmlReportJsonData;
 
     if ('apiStatistics' in data) {
       reportClientState.reportClientData = data;

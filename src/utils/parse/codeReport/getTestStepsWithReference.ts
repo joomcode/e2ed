@@ -1,3 +1,6 @@
+import {getFullStepDefinition} from './getFullStepDefinition';
+import {getStepReference} from './getStepReference';
+
 import type {StepWithReference, TestReport} from '../../../types/internal';
 
 /**
@@ -13,16 +16,16 @@ export const getTestStepsWithReference = (test: TestReport): readonly StepWithRe
       continue;
     }
 
-    const fullDefinition = `${step.kind} ${step.definition}`;
+    const fullDefinition = getFullStepDefinition(step);
 
     stepsHash[fullDefinition] =
       stepsHash[fullDefinition] === undefined ? 1 : stepsHash[fullDefinition] + 1;
 
     const count = stepsHash[fullDefinition];
-    const reference = `in ${test.path}:${step.line}:${step.column}`;
+    const reference = getStepReference(step, test.path);
 
     steps.push({
-      key: count === 1 ? `"${fullDefinition}"` : `"${fullDefinition}" (occurrence ${count})`,
+      key: getFullStepDefinition(step, count),
       reference,
     });
   }
