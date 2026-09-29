@@ -1,4 +1,4 @@
-import {INTERNAL_DIRECTORY_NAME} from '../../../constants/internal';
+import {INTERNAL_DIRECTORY_NAME, JSON_REPORT_DATA_CLASS} from '../../../constants/internal';
 
 import {getFullPackConfig} from '../../config';
 
@@ -23,6 +23,7 @@ export const ScriptGlobals: JSX.Component = () => {
     e2edRightColumnContainer: undefined,
     fullTestRuns: [],
     internalDirectoryName: INTERNAL_DIRECTORY_NAME,
+    jsonReportDataClass: JSON_REPORT_DATA_CLASS,
     lengthOfReadedJsonReportDataParts: 0,
     locator,
     pathToScreenshotsDirectoryForReport,

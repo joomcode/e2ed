@@ -1,6 +1,7 @@
 import {getScenarioReference} from './getScenarioReference';
 import {getScenarioStepsWithReference} from './getScenarioStepsWithReference';
 import {getStepComparisonErrors} from './getStepComparisonErrors';
+import {getStepReference} from './getStepReference';
 import {getTestReference} from './getTestReference';
 import {getTestStepsWithReference} from './getTestStepsWithReference';
 
@@ -28,17 +29,21 @@ export const fillTestErrors = (
   for (const step of scenario.steps) {
     if (step.definition === '') {
       scenarioHasError = true;
-      errors.push(
-        `Step in ${scenario.featurePath}:${step.lineNumber + 1}:${step.column + 1} (in ${scenarioReference}) has no definition.`,
+
+      const reference = getStepReference(
+        {column: step.column + 1, line: step.lineNumber + 1},
+        scenario.featurePath,
       );
+
+      errors.push(`Step ${reference} (in ${scenarioReference}) has no definition.`);
     }
   }
 
   for (const step of test.steps) {
     if (step.definition === undefined || step.definition === '') {
-      errors.push(
-        `Step in ${test.path}:${step.line}:${step.column} (in ${testReference}) has no definition.`,
-      );
+      const reference = getStepReference(step, test.path);
+
+      errors.push(`Step ${reference} (in ${testReference}) has no definition.`);
     }
   }
 

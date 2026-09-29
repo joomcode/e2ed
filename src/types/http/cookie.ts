@@ -5,6 +5,9 @@ import type {Brand} from '../brand';
  */
 export type Cookie = Readonly<{
   domain?: string;
+  /**
+   * Unix time in milliseconds (as in `Date.now()`).
+   */
   expires?: number;
   httpOnly?: boolean;
   name: string;

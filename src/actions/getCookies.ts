@@ -5,6 +5,8 @@ import {assertValueIsDefined} from '../utils/asserts';
 
 import type {Cookie} from '../types/internal';
 
+const msInSecond = 1_000;
+
 /**
  * Returns page's cookies with the specified cookies parameters.
  * If there are no cookies parameters, returns all the cookies.
@@ -24,8 +26,15 @@ export const getCookies = async (
   await step(
     logMessage,
     async () => {
-      const page = getPlaywrightPage();
-      const allCookies = await page.context().cookies(page.url());
+      const playwrightPage = getPlaywrightPage();
+      const playwrightCookies = await playwrightPage.context().cookies(playwrightPage.url());
+
+      // Playwright's `cookies` returns `expires` in unix time in seconds (`-1` for session cookies),
+      // while `Cookie` type uses milliseconds (as in `Date.now()`).
+      const allCookies: readonly Cookie[] = playwrightCookies.map(({expires, ...cookie}) => ({
+        ...cookie,
+        ...(expires !== -1 ? {expires: expires * msInSecond} : undefined),
+      }));
 
       if (parameters.length === 0) {
         cookies = allCookies;

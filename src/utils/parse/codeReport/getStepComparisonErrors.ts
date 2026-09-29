@@ -1,4 +1,5 @@
-import {assertValueIsDefined} from './assertValueIsDefined';
+import {assertValueIsDefined} from '../assertValueIsDefined';
+
 import {getStepOrderError} from './getStepOrderError';
 
 import type {StepWithReference} from '../../../types/internal';

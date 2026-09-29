@@ -8,7 +8,7 @@ import {assertFunctionThrows, E2edError} from 'e2ed/utils';
 test(
   'waitForAllRequestsComplete works correct with timeout and predicate in base cases',
   {meta: {testId: '9'}, testIdleTimeout: 6_000},
-  // eslint-disable-next-line complexity, max-statements
+  // eslint-disable-next-line max-statements
   async () => {
     let startRequestInMs = Date.now();
 

@@ -16,8 +16,8 @@ declare const reportClientState: ReportClientState;
  * @internal
  */
 export const readJsonReportData = (areAllScriptsLoaded = false): void => {
-  const {lengthOfReadedJsonReportDataParts} = reportClientState;
-  const scripts = document.querySelectorAll('body > script.e2edJsonReportData');
+  const {jsonReportDataClass, lengthOfReadedJsonReportDataParts} = reportClientState;
+  const scripts = document.querySelectorAll(`body > script.${jsonReportDataClass}`);
   const {length} = scripts;
 
   if (length <= lengthOfReadedJsonReportDataParts) {

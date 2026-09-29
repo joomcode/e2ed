@@ -18,7 +18,6 @@ type Return = Readonly<{
  * Returns count of border (letter or non-letter) inside string.
  * @internal
  */
-// eslint-disable-next-line complexity
 export const getBorderCount = (value: string): Return => {
   let borderCount = -1;
   let letterCount = 0;

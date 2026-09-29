@@ -18,7 +18,7 @@ root: true
 ignorePatterns: [build, local]
 rules:
   class-methods-use-this: off
-  complexity: [error, {max: 10}]
+  complexity: [error, {max: 12}]
   consistent-return: off
   curly: [error, all]
   default-param-last: off

@@ -1,7 +1,8 @@
 // eslint-disable-next-line import/no-internal-modules
 import {setReadonlyProperty} from '../../object/setReadonlyProperty';
 
-import {assertValueIsDefined} from './assertValueIsDefined';
+import {assertValueIsDefined} from '../assertValueIsDefined';
+
 import {fillTestErrors} from './fillTestErrors';
 
 import type {CodeReport} from '../../../types/internal';

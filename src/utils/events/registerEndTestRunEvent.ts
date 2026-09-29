@@ -56,6 +56,8 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
 
   const runError = hasRunError ? getRunErrorFromError(unknownRunError) : undefined;
 
+  // The key order of this object is part of the HTML report format:
+  // `status` must be the last key (see comment for `fullTestRun` below).
   const testRun: TestRun = {
     endTimeInMs,
     filePath,
@@ -76,6 +78,11 @@ export const registerEndTestRunEvent = async (endTestRunEvent: EndTestRunEvent):
   const mainParams = getMainTestRunParams(testRun);
   const runHash = getTestRunHash(testRun).replaceAll('#', '') as RunHash;
 
+  // The key order of `fullTestRun` is part of the HTML report format: `mainParams` must be
+  // the first key, and `status` (from `testRun`) must be the last one (both are strings).
+  // So in the JSON data of HTML report, test runs are always separated by `"},{"mainParams":"`,
+  // and `readJsonDataFromHtmlReport` relies on this separator to read large reports by parts
+  // (including old reports). Do not change this key order.
   const fullTestRun: FullTestRun = {mainParams, runHash, ...testRun};
 
   await writeCompletedTestRun({filePath, name, options, status});

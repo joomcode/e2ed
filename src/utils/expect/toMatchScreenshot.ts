@@ -29,7 +29,7 @@ import {expect as playwrightExpect} from '@playwright/test';
  * Checks that the selector screenshot matches the one specified by `expectedScreenshotId`.
  * @internal
  */
-// eslint-disable-next-line complexity, max-statements
+// eslint-disable-next-line max-statements
 export const toMatchScreenshot = async (
   context: Expect,
   expectedScreenshotId: string,
